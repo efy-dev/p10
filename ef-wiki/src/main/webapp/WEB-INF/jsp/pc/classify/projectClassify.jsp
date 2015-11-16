@@ -18,7 +18,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>e飞蚁工艺秀</title>
+  <title>e飞蚁工艺</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -70,17 +70,17 @@
     <div class="f-select-group">
       <div class="select-head">
         <span>分类：</span>
-        <strong><a href="#" class="active" about="1" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_allCategory&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
+        <strong><a href="javascript:void(0);" class="active" about="1" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_allCategory&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
       </div>
       <ul class="select-list">
 
         <c:if test="${!empty ProjectCategoryList}">
           <c:forEach var="catagory" items="${ProjectCategoryList}" varStatus="status">
             <c:if test="${status.index==0}">
-              <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Category&conditions=projectCategory.id:${catagory.id}&pageEntity.size=10&pageEntity.index='/>')">${catagory.name}</a></li>
+              <li><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Category&conditions=projectCategory.id:${catagory.id}&pageEntity.size=10&pageEntity.index='/>')">${catagory.name}</a></li>
             </c:if>
             <c:if test="${status.index!=0}">
-              <li><a href="#" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Category&conditions=projectCategory.id:${catagory.id}&pageEntity.size=10&pageEntity.index='/>')">${catagory.name}</a></li>
+              <li><a href="javascript:void(0);" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Category&conditions=projectCategory.id:${catagory.id}&pageEntity.size=10&pageEntity.index='/>')">${catagory.name}</a></li>
             </c:if>
           </c:forEach>
 
@@ -90,13 +90,13 @@
  <%--   <div class="f-select-group">
       <div class="select-head">
         <span>级别：</span>
-        <strong><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
+        <strong><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
       </div>
       <ul class="select-list">
-        <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:1&pageEntity.size=10&pageEntity.index='/>')">国家级</a></li>
-        <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:2&pageEntity.size=10&pageEntity.index='/>')">省级</a></li>
-        <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:3&pageEntity.size=10&pageEntity.index='/>')">市级</a></li>
-        <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:4&pageEntity.size=10&pageEntity.index='/>')">县级</a></li>
+        <li><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:1&pageEntity.size=10&pageEntity.index='/>')">国家级</a></li>
+        <li><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:2&pageEntity.size=10&pageEntity.index='/>')">省级</a></li>
+        <li><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:3&pageEntity.size=10&pageEntity.index='/>')">市级</a></li>
+        <li><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:4&pageEntity.size=10&pageEntity.index='/>')">县级</a></li>
       </ul>
     </div>--%>
   <%--  <div class="f-select-group cl-act">
@@ -107,7 +107,7 @@
       <ul class="select-list">
         <c:if test="${!empty AddressProvinceList}">
           <c:forEach var="ap" items="${AddressProvinceList}" varStatus="status">
-            <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Dirt&conditions=addressDistrict.addressCity.addressProvince.id:${ap.id}&pageEntity.size=10&pageEntity.index='/>')">${ap.name}</a></li>
+            <li><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Dirt&conditions=addressDistrict.addressCity.addressProvince.id:${ap.id}&pageEntity.size=10&pageEntity.index='/>')">${ap.name}</a></li>
           </c:forEach>
         </c:if>
       </ul>
@@ -238,6 +238,7 @@
         if(data && data.length>=1){
           for(i in data){
             var levelName="";
+
             switch(data[i].level)
             {
               case "1":levelName="国家级非物质文化遗产";break;
@@ -247,16 +248,27 @@
             }
             var isA = checkIsAttention(""+data[i].projectId);
             var word ="";
+            var insert ="";
             if(isA==true){
-              word="取消关注";
+              word="2";
+              //insert ="<em about=\"add\" id=\""+data[i].projectId+"\">已关注</em>";
             }else{
-              word="关注";
+              word="1";
+              // insert="<i class=\"gz-icon\"></i> <em about=\"add\" id=\""+data[i].projectId+"\">关注</em>";
             }
 
-            var box = $("<li> <div class=\"text\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><p class=\"p1\">"+data[i].projectName+"</p></a> <p class=\"p2\">"+levelName+"</p> </div> " +
-                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
-                    "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
-                    "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
+            if(word=="2"){
+              var box = $("<li> <div class=\"text\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><p class=\"p1\">"+data[i].projectName+"</p></a> <p class=\"p2\">"+levelName+"</p> </div> " +
+                      "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> "
+                      +" <em about=\"add\" id=\""+data[i].projectId+"\">已关注</em></a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
+                      "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
+            }else{
+              var box = $("<li> <div class=\"text\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><p class=\"p1\">"+data[i].projectName+"</p></a> <p class=\"p2\">"+levelName+"</p> </div> " +
+                      "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> "
+                      +" <i class=\"gz-icon\"></i> <em about=\"add\" id=\""+data[i].projectId+"\">关注</em> </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
+                      "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
+            }
+
             pubu.append(box);
 
             //PBL("#beforeAttention",".before",2);
@@ -302,15 +314,18 @@
             }
             var isA = checkIsAttention(""+data[i].projectId);
             var word ="";
+            var insert ="";
             if(isA==true){
               word="已关注";
+              insert =  " <em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em>";
             }else{
               word="关注";
+              insert =  "<i class=\"gz-icon\"></i> <em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em>";
             }
 
             var box = $("<li> <div class=\"text\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"> <p class=\"p1\">"+data[i].projectName+"</p> </a><p class=\"p2\">"+levelName+"</p> </div> " +
-                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
-                    "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
+                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +insert+
+                    " </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
                     "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
             pubu.append(box);
 
