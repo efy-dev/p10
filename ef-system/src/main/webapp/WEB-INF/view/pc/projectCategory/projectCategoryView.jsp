@@ -48,9 +48,9 @@
                 <td class="am-u-md-3">
                     <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${object.pictureUrl}@!product-model"/>" alt=""/>
                 </td>
-                <td class="am-primary am-u-md-3"></td>
+                <td class="am-primary am-u-md-3">类别简介</td>
                 <td class="am-u-md-3">
-                    <%--${object.addressDistrict.addressCity.addressProvince.name}--%>
+                    ${object.context}
                 </td>
             </tr>
             <%--<tr>--%>

@@ -66,9 +66,9 @@
                 <td class="am-u-md-3">
                     ${object.addressDistrict.name}
                 </td>
-                <td class="am-primary am-u-md-3">项目简介</td>
+                <td class="am-primary am-u-md-3"></td>
                 <td class="am-u-md-3">
-                    ${object.context}
+
                 </td>
             </tr>
             </tbody>
