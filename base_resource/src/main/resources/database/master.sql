@@ -680,3 +680,7 @@ ADD COLUMN `group_name`  varchar(255) NULL AFTER `price`;
 
 ALTER TABLE `base_banner`
 MODIFY COLUMN `group_name`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `direct_url`;
+
+ALTER TABLE `subject`
+CHANGE COLUMN `create_datetime` `start_datetime`  datetime NULL DEFAULT NULL AFTER `template`,
+ADD COLUMN `end_datetime`  datetime NULL AFTER `start_datetime`;

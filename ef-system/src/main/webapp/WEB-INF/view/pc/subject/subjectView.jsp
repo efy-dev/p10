@@ -26,6 +26,26 @@
                     <img width="35px" src="http://pro.efeiyi.com/${object.pictureUrl}@!product-model" alt="封面">
                 </td>
             </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">模板</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="template" dataType="Subject.template" checkedValue="${object.template}" type="normal"/>
+                </td>
+                <td class="am-primary am-u-md-3">类别</td>
+                <td class="am-u-md-3" colspan="3">
+                    <ming800:status name="type" dataType="Subject.type" checkedValue="${object.type}" type="normal" />
+                </td>
+            </tr>
+            <c:if test="${object.template == '2'}">
+            <tr>
+                <td class="am-primary am-u-md-3">起始时间</td>
+                <td class="am-u-md-3">${object.startDateTime}</td>
+                <td class="am-primary am-u-md-3">结束时间</td>
+                <td class="am-u-md-3" colspan="3">
+                        ${object.endDateTime}
+                </td>
+            </tr>
+            </c:if>
             </tbody>
         </table>
 

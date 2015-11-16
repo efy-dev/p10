@@ -293,15 +293,19 @@ public class ProductManagerImpl implements ProductManager{
     @Override
     public Subject saveSubject(Subject subject, String[] flag, String[] spId, String[] subjectPicture) {
         SubjectDescription subjectDescription = subject.getSubjectDescription();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+      //  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if("".equals(subject.getId())) {
             subject.setId(null);
-            try {
-                subject.setCreateDateTime(sdf.parse(sdf.format(new Date())));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                subject.setCreateDateTime(sdf.parse(sdf.format(new Date())));
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
             subjectDescription.setId(null);
+        }
+        if("1".equals(subject.getTemplate())){
+            subject.setStartDateTime(null);
+            subject.setEndDateTime(null);
         }
         xdoDao.saveOrUpdateObject(subjectDescription);
         subject.setSubjectDescription(subjectDescription);
