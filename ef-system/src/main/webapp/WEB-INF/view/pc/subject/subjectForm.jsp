@@ -87,9 +87,9 @@
                     <div style="margin-top: 9px;">
 
                         起始:
-                        <input style="width: 30%"  value="${object.startDateTime}" type="text" id="startDateTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'endDateTime\')}',minDate:'%y-%M-%d %H:%m:%s'})"  name="startDateTime" />
-                        终止:
-                        <input  style="width: 30%" value="${object.endDateTime}"  id="endDateTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'startDateTime\')}'})" name="endDateTime"/>
+                        <input style="width: 30%"  value="" type="text" id="startDateTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'endDateTime\')}',minDate:'%y-%M-%d %H:%m:%s'})"  name="startDateTime" />
+                        结束:
+                        <input  style="width: 30%" value=""  id="endDateTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'startDateTime\')}'})" name="endDateTime"/>
                         <%--<fmt:formatDate value="${object.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm"/>--%>
 
                     </div>
@@ -239,8 +239,10 @@
      $(".copy").each(function(){
        copyInit($(this));
      });
-
-
+    var startDateTime = '${object.startDateTime}'.substring(0,'${object.startDateTime}'.lastIndexOf("."));
+    var endDateTime = '${object.endDateTime}'.substring(0,'${object.startDateTime}'.lastIndexOf("."));
+    $("#startDateTime").val(startDateTime);
+       $("#endDateTime").val(endDateTime);
      $('#btn_upload').uploadify({
        uploader: '<c:url value="/product/subjectUploadify.do?status=1&subjectId=${object.id}"/>',            // 服务器处理地址
        swf: '<c:url value="/scripts/upload/uploadify.swf"/>',
