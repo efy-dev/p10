@@ -677,3 +677,6 @@ ADD COLUMN `context`  varchar(255) NULL AFTER `picture_pc_url`;
 ALTER TABLE `advertisement`
 ADD COLUMN `group_name`  varchar(255) NULL AFTER `price`;
 
+
+ALTER TABLE `base_banner`
+MODIFY COLUMN `group_name`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `direct_url`;
