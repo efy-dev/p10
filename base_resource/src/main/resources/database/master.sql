@@ -684,3 +684,10 @@ MODIFY COLUMN `group_name`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_
 ALTER TABLE `subject`
 CHANGE COLUMN `create_datetime` `start_datetime`  datetime NULL DEFAULT NULL AFTER `template`,
 ADD COLUMN `end_datetime`  datetime NULL AFTER `start_datetime`;
+======================11.16===============================
+ALTER TABLE `project_category`
+ADD COLUMN `context`  varchar(255) NULL AFTER `picture_url`;
+
+ALTER TABLE `project`
+DROP COLUMN `context`;
+
