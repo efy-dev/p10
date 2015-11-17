@@ -195,7 +195,7 @@ public class CouponBatchController extends BaseController {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        String hql = "from Consumer c where 1=1 ";
+        String hql = "from Consumer c where c.status<>0 ";
         LinkedHashMap<String, Object> hm = new LinkedHashMap<>();
         if (!"".equals(username)) {
             hql += " and c.username=:username ";
@@ -250,7 +250,7 @@ public class CouponBatchController extends BaseController {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        String hql = "from Consumer c where 1=1 ";
+        String hql = "from Consumer c where c.status<>0 ";
         LinkedHashMap<String, Object> hm = new LinkedHashMap<>();
         if (!"".equals(username)) {
             hql += " and c.username=:username ";

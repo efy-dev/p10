@@ -55,6 +55,7 @@ public class SearchController {
         //分页
         if(searchParamBean.getPageEntity() == null){
             PageEntity pageEntity = new PageEntity();
+            pageEntity.setSize(commonManager.getSearchParam(searchParamBean.getGroup()).getRows());
             searchParamBean.setPageEntity(pageEntity);
         }
 
