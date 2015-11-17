@@ -186,6 +186,8 @@
                     <query name="useful" label="可用列表" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>
+                        <condition name="couponBatch.startDate" defaultValue="${CURRENT_DATETIME}" operation="le"/>
+                        <condition name="couponBatch.endDate" defaultValue="${CURRENT_DATETIME}" operation="ge"/>
                         <!--<condition name="couponBatch.priceLimit" defaultValue="1" operation="le"/>-->
                         <!--<condition name="couponBatch.priceLimit" defaultValue="1" operation="le"/>-->
                     </query>

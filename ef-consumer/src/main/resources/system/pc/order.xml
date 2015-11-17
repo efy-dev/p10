@@ -8,6 +8,7 @@
                 <field name="orderStatus" label="订单状态" inputType="text">
                     <statusType fieldName="orderStatus">
                         <item label="等待付款" value="1"/>
+                        <item label="等待成团" value="3"/>
                         <item label="未发货" value="5"/>
                         <item label="已发货" value="7"/>
                         <item label="未评价" value="9"/>

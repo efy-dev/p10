@@ -147,7 +147,7 @@
                   <c:forEach items="${pc}" var="project" varStatus="status">
                     <li>
                       <div class="commodity-img">
-                        <a href="<c:url value='/project/brifProject/${project.id}'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_pc_url}"></a>
+                        <a href="<c:url value='/project/brifProject/${project.id}'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_pc_url}@!pc-project-list"></a>
                         <a href="#">
                           <div class="list-moods">
                             <i class="img-icon"></i>

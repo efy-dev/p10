@@ -52,7 +52,7 @@
   <div class="ae">
     <div class="details ae">
       <div class="detaile-left">
-        <div class="detaile-img"><a href="#"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${product.picture_url}"></a></div>
+        <div class="detaile-img"><a href="#"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${product.picture_url}@!pc-product-header"></a></div>
         <div class="detaile-share ae" style="height: auto;z-index: 200;">
           <!-- JiaThis Button BEGIN -->
           <div class="jiathis_style" style="background: #fff;border: 0;float: left;padding: 30px 0;">
@@ -175,7 +175,7 @@
                     </c:if>
                   </a>
                 </div>
-                <div class="img"><a href="http://${product.master.name}.efeiyi.com"><img src="${product.master.favicon}"></a></div>
+                <div class="img"><a href="http://${product.master.name}.efeiyi.com"><img src="${product.master.favicon}@!pc-project-master"></a></div>
               </li>
             </ul>
             </c:if>

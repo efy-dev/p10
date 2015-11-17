@@ -10,11 +10,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>订单详情</title>
+  <title>订单详情</title>
 </head>
 <body>
 <!--//End--header-->
-<c:if test="${order.orderStatus == 1 or order.orderStatus == 17 or order.orderStatus == 5 or order.orderStatus == 9 or order.orderStatus == 13}">
+<c:if test="${order.orderStatus == 3 or order.orderStatus == 1 or order.orderStatus == 17 or order.orderStatus == 5 or order.orderStatus == 9 or order.orderStatus == 13}">
   <div class="line-item">
     <div class="address">
       <p><span>${order.receiverName}</span><span>${order.receiverPhone}</span></p>
@@ -27,18 +27,18 @@
       <!--一个商品-->
       <c:forEach items="${order.purchaseOrderProductList}" var="purchaseOrderProduct">
         <div class="order-js-list">
-          <%--<h1>${order.tenant.name}</h1>--%>
+            <%--<h1>${order.tenant.name}</h1>--%>
           <div><hr data-am-widget="divider" style="" class=" am-divider-default" /></div>
           <div class="am-g am-intro-bd">
             <div class="am-intro-left am-u-sm-5 item-act"><a href="#"><img class="am-u-sm-12 item-act" src="<c:url value="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}"/>" alt="产品" /></a></div>
             <div class="am-intro-right am-u-sm-7 item-act">
               <p class="item-acr">${purchaseOrderProduct.productModel.product.name}[${purchaseOrderProduct.productModel.name}]
-                <%--<c:if test="${purchaseOrderProduct.productModel.productPropertyValueList.size()>1}">--%>
+                  <%--<c:if test="${purchaseOrderProduct.productModel.productPropertyValueList.size()>1}">--%>
                   <%--[--%>
                   <%--<c:forEach items="${purchaseOrderProduct.productModel.productPropertyValueList}"--%>
-                             <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                  <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
                   <%--]--%>
-                <%--</c:if>--%>
+                  <%--</c:if>--%>
               </p>
               <p class="item-rmb">￥${purchaseOrderProduct.purchasePrice}<span>x${purchaseOrderProduct.purchaseAmount}</span></p>
             </div>
@@ -67,26 +67,26 @@
       </a>
     </div>
     <ul class="figure">
-      <c:if test="${!empty order.coupon}">
+      <c:if test="${coupon==1}">
         <li><span>总金额</span><span>￥${order.total}</span></li>
-        <li><span>优惠券金额</span><span>￥${order.coupon.couponBatch.price}</span></li>
+        <li><span>优惠券金额</span><span>￥${couponPrice}</span></li>
         <c:if test="${order.orderStatus==1}">
-        <li><span>应付金额</span><span>￥${order.total-order.coupon.couponBatch.price}</span></li>
-          </c:if>
+          <li><span>应付金额</span><span>￥${order.total-couponPrice}</span></li>
+        </c:if>
         <c:if test="${order.orderStatus !=1}">
-          <li><span>已付金额</span><span>￥${order.total-order.coupon.couponBatch.price}</span></li>
+          <li><span>已付金额</span><span>￥${order.total-couponPrice}</span></li>
         </c:if>
       </c:if>
-      <c:if test="${empty order.coupon}">
-      <li><span>总金额</span><span>￥${order.total}</span></li>
-      <li><span>优惠券金额</span><span>￥0</span></li>
+      <c:if test="${coupon==0}">
+        <li><span>总金额</span><span>￥${order.total}</span></li>
+        <li><span>优惠券金额</span><span>￥0</span></li>
         <c:if test="${order.orderStatus==1}">
-          <li><span>应付金额</span><span>￥${order.total-order.coupon.couponBatch.price}</span></li>
+          <li><span>应付金额</span><span>￥${order.total-couponPrice}</span></li>
         </c:if>
         <c:if test="${order.orderStatus !=1}">
-          <li><span>已付金额</span><span>￥${order.total-order.coupon.couponBatch.price}</span></li>
+          <li><span>已付金额</span><span>￥${order.total-couponPrice}</span></li>
         </c:if>
-        </c:if>
+      </c:if>
     </ul>
   </div>
 </c:if>
@@ -105,24 +105,24 @@
       <!--订单状态为已付款-->
       <!--一个商品-->
       <div class="order-js-list">
-        <%--<h1>${order.tenant.name}</h1>--%>
+          <%--<h1>${order.tenant.name}</h1>--%>
         <div><hr data-am-widget="divider" style="" class=" am-divider-default" /></div>
         <c:forEach items="${order.purchaseOrderProductList}" var="purchaseOrderProduct">
-        <div class="am-g am-intro-bd">
-          <div class="am-intro-left am-u-sm-5 item-act"><a href="#"><img class="am-u-sm-12 item-act" src="<c:url value="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}"/>" alt="产品" /></a></div>
-          <div class="am-intro-right am-u-sm-7 item-act">
-            <p class="item-acr">${purchaseOrderProduct.productModel.product.name}[${purchaseOrderProduct.productModel.name}]
-              <%--<c:if test="${purchaseOrderProduct.productModel.productPropertyValueList.size()>1}">--%>
-              <%--[--%>
-              <%--<c:forEach items="${purchaseOrderProduct.productModel.productPropertyValueList}"--%>
-                         <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
-              <%--]--%>
-            <%--</c:if>--%>
-            </p>
-            <p class="item-rmb">￥${purchaseOrderProduct.purchasePrice}<span>x${purchaseOrderProduct.purchaseAmount}</span></p>
+          <div class="am-g am-intro-bd">
+            <div class="am-intro-left am-u-sm-5 item-act"><a href="#"><img class="am-u-sm-12 item-act" src="<c:url value="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}"/>" alt="产品" /></a></div>
+            <div class="am-intro-right am-u-sm-7 item-act">
+              <p class="item-acr">${purchaseOrderProduct.productModel.product.name}[${purchaseOrderProduct.productModel.name}]
+                  <%--<c:if test="${purchaseOrderProduct.productModel.productPropertyValueList.size()>1}">--%>
+                  <%--[--%>
+                  <%--<c:forEach items="${purchaseOrderProduct.productModel.productPropertyValueList}"--%>
+                  <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                  <%--]--%>
+                  <%--</c:if>--%>
+              </p>
+              <p class="item-rmb">￥${purchaseOrderProduct.purchasePrice}<span>x${purchaseOrderProduct.purchaseAmount}</span></p>
 
+            </div>
           </div>
-        </div>
         </c:forEach>
         <div class="am-form-group">
           <div class="am-form-group">
@@ -158,12 +158,12 @@
       </a>
     </div>
     <ul class="figure">
-      <c:if test="${!empty order.coupon}">
+      <c:if test="${coupon==1}">
         <li><span>总金额</span><span>￥${order.total}</span></li>
-        <li><span>优惠券金额</span><span>￥${order.coupon.couponBatch.price}</span></li>
-        <li><span>已付金额</span><span>￥${order.total-order.coupon.couponBatch.price}</span></li>
+        <li><span>优惠券金额</span><span>￥${couponPrice}</span></li>
+        <li><span>已付金额</span><span>￥${order.total-couponPrice}</span></li>
       </c:if>
-      <c:if test="${empty order.coupon}">
+      <c:if test="${coupon==0}">
         <li><span>总金额</span><span>￥${order.total}</span></li>
         <li><span>优惠券金额</span><span>￥0</span></li>
         <li><span>已付金额</span><span>￥${order.total}</span></li>
