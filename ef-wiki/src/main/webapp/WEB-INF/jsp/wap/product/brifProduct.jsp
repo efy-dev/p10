@@ -275,7 +275,6 @@ ${product.productDescription.content}
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          //alert("您还未登陆，请登录后再操作");
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
@@ -287,36 +286,28 @@ ${product.productDescription.content}
         }
         if(data=="true"){
           $("#"+masterId).html("取消关注");
-          if(oper=="0"){
-            var val = $("#saveMasterFllow").val("1");
-          }
-          if(oper=="1"){
-            var val = $("#saveMasterFllow").val("0");
-          }
           return true;
         }
         if(data=="del"){
           $("#"+masterId).html("关注");
-          if(oper=="0"){
-            var val = $("#saveMasterFllow").val("1");
-          }
-          if(oper=="1"){
-            var val = $("#saveMasterFllow").val("0");
-          }
           return true;
         }
         if(data=="error"){
-        showAlert("提示","未知错误，请联系管理员！！！");
+        alert("未知错误，请联系管理员！！！");
           return false;
         }
       },
       error:function(){
-
         alert("出错了，请联系管理员！！！");
         return false;
       },
       complete:function(){
-
+       /* if(oper=="0"){
+          var val = $("#saveMasterFllow").val("1");
+        }
+        if(oper=="1"){
+          var val = $("#saveMasterFllow").val("0");
+        }*/
       }
     });
   }

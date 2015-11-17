@@ -16,59 +16,53 @@
 
 <!-- //End--header-->
 <!--content-->
-    <div class="layout-col">
-      <div class="mt wh1">
-        <div class="extra-l">
-          <strong>订单信息</strong>
-        </div>
-      </div>
-      <div class="orderinfo">
-        <dl class="orderid-mashup" style="margin-bottom: 15px;">
-          <dt class="orderid">订单</dt>
-          <dd class="od-id">
-            <p >订单号: <span>${order.serial}</span></p>
-            <p>订单金额：<span>${order.total}</span></p>
-            <c:if test="${order.orderStatus!=1}">
-              <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span></p>
-            </c:if>
-            <c:if test="${order.orderStatus==1}">
-              <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span><a class="od-id-btn" href="<%=PConst.HOSTNAME%>/order/pay/${order.id}" title="去付款">去付款</a></p>
-            </c:if>
-          </dd>
-        </dl>
+<div class="layout-col">
+  <div class="mt wh1">
+    <div class="extra-l">
+      <strong>订单信息</strong>
+    </div>
+  </div>
+  <div class="orderinfo">
+    <dl class="orderid-mashup" style="margin-bottom: 15px;">
+      <dt class="orderid">订单</dt>
+      <dd class="od-id">
+        <p >订单号: <span>${order.serial}</span></p>
+        <p>订单金额：<span>${order.total}</span></p>
+        <c:if test="${order.orderStatus!=1}">
+          <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span></p>
+        </c:if>
+        <c:if test="${order.orderStatus==1}">
+          <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span><a class="od-id-btn" href="<%=PConst.HOSTNAME%>/order/pay/${order.id}" title="去付款">去付款</a></p>
+        </c:if>
+      </dd>
+    </dl>
 
-        <dl class="orderid-mashup bd-top">
-          <dt class="orderid">商品信息</dt>
-          <dd class="od-id">
-            <c:forEach  items="${order.purchaseOrderProductList}" var="op">
-              <table class="item-bg">
-                <tr>
-                  <td class="commodity_info1">
-                    <ul class="commodity_info-1">
-                    <li class="l1 informala"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
-                    </ul>
-                  </td>
-                  <td class="commodity_price_unit1  price9"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">
+    <dl class="orderid-mashup bd-top">
+      <dt class="orderid">商品信息</dt>
+      <dd class="od-id">
+        <c:forEach  items="${order.purchaseOrderProductList}" var="op">
+          <table class="item-bg">
+            <tr>
+              <td class="commodity_info1">
+                <ul class="commodity_info-1">
+                  <li class="l1 informala"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
+                </ul>
+              </td>
+              <td class="commodity_price_unit1  price9"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">
                   ${op.productModel.product.name}
-                    [${op.productModel.name}]
-                    <%--<c:if test="${op.productModel.productPropertyValueList.size()>1}">--%>
-                    <%--[--%>
-                    <%--<c:forEach items="${op.productModel.productPropertyValueList}"--%>
-                               <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
-                    <%--]--%>
-                  <%--</c:if>--%>
-                  </a></td>
+                [${op.productModel.name}]
+              </a></td>
 
-                  <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
-                  <td class="commodity_price  price8">￥${op.purchasePrice * op.purchaseAmount}</td>
-                </tr>
-              </table>
-            </c:forEach>
-          </dd>
-        </dl>
-        <%--<c:if test="${!empty purchaseOrderDelivery}">--%>
-        <c:if test="${!empty pl}">
-        <c:forEach items="${pl}" var="pl" varStatus="i">
+              <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
+              <td class="commodity_price  price8">￥${op.purchasePrice * op.purchaseAmount}</td>
+            </tr>
+          </table>
+        </c:forEach>
+      </dd>
+    </dl>
+    <%--<c:if test="${!empty purchaseOrderDelivery}">--%>
+    <c:if test="${!empty pl}">
+      <c:forEach items="${pl}" var="pl" varStatus="i">
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">物流信息</dt>
           <dd class="od-id">
@@ -82,33 +76,34 @@
             </div>
           </dd>
         </dl>
-        </c:forEach>
-        <%--</c:if>--%>
+      </c:forEach>
+      <%--</c:if>--%>
 
 
-        </c:if>
-        <dl class="orderid-mashup bd-top">
-          <dt class="orderid">收货信息</dt>
-          <dd class="od-id">
-            <p>收货地址：<span>${order.purchaseOrderAddress}</span></p>
-            <p>收货人姓名：<span>${order.receiverName}</span></p>
-            <p>联系电话：<span>${order.receiverPhone}</span></p>
+    </c:if>
+    <dl class="orderid-mashup bd-top">
+      <dt class="orderid">收货信息</dt>
+      <dd class="od-id">
+        <p>收货地址：<span>${order.purchaseOrderAddress}</span></p>
+        <p>收货人姓名：<span>${order.receiverName}</span></p>
+        <p>联系电话：<span>${order.receiverPhone}</span></p>
 
-          </dd>
-        </dl>
-        <dl class="orderid-mashup bd-top item-list5">
-          <dt class="orderid">支付及配送方式</dt>
-          <dd class="od-id">
-            <p >支付方式：<span ><ming800:status name="payWay" dataType="PurchaseOrder.payWay" checkedValue="${order.payWay}" type="normal"/> <strong style="font-size: 12px;color:#ff0000;font-weight: 100">共支付${order.total-order.coupon.couponBatch.price}元 <c:if test="${!empty order.coupon}">
-              ,优惠券抵扣${order.coupon.couponBatch.price}元
-            </c:if></strong></p>
-            <p>配送方式：<span>普通快递</span></p>
-            <p>运费：<span>免运费</span></p>
-          </dd>
-        </dl>
-      </div>
-    </div>
+      </dd>
+    </dl>
+    <dl class="orderid-mashup bd-top item-list5">
+      <dt class="orderid">支付及配送方式</dt>
+      <dd class="od-id">
+        <p >支付方式：<span ><ming800:status name="payWay" dataType="PurchaseOrder.payWay" checkedValue="${order.payWay}" type="normal"/>
+              <strong style="font-size: 12px;color:#ff0000;font-weight: 100">共支付${order.total-couponPrice}元 <c:if test="${coupon==1}">
+                ,优惠券抵扣${couponPrice}元
+              </c:if></strong></p>
+        <p>配送方式：<span>普通快递</span></p>
+        <p>运费：<span>免运费</span></p>
+      </dd>
+    </dl>
   </div>
+</div>
+</div>
 <script>
   $(function(){
     $("p[name='ss']").mouseenter(function(){
@@ -123,15 +118,6 @@
 
 <!-- //End--footer-->
 </div>
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value="/scripts/js/jquery.min.js"/>"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
-<![endif]-->
-<script src="<c:url value="/scripts/js/amazeui.min.js"/>"></script>
-<script src="<c:url value="/scripts/js/system.js"/>"></script>
+
 </body>
 </html>

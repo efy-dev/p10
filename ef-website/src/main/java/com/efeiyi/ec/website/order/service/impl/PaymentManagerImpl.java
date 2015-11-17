@@ -4,6 +4,7 @@ import cn.beecloud.BCEumeration;
 import cn.beecloud.BCPay;
 import cn.beecloud.BCPayResult;
 import cn.beecloud.BeeCloud;
+import cn.beecloud.bean.BCPayParameter;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
@@ -40,7 +41,33 @@ public class PaymentManagerImpl implements PaymentManager {
     @Override
     public String alipay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
         BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
-        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails), null, "http://www.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId(), null, null, null);
+        BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.ALI_WEB, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
+        param.setReturnUrl("http://www.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
+//        param.setBillTimeout(120);
+//        param.setOptional(optional);
+
+        BCPayResult bcPayResult = BCPay.startBCPay(param);
+//        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, 1, purchaseOrderPaymentDetails.getId(), "非遗产品", null, "http://www2.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId(), null, null, null);
+        if (bcPayResult.getType().ordinal() == 0) {
+            System.out.println(bcPayResult.getHtml());
+            return bcPayResult.getHtml();
+        } else {
+            //handle the error message as you wish！
+            System.out.println(bcPayResult.getErrMsg());
+            return "error";
+        }
+    }
+
+
+    @Override
+    public String alipayWap(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
+        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
+        BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.ALI_WAP, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
+        param.setReturnUrl("http://www.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
+//        param.setBillTimeout(120);
+//        param.setOptional(optional);
+
+        BCPayResult bcPayResult = BCPay.startBCPay(param);
 //        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, 1, purchaseOrderPaymentDetails.getId(), "非遗产品", null, "http://www2.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId(), null, null, null);
         if (bcPayResult.getType().ordinal() == 0) {
             System.out.println(bcPayResult.getHtml());
@@ -78,7 +105,9 @@ public class PaymentManagerImpl implements PaymentManager {
     @Override
     public Object wxpay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount, String openid) {
         BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
-        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_JSAPI, price.intValue(), purchaseOrderPaymentDetails.getId() + "", getTitle(purchaseOrderPaymentDetails), null, null, openid, null, null);
+        BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.WX_JSAPI, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
+        param.setOpenId(openid);
+        BCPayResult bcPayResult = BCPay.startBCPay(param);
         if (bcPayResult.getType().ordinal() == 0) {
             JSONObject jsonObject = JSONObject.fromObject(bcPayResult.getWxJSAPIMap());
             return jsonObject;
@@ -90,7 +119,9 @@ public class PaymentManagerImpl implements PaymentManager {
     @Override
     public String wxNativePay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
         BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
-        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_NATIVE,price.intValue(), purchaseOrderPaymentDetails.getId() + "", getTitle(purchaseOrderPaymentDetails), null, null, null, null, null);
+        BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.WX_NATIVE, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
+        param.setBillTimeout(120);
+        BCPayResult bcPayResult = BCPay.startBCPay(param);
         if (bcPayResult.getType().ordinal() == 0) {
             String codeUrl = bcPayResult.getCodeUrl();
             return codeUrl;
