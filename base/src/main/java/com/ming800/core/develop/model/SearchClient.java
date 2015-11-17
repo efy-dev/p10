@@ -18,55 +18,12 @@ import java.util.*;
  */
 public class SearchClient implements Runnable {
 
-//    public static List<String> searchList = new LinkedList<String>();
-    //    public static List<HttpServletRequest> postList = new LinkedList<HttpServletRequest>();
-//    public static Map resultMap = new LinkedHashMap<>();
-//    public static Map<HttpServletRequest, Map<String, Object>> responseMap = new LinkedHashMap<HttpServletRequest, Map<String, Object>>();
-    //    private static HttpClient httpclient = new HttpClient();
-    public static HttpSolrClient solrClient = new HttpSolrClient("http://localhost:8080/solr-5.3.1/product");
+    public HttpSolrClient solrClient;
     private CommonManager commonManager = (CommonManager) ApplicationContextUtil.getApplicationContext().getBean("commonManager");
 
-//    public void run() {
-//        while (true) {
-//            if (SearchClient.searchList.isEmpty()) {
-//                synchronized (SearchClient.searchList) {
-//                    if (SearchClient.searchList.isEmpty()) {
-//                        try {
-//                            SearchClient.searchList.wait();
-//                        } catch (InterruptedException e) {
-//                            Thread.currentThread().interrupt();
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//            }
-//
-//            String query = SearchClient.searchList.remove(0);
-//            try {
-//                Map result = postQuery2Solr(query);
-//                SearchClient.resultMap.put(query, result);
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            } finally {
-//                synchronized (query) {
-//                    query.notifyAll();
-//                }
-//            }
-//        }
-//    }
-
-//    private Map postQuery2Solr(String query) throws Exception {
-//        String url = PalConst.getInstance().solrUrl + query;
-//        HttpMethod method = new GetMethod(url);
-//        httpclient.executeMethod(method);
-//        String json = method.getResponseBodyAsString();
-//        System.out.println(method.getResponseBodyAsString());
-//        method.releaseConnection();
-//        Map<?, ?> map = JsonUtil.parseJsonStringToMap(json);
-//        return map;
-//    }
-
+    public SearchClient(String solrServerCoreUrl){
+        solrClient = new HttpSolrClient(solrServerCoreUrl);
+    }
 
     public void run() {
         while (true) {
@@ -83,46 +40,42 @@ public class SearchClient implements Runnable {
                 }
             }
 
-            HttpServletRequest request = SolrReactor.getInstance().postQueue.poll();
+            SearchParamBean searchParamBean = SolrReactor.getInstance().postQueue.poll();
             try {
-                Map resultMap = postQuery2Solr(request);
-                SolrReactor.getInstance().responseMap.put(request, resultMap);
+                Map resultMap = postQuery2Solr(searchParamBean);
+                SolrReactor.getInstance().responseMap.put(searchParamBean, resultMap);
 
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                synchronized (request) {
-                    request.notifyAll();
+                synchronized (searchParamBean) {
+                    searchParamBean.notifyAll();
                 }
             }
         }
     }
 
-    private Map<String, Object> postQuery2Solr(HttpServletRequest request) throws Exception {
+    private Map<String, Object> postQuery2Solr(SearchParamBean searchParamBean) throws Exception {
 
         //完整查询q
-        String queryString = request.getAttribute("q").toString();
-        SolrQuery solrQuery = new SolrQuery(queryString.toString());
+        String queryString = searchParamBean.getQuery();
+        SolrQuery solrQuery = new SolrQuery(queryString);
 
         //区间查询
-        String fq = request.getParameter("fq");
+        String fq = searchParamBean.getFq();
         if(fq != null && !"".equals(fq)) {
-            solrQuery.setFilterQueries(request.getParameter("fq"));
+            solrQuery.setFilterQueries(searchParamBean.getFq());
         }
 
-        CommonSearch commonSearch = commonManager.getSearchParam(request.getParameter("group"));
+        CommonSearch commonSearch = commonManager.getSearchParam(searchParamBean.getGroup());
         if (commonSearch != null) {
 
             //分页
-            String pageIndex = request.getParameter("pageEntity.index");
-            String pageSize = request.getParameter("pageEntity.size");
-            PageEntity pageEntity = (PageEntity) request.getAttribute("pageEntity");
-            if (pageIndex != null) {
-                pageEntity.setIndex(Integer.parseInt(pageIndex));
-                pageEntity.setSize(Integer.parseInt(pageSize));
-            }
-            solrQuery.setStart(pageIndex == null ? 0 : (pageEntity.getIndex() - 1) * pageEntity.getSize())
-                    .setRows(pageSize == null ? commonSearch.getRows() : Integer.parseInt(pageSize));
+            PageEntity pageEntity = searchParamBean.getPageEntity();
+            Integer pageIndex = pageEntity.getIndex();
+            Integer pageSize = pageEntity.getSize();
+            solrQuery.setStart(pageIndex == null ? 0 : ((pageEntity.getIndex() - 1) * pageEntity.getSize()))
+                    .setRows(pageSize == null ? commonSearch.getRows() : pageSize);
 
             //高亮
             if (commonSearch.isHighLight()) {
@@ -141,15 +94,15 @@ public class SearchClient implements Runnable {
             }
 
             //排序
-            String sortField = request.getParameter("sortField");
-            String sortOrder = request.getParameter("sortOrder");
+            String sortField = searchParamBean.getSortField();
+            String sortOrder = searchParamBean.getSortOrder();
             if (sortField != null && !sortField.equals("")) {
                 solrQuery.setSort(sortField, sortOrder == null || sortOrder.equals("") ? SolrQuery.ORDER.desc : SolrQuery.ORDER.asc);
             }
 
             //分組
             String[] facetFieldsArray = null;
-            String facetFields = request.getParameter("facetFields");
+            String facetFields = searchParamBean.getFacetFields();
             if (facetFields != null && !facetFields.equals("")) {
                 facetFieldsArray = facetFields.split(",");
                 solrQuery.setFacet(true)
@@ -207,7 +160,7 @@ public class SearchClient implements Runnable {
             queryMap.put("searchResultList", searchResultList);
             return queryMap;
         }
-        throw new Exception("没有找到检索配置group：" + request.getParameter("group"));
+        throw new Exception("没有找到检索配置group：" + searchParamBean.getGroup());
     }
 
 }
