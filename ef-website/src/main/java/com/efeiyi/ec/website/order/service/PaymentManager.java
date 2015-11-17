@@ -17,4 +17,6 @@ public interface PaymentManager {
     String wxNativePay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount);
 
     PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder);
+
+    String alipayWap(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount);
 }
