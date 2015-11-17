@@ -3,6 +3,7 @@ package com.efeiyi.ec.website.base.controller;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantProject;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -151,9 +152,23 @@ public class HomeController {
         HashMap<String, TenantProject> tenantMap = new HashMap<>();
         for(Object object :recommendedTenantList){
                XQuery xQuery = new XQuery("listTenantProject_default",request);
-               xQuery.put("tenant_id",((TenantProject)object).getId());
-//               List<Object> tenantProjectList =;
+               xQuery.put("tenant_id",((Tenant)object).getId());
+               List<Object> tenantProjectList = baseManager.listObject(xQuery);
+              //去重
+            if(tenantProjectList!=null&&tenantProjectList.size()>0){
+              for(int i = 0;i<tenantProjectList.size();i++){
+                for(int j = i+1;j<tenantProjectList.size();j++){
+                    if(((TenantProject)tenantProjectList.get(i)).getTenant().getId().equals(((TenantProject)tenantProjectList.get(j)).getTenant().getId())){
+                        tenantProjectList.remove(j);
+                        j--;
+                    }
+                }
+            }
+            }
+            tenantMap.put(((Tenant)object).getId(),(TenantProject)tenantProjectList.get(0));
         }
+        //关联店铺和project
+        model.addAttribute("tenantMap",tenantMap);
         for (Object object : categoryList) {
             //取得推荐分类下面商品
             XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);

@@ -46,18 +46,18 @@
                         <div class="links">
                    <c:forEach items="${projectMap.get(category.id)}" var="project">
                             <a href="<c:url value="/product/list/${project.id}"/>" title="">${project.name}</a>
-                   </c:forEach>
                         </div>
                         <!-- //End--links-->
                         <div class="reco">
-                            <c:if test="${not empty recommendedTenantList}">
+                            <c:if test="${recommendedTenantList}">
                                 <c:forEach items="${recommendedTenantList}" var="tenant">
-                                    <%--<c:if test="${tenant}">--%>
+                                 <c:if test="${tenantMap(tenant)==project.id}">
                                <a href="<c:url value="/tenant/${tenant.id}"/>" title=""> <img class="imgfilter" src="http://pro.efeiyi.com/${tenant.logoUrl}" alt=""></a>
-                                    <%--</c:if>--%>
+                                </c:if>
                                 </c:forEach>
-                            </c:if>
+                           </c:if>
                         </div>
+                    </c:forEach>
                     </div>
                 </div>
           </c:forEach>
