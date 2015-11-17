@@ -76,7 +76,7 @@
 <!-- //End--header-->
 <div class="craft-details">
   <div class="craft-banner">
-    <img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_pc_url}">
+    <img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_pc_url}@!pc-project-header">
     <div class="cart-b-page">
       <h5 class="ae">${project.name}</h5>
       <c:choose>
@@ -245,7 +245,7 @@
             var box = $(" <li> <div class=\"text\"> <h4><a href=\"http://"+data.list[i].master.name+".efeiyi.com\" >"+data.list[i].master.fullName+"</a></h4> " +
                     "<p>"+levelName+"</p> <p><span>"+data.list[i].master.brief+"</span></p> " +
                     "<a class=\"btn-guan\" href=\"javascript:void(0);\"  about=\""+opertation+"\" onclick=\"saveMasterFllow('"+data.list[i].master.id+"')\"    id=\""+data.list[i].master.id+"\">"+word+"</a> </div> " +
-                    "<div class=\"img\"><a href=\"http://"+data.list[i].master.name+".efeiyi.com\" ><img src=\""+data.list[i].master.favicon+"\"></a></div> </li>");
+                    "<div class=\"img\"><a href=\"http://"+data.list[i].master.name+".efeiyi.com\" ><img src=\""+data.list[i].master.favicon+"@!pc-project-master\"></a></div> </li>");
 
 
             pubu.append(box);

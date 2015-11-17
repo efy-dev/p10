@@ -691,3 +691,15 @@ ADD COLUMN `context`  varchar(255) NULL AFTER `picture_url`;
 ALTER TABLE `project`
 DROP COLUMN `context`;
 
+=======================11.17===================
+CREATE TABLE `master_comment_praise` (
+  `id`  char(16) NOT NULL ,
+  `comment_id`  char(16) NULL ,
+  `user_id`  char(16) NULL ,
+  `author_id`  char(16) NULL ,
+  `create_datetime`  datetime(6) NULL ,
+  `status`  varchar(2) NULL ,
+  PRIMARY KEY (`id`)
+)
+;
+

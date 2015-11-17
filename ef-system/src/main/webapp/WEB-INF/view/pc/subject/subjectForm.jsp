@@ -135,8 +135,19 @@
       <a id="btn_upload3"></a>
     </div>
   </div>
+        <c:if test="${not empty object.id}">
+            <div class="am-form-group">
+                <label name="createDate" class="am-u-sm-3 am-form-label">创建时间</label>
 
-
+                <div class="am-u-sm-9">
+                    <div style="margin-top: 9px;">
+                        <input value="${object.createDateTime}" type="hidden" name="createDateTime"/>
+                        <fmt:formatDate value="${object.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm:ss"/>
+                    </div>
+                    <!-- <small>必填项*</small>-->
+                </div>
+            </div>
+        </c:if>
   <div class="am-u-md-13">
     <div class="am-panel am-panel-default">
       <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">

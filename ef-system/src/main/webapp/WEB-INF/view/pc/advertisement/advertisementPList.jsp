@@ -74,7 +74,7 @@
                         </td>
                         <td class="am-hide-sm-only" width="20%">${ads.name}</td>
                         <td class="am-hide-sm-only" width="15%">
-                            <ming800:status name="groupName" dataType="Advertisement.groupName" checkedValue="${ads.groupName}" type="normal"/>
+                            <ming800:status name="groupName" dataType="Advertisement.group" checkedValue="${ads.groupName}" type="normal"/>
                         </td>
                         <td class="am-hide-sm-only" width="15%">
                            <a target="_blank" href="${ads.redirect}">${ads.redirect}</a>

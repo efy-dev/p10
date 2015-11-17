@@ -372,7 +372,7 @@
         if(data.mrModelList != null && data.mrModelList.length > 0){
           sub +="<div class=\"dynamic\" style=\"border-bottom:0;\">"+
           "                    <div class=\"suit-focus\">"+
-          "                        <div class=\"title\">您可能喜欢的工艺:</div>"+
+          "                        <div class=\"title\">您可能喜欢的大师:</div>"+
           "                        <div class=\"div-list\">"+
           "                            <ul>";
           var attr = data.mrModelList;

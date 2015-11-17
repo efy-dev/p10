@@ -125,16 +125,17 @@
       async: true,
       dataType: "json",//设置请求返回的数据格式
       success: function (data) {
+        var prevNode = $(o).parent().parent().prev().find("span");
+        var amount = parseInt(prevNode.html());
+        var num = parseInt($(o).find("span").html());
         if(data == "noRole"){
           alert("您还未登录,请登录后操作!");
         }else if(data == "add"){
-          var num = parseInt($(o).find("span").html());
           $(o).find("span").html(num + 1);
-          console.log(num);
+          prevNode.html(amount + 1);
         }else if(data == "del"){
-          var num = parseInt($(o).find("span").html());
           $(o).find("span").html(num - 1);
-          console.log(num);
+          prevNode.html(amount - 1);
         }
       }
     })

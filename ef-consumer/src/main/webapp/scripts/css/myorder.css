@@ -18,7 +18,7 @@ a:hover { text-decoration: underline }
 .myod-text6 { width: 127px; height: 51px; background: url(../images/myorder-head.jpg) no-repeat  -158px -167px; float: left; }
 /*各页面头部*/
 /*--reset--*/
-.wh1 { width: 100%; float: left; margin-bottom: 27px;position: relative;z-index: 1; }
+.wh1 { width: 100%; float: left; margin-bottom: 27px;position: relative; }
 /*//End--commmon*/
 .my-order .order-nav { width: 1000px; height: auto; margin: 0 auto; overflow: hidden; margin: 62px auto 150px; }
 .my-order .order-nav .layout-nav { float: left; width: 110px; height: auto; padding: 20px 14px 25px; border: 1px solid #ccc; }

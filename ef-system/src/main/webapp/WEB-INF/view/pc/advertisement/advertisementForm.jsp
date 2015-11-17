@@ -40,7 +40,7 @@
             <label name="name" class="am-u-sm-3 am-form-label">类别</label>
 
             <div class="am-u-sm-9">
-                <ming800:status name="groupName" dataType="Advertisement.groupName" checkedValue="${object.groupName}" type="select"/>
+                <ming800:status name="groupName" dataType="Advertisement.group" checkedValue="${object.groupName}" type="select"/>
             </div>
         </div>
 
