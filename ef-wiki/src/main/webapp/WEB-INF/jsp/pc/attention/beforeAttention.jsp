@@ -41,38 +41,7 @@
   <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
-<%--<div class="topbar wh" data-am-sticky>
-  <div class="hd">
-    <ul class="ul-item">
-      <li><strong>李先生8899</strong><a href="" title="退出">退出</a></li>
-      <li><a href="" title="请登录">请登录</a></li>
-      <li><a href="" title="快速注册">快速注册</a></li>
-      <li class="btn-top-wechat">
-        <a title="手机e飞蚁">手机e飞蚁</a>
-        <span class="top-wechat"></span>
-      </li>
-      <li class="cart">
-        <a href="" title="购物车"><i class="icon"></i>购物车</a>
-        <span class="tips"><em>0</em></span>
-      </li>
-    </ul>
-  </div>
-</div>
-<!-- //End--topbar-->
-<div class="header wh">
-  <div class="hd">
-    <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
-    <div class="nav">
-      <ul>
-        <li><a href="" title="首页">首页</a></li>
 
-        <li><a href="" title="传承人">大师</a></li>
-        <li><a href="" title="展览">工艺</a></li>
-
-      </ul>
-    </div>
-  </div>
-</div>--%>
 <!-- //End--header-->
 <div class="craft-details ">
   <div class="nav-bars ae">
@@ -237,8 +206,7 @@
       success:function(data){
          var parentElement =$("#"+projectId).parent().parent();
         if(data=="false"){
-          //alert("您还未登陆，请登录后再操作");
-          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/beforeAttention.do'/>";
@@ -249,29 +217,14 @@
           return false;
         }
         if(data=="true"){
-          //$("#"+projectId).html("取消关注");
-          mark = true;
           parentElement.empty();
-          if(oper=="add" &&  mark == true){
-            parentElement.append("<div class=\"gz-q\"> <em about=\"del\" id=\""+projectId+"\">已关注</em> </div>");
-          }
-          if(oper=="del" &&  mark == true){
-            parentElement.append("<div class=\"gz-q\"><i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">已关注</em> </div>");
-          }
-
-
+          parentElement.append("<div class=\"gz-q\"> <em about=\"del\" id=\""+projectId+"\">已关注</em> </div>");
           return true;
         }
         if(data=="del"){
           //$("#"+projectId).html("关注");
           parentElement.empty();
-          mark = true;
-          if(oper=="add" &&  mark == true){
-            parentElement.append("<div class=\"gz-q\"> <em about=\"del\" id=\""+projectId+"\">已关注</em> </div>");
-          }
-          if(oper=="del" &&  mark == true){
-            parentElement.append("<div class=\"gz-q\"><i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">已关注</em> </div>");
-          }
+          parentElement.append("<div class=\"gz-q\"><i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">关注</em> </div>");
           return true;
         }
         if(data=="error"){
@@ -285,6 +238,12 @@
         return false;
       },
       complete:function(){
+       /* if(oper=="add" &&  mark == true){
+          parentElement.append("<div class=\"gz-q\"> <em about=\"del\" id=\""+projectId+"\">已关注</em> </div>");
+        }
+        if(oper=="del" &&  mark == true){
+          parentElement.append("<div class=\"gz-q\"><i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">已关注</em> </div>");
+        }*/
         /*if(oper=="add" &&  mark == true){
           var val = $("#"+projectId).attr("about","del");
         }

@@ -861,23 +861,27 @@
         var getup = $(li).prev();
         var targetId = $(getup).attr("name");
         var targetSort = $(getup).attr("sort");
-        if(getup.length==0){
-            alert("已经是第一个了!");
-        }else{
-            $.ajax({
-                type: "get",
-                url: '<c:url value="/product/changePictureSort.do"/>',
-                cache: false,
-                dataType: "json",
-                data: {sourceId: sourceId,sourceSort:sourceSort,targetId:targetId,targetSort:targetSort},
-                success: function (data) {
-                    $(getup).before(li);
-                    $(li).attr("sort",targetSort);
-                    $(getup).attr("sort",sourceSort);
-                }
-            });
 
-        }
+            if (getup.length == 0) {
+                alert("已经是第一个了!");
+            } else   if(sourceSort == ""|| targetSort == ""){
+                $(getup).before(li);
+            }else {
+                $.ajax({
+                    type: "get",
+                    url: '<c:url value="/product/changePictureSort.do"/>',
+                    cache: false,
+                    dataType: "json",
+                    data: {sourceId: sourceId, sourceSort: sourceSort, targetId: targetId, targetSort: targetSort},
+                    success: function (data) {
+                        $(getup).before(li);
+                        $(li).attr("sort", targetSort);
+                        $(getup).attr("sort", sourceSort);
+                    }
+                });
+
+            }
+
     }
     function downImg(obj){
         var li = $(obj).parents("li");
@@ -886,23 +890,27 @@
         var getdown = $(li).next();
         var targetId = $(getdown).attr("name");
         var targetSort = $(getdown).attr("sort");
-        if(getdown.length==0){
-            alert("已经是最后一个了!");
-        }else{
-            $.ajax({
-                type: "get",
-                url: '<c:url value="/product/changePictureSort.do"/>',
-                cache: false,
-                dataType: "json",
-                data: {sourceId: sourceId,sourceSort:sourceSort,targetId:targetId,targetSort:targetSort},
-                success: function (data) {
-                    $(getdown).after(li);
-                    $(li).attr("sort",targetSort);
-                    $(getdown).attr("sort",sourceSort)
-                }
-            });
 
-        }
+            if (getdown.length == 0) {
+                alert("已经是最后一个了!");
+            } else  if(sourceSort==""||targetSort==""){
+                $(getdown).after(li);
+            }else {
+                $.ajax({
+                    type: "get",
+                    url: '<c:url value="/product/changePictureSort.do"/>',
+                    cache: false,
+                    dataType: "json",
+                    data: {sourceId: sourceId, sourceSort: sourceSort, targetId: targetId, targetSort: targetSort},
+                    success: function (data) {
+                        $(getdown).after(li);
+                        $(li).attr("sort", targetSort);
+                        $(getdown).attr("sort", sourceSort)
+                    }
+                });
+
+
+            }
 
     }
     function toDiscription(obj){

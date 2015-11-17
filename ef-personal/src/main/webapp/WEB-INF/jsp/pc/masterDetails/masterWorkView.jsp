@@ -167,10 +167,10 @@
                         }else{
                             src = "<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>";
                         }
-                        if(data[i].praiseNum == null){
+                        if(data[i].amount == null){
                             amount = 0;
                         }else{
-                            amount = data[i].praiseNum;
+                            amount = data[i].amount;
                         }
                         var sub = "<li class=\"ae\" id=\""+data[i].id+"\">"+
                                 "     <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"http://tenant.efeiyi.com/"+src+"@!master-favicon-view\"></a></div>"+
@@ -226,10 +226,10 @@
                         }else{
                             src = "<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>";
                         }
-                        if(data[i].praiseNum == null){
+                        if(data[i].amount == null){
                             amount = 0;
                         }else{
-                            amount = data[i].praiseNum;
+                            amount = data[i].amount;
                         }
                         var childNode = "<li style=\"margin: 0;border-bottom: 0;\" id=\""+data[i].id+"\" class=\"obtain\">"+
                                 "           <div class=\"ae\">"+
@@ -284,10 +284,10 @@
                     } else {
                         src = "<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>";
                     }
-                    if (data.praiseNum == null) {
+                    if(data.amount == null){
                         amount = 0;
-                    } else {
-                        amount = data.praiseNum;
+                    }else{
+                        amount = data.amount;
                     }
                     var childNode = "<li style=\"margin: 0;border-bottom: 0;\" id=\""+data.id+"\" class=\"obtain\">"+
                             "           <div class=\"ae\">"+
@@ -343,10 +343,10 @@
                     }else{
                         src = "<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>";
                     }
-                    if(data.praiseNum == null){
+                    if(data.amount == null){
                         amount = 0;
                     }else{
-                        amount = data.praiseNum;
+                        amount = data.amount;
                     }
                     var insertNode = $("<li class=\"ae\" id=\""+data.id+"\">"+
                             "     <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"http://tenant.efeiyi.com/"+src+"@!master-favicon-view\"></a></div>"+

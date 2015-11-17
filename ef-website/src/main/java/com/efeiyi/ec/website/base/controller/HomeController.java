@@ -162,24 +162,24 @@ public class HomeController {
         model.addAttribute("sign", "000");
 
         //广告区域 营销活动 热卖商品 广告区
-        XQuery subjectQuery = new XQuery("listAdvertisement_default", request);
-        XQuery subjectQuery2 = new XQuery("listAdvertisement_default2", request);
-        XQuery subjectQuery3 = new XQuery("listAdvertisement_default3", request);
-        List<Object> subjectList = baseManager.listObject(subjectQuery);
-        List<Object> subjectList2 = baseManager.listObject(subjectQuery2);
-        List<Object> subjectList3 = baseManager.listObject(subjectQuery3);
+        XQuery marketingActivityQuery = new XQuery("listAdvertisement_default", request);
+        XQuery hotSaleQuery = new XQuery("listAdvertisement_default3", request);
+        XQuery bannerQuery = new XQuery("listAdvertisement_default5", request);
+        List<Object> marketingActivityQueryList = baseManager.listObject(marketingActivityQuery);
+        List<Object> hotSaleList = baseManager.listObject(hotSaleQuery);
+        List<Object> bannerActivityList = baseManager.listObject(bannerQuery);
         //热卖商品
-        if (subjectList != null && subjectList.size() > 0) {
-            model.addAttribute("advertisement", subjectList);
+        if (marketingActivityQueryList != null && marketingActivityQueryList.size() > 0) {
+            model.addAttribute("marketingActivityQueryList", marketingActivityQueryList);
         }
-        if (subjectList2 != null && subjectList2.size() > 0) {
-            model.addAttribute("advertisement2", subjectList2);
+        if (hotSaleList != null && hotSaleList.size() > 0) {
+            model.addAttribute("hotSaleList", hotSaleList);
         }
-        if (subjectList3 != null && subjectList3.size() > 0) {
-            model.addAttribute("advertisement3", subjectList3);
+        if (bannerActivityList != null && bannerActivityList.size() > 0) {
+            model.addAttribute("bannerActivityList", bannerActivityList);
         }
         model.addAttribute("projectMap", projectMap);
-        return "/home";
+        return "/home1";
     }
 
     @RequestMapping({"/productCategory.do"})

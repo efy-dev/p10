@@ -474,7 +474,6 @@
         dataType:"json",
         success:function(data){
           if(data=="false"){
-            //alert("您还未登陆，请登录后再操作");
             var go = window.confirm("去登陆吧?");
             if(go==true){
               window.location.href ="<c:url value='/brifProject2/${project.id}'/>";
@@ -485,27 +484,17 @@
             return false;
           }
           if(data=="true"){
-            if(oper=="add"){
-              $("#"+masterId).attr("about","1");
-            }
-            if(val=="del"){
-             $("#"+masterId).attr("about","0");
-            }
+
             $("#"+masterId).html("取消关注");
             return true;
           }
           if(data=="del"){
-            if(oper=="add"){
-              $("#"+masterId).attr("about","1");
-            }
-            if(val=="del"){
-              $("#"+masterId).attr("about","0");
-            }
+
             $("#"+masterId).html("关注");
             return true;
           }
           if(data=="error"){
-            showAlert("提示","未知错误，请联系管理员！！！");
+            alert("未知错误，请联系管理员！！！");
             return false;
           }
         },
@@ -515,7 +504,12 @@
           return false;
         },
         complete:function(){
-
+         /* if(oper=="add"){
+            $("#"+masterId).attr("about","1");
+          }
+          if(val=="del"){
+            $("#"+masterId).attr("about","0");
+          }*/
         }
       });
     }
@@ -871,7 +865,7 @@
               for(i in data.list){
 
 
-                html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\">" +
+                html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\">" +
                         "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
                         "<div class=\"name\">"+data.list[i].name+"</div> <div class=\"txt-info\"> " +
                         "<a href=\"#\"><i class=\"icon good-1\"></i><em>"+data.list[i].fsAmount+"</em></a> " +
@@ -1081,7 +1075,7 @@
      data:"",
      dataType:"json",
      success:function(o){
-       window.location.href="<c:url value='/project/showProduct/'/>"+data2;
+       window.location.href="<c:url value='/base/showProduct/'/>"+data2;
      },
      error:function(){
        alert("出错了，请联系管理员！！！");
@@ -1098,7 +1092,7 @@
      data:"",
      dataType:"json",
      success:function(o){
-       window.location.href="<c:url value='/project/showProduct/'/>"+data2;
+       window.location.href="<c:url value='/base/showProduct/'/>"+data2;
      },
      error:function(){
        alert("出错了，请联系管理员！！！");
