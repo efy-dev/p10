@@ -27,6 +27,12 @@
         <%--<a href="<c:url value="/document/richTextView?group=ec.gywm"/> " target="_blank" title="新闻资讯">新闻资讯</a>--%>
     </div>
     <div class="copyright wh">
+        <div class="frlinksimg">
+            <strong>独家合作</strong>
+            <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织" target="_blank"></a>
+            <em class="line"></em>
+            <a class="icon2" title="中国非物质文化遗产保护协会"></a>
+        </div>
         <div class="phone">
             <strong>商家入驻热线</strong>
             <em>400-876-8766</em>
