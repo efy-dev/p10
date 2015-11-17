@@ -483,27 +483,17 @@
             return false;
           }
           if(data=="true"){
-            if(oper=="add"){
-              $("#"+masterId).attr("about","1");
-            }
-            if(val=="del"){
-             $("#"+masterId).attr("about","0");
-            }
+
             $("#"+masterId).html("取消关注");
             return true;
           }
           if(data=="del"){
-            if(oper=="add"){
-              $("#"+masterId).attr("about","1");
-            }
-            if(val=="del"){
-              $("#"+masterId).attr("about","0");
-            }
+
             $("#"+masterId).html("关注");
             return true;
           }
           if(data=="error"){
-            showAlert("提示","未知错误，请联系管理员！！！");
+            alert("未知错误，请联系管理员！！！");
             return false;
           }
         },
@@ -513,7 +503,12 @@
           return false;
         },
         complete:function(){
-
+         /* if(oper=="add"){
+            $("#"+masterId).attr("about","1");
+          }
+          if(val=="del"){
+            $("#"+masterId).attr("about","0");
+          }*/
         }
       });
     }

@@ -48,6 +48,7 @@
   <!--头部-->
   <div class="list-f-title">
     <p><a href="<c:url value='/pc/index.do'/>">工艺</a><i class="fu-icon"></i><a href="<c:url value='/pc/index.do'/>">动态</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct/'/><%=request.getAttribute("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
+
   </div>
   <div class="ae">
     <div class="details ae">
@@ -206,37 +207,28 @@
       data:"",
       dataType:"json",
       success:function(data){
+        var parentE = $("#saveMasterFllow").parent();
         if(data=="false"){
-          //alert("您还未登陆，请登录后再操作");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/showProduct/${product.id}/${projectId}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data=="true"){
                //$("#"+masterId).html("取消关注");
-          var parentE = $("#saveMasterFllow").parent();
+
           parentE.empty();
-          if(val=="1"){
-            //var val = $("#saveMasterFllow").val("1");
-            parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"0\"> <em>已关注</em>");
-          }
-          if(val=="0"){
-            //var val = $("#saveMasterFllow").val("0");
-            parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"1\"> <i class=\"gz-icon\"></i> <em>关注</em>");
-          }
+          parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"0\"> <em>已关注</em>");
           return true;
         }
         if(data=="del"){
           //$("#"+masterId).html("关注");
-          var parentE = $("#saveMasterFllow").parent();
           parentE.empty();
-          if(val=="0"){
-            //var val = $("#saveMasterFllow").val("1");
-            parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"1\"> <i class=\"gz-icon\"></i> <em>关注</em>");
-          }
-          if(val=="1"){
-            //var val = $("#saveMasterFllow").val("0");
-            parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"0\"> <em>已关注</em>");
-          }
+          parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"1\"> <i class=\"gz-icon\"></i> <em>关注</em>");
           return true;
         }
         if(data=="error"){
@@ -250,7 +242,14 @@
         return false;
       },
       complete:function(){
-
+        /*if(val=="1"){
+          //var val = $("#saveMasterFllow").val("1");
+          parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"0\"> <em>已关注</em>");
+        }
+        if(val=="0"){
+          //var val = $("#saveMasterFllow").val("0");
+          parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"1\"> <i class=\"gz-icon\"></i> <em>关注</em>");
+        }*/
       }
     });
   }
@@ -329,7 +328,7 @@
   function transdate(endTime){
     var timestamp = Date.parse(new Date());
     var oldTime = parseInt(endTime);
-    var intervalTime = (timestamp + 500 - oldTime)/1000/60;
+    var intervalTime = (timestamp + 2000 - oldTime)/1000/60;
     var showTime = "";
     if(intervalTime<=59){
       showTime=intervalTime.toFixed(0)+"分钟前";
@@ -355,8 +354,13 @@
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
-          //alert("您还未登陆，请登录后再操作！！！");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/showProduct/${product.id}/${projectId}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data2=="repeat"){
