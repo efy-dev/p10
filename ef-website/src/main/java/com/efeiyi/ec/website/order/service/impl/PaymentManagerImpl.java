@@ -43,7 +43,28 @@ public class PaymentManagerImpl implements PaymentManager {
         BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
         BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.ALI_WEB, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
         param.setReturnUrl("http://www.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
-        param.setBillTimeout(120);
+//        param.setBillTimeout(120);
+//        param.setOptional(optional);
+
+        BCPayResult bcPayResult = BCPay.startBCPay(param);
+//        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, 1, purchaseOrderPaymentDetails.getId(), "非遗产品", null, "http://www2.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId(), null, null, null);
+        if (bcPayResult.getType().ordinal() == 0) {
+            System.out.println(bcPayResult.getHtml());
+            return bcPayResult.getHtml();
+        } else {
+            //handle the error message as you wish！
+            System.out.println(bcPayResult.getErrMsg());
+            return "error";
+        }
+    }
+
+
+    @Override
+    public String alipayWap(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
+        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
+        BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.ALI_WAP, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
+        param.setReturnUrl("http://www.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
+//        param.setBillTimeout(120);
 //        param.setOptional(optional);
 
         BCPayResult bcPayResult = BCPay.startBCPay(param);
