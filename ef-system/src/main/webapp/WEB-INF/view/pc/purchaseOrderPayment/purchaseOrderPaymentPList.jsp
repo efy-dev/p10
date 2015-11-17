@@ -39,7 +39,7 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
-                    <th class="table-set">操作</th>
+                    <%--<th class="table-set">操作</th>--%>
                     <th class="table-title">支付记录编号</th>
                     <th class="table-title">支付订单</th>
                     <th class="table-title">支付金额</th>
@@ -55,15 +55,15 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrderPayment">
                     <tr id="${purchaseOrderPayment.id}">
-                        <td>
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removePurchaseOrderPayment('${purchaseOrderPayment.id}')})"><span
-                                            class="am-icon-trash-o"></span> 删除
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
+                        <%--<td>--%>
+                            <%--<div class="am-btn-toolbar">--%>
+                                <%--<div class="am-btn-group am-btn-group-xs">--%>
+                                    <%--<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removePurchaseOrderPayment('${purchaseOrderPayment.id}')})"><span--%>
+                                            <%--class="am-icon-trash-o"></span> 删除--%>
+                                    <%--</button>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                        <%--</td>--%>
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderPayment&view=view&viewIdentify=orderPayment&id=${purchaseOrderPayment.id}'/>">${purchaseOrderPayment.serial}</a></td>
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewPaymentOrder=order&viewIdentify=orderPayment&id=${purchaseOrderPayment.purchaseOrder.id}'/>">${purchaseOrderPayment.purchaseOrder.serial}</a></td>
                         <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderPayment.paymentAmount}" maxFractionDigits="2" minFractionDigits="2"/></td>

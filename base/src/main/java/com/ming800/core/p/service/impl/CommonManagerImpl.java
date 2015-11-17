@@ -32,6 +32,7 @@ public class CommonManagerImpl implements CommonManager {
     private static HashMap<String, CommonTag>    commonTagMap = new HashMap<>();
     private static HashMap<String, CommonSerial> autoSerialMap = new HashMap<>();
     private static HashMap<String, String> logisticsCompanyMap = new HashMap<>();
+    private static HashMap<String, CommonSearch> searchParamMap = new HashMap<>();
    // private static int jmenuId = 1;
 
     private static void initCommon() throws Exception {
@@ -47,6 +48,7 @@ public class CommonManagerImpl implements CommonManager {
                 getCommonRecommendedByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonTagByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getLogisticsCompany(new SAXReader().read(xmlFiles.getInputStream()));
+                getProductSearchParamByGroup(new SAXReader().read(xmlFiles.getInputStream()));
             }
         }catch (Exception e){
              // e.printStackTrace();
@@ -54,6 +56,45 @@ public class CommonManagerImpl implements CommonManager {
         }
 
 
+    }
+
+    /**
+     * 解析检索配置
+     * @param infoDocument
+     */
+    private static HashMap getProductSearchParamByGroup(Document infoDocument) {
+
+        if(infoDocument!=null){
+            //begin
+            List<Node> searchParamList = infoDocument.selectNodes("common/searchs/search");
+            if(searchParamList!=null){
+                for(Node node : searchParamList){
+                    String group = node.selectSingleNode("@group").getText();
+                    String rows = node.selectSingleNode("@rows").getText();
+                    String defaultQ = node.selectSingleNode("@defaultQ").getText();
+                    String highLight = node.selectSingleNode("@highLight").getText();
+                    String highLightFields = node.selectSingleNode("@highLightFields").getText();
+                    String highLightSimplePre = node.selectSingleNode("@highLightSimplePre").getText();
+                    String highLightSimplePost = node.selectSingleNode("@highLightSimplePost").getText();
+                    String defType = node.selectSingleNode("@defType").getText();
+                    String qf = node.selectSingleNode("@qf").getText();
+                    String solrClientCount = node.selectSingleNode("@solrClientCount").getText();
+
+                    CommonSearch commonSearch = new CommonSearch();
+                    commonSearch.setRows(Integer.parseInt(rows));
+                    commonSearch.setDefaultQ(defaultQ);
+                    commonSearch.setHighLight(Boolean.parseBoolean(highLight));
+                    commonSearch.setHighLightFields(highLightFields.split(","));
+                    commonSearch.setHighLightSimplePre(highLightSimplePre);
+                    commonSearch.setHighLightSimplePost(highLightSimplePost);
+                    commonSearch.setDefType(defType);
+                    commonSearch.setQf(qf);
+                    commonSearch.setSolrClientCount(Integer.parseInt(solrClientCount));
+                    searchParamMap.put(group,commonSearch);
+                }
+            }
+        }
+        return  searchParamMap;
     }
 
     /**
@@ -254,6 +295,14 @@ public class CommonManagerImpl implements CommonManager {
         return  conmmonSerial;
     }
 
+    @Override
+    public CommonSearch getSearchParam(String group) throws  Exception{
+        CommonSearch commonSearch = searchParamMap.get(group);
+        if(commonSearch == null){
+            throw  new Exception("commonSearch is null");
+        }
+        return  commonSearch;
+    }
 
 
 }

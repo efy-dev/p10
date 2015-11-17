@@ -458,8 +458,8 @@
                 basic="simple" others=""
                 model="com.efeiyi.ec.product.model.Advertisement">
             <fields>
-                <field name="groupName" label="分组" inputType="text">
-                    <statusType fieldName="groupName">
+                <field name="group" label="分组" inputType="text">
+                    <statusType fieldName="group">
                         <item label="营销活动" value="yxhd"/>
                         <item label="热卖商品" value="rmsp"/>
                         <item label="banner广告" value="bgg"/>
@@ -483,6 +483,13 @@
                 <do name="formAdvertisement" label="保存广告页" access="" result="/advertisement/advertisementForm" />
                 <do name="saveOrUpdateAdvertisement" label="保存产品描述" access="" result="/advertisement/advertisementSaveSuccess"
                     execute="com.efeiyi.ec.system.advertisement.controller.AdvertisementFormHandler" />
+
+                <do name="listAdvertisement" label="保存产品描述" access="" result="/advertisement/advertisementSaveSuccess">
+                    <query name="default" label="快速查询" type="auto" orderBy="adsOrder:desc">
+                       <condition name="groupName"  operation="eq" defaultValue="1"  inputType="default"/>
+                       <condition name="status"  operation="eq" defaultValue="1"  inputType="default"/>
+                    </query>
+                </do>
             </does>
         </entity>
 

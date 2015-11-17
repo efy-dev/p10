@@ -171,7 +171,12 @@ public class GroupController {
                     if(leftHour>0){
                         left = leftHour+"时"+leftMin+"分";
                     }else {
-                        left = leftMin+"分";
+                        if(leftMin>0){
+                            left = leftMin+"分";
+                        }else {
+                            left = "0分";
+                        }
+
                     }
                 }
                 if(groupProduct.getMemberAmount()-group.getMemberList().size()>0){
@@ -295,6 +300,15 @@ public class GroupController {
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
         Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
+        XQuery xQuery = new XQuery("listPurchaseOrderGroup_default0",request);
+        xQuery.put("member_user_id",group.getManUser().getId());
+        xQuery.put("group_id",group.getId());
+        String manUserName = "";
+        List<PurchaseOrderGroup> purchaseOrderGroupList = baseManager.listObject(xQuery);
+        if(purchaseOrderGroupList.size()>0){
+            manUserName = purchaseOrderGroupList.get(0).getPurchaseOrder().getReceiverName();
+        }
+        model.addAttribute("manUserName",manUserName);
         int memberAmount = group.getGroupProduct().getMemberAmount();
         int a = (int)((float)group.getMemberList().size()*100/memberAmount);
         if (a<=100){

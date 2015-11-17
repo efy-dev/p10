@@ -62,4 +62,12 @@ public interface CommonManager {
     /**
      * 获取配置文件中的快递公司列表*/
     HashMap getLogisticsCompany() throws Exception;
+
+    /**
+     * 检索
+     * @param group
+     * @return commonSearch
+     * @throws Exception
+     */
+    CommonSearch getSearchParam(String group) throws  Exception;
 }
