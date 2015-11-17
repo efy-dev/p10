@@ -1102,6 +1102,22 @@
      }
    });
  }
+ function transdate(endTime){
+   var timestamp = Date.parse(new Date());
+   var oldTime = parseInt(endTime);
+   var intervalTime = (timestamp+1000 - oldTime)/1000/60;
+   var showTime = "";
+   if(intervalTime<=59){
+     showTime=intervalTime.toFixed(0)+"分钟前";
+   }else if(1<=(intervalTime/60) && (intervalTime/60)<24){
+     showTime=(intervalTime/60).toFixed(0)+"小时前";
+   }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
+     showTime=(intervalTime/60/24).toFixed(0)+"天前";
+   }else{
+     showTime=new Date(oldTime).toLocaleString().replace(/:\d{1,2}$/,' ');
+   }
+   return showTime;
+ }
 </script>
 <!--自定义js--End-->
 </body>
