@@ -210,7 +210,7 @@
       </div>
     </div>
     <!--地区-->
-     <div class="login-reg">
+    <%-- <div class="login-reg">
          <%if(AuthorizationUtil.getMyUser()!=null && AuthorizationUtil.getMyUser().getId() != null){ %>
          <div class="bd logined"><%=AuthorizationUtil.getMyUser().getUsername()%><a class="btn-exit" href="<c:url value='/j_spring_cas_security_logout'/>">退出</a></div>
          <% } %>
@@ -219,7 +219,7 @@
          <a href="http://passport.efeiyi.com/register?service=http://http://master.efeiyi.com/ef-wiki/sso.do" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
          <% } %>
 
-    </div>
+    </div>--%>
 </div>
 </div>
 <script>
