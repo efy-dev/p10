@@ -106,7 +106,7 @@
         <ul class="bd">
           <li><a href="<c:url value='/base/home.do'/>" title="首页">首页</a></li>
           <li><a href="" title="分类" id="acs">消&nbsp;息</a></li>
-          <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+          <li><a href="http://www.i.efeiyi.com" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
         </ul>
       </div>
     </div>
