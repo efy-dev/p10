@@ -267,7 +267,6 @@ public class WikiIndexController extends WikibaseController {
     @ResponseBody
     public String saveMasterFollows(HttpServletRequest request, Model model) throws Exception {
         String masterId = request.getParameter("masterId");
-
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
             return "false";
