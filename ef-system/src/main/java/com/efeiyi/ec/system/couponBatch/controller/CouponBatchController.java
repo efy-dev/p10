@@ -27,10 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @RequestMapping("/couponBatch")
@@ -234,6 +231,7 @@ public class CouponBatchController extends BaseController {
                     } else {
                         tempCoupon.setConsumer(tempConsumer);
                         tempCoupon.setWhetherBind("2");
+                        tempCoupon.setBindTime(new Date());
                         baseManager.saveOrUpdate(Coupon.class.getName(), tempCoupon);
                         break;
                     }
