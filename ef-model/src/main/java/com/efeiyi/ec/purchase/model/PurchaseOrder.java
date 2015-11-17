@@ -19,6 +19,7 @@ import java.util.List;
 public class PurchaseOrder {
 
     public static final String ORDER_STATUS_WPAY = "1";  //等待付款
+    public static final String ORDER_STATUS_WAIT_GROUP = "3" ; //等待成团
     public static final String ORDER_STATUS_WRECEIVE = "5"; //未发货
     public static final String ORDER_STATUS_POSTED = "7";  //已发货
     public static final String ORDER_STATUS_UNCOMMENT = "9"; //未评价

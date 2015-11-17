@@ -32,7 +32,7 @@
 		<ul>
 			<li class="am-u-sm-6 "><a href="<c:url value="/purchaseCollect/wapCollectList.do"/>"
 									  style="padding: 15px 0;"><p>商品收藏</p></a></li>
-			<li class="am-u-sm-6 ac-ave1"><a href="<c:url value="/coupon/list"/>"><p>我的卡券</p></a></li>
+			<li class="am-u-sm-6 ac-ave1"><a href="<c:url value="/coupon/list?cf=4"/>"><p>我的卡券</p></a></li>
 		</ul>
 	</div>
 	<div class="order-list">
@@ -125,8 +125,8 @@
 
 			</div>
 		</c:if>
-		<c:if test="${purchaseOrder.orderStatus!=1 && purchaseOrder.subPurchaseOrder==null}">
-
+		<c:if test="${purchaseOrder.orderStatus!=1}">
+            <c:if test="${purchaseOrder.subPurchaseOrder==null || purchaseOrder.subPurchaseOrder.size()==0}">
 			<div class="list-pege">
 				<div class="state" style="padding: 1rem 0">
 					<p class="clo-2"><span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus"
@@ -209,9 +209,10 @@
 
 			</div>
 
-
+			</c:if>
 		</c:if>
 		<c:if test="${purchaseOrder.orderStatus!=1 && purchaseOrder.subPurchaseOrder != null}">
+			<c:if test="${purchaseOrder.subPurchaseOrder != null || purchaseOrder.subPurchaseOrder.size()>0 }">
 			<c:forEach items="${purchaseOrder.subPurchaseOrder}" var="spList">
 
 				<div class="list-pege">
@@ -297,6 +298,7 @@
 				</div>
 
 			</c:forEach>
+		</c:if>
 		</c:if>
 	</c:forEach>
 	<!--订单状态-->

@@ -47,12 +47,12 @@
 <div class="list-find">
   <!--头部-->
   <div class="list-f-title">
-    <p><a href="<c:url value='/pc/index.do'/>">工艺</a><i class="fu-icon"></i><a href="<c:url value='/pc/index.do'/>">动态</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct/'/><%=request.getParameter("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
+    <p><a href="<c:url value='/pc/index.do'/>">工艺</a><i class="fu-icon"></i><a href="<c:url value='/pc/index.do'/>">动态</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct/'/><%=request.getAttribute("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
   </div>
   <div class="ae">
     <div class="details ae">
       <div class="detaile-left">
-        <div class="detaile-img"><a href="#"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${product.picture_url}"></a></div>
+        <div class="detaile-img"><a href="#"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${product.picture_url}@!pc-product-header"></a></div>
         <div class="detaile-share ae" style="height: auto;z-index: 200;">
           <!-- JiaThis Button BEGIN -->
           <div class="jiathis_style" style="background: #fff;border: 0;float: left;padding: 30px 0;">
@@ -147,7 +147,7 @@
             <ul class="rf">
               <li>
                 <div class="text">
-                  <h4>${product.master.fullName}</h4>
+                  <a href="http://${product.master.name}.efeiyi.com"><h4>${product.master.fullName}</h4></a>
                   <p>${product.name}</p>
                   <c:choose>
                     <c:when test="${product.master.level =='1'}">
@@ -175,7 +175,7 @@
                     </c:if>
                   </a>
                 </div>
-                <div class="img"><img src="${product.master.favicon}"></div>
+                <div class="img"><a href="http://${product.master.name}.efeiyi.com"><img src="${product.master.favicon}@!pc-project-master"></a></div>
               </li>
             </ul>
             </c:if>
@@ -329,7 +329,7 @@
   function transdate(endTime){
     var timestamp = Date.parse(new Date());
     var oldTime = parseInt(endTime);
-    var intervalTime = (timestamp - oldTime)/1000/60;
+    var intervalTime = (timestamp + 500 - oldTime)/1000/60;
     var showTime = "";
     if(intervalTime<=59){
       showTime=intervalTime.toFixed(0)+"分钟前";
@@ -499,7 +499,7 @@ function getHfProduct(e){
           //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/'/>"+data;
+            window.location.href ="<c:url value='/showProduct/'/>"+data+"/"+"${projectId}";
           }
           else{
             return false;//取消
@@ -551,7 +551,7 @@ function getHfProduct(e){
           //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/${product.id}'/>";
+            window.location.href ="<c:url value='/showProduct/${product.id}'/>"+"/${projectId}";
           }
           else{
             return false;//取消
@@ -623,7 +623,7 @@ function getHfProduct(e){
           //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/'/>"+ds;
+            window.location.href ="<c:url value='/showProduct/'/>"+ds+"/${projectId}";
           }
           else{
             return false;//取消
@@ -635,9 +635,19 @@ function getHfProduct(e){
           return false;
         }
         if(data2=="true" && oper=='up'){
+          if($("#good-1").attr("name")=="down"){
+            $("#good-1").attr("name","up");
+          }else{
+            $("#good-1").attr("name","down");
+          }
           $("#em1").html(parseInt($("#em1").text())+1);
         }
         if(data2=="true" && oper=='down'){
+          if($("#good-1").attr("name")=="down"){
+            $("#good-1").attr("name","up");
+          }else{
+            $("#good-1").attr("name","down");
+          }
           $("#em1").html(parseInt($("#em1").text())-1);
         }
       },
@@ -646,11 +656,7 @@ function getHfProduct(e){
         return false;
       },
       complete:function(){
-        if($("#good-1").attr("name")=="down"){
-          $("#good-1").attr("name","up");
-        }else{
-          $("#good-1").attr("name","down");
-        }
+
 
 
       }
@@ -670,10 +676,9 @@ function getHfProduct(e){
       success:function(data2){
         if(data2=="false"){
           //alert("您还未登陆，请登录后再操作！！！");
-          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/'/>"+productId;
+            window.location.href ="<c:url value='/showProduct/'/>"+productId+"/${projectId}";
           }
           else{
             return false;//取消
@@ -686,9 +691,19 @@ function getHfProduct(e){
         }
         if(data2=="true" && oper=='up'){
           $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())+1);
+          if( $(data).attr("name")=="up"){
+            $(data).attr("name","down");
+          }else{
+            $(data).attr("name","up");
+          }
         }
         if(data2=="true" && oper=='down'){
           $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())-1);
+          if( $(data).attr("name")=="up"){
+            $(data).attr("name","down");
+          }else{
+            $(data).attr("name","up");
+          }
         }
       },
       error:function(){
@@ -697,11 +712,7 @@ function getHfProduct(e){
       },
       complete:function(){
 
-        if( $(data).attr("name")=="up"){
-          $(data).attr("name","down");
-        }else{
-          $(data).attr("name","up");
-        }
+
       }
     });
   }
@@ -719,7 +730,7 @@ function getHfProduct(e){
           //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/'/>"+productId;
+            window.location.href ="<c:url value='/showProduct/'/>"+productId+"/${projectId}";
           }
           else{
             return false;//取消
@@ -727,11 +738,13 @@ function getHfProduct(e){
           return false;
         }
         if(data=="repeat"){
-          alert("您已收藏过了！")
+          //alert("您已收藏过了！");
+          $('.details .detaile-left .detaile-share .thumb-up .thump-collect a').find('em').html('已收藏');
           return true;
         }
         if(data=="true"){
-          alert("您好，收藏成功！")
+          //alert("您好，收藏成功！");
+          $('.details .detaile-left .detaile-share .thumb-up .thump-collect a').find('em').html('已收藏');
           return true;
         }
 

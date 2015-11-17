@@ -119,6 +119,7 @@ public class ProductController extends BaseController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
         String url = "";
+        Integer sort = 0;
         for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
             ProductPicture productPicture = new ProductPicture();
             //上传文件
@@ -135,10 +136,14 @@ public class ProductController extends BaseController {
                 try {
                     aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
                     productPicture.setPictureUrl(url);
+                    if(request.getParameter("status").equals("3")){
+                        sort = productManager.productPictureSort(product.getId())+1;
+                       productPicture.setSort(sort);
+                    }
                     productPicture.setStatus(request.getParameter("status"));
                     productPicture.setProduct(product);
                     baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
-                    data = productPicture.getId() + ":" + url + ":" + imgName+hz;
+                    data = productPicture.getId() + ":" + url + ":" + imgName+hz+":"+sort;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -256,31 +261,49 @@ public class ProductController extends BaseController {
     public String saveNewProduct(Product product, ProductDescription productDescription,
                                  ProductPicture productPicture, ProductModelBean productModelBean,
                                  HttpServletRequest request,
+                                 MultipartRequest multipartRequest,
                                  String resultPage, Model model, String step) {
 
-        model.addAttribute("view", request.getParameter("view"));
+        model.addAttribute("view",request.getParameter("view"));
 
 
         if ("product".equals(step)) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            String identify = sdf.format(new Date());
+            String url = "";
+            if(multipartRequest.getFile("picture_url1")!=null) {
+                if (!multipartRequest.getFile("picture_url1").getOriginalFilename().equals("")) {
+                    url = "product/" + identify + multipartRequest.getFile("picture_url1").getOriginalFilename();
+                    product.setPicture_url(url);
 
+                }
+            }
 //            try {
 //                Product product1 =        productManager.saveProduct(product);
 //                System.out.print(product1.getMaster().getName());
 //            }catch (Exception e){
 //
 //            }
-            Product temProduct = productManager.saveProduct(product);
+            try {
+                Product temProduct = productManager.saveProduct(product);
+                //  &tenantId=${tenantId}&masterId=${masterId}&id=
+                String tenantId = "0";
+                String masterId = "0";
+                if (temProduct.getTenant() != null) {
+                    tenantId = temProduct.getTenant().getId();
+                }
+                if (temProduct.getMaster() != null) {
+                    masterId = temProduct.getMaster().getId();
+                }
+                resultPage = resultPage + "&tenantId="+tenantId+"&masterId="+masterId+"&id="+temProduct.getId();
+                aliOssUploadManager.uploadFile(multipartRequest.getFile("picture_url1"), "ec-efeiyi", url);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
             //  model.addAttribute("object",productManager.saveProduct(product));
-            //  &tenantId=${tenantId}&masterId=${masterId}&id=
-            String tenantId = "0";
-            String masterId = "0";
-            if (temProduct.getTenant() != null) {
-                tenantId = temProduct.getTenant().getId();
-            }
-            if (temProduct.getMaster() != null) {
-                masterId = temProduct.getMaster().getId();
-            }
-            resultPage = resultPage + "&tenantId="+tenantId+"&masterId="+masterId+"&id="+temProduct.getId();
+
+
 
         } else if ("description".equals(step)) {
 
@@ -567,14 +590,17 @@ public class ProductController extends BaseController {
     @RequestMapping("/setProductStatus.do")
     @ResponseBody
     public String setProductStatus(String id, String status, HttpServletRequest request) {
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+         String data = id;
         try {
-           productManager.setProductStatus(status,id);
+          Product product =  productManager.setProductStatus(status, id);
+            if(status.equals("1"))
+            data = sdf.format(product.getShowDateTime());
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return id;
+        return data;
     }
 
     @RequestMapping("/updateAmount.do")
@@ -618,5 +644,28 @@ public class ProductController extends BaseController {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    @RequestMapping("/updateShow.do")
+    @ResponseBody
+    public String updateShow(String subjectId,String show, HttpServletRequest request) {
+
+        try {
+            Subject subject = (Subject)baseManager.getObject(Subject.class.getName(),subjectId);
+            subject.setSubjectShow(show);
+            baseManager.saveOrUpdate(Subject.class.getName(),subject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return subjectId;
+    }
+
+    @RequestMapping("/changePictureSort.do")
+    @ResponseBody
+    public String changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort ) throws Exception {
+         productManager.changePictureSort(sourceId,sourceSort,targetId,targetSort);
+         return "";
+
     }
 }

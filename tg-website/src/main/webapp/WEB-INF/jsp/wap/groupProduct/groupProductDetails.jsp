@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>开团详情</title>
+    <title>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -51,10 +51,10 @@
     <div class="custom">
         <div data-am-widget="slider" class="am-slider am-slider-a1 olli" data-am-slider='{&quot;directionNav&quot;:false}' >
             <ul class="am-slides ">
-                <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+                <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</span></div></div></li>
                 <c:forEach items="${groupProduct.productModel.product.productPictureList}" var="picture">
                     <c:if test="${picture.status=='1'&&picture.productModel.id==groupProduct.productModel.id}">
-                    <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+                    <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</span></div></div></li>
                     </c:if>
                 </c:forEach>
             </ul>
@@ -86,7 +86,7 @@
             <div class="co-page">
                 <div class="introduce ae">
                     ${groupProduct.productModel.product.productDescription.content}
-                    <div class="button ae"><a href="$" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
+                    <div class="button ae"><a href="http://www.efeiyi.com/product/productModel/${groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
                 </div>
                 <a class="efeiyi-btn" href="<c:url value="/group/protocol"/>">e飞蚁拼团协议<i class="efiyi"></i></a>
             </div>
@@ -143,7 +143,8 @@
         display: none;
     }
     .MEIQIA-ICON {
-        background:url(/scripts/wap/images/qq.png) no-repeat -176px -143px;
+        background:url(http://j.efeiyi.com/tg-website/scripts/wap/images/qq.png) no-repeat -176px -143px;
+        background-size: auto auto;
     }
     #MEIQIA-BTN-ICON {
         width: 23px;

@@ -13,7 +13,7 @@
         if (AuthorizationUtil.getMyUser().getId() == null) {
     %>
     <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-    <a id="signin" href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do" class="btn-reg"
+    <a id="signin" href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do" class="btn-reg"
        onclick="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
     <%
         }
@@ -77,7 +77,8 @@
         display: none;
     }
     .MEIQIA-ICON {
-        background:url(http://www.efeiyi.com/scripts/wap/images/qq.png) no-repeat -176px -143px;
+        background:url("http://www.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
+        background-size: auto auto;
     }
     #MEIQIA-BTN-ICON {
         width: 23px;
@@ -89,6 +90,38 @@
     }
 </style>
 <script>
+
+    var _hmt = _hmt || [];
+
+    (function() {
+
+        var hm = document.createElement("script");
+
+        hm.src = "//hm.baidu.com/hm.js?15b49366788c12ff091a0f6b23c8835f";
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(hm, s);
+
+    })();
+
+</script>
+<script>
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-69796169-1', 'auto');
+
+    ga('send', 'pageview');
+
+</script>
+<script>
     function isWeiXin() {
         var ua = window.navigator.userAgent.toLowerCase();
         if (ua.match(/MicroMessenger/i) == 'micromessenger') {
@@ -97,7 +130,6 @@
             return false;
         }
     }
-    if (isWeiXin()==false) {
         (function(m, ei, q, i, a, j, s) {
             m[a] = m[a] || function() {
                         (m[a].a = m[a].a || []).push(arguments)
@@ -109,7 +141,6 @@
             s.parentNode.insertBefore(j, s)
         })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
         _MEIQIA('entId', 486);
-    }
 
     var registerWx = "<c:url value="/wx/userInfo"/>";
 

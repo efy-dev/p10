@@ -22,6 +22,7 @@
         <csrf disabled="true"/>
 
         <!--<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>-->
+        <intercept-url pattern="/yhq.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/saveOrUpdateOrder.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/pay/alipay/callback" access="isAnonymous()"/>
         <intercept-url pattern="/sso2.do" access="isAuthenticated()"/>
@@ -86,7 +87,7 @@
     <b:bean id="requestSingleLogoutFilter"
             class="org.springframework.security.web.authentication.logout.LogoutFilter">
         <b:constructor-arg
-                value="http://passport.efeiyi.com/logout?service=http://www.efeiyi.com" />
+                value="http://passport.efeiyi.com/logout?service=http://www.efeiyi.com/logoutHandler" />
         <b:constructor-arg>
             <b:bean
                     class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>

@@ -529,6 +529,8 @@ CREATE TABLE `master_work_store` (
 )
 ;
 
+
+
 CREATE TABLE `product_model_record` (
   `id`  char(16) NOT NULL ,
   `amount`  integer(255) NULL ,
@@ -651,3 +653,41 @@ ADD COLUMN `operation`  varchar(255) NULL AFTER `create_time`;
 
 ALTER TABLE `master_message`
 ADD COLUMN `data_source`  varchar(255) NULL AFTER `author`;
+
+ALTER TABLE `master_work`
+ADD COLUMN `store_amount`  int(16) NULL AFTER `tenant_id`;
+
+===========================================2015/11/11=========================================
+
+ALTER TABLE `subject`
+ADD COLUMN `type`  varchar(255) NULL AFTER `name`,
+ADD COLUMN `show`  varchar(255) NULL AFTER `type`,
+ADD COLUMN `template`  varchar(255) NULL AFTER `show`,
+ADD COLUMN `create_datetime`  datetime NULL AFTER `template`;
+
+ALTER TABLE `product_picture`
+ADD COLUMN `sort`  integer(255) NULL AFTER `product_model_id`;
+
+ALTER TABLE `product`
+ADD COLUMN `show_datetime`  datetime NULL AFTER `fans_amount`;
+
+ALTER TABLE `project`
+ADD COLUMN `context`  varchar(255) NULL AFTER `picture_pc_url`;
+
+ALTER TABLE `advertisement`
+ADD COLUMN `group_name`  varchar(255) NULL AFTER `price`;
+
+
+ALTER TABLE `base_banner`
+MODIFY COLUMN `group_name`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `direct_url`;
+
+ALTER TABLE `subject`
+CHANGE COLUMN `create_datetime` `start_datetime`  datetime NULL DEFAULT NULL AFTER `template`,
+ADD COLUMN `end_datetime`  datetime NULL AFTER `start_datetime`;
+======================11.16===============================
+ALTER TABLE `project_category`
+ADD COLUMN `context`  varchar(255) NULL AFTER `picture_url`;
+
+ALTER TABLE `project`
+DROP COLUMN `context`;
+

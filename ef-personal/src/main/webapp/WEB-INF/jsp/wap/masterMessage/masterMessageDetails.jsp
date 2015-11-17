@@ -50,18 +50,99 @@
   <div class="menu-list">
     <div class="menu-page">
       <ul class="bd">
-        <li><a href="" title="首页">首页</a></li>
+        <li><a href="<c:url value='/masterMessage/index.do'/>" title="首页">首页</a></li>
         <li><a href="" title="分类">消&nbsp;息</a></li>
         <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
     </div>
   </div>
 </header>
+<div style="display: none"  id="showMessage" class="pops-up">
+  <div style="background: #fff;" data-am-widget="tabs"
+       class="am-tabs am-tabs-default"
+          >
+    <ul class="am-tabs-nav am-cf">
+      <li class="am-active"><a href="[data-tab-panel-0]"><i class="bz-icon1"></i>
+        <span style="float: left;margin-left: 10px;">关注</span><i class="sod-sr"></i></a></li>
+      <li class=""><a href="[data-tab-panel-1]">
+        <i class="bz-icon2"></i>
+        <span style="float: left;margin-left: 10px;">评论</span><i class="sod-sr"></i>
+      </a></li>
+      <li class=""><a href="[data-tab-panel-2]">
+        <i class="bz-icon3"></i>
+        <span style="float: left;margin-left: 10px;">点赞</span></i>
+      </a></li>
+    </ul>
+    <div class="am-tabs-bd">
+      <div data-tab-panel-0 class="am-tab-panel am-active">
+        <div class="aboud-you">
+          <div class="list-you"><span>这些人最近关注了你</span></div>
+          <ul class="list-name">
+            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>Andy</span></li>
+            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>Lily</span></li>
+            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>wangjl</span></li>
+          </ul>
+          <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
+        </div>
+      </div>
+      <div data-tab-panel-1 class="am-tab-panel ">
+        <div class="discuss">
+          <ul class="discuss-2">
+            <li class="review">
+              <div class="matter">
+                <p class="text-h1"><a href="#">Andya</a>回复了你</p>
+                <p class="text-time">51分钟前</p>
+                <p class="text-content"><a href="#" >原来木板水印是一门高深的技艺，之前从来没
+                  有关注过，真心觉得中国的非遗文化值得我们
+                  去传承。</a></p>
+                <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div>
+              </div>
+            </li>
+            <li class="review">
+              <div class="matter">
+                <p class="text-h1"><a href="#">Joe</a>回复了你</p>
+                <p class="text-time">1小时前</p>
+                <p class="text-content"><a href="#" >原来木板水印是一门高深的技艺，之前从来没
+                  有关注过，真心觉得中国的非遗文化值得我们
+                  去传承。</a></p>
+                <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div data-tab-panel-2 class="am-tab-panel ">
+        <div class="discuss">
+          <ul class="discuss-2">
+            <li class="review">
+              <div class="matter">
+                <p class="text-h1">Joe</p>
+                <p class="text-time">1小时前</p>
+                <p class="text-content"><a href="#" >觉得你的评论“还不错”很赞</a></p>
+                <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div>
+              </div>
+              <div class="review" style="padding-top: 0.8rem">
+                <div class="matter">
+                  <p class="text-h1"><a href="#">Andy</a>回复了你</p>
+                  <p class="text-time">1小时前</p>
+                  <p class="text-content"><a href="#" >觉得你的评论“中国的非遗文化值得我们去传
+                    承”很赞</a></p>
+                  <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="background: #000;opacity: 0.5;width: 100%;height: 100%;position: absolute;"></div>
+</div>
 <!--//End--header-->
 <div class="master-works">
   <div class="user" style="height: 480px;">
-    <img class="img-user" src="../shop2015/upload/master-0.jpg" alt=""/>
-    <img class="img-bg" src="../shop2015/upload/master-1.jpg" alt=""/>
+    <img class="img-user" src="/scripts/assets/images/box-tx-3-4-3.jpg" alt=""/>
+    <img class="img-bg" src="/scripts/assets/images/box-tx-3-4-3.jpg" alt=""/>
     <div class="user-info">
       <p class="user-name">${object.fullName}</p>
       <p class="project-name">${object.projectName}</p>
@@ -100,7 +181,7 @@
               <!--图片效果1！-->
               <div class="suit-st-img">
                 <a href="<c:url value='/masterMessage/getMasterMessage.do?messageId='/>${message.id}">
-                  <img src="../shop2015/upload/120101-p1-2.jpg">
+                  <img src="/scripts/assets/images/images/header1.png">
                 </a>
               </div>
 
@@ -170,18 +251,12 @@
         if($(this).attr("title")=="1"){
           getMasterMessageList(masterId);
         }
-//        if($(this).attr("title")=="2"){
-//          var type = "2";
-//          var brief = $("#objText").val();
-//          getIntroduction(masterId,type,brief);
-//        }
 //        if($(this).attr("title")=="3"){
-//          getMasterProjectList(masterId);
+//          getAllMasterWork(masterId);
 //        }
       }
     });
   })
-
   function getMasterProjectList(masterId){
     $.ajax({
       type: "POST",
@@ -208,7 +283,6 @@
       }
     })
   }
-
   function getAllMasterWork(masterId){
     $.ajax({
       type: "POST",
@@ -225,10 +299,10 @@
         if(data != null && data.length > 0){
           for(var i = 0;i<data.length;i++){
             sub += "<li class=\"item\" title=\""+data[i].project.id+"\">"+data[i].project.name +
-                    "<a href=\"<c:url value='/masterBrief/getMasterWork.do?workId='/>"+data[i].id+"\"><img src=\""+data[i].pictureUrl+"\"></a>" +
+                    "<a href=\"<c:url value='/masterBrief/getMasterWork.do?workId='/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+data[i].pictureUrl+"@!master-intro-product\"></a>" +
                     "<div class=\"txt\"><div class=\"name\">"+data[i].name+"</div><div class=\"txt-info\">" +
                     "<a href=\"#\" onclick=\"praiseWork(this,'"+data[i].id+"');\"><i class=\"icon good-1\"></i><em>"+data[i].praiseStatus+"</em></a>"+
-                    "<a href=\"#\"><i class=\"icon good-2\"></i><em>9999</em></a></div></div></li>";
+                    "<a href=\"<c:url value='/masterBrief/getMasterWork.do?workId='/>"+data[i].id+"\"><i class=\"icon good-2\"></i><em>"+data[i].amount+"</em></a></div></div></li>";
           }
         }
         sub += "</ul>";
@@ -236,7 +310,6 @@
       }
     })
   }
-
   function praiseWork(o,workId){
     $.ajax({
       type: "POST",
@@ -252,7 +325,6 @@
       }
     })
   }
-
   function getMasterWorkListByProjectName(projectId , masterId){
     $.ajax({
       type: "POST",
@@ -270,7 +342,7 @@
           var sub = "";
           for(var i = 0;i<data.length;i++){
             sub += "<li class=\"item\" title=\""+data[i].project.id+"\">"+data[i].project.name +
-                    "<a href=\"<c:url value='/masterBrief/getMasterWork.do?workId='/>"+data[i].id+"\"><img src=\""+data[i].pictureUrl+"\"></a>" +
+                    "<a href=\"<c:url value='/masterBrief/getMasterWork.do?workId='/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+data[i].pictureUrl+"@!master-intro-product\"></a>" +
                     "<div class=\"txt\"><div class=\"name\">"+data[i].name+"</div><div class=\"txt-info\">" +
                     "<a href=\"#\"><i class=\"icon good-1\"></i><em>"+data[i].praiseStatus+"</em></a>"+
                     "<a href=\"#\"><i class=\"icon good-2\"></i><em>9999</em></a></div></div></li>";
@@ -280,7 +352,6 @@
       }
     })
   }
-
   function getIntroduction(masterId,type ,brief){
     $.ajax({
       type: "POST",
@@ -303,8 +374,10 @@
             if(obj != null && obj.length > 0){
               for (var j = 0; j < obj.length; j++) {
                 if (type != "5") {
-                  if ((type == "2" && type == data[i].type) || (type == "3" && type == data[i].type)) {
-                    sub += "<div class=\"h-c-img\"><img src=\""+obj[j].url+"\"></div><p>"+obj[j].title+"</p>";
+                  if (type == "2" && type == data[i].type) {
+                    sub += "<div class=\"h-c-img\"><img src=\"http://tenant.efeiyi.com/"+obj[j].url+"@!master-intro-product\"></div><p>"+obj[j].title+"</p>";
+                  }else if(type == "3" && type == data[i].type){
+                    sub += "<div class=\"h-c-img\"><img src=\"http://tenant.efeiyi.com/"+obj[j].url+"@!master-intro-product\"></div><p>"+obj[j].title+"</p>";
                   }else if(type == "4" && type == data[i].type){
                     sub += "<p class=\"tx-q1\">"+obj[j].title+"</p>";
                   }
@@ -347,7 +420,7 @@
               for (var j = 0; j < obj.length; j++) {
                 if (type != "5") {
                   if ((type == "2" && type == data[i].type) || (type == "3" && type == data[i].type)) {
-                    sub += "<div class=\"h-c-img\"><img src=\""+obj[j].url+"\"></div><p>"+obj[j].title+"</p>";
+                    sub += "<div class=\"h-c-img\"><img src=\"http://tenant.efeiyi.com/"+obj[j].url+"@!master-intro-product\"></div><p>"+obj[j].title+"</p>";
                   }else if(type == "4" && type == data[i].type){
                     sub += "<p class=\"tx-q1\">"+obj[j].title+"</p>";
                   }
@@ -391,8 +464,6 @@
       });
     });
   })
-
-
   function getMasterMessageList(masterId){
     $.ajax({
       type: "POST",
@@ -412,20 +483,25 @@
           "<div class=\"dynamic-st\">" +
           "<div class=\"suit-st-text\">" +
           "<p><span>"+data[i].content+"</span></p>" +
-          "</div>" +
-          "<div class=\"suit-st-img\">" +
-          "<a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+data[i].id+"\">" +
-          "<img src=\"../shop2015/upload/120101-p1-2.jpg\">" +
-          "</a>" +
-          "</div>" +
-          "<div class=\"suit-st-ft\">" +
+          "</div>" ;
+          if(data[i].messageAttachmentLists != null && data[i].messageAttachmentLists.length > 0){
+            var obj = data[i].messageAttachmentLists;
+            for(var j in obj){
+              sub += "<div class=\"suit-st-img\">" +
+                      "<a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+data[i].id+"\">" +
+                      "<img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+obj[j].pictureUrl+"\">" +
+                      "</a>" +
+                      "</div>" ;
+            }
+          }
+          sub += "<div class=\"suit-st-ft\">" +
           "<div class=\"suit-ft-left\"><span>"+data[i].dataSource+"</span></div>" +
           "<div class=\"suit-ft-right\"><span>"+cTime+"</span></div>" +
           "</div>" +
           "</div>" +
           "<div class=\"dynamic-ft\">" +
           "<a onclick=\"changePraiseStatus(this,'"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+data[i].praiseStatus+"</em></a> <i class=\"s-solid ft-a\"></i>"+
-          "<a href=\"#\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>9999</em> </a> <i class=\"s-solid ft-a\"></i>" +
+          "<a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+data[i].id+"\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>9999</em> </a> <i class=\"s-solid ft-a\"></i>" +
           "<a onclick=\"collected('"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i> </a>" +
           "</div>"+
           "</div>";
@@ -435,7 +511,6 @@
       }
     })
   }
-
   function transdate(endTime){
     var timestamp = Date.parse(new Date());
     var oldTime = parseInt(endTime);
@@ -460,10 +535,12 @@
       dataType:"json",
       error:function(){},
       success:function(msg){
-        if(true == msg){
+        if("add" == msg){
           alert("收藏成功!");
-        }else{
+        }else if("del" == msg){
           alert("收藏已移除!");
+        }else if("noRole" == msg){
+          alert("您还未登录,请登录后操作!");
         }
       }
     });
@@ -477,7 +554,13 @@
       dataType:"json",
       error:function(){},
       success:function(msg){
-        $(o).find("em").html(msg);
+        if(msg == "noRole"){
+          alert("您还未登录,请登录后操作");
+        }else if(msg == "add"){
+          $(o).find("em").html("取消赞");
+        }else if(msg == "del"){
+          $(o).find("em").html("赞");
+        }
       }
     })
   }

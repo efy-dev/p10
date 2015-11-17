@@ -60,6 +60,7 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
 
     private BigUser bigUser;
 
+
     private Date lastLoginDatetime;//最后一次登陆时间
     private Date lastLogoutDatetime;//最后一次登陆时间
 
@@ -258,11 +259,23 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     @Transient
     public Collection<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> gList = new ArrayList<GrantedAuthority>();
-        Permission permission = new Permission();//每个用户都默认带ROLE_USER这个权限
-        permission.setAuthority("ROLE_USER");//普通用户
-        gList.add(permission);
+      if(role!=null) {
+          Permission rolePermission = new Permission();//角色即权限
+          rolePermission.setAuthority(role.getName());
+          gList.add(rolePermission);
+//          if (role.getPermissionsList() != null) {
+//              for (Permission permission : role.getPermissionsList()) {
+//                  gList.add(permission);
+//              }
+//          }
+      }
+        Permission defaultPermission = new Permission();//每个用户都默认带ROLE_USER这个权限
+        defaultPermission.setAuthority("ROLE_USER");//普通用户
+        gList.add(defaultPermission);
         return gList;
     }
+
+
 
     @Transient
     public String getConfirmPassword() {

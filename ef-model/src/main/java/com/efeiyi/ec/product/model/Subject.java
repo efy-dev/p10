@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +22,12 @@ public class Subject {
     private List<SubjectPicture> subjectPictureList;
     private List<SubjectProduct> subjectProductList;
     private String status;
+    private String template;//1 普通 2 活动
+    private String type;//类别
+    private String subjectShow;//1 上架 0  下架
+    private Date startDateTime;
+    private Date endDateTime;
+    private Date createDateTime;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -97,5 +104,58 @@ public class Subject {
 
     public void setSubjectProductList(List<SubjectProduct> subjectProductList) {
         this.subjectProductList = subjectProductList;
+    }
+
+    @Column(name = "template")
+    public String getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
+    }
+
+    @Column(name = "type")
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    @Column(name = "subject_show")
+    public String getSubjectShow() {
+        return subjectShow;
+    }
+
+    public void setSubjectShow(String subjectShow) {
+        this.subjectShow = subjectShow;
+    }
+
+    @Column(name = "start_datetime")
+    public Date getStartDateTime() {
+        return startDateTime;
+    }
+
+    public void setStartDateTime(Date startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    @Column(name = "end_datetime")
+    public Date getEndDateTime() {
+        return endDateTime;
+    }
+
+    public void setEndDateTime(Date endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+
+    @Column(name = "create_datetime")
+    public Date getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 }

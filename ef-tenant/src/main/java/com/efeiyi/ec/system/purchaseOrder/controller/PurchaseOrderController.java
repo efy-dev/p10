@@ -9,6 +9,8 @@ import com.efeiyi.ec.purchase.model.PurchaseOrderDelivery;
 import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.system.purchaseOrder.service.PurchaseOrderManager;
 import com.efeiyi.ec.system.purchaseOrder.service.SmsCheckManager;
+import com.efeiyi.ec.system.util.HTTPParam;
+import com.efeiyi.ec.system.util.HTTPSend;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -25,11 +27,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/6/18.
@@ -46,6 +46,9 @@ public class PurchaseOrderController extends BaseController {
     @Autowired
     private SmsCheckManager smsCheckManager;
 
+    @Autowired
+    private HTTPSend httpSend;
+
     /**
      * 发货
      * ,PurchaseOrderDelivery purchaseOrderDelivery,Authentication authentication
@@ -56,6 +59,7 @@ public class PurchaseOrderController extends BaseController {
     @ResponseBody
     public String updateOrderStatus(PurchaseOrder purchaseOrder,HttpServletRequest request){
 
+        final String innerPurchaseOrderId = purchaseOrder.getId();
         String logisticsCompany = request.getParameter("logisticsCompany");
         String serial = request.getParameter("serial");
         String id = "";
@@ -64,6 +68,43 @@ public class PurchaseOrderController extends BaseController {
             if(null == purchaseOrder.getFatherPurchaseOrder()){
                 purchaseOrder.setOrderStatus("7");
                 id = purchaseOrderManager.updateOrderStatus(purchaseOrder,serial,logisticsCompany);
+                List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
+                if(null != subPurchaseOrderList && subPurchaseOrderList.size() > 0){
+                    PurchaseOrder p1 = null;
+                    for(int i = 0;i < subPurchaseOrderList.size();i++){
+                        p1 = subPurchaseOrderList.get(i);
+                        if("1".equals(p1.getOrderStatus()) || "5".equals(p1.getOrderStatus())){
+                            p1.setOrderStatus("7");
+                            purchaseOrderManager.updateOrderStatus(p1);
+                        }
+                    }
+                }
+
+                StringBuffer url = request.getRequestURL();
+                final String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).append("/").toString();
+                //启动一个定时器，发货七天用户没有点击收货的话，自动改为已收货
+                final Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        List<HTTPParam> params = new ArrayList<HTTPParam>();
+                        HTTPParam httpParam = new HTTPParam();
+                        httpParam.setKey("innerPurchaseOrderId");
+                        httpParam.setValue(innerPurchaseOrderId);
+                        HTTPParam httpParam1 = new HTTPParam();
+                        httpParam1.setKey("purchaseOrderType");
+                        httpParam1.setValue("1");//如果是父订单的话类型是1
+                        params.add(httpParam);
+                        params.add(httpParam1);
+
+                        try {
+                            httpSend.sendPost(tempContextUrl+"purchaseOrder/autoReceive.do",params);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        timer.cancel();//停止定时器
+                    }
+                }, 7*24*60*60*1000);
             }else{
                 PurchaseOrder fPurchaseOrder = purchaseOrder.getFatherPurchaseOrder();
                 List<PurchaseOrder> subPurchaseOrderList = fPurchaseOrder.getSubPurchaseOrder();
@@ -105,6 +146,35 @@ public class PurchaseOrderController extends BaseController {
                     }
 
                 }
+
+                StringBuffer url = request.getRequestURL();
+                final String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).append("/").toString();
+                //启动一个定时器，发货七天用户没有点击收货的话，自动改为已收货
+                final Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+
+                        List<HTTPParam> params = new ArrayList<HTTPParam>();
+                        HTTPParam httpParam = new HTTPParam();
+                        httpParam.setKey("innerPurchaseOrderId");
+                        httpParam.setValue(innerPurchaseOrderId);
+                        HTTPParam httpParam1 = new HTTPParam();
+                        httpParam1.setKey("purchaseOrderType");
+                        httpParam1.setValue("2");//如果是子订单的话类型是2
+                        params.add(httpParam);
+                        params.add(httpParam1);
+
+                        try {
+                            httpSend.sendPost(tempContextUrl+"purchaseOrder/autoReceive.do",params);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        timer.cancel();//停止定时器
+                    }
+                },  7*24*60*60*1000);
+
             }
 
 
@@ -123,6 +193,62 @@ public class PurchaseOrderController extends BaseController {
         }
 
         return  id;
+    }
+
+
+    @RequestMapping("/autoReceive.do")
+    @ResponseBody
+    public void autoReceive(HttpServletRequest request){
+        String innerPurchaseOrderId = request.getParameter("innerPurchaseOrderId");
+        String type = request.getParameter("purchaseOrderType");
+        if("1".equals(type)){//如果传进来的是父订单
+            PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),innerPurchaseOrderId);
+            String orderStatus = purchaseOrderTemp.getOrderStatus();
+            if ("7".equals(orderStatus)) {
+                purchaseOrderTemp.setOrderStatus("9");
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrderTemp);
+            }
+            List<PurchaseOrder> subPurchaseOrderList = purchaseOrderTemp.getSubPurchaseOrder();
+            if(null != subPurchaseOrderList && subPurchaseOrderList.size() > 0){
+                PurchaseOrder p1 = null;
+                for(int i = 0;i < subPurchaseOrderList.size();i++){
+                    p1 = subPurchaseOrderList.get(i);
+                    if("7".equals(p1.getOrderStatus())){
+                        p1.setOrderStatus("9");
+                        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),p1);
+                    }
+                }
+            }
+        }else if("2".equals(type)){//如果传进来的是子订单
+            System.out.print("子订单");
+            PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),innerPurchaseOrderId);
+            String orderStatus = purchaseOrderTemp.getOrderStatus();
+            if ("7".equals(orderStatus)) {
+                purchaseOrderTemp.setOrderStatus("9");
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
+                PurchaseOrder fPurchaseOrder = purchaseOrderTemp.getFatherPurchaseOrder();
+                List<PurchaseOrder> subPurchaseOrderList = fPurchaseOrder.getSubPurchaseOrder();
+                for (int k = 0; k < subPurchaseOrderList.size(); k++) {
+                    PurchaseOrder itPurchaseOrder = subPurchaseOrderList.get(k);
+                    if (k == 0 && itPurchaseOrder.getId().equals(purchaseOrderTemp.getId())) {//列表的第一个是自己
+                        continue;
+                    } else if (k == subPurchaseOrderList.size() - 1 && itPurchaseOrder.getId().equals(purchaseOrderTemp.getId())) {//列表中最后一个是自己
+                        fPurchaseOrder.setOrderStatus("9");
+                        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), fPurchaseOrder);
+                    } else if (itPurchaseOrder.getId().equals(purchaseOrderTemp.getId())) {
+                        continue;
+                    } else {
+                        if ("7".equals(itPurchaseOrder.getOrderStatus()) || "5".equals(itPurchaseOrder.getOrderStatus())) {
+                            break;
+                        }
+                        if ("9".equals(itPurchaseOrder.getOrderStatus()) && k == subPurchaseOrderList.size() - 1) {
+                            fPurchaseOrder.setOrderStatus("9");
+                            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), fPurchaseOrder);
+                        }
+                    }
+                }
+            }
+        }
     }
 
 

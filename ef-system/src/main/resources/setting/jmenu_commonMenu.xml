@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmenu id="commonMenu">
-    <jnode id="efecOrderAndConsumer" url="/main.do?jnodeId=efecOrderAndConsumer" text_zh_CN="订单与消费者">
+    <jnode id="efecOrderAndConsumer" access="admin" url="/main.do?jnodeId=efecOrderAndConsumer" text_zh_CN="订单与消费者">
         <jnode url="" id="orderManager" access="admin,manager" state="closed" text_zh_CN="订单管理">
             <jnode url="/basic/xm.do?qm=plistPurchaseOrder_default&amp;viewIdentify=orderProduct&amp;viewProductModel=order" access="admin" text_zh_CN="订单列表">
                 <match url="/basic/xm.do?qm=plistPurchaseOrder_default&amp;viewIdentify=orderProduct&amp;viewProductModel=order"/>
@@ -17,9 +17,18 @@
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewPaymentOrder=order"/>
                 <match url="/basic/xm.do?qm=viewConsumer&amp;viewPaymentConsumer=payment"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderPayment&amp;view=view"/>
-                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;param=orderPayment"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewIdentify=orderPayment"/>
                 <match url= "/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewIdentify=orderPayment"/>
                 <match url="/basic/xm.do?qm=plistPurchaseOrderPayment_search"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPaymentDetails_default" access="admin,manager" text_zh_CN="支付记录详情">
+                <match url="/basic/xm.do?qm=plistPurchaseOrderPaymentDetails_default"/>
+                <match url="/basic/xm.do?qm=plistPurchaseOrderPaymentDetails_search"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrderPayment&amp;view=purchaseOrderPaymentDetails&amp;viewIdentify=Details"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=purchaseOrderPaymentDetails&amp;viewIdentify=Details"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewIdentify=Details"/>
+                <match url= "/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewIdentify=Details"/>
+                <match url="/basic/xm.do?qm=viewConsumer&amp;view=purchaseOrderPaymentDetails"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default" access="admin,manager" text_zh_CN="发货记录">
                 <match url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default"/>
@@ -60,9 +69,12 @@
                 <match url="/basic/xm.do?qm=plistCoupon_used"/>
             </jnode>
         </jnode>
-
+        <jnode url="" id="consumer" access="admin" state="closed" text_zh_CN="营销活动">
+            <jnode url="/basic/xm.do?qm=formActivity" access="admin,manager" text_zh_CN="我的团长我的团">
+            </jnode>
+        </jnode>
     </jnode>
-    <jnode id="efecProductAndTenant" url="/main.do?jnodeId=efecProductAndTenant" text_zh_CN="商品与商家">
+    <jnode id="efecProductAndTenant" access="admin" url="/main.do?jnodeId=efecProductAndTenant" text_zh_CN="商品与商家">
         <jnode url="" id="productManager" access="admin,manager" state="closed" text_zh_CN="商品管理">
             <jnode url="/basic/xm.do?qm=plistProduct_default&amp;view=newProduct" access="admin" text_zh_CN="商品列表">
                 <match url="/basic/xm.do?qm=plistProduct_defalut&amp;view=newProduct"/>
@@ -153,6 +165,7 @@
             </jnode>
             <jnode url="/basic/xm.do?qm=plistSubject_default" access="admin,manager" text_zh_CN="首页推荐专题">
                 <match url="/basic/xm.do?qm=formSubject"/>
+                <match url="/basic/xm.do?qm=plistSubject_default1"/>
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>
                 <match url="/basic/xm.do?qm=viewSubject"/>
                 <match url="/basic/xm.do?qm=plistTProductModel_default"/>
@@ -191,7 +204,7 @@
         </jnode>
     </jnode>
 
-    <jnode id="ttManager" url="/main.do?jnodeId=ttManager" text_zh_CN="大师">
+    <jnode id="ttManager" access="admin" url="/main.do?jnodeId=ttManager" text_zh_CN="大师">
         <jnode url="" id="tenantManager" access="admin,manager" state="closed" text_zh_CN="大师管理">
             <jnode url="/basic/xm.do?qm=plistMaster_default" id="masterList" access="admin" text_zh_CN="大师列表">
                 <match url="/basic/xm.do?qm=plistMaster_default"/>
@@ -266,7 +279,7 @@
         </jnode>
     </jnode>
 
-    <jnode id="wikiManager" url="/main.do?jnodeId=wikiManager" text_zh_CN="工艺">
+    <jnode id="wikiManager" access="admin" url="/main.do?jnodeId=wikiManager" text_zh_CN="工艺">
         <!-- <jnode url="/basic/xm.do?qm=plistProjectContent_default" access="admin,manager" text_zh_CN="内容">
              <match url="plistProjectContent_default"/>
          </jnode>-->
@@ -285,6 +298,18 @@
                 <match url="/basic/xm.do?qm=formMasterWork"/>
                 <match url="/basic/xm.do?qm=formwikiMasterWork"/>
                 <match url="/basic/xm.do?qm=viewMasterwiki"/>
+                <match url="/basic/xm.do?qm=plistProductwiki_getProduct2"/>
+                <match url="/basic/xm.do?qm=plistProduct_defalut&amp;view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=formProduct&amp;view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=formProduct_Description&amp;view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=wikiProduct"/>
+                <match url="/product/saveNewProduct.do?view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=plistTenantProduct_default&amp;view=wikiProduct"/>
+                <match url="/basic/xm.do?view=wikiProduct"/>
+                <match url="/product/saveNewProduct.do?view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=plistProduct_default1&amp;view=wikiProduct"/>
             </jnode>
 
         </jnode>
@@ -295,7 +320,7 @@
 
     </jnode>
 
-    <jnode id="baseManager" url="/main.do?jnodeId=baseManager" text_zh_CN="基础管理">
+    <jnode id="baseManager" access="admin" url="/main.do?jnodeId=baseManager" text_zh_CN="基础管理">
         <jnode url="" id="CategoryManager" access="admin" state="closed" text_zh_CN="非遗项目与类别">
             <jnode url="/basic/xm.do?qm=plistProject_default" access="admin,manager" text_zh_CN="项目列表">
                 <match url="/basic/xm.do?qm=plistProject_default"/>
@@ -319,7 +344,7 @@
     </jnode>
 
 
-    <jnode id="systemManager" url="/main.do?jnodeId=systemManager" text_zh_CN="系统管理">
+    <jnode id="systemManager" access="admin" url="/main.do?jnodeId=systemManager" text_zh_CN="系统管理">
         <jnode url="" id="userManager" access="admin" state="closed" text_zh_CN="用户管理">
             <jnode url="/basic/xm.do?qm=plistUser_default" access="admin,manager" text_zh_CN="用户列表">
                 <match url="/basic/xm.do?qm=plistUser_default"/>
@@ -327,14 +352,14 @@
                 <match url="/basic/xm.do?qm=plistUser_default2"/>
                 <match url="/basic/xm.do?qm=formUser&amp;formParam=user"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistRole_default" access="admin,manager" text_zh_CN="角色管理">
+            <jnode url="/basic/xm.do?qm=plistRole_default" access="admin" text_zh_CN="角色管理">
                 <match url="/basic/xm.do?qm=plistRole_default"/>
                 <match url="/basic/xm.do?qm=formRole"/>
             </jnode>
 
         </jnode>
         <jnode id="tagManager" url="" access="admin" text_zh_CN="字典管理">
-            <jnode id="" url="/basic/xm.do?qm=plistTag_default" state="" extend="" access="" text_zh_CN="字典列表">
+            <jnode id="" url="/basic/xm.do?qm=plistTag_default" state="" extend="" access="admin" text_zh_CN="字典列表">
                 <match url="/basic/xm.do?qm=plistTag_default"/>
                 <match url="/basic/xm.do?qm=formTag"/>
             </jnode>

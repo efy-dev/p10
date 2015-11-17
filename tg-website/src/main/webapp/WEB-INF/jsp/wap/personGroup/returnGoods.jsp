@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>申请退货</title>
+    <title>个人中心-申请退货</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -80,7 +80,7 @@
         display: none;
     }
     .MEIQIA-ICON {
-        background:url(/scripts/wap/images/qq.png) no-repeat -176px -143px;
+        background:url(http://j.efeiyi.com/tg-website/scripts/wap/images/qq.png) no-repeat -176px -143px;
     }
     #MEIQIA-BTN-ICON {
         width: 23px;

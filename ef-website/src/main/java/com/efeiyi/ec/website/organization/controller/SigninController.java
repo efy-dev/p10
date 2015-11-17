@@ -30,7 +30,13 @@ import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -44,6 +50,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -58,7 +65,7 @@ import java.util.List;
  */
 
 @Controller
-public class   SigninController extends BaseController {
+public class SigninController extends BaseController {
     @Autowired
     private RoleManager roleManager;
     @Autowired
@@ -154,11 +161,11 @@ public class   SigninController extends BaseController {
         request.getSession().setAttribute(cellPhoneNumber, verificationCode);
         String massage = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1", PConst.TIANYI);
         if (massage != null) {
-                return true;
-            } else {
-                return false;
-            }
+            return true;
+        } else {
+            return false;
         }
+    }
 
 
     /**
@@ -170,33 +177,39 @@ public class   SigninController extends BaseController {
         if (source != null) {
             model.addAttribute("source", source);
         }
-        return "/register" ;
+        return "/register";
     }
 
     @RequestMapping("/sso.do")
     public String forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String redirect = request.getParameter("callUrl");
-        if (redirect!=null){
-            return "redirect:"+redirect;
-        }
+        String registeSuccess = request.getParameter("registeSuccess");
         String userId = request.getParameter("userId");
         if (userId != null && !"".equals(userId)) {
             Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
             XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
             List<Object> couponBatchList = baseManager.listObject(xQuery);
             for (Object couponBatchTemp : couponBatchList) {
-                Coupon coupon = new Coupon();
-                coupon.setStatus("1");
-                coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
-                coupon.setCouponBatch((CouponBatch) couponBatchTemp);
-                Date currentDate = new Date();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-                String currentDateStr = simpleDateFormat.format(currentDate);
-                coupon.setUniqueKey(currentDateStr + coupon.getSerial());
-                coupon.setConsumer(consumer);
-                baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                if (((CouponBatch) couponBatchTemp).getCouponList().size() < ((CouponBatch) couponBatchTemp).getAmount()) {
+                    Coupon coupon = new Coupon();
+                    coupon.setStatus("1");
+                    coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
+                    coupon.setCouponBatch((CouponBatch) couponBatchTemp);
+                    Date currentDate = new Date();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+                    String currentDateStr = simpleDateFormat.format(currentDate);
+                    coupon.setUniqueKey(currentDateStr + coupon.getSerial());
+                    coupon.setConsumer(consumer);
+                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                }
             }
 
+        }
+        if (redirect != null) {
+            return "redirect:" + redirect;
+        }
+        if (registeSuccess != null) {
+            return "redirect:" + registeSuccess;
         }
 //        response.sendRedirect(request.getContextPath() + "/sso2.do");
         return "redirect:/sso2.do";
@@ -207,20 +220,21 @@ public class   SigninController extends BaseController {
     public void forward2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //将登陆的用户的用户信息保存到cookie中
         MyUser myUser = AuthorizationUtil.getMyUser();
-        CookieTool.addCookie(response,"userinfo",myUser.getId(),10000000,".efeiyi.com");
+        CookieTool.addCookie(response, "userinfo", myUser.getId(), 10000000, ".efeiyi.com");
         response.sendRedirect(request.getContextPath() + "/");
     }
+
     @RequestMapping({"/login"})
-    public String login(HttpServletRequest request ,Model model){
+    public String login(HttpServletRequest request, Model model) {
         String error = request.getParameter("error");
-        if (error!=null){
-            model.addAttribute("error","true");
+        if (error != null) {
+            model.addAttribute("error", "true");
         }
         return "/login";
     }
 
     @RequestMapping({"/register"})
-    public String register(HttpServletRequest request ,Model model){
+    public String register(HttpServletRequest request, Model model) {
 //        String error = request.getParameter("error");
 //        if (error!=null){
 //            model.addAttribute("error","true");
@@ -229,23 +243,47 @@ public class   SigninController extends BaseController {
     }
 
     @RequestMapping({"/forgetPwd"})
-    public String forgetPwd(HttpServletRequest request ){
-
+    public String forgetPwd(HttpServletRequest request) {
         return "/forgetPassword";
-
     }
+
     @RequestMapping({"/setPwd"})
-    public String setPwd(HttpServletRequest request,Model model ) throws Exception {
-       String username=request.getParameter("username");
-        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("username",username);
-        String hql="from BigUser s where s.username=:username";
+    public String setPwd(HttpServletRequest request, Model model) throws Exception {
+        String username = request.getParameter("username");
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("username", username);
+        String hql = "from BigUser s where s.username=:username";
         BigUser biguser = (BigUser) baseManager.getUniqueObjectByConditions(hql, queryParamMap);
-         model.addAttribute("user",biguser);
+        model.addAttribute("user", biguser);
         return "/setPassword";
 
     }
 
+    @RequestMapping({"/registerSuccess.do"})
+    public String transitPage(HttpServletRequest request, Model model) throws Exception {
+        String userId = request.getParameter("userId");
+        if (userId != null && !"".equals(userId)) {
+            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
+            XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
+            List<Object> couponBatchList = baseManager.listObject(xQuery);
+            for (Object couponBatchTemp : couponBatchList) {
+                if (((CouponBatch) couponBatchTemp).getCouponList().size() < ((CouponBatch) couponBatchTemp).getAmount()) {
+                    Coupon coupon = new Coupon();
+                    coupon.setStatus("1");
+                    coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
+                    coupon.setCouponBatch((CouponBatch) couponBatchTemp);
+                    Date currentDate = new Date();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+                    String currentDateStr = simpleDateFormat.format(currentDate);
+                    coupon.setUniqueKey(currentDateStr + coupon.getSerial());
+                    coupon.setConsumer(consumer);
+                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                }
+            }
+
+        }
+        return "/registerSuccess";
+    }
 
     @RequestMapping({"/wx/register"})
     public String wxRegister() {
@@ -263,6 +301,57 @@ public class   SigninController extends BaseController {
 
         return "redirect:" + url;
     }
+
+    @RequestMapping("/wx/login")
+    public String wxLogin(HttpServletRequest request, Model model) throws Exception {
+        String result = "";
+        //1、网页授权后获取传递的code，用于获取openId
+        String code = request.getParameter("code");
+        if (request.getSession().getAttribute(code) != null) {
+            result = request.getSession().getAttribute(code).toString();
+        } else {
+
+            System.out.println("1、 page code value：" + code);
+            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+            result = HttpUtil.getHttpResponse(urlForOpenId, null);
+            request.getSession().setAttribute(code, result);
+        }
+        System.out.println("2、get openid result：" + result);
+        JSONObject jsonObject = JSONObject.fromObject(result);
+        if (jsonObject.containsKey("errcode")) {
+            throw new RuntimeException("get openId error：" + result);
+        }
+        String unionid = jsonObject.getString("unionid");
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("unionid", unionid);
+        Consumer consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from Consumer obj where obj.unionid=:unionid", param);
+        MyUser myUser = (MyUser) baseManager.getObject(MyUser.class.getName(), consumer.getId());
+        AuthenticationManager am = new SampleAuthenticationManager();
+        try {
+            Authentication authentication = new UsernamePasswordAuthenticationToken(myUser, myUser.getPassword());
+            Authentication authentication2 = am.authenticate(authentication);
+            Object obj = authentication2.getPrincipal();
+            SecurityContextHolder.getContext().setAuthentication(authentication2);
+        } catch (AuthenticationException e) {
+            System.out.println("Authentication failed: " + e.getMessage());
+        }
+        return "redirect:" + request.getParameter("redirect");
+    }
+
+
+    private static class SampleAuthenticationManager implements AuthenticationManager {
+        static final List<GrantedAuthority> AUTHORITIES = new ArrayList<GrantedAuthority>();
+
+        static {
+            AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+
+        public Authentication authenticate(Authentication auth) throws AuthenticationException {
+            return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
+                    auth.getCredentials(), AUTHORITIES);
+        }
+    }
+
 
     @RequestMapping({"/wx/bind"})
     public String getWxOpenId(HttpServletRequest request, Model model) throws Exception {

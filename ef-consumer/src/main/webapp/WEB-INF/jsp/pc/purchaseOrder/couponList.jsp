@@ -54,7 +54,7 @@
                         <c:set var="sd">
                             <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern='yyyy-MM-dd'/>
                         </c:set>
-                        <c:if test="${td<=sd || td>=ed && employ=='unUse'}">
+                        <c:if test="${td<sd || td>ed && employ=='unUse'}">
                        <div class="serial-list-page">
                         <div class="list-hd">
                             <span>券编号:${coupon.serial}</span>
@@ -80,25 +80,19 @@
                                             <p>全场通用</p>
                                         </c:when>
                                         <c:when test="${coupon.couponBatch.range ==2}">
-                                            <p>限购 [${coupon.couponBatch.project}] 类商品</p>
+                                            <p>限购 [${coupon.couponBatch.project.name}] 类商品</p>
 
                                         </c:when>
                                         <c:when test="${coupon.couponBatch.range ==3}">
-                                            <p>限购 [${coupon.couponBatch.tenant}] 店铺商品</p>
-
+                                            <p>限购 [${coupon.couponBatch.tenant.name}] 店铺商品</p>
                                         </c:when>
                                         <c:when test="${coupon.couponBatch.range ==4}">
-                                            <p>限购 [${coupon.couponBatch.tenant}] 店铺商品</p>
-
+                                            <p>限购 [${coupon.couponBatch.tenant.name}] 店铺商品</p>
                                         </c:when>
                                             </c:choose>
                                     <c:if test="${coupon.couponBatch.type==1}">
                                         <p>一次性消费满${coupon.couponBatch.priceLimit}元即可使用</p>
                                     </c:if>
-                                    <c:if test="${coupon.couponBatch.type==2}">
-                                        <p>消费立减${coupon.couponBatch.price}元</p>
-                                    </c:if>
-
                                     <p>期限：
                                         <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern='yyyy.MM.dd'/>
                                     -<fmt:formatDate value="${coupon.couponBatch.endDate}" pattern='yyyy.MM.dd' /></p>
@@ -138,23 +132,20 @@
                                                     <p>全场通用</p>
                                                 </c:when>
                                                 <c:when test="${coupon.couponBatch.range ==2}">
-                                                    <p>限购 [${coupon.couponBatch.project}] 类商品</p>
+                                                    <p>限购 [${coupon.couponBatch.project.name}] 类商品</p>
 
                                                 </c:when>
                                                 <c:when test="${coupon.couponBatch.range ==3}">
-                                                    <p>限购 [${coupon.couponBatch.tenant}] 店铺商品</p>
+                                                    <p>限购 [${coupon.couponBatch.tenant.name}] 店铺商品</p>
 
                                                 </c:when>
                                                 <c:when test="${coupon.couponBatch.range ==4}">
-                                                    <p>限购 [${coupon.couponBatch.tenant}] 店铺商品</p>
+                                                    <p>限购 [${coupon.couponBatch.product.name}] 商品</p>
 
                                                 </c:when>
                                             </c:choose>
                                             <c:if test="${coupon.couponBatch.type==1}">
                                                 <p>一次性消费满${coupon.couponBatch.priceLimit}元即可使用</p>
-                                            </c:if>
-                                            <c:if test="${coupon.couponBatch.type==2}">
-                                                <p>消费立减${coupon.couponBatch.price}元</p>
                                             </c:if>
                                             <p>期限：
                                                 <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern='yyyy.MM.dd'/>
@@ -196,23 +187,20 @@
                                                 <p>全场通用</p>
                                             </c:when>
                                             <c:when test="${coupon.couponBatch.range ==2}">
-                                                <p>限购 [${coupon.couponBatch.project}] 类商品</p>
+                                                <p>限购 [${coupon.couponBatch.project.name}] 类商品</p>
 
                                             </c:when>
                                             <c:when test="${coupon.couponBatch.range ==3}">
-                                                <p>限购 [${coupon.couponBatch.tenant}] 店铺商品</p>
+                                                <p>限购 [${coupon.couponBatch.tenant.name}] 店铺商品</p>
 
                                             </c:when>
                                             <c:when test="${coupon.couponBatch.range ==4}">
-                                                <p>限购 [${coupon.couponBatch.tenant}] 店铺商品</p>
+                                                <p>限购 [${coupon.couponBatch.tenant.name}] 店铺商品</p>
 
                                             </c:when>
                                         </c:choose>
                                         <c:if test="${coupon.couponBatch.type==1}">
                                             <p>一次性消费满${coupon.couponBatch.priceLimit}元即可使用</p>
-                                        </c:if>
-                                        <c:if test="${coupon.couponBatch.type==2}">
-                                            <p>消费立减${coupon.couponBatch.price}元</p>
                                         </c:if>
                                         <p>期限：
                                             <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern='yyyy.MM.dd'/>
@@ -280,11 +268,11 @@ function exchangeCoupon() {
                 if(data.couponBatch.range==1){
                    sub += "全场通用";
                 }else if(data.couponBatch.range==2){
-                    sub += data.couponBatch.project+"类商品使用";
+                    sub += data.couponBatch.project.name+"类商品使用";
                 }else if(data.couponBatch.range==3){
-                    sub += data.couponBatch.tenant+"店铺使用";
+                    sub += data.couponBatch.tenant.name+"店铺使用";
                 }else{
-                    sub +=  "全场通用123";
+                    sub +=  data.couponBatch.product.name+"商品使用";
                 }
                 sub +="</p>"+
                 "<p>有效时间:"+formatDate(data.couponBatch.startDate)+"至"+formatDate(data.couponBatch.endDate) +"</p>"+

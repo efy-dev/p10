@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,12 +40,13 @@ public class PersonController {
         XQuery xQuery = new XQuery("listJoinGroup_default",request);
         List<Object> myCreateProductList = baseManager.listObject(xQuery);
         if(myCreateProductList!=null&&myCreateProductList.size()>0){
-           for(int i=0;i<myCreateProductList.size();i++){
-               Member member = (Member)myCreateProductList.get(i);
-               if("0".equals(member.getLevel())==false){
-                   myCreateProductList.remove(member);
-               }
-           }
+            Iterator<Object> sListIterator = myCreateProductList.iterator();
+            while(sListIterator.hasNext()){
+                Member member = (Member)sListIterator.next();
+                if("0".equals(member.getLevel())==false){
+                    sListIterator.remove();
+                }
+            }
         }
         model.addAttribute("myCreateProductList", myCreateProductList);
         return "/personGroup/myCreateGroup";
@@ -62,12 +64,13 @@ public class PersonController {
         XQuery xQuery = new XQuery("listJoinGroup_default",request);
         List<Object> groupJoinList = baseManager.listObject(xQuery);
         if(groupJoinList!=null&&groupJoinList.size()>0){
-             for(int i=0;i<groupJoinList.size();i++){
-                 Member member = (Member)groupJoinList.get(i);
-                 if("0".equals(member.getLevel())){
-                     groupJoinList.remove(member);
-                 }
-             }
+            Iterator<Object> sListIterator = groupJoinList.iterator();
+            while(sListIterator.hasNext()){
+                Member member = (Member)sListIterator.next();
+                if("0".equals(member.getLevel())){
+                    sListIterator.remove();
+                }
+            }
         }
         model.addAttribute("groupJoinList", groupJoinList);
         return "/personGroup/myJoinGroup";

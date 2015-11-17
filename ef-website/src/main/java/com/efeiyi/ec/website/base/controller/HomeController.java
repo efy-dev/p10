@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.base.controller;
 
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
@@ -8,6 +9,8 @@ import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.model.Banner;
 import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
+import com.ming800.core.util.CookieTool;
+import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,8 +26,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -47,18 +52,21 @@ public class HomeController {
     public String authenticationTest() {
         System.out.println(AuthorizationUtil.isAuthenticated());
         String name = "13693097151";
+        LinkedHashMap<String,Object> param = new LinkedHashMap<>();
+        param.put("username",name);
+        MyUser myUser = (MyUser)baseManager.getUniqueObjectByConditions("select obj from "+MyUser.class.getName()+" obj where obj.username=:username",param);
         String password = "123123";
         AuthenticationManager am = new SampleAuthenticationManager();
         try {
-            Authentication request = new UsernamePasswordAuthenticationToken(name, password);
+            Authentication request = new UsernamePasswordAuthenticationToken(myUser, StringUtil.encodePassword("123123", "SHA"));
             Authentication result = am.authenticate(request);
+            Object obj = result.getPrincipal();
             SecurityContextHolder.getContext().setAuthentication(result);
         } catch (AuthenticationException e) {
             System.out.println("Authentication failed: " + e.getMessage());
         }
         return AuthorizationUtil.getMyUser().getUsername();
     }
-
 
     private static class SampleAuthenticationManager implements AuthenticationManager {
         static final List<GrantedAuthority> AUTHORITIES = new ArrayList<GrantedAuthority>();
@@ -68,9 +76,17 @@ public class HomeController {
         }
 
         public Authentication authenticate(Authentication auth) throws AuthenticationException {
-                return new UsernamePasswordAuthenticationToken(auth.getName(),
+                return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
                         auth.getCredentials(), AUTHORITIES);
         }
+    }
+
+
+    @RequestMapping({"/logoutHandler"})
+    public String logoutHandler(HttpServletResponse response){
+        //只有手动退出的时候清除cookie
+        CookieTool.addCookie(response,"userinfo","",1,".efeiyi.com");
+        return "redirect:/";
     }
 
     @RequestMapping({"/home.do"})
@@ -109,6 +125,60 @@ public class HomeController {
             model.addAttribute("advertisement", subjectList);
         }
 
+        return "/home";
+    }
+    @RequestMapping({"/home1.do"})
+    public String home1(HttpServletRequest request, Model model) throws Exception {
+
+        //判断是否有需要重定向的页面
+        String redirectUrl = request.getParameter("redirect");
+        if (redirectUrl != null) {
+            return "redirect:" + redirectUrl;
+        }
+        List<Object> categoryList = objectRecommendedManager.getRecommendedList("categoryRecommended");
+        HashMap<String, List> map = new HashMap<>();
+        HashMap<String, List> projectMap = new HashMap<>();
+        for (Object object : categoryList) {
+            XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
+            xQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
+            map.put(((ProjectCategory) object).getId(), baseManager.listObject(xQuery));
+            //首页
+            XQuery projectQuery = new XQuery("listProject_default", request);
+            projectQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
+            projectQuery.setSortHql("");
+            projectQuery.updateHql();
+            projectMap.put(((ProjectCategory) object).getId(), baseManager.listObject(projectQuery));
+        }
+        model.addAttribute("recommendMap", map);
+        model.addAttribute("categoryList", categoryList);
+
+        //首页轮播图
+        List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
+        model.addAttribute("bannerList", bannerList);
+
+        //传承人
+        List<Object> masterList = objectRecommendedManager.getRecommendedList("ec.masterRecommended");
+        model.addAttribute("masterList", masterList);
+        model.addAttribute("sign", "000");
+
+        //广告区域 营销活动 热卖商品 广告区
+        XQuery subjectQuery = new XQuery("listAdvertisement_default", request);
+        XQuery subjectQuery2 = new XQuery("listAdvertisement_default2", request);
+        XQuery subjectQuery3 = new XQuery("listAdvertisement_default3", request);
+        List<Object> subjectList = baseManager.listObject(subjectQuery);
+        List<Object> subjectList2 = baseManager.listObject(subjectQuery2);
+        List<Object> subjectList3 = baseManager.listObject(subjectQuery3);
+        //热卖商品
+        if (subjectList != null && subjectList.size() > 0) {
+            model.addAttribute("advertisement", subjectList);
+        }
+        if (subjectList2 != null && subjectList2.size() > 0) {
+            model.addAttribute("advertisement2", subjectList2);
+        }
+        if (subjectList3 != null && subjectList3.size() > 0) {
+            model.addAttribute("advertisement3", subjectList3);
+        }
+        model.addAttribute("projectMap", projectMap);
         return "/home";
     }
 

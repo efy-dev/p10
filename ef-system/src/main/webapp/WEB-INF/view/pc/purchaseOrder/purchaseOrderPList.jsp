@@ -77,16 +77,32 @@
 
                     }
                 });
+                var dingYueSerial;
                 $('#my-prompt').modal({
                     relatedTarget: this,
                     onConfirm: function(e) {
                         //console.log(e.data);
+                        dingYueSerial = e.data;
                         $.ajax({
                             type:"get",
                             data:{id:id,orderStatus:orderStatus,logisticsCompany:$('#logisticsCompany').val(),serial: e.data,logisticsCompanyZHCN:$('#logisticsCompany option:checked').text()},//输入框的值传递到后台
                             url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",
                             success:function(data){
                                 $(obj).find("span").text("已发货");
+
+                                alert("wuliugongsi"+$('#logisticsCompany').val());
+                                alert("wuliudanhao"+dingYueSerial);
+
+                                //发完货之后还要在快递100订阅 用户收货后直接修改订单状态为已签收
+                                $.ajax({
+                                    type:'post',
+                                    url:"<c:url value="http://www.kuaidi100.com/poll"/>",
+                                    data:{schema:'json',param:{"company":$('#logisticsCompany').val(),"number":dingYueSerial,"key":"WTVaPjwE5593","parameters":{"callbackurl":"admin.efeiyi.com/purchaseOrder/edingyue.do","salt":"test","resultv2":"1"}}},
+                                    success:function(data){
+                                        alert(data.message);
+                                    }
+                                });
+
                                 window.location.reload();
                             }
                         });
@@ -101,6 +117,9 @@
             }else if(temp == "等待付款"){
 
                 alert("等待付款，无法发货!")
+            }else if(temp == "等待成团"){
+
+                alert("等待成团，无法发货!")
             }else{
                 alert("已经发货!")
             }
@@ -170,6 +189,9 @@
                             <span class="am-icon-pencil-square-o">
                                 <c:if test="${purchaseOrder.orderStatus==1}">
                                     等待付款
+                                </c:if>
+                                <c:if test="${purchaseOrder.orderStatus==3}">
+                                    等待成团
                                 </c:if>
                                 <c:if test="${purchaseOrder.orderStatus==5}">
                                     立即发货

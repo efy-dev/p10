@@ -48,7 +48,13 @@
             </c:if>
         </div>
 
+        <div class="am-form-group">
+            <label for="context" class="am-u-sm-3 am-form-label">类别简介</label>
 
+            <div class="am-u-sm-9">
+                <textarea id="context" name="context" placeholder="限200字以内" rows="3" cols="4">${object.context}</textarea>
+            </div>
+        </div>
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>

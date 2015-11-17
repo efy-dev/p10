@@ -31,7 +31,7 @@
 <body style="float: left;">
 <div class="ae master-text">
   <div class="great-master">
-    <div class="master-pic"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/${object.favicon}" alt="传承人" class="am-img-thumbnail am-circle">
+    <div class="master-pic"><img src="http://tenant.efeiyi.com/${object.favicon}@!master-favicon-view" alt="传承人" class="am-img-thumbnail am-circle">
     </div>
     <h5>${object.masterName}</h5>
     <p>[${object.projectName}]</p>
@@ -43,7 +43,12 @@
           <div class="bt-gz">
             <a class="btn-guan" onclick="followMaster(this,'${object.id}');">
               <div class="gz-q">
-                <i class="gz-icon"></i>
+                <c:if test="${object.followStatus == '已关注'}">
+                  <i class="gz-icon" style="display: none;"></i>
+                </c:if>
+                <c:if test="${object.followStatus == '关注'}">
+                  <i class="gz-icon"></i>
+                </c:if>
                 <em>${object.followStatus}</em>
               </div>
             </a>
@@ -93,19 +98,19 @@
       async: true,
       dataType: "json",//设置请求返回的数据格式
       success: function (data) {
+        var next = $(o).parent().parent().next().find("span");
+        var fsAmount = parseInt($(o).parent().parent().next().find("span").html().split("粉")[0]);
         if(data == "noRole"){
           alert("您还未登录,请登录后操作!");
         }else if(data=="add"){
           str = "已关注";
           $(o).find("em").html(str);
-          var next = $(o).parent().parent().next().find("span");
-          var fsAmount = parseInt($(o).parent().parent().next().find("span").html().split("粉")[0]);
+          $(o).find(".gz-icon").hide();
           next.html((fsAmount + 1)+"粉丝");
         }else if(data=="del"){
           str = "关注";
           $(o).find("em").html(str);
-          var next = $(o).parent().parent().next().find("span");
-          var fsAmount = parseInt($(o).parent().parent().next().find("span").html().split("粉")[0]);
+          $(o).find(".gz-icon").show();
           next.html((fsAmount - 1)+"粉丝");
         }
       }
@@ -330,10 +335,10 @@
                       "                    <h4 class=\"ae\">"+data[i].projectName+"</h4>"+
                       "                    <div class=\"function-page ae\">"+
                       "                        <div class=\"d-left\">"+
-                      "                            <a href=\"#\">"+
+//                      "                            <a onclick=\"followWork(this,'"+data[i].id+"');\">"+
                       "                                <i class=\"h-i-con\"></i>"+
                       "                                <span>"+data[i].amount+"</span>"+
-                      "                            </a>"+
+//                      "                            </a>"+
                       "                        </div>"+
                       "                        <div class=\"d-right\">"+
                       "                            <div class=\"right1\">"+

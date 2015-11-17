@@ -60,6 +60,7 @@
                 <field name="orderStatus" label="订单状态" inputType="text">
                     <statusType fieldName="orderStatus">
                         <item label="等待付款" value="1"/>
+                        <item label="等待成团" value="3"/>
                         <item label="已付款" value="5"/>
                         <item label="已发货" value="7"/>
                         <item label="未评价" value="9"/>
@@ -307,7 +308,7 @@
                 <do name="formPurchaseOrderPayment" label="保存支付记录" access=""
                     result="/purchaseOrderPayment/purchaseOrderPaymentForm"/>
                 <do name="viewPurchaseOrderPayment" label="查看支付记录" access=""
-                    result="/purchaseOrderPayment/purchaseOrderPaymentView"/>
+                    result="/purchaseOrderPayment/purchaseOrderPaymentView" execute="com.efeiyi.ec.system.PurchaseOrderPayment.controller.PurchaseOrderPaymentHandler"/>
                 <do name="saveOrUpdatePurchaseOrderPayment" label="保存支付记录" access=""
                     result="/purchaseOrderPayment/purchaseOrderPaymentSaveSuccess"/>
                 <do name="listPurchaseOrderPayment" label="支付记录列表" access=""
@@ -331,6 +332,22 @@
                     </statusType>
                 </field>
             </fields>
+            <does>
+            <do name="plistPurchaseOrderPaymentDetails" access="" label="支付记录详情"
+                result="/purchaseOrderPaymentDetails/purchaseOrderPaymentDetailsPList">
+                <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <condition name="id" defaultValue="0" operation="ne"/>
+                </query>
+                <query name="search" label="查询" type="auto" orderBy="id:desc">
+                    <condition name="payWay" operation="eq" label="支付方式" inputType="select_status" key="purchaseOrderPaymentDetails.payWay"/>
+                    <condition name="purchaseOrderPayment.serial" operation="like" label="支付记录编号" inputType="text"/>
+                    <condition name="transactionNumber" operation="eq" label="交易号" inputType="text"/>
+                    <condition name="purchaseOrderPayment.purchaseOrder.serial" operation="like" label="订单号" inputType="text"/>
+                    <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
+                    <condition name="createDateTime" operation="le" label="截止时间" inputType="date" dataType="date"/>
+                </query>
+            </do>
+            </does>
         </entity>
         <entity name="purchaseOrderProduct" label="purchaseOrderProduct"
                 basic="simple" others=""
@@ -360,5 +377,16 @@
             </does>
         </entity>
 
+
+
+        <entity name="cartProduct" label="cartProduct"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.CartProduct">
+            <does>
+
+                <do name="formActivity" label="保存cartProduct" access="" result="/activity/activityForm"/>
+
+            </does>
+        </entity>
     </entities>
 </module>

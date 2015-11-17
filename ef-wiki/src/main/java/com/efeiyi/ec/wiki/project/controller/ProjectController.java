@@ -78,8 +78,8 @@ public class ProjectController extends WikibaseController {
         return new ModelAndView("/project/listProduct");
     }
 
-    @RequestMapping("/showProduct/{productId}")
-    public String showProduct(@PathVariable String productId,HttpServletRequest request, Model model) throws Exception {
+    @RequestMapping("/showProduct/{productId}/{projectId}")
+    public String showProduct(@PathVariable String productId,@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
         //String productId = request.getParameter("productId");
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
         boolean flag = false;
@@ -92,6 +92,7 @@ public class ProjectController extends WikibaseController {
         if (AuthorizationUtil.getMyUser().getId() != null) {
             model.addAttribute("myUser", AuthorizationUtil.getMyUser());
         }
+        model.addAttribute("projectId", projectId);
         return "/product/brifProduct";
     }
 

@@ -8,7 +8,7 @@
 --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
 
@@ -36,6 +36,14 @@
             <input type="text" name="name" id="name" placeholder="" value="${object.name}" >
         </div>
       </div>
+        <div class="am-form-group">
+            <label name="name" class="am-u-sm-3 am-form-label">类别</label>
+
+            <div class="am-u-sm-9">
+                <ming800:status name="groupName" dataType="Advertisement.group" checkedValue="${object.groupName}" type="select"/>
+            </div>
+        </div>
+
         <div class="am-form-group">
             <label for="img" class="am-u-sm-3 am-form-label">广告图片</label>
 

@@ -7,10 +7,11 @@ import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderGroup;
-import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.PConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,9 @@ public class GroupController {
     @Autowired
     private BaseManager baseManager;
 
+    @Autowired
+    private SmsCheckManager smsCheckManager;
+
     //跳转协议
     @RequestMapping(value = "/group.do")
     public String group(HttpServletRequest request,Model model) throws Exception{
@@ -49,12 +53,12 @@ public class GroupController {
         String memberId = request.getParameter("memberId");
         String groupId = request.getParameter("groupId");
 
-        XQuery xQuery = new XQuery("listGroup_default4",request);
-        xQuery.put("groupProduct_id",groupProductId);
-        List<Group> list = baseManager.listObject(xQuery);
+        //XQuery xQuery = new XQuery("listGroup_default4",request);
+        //xQuery.put("groupProduct_id",groupProductId);
+        //List<Group> list = baseManager.listObject(xQuery);
         //GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
 
-        boolean flag = false;
+      /*  boolean flag = false;
         String url1 = "";
         if(groupId==null||groupId.isEmpty()){
             for(Group group:list){
@@ -72,17 +76,17 @@ public class GroupController {
             if (group.getManUser().getId().equals(currentUser.getId())&&(group.getMemberList().size()<group.getGroupProduct().getMemberAmount())){
                 flag = true;
             }
-        }
+        }*/
 
 
         String amount = "1";
        // String url = "/group/createGroup?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId+"&callback=http://192.168.1.46:8080/group/createGroup";
-        String url = "http://www.efeiyi.com/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://j.efeiyi.com/tg-website/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
-        if(!flag){
+        String url = "http://www.efeiyi.com/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://tuan.efeiyi.com/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
+        //if(!flag){
             return "redirect:" + url;
-        }else {
+        /*}else {
             return "redirect:/group/joinGroup.do" + url1;
-        }
+        }*/
 
 
     }
@@ -98,89 +102,141 @@ public class GroupController {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
 
-        if (currentUser != null){
-            if(purchaseOrder.getOrderStatus().equals("5")){
-                if (groupId.equals("null")||groupId.isEmpty()){
-                    Group groupbuy = new Group();
-                    groupbuy.setManUser(currentUser);
-                    groupbuy.setStatus("1");
-                    groupbuy.setCreateDateTime(new Date());
-                    groupbuy.setGroupProduct(groupProduct);
-                    baseManager.saveOrUpdate(Group.class.getName(),groupbuy);
+        if(purchaseOrder.getOrderStatus().equals("5")){
+            purchaseOrder.setOrderStatus("3");
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+            if (groupId.equals("null")||groupId.isEmpty()){
+                Group groupbuy = new Group();
+                groupbuy.setManUser(currentUser);
+                groupbuy.setStatus("1");
+                groupbuy.setCreateDateTime(new Date());
+                groupbuy.setGroupProduct(groupProduct);
+                baseManager.saveOrUpdate(Group.class.getName(),groupbuy);
 
-                    Member member = new Member();
-                    member.setStatus("1");
-                    member.setGroup(groupbuy);
-                    member.setLevel("0");
-                    member.setUser(currentUser);
-                    baseManager.saveOrUpdate(Member.class.getName(),member);
+                Member member = new Member();
+                member.setStatus("1");
+                member.setGroup(groupbuy);
+                member.setLevel("0");
+                member.setUser(currentUser);
+                baseManager.saveOrUpdate(Member.class.getName(),member);
 
-                    PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
-                    purchaseOrderGroup.setStatus("1");
-                    purchaseOrderGroup.setGroup(groupbuy);
-                    purchaseOrderGroup.setMember(member);
-                    purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
-                    baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
+                PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
+                purchaseOrderGroup.setStatus("1");
+                purchaseOrderGroup.setGroup(groupbuy);
+                purchaseOrderGroup.setMember(member);
+                purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
+                baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
 
-                    model.addAttribute("groupId",groupbuy.getId());
-                    String url = "?groupProductId="+groupProductId+"&groupId="+groupbuy.getId()+"&memberId="+member.getId();
-                    return "redirect:/group/shareGroup.do"+url;
+                model.addAttribute("groupId",groupbuy.getId());
+                String url = "?groupProductId="+groupProductId+"&groupId="+groupbuy.getId()+"&memberId="+member.getId();
+                return "redirect:/group/shareGroup.do"+url;
+            }else {
+                Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
+                Member fatherMember = (Member) baseManager.getObject(Member.class.getName(),memberId);
+                String fatherLevel = fatherMember.getLevel();
+                String level = String.valueOf(Integer.parseInt(fatherLevel)+1);
+
+                Member member = new Member();
+                member.setStatus("1");
+                member.setGroup(group);
+                member.setLevel(level);
+                member.setUser(currentUser);
+                member.setSupMember(fatherMember);
+                baseManager.saveOrUpdate(Member.class.getName(),member);
+
+                PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
+                purchaseOrderGroup.setStatus("1");
+                purchaseOrderGroup.setGroup(group);
+                purchaseOrderGroup.setMember(member);
+                purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
+                baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
+
+                //发送短信
+                Date createTime = group.getCreateDateTime();
+                int limintDay = group.getGroupProduct().getGroupPurchaseTime();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(createTime);
+                calendar.add(Calendar.DATE,limintDay);
+                Date endTime = calendar.getTime();
+                Date dateNow = new Date();
+                long min = endTime.getTime()-dateNow.getTime();
+                long leftDay = min/(1000*60*60*24);
+                long leftHour = (min/(1000*60*60))%24;
+                long leftMin = (min/(1000*60))%60;
+                String left = "";
+                String memberLeft = "";
+                if(leftDay>0){
+                    left = leftDay+"天"+leftHour+"时"+leftMin+"分";
                 }else {
-                    Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
-                    Member fatherMember = (Member) baseManager.getObject(Member.class.getName(),memberId);
-                    String fatherLevel = fatherMember.getLevel();
-                    String level = String.valueOf(Integer.parseInt(fatherLevel)+1);
+                    if(leftHour>0){
+                        left = leftHour+"时"+leftMin+"分";
+                    }else {
+                        if(leftMin>0){
+                            left = leftMin+"分";
+                        }else {
+                            left = "0分";
+                        }
 
-                    Member member = new Member();
-                    member.setStatus("1");
-                    member.setGroup(group);
-                    member.setLevel(level);
-                    member.setUser(currentUser);
-                    member.setSupMember(fatherMember);
-                    baseManager.saveOrUpdate(Member.class.getName(),member);
+                    }
+                }
+                if(groupProduct.getMemberAmount()-group.getMemberList().size()>0){
+                    memberLeft = String.valueOf(groupProduct.getMemberAmount()-group.getMemberList().size());
+                }else {
+                    memberLeft = "0";
+                }
+                this.smsCheckManager.send(group.getManUser().getUsername(), "#userName#="+purchaseOrder.getReceiverName()+"&#timeLeft#="+left+"&#memberLeft#="+memberLeft, "1108985", PConst.TIANYI);
 
-                    PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
-                    purchaseOrderGroup.setStatus("1");
-                    purchaseOrderGroup.setGroup(group);
-                    purchaseOrderGroup.setMember(member);
-                    purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
-                    baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
-
-                    if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
-                        group.setStatus("3");
-                        baseManager.saveOrUpdate(Group.class.getName(),group);
-                        for(Member member1:group.getMemberList()){
-                            String userId = member1.getUser().getId();
-                            BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(),userId);
-                            int i = 0;
-                            if(member1.getSubMemberList()!=null&&member1.getSubMemberList().size()>0){
-                                i = i + member1.getSubMemberList().size();
-                                for(Member member2:member1.getSubMemberList()){
-                                    if(member2.getSubMemberList()!=null&&member2.getSubMemberList().size()>0){
-                                        i = i + member2.getSubMemberList().size();
-                                    }
+                /*if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
+                    group.setStatus("3");
+                    baseManager.saveOrUpdate(Group.class.getName(),group);
+                    for(Member member1:group.getMemberList()){
+                        String userId = member1.getUser().getId();
+                        BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(),userId);
+                        int i = 0;
+                        if(member1.getSubMemberList()!=null&&member1.getSubMemberList().size()>0){
+                            i = i + member1.getSubMemberList().size();
+                            for(Member member2:member1.getSubMemberList()){
+                                if(member2.getSubMemberList()!=null&&member2.getSubMemberList().size()>0){
+                                    i = i + member2.getSubMemberList().size();
                                 }
                             }
-                            bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
-                            baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
-
                         }
+                        if(bigUser.getRedPacket()==null){
+                            bigUser.setRedPacket(new BigDecimal("0"));
+                        }else {
+                            bigUser.setRedPacket(bigUser.getRedPacket().add(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
+                        }
+                        if (member1.getRedPacket()==null){
+                            member1.setRedPacket(new BigDecimal("0"));
+                        }else {
+                            member1.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        }
+
+                        baseManager.saveOrUpdate(Member.class.getName(),member1);
+                        baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
+
                     }
+                    XQuery xQuery = new XQuery("listPurchaseOrderGroup_default3",request);
+                    xQuery.put("group_id",group.getId());
+                    List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
+                    for(PurchaseOrderGroup purchaseOrderGroup1:list){
+                        PurchaseOrder purchaseOrder1 = purchaseOrderGroup1.getPurchaseOrder();
+                        purchaseOrder1.setOrderStatus("5");
+                        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder1);
+                    }
+                }*/
 
-                    model.addAttribute("groupId",group.getId());
-                    String url = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
+                model.addAttribute("groupId",group.getId());
+                String url = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
 //                    return "redirect:/group/joinGroup.do"+url;
-                    return "redirect:/group/shareGroup"+url;
-                }
-
-
-
+                return "redirect:/group/shareGroup"+url;
             }
-            else {
-                return "/";//未支付成功
-            }
-        }else {
-            return "/";//用户未登录
+
+
+
+        }
+        else {
+            return "/zhifushibai";//未支付成功
         }
 
     }
@@ -244,6 +300,15 @@ public class GroupController {
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
         Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
+        XQuery xQuery = new XQuery("listPurchaseOrderGroup_default0",request);
+        xQuery.put("member_user_id",group.getManUser().getId());
+        xQuery.put("group_id",group.getId());
+        String manUserName = "";
+        List<PurchaseOrderGroup> purchaseOrderGroupList = baseManager.listObject(xQuery);
+        if(purchaseOrderGroupList.size()>0){
+            manUserName = purchaseOrderGroupList.get(0).getPurchaseOrder().getReceiverName();
+        }
+        model.addAttribute("manUserName",manUserName);
         int memberAmount = group.getGroupProduct().getMemberAmount();
         int a = (int)((float)group.getMemberList().size()*100/memberAmount);
         if (a<=100){
@@ -258,9 +323,9 @@ public class GroupController {
                 break;
             }
         }
-        if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
+        /*if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
             flag = true;
-        }
+        }*/
         //设置参团与否参数
         String url = "";
         if (flag){
@@ -275,7 +340,8 @@ public class GroupController {
         int limintDay = group.getGroupProduct().getGroupPurchaseTime();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(createTime);
-        calendar.add(Calendar.DATE,limintDay);
+        //calendar.add(Calendar.DATE,limintDay);
+        calendar.add(Calendar.MINUTE,10);
         Date endTime = calendar.getTime();
 
 
@@ -289,7 +355,7 @@ public class GroupController {
 
     //对所有团进行成团操作并发送红包
     @RequestMapping(value = "/sendRedPacket")
-    public String sendRedPacket(HttpServletRequest request, Model model) throws Exception{
+    public void sendRedPacket(HttpServletRequest request, Model model) throws Exception{
         XQuery xQuery = new XQuery("listGroup_default3",request);
         List<Group> list = baseManager.listObject(xQuery);
         for(Group group:list){
@@ -297,7 +363,8 @@ public class GroupController {
             int limintDay = group.getGroupProduct().getGroupPurchaseTime();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(createTime);
-            calendar.add(Calendar.DATE,limintDay);
+            //calendar.add(Calendar.DATE,limintDay);
+            calendar.add(Calendar.MINUTE,10);
             Date endTime = calendar.getTime();
             Date date = new Date();
             if(date.after(endTime)){
@@ -316,12 +383,33 @@ public class GroupController {
                                     i = i + member1.getSubMemberList().size();
                                 }
                             }
+
                         }
-                        bigUser.setRedPacket(bigUser.getRedPacket().multiply(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
-                        member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        if(bigUser.getRedPacket()==null){
+                            bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        }else {
+                            bigUser.setRedPacket(bigUser.getRedPacket().add(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
+                        }
+                        if (member.getRedPacket()==null){
+                            member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        }else {
+                            member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        }
                         baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
                         baseManager.saveOrUpdate(Member.class.getName(),member);
 
+                        //发送短信
+                        this.smsCheckManager.send(member.getUser().getUsername(), "#redPacket#="+group.getGroupProduct().getBonus().multiply(new BigDecimal(i)), "1109007", PConst.TIANYI);
+
+                    }
+
+                    XQuery xQuery1 = new XQuery("listPurchaseOrderGroup_default3",request);
+                    xQuery.put("group_id",group.getId());
+                    List<PurchaseOrderGroup> list1 = baseManager.listObject(xQuery1);
+                    for(PurchaseOrderGroup purchaseOrderGroup1:list1){
+                        PurchaseOrder purchaseOrder1 = purchaseOrderGroup1.getPurchaseOrder();
+                        purchaseOrder1.setOrderStatus("5");
+                        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder1);
                     }
                 }else {
                     group.setStatus("5");
@@ -329,7 +417,6 @@ public class GroupController {
                 }
             }
         }
-        return "";
     }
 
 }

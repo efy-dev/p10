@@ -82,7 +82,7 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .box-hd .ul-index-list>li.stau3 em {right:19px}
 .box-hd .ul-index-list>li img {width:100%}
 .box-hd .ul-index-list>li a {display:block;position:relative}
-.box-hd .ul-index-list>li .name {width:20px;line-height:20px;position:absolute;top:19px;right:10px;color:#fff;font-style:italic;
+.box-hd .ul-index-list>li .name {width:20px;line-height:18px;position:absolute;top:19px;right:10px;color:#fff;font-style:italic;
     font-weight: bold;}
 .box-hd .ul-index-list>li .price {position:absolute;bottom:10px;left:10px;font-size:12px;color:#fff}
 .box-hd .ul-index-list>li .price i {font-style:normal;font-size:8px}

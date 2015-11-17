@@ -84,7 +84,13 @@
                         </fields>
                     </page>
                 </do>
-
+                <do name="plistProductwiki" access="" label="产品分页列表"
+                    result="/product/productPList2" execute="com.efeiyi.ec.system.product.controller.listProductHandler">
+                <query name="getProduct2" label="默认" type="auto" orderBy="id:desc">
+                    <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                    <condition name="project.id" operation="eq" defaultValue="0" label="项目"/>
+                </query>
+                </do>
                 <do name="removeProduct" label="删除产品" access="" result="json"/>
                 <do name="formProduct" label="保存产品页" access="" result="/product/productForm" execute="com.efeiyi.ec.system.product.controller.toFormProductHandler"/>
                 <do name="formProduct_Description" label="保存产品页" access="" result="/productDescription/productDescriptionForm" />
@@ -274,7 +280,7 @@
             <does>
                 <do name="plistProductPicture" access="" label="产品图片分页列表"
                     result="/productPicture/productPicturePList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default" label="默认" type="auto" orderBy="sort:asc">
                         <condition name="content" defaultValue="1" operation="eq" />
                     </query>
                 </do>
@@ -283,10 +289,10 @@
                 <do name="saveOrUpdateProductPicture" label="保存产品描述" access="" result="/productPicture/productPictureSaveSuccess"
                     execute="com.efeiyi.ec.system.product.controller.BasicBannerFormHandler" />
                 <do name="listProductPicture" label="产品描述列表" access="" result="/productPicture/productPictureList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default" label="默认" type="auto" orderBy="sort:asc">
                         <condition label="产品主键" name="id" defaultValue="1" operation="eq"/>
                     </query>
-                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default2" label="默认" type="auto" orderBy="sort:asc">
                         <condition label="product.id" name="product.id" defaultValue="1" operation="eq"/>
                         <condition label="productModel.id" name="productModel.id" defaultValue="1" operation="eq"/>
                         <condition label="status" name="status" defaultValue="2" operation="eq"/>
@@ -301,11 +307,40 @@
         <entity name="Subject" label="专题"
                 basic="simple" others=""
                 model="com.efeiyi.ec.product.model.Subject">
+            <fields>
+                <field name="show" label="状态" inputType="text">
+                    <statusType fieldName="show">
+                        <item label="上架" value="1"/>
+                        <item label="下架" value="2"/>
+                    </statusType>
+                </field>
+                <field name="type" label="类别" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="地区专题" value="dx"/>
+                        <item label="节日专题" value="jr"/>
+                        <item label="礼品专题" value="lp"/>
+                        <item label="品牌专题" value="pp"/>
+                        <item label="活动专题" value="hd"/>
+                    </statusType>
+                </field>
+                <field name="template" label="模板" inputType="text">
+                    <statusType fieldName="template">
+                        <item label="普通模板" value="1"/>
+                        <item label="活动模板" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
             <does>
                 <do name="plistSubject" access="" label="专题分页列表"
                     result="/subject/subjectPList">
                     <query name="default" label="默认" type="auto" orderBy="subjectIndex:desc">
                         <condition defaultValue="0" name="status" operation="ne" inputType="default"/>
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="subjectIndex:desc">
+                        <condition defaultValue="0" name="status" operation="ne" inputType="default"/>
+                        <condition  name="name" label="专题名称" operation="like" inputType="text"/>
+                        <condition name="type" operation="eq" label="专题类别" inputType="select_status" key="Subject.type"/>
+                        <condition name="template" operation="eq" label="模板" inputType="select_status" key="Subject.template"/>
                     </query>
                 </do>
                 <do name="viewSubject" label="查看专题" access="" result="/subject/subjectView"/>
@@ -422,6 +457,15 @@
         <entity name="Advertisement" label="产品列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.product.model.Advertisement">
+            <fields>
+                <field name="group" label="分组" inputType="text">
+                    <statusType fieldName="group">
+                        <item label="营销活动" value="yxhd"/>
+                        <item label="热卖商品" value="rmsp"/>
+                        <item label="banner广告" value="bgg"/>
+                    </statusType>
+                </field>
+            </fields>
             <does>
                 <do name="plistAdvertisement" access="" label="产品分页列表"
                     result="/advertisement/advertisementPList" >
@@ -432,12 +476,20 @@
                     <query name="default1" label="快速查询" type="auto" orderBy="adsOrder:desc">
                         <condition name="name"  operation="like" label="广告名称" inputType="text"/>
                         <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
+                        <condition name="groupName" operation="eq" label="类别" inputType="select_status" key="Advertisement.groupName"/>
                     </query>
                 </do>
                 <do name="removeAdvertisement" label="删除广告" access="" result="json"/>
                 <do name="formAdvertisement" label="保存广告页" access="" result="/advertisement/advertisementForm" />
                 <do name="saveOrUpdateAdvertisement" label="保存产品描述" access="" result="/advertisement/advertisementSaveSuccess"
                     execute="com.efeiyi.ec.system.advertisement.controller.AdvertisementFormHandler" />
+
+                <do name="listAdvertisement" label="保存产品描述" access="" result="/advertisement/advertisementSaveSuccess">
+                    <query name="default" label="快速查询" type="auto" orderBy="adsOrder:desc">
+                       <condition name="groupName"  operation="eq" defaultValue="1"  inputType="default"/>
+                       <condition name="status"  operation="eq" defaultValue="1"  inputType="default"/>
+                    </query>
+                </do>
             </does>
         </entity>
 
