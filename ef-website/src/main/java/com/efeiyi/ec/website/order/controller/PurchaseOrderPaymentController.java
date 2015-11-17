@@ -49,8 +49,13 @@ public class PurchaseOrderPaymentController {
 
     @RequestMapping({"/pay/alipay/{orderId}"})
     public String aliPay(HttpServletRequest request, Model model, @PathVariable String orderId) {
+        String resultHtml = "";
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
-        String resultHtml = paymentManager.alipay(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue());
+        if (HttpUtil.isPhone(request)) {
+            resultHtml = paymentManager.alipayWap(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue());
+        }else {
+            resultHtml = paymentManager.alipay(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue());
+        }
         model.addAttribute("resultHtml", resultHtml);
         return "/order/alipay";
     }
@@ -169,7 +174,7 @@ public class PurchaseOrderPaymentController {
         model.addAttribute("signType", jsonStr.getString("signType"));
         model.addAttribute("nonceStr", jsonStr.getString("nonceStr"));
         model.addAttribute("orderId", purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getId());
-        model.addAttribute("order",purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder());
+        model.addAttribute("order", purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder());
         return "/order/wxpay";
     }
 
@@ -183,9 +188,6 @@ public class PurchaseOrderPaymentController {
     }
 
 
-
-
-
     @RequestMapping({"/pay/{orderId}"})
     public String orderPay(@PathVariable String orderId, HttpServletRequest request) {
         //从新创建支付记录详情
@@ -193,7 +195,7 @@ public class PurchaseOrderPaymentController {
         String isWeiXin = request.getParameter("isWeiXin");//移动网站页面用的
         String payment = purchaseOrder.getPayWay();
 
-        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails  = paymentManager.initPurchaseOrderPayment(purchaseOrder);
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder);
 
         if (payment.equals("1")) {//支付宝
             return "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
