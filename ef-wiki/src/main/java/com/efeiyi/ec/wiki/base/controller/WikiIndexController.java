@@ -174,8 +174,7 @@ public class WikiIndexController extends WikibaseController {
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
             return "false";
-        }
-        if (oper.equalsIgnoreCase("del")){
+        }else{
             String queryHql = "from ProjectFollowed t where t.user.id=:userId and t.project.id=:projectId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
@@ -196,22 +195,19 @@ public class WikiIndexController extends WikibaseController {
                 project.setFsAmount(FsAmount);
                 baseManager.saveOrUpdate(Project.class.getName(),project);
                 return "del";
+            }else{
+                ProjectFollowed projectFollowed = new ProjectFollowed();
+                projectFollowed.setUser(user);
+                projectFollowed.setProject(project);
+                projectFollowed.setStatus("1");
+                projectFollowed.setCreateDatetime(new Date());
+                project.setFsAmount(project.getFsAmount() == null ? (0 + 1) : (project.getFsAmount() + 1));
+                baseManager.saveOrUpdate(Project.class.getName(), project);
+                baseManager.saveOrUpdate(ProjectFollowed.class.getName(), projectFollowed);
+                return "true";
             }
-            return "error";
         }
-        if (oper.equalsIgnoreCase("add")){
-            ProjectFollowed projectFollowed = new ProjectFollowed();
-            projectFollowed.setUser(user);
-            projectFollowed.setProject(project);
-            projectFollowed.setStatus("1");
-            projectFollowed.setCreateDatetime(new Date());
-            project.setFsAmount(project.getFsAmount() == null ? (0 + 1) : (project.getFsAmount() + 1));
-            baseManager.saveOrUpdate(Project.class.getName(), project);
-            baseManager.saveOrUpdate(ProjectFollowed.class.getName(), projectFollowed);
 
-            return "true";
-        }
-        return "error";
     }
 
     @RequestMapping("/Isattention/{projectId}")
@@ -271,14 +267,13 @@ public class WikiIndexController extends WikibaseController {
     @ResponseBody
     public String saveMasterFollows(HttpServletRequest request, Model model) throws Exception {
         String masterId = request.getParameter("masterId");
-        String oper = request.getParameter("oper");
 
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
             return "false";
-        }
-        Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
-        if(oper.equalsIgnoreCase("del")){
+        }else{
+            Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
+
             String queryHql = "from MasterFollowed t where t.user.id=:userId and t.master.id=:masterId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
@@ -300,25 +295,22 @@ public class WikiIndexController extends WikibaseController {
                 master.setFsAmount(FsAmount);
                 baseManager.saveOrUpdate(Master.class.getName(),master);
                 return "del";
+            }else{//没有关注，可以关注
+                MasterFollowed masterFollowed = new MasterFollowed();
+                masterFollowed.setUser(user);
+                masterFollowed.setCreateDateTime(new Date());
+                masterFollowed.setMaster(master);
+                masterFollowed.setStatus("1");
+                masterFollowed.setUser(user);
+                //这里需要同步更新master的粉丝数量字段
+                baseManager.saveOrUpdate(MasterFollowed.class.getName(), masterFollowed);
+                master.setFsAmount(master.getFsAmount()==null?1:master.getFsAmount()+1);
+                baseManager.saveOrUpdate(Master.class.getName(),master);
+                return "true";
             }
-           return "error";
+
         }
 
-        if(oper.equalsIgnoreCase("add")) {
-            MasterFollowed masterFollowed = new MasterFollowed();
-            masterFollowed.setUser(user);
-            masterFollowed.setCreateDateTime(new Date());
-            masterFollowed.setMaster(master);
-            masterFollowed.setStatus("1");
-            masterFollowed.setUser(user);
-            //这里需要同步更新master的粉丝数量字段
-            baseManager.saveOrUpdate(MasterFollowed.class.getName(), masterFollowed);
-            master.setFsAmount(master.getFsAmount()==null?1:master.getFsAmount()+1);
-            baseManager.saveOrUpdate(Master.class.getName(),master);
-            return "true";
-        }
-
-        return "error";
     }
 
     @RequestMapping("/showProduct/{productId}")

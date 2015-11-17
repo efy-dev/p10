@@ -283,10 +283,7 @@
     });
 
     function saveProjectFllow(projectId){
-        /*if(AuthorizationUtil.getMyUser().getId() == null){
-         alert("您还未登陆，请登录后再操作");
-         return false;
-         }*/
+
         var ab = $("#"+projectId).attr("about");
         var oper;
         if(ab=='0'){
@@ -300,28 +297,19 @@
             data:"",
             dataType:"json",
             success:function(data){
-                /* if(data==false){
-                 alert("您还未登陆，请登录后再操作");
-                 return false;
-                 }
-                 if(data==true){
-                 $("#"+projectId).html("已关注");
-                 return true;
-                 }
-                 */
+
                 if(data=="false"){
-                    //alert("您还未登陆，请登录后再操作");
-                    window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+                    window.location.href ="<c:url value='/sso.do'/>";
                     return false;
                 }
                 if(data=="true"){
                     $("#"+projectId).html("已关注");
-                    $("#"+projectId).attr("about","1");
+                    //$("#"+projectId).attr("about","1");
                     return true;
                 }
                 if(data=="del"){
                     $("#"+projectId).html("关注");
-                    $("#"+projectId).attr("about","0");
+                    //$("#"+projectId).attr("about","0");
                     return true;
                 }
                 if(data=="error"){
