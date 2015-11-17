@@ -744,21 +744,6 @@ public class MasterMessageController {
 		}
 	}
 
-//	@ResponseBody
-//	@RequestMapping("/getComment.do")
-//	public List getCommentListByMsgId(HttpServletRequest request){
-//		String msgId = request.getParameter("msgId");
-//		String queryHql = "from MasterComment c where c.masterMessage.id=:msgId and c.fatherComment.id='0' order by createDateTime Desc";
-//		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-//		queryMap.put("msgId",msgId);
-//		List<MasterComment> list = baseManager.listObject(queryHql,queryMap);
-//		if (list != null && list.size() > 0){
-//			return list;
-//		}else{
-//			return null;
-//		}
-//	}
-
 	@ResponseBody
 	@RequestMapping("/getSubCommentList.do")
 	public List getSubCommentListByFatherId(HttpServletRequest request){
@@ -1189,35 +1174,32 @@ public class MasterMessageController {
 	@ResponseBody
 	@RequestMapping("/praiseWorkComment.do")
 	public String praiseWorkComment(HttpServletRequest request){
-		String workId = request.getParameter("workId");
 		String commId = request.getParameter("commentId");
 		MyUser user = AuthorizationUtil.getMyUser();
-		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
 		MasterComment comment = (MasterComment) baseManager.getObject(MasterComment.class.getName(),commId);
 		if (user.getId() == null){
 			return "noRole";
 		}
-		String queryHql = "from MasterWorkPraise p where p.work.id=:workId and p.user.id=:userId and p.comment.id=:commId";
+		String queryHql = "from MasterCommentPraise p where p.author.id=:authorId and p.comment.id=:commId";
 		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-		queryMap.put("workId",workId);
-		queryMap.put("userId",user.getId());
+		queryMap.put("authorId",user.getId());
 		queryMap.put("commId",commId);
-		MasterWorkPraise praise = (MasterWorkPraise) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
-		if (praise != null){
-			baseManager.delete(MasterWorkPraise.class.getName(),praise.getId());
-			work.setAmount(work.getAmount()==null?0:work.getAmount() - 1);
-			baseManager.saveOrUpdate(MasterWork.class.getName(),work);
+		MasterCommentPraise commentPraise = (MasterCommentPraise) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
+		if (commentPraise != null){
+			baseManager.delete(MasterWorkPraise.class.getName(),commentPraise.getId());
+			comment.setAmount(comment.getAmount()==null?0:comment.getAmount() - 1);
+			baseManager.saveOrUpdate(MasterComment.class.getName(),comment);
 			return "del";
 		}else{
-			MasterWorkPraise workPraise = new MasterWorkPraise();
-			workPraise.setCreateDateTime(new Date());
-			workPraise.setStatus("1");
-			workPraise.setComment(comment);
-			workPraise.setWork(work);
-			workPraise.setUser(user);
-			baseManager.saveOrUpdate(MasterWorkPraise.class.getName(),workPraise);
-			work.setAmount(work.getAmount()==null?1:work.getAmount() + 1);
-			baseManager.saveOrUpdate(MasterWork.class.getName(),work);
+			MasterCommentPraise praise = new MasterCommentPraise();
+			praise.setCreateDateTime(new Date());
+			praise.setStatus("1");
+			praise.setComment(comment);
+			praise.setAuthor(user);
+			praise.setUser(comment.getUser());
+			baseManager.saveOrUpdate(MasterCommentPraise.class.getName(),praise);
+			comment.setAmount(comment.getAmount()==null?1:comment.getAmount() + 1);
+			baseManager.saveOrUpdate(MasterComment.class.getName(),comment);
 			return "add";
 		}
 	}
@@ -1225,35 +1207,32 @@ public class MasterMessageController {
 	@ResponseBody
 	@RequestMapping("/praiseMsgComment.do")
 	public String praiseMsgComment(HttpServletRequest request){
-		String msgId = request.getParameter("workId");
 		String commId = request.getParameter("commentId");
 		MyUser user = AuthorizationUtil.getMyUser();
-		MasterMessage work = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),msgId);
 		MasterComment comment = (MasterComment) baseManager.getObject(MasterComment.class.getName(),commId);
 		if (user.getId() == null){
 			return "noRole";
 		}
-		String queryHql = "from MasterMessagePraise p where p.message.id=:workId and p.user.id=:userId and p.comment.id=:commId";
+		String queryHql = "from MasterCommentPraise p where p.author.id=:authorId and p.comment.id=:commId";
 		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-		queryMap.put("workId",msgId);
-		queryMap.put("userId",user.getId());
+		queryMap.put("authorId",user.getId());
 		queryMap.put("commId",commId);
-		MasterMessagePraise praise = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
-		if (praise != null){
-			baseManager.delete(MasterWorkPraise.class.getName(),praise.getId());
-			work.setAmount(work.getAmount()==null?0:work.getAmount() - 1);
-			baseManager.saveOrUpdate(MasterMessage.class.getName(),work);
+		MasterCommentPraise commentPraise = (MasterCommentPraise) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
+		if (commentPraise != null){
+			baseManager.delete(MasterWorkPraise.class.getName(),commentPraise.getId());
+			comment.setAmount(comment.getAmount()==null?0:comment.getAmount() - 1);
+			baseManager.saveOrUpdate(MasterComment.class.getName(),comment);
 			return "del";
 		}else{
-			MasterMessagePraise workPraise = new MasterMessagePraise();
-			workPraise.setCreateDateTime(new Date());
-			workPraise.setStatus("1");
-			workPraise.setComment(comment);
-			workPraise.setMessage(work);
-			workPraise.setUser(user);
-			baseManager.saveOrUpdate(MasterMessagePraise.class.getName(),workPraise);
-			work.setAmount(work.getAmount()==null?1:work.getAmount() + 1);
-			baseManager.saveOrUpdate(MasterMessage.class.getName(),work);
+			MasterCommentPraise praise = new MasterCommentPraise();
+			praise.setCreateDateTime(new Date());
+			praise.setStatus("1");
+			praise.setComment(comment);
+			praise.setAuthor(user);
+			praise.setUser(comment.getUser());
+			baseManager.saveOrUpdate(MasterCommentPraise.class.getName(),praise);
+			comment.setAmount(comment.getAmount()==null?1:comment.getAmount() + 1);
+			baseManager.saveOrUpdate(MasterComment.class.getName(),comment);
 			return "add";
 		}
 	}
