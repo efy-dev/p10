@@ -18,6 +18,11 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="tenant.id" defaultValue="" operation="eq"/>
                     </query>
+
+                    <query name="byproject" label="根据项目来查询商品" type="auto" orderBy="showDateTime:desc">
+                        <condition name="project.id" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
                 </do>
             </does>
         </entity>
