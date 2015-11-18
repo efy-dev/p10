@@ -43,6 +43,8 @@ public class CouponController {
         float price = Float.parseFloat(request.getParameter("price"));
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), request.getParameter("purchaseOrderId"));
         XQuery couponQuery = new XQuery("listCoupon_useful", request);
+        couponQuery.put("couponBatch_startDate",new Date());
+        couponQuery.put("couponBatch_endDate",new Date());
         List<Object> couponList = baseManager.listObject(couponQuery);
         Iterator couponIterator = couponList.iterator();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
