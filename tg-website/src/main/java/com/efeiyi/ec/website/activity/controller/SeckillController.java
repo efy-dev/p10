@@ -42,7 +42,7 @@ public class SeckillController {
         Iterator iterator = pageInfo.getList().iterator();
         while (iterator.hasNext()) {
             SeckillProduct seckillProduct = (SeckillProduct)iterator.next();
-            if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
+            if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime() || seckillProduct.getAmount()<=0) {
                 iterator.remove();
             }
         }
@@ -78,6 +78,10 @@ public class SeckillController {
             //即将开始
             status = "1";
         }
+
+        if (seckillProduct.getAmount()<=0){
+            status = "3";
+        }
         model.addAttribute("miaoStatus", status);
         return "/activity/seckillProductView";
     }
@@ -88,6 +92,9 @@ public class SeckillController {
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
         String status = "1";
         Date currentDate = new Date();
+        if (seckillProduct.getAmount()<=0){
+            return "redirect:/miao/"+productId;
+        }
         if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
             //秒杀正在进行中
             status = "2";
@@ -104,5 +111,4 @@ public class SeckillController {
             return "redirect:/miao/"+productId;
         }
     }
-
 }
