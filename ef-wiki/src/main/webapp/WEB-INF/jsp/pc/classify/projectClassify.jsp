@@ -192,7 +192,7 @@
                     "<a class='btn-guan' href='#' onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +
                     "<div class='gz-q'> <i class='gz-icon'></i> <em about='add' id='"+data[i].projectId+"'>"+word+"</em> </div> " +
                     "</a> </div> </li>");*/
-           var box = $("<li> <dl> <dt><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"@!pc-classify-left\"></a> " +
+           var box = $("<li> <dl> <dt><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-classify-left\"></a> " +
                    "<div class=\"list-moods\"> <a href=\"#\"><i class=\"img-icon\"></i></a> " +
                    "<em>"+data[i].fsAmount+"</em> </div></dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
                    "<div class=\"text2\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><span>"+data[i].projectName+"</span></a></div>  <p>"+levelName+"</p> " +
@@ -261,12 +261,12 @@
               var box = $("<li> <div class=\"text\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><p class=\"p1\">"+data[i].projectName+"</p></a> <p class=\"p2\">"+levelName+"</p> </div> " +
                       "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> "
                       +" <em about=\"add\" id=\""+data[i].projectId+"\">已关注</em></a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
-                      "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");
+                      "<img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");
             }else{
               var box = $("<li> <div class=\"text\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><p class=\"p1\">"+data[i].projectName+"</p></a> <p class=\"p2\">"+levelName+"</p> </div> " +
                       "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> "
                       +" <i class=\"gz-icon\"></i> <em about=\"add\" id=\""+data[i].projectId+"\">关注</em> </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
-                      "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");
+                      "<img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");
             }
 
             pubu.append(box);
@@ -326,7 +326,7 @@
             var box = $("<li> <div class=\"text\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"> <p class=\"p1\">"+data[i].projectName+"</p> </a><p class=\"p2\">"+levelName+"</p> </div> " +
                     "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +insert+
                     " </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
-                    "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");
+                    "<img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");
             pubu.append(box);
 
             //PBL("#beforeAttention",".before",2);

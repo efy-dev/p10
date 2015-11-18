@@ -25,6 +25,15 @@ public class SearchParamBean {
     private Integer pageIndex;
     private Integer pageSize;
     private PageEntity pageEntity;
+    private String priceUD;
+
+    public String getPriceUD() {
+        return priceUD;
+    }
+
+    public void setPriceUD(String priceUD) {
+        this.priceUD = priceUD;
+    }
 
     public String getQ() {
         return q;

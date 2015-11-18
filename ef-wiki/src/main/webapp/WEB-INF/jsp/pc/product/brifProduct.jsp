@@ -53,7 +53,7 @@
   <div class="ae">
     <div class="details ae">
       <div class="detaile-left">
-        <div class="detaile-img"><a href="#"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${product.picture_url}@!pc-product-header"></a></div>
+        <div class="detaile-img"><a href="#"><img src="http://pro.efeiyi.com/${product.picture_url}@!pc-product-header"></a></div>
         <div class="detaile-share ae" style="height: auto;z-index: 200;">
           <!-- JiaThis Button BEGIN -->
           <div class="jiathis_style" style="background: #fff;border: 0;float: left;padding: 30px 0;">
@@ -65,7 +65,7 @@
           <!-- JiaThis Button END -->
           <div class="thumb-up">
             <div class="thump-assist">
-              <a href="javascript:void(0)" onclick="savaUpAndDown('${product.id}')" id="good-1" name="up"><i class="z-icon"></i><em id="em1">${product.amount}</em></a>
+              <a href="javascript:void(0)" onclick="savaUpAndDown('${product.id}')" id="good-1" name="up"><i class="z-icon"></i><em id="em1">${product.fsAmount}</em></a>
             </div>
             <div class="thump-collect">
               <a href="javascript:void(0)" onclick="storeProduct('${product.id}')"><i class="s-icon"></i><em>收藏</em></a>
@@ -743,7 +743,7 @@ function getHfProduct(e){
         }
         if(data=="repeat"){
           //alert("您已收藏过了！");
-          $('.details .detaile-left .detaile-share .thumb-up .thump-collect a').find('em').html('已收藏');
+          $('.details .detaile-left .detaile-share .thumb-up .thump-collect a').find('em').html('收藏');
           return true;
         }
         if(data=="true"){
