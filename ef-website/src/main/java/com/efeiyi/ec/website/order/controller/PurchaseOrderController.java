@@ -60,6 +60,72 @@ public class PurchaseOrderController extends BaseController {
     private PaymentManager paymentManager;
 
 
+    @RequestMapping({"/miaoBuy/{seckillProductId}/{amount}"})
+    public String miaoBuy(HttpServletRequest request, @PathVariable String seckillProductId, Model model, @PathVariable String amount) throws Exception {
+        SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), seckillProductId);
+        ProductModel productModel = new ProductModel();
+        productModel.setId(seckillProduct.getProductModel().getId());
+        productModel.setProduct(seckillProduct.getProductModel().getProduct());
+        productModel.setPrice(seckillProduct.getPrice());
+        productModel.setAmount(seckillProduct.getProductModel().getAmount());
+        productModel.setName(seckillProduct.getProductModel().getName());
+        productModel.setProductModel_url(seckillProduct.getProductModel().getProductModel_url());
+        CartProduct cartProduct = new CartProduct();
+//        String callback = request.getParameter("callback");
+        cartProduct.setProductModel(productModel);
+//        String amount = request.getParameter("amount");
+        cartProduct.setAmount(Integer.valueOf(amount));
+        cartProduct.setIsChoose("1");
+        cartProduct.setStatus("1");
+        List<CartProduct> cartProductList = new ArrayList<>();
+//        cartProduct.getProductModel().setPrice(groupProduct.getGroupPrice());
+        cartProductList.add(cartProduct);
+        Map<String, List> productMap = new HashMap<>();
+        productMap.put(seckillProduct.getProductModel().getProduct().getTenant().getId(), cartProductList);
+        model.addAttribute("productMap", productMap);
+        Cart cart = new Cart();
+        cart.setTotalPrice(seckillProduct.getPrice().multiply(new BigDecimal(cartProduct.getAmount())));
+        model.addAttribute("cart", cart);
+        List<Tenant> tenantList = new ArrayList<>();
+        tenantList.add(seckillProduct.getProductModel().getProduct().getTenant());
+        model.addAttribute("tenantList", tenantList);
+
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
+        xSaveOrUpdate.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
+        xSaveOrUpdate.getParamMap().put("user.id", AuthorizationUtil.getMyUser().getId());
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdate);
+
+        purchaseOrder.setTenant(tenantList.get(0));
+        purchaseOrder.setTotal(cart.getTotalPrice());
+        purchaseOrder.setOriginalPrice(cart.getTotalPrice());
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+//        callback += "?purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId + "&memberId=" + (request.getParameter("memberId") != null ? request.getParameter("memberId") : "null") + "&groupId=" + (request.getParameter("groupId") != null ? request.getParameter("groupId") : "null");
+//        purchaseOrder.setCallback(callback);
+//        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+
+        PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
+        purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
+        purchaseOrderProduct.setProductModel(seckillProduct.getProductModel());
+        purchaseOrderProduct.setPurchasePrice(seckillProduct.getPrice());
+        purchaseOrderProduct.setPurchaseAmount(cartProduct.getAmount());
+        baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+
+        XQuery xQuery = new XQuery("listConsumerAddress_default", request);
+        xQuery.addRequestParamToModel(model, request);
+        List addressList = baseManager.listObject(xQuery);
+
+        model.addAttribute("addressList", addressList);
+        model.addAttribute("purchaseOrder", purchaseOrder);
+        model.addAttribute("productModel", productModel);
+        model.addAttribute("amount", amount);
+        model.addAttribute("isEasyBuy", true);
+//        model.addAttribute("callback", callback);
+        model.addAttribute("seckillProductId", seckillProductId);
+
+        return "/purchaseOrder/purchaseOrderConfirm";
+    }
+
+
     @RequestMapping({"/groupBuy/{groupProductId}/{amount}"})
     public String groupBuy(HttpServletRequest request, @PathVariable String groupProductId, Model model, @PathVariable String amount) throws Exception {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
