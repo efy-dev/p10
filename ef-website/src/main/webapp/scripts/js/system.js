@@ -92,7 +92,9 @@ $(function(){
         }
         timer=setInterval(autoFocus,iSpeed);
     })();
-    //
+
+
+        //
     (function(){
         $('.shop-sort .link2 dt').click(function(){
             $(this).toggleClass('active').siblings('dd').stop().slideToggle('fast');
@@ -111,30 +113,30 @@ $(function(){
             $(this).addClass('active').siblings('li').removeClass('active');
         });
         //收藏
-        //var oBiao=$('.preview .collect .biao');
-        //oBiao.hover(function(){
-        //    var $span=$(this).siblings('span');
-        //    $span.text('添加收藏');
-        //    if($span.is('.active')){
-        //        $span.text('取消收藏');
-        //    }
-        //    if($span.is('.hover')){
-        //        $span.text('添加收藏');
-        //    }
-        //})
-        //
-        //oBiao.find('.icon').toggle(
-        //    function(){
-        //        var $span=$(this).parents('.biao').siblings('span');
-        //        $(this).addClass('icon-active');
-        //        $span.attr('class','txt active').text('取消收藏');
-        //    },
-        //    function(){
-        //        var $span=$(this).parents('.biao').siblings('span');
-        //        $(this).removeClass('icon-active');
-        //        $span.attr('class','txt hover').text('添加收藏');
-        //    }
-        //);
+        var oBiao=$('.preview .collect .biao');
+        oBiao.hover(function(){
+            var $span=$(this).siblings('span');
+            $span.text('添加收藏');
+            if($span.is('.active')){
+                $span.text('取消收藏');
+            }
+            if($span.is('.hover')){
+                $span.text('添加收藏');
+            }
+        })
+
+        oBiao.find('.icon').toggle(
+            function(){
+                var $span=$(this).parents('.biao').siblings('span');
+                $(this).addClass('icon-active');
+                $span.attr('class','txt active').text('取消收藏');
+            },
+            function(){
+                var $span=$(this).parents('.biao').siblings('span');
+                $(this).removeClass('icon-active');
+                $span.attr('class','txt hover').text('添加收藏');
+            }
+        );
         //
         $(window).scroll(function(){
             var d=$(document).scrollTop();
@@ -219,6 +221,14 @@ $(function(){
             })
         })
     })();
+    //商品详情评价2015116图片
+    (function(){
+        $('.dis-pic .dis-ol .one-li').click(function(){
+            var index = $(this).index()
+            $(this).addClass('active').siblings().removeClass('active');
+            $(this).parents('.dis-ol').siblings('.box-pic').find('.list-pic').eq(index).show().siblings().hide();
+        })
+    });
     //购物车
     (function(){
         //优惠券
@@ -229,14 +239,15 @@ $(function(){
             return false;
         });
     })();
+
     //010110结算页-计数
     (function(){
         //输入框计数
         var textareaText=$('.my-clearing .page-leaveword input');
         textareaText.keydown(function(){
-            var aNum=45;
-            var curLength=$(this).val().length;
-            var txtNmu=$(this).siblings('span');
+            var aNum=45,
+                curLength=$(this).val().length,
+                txtNmu=$(this).siblings('span');
             if(curLength>=aNum){
                 var num=$(this).val().substr(0,aNum-1);
                 $(this).val(num);
@@ -246,5 +257,134 @@ $(function(){
             }
         });
     })();
+
+
+    //二期---首页
+    (function(){
+        //新导航
+        var allSort=$('.nav-new .cate .allsort');
+        allSort.find('.item').hover(function(){
+            $(this).find('h3').addClass('hover');
+            $(this).find('.i-mc').stop(true,true).fadeIn(10);
+        },function(){
+            $(this).find('h3').removeClass('hover');
+            $(this).find('.i-mc').fadeOut(10);
+        });
+        //轮播图
+        (function(){
+            var $focus=$('.focus-new');
+            var $btnPrev=$focus.find('.btn-prev');
+            var $btnNext=$focus.find('.btn-next');
+            var $sliderMain=$focus.find('.slider-main');
+            var $liImg=$sliderMain.find('li');
+            var $liNav=$focus.find('.slider-nav').find('li');
+            var index=0;
+            var timer=null;
+            var iSpeed=3000;
+            $liNav.mousedown(function(){
+                clearInterval(timer);
+                index=$(this).index();
+                $liImg.eq(index).fadeIn(500).siblings('li').fadeOut(500);
+                $(this).addClass('active').siblings('li').removeClass('active');
+            });
+            $liNav.mouseup(function(){
+                timer=setInterval(autoFocus,iSpeed);
+            })
+            $sliderMain.hover(function(){
+                clearInterval(timer);
+            },function(){
+                timer=setInterval(autoFocus,iSpeed)
+            })
+
+            $focus.find('.hd').hover(function(){
+                $btnNext.stop(true,true).animate({'right':'0'},100);
+                $btnPrev.stop(true,true).animate({'left':'180px'},100);
+            },function(){
+                $btnNext.stop(true,true).animate({'right':'-134px'},100);
+                $btnPrev.stop(true,true).animate({'left':'-45px'},100);
+            })
+            //下一页
+            $btnNext.mousedown(function(){
+                clearInterval(timer);
+                autoFocus();
+            })
+            $btnNext.mouseup(function(){
+                timer=setInterval(autoFocus,iSpeed);
+            })
+            //上一页
+            $btnPrev.mousedown(function(){
+                clearInterval(timer);
+                index--;
+                if(index<0){
+                    index=$liImg.length-1;
+                }
+                $liImg.eq(index).fadeIn(500).siblings('li').fadeOut(500);
+                $liNav.eq(index).addClass('active').siblings('li').removeClass('active');
+            })
+            $btnPrev.mouseup(function(){
+                timer=setInterval(autoFocus,iSpeed);
+            })
+            function autoFocus(){
+                index++;
+                if(index>$liImg.length-1){index=0;}
+                $liImg.eq(index).fadeIn(500).siblings('li').fadeOut(500);
+                $liNav.eq(index).addClass('active').siblings('li').removeClass('active');
+            }
+            timer=setInterval(autoFocus,iSpeed);
+        })();
+
+
+
+
+
+
+
+
+    })();
+    //二期---B020101分类推荐首页
+    (function(){
+        //
+        var shopImg=$('.reco-shop .shop-img'),
+            aLi=shopImg.find('li'),
+            aLiNum=aLi.length,
+            aLiWidth=aLi.eq(0).outerWidth(true),
+            oUl=shopImg.find('ul'),
+            oUlWidth=aLiWidth*aLiNum,
+            index =0,
+            btnPrev=shopImg.find('.btn-prev'),
+            btnNext=shopImg.find('.btn-next');
+
+        oUl.css({'width':oUlWidth+'px'});
+        btnNext.bind('click',function(){
+            if(index<aLiNum-5){
+                index++;
+                oUl.animate({'margin-left':-index*aLiWidth+'px'},300);
+            }
+            btnOpacity();
+        });
+        btnPrev.bind('click',function(){
+            if(index>0){
+                index--;
+                oUl.animate({'margin-left':-index*aLiWidth+'px'},300);
+            }
+            btnOpacity();
+        })
+        //
+        btnOpacity();
+        function btnOpacity(){
+            if(index==0){
+                btnPrev.delay(100).animate({'opacity':'0.2'},10);
+                btnNext.delay(100).animate({'opacity':'1'},10);
+            }else{
+
+            }
+            if(index==aLiNum-5){
+                btnPrev.delay(100).animate({'opacity':'1'},10);
+                btnNext.delay(100).animate({'opacity':'0.2'},10);
+            }
+        }
+
+    })();
+
 
 })
