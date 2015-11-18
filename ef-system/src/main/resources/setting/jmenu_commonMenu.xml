@@ -2,7 +2,7 @@
 <jmenu id="commonMenu">
     <jnode id="ContextAndActivity" access="admin,operational,c_operational,financial,product_manager" text_zh_CN="内容与活动" url="/main.do?jnodeId=ContextAndActivity" state="">
          <jnode url="" text_zh_CN="营销活动" access="admin,operational,c_operational,o_operational,product_manager" state="closed">
-             <jnode url="/basic/xm.do?qm=formActivity" access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="我的团长我的团">
+             <jnode url="/basic/xm.do?qm=plistGroup_default" access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="我的团长我的团">
                  <match url="/basic/xm.do?qm=plistGroup_default"/>
              </jnode>
          </jnode>
@@ -255,9 +255,9 @@
         <!--</jnode>-->
     </jnode>
 
-    <jnode id="ttManager" access="admin,operational,c_operational,product_manager" url="/main.do?jnodeId=ttManager" text_zh_CN="大师">
-        <jnode url="" id="tenantManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="大师管理">
-            <jnode url="/basic/xm.do?qm=plistMaster_default" id="masterList" access="admin,operational,c_operational,product_manager" text_zh_CN="大师列表">
+    <jnode id="ttManager" access="admin" url="/main.do?jnodeId=ttManager" text_zh_CN="工艺与大师">
+        <jnode url="" id="tenantManager" access="admin,manager" state="closed" text_zh_CN="大师管理">
+            <jnode url="/basic/xm.do?qm=plistMaster_default" id="masterList" access="admin" text_zh_CN="大师列表">
                 <match url="/basic/xm.do?qm=plistMaster_default"/>
                 <match url="/basic/xm.do?qm=formMaster&amp;form=master&amp;param=master"/>
                 <match url="/basic/xm.do?qm=viewMaster&amp;view=master"/>
@@ -283,7 +283,7 @@
 
             </jnode>
 
-            <jnode url="/basic/xm.do?qm=plistMasterRecommended_default" access="admin,operational,c_operational,product_manager" text_zh_CN="大师推荐">
+            <jnode url="/basic/xm.do?qm=plistMasterRecommended_default" access="admin,manager" text_zh_CN="大师推荐">
                 <match url="/basic/xm.do?qm=plistMasterRecommended_default"/>
                 <match url="/basic/xm.do?qm=plistMaster_default&amp;list=master"/>
                 <match url="/basic/xm.do?qm=formMaster&amp;from=recommendMaster"/>
@@ -316,25 +316,19 @@
             <!--<match url="viewTenantWorkShop"/>-->
             <!--</jnode>-->
         </jnode>
-        <jnode id="contentManager" url="/main.do?jnodeId=contentManager" access="admin" text_zh_CN="内容管理">
+        <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
             <jnode url="/basic/xm.do?groupName=master.homePage&amp;qm=plistBanner_master.homePage"
-                   access="admin,operational,c_operational,product_manager" text_zh_CN="首页轮播图">
+                   access="admin,manager" text_zh_CN="首页轮播图">
                 <match url="/basic/xm.do?groupName=master.homePage&amp;qm=plistBanner_master.homePage"/>
                 <match url="/basic/xm.do?qm=formBanner&amp;groupName=master.homePage"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistDocument_master&amp;groupName=master" access="admin,operational,c_operational,product_manager" text_zh_CN="大师网站文档">
+            <jnode url="/basic/xm.do?qm=plistDocument_master&amp;groupName=master" access="admin,manager" text_zh_CN="大师网站文档">
                 <match url="/basic/xm.do?qm=plistDocument_master&amp;groupName=master"/>
                 <match url="/basic/xm.do?qm=viewDocument&amp;groupName=master"/>
                 <match url="/basic/xm.do?qm=formDocument&amp;groupName=master"/>
             </jnode>
         </jnode>
-    </jnode>
-
-    <jnode id="wikiManager" access="admin,operational,c_operational,product_manager" url="/main.do?jnodeId=wikiManager" text_zh_CN="工艺">
-        <!-- <jnode url="/basic/xm.do?qm=plistProjectContent_default" access="admin,manager" text_zh_CN="内容">
-             <match url="plistProjectContent_default"/>
-         </jnode>-->
-        <jnode url="" id="WikiCategoryManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="工艺管理">
+        <jnode url="" id="WikiCategoryManager" access="admin" state="closed" text_zh_CN="工艺管理">
             <jnode url="/basic/xm.do?qm=plistProject2_default" access="admin,manager" text_zh_CN="工艺项目列表">
                 <match url="/basic/xm.do?qm=plistProjectWiki_default"/>
                 <match url="/basic/xm.do?qm=formProjectContent"/>
@@ -364,11 +358,6 @@
             </jnode>
 
         </jnode>
-        <jnode url="/basic/xm.do?qm=plistProjectNews_default" access="admin,manager" text_zh_CN="资讯">
-            <match url="plistProjectNews_default"/>
-        </jnode>
-
-
     </jnode>
 
     <jnode id="baseManager" access="admin,operational,c_operational,product_manager" url="/main.do?jnodeId=baseManager" text_zh_CN="基础管理">

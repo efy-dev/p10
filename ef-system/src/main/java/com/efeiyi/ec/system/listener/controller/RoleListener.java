@@ -35,18 +35,18 @@ public class RoleListener implements HandlerInterceptor{
     private DoManager doManager;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        boolean  f = false;
-        String qm = request.getParameter("qm");
-        if(qm!=null&&!"".equals(qm)) {
-            Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
-            System.out.println(AuthorizationUtil.getUser().getRole().getName());
-            if (tempDo.getAccess().indexOf(AuthorizationUtil.getUser().getRole().getName()) == -1) {
-                response.sendRedirect("/role.jsp");
-            } else {
-                f =  true;
-            }
-        }
-       return  f;
+//        boolean  f = false;
+//        String qm = request.getParameter("qm");
+//        if(qm!=null&&!"".equals(qm)) {
+//            Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+//            System.out.println(AuthorizationUtil.getUser().getRole().getName());
+//            if (tempDo.getAccess().indexOf(AuthorizationUtil.getUser().getRole().getName()) == -1) {
+//                response.sendRedirect("/role.jsp");
+//            } else {
+//                f =  true;
+//            }
+//        }
+       return  true;
     }
 
     @Override

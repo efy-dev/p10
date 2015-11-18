@@ -33,8 +33,8 @@
 
 
 <div style="text-align: left" >
-    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" target="_blank"
-       href="<c:url value="/tuan/sendRedPacket.do"/>"><span
+    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" target="_blank" onclick="toSendPacket('<c:url value="/tuan/sendRedPacket.do"/>');"
+       href=""><span
             class="am-icon-pencil-square-o">发放成团红包</span>
     </a>
 </div>
@@ -94,6 +94,18 @@
     </div>
 </div>
 <script>
+    function toSendPacket(url){
+        $.ajax({
+            type: "get",
+            url: url,
+            cache: false,
+            dataType: "json",
+            data:{},
+            success: function (data) {
+              alert("发送成功！");
+            }
+        });
+    }
     function removeAds(divId){
         $.ajax({
             type: "get",
