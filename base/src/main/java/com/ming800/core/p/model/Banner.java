@@ -20,6 +20,7 @@ public class Banner {
     private String imageUrl;
     private String directUrl;
     private String status;
+    private String wapUrl;//移动跳转链接
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -83,5 +84,14 @@ public class Banner {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "wap_url")
+    public String getWapUrl() {
+        return wapUrl;
+    }
+
+    public void setWapUrl(String wapUrl) {
+        this.wapUrl = wapUrl;
     }
 }
