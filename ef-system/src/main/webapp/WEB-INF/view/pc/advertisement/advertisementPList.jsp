@@ -77,7 +77,16 @@
                             <ming800:status name="groupName" dataType="Advertisement.group" checkedValue="${ads.groupName}" type="normal"/>
                         </td>
                         <td class="am-hide-sm-only" width="15%">
-                           <a target="_blank" href="${ads.redirect}">${ads.redirect}</a>
+                            <c:if test="${not empty ads.redirect}">
+                            <p style="margin-left: 10px;">
+                                (PC)<a target="_blank" href="${ads.redirect}">${ads.redirect}</a>
+                            </p>
+                            </c:if>
+                            <c:if test="${not empty ads.wapRedirect}">
+                            <p style="margin-left: 0px;">
+                                (WAP) <a target="_blank" href="${ads.wapRedirect}">${ads.wapRedirect}</a>
+                            </p>
+                            </c:if>
                         </td>
                         <td class="am-hide-sm-only" width="15%">
                             <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${ads.img}@!product-model"/>"

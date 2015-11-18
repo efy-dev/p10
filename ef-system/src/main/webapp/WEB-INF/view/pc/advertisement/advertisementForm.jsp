@@ -61,10 +61,17 @@
 
 
         <div class="am-form-group">
-            <label name="redirect" class="am-u-sm-3 am-form-label">跳转链接</label>
+            <label name="redirect" class="am-u-sm-3 am-form-label">PC链接</label>
 
             <div class="am-u-sm-9">
                 <input type="text" name="redirect" id="redirect" placeholder="" value="${object.redirect}" >
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="wapRedirect" class="am-u-sm-3 am-form-label">移动链接</label>
+
+            <div class="am-u-sm-9">
+                <input type="text" name="wapRedirect" id="wapRedirect" placeholder="" value="${object.wapRedirect}" >
             </div>
         </div>
         <div class="am-form-group">

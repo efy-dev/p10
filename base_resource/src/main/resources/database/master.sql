@@ -703,3 +703,6 @@ CREATE TABLE `master_comment_praise` (
 )
 ;
 
+======================11.18 未同步=======================
+ALTER TABLE `advertisement`
+ADD COLUMN `wap_redirect`  varchar(255) NULL AFTER `group_name`;
