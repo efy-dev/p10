@@ -407,7 +407,7 @@ var startNum=1;
                }else{
                  amout1 =data.list[i].amount;
                }
-               var userName = data.list[i].user.username.substring(0,3)+"****"+${myUser.username}.toString().substring(7,11);;
+               var userName = data.list[i].user.username.substring(0,3)+"****"+data.list[i].user.username.substring(7,11);
                if(userName==null){
                  userName ="匿名用户";
                }
@@ -532,9 +532,9 @@ function savaUP(productId){
           }
           return false;
         }
-        var userName = ${myUser.username}.toString().substring(0,3)+"****"+${myUser.username}.toString().substring(7,11);
+        var userName = data.user.username.substring(0,3)+"****"+data.user.username.toString().substring(7,11);
         $(".dialogue").append("<div class='matter'> <p class='text-h1'>"+userName+"</p> " +
-                "<p class='text-time'>刚刚</p> <p class='text-content'>" +
+                "<p class='text-time'>刚刚</p> <p class='text-content' onclick='showmodal2(this)' about='"+data.id+"'>" +
                 "<a href='#' >"+CommentValue+"</a></p> <div class='owner'>" +
                 "<img class='am-circle' src='<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>'/>" +
                 "</div> <div class='owner-good'><a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.id+"\")' about='${product.id}' name='up'>" +
@@ -579,8 +579,8 @@ function savaUP(productId){
             return false;
           }
           $("#"+contentId).append("<div class='respond'> <p><span class='txt-name'>" +
-                  "<a href='#'> ${myUser.name2}：</a>" +
-                  "</span><span class='txt-content'>"+CommentValue+"</span></p> </div> ");
+                  "<a href='#'> ${myUser.username}：</a>" +
+                  "</span><span class='txt-content' onclick='showmodal2(this)' about='"+data.id+"'>"+CommentValue+"</span></p> </div> ");
         },
         error:function(){
           alert("出错了，请联系管理员！！！");
