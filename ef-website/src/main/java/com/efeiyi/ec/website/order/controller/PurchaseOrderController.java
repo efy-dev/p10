@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.order.controller;
 
+import com.efeiyi.ec.activity.model.SeckillProduct;
 import com.efeiyi.ec.group.model.GroupProduct;
 import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.product.model.Product;
