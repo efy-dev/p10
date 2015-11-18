@@ -313,7 +313,8 @@ input {outline: none}
 .product-intro .am-sticky-placeholder {background:none}
 .product-intro .detail {padding-bottom:70px;position:relative}
 .product-intro .detail .title {text-align:center;padding:40px 0}
-.product-intro .detail .title h3 {width:20px;line-height:34px;font-style:italic;display:inline-block;font-size:24px;font-weight:bold}
+.product-intro .detail .title h3 {width:70px;line-height:34px;display:inline-block;font-size:24px;font-weight:bold;padding: 17px;border:6px solid #000;
+    color: #000;}
 .product-intro .detail .part {width:1000px;min-width:1000px;padding:0 100px 70px 100px;font-size:12px;color:#666;float:left;box-sizing:content-box;border-bottom:1px #b2b2b2 solid}
 .product-intro .detail .part p, .product-intro .detail .part li, .product-intro .detail .part h4, .product-intro .detail .part span, .product-intro .detail .part strong {}
 .product-intro .detail .part h4 {width:100%;float:left;margin-bottom:36px;font-weight:normal}
@@ -711,6 +712,7 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 .product-intro .detail .part .td{padding-top: 24px;}
 .product-intro .detail .part .td li{width: 30px;text-align: center}
 .product-intro .detail .part .td li a{border-bottom: 0;}
+
 /*
  *
  *项目：电商二期
@@ -1066,7 +1068,7 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 .footernew .servicenew .fore dd{line-height: 17px;color: #999;font-size: 14px;}
 .footernew .servicenew .fore dd a{color: #999;font-size: 14px;outline: none;}
 .footernew .max-links{background: #0c0c0c;border-top:2px solid #161616; }
-.footernew .links {background:#000;height:16px;line-height:16px;text-align:center;padding:15px 0}
+.footernew .links {background:#000;height:16px;line-height:16px;text-align:center;padding:15px 0;box-sizing: content-box}
 .footernew .links a {margin:0 10px;display:inline-block;box-sizing:content-box;font-size: 12px;color: #ccc;font-weight: bold;}
 .footernew .links a.line {width:1px;height:10px;background: url("../images/footernew-icon.png") no-repeat 0 -200px;top:2px;position:relative}
 .footernew .links a:hover {color:#f00;text-decoration:underline}
@@ -1078,11 +1080,16 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 .footernew .copyright .frlinks span, .footernew .copyright .info {color:#666;font-size:12px;}
 .footernew .authentication {background: #000;text-align: center;padding:20px 0}
 .footernew .authentication a {display: inline-block;margin:0 20px}
-
+.footernew .frlinksimg {
+    padding:20px 0 30px 0;
+}
 .footernew .frlinksimg strong {
     font-size: 14px;
     color: #666;
     font-weight: bolder;
+    display: inline-block;
+    position: relative;
+    top:-45px
 }
 .footernew .frlinksimg a {
     width: 142px;
@@ -1096,6 +1103,52 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 }
 .footernew .frlinksimg a.icon2 {
     background-position: 0 -90px;
+    cursor: text;
+}
+.footernew .frlinksimg .line {
+    width: 2px;
+    height:40px;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+    top:-36px;
+    background: #434343;
+}
+
+
+.footer .frlinksimg {
+    padding:20px 0 30px 0;
+}
+.footer .frlinksimg strong {
+    font-size: 14px;
+    color: #666;
+    font-weight: bolder;
+    display: inline-block;
+    position: relative;
+    top:-45px
+}
+.footer .frlinksimg a {
+    width: 142px;
+    height:90px;
+    background:url(../images/frlinksimg.png) no-repeat;
+    display: inline-block;
+
+}
+.footer .frlinksimg a.icon1 {
+    background-position: 0 0;
+}
+.footer .frlinksimg a.icon2 {
+    background-position: 0 -90px;
+    cursor: text;
+}
+.footer .frlinksimg .line {
+    width: 2px;
+    height:40px;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+    top:-36px;
+    background: #434343;
 }
 /*--//ENd--footernew--*/
 

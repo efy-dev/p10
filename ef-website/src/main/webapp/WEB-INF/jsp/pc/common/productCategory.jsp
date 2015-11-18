@@ -7,80 +7,70 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<span class="bgbor"></span>
-
-<div class="nav-links" style="display:none;">
-    <c:forEach items="${categoryList}" var="category">
-        <ul>
-            <li class="title">${category.name}</li>
-            <c:forEach items="${projectMap.get(category.id)}" var="project">
-                <li><a href="<c:url value="/product/list/${project.id}"/>" target="_blank" title="">${project.name}</a></li>
+<div class="wh nav-new">
+    <div class="hd">
+        <div class="cate">
+            <div class="ld"><h2>非遗商品分类<i class="icon-new"></i></h2></div>
+            <div class="allsort">
+                <c:forEach items="${categoryList}" var="category">
+                    <div class="item">
+                        <h3><a href="" title="">${category.name}</a><i class="icon-new icon-link"></i></h3>
+                        <div class="i-mc" style="display: none;">
+                            <div class="links">
+                                <c:forEach items="${projectMap.get(category.id)}" var="project">
+                                    <a href="<c:url value="/product/list/${project.id}"/>" title="">${project.name}</a>
+                                </c:forEach>
+                            </div>
+                            <!-- //End--links-->
+                            <div class="reco">
+                                <c:forEach items="${projectMap.get(category.id)}" var="project">
+                                    <c:if test="${not empty recommendedTenantList}">
+                                        <c:forEach items="${recommendedTenantList}" var="tenant">
+                                            <c:if test="${project.id==tenantMap.get(tenant.id)}">
+                                                <a href="<c:url value="/tenant/${tenant.id}"/>" title=""> <img class="imgfilter" src="http://pro.efeiyi.com/${tenant.logoUrl}" alt=""></a>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:if>
+                                </c:forEach>
+                            </div>
+                                <%--</c:forEach>--%>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="items">
+            <a href="<c:url value="/"/>">首页</a>
+            <a href="">品牌专区</a>
+            <a href="">各地非遗</a>
+            <a href="">大师</a>
+            <a href="">工艺</a>
+        </div>
+    </div>
+</div>
+<!--//End--nav-new-->
+<div class="wh focus-new">
+    <div class="hd">
+        <ul class="slider-main">
+            <c:forEach items="${bannerList}" var="banner" varStatus="status">
+                <c:if test="${status.index==0}">
+                    <li style="display: block;">
+                </c:if>
+                <c:if test="${status.index!=0}">
+                    <li>
+                </c:if>
+                <a href="<c:url value="${banner.directUrl}"/> " target="_blank"><img
+                        src="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner" width="1280" height="481"
+                        alt=""/></a></li>
             </c:forEach>
-            <%--<li><a href="" target="_blank" title="">景泰蓝</a></li>--%>
-            <%--<li><a href="" target="_blank" title="">景德镇</a></li>--%>
-            <%--<li><a href="" target="_blank" title="">钧瓷</a></li>--%>
-            <%--<li><a href="" target="_blank" title="">龙泉青瓷</a></li>--%>
         </ul>
-    </c:forEach>
-    <%--<ul>--%>
-    <%--<li class="title">木 作 编 扎</li>--%>
-    <%--<li><a href="" target="_blank" title="">木雕</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">竹雕</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">风筝</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">空竹</a></li>--%>
-    <%--</ul>--%>
-    <%--<ul>--%>
-    <%--<li class="title">织 染 印 绣</li>--%>
-    <%--<li><a href="" target="_blank" title="">潮绣</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">苏绣</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">顾绣</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">沈绣</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">瑶族绣</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">京绣</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">云锦</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">蜀锦</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">漳缎</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">缂丝</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">蓝印花布</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">蜡染</a></li>--%>
-    <%--</ul>--%>
-    <%--<ul>--%>
-    <%--<li class="title">传 统 美 术</li>--%>
-    <%--<li><a href="" target="_blank" title="">唐卡</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">剪纸</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">书法篆刻</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">陶瓷微书</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">脸谱</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">掐丝珐琅画</a></li>--%>
-    <%--</ul>--%>
-    <%--<ul>--%>
-    <%--<li class="title">琢 玉 成 器</li>--%>
-    <%--<li><a href="" target="_blank" title="">玉雕</a></li>--%>
-    <%--</ul>--%>
-    <%--<ul>--%>
-    <%--<li class="title">金 石 錾 锻</li>--%>
-    <%--<li><a href="" target="_blank" title="">铜雕</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">花丝镶嵌</a></li>--%>
-    <%--</ul>--%>
-    <%--<ul>--%>
-    <%--<li class="title">如 胶 似 膝</li>--%>
-    <%--<li><a href="" target="_blank" title="">平遥漆器</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">北京雕漆</a></li>--%>
-    <%--</ul>--%>
-    <%--<ul>--%>
-    <%--<li class="title">文 房 四 宝</li>--%>
-    <%--<li><a href="" target="_blank" title="">端砚</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">歙砚</a></li>--%>
-    <%--<li><a href="" target="_blank" title="">粉蜡签</a></li>--%>
-    <%--</ul>--%>
-    <%--<ul>--%>
-    <%--<li class="title">饕 餮 美 食</li>--%>
-    <%--<li><a href="" target="_blank" title="">老汤精</a></li>--%>
-    <%--</ul>--%>
-    <%--<ul>--%>
-    <%--<li class="title">茗 品 佳 酿</li>--%>
-    <%--</ul>--%>
-    <%--<ul>--%>
-    <%--<li class="title">医 药 养 生</li>--%>
-    <%--</ul>--%>
+        <ul class="slider-nav">
+            <li class="active"></li>
+            <c:forEach items="${bannerList}" var="banner" begin="1">
+                <li></li>
+            </c:forEach>
+        </ul>
+        <div class="btn btn-prev" title="上一页"></div>
+        <div class="btn btn-next" title="下一页"></div>
+    </div>
 </div>
