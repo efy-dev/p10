@@ -204,7 +204,7 @@
           </div>
           <div class="sit-suit-twz"><p>${project.description}</p></div>
         </div>
-        <div class="sit-suit-img"><a href="#"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_wap_url}"></a></div>
+        <div class="sit-suit-img"><a href="#"><img src="http://pro.efeiyi.com/${project.picture_wap_url}"></a></div>
       </div>
     </div>
 
@@ -390,7 +390,7 @@
 
               var box = $(" <li class='item'> <a href='" +"<c:url value='/base/showProduct/"+data.list[i].id+"}'/> "+
                       "'>" +
-                      "<img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"'></a>" +
+                      "<img src='http://pro.efeiyi.com/"+data.list[i].picture_url+"'></a>" +
                       " <div class='txt'> <div class='name'>"+data.list[i].name+"</div> " +
                       "<div class='txt-info'> <a href='#'>" +
                       "<i class='icon good-1'></i>" +
@@ -468,7 +468,7 @@
       }
       $.ajax({
         type:"get",
-        url:"/base/attentionMaster.do?masterId="+masterId+"&oper="+oper,//设置请求的脚本地址
+        url:"<c:url value='/base/attentionMaster.do?masterId='/>"+masterId+"&oper="+oper,//设置请求的脚本地址
         data:"",
         async:true,
         dataType:"json",
@@ -866,7 +866,7 @@
 
 
                 html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\">" +
-                        "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
+                        "<img src=\"http://pro.efeiyi.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
                         "<div class=\"name\">"+data.list[i].name+"</div> <div class=\"txt-info\"> " +
                         "<a href=\"#\"><i class=\"icon good-1\"></i><em>"+data.list[i].fsAmount+"</em></a> " +
                         "<a href=\"#\"><i class=\"icon good-2\"></i><em>"+data.list[i].amount+"</em></a> " +
@@ -1101,6 +1101,22 @@
      complete:function(){
      }
    });
+ }
+ function transdate(endTime){
+   var timestamp = Date.parse(new Date());
+   var oldTime = parseInt(endTime);
+   var intervalTime = (timestamp+1000 - oldTime)/1000/60;
+   var showTime = "";
+   if(intervalTime<=59){
+     showTime=intervalTime.toFixed(0)+"分钟前";
+   }else if(1<=(intervalTime/60) && (intervalTime/60)<24){
+     showTime=(intervalTime/60).toFixed(0)+"小时前";
+   }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
+     showTime=(intervalTime/60/24).toFixed(0)+"天前";
+   }else{
+     showTime=new Date(oldTime).toLocaleString().replace(/:\d{1,2}$/,' ');
+   }
+   return showTime;
  }
 </script>
 <!--自定义js--End-->

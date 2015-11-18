@@ -267,7 +267,6 @@ public class WikiIndexController extends WikibaseController {
     @ResponseBody
     public String saveMasterFollows(HttpServletRequest request, Model model) throws Exception {
         String masterId = request.getParameter("masterId");
-
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
             return "false";
@@ -379,7 +378,7 @@ public class WikiIndexController extends WikibaseController {
             praise2Product.setModerator(null);
             baseManager.saveOrUpdate(Praise2Product.class.getName(), praise2Product);
             //product.setFsAmount(product.getFsAmount() == null ? 1 : product.getFsAmount() + 1);
-            product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
+            product.setFsAmount(product.getFsAmount() == null ? 1 : product.getFsAmount() + 1);
             baseManager.saveOrUpdate(Product.class.getName(), product);
             System.out.println(product);
         }
@@ -395,16 +394,16 @@ public class WikiIndexController extends WikibaseController {
                 //baseManager.delete(Praise2Product.class.getName(), praise2Product1.getId());
                   baseManager.remove(Praise2Product.class.getName(), praise2Product1.getId());
             long FsAmount =0;
-            if(product.getAmount() == null){
+            if(product.getFsAmount() == null){
                 FsAmount =0;
-            }else  if(product.getAmount() - 1<=0){
+            }else  if(product.getFsAmount() - 1<=0){
                 FsAmount =0;
-            }else if (product.getAmount() - 1>=1){
-                FsAmount =product.getAmount() - 1;
+            }else if (product.getFsAmount() - 1>=1){
+                FsAmount =product.getFsAmount() - 1;
             }
             //product.setFsAmount(product.getFsAmount() == null ? 0 : product.getFsAmount() - 1);
             //product.setFsAmount(FsAmount);
-            product.setAmount(FsAmount);
+            product.setFsAmount(FsAmount);
             baseManager.saveOrUpdate(Product.class.getName(), product);
         }
 
@@ -494,27 +493,28 @@ public class WikiIndexController extends WikibaseController {
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
             return "false";
-        }
-
-
-        if (user.getId() != null) {
+        }else{
             String queryHql = "from ProductStore t where t.user.id=:userId and t.product.id=:productId";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("productId", productId);
             ProductStore ps = (ProductStore) baseManager.getUniqueObjectByConditions(queryHql, map);
-            if (ps != null && ps.getId() != null){
-               return "repeat" ;
-            }//不为null,说明已经收藏了
+            if (ps != null && ps.getId() != null){//不为null,说明已经收藏了
+                baseManager.remove(ProductStore.class.getName(), ps.getId());
+                return "repeat" ;
+            }else{
+                productStore.setUser(user);
+                Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
+                productStore.setProduct(product);
+                productStore.setStatus("1");
+                productStore.setCreateDateTime(new Date());
+                baseManager.saveOrUpdate(ProductStore.class.getName(), productStore);
+                return "true";
+            }
         }
-        productStore.setUser(user);
-        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-        productStore.setProduct(product);
-        productStore.setStatus("1");
-        productStore.setCreateDateTime(new Date());
-        baseManager.saveOrUpdate(ProductStore.class.getName(), productStore);
 
-        return "true";
+
+
     }
 
 
