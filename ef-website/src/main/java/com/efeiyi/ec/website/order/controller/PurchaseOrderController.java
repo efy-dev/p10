@@ -99,6 +99,7 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrder.setTenant(tenantList.get(0));
         purchaseOrder.setTotal(cart.getTotalPrice());
         purchaseOrder.setOriginalPrice(cart.getTotalPrice());
+        purchaseOrder.setOrderType("2"); //2代表秒杀类型
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 //        callback += "?purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId + "&memberId=" + (request.getParameter("memberId") != null ? request.getParameter("memberId") : "null") + "&groupId=" + (request.getParameter("groupId") != null ? request.getParameter("groupId") : "null");
 //        purchaseOrder.setCallback(callback);

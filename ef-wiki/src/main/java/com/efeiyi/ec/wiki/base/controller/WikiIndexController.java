@@ -316,7 +316,10 @@ public class WikiIndexController extends WikibaseController {
     public ModelAndView showProduct(@PathVariable String productId, HttpServletRequest request, Model model) throws Exception {
         //String productId = request.getParameter("productId");
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-        boolean flag = IsattentionMaster2(request, product.getMaster().getId());//判断用户是否已经关注该作品的大师
+        boolean flag = false;
+        if(product.getMaster()!=null && !"".equals(product.getMaster().getId())){
+             flag = IsattentionMaster2(request, product.getMaster().getId());//判断用户是否已经关注该作品的大师
+        }
         model.addAttribute("flag", flag);
         model.addAttribute("product", product);
         if (AuthorizationUtil.getMyUser().getId() != null) {
