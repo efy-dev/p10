@@ -703,3 +703,21 @@ CREATE TABLE `master_comment_praise` (
 )
 ;
 
+
+
+
+CREATE TABLE `seckill_product` (
+`id`  char(16) NOT NULL ,
+`product_model_id`  char(16) NULL ,
+`price`  decimal(11,2) NULL ,
+`amount`  int(11) NULL ,
+`end_datetime`  datetime NULL ,
+`attention_amount`  int(11) NULL ,
+`status`  char(8) NULL ,
+`start_datetime`  datetime NULL ,
+`limit_amount`  int(11) NULL ,
+PRIMARY KEY (`id`)
+)
+;
+
+

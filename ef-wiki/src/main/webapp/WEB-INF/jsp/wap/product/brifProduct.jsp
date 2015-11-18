@@ -238,7 +238,7 @@ ${product.productDescription.content}
       <i class="s-solid ft-a"></i>
       <a href="#" class="ft-a" onclick="storeProduct('${product.id}')"> <i class="good-3"></i> </a>
       <i class="s-solid ft-a"></i>
-      <a href="javascript:void(0);" class="ft-a"   style="position:relative">
+      <a href="javascript:void(0);" class="ft-a addft-a"   style="position:relative">
         <i class="good-4" id="good-4"></i>
         <div class="nr-share" id="nr-share" style="display: none">
         <div class="nr-bg">
@@ -270,7 +270,7 @@ ${product.productDescription.content}
 
     $.ajax({
       type:"get",
-      url:"/base/attentionMaster.do?masterId="+masterId+"&oper="+oper,//设置请求的脚本地址
+      url:"<c:url value='/base/attentionMaster.do?masterId='/>"+masterId+"&oper="+oper,//设置请求的脚本地址
       data:"",
       dataType:"json",
       success:function(data){
@@ -333,7 +333,7 @@ var startNum=1;
               }else{
                 amout1 =data.list[i].amount;
               }
-              var userName = data.list[i].user.name2;
+              var userName = data.list[i].user.username.substring(0,3)+"****"+data.list[i].user.username.substring(7,11);
               if(userName==null){
                 userName ="匿名用户";
               }
@@ -375,7 +375,7 @@ var startNum=1;
   function transdate(endTime){
     var timestamp = Date.parse(new Date());
     var oldTime = parseInt(endTime);
-    var intervalTime = (timestamp - oldTime)/1000/60;
+    var intervalTime = (timestamp+1000 - oldTime)/1000/60;
     var showTime = "";
     if(intervalTime<=59){
       showTime=intervalTime.toFixed(0)+"分钟前";
@@ -407,7 +407,7 @@ var startNum=1;
                }else{
                  amout1 =data.list[i].amount;
                }
-               var userName = data.list[i].user.name2;
+               var userName = data.list[i].user.username.substring(0,3)+"****"+data.list[i].user.username.substring(7,11);
                if(userName==null){
                  userName ="匿名用户";
                }
@@ -532,8 +532,9 @@ function savaUP(productId){
           }
           return false;
         }
-        $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
-                "<p class='text-time'>刚刚</p> <p class='text-content'>" +
+        var userName = data.user.username.substring(0,3)+"****"+data.user.username.toString().substring(7,11);
+        $(".dialogue").append("<div class='matter'> <p class='text-h1'>"+userName+"</p> " +
+                "<p class='text-time'>刚刚</p> <p class='text-content' onclick='showmodal2(this)' about='"+data.id+"'>" +
                 "<a href='#' >"+CommentValue+"</a></p> <div class='owner'>" +
                 "<img class='am-circle' src='<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>'/>" +
                 "</div> <div class='owner-good'><a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.id+"\")' about='${product.id}' name='up'>" +
@@ -578,8 +579,8 @@ function savaUP(productId){
             return false;
           }
           $("#"+contentId).append("<div class='respond'> <p><span class='txt-name'>" +
-                  "<a href='#'> ${myUser.name2}：</a>" +
-                  "</span><span class='txt-content'>"+CommentValue+"</span></p> </div> ");
+                  "<a href='#'> ${myUser.username}：</a>" +
+                  "</span><span class='txt-content' onclick='showmodal2(this)' about='"+data.id+"'>"+CommentValue+"</span></p> </div> ");
         },
         error:function(){
           alert("出错了，请联系管理员！！！");
@@ -663,7 +664,7 @@ function savaUP(productId){
           return false;
         }
         if(data=="repeat"){
-          showAlert("提示","您已收藏过了！")
+          showAlert("提示","您已取消收藏！")
           return true;
         }
         if(data=="true"){
@@ -695,7 +696,7 @@ function savaUP(productId){
           for(i in data){
             var  pubu =$("#newcommentList");
             var cTime =transdate(data[i].createDateTime);
-            var userName = data[i].user.name2;
+            var userName = data[i].user.username.substring(0,3)+"****"+data[i].user.username.substring(7,11);
             if(userName==null){
               userName ="匿名用户";
             }
