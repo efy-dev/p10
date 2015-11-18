@@ -3,8 +3,6 @@ package com.efeiyi.ec.website.base.controller;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
-import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.tenant.model.TenantProject;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -13,7 +11,6 @@ import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import com.ming800.core.util.CookieTool;
 import com.ming800.core.util.StringUtil;
-import org.apache.solr.common.util.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -92,45 +89,45 @@ public class HomeController {
         return "redirect:/";
     }
 
-//    @RequestMapping({"/home.do"})
-//    public String home(HttpServletRequest request, Model model) throws Exception {
-//
-//        //判断是否有需要重定向的页面
-//        String redirectUrl = request.getParameter("redirect");
-//        if (redirectUrl != null) {
-//            return "redirect:" + redirectUrl;
-//        }
-//
-//
-//        List<Object> projectList = objectRecommendedManager.getRecommendedList("categoryRecommended");
-//        HashMap<String, List> map = new HashMap<>();
-//        for (Object object : projectList) {
-//            XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
-//            xQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
-//            map.put(((ProjectCategory) object).getId(), baseManager.listObject(xQuery));
-//        }
-//        model.addAttribute("recommendMap", map);
-//        model.addAttribute("projectList", projectList);
-//
-//        //首页轮播图
-//        List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
-//        model.addAttribute("bannerList", bannerList);
-//
-//        //传承人
-//        List<Object> masterList = objectRecommendedManager.getRecommendedList("ec.masterRecommended");
-//        model.addAttribute("masterList", masterList);
-//        model.addAttribute("sign", "000");
-//
-//        //品牌故事
-//        XQuery subjectQuery = new XQuery("listAdvertisement_default", request);
-//        List<Object> subjectList = baseManager.listObject(subjectQuery);
-//        if (subjectList != null && subjectList.size() > 0) {
-//            model.addAttribute("advertisement", subjectList);
-//        }
-//
-//        return "/home";
-//    }
     @RequestMapping({"/home.do"})
+    public String home(HttpServletRequest request, Model model) throws Exception {
+
+        //判断是否有需要重定向的页面
+        String redirectUrl = request.getParameter("redirect");
+        if (redirectUrl != null) {
+            return "redirect:" + redirectUrl;
+        }
+
+
+        List<Object> projectList = objectRecommendedManager.getRecommendedList("categoryRecommended");
+        HashMap<String, List> map = new HashMap<>();
+        for (Object object : projectList) {
+            XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
+            xQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
+            map.put(((ProjectCategory) object).getId(), baseManager.listObject(xQuery));
+        }
+        model.addAttribute("recommendMap", map);
+        model.addAttribute("projectList", projectList);
+
+        //首页轮播图
+        List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
+        model.addAttribute("bannerList", bannerList);
+
+        //传承人
+        List<Object> masterList = objectRecommendedManager.getRecommendedList("ec.masterRecommended");
+        model.addAttribute("masterList", masterList);
+        model.addAttribute("sign", "000");
+
+        //品牌故事
+        XQuery subjectQuery = new XQuery("listAdvertisement_default", request);
+        List<Object> subjectList = baseManager.listObject(subjectQuery);
+        if (subjectList != null && subjectList.size() > 0) {
+            model.addAttribute("advertisement", subjectList);
+        }
+
+        return "/home";
+    }
+    @RequestMapping({"/home1.do"})
     public String home1(HttpServletRequest request, Model model) throws Exception {
 
         //判断是否有需要重定向的页面
@@ -138,39 +135,10 @@ public class HomeController {
         if (redirectUrl != null) {
             return "redirect:" + redirectUrl;
         }
-        //取得分类列表
-        XQuery projectCategoryxQuery = new XQuery("listProjectCategory_default", request);
-        projectCategoryxQuery.setSortHql("");
-        projectCategoryxQuery.updateHql();
-        List<Object> categoryList = baseManager.listObject(projectCategoryxQuery);
-        List<Object> recommendedCategoryList = objectRecommendedManager.getRecommendedList("categoryRecommended");
-        //店铺推荐
-        List<Object> recommendedTenantList = objectRecommendedManager.getRecommendedList("tenantRecommended");
-        //tenant_project
+        List<Object> categoryList = objectRecommendedManager.getRecommendedList("categoryRecommended");
         HashMap<String, List> map = new HashMap<>();
         HashMap<String, List> projectMap = new HashMap<>();
-        HashMap<String, String> tenantMap = new HashMap<>();
-        for(Object object :recommendedTenantList){
-               XQuery xQuery = new XQuery("listTenantProject_default",request);
-               xQuery.put("tenant_id",((Tenant)object).getId());
-               List<Object> tenantProjectList = baseManager.listObject(xQuery);
-              //去重
-            if(tenantProjectList!=null&&tenantProjectList.size()>1){
-              for(int i = 0;i<tenantProjectList.size();i++){
-                for(int j = i+1;j<tenantProjectList.size();j++){
-                    if(((TenantProject)tenantProjectList.get(i)).getTenant().getId().equals(((TenantProject)tenantProjectList.get(j)).getTenant().getId())){
-                        tenantProjectList.remove(j);
-                        j--;
-                    }
-                }
-            }
-            }
-            tenantMap.put(((Tenant)object).getId(),((TenantProject)tenantProjectList.get(0)).getProject().getId());
-        }
-        //关联店铺和project
-        model.addAttribute("tenantMap",tenantMap);
         for (Object object : categoryList) {
-            //取得推荐分类下面商品
             XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
             xQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
             map.put(((ProjectCategory) object).getId(), baseManager.listObject(xQuery));
@@ -180,11 +148,10 @@ public class HomeController {
             projectQuery.setSortHql("");
             projectQuery.updateHql();
             projectMap.put(((ProjectCategory) object).getId(), baseManager.listObject(projectQuery));
-
         }
         model.addAttribute("recommendMap", map);
         model.addAttribute("categoryList", categoryList);
-        model.addAttribute("recommendedCategoryList", recommendedCategoryList);
+
         //首页轮播图
         List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
         model.addAttribute("bannerList", bannerList);
@@ -193,8 +160,9 @@ public class HomeController {
         List<Object> masterList = objectRecommendedManager.getRecommendedList("ec.masterRecommended");
         model.addAttribute("masterList", masterList);
         model.addAttribute("sign", "000");
+
         //广告区域 营销活动 热卖商品 广告区
-        XQuery marketingActivityQuery = new XQuery("listAdvertisement_default1", request);
+        XQuery marketingActivityQuery = new XQuery("listAdvertisement_default", request);
         XQuery hotSaleQuery = new XQuery("listAdvertisement_default3", request);
         XQuery bannerQuery = new XQuery("listAdvertisement_default5", request);
         List<Object> marketingActivityQueryList = baseManager.listObject(marketingActivityQuery);
@@ -211,68 +179,27 @@ public class HomeController {
             model.addAttribute("bannerActivityList", bannerActivityList);
         }
         model.addAttribute("projectMap", projectMap);
-        model.addAttribute("recommendedTenantList",recommendedTenantList);
-        return "/home";
+        return "/home1";
     }
-
 
     @RequestMapping({"/productCategory.do"})
     public String listProductCategory(HttpServletRequest request, Model model) throws Exception {
-        //首页轮播图
-        List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
-        model.addAttribute("bannerList", bannerList);
-        //取得分类列表
-        XQuery projectCategoryxQuery = new XQuery("listProjectCategory_default", request);
-        projectCategoryxQuery.setSortHql("");
-        projectCategoryxQuery.updateHql();
-        List<Object> categoryList = baseManager.listObject(projectCategoryxQuery);
-        List<Object> recommendedCategoryList = objectRecommendedManager.getRecommendedList("categoryRecommended");
-        //店铺推荐
-        List<Object> recommendedTenantList = objectRecommendedManager.getRecommendedList("tenantRecommended");
-        //tenant_project
-        HashMap<String, List> map = new HashMap<>();
         HashMap<String, List> projectMap = new HashMap<>();
-        HashMap<String, String> tenantMap = new HashMap<>();
-        for(Object object :recommendedTenantList){
-            XQuery xQuery = new XQuery("listTenantProject_default",request);
-            xQuery.put("tenant_id",((Tenant)object).getId());
-            List<Object> tenantProjectList = baseManager.listObject(xQuery);
-            //去重
-            if(tenantProjectList!=null&&tenantProjectList.size()>1){
-                for(int i = 0;i<tenantProjectList.size();i++){
-                    for(int j = i+1;j<tenantProjectList.size();j++){
-                        if(((TenantProject)tenantProjectList.get(i)).getTenant().getId().equals(((TenantProject)tenantProjectList.get(j)).getTenant().getId())){
-                            tenantProjectList.remove(j);
-                            j--;
-                        }
-                    }
-                }
-            }
-            tenantMap.put(((Tenant)object).getId(),((TenantProject)tenantProjectList.get(0)).getProject().getId());
-        }
-        //关联店铺和project
-        model.addAttribute("tenantMap",tenantMap);
-        for (Object object : categoryList) {
-            //取得推荐分类下面商品
-            XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
-            xQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
-            map.put(((ProjectCategory) object).getId(), baseManager.listObject(xQuery));
-            //首页
+        XQuery xQuery = new XQuery("listProjectCategory_default", request);
+        xQuery.setSortHql("");
+        xQuery.updateHql();
+        List<Object> categoryList = baseManager.listObject(xQuery);
+        for (Object category : categoryList) {
             XQuery projectQuery = new XQuery("listProject_default", request);
-            projectQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
+            projectQuery.put("projectCategory_id", ((ProjectCategory) category).getId());
             projectQuery.setSortHql("");
             projectQuery.updateHql();
-            projectMap.put(((ProjectCategory) object).getId(), baseManager.listObject(projectQuery));
-
+            projectMap.put(((ProjectCategory) category).getId(), baseManager.listObject(projectQuery));
         }
-        model.addAttribute("recommendMap", map);
         model.addAttribute("categoryList", categoryList);
-        model.addAttribute("recommendedCategoryList", recommendedCategoryList);
         model.addAttribute("projectMap", projectMap);
-        model.addAttribute("recommendedTenantList",recommendedTenantList);
         return "/common/productCategory";
     }
-
 
     @RequestMapping({"/news"})
     public String listNews() {

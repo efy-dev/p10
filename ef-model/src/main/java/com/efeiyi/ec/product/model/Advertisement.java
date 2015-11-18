@@ -19,6 +19,7 @@ public class Advertisement {
     private String status;
     private String price;
     private String groupName;
+    private String wapRedirect;//移动跳转链接
 
     @Column(name = "price")
     public String getPrice() {
@@ -92,5 +93,14 @@ public class Advertisement {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    @Column(name = "wap_redirect")
+    public String getWapRedirect() {
+        return wapRedirect;
+    }
+
+    public void setWapRedirect(String wapRedirect) {
+        this.wapRedirect = wapRedirect;
     }
 }

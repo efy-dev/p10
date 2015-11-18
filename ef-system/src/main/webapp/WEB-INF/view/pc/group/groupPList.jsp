@@ -33,7 +33,10 @@
 
 
 <div style="text-align: left" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formAdvertisement"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建广告" />
+    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="toSendPacket('<c:url value="/tuan/sendRedPacket.do"/>');"
+       href="javascript:void(0)"><span
+            class="am-icon-pencil-square-o">发放成团红包</span>
+    </a>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">
@@ -45,57 +48,37 @@
                 <thead>
                 <tr>
                     <th class="table-set" >操作</th>
-                    <th class="table-title">广告名称</th>
-                    <th class="table-title">类别</th>
-                    <th class="table-title">广告链接</th>
-                    <th class="table-title">广告图片</th>
-                    <th class="table-title">价格</th>
-                    <th class="table-title">排序</th>
-
+                    <th class="table-title">团长</th>
+                    <th class="table-title">团购商品</th>
+                    <th class="table-title">状态</th>
+                    <th class="table-title">创建时间</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <c:forEach items="${requestScope.pageInfo.list}" var="ads">
-                    <tr id="${ads.id}">
-                        <td width="15%">
+                <c:forEach items="${requestScope.pageInfo.list}" var="group">
+                    <tr id="${group.id}">
+                        <td width="20%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
 
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formAdvertisement&id=${ads.id}"/>">
-                                        编辑
-                                    </a>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void (0);" onclick="showConfirm('提示','是否删除',function(){removeAds('${ads.id}')})">
-                                        删除
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formGroup&id=${group.id}"/>">
+                                        查看详情
                                     </a>
 
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only" width="20%">${ads.name}</td>
-                        <td class="am-hide-sm-only" width="15%">
-                            <ming800:status name="groupName" dataType="Advertisement.group" checkedValue="${ads.groupName}" type="normal"/>
+                        <td class="am-hide-sm-only" width="20%">${group.manUser.name}</td>
+                        <td class="am-hide-sm-only" width="20%">
+                                ${group.groupProduct.productModel.name}
                         </td>
-                        <td class="am-hide-sm-only" width="15%">
-                            <c:if test="${not empty ads.redirect}">
-                            <p style="margin-left: 10px;">
-                                (PC)<a target="_blank" href="${ads.redirect}">${ads.redirect}</a>
-                            </p>
-                            </c:if>
-                            <c:if test="${not empty ads.wapRedirect}">
-                            <p style="margin-left: 0px;">
-                                (WAP) <a target="_blank" href="${ads.wapRedirect}">${ads.wapRedirect}</a>
-                            </p>
-                            </c:if>
+                        <td class="am-hide-sm-only" width="20%">
+                            <ming800:status name="showStatus" dataType="Group.showStatus" checkedValue="${group.status}" type="normal"/>
                         </td>
-                        <td class="am-hide-sm-only" width="15%">
-                            <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${ads.img}@!product-model"/>"
-                                 alt=""/>
+                        <td class="am-hide-sm-only" width="20%">
+                           <fmt:formatDate value="${group.createDateTime}" pattern="yyyy-MM-dd HH:mm:ss" type="both"/>
                         </td>
-                        <td class="am-hide-sm-only" width="10%">
-                           ${ads.price}
-                        </td>
-                        <td class="am-hide-sm-only" width="10%">${ads.adsOrder}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -111,6 +94,18 @@
     </div>
 </div>
 <script>
+    function toSendPacket(url){
+        $.ajax({
+            type: "get",
+            url: url,
+            cache: false,
+            dataType: "json",
+            data:{},
+            success: function (data) {
+              alert("发送成功！");
+            }
+        });
+    }
     function removeAds(divId){
         $.ajax({
             type: "get",

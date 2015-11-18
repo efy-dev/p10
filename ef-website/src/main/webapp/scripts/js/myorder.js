@@ -88,41 +88,5 @@ $(function(){
         amTabPanel.find('.am-tab-panel').eq($index).show().siblings('.am-tab-panel').hide();
         return false
     })
-    //我的评价弹出
-    $(".evaluation .addbtn").click(function(){
-        $(this).parents(".data-list").siblings(".evaluation .addcon").show();
-        $(".evaluation .addbtn").hide()
-    })
-    //010213卡券弹出
-    $('#efeiyi-dh').click(function(){
-        $(this).siblings('.ytacu').show();
-        $('.ytacu .dh .no').click(function(){
-            $(this).parent().parent().parent().parent().find('.ytacu').hide();
-        })
-        return false
-    })
-    //010213卡券弹出2
-    $('#efeiyi-dh').click(function(){
-        $(this).siblings('#ytacu2').show();
-        $('.ytacu .cg .btn').click(function(){
-            $(this).parent().parent().parent().parent().find('#ytacu2').hide();
-        })
-        return false
-    })
-    $('.my-kj .am-tabs-nav .ul-list li.items1').mouseenter(function(){
-        $(this).addClass('active').siblings().removeClass('active')
-    })
-  /*  var GradList = document.getElementById("quacorgrading").getElementsByTagName("input");*/
-      var GradList = $(".quacorgrading input");
-       for(var i=0;i < GradList.length;i++){
-        GradList[i].onmouseover = function(){
-            for(var Qi=0;Qi<GradList.length;Qi++){
-                GradList[Qi].style.backgroundPosition = '-36px -21px';
-            }
-            for(var Qii=0;Qii<this.name;Qii++){
-                GradList[Qii].style.backgroundPosition = '-5px -21px';
-            }
-        }
-    }
 
 })

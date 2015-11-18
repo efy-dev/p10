@@ -89,10 +89,10 @@
               <c:forEach items="${list}" var="object">
                 <li>
                   <dl class="add">
-                    <dt><a href="<c:url value='/masterMessage/introView.do?masterId=${object.id}'/>"><img src="http://tenant.efeiyi.com/${object.favicon}@!master-favicon-view"> </a></dt>
+                    <dt><a href="<c:url value='/masterMessage/introView/${object.id}'/>"><img src="http://tenant.efeiyi.com/${object.favicon}@!master-favicon-view"> </a></dt>
                     <dd>
                       <p class="txt1">
-                        <a href="<c:url value='/masterMessage/introView.do?masterId=${object.id}'/>">
+                        <a href="<c:url value='/masterMessage/introView/${object.id}'/>">
                           ${object.masterName}
                         </a>
                       </p>

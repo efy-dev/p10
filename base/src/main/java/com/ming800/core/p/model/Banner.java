@@ -2,7 +2,6 @@ package com.ming800.core.p.model;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
 
@@ -21,7 +20,7 @@ public class Banner {
     private String imageUrl;
     private String directUrl;
     private String status;
-    private String wapUrl;
+    private String wapUrl;//移动跳转链接
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

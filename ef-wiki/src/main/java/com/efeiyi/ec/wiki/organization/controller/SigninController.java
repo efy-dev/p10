@@ -306,7 +306,7 @@ public class   SigninController extends BaseController {
     }
     @RequestMapping("/wapShowProduct/{productId}")
     public void forwardFind9(@PathVariable String productId,HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect(request.getContextPath() +"/base/showProduct/"+productId);
+        response.sendRedirect(request.getContextPath() +"/project/showProduct/"+productId);
     }
 }
 

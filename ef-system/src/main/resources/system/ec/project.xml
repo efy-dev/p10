@@ -135,7 +135,6 @@
                     execute="com.efeiyi.ec.system.project.controller.ProjectListHandler">
                     <query name="default" label="默认" type="auto" orderBy="serial:asc">
                         <condition label="project主键" name="status" defaultValue="0" operation="ne"/>
-                        <condition label="project主键" name="projectCategory.id" defaultValue="0" operation="eq"/>
                     </query>
                 </do>
                 <do name="listProject2" label="project列表" access="" result="/tenantProject/projectList"

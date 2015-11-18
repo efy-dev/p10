@@ -255,7 +255,7 @@ $(document).ready(function(){
 })
 //fenxiang111
 $(document).ready(function(){
-    $('.suspend .great .dynamic-ft .addft-a').click(function(){
+    $('.suspend .great .dynamic-ft a').click(function(){
         $(this).siblings('#nr-share').slideToggle();
     })
 })

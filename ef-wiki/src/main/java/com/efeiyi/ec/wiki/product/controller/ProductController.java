@@ -74,8 +74,7 @@ public class ProductController extends WikibaseController {
         productComment.setContent(content);
         productComment.setAmount(0l);
         productComment.setWatch("0");
-        //MyUser moderator =((ProductComment)baseManager.getObject(ProductComment.class.getName(),contentId)).getModerator();
-        MyUser moderator =((ProductComment)baseManager.getObject(ProductComment.class.getName(),contentId)).getUser();
+        MyUser moderator =((ProductComment)baseManager.getObject(ProductComment.class.getName(),contentId)).getModerator();
         productComment.setModerator(moderator);
         ProductComment fatherProductComment = new ProductComment();
         fatherProductComment.setId(contentId);

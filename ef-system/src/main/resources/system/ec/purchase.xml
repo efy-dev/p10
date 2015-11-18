@@ -71,7 +71,7 @@
 
             </fields>
             <does>
-                <do name="plistPurchaseOrder" access="" label="购买订单"
+                <do name="plistPurchaseOrder" access="admin,operational,o_operational,financial,market,product_manager" label="购买订单"
                     result="/purchaseOrder/purchaseOrderPList" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderViewProductHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
@@ -88,10 +88,10 @@
 
                 </do>
 
-                <do name="removePurchaseOrder" label="删除购买订单" access="" result="json"/>
-                <do name="viewPurchaseOrder" label="查看购买订单" access="" result="/purchaseOrder/purchaseOrderView" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderViewProductHandler"/>
-                <do name="formPurchaseOrder" label="保存购买订单" access="" result="/purchaseOrder/purchaseOrderForm"/>
-                <do name="saveOrUpdatePurchaseOrder" label="保存购买订单" access=""
+                <do name="removePurchaseOrder" label="删除购买订单" access="admin,operational" result="json"/>
+                <do name="viewPurchaseOrder" label="查看购买订单" access="admin,operational,o_operational,financial,market,product_manager" result="/purchaseOrder/purchaseOrderView" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderViewProductHandler"/>
+                <do name="formPurchaseOrder" label="保存购买订单" access="admin,operational,o_operational" result="/purchaseOrder/purchaseOrderForm"/>
+                <do name="saveOrUpdatePurchaseOrder" label="保存购买订单" access="admin,operational,o_operational"
                     result="/purchaseOrder/purchaseOrderSaveSuccess"/>
                 <do name="listPurchaseOrder" label="购买订单列表" access="" result="/purchaseOrder/purchaseOrderList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
@@ -121,7 +121,7 @@
                 </field>
             </fields>
             <does>
-                <do name="plistCoupon" access="" label="优惠券列表"
+                <do name="plistCoupon" access="admin,operational,o_operational,financial,market,product_manager" label="优惠券列表"
                     result="/coupon/couponPList"
                     execute="com.efeiyi.ec.system.basic.controller.commonHandler"
                         >
@@ -147,7 +147,7 @@
                     </query>
                 </do>
 
-                <do name="plistConsumerCoupon" access="" label="消费者优惠券" result="/coupon/consumerCouponPList">
+                <do name="plistConsumerCoupon" access="admin,operational,o_operational,financial,market,product_manager" label="消费者优惠券" result="/coupon/consumerCouponPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="consumer.id" label="用户" operation="eq" inputType="default"/>
                     </query>
@@ -159,10 +159,10 @@
                     </query>
                 </do>
 
-                <do name="removeCoupon" label="删除优惠券" access="" result="json"/>
-                <do name="viewCoupon" label="查看优惠券" access="" result="/coupon/couponView" execute="com.efeiyi.ec.system.couponBatch.controller.CouponHandler"/>
-                <do name="formCoupon" label="保存优惠券" access="" result="/coupon/couponForm"/>
-                <do name="saveOrUpdateCoupon" label="保存优惠券" access=""
+                <do name="removeCoupon" label="删除优惠券" access="admin,operational" result="json"/>
+                <do name="viewCoupon" label="查看优惠券" access="admin,operational,o_operational,financial,market,product_manager" result="/coupon/couponView" execute="com.efeiyi.ec.system.couponBatch.controller.CouponHandler"/>
+                <do name="formCoupon" label="保存优惠券" access="admin,operational,o_operational" result="/coupon/couponForm"/>
+                <do name="saveOrUpdateCoupon" label="保存优惠券" access="admin,operational,o_operational"
                     result="/purchaseOrder/purchaseOrderSaveSuccess"/>
             </does>
         </entity>
@@ -179,7 +179,7 @@
                 </field>
             </fields>
             <does>
-                <do name="plistCouponBatch" access="" label="优惠券批次列表"
+                <do name="plistCouponBatch" access="admin,operational,o_operational,financial,market,product_manager" label="优惠券批次列表"
                     result="/couponBatch/couponBatchPList"
                     execute="com.efeiyi.ec.system.basic.controller.commonHandler"
                         >
@@ -196,12 +196,12 @@
                     </query>
                 </do>
 
-                <do name="removeCouponBatch" label="删除优惠券批次" access="" result="json"/>
-                <do name="viewCouponBatch" label="查看优惠券批次" access="" result="/couponBatch/couponBatchView"
+                <do name="removeCouponBatch" label="删除优惠券批次" access="admin,operational" result="json"/>
+                <do name="viewCouponBatch" label="查看优惠券批次" access="admin,operational,o_operational,financial,market,product_manager" result="/couponBatch/couponBatchView"
                     execute="com.efeiyi.ec.system.couponBatch.controller.LastCouponHandler"
                         />
-                <do name="formCouponBatch" label="保存优惠券批次" access="" result="/couponBatch/couponBatchForm"/>
-                <do name="saveOrUpdateCouponBatch" label="保存优惠券批次" access=""
+                <do name="formCouponBatch" label="保存优惠券批次" access="admin,operational,o_operational" result="/couponBatch/couponBatchForm"/>
+                <do name="saveOrUpdateCouponBatch" label="保存优惠券批次" access="admin,operational,o_operational"
                     result="redirect:/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch" execute="com.efeiyi.ec.system.couponBatch.controller.CouponBatchHandler">
                     <page>
                         <fields>
@@ -239,7 +239,7 @@
                 </field>
             </fields>
             <does>
-                <do name="plistPurchaseOrderDelivery" access="" label="purchaseOrderDelivery分页列表"
+                <do name="plistPurchaseOrderDelivery" access="admin,operational,o_operational,financial,market,product_manager" label="purchaseOrderDelivery分页列表"
                     result="/purchaseOrderDelivery/purchaseOrderDeliveryPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
@@ -254,12 +254,12 @@
                     </query>
                 </do>
 
-                <do name="removePurchaseOrderDelivery" label="删除发货记录" access="" result="json"/>
-                <do name="formPurchaseOrderDelivery" label="保存发货记录" access=""
+                <do name="removePurchaseOrderDelivery" label="删除发货记录" access="admin,operational" result="json"/>
+                <do name="formPurchaseOrderDelivery" label="保存发货记录" access="admin,operational,o_operational"
                     result="/purchaseOrderDelivery/purchaseOrderDeliveryForm"/>
-                <do name="viewPurchaseOrderDelivery" label="查看发货记录" access=""
+                <do name="viewPurchaseOrderDelivery" label="查看发货记录" access="admin,operational,o_operational,financial,market,product_manager"
                     result="/purchaseOrderDelivery/purchaseOrderDeliveryView" execute="com.efeiyi.ec.system.purchaseOrderDelivery.controller.PurchaseOrderDeliveryHandler"/>
-                <do name="saveOrUpdatePurchaseOrderDelivery" label="保存发货记录" access=""
+                <do name="saveOrUpdatePurchaseOrderDelivery" label="保存发货记录" access="admin,operational,o_operational"
                     result="/purchaseOrderDelivery/purchaseOrderDeliverySaveSuccess"/>
                 <do name="listPurchaseOrderDelivery" label="发货记录列表" access=""
                     result="/purchaseOrderDelivery/purchaseOrderDeliveryList">
@@ -290,7 +290,7 @@
                 </field>
             </fields>
             <does>
-                <do name="plistPurchaseOrderPayment" access="" label="支付记录分页查询"
+                <do name="plistPurchaseOrderPayment" access="admin,operational,o_operational,financial,market,product_manager" label="支付记录分页查询"
                     result="/purchaseOrderPayment/purchaseOrderPaymentPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
@@ -304,12 +304,12 @@
                     </query>
                 </do>
 
-                <do name="removePurchaseOrderPayment" label="删除支付记录" access="" result="json"/>
-                <do name="formPurchaseOrderPayment" label="保存支付记录" access=""
+                <do name="removePurchaseOrderPayment" label="删除支付记录" access="admin,operational" result="json"/>
+                <do name="formPurchaseOrderPayment" label="保存支付记录" access="admin,operational,o_operational"
                     result="/purchaseOrderPayment/purchaseOrderPaymentForm"/>
-                <do name="viewPurchaseOrderPayment" label="查看支付记录" access=""
+                <do name="viewPurchaseOrderPayment" label="查看支付记录" access="admin,operational,o_operational,financial,market,product_manager"
                     result="/purchaseOrderPayment/purchaseOrderPaymentView" execute="com.efeiyi.ec.system.PurchaseOrderPayment.controller.PurchaseOrderPaymentHandler"/>
-                <do name="saveOrUpdatePurchaseOrderPayment" label="保存支付记录" access=""
+                <do name="saveOrUpdatePurchaseOrderPayment" label="保存支付记录" access="admin,operational,o_operational"
                     result="/purchaseOrderPayment/purchaseOrderPaymentSaveSuccess"/>
                 <do name="listPurchaseOrderPayment" label="支付记录列表" access=""
                     result="/purchaseOrderPayment/purchaseOrderPaymentList">
@@ -333,7 +333,7 @@
                 </field>
             </fields>
             <does>
-            <do name="plistPurchaseOrderPaymentDetails" access="" label="支付记录详情"
+            <do name="plistPurchaseOrderPaymentDetails" access="admin,operational,o_operational,financial,market,product_manager" label="支付记录详情"
                 result="/purchaseOrderPaymentDetails/purchaseOrderPaymentDetailsPList">
                 <query name="default" label="默认" type="auto" orderBy="id:desc">
                     <condition name="id" defaultValue="0" operation="ne"/>
@@ -353,19 +353,19 @@
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.PurchaseOrderProduct">
             <does>
-                <do name="plistPurchaseOrderProduct" access="" label="购买订单产品"
+                <do name="plistPurchaseOrderProduct" access="admin,operational,o_operational,financial,market,product_manager" label="购买订单产品"
                     result="/purchaseOrderProduct/purchaseOrderProductPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
-                <do name="removePurchaseOrderProduct" label="删除购买订单产品" access="" result="json"/>
-                <do name="viewPurchaseOrderProduct" label="查看购买订单产品" access=""
+                <do name="removePurchaseOrderProduct" label="删除购买订单产品" access="admin,operational" result="json"/>
+                <do name="viewPurchaseOrderProduct" label="查看购买订单产品" access="admin,operational,o_operational,financial,market,product_manager"
                     result="/purchaseOrderProduct/purchaseOrderProductView"/>
-                <do name="formPurchaseOrderProduct" label="保存购买订单产品" access=""
+                <do name="formPurchaseOrderProduct" label="保存购买订单产品" access="admin,operational,o_operational"
                     result="/purchaseOrderProduct/purchaseOrderProductForm"/>
-                <do name="saveOrUpdatePurchaseOrderProduct" label="保存购买订单产品" access=""
+                <do name="saveOrUpdatePurchaseOrderProduct" label="保存购买订单产品" access="admin,operational,o_operational"
                     result="/purchaseOrderProduct/purchaseOrderProductSaveSuccess"/>
                 <do name="listPurchaseOrderProduct" label="购买订单产品列表" access=""
                     result="/purchaseOrderProduct/purchaseOrderProductList">
@@ -384,7 +384,7 @@
                 model="com.efeiyi.ec.purchase.model.CartProduct">
             <does>
 
-                <do name="formActivity" label="保存cartProduct" access="" result="/activity/activityForm"/>
+                <do name="formActivity" label="保存cartProduct" access="admin,operational,o_operational" result="/activity/activityForm"/>
 
             </does>
         </entity>
