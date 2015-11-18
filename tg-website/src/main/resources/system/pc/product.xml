@@ -49,6 +49,24 @@
                 </do>
             </does>
         </entity>
+
+        <entity name="SeckillProduct" label="秒杀商品" model="com.efeiyi.ec.activity.model.SeckillProduct">
+            <does>
+                <!--<do name="saveOrUpdateProduct" access="" label="修改状态值">-->
+                    <!--<page>-->
+                        <!--<fields>-->
+                            <!--<field name="status" label="默认值" defaultValue="1" inputType="default"/>-->
+                        <!--</fields>-->
+                    <!--</page>-->
+                <!--</do>-->
+                <do name="plistSeckillProduct" access="" label="正在进行当中的秒杀商品列表">
+                    <query name="default" label="默认" type="auto" orderBy="endDatetime:asc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <!--<condition name="productModel.id" defaultValue="1" operation="eq"/>-->
+                    </query>
+                </do>
+            </does>
+        </entity>
     </entities>
 
 </module>

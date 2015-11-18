@@ -48,11 +48,12 @@
   <!--头部-->
   <div class="list-f-title">
     <p><a href="<c:url value='/pc/index.do'/>">工艺</a><i class="fu-icon"></i><a href="<c:url value='/pc/index.do'/>">动态</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct/'/><%=request.getAttribute("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
+
   </div>
   <div class="ae">
     <div class="details ae">
       <div class="detaile-left">
-        <div class="detaile-img"><a href="#"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${product.picture_url}@!pc-product-header"></a></div>
+        <div class="detaile-img"><a href="#"><img src="http://pro.efeiyi.com/${product.picture_url}@!pc-product-header"></a></div>
         <div class="detaile-share ae" style="height: auto;z-index: 200;">
           <!-- JiaThis Button BEGIN -->
           <div class="jiathis_style" style="background: #fff;border: 0;float: left;padding: 30px 0;">
@@ -64,7 +65,7 @@
           <!-- JiaThis Button END -->
           <div class="thumb-up">
             <div class="thump-assist">
-              <a href="javascript:void(0)" onclick="savaUpAndDown('${product.id}')" id="good-1" name="up"><i class="z-icon"></i><em id="em1">${product.amount}</em></a>
+              <a href="javascript:void(0)" onclick="savaUpAndDown('${product.id}')" id="good-1" name="up"><i class="z-icon"></i><em id="em1">${product.fsAmount}</em></a>
             </div>
             <div class="thump-collect">
               <a href="javascript:void(0)" onclick="storeProduct('${product.id}')"><i class="s-icon"></i><em>收藏</em></a>
@@ -206,37 +207,28 @@
       data:"",
       dataType:"json",
       success:function(data){
+        var parentE = $("#saveMasterFllow").parent();
         if(data=="false"){
-          //alert("您还未登陆，请登录后再操作");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/showProduct/${product.id}/${projectId}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data=="true"){
                //$("#"+masterId).html("取消关注");
-          var parentE = $("#saveMasterFllow").parent();
+
           parentE.empty();
-          if(val=="1"){
-            //var val = $("#saveMasterFllow").val("1");
-            parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"0\"> <em>已关注</em>");
-          }
-          if(val=="0"){
-            //var val = $("#saveMasterFllow").val("0");
-            parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"1\"> <i class=\"gz-icon\"></i> <em>关注</em>");
-          }
+          parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"0\"> <em>已关注</em>");
           return true;
         }
         if(data=="del"){
           //$("#"+masterId).html("关注");
-          var parentE = $("#saveMasterFllow").parent();
           parentE.empty();
-          if(val=="0"){
-            //var val = $("#saveMasterFllow").val("1");
-            parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"1\"> <i class=\"gz-icon\"></i> <em>关注</em>");
-          }
-          if(val=="1"){
-            //var val = $("#saveMasterFllow").val("0");
-            parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"0\"> <em>已关注</em>");
-          }
+          parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"1\"> <i class=\"gz-icon\"></i> <em>关注</em>");
           return true;
         }
         if(data=="error"){
@@ -250,7 +242,14 @@
         return false;
       },
       complete:function(){
-
+        /*if(val=="1"){
+          //var val = $("#saveMasterFllow").val("1");
+          parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"0\"> <em>已关注</em>");
+        }
+        if(val=="0"){
+          //var val = $("#saveMasterFllow").val("0");
+          parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"1\"> <i class=\"gz-icon\"></i> <em>关注</em>");
+        }*/
       }
     });
   }
@@ -329,7 +328,7 @@
   function transdate(endTime){
     var timestamp = Date.parse(new Date());
     var oldTime = parseInt(endTime);
-    var intervalTime = (timestamp + 500 - oldTime)/1000/60;
+    var intervalTime = (timestamp + 2000 - oldTime)/1000/60;
     var showTime = "";
     if(intervalTime<=59){
       showTime=intervalTime.toFixed(0)+"分钟前";
@@ -355,8 +354,13 @@
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
-          //alert("您还未登陆，请登录后再操作！！！");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/showProduct/${product.id}/${projectId}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data2=="repeat"){
@@ -739,7 +743,7 @@ function getHfProduct(e){
         }
         if(data=="repeat"){
           //alert("您已收藏过了！");
-          $('.details .detaile-left .detaile-share .thumb-up .thump-collect a').find('em').html('已收藏');
+          $('.details .detaile-left .detaile-share .thumb-up .thump-collect a').find('em').html('收藏');
           return true;
         }
         if(data=="true"){

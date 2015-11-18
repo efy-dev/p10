@@ -42,32 +42,25 @@
     </div>
 </div>
 <!-- //End--topbar-->
-<div class="header wh">
+<div class="header-new wh">
     <div class="hd">
-        <div class="logo"><a class="icon" href="<c:url value="/"/>" title="e飞蚁-爱非遗"></a></div>
-        <div class="nav">
-            <ul>
-                <c:forEach items="${jnode.children}" var="child">
-                    <li>
-                        <c:if test="${!child.getState().equals('productCategory')}">
-                            <a class="${child.jnodeMatch("cur",currentJnode)}" href="<c:url value="${child.url}"/>"
-                               title="${child.text_zh_CN}">${child.text_zh_CN}</a>
-                        </c:if>
-                        <c:if test="${child.getState().equals('productCategory')}">
-                            <a class="${child.jnodeMatch("cur",currentJnode)}"
-                               title="${child.text_zh_CN}">${child.text_zh_CN}</a>
-                            <jsp:include page="/productCategory.do" flush="true"/>
-                        </c:if>
-                    </li>
-                </c:forEach>
-                <%--<li><a href="" title="商品分类">商品分类</a></li>--%>
-                <%--<li><a href="" title="传承人">传承人</a></li>--%>
-                <%--<li><a href="" title="展览">展览</a></li>--%>
-                <%--<li><a href="" title="资讯">资讯</a></li>--%>
-            </ul>
-        </div>
+        <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
+        <form action="">
+            <input type="text" class="txt" placeholder="">
+            <input type="submit" class="icon-new btn" value="">
+            <div class="keywords">
+                <a href="">剪纸</a>
+                <a href="">景泰蓝</a>
+                <a href="">景德镇</a>
+                <a href="">二锅头</a>
+                <a href="">徽州三雕</a>
+                <a href="">藏药</a>
+                <a href="">十全大补丸</a>
+            </div>
+        </form>
     </div>
 </div>
+<jsp:include page="/productCategory.do" flush="true"/>
 <script>
 
     $().ready(function () {
