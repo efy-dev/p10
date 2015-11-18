@@ -204,7 +204,7 @@
         </jnode>
     </jnode>
 
-    <jnode id="ttManager" access="admin" url="/main.do?jnodeId=ttManager" text_zh_CN="大师">
+    <jnode id="ttManager" access="admin" url="/main.do?jnodeId=ttManager" text_zh_CN="工艺与大师">
         <jnode url="" id="tenantManager" access="admin,manager" state="closed" text_zh_CN="大师管理">
             <jnode url="/basic/xm.do?qm=plistMaster_default" id="masterList" access="admin" text_zh_CN="大师列表">
                 <match url="/basic/xm.do?qm=plistMaster_default"/>
@@ -277,12 +277,6 @@
                 <match url="/basic/xm.do?qm=formDocument&amp;groupName=master"/>
             </jnode>
         </jnode>
-    </jnode>
-
-    <jnode id="wikiManager" access="admin" url="/main.do?jnodeId=wikiManager" text_zh_CN="工艺">
-        <!-- <jnode url="/basic/xm.do?qm=plistProjectContent_default" access="admin,manager" text_zh_CN="内容">
-             <match url="plistProjectContent_default"/>
-         </jnode>-->
         <jnode url="" id="WikiCategoryManager" access="admin" state="closed" text_zh_CN="工艺管理">
             <jnode url="/basic/xm.do?qm=plistProject2_default" access="admin,manager" text_zh_CN="工艺项目列表">
                 <match url="/basic/xm.do?qm=plistProjectWiki_default"/>
@@ -313,12 +307,19 @@
             </jnode>
 
         </jnode>
+    </jnode>
+
+ <!--   <jnode id="wikiManager" access="admin" url="/main.do?jnodeId=wikiManager" text_zh_CN="工艺">
+        &lt;!&ndash; <jnode url="/basic/xm.do?qm=plistProjectContent_default" access="admin,manager" text_zh_CN="内容">
+             <match url="plistProjectContent_default"/>
+         </jnode>&ndash;&gt;
+
         <jnode url="/basic/xm.do?qm=plistProjectNews_default" access="admin,manager" text_zh_CN="资讯">
             <match url="plistProjectNews_default"/>
         </jnode>
 
 
-    </jnode>
+    </jnode>-->
 
     <jnode id="baseManager" access="admin" url="/main.do?jnodeId=baseManager" text_zh_CN="基础管理">
         <jnode url="" id="CategoryManager" access="admin" state="closed" text_zh_CN="非遗项目与类别">
