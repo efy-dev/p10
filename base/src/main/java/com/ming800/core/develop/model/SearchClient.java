@@ -83,7 +83,7 @@ public class SearchClient implements Runnable {
                     .setRows(pageSize == null ? commonSearch.getRows() : pageSize);
 
             //高亮
-            if (commonSearch.isHighLight()) {
+            if (commonSearch.isHighLight() && !"*".equals(searchParamBean.getQ().trim())) {
                 solrQuery.setHighlight(commonSearch.isHighLight());
                 for (String highLightFields : commonSearch.getHighLightFields()) {
                     solrQuery.addHighlightField(highLightFields);
@@ -146,7 +146,7 @@ public class SearchClient implements Runnable {
             SolrDocumentList searchResultList = response.getResults();
             Map<String, Map<String, List<String>>> highLightingMap = response.getHighlighting();
             pageEntity.setCount((int) searchResultList.getNumFound());
-            if (searchResultList != null) {
+            if (searchResultList != null && highLightingMap != null) {
                 for (Object obj : searchResultList) {
                     Map docMap = (Map) obj;
                     String id = (String) docMap.get("id");
