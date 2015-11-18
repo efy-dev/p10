@@ -62,6 +62,7 @@ public class Product implements Serializable{
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
+    @Where(clause = "status!=0")
     public List<ProductModel> getProductModelList() {
         return productModelList;
     }

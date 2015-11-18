@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
@@ -34,7 +33,7 @@
 <body>
 <div class="packet ae">
     <div class="red ae">
-        <div class="pic"><span>${fn:substring(group.groupProduct.bonus,0,2)}</span></div>
+        <div class="pic"><span>${group.groupProduct.bonus}</span></div>
     </div>
     <div class="text ae">
         <p>1、恭喜您参团成功！</p>
