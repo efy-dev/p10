@@ -30,6 +30,9 @@ public class SearchController {
     @RequestMapping("/search.do")
     public ModelAndView solrSearch(ModelMap modelMap,SearchParamBean searchParamBean) throws Exception {
 
+        if (searchParamBean.getQ() == null || "".equals(searchParamBean.getQ().trim())){
+            searchParamBean.setQ("*");
+        }
         //基本查询q
         String q = searchParamBean.getQ();
         StringBuilder queryString = new StringBuilder(commonManager.getSearchParam(searchParamBean.getGroup()).getDefaultQ()).append(q);
