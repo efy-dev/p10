@@ -14,7 +14,7 @@
             <div class="allsort">
                 <c:forEach items="${categoryList}" var="category">
                     <div class="item">
-                        <h3><a href="" title="">${category.name}</a><i class="icon-new icon-link"></i></h3>
+                        <h3><a href="<c:url value="/project/product/${category.id}"/>" title="">${category.name}</a><i class="icon-new icon-link"></i></h3>
                         <div class="i-mc" style="display: none;">
                             <div class="links">
                                 <c:forEach items="${projectMap.get(category.id)}" var="project">
