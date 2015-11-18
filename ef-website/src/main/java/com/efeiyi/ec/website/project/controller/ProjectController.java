@@ -4,6 +4,7 @@ import com.efeiyi.ec.project.model.Project;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import com.sun.javafx.sg.prism.NGShape;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class ProjectController extends BaseController {
 
     @Autowired
     private ObjectRecommendedManager objectRecommendedManager;
+
+    @Autowired
+    private BannerManager bannerManager;
 
     @RequestMapping(value = "/listProject.do")
     public String queryProjectList(Model model,HttpServletRequest request ) throws Exception{
@@ -52,6 +56,8 @@ public class ProjectController extends BaseController {
     @RequestMapping("/list/{categoryId}")
     public String listProjectByCategory(HttpServletRequest request , @PathVariable String categoryId ,Model model) throws Exception{
         //@TODO 轮播图位置
+        List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
+        model.addAttribute("bannerList", bannerList);
         XQuery projectQuery = new XQuery("listProject_default",request);
         projectQuery.put("projectCategory_id",categoryId);
         List<Object> projectList = baseManager.listObject(projectQuery);

@@ -94,7 +94,7 @@ $(function(){
     })();
 
 
-        //
+    //
     (function(){
         $('.shop-sort .link2 dt').click(function(){
             $(this).toggleClass('active').siblings('dd').stop().slideToggle('fast');
@@ -382,7 +382,14 @@ $(function(){
                 btnPrev.delay(100).animate({'opacity':'1'},10);
                 btnNext.delay(100).animate({'opacity':'0.2'},10);
             }
-        }
+        };
+
+
+        //分类展开收起
+        var cate=$('#cate');
+        cate.find('h2').bind('click',function(){
+            cate.find('.allsort').slideToggle(100);
+        })
 
     })();
 
