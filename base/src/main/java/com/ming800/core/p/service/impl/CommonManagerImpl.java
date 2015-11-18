@@ -79,7 +79,6 @@ public class CommonManagerImpl implements CommonManager {
                     String defType = node.selectSingleNode("@defType").getText();
                     String qf = node.selectSingleNode("@qf").getText();
                     String solrClientCount = node.selectSingleNode("@solrClientCount").getText();
-                    String solrServerCoreUrl = node.selectSingleNode("@solrServerCoreUrl").getText();
 
                     CommonSearch commonSearch = new CommonSearch();
                     commonSearch.setRows(Integer.parseInt(rows));
@@ -90,8 +89,7 @@ public class CommonManagerImpl implements CommonManager {
                     commonSearch.setHighLightSimplePost(highLightSimplePost);
                     commonSearch.setDefType(defType);
                     commonSearch.setQf(qf);
-                    commonSearch.setSolrClientCount(solrClientCount);
-                    commonSearch.setSolrServerCoreUrl(solrServerCoreUrl);
+                    commonSearch.setSolrClientCount(Integer.parseInt(solrClientCount));
                     searchParamMap.put(group,commonSearch);
                 }
             }

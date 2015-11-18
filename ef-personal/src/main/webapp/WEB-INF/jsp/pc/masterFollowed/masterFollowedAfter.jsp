@@ -81,7 +81,7 @@
   $(window).load(function(){
     var winH = $(window).height(); //页面可视区域高度
     $(window).scroll(function(){
-      var pageH = $(document).height();
+      var pageH = $(document.body).height();
       var scrollT = $(window).scrollTop(); //滚动条top
       var aa = (pageH - winH - scrollT) / winH;
       console.log(ajaxkey);

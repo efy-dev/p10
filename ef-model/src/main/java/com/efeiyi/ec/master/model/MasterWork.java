@@ -36,7 +36,6 @@ public class MasterWork {
     // /   private  MasterWorkRecommended recommended;//推荐作品
 //    private List<ProjectTag> projectTagList;
     private String praiseStatus;
-    private String storeStatus;
     private Integer amount;
     private Integer fsAmount;
     private Integer storeAmount;
@@ -148,15 +147,6 @@ public class MasterWork {
 
     public void setProductDescription(ProductDescription productDescription) {
         this.productDescription = productDescription;
-    }
-
-    @Transient
-    public String getStoreStatus() {
-        return storeStatus;
-    }
-
-    public void setStoreStatus(String storeStatus) {
-        this.storeStatus = storeStatus;
     }
 
     @Column(name = "status")

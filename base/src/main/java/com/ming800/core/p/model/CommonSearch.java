@@ -14,8 +14,7 @@ public class CommonSearch implements Serializable {
     private String highLightSimplePost;//高亮后缀
     private String defType;//权重类型
     private String qf;//权重分配算式
-    private String solrClientCount;//启动的SolrClient数
-    private String solrServerCoreUrl;//Solr服务端地址
+    private Integer solrClientCount;//启动的SolrClient数
 
     public Integer getRows() {
         return rows;
@@ -61,11 +60,11 @@ public class CommonSearch implements Serializable {
         this.defType = defType;
     }
 
-    public String getSolrClientCount() {
+    public Integer getSolrClientCount() {
         return solrClientCount;
     }
 
-    public void setSolrClientCount(String solrClientCount) {
+    public void setSolrClientCount(Integer solrClientCount) {
         this.solrClientCount = solrClientCount;
     }
 
@@ -87,13 +86,5 @@ public class CommonSearch implements Serializable {
 
     public void setQf(String qf) {
         this.qf = qf;
-    }
-
-    public String getSolrServerCoreUrl() {
-        return solrServerCoreUrl;
-    }
-
-    public void setSolrServerCoreUrl(String solrServerCoreUrl) {
-        this.solrServerCoreUrl = solrServerCoreUrl;
     }
 }

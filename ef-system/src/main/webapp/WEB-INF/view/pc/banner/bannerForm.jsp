@@ -71,10 +71,17 @@
                 </div>
 
                 <div class="am-form-group">
-                    <label for="directUrl" class="am-u-sm-3 am-form-label">跳转地址</label>
+                    <label for="directUrl" class="am-u-sm-3 am-form-label">PC地址</label>
 
                     <div class="am-u-sm-9">
                         <input type="text" id="directUrl" name="directUrl" placeholder="点击轮播图跳转的url" value="${object.directUrl}">
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label for="wapUrl" class="am-u-sm-3 am-form-label">移动地址</label>
+
+                    <div class="am-u-sm-9">
+                        <input type="text" id="wapUrl" name="wapUrl" placeholder="点击轮播图跳转的url" value="${object.wapUrl}">
                     </div>
                 </div>
                 <div class="am-form-group">

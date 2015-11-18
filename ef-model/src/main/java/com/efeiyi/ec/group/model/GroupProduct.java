@@ -22,17 +22,6 @@ public class GroupProduct implements Serializable {
     private Integer groupPurchaseTime;// 成团时间
     private String status;// 状态标记
     private ProductModel productModel; //商品
-    private String productName;
-
-    @Transient
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")

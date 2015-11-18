@@ -60,7 +60,7 @@ public class MasterCategoryController {
 		}
 		XQuery xQuery = new XQuery("listMasterProject_default",request);
 		List<MasterProject> list = baseManager.listObject(xQuery);
-		XQuery xQuery2 = new XQuery("listAddressProvince_default",request);
+		XQuery xQuery2 = new XQuery("listAddressProvince_asc",request);
 		List<AddressProvince> list2 = baseManager.listObject(xQuery2);
 		model.addAttribute("categoryList",list);
 		model.addAttribute("cityList",list2);

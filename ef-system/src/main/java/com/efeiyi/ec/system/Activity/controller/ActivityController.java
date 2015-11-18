@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
@@ -35,7 +36,8 @@ public class ActivityController {
 
     //对所有团进行成团操作并发送红包
     @RequestMapping(value = "/sendRedPacket.do")
-    public void sendRedPacket(HttpServletRequest request, Model model) throws Exception{
+    @ResponseBody
+    public String sendRedPacket(HttpServletRequest request, Model model) throws Exception{
         XQuery xQuery = new XQuery("listGroup_default3",request);
         List<Group> list = baseManager.listObject(xQuery);
         for(Group group:list){
@@ -97,6 +99,7 @@ public class ActivityController {
                 }
             }
         }
+        return  "";
     }
 
 }

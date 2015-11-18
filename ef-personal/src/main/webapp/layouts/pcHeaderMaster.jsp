@@ -16,7 +16,7 @@
             <%if(AuthorizationUtil.getMyUser()==null || AuthorizationUtil.getMyUser().getId() == null){ %>
             <%--<li><a href="<c:url value='http://passport.efeiyi.com/login?service=http%3A%2F%2Flocalhost:8080%2Fj_spring_cas_security_check'/>" title="登录">请登录</a></li>--%>
             <li><a href="<c:url value='/sso.do'/>" title="登录">请登录</a></li>
-            <li><a href="http://passport.efeiyi.com/register?service=http://master.efeiyi.com/ef-person//sso.do" title="快速注册">快速注册</a></li>
+            <li><a href="" title="快速注册">快速注册</a></li>
             <% } %>
             <%--<li><a href="" title="商家入驻">商家入驻</a></li>--%>
             <li class="btn-top-wechat">

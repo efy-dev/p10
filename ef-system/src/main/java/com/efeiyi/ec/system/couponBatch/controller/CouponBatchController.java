@@ -27,7 +27,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/couponBatch")
@@ -195,7 +198,7 @@ public class CouponBatchController extends BaseController {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        String hql = "from Consumer c where c.status<>0 ";
+        String hql = "from Consumer c where 1=1 ";
         LinkedHashMap<String, Object> hm = new LinkedHashMap<>();
         if (!"".equals(username)) {
             hql += " and c.username=:username ";
@@ -231,7 +234,6 @@ public class CouponBatchController extends BaseController {
                     } else {
                         tempCoupon.setConsumer(tempConsumer);
                         tempCoupon.setWhetherBind("2");
-                        tempCoupon.setBindTime(new Date());
                         baseManager.saveOrUpdate(Coupon.class.getName(), tempCoupon);
                         break;
                     }
@@ -250,7 +252,7 @@ public class CouponBatchController extends BaseController {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        String hql = "from Consumer c where c.status<>0 ";
+        String hql = "from Consumer c where 1=1 ";
         LinkedHashMap<String, Object> hm = new LinkedHashMap<>();
         if (!"".equals(username)) {
             hql += " and c.username=:username ";

@@ -27,7 +27,6 @@ public class MasterModel implements Serializable{
 	private Integer fsAmount;//关注数
 	private Integer storeAmount;//收藏数
 	private String praiseStatus;
-	private String storeStatus;//收藏状态
 	private Long praiseNum;
 	private String remark;
 	private String cityName;
@@ -90,14 +89,6 @@ public class MasterModel implements Serializable{
 
 	public void setPraiseStatus(String praiseStatus) {
 		this.praiseStatus = praiseStatus;
-	}
-
-	public String getStoreStatus() {
-		return storeStatus;
-	}
-
-	public void setStoreStatus(String storeStatus) {
-		this.storeStatus = storeStatus;
 	}
 
 	public String getFollowStatus() {

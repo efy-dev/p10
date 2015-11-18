@@ -58,7 +58,18 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only" width="15%">${banner.title}</td>
-                        <td class="am-hide-sm-only" width="25%">${banner.directUrl}</td>
+                        <td class="am-hide-sm-only" width="25%">
+                            <c:if test="${not empty banner.directUrl}">
+                                <p style="margin-left: 10px;">
+                                    (PC)<a target="_blank" href="${banner.directUrl}">${banner.directUrl}</a>
+                                </p>
+                            </c:if>
+                            <c:if test="${not empty banner.wapUrl}">
+                                <p style="margin-left: 0px;">
+                                    (WAP) <a target="_blank" href="${banner.wapUrl}">${banner.wapUrl}</a>
+                                </p>
+                            </c:if>
+                        </td>
                         <td class="am-hide-sm-only" width="10%">
                             <a href="#" onclick="toUpdateBannerOrder(this,'<c:url value="/banner/updateBannerOrder.do"/>')" bannerOrder="${banner.bannerOrder}" id="${banner.id}">
                                     ${banner.bannerOrder}
