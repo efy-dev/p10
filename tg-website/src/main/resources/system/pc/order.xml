@@ -29,10 +29,6 @@
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="group.id" defaultValue="1" operation="eq"/>
                     </query>
-                    <query name="default0" label="拼团中" type="auto" orderBy="id:desc">
-                        <condition name="member.user.id" defaultValue="1" operation="eq"/>
-                        <condition name="group.id" defaultValue="1" operation="eq"/>
-                    </query>
                 </do>
             </does>
         </entity>
