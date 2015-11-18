@@ -284,10 +284,10 @@
                     } else {
                         src = "<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>";
                     }
-                    if(data.amount == null){
+                    if(data[i].amount == null){
                         amount = 0;
                     }else{
-                        amount = data.amount;
+                        amount = data[i].amount;
                     }
                     var childNode = "<li style=\"margin: 0;border-bottom: 0;\" id=\""+data.id+"\" class=\"obtain\">"+
                             "           <div class=\"ae\">"+
@@ -343,10 +343,10 @@
                     }else{
                         src = "<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>";
                     }
-                    if(data.amount == null){
+                    if(data[i].amount == null){
                         amount = 0;
                     }else{
-                        amount = data.amount;
+                        amount = data[i].amount;
                     }
                     var insertNode = $("<li class=\"ae\" id=\""+data.id+"\">"+
                             "     <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"http://tenant.efeiyi.com/"+src+"@!master-favicon-view\"></a></div>"+

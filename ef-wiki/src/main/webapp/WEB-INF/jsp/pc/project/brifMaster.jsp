@@ -76,7 +76,7 @@
 <!-- //End--header-->
 <div class="craft-details">
   <div class="craft-banner">
-    <img src="http://pro.efeiyi.com/${project.picture_pc_url}@!pc-project-header">
+    <img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_pc_url}@!pc-project-header">
     <div class="cart-b-page">
       <h5 class="ae">${project.name}</h5>
       <c:choose>
@@ -171,7 +171,7 @@
           return true;
         }
         if(data=="error"){
-          alert("未知错误，请联系管理员！！！");
+          showAlert("提示","未知错误，请联系管理员！！！");
           return false;
         }
       },
@@ -399,7 +399,8 @@
       dataType:"json",
       success:function(data){
         if(data=="false"){
-
+          //alert("您还未登陆，请登录后再操作");
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/brifMaster/${project.id}'/>";
@@ -413,12 +414,23 @@
           //$("#"+masterId).html("取消关注");
           $("#"+masterId).empty();
           $("#"+masterId).append("<em>已关注</em>");
-
+          if(oper=="add"){
+            var val = $("#"+masterId).attr("about","1");
+          }
+          if(oper=="del"){
+            var val = $("#"+masterId).attr("about","0");
+          }
           return true;
         }
         if(data=="del"){
           $("#"+masterId).empty();
           $("#"+masterId).append("<i class=\"gz-icon\"></i><em>关注</em>");
+          if(oper=="add"){
+            var val = $("#"+masterId).attr("about","1");
+          }
+          if(oper=="del"){
+            var val = $("#"+masterId).attr("about","0");
+          }
           return true;
         }
         if(data=="error"){
@@ -432,12 +444,7 @@
         return false;
       },
       complete:function(){
-        /*if(oper=="add"){
-          var val = $("#"+masterId).attr("about","1");
-        }
-        if(oper=="del"){
-          var val = $("#"+masterId).attr("about","0");
-        }*/
+
       }
     });
   }

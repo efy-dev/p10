@@ -238,7 +238,7 @@ ${product.productDescription.content}
       <i class="s-solid ft-a"></i>
       <a href="#" class="ft-a" onclick="storeProduct('${product.id}')"> <i class="good-3"></i> </a>
       <i class="s-solid ft-a"></i>
-      <a href="javascript:void(0);" class="ft-a addft-a"   style="position:relative">
+      <a href="javascript:void(0);" class="ft-a"   style="position:relative">
         <i class="good-4" id="good-4"></i>
         <div class="nr-share" id="nr-share" style="display: none">
         <div class="nr-bg">
@@ -270,11 +270,12 @@ ${product.productDescription.content}
 
     $.ajax({
       type:"get",
-      url:"<c:url value='/base/attentionMaster.do?masterId='/>"+masterId+"&oper="+oper,//设置请求的脚本地址
+      url:"/base/attentionMaster.do?masterId="+masterId+"&oper="+oper,//设置请求的脚本地址
       data:"",
       dataType:"json",
       success:function(data){
         if(data=="false"){
+          //alert("您还未登陆，请登录后再操作");
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
@@ -286,28 +287,36 @@ ${product.productDescription.content}
         }
         if(data=="true"){
           $("#"+masterId).html("取消关注");
+          if(oper=="0"){
+            var val = $("#saveMasterFllow").val("1");
+          }
+          if(oper=="1"){
+            var val = $("#saveMasterFllow").val("0");
+          }
           return true;
         }
         if(data=="del"){
           $("#"+masterId).html("关注");
+          if(oper=="0"){
+            var val = $("#saveMasterFllow").val("1");
+          }
+          if(oper=="1"){
+            var val = $("#saveMasterFllow").val("0");
+          }
           return true;
         }
         if(data=="error"){
-        alert("未知错误，请联系管理员！！！");
+        showAlert("提示","未知错误，请联系管理员！！！");
           return false;
         }
       },
       error:function(){
+
         alert("出错了，请联系管理员！！！");
         return false;
       },
       complete:function(){
-       /* if(oper=="0"){
-          var val = $("#saveMasterFllow").val("1");
-        }
-        if(oper=="1"){
-          var val = $("#saveMasterFllow").val("0");
-        }*/
+
       }
     });
   }
@@ -333,7 +342,7 @@ var startNum=1;
               }else{
                 amout1 =data.list[i].amount;
               }
-              var userName = data.list[i].user.username.substring(0,3)+"****"+data.list[i].user.username.substring(7,11);
+              var userName = data.list[i].user.name2;
               if(userName==null){
                 userName ="匿名用户";
               }
@@ -375,7 +384,7 @@ var startNum=1;
   function transdate(endTime){
     var timestamp = Date.parse(new Date());
     var oldTime = parseInt(endTime);
-    var intervalTime = (timestamp+1000 - oldTime)/1000/60;
+    var intervalTime = (timestamp - oldTime)/1000/60;
     var showTime = "";
     if(intervalTime<=59){
       showTime=intervalTime.toFixed(0)+"分钟前";
@@ -407,7 +416,7 @@ var startNum=1;
                }else{
                  amout1 =data.list[i].amount;
                }
-               var userName = data.list[i].user.username.substring(0,3)+"****"+data.list[i].user.username.substring(7,11);
+               var userName = data.list[i].user.name2;
                if(userName==null){
                  userName ="匿名用户";
                }
@@ -532,9 +541,8 @@ function savaUP(productId){
           }
           return false;
         }
-        var userName = data.user.username.substring(0,3)+"****"+data.user.username.toString().substring(7,11);
-        $(".dialogue").append("<div class='matter'> <p class='text-h1'>"+userName+"</p> " +
-                "<p class='text-time'>刚刚</p> <p class='text-content' onclick='showmodal2(this)' about='"+data.id+"'>" +
+        $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
+                "<p class='text-time'>刚刚</p> <p class='text-content'>" +
                 "<a href='#' >"+CommentValue+"</a></p> <div class='owner'>" +
                 "<img class='am-circle' src='<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>'/>" +
                 "</div> <div class='owner-good'><a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.id+"\")' about='${product.id}' name='up'>" +
@@ -579,8 +587,8 @@ function savaUP(productId){
             return false;
           }
           $("#"+contentId).append("<div class='respond'> <p><span class='txt-name'>" +
-                  "<a href='#'> ${myUser.username}：</a>" +
-                  "</span><span class='txt-content' onclick='showmodal2(this)' about='"+data.id+"'>"+CommentValue+"</span></p> </div> ");
+                  "<a href='#'> ${myUser.name2}：</a>" +
+                  "</span><span class='txt-content'>"+CommentValue+"</span></p> </div> ");
         },
         error:function(){
           alert("出错了，请联系管理员！！！");
@@ -664,7 +672,7 @@ function savaUP(productId){
           return false;
         }
         if(data=="repeat"){
-          showAlert("提示","您已取消收藏！")
+          showAlert("提示","您已收藏过了！")
           return true;
         }
         if(data=="true"){
@@ -696,7 +704,7 @@ function savaUP(productId){
           for(i in data){
             var  pubu =$("#newcommentList");
             var cTime =transdate(data[i].createDateTime);
-            var userName = data[i].user.username.substring(0,3)+"****"+data[i].user.username.substring(7,11);
+            var userName = data[i].user.name2;
             if(userName==null){
               userName ="匿名用户";
             }

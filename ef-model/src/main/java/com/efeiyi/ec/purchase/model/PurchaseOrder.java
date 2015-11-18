@@ -48,7 +48,6 @@ public class PurchaseOrder {
     private String receiverName;//收货人姓名
     private String receiverPhone;//收货人联系方式
     private String callback; //回调
-    private String orderType; // 订单类型
 
     @Column(name = "callback")
     public String getCallback() {
@@ -256,14 +255,6 @@ public class PurchaseOrder {
         this.payWay = payWay;
     }
 
-    @Column(name = "order_type")
-    public String getOrderType() {
-        return orderType;
-    }
-
-    public void setOrderType(String orderType) {
-        this.orderType = orderType;
-    }
 
     @Transient
     public BigDecimal getRealPayMoney() {

@@ -60,7 +60,7 @@
   </div>
   <!--价格-->
   <div class="cost ae">
-    <div class="txt1"><s>飞蚁价:${group.groupProduct.productModel.price}元</s></div>
+    <div class="txt1"><s>原价:${group.groupProduct.productModel.price}元</s></div>
     <div class="txt2"><em>拼团价:${group.groupProduct.groupPrice}元</em><i class="icon"></i></div>
   </div>
   <!--功能-->

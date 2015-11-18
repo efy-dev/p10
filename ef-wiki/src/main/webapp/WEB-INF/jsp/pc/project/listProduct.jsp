@@ -77,7 +77,7 @@
 <!-- //End--header-->
 <div class="craft-details">
   <div class="craft-banner">
-    <img src="http://pro.efeiyi.com/${project.picture_url}@!pc-project-header">
+    <img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_url}@!pc-project-header">
     <div class="cart-b-page">
       <h5 class="ae">${project.name}</h5>
       <c:choose>
@@ -216,22 +216,22 @@
         var pubu = $("#pubu");
         if(data.list && data.list != null){
           for(i in data.list){
-            var box = $("<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\"> <img src=\"http:pro.efeiyi.com/"+data.list[i].picture_url+"\"> " +
+            var box = $("<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                     "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                     "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
-                    "<span>"+data.list[i].amount+"</span> </a> </div> <div class=\"d-right\"> " +
+                    "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
                     "<div class=\"right1\"> <a href=\"#\"> <i class=\"h-i-con2\"></i> " +
-                    "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"right2\"> <a href=\"#\"> " +
+                    "<span>"+data.list[i].amount+"</span> </a> </div> <div class=\"right2\"> <a href=\"#\"> " +
                     "<i class=\"h-i-con3\"></i> </a> </div> </div> </div> </li> </ul>");
 
 
             pubu.append(box);
-            html+="<li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\"> <img src=\"http://pro.efeiyi.com/"+data.list[i].picture_url+"\"> " +
+            html+="<li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                     "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                     "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
-                    "<span>"+data.list[i].amount+"</span> </a> </div> <div class=\"d-right\"> " +
+                    "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
                     "<div class=\"right1\"> <a href=\"#\"> <i class=\"h-i-con2\"></i> " +
-                    "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"right2\"> <a href=\"#\"> " +
+                    "<span>"+data.list[i].amount+"</span> </a> </div> <div class=\"right2\"> <a href=\"#\"> " +
                     "<i class=\"h-i-con3\"></i> </a> </div> </div> </div> </li> "
           }
          //return html;
@@ -678,7 +678,7 @@
 
 
                 // pubu.append(box);
-                html+="<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\"> <img src=\"http://pro.efeiyi.com/"+data.list[i].picture_url+"\"> " +
+                html+="<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                         "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                         "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                         "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
@@ -788,7 +788,7 @@
           return false;
         }
         if(data=="repeat"){
-          alert("您已取消收藏！")
+          alert("您已收藏过了！")
           return true;
         }
         if(data=="true"){

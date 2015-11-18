@@ -81,7 +81,7 @@
                                 未绑定
                             </c:if>
                             <c:if test="${coupon.whetherBind == '2'}">
-                                <fmt:formatDate value="${coupon.bindTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                ${coupon.bindTime}
                             </c:if>
                         </td>
                         <td class="am-hide-sm-only"><a

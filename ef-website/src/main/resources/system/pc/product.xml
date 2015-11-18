@@ -18,11 +18,6 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="tenant.id" defaultValue="" operation="eq"/>
                     </query>
-
-                    <query name="byproject" label="根据项目来查询商品" type="auto" orderBy="showDateTime:desc">
-                        <condition name="project.id" defaultValue="0" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                    </query>
                 </do>
             </does>
         </entity>
@@ -89,18 +84,6 @@
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <!--<condition name="subject.id" defaultValue="1" operation="eq"/>-->
                     </query>
-                    <query name="default1" label="默认" type="auto" orderBy="adsOrder:desc">
-                        <condition name="groupName" defaultValue="yxhd" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                    </query>
-                    <query name="default3" label="默认" type="auto" orderBy="adsOrder:desc">
-                        <condition name="groupName" defaultValue="rmsp" operation="eq" inputType="default"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                    </query>
-                    <query name="default5" label="默认" type="auto" orderBy="adsOrder:desc">
-                        <condition name="groupName" defaultValue="bgg" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                    </query>
                 </do>
             </does>
         </entity>
@@ -142,9 +125,9 @@
             </does>
         </entity>
 
-        <entity name="TenantMaster" label="店铺大师列表"  model="com.efeiyi.ec.tenant.model.TenantProject">
+        <entity name="TenantMaster" label="店铺大师列表"  model="com.efeiyi.ec.tenant.model.TenantMaster">
             <does>
-                <do name="listTenantProject" access="" label="店铺大师列表">
+                <do name="listTenantMaster" access="" label="店铺大师列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="tenant.id" defaultValue="1" operation="eq"/>

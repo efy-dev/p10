@@ -63,7 +63,17 @@
                         </td>
                         <td class="am-hide-sm-only" width="15%">${banner.title}</td>
                         <td class="am-hide-sm-only" width="25%">
-                             <a href="${banner.directUrl}" target="_blank">${banner.directUrl}</a>
+                            <c:if test="${not empty banner.directUrl}">
+                                <p style="margin-left: 10px;">
+                                    (PC)<a target="_blank" href="${banner.directUrl}">${banner.directUrl}</a>
+                                </p>
+                            </c:if>
+                            <c:if test="${not empty banner.wapUrl}">
+                                <p style="margin-left: 0px;">
+                                    (WAP) <a target="_blank" href="${banner.wapUrl}">${banner.wapUrl}</a>
+                                </p>
+                            </c:if>
+                             <%--<a href="${banner.directUrl}" target="_blank">${banner.directUrl}</a>--%>
                         </td>
                         <td class="am-hide-sm-only" width="15%">
                             <c:if test="${banner.group == 'ec.home.banner'}">
