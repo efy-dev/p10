@@ -30,6 +30,10 @@
             <mvc:mapping path="**"/>
             <bean class="com.efeiyi.ec.system.interceptor.DriverInterceptor"/>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/basic/**"/>
+            <bean class="com.efeiyi.ec.system.listener.controller.RoleListener"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
 

@@ -42,6 +42,7 @@ public class AuthorizationUtil {
         user.setId(myUser.getId());
         user.setName(myUser.getName());
         user.setUsername(myUser.getUsername());
+        user.setRole(myUser.getRole());
         return user;
     }
 
