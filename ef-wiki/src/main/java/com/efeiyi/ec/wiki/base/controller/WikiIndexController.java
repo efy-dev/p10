@@ -497,7 +497,7 @@ public class WikiIndexController extends WikibaseController {
         if (user.getId() == null) {
             return "false";
         }else{
-            String queryHql = "from ProductStore t where t.user.id=:userId and t.product.id=:productId";
+            String queryHql = "from ProductStore t where t.user.id=:userId and t.product.id=:productId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("productId", productId);
