@@ -33,8 +33,8 @@
 
 
 <div style="text-align: left" >
-    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" target="_blank" onclick="toSendPacket('<c:url value="/tuan/sendRedPacket.do"/>');"
-       href=""><span
+    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="toSendPacket('<c:url value="/tuan/sendRedPacket.do"/>');"
+       href="javascript:void(0)"><span
             class="am-icon-pencil-square-o">发放成团红包</span>
     </a>
 </div>
