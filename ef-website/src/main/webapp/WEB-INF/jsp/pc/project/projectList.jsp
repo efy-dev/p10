@@ -9,6 +9,31 @@
 <!-- //End--header-->
 <!--//End--nav-new-->
 <!--//End--focus-new-->
+<div class="wh focus-new">
+    <div class="hd">
+        <ul class="slider-main">
+            <c:forEach items="${bannerList}" var="banner" varStatus="status">
+                <c:if test="${status.index==0}">
+                    <li style="display: block;">
+                </c:if>
+                <c:if test="${status.index!=0}">
+                    <li>
+                </c:if>
+                <a href="<c:url value="${banner.directUrl}"/> " target="_blank"><img
+                        src="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner" width="1280" height="481"
+                        alt=""/></a></li>
+            </c:forEach>
+        </ul>
+        <ul class="slider-nav">
+            <li class="active"></li>
+            <c:forEach items="${bannerList}" var="banner" begin="1">
+                <li></li>
+            </c:forEach>
+        </ul>
+        <div class="btn btn-prev" title="上一页"></div>
+        <div class="btn btn-next" title="下一页"></div>
+    </div>
+</div>
 <div class="wh reco-shop">
     <div class="hd">
         <div class="wh shop-img">

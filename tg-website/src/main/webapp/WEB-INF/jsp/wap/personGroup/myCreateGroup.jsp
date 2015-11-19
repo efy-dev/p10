@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>个人中心-我的开团</title>
+    <title>我的开团</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -43,7 +43,7 @@
     <c:forEach items="${myCreateProductList}" var="member" varStatus="rec">
     <li>
         <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${member.group.groupProduct.id}&groupId=${member.group.id}&memberId=${member.id}">
-            <p> ${member.group.groupProduct.productModel.product.name}[${member.group.groupProduct.productModel.name}]</p>
+            <p> ${member.group.groupProduct.productModel.product.name} ${member.group.groupProduct.productModel.name}</p>
             <p>${member.group.createDateTime}</p>
             <c:if test="${member.group.status==1}">
                 <p>${member.group.memberList.size()}人/${member.group.groupProduct.memberAmount}人成团</p>
