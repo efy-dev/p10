@@ -2,6 +2,7 @@ package com.ming800.core.p.model;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
 
@@ -20,6 +21,7 @@ public class Banner {
     private String imageUrl;
     private String directUrl;
     private String status;
+    private String wapUrl;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -83,5 +85,14 @@ public class Banner {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "wap_url")
+    public String getWapUrl() {
+        return wapUrl;
+    }
+
+    public void setWapUrl(String wapUrl) {
+        this.wapUrl = wapUrl;
     }
 }
