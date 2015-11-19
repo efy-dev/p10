@@ -213,8 +213,16 @@ public class ProductController {
         Project project = product.getProject();
         XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
         purchaseOrderProductQuery.put("productModel_id", productModelId);
-        List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
-        Collections.reverse(purchaseOrderProductList);
+        List<Object> purchaseOrderProductList = new ArrayList<Object>();
+        try{
+            purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
+            if(purchaseOrderProductList!=null&&purchaseOrderProductList.size()>0){
+                Collections.reverse(purchaseOrderProductList);
+            }
+        }catch (Exception e){
+            purchaseOrderProductList = null;
+        }
+        model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
         XQuery productPicturexQuery = new XQuery("listProductPicture_default",request);
         productPicturexQuery.put("product_id",product.getId());
         List<Object> productPictureList = baseManager.listObject(productPicturexQuery);
