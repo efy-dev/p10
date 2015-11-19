@@ -19,16 +19,33 @@
         }
     %>
 </div>
-<footer class="bd footer">
+<footer class="bd footer-new">
+    <div class="bd authentication">
+        <h3>独家合作伙伴</h3>
+        <div class="bd">
+            <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织"></a>
+            <em class="line"></em>
+            <a class="icon2" title="e飞蚁"></a>
+            <em class="line"></em>
+            <a class="icon3" title="中国非物质文化遗产保护协会"></a>
+        </div>
+    </div>
     <div class="bd info">
         <a class="icon"></a>
-
-        <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台
-        </div>
-        <div class="wechat"  id="wechat"><img src="/scripts/images/icon-wechat.png"></div>
-        <div class="txt" id="wechatStr1">关注微信公众号</div>
-        <div class="txt"id="wechatStr2">领取好礼</div>
+        <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台</div>
+        <div class="wechat"><img src="/scripts/images/icon-wechat.png"></div>
+        <div class="txt">关注微信公众号</div>
+        <div class="txt">领取超值代金券</div>
     </div>
+    <%--<div class="bd info">--%>
+        <%--<a class="icon"></a>--%>
+
+        <%--<div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台--%>
+        <%--</div>--%>
+        <%--<div class="wechat"  id="wechat"><img src="/scripts/images/icon-wechat.png"></div>--%>
+        <%--<div class="txt" id="wechatStr1">关注微信公众号</div>--%>
+        <%--<div class="txt"id="wechatStr2">领取好礼</div>--%>
+    <%--</div>--%>
     <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
 <!--[if (gte IE 9)|!(IE)]><!-->
