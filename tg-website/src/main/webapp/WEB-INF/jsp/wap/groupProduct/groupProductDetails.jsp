@@ -48,15 +48,18 @@
 <!--//End--header-->
 <div class="my-colonel ae">
     <!-- 轮播产品-->
-    <div class="custom">
-        <div data-am-widget="slider" class="am-slider am-slider-a1 olli" data-am-slider='{&quot;directionNav&quot;:false}' >
-            <ul class="am-slides ">
-                <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</span></div></div></li>
+    <div class="custom newcustom">
+        <div data-am-widget="slider" class="am-slider am-slider-a1 am-no-layout" data-am-slider="{&quot;directionNav&quot;:false}">
+            <ul class="am-viewport" style="overflow: hidden; position: relative;">
+                <ul class="am-slides" style="width: 1200%; transition-duration: 0.6s; transform: translate3d(-640px, 0px, 0px);">
+                    <li class="clone c-page" aria-hidden="true" style="width: 320px; float: left; display: block;">
+                        <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</span></div></div></li>
                 <c:forEach items="${groupProduct.productModel.product.productPictureList}" var="picture">
                     <c:if test="${picture.status=='1'&&picture.productModel.id==groupProduct.productModel.id}">
-                    <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</span></div></div></li>
+                        <li class="clone c-page" aria-hidden="true" style="width: 320px; float: left; display: block;"><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</span></div></div></li>
                     </c:if>
                 </c:forEach>
+            </ul>
             </ul>
         </div>
     </div>

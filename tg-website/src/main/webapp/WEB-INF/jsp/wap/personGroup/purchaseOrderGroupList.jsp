@@ -124,7 +124,7 @@
               <i class="bgpic"></i>
             </div>
           </div>
-          <div class="b-btn"><a href="#" class="btn">去逛逛</a></div>
+          <div class="b-btn"><a href="<c:url value="/tuan"/>" class="btn">去逛逛</a></div>
         </div>
       </c:if>
       </div>
@@ -172,7 +172,7 @@
             <i class="bgpic"></i>
           </div>
         </div>
-        <div class="b-btn"><a href="#" class="btn">去逛逛</a></div>
+        <div class="b-btn"><a href="<c:url value="/tuan"/>" class="btn">去逛逛</a></div>
       </div>
       </c:if>
     </div>
@@ -225,7 +225,7 @@
                 <i class="bgpic"></i>
               </div>
             </div>
-            <div class="b-btn"><a href="#" class="btn">去逛逛</a></div>
+            <div class="b-btn"><a href="<c:url value="/tuan"/>" class="btn">去逛逛</a></div>
           </div>
         </c:if>
     </div>
@@ -279,7 +279,7 @@
             <i class="bgpic"></i>
           </div>
         </div>
-        <div class="b-btn"><a href="#" class="btn">去逛逛</a></div>
+        <div class="b-btn"><a href="<c:url value="/tuan"/>" class="btn">去逛逛</a></div>
       </div>
       </c:if>
     </div>
