@@ -4,6 +4,7 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectFollowed;
 import com.efeiyi.ec.wiki.base.controller.WikibaseController;
+import com.efeiyi.ec.wiki.model.ProductStore;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -92,6 +94,8 @@ public class ProjectController extends WikibaseController {
         if (AuthorizationUtil.getMyUser().getId() != null) {
             model.addAttribute("myUser", AuthorizationUtil.getMyUser());
         }
+        boolean hasStore =  IsStoreProduct(request,productId);
+        model.addAttribute("hasStore", hasStore);
         model.addAttribute("projectId", projectId);
         return "/product/brifProduct";
     }
@@ -116,4 +120,18 @@ public class ProjectController extends WikibaseController {
         return flag;
     }
 
+    public boolean IsStoreProduct(HttpServletRequest request, String productId) throws Exception {
+        boolean flag = false;
+        if (AuthorizationUtil.getMyUser().getId() != null) {
+            String queryHql = "from ProductStore t where t.user.id=:userId and t.product.id=:productId";
+            LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+            map.put("userId", AuthorizationUtil.getMyUser().getId());
+            map.put("productId", productId);
+            ProductStore ps = (ProductStore) baseManager.getUniqueObjectByConditions(queryHql, map);
+            if (ps != null && ps.getId() != null){
+                flag = true;
+            }//不为null,说明已经收藏了
+        }
+        return flag;
+    }
 }

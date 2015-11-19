@@ -204,7 +204,7 @@
           </div>
           <div class="sit-suit-twz"><p>${project.description}</p></div>
         </div>
-        <div class="sit-suit-img"><a href="#"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_wap_url}"></a></div>
+        <div class="sit-suit-img"><a href="#"><img src="http://pro.efeiyi.com/${project.picture_wap_url}"></a></div>
       </div>
     </div>
 
@@ -387,7 +387,7 @@
 
               var box = $(" <li class='item'> <a href='" +"<c:url value='/base/showProduct/{"+data.list[i].id+"}'/> "+
                       "'>" +
-                      "<img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"'></a>" +
+                      "<img src='http://pro.efeiyi.com/"+data.list[i].picture_url+"'></a>" +
                       " <div class='txt'> <div class='name'>"+data.list[i].name+"</div> " +
                       "<div class='txt-info'> <a href='#'>" +
                       "<i class='icon good-1'></i>" +
@@ -869,7 +869,7 @@
 
 
                 html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\">" +
-                        "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
+                        "<img src=\"http://pro.efeiyi.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
                         "<div class=\"name\">"+data.list[i].name+"</div> <div class=\"txt-info\"> " +
                         "<a href=\"javascript:void(0);\" onclick=\"savaUpAndDown('"+data.list[i].id+"')\" id=\""+data.list[i].id+"\" name=\"up\" ><i class=\"icon good-1\"></i><em>"+data.list[i].fsAmount+"</em></a> " +
                         "<a href=\"#\"><i class=\"icon good-2\"></i><em>"+data.list[i].amount+"</em></a> " +
