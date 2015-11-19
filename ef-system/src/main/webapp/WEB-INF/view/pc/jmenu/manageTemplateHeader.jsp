@@ -25,7 +25,7 @@
         <c:if test="${jmenu.children.size()>1}">
             <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-left admin-header-list">
                 <c:forEach items="${jmenu.children}" var="jmenuNode">
-                    <security:authorize ifAnyGranted="${jmenuNode.access}">
+                    <%--<security:authorize ifAnyGranted="${jmenuNode.access}">--%>
                     <li>
                             <%--<c:if test="${jnode.contain(requestScope.qm)&& jnode.getRootFather.id==jmenuNode.id}">--%>
                         <a class="${jmenuNode.jnodeMatch('efy-active',jnode)}"
@@ -35,7 +35,7 @@
                             <%--<a href="http://<%=request.getServerName()+':'+request.getServerPort()%>/main.do${jmenuNode.url}">${jmenuNode.text_zh_CN}</a>--%>
                             <%--</c:if>--%>
                     </li>
-                    </security:authorize>
+                    <%--</security:authorize>--%>
                 </c:forEach>
             </ul>
         </c:if>
