@@ -9,7 +9,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "purchase_order")
-public class PurchaseOrderGift extends PurchaseOrder {
+public class PurchaseOrderGift  {
 
     private String giftMessage;
     private String showGiftNameStatus; //0不显示 1显示

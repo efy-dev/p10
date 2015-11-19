@@ -60,6 +60,43 @@ public class PurchaseOrderController extends BaseController {
     private PaymentManager paymentManager;
 
 
+
+    @RequestMapping({"/giftBuy/{productId}/{amount}"})
+    public String giftBuy(HttpServletRequest request, @PathVariable String productId, Model model, @PathVariable String amount) throws Exception {
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productId);
+        CartProduct cartProduct = new CartProduct();
+        cartProduct.setProductModel(productModel);
+        cartProduct.setAmount(Integer.valueOf(amount));
+        cartProduct.setIsChoose("1");
+        cartProduct.setStatus("1");
+        List<CartProduct> cartProductList = new ArrayList<>();
+        cartProductList.add(cartProduct);
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
+        xSaveOrUpdate.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
+        xSaveOrUpdate.getParamMap().put("user.id", AuthorizationUtil.getMyUser().getId());
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdate);
+        purchaseOrder.setTenant(productModel.getProduct().getTenant());
+        purchaseOrder.setTotal(productModel.getPrice().multiply(new BigDecimal(Integer.parseInt(amount))));
+        purchaseOrder.setOriginalPrice(productModel.getPrice().multiply(new BigDecimal(Integer.parseInt(amount))));
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
+        purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
+        purchaseOrderProduct.setProductModel(productModel);
+        purchaseOrderProduct.setPurchasePrice(productModel.getPrice().multiply(new BigDecimal(Integer.parseInt(amount))));
+        purchaseOrderProduct.setPurchaseAmount(cartProduct.getAmount());
+        baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+        XQuery xQuery = new XQuery("listConsumerAddress_default", request);
+        xQuery.addRequestParamToModel(model, request);
+        List addressList = baseManager.listObject(xQuery);
+        model.addAttribute("addressList", addressList);
+        model.addAttribute("purchaseOrder", purchaseOrder);
+        model.addAttribute("productModel", productModel);
+        model.addAttribute("amount", amount);
+
+        return "/purchaseOrder/purchaseOrderConfirm";
+    }
+
+
     @RequestMapping({"/groupBuy/{groupProductId}/{amount}"})
     public String groupBuy(HttpServletRequest request, @PathVariable String groupProductId, Model model, @PathVariable String amount) throws Exception {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
