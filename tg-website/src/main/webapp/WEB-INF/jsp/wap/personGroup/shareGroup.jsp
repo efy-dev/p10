@@ -96,7 +96,8 @@
           <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
         </c:if>
         <c:if test="${group.groupProduct.memberAmount-group.memberList.size()<=0}">
-          <a href="javascript:void(0)" class="btn" id="btn">还&nbsp;差&nbsp;0&nbsp;人&nbsp;成&nbsp;团</a>
+          <a href="javascript:void(0)" class="btn" id="btn">还&nbsp;差&nbsp;0&nbsp;人&nbsp;成&nbsp;团&nbsp;,&nbsp;去&nbsp;分&nbsp;享</a>
+          <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
         </c:if>
       </c:if>
       <c:if test="${flag==0}">
@@ -153,7 +154,55 @@
       </div>
     </div>
   </div>
+
+  <!--在线客服-->
+  <div class="scroll-bar">
+    <div class="scroll-bar-top" style="display: block;">
+      <span class="btn"><i class="icon1"></i></span>
+    </div>
+    <!-- //End--返回顶部-->
+  </div>
 </div>
+
+<div style="display: none">
+
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+  document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+<style type="text/css">
+  #MEIQIA-BTN-HOLDER {
+    right: 0;bottom: 145px;}
+  #MEIQIA-BTN {
+    background: #000;
+    width: 33px;
+    height:53px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+  #MEIQIA-BTN-LINE {
+    display: none;}
+  #MEIQIA-BTN-TEXT {
+    width:48px;
+    font-size: 12px;
+    position: absolute;
+    left:-28px;
+    top:20px;,
+  display: none;
+  }
+  .MEIQIA-ICON {
+    background:url("http://www.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
+    background-size: auto auto;
+  }
+  #MEIQIA-BTN-ICON {
+    width: 23px;
+    height: 28px;
+    margin: 0;
+    float: left;
+    margin-left:5px;
+    margin-top: 6px;
+  }
+</style>
 <script type="text/javascript">
   var endDate=${endTime};
   setInterval("daoJiShi()",1000);
@@ -176,7 +225,20 @@
     document.getElementById('timer').innerHTML=ofh+ ':' +ofm+ ':' +ofs;
     if(ofs<0){document.getElementById('timer').innerHTML='00:00:00';return;};
   };
+
+  (function(m, ei, q, i, a, j, s) {
+    m[a] = m[a] || function() {
+              (m[a].a = m[a].a || []).push(arguments)
+            };
+    j = ei.createElement(q),
+            s = ei.getElementsByTagName(q)[0];
+    j.async = true;
+    j.src = i;
+    s.parentNode.insertBefore(j, s)
+  })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+  _MEIQIA('entId', 486);
 </script>
+
 <!--//End--footer-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
