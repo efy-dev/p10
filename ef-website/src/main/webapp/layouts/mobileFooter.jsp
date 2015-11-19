@@ -21,7 +21,7 @@
 </div>
 <footer class="bd footer-new">
     <div class="bd authentication">
-        <h3>独家合作伙伴</h3>
+        <h3>战略合作伙伴</h3>
         <div class="bd">
             <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织"></a>
             <em class="line"></em>
