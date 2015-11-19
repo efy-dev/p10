@@ -289,6 +289,11 @@ public class GroupController {
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
         Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
+
+        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
+        purchaseOrderProductQuery.put("productModel_id", group.getGroupProduct().getProductModel().getId());
+        List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
+
         int memberAmount = group.getGroupProduct().getMemberAmount();
         int a = (int)((float)group.getMemberList().size()*100/memberAmount);
         if (a<=100){
@@ -328,6 +333,7 @@ public class GroupController {
         model.addAttribute("endTime",df.parse(df.format(endTime)).getTime());
         model.addAttribute("group",group);
         model.addAttribute("url",url);
+        model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
 
         return "/personGroup/shareGroup";
     }
