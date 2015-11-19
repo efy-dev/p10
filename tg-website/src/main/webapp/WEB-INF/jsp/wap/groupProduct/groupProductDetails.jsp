@@ -123,6 +123,11 @@
         <!-- //End--返回顶部-->
     </div>
 </div>
+<div style="display: none">
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
 <!--//End--footer-->
 <style type="text/css">
     #MEIQIA-BTN-HOLDER {
@@ -142,11 +147,11 @@
         font-size: 12px;
         position: absolute;
         left:-28px;
-        top:20px;
-        display: none;
+        top:20px;,
+    display: none;
     }
     .MEIQIA-ICON {
-        background:url(http://j.efeiyi.com/tg-website/scripts/wap/images/qq.png) no-repeat -176px -143px;
+        background:url("http://www.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
         background-size: auto auto;
     }
     #MEIQIA-BTN-ICON {

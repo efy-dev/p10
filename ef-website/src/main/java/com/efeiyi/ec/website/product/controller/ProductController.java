@@ -120,7 +120,7 @@ public class ProductController {
             xSaveOrUpdate.getParamMap().remove("id");
             baseManager.saveOrUpdate(xSaveOrUpdate);
         } else {
-         flag = false;
+            flag = false;
         }
         return flag;
     }
@@ -167,7 +167,7 @@ public class ProductController {
         model.addAttribute("productModel", productModel);
         model.addAttribute("map",map);
         return "/product/recommendationList";
-}
+    }
     /**
      * 删除收藏产品
      * @param request
@@ -213,25 +213,21 @@ public class ProductController {
         Project project = product.getProject();
         XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
         purchaseOrderProductQuery.put("productModel_id", productModelId);
-        List<Object> purchaseOrderProductList = new ArrayList<Object>();
-        try{
-            purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
-            if(purchaseOrderProductList!=null&&purchaseOrderProductList.size()>0){
-            Collections.reverse(purchaseOrderProductList);
-            }
-        }catch (Exception e){
-            purchaseOrderProductList = null;
-        }
-        model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
+        List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
+        Collections.reverse(purchaseOrderProductList);
+        XQuery productPicturexQuery = new XQuery("listProductPicture_default",request);
+        productPicturexQuery.put("product_id",product.getId());
+        List<Object> productPictureList = baseManager.listObject(productPicturexQuery);
+        model.addAttribute("productPictureList",productPictureList);
         List<ProductModel> productModelListTmp = product.getProductModelList();
         List<ProductPicture> productPictures = product.getProductPictureList();
         ProductPicture productPicture = new ProductPicture();
         if (productPictures != null && productPictures.size() > 0) {
-             for (ProductPicture p : productPictures) {
-                    if("2".equals(p.getStatus())){
-                        productPicture = p;
-                        break;
-                    }
+            for (ProductPicture p : productPictures) {
+                if("2".equals(p.getStatus())){
+                    productPicture = p;
+                    break;
+                }
             }
         }
         model.addAttribute("productModelList", productModelListTmp);
@@ -239,7 +235,7 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("productPicture",productPicture);
         model.addAttribute("productPictures",productPictures);
-
+        model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
         model.addAttribute("project",project);
         return "/product/productDetails";
     }
@@ -250,7 +246,7 @@ public class ProductController {
      */
     @RequestMapping({"/favorite/productFavoriteStatus.do"})
     @ResponseBody
-   public Boolean productFavoriteStatus(HttpServletRequest request) throws Exception{
+    public Boolean productFavoriteStatus(HttpServletRequest request) throws Exception{
         MyUser currentUser = AuthorizationUtil.getMyUser();
         Boolean flag = false;
         if (currentUser.getId() != null) {
@@ -260,9 +256,9 @@ public class ProductController {
             xQuery.put("productModel_id", productModelId);
             List<ProductFavorite> productFavoriteList =  baseManager.listObject(xQuery);
             if(productFavoriteList!=null&&"1".equals(productFavoriteList.get(0).getStatus())){
-            flag = true;
+                flag = true;
             }
         }
         return flag;
-     }
+    }
 }

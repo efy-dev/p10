@@ -210,6 +210,11 @@
                         <condition name="product.id" defaultValue="0" operation="eq"/>
                     </query>
                 </do>
+                <do name="listMSProductModel" label="秒杀产品列表" access="" result="/productModel/productModelList">
+                    <query name="default" label="默认规格" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
             </does>
         </entity>
         <entity name="ProductRecommended" label="推荐产品列表"
