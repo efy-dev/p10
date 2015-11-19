@@ -21,10 +21,6 @@ $(function(){
     })();
     //订单礼物弹出框
     (function(){
-        $("#add-dext").click(function(){
-            $(this).siblings(".add-ress").show();
-            return false
-        })
         $("#add-show").click(function(){
             $(this).siblings('.add-cart').fadeIn().show()
             return false
@@ -177,8 +173,6 @@ $(function(){
                 $(this).parents('#order-address').hide();
                 $('body,document').css('overflow','visible');
             })
-
-
             return false;
         })
     })();

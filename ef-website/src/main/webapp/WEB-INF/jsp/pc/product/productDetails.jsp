@@ -256,7 +256,7 @@
                                 <%--<c:if test="${not empty purchaseOrderProductList}">--%>
                                 <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct"
                                            varStatus="rec">
-                                    <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'}">
+                                    <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'&&not empty purchaseOrderProduct.purchaseOrder.user&&not empty purchaseOrderProduct.purchaseOrder}">
                                     <li>
                                     <div class="txt">
                                         <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
