@@ -27,6 +27,14 @@
         <%--<a href="<c:url value="/document/richTextView?group=ec.gywm"/> " target="_blank" title="新闻资讯">新闻资讯</a>--%>
     </div>
     <div class="copyright wh">
+        <div class="frlinksimg">
+            <strong>独家合作</strong>
+            <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织" target="_blank"></a>
+            <em class="line"></em>
+            <a class="icon3" title="中国非物质文化遗产保护协会"></a>
+            <em class="line"></em>
+            <a class="icon2" title="中国非物质文化遗产保护协会"></a>
+        </div>
         <div class="phone">
             <strong>商家入驻热线</strong>
             <em>400-876-8766</em>
@@ -38,9 +46,10 @@
             <%--<a rel="nofollow" href="http://www.yongxinhua.cn/ " target="_blank" title="永新华控股">永新华控股</a>--%>
             <%--<a rel="nofollow" href="http://www.ihchina.cn/show/feiyiweb/index.html" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>--%>
         </div>
-        <div class="info">Copyright © 2015 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
+        <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1&nbsp;&nbsp;京公网安备11010502027457</div>
     </div>
     <div class="wh authentication">
+        <a href="http://gawa.bjchy.gov.cn/" target="_blank" title="网站域名备案"><img src="<c:url value="/scripts/images/authentication-0.png"/>" alt="网站域名备案"></a>
         <a href="http://www.miitbeian.gov.cn" target="_blank" title="网站域名备案"><img src="<c:url value="/scripts/images/authentication-1.png"/>" alt="网站域名备案"></a>
         <a href="http://www.baic.gov.cn/" target="_blank" title="企业信用信息备案"><img src="<c:url value="/scripts/images/authentication-2.png"/>" alt="企业信用信息备案"></a>
         <a href="<c:url value="/scripts/images/license.jpg"/>" target="_blank" title="企业营业执照"><img src="<c:url value="/scripts/images/authentication-3.png"/>" alt="企业营业执照 "></a>

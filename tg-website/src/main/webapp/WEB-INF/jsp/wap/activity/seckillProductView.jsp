@@ -92,12 +92,12 @@
 
             <p class="bd t3">秒杀规则：下单成功后请在15分钟内完成支付</p>
             <c:if test="${miaoStatus=='2'}">
-                <div class="bd btn-bg" id="miaoBuy"><a href="<c:url value="/buy/${seckillProduct.id}/1"/>"
+                <div class="bd btn-bg" id="miaoBuy"><a href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
                                                        title="立即抢购">立即抢购</a>
                 </div>
             </c:if>
             <c:if test="${miaoStatus=='1'}">
-                <div class="bd btn-bg" id="miaoBuy" style="display: none"><a href="<c:url value="/buy/${seckillProduct.id}/1"/>"
+                <div class="bd btn-bg" id="miaoBuy" style="display: none"><a href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
                                                        title="立即抢购">立即抢购</a>
                 </div>
             </c:if>

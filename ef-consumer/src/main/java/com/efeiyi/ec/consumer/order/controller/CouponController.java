@@ -94,9 +94,9 @@ public class CouponController {
             List<Object> couponBatchList = baseManager.listObject(xQuery);
             if (couponBatchList != null && couponBatchList.size() > 0) {
                 CouponBatch currentCouponBatch = (CouponBatch) couponBatchList.get(0);
-                if (currentCouponBatch.getAmount() <= currentCouponBatch.getCouponList().size()) {
-                    return "null";
-                }
+//                if (currentCouponBatch.getAmount() <= currentCouponBatch.getCouponList().size()) {
+//                    return "null";
+//                }
 //            生成一张该批次的优惠券  这里使用的是通码
                 coupon = new Coupon();
                 coupon.setStatus("1");

@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>已参团人打开</title>
+  <title>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -46,27 +46,42 @@
 <div class="my-colonel ae">
   <!--产品-->
   <!-- 轮播产品-->
-  <div class="custom">
+<%--  <div class="custom">
     <div data-am-widget="slider" class="am-slider am-slider-a1 olli" data-am-slider='{&quot;directionNav&quot;:false}' >
       <ul class="am-slides ">
-        <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${group.groupProduct.productModel.product.name}${group.groupProduct.productModel.name}${group.groupProduct.productModel.product.subName}</span></div></div></li>
+        <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</span></div></div></li>
         <c:forEach items="${group.groupProduct.productModel.product.productPictureList}" var="picture">
           <c:if test="${picture.status=='1'&&picture.productModel.id==group.groupProduct.productModel.id}">
-            <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${group.groupProduct.productModel.product.name}${group.groupProduct.productModel.name}${group.groupProduct.productModel.product.subName}</span></div></div></li>
+            <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</span></div></div></li>
           </c:if>
         </c:forEach>
+      </ul>
+    </div>
+  </div>--%>
+  <div class="custom newcustom">
+    <div data-am-widget="slider" class="am-slider am-slider-a1 am-no-layout" data-am-slider="{&quot;directionNav&quot;:false}">
+      <ul class="am-viewport" style="overflow: hidden; position: relative;">
+        <ul class="am-slides" style="width: 1200%; transition-duration: 0.6s; transform: translate3d(-640px, 0px, 0px);">
+          <li class="clone c-page" aria-hidden="true" style="width: 320px; float: left; display: block;">
+            <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!wap-product-pic"><div class="c-page"><span>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</span></div></div></li>
+          <c:forEach items="${group.groupProduct.productModel.product.productPictureList}" var="picture">
+            <c:if test="${picture.status=='1'&&picture.productModel.id==group.groupProduct.productModel.id}">
+              <li class="clone c-page" aria-hidden="true" style="width: 320px; float: left; display: block;"><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"><div class="c-page"><span>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</span></div></div></li>
+            </c:if>
+          </c:forEach>
+        </ul>
       </ul>
     </div>
   </div>
   <!--价格-->
   <div class="cost ae">
-    <div class="txt1"><s>原价:${group.groupProduct.productModel.price}元</s></div>
+    <div class="txt1"><s>飞蚁价:${group.groupProduct.productModel.price}元</s></div>
     <div class="txt2"><em>拼团价:${group.groupProduct.groupPrice}元</em><i class="icon"></i></div>
   </div>
   <!--功能-->
   <div class="iwill ae">
     <div class="join ae">
-      <div class="txt-page ae"><span>团长:${group.manUser.name}</span><span>${group.memberList.size()}人参团/${group.groupProduct.memberAmount}人起成团</span></div>
+      <div class="txt-page ae"><span>团长:${manUserName}</span><span>${group.memberList.size()}人参团/${group.groupProduct.memberAmount}人起成团</span></div>
       <div class="Powerweb ae">
         <div class="black" style="width: ${bil}%;"></div>
         <div class="gray"></div>
@@ -74,17 +89,25 @@
       <div class="txt-page ae"><span>拼团倒计时：</span><span>分享红包：${group.groupProduct.bonus}</span></div>
       <div class="time ae" id="timer">00:00:00</div>
     </div>
-    <c:if test="${flag==1}">
-      <c:if test="${group.groupProduct.memberAmount-group.memberList.size()>0}">
-        <a href="javascript:void(0)" class="btn" id="btn">还&nbsp;差&nbsp;${group.groupProduct.memberAmount-group.memberList.size()}&nbsp;人&nbsp;成&nbsp;团</a>
-        <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
+    <c:if test="${group.status==1}">
+      <c:if test="${flag==1}">
+        <c:if test="${group.groupProduct.memberAmount-group.memberList.size()>0}">
+          <a href="javascript:void(0)" class="btn" id="btn">还&nbsp;差&nbsp;${group.groupProduct.memberAmount-group.memberList.size()}&nbsp;人&nbsp;成&nbsp;团&nbsp;,&nbsp;去&nbsp;分&nbsp;享</a>
+          <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
+        </c:if>
+        <c:if test="${group.groupProduct.memberAmount-group.memberList.size()<=0}">
+          <a href="javascript:void(0)" class="btn" id="btn">还&nbsp;差&nbsp;0&nbsp;人&nbsp;成&nbsp;团</a>
+        </c:if>
       </c:if>
-      <c:if test="${group.groupProduct.memberAmount-group.memberList.size()<=0}">
-        <a href="javascript:void(0)" class="btn">还&nbsp;差&nbsp;0&nbsp;人&nbsp;成&nbsp;团</a>
+      <c:if test="${flag==0}">
+        <a href="<c:url value='/group/groupBuy.do'/>${url}" class="btn">参&nbsp;团</a>
       </c:if>
     </c:if>
-    <c:if test="${flag==0}">
-      <a href="<c:url value='/group/groupBuy.do'/>${url}" class="btn">参&nbsp;团</a>
+    <c:if test="${group.status==3}">
+      <a href="javascript:void(0)" class="btn">已&nbsp;成&nbsp;团</a>
+    </c:if>
+    <c:if test="${group.status==5}">
+      <a href="javascript:void(0)" class="btn">组&nbsp;团&nbsp;失&nbsp;败</a>
     </c:if>
   </div>
   <!-- 选项卡-->
@@ -104,7 +127,7 @@
           <div class="button ae"><a href="http://www.efeiyi.com/product/productModel/${group.groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
         </div>
         <div class="tab-btn">
-          <a href="<c:url value="/product/groupProduct1.do"/>">更多团购商品<i class="gicon"></i></a>
+          <a href="<c:url value="/tuan"/>">更多团购商品<i class="gicon"></i></a>
           <a href="<c:url value="/product/groupProduct/${group.groupProduct.id}"/>">我要开团<i class="gicon"></i></a>
         </div>
       </div>

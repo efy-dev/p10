@@ -25,7 +25,9 @@
                 if (AuthorizationUtil.getMyUser().getId() == null) {
             %>
             <li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>
-            <li><a href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do" title="快速注册">快速注册</a></li>
+            <li>
+                <a href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do"
+                   title="快速注册">快速注册</a></li>
             <%
                 }
             %>
@@ -48,6 +50,7 @@
         <form action="">
             <input type="text" class="txt" placeholder="">
             <input type="submit" class="icon-new btn" value="">
+
             <div class="keywords">
                 <a href="">剪纸</a>
                 <a href="">景泰蓝</a>
@@ -60,7 +63,24 @@
         </form>
     </div>
 </div>
-<jsp:include page="/productCategory.do" flush="true"/>
+
+<div class="wh nav-new nav-new-list">
+    <div class="hd">
+        <div class="cate" id="cate">
+            <div class="ld"><h2>非遗商品分类<i class="icon-new"></i></h2></div>
+            <jsp:include page="/productCategory.do" flush="true"/>
+
+        </div>
+        <div class="items">
+            <a href="<c:url value="/"/>">首页</a>
+            <a href="">品牌专区</a>
+            <a href="">各地非遗</a>
+            <a href="">大师</a>
+            <a href="">工艺</a>
+        </div>
+    </div>
+</div>
+
 <script>
 
     $().ready(function () {

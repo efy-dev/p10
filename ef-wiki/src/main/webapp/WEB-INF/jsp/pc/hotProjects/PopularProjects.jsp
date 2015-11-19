@@ -116,10 +116,10 @@
         <c:if test="${! empty bannerList}">
           <c:forEach var="banner" items="${bannerList}" varStatus="status">
           <c:if test="${status.index==0}">
-          <li style="display: block;"><a href="#"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${banner.imageUrl}" ></a></li>
+          <li style="display: block;"><a href="#"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
             </c:if>
             <c:if test="${status.index!=0}">
-              <li><a href="#"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${banner.imageUrl}" ></a></li>
+              <li><a href="#"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
             </c:if>
           </c:forEach>
 
@@ -147,7 +147,7 @@
                   <c:forEach items="${pc}" var="project" varStatus="status">
                     <li>
                       <div class="commodity-img">
-                        <a href="<c:url value='/project/brifProject/${project.id}'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_pc_url}@!pc-project-list"></a>
+                        <a href="<c:url value='/project/brifProject/${project.id}'/>"><img src="http://pro.efeiyi.com/${project.picture_pc_url}@!pc-project-list"></a>
                         <a href="#">
                           <div class="list-moods">
                             <i class="img-icon"></i>
