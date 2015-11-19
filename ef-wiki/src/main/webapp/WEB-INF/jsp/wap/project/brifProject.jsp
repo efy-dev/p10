@@ -105,8 +105,8 @@
       <div class="menu-page">
         <ul class="bd">
           <li><a href="<c:url value='/base/home.do'/>" title="首页">首页</a></li>
-          <li><a href="" title="分类" id="acs">消&nbsp;息</a></li>
-          <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+          <li><a href="javascript:void(0);" title="分类" id="acs">消&nbsp;息</a></li>
+          <li><a href="http://www.i.efeiyi.com" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
         </ul>
       </div>
     </div>
@@ -204,7 +204,7 @@
           </div>
           <div class="sit-suit-twz"><p>${project.description}</p></div>
         </div>
-        <div class="sit-suit-img"><a href="#"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_wap_url}"></a></div>
+        <div class="sit-suit-img"><a href="#"><img src="http://pro.efeiyi.com/${project.picture_wap_url}"></a></div>
       </div>
     </div>
 
@@ -387,7 +387,7 @@
 
               var box = $(" <li class='item'> <a href='" +"<c:url value='/base/showProduct/{"+data.list[i].id+"}'/> "+
                       "'>" +
-                      "<img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"'></a>" +
+                      "<img src='http://pro.efeiyi.com/"+data.list[i].picture_url+"'></a>" +
                       " <div class='txt'> <div class='name'>"+data.list[i].name+"</div> " +
                       "<div class='txt-info'> <a href='#'>" +
                       "<i class='icon good-1'></i>" +
@@ -637,7 +637,22 @@
     }
 
 
-
+    function transdate(endTime){
+      var timestamp = Date.parse(new Date());
+      var oldTime = parseInt(endTime);
+      var intervalTime = (timestamp+1000 - oldTime)/1000/60;
+      var showTime = "";
+      if(intervalTime<=59){
+        showTime=intervalTime.toFixed(0)+"分钟前";
+      }else if(1<=(intervalTime/60) && (intervalTime/60)<24){
+        showTime=(intervalTime/60).toFixed(0)+"小时前";
+      }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
+        showTime=(intervalTime/60/24).toFixed(0)+"天前";
+      }else{
+        showTime=new Date(oldTime).toLocaleString().replace(/:\d{1,2}$/,' ');
+      }
+      return showTime;
+    }
 
   </script>
 
@@ -868,8 +883,8 @@
               for(i in data.list){
 
 
-                html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\">" +
-                        "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
+                html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\">" +
+                        "<img src=\"http://pro.efeiyi.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
                         "<div class=\"name\">"+data.list[i].name+"</div> <div class=\"txt-info\"> " +
                         "<a href=\"javascript:void(0);\" onclick=\"savaUpAndDown('"+data.list[i].id+"')\" id=\""+data.list[i].id+"\" name=\"up\" ><i class=\"icon good-1\"></i><em>"+data.list[i].fsAmount+"</em></a> " +
                         "<a href=\"#\"><i class=\"icon good-2\"></i><em>"+data.list[i].amount+"</em></a> " +
@@ -910,81 +925,7 @@
 
 
 <script type="text/javascript">
- /* $(function(){
 
-    var $waterfall = $('#waterfall');
-
-    $waterfall.masonry({
-      columnWidth: 230
-    });
-
-  });*/
-/*
- function  imgload(){
-   var box = $('.item');
-   var boxHeight = {
-     leftBox:[],
-     centerBox:[],
-     rightBox:[]
-   }
-
-   for(var i=0;i<box.length;i++){
-     var now = i%3;		//now的值为0，1，2
-
-     switch(now){
-       case 0:
-         box.eq(i).css('left','10px');
-         boxHeight.leftBox.push(box.eq(i).height());
-         var now2 = Math.floor(i/3);
-
-         if(now2==0){
-           box.eq(i).css('top',0);
-         }else{
-           var total = 0;
-           for(var j=0;j<now2;j++){
-             total += boxHeight.leftBox[j]+10;
-           }
-           box.eq(i).css('top',total+'px')
-         }
-
-         break;
-
-       case 1:
-         box.eq(i).css('left','270px');
-         boxHeight.centerBox.push(box.eq(i).height());
-         var now2 = Math.floor(i/3);
-
-         if(now2==0){
-           box.eq(i).css('top',0);
-         }else{
-           var total = 0;
-           for(var j=0;j<now2;j++){
-             total += boxHeight.centerBox[j]+10;
-           }
-           box.eq(i).css('top',total+'px')
-         }
-         break;
-
-       case 2:
-         box.eq(i).css('left','530px');
-         boxHeight.rightBox.push(box.eq(i).height());
-         var now2 = Math.floor(i/3);
-
-         if(now2==0){
-           box.eq(i).css('top',0);
-         }else{
-           var total = 0;
-           for(var j=0;j<now2;j++){
-             total += boxHeight.rightBox[j]+10;
-           }
-           box.eq(i).css('top',total+'px')
-         }
-         break;
-     }
-   }
-
- }
-*/
  var commentNumber = 1;
  var praiseNumber = 1;
  function getCommentList(){
@@ -1125,7 +1066,7 @@
          return false;
        }
        if(data2=="repeat"){
-         alert("请不要重复操作！！！");
+         alert("您已经赞过了");
          return false;
        }
        if(data2=="true" && oper=='up'){

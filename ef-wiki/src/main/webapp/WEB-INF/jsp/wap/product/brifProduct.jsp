@@ -83,7 +83,7 @@
       <ul class="bd">
         <li><a href="<c:url value='/base/home.do'/>" title="首页">首页</a></li>
         <li><a href="javascript:void(0);" title="分类" id="acs">消&nbsp;息</a></li>
-        <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+        <li><a href="http://www.i.efeiyi.com" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
     </div>
   </div>
@@ -384,7 +384,7 @@ var startNum=1;
   function transdate(endTime){
     var timestamp = Date.parse(new Date());
     var oldTime = parseInt(endTime);
-    var intervalTime = (timestamp - oldTime)/1000/60;
+    var intervalTime = (timestamp+1000 - oldTime)/1000/60;
     var showTime = "";
     if(intervalTime<=59){
       showTime=intervalTime.toFixed(0)+"分钟前";
@@ -672,7 +672,7 @@ function savaUP(productId){
           return false;
         }
         if(data=="repeat"){
-          showAlert("提示","您已收藏过了！")
+          showAlert("提示","您好，取消收藏成功！")
           return true;
         }
         if(data=="true"){

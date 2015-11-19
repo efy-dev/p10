@@ -136,6 +136,18 @@
             </does>
         </entity>
 
+        <entity name="masterWorkStore" label="工作坊"  model="com.efeiyi.ec.master.model.MasterWorkStore">
+            <does>
+                <do name="listMasterWorkStore" access="" label="工作坊">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="work.id" defaultValue="1" operation="eq"/>
+                        <condition name="user.id" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
         <entity name="masterComment" label="评论"  model="com.efeiyi.ec.master.model.MasterComment">
             <does>
                 <do name="listMasterComment" access="" label="工作坊">

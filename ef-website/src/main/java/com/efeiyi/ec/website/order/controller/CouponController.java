@@ -43,6 +43,8 @@ public class CouponController {
         float price = Float.parseFloat(request.getParameter("price"));
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), request.getParameter("purchaseOrderId"));
         XQuery couponQuery = new XQuery("listCoupon_useful", request);
+        couponQuery.put("couponBatch_startDate", new Date());
+        couponQuery.put("couponBatch_endDate", new Date());
         List<Object> couponList = baseManager.listObject(couponQuery);
         Iterator couponIterator = couponList.iterator();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -241,8 +243,10 @@ public class CouponController {
             List<Object> couponBatchList = baseManager.listObject(xQuery);
             if (couponBatchList != null && couponBatchList.size() > 0) {
                 CouponBatch currentCouponBatch = (CouponBatch) couponBatchList.get(0);
-                if (currentCouponBatch.getAmount() <= currentCouponBatch.getCouponList().size()) {
-                    return "null";
+                if (currentCouponBatch.getAmount() != null) {
+                    if (currentCouponBatch.getCouponList() != null && currentCouponBatch.getAmount() <= currentCouponBatch.getCouponList().size()) {
+                        return "null";
+                    }
                 }
 //            生成一张该批次的优惠券  这里使用的是通码
                 coupon = new Coupon();
@@ -418,24 +422,26 @@ public class CouponController {
         return "/purchaseOrder/couponMessage";
 
     }
+
     @RequestMapping("yhq.do")
-    public String yhq(HttpServletRequest request,Model model){
-        model.addAttribute("couponBatchId",request.getParameter("couponBatchId"));
+    public String yhq(HttpServletRequest request, Model model) {
+        model.addAttribute("couponBatchId", request.getParameter("couponBatchId"));
         return "/yhq";
     }
+
     @RequestMapping("/getYhq.do")
-    public String  getYhq(HttpServletRequest request,Model model) throws Exception {
-        Coupon coupon=null;
-        Date date=new Date();
-        String couponBatchId =request.getParameter("couponBatchId");
+    public String getYhq(HttpServletRequest request, Model model) throws Exception {
+        Coupon coupon = null;
+        Date date = new Date();
+        String couponBatchId = request.getParameter("couponBatchId");
 
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), AuthorizationUtil.getMyUser().getId());
-        CouponBatch couponBatch= (CouponBatch) baseManager.getObject(CouponBatch.class.getName(),couponBatchId);
+        CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(), couponBatchId);
 
-        XQuery xQuery1=new XQuery("listCoupon_have",request);
-        xQuery1.put("couponBatch_id",couponBatchId);
-        xQuery1.put("consumer_id",consumer.getId());
-         List haveUser=baseManager.listObject(xQuery1);
+        XQuery xQuery1 = new XQuery("listCoupon_have", request);
+        xQuery1.put("couponBatch_id", couponBatchId);
+        xQuery1.put("consumer_id", consumer.getId());
+        List haveUser = baseManager.listObject(xQuery1);
         synchronized (this) {
             if (couponBatch != null) {
 
