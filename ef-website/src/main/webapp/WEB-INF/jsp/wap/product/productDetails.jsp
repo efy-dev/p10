@@ -104,8 +104,15 @@
         <div class="des-content">
             <div class="bd title">详情</div>
             <div class="bd">
-                <c:if test="${!empty product.productDescription}">
+                <c:if test="${not empty product.productDescription}">
                     ${product.productDescription.content}
+                </c:if>
+                <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0}">
+                    <c:forEach items="${productPictureList}" var="productPicture">
+                        <p>
+                            <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}"/>
+                        </p>
+                    </c:forEach>
                 </c:if>
                 <c:if test="${not empty purchaseOrderProductList}">
                     <div class="discuss">
