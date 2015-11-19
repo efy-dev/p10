@@ -299,11 +299,7 @@ public class GroupController {
         MyUser user = AuthorizationUtil.getMyUser();
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
-        Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
-
-        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
-        purchaseOrderProductQuery.put("productModel_id", group.getGroupProduct().getProductModel().getId());
-        List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
+        Group group = (Group)baseManager.getObject(Group.class.getName(),groupId);
 
         XQuery xQuery = new XQuery("listPurchaseOrderGroup_default0",request);
         xQuery.put("member_user_id",group.getManUser().getId());
@@ -354,7 +350,7 @@ public class GroupController {
         model.addAttribute("endTime",df.parse(df.format(endTime)).getTime());
         model.addAttribute("group",group);
         model.addAttribute("url",url);
-        model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
+        //model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
 
         return "/personGroup/shareGroup";
     }
