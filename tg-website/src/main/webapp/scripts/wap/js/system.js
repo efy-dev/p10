@@ -19,7 +19,33 @@ $(function(){
             $('article').css({'padding-bottom':'50px'})
         }
     })();
-    //020102分类导航
+    //订单礼物弹出框
+    (function(){
+        $("#add-show").click(function(){
+            $(this).siblings('.add-cart').fadeIn().show()
+            return false
+        })
+        $(".gift .add-cart .cancel").click(function(){
+            $(this).parents().find('.add-cart').fadeOut().hide()
+            return false
+        })
+        $(".gift .gift-details .elect .add-c1").click(function(){
+            $(this).siblings(".gift .gift-details .elect span").toggleClass("active")
+            $(".gift .detailed .font-1").slideToggle()
+        })
+        $(".gift .gift-details .elect .add-c2").click(function(){
+            $(this).siblings(".gift .gift-details .elect span").toggleClass("active")
+            $(".gift .detailed .font-2").slideToggle()
+        })
+    })
+    //商品评价
+    (function(){
+        $('.my-evaluate .score .score-star .star li').click(function(){
+            $(this).toggleClass('active');
+        })
+    });
+
+        //020102分类导航
     (function(){
         $('.box-hd .ul-index-list>li .item').click(function(){
             $(this).find('.arrow-down').toggleClass('arrow-up');
@@ -97,8 +123,37 @@ $(function(){
             })
             return false;
         });
-        //详情和评论-tab
-        //$('')
+        //详情和评论-弹出轮播图
+
+        $('.list-img li').on('click',function(){
+            var $swiper=$('#swiper');
+
+            //$(this).parents('.list-img')
+            $swiper.find('.am-slides').html($(this).parents('.list-img').html())
+            //计算弹出框中图片的定位
+            var swiperImg=$('#swiper .am-slides img');
+            swiperImg.each(function(){
+                var imgHeight=$(this).height();
+                $(this).css({'margin-top':-imgHeight/2+'px'});
+            })
+
+            $swiper.css({'z-index':'102'});
+            $swiper.animate({'opacity':'1'},100);
+
+            //初始化
+            $('.swiper').flexslider({
+                animation: "slide",
+                animationLoop: false,
+                // smoothHeight: true,
+                animationSpeed: 600,
+                slideshow: false
+            });
+            //关闭弹出框
+            $swiper.find('.icon-close').on('click',function(){
+                $swiper.css({'z-index':'-1'});
+                $swiper.animate({'opacity':'0'},100);
+            })
+        });
     })();
     //订单
     (function(){
@@ -153,7 +208,6 @@ $(function(){
         if($('div').hasClass('coupon-sc')){
             $('body').css('height','100%');
         }
-
     })();
     //优惠-----优惠券tab
     (function(){
@@ -165,7 +219,38 @@ $(function(){
             yhbox.eq(index).show().siblings().hide();
         })
     })();
+    //秒杀
+    (function(){
+        //02移动商城/0201商城前台/秒杀—即将开始
+        $('.seckill .s-list .items:last').css('border-bottom','0');
+        //秒杀-商品详情-即将开始
+        var tNum=$('.details .des-price-seckill p.tnum'),
+            $sub=tNum.find('.sub'),
+            $add=tNum.find('.add'),
+            $ipt=tNum.find('.txt');
 
+        $add.on('click',function(){
+            var $val=$ipt.val();
+            if($val>0){
+                $ipt.val(parseInt($val)+1);
+            }
+            $sub.removeClass('sub-no');
+        })
+        $sub.on('click',function(){
+            var $val=$ipt.val();
+            if($val>1){
+                $ipt.val(parseInt($val)-1);
+                subClassGary();
+            }
 
+        })
+        subClassGary();
+        function subClassGary(){
+            var $val=$ipt.val();
+            if($val==1){
+                $sub.addClass('sub-no')
+            }
+        }
 
+    })();
 })

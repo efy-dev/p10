@@ -123,7 +123,7 @@ input {outline: none}
 .category .explain .more .icon {margin-top:6px}
 /*--//End--explain--*/
 .category .list-pro {width:100%;float:left;maoverflow:hidden}
-.category .list-pro .ul-item {width:1250px;float:left;overflow:hidden}
+.category .list-pro .ul-item {width:1250px;float:left;margin-bottom:45px;overflow:hidden}
 .category .list-pro .ul-item li {width:280px;float:left;padding-bottom:45px;border-bottom:1px #cdcdcd solid;margin-right:27px;position:relative}
 .category .list-pro .ul-item li .tips {height:17px;line-height:17px;padding:0 5px;position:absolute;top:6px;left:0;z-index:2;background:#f00;font-size:12px;color:#fff}
 .category .list-pro .ul-item li .tips .icon {background-position:-128px -50px;width:5px;height:17px;position:absolute;top:0;right:-5px}
@@ -891,7 +891,7 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
     z-index: 10;
 }
 .nav-new .items a {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     float: left;
     margin-left: 105px;
@@ -1113,7 +1113,6 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
     width: 2px;
     height:40px;
     display: inline-block;
-    margin: 0 20px;
     position: relative;
     top:-36px;
     background: #434343;

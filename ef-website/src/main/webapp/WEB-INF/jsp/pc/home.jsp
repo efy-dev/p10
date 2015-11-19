@@ -230,64 +230,15 @@
                     </div>
                 </div>
                 <ul class="cat-right">
-                        <%--<c:forEach items="${recommendMap.get(projectCategory.id)}" var="projectCategoryProductModel" varStatus="status">--%>
+                        <c:forEach items="${recommendMap.get(projectCategory.id)}" var="projectCategoryProductModel" varStatus="status">
                     <li>
-                        <a href="<c:url value="/product/hot/${recommendMap.get(projectCategory.id).get(0).productModel.id}"/>" target="_blank">
+                        <a href="<c:url value="/product/hot/${projectCategoryProductModel.productModel.id}"/>" target="_blank">
                             <strong>${projectCategoryProductModel.productModel.product.name}</strong>
-                            <img class="imgfilter" src="http://pro.efeiyi.com/${recommendMap.get(projectCategory.id).get(0).productModel.product.getProductPicture().pictureUrl}@!pc-recommend-list">
+                            <img class="imgfilter" src="http://pro.efeiyi.com/${projectCategoryProductModel.productModel.product.getProductPicture().pictureUrl}@!pc-recommend-list">
                         </a>
-                        <span class="cat-money"><em>￥</em><font>${recommendMap.get(projectCategory.id).get(0).productModel.price.intValue()}</font></span>
+                        <span class="cat-money"><em>￥</em><font>${projectCategoryProductModel.productModel.price.intValue()}</font></span>
                     </li>
-                    <li>
-                        <a href="<c:url value="/product/hot/${recommendMap.get(projectCategory.id).get(1).productModel.id}"/>" target="_blank">
-                            <strong>${projectCategoryProductModel.productModel.product.name}</strong>
-                            <img class="imgfilter" src="http://pro.efeiyi.com/${recommendMap.get(projectCategory.id).get(1).productModel.product.getProductPicture().pictureUrl}@!pc-recommend-list">
-                        </a>
-                        <span class="cat-money"><em>￥</em><font>${recommendMap.get(projectCategory.id).get(1).productModel.price.intValue()}</font></span>
-                    </li>
-                    <li>
-                        <a href="<c:url value="/product/hot/${recommendMap.get(projectCategory.id).get(2).productModel.id}"/>" target="_blank">
-                            <strong>${recommendMap.get(projectCategory.id).get(2).productModel.product.name}</strong>
-                            <img class="imgfilter" src="http://pro.efeiyi.com/${recommendMap.get(projectCategory.id).get(2).productModel.product.getProductPicture().pictureUrl}@!pc-recommend-list">
-                        </a>
-                        <span class="cat-money"><em>￥</em><font>${recommendMap.get(projectCategory.id).get(2).productModel.price.intValue()}</font></span>
-                    </li>
-                    <li>
-                        <a href="<c:url value="/product/hot/${recommendMap.get(projectCategory.id).get(3).productModel.id}"/>" target="_blank">
-                            <strong>${recommendMap.get(projectCategory.id).get(3).productModel.product.name}</strong>
-                            <img class="imgfilter" src="http://pro.efeiyi.com/${recommendMap.get(projectCategory.id).get(3).productModel.product.getProductPicture().pictureUrl}@!pc-recommend-list">
-                        </a>
-                        <span class="cat-money"><em>￥</em><font>${recommendMap.get(projectCategory.id).get(3).productModel.price.intValue()}</font></span>
-                    </li>
-                    <li>
-                        <a href="<c:url value="/product/hot/${recommendMap.get(projectCategory.id).get(4).productModel.id}"/>" target="_blank">
-                            <strong>${recommendMap.get(projectCategory.id).get(4).productModel.product.name}</strong>
-                            <img class="imgfilter" src="http://pro.efeiyi.com/${recommendMap.get(projectCategory.id).get(4).productModel.product.getProductPicture().pictureUrl}@!pc-recommend-list">
-                        </a>
-                        <span class="cat-money"><em>￥</em><font>${recommendMap.get(projectCategory.id).get(4).productModel.price.intValue()}</font></span>
-                    </li>
-                    <li>
-                        <a href="<c:url value="/product/hot/${recommendMap.get(projectCategory.id).get(5).productModel.id}"/>" target="_blank">
-                            <strong>${recommendMap.get(projectCategory.id).get(5).productModel.product.name}</strong>
-                            <img class="imgfilter" src="http://pro.efeiyi.com/${recommendMap.get(projectCategory.id).get(5).productModel.product.getProductPicture().pictureUrl}@!pc-recommend-list">
-                        </a>
-                        <span class="cat-money"><em>￥</em><font>${recommendMap.get(projectCategory.id).get(5).productModel.price.intValue()}</font></span>
-                    </li>
-                    <li>
-                        <a href="<c:url value="/product/hot/${recommendMap.get(projectCategory.id).get(6).productModel.id}"/>" target="_blank">
-                            <strong>${recommendMap.get(projectCategory.id).get(6).productModel.product.name}</strong>
-                            <img class="imgfilter" src="http://pro.efeiyi.com/${recommendMap.get(projectCategory.id).get(6).productModel.product.getProductPicture().pictureUrl}@!pc-recommend-list">
-                        </a>
-                        <span class="cat-money"><em>￥</em><font>${recommendMap.get(projectCategory.id).get(6).productModel.price.intValue()}</font></span>
-                    </li>
-                    <li>
-                        <a href="<c:url value="/product/hot/${recommendMap.get(projectCategory.id).get(7).productModel.id}"/>" target="_blank">
-                            <strong>${recommendMap.get(projectCategory.id).get(7).productModel.product.name}</strong>
-                            <img class="imgfilter" src="http://pro.efeiyi.com/${recommendMap.get(projectCategory.id).get(7).productModel.product.getProductPicture().pictureUrl}@!pc-recommend-list">
-                        </a>
-                        <span class="cat-money"><em>￥</em><font>${recommendMap.get(projectCategory.id).get(7).productModel.price.intValue()}</font></span>
-                    </li>
-                        <%--</c:forEach>--%>
+                        </c:forEach>
                 </ul>
             </div>
         </c:forEach>
