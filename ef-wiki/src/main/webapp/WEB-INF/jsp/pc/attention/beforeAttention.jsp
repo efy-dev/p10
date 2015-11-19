@@ -169,7 +169,7 @@
             }else{
               word="<i class=\"gz-icon\"></i> <em about=\"add\" id=\""+data[i].projectId+"\">关注</em>";
             }
-              var box = $("<li class='before'> <div class='eimg'><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"@!pc-before-attention'></a></div> " +
+              var box = $("<li class='before'> <div class='eimg'><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src='http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-before-attention'></a></div> " +
                       "<div class='etext'> <p class='dz'>"+data[i].addressDistrict+"</p> " +
                       "<a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><h5>"+data[i].projectName+"</h5></a>  " +
                       "<p>"+levelName+"</p> " +

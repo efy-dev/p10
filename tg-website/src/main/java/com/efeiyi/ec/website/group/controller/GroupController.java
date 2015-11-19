@@ -164,16 +164,27 @@ public class GroupController {
                 long leftHour = (min/(1000*60*60))%24;
                 long leftMin = (min/(1000*60))%60;
                 String left = "";
+                String memberLeft = "";
                 if(leftDay>0){
                     left = leftDay+"天"+leftHour+"时"+leftMin+"分";
                 }else {
                     if(leftHour>0){
                         left = leftHour+"时"+leftMin+"分";
                     }else {
-                        left = leftMin+"分";
+                        if(leftMin>0){
+                            left = leftMin+"分";
+                        }else {
+                            left = "0分";
+                        }
+
                     }
                 }
-                this.smsCheckManager.send(group.getManUser().getUsername(), "#userName#="+purchaseOrder.getReceiverName()+"&#timeLeft#="+left+"&#memberLeft#="+String.valueOf(groupProduct.getMemberAmount()-group.getMemberList().size()), "1108985", PConst.TIANYI);
+                if(groupProduct.getMemberAmount()-group.getMemberList().size()>0){
+                    memberLeft = String.valueOf(groupProduct.getMemberAmount()-group.getMemberList().size());
+                }else {
+                    memberLeft = "0";
+                }
+                this.smsCheckManager.send(group.getManUser().getUsername(), "#userName#="+purchaseOrder.getReceiverName()+"&#timeLeft#="+left+"&#memberLeft#="+memberLeft, "1108985", PConst.TIANYI);
 
                 /*if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
                     group.setStatus("3");
@@ -293,6 +304,16 @@ public class GroupController {
         XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
         purchaseOrderProductQuery.put("productModel_id", group.getGroupProduct().getProductModel().getId());
         List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
+
+        XQuery xQuery = new XQuery("listPurchaseOrderGroup_default0",request);
+        xQuery.put("member_user_id",group.getManUser().getId());
+        xQuery.put("group_id",group.getId());
+        String manUserName = "";
+        List<PurchaseOrderGroup> purchaseOrderGroupList = baseManager.listObject(xQuery);
+        if(purchaseOrderGroupList.size()>0){
+            manUserName = purchaseOrderGroupList.get(0).getPurchaseOrder().getReceiverName();
+        }
+        model.addAttribute("manUserName",manUserName);
 
         int memberAmount = group.getGroupProduct().getMemberAmount();
         int a = (int)((float)group.getMemberList().size()*100/memberAmount);
