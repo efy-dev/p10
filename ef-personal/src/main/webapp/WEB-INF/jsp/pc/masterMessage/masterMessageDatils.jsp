@@ -104,7 +104,14 @@
                     </h4>
                   <p>${msg.master.projectName}</p>
                   <p><span><ming800:status name='level' dataType='Tenant.level' checkedValue='${object.level}' type='normal'/>传承人</span></p>
-                  <a class="btn-guan" onclick="followMaster(this,'${msg.master.id}');"><i class="gz-icon"></i><em>关注</em></a>
+                  <a class="btn-guan" onclick="followMaster(this,'${msg.master.id}');">
+                      <c:if test="${msg.master.followStatus == '已关注'}">
+                          <i class="gz-icon" style="display: none;"></i>
+                      </c:if>
+                      <c:if test="${msg.master.followStatus == '关注'}">
+                          <i class="gz-icon"></i>
+                      </c:if>
+                      <em>${msg.master.followStatus}</em></a>
                 </div>
                 <div class="img">
                     <a href="<c:url value='/masterMessage/introView/${msg.master.id}'/>">
@@ -297,10 +304,10 @@
                   } else {
                       src = "<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>";
                   }
-                  if(data[i].amount == null){
+                  if(data.amount == null){
                       amount = 0;
                   }else{
-                      amount = data[i].amount;
+                      amount = data.amount;
                   }
                   var childNode = "<li style=\"margin: 0;border-bottom: 0;\" id=\""+data.id+"\" class=\"obtain\">"+
                           "           <div class=\"ae\">"+
@@ -356,10 +363,10 @@
                   }else{
                       src = "<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>";
                   }
-                  if(data[i].amount == null){
+                  if(data.amount == null){
                       amount = 0;
                   }else{
-                      amount = data[i].amount;
+                      amount = data.amount;
                   }
                   var insertNode = $("<li class=\"ae\" id=\""+data.id+"\">"+
                           "     <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\""+src+"\"></a></div>"+

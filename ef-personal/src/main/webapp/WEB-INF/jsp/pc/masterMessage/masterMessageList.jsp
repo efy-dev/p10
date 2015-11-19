@@ -76,9 +76,9 @@
   var StartRecommendNum = 1;
   var ajaxKey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关
   $(document).ready(function(){
-    getData("<c:url value='/masterMessage/mainData/plistMasterMessage_default/0/4/'/>");
-    getData2("<c:url value='/masterMessage/subMaster/plistMaster_default/6/'/>");
-    getData3("<c:url value='/masterMessage/hotMaster/plistMasterRecommend_group/6/'/>");
+  getData("<c:url value='/masterMessage/mainData/plistMasterMessage_default/0/4/'/>");
+  getData2("<c:url value='/masterMessage/subMaster/plistMaster_default/6/'/>");
+  getData3("<c:url value='/masterMessage/hotMaster/plistMasterRecommend_group/6/'/>");
   });
 
   $(window).load(function(){
@@ -142,29 +142,101 @@
             }else{
               var projectName = "";
             }
-            var box = "<li><div class=\"pc-dy-txt ae\"><div class=\"pc-dy-pic\"><div class=\"pc-d-pic\"><a href=\"<c:url value='/masterMessage/masterView/'/>"+data[i].masterId+"\"><img  class=\"am-circle\"  src=\"http://tenant.efeiyi.com/"+data[i].favicon+"@!master-favicon-view\"></a></div>" +
-                      "<div class=\"pc-gz gz-pc\"><div class=\"bt-gz act-1\"><a class=\"btn-guan\" name=\"masterFollow"+data[i].masterId+"\" onclick=\"followMaster('"+data[i].masterId+"');\"><div class=\"gz-q\">" ;
-                    if(data[i].followStatus == "已关注"){
-                      box += "<i class=\"gz-icon\" style='display: none'></i>";
-                    }else{
-                      box += "<i class=\"gz-icon\"></i>";
-                    }
-            box += "<em>"+data[i].followStatus+"</em></div></a></div></div></div>" +
-                      "<div class=\"pc-dy-box\"><h5><a href=\"<c:url value='/masterMessage/masterView/'/>"+data[i].masterId+"\">"+data[i].masterName+"</a></h5>"+projectName+"<p>"+levelName+"非遗传承人</p><div class=\"pc-dy-content\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><p>"+data[i].remark+"</p></a>" +
-                      "<div class=\"one-tiem\"><span>"+cTime+"</span><span>来自&nbsp;"+data[i].dataSource+"</span></div>" ;
-            var attr = data[i].messageAttachmentLists;
-            if(attr != null && attr.length > 0 ){
-              for(var j in attr){
-                box += "<div class=\"detaile-img\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+attr[j].pictureUrl+"@!master-message-little-more\"></a></div>";
-              }
+            var sub = "<li>"+
+                    "                    <div class=\"pc-dy-txt ae\">"+
+                    "                        <div class=\"pc-dy-pic \">"+
+                    "                            <div class=\"pc-d-pic\"><a href=\"<c:url value='/masterMessage/masterView/'/>"+data[i].masterId+"\"><img  class=\"am-circle\"  src=\"http://tenant.efeiyi.com/"+data[i].favicon+"@!master-favicon-view\"></a></div>"+
+                    "                            <div class=\"pc-gz gz-pc\">"+
+                    "                                <div class=\"bt-gz act-1\">"+
+                    "                                    <a class=\"btn-guan\" name=\"masterFollow"+data[i].masterId+"\" onclick=\"followMaster('"+data[i].masterId+"');\">"+
+                    "                                        <div class=\"gz-q\">";
+            if(data[i].followStatus == "已关注"){
+              sub += "<i class=\"gz-icon\" style='display: none'></i>";
+            }else{
+              sub += "<i class=\"gz-icon\"></i>";
             }
-            box += "</div></div></div><div class=\"one-state\"><ul class=\"state\"><li><a onclick=\"praiseMessage(this,'"+data[i].id+"');\"><span class=\"pos\"><span class=\"line\"><i class=\"dnc-icon zq\"></i>" +
-                      "<em>赞"+data[i].praiseNum+"</em></span></span></a></li><li><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><span class=\"pos\"><span class=\"line\"><i class=\"dnc-icon-2 zq\"></i><em>评论"+data[i].amount+"</em>" +
-                      "</span></span></a></li><li><a name='store"+data[i].id+"' onclick=\"storeMessage('"+data[i].id+"');\"><span class=\"pos\"><span class=\"line\"><i class=\"dnc-icon-3 zq\"></i><em>收藏</em></span></span></a></li>" +
-                      "<li style=\"position: relative\"><a href=\"#\"><span class=\"pos\"><span class=\"line\"><i class=\"dnc-icon-4 zq\"></i><em>分享</em></span></span></a>" +
-                      "<div style=\"display: none\" class=\"nr-share\"><div class=\"nr-bg\"><div class=\"jiathis_style\"><a class=\"jiathis_button_weixin\"></a><a class=\"jiathis_button_tqq\"></a>" +
-                      "<a class=\"jiathis_button_tsina\"></a><a class=\"jiathis_button_cqq\"></a></div></div></div></li></ul></div></li>";
-              pubu.append(box);
+                    sub +="                                      <em>"+data[i].followStatus+"</em>"+
+                    "                                        </div>"+
+                    "                                    </a>"+
+                    "                                </div>"+
+                    "                            </div>"+
+                    "                        </div>"+
+                    "                        <div class=\"pc-dy-box\">"+
+                    "                            <h5><a href=\"<c:url value='/masterMessage/masterView/'/>"+data[i].masterId+"\">"+data[i].masterName+"</a></h5>"+
+                    "                            <p>"+projectName+"</p>"+
+                    "                            <p>"+levelName+"非遗传承人</p>"+
+                    "                            <div class=\"pc-dy-content\">"+
+                    "                                <a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><p>"+data[i].remark+"</p></a>";
+            var attr = data[i].messageAttachmentLists;
+            if(attr != null && attr.length == 1){
+              sub += "<div class=\"one-pic\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+attr[j].pictureUrl+"@!master-message-little-more\"></a></div>";
+            }else if(attr != null && attr.length > 1){
+              sub += "<div class=\"two-pic w-active\"><ul class=\"sudoku\">";
+              for(var j in attr){
+                sub += "<li><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+attr[j].pictureUrl+"@!master-message-little-more\"></a></li>";
+              }
+              sub += "</ul></div>";
+            }
+            sub +=  "                                <div class=\"one-tiem\"><span>"+cTime+"</span><span>来自&nbsp;"+data[i].dataSource+"</span></div>"+
+                    "                            </div>"+
+                    "                        </div>"+
+                    "                    </div>"+
+                    "                    <div class=\"one-state\">"+
+                    "                        <ul class=\"state\" >"+
+                    "                            <li>"+
+                    "                                <a onclick=\"praiseMessage(this,'"+data[i].id+"');\">"+
+                    "                                    <span class=\"pos\">"+
+                    "                                        <span class=\"line\">"+
+                    "                                            <i class=\"dnc-icon zq\"></i>"+
+                    "                                            <em>赞"+data[i].praiseNum+"</em>"+
+                    "                                        </span>"+
+                    "                                    </span>"+
+                    "                                </a>"+
+                    "                            </li>"+
+                    "                            <li>"+
+                    "                                <a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\">"+
+                    "                                    <span class=\"pos\">"+
+                    "                                        <span class=\"line\">"+
+                    "                                            <i class=\"dnc-icon-2 zq\"></i>"+
+                    "                                            <em>评论"+data[i].amount+"</em>"+
+                    "                                        </span>"+
+                    "                                    </span>"+
+                    "                                </a>"+
+                    "                            </li>"+
+                    "                            <li>"+
+                    "                                <a name='store"+data[i].id+"' onclick=\"storeMessage('"+data[i].id+"');\">"+
+                    "                                    <span class=\"pos\">"+
+                    "                                        <span class=\"line\">"+
+                    "                                            <i class=\"dnc-icon-3 zq\"></i>"+
+                    "                                            <em>收藏</em>"+
+                    "                                        </span>"+
+                    "                                    </span>"+
+                    "                                </a>"+
+                    "                            </li>"+
+                    "                            <li style=\"position: relative\">"+
+                    "                                <a onclick=\"showJiathis(this);\">"+
+                    "                                    <span class=\"pos\">"+
+                    "                                        <span class=\"line\">"+
+                    "                                            <i class=\"dnc-icon-4 zq\"></i>"+
+                    "                                            <em>分享</em>"+
+                    "                                        </span>"+
+                    "                                    </span>"+
+                    "                                </a>"+
+                    "                                <div style='display: none;' class=\"nr-share\">"+
+                    "                                    <div class=\"nr-bg\">"+
+                    "                                        <div class=\"jiathis_style\">"+
+                    "                                            <a class=\"jiathis_button_weixin\"></a>"+
+                    "                                            <a class=\"jiathis_button_tqq\"></a>"+
+                    "                                            <a class=\"jiathis_button_tsina\"></a>"+
+                    "                                            <a class=\"jiathis_button_cqq\"></a>"+
+                    "                                        </div>"+
+                    "                                    </div>"+
+                    "                                </div>"+
+                    "                            </li>"+
+                    "                        </ul>"+
+                    "                    </div>"+
+                    "                </li>";
+              pubu.append(sub);
           }
         }else{
           flag = true;
@@ -179,6 +251,18 @@
         $("#loding").show();
       }
     })
+  }
+  function showJiathis(o){
+      var next = $(o).parent().find(".nr-share");
+      if($(next).is(":hidden")){
+          alert(11);
+          $(next).attr("style","display:block");
+          $(next).show();
+      }else{
+          alert(22);
+          $(next).attr("style","display:none");
+          $(next).hide();
+      }
   }
 
   function getData2(url){
