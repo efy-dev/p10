@@ -105,8 +105,8 @@
       <div class="menu-page">
         <ul class="bd">
           <li><a href="<c:url value='/base/home.do'/>" title="首页">首页</a></li>
-          <li><a href="" title="分类" id="acs">消&nbsp;息</a></li>
-          <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+          <li><a href="javascript:void(0);" title="分类" id="acs">消&nbsp;息</a></li>
+          <li><a href="http://www.i.efeiyi.com" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
         </ul>
       </div>
     </div>
@@ -638,7 +638,22 @@
       getStartNum = index;//更新请求数据的条数位置
     }
 
-
+    function transdate(endTime){
+      var timestamp = Date.parse(new Date());
+      var oldTime = parseInt(endTime);
+      var intervalTime = (timestamp+1000 - oldTime)/1000/60;
+      var showTime = "";
+      if(intervalTime<=59){
+        showTime=intervalTime.toFixed(0)+"分钟前";
+      }else if(1<=(intervalTime/60) && (intervalTime/60)<24){
+        showTime=(intervalTime/60).toFixed(0)+"小时前";
+      }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
+        showTime=(intervalTime/60/24).toFixed(0)+"天前";
+      }else{
+        showTime=new Date(oldTime).toLocaleString().replace(/:\d{1,2}$/,' ');
+      }
+      return showTime;
+    }
 
 
   </script>
