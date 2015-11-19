@@ -30,7 +30,7 @@ public class SolrReactor {
                 new Thread(new SearchClient(commonManager.getSearchParam("efeiyi").getSolrServerCoreUrl())).start();
             }
         }catch (Exception e){
-            System.err.println("solrReactor启动失败了！！！！！！");
+            System.err.println("solrReactor启动失败了！！！！！�?");
             e.printStackTrace();
         }
 
@@ -44,7 +44,7 @@ public class SolrReactor {
                 }
             }
             try {
-                //检索客户端首次启动时，可能在休眠之前poll检索request，故休眠若干毫秒，保证检索客户端都休眠后，再offer检索request
+                //�?索客户端首次启动时，可能在休眠之前poll�?索request，故休眠若干毫秒，保证检索客户端都休眠后，再offer�?索request
                 Thread.sleep(1000);
             }catch (Exception e){
                 e.printStackTrace();
