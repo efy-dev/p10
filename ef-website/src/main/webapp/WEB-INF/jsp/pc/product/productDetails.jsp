@@ -263,7 +263,7 @@
                                             ${purchaseOrderProduct.purchaseOrderComment.content}
                                         </c:if>
                                     </div>
-                                    <%--<div class="star">5星</div>--%>
+                                        <div class="star"><i class="star-icon star-5"></i></div>
                                     <c:set var="user">
                                         ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                     </c:set>
