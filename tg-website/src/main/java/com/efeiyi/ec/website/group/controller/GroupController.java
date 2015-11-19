@@ -294,6 +294,16 @@ public class GroupController {
         purchaseOrderProductQuery.put("productModel_id", group.getGroupProduct().getProductModel().getId());
         List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
 
+        XQuery xQuery = new XQuery("listPurchaseOrderGroup_default0",request);
+        xQuery.put("member_user_id",group.getManUser().getId());
+        xQuery.put("group_id",group.getId());
+        String manUserName = "";
+        List<PurchaseOrderGroup> purchaseOrderGroupList = baseManager.listObject(xQuery);
+        if(purchaseOrderGroupList.size()>0){
+            manUserName = purchaseOrderGroupList.get(0).getPurchaseOrder().getReceiverName();
+        }
+        model.addAttribute("manUserName",manUserName);
+
         int memberAmount = group.getGroupProduct().getMemberAmount();
         int a = (int)((float)group.getMemberList().size()*100/memberAmount);
         if (a<=100){

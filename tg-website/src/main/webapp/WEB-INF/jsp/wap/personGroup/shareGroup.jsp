@@ -66,7 +66,7 @@
   <!--功能-->
   <div class="iwill ae">
     <div class="join ae">
-      <div class="txt-page ae"><span>团长:${group.manUser.name}</span><span>${group.memberList.size()}人参团/${group.groupProduct.memberAmount}人起成团</span></div>
+      <div class="txt-page ae"><span>团长:${manUserName}</span><span>${group.memberList.size()}人参团/${group.groupProduct.memberAmount}人起成团</span></div>
       <div class="Powerweb ae">
         <div class="black" style="width: ${bil}%;"></div>
         <div class="gray"></div>
