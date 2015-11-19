@@ -100,7 +100,7 @@ public class SeckillController {
             if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
                 //秒杀正在进行中
                 status = "2";
-                return "redirect:http://www.efeiyi.com/miaoBuy/" + productId + "/" + amount;
+                return "redirect:http://www.efeiyi.com/order/miaoBuy/" + productId + "/" + amount;
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
                 //秒杀已经结束
                 status = "3";
