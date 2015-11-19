@@ -896,13 +896,13 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
     float: left;
     margin-left: 105px;
 }
+.nav-new-list {border-bottom: 3px solid #000;}
+.nav-new-list .cate .allsort {top: 39px;}
 /*--//End---nav-new---*/
 .focus-new {
     height:433px;
     position: relative;
-
     z-index: 1;
-
 }
 .focus-new .hd {height:430px;border-bottom: 3px solid #000;position:relative;box-sizing:content-box;overflow: hidden;}
 .focus-new .slider-main {width:1020px;height:430px;padding-left: 180px;position:absolute;top:0;left:0;z-index:1;box-sizing: content-box}
@@ -1105,6 +1105,10 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
     background-position: 0 -90px;
     cursor: text;
 }
+.footernew .frlinksimg a.icon3 {
+    background-position: 0 -210px;
+    cursor: text;
+}
 .footernew .frlinksimg .line {
     width: 2px;
     height:40px;
@@ -1139,6 +1143,10 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 }
 .footer .frlinksimg a.icon2 {
     background-position: 0 -90px;
+    cursor: text;
+}
+.footer .frlinksimg a.icon3 {
+    background-position: 0 -210px;
     cursor: text;
 }
 .footer .frlinksimg .line {
