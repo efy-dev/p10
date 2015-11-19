@@ -46,7 +46,7 @@ public class GroupProductController {
      */
     @RequestMapping(value = "/groupProduct.do/{index}")
     @ResponseBody
-    public List<GroupProduct> listProduct(HttpServletRequest request,@PathVariable String index) throws Exception {
+    public List<Object> listProduct(HttpServletRequest request,@PathVariable String index) throws Exception {
         XQuery xQuery = new XQuery("listGroupProduct_default",request);
         xQuery.put("status","1");
         PageEntity pageEntity = new PageEntity();
@@ -56,10 +56,7 @@ public class GroupProductController {
         pageEntity.setSize(4);
         xQuery.setPageEntity(pageEntity);
         PageInfo pageInfo = baseManager.listPageInfo(xQuery);
-        List<GroupProduct> list = pageInfo.getList();
-        for(GroupProduct groupProduct:list){
-            groupProduct.setProductName(groupProduct.getProductModel().getProduct().getName());
-        }
+        List<Object> list = pageInfo.getList();
         return list;
     }
     /**
