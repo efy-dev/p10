@@ -254,7 +254,7 @@
             <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0}">
                 <c:forEach items="${productPictureList}" var="productPicture">
              <p>
-                    <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}"/>
+                    <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!pc-detail-view"/>
              </p>
                 </c:forEach>
 
