@@ -119,98 +119,98 @@
             </c:if>
         </ul>
         <ul class="list-bottom ae">
-            <%--<c:if test="${not empty hotSaleList&&fn:length(hotSaleList)>0}">--%>
-            <%--<c:forEach items="${hotSaleList}" var="hotSale">--%>
+            <c:if test="${not empty hotSaleList&&fn:length(hotSaleList)>0}">
+            <c:forEach items="${hotSaleList}" var="hotSale" begin="0" end="9">
+            <li>
+            <a href="${hotSale.redirect}" target="_blank">
+            <strong>${hotSale.name}</strong>
+            <img class="imgfilter" src="http://pro.efeiyi.com/${hotSale.img}@!pc-home-hot-sale">
+            </a>
+            <span class="money"><em>￥</em><font>${hotSale.price}</font></span>
+            <span class="fiery">热卖</span>
+            </li>
+            </c:forEach>
+            </c:if>
             <%--<li>--%>
-            <%--<a href="#" target="_blank">--%>
-            <%--<strong>${hotSale.name}</strong>--%>
-            <%--<img class="imgfilter" src="http://pro.efeiyi.com/${hotSale.img}@!pc-home-hot-sale">--%>
-            <%--</a>--%>
-            <%--<span class="money"><em>￥</em><font>${hotSale.price}</font></span>--%>
-            <%--<span class="fiery">热卖</span>--%>
+                <%--<a href="${hotSaleList.get(0).redirect}" target="_blank">--%>
+                    <%--<strong>${hotSaleList.get(0).name}</strong>--%>
+                    <%--<img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(0).img}@!pc-home-hot-sale">--%>
+                <%--</a>--%>
+                <%--<span class="money"><em>￥</em><font>${hotSaleList.get(0).price}</font></span>--%>
+                <%--<span class="fiery">热卖</span>--%>
             <%--</li>--%>
-            <%--</c:forEach>--%>
-            <%--</c:if>--%>
-            <li>
-                <a href="${hotSaleList.get(0).redirect}" target="_blank">
-                    <strong>${hotSaleList.get(0).name}</strong>
-                    <img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(0).img}@!pc-home-hot-sale">
-                </a>
-                <span class="money"><em>￥</em><font>${hotSaleList.get(0).price}</font></span>
-                <span class="fiery">热卖</span>
-            </li>
-            <li>
-                <a href="${hotSaleList.get(1).redirect}" target="_blank">
-                    <strong>${hotSaleList.get(1).name}</strong>
-                    <img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(1).img}@!pc-home-hot-sale">
-                </a>
-                <span class="money"><em>￥</em><font>${hotSaleList.get(1).price}</font></span>
-                <span class="fiery">热卖</span>
-            </li>
-            <li>
-                <a href="${hotSaleList.get(2).redirect}" target="_blank">
-                    <strong>${hotSaleList.get(2).name}</strong>
-                    <img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(2).img}@!pc-home-hot-sale">
-                </a>
-                <span class="money"><em>￥</em><font>${hotSaleList.get(2).price}</font></span>
-                <span class="fiery">热卖</span>
-            </li>
-            <li>
-                <a href="${hotSaleList.get(3).redirect}" target="_blank">
-                    <strong>${hotSaleList.get(3).name}</strong>
-                    <img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(3).img}@!pc-home-hot-sale">
-                </a>
-                <span class="money"><em>￥</em><font>${hotSaleList.get(3).price}</font></span>
-                <span class="fiery">热卖</span>
-            </li>
-            <li>
-                <a href="${hotSaleList.get(4).redirect}" target="_blank">
-                    <strong>${hotSaleList.get(4).name}</strong>
-                    <img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(4).img}@!pc-home-hot-sale">
-                </a>
-                <span class="money"><em>￥</em><font>${hotSaleList.get(4).price}</font></span>
-                <span class="fiery">热卖</span>
-            </li>
-            <li>
-                <a href="${hotSaleList.get(5).redirect}" target="_blank">
-                    <strong>${hotSaleList.get(5).name}</strong>
-                    <img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(5).img}@!pc-home-hot-sale">
-                </a>
-                <span class="money"><em>￥</em><font>${hotSaleList.get(5).price}</font></span>
-                <span class="fiery">热卖</span>
-            </li>
-            <li>
-                <a href="${hotSaleList.get(6).redirect}" target="_blank">
-                    <strong>${hotSaleList.get(6).name}</strong>
-                    <img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(6).img}@!pc-home-hot-sale">
-                </a>
-                <span class="money"><em>￥</em><font>${hotSaleList.get(6).price}</font></span>
-                <span class="fiery">热卖</span>
-            </li>
-            <li>
-                <a href="${hotSaleList.get(7).redirect}" target="_blank">
-                    <strong>${hotSaleList.get(7).name}</strong>
-                    <img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(7).img}@!pc-home-hot-sale">
-                </a>
-                <span class="money"><em>￥</em><font>${hotSaleList.get(7).price}</font></span>
-                <span class="fiery">热卖</span>
-            </li>
-            <li>
-                <a href="${hotSaleList.get(8).redirect}" target="_blank">
-                    <strong>${hotSaleList.get(8).name}</strong>
-                    <img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(8).img}@!pc-home-hot-sale">
-                </a>
-                <span class="money"><em>￥</em><font>${hotSaleList.get(8).price}</font></span>
-                <span class="fiery">热卖</span>
-            </li>
-            <li>
-                <a href="${hotSaleList.get(9).redirect}" target="_blank">
-                    <strong>${hotSaleList.get(9).name}</strong>
-                    <img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(9).img}@!pc-home-hot-sale">
-                </a>
-                <span class="money"><em>￥</em><font>${hotSaleList.get(9).price}</font></span>
-                <span class="fiery">热卖</span>
-            </li>
+            <%--<li>--%>
+                <%--<a href="${hotSaleList.get(1).redirect}" target="_blank">--%>
+                    <%--<strong>${hotSaleList.get(1).name}</strong>--%>
+                    <%--<img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(1).img}@!pc-home-hot-sale">--%>
+                <%--</a>--%>
+                <%--<span class="money"><em>￥</em><font>${hotSaleList.get(1).price}</font></span>--%>
+                <%--<span class="fiery">热卖</span>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<a href="${hotSaleList.get(2).redirect}" target="_blank">--%>
+                    <%--<strong>${hotSaleList.get(2).name}</strong>--%>
+                    <%--<img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(2).img}@!pc-home-hot-sale">--%>
+                <%--</a>--%>
+                <%--<span class="money"><em>￥</em><font>${hotSaleList.get(2).price}</font></span>--%>
+                <%--<span class="fiery">热卖</span>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<a href="${hotSaleList.get(3).redirect}" target="_blank">--%>
+                    <%--<strong>${hotSaleList.get(3).name}</strong>--%>
+                    <%--<img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(3).img}@!pc-home-hot-sale">--%>
+                <%--</a>--%>
+                <%--<span class="money"><em>￥</em><font>${hotSaleList.get(3).price}</font></span>--%>
+                <%--<span class="fiery">热卖</span>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<a href="${hotSaleList.get(4).redirect}" target="_blank">--%>
+                    <%--<strong>${hotSaleList.get(4).name}</strong>--%>
+                    <%--<img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(4).img}@!pc-home-hot-sale">--%>
+                <%--</a>--%>
+                <%--<span class="money"><em>￥</em><font>${hotSaleList.get(4).price}</font></span>--%>
+                <%--<span class="fiery">热卖</span>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<a href="${hotSaleList.get(5).redirect}" target="_blank">--%>
+                    <%--<strong>${hotSaleList.get(5).name}</strong>--%>
+                    <%--<img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(5).img}@!pc-home-hot-sale">--%>
+                <%--</a>--%>
+                <%--<span class="money"><em>￥</em><font>${hotSaleList.get(5).price}</font></span>--%>
+                <%--<span class="fiery">热卖</span>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<a href="${hotSaleList.get(6).redirect}" target="_blank">--%>
+                    <%--<strong>${hotSaleList.get(6).name}</strong>--%>
+                    <%--<img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(6).img}@!pc-home-hot-sale">--%>
+                <%--</a>--%>
+                <%--<span class="money"><em>￥</em><font>${hotSaleList.get(6).price}</font></span>--%>
+                <%--<span class="fiery">热卖</span>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<a href="${hotSaleList.get(7).redirect}" target="_blank">--%>
+                    <%--<strong>${hotSaleList.get(7).name}</strong>--%>
+                    <%--<img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(7).img}@!pc-home-hot-sale">--%>
+                <%--</a>--%>
+                <%--<span class="money"><em>￥</em><font>${hotSaleList.get(7).price}</font></span>--%>
+                <%--<span class="fiery">热卖</span>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<a href="${hotSaleList.get(8).redirect}" target="_blank">--%>
+                    <%--<strong>${hotSaleList.get(8).name}</strong>--%>
+                    <%--<img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(8).img}@!pc-home-hot-sale">--%>
+                <%--</a>--%>
+                <%--<span class="money"><em>￥</em><font>${hotSaleList.get(8).price}</font></span>--%>
+                <%--<span class="fiery">热卖</span>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<a href="${hotSaleList.get(9).redirect}" target="_blank">--%>
+                    <%--<strong>${hotSaleList.get(9).name}</strong>--%>
+                    <%--<img class="imgfilter" src="http://pro.efeiyi.com/${hotSaleList.get(9).img}@!pc-home-hot-sale">--%>
+                <%--</a>--%>
+                <%--<span class="money"><em>￥</em><font>${hotSaleList.get(9).price}</font></span>--%>
+                <%--<span class="fiery">热卖</span>--%>
+            <%--</li>--%>
         </ul>
     </div>
     <!-- 放banner-->

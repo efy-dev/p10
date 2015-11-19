@@ -883,7 +883,7 @@
               for(i in data.list){
 
 
-                html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\">" +
+                html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\">" +
                         "<img src=\"http://pro.efeiyi.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
                         "<div class=\"name\">"+data.list[i].name+"</div> <div class=\"txt-info\"> " +
                         "<a href=\"javascript:void(0);\" onclick=\"savaUpAndDown('"+data.list[i].id+"')\" id=\""+data.list[i].id+"\" name=\"up\" ><i class=\"icon good-1\"></i><em>"+data.list[i].fsAmount+"</em></a> " +

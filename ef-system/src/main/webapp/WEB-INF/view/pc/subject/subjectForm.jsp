@@ -250,10 +250,15 @@
      $(".copy").each(function(){
        copyInit($(this));
      });
-    var startDateTime = '${object.startDateTime}'.substring(0,'${object.startDateTime}'.lastIndexOf("."));
-    var endDateTime = '${object.endDateTime}'.substring(0,'${object.startDateTime}'.lastIndexOf("."));
-    $("#startDateTime").val(startDateTime);
-       $("#endDateTime").val(endDateTime);
+       if(${not empty object.startDateTime}){
+           var startDateTime = '${object.startDateTime}'.substring(0,'${object.startDateTime}'.lastIndexOf("."));
+           $("#startDateTime").val(startDateTime);
+       }
+       if(${not empty object.endDateTime}){
+           var endDateTime = '${object.endDateTime}'.substring(0,'${object.startDateTime}'.lastIndexOf("."));
+
+           $("#endDateTime").val(endDateTime);
+       }
      $('#btn_upload').uploadify({
        uploader: '<c:url value="/product/subjectUploadify.do?status=1&subjectId=${object.id}"/>',            // 服务器处理地址
        swf: '<c:url value="/scripts/upload/uploadify.swf"/>',

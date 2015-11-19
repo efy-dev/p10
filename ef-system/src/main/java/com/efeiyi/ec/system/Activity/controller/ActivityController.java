@@ -45,8 +45,7 @@ public class ActivityController {
             int limintDay = group.getGroupProduct().getGroupPurchaseTime();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(createTime);
-            //calendar.add(Calendar.DATE,limintDay);
-            calendar.add(Calendar.MINUTE,10);
+            calendar.add(Calendar.DATE,limintDay);
             Date endTime = calendar.getTime();
             Date date = new Date();
             if(date.after(endTime)){

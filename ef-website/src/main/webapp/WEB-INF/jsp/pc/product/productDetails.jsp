@@ -117,8 +117,8 @@
             <!-- //End-->
             <div class="master-cost">
                 <c:if test="productModel.marketPrice!=null">
-                <p><font>市场价：</font><em>${productModel.marketPrice}</em></p>
-                 </c:if>
+                    <p><font>市场价：</font><em>${productModel.marketPrice}</em></p>
+                </c:if>
                 <p>飞蚁价</p>
 
                 <p><strong>￥</strong><span>${productModel.price}</span></p>
@@ -128,42 +128,42 @@
             <div class="des">
                 <div class="colour">服务：</div>
                 <div class="colour-page">
-                        <span>由 <a target="_blank" href="<c:url value="/tenant/${product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</span>
+                    <span>由 <a target="_blank" href="<c:url value="/tenant/${product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</span>
                 </div>
             </div>
             <div class="des">
                 <c:if test="${fn:length(productModelList) >1}">
-                <div class="colour">规格：</div>
-                <div class="colour-page">
-                    <ul class="ul-list">
+                    <div class="colour">规格：</div>
+                    <div class="colour-page">
+                        <ul class="ul-list">
                             <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
                                 <c:if test="${productModel.id == productModelTmp.id}">
                                     <li class="active">
                                         <a href="/product/productModel/${productModelTmp.id}">
-                                            <%--<c:forEach items="${productModelTmp.productPropertyValueList}"--%>
-                                                       <%--var="productPropertyValue" varStatus="rec">--%>
+                                                <%--<c:forEach items="${productModelTmp.productPropertyValueList}"--%>
+                                                <%--var="productPropertyValue" varStatus="rec">--%>
                                                 <%--${productPropertyValue.projectPropertyValue.value}--%>
-                                            <%--</c:forEach>--%>
+                                                <%--</c:forEach>--%>
                                                 <%--${product.name}--%>
-                                            ${productModelTmp.name}
+                                                ${productModelTmp.name}
                                         </a>
                                     </li>
                                 </c:if>
                                 <c:if test="${productModel.id != productModelTmp.id}">
                                     <li class="">
                                         <a href="/product/productModel/${productModelTmp.id}">
-                                            <%--<c:forEach items="${productModelTmp.productPropertyValueList}"--%>
-                                                       <%--var="productPropertyValue" varStatus="rec">--%>
+                                                <%--<c:forEach items="${productModelTmp.productPropertyValueList}"--%>
+                                                <%--var="productPropertyValue" varStatus="rec">--%>
                                                 <%--${productPropertyValue.projectPropertyValue.value}--%>
-                                            <%--</c:forEach>--%>
+                                                <%--</c:forEach>--%>
                                                 <%--${product.name}--%>
-                                                    ${productModelTmp.name}
+                                                ${productModelTmp.name}
                                         </a>
                                     </li>
                                 </c:if>
                             </c:forEach>
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
                 </c:if>
             </div>
             <div class="des">
@@ -183,7 +183,7 @@
                 </c:if>
                 <c:if test="${productModel.amount > 0}">
                     <a id="modelId" class="btn btn-append"
-                      onclick="addCart('${productModel.id}')"  title="放入购物车" dis>放入购物车</a>
+                       onclick="addCart('${productModel.id}')"  title="放入购物车" dis>放入购物车</a>
                     <a class="btn btn-buy" onclick="immediateBuy('${productModel.id}')"
                        title="立即购买">立即购买</a>
                 </c:if>
@@ -246,41 +246,53 @@
         <div class="wh title"><h3>商品详情</h3></div>
         <div class="wh part">
             <%--<div class="wh part">--%>
-            ${product.productDescription.content}
-                <c:if test="${not empty purchaseOrderProductList}">
-             <div class="discuss">
-                <div class="title" id="title"><h3>商品评价</h3></div>
-                <div class="dis-con">
-                    <div class="dis-title">用户印象：</div>
-                    <div class="dis-ul">
-                                <%--<c:if test="${not empty purchaseOrderProductList}">--%>
-                                <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct"
-                                           varStatus="rec">
-                                    <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'&&not empty purchaseOrderProduct.purchaseOrder.user&&not empty purchaseOrderProduct.purchaseOrder}">
-                                    <li>
-                                    <div class="txt">
-                                        <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
-                                            ${purchaseOrderProduct.purchaseOrderComment.content}
-                                        </c:if>
-                                    </div>
-                                    <%--<div class="star">5星</div>--%>
-                                    <c:set var="user">
-                                        ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
-                                    </c:set>
-                                    <div class="user"><i
-                                            class="icon"></i>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}
-                                    </div>
-                                    </li>
-                                    </c:if>
-                                 </c:forEach>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-                </c:if>
+            <c:if test="${not empty product.productDescription.content}">
+                ${product.productDescription.content}
+            </c:if>
         </div>
-</div>
+        <div class="wh part">
+            <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0}">
+                <c:forEach items="${productPictureList}" var="productPicture">
+             <p>
+                    <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!pc-detail-view"/>
+             </p>
+                </c:forEach>
+
+            </c:if>
+            <c:if test="${not empty purchaseOrderProductList}">
+                <div class="discuss">
+                    <div class="title" id="title"><h3>商品评价</h3></div>
+                    <div class="dis-con">
+                        <div class="dis-title">用户印象：</div>
+                        <div class="dis-ul">
+                                <%--<c:if test="${not empty purchaseOrderProductList}">--%>
+                            <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct"
+                                       varStatus="rec">
+                                <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'&&not empty purchaseOrderProduct.purchaseOrder.user&&not empty purchaseOrderProduct.purchaseOrder}">
+                                    <li>
+                                        <div class="txt">
+                                            <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
+                                                ${purchaseOrderProduct.purchaseOrderComment.content}
+                                            </c:if>
+                                        </div>
+                                        <div class="star"><i class="star-icon star-5"></i></div>
+                                        <c:set var="user">
+                                            ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
+                                        </c:set>
+                                        <div class="user"><i
+                                                class="icon"></i>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}
+                                        </div>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </c:if>
+        </div>
+    </div>
 
 
 
@@ -343,26 +355,26 @@
         });
     }
 
-//    $(function(){
-//        var t = $("#text_box");
-//        $("#add").click(function(){
-//            t.val(parseInt(t.val())+1)
-//            setTotal();
-//        })
-//        $("#min").click(function(){
-//            t.val(parseInt(t.val())-1)
-//            setTotal();
-//        })
-//        function setTotal(){
-//            $("#total").html((parseInt(t.val())*300).toFixed(2));
-//        }
-//        setTotal();
-//    })
+    //    $(function(){
+    //        var t = $("#text_box");
+    //        $("#add").click(function(){
+    //            t.val(parseInt(t.val())+1)
+    //            setTotal();
+    //        })
+    //        $("#min").click(function(){
+    //            t.val(parseInt(t.val())-1)
+    //            setTotal();
+    //        })
+    //        function setTotal(){
+    //            $("#total").html((parseInt(t.val())*300).toFixed(2));
+    //        }
+    //        setTotal();
+    //    })
 
     function subtractProduct() {
         var t = $("#value");
         if(t.val()<=1){
-           document.getElementById("classid").value = 1;
+            document.getElementById("classid").value = 1;
         }
         t.val(parseInt(t.val())-1)
     }
