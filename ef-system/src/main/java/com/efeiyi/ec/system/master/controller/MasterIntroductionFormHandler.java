@@ -22,7 +22,7 @@ public class MasterIntroductionFormHandler implements DoHandler {
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
-        XQuery xQuery = new XQuery("listProject_default",request);
+        XQuery xQuery = new XQuery("listProject2_default",request);
         List<Project> list = baseManager.listObject(xQuery);
         modelMap.addAttribute("projectList",list);
         if (request.getParameter("masterId") != null) {

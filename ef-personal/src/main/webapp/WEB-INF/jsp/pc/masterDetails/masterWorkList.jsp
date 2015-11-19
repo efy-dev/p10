@@ -332,7 +332,7 @@
             if(data != null && data.length > 0) {
               for(var i in data){
                 html += "<li class=\"cell craft-page\">"+
-                      "                    <a href='/masterMessage/getWorkDetails/"+data[i].id+"'><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+data[i].favicon+"\"></a>"+
+                      "                    <a href=\"<c:url value='/masterMessage/getWorkDetails/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+data[i].favicon+"\"></a>"+
                       "                    <h4 class=\"ae\">"+data[i].projectName+"</h4>"+
                       "                    <div class=\"function-page ae\">"+
                       "                        <div class=\"d-left\">"+
