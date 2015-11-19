@@ -21,11 +21,11 @@
     </div>
     <!--//End--am-slider-->
     <div class="toolbar">
-        <a class="item asso" href="#asso">
+        <a class="item asso" href="<c:url value="/productCategory.do"/> ">
             <span><i class="newicon"></i></span>
             <span>分&nbsp;类</span>
         </a>
-        <a class="item sh" href="#asso">
+        <a class="item sh" href="http://www.efeiyi.com/subject/ig8zlvonengegjk9">
             <span><i class="newicon"></i></span>
             <span>专&nbsp;题</span>
         </a>

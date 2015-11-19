@@ -75,6 +75,7 @@ public class ConvertMasterModelUtil {
 	public static MasterModel convertWork(MasterWork work){
 		MasterModel workModel = new MasterModel();
 		workModel.setMasterId(work.getMaster().getId());
+		workModel.setStoreStatus(work.getStoreStatus()==null?"收藏":work.getStoreStatus());
 		workModel.setProjectName(work.getName()==null?"":work.getName());
 		workModel.setContent(work.getProductDescription().getContent()==null?"":work.getProductDescription().getContent());
 		workModel.setId(work.getId());

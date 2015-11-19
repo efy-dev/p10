@@ -886,10 +886,16 @@
               for(i in data.list){
 
 
-                html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\">" +
+                /*html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\">" +
                         "<img src=\"http://pro.efeiyi.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
                         "<div class=\"name\">"+data.list[i].name+"</div> <div class=\"txt-info\"> " +
                         "<a href=\"#\"><i class=\"icon good-1\"></i><em>"+data.list[i].fsAmount+"</em></a> " +
+                        "<a href=\"#\"><i class=\"icon good-2\"></i><em>"+data.list[i].amount+"</em></a> " +
+                        "</div> </div> </li></ul>";*/
+                html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\">" +
+                        "<img src=\"http://pro.efeiyi.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
+                        "<div class=\"name\">"+data.list[i].name+"</div> <div class=\"txt-info\"> " +
+                        "<a href=\"javascript:void(0);\" onclick=\"savaUpAndDown('"+data.list[i].id+"')\" id=\""+data.list[i].id+"\" name=\"up\" ><i class=\"icon good-1\"></i><em>"+data.list[i].fsAmount+"</em></a> " +
                         "<a href=\"#\"><i class=\"icon good-2\"></i><em>"+data.list[i].amount+"</em></a> " +
                         "</div> </div> </li></ul>";
 
@@ -928,81 +934,7 @@
 
 
 <script type="text/javascript">
- /* $(function(){
 
-    var $waterfall = $('#waterfall');
-
-    $waterfall.masonry({
-      columnWidth: 230
-    });
-
-  });*/
-/*
- function  imgload(){
-   var box = $('.item');
-   var boxHeight = {
-     leftBox:[],
-     centerBox:[],
-     rightBox:[]
-   }
-
-   for(var i=0;i<box.length;i++){
-     var now = i%3;		//now的值为0，1，2
-
-     switch(now){
-       case 0:
-         box.eq(i).css('left','10px');
-         boxHeight.leftBox.push(box.eq(i).height());
-         var now2 = Math.floor(i/3);
-
-         if(now2==0){
-           box.eq(i).css('top',0);
-         }else{
-           var total = 0;
-           for(var j=0;j<now2;j++){
-             total += boxHeight.leftBox[j]+10;
-           }
-           box.eq(i).css('top',total+'px')
-         }
-
-         break;
-
-       case 1:
-         box.eq(i).css('left','270px');
-         boxHeight.centerBox.push(box.eq(i).height());
-         var now2 = Math.floor(i/3);
-
-         if(now2==0){
-           box.eq(i).css('top',0);
-         }else{
-           var total = 0;
-           for(var j=0;j<now2;j++){
-             total += boxHeight.centerBox[j]+10;
-           }
-           box.eq(i).css('top',total+'px')
-         }
-         break;
-
-       case 2:
-         box.eq(i).css('left','530px');
-         boxHeight.rightBox.push(box.eq(i).height());
-         var now2 = Math.floor(i/3);
-
-         if(now2==0){
-           box.eq(i).css('top',0);
-         }else{
-           var total = 0;
-           for(var j=0;j<now2;j++){
-             total += boxHeight.rightBox[j]+10;
-           }
-           box.eq(i).css('top',total+'px')
-         }
-         break;
-     }
-   }
-
- }
-*/
  var commentNumber = 1;
  var praiseNumber = 1;
  function getCommentList(){
@@ -1120,6 +1052,59 @@
        return false;
      },
      complete:function(){
+     }
+   });
+ }
+ function savaUpAndDown(ds){
+   var oper = $("#"+ds).attr("name");
+   $.ajax({
+     type:"get",
+     url:"<c:url value='/base/saveThumbUp.do?productId='/>"+ds+"&operation="+oper,
+     data:"",
+     dataType:"json",
+     success:function(data2){
+       if(data2=="false"){
+         //alert("您还未登陆，请登录后再操作！！！");
+         var go = window.confirm("去登陆吧?");
+         if(go==true){
+           window.location.href ="<c:url value='/wapbrifProject/${project.id}'/>";
+         }
+         else{
+           return false;//取消
+         }
+         return false;
+       }
+       if(data2=="repeat"){
+         alert("您已经赞过了");
+         return false;
+       }
+       if(data2=="true" && oper=='up'){
+         //$("#em1").html(parseInt($("#em1").text())+1);
+         $("#"+ds).children("em").eq(0).html(parseInt($("#"+ds).children("em").eq(0).text())+1);
+         if($("#"+ds).attr("name")=="down"){
+           $("#"+ds).attr("name","up");
+         }else{
+           $("#"+ds).attr("name","down");
+         }
+       }
+       if(data2=="true" && oper=='down'){
+         $("#"+ds).children("em").eq(0).html(parseInt($("#"+ds).children("em").eq(0).text())-1);
+         // $("#em1").html(parseInt($("#em1").text())-1);
+         if($("#"+ds).attr("name")=="down"){
+           $("#"+ds).attr("name","up");
+         }else{
+           $("#"+ds).attr("name","down");
+         }
+       }
+     },
+     error:function(){
+       alert("出错了，请联系管理员！！！");
+       return false;
+     },
+     complete:function(){
+
+
+
      }
    });
  }

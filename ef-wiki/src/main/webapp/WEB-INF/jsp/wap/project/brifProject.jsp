@@ -883,7 +883,7 @@
               for(i in data.list){
 
 
-                html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\">" +
+                html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\">" +
                         "<img src=\"http://pro.efeiyi.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
                         "<div class=\"name\">"+data.list[i].name+"</div> <div class=\"txt-info\"> " +
                         "<a href=\"javascript:void(0);\" onclick=\"savaUpAndDown('"+data.list[i].id+"')\" id=\""+data.list[i].id+"\" name=\"up\" ><i class=\"icon good-1\"></i><em>"+data.list[i].fsAmount+"</em></a> " +
@@ -925,81 +925,7 @@
 
 
 <script type="text/javascript">
- /* $(function(){
 
-    var $waterfall = $('#waterfall');
-
-    $waterfall.masonry({
-      columnWidth: 230
-    });
-
-  });*/
-/*
- function  imgload(){
-   var box = $('.item');
-   var boxHeight = {
-     leftBox:[],
-     centerBox:[],
-     rightBox:[]
-   }
-
-   for(var i=0;i<box.length;i++){
-     var now = i%3;		//now的值为0，1，2
-
-     switch(now){
-       case 0:
-         box.eq(i).css('left','10px');
-         boxHeight.leftBox.push(box.eq(i).height());
-         var now2 = Math.floor(i/3);
-
-         if(now2==0){
-           box.eq(i).css('top',0);
-         }else{
-           var total = 0;
-           for(var j=0;j<now2;j++){
-             total += boxHeight.leftBox[j]+10;
-           }
-           box.eq(i).css('top',total+'px')
-         }
-
-         break;
-
-       case 1:
-         box.eq(i).css('left','270px');
-         boxHeight.centerBox.push(box.eq(i).height());
-         var now2 = Math.floor(i/3);
-
-         if(now2==0){
-           box.eq(i).css('top',0);
-         }else{
-           var total = 0;
-           for(var j=0;j<now2;j++){
-             total += boxHeight.centerBox[j]+10;
-           }
-           box.eq(i).css('top',total+'px')
-         }
-         break;
-
-       case 2:
-         box.eq(i).css('left','530px');
-         boxHeight.rightBox.push(box.eq(i).height());
-         var now2 = Math.floor(i/3);
-
-         if(now2==0){
-           box.eq(i).css('top',0);
-         }else{
-           var total = 0;
-           for(var j=0;j<now2;j++){
-             total += boxHeight.rightBox[j]+10;
-           }
-           box.eq(i).css('top',total+'px')
-         }
-         break;
-     }
-   }
-
- }
-*/
  var commentNumber = 1;
  var praiseNumber = 1;
  function getCommentList(){
@@ -1140,7 +1066,7 @@
          return false;
        }
        if(data2=="repeat"){
-         alert("请不要重复操作！！！");
+         alert("您已经赞过了");
          return false;
        }
        if(data2=="true" && oper=='up'){
