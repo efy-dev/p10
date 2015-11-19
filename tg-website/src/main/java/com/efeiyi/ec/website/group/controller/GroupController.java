@@ -246,7 +246,7 @@ public class GroupController {
         String groupProductId = request.getParameter("groupProductId");
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
-        Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
+        Group group = (Group)baseManager.getObject(Group.class.getName(),groupId);
         String url = "?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId;
         boolean flag = false;
         for (Member member:group.getMemberList()){
