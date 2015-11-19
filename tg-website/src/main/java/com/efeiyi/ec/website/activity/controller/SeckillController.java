@@ -64,6 +64,7 @@ public class SeckillController {
     @RequestMapping("/{seckillProductId}")
     public String viewSeckillProduct(HttpServletRequest request, Model model, @PathVariable String seckillProductId) throws Exception {
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), seckillProductId);
+        seckillProduct.setAttentionAmount((seckillProduct.getAttentionAmount() == null ? seckillProduct.getAttentionAmount() : 0) + 1);
         model.addAttribute("seckillProduct", seckillProduct);
         //获得当前秒杀的状态 通过时间
         String status = "1";

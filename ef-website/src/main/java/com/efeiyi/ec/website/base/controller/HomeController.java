@@ -150,25 +150,25 @@ public class HomeController {
         HashMap<String, List> map = new HashMap<>();
         HashMap<String, List> projectMap = new HashMap<>();
         HashMap<String, String> tenantMap = new HashMap<>();
-        for(Object object :recommendedTenantList){
-            XQuery xQuery = new XQuery("listTenantProject_default",request);
-            xQuery.put("tenant_id",((Tenant)object).getId());
-            List<Object> tenantProjectList = baseManager.listObject(xQuery);
-            //去重
-            if(tenantProjectList!=null&&tenantProjectList.size()>1){
-                for(int i = 0;i<tenantProjectList.size();i++){
-                    for(int j = i+1;j<tenantProjectList.size();j++){
-                        if(((TenantProject)tenantProjectList.get(i)).getTenant().getId().equals(((TenantProject)tenantProjectList.get(j)).getTenant().getId())){
-                            tenantProjectList.remove(j);
-                            j--;
-                        }
-                    }
-                }
-            }
-            tenantMap.put(((Tenant)object).getId(),((TenantProject)tenantProjectList.get(0)).getProject().getId());
-        }
+//        for(Object object :recommendedTenantList){
+//            XQuery xQuery = new XQuery("listTenantProject_default",request);
+//            xQuery.put("tenant_id",((Tenant)object).getId());
+//            List<Object> tenantProjectList = baseManager.listObject(xQuery);
+//            //去重
+//            if(tenantProjectList!=null&&tenantProjectList.size()>1){
+//                for(int i = 0;i<tenantProjectList.size();i++){
+//                    for(int j = i+1;j<tenantProjectList.size();j++){
+//                        if(((TenantProject)tenantProjectList.get(i)).getTenant().getId().equals(((TenantProject)tenantProjectList.get(j)).getTenant().getId())){
+//                            tenantProjectList.remove(j);
+//                            j--;
+//                        }
+//                    }
+//                }
+//            }
+//            tenantMap.put(((Tenant)object).getId(),((TenantProject)tenantProjectList.get(0)).getProject().getId());
+//        }
         //关联店铺和project
-        model.addAttribute("tenantMap",tenantMap);
+//        model.addAttribute("tenantMap",tenantMap);
         for (Object object : categoryList) {
             //取得推荐分类下面商品
             XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
@@ -233,25 +233,25 @@ public class HomeController {
         HashMap<String, List> map = new HashMap<>();
         HashMap<String, List> projectMap = new HashMap<>();
         HashMap<String, String> tenantMap = new HashMap<>();
-        for(Object object :recommendedTenantList){
-            XQuery xQuery = new XQuery("listTenantProject_default",request);
-            xQuery.put("tenant_id",((Tenant)object).getId());
-            List<Object> tenantProjectList = baseManager.listObject(xQuery);
-            //去重
-            if(tenantProjectList!=null&&tenantProjectList.size()>1){
-                for(int i = 0;i<tenantProjectList.size();i++){
-                    for(int j = i+1;j<tenantProjectList.size();j++){
-                        if(((TenantProject)tenantProjectList.get(i)).getTenant().getId().equals(((TenantProject)tenantProjectList.get(j)).getTenant().getId())){
-                            tenantProjectList.remove(j);
-                            j--;
-                        }
-                    }
-                }
-            }
-            tenantMap.put(((Tenant)object).getId(),((TenantProject)tenantProjectList.get(0)).getProject().getId());
-        }
+//        for(Object object :recommendedTenantList){
+//            XQuery xQuery = new XQuery("listTenantProject_default",request);
+//            xQuery.put("tenant_id",((Tenant)object).getId());
+//            List<Object> tenantProjectList = baseManager.listObject(xQuery);
+//            //去重
+//            if(tenantProjectList!=null&&tenantProjectList.size()>1){
+//                for(int i = 0;i<tenantProjectList.size();i++){
+//                    for(int j = i+1;j<tenantProjectList.size();j++){
+//                        if(((TenantProject)tenantProjectList.get(i)).getTenant().getId().equals(((TenantProject)tenantProjectList.get(j)).getTenant().getId())){
+//                            tenantProjectList.remove(j);
+//                            j--;
+//                        }
+//                    }
+//                }
+//            }
+//            tenantMap.put(((Tenant)object).getId(),((TenantProject)tenantProjectList.get(0)).getProject().getId());
+//        }
         //关联店铺和project
-        model.addAttribute("tenantMap",tenantMap);
+//        model.addAttribute("tenantMap",tenantMap);
         for (Object object : categoryList) {
             //取得推荐分类下面商品
             XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
