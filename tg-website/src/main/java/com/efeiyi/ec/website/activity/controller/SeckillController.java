@@ -88,7 +88,7 @@ public class SeckillController {
     }
 
 
-    @RequestMapping({"/buy/{productId}/{amount}"})
+    @RequestMapping({"/miao/buy/{productId}/{amount}"})
     public String miaoBuy(@PathVariable String productId, @PathVariable String amount) {
         synchronized (this) {
             SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
