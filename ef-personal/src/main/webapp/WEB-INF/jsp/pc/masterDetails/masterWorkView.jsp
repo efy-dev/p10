@@ -54,7 +54,7 @@
                     <div class="thumb-up">
                         <div class="thump-collect">
                             <a onclick="storeWork(this,'${work.id}');" href="javascript:void(0)" class="sc"><i
-                                    class="s-icon"></i><em>收藏</em></a>
+                                    class="s-icon"></i><em>${work.storeStatus}</em></a>
                         </div>
                         <div class="thump-assist">
                             <a onclick="praiseWork(this,'${work.id}');" href="javascript:void(0)"><i class="z-icon"></i><em>${work.amount}</em></a>
@@ -284,10 +284,10 @@
                     } else {
                         src = "<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>";
                     }
-                    if(data[i].amount == null){
+                    if(data.amount == null){
                         amount = 0;
                     }else{
-                        amount = data[i].amount;
+                        amount = data.amount;
                     }
                     var childNode = "<li style=\"margin: 0;border-bottom: 0;\" id=\""+data.id+"\" class=\"obtain\">"+
                             "           <div class=\"ae\">"+
@@ -343,10 +343,10 @@
                     }else{
                         src = "<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>";
                     }
-                    if(data[i].amount == null){
+                    if(data.amount == null){
                         amount = 0;
                     }else{
-                        amount = data[i].amount;
+                        amount = data.amount;
                     }
                     var insertNode = $("<li class=\"ae\" id=\""+data.id+"\">"+
                             "     <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"http://tenant.efeiyi.com/"+src+"@!master-favicon-view\"></a></div>"+

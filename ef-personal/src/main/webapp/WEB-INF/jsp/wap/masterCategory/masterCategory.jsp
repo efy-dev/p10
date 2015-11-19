@@ -81,7 +81,7 @@
           <div class="site">
             <div class="menu-page">
               <ul class="list-site" id="level">
-                <li><a href="<c:url value='/masterCategory/CategoryList.do' />">全部</a></li>
+                <li><a href="#">全部</a></li>
                 <li><a href="<c:url value='/masterCategory/getLevelList.do?level=1'/>">国家级</a></li>
                 <li><a href="<c:url value='/masterCategory/getLevelList.do?level=2'/>">省级</a></li>
                 <li><a href="<c:url value='/masterCategory/getLevelList.do?level=3'/>">市级</a></li>
