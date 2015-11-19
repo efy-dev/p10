@@ -32,11 +32,10 @@
     <script>src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"</script>
 </head>
 <body style="position: relative">
-<img src="<c:url value=""/>" style="position: absolute;left: 0;top: -1000px;width: 100%">
+<img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!wap-product-pic" style="position: absolute;left: 0;top: -1000px;width: 100%">
 <div class="packet ae">
     <div class="red ae">
-        <%--<div class="pic"><span>${fn:substring(group.groupProduct.bonus,0,2)}</span></div>--%>
-        <div class="pic"><span>10</span></div>
+        <div class="pic"><span>${fn:substring(group.groupProduct.bonus,0,2)}</span></div>
     </div>
     <div class="text ae">
 
@@ -46,7 +45,7 @@
         <p>红包计算方法：</p>
         <p>分享红包总额=分享红包*有效分享次数，详情请见e飞蚁拼团协议!</p>
     </div>
-    <div class="button ae"><a class="btn ad">我&nbsp;要&nbsp;呼&nbsp;朋&nbsp;唤&nbsp;友</a><a href="<c:url value="/group/joinGroup.do"/>" class="btn">查&nbsp;看&nbsp;参&nbsp;团&nbsp;进&nbsp;度</a>
+    <div class="button ae"><a class="btn ad">我&nbsp;要&nbsp;呼&nbsp;朋&nbsp;唤&nbsp;友</a><a href="<c:url value="/group/joinGroup.do${url}"/>" class="btn">查&nbsp;看&nbsp;参&nbsp;团&nbsp;进&nbsp;度</a>
         <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"></div>
     </div>
 </div>
