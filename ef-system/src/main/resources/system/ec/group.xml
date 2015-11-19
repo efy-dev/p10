@@ -24,6 +24,7 @@
                         <condition name="status" operation="eq" label="状态" inputType="select_status" key="Group.showStatus"/>
                     </query>
                 </do>
+                <do name="viewGroup" label="查看组" access="" result="/group/groupView"/>
                 <do name="listGroup" access="" label="团列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="manUser.id" defaultValue="1" operation="eq"/>
