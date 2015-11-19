@@ -301,6 +301,10 @@ public class GroupController {
         String memberId = request.getParameter("memberId");
         Group group = (Group)baseManager.getObject(Group.class.getName(),groupId);
 
+        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
+        purchaseOrderProductQuery.put("productModel_id", group.getGroupProduct().getProductModel().getId());
+        List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
+
         XQuery xQuery = new XQuery("listPurchaseOrderGroup_default0",request);
         xQuery.put("member_user_id",group.getManUser().getId());
         xQuery.put("group_id",group.getId());
@@ -342,15 +346,15 @@ public class GroupController {
         int limintDay = group.getGroupProduct().getGroupPurchaseTime();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(createTime);
-        //calendar.add(Calendar.DATE,limintDay);
-        calendar.add(Calendar.MINUTE,10);
+        calendar.add(Calendar.DATE,limintDay);
+        //calendar.add(Calendar.MINUTE,10);
         Date endTime = calendar.getTime();
 
 
         model.addAttribute("endTime",df.parse(df.format(endTime)).getTime());
         model.addAttribute("group",group);
         model.addAttribute("url",url);
-        //model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
+        model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
 
         return "/personGroup/shareGroup";
     }
@@ -366,8 +370,8 @@ public class GroupController {
             int limintDay = group.getGroupProduct().getGroupPurchaseTime();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(createTime);
-            //calendar.add(Calendar.DATE,limintDay);
-            calendar.add(Calendar.MINUTE,10);
+            calendar.add(Calendar.DATE,limintDay);
+            //calendar.add(Calendar.MINUTE,10);
             Date endTime = calendar.getTime();
             Date date = new Date();
             if(date.after(endTime)){
