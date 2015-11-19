@@ -249,7 +249,14 @@
             <c:if test="${not empty product.productDescription.content}">
                 ${product.productDescription.content}
             </c:if>
-            <c:if test="${empty product.productDescription.content}">
+        </div>
+        <div class="wh part">
+            <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0}">
+                <c:forEach items="${productPictureList}" var="productPicture">
+             <p>
+                    <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}"/>
+             </p>
+                </c:forEach>
 
             </c:if>
             <c:if test="${not empty purchaseOrderProductList}">
