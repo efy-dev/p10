@@ -788,7 +788,7 @@
           return false;
         }
         if(data=="repeat"){
-          alert("您已收藏过了！")
+          alert("您好，取消收藏成功")
           return true;
         }
         if(data=="true"){
