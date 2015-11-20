@@ -108,6 +108,8 @@
 </div>
 <script>
 
+    var payment = "1";
+
     function giftNameStatus(element) {
         var status = ""
         if ($(element).attr("checked")) {
@@ -123,7 +125,7 @@
         }
         ajaxRequest("<c:url value="/order/giftBuy/showNameStatus.do"/>", {
             "purchaseOrderId": "${purchaseOrder.id}",
-            "status": status
+            "nameStatus": status
         }, success, function () {
         }, "post");
     }
@@ -132,7 +134,7 @@
         var status = ""
         if ($(element).attr("checked")) {
             status = "1"
-        } else {csdewx
+        } else {
             status = "0"
         }
         var success = function (data) {
@@ -141,20 +143,40 @@
                 $(element).attr("checked", false);
             }
         }
-        ajaxRequest("<c:url value="/order/giftBuy/showNameStatus.do"/>", {
+        ajaxRequest("<c:url value="/order/giftBuy/showPriceStatus.do"/>", {
             "purchaseOrderId": "${purchaseOrder.id}",
-            "status": status
+            "priceStatus": status
         }, success, function () {
         }, "post");
     }
 
-    var payment = "1";
+    function updateGiftMessage() {
+        var message = $("#confirmGiftMessage").val();
+        if (message != "") {
+            var success = function (data) {
+                console.log("保存成功");
+            }
+            ajaxRequest("<c:url value="/order/giftBuy/saveOrUpdateGiftMessage.do"/>", {
+                "purchaseOrderId": "${purchaseOrder.id}",
+                "giftMessage": message
+            }, success, function () {
+            }, "post");
+        }
+    }
+
 
     $().ready(function () {
+
+        $("#confirmGiftMessage").click(function () {
+            updateGiftMessage();
+        });
+
         if (!isWeiXin()) {
             $("#weixin").hide();
+            payment = 1;
         } else {
             $("#zhifubao").remove();
+            payment = 3;
         }
     })
 
