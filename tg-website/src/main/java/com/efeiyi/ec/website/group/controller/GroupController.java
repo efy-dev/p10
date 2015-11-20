@@ -114,12 +114,12 @@ public class GroupController {
         String memberId = request.getParameter("memberId");
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
 
-        String orderStatus = "0";
-        if (purchaseOrder != null && purchaseOrder.getOrderStatus() != null && purchaseOrder.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRECEIVE)) {
-            orderStatus = "1";
-        }
+//        String orderStatus = "0";
+//        if (purchaseOrder != null && purchaseOrder.getOrderStatus() != null && purchaseOrder.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRECEIVE)) {
+//            orderStatus = "1";
+//        }
 
-        if (orderStatus.equals("1")) {
+//        if (orderStatus.equals("1")) {
 
             GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
 
@@ -215,13 +215,13 @@ public class GroupController {
             } else {
                 return "redirect:/tuan";//未支付成功
             }
-        } else {
-            model.addAttribute("purchaseOrderId",purchaseOrderId);
-            model.addAttribute("groupProductId",groupProductId);
-            model.addAttribute("groupId",groupId);
-            model.addAttribute("memberId",memberId);
-            return "/orderDeal";
-        }
+//        } else {
+//            model.addAttribute("purchaseOrderId",purchaseOrderId);
+//            model.addAttribute("groupProductId",groupProductId);
+//            model.addAttribute("groupId",groupId);
+//            model.addAttribute("memberId",memberId);
+//            return "/orderDeal";
+//        }
     }
 
     @RequestMapping(value = "/shareGroup")

@@ -754,6 +754,7 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
     border: 2px solid #000;
     float: left;
     box-sizing: content-box;
+    font-size: 1.4rem;
 }
 .header-new form .btn {
     width: 30px;

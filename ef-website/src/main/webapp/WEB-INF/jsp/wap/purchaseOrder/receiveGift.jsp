@@ -39,7 +39,7 @@
     </div>
     <form action="<c:url value="/order/giftConfirm.do"/>" method="post">
 
-        <input name="purchaseOrderId" value="${purchaseOrder.id}">
+        <input name="purchaseOrderId" value="${purchaseOrder.id}" type="hidden">
 
         <div class="btb"><h5>感谢您收下礼物，快填写您的收货信息吧！</h5></div>
         <ul class="profile ae">
@@ -53,7 +53,7 @@
             </li>
             <li>
                 <strong>配送地区：</strong>
-                <label id="add-dext"><p type="text" class="dtxt" placeholder="">点击选择配送地区</p></label>
+                <label id="add-dext"><p type="text" class="dtxt" placeholder="" onclick="$('.add-ress').show()">点击选择配送地区</p></label>
 
                 <div class="add-ress" style="display: none">
                     <div class="add-text shipping-address ae">
@@ -66,8 +66,8 @@
                             <option value="">请选择市</option>
                         </select>
                         <%--<select  name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required=""><option value="">请选择</option></select>--%>
-                        <div class="addbqt"><a onclick="$('.add-ress').hide()" class="bqtn"
-                                               value="确&nbsp;认&nbsp;选&nbsp;择"></a></div>
+                        <div class="addbqt"><a style="text-align: center;" onclick="$('.add-ress').hide();$('#province').val" class="bqtn"
+                                               value="确&nbsp;认&nbsp;选&nbsp;择">确&nbsp;认&nbsp;选&nbsp;择</a></div>
                     </div>
                     <div class="bg"></div>
                 </div>

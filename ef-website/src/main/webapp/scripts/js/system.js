@@ -216,8 +216,8 @@ $(function(){
             }else{
                 btnTop.fadeOut();
             }
-            btnTop.click(function(){
-                $('body').stop(true).animate({'scrollTop':'0'},300);
+            btnTop.bind('click',function(){
+                $('html,body').stop(true).animate({'scrollTop':'0'},300);
             })
         })
     })();
