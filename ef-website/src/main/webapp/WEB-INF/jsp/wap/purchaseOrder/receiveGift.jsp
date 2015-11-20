@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -24,9 +25,6 @@
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <link type="text/css" rel="stylesheet" href="../shop2015/css/amazeui.min.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="../shop2015/css/app.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="../shop2015/css/myorder.css?v=20150831">
 </head>
 <body>
 <!--//End--header-->
