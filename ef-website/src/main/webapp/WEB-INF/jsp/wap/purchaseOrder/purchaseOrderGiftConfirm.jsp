@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -82,11 +83,11 @@
         </div>
         <div class="elect">
             <div class="left">
-                <input type="checkbox" class="add-c1" id="showGiftName">
+                <input type="checkbox" class="add-c1" id="showGiftName" onclick="giftNameStatus(this)">
                 <span>显示礼物名称</span>
             </div>
             <div class="right">
-                <input type="checkbox" class="add-c2" id="showGiftPrice">
+                <input type="checkbox" class="add-c2" id="showGiftPrice" onclick="giftPriceStatus(this)">
                 <span>显示礼物价格</span>
             </div>
         </div>
@@ -106,6 +107,46 @@
     </div>
 </div>
 <script>
+
+    function giftNameStatus(element) {
+        var status = ""
+        if ($(element).attr("checked")) {
+            status = "1"
+        } else {
+            status = "0"
+        }
+        var success = function (data) {
+            if (!data) {
+                showAlert("提示", "修改状态失败");
+                $(element).attr("checked", false);
+            }
+        }
+        ajaxRequest("<c:url value="/order/giftBuy/showNameStatus.do"/>", {
+            "purchaseOrderId": "${purchaseOrder.id}",
+            "status": status
+        }, success, function () {
+        }, "post");
+    }
+
+    function giftPriceStatus(element) {
+        var status = ""
+        if ($(element).attr("checked")) {
+            status = "1"
+        } else {csdewx
+            status = "0"
+        }
+        var success = function (data) {
+            if (!data) {
+                showAlert("提示", "修改状态失败");
+                $(element).attr("checked", false);
+            }
+        }
+        ajaxRequest("<c:url value="/order/giftBuy/showNameStatus.do"/>", {
+            "purchaseOrderId": "${purchaseOrder.id}",
+            "status": status
+        }, success, function () {
+        }, "post");
+    }
 
     var payment = "1";
 
