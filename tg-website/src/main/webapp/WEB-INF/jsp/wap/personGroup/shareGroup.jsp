@@ -86,7 +86,7 @@
         <div class="black" style="width: ${bil}%;"></div>
         <div class="gray"></div>
       </div>
-      <div class="txt-page ae"><span>拼团倒计时：</span><span>分享红包：${group.groupProduct.bonus}</span></div>
+      <div class="txt-page ae"><span>拼团倒计时：</span><span>分享红包：${group.groupProduct.bonus}元</span></div>
       <div class="time ae" id="timer">00:00:00</div>
     </div>
     <c:if test="${group.status==1}">
@@ -164,11 +164,6 @@
   </div>
 </div>
 
-<div style="display: none">
-
-  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-  document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
-</div>
 <style type="text/css">
   #MEIQIA-BTN-HOLDER {
     right: 0;bottom: 145px;}
@@ -254,5 +249,25 @@
 <script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
 <script src="<c:url value="/scripts/wap/js/myorder.js?v=20150831"/>"></script>
 <!--自定义js--End-->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?99fa5c9048e30c9dada20ea390329f89";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70397028-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </body>
 </html>

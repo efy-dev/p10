@@ -16,6 +16,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "purchase_order")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class PurchaseOrder {
 
     public static final String ORDER_STATUS_WPAY = "1";  //等待付款

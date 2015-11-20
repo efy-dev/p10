@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -82,11 +83,11 @@
         </div>
         <div class="elect">
             <div class="left">
-                <input type="checkbox" class="add-c1" id="showGiftName">
+                <input type="checkbox" class="add-c1" id="showGiftName" onclick="giftNameStatus(this)">
                 <span>显示礼物名称</span>
             </div>
             <div class="right">
-                <input type="checkbox" class="add-c2" id="showGiftPrice">
+                <input type="checkbox" class="add-c2" id="showGiftPrice" onclick="giftPriceStatus(this)">
                 <span>显示礼物价格</span>
             </div>
         </div>
@@ -109,11 +110,73 @@
 
     var payment = "1";
 
+    function giftNameStatus(element) {
+        var status = ""
+        if ($(element).attr("checked")) {
+            status = "1"
+        } else {
+            status = "0"
+        }
+        var success = function (data) {
+            if (!data) {
+                showAlert("提示", "修改状态失败");
+                $(element).attr("checked", false);
+            }
+        }
+        ajaxRequest("<c:url value="/order/giftBuy/showNameStatus.do"/>", {
+            "purchaseOrderId": "${purchaseOrder.id}",
+            "nameStatus": status
+        }, success, function () {
+        }, "post");
+    }
+
+    function giftPriceStatus(element) {
+        var status = ""
+        if ($(element).attr("checked")) {
+            status = "1"
+        } else {
+            status = "0"
+        }
+        var success = function (data) {
+            if (!data) {
+                showAlert("提示", "修改状态失败");
+                $(element).attr("checked", false);
+            }
+        }
+        ajaxRequest("<c:url value="/order/giftBuy/showPriceStatus.do"/>", {
+            "purchaseOrderId": "${purchaseOrder.id}",
+            "priceStatus": status
+        }, success, function () {
+        }, "post");
+    }
+
+    function updateGiftMessage() {
+        var message = $("#confirmGiftMessage").val();
+        if (message != "") {
+            var success = function (data) {
+                console.log("保存成功");
+            }
+            ajaxRequest("<c:url value="/order/giftBuy/saveOrUpdateGiftMessage.do"/>", {
+                "purchaseOrderId": "${purchaseOrder.id}",
+                "giftMessage": message
+            }, success, function () {
+            }, "post");
+        }
+    }
+
+
     $().ready(function () {
+
+        $("#confirmGiftMessage").click(function () {
+            updateGiftMessage();
+        });
+
         if (!isWeiXin()) {
             $("#weixin").hide();
+            payment = 1;
         } else {
             $("#zhifubao").remove();
+            payment = 3;
         }
     })
 
