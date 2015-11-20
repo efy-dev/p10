@@ -225,8 +225,9 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .details-total-bar .btn-buy {width:30%}
 /*--//End--*/
 .details-shop {padding:0 20px}
-.details-shop .s-part {position:relative;padding:20px 0 20px 90px;font-size:1.4rem;border-bottom:1px solid #000}
-.details-shop .s-part img {width:80px;height:80px;border:1px solid #000;position:absolute;top:50%;margin-top:-40px;left:0}
+.details-shop .s-part {position:relative;padding:20px 0 20px 130px;font-size:1.4rem;border-bottom:1px solid #000}
+.details-shop .s-part .img {width: 122px;height: 37px;border:1px solid #000;position:absolute;top:50%;left: 0;margin-top:-17px}
+.details-shop .s-part .img img {width: 100%;max-height: 35px}
 .details-shop .s-part .txt {padding:20px 40px 20px 0}
 .details-shop .s-part .txt p {width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;float:left}
 .details-shop .s-part .txt p:last-child {font-size:12px}
@@ -627,7 +628,7 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 }
 .footer-new .authentication a.icon1 {background-position: 0 0;height: 88px}
 .footer-new .authentication a.icon2 {background-position: 0 -88px;height: 26px;top:-30px}
-.footer-new .authentication a.icon3 {background-position: 0 -115px;height: 88px}
+.footer-new .authentication a.icon3 {background-position: 0 -115px;height:98px;top:10px;}
 .footer-new .authentication .line {
     width: 2px;
     height:27px;
