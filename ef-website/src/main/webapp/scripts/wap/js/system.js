@@ -7,7 +7,7 @@ $(function(){
     //购物车
     (function(){
         $('.icon-delete').click(function(){
-           $('.alert-delete').fadeIn('fast');
+            $('.alert-delete').fadeIn('fast');
         })
 
         $('.edit-dete').click(function(){
@@ -21,6 +21,13 @@ $(function(){
     })();
     //订单礼物弹出框
     (function(){
+        $("#add-dext").click(function(){
+            $(this).siblings(".add-ress").show();
+            return false
+        })
+        $(".add-ress .bg").click(function(){
+            $(this).parents().find(".add-ress").hide();
+        })
         $("#add-show").click(function(){
             $(this).siblings('.add-cart').fadeIn().show()
             return false
@@ -38,14 +45,14 @@ $(function(){
             $(".gift .detailed .font-2").slideToggle()
         })
     })
-    //商品评价
+        //商品评价
     (function(){
         $('.my-evaluate .score .score-star .star li').click(function(){
             $(this).toggleClass('active');
         })
     });
 
-        //020102分类导航
+    //020102分类导航
     (function(){
         $('.box-hd .ul-index-list>li .item').click(function(){
             $(this).find('.arrow-down').toggleClass('arrow-up');
@@ -173,6 +180,8 @@ $(function(){
                 $(this).parents('#order-address').hide();
                 $('body,document').css('overflow','visible');
             })
+
+
             return false;
         })
     })();
@@ -207,7 +216,9 @@ $(function(){
         $('.coupon-sc').css({'height':(bodyH-55)+'px'});
         if($('div').hasClass('coupon-sc')){
             $('body').css('height','100%');
-        }
+            $('.login-reg').css({'margin-top':(bodyH-55)+'px'})
+        };
+
     })();
     //优惠-----优惠券tab
     (function(){
