@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -21,20 +22,26 @@
 <div class="am-u-sm-12 am-u-md-6">
     <div class="am-btn-toolbar">
         <div class="am-btn-group am-btn-group-xs">
+<security:authorize ifAnyGranted="admin">
             <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formRole"/>"><span class="am-icon-plus"></span>新建角色</a>
+    </security:authorize>
         </div>
     </div>
 </div>
 
 <table class="am-table am-table-bordered am-table-radius am-table-striped">
     <tr style="text-align: center">
+<security:authorize ifAnyGranted="admin">
         <td>操作</td>
+    </security:authorize>
         <td>角色名称</td>
+        <td>中文名称</td>
         <td>角色类型</td>
     </tr>
 
     <c:forEach items="${requestScope.pageInfo.list}" var="role">
         <tr style="text-align: center" id="${role.id}">
+            <security:authorize ifAnyGranted="admin">
             <td width="20%">
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;text-align: center;" >
@@ -45,7 +52,9 @@
                     </div>
                 </div>
             </td>
+            </security:authorize>
             <td width="20%">${role.name}</td>
+            <td width="20%">${role.cname}</td>
             <td width="20%">
                 <ming800:status name="basicType" dataType="Role.basicType" checkedValue="${role.basicType}" type="normal" />
             </td>

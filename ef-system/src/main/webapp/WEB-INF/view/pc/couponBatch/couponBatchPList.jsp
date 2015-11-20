@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -72,7 +73,9 @@
 
 <div class="am-btn-toolbar" style="margin-bottom: 10px">
     <div class="am-btn-group am-btn-group-xs">
+<security:authorize ifAnyGranted="admin,operational,o_operational">
         <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formCouponBatch"/>"><span class="am-icon-plus"></span>新建优惠券批次</a>
+</security:authorize>
     </div>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
@@ -99,6 +102,7 @@
                             <tr id="${couponBatch.id}">
                                 <td>
                                     <div class="am-btn-toolbar">
+                                        <security:authorize ifAnyGranted="admin,operational,o_operational">
                                         <div class="am-btn-group am-btn-group-xs">
                                             <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeCouponBatch('${couponBatch.id}')})"><span
                                                     class="am-icon-trash-o">删除</span>
@@ -134,7 +138,7 @@
                                                     </a>
                                                 </c:otherwise>
                                             </c:choose>
-
+                                            </security:authorize>
                                             <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" href="<c:url value='/basic/xm.do?qm=plistCoupon_used&conditions=couponBatch.id:${couponBatch.id}'/>"><span
                                                     class="am-icon-trash-o">查看优惠券使用情况</span>
                                             </a>

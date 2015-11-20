@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -33,10 +34,12 @@
 
 
 <div style="text-align: left" >
+<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
        href="<c:url value="/basic/xm.do?qm=formSeckillProduct" />"><span
             class="am-icon-pencil-square-o">新建秒杀商品</span>
     </a>
+    </security:authorize>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">
@@ -47,7 +50,9 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                     <th class="table-set" >操作</th>
+</security:authorize>
                     <th class="table-title">秒杀商品</th>
                     <th class="table-title">秒杀价格</th>
                     <th class="table-title">限购数量</th>
@@ -62,6 +67,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="seckillProduct">
                     <tr id="${seckillProduct.id}">
+                        <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                         <td width="10%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -76,6 +82,7 @@
                                 </div>
                             </div>
                         </td>
+                        </security:authorize>
                         <td class="am-hide-sm-only" width="10%">${seckillProduct.productModel.name}</td>
                         <td class="am-hide-sm-only" width="10%">
                                 ${seckillProduct.price}

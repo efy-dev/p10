@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -20,13 +21,17 @@
 
 
 <div style="text-align: left" >
+<security:authorize ifAnyGranted="admin,operational,c_operational">
       <a type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" href="<c:url value="/basic/xm.do?qm=formUser&formParam=user"/>"><span class="am-icon-plus"></span>新建用户</a>
+</security:authorize>
 </div>
 
     <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <table class="am-table am-table-bordered am-table-radius am-table-striped">
   <tr style="text-align: center">
+<security:authorize ifAnyGranted="admin,operational,c_operational">
     <td>操作</td>
+    </security:authorize>
     <td>用户名</td>
     <td>真实姓名</td>
     <td>角色</td>
@@ -34,17 +39,19 @@
 
   <c:forEach items="${requestScope.pageInfo.list}" var="user">
     <tr style="text-align: center" id="${user.id}">
+        <security:authorize ifAnyGranted="admin,operational,c_operational">
       <td width="20%">
         <div class="am-btn-toolbar">
           <div class="am-btn-group am-btn-group-xs" style="width: 100%;text-align: center;" >
             <a  style="margin-left: 70px;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formUser&formParam=user&id=${user.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</a>
-              <a onclick="removeUser('${user.id}')" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
+              <a onclick="showConfirm('提示','是否删除',function(){removeUser('${user.id}')})" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
           </div>
         </div>
       </td>
+        </security:authorize>
       <td width="20%">${user.username}</td>
       <td width="20%">${user.name}</td>
-      <td width="20%">${user.role.name}
+      <td width="20%">${user.role.cname}
       </td>
     </tr>
   </c:forEach>

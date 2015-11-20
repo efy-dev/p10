@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -33,10 +34,12 @@
 
 
 <div style="text-align: left" >
+    <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
     <a class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="toSendPacket('<c:url value="/tuan/sendRedPacket.do"/>');"
        href="javascript:void(0)"><span
             class="am-icon-pencil-square-o">发放成团红包</span>
     </a>
+    </security:authorize>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">

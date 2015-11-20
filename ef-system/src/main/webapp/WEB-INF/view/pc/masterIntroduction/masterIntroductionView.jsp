@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -93,8 +94,10 @@
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                 <th class="table-set">操作</th>
-                <th class="table-title">连接</th>
+</security:authorize>
+                <th class="table-title">链接</th>
                 <th class="table-title">内容</th>
 <c:if test="${object.type == 5}">
                 <th class="table-title">视频链接</th>
@@ -105,6 +108,7 @@
 
             <c:forEach items="${object.attachmentList}" var="attachment">
                 <tr id="${attachment.id}">
+                    <security:authorize ifAnyGranted="admin,operational,c_operational">
                     <td width="25%">
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
@@ -115,6 +119,7 @@
                             </div>
                         </div>
                     </td>
+                    </security:authorize>
                     <td class="am-hide-sm-only" width="25%">http://tenant.efeiyi.com/${attachment.url}</td>
                     <td class="am-hide-sm-only" width="25%">
                         <a href="/Img/imgUrl.do?imgUrl=http://tenant.efeiyi.com/${attachment.url}">
@@ -133,6 +138,7 @@
             </tbody>
         </table>
     </div>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
     <div class="am-u-md-12">
         <h2>新建附件</h2>
 
@@ -181,8 +187,8 @@
         </form>
 
     </div>
-
-</div>
+    </security:authorize>
+    </div>
 <script>
 
     function removeAttachment(divId) {

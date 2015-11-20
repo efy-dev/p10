@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title></title>
@@ -104,11 +105,12 @@
                 <%--返回列表--%>
                 <%--</a>--%>
             </legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
             <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                href="<c:url value="/basic/xm.do?qm=formProduct&view=${view}&id=${object.id}&tenantId=${tenantId}&masterId=${masterId}"/>">
                 修改基本信息
             </a>
-
+</security:authorize>
             <div class="am-form-group">
                 <label name="serial" class="am-u-sm-3 am-form-label">商品编号</label>
 
@@ -187,12 +189,13 @@
         <legend>
 
         </legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
         <a style="width: 10%;" href="javascript:void(0);"
            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
            onclick="toSubmit('1','redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')">
             保存商品描述
         </a>
-
+</security:authorize>
         <div class="am-form-group">
             <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data"
                   id="form1">
@@ -219,11 +222,12 @@
         <legend>
 
         </legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
         <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
            href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=${view}&id=${object.id}"/>">
             修改规格
         </a>
-
+</security:authorize>
         <div class="am-u-md-9" style="margin-left: 19%;">
             <div class="am-panel am-panel-default">
                 <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">商品规格<span
@@ -296,8 +300,9 @@
 
 
         </legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
         <a id="btn_upload"></a>
-
+</security:authorize>
         <div class="am-u-md-13">
             <div class="am-panel am-panel-default">
                 <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
@@ -320,7 +325,7 @@
                                                          alt="商品图片"/>
                                                 </a>
                                             </dt>
-
+                                            <security:authorize ifAnyGranted="admin,operational,c_operational">
                                             <dd style="width: 100%;text-align: center;">
                                                 <c:choose>
                                                     <c:when test="${productPicture.status == '2'}">
@@ -359,6 +364,7 @@
                                                 </select>
 
                                             </dd>
+                                            </security:authorize>
                                             <dd style="width: 100%;text-align: center;">
                                                     ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}${fn:substring(productPicture.pictureUrl,fn:indexOf(productPicture.pictureUrl,"." ) ,fn:length(productPicture.pictureUrl)+1 )}
                                             </dd>
@@ -384,6 +390,7 @@
 
 
         </legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
           <span style="margin-left: 90%;">
                           <a style="width: 10%;"
                              class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -392,7 +399,7 @@
                           </a>
                     </span>
         <a id="btn_upload3"></a>
-
+</security:authorize>
         <div class="am-u-md-13">
             <div class="am-panel am-panel-default">
                 <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">
@@ -421,6 +428,7 @@
                                                 </a>
                                             </dt>
                                             <dd style="position: absolute;width: 100%;right: 0;top: 25%;">
+                                                <security:authorize ifAnyGranted="admin,operational,c_operational">
                                             <div style="width: 100%;text-align: center;">
                                                 <c:choose>
                                                     <c:when test="${productPicture.status == '9'}">
@@ -435,9 +443,11 @@
                                                 <a href="javascript:void(0);"
                                                    onclick="deletePicture(this,'${productPicture.id}')">删除</a>
                                             </div>
+                                                </security:authorize>
                                             <div style="width: 100%;text-align: center;">
                                                     ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}${fn:substring(productPicture.pictureUrl,fn:indexOf(productPicture.pictureUrl,"." ) ,fn:length(productPicture.pictureUrl)+1 )}
                                             </div>
+                                                <security:authorize ifAnyGranted="admin,operational,c_operational">
                                             <div style="width: 100%;text-align: center;">
                                                 <a href="javascript:void(0);" class="copy"
                                                    url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
@@ -446,6 +456,7 @@
                                                 <a href="javascript:void(0);" onclick="upImg(this);">上移</a>
                                                 <a href="javascript:void(0);" onclick="downImg(this);">下移</a>
                                             </div>
+                                                </security:authorize>
                                             </dd>
                                         </dl>
                                     </li>

@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -20,7 +21,9 @@
 <body>
 <div class="am-btn-toolbar" style="margin-bottom: 10px">
     <div class="am-btn-group am-btn-group-xs">
+<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
         <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formBanner&groupName=${groupName}&bucket=ec-efeiyi"/>"><span class="am-icon-plus"></span>新建轮播图</a>
+    </security:authorize>
     </div>
 </div>
 
@@ -34,7 +37,9 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                     <th class="table-set">操作</th>
+</security:authorize>
                     <th class="table-title">标题</th>
                     <th class="table-title">跳转地址</th>
                     <th class="table-title">类别</th>
@@ -47,6 +52,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="banner">
                     <tr id="${banner.id}" width="25%">
+                        <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -61,6 +67,7 @@
                                 </div>
                             </div>
                         </td>
+                        </security:authorize>
                         <td class="am-hide-sm-only" width="15%">${banner.title}</td>
                         <td class="am-hide-sm-only" width="25%">
                             <c:if test="${not empty banner.directUrl}">

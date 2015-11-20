@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -23,6 +24,7 @@
 
 
             <div>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                 <c:if test="${empty level}">
                     <input onclick="window.location.href='<c:url
                             value="/basic/xm.do?qm=formProjectCategory&param=JiChu&fatherCategoryId=${fatherCategoryId}&level=1"/>'"
@@ -37,11 +39,14 @@
                            style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
                            value="新建类别"/>
                 </c:if>
+    </security:authorize>
             </div>
 
                 <table class="am-table am-table-bordered am-table-radius am-table-striped">
                     <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                         <td>操作</td>
+</security:authorize>
                         <td>类别名称</td>
                         <td>类别编号</td>
                         <td>类别图片</td>
@@ -50,6 +55,7 @@
                     <c:forEach items="${requestScope.pageInfo.list}" var="projectCategory">
 
                         <tr id="${projectCategory.id}">
+                            <security:authorize ifAnyGranted="admin,operational,c_operational">
                             <td width="30%">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
@@ -112,6 +118,7 @@
                                     </div>
                                 </div>
                             </td>
+                            </security:authorize>
                             <td width="20%">
                                 <a href="<c:url value="/basic/xm.do?qm=viewProjectCategory&view=plist&id=${projectCategory.id}"/>">
                                         ${projectCategory.name}

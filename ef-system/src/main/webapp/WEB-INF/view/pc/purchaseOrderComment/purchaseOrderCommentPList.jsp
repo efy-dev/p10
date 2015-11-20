@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -38,7 +39,9 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                     <th class="table-set">操作</th>
+</security:authorize>
                     <th class="table-title">订单编号</th>
                     <th class="table-title">用户名</th>
                     <th class="table-title">昵称</th>
@@ -54,6 +57,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrderComment">
                     <tr id="${purchaseOrderComment.id}" width="12%">
+                        <security:authorize ifAnyGranted="admin,operational,c_operational">
                         <td width="12%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -63,6 +67,7 @@
                                 </div>
                             </div>
                         </td>
+                        </security:authorize>
                         <td class="am-hide-sm-only" width="12%">
                             <a
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=comment&id=${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.id}'/>">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.serial}

@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -107,7 +108,12 @@
                         <td class="am-hide-sm-only">${productModel.serial}</td>
                         <td class="am-hide-sm-only">${productModel.price}</td>
                         <td class="am-hide-sm-only">
+                            <security:authorize ifNotGranted="admin,operational,c_operational">
+                               ${productModel.amount}
+                            </security:authorize>
+                            <security:authorize ifAnyGranted="admin,operational,c_operational">
                             <a href="javascript:void (0);" amount="${productModel.amount}" id="${productModel.id}" onclick="toUpdateAmount(this,'<c:url value="/product/updateAmount.do"/>')">${productModel.amount}</a>
+                            </security:authorize>
                          </td>
                     </tr>
                 </c:forEach>
