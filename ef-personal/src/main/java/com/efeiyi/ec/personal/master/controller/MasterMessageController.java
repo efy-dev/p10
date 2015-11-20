@@ -733,13 +733,13 @@ public class MasterMessageController {
 			msgStore.setMasterMessage(message);
 			msgStore.setUser(user);
 			baseManager.saveOrUpdate(MasterMessageStore.class.getName(),msgStore);
-			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() + 1);
-			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
+//			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() + 1);
+//			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
 			return "add";
 		}else{
 			baseManager.delete(MasterMessageStore.class.getName(),praise.getId());
-			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() - 1);
-			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
+//			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() - 1);
+//			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
 			return "del";
 		}
 	}
