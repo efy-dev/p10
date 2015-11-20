@@ -104,7 +104,7 @@
         <div class="des-content">
             <div class="bd title">详情</div>
             <div class="bd">
-                <c:if test="${not empty product.productDescription&&empty productPictureList}">
+                <c:if test="${not empty product.productDescription}">
                     ${product.productDescription.content}
                 </c:if>
                 <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0&&empty product.productDescription}">
