@@ -67,7 +67,6 @@ public class MasterCategoryController {
 		return "/masterCategory/masterCategory";
 	}
 
-
 	@RequestMapping("/getCityList.do")
 	public String getClassifyByCity(HttpServletRequest request , Model model){
 		String provinceId = request.getParameter("cityId");
@@ -153,6 +152,11 @@ public class MasterCategoryController {
 			master.setFollowStatus("关注");
 		}
 		return master.getFollowStatus();
+	}
+
+	@RequestMapping("/forwardPage")
+	public String forwardPage(){
+		return "/masterCategory/";
 	}
 
 	/******PC start******/

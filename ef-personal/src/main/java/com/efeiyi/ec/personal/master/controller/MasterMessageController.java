@@ -733,13 +733,13 @@ public class MasterMessageController {
 			msgStore.setMasterMessage(message);
 			msgStore.setUser(user);
 			baseManager.saveOrUpdate(MasterMessageStore.class.getName(),msgStore);
-			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() + 1);
-			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
+//			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() + 1);
+//			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
 			return "add";
 		}else{
 			baseManager.delete(MasterMessageStore.class.getName(),praise.getId());
-			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() - 1);
-			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
+//			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() - 1);
+//			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
 			return "del";
 		}
 	}
@@ -911,9 +911,10 @@ public class MasterMessageController {
 		if (pageInfo.getList() != null && pageInfo.getList().size() > 0) {
 			List<MasterFollowed> list1 = pageInfo.getList();
 			for (MasterFollowed followed : list1) {
-				XQuery xQuery = new XQuery("plistMasterMessage_default2",request);
-				xQuery.put("master_id",followed.getMaster().getId());
-				xQuery.put("creator_id",followed.getUser().getId());
+				String masterId = followed.getMaster().getId();
+				XQuery xQuery = new XQuery("plistMasterMessage_default1",request);
+				xQuery.put("master_id",masterId);
+				//xQuery.put("creator_id",followed.getUser().getId());
 				List<MasterMessage> list2 = baseManager.listObject(xQuery);
 				if (list2 != null && list2.size() > 0){
 					for (MasterMessage message : list2){
@@ -940,13 +941,21 @@ public class MasterMessageController {
 	}
 
 	@RequestMapping("/getWorkDetails/{workId}")
-	public String getMasterWorkDetails(@PathVariable String workId , Model model){
-//		String workId = request.getParameter("workId");
+	public String getMasterWorkDetails(HttpServletRequest request , @PathVariable String workId , Model model) throws Exception {
 		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
-		MasterModel workModel = ConvertMasterModelUtil.convertWork(work);
 		work.getMaster().setProjectName(mainMasterProject(work.getMaster().getMasterProjectList()));
 		MyUser user = AuthorizationUtil.getMyUser();
+		XQuery xQuery = new XQuery("listMasterWorkStore_default",request);
+		xQuery.put("work_id",workId);
+		xQuery.put("user_id",user.getId());
+		List<MasterWorkStore> list = baseManager.listObject(xQuery);
+		if (list != null && list.size() > 0){
+			work.setStoreStatus("已收藏");
+		}else{
+			work.setStoreStatus("收藏");
+		}
 		work.getMaster().setFollowStatus(getFollowStatus(work.getMaster(),user));
+		MasterModel workModel = ConvertMasterModelUtil.convertWork(work);
 		model.addAttribute("object",work.getMaster());
 		model.addAttribute("work",workModel);
 		return "/masterDetails/masterWorkView";

@@ -101,7 +101,7 @@
     function htmlGenerater(it /**/) {
         var out = '';
         for (var i = 0; i < it.length; i++) {
-            out += '<li class="ae"> <div class="colonel-pic ae"><a href="<c:url value="/product/groupProduct/"/>' + (it[i].id) + '"><img src="http://pro.efeiyi.com/' + (it[i].productModel.productModel_url) + '@!tg-efeiyi-view-list"></a> <div class="c-page"><span><a href="javascript:void(0)">' + (it[i].productModel.name)  + '</a></span> </div> </div> <ul class="price ae"> <li><s>原价:' + (it[i].productModel.price) + '元</s></li> <li>团购价:' + (it[i].groupPrice) + '元</li> <li>' + (it[i].memberAmount) + '人成团</li> </ul></li>';
+            out += '<li class="ae"> <div class="colonel-pic ae"><a href="<c:url value="/product/groupProduct/"/>' + (it[i].id) + '"><img src="http://pro.efeiyi.com/' + (it[i].productModel.productModel_url) + '@!wap-product-pic"></a> <div class="c-page"><span><a href="javascript:void(0)">' +it[i].productName + '[' + (it[i].productModel.name) + ']' + '</a></span> </div> </div> <ul class="price ae"> <li><s>飞蚁价:' + (it[i].productModel.price) + '元</s></li> <li>团购价:' + (it[i].groupPrice) + '元</li> <li>' + (it[i].memberAmount) + '人成团</li> </ul></li>';
         }
         return out;
     }
@@ -135,5 +135,25 @@
     }
 </script>
 <!--自定义js--End-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?99fa5c9048e30c9dada20ea390329f89";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-70397028-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </body>
 </html>

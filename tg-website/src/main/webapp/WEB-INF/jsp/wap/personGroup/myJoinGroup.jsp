@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>我的参团</title>
+    <title>个人中心-我的参团</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -42,41 +42,42 @@
 <!--//End--header-->
 <ul class="offered ae">
     <c:forEach items="${groupJoinList}" var="member" varStatus="rec">
-        <li>
-            <p>${member.group.groupProduct.productModel.product.name} ${member.group.groupProduct.productModel.name}</p>
-            <p>${member.group.createDateTime}</p>
-            <c:if test="${member.group.status=='1'}">
-                <p>${member.group.memberList.size()}人/${member.group.groupProduct.memberAmount}人成团</p>
-            </c:if>
-            <c:if test="${member.group.status=='3'}">
-                <p>组团成功</p>
-            </c:if>
-            <c:if test="${member.group.status=='5'}">
-                <p>组团失败</p>
-            </c:if>
-            <c:forEach items="${member.group.memberList}" var="memberTemp" varStatus="rec">
-                <c:if test="${memberTemp.level==0}">
-                    <c:set var="user">
-                        ${memberTemp.user.getUsername()}
-                    </c:set>
+        <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${member.group.groupProduct.id}&groupId=${member.group.id}&memberId=${member.id}">
+            <li>
+                <p>${member.group.groupProduct.productModel.product.name}[${member.group.groupProduct.productModel.name}]</p>
+                <p>${member.group.createDateTime}</p>
+                <c:if test="${member.group.status=='1'}">
+                    <p>${member.group.memberList.size()}人/${member.group.groupProduct.memberAmount}人成团</p>
                 </c:if>
-            </c:forEach>
-            <p>团长:${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
-            <c:if test="${member.group.status=='1'}">
+                <c:if test="${member.group.status=='3'}">
+                    <p>组团成功</p>
+                </c:if>
+                <c:if test="${member.group.status=='5'}">
+                    <p>组团失败</p>
+                </c:if>
+                <c:forEach items="${member.group.memberList}" var="memberTemp" varStatus="rec">
+                    <c:if test="${memberTemp.level==0}">
+                        <c:set var="user">
+                            ${memberTemp.user.getUsername()}
+                        </c:set>
+                    </c:if>
+                </c:forEach>
+                <p>团长:${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
+                <c:if test="${member.group.status=='1'}">
                <span>
                 进行中
                </span>
-            </c:if>
-            <c:if test="${member.group.status!='1'}">
+                </c:if>
+                <c:if test="${member.group.status!='1'}">
                <span>
                 拼团结束
                </span>
-            </c:if>
-        </li>
+                </c:if>
+            </li>
+        </a>
     </c:forEach>
 </ul>
 <!--//End--footer-->
-
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script href="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
@@ -90,5 +91,25 @@
 <script href="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
 <script href="<c:url value="/scripts/wap/js/myorder.js?v=20150831"/>"></script>
 <!--自定义js--End-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?99fa5c9048e30c9dada20ea390329f89";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-70397028-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </body>
 </html>

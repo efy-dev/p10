@@ -1,7 +1,7 @@
 package com.ming800.core.p.controller;
 
-import com.ming800.core.develop.model.SearchParamBean;
-import com.ming800.core.develop.model.SolrReactor;
+import com.ming800.core.p.model.SearchParamBean;
+import com.ming800.core.p.model.SolrReactor;
 import com.ming800.core.p.service.CommonManager;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.JsonUtil;
@@ -11,8 +11,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

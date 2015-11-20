@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/18.
@@ -39,13 +41,31 @@ public class TenantController {
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantId",tenantId);
         List<TenantMaster> list1 = baseManager.listObject(queryHql,queryParamMap);
-
         xQuery.addRequestParamToModel(model,request);
-        List<ProductModel> list = baseManager.listPageInfo(xQuery).getList();
+        List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
+        Map<ProductModel,String> map = new HashMap<>();
+        if(productModelList!=null&&productModelList.size()>0){
+            for(ProductModel productModelTemp:productModelList){
+                StringBuilder s = new StringBuilder(productModelTemp.getProduct().getName());
+                if(productModelTemp.getProduct().getProductModelList().size()==1){
+                    map.put(productModelTemp,s.toString());
+                }else{
+                    s.append("[").append(productModelTemp.getName());
+                    if(s.toString().length()>14){
+                        s = new StringBuilder(s.substring(0,14));
+                        s.append("...").append("]");
+                    }else{
+                        s.append("]");
+                    }
+                    map.put(productModelTemp,s.toString());
+                }
+            }
+        }
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
-        model.addAttribute("productModelList", list);
+        model.addAttribute("productModelList", productModelList);
         model.addAttribute("tenantId",tenantId);
         model.addAttribute("tenant",tenant);
+        model.addAttribute("map",map);
         model.addAttribute("tenantMasterList",list1);
         return "/tenant/productPList";
     }

@@ -79,7 +79,7 @@
             <c:forEach var="ppj" items="${popularProjectsList}">
               <ul class="hot" id="box">
                 <li>
-                  <a href="<c:url value='/base/brifProject/${ppj.project.id}/1'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${ppj.project.picture_wap_url}"></a>
+                  <a href="<c:url value='/base/brifProject/${ppj.project.id}/1'/>"><img src="http://pro.efeiyi.com/${ppj.project.picture_wap_url}"></a>
                   <div class="hot-poge">
                     <span style="margin-right: 1rem">人气</span>
                  <%-- <span>${fn:length(ppj.project.projectFolloweds)}</span>--%>
@@ -95,39 +95,7 @@
             <div class="dynamic" style="border-bottom: 0;">
 
               <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
-              <%--<div class="suit">
-                <div class="dynamic" id="recommends">
-                  <div class="attention">
-                    <p>您还没有关注任何工艺,下面是我们为你推荐的几项具体工艺项目</p>
-                  </div>
-                  <c:if test="${!empty  attentionProjectsList}">
-                    <ul class="dynamic-list-suit" id="recommend">
-                    <c:forEach var="apj" items="${attentionProjectsList}">
 
-                        <!--只显示9个-->
-                        <li>
-                          <div class="suit-list-bt">
-                              <a href="<c:url value='/base/brifProject.do?projectId=${apj.project.id}'/>"><img src="${apj.project.picture_url}"></a>
-                              <c:if test="${apj.attention=='0'}">
-                                  <a class="gz-fd-icon" id="${apj.project.id}" href="javascript:void(0);" onclick="saveProjectFllow('${apj.project.id}')" about="0">关注</a>
-                              </c:if>
-                              <c:if test="${apj.attention=='1'}">
-                                  <a class="gz-fd-icon" id="${apj.project.id}" href="javascript:void(0);" onclick="saveProjectFllow('${apj.project.id}')" about="1">已关注</a>
-                              </c:if>
-
-                          </div>
-                        </li>
-                    </c:forEach>
-
-
-
-                    </ul>
-
-                  </c:if>
-
-                </div>
-                <a href="#" class="state-btn" style="color: #000;" onclick="getData('<c:url value='/basic/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index='/>')">查看更多工艺</a>
-              </div>--%>
                 <div class="suit">
                     <div class="dynamic" style="border-bottom:0;">
                         <div class="suit-focus">
@@ -139,7 +107,7 @@
                                     <c:forEach var="apj" items="${attentionProjectsList}">
                                     <li>
                                         <p class="tb">
-                                            <a href="<c:url value='/base/brifProject/${apj.project.id}/1'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${apj.project.picture_wap_url}"></a>
+                                            <a href="<c:url value='/base/brifProject/${apj.project.id}/1'/>"><img src="http://pro.efeiyi.com/${apj.project.picture_wap_url}"></a>
                                             <c:if test="${apj.attention=='0'}">
                                             <a class="icon-guanzu" id="${apj.project.id}" href="javascript:void(0);" onclick="saveProjectFllow('${apj.project.id}')" about="0">关注</a>
                                             </c:if>
@@ -185,20 +153,7 @@
 
               <div class="dynamic" id="after">
                 <ul class="suit-zt-2" id="attention">
-                 <%-- <li>
-                    <div class="suit-zt--2-img am-u-sm-5 am-u-end">
-                      <a href="#"><img src="../shop2015/upload/120211-tx-1.jpg">
-                        <div class="tp-bg-0">
-                          <table>
-                            <tr><td><div style="padding: 0 1rem;">铜胎掐丝珐琅景泰蓝</div></td></tr>
-                          </table>
-                        </div></a>
-                    </div>
-                    <div class="suit-zt--2-text am-u-sm-7 am-u-end">
-                      <h4>景泰蓝工艺详情更新了</h4>
-                      <p><a href="#"> 增加相关大师5位</a></p>
-                    </div>
-                  </li>--%>
+
 
                 </ul>
               </div>
@@ -422,7 +377,7 @@
                             at='1';
                         }
                         var box = $("<li> <div class='suit-list-bt'>" +
-                                "<a href=\"<c:url value='/base/brifProject/'/>"+data.list[i].project.id+"/1\"> <img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].project.picture_wap_url+"'></a>" +
+                                "<a href=\"<c:url value='/base/brifProject/'/>"+data.list[i].project.id+"/1\"> <img src='http://pro.efeiyi.com/"+data.list[i].project.picture_wap_url+"'></a>" +
                                 " <a class='gz-fd-icon' about='"+at+"' id='"+projectid+"' href='#' onclick='saveProjectFllow(\""+projectid+"\")'>" +
                                 word +
                                 "</a> </div> </li>");
@@ -468,7 +423,7 @@
                         var moods = data.list[i].project.fsAmount;
                         if(moods==null) moods=0;
                         var box = $("<ul class='hot' id='box'>" +
-                                "<li><a href=\"<c:url value='/base/brifProject/'/>"+data.list[i].project.id+"/1\"><img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].project.picture_wap_url+"'></a> " +
+                                "<li><a href=\"<c:url value='/base/brifProject/'/>"+data.list[i].project.id+"/1\"><img src='http://pro.efeiyi.com/"+data.list[i].project.picture_wap_url+"'></a> " +
                                 "<div class='hot-poge'> <span style='margin-right: 1rem'>人气</span> " +
                                 "<span>"+moods+"</span> " +
                                 "</div></li> </ul>");
@@ -561,7 +516,7 @@
                     for(i in data){
                         for(var key in data[i]){
                             var box = $(" <li> <div class=\"suit-zt--2-img am-u-sm-5 am-u-end\">" +
-                                    " <a href=\"<c:url value='/base/brifProject/'/>"+data[i][key].project.id+"/1\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i][key].project.picture_wap_url+"\"> " +
+                                    " <a href=\"<c:url value='/base/brifProject/'/>"+data[i][key].project.id+"/1\"><img src=\"http://pro.efeiyi.com/"+data[i][key].project.picture_wap_url+"\"> " +
                                     "<div class=\"tp-bg-0\"> " +
                                     "<table> <tr><td>" +
                                     "<div style=\"padding: 0 1rem;\">"+data[i][key].project.name+"</div></td></tr> </table> " +
@@ -616,7 +571,7 @@
                     for(i in data){
                         for(var key in data[i]){
                             var box = $(" <li> <div class=\"suit-zt--2-img am-u-sm-5 am-u-end\">" +
-                                    " <a href=\"<c:url value='/base/brifProject/'/>"+data[i][key].project.id+"/1\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i][key].project.picture_wap_url+"\"> " +
+                                    " <a href=\"<c:url value='/base/brifProject/'/>"+data[i][key].project.id+"/1\"><img src=\"http://pro.efeiyi.com/"+data[i][key].project.picture_wap_url+"\"> " +
                                     "<div class=\"tp-bg-0\"> " +
                                     "<table> <tr><td>" +
                                     "<div style=\"padding: 0 1rem;\">"+data[i][key].project.name+"</div></td></tr> </table> " +

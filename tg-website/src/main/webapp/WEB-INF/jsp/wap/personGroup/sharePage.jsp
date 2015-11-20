@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
@@ -30,12 +31,14 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
     <script>src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"</script>
 </head>
-<body>
+<body style="position: relative">
+<img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!wap-product-pic" style="position: absolute;left: 0;top: -1000px;width: 100%">
 <div class="packet ae">
     <div class="red ae">
-        <div class="pic"><span>${group.groupProduct.bonus}</span></div>
+        <div class="pic"><span>${fn:substring(group.groupProduct.bonus,0,2)}</span></div>
     </div>
     <div class="text ae">
+
         <p>1、恭喜您参团成功！</p>
         <p>2、分享该链接并成功帮好友参团，拼团成功后，您就可以得到分享红包！</p>
         <p>3、红包无上限，更多分享，更多红包！</p>
@@ -46,63 +49,7 @@
         <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"></div>
     </div>
 </div>
-<script>
-    var imgUrl = 'http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}';  // 分享后展示的一张图片
-    var lineLink = 'http://j.efeiyi.com/tg-website/group/joinGroup.do${url}'; // 点击分享后跳转的页面地址
-    var descContent = "xx参加了团购，还差4人成团";  // 分享后的描述信息
-    var shareTitle = '这是微信分享链接标题';  // 分享后的标题
-    var appid = '';  // 应用id,如果有可以填，没有就留空
-/*
-//    function shareFriend() {
-        WeixinJSBridge.invoke('sendAppMessage',{
-            "img_url": imgUrl,
-            "img_width": "200",
-            "img_height": "200",
-            "link": lineLink,
-            "desc": descContent,
-            "title": shareTitle
-        }, function(res) {
-            //_report('send_msg', res.err_msg);  // 这是回调函数，必须注释掉
-        })
-//    }
-//    function shareTimeline() {
-        WeixinJSBridge.invoke('shareTimeline',{
-            "img_url": imgUrl,
-            "img_width": "200",
-            "img_height": "200",
-            "link": lineLink,
-            "desc": descContent,
-            "title": shareTitle
-        }, function(res) {
-            //_report('timeline', res.err_msg); // 这是回调函数，必须注释掉
-        });
-//    }
-//    function shareWeibo() {
-        WeixinJSBridge.invoke('shareWeibo',{
-            "content": descContent,
-            "url": lineLink,
-        }, function(res) {
-            //_report('weibo', res.err_msg);
-        });
-//    }
-    // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
-//    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-//        // 发送给好友
-//        WeixinJSBridge.on('menu:share:appmessage', function(argv){
-//            alert(argy);
-//            shareFriend();
-//        });
-//        // 分享到朋友圈
-//        WeixinJSBridge.on('menu:share:timeline', function(argv){
-//            shareTimeline();
-//        });
-//        // 分享到微博
-//        WeixinJSBridge.on('menu:share:weibo', function(argv){
-//            shareWeibo();
-//        });
-//    }, false);*/
 
-</script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
@@ -116,5 +63,25 @@
 <script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
 <script src="<c:url value="/scripts/wap/js/myorder.js?v=20150831"/>"></script>
 <!--自定义js--End-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?99fa5c9048e30c9dada20ea390329f89";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-70397028-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </body>
 </html>

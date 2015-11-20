@@ -1,10 +1,9 @@
-package com.ming800.core.develop.model;
+package com.ming800.core.p.model;
 
 
 import com.ming800.core.p.service.CommonManager;
 import com.ming800.core.util.ApplicationContextUtil;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;

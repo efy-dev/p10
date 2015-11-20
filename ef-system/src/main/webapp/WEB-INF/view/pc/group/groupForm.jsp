@@ -15,12 +15,7 @@
 
 </head>
 <body>
-<div class="am-cf am-padding">
-  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建/编辑广告</strong> /
-    <small>New/Edit Subject</small>
-  </div>
-</div>
-<hr/>
+
 
 <div class="am-g">
 

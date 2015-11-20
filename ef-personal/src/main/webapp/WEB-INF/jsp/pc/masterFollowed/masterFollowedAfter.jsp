@@ -81,7 +81,7 @@
   $(window).load(function(){
     var winH = $(window).height(); //页面可视区域高度
     $(window).scroll(function(){
-      var pageH = $(document.body).height();
+      var pageH = $(document).height();
       var scrollT = $(window).scrollTop(); //滚动条top
       var aa = (pageH - winH - scrollT) / winH;
       console.log(ajaxkey);
@@ -266,7 +266,7 @@
                               "            <div class=\"text\">"+
                               "              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\">"+data[i].masterName+"</a></p>"+
                               "              <p class=\"p2\">"+data[i].projectName+"</p>"+
-                              "              <p class=\"p2\">"+levelName+"非物质文化遗产</p>"+
+                              "              <p class=\"p2\">"+levelName+"非遗传承人</p>"+
                               "            </div>"+
                               "            <div class=\"bt-gz\">"+
                               "              <a class=\"btn-guan\" name=\"masterFollow"+data[i].id+"\" onclick=\"followMaster('"+data[i].id+"');\">"+
@@ -326,7 +326,7 @@
                               "            <div class=\"text\">"+
                               "              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\">"+data[i].masterName+"</a></p>"+
                               "              <p class=\"p2\">"+data[i].projectName+"</p>"+
-                              "              <p class=\"p2\">"+levelName+"非物质文化遗产</p>"+
+                              "              <p class=\"p2\">"+levelName+"非遗传承人</p>"+
                               "            </div>"+
                               "            <div class=\"bt-gz\">"+
                               "              <a class=\"btn-guan\" name=\"masterFollow"+data[i].id+"\" onclick=\"followMaster('"+data[i].id+"');\">"+

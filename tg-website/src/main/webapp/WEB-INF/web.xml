@@ -171,6 +171,7 @@
     <!--</error-page>-->
 
     <welcome-file-list>
-        <welcome-file>/product/groupProduct1.do</welcome-file>
+        <!--<welcome-file>/product/groupProduct.do/ih4icqax36o7zjuh</welcome-file>-->
+        <welcome-file>/tuan.do</welcome-file>
     </welcome-file-list>
 </web-app>

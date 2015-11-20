@@ -165,88 +165,6 @@ public class WikiIndexController extends WikibaseController {
         return new ModelAndView("/personal/personalInfoView");
     }
 
-    @RequestMapping("/attention.do")
-    @ResponseBody
-    public String saveProjectFollows(HttpServletRequest request, Model model) throws Exception {
-        String projectid = request.getParameter("projectId");
-        String oper = request.getParameter("oper");
-        Project project = (Project) baseManager.getObject(Project.class.getName(), projectid);
-        MyUser user = AuthorizationUtil.getMyUser();
-        if (user.getId() == null) {
-            return "false";
-        }
-        if (oper.equalsIgnoreCase("del")){
-            String queryHql = "from ProjectFollowed t where t.user.id=:userId and t.project.id=:projectId and t.status!='0'";
-            LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-            map.put("userId", user.getId());
-            map.put("projectId", projectid);
-            ProjectFollowed pf = (ProjectFollowed) baseManager.getUniqueObjectByConditions(queryHql, map);
-            if (pf != null && pf.getId() != null)//说明已经关注
-            {
-                //baseManager.delete(ProjectFollowed.class.getName(), pf.getId());
-                baseManager.remove(ProjectFollowed.class.getName(), pf.getId());//假删
-                long FsAmount =0;
-                if(project.getFsAmount() == null){
-                    FsAmount =0;
-                }else  if(project.getFsAmount() - 1<=0){
-                    FsAmount =0;
-                }else if (project.getFsAmount() - 1>=1){
-                    FsAmount =project.getFsAmount() - 1;
-                }
-                project.setFsAmount(FsAmount);
-                baseManager.saveOrUpdate(Project.class.getName(),project);
-                return "del";
-            }
-            return "error";
-        }
-        if (oper.equalsIgnoreCase("add")){
-            ProjectFollowed projectFollowed = new ProjectFollowed();
-            projectFollowed.setUser(user);
-            projectFollowed.setProject(project);
-            projectFollowed.setStatus("1");
-            projectFollowed.setCreateDatetime(new Date());
-            project.setFsAmount(project.getFsAmount() == null ? (0 + 1) : (project.getFsAmount() + 1));
-            baseManager.saveOrUpdate(Project.class.getName(), project);
-            baseManager.saveOrUpdate(ProjectFollowed.class.getName(), projectFollowed);
-
-            return "true";
-        }
-        return "error";
-    }
-
-    @RequestMapping("/Isattention/{projectId}")
-    @ResponseBody
-    public boolean checkIsAttention(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
-        boolean flag = false;
-        //String projectid = request.getParameter("projectId");
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-            XQuery xQuery = new XQuery("plistProjectFollowed_check", request);
-            xQuery.put("project_id", projectId);
-            xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
-            List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() >= 1) {
-                flag = true;
-            }
-        }
-
-        return flag;
-    }
-
-
-    @RequestMapping("/brifProject/{projectId}/{page}")
-    public ModelAndView getBrifProject(@PathVariable String projectId,@PathVariable String page,HttpServletRequest request, Model model) throws Exception {
-        //String projectId = request.getParameter("projectId");
-        //String page = request.getParameter("page");
-        Project project = (Project) baseManager.getObject(Project.class.getName(), projectId);
-        boolean flag = checkIsAttention(projectId,request, model);//判断用户是否已经关注该项目
-        model.addAttribute("flag", flag);
-        model.addAttribute("project", project);
-        if(page!=null && page.equals("2")){
-            return new ModelAndView("/project/brifProject2");
-        }
-        return new ModelAndView("/project/brifProject");
-    }
-
 
     @RequestMapping("/IsattentionMaster.do")
     @ResponseBody
@@ -276,79 +194,49 @@ public class WikiIndexController extends WikibaseController {
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
             return "false";
-        }
-        Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
-        if(oper.equalsIgnoreCase("del")){
-            String queryHql = "from MasterFollowed t where t.user.id=:userId and t.master.id=:masterId and t.status!='0'";
-            LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-            map.put("userId", user.getId());
-            map.put("masterId", masterId);
-            MasterFollowed mf = (MasterFollowed) baseManager.getUniqueObjectByConditions(queryHql, map);
-            if (mf != null && mf.getId() != null)//说明已经关注
-            {
-                //baseManager.delete(MasterFollowed.class.getName(), mf.getId());
-                mf.setStatus("0");                                                      //假删除
-                baseManager.saveOrUpdate(MasterFollowed.class.getName(),mf);
-                long FsAmount =0;
-                if(master.getFsAmount() == null){
-                    FsAmount =0;
-                }else  if(master.getFsAmount() - 1<=0){
-                    FsAmount =0;
-                }else if (master.getFsAmount() - 1>=1){
-                    FsAmount =master.getFsAmount() - 1;
+        }else{
+               Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
+                String queryHql = "from MasterFollowed t where t.user.id=:userId and t.master.id=:masterId and t.status!='0'";
+                LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+                map.put("userId", user.getId());
+                map.put("masterId", masterId);
+                MasterFollowed mf = (MasterFollowed) baseManager.getUniqueObjectByConditions(queryHql, map);
+                if (mf != null && mf.getId() != null)//说明已经关注
+                {
+                    //baseManager.delete(MasterFollowed.class.getName(), mf.getId());
+                    mf.setStatus("0");                                                      //假删除
+                    baseManager.saveOrUpdate(MasterFollowed.class.getName(),mf);
+                    long FsAmount =0;
+                    if(master.getFsAmount() == null){
+                        FsAmount =0;
+                    }else  if(master.getFsAmount() - 1<=0){
+                        FsAmount =0;
+                    }else if (master.getFsAmount() - 1>=1){
+                        FsAmount =master.getFsAmount() - 1;
+                    }
+                    master.setFsAmount(FsAmount);
+                    baseManager.saveOrUpdate(Master.class.getName(),master);
+                    return "del";
+                }else{
+                    MasterFollowed masterFollowed = new MasterFollowed();
+                    masterFollowed.setUser(user);
+                    masterFollowed.setCreateDateTime(new Date());
+                    masterFollowed.setMaster(master);
+                    masterFollowed.setStatus("1");
+                    masterFollowed.setUser(user);
+                    //这里需要同步更新master的粉丝数量字段
+                    baseManager.saveOrUpdate(MasterFollowed.class.getName(), masterFollowed);
+                    master.setFsAmount(master.getFsAmount()==null?1:master.getFsAmount()+1);
+                    baseManager.saveOrUpdate(Master.class.getName(),master);
+                    return "true";
                 }
-                master.setFsAmount(FsAmount);
-                baseManager.saveOrUpdate(Master.class.getName(),master);
-                return "del";
-            }
-           return "error";
+
+
         }
 
-        if(oper.equalsIgnoreCase("add")) {
-            MasterFollowed masterFollowed = new MasterFollowed();
-            masterFollowed.setUser(user);
-            masterFollowed.setCreateDateTime(new Date());
-            masterFollowed.setMaster(master);
-            masterFollowed.setStatus("1");
-            masterFollowed.setUser(user);
-            //这里需要同步更新master的粉丝数量字段
-            baseManager.saveOrUpdate(MasterFollowed.class.getName(), masterFollowed);
-            master.setFsAmount(master.getFsAmount()==null?1:master.getFsAmount()+1);
-            baseManager.saveOrUpdate(Master.class.getName(),master);
-            return "true";
-        }
 
-        return "error";
+
     }
-
-    @RequestMapping("/showProduct/{productId}")
-    public ModelAndView showProduct(@PathVariable String productId, HttpServletRequest request, Model model) throws Exception {
-        //String productId = request.getParameter("productId");
-        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-        boolean flag = IsattentionMaster2(request, product.getMaster().getId());//判断用户是否已经关注该作品的大师
-        model.addAttribute("flag", flag);
-        model.addAttribute("product", product);
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-            model.addAttribute("myUser", AuthorizationUtil.getMyUser());
-        }
-        return new ModelAndView("/product/brifProduct");
-    }
-
-
-    public boolean IsattentionMaster2(HttpServletRequest request, String userid) throws Exception {
-        boolean flag = false;
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-            XQuery xQuery = new XQuery("listMasterFollowed_check", request);
-            xQuery.put("master_id", userid);
-            xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
-            List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() >= 1) {
-                flag = true;
-            }
-        }
-        return flag;
-    }
-
 
     @RequestMapping("/saveThumbUp.do")
     @ResponseBody
@@ -371,13 +259,7 @@ public class WikiIndexController extends WikibaseController {
             if (p21 != null && p21.getId() != null)//不为null,说明已经点过赞了
             {
                 return "repeat";
-            }
-
-
-
-            //防止重复点赞
-
-
+            }//防止重复点赞
             praise2Product.setUser(user);
             praise2Product.setProduct(product);
             praise2Product.setCreateDateTime(new Date());
@@ -438,7 +320,6 @@ public class WikiIndexController extends WikibaseController {
         String oper = request.getParameter("operation");
         if (oper != null && oper.equalsIgnoreCase("up")) {
 
-            //String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.comment.id=:commentId";
             String queryHql = "from Praise2Product t where t.user.id=:userId and t.comment.id=:commentId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
@@ -450,9 +331,6 @@ public class WikiIndexController extends WikibaseController {
                 return "repeat";
             }
             //防止重复点赞
-
-
-
             praise2Product.setUser(user);
             praise2Product.setProduct(product);
             praise2Product.setCreateDateTime(new Date());
@@ -494,36 +372,6 @@ public class WikiIndexController extends WikibaseController {
     }
 
 
-    @RequestMapping("/storeProduct.do")
-    @ResponseBody
-    public String storeProduct(HttpServletRequest request, Model model) throws Exception {
-        String productId = request.getParameter("productId");
-        ProductStore productStore = new ProductStore();
-        MyUser user = AuthorizationUtil.getMyUser();
-        if (user.getId() == null) {
-            return "false";
-        }
-
-
-        if (user.getId() != null) {
-            String queryHql = "from ProductStore t where t.user.id=:userId and t.product.id=:productId";
-            LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-            map.put("userId", user.getId());
-            map.put("productId", productId);
-            ProductStore ps = (ProductStore) baseManager.getUniqueObjectByConditions(queryHql, map);
-            if (ps != null && ps.getId() != null){
-               return "repeat" ;
-            }//不为null,说明已经收藏了
-        }
-        productStore.setUser(user);
-        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-        productStore.setProduct(product);
-        productStore.setStatus("1");
-        productStore.setCreateDateTime(new Date());
-        baseManager.saveOrUpdate(ProductStore.class.getName(), productStore);
-
-        return "true";
-    }
 
 
     @RequestMapping("/afterAttention.do")
@@ -578,7 +426,19 @@ public class WikiIndexController extends WikibaseController {
     }
 
 
-
+    public boolean IsattentionMaster2(HttpServletRequest request, String userid) throws Exception {
+        boolean flag = false;
+        if (AuthorizationUtil.getMyUser().getId() != null) {
+            XQuery xQuery = new XQuery("listMasterFollowed_check", request);
+            xQuery.put("master_id", userid);
+            xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
+            List<ProjectFollowed> list = baseManager.listObject(xQuery);
+            if (list != null && list.size() >= 1) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
 
 
 }

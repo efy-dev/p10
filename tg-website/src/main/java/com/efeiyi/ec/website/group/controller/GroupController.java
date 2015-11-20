@@ -81,7 +81,7 @@ public class GroupController {
 
         String amount = "1";
        // String url = "/group/createGroup?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId+"&callback=http://192.168.1.46:8080/group/createGroup";
-        String url = "http://www.efeiyi.com/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://tuan.efeiyi.com/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
+        String url = "http://www.efeiyi.com/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://a.efeiyi.com/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
         //if(!flag){
             return "redirect:" + url;
         /*}else {
@@ -164,16 +164,27 @@ public class GroupController {
                 long leftHour = (min/(1000*60*60))%24;
                 long leftMin = (min/(1000*60))%60;
                 String left = "";
+                String memberLeft = "";
                 if(leftDay>0){
                     left = leftDay+"天"+leftHour+"时"+leftMin+"分";
                 }else {
                     if(leftHour>0){
                         left = leftHour+"时"+leftMin+"分";
                     }else {
-                        left = leftMin+"分";
+                        if(leftMin>0){
+                            left = leftMin+"分";
+                        }else {
+                            left = "0分";
+                        }
+
                     }
                 }
-                this.smsCheckManager.send(group.getManUser().getUsername(), "#userName#="+purchaseOrder.getReceiverName()+"&#timeLeft#="+left+"&#memberLeft#="+String.valueOf(groupProduct.getMemberAmount()-group.getMemberList().size()), "1108985", PConst.TIANYI);
+                if(groupProduct.getMemberAmount()-group.getMemberList().size()>0){
+                    memberLeft = String.valueOf(groupProduct.getMemberAmount()-group.getMemberList().size());
+                }else {
+                    memberLeft = "0";
+                }
+                this.smsCheckManager.send(group.getManUser().getUsername(), "#userName#="+purchaseOrder.getReceiverName()+"&#timeLeft#="+left+"&#memberLeft#="+memberLeft, "1108985", PConst.TIANYI);
 
                 /*if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
                     group.setStatus("3");
@@ -235,7 +246,7 @@ public class GroupController {
         String groupProductId = request.getParameter("groupProductId");
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
-        Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
+        Group group = (Group)baseManager.getObject(Group.class.getName(),groupId);
         String url = "?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId;
         boolean flag = false;
         for (Member member:group.getMemberList()){
@@ -288,7 +299,22 @@ public class GroupController {
         MyUser user = AuthorizationUtil.getMyUser();
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
-        Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
+        Group group = (Group)baseManager.getObject(Group.class.getName(),groupId);
+
+        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
+        purchaseOrderProductQuery.put("productModel_id", group.getGroupProduct().getProductModel().getId());
+        List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
+
+        XQuery xQuery = new XQuery("listPurchaseOrderGroup_default0",request);
+        xQuery.put("member_user_id",group.getManUser().getId());
+        xQuery.put("group_id",group.getId());
+        String manUserName = "";
+        List<PurchaseOrderGroup> purchaseOrderGroupList = baseManager.listObject(xQuery);
+        if(purchaseOrderGroupList.size()>0){
+            manUserName = purchaseOrderGroupList.get(0).getPurchaseOrder().getReceiverName();
+        }
+        model.addAttribute("manUserName",manUserName);
+
         int memberAmount = group.getGroupProduct().getMemberAmount();
         int a = (int)((float)group.getMemberList().size()*100/memberAmount);
         if (a<=100){
@@ -320,14 +346,15 @@ public class GroupController {
         int limintDay = group.getGroupProduct().getGroupPurchaseTime();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(createTime);
-        //calendar.add(Calendar.DATE,limintDay);
-        calendar.add(Calendar.MINUTE,10);
+        calendar.add(Calendar.DATE,limintDay);
+        //calendar.add(Calendar.MINUTE,10);
         Date endTime = calendar.getTime();
 
 
         model.addAttribute("endTime",df.parse(df.format(endTime)).getTime());
         model.addAttribute("group",group);
         model.addAttribute("url",url);
+        model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
 
         return "/personGroup/shareGroup";
     }
@@ -343,8 +370,8 @@ public class GroupController {
             int limintDay = group.getGroupProduct().getGroupPurchaseTime();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(createTime);
-            //calendar.add(Calendar.DATE,limintDay);
-            calendar.add(Calendar.MINUTE,10);
+            calendar.add(Calendar.DATE,limintDay);
+            //calendar.add(Calendar.MINUTE,10);
             Date endTime = calendar.getTime();
             Date date = new Date();
             if(date.after(endTime)){

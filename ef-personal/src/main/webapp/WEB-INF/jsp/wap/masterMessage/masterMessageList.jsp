@@ -81,8 +81,8 @@
     <div class="bd logined"><%=AuthorizationUtil.getMyUser().getUsername()%><a class="btn-exit" href="<c:url value='/j_spring_cas_security_logout'/>">退出</a></div>
     <% } %>
     <%if(AuthorizationUtil.getMyUser()==null || AuthorizationUtil.getMyUser().getId() == null){ %>
-    <a href="<c:url value='http://192.168.1.57/cas/login?service=http%3A%2F%2Flocalhost:8080%2Fj_spring_cas_security_check'/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-    <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+    <a href="<c:url value='/sso.do'/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+    <a href="http://passport.efeiyi.com/register?service=http://master.efeiyi.com/ef-person//sso.do" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
     <% } %>
 
   </div>
@@ -444,7 +444,7 @@
                       "                            <div class=\"suit-ft-right\"><span>"+ctime+"</span></div>"+
                       "                        </div>"+
                       "                    </div>"+
-                      "                 <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[i].fsAmount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[i].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i> </a> </div>"+
+                      "                 <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[j].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[j].fsAmount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[j].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[j].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected('"+obj[j].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i> </a> </div>"+
                       "                </div>";
               box.append(sub);
             }

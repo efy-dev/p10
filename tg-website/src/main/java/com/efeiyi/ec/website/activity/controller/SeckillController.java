@@ -20,7 +20,7 @@ import java.util.List;
  * Created by Administrator on 2015/11/17 0017.
  */
 @Controller
-@RequestMapping({"/miao"})
+//@RequestMapping({"/miao"})
 public class SeckillController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class SeckillController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("/list")
+    @RequestMapping("/miao")
     public String listSeckillProduct(HttpServletRequest request, Model model) throws Exception {
         XQuery seckillQuery = new XQuery("plistSeckillProduct_default", request, 4);
         PageInfo pageInfo = baseManager.listPageInfo(seckillQuery);
@@ -61,9 +61,10 @@ public class SeckillController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("/{seckillProductId}")
+    @RequestMapping("/miao/{seckillProductId}")
     public String viewSeckillProduct(HttpServletRequest request, Model model, @PathVariable String seckillProductId) throws Exception {
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), seckillProductId);
+        seckillProduct.setAttentionAmount((seckillProduct.getAttentionAmount() == null ? seckillProduct.getAttentionAmount() : 0) + 1);
         model.addAttribute("seckillProduct", seckillProduct);
         //获得当前秒杀的状态 通过时间
         String status = "1";
@@ -87,7 +88,7 @@ public class SeckillController {
     }
 
 
-    @RequestMapping({"/buy/{productId}/{amount}"})
+    @RequestMapping({"/miao/buy/{productId}/{amount}"})
     public String miaoBuy(@PathVariable String productId, @PathVariable String amount) {
         synchronized (this) {
             SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
@@ -99,7 +100,7 @@ public class SeckillController {
             if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
                 //秒杀正在进行中
                 status = "2";
-                return "redirect:http://www.efeiyi.com/miaoBuy/" + productId + "/" + amount;
+                return "redirect:http://www.efeiyi.com/order/miaoBuy/" + productId + "/" + amount;
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
                 //秒杀已经结束
                 status = "3";
