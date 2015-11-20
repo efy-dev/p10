@@ -17,7 +17,27 @@
     <script src="<c:url value="/scripts/wap/js/jquery-1.11.1.min.js"/>"></script>
 </head>
 <body>
-<div class="am-u-sm-12" style="padding-top: 200px;padding-right: 50px;padding-left: 50px;text-align: center">玩命处理中，请稍后...</div>
+<div class="packet ae">
+    <div class="efeiyi-lod ae">
+        <a class="efiyi-logo"></a>
+        <a class="eifyi-ld"><div class="ld-img"><img src="../shop2015/images/jazq2.gif"></div></a>
+        <p>正在获取支付结果，请勿关闭当前页面。</p>
+    </div>
+</div>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<script src="<c:url value="/scripts/wap/js/amazeui.min.js"/>"></script>
+<!--自定义js--Start-->
+<script src="<c:url value="/scripts/wap/js/system.js"/>"></script>
+<script src="<c:url value="/scripts/wap/js/myorder.js?v=20150831"/>"></script>
+<!--自定义js--End-->
 <script>
 
 
