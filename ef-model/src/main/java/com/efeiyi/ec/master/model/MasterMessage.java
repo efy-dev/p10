@@ -35,6 +35,7 @@ public class MasterMessage implements Serializable {
 	private Long praiseNum;//点赞数量
 	private String praiseStatus;
 	private String followStatus;
+	private String storeStatus;
 	private Integer amount;//评论数量
 	private Integer fsAmount;//关注人数
 	private List<MasterNewsTag> masterNewsTagList;
@@ -213,6 +214,15 @@ public class MasterMessage implements Serializable {
 
 	public void setAmount(Integer amount) {
 		this.amount = amount;
+	}
+
+	@Transient
+	public String getStoreStatus() {
+		return storeStatus;
+	}
+
+	public void setStoreStatus(String storeStatus) {
+		this.storeStatus = storeStatus;
 	}
 
 	@Column(name = "fans_amount")

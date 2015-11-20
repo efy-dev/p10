@@ -18,6 +18,7 @@ public class ConvertMasterModelUtil {
 		if (message != null){
 			masterModel.setMasterId(message.getMaster().getId()==null?"":message.getMaster().getId());
 			masterModel.setPraiseStatus(message.getPraiseStatus()==null?"赞":message.getPraiseStatus());
+			masterModel.setStoreStatus(message.getStoreStatus()==null?"收藏":message.getStoreStatus());
 			masterModel.setFsAmount(message.getFsAmount() == null ? 0 : message.getFsAmount());
 			masterModel.setAmount(message.getAmount() == null ? 0 : message.getAmount());
 			masterModel.setCreateDateTime(message.getCreateDateTime() == null ? new Date() : message.getCreateDateTime());
