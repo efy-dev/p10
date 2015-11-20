@@ -44,11 +44,6 @@
     <p>400—876—8766</p>
 </div>
 <!--//End--footer-->
-<div style="display: none">
-
-    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
-</div>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script href="<c:url value="/scripts/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
@@ -107,6 +102,27 @@
         s.parentNode.insertBefore(j, s)
     })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
     _MEIQIA('entId', 486);
+</script>
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?99fa5c9048e30c9dada20ea390329f89";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-70397028-1', 'auto');
+    ga('send', 'pageview');
+
 </script>
 </body>
 </html>
