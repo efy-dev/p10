@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -25,7 +26,9 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                     <th class="table-set">操作</th>
+    </security:authorize>
                     <th class="table-title">中文姓名</th>
                     <th class="table-title">性别</th>
                     <th class="table-title">等级</th>
@@ -35,6 +38,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="master">
                     <tr id="${master.id}">
+                        <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                         <td width="25%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -66,6 +70,7 @@
                                 </div>
                             </div>
                         </td>
+                        </security:authorize>
                         <td class="am-hide-sm-only" width="25%">
                             <a href="<c:url value="/basic/xm.do?qm=viewMaster&view=master&id=${master.id}"/>">
                               ${master.fullName}

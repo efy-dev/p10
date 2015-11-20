@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -19,7 +20,9 @@
 </head>
 <body>
 <div style="text-align: left;margin-left: 10px;" >
+<security:authorize ifAnyGranted="admin,operational,c_operational">
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectWiki&param=formProject&fatherId=${fatherId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目" />
+    </security:authorize>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <table class="am-table am-table-bordered am-table-radius am-table-striped" >
@@ -44,6 +47,7 @@
                         <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProductwiki_getProduct2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看作品</button>
                         <%--<button onclick="window.location.href='<c:url value="/basic/xm.do?qm=listMasterProject2Master_default2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search-plus"></span> 查看大师</button>--%>
                         <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProjectFollowed_default&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看关注</button>
+                            <security:authorize ifAnyGranted="admin,operational,c_operational">
                             <c:if test="${empty project.projectRecommendeds}">
                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                    onclick="recommended(this,1,'<c:url
@@ -76,6 +80,7 @@
                                                            value="/Recommended/saveObjectRecommended.do"/>')"
                                                    style="padding: 0px 10px 5px 10px"> 保存</a>
                                        </span>
+                            </security:authorize>
                     </div>
                 </div>
             </td>

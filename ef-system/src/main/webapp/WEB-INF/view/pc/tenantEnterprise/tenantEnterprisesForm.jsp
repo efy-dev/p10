@@ -47,7 +47,9 @@
             <label for="frontPhotoUrl" class="am-u-sm-3 am-form-label">*法人身份证电子版正面</label>
             <fieldset>
                 <legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                     <a id="btn_upload0"></a>
+    </security:authorize>
                 </legend>
                 <div class="am-u-md-13">
                     <div class="am-panel am-panel-default">
@@ -77,7 +79,9 @@
             <label for="identityPhotoUrl" class="am-u-sm-3 am-form-label">*法人身份证电子版反面</label>
             <fieldset>
                 <legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                     <a id="btn_upload1"></a>
+  </security:authorize>
                 </legend>
 
                 <div class="am-u-md-13">
@@ -138,7 +142,9 @@
             <label for="businessLicense" class="am-u-sm-3 am-form-label">*营业执照副本电子版</label>
             <fieldset>
                 <legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                     <a id="btn_upload2"></a>
+    </security:authorize>
                 </legend>
                 <div class="am-u-md-13">
                     <div class="am-panel am-panel-default">
@@ -168,7 +174,9 @@
             <label for="taxRegistrationAttachment" class="am-u-sm-3 am-form-label">*税务登记证电子版</label>
             <fieldset>
                 <legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                     <a id="btn_upload3"></a>
+    </security:authorize>
                 </legend>
 
                 <div class="am-u-md-13">
@@ -199,7 +207,9 @@
             <label for="organizationAttachment" class="am-u-sm-3 am-form-label">*组织机构电子版</label>
             <fieldset>
                 <legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                     <a id="btn_upload4"></a>
+    </security:authorize>
                 </legend>
                 <div class="am-u-md-13">
                     <div class="am-panel am-panel-default">
@@ -229,8 +239,10 @@
             <label for="bankAttachment" class="am-u-sm-3 am-form-label">*银行开户电子版</label>
             <fieldset>
                 <legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                     <a id="btn_upload5"></a>
-                </legend>
+    </security:authorize>
+    </legend>
 
                 <div class="am-u-md-13">
                     <div class="am-panel am-panel-default">
@@ -259,7 +271,9 @@
 
       <div class="am-form-group">
         <div class="am-u-sm-9 am-u-sm-push-3">
+<security:authorize ifAnyGranted="admin,operational,c_operational">
           <button type="submit" class="am-btn am-btn-primary">保存企业信息</button>
+    </security:authorize>
         </div>
       </div>
     </table>

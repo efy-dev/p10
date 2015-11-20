@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title></title>
@@ -153,7 +154,9 @@
                 </td>
                 <td class="am-primary am-u-md-3">保存</td>
                 <td class="am-u-md-3">
+<security:authorize ifAnyGranted="admin,operational,o_operational">
                     <input type="button" value="保存" onclick="saveReceiver('${object.id}','${object.orderStatus}')">
+    </security:authorize>
                 </td>
             </tr>
             </tbody>

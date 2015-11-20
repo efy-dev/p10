@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title></title>
@@ -140,8 +141,10 @@
 
             <div class="am-form-group">
                 <div class="am-u-sm-9 am-u-sm-push-3">
+<security:authorize ifAnyGranted="admin,operational,o_operational">
                     <input type="button" onclick="searchUserNum()" value="查询用户">
                     <input type="button" onclick="sendCoupon()" value="发送优惠券">
+    </security:authorize>
                 </div>
             </div>
         </form>

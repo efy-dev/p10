@@ -236,7 +236,7 @@ public class GroupController {
 
         }
         else {
-            return "/zhifushibai";//未支付成功
+            return "redirect:/tuan";//未支付成功
         }
 
     }

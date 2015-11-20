@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -51,14 +52,20 @@
                 <textarea class="ae" id="giftMessage"></textarea>
 
                 <div class="atext ae">
-                    <a href="" class="cancel">取&nbsp;消</a>
-                    <a href="" class="affirm" id="confirmGiftMessage">确&nbsp;认</a>
+                    <a class="cancel">取&nbsp;消</a>
+                    <a class="affirm" id="confirmGiftMessage" onclick="updateGiftMessage()">确&nbsp;认</a>
                 </div>
             </div>
-
-
         </div>
-        <div class="cupic ae"><img src="../shop2015/upload/ever1.png"></div>
+        <div data-am-widget="slider" class="am-slider am-slider-a1 ae"
+             data-am-slider='{&quot;directionNav&quot;:false}'>
+            <ul class="am-slides">
+                <li><img src="../shop2015/upload/ever1.png"></li>
+                <li><img src="../shop2015/upload/ever2.jpg"></li>
+                <li><img src="../shop2015/upload/ever3.jpg"></li>
+                <li><img src="../shop2015/upload/ever4.jpg"></li>
+            </ul>
+        </div>
         <div class="detailed">
             <div class="font-1" style="display: none">礼物清单：${productModel.name}</div>
             <div class="font-2" style="display: none">价值：${productModel.price}元</div>
@@ -82,11 +89,11 @@
         </div>
         <div class="elect">
             <div class="left">
-                <input type="checkbox" class="add-c1" id="showGiftName">
+                <input type="checkbox" class="add-c1" id="showGiftName" onclick="giftNameStatus(this)">
                 <span>显示礼物名称</span>
             </div>
             <div class="right">
-                <input type="checkbox" class="add-c2" id="showGiftPrice">
+                <input type="checkbox" class="add-c2" id="showGiftPrice" onclick="giftPriceStatus(this)">
                 <span>显示礼物价格</span>
             </div>
         </div>
@@ -109,11 +116,73 @@
 
     var payment = "1";
 
+    function giftNameStatus(element) {
+        var status = ""
+        if (element.checked == true) {
+            status = "1"
+        } else {
+            status = "0"
+        }
+        var success = function (data) {
+            if (!data) {
+                showAlert("提示", "修改状态失败");
+                $(element).attr("checked", false);
+            }
+        }
+        ajaxRequest("<c:url value="/order/giftBuy/showNameStatus.do"/>", {
+            "purchaseOrderId": "${purchaseOrder.id}",
+            "nameStatus": status
+        }, success, function () {
+        }, "post");
+    }
+
+    function giftPriceStatus(element) {
+        var status = ""
+        if (element.checked == true) {
+            status = "1"
+        } else {
+            status = "0"
+        }
+        var success = function (data) {
+            if (!data) {
+                showAlert("提示", "修改状态失败");
+                $(element).attr("checked", false);
+            }
+        }
+        ajaxRequest("<c:url value="/order/giftBuy/showPriceStatus.do"/>", {
+            "purchaseOrderId": "${purchaseOrder.id}",
+            "priceStatus": status
+        }, success, function () {
+        }, "post");
+    }
+
+    function updateGiftMessage() {
+        var message = $("#giftMessage").val();
+        if (message != "") {
+            var success = function (data) {
+                console.log("保存成功");
+            }
+            ajaxRequest("<c:url value="/order/giftBuy/saveOrUpdateGiftMessage.do"/>", {
+                "purchaseOrderId": "${purchaseOrder.id}",
+                "giftMessage": message
+            }, success, function () {
+            }, "post");
+        }
+    }
+
+
     $().ready(function () {
+//
+//        $("#confirmGiftMessage").click(function () {
+//            updateGiftMessage();
+//        });
+
         if (!isWeiXin()) {
             $("#weixin").hide();
+            payment = 1;
         } else {
             $("#zhifubao").remove();
+            payment = 3;
         }
     })
 
@@ -158,7 +227,7 @@
                         }
 
                         var url = "<c:url value="/order/confirm/"/>";
-                        url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin;
+                        url += orderId + "?payment=" + payment + "&message=" + message + isweixin;
                         window.location.href = url;
                     }
                 } else {

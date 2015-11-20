@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -44,6 +45,7 @@
                         <td width="50%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
+                                    <security:authorize ifAnyGranted="admin,operational,c_operational">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
                                        href="<c:url value="/basic/xm.do?qm=formMaster&form=master&id=${master.id}&param=master"/>"><span
                                             class="am-icon-pencil-square-o"></span> 编辑
@@ -52,6 +54,8 @@
                                       onclick="showConfirm('提示','删除大师同时会解除该大师与商家，项目的关联，确认删除?',function(){removeMaster('${master.id}')})" href="#"><span
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
+                                    </security:authorize>
+
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                        href="<c:url value="/basic/xm.do?qm=plistMasterMessage_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span
                                             class="am-icon-trash-o"></span> 最新动态
@@ -60,6 +64,7 @@
                                         href="<c:url value="/basic/xm.do?qm=plistMasterFollowed_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span
                                             class="am-icon-trash-o"></span> 查看粉丝
                                     </a>
+                                    <security:authorize ifAnyGranted="admin,operational,c_operational">
                                     <c:set value="0" var="isOk"/>
                                     <c:if test="${not empty master.masterRecommendedList}">
                                         <c:forEach var="recommended" items="${master.masterRecommendedList}">
@@ -91,6 +96,7 @@
                                                 <a class=" am-btn-primary" href="javascript:void (0);" onclick="saveModel(this)" style="padding: 0px 10px 5px 10px" > 保存</a>
 
                                        </span>
+                                    </security:authorize>
                                 </div>
                             </div>
                         </td>
