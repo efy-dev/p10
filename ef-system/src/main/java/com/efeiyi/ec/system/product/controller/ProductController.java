@@ -668,4 +668,12 @@ public class ProductController extends BaseController {
          return "";
 
     }
+
+    @RequestMapping("/updatePictureSort.do")
+    @ResponseBody
+    public String updatePictureSort(String id,String sort) throws Exception {
+
+        return "";
+
+    }
 }

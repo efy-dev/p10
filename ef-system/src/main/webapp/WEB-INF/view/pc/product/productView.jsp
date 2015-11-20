@@ -372,6 +372,11 @@
                                                 <a href="javascript:void(0);" class="copy"
                                                    url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
                                             </dd>
+                                            <dd style="width: 100%;text-align: center;">
+                                                <a href="#" onclick="toUpdatePictureSort(this,'<c:url value="/product/updatePictureSort.do"/>')" sort="${productPicture.sort}" id="${productPicture.id}">
+                                                        ${masterRecommended.sort}
+                                                </a>
+                                            </dd>
                                             <%--<dd style="width: 100%;text-align: center;">--%>
                                                     <%--<a href="javascript:void(0);"   onclick="changeImg('${productPicture.pictureUrl}');">替换图片</a>--%>
                                             <%--</dd>--%>
@@ -938,6 +943,26 @@
             alert("添加成功!");
         }
 
+    }
+
+    function toUpdatePictureSort(obj,updateUrl){
+        var sort = $(obj).attr("sort");
+        var id = $(obj).attr("id");
+        $(obj).parent().html("<input id="+id+" onblur=\"updatePictureSort(this,'"+updateUrl+"')\" type=\"text\" name=\"sort\" style=\"width: 35px;\" value="+sort+" />");
+    }
+    function updatePictureSort(obj,updateUrl){
+        var sort = $(obj).val();
+        var id = $(obj).attr("id");
+        $.ajax({
+            type: "get",
+            url: updateUrl,
+            cache: false,
+            dataType: "json",
+            data:{id:id,sort:sort},
+            success: function (data) {
+                $(obj).parent().html("<a onclick=\"toUpdatePictureSort(this,'"+updateUrl+"')\" sort="+sort+" id="+id+">"+sort+"</a>");
+            }
+        });
     }
 </script>
 
