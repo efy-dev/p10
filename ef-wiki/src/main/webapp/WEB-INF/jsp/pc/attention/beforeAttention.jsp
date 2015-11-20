@@ -131,9 +131,9 @@
               case "3":levelName="市级非物质文化遗产";break;
               default:levelName="县级非物质文化遗产";
             }
-            var isA = checkIsAttention(data[i].projectId+"");
+             checkIsAttention(data[i].projectId+"");
             var word ="";
-            if(isA==true){
+            if(isAttention==true){
               word="<em about=\"add\" id=\""+data[i].projectId+"\">已关注</em>";
             }else{
               word="<i class=\"gz-icon\"></i> <em about=\"add\" id=\""+data[i].projectId+"\">关注</em>";

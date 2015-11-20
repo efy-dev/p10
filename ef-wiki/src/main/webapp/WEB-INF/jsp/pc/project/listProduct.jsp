@@ -42,38 +42,7 @@
 
 </head>
 <body style="float: left">
-<%--<div class="topbar wh" data-am-sticky>
-  <div class="hd">
-    <ul class="ul-item">
-      <li><strong>李先生8899</strong><a href="" title="退出">退出</a></li>
-      <li><a href="" title="请登录">请登录</a></li>
-      <li><a href="" title="快速注册">快速注册</a></li>
-      <li class="btn-top-wechat">
-        <a title="手机e飞蚁">手机e飞蚁</a>
-        <span class="top-wechat"></span>
-      </li>
-      <li class="cart">
-        <a href="" title="购物车"><i class="icon"></i>购物车</a>
-        <span class="tips"><em>0</em></span>
-      </li>
-    </ul>
-  </div>
-</div>
-<!-- //End--topbar-->
-<div class="header wh">
-  <div class="hd">
-    <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
-    <div class="nav">
-      <ul>
-        <li><a href="" title="首页">首页</a></li>
 
-        <li><a href="" title="传承人">大师</a></li>
-        <li><a href="<c:url value='/pc/index.do'/>" title="展览">工艺</a></li>
-
-      </ul>
-    </div>
-  </div>
-</div>--%>
 <!-- //End--header-->
 <div class="craft-details">
   <div class="craft-banner">
@@ -775,8 +744,6 @@
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          //alert("您还未登陆，请登录后再操作");
-          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/listProduct/${project.id}'/>";
@@ -784,7 +751,6 @@
           else{
             return false;//取消
           }
-          return false;
           return false;
         }
         if(data=="repeat"){

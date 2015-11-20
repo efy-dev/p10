@@ -34,7 +34,7 @@ public class ProductCommentController extends WikibaseController {
     @RequestMapping("/getCommentList.do")
     @ResponseBody
     public List getCommentList(HttpServletRequest request, Model model) throws Exception {
-        List<ProductCommentModel> list = null;
+        List<ProductCommentModel> list;
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query = new XQuery("plistProductComment_ownerComent", request);
             query.put("moderator_id", AuthorizationUtil.getMyUser().getId());
@@ -53,8 +53,10 @@ public class ProductCommentController extends WikibaseController {
     public String watchComment(HttpServletRequest request) throws Exception {
         String commentId = request.getParameter("commentId");
         ProductComment productComment = (ProductComment)baseManager.getObject(ProductComment.class.getName(),commentId);
-        productComment.setWatch("1");
-        baseManager.saveOrUpdate(ProductComment.class.getName(),productComment);
+        if(productComment!=null && productComment.getId()!=null){
+            productComment.setWatch("1");
+            baseManager.saveOrUpdate(ProductComment.class.getName(),productComment);
+        }
         return "succ";
     }
 }
