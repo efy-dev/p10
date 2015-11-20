@@ -20,7 +20,7 @@
 <div class="packet ae">
     <div class="efeiyi-lod ae">
         <a class="efiyi-logo"></a>
-        <a class="eifyi-ld"><div class="ld-img"><img src="../shop2015/images/jazq2.gif"></div></a>
+        <a class="eifyi-ld"><div class="ld-img"><img src="<c:url value="/scripts/wap/images/jazq2.gif"/>"></div></a>
         <p>正在获取支付结果，请勿关闭当前页面。</p>
     </div>
 </div>
