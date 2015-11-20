@@ -373,9 +373,16 @@
                                                    url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
                                             </dd>
                                             <dd style="width: 100%;text-align: center;">
-                                                <a href="#" onclick="toUpdatePictureSort(this,'<c:url value="/product/updatePictureSort.do"/>')" sort="${productPicture.sort}" id="${productPicture.id}">
-                                                        ${masterRecommended.sort}
+                                                <c:if test="${empty productPicture.sort}">
+                                                    <a href="javascript:void (0)" onclick="toUpdatePictureSort(this,'<c:url value="/product/updatePictureSort.do"/>')" sort="0" id="${productPicture.id}">
+                                                           初始化排序
+                                                    </a>
+                                                </c:if>
+                                <c:if test="${not empty productPicture.sort}">
+                                                <a href="javascript:void (0)" onclick="toUpdatePictureSort(this,'<c:url value="/product/updatePictureSort.do"/>')" sort="${productPicture.sort}" id="${productPicture.id}">
+                                                        ${productPicture.sort}
                                                 </a>
+                                </c:if>
                                             </dd>
                                             <%--<dd style="width: 100%;text-align: center;">--%>
                                                     <%--<a href="javascript:void(0);"   onclick="changeImg('${productPicture.pictureUrl}');">替换图片</a>--%>
@@ -620,6 +627,7 @@
                 var imgName = data.split(":")[2];
                 var url = "http://pro.efeiyi.com/" + imgUrl + "@!product-model";
                 var trueUrl = "http://pro.efeiyi.com/" + imgUrl + "@!water-mask";
+                var updatePictrueUrl = '<c:url value="/product/updatePictureSort.do"/>';
 //                ///图片信息
 //                var tr = '<tr name = "'+pictureId+'">' +
 //                        ' <td>  ' +
@@ -661,6 +669,10 @@
                         '</dd>' +
                         '<dd style="width: 100%;text-align: center;" >' +
                         '  <a href="javascript:void(0);" onclick="copyInit(this);"   class="copy" url="' + trueUrl + '">' + '复制图片地址' + '</a>' +
+                        '</dd>' +
+                        '<dd style="width: 100%;text-align: center;" >' +
+                        '   <a href="javascript:void (0)" onclick="toUpdatePictureSort(this,\''+updatePictrueUrl+'\')" sort="0" id="' + pictureId + '">初始化排序'+
+                        '</a>' +
                         '</dd>' +
 //                        '<dd style="width: 100%;text-align: center;" >' +
 //                        '   <a href="javascript:void(0);"   onclick="changeImg(\'' + imgUrl + '\');">' + '替换图片' + '</a>' +
@@ -948,10 +960,14 @@
     function toUpdatePictureSort(obj,updateUrl){
         var sort = $(obj).attr("sort");
         var id = $(obj).attr("id");
-        $(obj).parent().html("<input id="+id+" onblur=\"updatePictureSort(this,'"+updateUrl+"')\" type=\"text\" name=\"sort\" style=\"width: 35px;\" value="+sort+" />");
+        if(sort == "0"){
+            sort="";
+        }
+        $(obj).parent().html("<input id="+id+" onblur=\"updatePictureSort(this,'"+updateUrl+"')\" type=\"text\" name=\"sort\" style=\"width: 35px;\" required value="+sort+"  >");
     }
     function updatePictureSort(obj,updateUrl){
         var sort = $(obj).val();
+
         var id = $(obj).attr("id");
         $.ajax({
             type: "get",
@@ -960,7 +976,7 @@
             dataType: "json",
             data:{id:id,sort:sort},
             success: function (data) {
-                $(obj).parent().html("<a onclick=\"toUpdatePictureSort(this,'"+updateUrl+"')\" sort="+sort+" id="+id+">"+sort+"</a>");
+                $(obj).parent().html("<a onclick=\"toUpdatePictureSort(this,'"+updateUrl+"')\" sort="+data+" id="+id+">"+data+"</a>");
             }
         });
     }
