@@ -84,7 +84,6 @@
       var pageH = $(document).height();
       var scrollT = $(window).scrollTop(); //滚动条top
       var aa = (pageH - winH - scrollT) / winH;
-      console.log(ajaxkey);
       if(aa < 0.02){
         if(ajaxkey){
           getData("<c:url value='/masterMessage/getFollowAfterList/plistMasterFollow_default/4/'/>");
@@ -200,11 +199,11 @@
                     "                                </a>"+
                     "                            </li>"+
                     "                            <li>"+
-                    "                                <a name='store"+data[i].id+"' onclick=\"storeMessage('"+data[i].id+"');\">"+
+                    "                                <a name='store"+data[i].id+"' onclick=\"storeMessage(this,'"+data[i].id+"');\">"+
                     "                                    <span class=\"pos\">"+
                     "                                        <span class=\"line\">"+
                     "                                            <i class=\"dnc-icon-3 zq\"></i>"+
-                    "                                            <em>收藏</em>"+
+                    "                                            <em>"+data[i].storeStatus+"</em>"+
                     "                                        </span>"+
                     "                                    </span>"+
                     "                                </a>"+
@@ -418,7 +417,7 @@
     })
   }
 
-  function storeMessage(msgId){
+  function storeMessage(o,msgId){
     $.ajax({
       type: "get",//设置get请求方式
       url: "<c:url value='/masterMessage/storeMessage.do'/>",//设置请求的脚本地址
@@ -429,9 +428,9 @@
         if(data =="noRole"){
           alert("您还没有登录,请登录后操作!");
         }else if(data == "add"){
-          alert("收藏成功!");
+            $(o).find("em").html("已收藏");
         }else if(data == "del"){
-          alert("已取消收藏!");
+            $(o).find("em").html("收藏");
         }
       }
     })
