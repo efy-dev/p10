@@ -86,7 +86,7 @@
         <div class="black" style="width: ${bil}%;"></div>
         <div class="gray"></div>
       </div>
-      <div class="txt-page ae"><span>拼团倒计时：</span><span>分享红包：${group.groupProduct.bonus}</span></div>
+      <div class="txt-page ae"><span>拼团倒计时：</span><span>分享红包：${group.groupProduct.bonus}元</span></div>
       <div class="time ae" id="timer">00:00:00</div>
     </div>
     <c:if test="${group.status==1}">
