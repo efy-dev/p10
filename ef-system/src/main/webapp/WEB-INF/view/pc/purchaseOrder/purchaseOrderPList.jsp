@@ -90,8 +90,8 @@
                             success:function(data){
                                 $(obj).find("span").text("已发货");
 
-                                alert("wuliugongsi"+$('#logisticsCompany').val());
-                                alert("wuliudanhao"+dingYueSerial);
+//                                alert("wuliugongsi"+$('#logisticsCompany').val());
+//                                alert("wuliudanhao"+dingYueSerial);
 
                                 //发完货之后还要在快递100订阅 用户收货后直接修改订单状态为已签收
                                 $.ajax({
