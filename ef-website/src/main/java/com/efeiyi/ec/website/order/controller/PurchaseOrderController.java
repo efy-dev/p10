@@ -60,6 +60,35 @@ public class PurchaseOrderController extends BaseController {
     private PaymentManager paymentManager;
 
 
+    @RequestMapping("/giftReceive/{orderId}")
+    public String receiveGift(HttpServletRequest request, @PathVariable String orderId, Model model) {
+        PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), orderId);
+        if (purchaseOrderGift.getOrderType().equals("3") && purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRGIFT)) {
+            //判断是否是礼品订单 且可以被收礼
+            model.addAttribute("purchaseOrder", purchaseOrderGift);
+        }
+        return "/purchaseOrder/receiveGift";
+    }
+
+    @RequestMapping("/giftConfirm.do")
+    public String confirmGift(HttpServletRequest request,Model model) {
+        String purchaseOrderId = request.getParameter("purchaseOrderId");
+        PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+        AddressProvince addressProvince = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), request.getParameter("province.id"));
+        AddressCity addressCity = (AddressCity) baseManager.getObject(AddressCity.class.getName(), request.getParameter("city.id"));
+        String detail = request.getParameter("receiveDetail");
+        String address = addressProvince.getName() + addressCity.getName() + detail;
+        String receiveName = request.getParameter("receiveName");
+        String receivePhone = request.getParameter("receivePhone");
+        purchaseOrderGift.setReceiverName(receiveName);
+        purchaseOrderGift.setReceiverPhone(receivePhone);
+        purchaseOrderGift.setPurchaseOrderAddress(address);
+        purchaseOrderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //订单改为未发货状态
+        baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+        model.addAttribute("purchaseOrder",purchaseOrderGift);
+        return "/purchaseOrder/giftView";
+    }
+
     @RequestMapping("/giftBuy/showNameStatus.do")
     @ResponseBody
     public boolean changeShowGiftNameStatus(HttpServletRequest request) {
@@ -91,6 +120,7 @@ public class PurchaseOrderController extends BaseController {
     }
 
     @RequestMapping("/giftBuy/saveOrUpdateGiftMessage.do")
+    @ResponseBody
     public String saveOrUpdateGiftMessage(HttpServletRequest request) {
         try {
             String purchaseOrderId = request.getParameter("purchaseOrderId");
@@ -309,14 +339,19 @@ public class PurchaseOrderController extends BaseController {
         String message = request.getParameter("message");
         //买家留言
         HashMap<String, String> messageMap = new HashMap<>();
-        for (String messageTemp : message.split(";")) {
-            if (messageTemp != null && !messageTemp.equals("")) {
-                if (messageTemp.split(":").length >= 2)
-                    messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
+        if (message != null) {
+            for (String messageTemp : message.split(";")) {
+                if (messageTemp != null && !messageTemp.equals("")) {
+                    if (messageTemp.split(":").length >= 2)
+                        messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
+                }
             }
         }
         //订单收货地址//初始化订单状态
-        ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
+        ConsumerAddress consumerAddress = null;
+        if (addressId != null) {
+            consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
+        }
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder = purchaseOrderManager.confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payment);
         //生成支付记录以及支付详情

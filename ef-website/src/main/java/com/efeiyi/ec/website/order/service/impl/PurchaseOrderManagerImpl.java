@@ -96,27 +96,26 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
 
     @Override
     public PurchaseOrder confirmPurchaseOrder(PurchaseOrder purchaseOrder, ConsumerAddress consumerAddress, HashMap<String, String> messageMap, String payWay) {
-        String purchaseOrderAddress = (consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : "") + " " + (consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : "") + " " + (consumerAddress.getDetails() != null ? consumerAddress.getDetails() : "");
         purchaseOrder.setStatus("1");
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WPAY);
         purchaseOrder.setPayWay(payWay);
-//        purchaseOrder.setConsumerAddress(consumerAddress);
-        purchaseOrder.setPurchaseOrderAddress(purchaseOrderAddress);
-        purchaseOrder.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "");
-        purchaseOrder.setReceiverPhone(consumerAddress.getPhone() != null ? consumerAddress.getPhone() : "");
-        if (purchaseOrder.getCoupon() != null) {
-            Coupon coupon = purchaseOrder.getCoupon();
-            coupon.setStatus("2");
-            baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+        if (consumerAddress != null) {
+            String purchaseOrderAddress = (consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : "") + " " + (consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : "") + " " + (consumerAddress.getDetails() != null ? consumerAddress.getDetails() : "");
+            purchaseOrder.setPurchaseOrderAddress(purchaseOrderAddress);
+            purchaseOrder.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "");
+            purchaseOrder.setReceiverPhone(consumerAddress.getPhone() != null ? consumerAddress.getPhone() : "");
         }
         List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
         if (subPurchaseOrderList != null && subPurchaseOrderList.size() > 1) {
             for (PurchaseOrder purchaseOrderTemp : subPurchaseOrderList) {
                 purchaseOrderTemp.setStatus("1");
                 purchaseOrderTemp.setOrderStatus(PurchaseOrder.ORDER_STATUS_WPAY);
-                purchaseOrderTemp.setPurchaseOrderAddress(purchaseOrderAddress);
-                purchaseOrderTemp.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "");
-                purchaseOrderTemp.setReceiverPhone(consumerAddress.getPhone() != null ? consumerAddress.getPhone() : "");
+                if (consumerAddress != null) {
+                    String purchaseOrderAddress = (consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : "") + " " + (consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : "") + " " + (consumerAddress.getDetails() != null ? consumerAddress.getDetails() : "");
+                    purchaseOrderTemp.setPurchaseOrderAddress(purchaseOrderAddress);
+                    purchaseOrderTemp.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "");
+                    purchaseOrderTemp.setReceiverPhone(consumerAddress.getPhone() != null ? consumerAddress.getPhone() : "");
+                }
 //                purchaseOrderTemp.setConsumerAddress(consumerAddress);
                 purchaseOrderTemp.setMessage(messageMap.get(purchaseOrderTemp.getTenant().getId() + "Message"));
                 purchaseOrderTemp.setPayWay(payWay);

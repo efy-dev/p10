@@ -157,7 +157,7 @@
     }
 
     function updateGiftMessage() {
-        var message = $("#confirmGiftMessage").val();
+        var message = $("#giftMessage").val();
         if (message != "") {
             var success = function (data) {
                 console.log("保存成功");
@@ -227,7 +227,7 @@
                         }
 
                         var url = "<c:url value="/order/confirm/"/>";
-                        url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin;
+                        url += orderId + "?payment=" + payment + "&message=" + message + isweixin;
                         window.location.href = url;
                     }
                 } else {
