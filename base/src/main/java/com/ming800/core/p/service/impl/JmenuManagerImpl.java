@@ -79,11 +79,16 @@ public class JmenuManagerImpl implements JmenuManager {
                 jnode.setChildren(new ArrayList<Jnode>());
                 String id = jnodeXmlNode.selectSingleNode("@id").getText();
                 String url = jnodeXmlNode.selectSingleNode("@url").getText();
-                String access = jnodeXmlNode.selectSingleNode("@access").getText();
+                if(jnodeXmlNode.selectSingleNode("@access")!=null){
+                    String access = jnodeXmlNode.selectSingleNode("@access").getText();
+                    jnode.setAccess(access);
+                }else {
+                    jnode.setAccess("ROLE_USER");
+                }
                 String text_zh_CN = jnodeXmlNode.selectSingleNode("@text_zh_CN").getText();
                 jnode.setId(id);
                 jnode.setUrl(url);
-                jnode.setAccess(access);
+
                 jnode.setText_zh_CN(text_zh_CN);
                 List<Node> firstLayerList = jnodeXmlNode.selectNodes("jnode");
                 //便利第二层jnode

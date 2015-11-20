@@ -668,4 +668,14 @@ public class ProductController extends BaseController {
          return "";
 
     }
+
+    @RequestMapping("/updatePictureSort.do")
+    @ResponseBody
+    public String updatePictureSort(String id,String sort) throws Exception {
+        ProductPicture productPicture = (ProductPicture)baseManager.getObject(ProductPicture.class.getName(),id);
+        productPicture.setSort(Integer.parseInt(sort));
+        baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+        return sort;
+
+    }
 }

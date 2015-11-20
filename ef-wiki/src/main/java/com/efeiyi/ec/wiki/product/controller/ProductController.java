@@ -42,6 +42,9 @@ public class ProductController extends WikibaseController {
             return false;
         }
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
+        if(product==null || product.getId()==null){//参数非法
+            return false;
+        }
         ProductComment productComment = new ProductComment();
         productComment.setCreateDateTime(new Date());
         productComment.setUser(user);
@@ -55,7 +58,8 @@ public class ProductController extends WikibaseController {
         fatherProductComment.setId("0");
         productComment.setFatherComment(fatherProductComment);
         baseManager.saveOrUpdate(ProductComment.class.getName(), productComment);
-        product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
+        //product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
+        product.setFsAmount(product.getFsAmount() == null ? 1 : product.getFsAmount() + 1);
         baseManager.saveOrUpdate(Product.class.getName(), product);
         return productComment;
     }
@@ -72,6 +76,9 @@ public class ProductController extends WikibaseController {
         }
 
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
+        if(product==null || product.getId()==null){//参数非法
+            return false;
+        }
         ProductComment productComment = new ProductComment();
         productComment.setCreateDateTime(new Date());
         productComment.setUser(user);
@@ -87,13 +94,13 @@ public class ProductController extends WikibaseController {
         fatherProductComment.setId(contentId);
         productComment.setFatherComment(fatherProductComment);
         baseManager.saveOrUpdate(ProductComment.class.getName(), productComment);
-        product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
+        //product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
+        product.setFsAmount(product.getFsAmount() == null ? 1 : product.getFsAmount() + 1);
         baseManager.saveOrUpdate(Product.class.getName(), product);
         return productComment;
     }
     @RequestMapping("/base/showProduct/{productId}")
     public ModelAndView showProduct(@PathVariable String productId, HttpServletRequest request, Model model) throws Exception {
-        //String productId = request.getParameter("productId");
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
         boolean flag = IsattentionMaster2(request, product.getMaster().getId());//判断用户是否已经关注该作品的大师
         model.addAttribute("flag", flag);

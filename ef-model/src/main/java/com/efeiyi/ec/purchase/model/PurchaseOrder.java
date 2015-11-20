@@ -22,6 +22,7 @@ public class PurchaseOrder {
     public static final String ORDER_STATUS_WPAY = "1";  //等待付款
     public static final String ORDER_STATUS_WAIT_GROUP = "3" ; //等待成团
     public static final String ORDER_STATUS_WRECEIVE = "5"; //未发货
+    public static final String ORDER_STATUS_WRGIFT = "6"; //待收礼
     public static final String ORDER_STATUS_POSTED = "7";  //已发货
     public static final String ORDER_STATUS_UNCOMMENT = "9"; //未评价
     public static final String ORDER_STATUS_FINISHED = "13"; //已完成
@@ -49,7 +50,7 @@ public class PurchaseOrder {
     private String receiverName;//收货人姓名
     private String receiverPhone;//收货人联系方式
     private String callback; //回调
-    private String orderType; // 订单类型
+    private String orderType; // 1.普通类型 2.秒杀类型 3.礼品卷类型
 
     @Column(name = "callback")
     public String getCallback() {
