@@ -255,12 +255,10 @@
   function showJiathis(o){
       var next = $(o).parent().find(".nr-share");
       if($(next).is(":hidden")){
-          alert(11);
-          $(next).attr("style","display:block");
+//          $(next).attr("style","display:block");
           $(next).show();
       }else{
-          alert(22);
-          $(next).attr("style","display:none");
+//          $(next).attr("style","display:none");
           $(next).hide();
       }
   }
