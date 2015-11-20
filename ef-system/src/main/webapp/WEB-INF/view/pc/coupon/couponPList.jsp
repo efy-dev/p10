@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -39,7 +40,9 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
+<security:authorize ifAnyGranted="admin,operational,o_operational">
                     <th class="table-set">操作</th>
+    </security:authorize>
                     <th class="table-title">优惠券编号</th>
                     <th class="table-title">绑定账号</th>
                     <th class="table-title">绑定时间</th>
@@ -55,6 +58,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="coupon">
                     <tr id="${coupon.id}">
+                        <security:authorize ifAnyGranted="admin,operational,o_operational">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -65,6 +69,7 @@
                                 </div>
                             </div>
                         </td>
+                        </security:authorize>
                         <td class="am-hide-sm-only">
                             <a href="<c:url value='/basic/xm.do?qm=viewCoupon&id=${coupon.id}'/>">${coupon.serial}
                         </td>
@@ -76,6 +81,7 @@
                                 ${coupon.consumer.username}
                             </c:if>
                         </td>
+
                         <td class="am-hide-sm-only">
                             <c:if test="${coupon.whetherBind == '1'}">
                                 未绑定

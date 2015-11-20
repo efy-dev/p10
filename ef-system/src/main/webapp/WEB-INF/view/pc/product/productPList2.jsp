@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -23,8 +24,10 @@
 
 
 <div style="text-align: left" >
+<security:authorize ifAnyGranted="admin,operational,c_operational">
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&view=wikiProduct&tenantId=${tenantId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
     <input onclick="outExcel();" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="生成excel" />
+    </security:authorize>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions};tenant.id:${tenantId}&tenantId=${tenantId}"/>
 <div class="admin-content">
@@ -35,7 +38,9 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                     <th class="table-set" width="30%">操作</th>
+</security:authorize>
                     <th class="table-title" width="25%">产品名称</th>
                     <th class="table-title" width="15%">产品编号</th>
                     <th class="table-title" width="15%">项目</th>
@@ -51,6 +56,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="product">
                     <tr id="${product.id}">
+                        <security:authorize ifAnyGranted="admin,operational,c_operational">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -113,6 +119,7 @@
                                 </div>
                             </div>
                         </td>
+                        </security:authorize>
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&view=wikiProduct&id=${product.id}'/>">${product.name}</a></td>
                         <td class="am-hide-sm-only">${product.serial}</td>
                         <td class="am-hide-sm-only">

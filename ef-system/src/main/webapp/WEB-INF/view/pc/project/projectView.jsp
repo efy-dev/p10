@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -16,8 +17,10 @@
 <div class="am-g">
     <div style="text-align: left;margin-left: 18px;" >
         <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProject_default"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;height: 35px;" value="返回列表" />
+<security:authorize ifAnyGranted="admin,operational,c_operational">
         <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProject&param=formProject"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;height: 35px;" value="新建项目" />
         <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProject&param=formProject&id=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;height: 35px;" value="编辑项目" />
+    </security:authorize>
     </div>
     <div class="am-u-sm-12">
         <table class="am-table am-table-bordered">
@@ -95,7 +98,9 @@
     <%--</div>--%>
 
     <div style="text-align: left;margin-left: 15px;" >
+<security:authorize ifAnyGranted="admin,operational,c_operational">
         <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectProperty&param=project&projectId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目属性" />
+    </security:authorize>
     </div>
 
         <div class="am-panel am-panel-default" style="margin-left: 15px;">
@@ -104,12 +109,15 @@
                 <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
                     <tbody>
                     <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                         <th>操作</th>
+</security:authorize>
                         <th>属性名称</th>
                         <th>属性值</th>
                     </tr>
                     <c:forEach var="projectProperty" items="${object.projectPropertyList}" >
                         <tr id="${projectProperty.id}">
+                            <security:authorize ifAnyGranted="admin,operational,c_operational">
                             <td width="20%">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
@@ -118,23 +126,25 @@
                                     </div>
                                 </div>
                             </td>
+                            </security:authorize>
                             <td width="20%">
                                 <a href="#">${projectProperty.name}</a>
                             </td>
                             <td width="60%">
-
+                                <security:authorize ifAnyGranted="admin,operational,c_operational">
                                 <a class="am-badge am-badge-secondary" href="<c:url value="/basic/xm.do?qm=formProjectPropertyValue&projectPropertyId=${projectProperty.id}&projectId=${object.id}"/>"  style="margin-left: 10px;width:85px;height: 28px;line-height: 2;margin-top: 10px;margin-bottom: 10px;background-color:rgb(102,102,102);">+
                                  </a>
-
+                                </security:authorize>
                                 <c:forEach var="projectPropertyValue" items="${projectProperty.projectPropertyValueList}" varStatus="status">
                                           <span>
                                             <a class="am-badge am-badge-secondary" style="margin-left: 10px;width:85px;height: 28px;line-height: 2;margin-top: 10px;margin-bottom: 10px;background-color:rgb(102,102,102);">${projectPropertyValue.value}
                                             </a>
                                           </span>
                                     <samll style="margin-left: 2px;">
-
+                                        <security:authorize ifAnyGranted="admin,operational,c_operational">
                                         <a href="#" onclick= "window.location.href='<c:url value="/basic/xm.do?qm=formProjectPropertyValue&id=${projectPropertyValue.id}&projectPropertyId=${projectProperty.id}&projectId=${object.id}"/>'" >编辑</a>
                                         <a href="#"  onclick="removePropertyValue(this,'${projectPropertyValue.id}')" >删除</a>
+                                        </security:authorize>
                                     </samll>
                                 </c:forEach>
                             </td>

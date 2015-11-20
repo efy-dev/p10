@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -90,8 +91,8 @@
                             success:function(data){
                                 $(obj).find("span").text("已发货");
 
-                                alert("wuliugongsi"+$('#logisticsCompany').val());
-                                alert("wuliudanhao"+dingYueSerial);
+//                                alert("wuliugongsi"+$('#logisticsCompany').val());
+//                                alert("wuliudanhao"+dingYueSerial);
 
                                 //发完货之后还要在快递100订阅 用户收货后直接修改订单状态为已签收
                                 $.ajax({
@@ -160,7 +161,9 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
+<security:authorize ifAnyGranted="admin,operational,o_operational">
                     <th class="table-set">操作</th>
+    </security:authorize>
                     <th class="table-title">订单号</th>
                     <th class="table-title">订单状态</th>
                     <th class="table-title">产品</th>
@@ -177,6 +180,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrder">
                     <tr id="${purchaseOrder.id}">
+                        <security:authorize ifAnyGranted="admin,operational,o_operational">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -207,6 +211,7 @@
                                 </div>
                             </div>
                         </td>
+                        </security:authorize>
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=${viewIdentify}&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}
                         </a>

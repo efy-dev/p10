@@ -16,6 +16,7 @@ import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AutoSerialManager;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -193,6 +194,37 @@ public class PurchaseOrderController extends BaseController {
         }
 
         return  id;
+    }
+
+    @RequestMapping("/edingyue.do")
+    @ResponseBody
+    public void eDingYue(HttpServletRequest request,HttpServletResponse response){
+        String param = request.getParameter("param");
+        JSONObject jsonObject = JSONObject.fromObject(param);
+        JSONObject jsonObject1 = jsonObject.getJSONObject("lastResult");
+        String purchaseOrderSerial = jsonObject1.getString("nu");
+        if("1".equals(jsonObject1.getString("ischeck"))){
+            String hql = "from PurchaseOrderDelivery c where c.serial=:serial ";
+            LinkedHashMap<String, Object> hm = new LinkedHashMap<>();
+            hm.put("serial",purchaseOrderSerial);
+            PurchaseOrderDelivery purchaseOrderDelivery = (PurchaseOrderDelivery) baseManager.listObject(hql, hm).get(0);
+            PurchaseOrder purchaseOrder = purchaseOrderDelivery.getPurchaseOrder();
+            if("7".equals(purchaseOrder.getOrderStatus())){
+                purchaseOrder.setOrderStatus("9");
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+
+            }
+        }
+        JSONObject result = new JSONObject();
+        result.put("result","true");
+        result.put("returnCode","200");
+        result.put("message","成功");
+        try {
+            response.getWriter().print(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

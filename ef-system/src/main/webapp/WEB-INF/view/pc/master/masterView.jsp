@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title></title>
@@ -81,12 +82,14 @@
         <h2>传承人的项目</h2>
         <div class="am-btn-toolbar">
             <div class="am-btn-group am-btn-group-xs">
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                 <a type="button" class="am-btn am-btn-default"
                    href="<c:url value="/basic/xm.do?qm=listProject_default&masterId=${object.id}&master=1"/>"><span
                         class="am-icon-plus"></span> 新建为主项目</a>
                 <a type="button" class="am-btn am-btn-default"
                    href="<c:url value="/basic/xm.do?qm=listProject_default&masterId=${object.id}"/>"><span
                         class="am-icon-plus"></span> 新建项目</a>
+</security:authorize>
             </div>
         </div>
     </div>
@@ -114,9 +117,11 @@
 
         <div class="am-btn-toolbar">
             <div class="am-btn-group am-btn-group-xs">
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                 <a type="button" class="am-btn am-btn-default"
                    href="<c:url value="/basic/xm.do?qm=formMasterBanner&masterId=${object.id}"/>"><span
                         class="am-icon-plus"></span> 新建轮播图</a>
+</security:authorize>
             </div>
         </div>
     </div>
@@ -134,9 +139,11 @@
 
         <div class="am-btn-toolbar">
             <div class="am-btn-group am-btn-group-xs">
+<security:authorize ifAnyGranted="admin,operational,c_operational">
                 <a type="button" class="am-btn am-btn-default"
                    href="<c:url value="/basic/xm.do?qm=formMasterIntroduction&masterId=${object.id}"/>"><span
                         class="am-icon-plus"></span> 新建传承人介绍</a>
+</security:authorize>
             </div>
         </div>
     </div>

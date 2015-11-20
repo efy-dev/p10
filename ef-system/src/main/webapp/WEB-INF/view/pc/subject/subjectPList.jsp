@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -48,9 +49,11 @@
 
 
 <div style="text-align: left">
+<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formSubject"/>'" type="button"
            class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建专题"/>
+    </security:authorize>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">
@@ -61,7 +64,9 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                     <th class="table-set" width="30%">操作</th>
+</security:authorize>
                     <th class="table-title" width=20%">专题名称</th>
                     <th class="table-title" width="15%">专题类别</th>
                     <th class="table-title" width="15%">模板</th>
@@ -76,6 +81,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="subject">
                     <tr id="${subject.id}">
+                        <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -115,6 +121,7 @@
                                 </div>
                             </div>
                         </td>
+                        </security:authorize>
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewSubject&id=${subject.id}'/>">${subject.name}</a>
                         </td>

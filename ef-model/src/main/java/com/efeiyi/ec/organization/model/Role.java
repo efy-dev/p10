@@ -11,6 +11,7 @@ import java.util.List;
 public class Role implements Serializable {
     private String id;
     private String name;
+    private String cname;//中文名称
     private String basicType;
     private Integer superPermission;        //1具有超级权限  2不具有超级权限
 
@@ -106,4 +107,13 @@ public class Role implements Serializable {
     public void setLisenceSet(Set<String> lisenceSet) {
         this.lisenceSet = lisenceSet;
     }*/
+
+    @Column(name = "c_name")
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
 }

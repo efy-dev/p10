@@ -9,11 +9,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6">
+<security:authorize ifAnyGranted="admin,operational,c_operational">
         <%--<a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/product/project/toTenantProject.do?tenantId=${tenantId}"/>">关联项目</a>--%>
         <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=plistTProduct_default&conditions=tenant.id:${tenantId}&tenantCategoryId=${tenantCategoryId}&tenantId=${tenantId}"/>">添加商品</a>
+    </security:authorize>
     </div>
     <div class="am-u-sm-12">
         <table class="am-table am-table-striped am-table-hover table-main">

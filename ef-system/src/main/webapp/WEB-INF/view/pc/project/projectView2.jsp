@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -16,8 +17,10 @@
 <div class="am-g">
     <div style="text-align: left;margin-left: 18px;" >
         <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProject2_default"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;height: 35px;" value="返回列表" />
+<security:authorize ifAnyGranted="admin,operational,c_operational">
         <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectWiki&param=formProject"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;height: 35px;" value="新建项目" />
         <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectWiki&param=formProject&id=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;height: 35px;" value="编辑项目" />
+</security:authorize>
     </div>
     <div class="am-u-sm-12">
         <table class="am-table am-table-bordered">
@@ -112,12 +115,16 @@
 <div class="am-u-sm-12">
     <div style="text-align: left;" >
         <label>项目内容</label>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
         <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent&projectid=${object.id}&objectName=${object.name}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目内容" />
        <%-- <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目内容" />--%>
+</security:authorize>
     </div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped" >
         <tr style="text-align: left">
+<security:authorize ifAnyGranted="admin,operational,c_operational">
             <td  width="10%">操作</td>
+</security:authorize>
             <td  width="10%">内容类型</td>
             <td  width="80%">项目内容</td>
         </tr>
@@ -125,6 +132,7 @@
         <c:forEach items="${projectContentList}" var="ProjectContent">
 
             <tr style="text-align: left">
+                <security:authorize ifAnyGranted="admin,operational,c_operational">
                 <td>
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
@@ -132,6 +140,7 @@
                         </div>
                     </div>
                 </td>
+                </security:authorize>
                 <td>
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >

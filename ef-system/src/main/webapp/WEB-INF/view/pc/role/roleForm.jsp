@@ -28,9 +28,15 @@
     <div class="am-form-group">
       <label name="name" for="name" class="am-u-sm-3 am-form-label">角色名称 <small>*</small></label>
       <div class="am-u-sm-9">
-        <input type="text" name="name" id="name" placeholder="角色名称" value="${object.name}">
+        <input type="text" name="name" id="name" placeholder="角色名称" value="${object.name}" required>
       </div>
     </div>
+      <div class="am-form-group">
+          <label name="cname" for="cname" class="am-u-sm-3 am-form-label">中文名称<small>*</small></label>
+          <div class="am-u-sm-9">
+              <input type="text" name="cname" id="cname" placeholder="中文名称" value="${object.cname}">
+          </div>
+      </div>
     <c:if test="${empty object.id}">
       <div class="am-form-group">
         <label name="basicType" for="basicType" class="am-u-sm-3 am-form-label">角色类型 <small>*</small></label>
