@@ -34,6 +34,7 @@
             <input type="hidden" value="saveOrUpdateMasterMessage" name="qm">
             <input type="hidden" name="master.id" value="${masterId}">
             <input  type="hidden" name="id" value="${object.id}"/>
+            <input type="hidden" name="status" value="1">
             <div class="am-form-group">
                 <label for="remark" class="am-u-sm-3 am-form-label">摘要</label>
 
@@ -82,14 +83,14 @@
                     </div>
                 </div>
             </div>
-            <div class="am-form-group">
-                <label name="status" class="am-u-sm-3 am-form-label">状态</label>
+            <%--<div class="am-form-group">--%>
+                <%--<label name="status" class="am-u-sm-3 am-form-label">状态</label>--%>
 
-                <div class="am-u-sm-9">
-                    <input type="text" name="status" id="status" placeholder="状态" value="${object.status}"
-                           required>
-                </div>
-            </div>
+                <%--<div class="am-u-sm-9">--%>
+                    <%--<input type="text" name="status" id="status" placeholder="状态" value="${object.status}"--%>
+                           <%--required>--%>
+                <%--</div>--%>
+            <%--</div>--%>
             <div class="am-form-group">
                 <label for="dataSource" class="am-u-sm-3 am-form-label">来源</label>
                 <div class="am-u-sm-9">

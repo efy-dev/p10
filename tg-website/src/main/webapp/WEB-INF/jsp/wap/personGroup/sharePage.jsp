@@ -31,12 +31,14 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
     <script>src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"</script>
 </head>
-<body>
+<body style="position: relative">
+<img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!wap-product-pic" style="position: absolute;left: 0;top: -1000px;width: 100%">
 <div class="packet ae">
     <div class="red ae">
         <div class="pic"><span>${fn:substring(group.groupProduct.bonus,0,2)}</span></div>
     </div>
     <div class="text ae">
+
         <p>1、恭喜您参团成功！</p>
         <p>2、分享该链接并成功帮好友参团，拼团成功后，您就可以得到分享红包！</p>
         <p>3、红包无上限，更多分享，更多红包！</p>
@@ -47,6 +49,7 @@
         <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"></div>
     </div>
 </div>
+
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
@@ -60,5 +63,25 @@
 <script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
 <script src="<c:url value="/scripts/wap/js/myorder.js?v=20150831"/>"></script>
 <!--自定义js--End-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?99fa5c9048e30c9dada20ea390329f89";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-70397028-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </body>
 </html>

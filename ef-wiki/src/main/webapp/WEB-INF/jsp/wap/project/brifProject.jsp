@@ -126,40 +126,11 @@
         </a></li>
       </ul>
       <div class="am-tabs-bd" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-        <%--<div data-tab-panel-0="" class="am-tab-panel am-active">
-          <div class="aboud-you">
-            <div class="list-you"><span>这些人最近关注了你</span></div>
-            <ul class="list-name">
-              <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>Andy</span></li>
-              <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>Lily</span></li>
-              <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>wangjl</span></li>
-            </ul>
-            <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
-          </div>
-        </div>--%>
+
         <div data-tab-panel-0="" class="am-tab-panel am-active">
           <div class="discuss">
             <ul class="discuss-2" id="newcommentList">
-              <%-- <li class="review">
-                 <div class="matter">
-                   <p class="text-h1"><a href="#">Andya</a>回复了你</p>
-                   <p class="text-time">51分钟前</p>
-                   <p class="text-content"><a href="#">原来木板水印是一门高深的技艺，之前从来没
-                     有关注过，真心觉得中国的非遗文化值得我们
-                     去传承。</a></p>
-                   <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
-                 </div>
-               </li>
-               <li class="review">
-                 <div class="matter">
-                   <p class="text-h1"><a href="#">Joe</a>回复了你</p>
-                   <p class="text-time">1小时前</p>
-                   <p class="text-content"><a href="#">原来木板水印是一门高深的技艺，之前从来没
-                     有关注过，真心觉得中国的非遗文化值得我们
-                     去传承。</a></p>
-                   <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
-                 </div>
-               </li>--%>
+
             </ul>
             <div class="more"><a href="javascript:void(0);" onclick="getCommentList()"><i class="time-1"></i>查看更多评论</a></div>
           </div>
@@ -167,15 +138,7 @@
         <div data-tab-panel-1="" class="am-tab-panel ">
           <div class="discuss">
             <ul class="discuss-2" id="newPraiseList">
-              <%-- <li class="review">
-                 <div class="matter">
-                   <p class="text-h1">Joe</p>
-                   <p class="text-time">1小时前</p>
-                   <p class="text-content"><a href="#">觉得你的评论“还不错”很赞</a></p>
-                   <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
-                 </div>
 
-               </li>--%>
             </ul>
             <div class="more"><a href="javascript:void(0);" onclick="getPraiseList()"><i class="time-1"></i>查看更多点赞</a></div>
           </div>
@@ -240,23 +203,7 @@
             <div class="penel-container">
             <div class="master-works">
               <div class="works-list"  id="waterfall">
-              <%--  <ul class="list-con"  id="pubu">
 
-                 <li class="item">
-                    <a href="http://www.baidu.com"><img src="/scripts/assets/images/120119-6.jpg"></a>
-                    <div class="txt">
-                      <div class="name">春梅</div>
-                      <div class="txt-info">
-                        <a href="#"><i class="icon good-1"></i><em>9999</em></a>
-                        <a href="#"><i class="icon good-2"></i><em>9999</em></a>
-                      </div>
-                    </div>
-                  </li>
-
-
-
-
-                </ul>--%>
               </div>
             </div>
           </div>

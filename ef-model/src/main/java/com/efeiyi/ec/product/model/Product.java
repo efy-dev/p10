@@ -143,7 +143,7 @@ public class Product implements Serializable{
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     @Where(clause = "status!=0")
-    @OrderBy(value = "id desc ")
+    @OrderBy(value = "sort asc ")
     @JsonIgnore
     public List<ProductPicture> getProductPictureList() {
         return productPictureList;

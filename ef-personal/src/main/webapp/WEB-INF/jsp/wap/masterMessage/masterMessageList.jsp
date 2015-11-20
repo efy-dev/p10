@@ -444,7 +444,7 @@
                       "                            <div class=\"suit-ft-right\"><span>"+ctime+"</span></div>"+
                       "                        </div>"+
                       "                    </div>"+
-                      "                 <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[i].fsAmount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[i].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i> </a> </div>"+
+                      "                 <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[j].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[j].fsAmount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[j].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[j].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected('"+obj[j].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i> </a> </div>"+
                       "                </div>";
               box.append(sub);
             }

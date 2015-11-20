@@ -77,40 +77,11 @@
         </a></li>
       </ul>
       <div class="am-tabs-bd" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-        <%--<div data-tab-panel-0="" class="am-tab-panel am-active">
-          <div class="aboud-you">
-            <div class="list-you"><span>这些人最近关注了你</span></div>
-            <ul class="list-name">
-              <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>Andy</span></li>
-              <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>Lily</span></li>
-              <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>wangjl</span></li>
-            </ul>
-            <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
-          </div>
-        </div>--%>
+
         <div data-tab-panel-0="" class="am-tab-panel am-active">
           <div class="discuss">
             <ul class="discuss-2" id="newcommentList">
-              <%-- <li class="review">
-                 <div class="matter">
-                   <p class="text-h1"><a href="#">Andya</a>回复了你</p>
-                   <p class="text-time">51分钟前</p>
-                   <p class="text-content"><a href="#">原来木板水印是一门高深的技艺，之前从来没
-                     有关注过，真心觉得中国的非遗文化值得我们
-                     去传承。</a></p>
-                   <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
-                 </div>
-               </li>
-               <li class="review">
-                 <div class="matter">
-                   <p class="text-h1"><a href="#">Joe</a>回复了你</p>
-                   <p class="text-time">1小时前</p>
-                   <p class="text-content"><a href="#">原来木板水印是一门高深的技艺，之前从来没
-                     有关注过，真心觉得中国的非遗文化值得我们
-                     去传承。</a></p>
-                   <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
-                 </div>
-               </li>--%>
+
             </ul>
             <div class="more"><a href="javascript:void(0);" onclick="getCommentList()"><i class="time-1"></i>查看更多评论</a></div>
           </div>
@@ -118,15 +89,7 @@
         <div data-tab-panel-1="" class="am-tab-panel ">
           <div class="discuss">
             <ul class="discuss-2" id="newPraiseList">
-              <%-- <li class="review">
-                 <div class="matter">
-                   <p class="text-h1">Joe</p>
-                   <p class="text-time">1小时前</p>
-                   <p class="text-content"><a href="#">觉得你的评论“还不错”很赞</a></p>
-                   <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
-                 </div>
 
-               </li>--%>
             </ul>
             <div class="more"><a href="javascript:void(0);" onclick="getPraiseList()"><i class="time-1"></i>查看更多点赞</a></div>
           </div>
@@ -316,8 +279,142 @@
 
 
   }
+  var commentNumber = 1;
+  var praiseNumber = 1;
+  function getCommentList(){
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/comment/getCommentList.do?pageEntity.size=5&pageEntity.index='/>"+commentNumber,
+      data:"",
+      dataType:"json",
+      success:function(data){
+        if(data && data.length>=1){
+          for(i in data){
+            var  pubu =$("#newcommentList");
+            var cTime =transdate(data[i].createDateTime);
+            var userName = data[i].user.name2;
+            if(userName==null){
+              userName ="匿名用户";
+            }
 
+            var box = $("<li class=\"review\"><div class=\"matter\"> <p class=\"text-h1\">" +
+                    "<a href=\"#\">"+userName+"</a>回复了你</p> " +
+                    "<p class=\"text-time\">"+cTime+"</p> <p class=\"text-content\">" +
+                    "<a href=\"javascript:void(0);\" onclick=\"gotoWatch('"+data[i].id+"','"+data[i].product+"')\">"+data[i].content+"</a></p> " +
+                    "<div class=\"owner\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></div></div> </li>");
+            pubu.append(box);
 
+          }
+
+        }else{
+          flag = true;
+        }
+
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        commentNumber =commentNumber+1;
+      }
+    });
+
+  }
+  function getPraiseList(){
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/praise/getPraiseList.do?pageEntity.size=10&pageEntity.index='/>"+praiseNumber,
+      data:"",
+      dataType:"json",
+      success:function(data){
+        if(data && data.length>=1){
+          for(i in data){
+            var  pubu =$("#newPraiseList");
+            var cTime =transdate(data[i].createDateTime);
+            var userName = data[i].user.name2;
+            if(userName==null){
+              userName ="匿名用户";
+            }
+
+            var box = $("<li class=\"review\"> <div class=\"matter\"> <p class=\"text-h1\">"+userName+"</p> " +
+                    "<p class=\"text-time\">"+cTime+"</p> <p class=\"text-content\">" +
+                    "<a href=\"javascript:void(0);\" onclick=\"watchPraise('"+data[i].id+"','"+data[i].product+"')\">觉得你的评论“还不错”很赞</a></p> <div class=\"owner\">" +
+                    "<img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></div> </div> " +
+                    "</li>");
+            pubu.append(box);
+
+          }
+
+        }else{
+          flag = true;
+        }
+
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        praiseNumber =praiseNumber+1;
+      }
+    });
+
+  }
+  $(document).ready(function(){
+    getCommentList();
+    getPraiseList();
+  });
+  function gotoWatch(data1,data2){
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/comment/watchComment.do?commentId='/>"+data1,
+      data:"",
+      dataType:"json",
+      success:function(o){
+        window.location.href="<c:url value='/project/showProduct/'/>"+data2;
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+      }
+    });
+  }
+  function watchPraise(data1,data2){
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/praise/watchPraise.do?commentId='/>"+data1,
+      data:"",
+      dataType:"json",
+      success:function(o){
+        window.location.href="<c:url value='/project/showProduct/'/>"+data2;
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+      }
+    });
+  }
+  function transdate(endTime){
+    var timestamp = Date.parse(new Date());
+    var oldTime = parseInt(endTime);
+    var intervalTime = (timestamp+1000 - oldTime)/1000/60;
+    var showTime = "";
+    if(intervalTime<=59){
+      showTime=intervalTime.toFixed(0)+"分钟前";
+    }else if(1<=(intervalTime/60) && (intervalTime/60)<24){
+      showTime=(intervalTime/60).toFixed(0)+"小时前";
+    }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
+      showTime=(intervalTime/60/24).toFixed(0)+"天前";
+    }else{
+      showTime=new Date(oldTime).toLocaleString().replace(/:\d{1,2}$/,' ');
+    }
+    return showTime;
+  }
 </script>
 
 <script src="<c:url value='/resources/jquery/jquery.min.js?v=20150831'/>"></script>

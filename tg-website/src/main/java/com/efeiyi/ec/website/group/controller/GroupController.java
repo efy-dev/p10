@@ -246,7 +246,7 @@ public class GroupController {
         String groupProductId = request.getParameter("groupProductId");
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
-        Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
+        Group group = (Group)baseManager.getObject(Group.class.getName(),groupId);
         String url = "?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId;
         boolean flag = false;
         for (Member member:group.getMemberList()){
@@ -299,7 +299,7 @@ public class GroupController {
         MyUser user = AuthorizationUtil.getMyUser();
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
-        Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
+        Group group = (Group)baseManager.getObject(Group.class.getName(),groupId);
 
         XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
         purchaseOrderProductQuery.put("productModel_id", group.getGroupProduct().getProductModel().getId());
@@ -346,8 +346,8 @@ public class GroupController {
         int limintDay = group.getGroupProduct().getGroupPurchaseTime();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(createTime);
-        //calendar.add(Calendar.DATE,limintDay);
-        calendar.add(Calendar.MINUTE,10);
+        calendar.add(Calendar.DATE,limintDay);
+        //calendar.add(Calendar.MINUTE,10);
         Date endTime = calendar.getTime();
 
 
@@ -370,8 +370,8 @@ public class GroupController {
             int limintDay = group.getGroupProduct().getGroupPurchaseTime();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(createTime);
-            //calendar.add(Calendar.DATE,limintDay);
-            calendar.add(Calendar.MINUTE,10);
+            calendar.add(Calendar.DATE,limintDay);
+            //calendar.add(Calendar.MINUTE,10);
             Date endTime = calendar.getTime();
             Date date = new Date();
             if(date.after(endTime)){
