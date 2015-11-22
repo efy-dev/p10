@@ -114,7 +114,7 @@
                         </p>
                     </c:forEach>
                 </c:if>
-                <c:if test="${not empty ongjuba}">
+                <c:if test="${not empty purchaseOrderProductList}">
                     <div class="discuss">
                         <div class="bd dis-title">【顾客评论】</div>
                         <ul class="ul-list">

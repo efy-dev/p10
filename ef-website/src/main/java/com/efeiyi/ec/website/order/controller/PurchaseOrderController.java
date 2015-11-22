@@ -67,6 +67,11 @@ public class PurchaseOrderController extends BaseController {
             //判断是否是礼品订单 且可以被收礼
             model.addAttribute("purchaseOrder", purchaseOrderGift);
         }
+
+        if (AuthorizationUtil.isAuthenticated() && AuthorizationUtil.getMyUser().getId().equals(purchaseOrderGift.getUser().getId())){
+            model.addAttribute("order",purchaseOrderGift);
+            return "/purchaseOrder/purchaseOrderGiftView";
+        }
         return "/purchaseOrder/receiveGift";
     }
 
