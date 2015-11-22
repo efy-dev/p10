@@ -107,14 +107,14 @@
                 <c:if test="${not empty product.productDescription}">
                     ${product.productDescription.content}
                 </c:if>
-                <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0}">
+                <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0&&empty product.productDescription}">
                     <c:forEach items="${productPictureList}" var="productPicture">
                         <p>
                             <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}"/>
                         </p>
                     </c:forEach>
                 </c:if>
-                <c:if test="${not empty purchaseOrderProductList}">
+                <c:if test="${not empty ongjuba}">
                     <div class="discuss">
                         <div class="bd dis-title">【顾客评论】</div>
                         <ul class="ul-list">

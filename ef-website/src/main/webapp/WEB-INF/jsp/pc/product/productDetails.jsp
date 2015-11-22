@@ -251,7 +251,7 @@
             </c:if>
         </div>
         <div class="wh part">
-            <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0}">
+            <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0&&empty product.productDescription.content}">
                 <c:forEach items="${productPictureList}" var="productPicture">
              <p>
                     <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!pc-detail-view"/>
