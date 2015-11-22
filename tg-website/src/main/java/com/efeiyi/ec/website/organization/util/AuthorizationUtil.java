@@ -33,6 +33,14 @@ public class AuthorizationUtil {
     }
 
 
+    public static boolean isAuthenticated() {
+        try {
+            return getMyUser().getId()!=null;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
     public static User getUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();

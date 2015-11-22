@@ -11,4 +11,5 @@
     <!--<mapping path="/getXPage.do" decorator="/layouts/iframe.jsp"/>-->
     <!--<mapping path="/pc/login.do" decorator="/layouts/iframe.jsp"/>-->
     <mapping path="/miao**" decorator="/layouts/miaoTemplate.jsp"/>
+  <mapping path="/order/**" decorator="/layouts/mainTemplate.jsp"/>
 </sitemesh>
