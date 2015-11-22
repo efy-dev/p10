@@ -146,7 +146,6 @@
                   </li>
                 </c:if>
               </c:forEach>
-
             </ul>
           </div>
         </c:if>
