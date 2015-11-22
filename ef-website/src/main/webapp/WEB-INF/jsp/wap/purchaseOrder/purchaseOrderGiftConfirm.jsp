@@ -245,7 +245,7 @@
 
     function submitOrder(orderId) {
 
-        ajaxRequest("<c:url value="/order/giftBuy/updateImg.do"/>", {"imageUrl": getCurrentImg()}, function () {
+        ajaxRequest("<c:url value="/order/giftBuy/updateImg.do"/>", {"imageUrl": getCurrentImg(),"purchaseOrderId":"${purchaseOrder.id}"}, function () {
             $.ajax({
                 type: 'post',
                 async: false,

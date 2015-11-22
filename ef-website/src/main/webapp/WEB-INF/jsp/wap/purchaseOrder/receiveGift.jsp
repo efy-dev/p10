@@ -37,7 +37,7 @@
         <div class="cupic ae"><img src="${purchaseOrder.giftPictureUrl}"></div>
         <div class="efi-icon ae"><i class="icon"></i></div>
     </div>
-    <form action="<c:url value="/order/giftConfirm.do"/>" method="post">
+    <form action="<c:url value="/giftConfirm.do"/>" method="post">
 
         <input name="purchaseOrderId" value="${purchaseOrder.id}" type="hidden">
 

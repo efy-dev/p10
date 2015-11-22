@@ -53,7 +53,7 @@
     <div class="car-fx">
         <p  style="display: none"  id="receiveUrl">http://www.efeiyi.com/order/giftReceive/${order.id}</p>
         <a onclick="weixinSendAppMessage()">送礼给Ta</a>
-        <a href="<c:url value="/order/createGiftImage/${order.id}"/> ">保存为图片</a>
+        <a href="<c:url value="/createGiftImage/${order.id}"/> ">保存为图片</a>
     </div>
 </div>
 
