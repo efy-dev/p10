@@ -52,7 +52,7 @@
     </div>
     <div class="car-fx">
         <p  style="display: none"  id="receiveUrl">http://www.efeiyi.com/order/giftReceive/${order.id}</p>
-        <a onclick="copyUrl()">送礼给Ta</a>
+        <a onclick="weixinSendAppMessage()">送礼给Ta</a>
         <a href="<c:url value="/order/createGiftImage/${order.id}"/> ">保存为图片</a>
     </div>
 </div>
@@ -72,6 +72,7 @@
             WeixinJSBridge.invoke('sendAppMessage', {
                 "appid":"wx7f6aa253b75466dd",
                 "link":"http://www.efeiyi.com/order/giftReceive/${order.id}",
+                "img_url":"",
                 "desc":"${order.giftMessage}",
                 "title":"礼物到",
                 "img_width":"640",
@@ -97,26 +98,14 @@
 //                callbacks.all && callbacks.all(resp);
             });
         };
-//        WeixinJSBridge.on('menu:share:appmessage', function (argv) {
-//            if (callbacks.async && callbacks.ready) {
-//                window["_wx_loadedCb_"] = callbacks.dataLoaded || new Function();
-//                if(window["_wx_loadedCb_"].toString().indexOf("_wx_loadedCb_") > 0) {
-//                    window["_wx_loadedCb_"] = new Function();
-//                }
-//                callbacks.dataLoaded = function (newData) {
-//                    window["_wx_loadedCb_"](newData);
-//                    sendAppMessage(newData);
-//                };
-//                // 然后就绪
-//                callbacks.ready && callbacks.ready(argv);
-//            } else {
-//                // 就绪状态
-//                callbacks.ready && callbacks.ready(argv);
-//                sendAppMessage(data);
-//            }
-//        });
-                sendAppMessage();
+        WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+                sendAppMessage()
+        });
     }
+
+    $().ready(function(){
+        weixinSendAppMessage();
+    })
 </script>
 </body>
 </html>
