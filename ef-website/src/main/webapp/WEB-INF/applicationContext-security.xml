@@ -25,6 +25,7 @@
         <intercept-url pattern="/order/saveOrUpdateOrder.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/pay/alipay/callback" access="isAnonymous()"/>
         <intercept-url pattern="/order/giftReceive/**" access="isAnonymous()"/>
+        <intercept-url pattern="/order/giftConfirm.do" access="isAnonymous()"/>
         <intercept-url pattern="/sso2.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/myEfeiyi/list.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/pay/**" access="isAuthenticated()"/>
@@ -47,7 +48,7 @@
     </b:bean>
 
     <b:bean id="serviceProperties"  class="org.springframework.security.cas.ServiceProperties">
-        <b:property name="service"  value="http://192.168.1.64:8080/j_spring_cas_security_check"/>
+        <b:property name="service"  value="http://localhost:8080/j_spring_cas_security_check"/>
         <!--<b:property name="service"  value="http://www2.efeiyi.com/j_spring_cas_security_check"/>-->
         <b:property name="sendRenew" value="false"/>
     </b:bean>

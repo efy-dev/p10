@@ -45,11 +45,15 @@
             <!-- <div class="edit-txt1">种地农民卖粮之难，并不只此而已。喜获丰收，本想多卖多赚，孰料供大于求，价格上不去甚至被恶意压低，迟迟兑换不了钞票。</div>-->
             <!--确定后的样式-->
             <a href="#" id="add-show" class="edit-txt">编辑祝福语</a>
+
+            <em id="giftMessageContent" style="display:none;">我精心为你准备了礼物，希望你能收下。</em>
+            <!--弹出按钮-->
+            <a href="#" name="add-show" style="display: none" onclick="$('.add-cart').show()"><i class="cart-icon"></i></a>
             <!--弹出框-->
 
 
             <div style="display: none" class="add-cart">
-                <textarea class="ae" id="giftMessage"></textarea>
+                <textarea class="ae" id="giftMessage" maxlength="20"></textarea>
 
                 <div class="atext ae">
                     <a class="cancel">取&nbsp;消</a>
@@ -57,13 +61,13 @@
                 </div>
             </div>
         </div>
-        <div data-am-widget="slider" class="am-slider am-slider-a1 ae"
+        <div data-am-widget="slider" class="am-slider am-slider-a1 ae" id="slider"
              data-am-slider='{&quot;directionNav&quot;:false}'>
             <ul class="am-slides">
-                <li><img src="../shop2015/upload/ever1.png"></li>
-                <li><img src="../shop2015/upload/ever2.jpg"></li>
-                <li><img src="../shop2015/upload/ever3.jpg"></li>
-                <li><img src="../shop2015/upload/ever4.jpg"></li>
+                <li><img id="1" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever1.png"></li>
+                <li><img id="2" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever2.jpg"></li>
+                <li><img id="3" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever3.jpg"></li>
+                <li><img id="4" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever3.jpg"></li>
             </ul>
         </div>
         <div class="detailed">
@@ -76,7 +80,7 @@
         <a href="#" class="gift-c-d ae"><strong>${productModel.name}</strong><i class="sj-icon"></i></a>
 
         <div class="chandise ae">
-            <div class="cha-pic"><img src="../shop2015/upload/seckill1.jpg"></div>
+            <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>
             <div class="cha-box">
                 <strong>${productModel.product.subName}</strong>
 
@@ -161,6 +165,13 @@
         if (message != "") {
             var success = function (data) {
                 console.log("保存成功");
+                $("#giftMessageContent").html(data);
+                $("#giftMessageContent").show()
+                $("#add-show").hide();
+                $("#add-show").attr("id", "add-show1")
+                $("[name=add-show]").show()
+                $("[name=add-show]").attr("id", "add-show");
+                $(".add-cart").hide();
             }
             ajaxRequest("<c:url value="/order/giftBuy/saveOrUpdateGiftMessage.do"/>", {
                 "purchaseOrderId": "${purchaseOrder.id}",
@@ -173,6 +184,7 @@
 
     $().ready(function () {
 //
+//        $('#slider').flexslider('pause');
 //        $("#confirmGiftMessage").click(function () {
 //            updateGiftMessage();
 //        });
@@ -207,18 +219,40 @@
         payment = "3";
     }
 
-    function submitOrder(orderId) {
-        $.ajax({
-            type: 'post',
-            async: false,
-            url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
-            dataType: 'json',
-            success: function (data) {
-                if (data) {
-                    if (consumerAddress == "") {
-                        showAlert("提示", "请选择一个收货地址！");
-                    } else {
+    function getCurrentImg() {
 
+        var imgId = "";
+
+        var elements = $("ol").find("li");
+
+        for (var i = 0; i < elements.length; i++) {
+            var clazz = $($(elements[i]).find("a")).attr("class");
+            if (clazz == "am-active") {
+                imgId = $($(elements[i]).find("a")).html()
+            }
+//            if(elements.find("a").html()=="1"){
+//                imgId = "1";
+//            }else if (elements.find("a").html()=="2"){
+//                imgId = "2";
+//            }else if (elements.find("a").html()=="3"){
+//                imgId = "3"
+//            }else if (elements.find("a").html()=="4"){
+//                imgId = "4";
+//            }
+        }
+        return $("#" + imgId).attr("src");
+    }
+
+    function submitOrder(orderId) {
+
+        ajaxRequest("<c:url value="/order/giftBuy/updateImg.do"/>", {"imageUrl": getCurrentImg()}, function () {
+            $.ajax({
+                type: 'post',
+                async: false,
+                url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
                         var isweixin = "";
 
                         if (isWeiXin()) {
@@ -227,16 +261,16 @@
                         }
 
                         var url = "<c:url value="/order/confirm/"/>";
-                        url += orderId + "?payment=" + payment + "&message=" + message + isweixin;
+                        url += orderId + "?payment=" + payment + "&message=" +isweixin + "&imageUrl=" + getCurrentImg();
                         window.location.href = url;
+                    } else {
+                        showAlert("提示", "抱歉，该商品已售罄！")
                     }
-                } else {
-                    showAlert("提示", "抱歉，该商品已售罄！")
-                }
-            },
+                },
 
-        });
-
+            });
+        }, function () {
+        }, "post");
     }
 
 </script>

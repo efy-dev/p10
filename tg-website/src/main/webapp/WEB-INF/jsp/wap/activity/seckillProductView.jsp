@@ -52,7 +52,7 @@
     <div class="bd details">
         <div class="bd des-title">
             <strong class="bd txt">${seckillProduct.productModel.name}</strong>
-            <a href="#分享" class="share">
+            <a href="#分享" class="share" style="right: 0px;">
                 <i class="icon icon-share"></i>
 
                 <p>分享</p>

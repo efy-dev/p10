@@ -71,7 +71,7 @@ public class PurchaseOrderController extends BaseController {
     }
 
     @RequestMapping("/giftConfirm.do")
-    public String confirmGift(HttpServletRequest request,Model model) {
+    public String confirmGift(HttpServletRequest request, Model model) {
         String purchaseOrderId = request.getParameter("purchaseOrderId");
         PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
         AddressProvince addressProvince = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), request.getParameter("province.id"));
@@ -85,7 +85,7 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrderGift.setPurchaseOrderAddress(address);
         purchaseOrderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //订单改为未发货状态
         baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
-        model.addAttribute("purchaseOrder",purchaseOrderGift);
+        model.addAttribute("purchaseOrder", purchaseOrderGift);
         return "/purchaseOrder/giftView";
     }
 
@@ -100,6 +100,21 @@ public class PurchaseOrderController extends BaseController {
             baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
             return true;
         } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @RequestMapping({"giftBuy/updateImg.do"})
+    @ResponseBody
+    public boolean updateImg(HttpServletRequest request) {
+        try {
+            String imageUrl = request.getParameter("imageUrl");
+            String purchaseOrderId = request.getParameter("purchaseOrderId");
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
+            purchaseOrderGift.setGiftPictureUrl(imageUrl);
+            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+            return true;
+        }catch (Exception e){
             return false;
         }
     }
