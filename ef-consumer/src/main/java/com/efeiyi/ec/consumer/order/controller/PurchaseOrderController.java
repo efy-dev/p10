@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
@@ -81,6 +82,14 @@ public class PurchaseOrderController {
         model.addAttribute("orderList", list);
         model.addAttribute("user", user);
         return "/purchaseOrder/purchaseOrderList";
+    }
+
+
+    @RequestMapping({"/createGiftImage/{orderId}"})
+    public String createGiftImage(@PathVariable String orderId){
+
+        PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift)baseManager.getObject(PurchaseOrderGift.class.getName(),orderId);
+        return null;
     }
 
     /**
@@ -211,6 +220,11 @@ public class PurchaseOrderController {
             model.addAttribute("dl", dl);
         }
 
+        if (purchaseOrder.getOrderType()!=null && purchaseOrder.getOrderType().equals("3")){
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift)baseManager.getObject(PurchaseOrderGift.class.getName(),purchaseOrder.getId());
+            model.addAttribute("order",purchaseOrderGift);
+            return "/purchaseOrder/purchaseOrderGiftView";
+        }
 
         return "/purchaseOrder/purchaseOrderView";
     }
