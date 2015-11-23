@@ -158,6 +158,7 @@
      <c:if test="${not empty productModel.product.tenant.id}">
          <a class="btn-default" href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>" title="进店">进店</a>
      </c:if>
+        <a class="btn-default" onclick="giftBuy()" title="送礼">送礼</a>
         <%--<a class="btn-default" target="_blank"  title="咨询">咨询</a>--%>
         <c:if test="${productModel.amount<=0}">
             <a class="btn-cart" title="放入购物车"><i class="icon"></i>放入购物车</a>
@@ -281,6 +282,12 @@
         var t = document.getElementById("value").value;
         window.location.href = "<c:url value="/cart/addProduct.do?id="/>"+o +"&amount="+ t+"&redirect=/product/productModel/"+o;
     }
+
+    function giftBuy(){
+        var t = document.getElementById("value").value;
+        window.location.href = "<c:url value="/order/giftBuy/${productModel.od}/"/>"+t;
+    }
+
     function immediateBuy(o){
         var t = document.getElementById("value").value;
         window.location.href = "<c:url value=""/>"+"/order/easyBuy/"+o +"?amount="+ t;
