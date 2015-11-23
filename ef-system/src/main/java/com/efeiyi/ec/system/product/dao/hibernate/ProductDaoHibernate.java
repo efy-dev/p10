@@ -65,7 +65,7 @@ public class ProductDaoHibernate implements ProductDao{
         String sql = "select MAX(sort)  " +
                 "from product_picture pp " +
                 "where pp.product_id = :productId "+
-                " and pp.status = '3' OR pp.status = '9' ";
+                " and pp.status in ('3','9') ";
         List<Object> objectList = this.getSession().createSQLQuery(sql).setParameter("productId",productId).list();
         if(objectList.get(0)==null){
             return 0;

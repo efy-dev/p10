@@ -220,11 +220,9 @@ public class PurchaseOrderController {
             model.addAttribute("dl", dl);
         }
 
-//        if (purchaseOrder.getOrderType()!=null && purchaseOrder.getOrderType().equals("3")){
-//            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift)baseManager.getObject(PurchaseOrderGift.class.getName(),purchaseOrder.getId());
-//            model.addAttribute("order",purchaseOrderGift);
-//            return "/purchaseOrder/purchaseOrderGiftView";
-//        }
+        if (purchaseOrder.getOrderType()!=null && purchaseOrder.getOrderType().equals("3")){
+            return "redirect:http://www.efeiyi.com/order/giftReceive/"+purchaseOrder.getId();
+        }
 
         return "/purchaseOrder/purchaseOrderView";
     }

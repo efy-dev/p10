@@ -74,17 +74,13 @@ public class PersonalInforController {
         if(session != null){
             session.invalidate();
         }
-        MyUser bigUser = AuthorizationUtil.getMyUser();
-        System.out.println(bigUser.isAccountExpired());
         return "redirect:/myEfeiyi/getPersonalInfo.do";
 
     }
     @RequestMapping({"/getPassword.do"})
-    public String getPassword(HttpServletRequest request,ModelMap modelMap){
-
+    public String getPassword(ModelMap modelMap){
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
-
         modelMap.addAttribute("user", user);
         return "/personal/securityAccount";
     }
@@ -113,9 +109,6 @@ public class PersonalInforController {
     @RequestMapping("/uploadIcon.do")
     @ResponseBody
     public String uploadProductImg(HttpServletRequest request) throws Exception{
-        String data = "";
-        String id = request.getParameter("id");
-        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(),id);
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -131,9 +124,9 @@ public class PersonalInforController {
                 XSaveOrUpdate xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateInfo",request);
                 xSaveOrUpdate.getParamMap().put("pictureUrl",url);
                 baseManager.saveOrUpdate(xSaveOrUpdate);
-//                data = user.getId() + ":" + url;
             }catch (Exception e){
                 e.printStackTrace();
+                throw new Exception("upload error with aliyun");
             }
         }
         return url;

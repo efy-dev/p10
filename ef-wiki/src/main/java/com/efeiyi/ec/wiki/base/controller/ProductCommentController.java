@@ -43,7 +43,7 @@ public class ProductCommentController extends WikibaseController {
         }else{
             list = new ArrayList<ProductCommentModel>();
         }
-
+        logger.info("getCommentList success");
         return list;
 
     }
