@@ -10,32 +10,22 @@ import com.efeiyi.ec.project.model.ProjectRecommended;
 import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
 import com.efeiyi.ec.wiki.model.Praise2Product;
 import com.efeiyi.ec.wiki.model.ProductComment;
-import com.efeiyi.ec.wiki.model.ProductStore;
 import com.efeiyi.ec.wiki.model.ProjectRecommendedModel;
-import com.efeiyi.ec.wiki.organization.service.UserManager;
 import com.efeiyi.ec.wiki.organization.service.imp.UserManagerImpl;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.util.HttpUtil;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import org.apache.http.HttpResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -176,7 +166,7 @@ public class WikiIndexController extends WikibaseController {
             xQuery.put("master_id", masterId);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() >= 1) {
+            if (!list.isEmpty()) {
                 flag = true;
             }
         }
@@ -189,8 +179,6 @@ public class WikiIndexController extends WikibaseController {
     @ResponseBody
     public String saveMasterFollows(HttpServletRequest request, Model model) throws Exception {
         String masterId = request.getParameter("masterId");
-        String oper = request.getParameter("oper");
-
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
             return "false";
@@ -271,11 +259,10 @@ public class WikiIndexController extends WikibaseController {
             //product.setFsAmount(product.getFsAmount() == null ? 1 : product.getFsAmount() + 1);
             product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
             baseManager.saveOrUpdate(Product.class.getName(), product);
-            System.out.println(product);
         }
 
 
-        if (oper != null && oper.equalsIgnoreCase("down")) {
+        if (oper != null && "down".equalsIgnoreCase(oper)) {
             String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
@@ -344,7 +331,7 @@ public class WikiIndexController extends WikibaseController {
         }
 
 
-        if (oper != null && oper.equalsIgnoreCase("down")) {
+        if (oper != null && "down".equalsIgnoreCase(oper)) {
             String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.comment.id=:commentId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
@@ -387,7 +374,7 @@ public class WikiIndexController extends WikibaseController {
         List<ProjectFollowed> projectFolloweds = pageInfo.getList();
         HashMap<String,ProjectFollowed> map = new HashMap<String,ProjectFollowed>();
         List<HashMap<String,ProjectFollowed>> res = new ArrayList<HashMap<String,ProjectFollowed>>();
-        if (projectFolloweds!=null && projectFolloweds.size()>=1){
+        if (!projectFolloweds.isEmpty()){
           for (ProjectFollowed projectFollowed : projectFolloweds) {
             Project project = projectFollowed.getProject();
             XQuery query = new XQuery("listProduct_after", request);
@@ -395,10 +382,10 @@ public class WikiIndexController extends WikibaseController {
             query.put("createDateTime",user.getLastLoginDatetime() );
             query.put("createDateTime2", user.getLastLogoutDatetime());
             List<Product> lp = baseManager.listObject(query);
-            int num=0;
-            if (lp!=null && lp.size()>=1)
+            Integer num=0;
+            if (!lp.isEmpty())
                 num = lp.size();
-            map.put(num+"",projectFollowed);
+            map.put(num.toString(),projectFollowed);
             res.add(map);
          }
         }
@@ -433,7 +420,7 @@ public class WikiIndexController extends WikibaseController {
             xQuery.put("master_id", userid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() >= 1) {
+            if (!list.isEmpty()) {
                 flag = true;
             }
         }

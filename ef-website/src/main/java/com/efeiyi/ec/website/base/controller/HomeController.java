@@ -255,6 +255,8 @@ public class HomeController {
         for (Object object : categoryList) {
             //取得推荐分类下面商品
             XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
+            xQuery.setSortHql("");
+            xQuery.updateHql();
             xQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
             map.put(((ProjectCategory) object).getId(), baseManager.listObject(xQuery));
             //首页

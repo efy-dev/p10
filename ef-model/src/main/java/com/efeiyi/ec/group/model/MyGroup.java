@@ -1,7 +1,6 @@
 package com.efeiyi.ec.group.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.purchase.model.PurchaseOrderGroup;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -13,11 +12,11 @@ import java.util.List;
  * Created by Administrator on 2015/10/21.
  */
 @Entity
-@Table(name = "group_buy")
-public class Group {
+@Table(name = "activity_group_buy")
+public class MyGroup {
     private String id;
     private GroupProduct groupProduct;//团购商品
-    private List<Member> memberList;
+    private List<GroupMember> groupMemberList;
     private String status; //0:取消 1：进行中 3：组团成功 5： 组团失败
     private Date createDateTime;
     private List<PurchaseOrderGroup> purchaseOrderGroupList;
@@ -45,12 +44,12 @@ public class Group {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group", cascade = CascadeType.ALL)
-    public List<Member> getMemberList() {
-        return memberList;
+    public List<GroupMember> getGroupMemberList() {
+        return groupMemberList;
     }
 
-    public void setMemberList(List<Member> memberList) {
-        this.memberList = memberList;
+    public void setGroupMemberList(List<GroupMember> groupMemberList) {
+        this.groupMemberList = groupMemberList;
     }
 
     @Column(name = "status")

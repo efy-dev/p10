@@ -259,6 +259,17 @@
                 </do>
             </does>
         </entity>
+        <entity name="PurchaseOrderComment" label="用户晒单"  model="com.efeiyi.ec.purchase.model.PurchaseOrderCommentPicture">
+            <does>
+                <do name="saveOrUpdateCommentPicture"  access="" label="保存晒单图片">
+                    <page>
+                        <fields>
+                            <field name="status" label="默认值" defaultValue="1" inputType="default" />
+                        </fields>
+                    </page>
+                </do>
+            </does>
+        </entity>
         <entity name="PurchaseOrderProduct" label="用户评价状态"  model="com.efeiyi.ec.purchase.model.PurchaseOrderProduct">
             <does>
                 <do name="saveOrUpdateProduct"  access="" label="修改状态值">

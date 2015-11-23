@@ -1,5 +1,6 @@
 package com.efeiyi.ec.master.model;
 
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.project.model.Project;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,7 +28,7 @@ public class MasterMessage implements Serializable {
 	private List<MessageAttachment> messageAttachmentLists;
 	private String title;
 	private String masterId;
-	private User creator;
+	private MyUser creator;
 	private String brief; //简介
 	private String masterName;
 	private String status;
@@ -130,11 +131,11 @@ public class MasterMessage implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
-	public User getCreator() {
+	public MyUser getCreator() {
 		return creator;
 	}
 
-	public void setCreator(User creator) {
+	public void setCreator(MyUser creator) {
 		this.creator = creator;
 	}
 

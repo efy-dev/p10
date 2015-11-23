@@ -19,7 +19,8 @@ public class PurchaseOrderProduct {
     private Integer purchaseAmount;
     private BigDecimal purchasePrice;
     private PurchaseOrderComment purchaseOrderComment;
-    private String status;//评价状态 0：未评价 1：已评价
+    private String status;//评价状态 1：已评价
+    private Double average;
 
     public PurchaseOrderProduct(PurchaseOrder purchaseOrder,ProductModel productModel,Integer purchaseAmount,BigDecimal purchasePrice){
         this.purchaseOrder = purchaseOrder;
@@ -97,5 +98,14 @@ public class PurchaseOrderProduct {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "average")
+    public Double getAverage() {
+        return average;
+    }
+
+    public void setAverage(Double average) {
+        this.average = average;
     }
 }

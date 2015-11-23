@@ -117,7 +117,7 @@ public class WikiDynamicController extends WikibaseController {
         PageInfo pageInfo = baseManager.listPageInfo(query);
         List<ProjectRecommended> list = pageInfo.getList();
         List<ProjectModel> pm = new ArrayList<ProjectModel>();
-        if (null!=list && list.size()>=1){
+        if (!list.isEmpty()){
             for (ProjectRecommended projectRecommended:list){
                  Project project = projectRecommended.getProject();
                  ProjectModel projectModel = projectConvertprojectModelUtil.projectConvertprojectModel(project);
@@ -169,7 +169,7 @@ public List getAttentionProjects(HttpServletRequest request, Model model) throws
     PageInfo pageInfo = baseManager.listPageInfo(query);
     List<ProjectFollowed> projectFolloweds = pageInfo.getList();
     List<ProjectDataModel> pm = new ArrayList<ProjectDataModel>();
-    if (null!=projectFolloweds && projectFolloweds.size()>=1){
+    if (!projectFolloweds.isEmpty()){
         for (ProjectFollowed projectFollowed:projectFolloweds){
             Project project = projectFollowed.getProject();
             ProjectDataModel projectDataModel = projectConvertprojectModelUtil.getProjectDataModel(project);

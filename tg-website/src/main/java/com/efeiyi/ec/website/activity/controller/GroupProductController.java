@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.product.controller;
+package com.efeiyi.ec.website.activity.controller;
 
 import com.efeiyi.ec.group.model.GroupProduct;
 import com.efeiyi.ec.organization.model.Consumer;

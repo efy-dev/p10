@@ -66,7 +66,7 @@
           <div class="site">
             <div class="menu-page">
               <ul class="list-site" id="classify">
-                <li><a href="#">全部</a></li>
+                <li><a href="<c:url value='/masterCategory/forwardPage'/>">全部</a></li>
                 <c:if test="${!empty categoryList}">
                     <c:forEach items="${categoryList}" var="cate">
                         <li><a href="<c:url value='/masterCategory/getProjectNameList.do?projectId='/>${cate.project.id}">${cate.project.name}</a></li>
@@ -81,7 +81,7 @@
           <div class="site">
             <div class="menu-page">
               <ul class="list-site" id="level">
-                <li><a href="#">全部</a></li>
+                <li><a href="<c:url value='/masterCategory/forwardPage'/>">全部</a></li>
                 <li><a href="<c:url value='/masterCategory/getLevelList.do?level=1'/>">国家级</a></li>
                 <li><a href="<c:url value='/masterCategory/getLevelList.do?level=2'/>">省级</a></li>
                 <li><a href="<c:url value='/masterCategory/getLevelList.do?level=3'/>">市级</a></li>
@@ -95,7 +95,7 @@
           <div class="site">
             <div class="menu-page">
               <ul class="list-site" id="city">
-                <li><a href="#">全部</a></li>
+                <li><a href="<c:url value='/masterCategory/forwardPage'/>">全部</a></li>
                 <c:if test="${!empty cityList}">
                   <c:forEach items="${cityList}" var="city">
                     <li><a href="<c:url value='/masterCategory/getCityList.do?cityId='/>${city.id}">${city.name}</a></li>

@@ -16,6 +16,7 @@ import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -156,7 +157,29 @@ public class MasterCategoryController {
 
 	@RequestMapping("/forwardPage")
 	public String forwardPage(){
-		return "/masterCategory/";
+		return "/masterCategory/allMaster";
+	}
+
+	@RequestMapping("/allMaster/{qm}/{size}/{index}")
+	@ResponseBody
+	public List getAllMaster(HttpServletRequest request ,@PathVariable String qm , @PathVariable String size , @PathVariable String index) throws Exception {
+		XQuery xQuery = new XQuery("plistMaster_default",request);
+		PageEntity entity = new PageEntity();
+		if (index != null){
+			entity.setSize(Integer.parseInt(size));
+			entity.setIndex(Integer.parseInt(index));
+		}
+		xQuery.setPageEntity(entity);
+		PageInfo pageInfo = baseManager.listPageInfo(xQuery);
+		List<Master> list = pageInfo.getList();
+		if (list != null && list.size() > 0){
+			for (Master master : list){
+				getMasterFollowedStatus(master);
+			}
+			return list;
+		}else{
+			return null;
+		}
 	}
 
 	/******PC start******/
