@@ -19,6 +19,16 @@ public class PurchaseOrderComment {
     private List<PurchaseOrderCommentPicture> purchaseOrderCommentPictureList;
     private String status;
     private String content;
+    private String createDatetime;
+
+    @Column(name = "create_datetime")
+    public String getCreateDatetime() {
+        return createDatetime;
+    }
+
+    public void setCreateDatetime(String createDatetime) {
+        this.createDatetime = createDatetime;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

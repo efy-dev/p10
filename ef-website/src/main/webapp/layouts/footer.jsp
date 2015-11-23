@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="<c:url value="/scripts/js/system.js?v=929"/>"></script>
 <div class="footer wh">
     <div class="service wh">
         <div class="icon phone"></div>
@@ -97,7 +98,7 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
 <![endif]-->
-<script src="<c:url value="/scripts/js/system.js?v=929"/>"></script>
+
 <script type='text/javascript'>
     (function(m, ei, q, i, a, j, s) {
         m[a] = m[a] || function() {
