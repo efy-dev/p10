@@ -67,7 +67,7 @@ public class GroupMember implements Serializable {
     }
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "supMember")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "supGroupMember")
     public List<GroupMember> getSubGroupMemberList() {
         return subGroupMemberList;
     }
