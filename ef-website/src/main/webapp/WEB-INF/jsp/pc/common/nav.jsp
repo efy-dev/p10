@@ -73,10 +73,8 @@
         </div>
         <div class="items">
             <a href="<c:url value="/"/>">首页</a>
-            <a href="">品牌专区</a>
-            <a href="">各地非遗</a>
-            <a href="">大师</a>
-            <a href="">工艺</a>
+            <a href="">礼品专区</a>
+            <a href="">精选专题</a>
         </div>
     </div>
 </div>
