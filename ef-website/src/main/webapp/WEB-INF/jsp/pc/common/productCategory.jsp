@@ -7,12 +7,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="allsort">
+<div class="allsort" style="display: none;">
     <c:forEach items="${categoryList}" var="category">
         <div class="item">
-            <h3><a href="<c:url value="/project/list/${category.id}"/>" title="">${category.name}</a><i
-                    class="icon-new icon-link"></i></h3>
-
+            <h3 class="active"><i class="icon-new icon-left"></i><a href="<c:url value="/project/list/${category.id}"/>" title="">${category.name}</a><i class="icon-new icon-link"></i><i class="icon-new icon-right"></i></h3>
             <div class="i-mc" style="display: none;">
                 <div class="links">
                     <c:forEach items="${projectMap.get(category.id)}" var="project">

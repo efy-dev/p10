@@ -88,16 +88,31 @@
 
             <p class="bd t3">每件商品限抢购一件</p>
 
-            <p class="bd seckill-time">秒杀倒计时： <strong class="seckill-time"><font id="time-h">00</font>:<font id="time-m">00</font>:<font
-                    id="time-s">00</font></strong></p>
+            <c:if test="${miaoStatus!='1'}">
+                <p class="bd seckill-time">秒杀倒计时： <strong class="seckill-time"><font id="time-h">00</font>:<font
+                        id="time-m">00</font>:<font
+                        id="time-s">00</font></strong></p>
+            </c:if>
 
             <p class="bd t3">秒杀规则：下单成功后请在15分钟内完成支付</p>
+
+
             <c:if test="${miaoStatus=='2'}">
                 <div class="bd btn-bg" id="miaoBuy"><a href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
                                                        title="立即抢购">立即抢购</a>
                 </div>
             </c:if>
             <c:if test="${miaoStatus=='1'}">
+                <div class="bd time">
+                    <h1 class="bd">距秒杀结束</h1>
+
+                    <div class="des">
+                        <span class="items hour" id="time-h">00</span>
+                        <span class="items minute" id="time-m">00</span>
+                        <span class="items seconds" id="time-s">00</span>
+                    </div>
+                </div>
+
                 <div class="bd btn-bg" id="miaoBuy" style="display: none"><a
                         href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
                         title="立即抢购">立即抢购</a>
@@ -113,7 +128,7 @@
         <div class="des-content des-content-seckill">
             <div class="des-tab">
                 <span class="link active" title="详情">详情</span>
-                <a href="#comment"><span class="link" title="评论[25]">评论</span></a>
+                <a href="#comment"><span class="link" title="评论">评论</span></a>
             </div>
             <!-- //End-des-tab-->
             <div class="bd title">详情</div>
@@ -197,7 +212,12 @@
 
     function show_time() {
         var time_start = new Date().getTime(); //设定当前时间
+        <c:if test="${miaoStatus=='1'}">
+        var time_end = new Date("<fmt:formatDate value="${seckillProduct.endDatetime}" pattern="20YY/MM/dd HH:mm:ss"/>").getTime(); //设定目标时间
+        </c:if>
+        <c:if test="${miaoStatus!='1'}">
         var time_end = new Date("<fmt:formatDate value="${seckillProduct.startDatetime}" pattern="20YY/MM/dd HH:mm:ss"/>").getTime(); //设定目标时间
+        </c:if>
         // 计算时间差
         var time_distance = time_end - time_start;
 

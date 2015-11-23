@@ -158,7 +158,13 @@ public class Code2UrlConsumer implements Runnable {
 
     private String getTicketUrl(String code) throws UnsupportedEncodingException {
 
-        ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_id", code);
+        if(runningModel){
+            //永久
+            ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_str", code);
+        }else {
+            //临时
+            ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_id", code);
+        }
         stringEntity = new StringEntity(jsonObject.toJSONString(), "utf-8");
         stringEntity.setContentType("application/json");
         method.setEntity(stringEntity);
