@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-
 <module name="purchase" label="purchase" version="" package="com.efeiyi.ec.purchase" path="">
 
     <entities>
@@ -62,17 +61,21 @@
                         <item label="等待付款" value="1"/>
                         <item label="等待成团" value="3"/>
                         <item label="已付款" value="5"/>
+                        <item label="待收礼" value="6"/>
                         <item label="已发货" value="7"/>
                         <item label="未评价" value="9"/>
                         <item label="已完成" value="13"/>
+                        <item label="已退款" value="15"/>
                         <item label="已取消" value="17"/>
                     </statusType>
                 </field>
 
             </fields>
             <does>
-                <do name="plistPurchaseOrder" access="admin,operational,o_operational,financial,market,product_manager" label="购买订单"
-                    result="/purchaseOrder/purchaseOrderPList" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderViewProductHandler">
+                <do name="plistPurchaseOrder" access="admin,operational,o_operational,financial,market,product_manager"
+                    label="购买订单"
+                    result="/purchaseOrder/purchaseOrderPList"
+                    execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderViewProductHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
                     </query>
@@ -80,7 +83,8 @@
                         <condition name="user.id" operation="eq" label="消费者id" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
-                        <condition name="orderStatus" operation="eq" label="订单状态" inputType="select_status" key="purchaseOrder.orderStatus"/>
+                        <condition name="orderStatus" operation="eq" label="订单状态" inputType="select_status"
+                                   key="purchaseOrder.orderStatus"/>
                         <condition name="serial" operation="like" label="订单号" inputType="text"/>
                         <condition name="createDatetime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
                         <condition name="createDatetime" operation="le" label="截止时间" inputType="date" dataType="date"/>
@@ -89,8 +93,12 @@
                 </do>
 
                 <do name="removePurchaseOrder" label="删除购买订单" access="admin,operational" result="json"/>
-                <do name="viewPurchaseOrder" label="查看购买订单" access="admin,operational,o_operational,financial,market,product_manager" result="/purchaseOrder/purchaseOrderView" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderViewProductHandler"/>
-                <do name="formPurchaseOrder" label="保存购买订单" access="admin,operational,o_operational" result="/purchaseOrder/purchaseOrderForm"/>
+                <do name="viewPurchaseOrder" label="查看购买订单"
+                    access="admin,operational,o_operational,financial,market,product_manager"
+                    result="/purchaseOrder/purchaseOrderView"
+                    execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderViewProductHandler"/>
+                <do name="formPurchaseOrder" label="保存购买订单" access="admin,operational,o_operational"
+                    result="/purchaseOrder/purchaseOrderForm"/>
                 <do name="saveOrUpdatePurchaseOrder" label="保存购买订单" access="admin,operational,o_operational"
                     result="/purchaseOrder/purchaseOrderSaveSuccess"/>
                 <do name="listPurchaseOrder" label="购买订单列表" access="" result="/purchaseOrder/purchaseOrderList">
@@ -121,7 +129,8 @@
                 </field>
             </fields>
             <does>
-                <do name="plistCoupon" access="admin,operational,o_operational,financial,market,product_manager" label="优惠券列表"
+                <do name="plistCoupon" access="admin,operational,o_operational,financial,market,product_manager"
+                    label="优惠券列表"
                     result="/coupon/couponPList"
                     execute="com.efeiyi.ec.system.basic.controller.commonHandler"
                         >
@@ -138,30 +147,41 @@
                     </query>
 
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
-                        <condition name="status" operation="eq" label="优惠券状态" inputType="select_status" key="coupon.status"/>
-                        <condition name="whetherBind" operation="eq" label="是否绑定" inputType="select_status" key="coupon.whetherBind"/>
+                        <condition name="status" operation="eq" label="优惠券状态" inputType="select_status"
+                                   key="coupon.status"/>
+                        <condition name="whetherBind" operation="eq" label="是否绑定" inputType="select_status"
+                                   key="coupon.whetherBind"/>
                         <condition name="serial" operation="like" label="优惠券序列号" inputType="text"/>
                         <condition name="couponBatch.name" operation="like" label="优惠券批次名" inputType="text"/>
-                        <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
-                        <condition name="couponBatch.endDate" operation="le" label="失效日期" inputType="date" dataType="date"/>
+                        <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date"
+                                   dataType="date"/>
+                        <condition name="couponBatch.endDate" operation="le" label="失效日期" inputType="date"
+                                   dataType="date"/>
                     </query>
                 </do>
 
-                <do name="plistConsumerCoupon" access="admin,operational,o_operational,financial,market,product_manager" label="消费者优惠券" result="/coupon/consumerCouponPList">
+                <do name="plistConsumerCoupon" access="admin,operational,o_operational,financial,market,product_manager"
+                    label="消费者优惠券" result="/coupon/consumerCouponPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="consumer.id" label="用户" operation="eq" inputType="default"/>
                     </query>
                     <query name="consumer" label="分类查询" type="auto" orderBy="id:desc">
-                        <condition name="status" operation="eq" label="优惠券状态" inputType="select_status" key="coupon.status"/>
+                        <condition name="status" operation="eq" label="优惠券状态" inputType="select_status"
+                                   key="coupon.status"/>
                         <condition name="serial" operation="eq" label="优惠券序列号" inputType="text"/>
-                        <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
-                        <condition name="couponBatch.endDate" operation="le" label="失效日期" inputType="date" dataType="date"/>
+                        <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date"
+                                   dataType="date"/>
+                        <condition name="couponBatch.endDate" operation="le" label="失效日期" inputType="date"
+                                   dataType="date"/>
                     </query>
                 </do>
 
                 <do name="removeCoupon" label="删除优惠券" access="admin,operational" result="json"/>
-                <do name="viewCoupon" label="查看优惠券" access="admin,operational,o_operational,financial,market,product_manager" result="/coupon/couponView" execute="com.efeiyi.ec.system.couponBatch.controller.CouponHandler"/>
-                <do name="formCoupon" label="保存优惠券" access="admin,operational,o_operational" result="/coupon/couponForm"/>
+                <do name="viewCoupon" label="查看优惠券"
+                    access="admin,operational,o_operational,financial,market,product_manager"
+                    result="/coupon/couponView" execute="com.efeiyi.ec.system.couponBatch.controller.CouponHandler"/>
+                <do name="formCoupon" label="保存优惠券" access="admin,operational,o_operational"
+                    result="/coupon/couponForm"/>
                 <do name="saveOrUpdateCoupon" label="保存优惠券" access="admin,operational,o_operational"
                     result="/purchaseOrder/purchaseOrderSaveSuccess"/>
             </does>
@@ -179,7 +199,8 @@
                 </field>
             </fields>
             <does>
-                <do name="plistCouponBatch" access="admin,operational,o_operational,financial,market,product_manager" label="优惠券批次列表"
+                <do name="plistCouponBatch" access="admin,operational,o_operational,financial,market,product_manager"
+                    label="优惠券批次列表"
                     result="/couponBatch/couponBatchPList"
                     execute="com.efeiyi.ec.system.basic.controller.commonHandler"
                         >
@@ -188,24 +209,28 @@
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq" label="优惠券批次状态" inputType="default"/>
-                        <condition name="name"  operation="like" label="优惠券批次名称"/>
-                        <condition name="price"  operation="eq" label="优惠金额" inputType="text" dataType="float"/>
-                        <condition name="priceLimit"  operation="eq" label="使用限制金额" inputType="text" dataType="float"/>
+                        <condition name="name" operation="like" label="优惠券批次名称"/>
+                        <condition name="price" operation="eq" label="优惠金额" inputType="text" dataType="float"/>
+                        <condition name="priceLimit" operation="eq" label="使用限制金额" inputType="text" dataType="float"/>
                         <condition name="startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
                         <condition name="endDate" operation="le" label="失效日期" inputType="date" dataType="date"/>
                     </query>
                 </do>
 
                 <do name="removeCouponBatch" label="删除优惠券批次" access="admin,operational" result="json"/>
-                <do name="viewCouponBatch" label="查看优惠券批次" access="admin,operational,o_operational,financial,market,product_manager" result="/couponBatch/couponBatchView"
+                <do name="viewCouponBatch" label="查看优惠券批次"
+                    access="admin,operational,o_operational,financial,market,product_manager"
+                    result="/couponBatch/couponBatchView"
                     execute="com.efeiyi.ec.system.couponBatch.controller.LastCouponHandler"
                         />
-                <do name="formCouponBatch" label="保存优惠券批次" access="admin,operational,o_operational" result="/couponBatch/couponBatchForm"/>
+                <do name="formCouponBatch" label="保存优惠券批次" access="admin,operational,o_operational"
+                    result="/couponBatch/couponBatchForm"/>
                 <do name="saveOrUpdateCouponBatch" label="保存优惠券批次" access="admin,operational,o_operational"
-                    result="redirect:/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch" execute="com.efeiyi.ec.system.couponBatch.controller.CouponBatchHandler">
+                    result="redirect:/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch"
+                    execute="com.efeiyi.ec.system.couponBatch.controller.CouponBatchHandler">
                     <page>
                         <fields>
-                            <field name="status" label="状态" defaultValue="1" inputType="default" />
+                            <field name="status" label="状态" defaultValue="1" inputType="default"/>
                         </fields>
                     </page>
                 </do>
@@ -239,13 +264,16 @@
                 </field>
             </fields>
             <does>
-                <do name="plistPurchaseOrderDelivery" access="admin,operational,o_operational,financial,market,product_manager" label="purchaseOrderDelivery分页列表"
+                <do name="plistPurchaseOrderDelivery"
+                    access="admin,operational,o_operational,financial,market,product_manager"
+                    label="purchaseOrderDelivery分页列表"
                     result="/purchaseOrderDelivery/purchaseOrderDeliveryPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
-                        <condition name="status" operation="eq" label="发货状态" inputType="select_status" key="purchaseOrderDelivery.status"/>
+                        <condition name="status" operation="eq" label="发货状态" inputType="select_status"
+                                   key="purchaseOrderDelivery.status"/>
                         <condition name="serial" operation="like" label="发货记录编号" inputType="text"/>
                         <condition name="purchaseOrder.serial" operation="like" label="订单号" inputType="text"/>
                         <condition name="logisticsCompany" operation="like" label="物流公司" inputType="text"/>
@@ -257,8 +285,10 @@
                 <do name="removePurchaseOrderDelivery" label="删除发货记录" access="admin,operational" result="json"/>
                 <do name="formPurchaseOrderDelivery" label="保存发货记录" access="admin,operational,o_operational"
                     result="/purchaseOrderDelivery/purchaseOrderDeliveryForm"/>
-                <do name="viewPurchaseOrderDelivery" label="查看发货记录" access="admin,operational,o_operational,financial,market,product_manager"
-                    result="/purchaseOrderDelivery/purchaseOrderDeliveryView" execute="com.efeiyi.ec.system.purchaseOrderDelivery.controller.PurchaseOrderDeliveryHandler"/>
+                <do name="viewPurchaseOrderDelivery" label="查看发货记录"
+                    access="admin,operational,o_operational,financial,market,product_manager"
+                    result="/purchaseOrderDelivery/purchaseOrderDeliveryView"
+                    execute="com.efeiyi.ec.system.purchaseOrderDelivery.controller.PurchaseOrderDeliveryHandler"/>
                 <do name="saveOrUpdatePurchaseOrderDelivery" label="保存发货记录" access="admin,operational,o_operational"
                     result="/purchaseOrderDelivery/purchaseOrderDeliverySaveSuccess"/>
                 <do name="listPurchaseOrderDelivery" label="发货记录列表" access=""
@@ -290,13 +320,15 @@
                 </field>
             </fields>
             <does>
-                <do name="plistPurchaseOrderPayment" access="admin,operational,o_operational,financial,market,product_manager" label="支付记录分页查询"
+                <do name="plistPurchaseOrderPayment"
+                    access="admin,operational,o_operational,financial,market,product_manager" label="支付记录分页查询"
                     result="/purchaseOrderPayment/purchaseOrderPaymentPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
-                        <condition name="status" operation="eq" label="支付状态" inputType="select_status" key="purchaseOrderPayment.status"/>
+                        <condition name="status" operation="eq" label="支付状态" inputType="select_status"
+                                   key="purchaseOrderPayment.status"/>
                         <condition name="serial" operation="like" label="支付记录编号" inputType="text"/>
                         <condition name="purchaseOrder.serial" operation="like" label="订单号" inputType="text"/>
                         <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
@@ -307,8 +339,10 @@
                 <do name="removePurchaseOrderPayment" label="删除支付记录" access="admin,operational" result="json"/>
                 <do name="formPurchaseOrderPayment" label="保存支付记录" access="admin,operational,o_operational"
                     result="/purchaseOrderPayment/purchaseOrderPaymentForm"/>
-                <do name="viewPurchaseOrderPayment" label="查看支付记录" access="admin,operational,o_operational,financial,market,product_manager"
-                    result="/purchaseOrderPayment/purchaseOrderPaymentView" execute="com.efeiyi.ec.system.PurchaseOrderPayment.controller.PurchaseOrderPaymentHandler"/>
+                <do name="viewPurchaseOrderPayment" label="查看支付记录"
+                    access="admin,operational,o_operational,financial,market,product_manager"
+                    result="/purchaseOrderPayment/purchaseOrderPaymentView"
+                    execute="com.efeiyi.ec.system.PurchaseOrderPayment.controller.PurchaseOrderPaymentHandler"/>
                 <do name="saveOrUpdatePurchaseOrderPayment" label="保存支付记录" access="admin,operational,o_operational"
                     result="/purchaseOrderPayment/purchaseOrderPaymentSaveSuccess"/>
                 <do name="listPurchaseOrderPayment" label="支付记录列表" access=""
@@ -333,27 +367,31 @@
                 </field>
             </fields>
             <does>
-            <do name="plistPurchaseOrderPaymentDetails" access="admin,operational,o_operational,financial,market,product_manager" label="支付记录详情"
-                result="/purchaseOrderPaymentDetails/purchaseOrderPaymentDetailsPList">
-                <query name="default" label="默认" type="auto" orderBy="id:desc">
-                    <condition name="id" defaultValue="0" operation="ne"/>
-                </query>
-                <query name="search" label="查询" type="auto" orderBy="id:desc">
-                    <condition name="payWay" operation="eq" label="支付方式" inputType="select_status" key="purchaseOrderPaymentDetails.payWay"/>
-                    <condition name="purchaseOrderPayment.serial" operation="like" label="支付记录编号" inputType="text"/>
-                    <condition name="transactionNumber" operation="eq" label="交易号" inputType="text"/>
-                    <condition name="purchaseOrderPayment.purchaseOrder.serial" operation="like" label="订单号" inputType="text"/>
-                    <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
-                    <condition name="createDateTime" operation="le" label="截止时间" inputType="date" dataType="date"/>
-                </query>
-            </do>
+                <do name="plistPurchaseOrderPaymentDetails"
+                    access="admin,operational,o_operational,financial,market,product_manager" label="支付记录详情"
+                    result="/purchaseOrderPaymentDetails/purchaseOrderPaymentDetailsPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                    <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="payWay" operation="eq" label="支付方式" inputType="select_status"
+                                   key="purchaseOrderPaymentDetails.payWay"/>
+                        <condition name="purchaseOrderPayment.serial" operation="like" label="支付记录编号" inputType="text"/>
+                        <condition name="transactionNumber" operation="eq" label="交易号" inputType="text"/>
+                        <condition name="purchaseOrderPayment.purchaseOrder.serial" operation="like" label="订单号"
+                                   inputType="text"/>
+                        <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
+                        <condition name="createDateTime" operation="le" label="截止时间" inputType="date" dataType="date"/>
+                    </query>
+                </do>
             </does>
         </entity>
         <entity name="purchaseOrderProduct" label="purchaseOrderProduct"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.PurchaseOrderProduct">
             <does>
-                <do name="plistPurchaseOrderProduct" access="admin,operational,o_operational,financial,market,product_manager" label="购买订单产品"
+                <do name="plistPurchaseOrderProduct"
+                    access="admin,operational,o_operational,financial,market,product_manager" label="购买订单产品"
                     result="/purchaseOrderProduct/purchaseOrderProductPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="1" operation="eq"/>
@@ -361,7 +399,8 @@
                 </do>
 
                 <do name="removePurchaseOrderProduct" label="删除购买订单产品" access="admin,operational" result="json"/>
-                <do name="viewPurchaseOrderProduct" label="查看购买订单产品" access="admin,operational,o_operational,financial,market,product_manager"
+                <do name="viewPurchaseOrderProduct" label="查看购买订单产品"
+                    access="admin,operational,o_operational,financial,market,product_manager"
                     result="/purchaseOrderProduct/purchaseOrderProductView"/>
                 <do name="formPurchaseOrderProduct" label="保存购买订单产品" access="admin,operational,o_operational"
                     result="/purchaseOrderProduct/purchaseOrderProductForm"/>
@@ -378,13 +417,13 @@
         </entity>
 
 
-
         <entity name="cartProduct" label="cartProduct"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.CartProduct">
             <does>
 
-                <do name="formActivity" label="保存cartProduct" access="admin,operational,o_operational" result="/activity/activityForm"/>
+                <do name="formActivity" label="保存cartProduct" access="admin,operational,o_operational"
+                    result="/activity/activityForm"/>
 
             </does>
         </entity>
