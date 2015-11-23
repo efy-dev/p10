@@ -20,6 +20,8 @@ public class PurchaseOrderComment {
     private String status;
     private String content;
     private String createDatetime;
+    private PurchaseOrderBusinessReply purchaseOrderBusinessReply;
+
 
     @Column(name = "create_datetime")
     public String getCreateDatetime() {
@@ -94,5 +96,14 @@ public class PurchaseOrderComment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "purchase_order_business_reply_id")
+    public PurchaseOrderBusinessReply getPurchaseOrderBusinessReply() {
+        return purchaseOrderBusinessReply;
+    }
+
+    public void setPurchaseOrderBusinessReply(PurchaseOrderBusinessReply purchaseOrderBusinessReply) {
+        this.purchaseOrderBusinessReply = purchaseOrderBusinessReply;
     }
 }

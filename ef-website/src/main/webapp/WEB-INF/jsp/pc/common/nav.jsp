@@ -47,10 +47,15 @@
 <div class="header-new wh">
     <div class="hd">
         <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
-        <form action="">
-            <input type="text" class="txt" placeholder="">
+        <form action="<c:url value='/search.do'/>" method="get">
+            <input type="text" class="txt" placeholder="" name="q" id="q" value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>">
             <input type="submit" class="icon-new btn" value="">
-
+            <%-- 全文检索测试 --%>
+            <input type="hidden" id="resultPage" name="resultPage" value="/searchResult"/>
+            <input type="hidden" id="facetFields" name="facetFields" value="project_name"/>
+            <input type="hidden" id="group" name="group" value="efeiyi"/>
+            <input type="hidden" id="priceUD" name="priceUD" value="0"/>
+            <%-- End全文检索测试 --%>
             <div class="keywords">
                 <a href="">剪纸</a>
                 <a href="">景泰蓝</a>
