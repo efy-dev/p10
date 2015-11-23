@@ -88,7 +88,7 @@
 
             <p class="bd t3">每件商品限抢购一件</p>
 
-            <c:if test="${miaoStatus!='1'}">
+            <c:if test="${miaoStatus!='2'}">
                 <p class="bd seckill-time">秒杀倒计时： <strong class="seckill-time"><font id="time-h">00</font>:<font
                         id="time-m">00</font>:<font
                         id="time-s">00</font></strong></p>
@@ -98,11 +98,6 @@
 
 
             <c:if test="${miaoStatus=='2'}">
-                <div class="bd btn-bg" id="miaoBuy"><a href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
-                                                       title="立即抢购">立即抢购</a>
-                </div>
-            </c:if>
-            <c:if test="${miaoStatus=='1'}">
                 <div class="bd time">
                     <h1 class="bd">距秒杀结束</h1>
 
@@ -112,6 +107,11 @@
                         <span class="items seconds" id="time-s">00</span>
                     </div>
                 </div>
+                <div class="bd btn-bg" id="miaoBuy"><a href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
+                                                       title="立即抢购">立即抢购</a>
+                </div>
+            </c:if>
+            <c:if test="${miaoStatus=='1'}">
 
                 <div class="bd btn-bg" id="miaoBuy" style="display: none"><a
                         href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
@@ -212,10 +212,10 @@
 
     function show_time() {
         var time_start = new Date().getTime(); //设定当前时间
-        <c:if test="${miaoStatus=='1'}">
+        <c:if test="${miaoStatus=='2'}">
         var time_end = new Date("<fmt:formatDate value="${seckillProduct.endDatetime}" pattern="20YY/MM/dd HH:mm:ss"/>").getTime(); //设定目标时间
         </c:if>
-        <c:if test="${miaoStatus!='1'}">
+        <c:if test="${miaoStatus!='2'}">
         var time_end = new Date("<fmt:formatDate value="${seckillProduct.startDatetime}" pattern="20YY/MM/dd HH:mm:ss"/>").getTime(); //设定目标时间
         </c:if>
         // 计算时间差
