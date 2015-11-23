@@ -43,7 +43,7 @@ public class MyGroup {
         this.groupProduct = groupProduct;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "myGroup", cascade = CascadeType.ALL)
     public List<GroupMember> getGroupMemberList() {
         return groupMemberList;
     }
@@ -80,7 +80,7 @@ public class MyGroup {
         this.manUser = manUser;
     }
 
-    @OneToMany(fetch = FetchType.LAZY ,mappedBy = "group")
+    @OneToMany(fetch = FetchType.LAZY ,mappedBy = "myGroup")
     @Where(clause = "status=1")
     public List<PurchaseOrderGroup> getPurchaseOrderGroupList() {
         return purchaseOrderGroupList;
