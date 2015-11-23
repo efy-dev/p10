@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%--
@@ -30,16 +31,12 @@
             <%--<h1>${order.tenant.name}</h1>--%>
           <div><hr data-am-widget="divider" style="" class=" am-divider-default" /></div>
           <div class="am-g am-intro-bd">
-            <div class="am-intro-left am-u-sm-5 item-act"><a href="#"><img class="am-u-sm-12 item-act" src="<c:url value="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}"/>" alt="产品" /></a></div>
+            <div class="am-intro-left am-u-sm-5 item-act"><a href="<%=PConst.HOSTNAME%>/product/productModel/${purchaseOrderProduct.productModel.id}"><img class="am-u-sm-12 item-act" src="<c:url value="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}"/>" alt="产品" /></a></div>
             <div class="am-intro-right am-u-sm-7 item-act">
-              <p class="item-acr">${purchaseOrderProduct.productModel.product.name}[${purchaseOrderProduct.productModel.name}]
-                  <%--<c:if test="${purchaseOrderProduct.productModel.productPropertyValueList.size()>1}">--%>
-                  <%--[--%>
-                  <%--<c:forEach items="${purchaseOrderProduct.productModel.productPropertyValueList}"--%>
-                  <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
-                  <%--]--%>
-                  <%--</c:if>--%>
-              </p>
+             <a href="<%=PConst.HOSTNAME%>/product/productModel/${purchaseOrderProduct.productModel.id}"> <p class="item-acr">
+              ${purchaseOrderProduct.productModel.product.name}[${purchaseOrderProduct.productModel.name}]
+
+              </p></a>
               <p class="item-rmb">￥${purchaseOrderProduct.purchasePrice}<span>x${purchaseOrderProduct.purchaseAmount}</span></p>
             </div>
           </div>
@@ -112,12 +109,7 @@
             <div class="am-intro-left am-u-sm-5 item-act"><a href="#"><img class="am-u-sm-12 item-act" src="<c:url value="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}"/>" alt="产品" /></a></div>
             <div class="am-intro-right am-u-sm-7 item-act">
               <p class="item-acr">${purchaseOrderProduct.productModel.product.name}[${purchaseOrderProduct.productModel.name}]
-                  <%--<c:if test="${purchaseOrderProduct.productModel.productPropertyValueList.size()>1}">--%>
-                  <%--[--%>
-                  <%--<c:forEach items="${purchaseOrderProduct.productModel.productPropertyValueList}"--%>
-                  <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
-                  <%--]--%>
-                  <%--</c:if>--%>
+
               </p>
               <p class="item-rmb">￥${purchaseOrderProduct.purchasePrice}<span>x${purchaseOrderProduct.purchaseAmount}</span></p>
 
