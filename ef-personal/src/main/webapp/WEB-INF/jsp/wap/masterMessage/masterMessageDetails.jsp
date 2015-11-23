@@ -245,9 +245,9 @@
     });
   }
   $(document).ready(function(){
+    var masterId = '${object.id}';
     $("#userNav li").each(function(){
       if($(this).attr("class")=="active"){
-        var masterId = "${object.id}";
         if($(this).attr("title")=="1"){
           getMasterMessageList(masterId);
         }
@@ -466,10 +466,10 @@
   })
   function getMasterMessageList(masterId){
     $.ajax({
-      type: "POST",
-      url: "<c:url value='/masterMessage/getMasterDetails.do'/>",
+      type: "post",
+      url: "<c:url value='/masterMessage/getMasterDetails.do?masterId='/>"+masterId,
       async:false ,
-      data:"masterId="+masterId,
+      data:"",
       dataType:"json",
       error: function(){alert('出错了,请联系系统管理员!');},
       success: function(data){
