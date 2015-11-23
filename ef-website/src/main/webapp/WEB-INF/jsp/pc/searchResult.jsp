@@ -136,9 +136,8 @@
                     <%-- 数据显示 --%>
                     <c:forEach items="${searchParamBean.searchResultList}" var="result">
                         <li>
-                            <a href="http://192.168.1.57/ef-website/product/productModel/${result.id}" target="_blank" title="">
-                                <%--<img class="imgfilter" src="../../shop2015PC/upload/category-1.jpg" alt="">--%>
-                                <img class="imgfilter" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${result.picture_url}" alt="">
+                            <a href="http://www2.efeiyi.com/product/productModel/${result.id}" target="_blank" title="">
+                                <img class="imgfilter" src="http://pro.efeiyi.com/${result.picture_url}" alt="">
                                 <p class="wh name">${result.product_name}<c:if test="${result.frequent != 1}">[${result.specification}]</c:if></p>
                                 <p class="wh price">￥${result.product_model_price}</p>
                             </a>
