@@ -1,10 +1,7 @@
-package com.efeiyi.ec.website.group.controller;
-
-import com.efeiyi.ec.group.model.Group;
-import com.efeiyi.ec.group.model.Member;
+package com.efeiyi.ec.website.activity.controller;
+import com.efeiyi.ec.group.model.GroupMember;
 import com.efeiyi.ec.organization.model.BigUser;
-import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.purchase.model.PurchaseOrderGroup;
+import com.efeiyi.ec.group.model.PurchaseOrderGroup;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -14,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,8 +38,8 @@ public class PersonController {
         if(myCreateProductList!=null&&myCreateProductList.size()>0){
             Iterator<Object> sListIterator = myCreateProductList.iterator();
             while(sListIterator.hasNext()){
-                Member member = (Member)sListIterator.next();
-                if("0".equals(member.getLevel())==false){
+                GroupMember groupMember = (GroupMember)sListIterator.next();
+                if("0".equals(groupMember.getLevel())==false){
                     sListIterator.remove();
                 }
             }
@@ -66,8 +62,8 @@ public class PersonController {
         if(groupJoinList!=null&&groupJoinList.size()>0){
             Iterator<Object> sListIterator = groupJoinList.iterator();
             while(sListIterator.hasNext()){
-                Member member = (Member)sListIterator.next();
-                if("0".equals(member.getLevel())){
+                GroupMember groupMember = (GroupMember)sListIterator.next();
+                if("0".equals(groupMember.getLevel())){
                     sListIterator.remove();
                 }
             }

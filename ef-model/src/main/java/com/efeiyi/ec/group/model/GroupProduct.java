@@ -12,7 +12,7 @@ import java.util.Date;
  * Created by Administrator on 2015/10/20.
  */
 @Entity
-@Table(name = "group_product")
+@Table(name = "activity_group_product")
 public class GroupProduct implements Serializable {
     private String id;
     private Integer memberAmount;//参团人数限制

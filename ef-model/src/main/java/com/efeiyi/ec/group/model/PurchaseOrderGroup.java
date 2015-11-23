@@ -1,7 +1,6 @@
-package com.efeiyi.ec.purchase.model;
+package com.efeiyi.ec.group.model;
 
-import com.efeiyi.ec.group.model.Group;
-import com.efeiyi.ec.group.model.Member;
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,13 +9,13 @@ import javax.persistence.*;
  * Created by Administrator on 2015/11/4 0004.
  */
 @Entity
-@Table(name = "purchase_order_group")
+@Table(name = "activity_purchase_order_group")
 public class PurchaseOrderGroup {
 
     private String id;
     private PurchaseOrder purchaseOrder;
-    private Group group;
-    private Member member;
+    private MyGroup myGroup;
+    private GroupMember groupMember;
     private String status; //0删除 1不删除
 
     @Id
@@ -42,22 +41,22 @@ public class PurchaseOrderGroup {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
-    public Group getGroup() {
-        return group;
+    public MyGroup getMyGroup() {
+        return myGroup;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setMyGroup(MyGroup myGroup) {
+        this.myGroup = myGroup;
     }
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    public Member getMember() {
-        return member;
+    public GroupMember getGroupMember() {
+        return groupMember;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setGroupMember(GroupMember groupMember) {
+        this.groupMember = groupMember;
     }
 
     @Column(name = "status")
