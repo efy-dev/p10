@@ -41,7 +41,7 @@ public class PurchaseCommentController {
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("finishList",list);
 
-    return "/purchaseOrder/purchaseComment1";
+    return "/purchaseOrder/purchaseComment";
 }
 
     /**
