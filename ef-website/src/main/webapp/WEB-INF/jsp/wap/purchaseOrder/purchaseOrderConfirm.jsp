@@ -387,6 +387,9 @@
             url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
             dataType: 'json',
             success: function (data) {
+                <c:if test="${purchaseOrder.orderType=='2'}">
+                    data = true;
+                </c:if>
                 if (data) {
                     if (consumerAddress == "") {
                         showAlert("提示", "请选择一个收货地址！");
