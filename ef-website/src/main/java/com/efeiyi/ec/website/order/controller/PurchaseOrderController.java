@@ -1,5 +1,8 @@
 package com.efeiyi.ec.website.order.controller;
 
+import com.aliyun.openservices.oss.OSSClient;
+import com.aliyun.openservices.oss.model.ObjectMetadata;
+import com.aliyun.openservices.oss.model.PutObjectResult;
 import com.efeiyi.ec.group.model.GroupProduct;
 import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.product.model.Product;
@@ -15,6 +18,10 @@ import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
 import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -28,15 +35,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.google.zxing.WriterException;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -60,34 +74,10 @@ public class PurchaseOrderController extends BaseController {
     private PaymentManager paymentManager;
 
 
-    @RequestMapping("/giftReceive/{orderId}")
-    public String receiveGift(HttpServletRequest request, @PathVariable String orderId, Model model) {
-        PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), orderId);
-        if (purchaseOrderGift.getOrderType().equals("3") && purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRGIFT)) {
-            //判断是否是礼品订单 且可以被收礼
-            model.addAttribute("purchaseOrder", purchaseOrderGift);
-        }
-        return "/purchaseOrder/receiveGift";
-    }
 
-    @RequestMapping("/giftConfirm.do")
-    public String confirmGift(HttpServletRequest request,Model model) {
-        String purchaseOrderId = request.getParameter("purchaseOrderId");
-        PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
-        AddressProvince addressProvince = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), request.getParameter("province.id"));
-        AddressCity addressCity = (AddressCity) baseManager.getObject(AddressCity.class.getName(), request.getParameter("city.id"));
-        String detail = request.getParameter("receiveDetail");
-        String address = addressProvince.getName() + addressCity.getName() + detail;
-        String receiveName = request.getParameter("receiveName");
-        String receivePhone = request.getParameter("receivePhone");
-        purchaseOrderGift.setReceiverName(receiveName);
-        purchaseOrderGift.setReceiverPhone(receivePhone);
-        purchaseOrderGift.setPurchaseOrderAddress(address);
-        purchaseOrderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //订单改为未发货状态
-        baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
-        model.addAttribute("purchaseOrder",purchaseOrderGift);
-        return "/purchaseOrder/giftView";
-    }
+
+
+
 
     @RequestMapping("/giftBuy/showNameStatus.do")
     @ResponseBody
@@ -100,6 +90,21 @@ public class PurchaseOrderController extends BaseController {
             baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
             return true;
         } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @RequestMapping({"giftBuy/updateImg.do"})
+    @ResponseBody
+    public boolean updateImg(HttpServletRequest request) {
+        try {
+            String imageUrl = request.getParameter("imageUrl");
+            String purchaseOrderId = request.getParameter("purchaseOrderId");
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
+            purchaseOrderGift.setGiftPictureUrl(imageUrl);
+            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+            return true;
+        }catch (Exception e){
             return false;
         }
     }
@@ -151,6 +156,7 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrderGift.setTenant(productModel.getProduct().getTenant());
         purchaseOrderGift.setTotal(productModel.getPrice().multiply(new BigDecimal(Integer.parseInt(amount))));
         purchaseOrderGift.setOriginalPrice(productModel.getPrice().multiply(new BigDecimal(Integer.parseInt(amount))));
+        purchaseOrderGift.setOrderType("3");
         baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
         purchaseOrderProduct.setPurchaseOrder(purchaseOrderGift);
@@ -211,8 +217,8 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrder.setOriginalPrice(cart.getTotalPrice());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         //拼写回调路径purchaseOrderId,groupProductId,memberId,groupId
-        callback += "?purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId + "&memberId=" + (request.getParameter("memberId") != null ? request.getParameter("memberId") : "null") + "&groupId=" + (request.getParameter("groupId") != null ? request.getParameter("groupId") : "null");
-        purchaseOrder.setCallback(callback);
+        String callbackTemp = callback+"?purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId + "&memberId=" + (request.getParameter("memberId") != null ? request.getParameter("memberId") : "null") + "&groupId=" + (request.getParameter("groupId") != null ? request.getParameter("groupId") : "null");
+        purchaseOrder.setCallback(callbackTemp);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();

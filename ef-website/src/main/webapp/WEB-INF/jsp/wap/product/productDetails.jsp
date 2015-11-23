@@ -107,7 +107,7 @@
                 <c:if test="${not empty product.productDescription}">
                     ${product.productDescription.content}
                 </c:if>
-                <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0}">
+                <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0&&empty product.productDescription}">
                     <c:forEach items="${productPictureList}" var="productPicture">
                         <p>
                             <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}"/>

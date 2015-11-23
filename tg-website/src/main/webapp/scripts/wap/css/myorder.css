@@ -228,7 +228,7 @@
 .btn {padding:0.75rem 0;width:100%;background:#d42811;text-align:center;float:left;color:#fff;list-style:none;border:0;outline:none}
 .btn:hover {color:#fff}
 .gbtn {width:100%;padding:1.2rem 0;text-align:center;float:left;background:#000;color:#fff;position:relative}
-.pq {margin-left:2%;width:0.8rem;height:0.8rem;border-right:1px solid #ccc;border-bottom:1px solid #ccc;transfrom:rotate(-45deg);-webkit-transform:rotate(-45deg);float:left;margin-top:0.5rem}
+.apq {margin-left:2%;width:0.8rem;height:0.8rem;border-right:1px solid #ccc;border-bottom:1px solid #ccc;transfrom:rotate(-45deg);-webkit-transform:rotate(-45deg);float:left;margin-top:0.5rem}
 .tab-btn {padding:1.4rem 1.8rem;width:100%;float:left;border-top:1px solid #000;font-size:1.4rem;color:#000}
 .tab-btn a {float:left;color:#000;padding-left:1.5rem;position:relative}
 .tab-btn a .gicon {width:1rem;height:1rem;position:absolute;border-right:1px solid #000;border-bottom:1px solid #000;left:0;top:20%;transform:rotate(136deg);-webkit-transform:rotate(136deg);}
@@ -377,6 +377,7 @@
 .od-tab1 .product li .center .pic img {width:100%}
 .od-tab1 .product li .center .txt {padding-left:143px;height:11rem}
 .od-tab1 .product li .center .txt p {font-size:12px;color:#000;margin-bottom:1.6rem}
+.od-tab1 .product li .center .txt p:last-child{color: #cc0000}
 .od-tab1 .product li .bottom {padding:0 1.8rem;margin-top:4px}
 .od-tab1 .product li .bottom .left {float:left;font-size:12px;color:#000;margin-top:10px;width:20%}
 .od-tab1 .product li .bottom .right {float:right;width:80%}

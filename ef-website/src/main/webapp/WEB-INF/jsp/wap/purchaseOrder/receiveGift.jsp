@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -24,9 +25,6 @@
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <link type="text/css" rel="stylesheet" href="../shop2015/css/amazeui.min.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="../shop2015/css/app.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="../shop2015/css/myorder.css?v=20150831">
 </head>
 <body>
 <!--//End--header-->
@@ -39,9 +37,9 @@
         <div class="cupic ae"><img src="${purchaseOrder.giftPictureUrl}"></div>
         <div class="efi-icon ae"><i class="icon"></i></div>
     </div>
-    <form action="<c:url value="/order/giftConfirm.do"/>" method="post">
+    <form action="<c:url value="/giftConfirm.do"/>" method="post">
 
-        <input name="purchaseOrderId" value="${purchaseOrder.id}">
+        <input name="purchaseOrderId" value="${purchaseOrder.id}" type="hidden">
 
         <div class="btb"><h5>感谢您收下礼物，快填写您的收货信息吧！</h5></div>
         <ul class="profile ae">
@@ -55,7 +53,7 @@
             </li>
             <li>
                 <strong>配送地区：</strong>
-                <label id="add-dext"><p type="text" class="dtxt" placeholder="">点击选择配送地区</p></label>
+                <label id="add-dext"><p type="text" class="dtxt" placeholder="" onclick="$('.add-ress').show()" id="addressProvince">点击选择配送地区</p></label>
 
                 <div class="add-ress" style="display: none">
                     <div class="add-text shipping-address ae">
@@ -68,8 +66,8 @@
                             <option value="">请选择市</option>
                         </select>
                         <%--<select  name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required=""><option value="">请选择</option></select>--%>
-                        <div class="addbqt"><a onclick="$('.add-ress').hide()" class="bqtn"
-                                               value="确&nbsp;认&nbsp;选&nbsp;择"></a></div>
+                        <div class="addbqt"><a style="text-align: center;" onclick="$('.add-ress').hide();$('#addressProvince').html($('option[value='+$('#province').val()+']').html()+$('option[value='+$('#city').val()+']').html());" class="bqtn"
+                                               value="确&nbsp;认&nbsp;选&nbsp;择">确&nbsp;认&nbsp;选&nbsp;择</a></div>
                     </div>
                     <div class="bg"></div>
                 </div>

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -16,7 +17,7 @@
 <body>
 <header class="am-header custom-header">
     <div class="am-header-left am-header-nav">
-        <a href="<c:url value="/miao/list"/>" class="chevron-left"></a>
+        <a href="<c:url value="/miao"/>" class="chevron-left"></a>
     </div>
     <!-- //End--chevron-left-->
     <h1 class="am-header-title">${seckillProduct.productModel.name}</h1>
@@ -51,7 +52,7 @@
     <div class="bd details">
         <div class="bd des-title">
             <strong class="bd txt">${seckillProduct.productModel.name}</strong>
-            <a href="#分享" class="share">
+            <a href="#分享" class="share" style="right: 0px;">
                 <i class="icon icon-share"></i>
 
                 <p>分享</p>
@@ -87,7 +88,7 @@
 
             <p class="bd t3">每件商品限抢购一件</p>
 
-            <p class="bd t3">秒杀倒计时： <strong><font id="time-h">00</font>:<font id="time-m">00</font>:<font
+            <p class="bd seckill-time">秒杀倒计时： <strong class="seckill-time"><font id="time-h">00</font>:<font id="time-m">00</font>:<font
                     id="time-s">00</font></strong></p>
 
             <p class="bd t3">秒杀规则：下单成功后请在15分钟内完成支付</p>
@@ -97,8 +98,9 @@
                 </div>
             </c:if>
             <c:if test="${miaoStatus=='1'}">
-                <div class="bd btn-bg" id="miaoBuy" style="display: none"><a href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
-                                                       title="立即抢购">立即抢购</a>
+                <div class="bd btn-bg" id="miaoBuy" style="display: none"><a
+                        href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
+                        title="立即抢购">立即抢购</a>
                 </div>
             </c:if>
             <c:if test="${miaoStatus=='3'}">
@@ -107,12 +109,84 @@
 
         </div>
         <!-- //End--des-price-seckill-->
+        <div class="seckill-bor"></div>
+        <div class="des-content des-content-seckill">
+            <div class="des-tab">
+                <span class="link active" title="详情">详情</span>
+                <a href="#comment"><span class="link" title="评论[25]">评论</span></a>
+            </div>
+            <!-- //End-des-tab-->
+            <div class="bd title">详情</div>
+            <div class="bd">
+                <c:if test="${not empty seckillProduct.productModel.product.productDescription}">
+                    ${seckillProduct.productModel.product.productDescription.content}
+                </c:if>
+                <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0}">
+                    <c:forEach items="${productPictureList}" var="productPicture">
+                        <%--<p>--%>
+                        <%--<img src="http://pro.efeiyi.com/${productPicture.pictureUrl}"/>--%>
+                        <%--</p>--%>
+                        <ul class="bd ul-img">
+                            <li class="img"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}"/></li>
+                        </ul>
+                    </c:forEach>
+                </c:if>
+
+                <!-- //End---->
+                <div class="discuss" id="comment">
+                    <c:if test="${not empty purchaseOrderProductList&&fn:length(purchaseOrderProductList) >0}">
+                    <div class="bd dis-title">【顾客评论】</div>
+                    <ul class="ul-list">
+                        <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct"
+                                   varStatus="rec">
+                            <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'}">
+
+                                <c:set var="user">
+                                    ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
+                                </c:set>
+                                <li class="item">
+                                    <div class="user-info">
+                                        <img src="../shop2015/upload/yonghm.jpg" alt="">
+
+                                        <p class="name">${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
+
+                                        <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment.createDatetime}">
+                                            <p class="time">2015-10-12 16:16<fmt:formatDate
+                                                    value="${purchaseOrderProduct.purchaseOrderComment.createDatetime}"
+                                                    pattern="yy-MM-dd HH:mm"/></p>
+                                        </c:if>
+                                    </div>
+                                    <div class="seller">
+                                        <p class="ask">${purchaseOrderProduct.purchaseOrderComment.content}</p>
+
+                                            <%--<p class="answer"><span>3天后追加：</span>真的好漂亮，价格公平，绣的真是栩栩如生，货真价实太棒了！</p>--%>
+                                    </div>
+                                        <%--<div class="store">--%>
+                                        <%--<p class="s-title">店主回复</p>--%>
+
+                                        <%--<p class="s-info">谢谢您的支持与鼓励，我们定会竭尽所能，给您提供最专业的服务。</p>--%>
+                                        <%--</div>--%>
+                                </li>
+
+                            </c:if>
+                        </c:forEach>
+                    </ul>
+                </div>
+                </c:if>
+            </div>
+            <!-- //End--box-des-->
+        </div>
     </div>
+
+
     <!-- //End---->
 </article>
 
 <script>
     $().ready(function () {
+        $("img").each(function () {
+            $(this).css("width", "100%")
+        })
         show_time();
     })
 
