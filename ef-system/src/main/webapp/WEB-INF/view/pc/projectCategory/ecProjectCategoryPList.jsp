@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -27,7 +28,9 @@
             <div class="am-u-sm-12">
                 <table class="am-table am-table-bordered am-table-radius am-table-striped">
                     <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                         <td>操作</td>
+    </security:authorize>
                         <td>类别名称</td>
                         <td>类别编号</td>
                         <td>类别图片</td>
@@ -36,6 +39,7 @@
                     <c:forEach items="${requestScope.pageInfo.list}" var="projectCategory">
 
                         <tr id="${projectCategory.id}">
+                            <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                             <td width="25%">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
@@ -94,6 +98,7 @@
                                     </c:if>
                                 </c:forEach>
                             </td>
+                            </security:authorize>
                             <td width="25%">
                                     ${projectCategory.serial}
                             </td>

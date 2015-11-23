@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Path;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -66,6 +67,17 @@ public class SeckillController {
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), seckillProductId);
         seckillProduct.setAttentionAmount((seckillProduct.getAttentionAmount() == null ? seckillProduct.getAttentionAmount() : 0) + 1);
         model.addAttribute("seckillProduct", seckillProduct);
+
+        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
+        purchaseOrderProductQuery.put("productModel_id", seckillProduct.getProductModel().getId());
+        List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
+        Collections.reverse(purchaseOrderProductList);
+
+//        XQuery productPicturexQuery = new XQuery("listProductPicture_default",request);
+//        productPicturexQuery.put("product_id",seckillProduct.getProductModel().getProduct().getId());
+//        List<Object> productPictureList = baseManager.listObject(productPicturexQuery);
+//        model.addAttribute("productPictureList",productPictureList);
+
         //获得当前秒杀的状态 通过时间
         String status = "1";
         Date currentDate = new Date();

@@ -66,7 +66,7 @@
           <p class="itor-text-3"><ming800:status name='level' dataType='Tenant.level' checkedValue='${obj.level}' type='normal'/>非遗传承人</p>
           <p class="itor-text-4">${obj.brief}</p>
           <a class="gz-fd-icon" onclick="changeFollowedStatus(this,'${obj.id}');">${obj.followStatus}</a>
-          <div class="gz-fd-img"><a href="#"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/${obj.favicon}"></a></div>
+          <div class="gz-fd-img"><a href="<c:url value='/masterMessage/forwardMasterDetails.do?masterId=${obj.id}'/>"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/${obj.favicon}"></a></div>
         </div>
       </div>
   </c:forEach>
@@ -78,7 +78,7 @@
   <% } %>
   <%if(AuthorizationUtil.getMyUser()==null || AuthorizationUtil.getMyUser().getId() == null){ %>
   <a href="<c:url value='/sso.do'/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-  <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+  <a href="http://passport.efeiyi.com/register?service=http://master.efeiyi.com/ef-person//sso.do" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
   <% } %>
 
 </div>

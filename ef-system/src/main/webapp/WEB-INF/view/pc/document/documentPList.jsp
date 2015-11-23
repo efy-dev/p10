@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -35,7 +36,9 @@
 <body>
 <div class="am-btn-toolbar" style="margin-bottom: 10px">
     <div class="am-btn-group am-btn-group-xs">
+<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
         <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formDocument&groupName=${groupName}"/>"><span class="am-icon-plus"></span>新建文档</a>
+</security:authorize>
     </div>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&groupName=${groupName}&conditions=${requestScope.conditions}"/>
@@ -47,7 +50,9 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                     <th class="table-set">操作</th>
+</security:authorize>
                     <th class="table-title">标题</th>
                     <th class="table-title">类别</th>
                 </tr>
@@ -56,6 +61,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="document">
                     <tr id="${document.id}">
+                        <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                         <td width="33%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -70,6 +76,7 @@
                                 </div>
                             </div>
                         </td>
+                        </security:authorize>
                         <td class="am-hide-sm-only" width="33%"><a href="<c:url value="/basic/xm.do?qm=viewDocument&groupName=${groupName}&id=${document.id}"/>">${document.title}</a></td>
                         <td class="am-hide-sm-only" width="33%">
                             <ming800:status name="group" dataType="Document.group" checkedValue="${document.group}"  type="normal"/>

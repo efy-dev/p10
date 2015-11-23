@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -39,6 +40,7 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
+
                     <th class="table-set">操作</th>
                     <th class="table-title">用户名</th>
                     <th class="table-title">电话</th>
@@ -53,6 +55,7 @@
                     <tr id="${consumer.id}">
                         <td>
                             <div class="am-btn-toolbar">
+                                <security:authorize ifAnyGranted="admin,operational,o_operational">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                        href="<c:url value="/basic/xm.do?qm=formConsumer&id=${consumer.id}"/>"><span
@@ -64,6 +67,7 @@
                                             class="am-icon-trash-o">删除</span>
                                     </button>
                                 </div>
+                                </security:authorize>
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                        href="<c:url value="/basic/xm.do?qm=plistPurchaseOrder_consumer&view=consumer&viewIdentify=consumer&viewProductModel=consumer&conditions=user.id:${consumer.id}"/>"><span
@@ -78,6 +82,7 @@
                                 </div>
                             </div>
                         </td>
+
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewConsumer&viewConsumer=consumer&id=${consumer.id}'/>">${consumer.username}</a></td>
                         <td class="am-hide-sm-only">${consumer.phone}</td>
                         <td class="am-hide-sm-only">

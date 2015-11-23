@@ -34,7 +34,7 @@ public class praise2ProductController extends WikibaseController {
     @RequestMapping("/getPraiseList.do")
     @ResponseBody
     public List getPraiseList(HttpServletRequest request, Model model) throws Exception {
-        List<Praise2ProductModel> list = null;
+        List<Praise2ProductModel> list;
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query = new XQuery("plistPraise2Product_ownerPraise", request);
             query.put("moderator_id", AuthorizationUtil.getMyUser().getId());
@@ -52,8 +52,10 @@ public class praise2ProductController extends WikibaseController {
     public String watchPraise(HttpServletRequest request) throws Exception {
         String praise2ProductId = request.getParameter("praise2ProductId");
         Praise2Product praise2Product = (Praise2Product)baseManager.getObject(Praise2Product.class.getName(),praise2ProductId);
-        praise2Product.setWatch("1");
-        baseManager.saveOrUpdate(Praise2Product.class.getName(),praise2Product);
+        if(praise2Product!=null && praise2Product.getId()!=null){
+            praise2Product.setWatch("1");
+            baseManager.saveOrUpdate(Praise2Product.class.getName(),praise2Product);
+        }
         return "succ";
     }
 }

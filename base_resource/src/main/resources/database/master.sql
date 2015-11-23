@@ -709,3 +709,13 @@ ADD COLUMN `wap_redirect`  varchar(255) NULL AFTER `group_name`;
 
 ALTER TABLE `base_banner`
 ADD COLUMN `wap_url`  varchar(255) NULL AFTER `the_status`;
+
+
+ALTER TABLE `organization_role`
+ADD COLUMN `code`  varchar(255) NULL AFTER `thestatus`;
+
+ALTER TABLE `organization_role`
+CHANGE COLUMN `code` `role_code`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `thestatus`;
+
+ALTER TABLE `organization_role`
+CHANGE COLUMN `role_code` `c_name`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `thestatus`;

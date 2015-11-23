@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -25,54 +26,21 @@
                 }
             });
         }
+        function updateOrderStatusNew(obj, id) {
 
-        <%--$(function(){--%>
-            <%--$('#postSpan').on('click',function(){--%>
-                <%--var temp = $('#postSpan').text().trim()--%>
-                <%--var orderStatus = "5";--%>
-                <%--if(temp == '立即发货'){--%>
-                    <%--$('#my-prompt').modal({--%>
-                        <%--relatedTarget: this,--%>
-                        <%--onConfirm: function(e) {--%>
-
-                            <%--$.ajax({--%>
-                                <%--type:"get",--%>
-                                <%--data:{id:id,orderStatus:orderStatus,logisticsCompany:$('#logisticsCompany').val(),serial:$('#serial').val()},--%>
-                                <%--url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",--%>
-                                <%--success:function(data){--%>
-                                    <%--$(obj).find("span").text("已发货");--%>
-                                <%--}--%>
-                            <%--});--%>
-                        <%--},--%>
-                        <%--onCancel: function(e) {--%>
-                            <%--alert('不想说!');--%>
-                        <%--}--%>
-                    <%--});--%>
-                <%--}else if(temp == "无法发货"){--%>
-
-                    <%--alert("无法发货!")--%>
-                <%--}else{--%>
-                    <%--alert("已经发货!")--%>
-                <%--}--%>
-            <%--});--%>
-        <%--});--%>
-
-
-        function updateOrderStatusNew(obj,id){
-
-            var temp =  $(obj).find("span").text().trim();
+            var temp = $(obj).find("span").text().trim();
             var orderStatus = "5";
-            if(temp == '立即发货'){
-                $('#logisticsCompany')[0].options.length=0;
+            if (temp == '立即发货') {
+                $('#logisticsCompany')[0].options.length = 0;
                 $('#serial').val("");
                 $.ajax({
-                    type:'get',
-                    url:"<c:url value="/purchaseOrderDelivery/getLogisticsCompany.do"/>",
-                    success:function(data){
+                    type: 'get',
+                    url: "<c:url value="/purchaseOrderDelivery/getLogisticsCompany.do"/>",
+                    success: function (data) {
                         var selector = $("#logisticsCompany");
                         data = eval('(' + data + ')');
-                        for(var key in data){
-                            selector.append('<option value="'+key+'">'+data[key]+'</option>')
+                        for (var key in data) {
+                            selector.append('<option value="' + key + '">' + data[key] + '</option>')
                         }
 
                     }
@@ -80,25 +48,43 @@
                 var dingYueSerial;
                 $('#my-prompt').modal({
                     relatedTarget: this,
-                    onConfirm: function(e) {
+                    onConfirm: function (e) {
                         //console.log(e.data);
                         dingYueSerial = e.data;
                         $.ajax({
-                            type:"get",
-                            data:{id:id,orderStatus:orderStatus,logisticsCompany:$('#logisticsCompany').val(),serial: e.data,logisticsCompanyZHCN:$('#logisticsCompany option:checked').text()},//输入框的值传递到后台
-                            url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",
-                            success:function(data){
+                            type: "get",
+                            data: {
+                                id: id,
+                                orderStatus: orderStatus,
+                                logisticsCompany: $('#logisticsCompany').val(),
+                                serial: e.data,
+                                logisticsCompanyZHCN: $('#logisticsCompany option:checked').text()
+                            },//输入框的值传递到后台
+                            url: "<c:url value="/purchaseOrder/updateOrderStatus.do"/>",
+                            success: function (data) {
                                 $(obj).find("span").text("已发货");
 
-                                alert("wuliugongsi"+$('#logisticsCompany').val());
-                                alert("wuliudanhao"+dingYueSerial);
+//                                alert("wuliugongsi"+$('#logisticsCompany').val());
+//                                alert("wuliudanhao"+dingYueSerial);
 
                                 //发完货之后还要在快递100订阅 用户收货后直接修改订单状态为已签收
                                 $.ajax({
-                                    type:'post',
-                                    url:"<c:url value="http://www.kuaidi100.com/poll"/>",
-                                    data:{schema:'json',param:{"company":$('#logisticsCompany').val(),"number":dingYueSerial,"key":"WTVaPjwE5593","parameters":{"callbackurl":"admin.efeiyi.com/purchaseOrder/edingyue.do","salt":"test","resultv2":"1"}}},
-                                    success:function(data){
+                                    type: 'post',
+                                    url: "<c:url value="http://www.kuaidi100.com/poll"/>",
+                                    data: {
+                                        schema: 'json',
+                                        param: {
+                                            "company": $('#logisticsCompany').val(),
+                                            "number": dingYueSerial,
+                                            "key": "WTVaPjwE5593",
+                                            "parameters": {
+                                                "callbackurl": "admin.efeiyi.com/purchaseOrder/edingyue.do",
+                                                "salt": "test",
+                                                "resultv2": "1"
+                                            }
+                                        }
+                                    },
+                                    success: function (data) {
                                         alert(data.message);
                                     }
                                 });
@@ -107,23 +93,37 @@
                             }
                         });
                     },
-                    onCancel: function(e) {
-                       // alert('不想说!');
+                    onCancel: function (e) {
+                        // alert('不想说!');
                     }
                 });
-            }else if(temp == "已取消"){
-
-                alert("订单已取消，无法发货!")
-            }else if(temp == "等待付款"){
-
-                alert("等待付款，无法发货!")
-            }else if(temp == "等待成团"){
-
-                alert("等待成团，无法发货!")
-            }else{
+            } else if (temp == "已取消") {
+                alert("订单已取消!")
+            } else if (temp == "等待付款") {
+                alert("等待付款!")
+            } else if (temp == "待收礼") {
+                alert("待收礼!")
+            } else if (temp == "已退款") {
+                alert("已退款!")
+            } else if (temp == "等待成团") {
+                alert("等待成团!")
+            } else {
                 alert("已经发货!")
             }
         }
+        function refund(obj, id){
+            $.ajax({
+                type: "get",
+                data: {
+                    id: id,
+                },//输入框的值传递到后台
+                url: "<c:url value="/purchaseOrder/refund.do"/>",
+                success: function (data) {
+                    window.location.reload();
+                }
+            });
+        }
+
 
     </script>
 </head>
@@ -143,10 +143,12 @@
 
                     <%--物流公司: <input type="text" id="logisticsCompany" name="logisticsCompany" class="am-modal-prompt-input">--%>
                     <div>
-                    物流公司: <select class="am-modal-prompt-select" id="logisticsCompany" name="logisticsCompany" style="width: 90px;display: inline-block;"></select>
+                        物流公司: <select class="am-modal-prompt-select" id="logisticsCompany" name="logisticsCompany"
+                                      style="width: 90px;display: inline-block;"></select>
                     </div>
                     <div>
-                    快递单号:<input type="text" id="serial" name="serial" class="am-modal-prompt-input" style="width: 100px;height:30px;display: inline-block;">
+                        快递单号:<input type="text" id="serial" name="serial" class="am-modal-prompt-input"
+                                    style="width: 100px;height:30px;display: inline-block;">
                     </div>
                 </div>
                 <div class="am-modal-footer">
@@ -160,12 +162,14 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
-                    <th class="table-set">操作</th>
+                    <security:authorize ifAnyGranted="admin,operational,o_operational">
+                        <th class="table-set">操作</th>
+                    </security:authorize>
                     <th class="table-title">订单号</th>
                     <th class="table-title">订单状态</th>
                     <th class="table-title">产品</th>
                     <th class="table-title">总额/实付金额(元)</th>
-                <%--<th class="table-title">支付类型</th>--%>
+                    <%--<th class="table-title">支付类型</th>--%>
                     <th class="table-title">收货地址</th>
                     <th class="table-title">下单人</th>
                     <th class="table-title">创建日期</th>
@@ -177,15 +181,17 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrder">
                     <tr id="${purchaseOrder.id}">
-                        <td>
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <%--<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
+                        <security:authorize ifAnyGranted="admin,operational,o_operational">
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                            <%--<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
                                             <%--onclick="showConfirm('提示','是否删除',function(){removePurchaseOrder('${purchaseOrder.id}')})"><span--%>
                                             <%--class="am-icon-trash-o">删除</span>--%>
-                                    <%--</button>--%>
+                                            <%--</button>--%>
 
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;" id="send" onclick="updateOrderStatusNew(this,'${purchaseOrder.id}')">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;"
+                                           id="send" onclick="updateOrderStatusNew(this,'${purchaseOrder.id}')">
                             <span class="am-icon-pencil-square-o">
                                 <c:if test="${purchaseOrder.orderStatus==1}">
                                     等待付款
@@ -196,17 +202,32 @@
                                 <c:if test="${purchaseOrder.orderStatus==5}">
                                     立即发货
                                 </c:if>
+                                <c:if test="${purchaseOrder.orderStatus==6}">
+                                    待收礼
+                                </c:if>
                                 <c:if test="${purchaseOrder.orderStatus==9 or purchaseOrder.orderStatus==13 or purchaseOrder.orderStatus==7}">
                                     已发货
+                                </c:if>
+                                <c:if test="${purchaseOrder.orderStatus==15}">
+                                    已退款
                                 </c:if>
                                  <c:if test="${ purchaseOrder.orderStatus==17}">
                                      已取消
                                  </c:if>
                             </span>
-                                    </a>
+                                        </a>
+
+                                        <c:if test="${purchaseOrder.orderStatus==5 || purchaseOrder.orderStatus==6 || purchaseOrder.orderStatus==7 || purchaseOrder.orderStatus==9 || purchaseOrder.orderStatus==13}">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
+                                               style="color: red;" id="refund"
+                                               onclick="refund(this,'${purchaseOrder.id}')">
+                                                <span class="am-icon-pencil-square-o">退款</span>
+                                            </a>
+                                        </c:if>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
+                        </security:authorize>
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=${viewIdentify}&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}
                         </a>
@@ -227,22 +248,26 @@
                             <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseProduct">
                                 <p style="margin-left: 10px;"><a
                                         href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&viewProductModel=${viewProductModel}&id=${purchaseProduct.id}'/>">${purchaseProduct.productModel.product.name}</a>
-                                    <img width="20px" src="http://pro.efeiyi.com/${purchaseProduct.productModel.productModel_url}@!product-model" alt="产品图片">
+                                    <img width="20px"
+                                         src="http://pro.efeiyi.com/${purchaseProduct.productModel.productModel_url}@!product-model"
+                                         alt="产品图片">
                                 </p>
                             </c:forEach>
 
                         </td>
 
-                        <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/> <br>
-                            <fmt:formatNumber type="number" value="${purchaseOrder.getRealPayMoney()}" maxFractionDigits="2" minFractionDigits="2"/></td>
-                        <%--<td class="am-hide-sm-only">--%>
+                        <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrder.total}"
+                                                                      maxFractionDigits="2" minFractionDigits="2"/> <br>
+                            <fmt:formatNumber type="number" value="${purchaseOrder.getRealPayMoney()}"
+                                              maxFractionDigits="2" minFractionDigits="2"/></td>
+                            <%--<td class="am-hide-sm-only">--%>
                             <%--<c:forEach items="${purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">--%>
-                                <%--<span style="margin-left: 10px;">--%>
-                                    <%--<ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"--%>
-                                                    <%--checkedValue="${purchaseOrderPayment.payWay}"--%>
-                                                    <%--type="normal"/>--%>
+                            <%--<span style="margin-left: 10px;">--%>
+                            <%--<ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"--%>
+                            <%--checkedValue="${purchaseOrderPayment.payWay}"--%>
+                            <%--type="normal"/>--%>
                             <%--</c:forEach>--%>
-                        <%--</td>--%>
+                            <%--</td>--%>
                         <td class="am-hide-sm-only">${purchaseOrder.purchaseOrderAddress}</td>
                         <td class="am-hide-sm-only">${purchaseOrder.user.username}</td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both"
@@ -266,25 +291,25 @@
 </div>
 
 <%--<script type="text/javascript">--%>
-    <%--function updateOrderStatus(obj,id){--%>
-        <%--var temp = $(obj).find("span").text().trim()--%>
-        <%--var orderStatus = "5";--%>
-        <%--if(temp=="立即发货"){--%>
-            <%--$.ajax({--%>
-                <%--type:"get",--%>
-                <%--data:{id:id,orderStatus:orderStatus},--%>
-                <%--url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",--%>
-                <%--success:function(data){--%>
-                    <%--$(obj).find("span").text("已发货");--%>
-                <%--}--%>
-            <%--});--%>
-        <%--}else if(temp == "无法发货"){--%>
+<%--function updateOrderStatus(obj,id){--%>
+<%--var temp = $(obj).find("span").text().trim()--%>
+<%--var orderStatus = "5";--%>
+<%--if(temp=="立即发货"){--%>
+<%--$.ajax({--%>
+<%--type:"get",--%>
+<%--data:{id:id,orderStatus:orderStatus},--%>
+<%--url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",--%>
+<%--success:function(data){--%>
+<%--$(obj).find("span").text("已发货");--%>
+<%--}--%>
+<%--});--%>
+<%--}else if(temp == "无法发货"){--%>
 
-            <%--alert("无法发货!")--%>
-        <%--}else{--%>
-            <%--alert("已经发货!")--%>
-        <%--}--%>
-    <%--}--%>
+<%--alert("无法发货!")--%>
+<%--}else{--%>
+<%--alert("已经发货!")--%>
+<%--}--%>
+<%--}--%>
 
 
 <%--</script>--%>

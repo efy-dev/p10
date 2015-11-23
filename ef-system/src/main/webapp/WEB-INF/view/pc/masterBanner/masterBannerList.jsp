@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <%--<div class="am-g">--%>
 <%--<c:forEach items="${objectList}" var="masterBanner" varStatus="banner">--%>
@@ -42,7 +43,9 @@
     <table class="am-table am-table-striped am-table-hover table-main">
         <thead>
         <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
             <th class="table-set">操作</th>
+</security:authorize>
             <th class="table-title">标题</th>
             <th class="table-title">图片</th>
 
@@ -53,6 +56,7 @@
 
         <c:forEach items="${objectList}" var="masterBanner" varStatus="banner">
             <tr id="${masterBanner.id}">
+                <security:authorize ifAnyGranted="admin,operational,c_operational">
                 <td>
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs">
@@ -62,6 +66,7 @@
                         </div>
                     </div>
                 </td>
+                </security:authorize>
                 <td class="am-hide-sm-only">${masterBanner.title}</td>
                 <td class="am-hide-sm-only"><img width="35px;" src="<c:url value="http://tenant.efeiyi.com/${masterBanner.imageUrl}@!tenant-manage-banner"/>" alt=""/></td>
             </tr>

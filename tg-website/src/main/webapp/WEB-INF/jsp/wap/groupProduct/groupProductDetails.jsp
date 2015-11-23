@@ -66,7 +66,7 @@
     <!-- 轮播产品-->
     <!--价格-->
     <div class="cost ae">
-        <div class="txt1"><s>飞蚁价:${groupProduct.productModel.price}元</s></div>
+        <div class="txt1"><s style="font-size: 14px;color: #545454;">飞蚁价:${groupProduct.productModel.price}元</s></div>
         <div class="txt2"><em>拼团价:${groupProduct.groupPrice}元</em><i class="icon"></i></div>
     </div>
     <!--功能-->

@@ -448,19 +448,15 @@ public class MasterMessageController {
 	@ResponseBody
 	@RequestMapping("/mainData/{qm}/{conditions}/{size}/{index}")
 	public List getMainMessage(HttpServletRequest request , @PathVariable String qm , @PathVariable String conditions, @PathVariable String size,@PathVariable String index) throws Exception {
-		//String qm = request.getParameter("qm");
 		if (null == qm || "".equalsIgnoreCase(qm)) {
 			qm = "plistMasterMessage_default";
 		}
 		XQuery query = new XQuery(qm, request);
-//		String conditions = request.getParameter("conditions");
 		if (!"0".equals(conditions)){
 			String[] attr = conditions.split(":");
 			query.put("master_id", attr[1].substring(0,attr[1].length()));
 		}
 		PageEntity pageEntity = new PageEntity();
-//		String pageIndex = request.getParameter("pageEntity.index");
-//		String pageSize = request.getParameter("pageEntity.size");
 		if (index != null) {
 			pageEntity.setIndex(Integer.parseInt(index));
 			pageEntity.setSize(Integer.parseInt(size));
@@ -484,19 +480,20 @@ public class MasterMessageController {
 						message.setFollowStatus("关注");
 					}
 					message.setPraiseStatus("赞");
-//					String sql = "from MasterMessagePraise p where p.user.id=:userId and p.message.id=:msgId and p.status = '1'";
-//					queryMap.clear();
-//					queryMap.put("userId",user.getId());
-//					queryMap.put("msgId",message.getId());
-//					MasterMessagePraise praise = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(sql,queryMap);
-//					if (praise != null){
-//						message.setPraiseStatus("取消赞");
-//					}else {
-//						message.setPraiseStatus("赞");
-//					}
+					String sql = "from MasterMessageStore p where p.user.id=:userId and p.masterMessage.id=:msgId and p.status = '1'";
+					queryMap.clear();
+					queryMap.put("userId",user.getId());
+					queryMap.put("msgId",message.getId());
+					MasterMessageStore store = (MasterMessageStore) baseManager.getUniqueObjectByConditions(sql,queryMap);
+					if (store != null){
+						message.setStoreStatus("已收藏");
+					}else {
+						message.setStoreStatus("收藏");
+					}
 				} else {
 					message.setFollowStatus("关注");
 					message.setPraiseStatus("赞");
+					message.setStoreStatus("收藏");
 				}
 				MasterModel masterModel = ConvertMasterModelUtil.convertMasterModel(message);
 				list.add(masterModel);
@@ -733,13 +730,15 @@ public class MasterMessageController {
 			msgStore.setMasterMessage(message);
 			msgStore.setUser(user);
 			baseManager.saveOrUpdate(MasterMessageStore.class.getName(),msgStore);
+			message.setStoreStatus("已关注");
 //			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() + 1);
-//			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
+			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
 			return "add";
 		}else{
 			baseManager.delete(MasterMessageStore.class.getName(),praise.getId());
 //			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() - 1);
-//			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
+			message.setStoreStatus("关注");
+			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
 			return "del";
 		}
 	}
@@ -919,6 +918,16 @@ public class MasterMessageController {
 				if (list2 != null && list2.size() > 0){
 					for (MasterMessage message : list2){
 						message.setFollowStatus("已关注");
+						String sql = "from MasterMessageStore p where p.user.id=:userId and p.masterMessage.id=:msgId and p.status = '1'";
+						LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
+						queryMap.put("userId",AuthorizationUtil.getMyUser().getId());
+						queryMap.put("msgId",message.getId());
+						MasterMessageStore store = (MasterMessageStore) baseManager.getUniqueObjectByConditions(sql,queryMap);
+						if (store != null){
+							message.setStoreStatus("已收藏");
+						}else {
+							message.setStoreStatus("收藏");
+						}
 						MasterModel masterModel = ConvertMasterModelUtil.convertMasterModel(message);
 						list.add(masterModel);
 					}

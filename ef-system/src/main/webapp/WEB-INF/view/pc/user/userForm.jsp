@@ -42,7 +42,7 @@
                 <select name="role.id" id="roleId" class="selectValidate" >
                     <option>请选择</option>
                     <c:forEach items="${roleList}" var="role" >
-                    <option value="${role.id}">${role.name}</option>
+                    <option value="${role.id}">${role.cname}</option>
                   </c:forEach>
                 </select>
 

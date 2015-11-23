@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -49,7 +50,9 @@
         <label for="frontPhotoUrl" class="am-u-sm-3 am-form-label">*经营者身份证电子版正面</label>
         <fieldset>
           <legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
             <a id="btn_upload0"></a>
+    </security:authorize>
           </legend>
           <div class="am-u-md-13">
             <div class="am-panel am-panel-default">
@@ -79,7 +82,9 @@
         <label for="versoPhotoUrl" class="am-u-sm-3 am-form-label">*经营者身份证电子版反面</label>
         <fieldset>
           <legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
             <a id="btn_upload1"></a>
+    </security:authorize>
           </legend>
 
           <div class="am-u-md-13">
@@ -155,7 +160,9 @@
         <label for="businessLicense" class="am-u-sm-3 am-form-label">*营业执照电子版</label>
         <fieldset>
           <legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
             <a id="btn_upload2"></a>
+    </security:authorize>
           </legend>
           <div class="am-u-md-13">
             <div class="am-panel am-panel-default">
@@ -185,7 +192,9 @@
         <label for="taxRegistrationAttachment" class="am-u-sm-3 am-form-label">*税务登记证电子版</label>
         <fieldset>
           <legend>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
             <a id="btn_upload3"></a>
+    </security:authorize>
           </legend>
 
           <div class="am-u-md-13">
@@ -214,7 +223,9 @@
       </div>
       <div class="am-form-group">
         <div class="am-u-sm-9 am-u-sm-push-3">
+<security:authorize ifAnyGranted="admin,operational,c_operational">
           <button type="submit" class="am-btn am-btn-primary">保存个体信息</button>
+    </security:authorize>
         </div>
       </div>
     </table>

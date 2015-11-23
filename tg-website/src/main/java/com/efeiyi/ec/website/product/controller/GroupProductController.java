@@ -1,9 +1,13 @@
 package com.efeiyi.ec.website.product.controller;
 
 import com.efeiyi.ec.group.model.GroupProduct;
+import com.efeiyi.ec.organization.model.Consumer;
+import com.efeiyi.ec.purchase.model.Coupon;
+import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,11 +32,47 @@ public class GroupProductController {
     @Autowired
     private BaseManager baseManager;
 
+    @Autowired
+    private AutoSerialManager autoSerialManager;
+
     @RequestMapping({"/tuan","/tuan.do"})
     public String listProduct1(HttpServletRequest request, Model model) throws Exception {
      return  "/groupProduct/groupProductList";
     }
 
+
+    @RequestMapping("/sso.do")
+    public String forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String redirect = request.getParameter("callUrl");
+        String registeSuccess = request.getParameter("registeSuccess");
+        String userId = request.getParameter("userId");
+        if (userId != null && !"".equals(userId)) {
+            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
+            XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
+            List<Object> couponBatchList = baseManager.listObject(xQuery);
+            for (Object couponBatchTemp : couponBatchList) {
+                if (((CouponBatch) couponBatchTemp).getCouponList().size() < ((CouponBatch) couponBatchTemp).getAmount()) {
+                    Coupon coupon = new Coupon();
+                    coupon.setStatus("1");
+                    coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
+                    coupon.setCouponBatch((CouponBatch) couponBatchTemp);
+                    Date currentDate = new Date();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+                    String currentDateStr = simpleDateFormat.format(currentDate);
+                    coupon.setUniqueKey(currentDateStr + coupon.getSerial());
+                    coupon.setConsumer(consumer);
+                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                }
+            }
+        }
+        if (redirect != null) {
+            return "redirect:" + redirect;
+        }
+        if (registeSuccess != null) {
+            return "redirect:" + registeSuccess;
+        }
+        return "redirect:/";
+    }
 
     /**
      * 团购产品列表

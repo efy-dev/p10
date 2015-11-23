@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -31,12 +32,13 @@
     </script>
 </head>
 <body>
+<security:authorize ifAnyGranted="admin,operational,c_operational">
         <div style="text-align: left;margin-bottom: 10px">
             <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=formEnterpriseTenant"/>"><span class="am-icon-plus"></span>新建企业商家</a>
             <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=formPrivateTenant"/>"><span class="am-icon-plus"></span>新建个体商家</a>
             <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=formPersonalTenant"/>"><span class="am-icon-plus"></span>新建个人商家</a>
         </div>
-
+</security:authorize>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">
     <div class="am-g">
@@ -57,6 +59,7 @@
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
+                                    <security:authorize ifAnyGranted="admin,operational,c_operational">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
                                        href="<c:url value="/basic/xm.do?qm=formTenant&id=${tenant.id}"/>"><span
                                             class="am-icon-pencil-square-o"></span> 编辑
@@ -65,6 +68,7 @@
                                        onclick="showConfirm('提示','是否删除',function(){removeTenant('${tenant.id}')})" href="#"><span
                                             class="am-icon-trash-o"></span>删除
                                     </a>
+                                    </security:authorize>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                     href="<c:url value="/basic/xm.do?qm=plistTENANTProduct_default&view=tenant&conditions=tenant.id:${tenant.id}&tenantId=${tenant.id}"/>"><span
                                             class="am-icon-trash-o"></span> 查看商品列表
@@ -92,6 +96,7 @@
                                             <span class="am-icon-heart">完善信息</span>
                                         </a>
                                     </c:if>
+                                    <security:authorize ifAnyGranted="admin,operational,c_operational">
                                     <c:if test="${empty tenant.tenantRecommendedList}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                            onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"
@@ -114,6 +119,7 @@
                                                 <input type="text" name="sort" style="width: 35px;" value="" />
                                                 <a class=" am-btn-primary" onclick="saveRecommended(this,'tenantRecommended',1,'<c:url value="/Recommended/saveObjectRecommended.do" />')" style="padding: 0px 10px 5px 10px" > 保存</a>
                                        </span>
+                                    </security:authorize>
                                 </div>
                             </div>
                         </td>

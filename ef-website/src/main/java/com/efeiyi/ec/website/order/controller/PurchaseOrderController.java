@@ -1,5 +1,8 @@
 package com.efeiyi.ec.website.order.controller;
 
+import com.aliyun.openservices.oss.OSSClient;
+import com.aliyun.openservices.oss.model.ObjectMetadata;
+import com.aliyun.openservices.oss.model.PutObjectResult;
 import com.efeiyi.ec.group.model.GroupProduct;
 import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.product.model.Product;
@@ -15,6 +18,10 @@ import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
 import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -28,15 +35,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.google.zxing.WriterException;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -61,6 +75,70 @@ public class PurchaseOrderController extends BaseController {
 
 
 
+
+
+
+
+    @RequestMapping("/giftBuy/showNameStatus.do")
+    @ResponseBody
+    public boolean changeShowGiftNameStatus(HttpServletRequest request) {
+        try {
+            String purchaseOrderId = request.getParameter("purchaseOrderId");
+            String status = request.getParameter("nameStatus");
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
+            purchaseOrderGift.setShowGiftNameStatus(status);
+            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @RequestMapping({"giftBuy/updateImg.do"})
+    @ResponseBody
+    public boolean updateImg(HttpServletRequest request) {
+        try {
+            String imageUrl = request.getParameter("imageUrl");
+            String purchaseOrderId = request.getParameter("purchaseOrderId");
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
+            purchaseOrderGift.setGiftPictureUrl(imageUrl);
+            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    @RequestMapping("/giftBuy/showPriceStatus.do")
+    @ResponseBody
+    public boolean changeShowGiftPriceStatus(HttpServletRequest request) {
+        try {
+            String purchaseOrderId = request.getParameter("purchaseOrderId");
+            String status = request.getParameter("priceStatus");
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
+            purchaseOrderGift.setShowGiftPriceStatus(status);
+            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @RequestMapping("/giftBuy/saveOrUpdateGiftMessage.do")
+    @ResponseBody
+    public String saveOrUpdateGiftMessage(HttpServletRequest request) {
+        try {
+            String purchaseOrderId = request.getParameter("purchaseOrderId");
+            String message = request.getParameter("giftMessage");
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
+            purchaseOrderGift.setGiftMessage(message);
+            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+            return message;
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     @RequestMapping({"/giftBuy/{productId}/{amount}"})
     public String giftBuy(HttpServletRequest request, @PathVariable String productId, Model model, @PathVariable String amount) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productId);
@@ -71,16 +149,17 @@ public class PurchaseOrderController extends BaseController {
         cartProduct.setStatus("1");
         List<CartProduct> cartProductList = new ArrayList<>();
         cartProductList.add(cartProduct);
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrderGift", request);
         xSaveOrUpdate.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
         xSaveOrUpdate.getParamMap().put("user.id", AuthorizationUtil.getMyUser().getId());
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdate);
-        purchaseOrder.setTenant(productModel.getProduct().getTenant());
-        purchaseOrder.setTotal(productModel.getPrice().multiply(new BigDecimal(Integer.parseInt(amount))));
-        purchaseOrder.setOriginalPrice(productModel.getPrice().multiply(new BigDecimal(Integer.parseInt(amount))));
-        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.saveOrUpdate(xSaveOrUpdate);
+        purchaseOrderGift.setTenant(productModel.getProduct().getTenant());
+        purchaseOrderGift.setTotal(productModel.getPrice().multiply(new BigDecimal(Integer.parseInt(amount))));
+        purchaseOrderGift.setOriginalPrice(productModel.getPrice().multiply(new BigDecimal(Integer.parseInt(amount))));
+        purchaseOrderGift.setOrderType("3");
+        baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
-        purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
+        purchaseOrderProduct.setPurchaseOrder(purchaseOrderGift);
         purchaseOrderProduct.setProductModel(productModel);
         purchaseOrderProduct.setPurchasePrice(productModel.getPrice().multiply(new BigDecimal(Integer.parseInt(amount))));
         purchaseOrderProduct.setPurchaseAmount(cartProduct.getAmount());
@@ -89,11 +168,12 @@ public class PurchaseOrderController extends BaseController {
         xQuery.addRequestParamToModel(model, request);
         List addressList = baseManager.listObject(xQuery);
         model.addAttribute("addressList", addressList);
-        model.addAttribute("purchaseOrder", purchaseOrder);
+        model.addAttribute("purchaseOrder", purchaseOrderGift);
         model.addAttribute("productModel", productModel);
+        model.addAttribute("purchaseOrderProduct", purchaseOrderProduct);
         model.addAttribute("amount", amount);
 
-        return "/purchaseOrder/purchaseOrderConfirm";
+        return "/purchaseOrder/purchaseOrderGiftConfirm";
     }
 
 
@@ -137,8 +217,8 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrder.setOriginalPrice(cart.getTotalPrice());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         //拼写回调路径purchaseOrderId,groupProductId,memberId,groupId
-        callback += "?purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId + "&memberId=" + (request.getParameter("memberId") != null ? request.getParameter("memberId") : "null") + "&groupId=" + (request.getParameter("groupId") != null ? request.getParameter("groupId") : "null");
-        purchaseOrder.setCallback(callback);
+        String callbackTemp = callback+"?purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId + "&memberId=" + (request.getParameter("memberId") != null ? request.getParameter("memberId") : "null") + "&groupId=" + (request.getParameter("groupId") != null ? request.getParameter("groupId") : "null");
+        purchaseOrder.setCallback(callbackTemp);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
@@ -228,7 +308,7 @@ public class PurchaseOrderController extends BaseController {
      */
     @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
-        Cart cart = cartManager.copyCart((Cart) request.getSession().getAttribute("cart"),cartManager.getCurrentCart(request));
+        Cart cart = cartManager.copyCart((Cart) request.getSession().getAttribute("cart"), cartManager.getCurrentCart(request));
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cart, model);
         //收货地址
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
@@ -265,14 +345,19 @@ public class PurchaseOrderController extends BaseController {
         String message = request.getParameter("message");
         //买家留言
         HashMap<String, String> messageMap = new HashMap<>();
-        for (String messageTemp : message.split(";")) {
-            if (messageTemp != null && !messageTemp.equals("")) {
-                if (messageTemp.split(":").length >= 2)
-                    messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
+        if (message != null) {
+            for (String messageTemp : message.split(";")) {
+                if (messageTemp != null && !messageTemp.equals("")) {
+                    if (messageTemp.split(":").length >= 2)
+                        messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
+                }
             }
         }
         //订单收货地址//初始化订单状态
-        ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
+        ConsumerAddress consumerAddress = null;
+        if (addressId != null) {
+            consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
+        }
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder = purchaseOrderManager.confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payment);
         //生成支付记录以及支付详情

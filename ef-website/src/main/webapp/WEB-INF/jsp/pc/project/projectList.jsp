@@ -91,6 +91,11 @@
     <!-- //ENd-->
 </div>
 <!--//ENd--classify-->
-
+<script type="text/javascript">
+    $().ready(function(){;
+        $(".allsort").show()
+        $(".cate").removeAttr("id");
+    })
+</script>
 </body>
 </html>

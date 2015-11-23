@@ -21,7 +21,7 @@
 </div>
 <footer class="bd footer-new">
     <div class="bd authentication">
-        <h3>独家合作伙伴</h3>
+        <h3>战略合作伙伴</h3>
         <div class="bd">
             <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织"></a>
             <em class="line"></em>
@@ -57,7 +57,7 @@
 <![endif]-->
 <script src="<c:url value="/resources/assets/js/amazeui.min.js"/>"></script>
 <!--自定义js--Start-->
-<script src="<c:url value="/scripts/wap/js/system.js?v=929"/>"></script>
+<script src="<c:url value="/scripts/wap/js/system.js?v=20151120"/>"></script>
 <!--自定义js--End-->
 
 <div style="display: none">
