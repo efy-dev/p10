@@ -26,6 +26,7 @@ public class PurchaseOrder {
     public static final String ORDER_STATUS_POSTED = "7";  //已发货
     public static final String ORDER_STATUS_UNCOMMENT = "9"; //未评价
     public static final String ORDER_STATUS_FINISHED = "13"; //已完成
+    public static final String ORDER_STATUS_REFUND = "15"; //已退款
     public static final String ORDER_STATUS_CONSEL = "17"; //已取消
 
     private String id;
