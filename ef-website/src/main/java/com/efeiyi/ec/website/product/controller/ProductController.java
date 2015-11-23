@@ -4,6 +4,8 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.purchase.model.Cart;
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -217,7 +219,15 @@ public class ProductController {
         try{
             purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
             if(purchaseOrderProductList!=null&&purchaseOrderProductList.size()>0){
-                Collections.reverse(purchaseOrderProductList);
+                for(int i=0;i<purchaseOrderProductList.size();i++){
+                    PurchaseOrder purchaseOrder = ((PurchaseOrderProduct)purchaseOrderProductList.get(i)).getPurchaseOrder();
+                    if(purchaseOrder.getId()==null){
+                        purchaseOrderProductList.remove(i);
+                    }
+                }
+                if(purchaseOrderProductList!=null&&purchaseOrderProductList.size()>0){
+                    Collections.reverse(purchaseOrderProductList);
+                }
             }
         }catch (Exception e){
             purchaseOrderProductList = null;
