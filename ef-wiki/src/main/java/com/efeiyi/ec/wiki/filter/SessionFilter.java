@@ -35,7 +35,7 @@ public class SessionFilter extends OncePerRequestFilter
             throws ServletException, IOException
     {
 
-        boolean doFilter = true;
+        boolean doFilter = isAjaxRequest(request);
 
         if (doFilter)
         {       response.setHeader("Access-Control-Allow-Origin", "*");
