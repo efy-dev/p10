@@ -23,7 +23,7 @@ public class PurchaseOrderPayment {
     private List<PurchaseOrderPaymentDetails> purchaseOrderPaymentDetailsList;
     private User user;
     private String serial;//支付记录编号
-    private String status;//1待支付  2已支付 3 支付失败~
+    private String status;//1待支付  2已支付 3 支付失败~  4 已退款
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
