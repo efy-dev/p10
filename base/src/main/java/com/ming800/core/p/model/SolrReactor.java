@@ -26,10 +26,10 @@ public class SolrReactor {
         try {
             int count = Integer.parseInt(commonManager.getSearchParam("efeiyi").getSolrClientCount());
             for (int x = 0; x < count; x++) {
-                new Thread(new SearchClient(commonManager.getSearchParam("efeiyi").getSolrServerCoreUrl())).start();
+                new Thread(new SearchClient("efeiyi")).start();
             }
         }catch (Exception e){
-            System.err.println("solrReactor启动失败了！！！！！�?");
+            System.err.println("solrReactor init failed!!!!!!!!!!!!!!!");
             e.printStackTrace();
         }
 
@@ -41,12 +41,6 @@ public class SolrReactor {
                 if (solrReactor == null) {
                     solrReactor = new SolrReactor();
                 }
-            }
-            try {
-                //�?索客户端首次启动时，可能在休眠之前poll�?索request，故休眠若干毫秒，保证检索客户端都休眠后，再offer�?索request
-                Thread.sleep(1000);
-            }catch (Exception e){
-                e.printStackTrace();
             }
         }
 

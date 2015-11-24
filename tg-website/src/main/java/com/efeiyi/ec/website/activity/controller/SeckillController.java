@@ -112,6 +112,8 @@ public class SeckillController {
             if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
                 //秒杀正在进行中
                 status = "2";
+                //再这里减秒杀库存
+                seckillProduct.setAmount(seckillProduct.getAmount()-Integer.parseInt(amount));
                 return "redirect:http://www.efeiyi.com/order/miaoBuy/" + productId + "/" + amount;
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
                 //秒杀已经结束

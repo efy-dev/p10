@@ -37,6 +37,7 @@ public class Tenant implements Serializable {
     private List<TenantRecommended> tenantRecommendedList;
     private  String pictureUrl;
     private  String address;//商户地址
+    private  String phone;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -161,5 +162,14 @@ public class Tenant implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Column(name = "phone")
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

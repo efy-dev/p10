@@ -124,13 +124,7 @@
                                 <th class="am-text-center" width="15%">价格(元)</th>
                                 <th class="am-text-center" width="15%">市场价格(元)</th>
                             </tr>
-                            <c:set var="iscontain" value="false" />
-                            <c:forEach var="item" items="${object.productModelList}">
-                                <c:if test="${item.status == '3'}">
-                                    <c:set var="iscontain" value="true" />
-                                </c:if>
-                            </c:forEach>
-                            <c:if test="${iscontain == 'false' }">
+                            <c:if test="${empty object.productModelList}">
                                 <tr flag="default">
                                     <td align="center">
                                         <input type="hidden" name="defaultId" value=""/>
@@ -336,7 +330,12 @@
     //提交
     function toSubmit(result) {
         $("input[name='resultPage']").val(result);
-        $("form").submit();
+        if($("#productModel tr[flag='default']").length==1){
+            $("form").submit();
+        }else{
+            alert("保存失败!");
+        }
+
     }
     /****属性 生成商品模型***/
     function projectPropertyClick(obj) {

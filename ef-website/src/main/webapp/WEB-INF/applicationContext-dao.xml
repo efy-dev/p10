@@ -45,4 +45,6 @@
     <bean id="userManager" class="com.efeiyi.ec.website.organization.service.impl.UserManagerImpl">
         <property name="userDao" ref="userDao"/>
     </bean>
+
+    <bean id="commonManager" class="com.ming800.core.p.service.impl.CommonManagerImpl" />
 </beans>

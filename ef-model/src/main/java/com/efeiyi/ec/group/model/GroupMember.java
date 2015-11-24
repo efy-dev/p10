@@ -13,16 +13,16 @@ import java.util.List;
  * Created by Administrator on 2015/10/20.
  */
 @Entity
-@Table(name = "member")
-public class Member implements Serializable {
+@Table(name = "activity_member")
+public class GroupMember implements Serializable {
 
     private String id;
     private MyUser user;//用户
     private String level;//
-    private Member supMember;
-    private List<Member> subMemberList;
+    private GroupMember supGroupMember;
+    private List<GroupMember> subGroupMemberList;
     private String status;//0:取消 1进行中 3：组团成功 5：组团失败
-    private Group group;
+    private MyGroup myGroup;
     private BigDecimal redPacket;
 
 
@@ -58,22 +58,22 @@ public class Member implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sup_member_id")
-    public Member getSupMember() {
-        return supMember;
+    public GroupMember getSupGroupMember() {
+        return supGroupMember;
     }
 
-    public void setSupMember(Member supMember) {
-        this.supMember = supMember;
+    public void setSupGroupMember(GroupMember supGroupMember) {
+        this.supGroupMember = supGroupMember;
     }
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "supMember")
-    public List<Member> getSubMemberList() {
-        return subMemberList;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "supGroupMember")
+    public List<GroupMember> getSubGroupMemberList() {
+        return subGroupMemberList;
     }
 
-    public void setSubMemberList(List<Member> subMemberList) {
-        this.subMemberList = subMemberList;
+    public void setSubGroupMemberList(List<GroupMember> subGroupMemberList) {
+        this.subGroupMemberList = subGroupMemberList;
     }
 
     @Column(name = "status")
@@ -87,12 +87,12 @@ public class Member implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
-    public Group getGroup() {
-        return group;
+    public MyGroup getMyGroup() {
+        return myGroup;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setMyGroup(MyGroup myGroup) {
+        this.myGroup = myGroup;
     }
 
     @Column(name = "red_packet")

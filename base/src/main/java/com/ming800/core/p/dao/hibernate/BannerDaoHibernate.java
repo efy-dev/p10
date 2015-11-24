@@ -37,7 +37,7 @@ public class BannerDaoHibernate  implements BannerDao {
     public  List getBannerList(String groupName){
 
         Session session = this.getSession();
-        Query query = session.createQuery("SELECT d FROM Banner d WHERE d.group = :group and d.status = '1'  order by d.id ")
+        Query query = session.createQuery("SELECT d FROM Banner d WHERE d.group = :group and d.status = '1'  order by d.bannerOrder desc ")
                 .setString("group", groupName);
         return query.list();
 

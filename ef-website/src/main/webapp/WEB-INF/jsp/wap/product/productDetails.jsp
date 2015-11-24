@@ -285,7 +285,7 @@
 
     function giftBuy(){
         var t = document.getElementById("value").value;
-        window.location.href = "<c:url value="/order/giftBuy/${productModel.od}/"/>"+t;
+        window.location.href = "<c:url value="/order/giftBuy/${productModel.id}/"/>"+t;
     }
 
     function immediateBuy(o){

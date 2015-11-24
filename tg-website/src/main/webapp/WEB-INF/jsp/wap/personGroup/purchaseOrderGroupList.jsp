@@ -54,15 +54,15 @@
       <c:if test="${not empty purchaseOrderGroupList&&fn:length(purchaseOrderGroupList)>0}">
       <ul class="product ae">
         <c:forEach items="${purchaseOrderGroupList}" var="purchaseOrderGroup">
-          <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup.group.groupProduct.id}&groupId=${purchaseOrderGroup.group.id}&memberId=${purchaseOrderGroup.member.id}">
+          <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup.myGroup.groupProduct.id}&groupId=${purchaseOrderGroup.myGroup.id}&memberId=${purchaseOrderGroup.groupMember.id}">
             <li>
               <div class="top">
                 <span>${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}[${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}]</span>
                 <i class=" pq"></i>
-                <c:if test="${purchaseOrderGroup.group.status==1}">
+                <c:if test="${purchaseOrderGroup.myGroup.status==1}">
                   <span>组团中</span>
                 </c:if>
-                <c:if test="${purchaseOrderGroup.group.status==3}">
+                <c:if test="${purchaseOrderGroup.myGroup.status==3}">
                   <c:if test="${purchaseOrderGroup.purchaseOrder.orderStatus==1}">
                     <span>组团成功-等待付款</span>
                   </c:if>
@@ -76,7 +76,7 @@
                     <span>组团成功-已完成</span>
                   </c:if>
                 </c:if>
-                <c:if test="${purchaseOrderGroup.group.status==5}">
+                <c:if test="${purchaseOrderGroup.myGroup.status==5}">
                   <c:if test="${purchaseOrderGroup.purchaseOrder.orderStatus==5}">
                     <span>组团失败-等待付款</span>
                   </c:if>
@@ -86,13 +86,13 @@
                 </c:if>
               </div>
               <div class="center ae">
-                <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup.group.groupProduct.id}"/>" ><img src="http://pro.efeiyi.com/${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
+                <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup.myGroup.groupProduct.id}"/>" ><img src="http://pro.efeiyi.com/${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
                 <div class="txt ae"><p>交易金额：${purchaseOrderGroup.purchaseOrder.total}元</p>
-                  <c:if test="${purchaseOrderGroup.group.status==1||purchaseOrderGroup.group.status==5}">
+                  <c:if test="${purchaseOrderGroup.myGroup.status==1||purchaseOrderGroup.myGroup.status==5}">
                     <p>返回红包：0元</p>
                   </c:if>
-                  <c:if test="${purchaseOrderGroup.group.status==3}">
-                    <p>返回红包：${purchaseOrderGroup.member.redPacket}元</p>
+                  <c:if test="${purchaseOrderGroup.myGroup.status==3}">
+                    <p>返回红包：${purchaseOrderGroup.groupMember.redPacket}元</p>
                   </c:if>
                 </div>
               </div>
@@ -132,7 +132,7 @@
       <c:if test="${not empty purchaseOrderGroupList5&&fn:length(purchaseOrderGroupList5)>0}">
       <ul class="product ae">
           <c:forEach items="${purchaseOrderGroupList5}" var="purchaseOrderGroup5">
-            <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup5.group.groupProduct.id}&groupId=${purchaseOrderGroup5.group.id}&memberId=${purchaseOrderGroup5.member.id}">
+            <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup5.myGroup.groupProduct.id}&groupId=${purchaseOrderGroup5.myGroup.id}&memberId=${purchaseOrderGroup5.groupMember.id}">
               <li>
                 <div class="top">
                   <span>${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}[${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}]</span>
@@ -140,21 +140,21 @@
                   <span>待发货</span>
                 </div>
                 <div class="center ae">
-                  <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup5.group.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
+                  <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup5.myGroup.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
                   <div class="txt ae"><p>交易金额：${purchaseOrderGroup5.purchaseOrder.total}元</p>
-                    <c:if test="${purchaseOrderGroup5.group.status==1||purchaseOrderGroup5.group.status==5}">
+                    <c:if test="${purchaseOrderGroup5.myGroup.status==1||purchaseOrderGroup5.myGroup.status==5}">
                       <p>返回红包：0元</p>
                     </c:if>
-                    <c:if test="${purchaseOrderGroup5.group.status==3}">
-                      <p>返回红包：${purchaseOrderGroup5.member.redPacket}元</p>
+                    <c:if test="${purchaseOrderGroup5.myGroup.status==3}">
+                      <p>返回红包：${purchaseOrderGroup5.groupMember.redPacket}元</p>
                     </c:if>
                   </div>
                 </div>
                 <div class="bottom ae">
-                  <c:if test="${purchaseOrderGroup5.member.level==0}">
+                  <c:if test="${purchaseOrderGroup5.groupMember.level==0}">
                     <div class="left">身份:团长</div>
                   </c:if>
-                  <c:if test="${purchaseOrderGroup5.member.level!=0}">
+                  <c:if test="${purchaseOrderGroup5.groupMember.level!=0}">
                     <div class="left">身份:团员</div>
                   </c:if>
                 </div>
@@ -180,7 +180,7 @@
       <c:if test="${not empty purchaseOrderGroupList7&&fn:length(purchaseOrderGroupList7)>0}">
       <ul class="product ae">
         <c:forEach items="${purchaseOrderGroupList7}" var="purchaseOrderGroup7">
-          <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup7.group.groupProduct.id}&groupId=${purchaseOrderGroup7.group.id}&memberId=${purchaseOrderGroup7.member.id}">
+          <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup7.myGroup.groupProduct.id}&groupId=${purchaseOrderGroup7.myGroup.id}&memberId=${purchaseOrderGroup7.groupMember.id}">
             <li>
               <div class="top">
                 <span>${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}[${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}]</span>
@@ -188,21 +188,21 @@
                 <span>待收货</span>
               </div>
               <div class="center ae">
-                <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup7.group.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
+                <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup7.myGroup.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
                 <div class="txt ae"><p>交易金额：${purchaseOrderGroup7.purchaseOrder.total}元</p>
-                  <c:if test="${purchaseOrderGroup7.group.status==1||purchaseOrderGroup7.group.status==5}">
+                  <c:if test="${purchaseOrderGroup7.myGroup.status==1||purchaseOrderGroup7.myGroup.status==5}">
                     <p>返回红包：0元</p>
                   </c:if>
-                  <c:if test="${purchaseOrderGroup7.group.status==3}">
-                    <p>返回红包：${purchaseOrderGroup7.member.redPacket}元</p>
+                  <c:if test="${purchaseOrderGroup7.myGroup.status==3}">
+                    <p>返回红包：${purchaseOrderGroup7.groupMember.redPacket}元</p>
                   </c:if>
                 </div>
               </div>
               <div class="bottom ae">
-                <c:if test="${purchaseOrderGroup7.member.level==0}">
+                <c:if test="${purchaseOrderGroup7.groupMember.level==0}">
                   <div class="left">身份:团长</div>
                 </c:if>
-                <c:if test="${purchaseOrderGroup7.member.level!=0}">
+                <c:if test="${purchaseOrderGroup7.groupMember.level!=0}">
                   <div class="left">身份:团员</div>
                 </c:if>
                   <%--<ul class="right">--%>
@@ -234,7 +234,7 @@
       <c:if test="${not empty purchaseOrderGroupList9&&fn:length(purchaseOrderGroupList9)>0}">
       <ul class="product ae">
         <c:forEach items="${purchaseOrderGroupList9}" var="purchaseOrderGroup9">
-          <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup9.group.groupProduct.id}&groupId=${purchaseOrderGroup9.group.id}&memberId=${purchaseOrderGroup9.member.id}">
+          <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup9.myGroup.groupProduct.id}&groupId=${purchaseOrderGroup9.myGroup.id}&memberId=${purchaseOrderGroup9.groupMember.id}">
             <li>
               <div class="top">
                 <span>${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}[${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}]</span>
@@ -242,21 +242,21 @@
                 <span>交易成功</span>
               </div>
               <div class="center ae">
-                <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup9.group.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
+                <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup9.myGroup.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
                 <div class="txt ae"><p>交易金额：${purchaseOrderGroup9.purchaseOrder.total}元</p>
-                  <c:if test="${purchaseOrderGroup9.group.status==1||purchaseOrderGroup9.group.status==5}">
+                  <c:if test="${purchaseOrderGroup9.myGroup.status==1||purchaseOrderGroup9.myGroup.status==5}">
                     <p>返回红包：0元</p>
                   </c:if>
-                  <c:if test="${purchaseOrderGroup9.group.status==3}">
-                    <p>返回红包：${purchaseOrderGroup9.member.redPacket}元</p>
+                  <c:if test="${purchaseOrderGroup9.myGroup.status==3}">
+                    <p>返回红包：${purchaseOrderGroup9.groupMember.redPacket}元</p>
                   </c:if>
                 </div>
               </div>
               <div class="bottom ae">
-                <c:if test="${purchaseOrderGroup9.member.level==0}">
+                <c:if test="${purchaseOrderGroup9.groupMember.level==0}">
                   <div class="left">身份:团长</div>
                 </c:if>
-                <c:if test="${purchaseOrderGroup9.member.level!=0}">
+                <c:if test="${purchaseOrderGroup9.groupMember.level!=0}">
                   <div class="left">身份:团员</div>
                 </c:if>
                   <%--<ul class="right">--%>
