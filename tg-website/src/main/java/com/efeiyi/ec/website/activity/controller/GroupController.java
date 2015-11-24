@@ -110,12 +110,13 @@ public class GroupController {
     //购买、建团
     @RequestMapping(value = "/createGroup")
     public String createGroup(HttpServletRequest request, Model model) throws Exception {
-        MyUser currentUser = AuthorizationUtil.getMyUser();
+//        MyUser currentUser = AuthorizationUtil.getMyUser();
         String purchaseOrderId = request.getParameter("purchaseOrderId");
         String groupProductId = request.getParameter("groupProductId");
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+        MyUser currentUser = purchaseOrder.getUser();
 
 //        String orderStatus = "0";
 //        if (purchaseOrder != null && purchaseOrder.getOrderStatus() != null && purchaseOrder.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRECEIVE)) {
