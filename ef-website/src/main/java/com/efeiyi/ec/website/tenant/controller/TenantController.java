@@ -76,12 +76,31 @@ public class TenantController {
         XQuery xQuery1 = new XQuery("listTenantMaster_default",request);
         xQuery1.put("tenant_id",tenantId);
         xQuery.put("product_tenant_id",tenantId);
-        List list = baseManager.listObject(xQuery);
+        List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
+        Map<ProductModel,String> map = new HashMap<>();
+        if(productModelList!=null&&productModelList.size()>0){
+            for(ProductModel productModelTemp:productModelList){
+                StringBuilder s = new StringBuilder(productModelTemp.getProduct().getName());
+                if(productModelTemp.getProduct().getProductModelList().size()==1){
+                    map.put(productModelTemp,s.toString());
+                }else{
+                    s.append("[").append(productModelTemp.getName());
+                    if(s.toString().length()>14){
+                        s = new StringBuilder(s.substring(0,14));
+                        s.append("...").append("]");
+                    }else{
+                        s.append("]");
+                    }
+                    map.put(productModelTemp,s.toString());
+                }
+            }
+        }
         List list1 = baseManager.listObject(xQuery1);
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        model.addAttribute("productModelList", list);
+        model.addAttribute("productModelList", productModelList);
         model.addAttribute("tenant",tenant);
         model.addAttribute("tenantMasterList",list1);
+        model.addAttribute("map",map);
         return "/tenant/productList";
     }
 
