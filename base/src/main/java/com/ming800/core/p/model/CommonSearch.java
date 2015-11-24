@@ -15,7 +15,11 @@ public class CommonSearch implements Serializable {
     private String defType;//权重类型
     private String qf;//权重分配算式
     private String solrClientCount;//启动的SolrClient数
-    private String solrServerCoreUrl;//Solr服务端地址
+    private String solrServerCoreUrl;//Solr核心名
+    private String solrServerHost;//solr服务主机地址
+    private String port;//端口
+    private String username;//solr访问验证用户名
+    private String password;//solr访问验证密码
 
     public Integer getRows() {
         return rows;
@@ -95,5 +99,37 @@ public class CommonSearch implements Serializable {
 
     public void setSolrServerCoreUrl(String solrServerCoreUrl) {
         this.solrServerCoreUrl = solrServerCoreUrl;
+    }
+
+    public String getSolrServerHost() {
+        return solrServerHost;
+    }
+
+    public void setSolrServerHost(String solrServerHost) {
+        this.solrServerHost = solrServerHost;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
     }
 }

@@ -80,6 +80,10 @@ public class CommonManagerImpl implements CommonManager {
                     String qf = node.selectSingleNode("@qf").getText();
                     String solrClientCount = node.selectSingleNode("@solrClientCount").getText();
                     String solrServerCoreUrl = node.selectSingleNode("@solrServerCoreUrl").getText();
+                    String solrServerHost = node.selectSingleNode("@solrServerHost").getText();
+                    String username = node.selectSingleNode("@username").getText();
+                    String password = node.selectSingleNode("@password").getText();
+                    String port = node.selectSingleNode("@port").getText();
 
                     CommonSearch commonSearch = new CommonSearch();
                     commonSearch.setRows(Integer.parseInt(rows));
@@ -92,6 +96,10 @@ public class CommonManagerImpl implements CommonManager {
                     commonSearch.setQf(qf);
                     commonSearch.setSolrClientCount(solrClientCount);
                     commonSearch.setSolrServerCoreUrl(solrServerCoreUrl);
+                    commonSearch.setSolrServerHost(solrServerHost);
+                    commonSearch.setUsername(username);
+                    commonSearch.setPassword(password);
+                    commonSearch.setPort(port);
                     searchParamMap.put(group,commonSearch);
                 }
             }
