@@ -64,6 +64,13 @@
                 </div>
             </div>
             <div class="am-form-group">
+                <label for="phone" class="am-u-sm-3 am-form-label">商家联系方式</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="phone" name="phone" placeholder="商家联系方式" value="${object.phone}" required>
+                </div>
+            </div>
+            <div class="am-form-group">
                 <label for="logo" class="am-u-sm-3 am-form-label">Logo</label>
 
                 <div class="am-u-sm-9">

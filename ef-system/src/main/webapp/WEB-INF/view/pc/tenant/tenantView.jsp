@@ -32,6 +32,13 @@
                         个人
                     </c:if>
                 </td>
+
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">商家联系方式</td>
+                <td class="am-u-md-3">${object.phone}</td>
+                <td class="am-primary am-u-md-3"></td>
+                <td class="am-u-md-3" colspan="3"></td>
             </tr>
             </tbody>
         </table>
