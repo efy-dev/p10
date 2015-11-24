@@ -47,7 +47,7 @@
                 <p>${member.myGroup.groupProduct.productModel.product.name}[${member.myGroup.groupProduct.productModel.name}]</p>
                 <p>${member.myGroup.createDateTime}</p>
                 <c:if test="${member.myGroup.status=='1'}">
-                    <p>${member.myGroup.memberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
+                    <p>${member.myGroup.groupMemberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
                 </c:if>
                 <c:if test="${member.myGroup.status=='3'}">
                     <p>组团成功</p>
@@ -55,7 +55,7 @@
                 <c:if test="${member.myGroup.status=='5'}">
                     <p>组团失败</p>
                 </c:if>
-                <c:forEach items="${member.myGroup.memberList}" var="memberTemp" varStatus="rec">
+                <c:forEach items="${member.myGroup.groupMemberList}" var="memberTemp" varStatus="rec">
                     <c:if test="${memberTemp.level==0}">
                         <c:set var="user">
                             ${memberTemp.user.getUsername()}
