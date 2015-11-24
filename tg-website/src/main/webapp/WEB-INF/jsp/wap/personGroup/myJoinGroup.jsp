@@ -42,20 +42,20 @@
 <!--//End--header-->
 <ul class="offered ae">
     <c:forEach items="${groupJoinList}" var="member" varStatus="rec">
-        <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${member.group.groupProduct.id}&groupId=${member.group.id}&memberId=${member.id}">
+        <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
             <li>
-                <p>${member.group.groupProduct.productModel.product.name}[${member.group.groupProduct.productModel.name}]</p>
-                <p>${member.group.createDateTime}</p>
-                <c:if test="${member.group.status=='1'}">
-                    <p>${member.group.memberList.size()}人/${member.group.groupProduct.memberAmount}人成团</p>
+                <p>${member.myGroup.groupProduct.productModel.product.name}[${member.myGroup.groupProduct.productModel.name}]</p>
+                <p>${member.myGroup.createDateTime}</p>
+                <c:if test="${member.myGroup.status=='1'}">
+                    <p>${member.myGroup.memberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
                 </c:if>
-                <c:if test="${member.group.status=='3'}">
+                <c:if test="${member.myGroup.status=='3'}">
                     <p>组团成功</p>
                 </c:if>
-                <c:if test="${member.group.status=='5'}">
+                <c:if test="${member.myGroup.status=='5'}">
                     <p>组团失败</p>
                 </c:if>
-                <c:forEach items="${member.group.memberList}" var="memberTemp" varStatus="rec">
+                <c:forEach items="${member.myGroup.memberList}" var="memberTemp" varStatus="rec">
                     <c:if test="${memberTemp.level==0}">
                         <c:set var="user">
                             ${memberTemp.user.getUsername()}
@@ -63,12 +63,12 @@
                     </c:if>
                 </c:forEach>
                 <p>团长:${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
-                <c:if test="${member.group.status=='1'}">
+                <c:if test="${member.myGroup.status=='1'}">
                <span>
                 进行中
                </span>
                 </c:if>
-                <c:if test="${member.group.status!='1'}">
+                <c:if test="${member.myGroup.status!='1'}">
                <span>
                 拼团结束
                </span>
