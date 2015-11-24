@@ -1072,7 +1072,7 @@ public class MasterMessageController {
 		MasterWorkPraise praise = (MasterWorkPraise) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
 		if (praise != null){
 			baseManager.delete(MasterWorkPraise.class.getName(),praise.getId());
-			work.setAmount(work.getAmount()==null?0:work.getAmount() -1);
+			work.setFsAmount(work.getFsAmount() == null ? 0 : work.getFsAmount() -1);
 			baseManager.saveOrUpdate(MasterWork.class.getName(),work);
 			return "del";
 		}else{
@@ -1082,7 +1082,7 @@ public class MasterMessageController {
 			workPraise.setCreateDateTime(new Date());
 			workPraise.setStatus("1");
 			baseManager.saveOrUpdate(MasterWorkPraise.class.getName(),workPraise);
-			work.setAmount(work.getAmount()==null?1:work.getAmount()+1);
+			work.setFsAmount(work.getFsAmount()==null?1:work.getFsAmount()+1);
 			baseManager.saveOrUpdate(MasterWork.class.getName(),work);
 			return "add";
 		}

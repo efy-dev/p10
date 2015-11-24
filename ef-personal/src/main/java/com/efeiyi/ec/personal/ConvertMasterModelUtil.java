@@ -81,7 +81,7 @@ public class ConvertMasterModelUtil {
 		workModel.setContent(work.getProductDescription().getContent()==null?"":work.getProductDescription().getContent());
 		workModel.setId(work.getId());
 		workModel.setCreateDateTime(work.getCreateDateTime());
-		workModel.setPraiseNum(Long.valueOf(String.valueOf(work.getAmount()==null?0:work.getAmount())));
+		workModel.setPraiseNum(Long.valueOf(String.valueOf(work.getFsAmount()==null?0:work.getFsAmount())));
 		workModel.setFavicon(work.getPictureUrl()==null?"":work.getPictureUrl());
 		workModel.setAmount(work.getAmount()==null?0:work.getAmount());
 		workModel.setStoreAmount(work.getStoreAmount()==null?0:work.getStoreAmount());

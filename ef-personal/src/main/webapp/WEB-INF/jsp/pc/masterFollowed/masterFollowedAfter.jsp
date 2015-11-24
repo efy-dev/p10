@@ -55,14 +55,14 @@
         <ul class="gy-grounp ae" id="newInsert">
 
         </ul>
-        <div class="f-r-gd ae"><a onclick="moreMaster();"><span>更多大师</span><i class="sp-icon"></i></a></div>
+        <div class="f-r-gd ae"><a href="<c:url value='/masterMessage/classify'/>"><span>更多大师</span><i class="sp-icon"></i></a></div>
       </div>
       <div class="f-right-gy ae">
         <div class="h4"><span>热门大师</span></div>
         <ul class="gy-grounp ae" id="hotMaster">
 
         </ul>
-        <div class="f-r-gd ae"><a onclick="moreHotMaster();"><span>更多大师</span><i class="sp-icon"></i></a></div>
+        <div class="f-r-gd ae"><a href="<c:url value='/masterMessage/classify'/>"><span>更多大师</span><i class="sp-icon"></i></a></div>
       </div>
     </div>
   </div>
