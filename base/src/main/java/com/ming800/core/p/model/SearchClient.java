@@ -3,6 +3,9 @@ package com.ming800.core.p.model;
 import com.ming800.core.p.service.CommonManager;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.ApplicationContextUtil;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.FacetField;
@@ -19,8 +22,18 @@ public class SearchClient implements Runnable {
     public HttpSolrClient solrClient;
     private CommonManager commonManager = (CommonManager) ApplicationContextUtil.getApplicationContext().getBean("commonManager");
 
-    public SearchClient(String solrServerCoreUrl){
-        solrClient = new HttpSolrClient(solrServerCoreUrl);
+    public SearchClient(String group){
+        CommonSearch commonSearch = null;
+        try {
+            commonSearch = commonManager.getSearchParam(group);
+        }catch (Exception e){
+            System.err.println("solr commonSearch exception!!!!!!!!!!");
+        }
+        solrClient = new HttpSolrClient(commonSearch.getSolrServerCoreUrl());
+        DefaultHttpClient httpClient = (DefaultHttpClient) solrClient.getHttpClient();
+          httpClient.getCredentialsProvider().setCredentials(
+                      new AuthScope(commonSearch.getSolrServerHost(), Integer.parseInt(commonSearch.getPort())),
+              new UsernamePasswordCredentials(commonSearch.getUsername(), commonSearch.getPassword()));
     }
 
     public void run() {
