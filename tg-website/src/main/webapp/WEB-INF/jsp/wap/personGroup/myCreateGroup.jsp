@@ -46,7 +46,7 @@
             <p> ${member.myGroup.groupProduct.productModel.product.name} ${member.myGroup.groupProduct.productModel.name}</p>
             <p>${member.myGroup.createDateTime}</p>
             <c:if test="${member.myGroup.status==1}">
-                <p>${member.myGroup.memberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
+                <p>${member.myGroup.groupMemberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
                 <span>进行中</span>
             </c:if>
             <c:if test="${member.myGroup.status==3}">

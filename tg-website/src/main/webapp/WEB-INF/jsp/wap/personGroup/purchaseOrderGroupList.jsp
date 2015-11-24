@@ -97,10 +97,10 @@
                 </div>
               </div>
               <div class="bottom ae">
-                <c:if test="${purchaseOrderGroup.member.level==0}">
+                <c:if test="${purchaseOrderGroup.groupMember.level==0}">
                   <div class="left">身份:团长</div>
                 </c:if>
-                <c:if test="${purchaseOrderGroup.member.level!=0}">
+                <c:if test="${purchaseOrderGroup.groupMember.level!=0}">
                   <div class="left">身份:团员</div>
                 </c:if>
                 <ul class="right">
