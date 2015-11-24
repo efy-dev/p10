@@ -42,18 +42,18 @@
 <ul class="offered ae">
     <c:forEach items="${myCreateProductList}" var="member" varStatus="rec">
     <li>
-        <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${member.group.groupProduct.id}&groupId=${member.group.id}&memberId=${member.id}">
-            <p> ${member.group.groupProduct.productModel.product.name} ${member.group.groupProduct.productModel.name}</p>
-            <p>${member.group.createDateTime}</p>
-            <c:if test="${member.group.status==1}">
-                <p>${member.group.memberList.size()}人/${member.group.groupProduct.memberAmount}人成团</p>
+        <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
+            <p> ${member.myGroup.groupProduct.productModel.product.name} ${member.myGroup.groupProduct.productModel.name}</p>
+            <p>${member.myGroup.createDateTime}</p>
+            <c:if test="${member.myGroup.status==1}">
+                <p>${member.myGroup.memberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
                 <span>进行中</span>
             </c:if>
-            <c:if test="${member.group.status==3}">
+            <c:if test="${member.myGroup.status==3}">
                 <p>组团成功</p>
                 <span>拼团结束</span>
             </c:if>
-            <c:if test="${member.group.status==5}">
+            <c:if test="${member.myGroup.status==5}">
                 <p>组团失败</p>
                 <span>拼团结束</span>
             </c:if>
