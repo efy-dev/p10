@@ -102,6 +102,13 @@
                     <input type="text" id="address" name="address" placeholder="商家地址" value="${object.address}" required>
                 </div>
             </div>
+            <div class="am-form-group">
+                <label for="phone" class="am-u-sm-3 am-form-label">商家联系方式</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="phone" name="phone" placeholder="商家地址" value="${object.phone}" required>
+                </div>
+            </div>
             <%--<div class="am-form-group">--%>
                 <%--<label for="user-intro" class="am-u-sm-3 am-form-label">短简介</label>--%>
 
