@@ -32,6 +32,16 @@ public class WxPayConfig {
     //本例程通过curl使用HTTP POST方法，此处可修改其超时时间，默认为30秒
     public static final int CURL_TIMEOUT = 30;
 
+//
+//    {
+//        "access_token":"ACCESS_TOKEN",
+//            "expires_in":7200,
+//            "refresh_token":"REFRESH_TOKEN",
+//            "openid":"OPENID",
+//            "scope":"SCOPE",
+//            "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL"
+//    }
+
 
 
 }
