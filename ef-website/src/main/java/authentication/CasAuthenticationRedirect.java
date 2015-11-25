@@ -40,17 +40,6 @@ public class CasAuthenticationRedirect extends org.springframework.security.cas.
                 }
 
             }
-            //出发登陆的时候去取得uuid
-            if (HttpUtil.isWeixin(request) && unionid == null) {
-                try {
-                    String callback = URLEncoder.encode(serviceUrl, "utf-8");
-                    String dataKey = "unionid";
-                    request.getServletContext().getRequestDispatcher("/wx/getInfo.do?callback=" + callback + "&dataKey=" + dataKey).forward(request, response);
-                    return null;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
             getServiceProperties().setService(serviceUrlBak + serviceUrl);
         }
 
