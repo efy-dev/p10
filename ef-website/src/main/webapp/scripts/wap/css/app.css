@@ -1,4 +1,4 @@
-body, h1, h2, h3, h4, h5, h6, ul, li, dl, dt, dd, img, input, a, p, strong, em, i {margin:0;padding:0;font-family:Microsoft YaHei}
+body, h1, h2, h3, h4, h5, h6, ul, li, dl, dt, dd, img, input, a, p, strong, em, i {margin:0;padding:0;font-family: NotoSansSChinese, Microsoft YaHei,AkkuratProRegular,Helvetica Neue, Helvetica, Arial, sans-serif;}
 strong, b, em {font-weight:normal;font-style:normal}
 img {border:0}
 ul, dl {list-style:none}
@@ -454,10 +454,7 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 /*--//End--*/
 
 /**
- *
- * ҳ�棺��Ʒ����
- * ģ�飺����ͼƬ-->����-->�ֲ�ͼ
- * ʱ�䣺2015-11-12
+ *2015-11-12
  *
 **/
 .swiper {width:100%;height:100%;position:fixed;top:0;left:0;/*z-index:102;*/ opacity:0;z-index:-1;background:#191919}
@@ -480,98 +477,9 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .swiper .icon-close:after {transform:rotate(45deg)}
 .swiper .icon-close:before {transform:rotate(-45deg)}
 /*--//End--*/
-.seckill .time {text-align:center;padding:1.5rem 0;height:114px;position:relative}
-.seckill .time h1 {font-size:15px;font-weight:bolder}
-.seckill .time .des {position:absolute;top:52px;left:50%;margin-left:-85px;background:#fff}
-.seckill .time .des .items {width:51px;height:38px;line-height:38px;float:left;border:4px solid #ccc;font-size:30px;font-weight:bolder;box-sizing:content-box;margin:0;padding:0}
-.seckill .time .des .items:nth-child(2) {border-left:0;border-right:0}
-.seckill .time2 {line-height:84px}
-.seckill .price-buy {height:73px;padding:13px 0 13px 19px;border-bottom:1px solid #000}
-.seckill .price-buy .price {float:left;color:#f00}
-.seckill .price-buy .price p {width:100%;float:left}
-.seckill .price-buy .price .t1 {height:26px}
-.seckill .price-buy .price .t1 em {font-size:15px;float:left;margin-top:3px}
-.seckill .price-buy .price .t1 del {font-size:15px;color:#999;float:left;margin-top:4px;margin-left:20px}
-.seckill .price-buy .price .t1 strong {line-height:26px;font-size:24px;float:left}
-.seckill .price-buy .price .t2 {height:20px;font-size:12px;color:#999;font-weight:bolder}
-.seckill .price-buy .btn-buy a {width:93px;line-height:46px;float:right;background:#000;color:#fff;text-align:center;font-size:12px;font-weight:bolder}
-.seckill .t-title {text-align:center;padding:16px 0;border-bottom:1px solid #000}
-.seckill .t-title h3 {font-size:15px;font-weight:bolder}
-.seckill .t-title h4 {font-size:12px;font-weight:bolder}
-.seckill .s-list {padding:0 18px;border-bottom:1px solid #000}
-.seckill .s-list .items {width:100%;float:left;margin-top:16px;position:relative;border-bottom:1px solid #ccc}
-.seckill .s-list .items img {width:123px;position:absolute;top:0;left:0}
-.seckill .s-list .items .info {width:100%;padding-left:139px;float:left;font-size:10px}
-.seckill .s-list .items .info p {width:100%;float:left}
-.seckill .s-list .items .info p span {font-size:10px;-webkit-transform:scale(0.875)}
-.seckill .s-list .items .info .t1 {height:19px;font-size:12px;font-weight:bolder;overflow:hidden}
-.seckill .s-list .items .info .t2 {height:19px;overflow:hidden}
-.seckill .s-list .items .info .t3 {height:38px;overflow:hidden}
-.seckill .s-list .items .info .t4 {color:#f00}
-.seckill .s-list .items .info .t4 strong {font-size:18px}
-.seckill .s-list .items .info .t4 del {margin-left:14px;color:#999}
-.seckill .s-list .items .divbtm {width:100%;height:28px;line-height:28px;float:left;margin:7px 0}
-.seckill .s-list .items .divbtm span {font-size:12px;font-weight:bolder;float:left;color:#999}
-.seckill .s-list .items .divbtm a {width:133px;height:24px;line-height:26px;float:right;color:#000;text-align:center;border:2px solid #000;font-size:12px;box-sizing:content-box;font-weight:bolder}
-.seckill .p-list {padding:0 18px}
-.seckill .p-list h3 {width:100%;float:left;margin:16px 0;font-size:15px;text-align:center}
-.seckill .p-list .ul-list li {width:48%;margin-bottom:16px;font-size:14px;float:left}
-.seckill .p-list .ul-list li:nth-child(2n) {float:right}
-.seckill .p-list .ul-list li img {width:100%}
-.seckill .p-list .ul-list li p {width:100%;float:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.seckill .p-list .ul-list li .t1 {font-size:10px;/*-webkit-transform:scale(0.875);*/}
-.seckill .p-list .ul-list li .t2 {font-size:9px;/*-webkit-transform:scale(0.875);*/}
-.seckill .p-list .ul-list li .t2 em {font-size:12px;color:#f00}
-.seckill .p-list .ul-list li .t2 del {font-size:9px;color:#999;margin-right:18px}
-.seckill .p-list .ul-list li .t2 strong {font-size:18px;color:#f00}
-.seckill .p-list .ul-list li .t3 {font-size:10px;color:#999;font-weight:bolder;/*-webkit-transform:scale(0.875);*/}
-.seckill .p-list .ul-list li .t4 {width:100%;float:left;border:2px solid #ccc;height:28px;line-height:26px;text-align:center;font-size:10px;color:#999;margin-top:10px;font-weight:bolder}
-.details .des-price-seckill {padding:0 20px;font-size:14px;position:relative}
-.details .des-price-seckill p {font-size:12px;margin-bottom:5px;padding-left:50px;position:relative}
-.details .des-price-seckill p span {position:absolute;top:0;left:0}
-.details .des-price-seckill p.t0 {margin-bottom:8px}
-.details .des-price-seckill p.t0 span {top:3px}
-.details .des-price-seckill p.t0 em {color:#f00;font-size:10px}
-.details .des-price-seckill p.t0 strong {color:#f00;font-size:15px}
-.details .des-price-seckill p.t1 {margin-top:10px;margin-bottom:6px}
-.details .des-price-seckill p.t2 {margin-bottom:11px}
-.details .des-price-seckill p.t3 {padding-left:0}
-.details .des-price-seckill p.t4 {padding-left:0;font-size:14px;font-weight: bolder;color:#000}
-.details .des-price-seckill .seckill-time {font-size: 14px;font-weight: bolder;padding-left: 0;}
-.details .des-price-seckill .seckill-time p.p2{font-size: 24px;margin-top: 12px}
-.details .des-price-seckill div.time {
-    height: 120px;
-    border: 1px solid #ccc;
-    text-align: center;
-    padding: 17px 0;
-    position: relative;}
-.details .des-price-seckill div.time h1 {
-    font-size: 15px;
-    margin-bottom: 16px;}
-.details .des-price-seckill div.time .des {position:absolute;top:50px;left:50%;margin-left:-85px;background:#fff}
-.details .des-price-seckill div.time .des .items {width:51px;height:38px;line-height:38px;float:left;border:4px solid #ccc;font-size:30px;font-weight:bolder;box-sizing:content-box;margin:0;padding:0}
-.details .des-price-seckill div.time .des .items:nth-child(2) {border-left:0;border-right:0}
-
-
-.details .des-price-seckill p.tnum {height:65px;padding-left:0}
-.details .des-price-seckill p.tnum strong {width:100%;float:left;margin-bottom:12px}
-.details .des-price-seckill p.tnum em {width:35px;height:25px;line-height:25px;text-align:center;border:1px solid #000;float:left;position:relative;cursor:pointer}
-.details .des-price-seckill p.tnum em:after {content:'';width:9px;height:1px;background:#000;position:absolute;top:50%;left:50%;margin-left:-4px}
-.details .des-price-seckill p.tnum em.sub {border-right:0}
-.details .des-price-seckill p.tnum em.sub-no:after {background:#ccc}
-.details .des-price-seckill p.tnum em.add {border-left:0}
-.details .des-price-seckill p.tnum em.add:before {content:'';width:1px;height:9px;background:#000;position:absolute;top:50%;left:50%;margin-top:-4px}
-.details .des-price-seckill p.tnum .txt {border:1px solid #000;width:45px;height:25px;line-height:25px;text-align:center;float:left}
-.details .des-price-seckill .btn-bg, .details .des-price-seckill .btn-bg-no {height:44px;line-height:44px;font-size:15px;font-weight:bolder;border-top:2px solid #000;border-bottom:2px solid #000;text-align:center;position:fixed;bottom:0;left:0;z-index:9;background:#fff}
-.details .des-price-seckill .btn-bg a {display:block;color:#000}
-.details .des-price-seckill .btn-bg-no {border-top:2px solid #ccc;border-bottom:2px solid #ccc;color:#999}
-
-.seckill-bor {width:100%;height:1px;float: left;background:#000;margin-bottom: 11px;margin-top:16px}
-.des-content-seckill {padding-bottom:50px}
-/*--//End--*/
 /*
  *Project:second phase
- *Page:B60205����ɸѡ
+ *Page:B60205
  *
 */
 .h-search {position:absolute;right:1.2rem;top:50%;margin-top:-1.1rem}
@@ -628,7 +536,7 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 }
 .footer-new .authentication a.icon1 {background-position: 0 0;height: 88px}
 .footer-new .authentication a.icon2 {background-position: 0 -88px;height: 26px;top:-30px}
-.footer-new .authentication a.icon3 {background-position: 0 -115px;height:98px;top:10px;}
+.footer-new .authentication a.icon3 {background-position: 0 -114px;height:98px;top:10px;}
 .footer-new .authentication .line {
     width: 2px;
     height:27px;
@@ -638,3 +546,170 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
     top:-30px;
     background: #ccc;
 }
+/*--//End--秒杀--*/
+.seckill .des-price {padding:15px 20px;border-bottom: 1px solid #000;margin-bottom: 11px;}
+.seckill .s {width:100%;font-size:12px;margin-bottom:8px;padding-left:50px;position:relative;float:left}
+.seckill .s span {position:absolute;top:0;left:0}
+.seckill .s1 {color:#999}
+.seckill .s2 span {top:3px}
+.seckill .s2 em {color:#f00;font-size:10px}
+.seckill .s2 strong {color:#f00;font-size:15px}
+.seckill .s3{height:104px;border:1px solid#e5e5e5;text-align:center;padding-left:0;font-size:15px;font-weight:bolder;margin-bottom:12px;}
+.seckill .s3 .status1 {line-height:104px;}
+.seckill .s3 .status1 strong{font-size:70px;vertical-align:middle;margin:0 30px;font-weight: bolder;}
+.seckill .s3 .status2 {margin: 29px 0}
+.seckill .s3 .status2 p {line-height:24px}
+.seckill .s3 .status3 {
+    padding-top:15px;}
+.seckill .s3 .status3 p {width:100%;float: left}
+.seckill .s3 .status3 p:last-child {
+    position: absolute;
+    top:45px;
+    left: 50%;
+    margin-left:-83px;
+}
+.seckill .s3 .status3 strong {
+    width: 55px;
+    line-height: 20px;
+    padding:8px 0;
+    text-align: center;
+    float: left;
+    border: 4px solid #ccc;
+    font-size: 30px;
+    font-weight: bolder;
+}
+.seckill .s3 .status3 strong:nth-child(2){border-left:0;border-right: 0;}
+.seckill .s4 {padding-left:0;}
+.seckill .s4 .tabs {border: 1px solid #e5e5e5;margin-top:10px;position: relative;}
+.seckill .s4 .tabs p {
+    width:50%;
+    line-height: 28px;
+    text-align: center;
+    float: left;
+}
+.seckill .s4 .tabs:after{
+    content: '';
+    width:1px;
+    height: 20px;background: #e5e5e5;position: absolute;top:4px;left: 50%;}
+.seckill .s4 .info ul {overflow: hidden;}
+.seckill .s4 .info li {line-height:28px;border-bottom: 1px solid #e5e5e5;text-align: center}
+.seckill .s4 .info li p {width: 50%;float: left;color: #999}
+.seckill .s4 .info div.more {text-align: center;line-height:28px;color:#000;border-bottom: 1px solid #e5e5e5;}
+.seckill .s4 .info div.more a {color:#000;display: block;}
+.seckill .s4 .info div.more .zk:after,
+.seckill .s4 .info div.more .sq:after{
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-left: 1px solid #000;
+    border-top: 1px solid #000;
+    display: inline-block;
+    margin-left:8px;
+    position: relative;
+}
+.seckill .s4 .info div.more .zk:after {-webkit-transform: rotate(-135deg);transform: rotate(-135deg);top:-2px;}
+.seckill .s4 .info div.more .sq:after {-webkit-transform: rotate(45deg);transform: rotate(45deg);top:2px;}
+.seckill .s5 {padding-left:65px;}
+.seckill .s6 {margin-bottom: 0;padding-left:65px;}
+.seckill-share {text-align: center;}
+.seckill-share p {
+    font-size: 12px;
+    font-weight: bolder;}
+.seckill-share .icon-s {
+    margin-top: 17px;
+    margin-bottom: 20px;}
+.seckill-share .icon-s:after {
+    content: '';
+    background:url(../images/seckill-share.png) no-repeat 0 0;
+    background-size:67px auto;
+    width: 67px;
+    height: 67px;
+    display: inline-block;
+}
+.seckill-share .info .btn-share {
+    width: 142px;
+    height: 30px;
+    line-height: 30px;
+    background: #000;
+    color: #fff;
+    display: inline-block;
+    margin-top:20px;
+    margin-bottom: 38px;
+}
+.seckill-share .fotchat p {
+    font-size: 10px;}
+.seckill-share .fotchat img {
+    width:180px;
+    display: inline-block;
+    margin:20px 0;}
+.seckill-share .btns a {
+    width: 50%;
+    line-height: 42px;
+    text-align: center;
+    float: left;
+    font-size: 12px;
+    font-weight: bolder;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    color: #000;
+}
+.seckill-share .btns a:first-child {
+    background: #000;
+    color: #fff;
+}
+
+
+.seckill .seckill-pro {border-top: 1px solid #000;border-bottom: 1px solid #000;margin-bottom: 16px;}
+.seckill .seckill-pro:first-child {border-top: 0;}
+.seckill .seckill-pro .start h1 {line-height:46px;font-size: 15px;text-align: center;}
+.seckill .seckill-pro .bigimg {position: relative;}
+.seckill .seckill-pro .bigimg img {width:100%;}
+.seckill .seckill-pro .bigimg .mask {
+    width: 100%;
+    line-height: 30px;
+    padding: 0 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,.2);
+    color: #fff;
+    font-size: 12px;
+}
+.seckill .seckill-pro .bigbuy {padding:13px 20px;font-size:12px;
+    position: relative;}
+.seckill .seckill-pro .bigbuy p {font-size:12px;}
+.seckill .seckill-pro .bigbuy .p1 {color:#666;margin-top: 10px;}
+.seckill .seckill-pro .bigbuy .p2 {color: #f00;}
+.seckill .seckill-pro .bigbuy .p2 span {color:#000}
+.seckill .seckill-pro .bigbuy .p2 strong{font-size:18px;}
+.seckill .seckill-pro .bigbuy a.btn-buy {width:93px;line-height:42px;background:#000;color:#fff;text-align:center;font-size:12px;font-weight:bolder;
+    position: absolute;
+    bottom:13px;
+    right:20px;}
+
+
+
+
+.seckill .p-list {padding:0 18px;
+    border-top: 1px solid #000;}
+.seckill .p-list h3 {width:100%;float:left;margin:16px 0;font-size:15px;text-align:center}
+.seckill .p-list .ul-list li {width:48%;margin-bottom:16px;font-size:14px;float:left}
+.seckill .p-list .ul-list li:nth-child(2n) {float:right}
+.seckill .p-list .ul-list li img {width:100%}
+.seckill .p-list .ul-list li p {width:100%;float:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.seckill .p-list .ul-list li .t1 {font-size:10px;/*-webkit-transform:scale(0.875);*/}
+.seckill .p-list .ul-list li .t2 {font-size:9px;/*-webkit-transform:scale(0.875);*/}
+.seckill .p-list .ul-list li .t2 em {font-size:12px;color:#f00}
+.seckill .p-list .ul-list li .t2 del {font-size:9px;color:#999;margin-right:18px}
+.seckill .p-list .ul-list li .t2 strong {font-size:18px;color:#f00}
+.seckill .p-list .ul-list li .t3 {font-size:10px;color:#999;font-weight:bolder;/*-webkit-transform:scale(0.875);*/}
+.seckill .p-list .ul-list li .t4 {width:100%;float:left;border:2px solid #ccc;height:28px;line-height:26px;text-align:center;font-size:10px;color:#999;margin-top:10px;font-weight:bolder}
+/*--//End--*/
+
+
+
+
+
+.seckill .btn-bg, .seckill .btn-bg-no {height:44px;line-height:44px;font-size:15px;font-weight:bolder;border-top:2px solid #000;border-bottom:2px solid #000;text-align:center;position:fixed;bottom:0;left:0;z-index:9;background:#fff}
+.seckill .btn-bg a {display:block;color:#000}
+.seckill .btn-bg-no {border-top:2px solid #ccc;border-bottom:2px solid #ccc;color:#999}
