@@ -13,15 +13,22 @@ import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AutoSerialManager;
 import net.sf.json.JSONObject;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -102,7 +109,7 @@ public class PurchaseOrderController extends BaseController {
                         }
                         timer.cancel();//停止定时器
                     }
-                }, 7 * 24 * 60 * 60 * 1000);
+                },7 * 24 * 60 * 60 * 1000);
 
             } else {
                 PurchaseOrder fPurchaseOrder = purchaseOrder.getFatherPurchaseOrder();
@@ -246,8 +253,7 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
         purchaseOrderPayment.setCreateDateTime(new Date());
 
-        baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(),purchaseOrderPayment);
-
+        baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
 
 
     }
@@ -257,6 +263,7 @@ public class PurchaseOrderController extends BaseController {
     public void autoReceive(HttpServletRequest request) {
         String innerPurchaseOrderId = request.getParameter("innerPurchaseOrderId");
         String type = request.getParameter("purchaseOrderType");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         if ("1".equals(type)) {//如果传进来的是父订单
             PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), innerPurchaseOrderId);
             String orderStatus = purchaseOrderTemp.getOrderStatus();
@@ -275,6 +282,8 @@ public class PurchaseOrderController extends BaseController {
                     }
                 }
             }
+            this.smsCheckManager.send(purchaseOrderTemp.getUser().getUsername(), "#deliverydate#=" + sdf.format(new Date()), "1125609", PConst.TIANYI);
+
         } else if ("2".equals(type)) {//如果传进来的是子订单
             System.out.print("子订单");
             PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), innerPurchaseOrderId);
@@ -303,6 +312,8 @@ public class PurchaseOrderController extends BaseController {
                         }
                     }
                 }
+
+                this.smsCheckManager.send(purchaseOrderTemp.getUser().getUsername(), "#deliverydate#=" + sdf.format(new Date()), "1125609", PConst.TIANYI);
             }
         }
     }
@@ -336,6 +347,26 @@ public class PurchaseOrderController extends BaseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+
+    @RequestMapping("/downloadOrders.do")
+    @ResponseBody
+    public  ResponseEntity<byte[]> downloadOrders() throws Exception {
+        String[] homes ={"订单号","支付方式","订单总价","订单状态","订单原价","收货人地址","收货人姓名","收货人联系方式","下单时间","商品名称","商品编号","下单人","优惠券","优惠券编号","优惠券名称","优惠价格","优惠条件","店铺"};
+
+        String path = this.getClass().getResource("/").getPath().toString() + "com/efeiyi/ec/system/download";
+
+        String fileName = purchaseOrderManager.outExcel(path,homes);
+
+        File downloadFile = new File(path+"//"+fileName);
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", new String(fileName.getBytes("UTF-8"),"iso-8859-1"));
+        byte[] bytes = FileUtils.readFileToByteArray(downloadFile);
+        return new ResponseEntity<byte[]>(bytes,headers, HttpStatus.OK);
 
     }
 

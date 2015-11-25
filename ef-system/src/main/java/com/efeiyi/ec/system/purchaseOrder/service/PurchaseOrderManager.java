@@ -1,6 +1,7 @@
 package com.efeiyi.ec.system.purchaseOrder.service;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import jxl.write.WriteException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,5 +18,7 @@ public interface PurchaseOrderManager {
     String updateOrderStatus(PurchaseOrder purchaseOrder,String serial,String logisticsCompany);
 
     String updateOrderStatus(PurchaseOrder purchaseOrder);
+
+    String outExcel(String path,String[] homes) throws WriteException;
 
 }
