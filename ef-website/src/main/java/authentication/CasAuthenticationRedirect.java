@@ -38,7 +38,6 @@ public class CasAuthenticationRedirect extends org.springframework.security.cas.
                 if (StringUtils.isNotBlank(queryString)) {
                     serviceUrl += "?" + queryString;
                 }
-
             }
             getServiceProperties().setService(serviceUrlBak + serviceUrl);
         }

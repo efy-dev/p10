@@ -285,7 +285,7 @@ public class SigninController extends BaseController {
     @RequestMapping({"/wx/userInfo"})
     public String wxPay(HttpServletRequest request) throws Exception {
         String dataKey = "unionid";
-        String callback = "/wx/bind";
+        String callback = request.getServerName()+request.getServerPort()+"/wx/bind";
         callback = URLEncoder.encode(callback,"UTF-8");
         String redirect = "/wx/getInfo.do?callback="+callback+"&dataKey="+dataKey;
         return "redirect:" + redirect;
