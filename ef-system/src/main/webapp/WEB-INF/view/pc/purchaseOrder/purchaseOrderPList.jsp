@@ -141,6 +141,11 @@
 <div class="admin-content" style="height: auto">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
+            <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
+               style="color: red;" id="downloadOrder"
+               href='<c:url value="/purchaseOrder/downloadOrders.do"></c:url>'>
+                <span class="am-icon-pencil-square-o">下载订单</span>
+            </a>
         </div>
 
         <%--点击立即发货的时候弹出的模态对话框--%>

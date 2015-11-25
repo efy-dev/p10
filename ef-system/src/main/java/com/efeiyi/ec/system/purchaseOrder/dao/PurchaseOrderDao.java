@@ -4,6 +4,8 @@ package com.efeiyi.ec.system.purchaseOrder.dao;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: ming
@@ -14,6 +16,7 @@ import com.efeiyi.ec.purchase.model.PurchaseOrder;
 public interface PurchaseOrderDao {
 
     String updateOrderStatus(PurchaseOrder purchaseOrder);
+    public List getResult();
 
 
 }
