@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -108,7 +109,7 @@ public class PurchaseOrderController extends BaseController {
                         }
                         timer.cancel();//停止定时器
                     }
-                }, 7 * 24 * 60 * 60 * 1000);
+                },7 * 24 * 60 * 60 * 1000);
 
             } else {
                 PurchaseOrder fPurchaseOrder = purchaseOrder.getFatherPurchaseOrder();
@@ -262,6 +263,7 @@ public class PurchaseOrderController extends BaseController {
     public void autoReceive(HttpServletRequest request) {
         String innerPurchaseOrderId = request.getParameter("innerPurchaseOrderId");
         String type = request.getParameter("purchaseOrderType");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         if ("1".equals(type)) {//如果传进来的是父订单
             PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), innerPurchaseOrderId);
             String orderStatus = purchaseOrderTemp.getOrderStatus();
@@ -280,6 +282,8 @@ public class PurchaseOrderController extends BaseController {
                     }
                 }
             }
+            this.smsCheckManager.send(purchaseOrderTemp.getUser().getUsername(), "#deliverydate#=" + sdf.format(new Date()), "1125609", PConst.TIANYI);
+
         } else if ("2".equals(type)) {//如果传进来的是子订单
             System.out.print("子订单");
             PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), innerPurchaseOrderId);
@@ -308,6 +312,8 @@ public class PurchaseOrderController extends BaseController {
                         }
                     }
                 }
+
+                this.smsCheckManager.send(purchaseOrderTemp.getUser().getUsername(), "#deliverydate#=" + sdf.format(new Date()), "1125609", PConst.TIANYI);
             }
         }
     }
