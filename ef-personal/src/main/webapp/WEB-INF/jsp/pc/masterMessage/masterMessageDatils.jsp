@@ -285,66 +285,72 @@
   }
   function subOtherComment(o,msgId,parent,flag){
       var content = $(o).parent().prev().val();
-      $.ajax({
-          type: "post",//设置get请求方式
-          url: "<c:url value='/masterMessage/commentMsg.do'/>",//设置请求的脚本地址
-          data: "content=" + content + "&fatherId=" + parent + "&workId=" + msgId,//设置请求的数据
-          async: true,
-          dataType: "json",//设置请求返回的数据格式
-          success: function (data) {
-              if (data == "noRole") {
-                  alert("您还没有登录,请登录后操作!");
-              }else {
-                  var cTime = transdate(data.createDateTime);
-                  var userName = data.user.username.substring(0, 3) + "****" + data.user.username.substring(7, 11);
-                  var src;
-                  var amount;
-                  if (data.favicon != null) {
-                      src = "http://tenant.efeiyi.com/"+data[i].favicon+"@!master-favicon-view";
-                  } else {
-                      src = "<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>";
+      if(content != null && content != "" && content.length > 0){
+          $.ajax({
+              type: "post",//设置get请求方式
+              url: "<c:url value='/masterMessage/commentMsg.do'/>",//设置请求的脚本地址
+              data: "content=" + content + "&fatherId=" + parent + "&workId=" + msgId,//设置请求的数据
+              async: true,
+              dataType: "json",//设置请求返回的数据格式
+              success: function (data) {
+                  if (data == "noRole") {
+                      alert("您还没有登录,请登录后操作!");
+                  }else {
+                      var cTime = transdate(data.createDateTime);
+                      var userName = data.user.username.substring(0, 3) + "****" + data.user.username.substring(7, 11);
+                      var src;
+                      var amount;
+                      if (data.favicon != null) {
+                          src = "http://tenant.efeiyi.com/"+data[i].favicon+"@!master-favicon-view";
+                      } else {
+                          src = "<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>";
+                      }
+                      if(data.amount == null){
+                          amount = 0;
+                      }else{
+                          amount = data.amount;
+                      }
+                      var childNode = "<li style=\"margin: 0;border-bottom: 0;\" id=\""+data.id+"\" class=\"obtain\">"+
+                              "           <div class=\"ae\">"+
+                              "               <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\""+src+"\"></a></div>"+
+                              "               <div class=\"text\"><span><a href=\"#\">"+userName+" 回复 "+name+"：</a></span><span>"+data.content+"</span></div>"+
+                              "               <div class=\"status ae\">"+
+                              "                   <div class=\"status-left\"><span>"+cTime+"</span></div>"+
+                              "                   <div class=\"status-right\">"+
+                              "                   <div class=\"ef\"><a onclick=\"getHfProduct2(this);\">回复</a></div>"+
+                              "                       <div class=\"zan\">"+
+                              "                        <a onclick=\"praiseWorkComment(this,'"+data.id+"','"+msgId+"');\"><i class=\"icon\"></i> <em>"+amount+"</em></a>"+
+                              "                       </div>"+
+                              "                   </div>"+
+                              "               </div>"+
+                              "               <div class=\"review-sr ae\" style=\"display: none;\">"+
+                              "                   <textarea></textarea>"+
+                              "                   <div class=\"btn1 ae\">"+
+                              "                       <input type=\"button\" onclick=\"subOtherComment(this,'"+msgId+"','"+data.id+"',false);\" class=\"btn\" value=\"评论\">"+
+                              "                    </div>"+
+                              "               </div>"+
+                              "           </div>"+
+                              "        </li>";
+                      if(flag == true){
+                          $("#"+parent).append(childNode);
+                      }else{
+                          $("#"+parent).after(childNode);
+                      }
                   }
-                  if(data.amount == null){
-                      amount = 0;
-                  }else{
-                      amount = data.amount;
-                  }
-                  var childNode = "<li style=\"margin: 0;border-bottom: 0;\" id=\""+data.id+"\" class=\"obtain\">"+
-                          "           <div class=\"ae\">"+
-                          "               <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\""+src+"\"></a></div>"+
-                          "               <div class=\"text\"><span><a href=\"#\">"+userName+" 回复 "+name+"：</a></span><span>"+data.content+"</span></div>"+
-                          "               <div class=\"status ae\">"+
-                          "                   <div class=\"status-left\"><span>"+cTime+"</span></div>"+
-                          "                   <div class=\"status-right\">"+
-                          "                   <div class=\"ef\"><a onclick=\"getHfProduct2(this);\">回复</a></div>"+
-                          "                       <div class=\"zan\">"+
-                          "                        <a onclick=\"praiseWorkComment(this,'"+data.id+"','"+msgId+"');\"><i class=\"icon\"></i> <em>"+amount+"</em></a>"+
-                          "                       </div>"+
-                          "                   </div>"+
-                          "               </div>"+
-                          "               <div class=\"review-sr ae\" style=\"display: none;\">"+
-                          "                   <textarea></textarea>"+
-                          "                   <div class=\"btn1 ae\">"+
-                          "                       <input type=\"button\" onclick=\"subOtherComment(this,'"+msgId+"','"+data.id+"',false);\" class=\"btn\" value=\"评论\">"+
-                          "                    </div>"+
-                          "               </div>"+
-                          "           </div>"+
-                          "        </li>";
-                  if(flag == true){
-                      $("#"+parent).append(childNode);
-                  }else{
-                      $("#"+parent).after(childNode);
-                  }
+              },complete:function(){
+                  $(o).parent().prev().val("");
+                  $(o).parent().parent().slideUp();
               }
-          },complete:function(){
-              $(o).parent().prev().val("");
-              $(o).parent().parent().slideUp();
-          }
-      })
+          })
+      }else{
+          alert("您未输入任何评论信息");
+      }
+
   }
   function subMainComment(o,msgId,parent){
       var content = $(o).parent().prev().val();
-      $.ajax({
+      if(content != null && content != "" && content.length > 0){
+            $.ajax({
           type: "post",//设置get请求方式
           url: "<c:url value='/masterMessage/commentMsg.do'/>",//设置请求的脚本地址
           data: "content=" + content + "&fatherId=" + parent + "&workId=" + msgId,//设置请求的数据
@@ -398,6 +404,9 @@
               $(o).parent().prev().val("");
           }
       })
+      }else{
+          alert("您未输入任何评论信息");
+      }
   }
   function getHfProduct(e){
       $(e).parent().parent().parent().parent().find('.review').slideToggle();

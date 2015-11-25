@@ -111,17 +111,26 @@
                 alert("已经发货!")
             }
         }
-        function refund(obj, id){
-            $.ajax({
-                type: "get",
-                data: {
-                    id: id,
-                },//输入框的值传递到后台
-                url: "<c:url value="/purchaseOrder/refund.do"/>",
-                success: function (data) {
-                    window.location.reload();
-                }
-            });
+        function refund(obj, id) {
+            var refundWay = $('#refundType').val();
+
+            $('#my-prompt1').modal({
+                relatedTarget: this,
+                onConfirm: function (e) {
+                    $.ajax({
+                        type: "get",
+                        data: {
+                            id: id,//订单id
+                            refundWay:refundWay,//退款方式
+                            refundMoney:e.data,//退款金额
+                        },//输入框的值传递到后台
+                        url: "<c:url value="/purchaseOrder/refund.do"/>",
+                        success: function (data) {
+                            window.location.reload();
+                        }
+                    });
+                }});
+
         }
 
 
@@ -132,6 +141,11 @@
 <div class="admin-content" style="height: auto">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
+            <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
+               style="color: red;" id="downloadOrder"
+               href='<c:url value="/purchaseOrder/downloadOrders.do"></c:url>'>
+                <span class="am-icon-pencil-square-o">下载订单</span>
+            </a>
         </div>
 
         <%--点击立即发货的时候弹出的模态对话框--%>
@@ -148,6 +162,32 @@
                     </div>
                     <div>
                         快递单号:<input type="text" id="serial" name="serial" class="am-modal-prompt-input"
+                                    style="width: 100px;height:30px;display: inline-block;">
+                    </div>
+                </div>
+                <div class="am-modal-footer">
+                    <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                    <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                </div>
+            </div>
+        </div>
+
+        <%--点击退款的时候弹出的模态对话框--%>
+        <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt1">
+            <div class="am-modal-dialog">
+                <%--<div class="am-modal-hd">Amaze UI</div>--%>
+                <div class="am-modal-bd">
+                    <div>请选择退款方式</div>
+                    <div>
+                        退款方式: <select class="am-modal-prompt-select" id="refundType" name="refundType"
+                                      style="width: 90px;display: inline-block;">
+                        <option value="支付宝">支付宝</option>
+                        <option value="微信">微信</option>
+                        <option value="其他">其他</option>
+                    </select>
+                    </div>
+                    <div>
+                        退款金额:<input type="text" id="refundMoney" name="refundMoney" class="am-modal-prompt-input"
                                     style="width: 100px;height:30px;display: inline-block;">
                     </div>
                 </div>
@@ -185,11 +225,6 @@
                             <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                            <%--<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
-                                            <%--onclick="showConfirm('提示','是否删除',function(){removePurchaseOrder('${purchaseOrder.id}')})"><span--%>
-                                            <%--class="am-icon-trash-o">删除</span>--%>
-                                            <%--</button>--%>
-
                                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;"
                                            id="send" onclick="updateOrderStatusNew(this,'${purchaseOrder.id}')">
                             <span class="am-icon-pencil-square-o">
@@ -260,14 +295,6 @@
                                                                       maxFractionDigits="2" minFractionDigits="2"/> <br>
                             <fmt:formatNumber type="number" value="${purchaseOrder.getRealPayMoney()}"
                                               maxFractionDigits="2" minFractionDigits="2"/></td>
-                            <%--<td class="am-hide-sm-only">--%>
-                            <%--<c:forEach items="${purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">--%>
-                            <%--<span style="margin-left: 10px;">--%>
-                            <%--<ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"--%>
-                            <%--checkedValue="${purchaseOrderPayment.payWay}"--%>
-                            <%--type="normal"/>--%>
-                            <%--</c:forEach>--%>
-                            <%--</td>--%>
                         <td class="am-hide-sm-only">${purchaseOrder.purchaseOrderAddress}</td>
                         <td class="am-hide-sm-only">${purchaseOrder.user.username}</td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both"
@@ -289,29 +316,5 @@
         </ming800:pcPageList>
     </div>
 </div>
-
-<%--<script type="text/javascript">--%>
-<%--function updateOrderStatus(obj,id){--%>
-<%--var temp = $(obj).find("span").text().trim()--%>
-<%--var orderStatus = "5";--%>
-<%--if(temp=="立即发货"){--%>
-<%--$.ajax({--%>
-<%--type:"get",--%>
-<%--data:{id:id,orderStatus:orderStatus},--%>
-<%--url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",--%>
-<%--success:function(data){--%>
-<%--$(obj).find("span").text("已发货");--%>
-<%--}--%>
-<%--});--%>
-<%--}else if(temp == "无法发货"){--%>
-
-<%--alert("无法发货!")--%>
-<%--}else{--%>
-<%--alert("已经发货!")--%>
-<%--}--%>
-<%--}--%>
-
-
-<%--</script>--%>
 </body>
 </html>

@@ -110,7 +110,7 @@ public class MasterCategoryController {
 	@RequestMapping("/getProjectNameList.do")
 	public String getClassifyByProjectName(HttpServletRequest request , Model model){
 		String projectId = request.getParameter("projectId");
-		String queryHql = "from MasterProject p where p.project.id=:projectId";
+		String queryHql = "from MasterProject p where p.project.id=:projectId and p.status = '1'";
 		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
 		queryMap.put("projectId",projectId);
 		List<MasterProject> mpList = baseManager.listObject(queryHql,queryMap);

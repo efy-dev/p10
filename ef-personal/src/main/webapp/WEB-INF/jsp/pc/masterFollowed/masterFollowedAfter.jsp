@@ -55,14 +55,14 @@
         <ul class="gy-grounp ae" id="newInsert">
 
         </ul>
-        <div class="f-r-gd ae"><a onclick="moreMaster();"><span>更多大师</span><i class="sp-icon"></i></a></div>
+        <div class="f-r-gd ae"><a href="<c:url value='/masterMessage/classify'/>"><span>更多大师</span><i class="sp-icon"></i></a></div>
       </div>
       <div class="f-right-gy ae">
         <div class="h4"><span>热门大师</span></div>
         <ul class="gy-grounp ae" id="hotMaster">
 
         </ul>
-        <div class="f-r-gd ae"><a onclick="moreHotMaster();"><span>更多大师</span><i class="sp-icon"></i></a></div>
+        <div class="f-r-gd ae"><a href="<c:url value='/masterMessage/classify'/>"><span>更多大师</span><i class="sp-icon"></i></a></div>
       </div>
     </div>
   </div>
@@ -208,16 +208,26 @@
                     "                                    </span>"+
                     "                                </a>"+
                     "                            </li>"+
-                    "                            <li>"+
-                    "                                <a href=\"#\">"+
-                    "                                    <span class=\"pos\">"+
-                    "                                        <span class=\"line\">"+
-                    "                                            <i class=\"dnc-icon-4 zq\"></i>"+
-                    "                                            <em>分享</em>"+
-                    "                                        </span>"+
-                    "                                    </span>"+
-                    "                                </a>"+
-                    "                            </li>"+
+                    "                            <li style=\"position: relative\">"+
+                      "                                <a onclick=\"showJiathis(this);\">"+
+                      "                                    <span class=\"pos\">"+
+                      "                                        <span class=\"line\">"+
+                      "                                            <i class=\"dnc-icon-4 zq\"></i>"+
+                      "                                            <em>分享</em>"+
+                      "                                        </span>"+
+                      "                                    </span>"+
+                      "                                </a>"+
+                      "                                <div style='display: none;' class=\"nr-share\">"+
+                      "                                    <div class=\"nr-bg\">"+
+                      "                                        <div class=\"jiathis_style\">"+
+                      "                                            <a class=\"jiathis_button_weixin\"></a>"+
+                      "                                            <a class=\"jiathis_button_tqq\"></a>"+
+                      "                                            <a class=\"jiathis_button_tsina\"></a>"+
+                      "                                            <a class=\"jiathis_button_cqq\"></a>"+
+                      "                                        </div>"+
+                      "                                    </div>"+
+                      "                                </div><script type=\"text/javascript\" src=\"http://v3.jiathis.com/code/jia.js\" charset=\"utf-8\"/>"+
+                      "                            </li>"+
                     "                        </ul>"+
                     "                    </div>"+
                     "                </li>";
@@ -230,10 +240,18 @@
       complete:function(){
         if(flag==true) {
           ajaxkey = false;
-          console.log(ajaxkey);
         }
       }
     })
+  }
+
+  function showJiathis(o){
+      var next = $(o).parent().find(".nr-share");
+      if($(next).is(":hidden")){
+          $(next).show();
+      }else{
+          $(next).hide();
+      }
   }
 
   function getData2(url){

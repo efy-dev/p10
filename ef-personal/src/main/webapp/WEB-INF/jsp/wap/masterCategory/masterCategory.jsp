@@ -44,14 +44,95 @@
   <div class="menu-list">
     <div class="menu-page">
       <ul class="bd">
-        <li><a href="" title="首页">首页</a></li>
-        <li><a href="" title="分类">消&nbsp;息</a></li>
-        <li><a href="<c:url value='/personal/getPersonal.do'/>" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+        <li><a href="<c:url value='/masterMessage/index.do'/>" title="首页">首页</a></li>
+        <li><a href="javascript:void(0);" id="acs" title="分类">消&nbsp;息</a></li>
+        <li><a href="http://www.i.efeiyi.com" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
     </div>
   </div>
 </header>
 <!--//End--header-->
+<div style="display: none"  id="showMessage" class="pops-up">
+  <div style="background: #fff;" data-am-widget="tabs"
+       class="am-tabs am-tabs-default"
+          >
+    <ul class="am-tabs-nav am-cf">
+      <li class="am-active"><a href="[data-tab-panel-0]"><i class="bz-icon1"></i>
+        <span style="float: left;margin-left: 10px;">关注</span><i class="sod-sr"></i></a></li>
+      <li class=""><a href="[data-tab-panel-1]">
+        <i class="bz-icon2"></i>
+        <span style="float: left;margin-left: 10px;">评论</span><i class="sod-sr"></i>
+      </a></li>
+      <li class=""><a href="[data-tab-panel-2]">
+        <i class="bz-icon3"></i>
+        <span style="float: left;margin-left: 10px;">点赞</span></i>
+      </a></li>
+    </ul>
+    <div class="am-tabs-bd">
+      <div data-tab-panel-0 class="am-tab-panel am-active">
+        <div class="aboud-you">
+          <div class="list-you"><span>这些人最近关注了你</span></div>
+          <ul class="list-name" id="">
+            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>Andy</span></li>
+            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>Lily</span></li>
+            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>wangjl</span></li>
+          </ul>
+          <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
+        </div>
+      </div>
+      <div data-tab-panel-1 class="am-tab-panel ">
+        <div class="discuss">
+          <ul class="discuss-2">
+            <li class="review">
+              <div class="matter">
+                <p class="text-h1"><a href="#">Andya</a>回复了你</p>
+                <p class="text-time">51分钟前</p>
+                <p class="text-content"><a href="#" >原来木板水印是一门高深的技艺，之前从来没
+                  有关注过，真心觉得中国的非遗文化值得我们
+                  去传承。</a></p>
+                <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div>
+              </div>
+            </li>
+            <li class="review">
+              <div class="matter">
+                <p class="text-h1"><a href="#">Joe</a>回复了你</p>
+                <p class="text-time">1小时前</p>
+                <p class="text-content"><a href="#" >原来木板水印是一门高深的技艺，之前从来没
+                  有关注过，真心觉得中国的非遗文化值得我们
+                  去传承。</a></p>
+                <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div data-tab-panel-2 class="am-tab-panel ">
+        <div class="discuss">
+          <ul class="discuss-2">
+            <li class="review">
+              <div class="matter">
+                <p class="text-h1">Joe</p>
+                <p class="text-time">1小时前</p>
+                <p class="text-content"><a href="#" >觉得你的评论“还不错”很赞</a></p>
+                <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div>
+              </div>
+              <div class="review" style="padding-top: 0.8rem">
+                <div class="matter">
+                  <p class="text-h1"><a href="#">Andy</a>回复了你</p>
+                  <p class="text-time">1小时前</p>
+                  <p class="text-content"><a href="#" >觉得你的评论“中国的非遗文化值得我们去传
+                    承”很赞</a></p>
+                  <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="background: #000;opacity: 0.5;width: 100%;height: 100%;position: absolute;"></div>
+</div>
 <!--地区-->
 <div class="dis-q1">
   <div class="dis-q2">
@@ -132,42 +213,6 @@
   </div>
   <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
-<!--//End--footer-->
-<script >
-  <%--$(window).load(function(){--%>
-    <%--$("#category li").each(function(){--%>
-      <%--if((this).attr("class") == "am-active"){--%>
-          <%--if($(this).attr("title") == "1"){--%>
-              <%--getCategoryByProjectName();--%>
-          <%--}else if($(this).attr("title") == "2"){--%>
-              <%--getCategoryByMasterLevel();--%>
-          <%--}else if($(this).attr("title") == "3"){--%>
-              <%--getCategoryByCity();--%>
-          <%--}--%>
-      <%--}--%>
-    <%--})--%>
-  <%--})--%>
-  <%--function getCategoryByProjectName(){--%>
-    <%--$.ajax({--%>
-      <%--type: "POST",--%>
-      <%--url: "<c:url value='/masterCategory/CategoryList.do'/>",--%>
-      <%--async:false ,--%>
-      <%--dataType:"json",--%>
-      <%--error: function(){alert('操作失败,请联系系统管理员!');},--%>
-      <%--success: function(data){--%>
-        <%--var box = $("#pubu");--%>
-        <%--var sub = "<li><a href=\"#\">全部</a></li>";--%>
-        <%--if(data != null && data.length > 0){--%>
-          <%--for(var i = 0; i < data.length ; i++){--%>
-            <%--sub += "<li><a href=\"#\">"+data[i].id+"</a></li>";--%>
-          <%--}--%>
-          <%--box.append(sub);--%>
-        <%--}--%>
-      <%--}--%>
-    <%--})--%>
-  <%--}--%>
-</script>
-
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>
 <!--<![endif]-->

@@ -181,7 +181,7 @@
                     +"<div class=\"dynamic-ft\"> "
                     +"<a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+obj[i].praiseStatus+"</em></a><i class=\"s-solid ft-a\"></i> "
                     +"<a onclick=\"showModel('"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-2\"></i><em>"+obj[i].amount+"</em></a><i class=\"s-solid ft-a\"></i> "
-                    +"<a onclick=\"collected('"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i></a></div></div>";
+                    +"<a onclick=\"collected(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+obj[i].storeStatus+"</em></a></div></div>";
             box.append(sub);
           }
         }else{
@@ -245,23 +245,23 @@
     }
     return showTime;
   }
-  function collected(messageId){
+  function collected(o,messageId){
     $.ajax({
-      url:"<c:url value='/masterMessage/collected.do'/>",
-      data:"messageId="+messageId,
-      type:"POST",
-      dataType:"json",
-      error:function(){},
-      success:function(msg){
-        if("add" == msg){
-          alert("收藏成功!");
-        }else if("del" == msg){
-          alert("收藏已移除!");
-        }else if("noRole" == msg){
-          alert("您还未登录,请登录后操作!");
+      type: "get",//设置get请求方式
+      url: "<c:url value='/masterMessage/storeMessage.do'/>",//设置请求的脚本地址
+      data: "msgId="+messageId,//设置请求的数据
+      async: true,
+      dataType: "json",//设置请求返回的数据格式
+      success: function (data) {
+        if(data =="noRole"){
+          alert("您还没有登录,请登录后操作!");
+        }else if(data == "add"){
+          $(o).find("em").html("已收藏");
+        }else if(data == "del"){
+          $(o).find("em").html("收藏");
         }
       }
-    });
+    })
   }
   function changePraiseStatus(o,messageId){
     $.ajax({
@@ -367,6 +367,7 @@
       error: function(){alert('出错了,请联系系统管理员!');},
       success: function(data){
         var box = $("#pubu");
+        box.empty();
         var sub = "";
         console.log(data);
         if(data.mrModelList != null && data.mrModelList.length > 0){
@@ -414,7 +415,7 @@
                       "                            <div class=\"suit-ft-right\"><span>"+ctime+"</span></div>"+
                       "                        </div>"+
                       "                    </div>"+
-                      "                    <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[i].fsAmount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[i].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i> </a> </div>"+
+                      "                    <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[i].fsAmount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[i].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected(this,'"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+obj[i].storeStatus+"</em></a> </div>"+
                       "                </div>";
             }
           }
@@ -444,10 +445,10 @@
                       "                            <div class=\"suit-ft-right\"><span>"+ctime+"</span></div>"+
                       "                        </div>"+
                       "                    </div>"+
-                      "                 <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[j].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[j].fsAmount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[j].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[j].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected('"+obj[j].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i> </a> </div>"+
+                      "                 <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[j].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[j].fsAmount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[j].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[j].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected(this,'"+obj[j].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+obj[j].storeStatus+"</em></a> </div>"+
                       "                </div>";
-              box.append(sub);
             }
+            box.append(sub);
           }
         }
       }

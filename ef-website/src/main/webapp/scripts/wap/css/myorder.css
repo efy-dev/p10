@@ -257,10 +257,63 @@
 .all-bulk .price li:nth-child(1) s {color:#999}
 .all-bulk .price li:nth-child(2) {text-align:center;width:46%}
 .all-bulk .price li:nth-child(3) {text-align:right;width:21%}
+/*new分享页面*/
+.newhad .had-icon{background: url("../images/cart-icon.png") no-repeat  -43px -219px;display: inline-block;background-size: 80px auto;-webkit-background-size: 80px auto;width: 31px;height: 23px;position: absolute;left: 0;top:13px;}
+.newhad .am-header-title{margin: 0 20%;position: relative;padding-left: 37px;}
+.newshare .had-product{padding: 16px 0;position: relative;border-bottom: 1px solid #000;border-top: 1px solid #000;margin-top: -1px;}
+.newshare .had-product .had-pic{width: 105px;position: absolute;left: 1.9rem;top: 1.6rem}
+.newshare .had-product .had-pic img{width: 100%}
+.newshare .had-product .had-txt{padding:5px 0 0 132px;font-size: 12px;color: #000;height: 92px;}
+.newshare .had-product .had-txt p{margin-bottom: 10px;width: 100%;}
+.newshare .had-product .had-txt p:nth-child(1){text-overflow:ellipsis;white-space:nowrap;overflow: hidden}
+.newshare .had-product .had-txt p strong{color: #cc0000;font-size: 1.4rem}
+.newshare .had-product .had-txt p s{color: #999;}
+.newshare .new-team{padding: 1.6rem 1.9rem;text-align: center;}
+.newshare .new-team .old{width:100%;margin-bottom: 15px;display: inline-block;}
+.newshare .new-team .old a{width: 5rem;height: 5rem;position: relative;display: inline-block;}
+.newshare .new-team .old strong{font-weight: bold;right: -12px;top:-8px;width: 2.5rem;height: 2.5rem;border-radius: 3rem;-webkit-border-radius: 3rem;background-color: #cc0000;color: #fff;font-size: 18px;position: absolute;display: block}
+.newshare .new-team .addnewbd{width: 5rem;height: 5rem;border: 2px solid #cecece;border: 2px solid #cecece;border-radius: 3rem;-webkit-border-radius: 3rem;margin: 0 7px;}
+.newshare .new-team .crew a{margin-bottom: 15px;display: inline-block}
+.newshare .new-team .newtext{font-size: 12px;color: #666;display: inline-block;margin: 15px 0;}
+.newshare .new-page li:nth-child(1){border-top: 4px solid #ccc;border-bottom: 4px solid #ccc;}
+.newshare .new-page li strong{margin-right: 1%;width: 8%;display: inline-block;}
+.newshare .new-page li span{display: inline-block;}
+.newshare .new-page li span:nth-child(2){margin-right: 2%;width: 34%;}
+.newshare .new-page li span:nth-child(3){width: 25%;}
+.newshare .new-page li span:nth-child(4){width: 26%;}
+.newshare .new-page li .page-pic{width: 22px;height: 22px;display: inline-block;border: 1px solid #ccc;-webkit-border-radius: 3rem;border-radius: 3rem;}
+.newshare .new-page li{border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;padding: 15px 19px;margin-bottom: 16px;font-size: 12px;}
+/*拼团玩法*/
+.addmethod{margin-bottom: 15px;}
+.method{padding: 0 19px;margin-top: -15px;}
+.method .met-head{padding: 15px 0;}
+.method .met-head span{font-size: 12px;color: #ccc;font-weight: bold}
+.method .met-head span:nth-child(1){float:left}
+.method .met-head span:nth-child(2){float: right;}
+.method .met-head span a{color: #000;}
+.method .met-head span a .met-icon{width: 16px;height: 16px;background: url("../images/cart-icon.png") no-repeat 0px -261px;display: inline-block;margin-left: 5px;background-size: 100px auto;-webkit-background-size: 100px auto;}
+.method .met-footer{border: 1px solid #ccc;}
+.method .met-footer li{width: 18%;margin-left:6%;padding: 15px 0;float: left;font-weight: bold}
+.method .met-footer li.active p{color:#ff0000;}
+.method .met-footer li.active strong{border: 1px solid #ff0000;}
+.method .met-footer li.hover p{color:#000;}
+.method .met-footer li.hover strong{border: 1px dashed #000;}
+.method .met-footer li p{font-size: 12px;text-align: center;color: #000;margin-bottom: 5px;}
+.method .met-footer li p:nth-child(2){text-align: left}
+.method .met-footer li strong{border: 1px solid #000;width: 2rem;height: 2rem;text-align: center;-webkit-border-radius: 50% 50%;border-radius: 50% 50%;display: inline-block;line-height:20px;font-size: 10px;}
+/*通用悬浮菜单*/
+.m-icon{background: url("../images/cart-icon.png") no-repeat;display: inline-block;background-size: 80px auto;-webkit-background-size: 80px auto;}
+.met-nav{border: 1px solid #000;border-top-width:2px;position: fixed;bottom: 0;background: #fff;padding: 8px 0;}
+.met-nav a{width: 25%;float: left;}
+.met-nav a p{text-align: center;font-size: 12px;color: #000;}
+.met-nav a .met-1con{background-position: 0px -263px;width: 20px;height: 23px;}
+.met-nav a .met-2con{background-position: -43px -305px;width: 31px;height: 23px;}
+.met-nav a .met-3con{background-position: -43px -261px;width: 30px;height: 23px;}
+.met-nav a .met-4con{background-position: 0px -304px;width: 20px;height: 23px;}
 /*分享页面*/
 .packet .red .pic {margin:5.1rem auto 0;width:17.2rem;height:11.2rem;background:url(../images/purchase2.png)no-repeat;background-size:100%;color:#ffb100;font-size:5rem;font-weight:bold;}
 .packet .red {margin-bottom:2.2rem}
-.packet .red .pic span{text-align: center;display: block;padding:2.5rem 0rem}
+.packet .red .pic strong{text-align: center;display: block;padding:2.5rem 0rem}
 .packet .text {padding:0 1.8rem;margin-bottom:2.2rem}
 .packet .text p {font-size:1.4rem;color:#000;margin-bottom:0.5rem}
 .packet .button {padding:0 1.8rem}
@@ -324,6 +377,10 @@
 .site label {width:25%;float:left;font-size:1.4rem;text-align:right;font-weight:100;padding:0.9rem 2% 0 0}
 .site .text {padding:0.9rem 1.1rem;font-size:1.6rem;color:#666;float:left;width:74%;border:1px solid #999}
 .site .txt {padding:0.9rem 1.1rem;font-size:1.6rem;color:#666;float:left;width:74%;border:1px solid #999;height:6.5rem;resize:none;outline:none}
+/*拼团玩法*/
+.newpacket{padding:1.9rem;}
+.newpacket strong{font-weight:bold}
+.newpacket p{margin-bottom: 20px;font-size: 12px;color: #000}
 /*我的红包*/
 .my-packet {padding:1.6rem 1.8rem}
 .my-packet .top {position:relative;margin-bottom:1.6rem}
@@ -334,9 +391,13 @@
 .my-packet .top .text p:last-child {margin-bottom:0}
 .my-packet .page p {font-size:14px;color:#000;margin-bottom:0.8rem}
 /*我的参团/开团*/
+.ag-list .ag-new{margin-top: -1px}
+.ag-list .ag-new li.active{background: #000;color: #fff;}
+.ag-list .ag-new li{width: 50%;float: left;padding:15px 0;text-align: center;color: #000;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 14px;}
+.ag-list .ag-new li:nth-child(1){width: 50%;border-right: 1px solid #000}
 .offered {padding:1.6rem 1.8rem}
 .offered li {width:100%;float:left;position:relative;margin-bottom:1.6rem;border-bottom:1px solid #dedede}
-.offered li p {font-size:14px;margin-bottom:1.6rem;color:#000}
+.offered li p {font-size:14px;line-height:30px;color:#000}
 .offered li p:nth-child(2) {font-size:12px;color:#999}
 .offered li span {color:#ff0000;font-size:12px;position:absolute;right:0;margin-top:-22px;top:50%}
 /*开团详情*/
@@ -344,7 +405,7 @@
 .olli ol.am-control-nav.am-control-paging {bottom:45px}
 .olli .am-slider-a1 .am-control-nav li a.am-active {color:#ce0202}
 .my-colonel .cost {margin-top:0.4rem}
-.my-colonel .cost .txt1 {font-size:15px;color:#999;float:left;width:40%;text-align:left;padding:0.7rem 0 0 1.8rem}
+.my-colonel .cost .txt1 {font-size:16px;color:#999;float:left;width:40%;text-align:left;padding:0.7rem 0 0 1.8rem}
 .my-colonel .cost .txt2 {width:60%;float:right}
 .my-colonel .cost .txt2 em {padding:0.6rem 0.9rem;float:right;background-color:#d42811;font-size:14px;color:#fff;height: 36px;}
 .my-colonel .cost .txt2 .icon {width:17px;height:36px;background:url(../images/purchase.png)no-repeat 2px -29px;float:right;background-size:169px auto;-webkit-background-size:169px auto}
@@ -359,7 +420,7 @@
 /*未参团人打开*/
 .join .txt-page {font-size:12px;color:#000}
 .join .txt-page1 {font-size:12px;color:#000;margin-bottom:1.6rem}
-.join .time {font-size:26px;color:#000}
+.join .time {font-size:26px;color:#000;text-align: center;margin-bottom: 5px;}
 .join .txt-page span:nth-child(2) {float:right}
 .join .txt-page span:nth-child(1) {float:left}
 .join .Powerweb {height:1rem;position:relative;margin:0.6rem 0}
@@ -538,7 +599,17 @@ html, body {height:100%}
 .my-evaluate .score  .bask .file-pic{float: left;width: 100%}
 .my-evaluate .score  .bask .file-pic img{width: 100%;float: left;}
 .my-evaluate .score  .bask .file-pic .li-img{height: 68px;width: 68px;margin: 0 15px 10px 0;float: left}
-/*大首页new*/
+/*分类列表页*/
+.b06-list{padding: 0 1.3rem;}
+.b06-list .list-q{border-bottom: 1px solid #ccc;}
+.b06-list .list-q:last-child{border-bottom: 0;}
+.b06-list h5{padding: 13px 0;font-size: 12px;color: #000;font-weight: bold}
+.b06-page li{width: 24%;margin-left: 1%;float: left;margin-bottom: 1.3rem}
+.b06-page li:nth-child(4n+1){margin-left: 0;}
+.b06-page li img{width: 100%;}
+.b06-page li p{height: 36px;overflow: hidden;text-align: center;font-size: 1.2rem;color: #000;}
+.b06-page li.max-page a{height: 55px;line-height: 55px;border: 3px solid #000;text-align: center;font-size: 12px;display:block;color: #000;}
+    /*大首页new*/
 .newicon{background:url(../images/newicon.png) no-repeat;background-size:152px auto}
 .newheader{text-align: center}
 .newheader .icon-user{margin-top: 5px;}
