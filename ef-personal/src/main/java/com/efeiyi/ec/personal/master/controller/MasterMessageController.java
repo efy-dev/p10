@@ -61,22 +61,6 @@ public class MasterMessageController {
 		return "/masterMessage/masterMessageList";
 	}
 
-//	@ResponseBody
-//	 @RequestMapping("/masterMessageList.do")
-//	 public List MasterMessageList(HttpServletRequest request) throws Exception {
-//		XQuery xQuery = new XQuery("plistMasterMessage_default", request);
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		List<MasterMessage> messageList = baseManager.listObject(xQuery);
-//		for (MasterMessage message : messageList) {
-//			getPraiseStatus(message, user);
-//			message.setMasterId(message.getMaster().getId());
-//			message.setMasterName(message.getMaster().getFullName());
-//			message.setAmount(message.getAmount() == null ? 0 : message.getAmount());
-//			message.setFsAmount(message.getFsAmount() == null ? 0 : message.getFsAmount());
-//		}
-//		return messageList;
-//	}
-
 	@ResponseBody
 	@RequestMapping("/masterMessageList/{qm}/{size}/{index}")
 	public List MasterMessagePList(HttpServletRequest request , @PathVariable String qm , @PathVariable String size , @PathVariable String index) throws Exception {
@@ -160,33 +144,6 @@ public class MasterMessageController {
 		return message.getPraiseStatus();
 	}
 
-	@ResponseBody
-	@RequestMapping("/collected.do")
-	public String collected(HttpServletRequest request) {
-		String messageId = request.getParameter("messageId");
-		MyUser user = AuthorizationUtil.getMyUser();
-		if (user == null || user.getId() == null){
-			return "noRole";
-		}
-		String queryHql = "from MasterMessageStore s where s.masterMessage.id=:messageId and s.user.id=:userId";
-		LinkedHashMap<String, Object> queryMap = new LinkedHashMap<>();
-		queryMap.put("messageId", messageId);
-		queryMap.put("userId", user.getId());
-		List<MasterMessageStore> list = baseManager.listObject(queryHql, queryMap);
-		if (list == null || list.size() <= 0) {
-			MasterMessage message = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(), messageId);
-			MasterMessageStore store = new MasterMessageStore();
-			store.setUser(user);
-			store.setMasterMessage(message);
-			baseManager.saveOrUpdate(MasterMessageStore.class.getName(), store);
-			return "add";
-		} else {
-			MasterMessageStore store = list.get(0);
-			baseManager.delete(MasterMessageStore.class.getName(), store.getId());
-			return "del";
-		}
-	}
-
 	@RequestMapping("/forwardMasterDetails.do")
 	public String forwardDetails(HttpServletRequest request, Model model) {
 		String masterId = request.getParameter("masterId");
@@ -212,11 +169,21 @@ public class MasterMessageController {
 				LinkedHashMap<String, Object> queryMap1 = new LinkedHashMap<>();
 				queryMap1.put("messageId", message.getId());
 				queryMap1.put("userId", user.getId());
-				List<MasterMessage> praiseList = baseManager.listObject(queryHql1, queryMap1);
+				List<MasterMessagePraise> praiseList = baseManager.listObject(queryHql1, queryMap1);
 				if (praiseList != null && praiseList.size() > 0) {
 					message.setPraiseStatus("取消赞");
 				} else {
 					message.setPraiseStatus("赞");
+				}
+				String querySql = "from MasterMessageStore m where m.masterMessage.id=:messageId and m.user.id=:userId";
+				LinkedHashMap<String, Object> query = new LinkedHashMap<>();
+				query.put("messageId", message.getId());
+				query.put("userId", user.getId());
+				List<MasterMessageStore> storeList = baseManager.listObject(querySql,query );
+				if (storeList != null && storeList.size() > 0) {
+					message.setStoreStatus("已收藏");
+				} else {
+					message.setStoreStatus("收藏");
 				}
 			}
 		}
