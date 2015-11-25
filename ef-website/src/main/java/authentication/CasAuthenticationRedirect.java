@@ -17,7 +17,7 @@ public class CasAuthenticationRedirect extends org.springframework.security.cas.
     @Override
 
     protected String createServiceUrl(final HttpServletRequest request, final HttpServletResponse response) {
-
+        String unionid = request.getParameter("unionid");
 
         if (serviceUrlBak == null)
 

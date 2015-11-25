@@ -236,10 +236,6 @@ public class SigninController extends BaseController {
 
     @RequestMapping({"/register"})
     public String register(HttpServletRequest request, Model model) {
-//        String error = request.getParameter("error");
-//        if (error!=null){
-//            model.addAttribute("error","true");
-//        }
         return "/register";
     }
 
@@ -286,73 +282,21 @@ public class SigninController extends BaseController {
         return "/registerSuccess";
     }
 
-    @RequestMapping({"/wx/register"})
-    public String wxRegister() {
-        return "/wxRegister";
-    }
-
     @RequestMapping({"/wx/userInfo"})
     public String wxPay(HttpServletRequest request) throws Exception {
-        String redirect_uri = "http://www.efeiyi.com/wx/bind";
-        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=" + WxPayConfig.APPID +
-                "&redirect_uri=" +
-                URLEncoder.encode(redirect_uri, "UTF-8") +
-                "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
-
-        return "redirect:" + url;
+        String dataKey = "unionid";
+        String callback = "/wx/bind";
+        callback = URLEncoder.encode(callback,"UTF-8");
+        String redirect = "/wx/getInfo.do?callback="+callback+"&dataKey="+dataKey;
+        return "redirect:" + redirect;
     }
 
-
-    @RequestMapping({"/wx/userInfo/{redirect}"})
-    public String wxUserInfo(HttpServletRequest request,@PathVariable String redirect) throws Exception {
-        String redirect_uri = "http://www.efeiyi.com/wx/login/"+redirect;
-        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=" + WxPayConfig.APPID +
-                "&redirect_uri=" +
-                URLEncoder.encode(redirect_uri, "UTF-8") +
-                "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
-
-        return "redirect:" + url;
+    @RequestMapping({"/wx/bind"})
+    public String getWxOpenId(HttpServletRequest request, Model model) throws Exception {
+        String unionid = request.getParameter("unionid");
+        model.addAttribute("unionid", unionid);
+        return "/wxRedirect";
     }
-
-    @RequestMapping("/wx/login/{redirect}")
-    public String wxLogin(HttpServletRequest request, Model model, @PathVariable String redirect) throws Exception {
-        String result = "";
-        //1、网页授权后获取传递的code，用于获取openId
-        String code = request.getParameter("code");
-        if (request.getSession().getAttribute(code) != null) {
-            result = request.getSession().getAttribute(code).toString();
-        } else {
-
-            System.out.println("1、 page code value：" + code);
-            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
-            result = HttpUtil.getHttpResponse(urlForOpenId, null);
-            request.getSession().setAttribute(code, result);
-        }
-        System.out.println("2、get openid result：" + result);
-        JSONObject jsonObject = JSONObject.fromObject(result);
-        if (jsonObject.containsKey("errcode")) {
-            throw new RuntimeException("get openId error：" + result);
-        }
-        String unionid = jsonObject.getString("unionid");
-        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        param.put("unionid", unionid);
-        Consumer consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from Consumer obj where obj.unionid=:unionid", param);
-        MyUser myUser = (MyUser) baseManager.getObject(MyUser.class.getName(), consumer.getId());
-
-        AuthenticationManager am = new SampleAuthenticationManager();
-        try {
-            Authentication authentication = new UsernamePasswordAuthenticationToken(myUser, myUser.getPassword());
-            Authentication authentication2 = am.authenticate(authentication);
-            Object obj = authentication2.getPrincipal();
-            SecurityContextHolder.getContext().setAuthentication(authentication2);
-        } catch (AuthenticationException e) {
-            System.out.println("Authentication failed: " + e.getMessage());
-        }
-        return "redirect:"+ redirect;
-    }
-
 
     private static class SampleAuthenticationManager implements AuthenticationManager {
         static final List<GrantedAuthority> AUTHORITIES = new ArrayList<GrantedAuthority>();
@@ -368,28 +312,5 @@ public class SigninController extends BaseController {
     }
 
 
-    @RequestMapping({"/wx/bind"})
-    public String getWxOpenId(HttpServletRequest request, Model model) throws Exception {
-        String result = "";
-        //1、网页授权后获取传递的code，用于获取openId
-        String code = request.getParameter("code");
-        if (request.getSession().getAttribute(code) != null) {
-            result = request.getSession().getAttribute(code).toString();
-        } else {
-
-            System.out.println("1、 page code value：" + code);
-            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
-            result = HttpUtil.getHttpResponse(urlForOpenId, null);
-            request.getSession().setAttribute(code, result);
-        }
-        System.out.println("2、get openid result：" + result);
-        JSONObject jsonObject = JSONObject.fromObject(result);
-        if (jsonObject.containsKey("errcode")) {
-            throw new RuntimeException("get openId error：" + result);
-        }
-        String unionid = jsonObject.getString("unionid");
-        model.addAttribute("unionid", unionid);
-        return "/wxRedirect";
-    }
 }
 
