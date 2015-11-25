@@ -163,6 +163,20 @@
 									   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
 							</ul>
 						</c:if>
+						<c:if test="${purchaseOrder.orderStatus == '6'}">
+							<ul class="jp-pd jp-pd-btns">
+								<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
+								<li><a style="margin-right: 10px;"
+									   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
+							</ul>
+						</c:if>
+						<c:if test="${purchaseOrder.orderStatus == '15'}">
+							<ul class="jp-pd jp-pd-btns">
+								<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
+								<li><a style="margin-right: 10px;"
+									   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
+							</ul>
+						</c:if>
 						<c:if test="${purchaseOrder.orderStatus == '1'}">
 							<ul class="jp-pd jp-pd-btns">
 								<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
@@ -252,6 +266,20 @@
 								</c:if>
 							</ul>
 							<c:if test="${purchaseOrder.orderStatus == '3'}">
+								<ul class="jp-pd jp-pd-btns">
+									<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
+									<li><a style="margin-right: 10px;"
+										   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
+								</ul>
+							</c:if>
+							<c:if test="${purchaseOrder.orderStatus == '6'}">
+								<ul class="jp-pd jp-pd-btns">
+									<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
+									<li><a style="margin-right: 10px;"
+										   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
+								</ul>
+							</c:if>
+							<c:if test="${purchaseOrder.orderStatus == '15'}">
 								<ul class="jp-pd jp-pd-btns">
 									<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
 									<li><a style="margin-right: 10px;"
