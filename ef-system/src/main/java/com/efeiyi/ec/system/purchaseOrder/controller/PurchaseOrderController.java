@@ -3,6 +3,7 @@ package com.efeiyi.ec.system.purchaseOrder.controller;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderDelivery;
+import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
 import com.efeiyi.ec.system.purchaseOrder.service.PurchaseOrderManager;
 import com.efeiyi.ec.system.purchaseOrder.service.SmsCheckManager;
 import com.efeiyi.ec.system.util.HTTPParam;
@@ -10,6 +11,7 @@ import com.efeiyi.ec.system.util.HTTPSend;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
+import com.ming800.core.p.service.AutoSerialManager;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -39,6 +42,9 @@ public class PurchaseOrderController extends BaseController {
 
     @Autowired
     private HTTPSend httpSend;
+
+    @Autowired
+    private AutoSerialManager autoSerialManager;
 
     /**
      * ����
@@ -223,12 +229,27 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping("/refund.do")
     @ResponseBody
-    public void refund(HttpServletRequest request) {
+    public void refund(HttpServletRequest request) throws Exception {
         String purchaseOrderId = request.getParameter("id");
+        String refundWay = request.getParameter("refundWay");
+        String refundMoney = request.getParameter("refundMoney");
 
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
         purchaseOrder.setOrderStatus("15");
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+
+        PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
+        purchaseOrderPayment.setPaymentAmount(new BigDecimal(refundMoney));
+        purchaseOrderPayment.setPayWay(refundWay);
+        purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("systemAutoSerial"));
+        purchaseOrderPayment.setStatus("4");
+        purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
+        purchaseOrderPayment.setCreateDateTime(new Date());
+
+        baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(),purchaseOrderPayment);
+
+
+
     }
 
     @RequestMapping("/autoReceive.do")

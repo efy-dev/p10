@@ -15,7 +15,7 @@
                         <condition name="manUser.id" defaultValue="1" operation="eq"/>
                     </query>
                     <query name="default2" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="memberList" defaultValue="1" operation="in"/>
+                        <condition name="groupMemberList" defaultValue="1" operation="in"/>
                     </query>
                     <query name="default3" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>

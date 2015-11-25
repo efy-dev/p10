@@ -294,8 +294,8 @@ public class GroupController {
         List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
 
         XQuery xQuery = new XQuery("listPurchaseOrderGroup_default0", request);
-        xQuery.put("member_user_id", group.getManUser().getId());
-        xQuery.put("group_id", group.getId());
+        xQuery.put("groupMember_user_id", group.getManUser().getId());
+        xQuery.put("myGroup_id", group.getId());
         String manUserName = "";
         List<PurchaseOrderGroup> purchaseOrderGroupList = baseManager.listObject(xQuery);
         if (purchaseOrderGroupList.size() > 0) {
