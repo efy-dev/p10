@@ -207,6 +207,7 @@
                     </security:authorize>
                     <th class="table-title">订单号</th>
                     <th class="table-title">订单状态</th>
+                    <th class="table-title">订单类型</th>
                     <th class="table-title">产品</th>
                     <th class="table-title">总额/实付金额(元)</th>
                     <%--<th class="table-title">支付类型</th>--%>
@@ -277,6 +278,11 @@
                         <td class="am-hide-sm-only">
                             <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
                                             checkedValue="${purchaseOrder.orderStatus}"
+                                            type="normal"/>
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <ming800:status name="orderType" dataType="purchaseOrder.orderType"
+                                            checkedValue="${purchaseOrder.orderType}"
                                             type="normal"/>
                         </td>
                         <td class="am-hide-sm-only">
