@@ -73,7 +73,7 @@ public class MasterFollowedController {
 
 	@ResponseBody
 	@RequestMapping("/masterFollowedList.do")
-	public Object masterFollowedAfterList(HttpServletRequest request, Model model) throws Exception {
+	public Object masterFollowedAfterList(HttpServletRequest request) throws Exception {
 		MasterListModel masterListModel = new MasterListModel();
 		MyUser user = AuthorizationUtil.getMyUser();
 		List<MasterModel> models = new ArrayList<>();
@@ -88,6 +88,7 @@ public class MasterFollowedController {
 					query.put("master_id",followed.getMaster().getId());
 					List<MasterMessage> msgList = baseManager.listObject(query);
 					if (msgList != null && msgList.size() > 0){
+						msgList.get(0).setFollowStatus("已关注");
 						MasterModel msg = ConvertMasterModelUtil.convertMasterModel(msgList.get(0));
 						msgLists.add(msg);
 					}
@@ -148,6 +149,7 @@ public class MasterFollowedController {
 			query.put("master_id",followed.getMaster().getId());
 			List<MasterMessage> msgList = baseManager.listObject(query);
 			if (msgList != null && msgList.size() > 0){
+				msgList.get(0).setFollowStatus("已关注");
 				MasterModel msg = ConvertMasterModelUtil.convertMasterModel(msgList.get(0));
 				models.add(msg);
 			}
@@ -181,7 +183,6 @@ public class MasterFollowedController {
 			}
 		}
 	}
-
 
 	@ResponseBody
 	@RequestMapping("/getMasterRecommendList.do")

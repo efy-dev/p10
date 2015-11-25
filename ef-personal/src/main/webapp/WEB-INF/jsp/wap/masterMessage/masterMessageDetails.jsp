@@ -194,7 +194,7 @@
             <div class="dynamic-ft">
               <a href="#" onclick="changePraiseStatus(this,'${message.id}');" class="ft-a"> <i class="good-1"></i><em><c:if test="${empty message.praiseStatus}">赞</c:if><c:if test="${message.praiseStatus != null}">${message.praiseStatus}</c:if></em></a> <i class="s-solid ft-a"></i>
               <a href="#" class="ft-a"> <i class="good-2"></i> <em>9999</em> </a> <i class="s-solid ft-a"></i>
-              <a onclick="collected('${message.id}');" class="ft-a"> <i class="good-3"></i> </a>
+              <a onclick="collected(this,'${message.id}');" class="ft-a"> <i class="good-3"></i><em>${message.storeStatus}</em></a>
             </div>
           </div>
         </c:forEach>
@@ -502,7 +502,7 @@
           "<div class=\"dynamic-ft\">" +
           "<a onclick=\"changePraiseStatus(this,'"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+data[i].praiseStatus+"</em></a> <i class=\"s-solid ft-a\"></i>"+
           "<a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+data[i].id+"\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>9999</em> </a> <i class=\"s-solid ft-a\"></i>" +
-          "<a onclick=\"collected('"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i> </a>" +
+          "<a onclick=\"collected(this,'"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+data[i].storeStatus+"</em></a>" +
           "</div>"+
           "</div>";
         }
@@ -527,23 +527,23 @@
     }
     return showTime;
   }
-  function collected(messageId){
+  function collected(o,messageId){
     $.ajax({
-      url:"<c:url value='/masterMessage/collected.do'/>",
-      data:"messageId="+messageId,
-      type:"POST",
-      dataType:"json",
-      error:function(){},
-      success:function(msg){
-        if("add" == msg){
-          alert("收藏成功!");
-        }else if("del" == msg){
-          alert("收藏已移除!");
-        }else if("noRole" == msg){
-          alert("您还未登录,请登录后操作!");
+      type: "get",//设置get请求方式
+      url: "<c:url value='/masterMessage/storeMessage.do'/>",//设置请求的脚本地址
+      data: "msgId="+messageId,//设置请求的数据
+      async: true,
+      dataType: "json",//设置请求返回的数据格式
+      success: function (data) {
+        if(data =="noRole"){
+          alert("您还没有登录,请登录后操作!");
+        }else if(data == "add"){
+          $(o).find("em").html("已收藏");
+        }else if(data == "del"){
+          $(o).find("em").html("收藏");
         }
       }
-    });
+    })
   }
   function changePraiseStatus(o,messageId){
     $.ajax({
