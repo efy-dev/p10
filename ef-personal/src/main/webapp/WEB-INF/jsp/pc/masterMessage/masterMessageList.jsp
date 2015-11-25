@@ -231,7 +231,7 @@
                     "                                            <a class=\"jiathis_button_cqq\"></a>"+
                     "                                        </div>"+
                     "                                    </div>"+
-                    "                                </div>"+
+                    "                                </div><script type=\"text/javascript\" src=\"http://v3.jiathis.com/code/jia.js\" charset=\"utf-8\"/>"+
                     "                            </li>"+
                     "                        </ul>"+
                     "                    </div>"+

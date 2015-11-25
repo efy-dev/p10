@@ -180,24 +180,24 @@
     })
   }
 
-  function storeMessage(msgId){
-    $.ajax({
-      type: "get",//设置get请求方式
-      url: "<c:url value='/masterMessage/storeMessage.do'/>",//设置请求的脚本地址
-      data: "msgId="+msgId,//设置请求的数据
-      async: true,
-      dataType: "json",//设置请求返回的数据格式
-      success: function (data) {
-        if(data =="noRole"){
-          alert("您还没有登录,请登录后操作!");
-        }else if(data == "add"){
-          alert("收藏成功!");
-        }else if(data == "del"){
-          alert("已取消收藏!");
-        }
+function storeMessage(o,msgId){
+  $.ajax({
+    type: "get",//设置get请求方式
+    url: "<c:url value='/masterMessage/storeMessage.do'/>",//设置请求的脚本地址
+    data: "msgId="+msgId,//设置请求的数据
+    async: true,
+    dataType: "json",//设置请求返回的数据格式
+    success: function (data) {
+      if(data =="noRole"){
+        alert("您还没有登录,请登录后操作!");
+      }else if(data == "add"){
+        $(o).find("em").html("已收藏");
+      }else if(data == "del"){
+        $(o).find("em").html("收藏");
       }
-    })
-  }
+    }
+  })
+}
 
   function praiseMessage(o,msgId){
 //    var num = $(o).find("em").html().split("(")[1];
@@ -327,6 +327,7 @@
       async: true,
       dataType: "json",//设置请求返回的数据格式
       success: function (data) {
+        console.log(data);
         StartMessageNum = StartMessageNum + 1;
         var pubu = $("#pubu");
         if(data != null && data.length > 0) {
@@ -396,24 +397,34 @@
                     "                                    </a>"+
                     "                                </li>"+
                     "                                <li>"+
-                    "                                    <a onclick=\"storeMessage('"+data[i].id+"');\">"+
+                    "                                    <a onclick=\"storeMessage(this,'"+data[i].id+"');\">"+
                     "                                    <span class=\"pos\">"+
                     "                                        <span class=\"line\">"+
                     "                                            <i class=\"dnc-icon-3 zq\"></i>"+
-                    "                                            <em>收藏</em>"+
+                    "                                            <em>"+data[i].storeStatus+"</em>"+
                     "                                        </span>"+
                     "                                    </span>"+
                     "                                    </a>"+
                     "                                </li>"+
-                    "                                <li>"+
-                    "                                    <a href=\"#\">"+
-                    "                                    <span class=\"pos\">"+
+                    "                                <li style=\"position: relative\">"+
+                    "                                    <a onclick=\"showJiathis(this);\">"+
+                    "                                      <span class=\"pos\">"+
                     "                                        <span class=\"line\">"+
                     "                                            <i class=\"dnc-icon-4 zq\"></i>"+
                     "                                            <em>分享</em>"+
                     "                                        </span>"+
-                    "                                    </span>"+
+                    "                                      </span>"+
                     "                                    </a>"+
+                      "                                  <div style='display: none;' class=\"nr-share\">"+
+                      "                                    <div class=\"nr-bg\">"+
+                      "                                        <div class=\"jiathis_style\">"+
+                      "                                            <a class=\"jiathis_button_weixin\"></a>"+
+                      "                                            <a class=\"jiathis_button_tqq\"></a>"+
+                      "                                            <a class=\"jiathis_button_tsina\"></a>"+
+                      "                                            <a class=\"jiathis_button_cqq\"></a>"+
+                      "                                        </div>"+
+                      "                                    </div>"+
+                      "                                  </div><script type=\"text/javascript\" src=\"http://v3.jiathis.com/code/jia.js\" charset=\"utf-8\"/>"+
                     "                                </li>"+
                     "                            </ul>"+
                     "                        </div>"+
@@ -430,6 +441,16 @@
       }
     })
   }
+
+function showJiathis(o){
+  var next = $(o).next();
+  if($(next).is(":hidden")){
+    $(next).show();
+  }else{
+    $(next).hide();
+  }
+}
+
   //判断请求数据的开关
   function getDataCheck(){
     var pubu = $("#pubu");
