@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -273,6 +274,19 @@ public class PurchaseOrderController extends BaseController {
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 
+//    @RequestMapping("/")
+//    public String saveOrUpdateOrder(HttpServletRequest request ,HttpServletResponse response , Model model){
+//        String productModelId = request.getParameter("productModelId");
+//        String amount = request.getParameter("amount");
+//        float priceFloat = Float.parseFloat(request.getParameter("price"));
+//        BigDecimal price = new BigDecimal(priceFloat);
+//        ProductModel productModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),productModelId);
+//        PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(productModel,price,Integer.parseInt(amount), model);
+//        model.addAttribute("isEasyBuy", true);
+//    }
+
+
+
     @RequestMapping({"/getPurchaseOrderPrice.do"})
     @ResponseBody
     public String getPurchaseOrderPrice(HttpServletRequest request) {
@@ -365,6 +379,7 @@ public class PurchaseOrderController extends BaseController {
             return false;
         }
     }
+
 
 
 }

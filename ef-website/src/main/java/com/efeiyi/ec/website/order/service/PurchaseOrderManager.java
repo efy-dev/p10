@@ -1,10 +1,12 @@
 package com.efeiyi.ec.website.order.service;
 
 import com.efeiyi.ec.organization.model.ConsumerAddress;
+import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import org.springframework.ui.Model;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 /**
@@ -19,6 +21,8 @@ public interface PurchaseOrderManager {
         3.
      */
     PurchaseOrder saveOrUpdatePurchaseOrder(Cart cart,Model model) throws Exception;
+
+     PurchaseOrder saveOrUpdatePurchaseOrder(ProductModel productModel, BigDecimal price, int amount, Model model) throws Exception;
 
     PurchaseOrder confirmPurchaseOrder(PurchaseOrder purchaseOrder ,ConsumerAddress consumerAddress,HashMap<String, String> messageMap,String payWay);
 

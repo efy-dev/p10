@@ -57,7 +57,7 @@ public class WxController {
         } else {
             callbackUrl += "?" + dataKey + "=" + value;
         }
-        return "redirect:" + callbackUrl;
+        return "redirect:http://" + callbackUrl;
     }
 
     @RequestMapping({"/getInfo.do"})
