@@ -113,17 +113,17 @@ $(function(){
             $(this).addClass('active').siblings('li').removeClass('active');
         });
         //收藏
-        var oBiao=$('.preview .collect .biao');
-        oBiao.hover(function(){
-            var $span=$(this).siblings('span');
-            $span.text('添加收藏');
-            if($span.is('.active')){
-                $span.text('取消收藏');
-            }
-            if($span.is('.hover')){
-                $span.text('添加收藏');
-            }
-        })
+        //var oBiao=$('.preview .collect .biao');
+        //oBiao.hover(function(){
+        //    var $span=$(this).siblings('span');
+        //    $span.text('添加收藏');
+        //    if($span.is('.active')){
+        //        $span.text('取消收藏');
+        //    }
+        //    if($span.is('.hover')){
+        //        $span.text('添加收藏');
+        //    }
+        //})
 
         oBiao.find('.icon').toggle(
             function(){
