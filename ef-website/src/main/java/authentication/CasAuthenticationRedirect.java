@@ -45,7 +45,8 @@ public class CasAuthenticationRedirect extends org.springframework.security.cas.
                 try {
                     String callback = URLEncoder.encode(serviceUrl, "utf-8");
                     String dataKey = "unionid";
-                    response.sendRedirect(request.getContextPath() + "/wx/getInfo.do?callback=" + callback + "&dataKey=" + dataKey);
+                    request.getServletContext().getRequestDispatcher("/wx/getInfo.do?callback=" + callback + "&dataKey=" + dataKey).forward(request, response);
+                    return null;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
