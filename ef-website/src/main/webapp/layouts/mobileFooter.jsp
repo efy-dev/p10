@@ -161,7 +161,7 @@
 
     var registerWx = "<c:url value="/wx/userInfo"/>";
 
-    var register = "http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do";
+    var register = "http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do";
 
     if (isWeiXin()) {
 //        alert("not weixin");
