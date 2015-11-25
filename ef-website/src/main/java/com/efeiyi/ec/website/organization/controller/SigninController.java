@@ -40,6 +40,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -302,8 +303,21 @@ public class SigninController extends BaseController {
         return "redirect:" + url;
     }
 
-    @RequestMapping("/wx/login")
-    public String wxLogin(HttpServletRequest request, Model model) throws Exception {
+
+    @RequestMapping({"/wx/userInfo/{redirect}"})
+    public String wxUserInfo(HttpServletRequest request,@PathVariable String redirect) throws Exception {
+        String redirect_uri = "http://www.efeiyi.com/wx/login/"+redirect;
+        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+                "appid=" + WxPayConfig.APPID +
+                "&redirect_uri=" +
+                URLEncoder.encode(redirect_uri, "UTF-8") +
+                "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+
+        return "redirect:" + url;
+    }
+
+    @RequestMapping("/wx/login/{redirect}")
+    public String wxLogin(HttpServletRequest request, Model model, @PathVariable String redirect) throws Exception {
         String result = "";
         //1、网页授权后获取传递的code，用于获取openId
         String code = request.getParameter("code");
@@ -326,6 +340,7 @@ public class SigninController extends BaseController {
         param.put("unionid", unionid);
         Consumer consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from Consumer obj where obj.unionid=:unionid", param);
         MyUser myUser = (MyUser) baseManager.getObject(MyUser.class.getName(), consumer.getId());
+
         AuthenticationManager am = new SampleAuthenticationManager();
         try {
             Authentication authentication = new UsernamePasswordAuthenticationToken(myUser, myUser.getPassword());
@@ -335,7 +350,7 @@ public class SigninController extends BaseController {
         } catch (AuthenticationException e) {
             System.out.println("Authentication failed: " + e.getMessage());
         }
-        return "redirect:" + request.getParameter("redirect");
+        return "redirect:"+ redirect;
     }
 
 
