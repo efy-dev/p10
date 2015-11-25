@@ -17,7 +17,7 @@ public class CasAuthenticationRedirect extends org.springframework.security.cas.
     @Override
 
     protected String createServiceUrl(final HttpServletRequest request, final HttpServletResponse response) {
-        String unionid = request.getParameter("unionid");
+
 
         if (serviceUrlBak == null)
 
@@ -34,7 +34,7 @@ public class CasAuthenticationRedirect extends org.springframework.security.cas.
             if (!requestURI.equals("/") && requestURI.length() > 0) {
                 //serviceUrl="?"+ new SimpleUrlAuthenticationSuccessHandler().getTargetUrlParameter();
                 serviceUrl = "?callUrl";
-                serviceUrl += "=" + requestURI;
+                serviceUrl += "=" +request.getServerName()+":"+request.getServerPort()+ requestURI;
                 if (StringUtils.isNotBlank(queryString)) {
                     serviceUrl += "?" + queryString;
                 }
