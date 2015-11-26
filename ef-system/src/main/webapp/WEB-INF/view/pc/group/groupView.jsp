@@ -53,7 +53,7 @@
                     <th class="am-text-center" width="17%">红包</th>
 
                 </tr>
-                <c:forEach var="member" items="${object.memberList}">
+                <c:forEach var="member" items="${object.groupMemberList}">
                     <tr>
                         <td align="center">
                           ${member.user.name}
@@ -90,7 +90,7 @@
                                 ${po.purchaseOrder.serial}
                         </td>
                         <td class="am-text-center">
-                                ${po.member.user.name}
+                                ${po.groupMember.user.name}
                         </td>
 
                     </tr>
