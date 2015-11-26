@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.order.service.impl;
 
 import com.efeiyi.ec.organization.model.ConsumerAddress;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.*;
 import com.efeiyi.ec.tenant.model.Tenant;
@@ -86,7 +87,8 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
     private PurchaseOrder createNewPurchaseOrder(List<CartProduct> cartProductList) throws Exception {
 
         PurchaseOrder purchaseOrder = new PurchaseOrder();
-        purchaseOrder.setUser(AuthorizationUtil.getMyUser());
+        User user = (User)baseManager.getObject(User.class.getName(),AuthorizationUtil.getMyUser().getId());
+        purchaseOrder.setUser(user);
         purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
         purchaseOrder.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
@@ -110,7 +112,8 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
 
     private PurchaseOrder createNewPurchaseOrder(ProductModel productModel, BigDecimal price, int amount) throws Exception {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
-        purchaseOrder.setUser(AuthorizationUtil.getMyUser());
+        User user = (User)baseManager.getObject(User.class.getName(),AuthorizationUtil.getMyUser().getId());
+        purchaseOrder.setUser(user);
         purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
         purchaseOrder.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
