@@ -173,9 +173,9 @@ ${product.productDescription.content}
 <div class="suspend">
   <div class="great">
     <div class="dynamic-ft">
-      <a href="#" onclick="savaUP('${product.id}')" id="good-1" class="ft-a" name="up"> <i class="good-1"></i> <em id="em1">${product.fsAmount}</em></a>
+      <a href="#" onclick="savaUP('${product.id}')" id="good-1" class="ft-a" name="up"> <i class="good-1"></i> <em id="em1">${product.amount}</em></a>
       <i class="s-solid ft-a"></i>
-      <a href="#"  class="ft-a" onclick="showmodal()"> <i class="good-2"></i> <em>${product.amount}</em> </a>
+      <a href="#"  class="ft-a" onclick="showmodal()"> <i class="good-2"></i> <em>${product.fsAmount}</em> </a>
       <i class="s-solid ft-a"></i>
       <a href="#" class="ft-a" onclick="storeProduct('${product.id}')"> <i class="good-3"></i> </a>
       <i class="s-solid ft-a"></i>
