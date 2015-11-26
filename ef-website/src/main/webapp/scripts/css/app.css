@@ -899,7 +899,7 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
     margin-left: 92px;
 }
 .nav-new-list {border-bottom: 3px solid #000;}
-.nav-new-list .cate .allsort {top: 39px;}
+.nav-new-list .cate .allsort {top: 39px;display: none}
 /*--//End---nav-new---*/
 .focus-new {
     height:433px;
