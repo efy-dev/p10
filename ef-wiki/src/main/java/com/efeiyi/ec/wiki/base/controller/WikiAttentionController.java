@@ -109,7 +109,7 @@ public class WikiAttentionController extends WikibaseController {
 
     @RequestMapping("/prj.do")
     @ResponseBody
-    public List saveProjectFollows(HttpServletRequest request, Model model) throws Exception {
+    public List saveProjectFollows(HttpServletRequest request) throws Exception {
         XQuery query = new XQuery("plistProjectRecommended_default", request);
         PageInfo pageInfo = baseManager.listPageInfo(query);
         List<ProjectRecommended> list = pageInfo.getList();
@@ -136,8 +136,6 @@ public class WikiAttentionController extends WikibaseController {
         //轮播图
         List<Object> bannerList = getBanners();
         model.addAttribute("bannerList", bannerList);
-
-
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query3 = new XQuery("listProjectFollowed_isShow", request);
             query3.put("user_id", AuthorizationUtil.getMyUser().getId());
@@ -160,7 +158,7 @@ public class WikiAttentionController extends WikibaseController {
 
 @RequestMapping("/afterAtJ.do")
 @ResponseBody
-public List getAttentionProjects(HttpServletRequest request, Model model) throws Exception {
+public List getAttentionProjects(HttpServletRequest request) throws Exception {
     XQuery query = new XQuery("plistProjectFollowed2_isShow", request);
     query.put("user_id", AuthorizationUtil.getMyUser().getId());
     PageInfo pageInfo = baseManager.listPageInfo(query);

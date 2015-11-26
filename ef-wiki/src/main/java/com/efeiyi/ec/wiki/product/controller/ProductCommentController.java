@@ -34,7 +34,7 @@ public class ProductCommentController extends WikibaseController {
 
     @RequestMapping("/getCommentList.do")
     @ResponseBody
-    public List getCommentList(HttpServletRequest request, Model model) throws Exception {
+    public List getCommentList(HttpServletRequest request) throws Exception {
         List<ProductCommentModel> list;
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query = new XQuery("plistProductComment_ownerComent", request);

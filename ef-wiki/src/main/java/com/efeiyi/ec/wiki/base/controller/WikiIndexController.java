@@ -99,9 +99,6 @@ public class WikiIndexController extends WikibaseController {
         HttpSession session = request.getSession(true);*/
        //欺诈结束
 
-
-
-
         if (!HttpUtil.isPhone(request.getHeader("User-Agent"))) {
             return new ModelAndView("redirect:/pc/index.do");
         }
@@ -159,7 +156,7 @@ public class WikiIndexController extends WikibaseController {
 
     @RequestMapping("/IsattentionMaster.do")
     @ResponseBody
-    public boolean IsattentionMaster(HttpServletRequest request, Model model) throws Exception {
+    public boolean IsattentionMaster(HttpServletRequest request) throws Exception {
         boolean flag = false;
         String masterId = request.getParameter("masterId");
         if (AuthorizationUtil.getMyUser().getId() != null) {
@@ -178,7 +175,7 @@ public class WikiIndexController extends WikibaseController {
 
     @RequestMapping("/attentionMaster.do")
     @ResponseBody
-    public String saveMasterFollows(HttpServletRequest request, Model model) throws Exception {
+    public String saveMasterFollows(HttpServletRequest request) throws Exception {
         String masterId = request.getParameter("masterId");
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
@@ -229,7 +226,7 @@ public class WikiIndexController extends WikibaseController {
 
     @RequestMapping("/saveThumbUp.do")
     @ResponseBody
-    public String savaUP(HttpServletRequest request, Model model) throws Exception {
+    public String savaUP(HttpServletRequest request) throws Exception {
         String productId = request.getParameter("productId");
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
@@ -280,8 +277,6 @@ public class WikiIndexController extends WikibaseController {
             }else if (product.getAmount() - 1>=1){
                 FsAmount =product.getAmount() - 1;
             }
-            //product.setFsAmount(product.getFsAmount() == null ? 0 : product.getFsAmount() - 1);
-            //product.setFsAmount(FsAmount);
             product.setAmount(FsAmount);
             baseManager.saveOrUpdate(Product.class.getName(), product);
         }
@@ -294,7 +289,7 @@ public class WikiIndexController extends WikibaseController {
 
     @RequestMapping("/commentUpAndDown.do")
     @ResponseBody
-    public String commentUpAndDown(HttpServletRequest request, Model model) throws Exception {
+    public String commentUpAndDown(HttpServletRequest request) throws Exception {
         String productId = request.getParameter("productId");
         String commentId = request.getParameter("commentId");
 
@@ -358,11 +353,9 @@ public class WikiIndexController extends WikibaseController {
     }
 
 
-
-
     @RequestMapping("/afterAttention.do")
     @ResponseBody
-    public  List afterAttention(HttpServletRequest request, Model model) throws Exception {
+    public  List afterAttention(HttpServletRequest request) throws Exception {
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
             return new ArrayList();
