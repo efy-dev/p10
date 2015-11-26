@@ -3,4 +3,5 @@
     <mapping path="/pc/**" decorator="/layouts/mainTemplate.jsp"/>
     <mapping path="/project/**" decorator="/layouts/mainTemplate.jsp"/>
     <mapping path="/product/**" decorator="/layouts/mainTemplate.jsp"/>
+    <mapping path="/**" decorator="/layouts/mainTemplate.jsp"/>
 </sitemesh>

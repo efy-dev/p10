@@ -167,7 +167,7 @@ public class WikiIndexController extends WikibaseController {
             xQuery.put("master_id", masterId);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (!list.isEmpty()) {
+            if (list!=null && !list.isEmpty()) {
                 flag = true;
             }
         }
@@ -373,7 +373,7 @@ public class WikiIndexController extends WikibaseController {
         List<ProjectFollowed> projectFolloweds = pageInfo.getList();
         HashMap<String,ProjectFollowed> map = new HashMap<String,ProjectFollowed>();
         List<HashMap<String,ProjectFollowed>> res = new ArrayList<HashMap<String,ProjectFollowed>>();
-        if (!projectFolloweds.isEmpty()){
+        if (projectFolloweds!=null &&!projectFolloweds.isEmpty()){
           for (ProjectFollowed projectFollowed : projectFolloweds) {
             Project project = projectFollowed.getProject();
             XQuery query = new XQuery("listProduct_after", request);
@@ -382,7 +382,7 @@ public class WikiIndexController extends WikibaseController {
             query.put("createDateTime2", user.getLastLogoutDatetime());
             List<Product> lp = baseManager.listObject(query);
             Integer num=0;
-            if (!lp.isEmpty())
+            if (lp!=null && !lp.isEmpty())
                 num = lp.size();
             map.put(num.toString(),projectFollowed);
             res.add(map);
@@ -419,7 +419,7 @@ public class WikiIndexController extends WikibaseController {
             xQuery.put("master_id", userid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (!list.isEmpty()) {
+            if (list!=null && !list.isEmpty()) {
                 flag = true;
             }
         }
