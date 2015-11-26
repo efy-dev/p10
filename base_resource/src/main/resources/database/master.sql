@@ -719,3 +719,9 @@ CHANGE COLUMN `code` `role_code`  varchar(255) CHARACTER SET utf8 COLLATE utf8_g
 
 ALTER TABLE `organization_role`
 CHANGE COLUMN `role_code` `c_name`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `thestatus`;
+
+
+
+--------------------------11.26--------------------
+ALTER TABLE `master_news`
+MODIFY COLUMN `remark`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `type`;
