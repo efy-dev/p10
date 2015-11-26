@@ -221,13 +221,4 @@ public class BigTenant implements Serializable,BaseTenant {
     public void setAddress(String address) {
         this.address = address;
     }
-
-    @Column(name = "phone")
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }

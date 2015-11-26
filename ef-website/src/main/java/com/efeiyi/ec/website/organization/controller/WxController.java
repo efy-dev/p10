@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/11/25 0025.
@@ -53,7 +54,7 @@ public class WxController {
         return "redirect:" + url;
     }
 
-    @RequestMapping({"/fetchUserInfo/{unionid}/{callback}"})
+    @RequestMapping({"/fetchUserInfo/{dataKey}/{callback}"})
     public String getUserInfo(HttpServletRequest request, Model model, @PathVariable String dataKey, @PathVariable String callback) throws Exception {
 //        String callbackUrl = URLDecoder.decode(callback, "UTF-8");
         String result = "";
@@ -142,6 +143,7 @@ public class WxController {
         wxCalledRecord.setDataKey(dataKey);
         wxCalledRecord.setRequestSource(requestSource);
         wxCalledRecord.setConsumerId(consumerId);
+        wxCalledRecord.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
         String redirect = "/wx/fetchCode.do?callback=" + wxCalledRecord.getId() + "&dataKey=" + dataKey;
         return "redirect:" + redirect;
@@ -158,6 +160,7 @@ public class WxController {
         wxCalledRecord.setDataKey(dataKey);
         wxCalledRecord.setRequestSource(requestSource);
         wxCalledRecord.setConsumerId(consumerId);
+        wxCalledRecord.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
         String redirect = "/wx/fetchBaseUserCode.do?callback=" + wxCalledRecord.getId() + "&dataKey=" + dataKey;
         return "redirect:" + redirect;

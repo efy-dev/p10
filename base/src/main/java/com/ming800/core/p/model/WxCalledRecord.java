@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/11/26 0026.
@@ -18,7 +19,7 @@ public class WxCalledRecord {
     private String accessToken; //微信授权
     private String callback;    //接口回调
     private String requestSource; //请求来源
-    private String createDatetime; //请求时间
+    private Date createDatetime; //请求时间
     private String consumerId;    //目标用户的id (非必须)
 
     @Id
@@ -78,13 +79,14 @@ public class WxCalledRecord {
     }
 
     @Column(name = "create_datetime")
-    public String getCreateDatetime() {
+    public Date getCreateDatetime() {
         return createDatetime;
     }
 
-    public void setCreateDatetime(String createDatetime) {
+    public void setCreateDatetime(Date createDatetime) {
         this.createDatetime = createDatetime;
     }
+
 
     @Column(name = "consumer_id")
     public String getConsumerId() {
