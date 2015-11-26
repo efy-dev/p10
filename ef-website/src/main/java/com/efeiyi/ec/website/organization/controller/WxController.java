@@ -53,7 +53,7 @@ public class WxController {
         return "redirect:" + url;
     }
 
-    @RequestMapping({"/fetchUserInfo/{unionid}/{callback}"})
+    @RequestMapping({"/fetchUserInfo/{dataKey}/{callback}"})
     public String getUserInfo(HttpServletRequest request, Model model, @PathVariable String dataKey, @PathVariable String callback) throws Exception {
 //        String callbackUrl = URLDecoder.decode(callback, "UTF-8");
         String result = "";
