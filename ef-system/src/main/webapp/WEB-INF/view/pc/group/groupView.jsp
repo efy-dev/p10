@@ -49,18 +49,15 @@
                    id="productModel">
                 <tbody>
                 <tr>
-                    <th class="am-text-center" width="14%">姓名</th>
-                    <th class="am-text-center" width="17%">红包</th>
+                    <th width="14%">成员</th>
 
                 </tr>
                 <c:forEach var="member" items="${object.groupMemberList}">
                     <tr>
-                        <td align="center">
-                          ${member.user.name}
+                        <td>
+                          ${member.user.username}
                         </td>
-                        <td class="am-text-center">
-                                ${member.redPacket}
-                        </td>
+
 
                     </tr>
                 </c:forEach>
@@ -80,18 +77,18 @@
             <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
                 <tbody>
                 <tr>
-                    <th class="am-text-center" width="14%">订单号</th>
-                    <th class="am-text-center" width="17%">订单人</th>
-
+                    <th width="14%">订单号</th>
+                    <th width="14%">成员</th>
                 </tr>
                 <c:forEach var="po" items="${object.purchaseOrderGroupList}">
                     <tr>
-                        <td align="center">
+                        <td>
                                 ${po.purchaseOrder.serial}
                         </td>
-                        <td class="am-text-center">
-                                ${po.groupMember.user.name}
-                        </td>
+                        <td>
+                            ${po.groupMember.user.username}
+                       </td>
+
 
                     </tr>
                 </c:forEach>

@@ -5,6 +5,7 @@ import com.efeiyi.ec.group.model.GroupMember;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.group.model.PurchaseOrderGroup;
+import com.efeiyi.ec.system.Activity.service.ActivityManager;
 import com.efeiyi.ec.system.purchaseOrder.service.SmsCheckManager;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -33,6 +34,9 @@ public class ActivityController {
 
     @Autowired
     private SmsCheckManager smsCheckManager;
+
+    @Autowired
+    private ActivityManager activityManager;
 
     //对所有团进行成团操作并发送红包
     @RequestMapping(value = "/sendRedPacket.do")
@@ -101,4 +105,16 @@ public class ActivityController {
         return  "";
     }
 
+    @RequestMapping("/addGroup.do")
+    @ResponseBody
+    public String addGroup(String groupId,Integer amount,Integer length,HttpServletRequest request){
+        String f = "1";
+        try {
+            activityManager.addGroup(groupId,amount,length);
+        }catch (Exception e){
+            f="0";
+        }
+
+        return f;
+    }
 }
