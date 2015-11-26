@@ -125,14 +125,11 @@ public class PurchaseOrderController extends BaseController {
         productModel.setName(seckillProduct.getProductModel().getName());
         productModel.setProductModel_url(seckillProduct.getProductModel().getProductModel_url());
         CartProduct cartProduct = new CartProduct();
-//        String callback = request.getParameter("callback");
         cartProduct.setProductModel(productModel);
-//        String amount = request.getParameter("amount");
         cartProduct.setAmount(Integer.valueOf(amount));
         cartProduct.setIsChoose("1");
         cartProduct.setStatus("1");
         List<CartProduct> cartProductList = new ArrayList<>();
-//        cartProduct.getProductModel().setPrice(groupProduct.getGroupPrice());
         cartProductList.add(cartProduct);
         Map<String, List> productMap = new HashMap<>();
         productMap.put(seckillProduct.getProductModel().getProduct().getTenant().getId(), cartProductList);
