@@ -3,6 +3,7 @@ package com.efeiyi.ec.website.order.controller;
 import com.aliyun.openservices.oss.OSSClient;
 import com.aliyun.openservices.oss.model.ObjectMetadata;
 import com.aliyun.openservices.oss.model.PutObjectResult;
+import com.efeiyi.ec.activity.model.SeckillProduct;
 import com.efeiyi.ec.group.model.GroupProduct;
 import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.product.model.Product;
@@ -20,6 +21,7 @@ import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.ming800.core.base.controller.BaseController;
@@ -35,12 +37,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import com.google.zxing.WriterException;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -74,8 +75,123 @@ public class PurchaseOrderController extends BaseController {
     private PaymentManager paymentManager;
 
 
+    @RequestMapping("/giftReceive/{orderId}")
+    public String receiveGift(HttpServletRequest request, @PathVariable String orderId, Model model) {
+        PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), orderId);
+        if (purchaseOrderGift.getOrderType().equals("3") && purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRGIFT)) {
+            //判断是否是礼品订单 且可以被收礼
+            model.addAttribute("purchaseOrder", purchaseOrderGift);
+        }
+
+        if (AuthorizationUtil.isAuthenticated() && AuthorizationUtil.getMyUser().getId().equals(purchaseOrderGift.getUser().getId())){
+            model.addAttribute("order",purchaseOrderGift);
+            return "/purchaseOrder/purchaseOrderGiftView";
+        }
+        return "/purchaseOrder/receiveGift";
+    }
 
 
+    private static String accessKeyId = "maTnALCpSvWjxyAy";
+    private static String accessKeySecret = "0Ou6P67WhuSHESKrwJClFqCKo5BuBf";
+    public String productPicture(PurchaseOrderGift purchaseOrderGift) throws Exception{
+        String giftMessage = purchaseOrderGift.getGiftMessage();
+        String productModelName = new String();
+        BigDecimal productModelPrice = new BigDecimal("0");
+        if("1".equals(purchaseOrderGift.getShowGiftNameStatus())){
+            productModelName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getName();
+        }
+        if("1".equals(purchaseOrderGift.getShowGiftPriceStatus())){
+            productModelPrice = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getPrice();
+        }
+        //背景图设置
+        URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background.jpg");
+        ImageIcon imgIcon = new ImageIcon(backgroundUrl);
+        Image theImg = imgIcon.getImage();
+        int width=theImg.getWidth(null);
+        int height=theImg.getHeight(null);
+        BufferedImage bimage = new BufferedImage(width,height, BufferedImage.TYPE_INT_RGB);
+        Graphics  g = bimage.createGraphics();
+        g.setColor(Color.black);
+        g.drawImage(theImg, 0, 0, null );
+        //设置字体、字型、字号
+        g.setFont(new Font(null,Font.LAYOUT_NO_LIMIT_CONTEXT,25));
+        //背景图set文字显示
+        g.drawString(giftMessage,40,180);
+        g.drawString(productModelName,40,height/2+30);
+        g.drawString(productModelPrice.toString(),width/2+200,height/2+30);
+        g.dispose();
+        //二维码生成
+        String content = "http://www.efeiyi.com/order/giftReceive/"+purchaseOrderGift.getId();
+        Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
+        hints.put(EncodeHintType.MARGIN, 0);
+        BitMatrix bitMatrix = null;
+        try {
+            bitMatrix = new QRCodeWriter().encode(content,
+                    BarcodeFormat.QR_CODE, 154, 154,hints);//二维码像素
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+        int qRWidth = bitMatrix.getWidth();
+        int qRHeight = bitMatrix.getHeight();
+        BufferedImage image = new BufferedImage(qRWidth, qRHeight,BufferedImage.TYPE_INT_ARGB);
+        for (int x = 0; x < qRWidth; x++) {
+            for (int y = 0; y < qRHeight; y++) {
+                image.setRGB(x, y, bitMatrix.get(x, y) == true ?
+                        Color.BLACK.getRGB():Color.WHITE.getRGB());
+            }
+        }
+        //下载礼物图
+        String urlString = purchaseOrderGift.getGiftPictureUrl();
+        URL pictureUrl = new URL(urlString);
+        ImageIcon giftImgIcon = new ImageIcon(pictureUrl);
+        BufferedImage combined = new BufferedImage(bimage.getWidth(), bimage.getHeight(), BufferedImage.TYPE_INT_RGB);
+        //图像合并
+        g = combined.getGraphics();
+        g.drawImage(bimage, 0, 10, null);
+        g.drawImage(image, 100, 750, null);
+        g.drawImage(giftImgIcon.getImage(), 40, 250, null);
+        //保存到本地
+        ImageIO.write(combined, "JPG", new File("c://test3.jpg"));
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        ImageIO.write(combined, "jpg", os);
+        InputStream is = new ByteArrayInputStream(os.toByteArray());
+        ObjectMetadata meta = new ObjectMetadata();
+        // 必须设置ContentLength
+        meta.setContentLength(os.size());
+        // 上传Object
+        String url = "gift/"+purchaseOrderGift.getId()+".jpg";
+        OSSClient client = new OSSClient("http://oss-cn-beijing.aliyuncs.com", accessKeyId, accessKeySecret);
+        PutObjectResult result = client.putObject("ec-efeiyi", url, is, meta);
+        return url;
+    }
+
+    @RequestMapping({"/createGiftImage/{orderId}"})
+    public String createGiftImage(@PathVariable String orderId,Model model) throws Exception{
+        PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift)baseManager.getObject(PurchaseOrderGift.class.getName(),orderId);
+        String url = productPicture(purchaseOrderGift);
+        model.addAttribute("url",url);
+        return "/purchaseOrder/giftImage";
+    }
+
+
+    @RequestMapping("/giftConfirm.do")
+    public String confirmGift(HttpServletRequest request, Model model) {
+        String purchaseOrderId = request.getParameter("purchaseOrderId");
+        PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+        AddressProvince addressProvince = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), request.getParameter("province.id"));
+        AddressCity addressCity = (AddressCity) baseManager.getObject(AddressCity.class.getName(), request.getParameter("city.id"));
+        String detail = request.getParameter("receiveDetail");
+        String address = addressProvince.getName() + addressCity.getName() + detail;
+        String receiveName = request.getParameter("receiveName");
+        String receivePhone = request.getParameter("receivePhone");
+        purchaseOrderGift.setReceiverName(receiveName);
+        purchaseOrderGift.setReceiverPhone(receivePhone);
+        purchaseOrderGift.setPurchaseOrderAddress(address);
+        purchaseOrderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //订单改为未发货状态
+        baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+        model.addAttribute("purchaseOrder", purchaseOrderGift);
+        return "/purchaseOrder/giftView";
+    }
 
 
 
@@ -174,6 +290,74 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("amount", amount);
 
         return "/purchaseOrder/purchaseOrderGiftConfirm";
+    }
+
+
+
+    @RequestMapping({"/miaoBuy/{seckillProductId}/{amount}"})
+    public String miaoBuy(HttpServletRequest request, @PathVariable String seckillProductId, Model model, @PathVariable String amount) throws Exception {
+        SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), seckillProductId);
+        ProductModel productModel = new ProductModel();
+        productModel.setId(seckillProduct.getProductModel().getId());
+        productModel.setProduct(seckillProduct.getProductModel().getProduct());
+        productModel.setPrice(seckillProduct.getPrice());
+        productModel.setAmount(seckillProduct.getProductModel().getAmount());
+        productModel.setName(seckillProduct.getProductModel().getName());
+        productModel.setProductModel_url(seckillProduct.getProductModel().getProductModel_url());
+        CartProduct cartProduct = new CartProduct();
+//        String callback = request.getParameter("callback");
+        cartProduct.setProductModel(productModel);
+//        String amount = request.getParameter("amount");
+        cartProduct.setAmount(Integer.valueOf(amount));
+        cartProduct.setIsChoose("1");
+        cartProduct.setStatus("1");
+        List<CartProduct> cartProductList = new ArrayList<>();
+//        cartProduct.getProductModel().setPrice(groupProduct.getGroupPrice());
+        cartProductList.add(cartProduct);
+        Map<String, List> productMap = new HashMap<>();
+        productMap.put(seckillProduct.getProductModel().getProduct().getTenant().getId(), cartProductList);
+        model.addAttribute("productMap", productMap);
+        Cart cart = new Cart();
+        cart.setTotalPrice(seckillProduct.getPrice().multiply(new BigDecimal(cartProduct.getAmount())));
+        model.addAttribute("cart", cart);
+        List<Tenant> tenantList = new ArrayList<>();
+        tenantList.add(seckillProduct.getProductModel().getProduct().getTenant());
+        model.addAttribute("tenantList", tenantList);
+
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
+        xSaveOrUpdate.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
+        xSaveOrUpdate.getParamMap().put("user.id", AuthorizationUtil.getMyUser().getId());
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdate);
+
+        purchaseOrder.setTenant(tenantList.get(0));
+        purchaseOrder.setTotal(cart.getTotalPrice());
+        purchaseOrder.setOriginalPrice(cart.getTotalPrice());
+        purchaseOrder.setOrderType("2"); //2代表秒杀类型
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+//        callback += "?purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId + "&memberId=" + (request.getParameter("memberId") != null ? request.getParameter("memberId") : "null") + "&groupId=" + (request.getParameter("groupId") != null ? request.getParameter("groupId") : "null");
+//        purchaseOrder.setCallback(callback);
+//        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+
+        PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
+        purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
+        purchaseOrderProduct.setProductModel(seckillProduct.getProductModel());
+        purchaseOrderProduct.setPurchasePrice(seckillProduct.getPrice());
+        purchaseOrderProduct.setPurchaseAmount(cartProduct.getAmount());
+        baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+
+        XQuery xQuery = new XQuery("listConsumerAddress_default", request);
+        xQuery.addRequestParamToModel(model, request);
+        List addressList = baseManager.listObject(xQuery);
+
+        model.addAttribute("addressList", addressList);
+        model.addAttribute("purchaseOrder", purchaseOrder);
+        model.addAttribute("productModel", productModel);
+        model.addAttribute("amount", amount);
+        model.addAttribute("isEasyBuy", true);
+//        model.addAttribute("callback", callback);
+        model.addAttribute("seckillProductId", seckillProductId);
+
+        return "/purchaseOrder/purchaseOrderConfirm";
     }
 
 
@@ -310,6 +494,12 @@ public class PurchaseOrderController extends BaseController {
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
         Cart cart = cartManager.copyCart((Cart) request.getSession().getAttribute("cart"), cartManager.getCurrentCart(request));
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cart, model);
+        String callback = request.getParameter("callback");
+        if (callback != null) {
+
+            purchaseOrder.setCallback(callback);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        }
         //收货地址
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
@@ -321,6 +511,29 @@ public class PurchaseOrderController extends BaseController {
         request.getSession().removeAttribute("cart");
         return "/purchaseOrder/purchaseOrderConfirm";
     }
+
+    @RequestMapping("/saveOrUpdateOrder2.do")
+    public String saveOrUpdateOrder(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+        String productModelId = request.getParameter("productModelId");
+        String amount = request.getParameter("amount");
+        float priceFloat = Float.parseFloat(request.getParameter("price"));
+        BigDecimal price = new BigDecimal(priceFloat);
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+        PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(productModel, price, Integer.parseInt(amount), model);
+        String callback = request.getParameter("callback");
+        if (callback != null) {
+            purchaseOrder.setCallback(callback);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        }
+        XQuery xQuery = new XQuery("listConsumerAddress_default", request);
+        xQuery.addRequestParamToModel(model, request);
+        List addressList = baseManager.listObject(xQuery);
+        model.addAttribute("addressList", addressList);
+        model.addAttribute("purchaseOrder", purchaseOrder);
+        model.addAttribute("isEasyBuy", true);
+        return "/purchaseOrder/purchaseOrderConfirm";
+    }
+
 
     @RequestMapping({"/getPurchaseOrderPrice.do"})
     @ResponseBody

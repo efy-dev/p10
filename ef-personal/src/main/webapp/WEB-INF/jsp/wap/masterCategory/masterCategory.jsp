@@ -26,6 +26,7 @@
   <!-- Tile icon for Win8 (144x144 + tile color) -->
   <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
+  <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
 <header class="am-header custom-header">
@@ -69,20 +70,17 @@
       </a></li>
     </ul>
     <div class="am-tabs-bd">
-      <div data-tab-panel-0 class="am-tab-panel am-active">
+      <div data-tab-panel-0 about="alertTab" class="am-tab-panel am-active">
         <div class="aboud-you">
           <div class="list-you"><span>这些人最近关注了你</span></div>
-          <ul class="list-name" id="">
+          <ul class="list-name" id="toFollow">
             <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>Andy</span></li>
-            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>Lily</span></li>
-            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>wangjl</span></li>
           </ul>
-          <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
         </div>
       </div>
-      <div data-tab-panel-1 class="am-tab-panel ">
+      <div data-tab-panel-1 about="alertTab" class="am-tab-panel ">
         <div class="discuss">
-          <ul class="discuss-2">
+          <ul class="discuss-2" id="toComment">
             <li class="review">
               <div class="matter">
                 <p class="text-h1"><a href="#">Andya</a>回复了你</p>
@@ -104,11 +102,12 @@
               </div>
             </li>
           </ul>
+          <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
         </div>
       </div>
-      <div data-tab-panel-2 class="am-tab-panel ">
+      <div data-tab-panel-2 about="alertTab" class="am-tab-panel ">
         <div class="discuss">
-          <ul class="discuss-2">
+          <ul class="discuss-2" id="toPraise">
             <li class="review">
               <div class="matter">
                 <p class="text-h1">Joe</p>
@@ -213,6 +212,24 @@
   </div>
   <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
+<script>
+  var startNum = 1;
+  var ajaxKey = false;
+  $(function(){
+//    getFollows("");
+//    getComments("");
+//    getPraises("");
+  })
+  function getFollows(url){
+
+  }
+  function getComments(url){
+
+  }
+  function getPraises(url){
+
+  }
+</script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>
 <!--<![endif]-->

@@ -51,7 +51,7 @@
     <div class="menu-page">
       <ul class="bd">
         <li><a href="<c:url value='/masterMessage/index.do'/>" title="首页">首页</a></li>
-        <li><a href="" title="分类">消&nbsp;息</a></li>
+        <li><a href="" id="acs" title="分类">消&nbsp;息</a></li>
         <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
     </div>
@@ -77,7 +77,7 @@
       <div data-tab-panel-0 class="am-tab-panel am-active">
         <div class="aboud-you">
           <div class="list-you"><span>这些人最近关注了你</span></div>
-          <ul class="list-name">
+          <ul class="list-name" id="toFollows">
             <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>Andy</span></li>
             <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>Lily</span></li>
             <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>wangjl</span></li>
@@ -87,7 +87,7 @@
       </div>
       <div data-tab-panel-1 class="am-tab-panel ">
         <div class="discuss">
-          <ul class="discuss-2">
+          <ul class="discuss-2" id="toComments">
             <li class="review">
               <div class="matter">
                 <p class="text-h1"><a href="#">Andya</a>回复了你</p>
@@ -113,7 +113,7 @@
       </div>
       <div data-tab-panel-2 class="am-tab-panel ">
         <div class="discuss">
-          <ul class="discuss-2">
+          <ul class="discuss-2" id="toPraises">
             <li class="review">
               <div class="matter">
                 <p class="text-h1">Joe</p>
@@ -256,7 +256,19 @@
 //        }
       }
     });
+//    getFollows("");
+//    getComments("");
+//    getPraises("");
   })
+  function getFollows(url){
+
+  }
+  function getComments(url){
+
+  }
+  function getPraises(url){
+
+  }
   function getMasterProjectList(masterId){
     $.ajax({
       type: "POST",
