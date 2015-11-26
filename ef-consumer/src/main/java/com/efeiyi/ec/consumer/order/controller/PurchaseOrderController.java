@@ -1,5 +1,8 @@
 package com.efeiyi.ec.consumer.order.controller;
 
+import com.efeiyi.ec.consumer.organization.model.SendCode;
+import com.efeiyi.ec.consumer.organization.model.SmsProvider;
+import com.efeiyi.ec.consumer.organization.model.YunPianSmsProvider;
 import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.product.model.ProductModel;
@@ -259,6 +262,11 @@ public class PurchaseOrderController {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_UNCOMMENT);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        //确定收货后给商家发送已收货短信
+         String phone = purchaseOrder.getTenant().getPhone();
+         String purchaseOrderSerial=purchaseOrder.getSerial();
+         SmsProvider smsProvider = new YunPianSmsProvider();
+         smsProvider.post(phone, purchaseOrderSerial, "1125941");
         return "redirect:/order/myEfeiyi/list.do";
     }
 

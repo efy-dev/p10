@@ -49,6 +49,7 @@ public class BigTenant implements Serializable,BaseTenant {
     private List<TenantRecommended> tenantRecommendedList;
     private  String pictureUrl;
     private  String address;//商户地址
+    private  String phone;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
@@ -219,5 +220,13 @@ public class BigTenant implements Serializable,BaseTenant {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    @Column(name = "phone")
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
