@@ -1,6 +1,7 @@
 package com.efeiyi.ec.wiki.product.controller;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.project.model.ProjectFollowed;
 import com.efeiyi.ec.wiki.base.controller.WikibaseController;
@@ -47,7 +48,7 @@ public class ProductController extends WikibaseController {
         }
         ProductComment productComment = new ProductComment();
         productComment.setCreateDateTime(new Date());
-        productComment.setUser(user);
+        productComment.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
         productComment.setProduct(product);
         productComment.setStatus("1");
         productComment.setContent(content);
@@ -81,14 +82,14 @@ public class ProductController extends WikibaseController {
         }
         ProductComment productComment = new ProductComment();
         productComment.setCreateDateTime(new Date());
-        productComment.setUser(user);
+        productComment.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
         productComment.setProduct(product);
         productComment.setStatus("1");
         productComment.setContent(content);
         productComment.setAmount(0l);
         productComment.setWatch("0");
         //MyUser moderator =((ProductComment)baseManager.getObject(ProductComment.class.getName(),contentId)).getModerator();
-        MyUser moderator =((ProductComment)baseManager.getObject(ProductComment.class.getName(),contentId)).getUser();
+        User moderator =((ProductComment)baseManager.getObject(ProductComment.class.getName(),contentId)).getUser();
         productComment.setModerator(moderator);
         ProductComment fatherProductComment = new ProductComment();
         fatherProductComment.setId(contentId);
@@ -129,7 +130,7 @@ public class ProductController extends WikibaseController {
                 baseManager.remove(ProductStore.class.getName(),ps.getId());
                 return "repeat" ;
             }else{
-                productStore.setUser(user);
+                productStore.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
                 Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
                 productStore.setProduct(product);
                 productStore.setStatus("1");
