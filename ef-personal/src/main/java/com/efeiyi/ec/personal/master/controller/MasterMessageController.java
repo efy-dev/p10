@@ -3,6 +3,7 @@ package com.efeiyi.ec.personal.master.controller;
 import com.efeiyi.ec.master.model.*;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.personal.AuthorizationUtil;
 import com.efeiyi.ec.personal.ConvertMasterModelUtil;
 import com.efeiyi.ec.personal.master.model.MasterModel;
@@ -408,6 +409,35 @@ public class MasterMessageController {
 		store.setCreateDateTime(new Date());
 		baseManager.saveOrUpdate(MasterMessageStore.class.getName(), store);
 		return "true";
+	}
+
+	@ResponseBody
+	@RequestMapping("/userFollows/{qm}/{size}/{index}")
+	public String getUserFollows(HttpServletRequest request,@PathVariable String qm,@PathVariable String size,@PathVariable String index)throws Exception{
+		MyUser user = AuthorizationUtil.getMyUser();
+		if (user != null && user.getId() != null){
+			XQuery xQuery = new XQuery(qm,request);
+			xQuery.put("user_id",user.getId());
+			List<MasterFollowed> followeds = baseManager.listObject(xQuery);
+		}else{
+			return "noRole";
+		}
+
+		return null;
+	}
+
+	@ResponseBody
+	@RequestMapping("/userComments")
+	public String getUserComments(){
+
+		return null;
+	}
+
+	@ResponseBody
+	@RequestMapping("/userPraises")
+	public String getUserPraises(){
+
+		return null;
 	}
 
 	/*--------------PC-Start--------------*/
