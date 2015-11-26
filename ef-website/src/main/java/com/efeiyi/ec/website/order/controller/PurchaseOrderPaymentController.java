@@ -228,6 +228,8 @@ public class PurchaseOrderPaymentController {
         if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback()!=null){
             String redirect = URLDecoder.decode(purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback(),"UTF-8");
             return "redirect:http://"+redirect;
+        }else if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType().equals(3)){
+            return "redirect:/order/giftReceive/"+purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
         }
         return "/purchaseOrder/paySuccess";
     }
