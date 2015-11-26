@@ -48,30 +48,11 @@ public class PurchaseOrderController {
         String orderStatus = request.getParameter("status");
         model.addAttribute("status", orderStatus);
         XQuery xQuery = null;
-        int c = 0;
+
         if (orderStatus == null || orderStatus == "" || orderStatus =="0") {
             xQuery = new XQuery("plistPurchaseOrder_default", request, 10);
         } else {
-            c = Integer.parseInt(orderStatus);
-            switch (c) {
-                case 1:
-                    xQuery = new XQuery("plistPurchaseOrder_default1", request, 10);
-                    break;
-                case 5:
-                    xQuery = new XQuery("plistPurchaseOrder_default5", request, 10);
-                    break;
-                case 9:
-                    xQuery = new XQuery("plistPurchaseOrder_default9", request, 10);
-                    break;
-                case 13:
-                    xQuery = new XQuery("plistPurchaseOrder_default13", request, 10);
-                    break;
-                case 17:
-                    xQuery = new XQuery("plistPurchaseOrder_default17", request, 10);
-                    break;
-                default:
-                    xQuery = new XQuery("plistPurchaseOrder_default", request, 10);
-            }
+            xQuery = new XQuery("plistPurchaseOrder_default"+orderStatus+"", request, 10);
 
         }
         xQuery.addRequestParamToModel(model, request);
