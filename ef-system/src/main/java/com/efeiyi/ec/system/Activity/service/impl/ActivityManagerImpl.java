@@ -58,9 +58,9 @@ public class ActivityManagerImpl implements ActivityManager {
         if(amount>length){
             List<String> list = getUserList(amount - length);
            for(int i = 0;i<(amount-length);i++){
-               MyUser user = new MyUser();
+               User user = new User();
                user.setUsername(list.get(i));
-               user.setStatus(9);
+               user.setStatus("9");
                xdoDao.saveOrUpdateObject(user);
                GroupMember groupMember = new GroupMember();
                groupMember.setMyGroup(myGroup);

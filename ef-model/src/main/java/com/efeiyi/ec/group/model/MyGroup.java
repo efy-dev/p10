@@ -1,6 +1,7 @@
 package com.efeiyi.ec.group.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -20,7 +21,7 @@ public class MyGroup {
     private String status; //0:取消 1：进行中 3：组团成功 5： 组团失败
     private Date createDateTime;
     private List<PurchaseOrderGroup> purchaseOrderGroupList;
-    private MyUser manUser;
+    private User manUser;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -72,11 +73,11 @@ public class MyGroup {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "man_user_id")
-    public MyUser getManUser() {
+    public User getManUser() {
         return manUser;
     }
 
-    public void setManUser(MyUser manUser) {
+    public void setManUser(User manUser) {
         this.manUser = manUser;
     }
 
