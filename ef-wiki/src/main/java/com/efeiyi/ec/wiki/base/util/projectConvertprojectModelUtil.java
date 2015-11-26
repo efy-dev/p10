@@ -107,21 +107,21 @@ public class projectConvertprojectModelUtil {
         return list;
     }
 
-    public static List<Praise2ProductModel> getpraise2ProductModel(List<Praise2Product> praise2Products) {
-        List<Praise2ProductModel> list = new ArrayList<Praise2ProductModel>();
-        if (praise2Products != null && praise2Products.size() >= 1) {
-            for (Praise2Product productComment : praise2Products) {
-                Praise2ProductModel praise2ProductModel = new Praise2ProductModel();
-                praise2ProductModel.setModerator(productComment.getModerator());
-                praise2ProductModel.setStatus(productComment.getStatus());
-                praise2ProductModel.setWatch(productComment.getWatch());
-                praise2ProductModel.setProduct(productComment.getProduct().getId());
-                praise2ProductModel.setUser(productComment.getUser());
-                praise2ProductModel.setComment(productComment.getComment());
-                praise2ProductModel.setCreateDateTime(productComment.getCreateDateTime());
-                praise2ProductModel.setType(productComment.getType());
-                praise2ProductModel.setId(productComment.getId());
-                list.add(praise2ProductModel);
+    public static List<ProductPraiseModel> getpraise2ProductModel(List<ProductPraise> productPraises) {
+        List<ProductPraiseModel> list = new ArrayList<ProductPraiseModel>();
+        if (productPraises != null && productPraises.size() >= 1) {
+            for (ProductPraise productComment : productPraises) {
+                ProductPraiseModel productPraiseModel = new ProductPraiseModel();
+                productPraiseModel.setModerator(productComment.getModerator());
+                productPraiseModel.setStatus(productComment.getStatus());
+                productPraiseModel.setWatch(productComment.getWatch());
+                productPraiseModel.setProduct(productComment.getProduct().getId());
+                productPraiseModel.setUser(productComment.getUser());
+                productPraiseModel.setComment(productComment.getComment());
+                productPraiseModel.setCreateDateTime(productComment.getCreateDateTime());
+                productPraiseModel.setType(productComment.getType());
+                productPraiseModel.setId(productComment.getId());
+                list.add(productPraiseModel);
             }
         }
         return list;

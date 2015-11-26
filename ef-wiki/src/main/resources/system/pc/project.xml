@@ -355,7 +355,7 @@
 
         <entity name="Praise2Product" label="Praise2Product"
                 basic="simple" others=""
-                model="com.efeiyi.ec.wiki.model.Praise2Product">
+                model="com.efeiyi.ec.wiki.model.ProductPraise">
             <does>
                 <do name="plistPraise2Product" access="" label="Praise2Product列表"
                     result="json">

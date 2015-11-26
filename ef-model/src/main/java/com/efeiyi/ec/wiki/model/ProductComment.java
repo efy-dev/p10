@@ -1,6 +1,7 @@
 package com.efeiyi.ec.wiki.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,10 +28,10 @@ public class ProductComment implements Serializable {
     private ProductComment fatherComment;
     private List<ProductComment> subComment;
     private Date createDateTime;
-    private MyUser user;
-    private List<Praise2Product> praise;
+    private User user;
+    private List<ProductPraise> praise;
     private Long amount;
-    private MyUser moderator;
+    private User moderator;
     private String watch;
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -86,11 +87,11 @@ public class ProductComment implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public MyUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(MyUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
     @JsonIgnore
@@ -115,11 +116,11 @@ public class ProductComment implements Serializable {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "comment", cascade = CascadeType.ALL)
-    public List<Praise2Product> getPraise() {
+    public List<ProductPraise> getPraise() {
         return praise;
     }
 
-    public void setPraise(List<Praise2Product> praise) {
+    public void setPraise(List<ProductPraise> praise) {
         this.praise = praise;
     }
 
@@ -134,11 +135,11 @@ public class ProductComment implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "moderator_id")
-    public MyUser getModerator() {
+    public User getModerator() {
         return moderator;
     }
 
-    public void setModerator(MyUser moderator) {
+    public void setModerator(User moderator) {
         this.moderator = moderator;
     }
     @Column(name = "watch")

@@ -1,6 +1,7 @@
 package com.efeiyi.ec.wiki.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,15 +20,15 @@ import java.util.Date;
 @Entity
 @Table(name = "wiki_Praise_Product")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class Praise2Product implements Serializable {
+public class ProductPraise implements Serializable {
     private String id;
     private Product product;
-    private MyUser user;
+    private User user;
     private ProductComment comment;
     private String type;
     private Date createDateTime;
     private String status;
-    private MyUser moderator;
+    private User moderator;
     private String watch;
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -56,11 +57,11 @@ public class Praise2Product implements Serializable {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public MyUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(MyUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -101,11 +102,11 @@ public class Praise2Product implements Serializable {
     }
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "moderator_id")
-    public MyUser getModerator() {
+    public User getModerator() {
         return moderator;
     }
 
-    public void setModerator(MyUser moderator) {
+    public void setModerator(User moderator) {
         this.moderator = moderator;
     }
     @Column(name = "watch")

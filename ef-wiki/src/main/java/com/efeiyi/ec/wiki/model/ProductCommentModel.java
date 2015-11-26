@@ -1,6 +1,7 @@
 package com.efeiyi.ec.wiki.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.Product;
 
 import java.io.Serializable;
@@ -19,8 +20,8 @@ public class ProductCommentModel implements Serializable {
     private ProductComment fatherComment;
     private List<ProductComment> subComment;
     private Date createDateTime;
-    private MyUser user;
-    private MyUser moderator;
+    private User user;
+    private User moderator;
     private String watch;
 
     public String getId() {
@@ -79,19 +80,19 @@ public class ProductCommentModel implements Serializable {
         this.createDateTime = createDateTime;
     }
 
-    public MyUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(MyUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public MyUser getModerator() {
+    public User getModerator() {
         return moderator;
     }
 
-    public void setModerator(MyUser moderator) {
+    public void setModerator(User moderator) {
         this.moderator = moderator;
     }
 
