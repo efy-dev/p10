@@ -83,7 +83,9 @@
                             </div>
                         </td>
                         </security:authorize>
-                        <td class="am-hide-sm-only" width="10%">${seckillProduct.productModel.name}</td>
+                        <td class="am-hide-sm-only" width="10%">
+                            ${seckillProduct.productModel.name}
+                        </td>
                         <td class="am-hide-sm-only" width="10%">
                                 ${seckillProduct.price}
                         </td>

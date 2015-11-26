@@ -8,6 +8,7 @@ import com.efeiyi.ec.group.model.GroupMember;
 import com.efeiyi.ec.group.model.MyGroup;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.group.model.PurchaseOrderGroup;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
@@ -116,7 +117,7 @@ public class GroupController {
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
-        MyUser currentUser = purchaseOrder.getUser();
+        User currentUser = purchaseOrder.getUser();
 
 //        String orderStatus = "0";
 //        if (purchaseOrder != null && purchaseOrder.getOrderStatus() != null && purchaseOrder.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRECEIVE)) {

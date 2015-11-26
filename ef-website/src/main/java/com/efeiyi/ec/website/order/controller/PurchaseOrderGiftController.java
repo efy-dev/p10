@@ -101,7 +101,9 @@ public class PurchaseOrderGiftController {
         //设置字体、字型、字号
         g.setFont(new Font(null, Font.LAYOUT_NO_LIMIT_CONTEXT, 25));
         //背景图set文字显示
-        g.drawString(giftMessage, 40, 180);
+        if (giftMessage != null) {
+            g.drawString(giftMessage, 40, 180);
+        }
         g.drawString(productModelName, 40, height / 2 + 30);
         g.drawString((productModelPrice.intValue() != 0 ? productModelPrice.toString() : ""), width / 2 + 200, height / 2 + 30);
         g.dispose();
@@ -136,7 +138,6 @@ public class PurchaseOrderGiftController {
         g.drawImage(image, 100, 750, null);
         g.drawImage(giftImgIcon.getImage(), 40, 250, null);
         //保存到本地
-        ImageIO.write(combined, "JPG", new File("c://test3.jpg"));
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         ImageIO.write(combined, "jpg", os);
         InputStream is = new ByteArrayInputStream(os.toByteArray());

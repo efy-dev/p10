@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!--<common>-->
-    <!--<autoserials>-->
-        <!--<autoserial group="palLabelSerial" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="yymm" length="10" cacheSize="500" step="1" />-->
-        <!--<autoserial group="serial" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="2" />-->
-        <!--<autoserial group="documentOrder" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="2" />-->
-    <!--</autoserials>-->
-<!--</common>-->
