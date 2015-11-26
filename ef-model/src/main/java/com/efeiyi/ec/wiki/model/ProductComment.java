@@ -31,7 +31,7 @@ public class ProductComment implements Serializable {
     private User user;
     private List<ProductPraise> praise;
     private Long amount;
-    private MyUser moderator;
+    private User moderator;
     private String watch;
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -135,11 +135,11 @@ public class ProductComment implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "moderator_id")
-    public MyUser getModerator() {
+    public User getModerator() {
         return moderator;
     }
 
-    public void setModerator(MyUser moderator) {
+    public void setModerator(User moderator) {
         this.moderator = moderator;
     }
     @Column(name = "watch")
