@@ -341,10 +341,10 @@
                       " <div class='txt'> <div class='name'>"+data.list[i].name+"</div> " +
                       "<div class='txt-info'> <a href='#'>" +
                       "<i class='icon good-1'></i>" +
-                      "<em>"+data.list[i].fsAmount+"</em></a> " +
+                      "<em>"+data.list[i].amount+"</em></a> " +
                       "<a href='#'>" +
                       "<i class='icon good-2'>" +
-                      "</i><em>"+data.list[i].amount+"</em>" +
+                      "</i><em>"+data.list[i].fsAmount+"</em>" +
                       "</a> </div> </div> </li>");
 
               pubu.append(box);

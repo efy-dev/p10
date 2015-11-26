@@ -308,5 +308,9 @@ public class   SigninController extends BaseController {
     public void forwardFind9(@PathVariable String productId,HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect(request.getContextPath() +"/base/showProduct/"+productId);
     }
+    @RequestMapping("/wap/projectAttention")
+    public ModelAndView forwardFind10(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      return  new ModelAndView("/hotProjects/PopularProjects2");
+    }
 }
 

@@ -1,10 +1,9 @@
-package com.efeiyi.ec.wiki.base.controller;
+package com.efeiyi.ec.wiki.product.controller;
 
+import com.efeiyi.ec.wiki.base.controller.WikibaseController;
 import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
-import com.efeiyi.ec.wiki.model.Praise2Product;
-import com.efeiyi.ec.wiki.model.Praise2ProductModel;
-import com.efeiyi.ec.wiki.model.ProductComment;
-import com.efeiyi.ec.wiki.model.ProductCommentModel;
+import com.efeiyi.ec.wiki.model.ProductPraise;
+import com.efeiyi.ec.wiki.model.ProductPraiseModel;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -26,22 +25,22 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/praise")
-public class praise2ProductController extends WikibaseController {
-    private static Logger logger = Logger.getLogger(praise2ProductController.class);
+public class ProductPraiseController extends WikibaseController {
+    private static Logger logger = Logger.getLogger(ProductPraiseController.class);
     @Autowired
     BaseManager baseManager;
 
     @RequestMapping("/getPraiseList.do")
     @ResponseBody
     public List getPraiseList(HttpServletRequest request, Model model) throws Exception {
-        List<Praise2ProductModel> list;
+        List<ProductPraiseModel> list;
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query = new XQuery("plistPraise2Product_ownerPraise", request);
             query.put("moderator_id", AuthorizationUtil.getMyUser().getId());
             PageInfo pageInfo = baseManager.listPageInfo(query);
             list = projectConvertprojectModelUtil.getpraise2ProductModel(pageInfo.getList());
         }else{
-            list = new ArrayList<Praise2ProductModel>();
+            list = new ArrayList<ProductPraiseModel>();
         }
         return list;
 
@@ -51,10 +50,10 @@ public class praise2ProductController extends WikibaseController {
     @ResponseBody
     public String watchPraise(HttpServletRequest request) throws Exception {
         String praise2ProductId = request.getParameter("praise2ProductId");
-        Praise2Product praise2Product = (Praise2Product)baseManager.getObject(Praise2Product.class.getName(),praise2ProductId);
-        if(praise2Product!=null && praise2Product.getId()!=null){
-            praise2Product.setWatch("1");
-            baseManager.saveOrUpdate(Praise2Product.class.getName(),praise2Product);
+        ProductPraise productPraise = (ProductPraise)baseManager.getObject(ProductPraise.class.getName(),praise2ProductId);
+        if(productPraise !=null && productPraise.getId()!=null){
+            productPraise.setWatch("1");
+            baseManager.saveOrUpdate(ProductPraise.class.getName(), productPraise);
         }
         return "succ";
     }

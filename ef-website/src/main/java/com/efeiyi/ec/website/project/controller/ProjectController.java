@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.project.controller;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.project.model.ProjectCategory;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -57,6 +58,7 @@ public class ProjectController extends BaseController {
     public String listProjectByCategory(HttpServletRequest request , @PathVariable String categoryId ,Model model) throws Exception{
         //@TODO 轮播图位置
         List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
+        ProjectCategory projectCategory = (ProjectCategory) baseManager.getObject(ProjectCategory.class.getName(),categoryId);
         model.addAttribute("bannerList", bannerList);
         XQuery projectQuery = new XQuery("listProject_default",request);
         projectQuery.put("projectCategory_id",categoryId);
@@ -72,6 +74,7 @@ public class ProjectController extends BaseController {
             productMap.put(((Project)project).getId(),baseManager.listPageInfo(productQuery).getList());
         }
         model.addAttribute("productMap",productMap);
+        model.addAttribute("projectCategory",projectCategory);
         return "/project/projectList";
     }
 }

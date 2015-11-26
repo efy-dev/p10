@@ -221,7 +221,7 @@ public class ProductController {
             if(purchaseOrderProductList!=null&&purchaseOrderProductList.size()>0){
                 for(int i=0;i<purchaseOrderProductList.size();i++){
                     PurchaseOrder purchaseOrder = ((PurchaseOrderProduct)purchaseOrderProductList.get(i)).getPurchaseOrder();
-                    if(purchaseOrder.getId()==null){
+                    if(purchaseOrder.getId()==null||purchaseOrder.getUser()==null||purchaseOrder.getUser().getUsername()==null){
                         purchaseOrderProductList.remove(i);
                     }
                 }

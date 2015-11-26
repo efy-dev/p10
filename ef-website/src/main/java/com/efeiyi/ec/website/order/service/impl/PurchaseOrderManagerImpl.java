@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.order.service.impl;
 
 import com.efeiyi.ec.organization.model.ConsumerAddress;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.*;
 import com.efeiyi.ec.tenant.model.Tenant;
@@ -69,10 +70,25 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
 
     }
 
+    public PurchaseOrder saveOrUpdatePurchaseOrder(ProductModel productModel, BigDecimal price, int amount, Model model) throws Exception {
+        HashMap<String, List> productMap = new HashMap<>();
+        PurchaseOrder purchaseOrder = createNewPurchaseOrder(productModel, price, amount);
+        LinkedHashSet<Tenant> tenantSet = new LinkedHashSet<>();
+        tenantSet.add(productModel.getProduct().getTenant());
+        ArrayList<ProductModel> productModelArrayList = new ArrayList<>();
+        productModelArrayList.add(productModel);
+        productMap.put(productModel.getProduct().getTenant().getId(), productModelArrayList);
+        model.addAttribute("productMap", productMap);
+        model.addAttribute("purchaseOrder", purchaseOrder);
+        model.addAttribute("tenantList", tenantSet);
+        return purchaseOrder;
+    }
+
     private PurchaseOrder createNewPurchaseOrder(List<CartProduct> cartProductList) throws Exception {
 
         PurchaseOrder purchaseOrder = new PurchaseOrder();
-        purchaseOrder.setUser(AuthorizationUtil.getMyUser());
+        User user = (User)baseManager.getObject(User.class.getName(),AuthorizationUtil.getMyUser().getId());
+        purchaseOrder.setUser(user);
         purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
         purchaseOrder.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
@@ -88,6 +104,24 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
             }
             totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         }
+        purchaseOrder.setTotal(totalPrice);
+        purchaseOrder.setOriginalPrice(totalPrice);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        return purchaseOrder;
+    }
+
+    private PurchaseOrder createNewPurchaseOrder(ProductModel productModel, BigDecimal price, int amount) throws Exception {
+        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        User user = (User)baseManager.getObject(User.class.getName(),AuthorizationUtil.getMyUser().getId());
+        purchaseOrder.setUser(user);
+        purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
+        purchaseOrder.setCreateDatetime(new Date());
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        BigDecimal totalPrice = new BigDecimal(0);
+        PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrder, productModel, amount, price);
+        totalPrice = totalPrice.add(price.multiply(new BigDecimal(amount)));
+        baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+        totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         purchaseOrder.setTotal(totalPrice);
         purchaseOrder.setOriginalPrice(totalPrice);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);

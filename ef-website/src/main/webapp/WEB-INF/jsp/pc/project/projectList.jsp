@@ -58,10 +58,12 @@
             <div class="items">
                 <div class="img-big">
                     <a href="<c:url value="/product/list/${project.id}"/>" target="_blank">
-                        <strong class="tbar">${project.name}</strong>
+                        <div class="tbar2-n1"><div class="tbar2-n2"><strong class="tbar2">${project.name}</strong></div></div>
+                        <%--<strong class="tbar"></strong>--%>
                         <img class="imgfilter" src="http://pro.efeiyi.com/${project.picture_pc_url}@!project-list-pc"
                              alt="">
-                    <span class="txt">
+                        <div class="tbar-txt">
+                        <span class="txt">
                         <c:choose>
                             <c:when test="${project.description.length()<=60}">
                                 ${project.description}
@@ -71,6 +73,7 @@
                             </c:when>
                         </c:choose>
                     </span>
+                            </div>
                     </a>
                 </div>
                 <c:forEach items="${productMap.get(project.id)}" var="product">
@@ -95,6 +98,10 @@
     $().ready(function(){;
         $(".allsort").show()
         $(".cate").removeAttr("id");
+        $("#line").attr("class","wh nav-new");
+        if(${projectCategory.id==project.id}){
+
+        }
     })
 </script>
 </body>

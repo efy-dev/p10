@@ -10,7 +10,15 @@
 <div class="allsort" style="display: none;">
     <c:forEach items="${categoryList}" var="category">
         <div class="item">
-            <h3 class="active"><i class="icon-new icon-left"></i><a href="<c:url value="/project/list/${category.id}"/>" title="">${category.name}</a><i class="icon-new icon-link"></i><i class="icon-new icon-right"></i></h3>
+            <c:if test="${category.id==projectCategory.id}">
+            <h3 class="active">
+
+                </c:if>
+                    <c:if test="${category.id!=projectCategory.id}">
+                    <h3>
+
+                        </c:if><i class="icon-new icon-left"></i><a href="<c:url value="/project/list/${category.id}"/>" title="">${category.name}</a><i class="icon-new icon-link"></i><i class="icon-new icon-right"></i></h3>
+            <%--<h3 class="active"><i class="icon-new icon-left"></i><a href="<c:url value="/project/list/${category.id}"/>" title="">${category.name}</a><i class="icon-new icon-link"></i><i class="icon-new icon-right"></i></h3>--%>
             <div class="i-mc" style="display: none;">
                 <div class="links">
                     <c:forEach items="${projectMap.get(category.id)}" var="project">

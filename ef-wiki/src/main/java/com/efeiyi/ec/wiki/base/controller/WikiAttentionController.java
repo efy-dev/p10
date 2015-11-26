@@ -1,6 +1,5 @@
 package com.efeiyi.ec.wiki.base.controller;
 
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.project.model.ProjectFollowed;
@@ -15,7 +14,6 @@ import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.BannerManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,8 +30,8 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/pc")
-public class WikiDynamicController extends WikibaseController {
-    private static Logger logger = Logger.getLogger(WikiDynamicController.class);
+public class WikiAttentionController extends WikibaseController {
+    private static Logger logger = Logger.getLogger(WikiAttentionController.class);
     @Autowired
     BaseManager baseManager;
     @Autowired
@@ -112,12 +109,12 @@ public class WikiDynamicController extends WikibaseController {
 
     @RequestMapping("/prj.do")
     @ResponseBody
-    public List saveProjectFollows(HttpServletRequest request, Model model) throws Exception {
+    public List saveProjectFollows(HttpServletRequest request) throws Exception {
         XQuery query = new XQuery("plistProjectRecommended_default", request);
         PageInfo pageInfo = baseManager.listPageInfo(query);
         List<ProjectRecommended> list = pageInfo.getList();
         List<ProjectModel> pm = new ArrayList<ProjectModel>();
-        if (!list.isEmpty()){
+        if (list!=null && !list.isEmpty()){
             for (ProjectRecommended projectRecommended:list){
                  Project project = projectRecommended.getProject();
                  ProjectModel projectModel = projectConvertprojectModelUtil.projectConvertprojectModel(project);
@@ -139,8 +136,6 @@ public class WikiDynamicController extends WikibaseController {
         //轮播图
         List<Object> bannerList = getBanners();
         model.addAttribute("bannerList", bannerList);
-
-
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query3 = new XQuery("listProjectFollowed_isShow", request);
             query3.put("user_id", AuthorizationUtil.getMyUser().getId());
@@ -163,13 +158,13 @@ public class WikiDynamicController extends WikibaseController {
 
 @RequestMapping("/afterAtJ.do")
 @ResponseBody
-public List getAttentionProjects(HttpServletRequest request, Model model) throws Exception {
+public List getAttentionProjects(HttpServletRequest request) throws Exception {
     XQuery query = new XQuery("plistProjectFollowed2_isShow", request);
     query.put("user_id", AuthorizationUtil.getMyUser().getId());
     PageInfo pageInfo = baseManager.listPageInfo(query);
     List<ProjectFollowed> projectFolloweds = pageInfo.getList();
     List<ProjectDataModel> pm = new ArrayList<ProjectDataModel>();
-    if (!projectFolloweds.isEmpty()){
+    if (projectFolloweds!=null && !projectFolloweds.isEmpty()){
         for (ProjectFollowed projectFollowed:projectFolloweds){
             Project project = projectFollowed.getProject();
             ProjectDataModel projectDataModel = projectConvertprojectModelUtil.getProjectDataModel(project);

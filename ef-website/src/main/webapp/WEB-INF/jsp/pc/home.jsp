@@ -214,7 +214,7 @@
         </ul>
     </div>
     <!-- 放banner-->
-    <div class="middle-banner"><a href="${bannerActivityList[0].redirect}" target="_blank"><img src="http://pro.efeiyi.com/${bannerActivityList[0].img}@!pc-banner-advertisement"/></a></div>
+    <div><a href="${bannerActivityList[0].redirect}" target="_blank"><img src="http://pro.efeiyi.com/${bannerActivityList[0].img}@!pc-banner-advertisement"/></a></div>
     <div class="max-cat ae">
         <!--一个类别-->
         <c:forEach items="${recommendedCategoryList}" var="projectCategory">
@@ -342,6 +342,8 @@
     $().ready(function(){;
         $(".allsort").show()
         $(".cate").removeAttr("id");
+        $("#line").attr("class","wh nav-new");
+
     })
 </script>
 </body>

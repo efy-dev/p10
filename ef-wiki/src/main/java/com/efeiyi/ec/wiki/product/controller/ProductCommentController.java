@@ -1,6 +1,7 @@
-package com.efeiyi.ec.wiki.base.controller;
+package com.efeiyi.ec.wiki.product.controller;
 
 
+import com.efeiyi.ec.wiki.base.controller.WikibaseController;
 import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
 import com.efeiyi.ec.wiki.model.ProductComment;
 import com.efeiyi.ec.wiki.model.ProductCommentModel;
@@ -33,7 +34,7 @@ public class ProductCommentController extends WikibaseController {
 
     @RequestMapping("/getCommentList.do")
     @ResponseBody
-    public List getCommentList(HttpServletRequest request, Model model) throws Exception {
+    public List getCommentList(HttpServletRequest request) throws Exception {
         List<ProductCommentModel> list;
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query = new XQuery("plistProductComment_ownerComent", request);

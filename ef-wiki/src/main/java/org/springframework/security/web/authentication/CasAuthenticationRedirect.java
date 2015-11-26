@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by Administrator on 2015/11/4.
+ *
  */
 public class CasAuthenticationRedirect extends org.springframework.security.cas.web.CasAuthenticationEntryPoint{
     private String serviceUrlBak=null;

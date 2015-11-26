@@ -3,6 +3,7 @@ package com.efeiyi.ec.purchase.model;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.tenant.model.Tenant;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -35,7 +36,7 @@ public class PurchaseOrder {
     private List<PurchaseOrderDelivery> purchaseOrderDeliveryList;  //发货记录 订单配送
     private List<PurchaseOrderPayment> purchaseOrderPaymentList;
     private Date createDatetime;       //下单时间
-    private MyUser user;
+    private User user;
     private ConsumerAddress consumerAddress;  //收获地址
     private String status;
     private BigDecimal total;  //订单总价
@@ -159,13 +160,15 @@ public class PurchaseOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public MyUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(MyUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_address_id")

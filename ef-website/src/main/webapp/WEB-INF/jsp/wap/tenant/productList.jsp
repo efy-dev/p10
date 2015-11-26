@@ -43,7 +43,7 @@
   <!-- //End--slider-->
   <div class="details-shop-des">
     <div class="bd details-shop">
-      <div class="bd s-part s-part2">
+      <div class="bd s-part">
         <div class="img"><img src="<c:url value="http://pro.efeiyi.com/${tenant.logoUrl}@!tenant-wap-log"/>" width="80" alt=""/></div>
         <div class="bd txt">
           <p>${tenant.name}</p>

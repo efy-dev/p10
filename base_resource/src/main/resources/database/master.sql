@@ -719,3 +719,24 @@ CHANGE COLUMN `code` `role_code`  varchar(255) CHARACTER SET utf8 COLLATE utf8_g
 
 ALTER TABLE `organization_role`
 CHANGE COLUMN `role_code` `c_name`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `thestatus`;
+
+
+
+--------------------------11.26--------------------
+ALTER TABLE `master_news`
+MODIFY COLUMN `remark`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `type`;ADD COLUMN `create_datetime`  datetime NULL AFTER `template`;
+
+
+CREATE TABLE `wx_called_record` (
+`id`  char(16) NOT NULL ,
+`data_key`  varchar(128) NULL ,
+`data`  varchar(255) NULL ,
+`access_token`  varchar(128) NULL ,
+`callback`  varchar(128) NULL ,
+`request_source`  varchar(128) NULL ,
+`create_datetime`  datetime NULL ,
+`consumer_id`  char(16) NULL ,
+PRIMARY KEY (`id`)
+)
+;
+
