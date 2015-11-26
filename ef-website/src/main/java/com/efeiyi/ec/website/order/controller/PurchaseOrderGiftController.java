@@ -136,7 +136,6 @@ public class PurchaseOrderGiftController {
         g.drawImage(image, 100, 750, null);
         g.drawImage(giftImgIcon.getImage(), 40, 250, null);
         //保存到本地
-        ImageIO.write(combined, "JPG", new File("c://test3.jpg"));
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         ImageIO.write(combined, "jpg", os);
         InputStream is = new ByteArrayInputStream(os.toByteArray());
