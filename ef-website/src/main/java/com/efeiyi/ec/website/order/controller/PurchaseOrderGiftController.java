@@ -101,7 +101,9 @@ public class PurchaseOrderGiftController {
         //设置字体、字型、字号
         g.setFont(new Font(null, Font.LAYOUT_NO_LIMIT_CONTEXT, 25));
         //背景图set文字显示
-        g.drawString(giftMessage, 40, 180);
+        if (giftMessage != null) {
+            g.drawString(giftMessage, 40, 180);
+        }
         g.drawString(productModelName, 40, height / 2 + 30);
         g.drawString((productModelPrice.intValue() != 0 ? productModelPrice.toString() : ""), width / 2 + 200, height / 2 + 30);
         g.dispose();
