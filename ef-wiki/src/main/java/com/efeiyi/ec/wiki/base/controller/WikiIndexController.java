@@ -3,12 +3,13 @@ package com.efeiyi.ec.wiki.base.controller;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterFollowed;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectFollowed;
 import com.efeiyi.ec.project.model.ProjectRecommended;
 import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
-import com.efeiyi.ec.wiki.model.Praise2Product;
+import com.efeiyi.ec.wiki.model.ProductPraise;
 import com.efeiyi.ec.wiki.model.ProductComment;
 import com.efeiyi.ec.wiki.model.ProjectRecommendedModel;
 import com.efeiyi.ec.wiki.organization.service.imp.UserManagerImpl;
@@ -235,27 +236,27 @@ public class WikiIndexController extends WikibaseController {
             return "false";
         }
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-        Praise2Product praise2Product = new Praise2Product();
+        ProductPraise productPraise = new ProductPraise();
         String oper = request.getParameter("operation");
         if (oper != null && oper.equalsIgnoreCase("up")) {
 
-            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.status!='0'";
+            String queryHql = "from ProductPraise t where t.user.id=:userId and t.product.id=:productId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("productId", product.getId());
-            Praise2Product p21 = (Praise2Product) baseManager.getUniqueObjectByConditions(queryHql, map);
+            ProductPraise p21 = (ProductPraise) baseManager.getUniqueObjectByConditions(queryHql, map);
             if (p21 != null && p21.getId() != null)//不为null,说明已经点过赞了
             {
                 return "repeat";
             }//防止重复点赞
-            praise2Product.setUser(user);
-            praise2Product.setProduct(product);
-            praise2Product.setCreateDateTime(new Date());
-            praise2Product.setType("1");
-            praise2Product.setWatch("0");
-            praise2Product.setStatus("1");
-            praise2Product.setModerator(null);
-            baseManager.saveOrUpdate(Praise2Product.class.getName(), praise2Product);
+            productPraise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+            productPraise.setProduct(product);
+            productPraise.setCreateDateTime(new Date());
+            productPraise.setType("1");
+            productPraise.setWatch("0");
+            productPraise.setStatus("1");
+            productPraise.setModerator(null);
+            baseManager.saveOrUpdate(ProductPraise.class.getName(), productPraise);
             //product.setFsAmount(product.getFsAmount() == null ? 1 : product.getFsAmount() + 1);
             product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
             baseManager.saveOrUpdate(Product.class.getName(), product);
@@ -263,14 +264,14 @@ public class WikiIndexController extends WikibaseController {
 
 
         if (oper != null && "down".equalsIgnoreCase(oper)) {
-            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.status!='0'";
+            String queryHql = "from ProductPraise t where t.user.id=:userId and t.product.id=:productId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("productId", product.getId());
-            Praise2Product praise2Product1 = (Praise2Product) baseManager.getUniqueObjectByConditions(queryHql, map);
-            if (praise2Product1 != null && praise2Product1.getId() != null)//不为null,说明已经点过赞了，可以取消点赞
-                //baseManager.delete(Praise2Product.class.getName(), praise2Product1.getId());
-                  baseManager.remove(Praise2Product.class.getName(), praise2Product1.getId());
+            ProductPraise productPraise1 = (ProductPraise) baseManager.getUniqueObjectByConditions(queryHql, map);
+            if (productPraise1 != null && productPraise1.getId() != null)//不为null,说明已经点过赞了，可以取消点赞
+                //baseManager.delete(ProductPraise.class.getName(), productPraise1.getId());
+                  baseManager.remove(ProductPraise.class.getName(), productPraise1.getId());
             long FsAmount =0;
             if(product.getAmount() == null){
                 FsAmount =0;
@@ -303,44 +304,43 @@ public class WikiIndexController extends WikibaseController {
         }
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
         ProductComment productComment = (ProductComment) baseManager.getObject(ProductComment.class.getName(), commentId);
-        Praise2Product praise2Product = new Praise2Product();
+        ProductPraise productPraise = new ProductPraise();
         String oper = request.getParameter("operation");
         if (oper != null && oper.equalsIgnoreCase("up")) {
 
-            String queryHql = "from Praise2Product t where t.user.id=:userId and t.comment.id=:commentId and t.status!='0'";
+            String queryHql = "from ProductPraise t where t.user.id=:userId and t.comment.id=:commentId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             //map.put("productId", product.getId());
             map.put("commentId", commentId);
-            Praise2Product p2 = (Praise2Product) baseManager.getUniqueObjectByConditions(queryHql, map);
+            ProductPraise p2 = (ProductPraise) baseManager.getUniqueObjectByConditions(queryHql, map);
             if (p2 != null && p2.getId() != null)//不为null,说明已经点过赞了
             {
                 return "repeat";
             }
             //防止重复点赞
-            praise2Product.setUser(user);
-            praise2Product.setProduct(product);
-            praise2Product.setCreateDateTime(new Date());
-            praise2Product.setType("2");
-            praise2Product.setWatch("0");
-            praise2Product.setModerator(productComment.getUser());
-            praise2Product.setComment(productComment);
-            baseManager.saveOrUpdate(Praise2Product.class.getName(), praise2Product);
+            productPraise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+            productPraise.setProduct(product);
+            productPraise.setCreateDateTime(new Date());
+            productPraise.setType("2");
+            productPraise.setWatch("0");
+            productPraise.setModerator(productComment.getUser());
+            productPraise.setComment(productComment);
+            baseManager.saveOrUpdate(ProductPraise.class.getName(), productPraise);
             productComment.setAmount(productComment.getAmount() == null ? 1 : productComment.getAmount() + 1);
             baseManager.saveOrUpdate(ProductComment.class.getName(), productComment);
         }
 
 
         if (oper != null && "down".equalsIgnoreCase(oper)) {
-            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.comment.id=:commentId and t.status!='0'";
+            String queryHql = "from ProductPraise t where t.user.id=:userId and t.product.id=:productId and t.comment.id=:commentId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("productId", product.getId());
             map.put("commentId", commentId);
-            Praise2Product praise2Product1 = (Praise2Product) baseManager.getUniqueObjectByConditions(queryHql, map);
-            if (praise2Product1 != null && praise2Product1.getId() != null)//不为null,说明已经点过赞了，可以取消点赞
-                //baseManager.delete(Praise2Product.class.getName(), praise2Product1.getId());
-                baseManager.remove(Praise2Product.class.getName(), praise2Product1.getId());
+            ProductPraise productPraise1 = (ProductPraise) baseManager.getUniqueObjectByConditions(queryHql, map);
+            if (productPraise1 != null && productPraise1.getId() != null)//不为null,说明已经点过赞了，可以取消点赞
+                baseManager.remove(ProductPraise.class.getName(), productPraise1.getId());
             long Amount=0;
             if(productComment.getAmount() == null){
                 Amount=0;
@@ -349,7 +349,6 @@ public class WikiIndexController extends WikibaseController {
             }else if (productComment.getAmount() - 1>=1){
                 Amount = productComment.getAmount() - 1;
             }
-            //productComment.setAmount(productComment.getAmount() == null ? 0 : productComment.getAmount() - 1);
             productComment.setAmount(Amount);
             baseManager.saveOrUpdate(ProductComment.class.getName(), productComment);
         }

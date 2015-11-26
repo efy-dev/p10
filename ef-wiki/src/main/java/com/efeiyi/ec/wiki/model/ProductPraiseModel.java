@@ -1,21 +1,23 @@
 package com.efeiyi.ec.wiki.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Administrator on 2015/10/23.
  */
-public class Praise2ProductModel implements Serializable {
+public class ProductPraiseModel implements Serializable {
     private String id;
     private String product;
-    private MyUser user;
+    private User user;
     private ProductComment comment;
     private String type;
     private Date createDateTime;
     private String status;
-    private MyUser moderator;
+    private User moderator;
     private String watch;
 
     public String getId() {
@@ -34,11 +36,11 @@ public class Praise2ProductModel implements Serializable {
         this.product = product;
     }
 
-    public MyUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(MyUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -74,11 +76,11 @@ public class Praise2ProductModel implements Serializable {
         this.status = status;
     }
 
-    public MyUser getModerator() {
+    public User getModerator() {
         return moderator;
     }
 
-    public void setModerator(MyUser moderator) {
+    public void setModerator(User moderator) {
         this.moderator = moderator;
     }
 
