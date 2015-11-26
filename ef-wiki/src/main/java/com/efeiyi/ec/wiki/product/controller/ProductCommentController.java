@@ -1,6 +1,7 @@
-package com.efeiyi.ec.wiki.base.controller;
+package com.efeiyi.ec.wiki.product.controller;
 
 
+import com.efeiyi.ec.wiki.base.controller.WikibaseController;
 import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
 import com.efeiyi.ec.wiki.model.ProductComment;
 import com.efeiyi.ec.wiki.model.ProductCommentModel;

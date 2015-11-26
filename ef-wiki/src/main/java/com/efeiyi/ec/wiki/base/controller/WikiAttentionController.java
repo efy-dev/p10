@@ -1,6 +1,5 @@
 package com.efeiyi.ec.wiki.base.controller;
 
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.project.model.ProjectFollowed;
@@ -15,7 +14,6 @@ import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.BannerManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,8 +30,8 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/pc")
-public class WikiDynamicController extends WikibaseController {
-    private static Logger logger = Logger.getLogger(WikiDynamicController.class);
+public class WikiAttentionController extends WikibaseController {
+    private static Logger logger = Logger.getLogger(WikiAttentionController.class);
     @Autowired
     BaseManager baseManager;
     @Autowired
