@@ -56,7 +56,7 @@ public class ProductDaoHibernate implements ProductDao{
                 "left join project_category pg " +
                 "on pg.id = pt.category_id " +
                 "where pm.status!='0'" +
-                "order by p.serial";
+                "order by pt.name";
        List objectList = this.getSession().createSQLQuery(sql).list();
         return  objectList;
     }
