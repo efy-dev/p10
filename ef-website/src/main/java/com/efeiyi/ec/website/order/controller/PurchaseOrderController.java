@@ -169,7 +169,7 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrder.setOriginalPrice(cart.getTotalPrice());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         //拼写回调路径purchaseOrderId,groupProductId,memberId,groupId
-        String callbackTemp = callback+"?purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId + "&memberId=" + (request.getParameter("memberId") != null ? request.getParameter("memberId") : "null") + "&groupId=" + (request.getParameter("groupId") != null ? request.getParameter("groupId") : "null");
+        String callbackTemp = callback + "?purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId + "&memberId=" + (request.getParameter("memberId") != null ? request.getParameter("memberId") : "null") + "&groupId=" + (request.getParameter("groupId") != null ? request.getParameter("groupId") : "null");
         purchaseOrder.setCallback(callbackTemp);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
@@ -248,7 +248,6 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("productModel", productModel);
         model.addAttribute("amount", amount);
         model.addAttribute("isEasyBuy", true);
-
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 
@@ -260,8 +259,14 @@ public class PurchaseOrderController extends BaseController {
      */
     @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
-        Cart cart = cartManager.copyCart((Cart) request.getSession().getAttribute("cart"),cartManager.getCurrentCart(request));
+        Cart cart = cartManager.copyCart((Cart) request.getSession().getAttribute("cart"), cartManager.getCurrentCart(request));
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cart, model);
+        String callback = request.getParameter("callback");
+        if (callback != null) {
+
+            purchaseOrder.setCallback(callback);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        }
         //收货地址
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
@@ -274,17 +279,27 @@ public class PurchaseOrderController extends BaseController {
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 
-//    @RequestMapping("/")
-//    public String saveOrUpdateOrder(HttpServletRequest request ,HttpServletResponse response , Model model){
-//        String productModelId = request.getParameter("productModelId");
-//        String amount = request.getParameter("amount");
-//        float priceFloat = Float.parseFloat(request.getParameter("price"));
-//        BigDecimal price = new BigDecimal(priceFloat);
-//        ProductModel productModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),productModelId);
-//        PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(productModel,price,Integer.parseInt(amount), model);
-//        model.addAttribute("isEasyBuy", true);
-//    }
-
+    @RequestMapping("/saveOrUpdateOrder2.do")
+    public String saveOrUpdateOrder(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+        String productModelId = request.getParameter("productModelId");
+        String amount = request.getParameter("amount");
+        float priceFloat = Float.parseFloat(request.getParameter("price"));
+        BigDecimal price = new BigDecimal(priceFloat);
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+        PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(productModel, price, Integer.parseInt(amount), model);
+        String callback = request.getParameter("callback");
+        if (callback != null) {
+            purchaseOrder.setCallback(callback);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        }
+        XQuery xQuery = new XQuery("listConsumerAddress_default", request);
+        xQuery.addRequestParamToModel(model, request);
+        List addressList = baseManager.listObject(xQuery);
+        model.addAttribute("addressList", addressList);
+        model.addAttribute("purchaseOrder", purchaseOrder);
+        model.addAttribute("isEasyBuy", true);
+        return "/purchaseOrder/purchaseOrderConfirm";
+    }
 
 
     @RequestMapping({"/getPurchaseOrderPrice.do"})
@@ -379,7 +394,6 @@ public class PurchaseOrderController extends BaseController {
             return false;
         }
     }
-
 
 
 }

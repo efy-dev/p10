@@ -664,3 +664,18 @@ ADD COLUMN `type`  varchar(255) NULL AFTER `name`,
 ADD COLUMN `show`  varchar(255) NULL AFTER `type`,
 ADD COLUMN `template`  varchar(255) NULL AFTER `show`,
 ADD COLUMN `create_datetime`  datetime NULL AFTER `template`;
+
+
+CREATE TABLE `wx_called_record` (
+`id`  char(16) NOT NULL ,
+`data_key`  varchar(128) NULL ,
+`data`  varchar(255) NULL ,
+`access_token`  varchar(128) NULL ,
+`callback`  varchar(128) NULL ,
+`request_source`  varchar(128) NULL ,
+`create_datetime`  datetime NULL ,
+`consumer_id`  char(16) NULL ,
+PRIMARY KEY (`id`)
+)
+;
+

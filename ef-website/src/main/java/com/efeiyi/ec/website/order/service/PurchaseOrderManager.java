@@ -20,9 +20,26 @@ public interface PurchaseOrderManager {
         2.生成子订单
         3.
      */
+
+    /**
+     * 购物车下单入口
+     * @param cart
+     * @param model
+     * @return
+     * @throws Exception
+     */
     PurchaseOrder saveOrUpdatePurchaseOrder(Cart cart,Model model) throws Exception;
 
-     PurchaseOrder saveOrUpdatePurchaseOrder(ProductModel productModel, BigDecimal price, int amount, Model model) throws Exception;
+    /**
+     * 单品下单入口
+     * @param productModel 商品
+     * @param price 单价
+     * @param amount 数量
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    PurchaseOrder saveOrUpdatePurchaseOrder(ProductModel productModel, BigDecimal price, int amount, Model model) throws Exception;
 
     PurchaseOrder confirmPurchaseOrder(PurchaseOrder purchaseOrder ,ConsumerAddress consumerAddress,HashMap<String, String> messageMap,String payWay);
 

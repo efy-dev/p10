@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
@@ -211,9 +212,13 @@ public class PurchaseOrderPaymentController {
 
 
     @RequestMapping({"/paysuccess/{orderId}"})
-    public String paySuccess(@PathVariable String orderId, Model model) {
+    public String paySuccess(@PathVariable String orderId, Model model)throws Exception{
         PurchaseOrderPaymentDetails purchaseOrder = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
+        if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback()!=null){
+            String redirect = URLDecoder.decode(purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback(),"UTF-8");
+            return "redirect:http://"+redirect;
+        }
         return "/purchaseOrder/paySuccess";
     }
 
