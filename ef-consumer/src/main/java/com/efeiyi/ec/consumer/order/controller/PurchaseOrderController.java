@@ -1,5 +1,8 @@
 package com.efeiyi.ec.consumer.order.controller;
 
+import com.efeiyi.ec.consumer.organization.model.SendCode;
+import com.efeiyi.ec.consumer.organization.model.SmsProvider;
+import com.efeiyi.ec.consumer.organization.model.YunPianSmsProvider;
 import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.product.model.ProductModel;
@@ -45,30 +48,11 @@ public class PurchaseOrderController {
         String orderStatus = request.getParameter("status");
         model.addAttribute("status", orderStatus);
         XQuery xQuery = null;
-        int c = 0;
+
         if (orderStatus == null || orderStatus == "" || orderStatus =="0") {
             xQuery = new XQuery("plistPurchaseOrder_default", request, 10);
         } else {
-            c = Integer.parseInt(orderStatus);
-            switch (c) {
-                case 1:
-                    xQuery = new XQuery("plistPurchaseOrder_default1", request, 10);
-                    break;
-                case 5:
-                    xQuery = new XQuery("plistPurchaseOrder_default5", request, 10);
-                    break;
-                case 9:
-                    xQuery = new XQuery("plistPurchaseOrder_default9", request, 10);
-                    break;
-                case 13:
-                    xQuery = new XQuery("plistPurchaseOrder_default13", request, 10);
-                    break;
-                case 17:
-                    xQuery = new XQuery("plistPurchaseOrder_default17", request, 10);
-                    break;
-                default:
-                    xQuery = new XQuery("plistPurchaseOrder_default", request, 10);
-            }
+            xQuery = new XQuery("plistPurchaseOrder_default"+orderStatus+"", request, 10);
 
         }
         xQuery.addRequestParamToModel(model, request);
@@ -259,6 +243,11 @@ public class PurchaseOrderController {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_UNCOMMENT);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        //确定收货后给商家发送已收货短信
+         String phone = purchaseOrder.getTenant().getPhone();
+         String purchaseOrderSerial=purchaseOrder.getSerial();
+         SmsProvider smsProvider = new YunPianSmsProvider();
+         smsProvider.post(phone, purchaseOrderSerial, "1125941");
         return "redirect:/order/myEfeiyi/list.do";
     }
 
