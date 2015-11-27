@@ -478,7 +478,7 @@ public class CouponController {
                     }
                 } else {
 
-                    model.addAttribute("yhq", null);
+                    model.addAttribute("yhq", "used");
                 }
 
 

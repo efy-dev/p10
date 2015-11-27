@@ -3,7 +3,9 @@ package com.efeiyi.ec.purchase.model;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -35,7 +37,7 @@ public class PurchaseOrder {
     private List<PurchaseOrderDelivery> purchaseOrderDeliveryList;  //发货记录 订单配送
     private List<PurchaseOrderPayment> purchaseOrderPaymentList;
     private Date createDatetime;       //下单时间
-    private MyUser user;
+    private User user;
     private ConsumerAddress consumerAddress;  //收获地址
     private String status;
     private BigDecimal total;  //订单总价
@@ -73,6 +75,7 @@ public class PurchaseOrder {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coupon_id")
+    @JsonIgnore
     public Coupon getCoupon() {
         return coupon;
     }
@@ -91,6 +94,7 @@ public class PurchaseOrder {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "fatherPurchaseOrder")
+    @JsonIgnore
     public List<PurchaseOrder> getSubPurchaseOrder() {
         return subPurchaseOrder;
     }
@@ -101,6 +105,7 @@ public class PurchaseOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "father_purchase_order_id")
+    @JsonIgnore
     public PurchaseOrder getFatherPurchaseOrder() {
         return fatherPurchaseOrder;
     }
@@ -111,6 +116,7 @@ public class PurchaseOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
+    @JsonIgnore
     public Tenant getTenant() {
         return tenant;
     }
@@ -140,6 +146,7 @@ public class PurchaseOrder {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<PurchaseOrderProduct> getPurchaseOrderProductList() {
         return purchaseOrderProductList;
     }
@@ -159,16 +166,19 @@ public class PurchaseOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public MyUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(MyUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_address_id")
+    @JsonIgnore
     public ConsumerAddress getConsumerAddress() {
         return consumerAddress;
     }
@@ -179,6 +189,7 @@ public class PurchaseOrder {
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<PurchaseOrderDelivery> getPurchaseOrderDeliveryList() {
         return purchaseOrderDeliveryList;
     }
@@ -188,6 +199,7 @@ public class PurchaseOrder {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<PurchaseOrderPayment> getPurchaseOrderPaymentList() {
         return purchaseOrderPaymentList;
     }

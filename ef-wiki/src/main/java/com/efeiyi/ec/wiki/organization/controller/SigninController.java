@@ -308,5 +308,10 @@ public class   SigninController extends BaseController {
     public void forwardFind9(@PathVariable String productId,HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect(request.getContextPath() +"/base/showProduct/"+productId);
     }
+    @RequestMapping("/wap/projectAttention")
+    public String forwardFind10(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+        request.setAttribute("flag", "2");
+        return  "forward:"+request.getContextPath()+"/base/home.do";
+    }
 }
 

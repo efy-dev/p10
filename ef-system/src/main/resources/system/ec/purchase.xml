@@ -406,7 +406,23 @@
                         <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
-
+                <do name="plistPurchaseOrderProductMiao"
+                    access="admin,operational,o_operational,financial,market,product_manager" label="购买订单产品"
+                    result="/purchaseOrderProduct/purchaseOrderProductPListMiao"
+                    execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderViewProductHandler"
+                        >
+                    <query name="default" label="默认" type="auto" orderBy="purchaseOrder.createDatetime:desc">
+                        <condition name="productModel.id" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="purchaseOrder.orderType" defaultValue="2" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="purchaseOrder.createDatetime:desc">
+                        <condition name="productModel.id" operation="eq" inputType="default"/>
+                        <condition name="purchaseOrder.orderType" defaultValue="2" operation="eq" inputType="default"/>
+                        <condition name="purchaseOrder.serial" operation="like" label="订单号" inputType="text"/>
+                        <condition name="purchaseOrder.createDatetime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
+                        <condition name="purchaseOrder.createDatetime" operation="le" label="截止时间" inputType="date" dataType="date"/>
+                    </query>
+                </do>
                 <do name="removePurchaseOrderProduct" label="删除购买订单产品" access="admin,operational" result="json"/>
                 <do name="viewPurchaseOrderProduct" label="查看购买订单产品"
                     access="admin,operational,o_operational,financial,market,product_manager"

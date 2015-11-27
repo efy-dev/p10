@@ -1,6 +1,7 @@
 package com.efeiyi.ec.group.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public class GroupMember implements Serializable {
 
     private String id;
-    private MyUser user;//用户
+    private User user;//用户
     private String level;//
     private GroupMember supGroupMember;
     private List<GroupMember> subGroupMemberList;
@@ -39,11 +40,11 @@ public class GroupMember implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public MyUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(MyUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

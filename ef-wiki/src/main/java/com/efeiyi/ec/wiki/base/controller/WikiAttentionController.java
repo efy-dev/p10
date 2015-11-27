@@ -109,12 +109,12 @@ public class WikiAttentionController extends WikibaseController {
 
     @RequestMapping("/prj.do")
     @ResponseBody
-    public List saveProjectFollows(HttpServletRequest request, Model model) throws Exception {
+    public List saveProjectFollows(HttpServletRequest request) throws Exception {
         XQuery query = new XQuery("plistProjectRecommended_default", request);
         PageInfo pageInfo = baseManager.listPageInfo(query);
         List<ProjectRecommended> list = pageInfo.getList();
         List<ProjectModel> pm = new ArrayList<ProjectModel>();
-        if (!list.isEmpty()){
+        if (list!=null && !list.isEmpty()){
             for (ProjectRecommended projectRecommended:list){
                  Project project = projectRecommended.getProject();
                  ProjectModel projectModel = projectConvertprojectModelUtil.projectConvertprojectModel(project);
@@ -136,8 +136,6 @@ public class WikiAttentionController extends WikibaseController {
         //轮播图
         List<Object> bannerList = getBanners();
         model.addAttribute("bannerList", bannerList);
-
-
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query3 = new XQuery("listProjectFollowed_isShow", request);
             query3.put("user_id", AuthorizationUtil.getMyUser().getId());
@@ -160,13 +158,13 @@ public class WikiAttentionController extends WikibaseController {
 
 @RequestMapping("/afterAtJ.do")
 @ResponseBody
-public List getAttentionProjects(HttpServletRequest request, Model model) throws Exception {
+public List getAttentionProjects(HttpServletRequest request) throws Exception {
     XQuery query = new XQuery("plistProjectFollowed2_isShow", request);
     query.put("user_id", AuthorizationUtil.getMyUser().getId());
     PageInfo pageInfo = baseManager.listPageInfo(query);
     List<ProjectFollowed> projectFolloweds = pageInfo.getList();
     List<ProjectDataModel> pm = new ArrayList<ProjectDataModel>();
-    if (!projectFolloweds.isEmpty()){
+    if (projectFolloweds!=null && !projectFolloweds.isEmpty()){
         for (ProjectFollowed projectFollowed:projectFolloweds){
             Project project = projectFollowed.getProject();
             ProjectDataModel projectDataModel = projectConvertprojectModelUtil.getProjectDataModel(project);

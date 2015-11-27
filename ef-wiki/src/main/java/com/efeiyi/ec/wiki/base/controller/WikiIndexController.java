@@ -99,9 +99,6 @@ public class WikiIndexController extends WikibaseController {
         HttpSession session = request.getSession(true);*/
        //欺诈结束
 
-
-
-
         if (!HttpUtil.isPhone(request.getHeader("User-Agent"))) {
             return new ModelAndView("redirect:/pc/index.do");
         }
@@ -137,6 +134,9 @@ public class WikiIndexController extends WikibaseController {
                 + request.getServerName() + ":" + request.getServerPort()
                 + path + "/";
         model.addAttribute("basePath", basePath);
+        if (request.getAttribute("flag")!=null && "2".equals(request.getAttribute("flag").toString())){
+            return new ModelAndView("/hotProjects/PopularProjects2");
+        }
         return new ModelAndView("/hotProjects/PopularProjects");
     }
 
@@ -159,7 +159,7 @@ public class WikiIndexController extends WikibaseController {
 
     @RequestMapping("/IsattentionMaster.do")
     @ResponseBody
-    public boolean IsattentionMaster(HttpServletRequest request, Model model) throws Exception {
+    public boolean IsattentionMaster(HttpServletRequest request) throws Exception {
         boolean flag = false;
         String masterId = request.getParameter("masterId");
         if (AuthorizationUtil.getMyUser().getId() != null) {
@@ -167,7 +167,7 @@ public class WikiIndexController extends WikibaseController {
             xQuery.put("master_id", masterId);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (!list.isEmpty()) {
+            if (list!=null && !list.isEmpty()) {
                 flag = true;
             }
         }
@@ -178,7 +178,7 @@ public class WikiIndexController extends WikibaseController {
 
     @RequestMapping("/attentionMaster.do")
     @ResponseBody
-    public String saveMasterFollows(HttpServletRequest request, Model model) throws Exception {
+    public String saveMasterFollows(HttpServletRequest request) throws Exception {
         String masterId = request.getParameter("masterId");
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
@@ -229,7 +229,7 @@ public class WikiIndexController extends WikibaseController {
 
     @RequestMapping("/saveThumbUp.do")
     @ResponseBody
-    public String savaUP(HttpServletRequest request, Model model) throws Exception {
+    public String savaUP(HttpServletRequest request) throws Exception {
         String productId = request.getParameter("productId");
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
@@ -280,8 +280,6 @@ public class WikiIndexController extends WikibaseController {
             }else if (product.getAmount() - 1>=1){
                 FsAmount =product.getAmount() - 1;
             }
-            //product.setFsAmount(product.getFsAmount() == null ? 0 : product.getFsAmount() - 1);
-            //product.setFsAmount(FsAmount);
             product.setAmount(FsAmount);
             baseManager.saveOrUpdate(Product.class.getName(), product);
         }
@@ -294,7 +292,7 @@ public class WikiIndexController extends WikibaseController {
 
     @RequestMapping("/commentUpAndDown.do")
     @ResponseBody
-    public String commentUpAndDown(HttpServletRequest request, Model model) throws Exception {
+    public String commentUpAndDown(HttpServletRequest request) throws Exception {
         String productId = request.getParameter("productId");
         String commentId = request.getParameter("commentId");
 
@@ -358,11 +356,9 @@ public class WikiIndexController extends WikibaseController {
     }
 
 
-
-
     @RequestMapping("/afterAttention.do")
     @ResponseBody
-    public  List afterAttention(HttpServletRequest request, Model model) throws Exception {
+    public  List afterAttention(HttpServletRequest request) throws Exception {
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
             return new ArrayList();
@@ -373,7 +369,7 @@ public class WikiIndexController extends WikibaseController {
         List<ProjectFollowed> projectFolloweds = pageInfo.getList();
         HashMap<String,ProjectFollowed> map = new HashMap<String,ProjectFollowed>();
         List<HashMap<String,ProjectFollowed>> res = new ArrayList<HashMap<String,ProjectFollowed>>();
-        if (!projectFolloweds.isEmpty()){
+        if (projectFolloweds!=null &&!projectFolloweds.isEmpty()){
           for (ProjectFollowed projectFollowed : projectFolloweds) {
             Project project = projectFollowed.getProject();
             XQuery query = new XQuery("listProduct_after", request);
@@ -382,7 +378,7 @@ public class WikiIndexController extends WikibaseController {
             query.put("createDateTime2", user.getLastLogoutDatetime());
             List<Product> lp = baseManager.listObject(query);
             Integer num=0;
-            if (!lp.isEmpty())
+            if (lp!=null && !lp.isEmpty())
                 num = lp.size();
             map.put(num.toString(),projectFollowed);
             res.add(map);
@@ -419,7 +415,7 @@ public class WikiIndexController extends WikibaseController {
             xQuery.put("master_id", userid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (!list.isEmpty()) {
+            if (list!=null && !list.isEmpty()) {
                 flag = true;
             }
         }

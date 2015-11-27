@@ -35,9 +35,8 @@ public class ProjectController extends WikibaseController {
 
     @RequestMapping("/project/brifProject/{projectId}")
     public ModelAndView getBrifProject(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
-        //String projectId = request.getParameter("projectId");
         Project project = getBrifProjectHeader(projectId);
-        boolean flag = checkIsAttention(request, model);
+        boolean flag = checkIsAttention(request);
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
         return new ModelAndView("/project/brifProject");
@@ -45,7 +44,7 @@ public class ProjectController extends WikibaseController {
 
     @RequestMapping("/project/Isattention.do")
     @ResponseBody
-    public boolean checkIsAttention(HttpServletRequest request, Model model) throws Exception {
+    public boolean checkIsAttention(HttpServletRequest request) throws Exception {
         boolean flag = false;
         String projectid = request.getParameter("projectId");
         if (AuthorizationUtil.getMyUser().getId() != null) {
@@ -63,9 +62,8 @@ public class ProjectController extends WikibaseController {
 
     @RequestMapping("/project/brifMaster/{projectId}")
     public ModelAndView getBrifMaster(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
-        //String projectId = request.getParameter("projectId");
         Project project = getBrifProjectHeader(projectId);
-        boolean flag = checkIsAttention(request, model);
+        boolean flag = checkIsAttention(request);
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
         return new ModelAndView("/project/brifMaster");
@@ -73,9 +71,8 @@ public class ProjectController extends WikibaseController {
 
     @RequestMapping("/project/listProduct/{projectId}")
     public ModelAndView getListProducts(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
-        //String projectId = request.getParameter("projectId");
         Project project = getBrifProjectHeader(projectId);
-        boolean flag = checkIsAttention(request, model);
+        boolean flag = checkIsAttention(request);
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
         return new ModelAndView("/project/listProduct");
@@ -83,7 +80,6 @@ public class ProjectController extends WikibaseController {
 
     @RequestMapping("/project/showProduct/{productId}/{projectId}")
     public String showProduct(@PathVariable String productId,@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
-        //String productId = request.getParameter("productId");
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
         boolean flag = false;
         if(product.getMaster()!=null && !"".equals(product.getMaster().getId())){
@@ -105,9 +101,8 @@ public class ProjectController extends WikibaseController {
 
     @RequestMapping("/base/attention.do")
     @ResponseBody
-    public String saveProjectFollows(HttpServletRequest request, Model model) throws Exception {
+    public String saveProjectFollows(HttpServletRequest request) throws Exception {
         String projectid = request.getParameter("projectId");
-        String oper = request.getParameter("oper");
         Project project = (Project) baseManager.getObject(Project.class.getName(), projectid);
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
@@ -150,9 +145,8 @@ public class ProjectController extends WikibaseController {
     }
     @RequestMapping("/base/Isattention/{projectId}")
     @ResponseBody
-    public boolean checkIsAttention(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
+    public boolean checkIsAttention(@PathVariable String projectId,HttpServletRequest request) throws Exception {
         boolean flag = false;
-        //String projectid = request.getParameter("projectId");
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery xQuery = new XQuery("plistProjectFollowed_check", request);
             xQuery.put("project_id", projectId);
@@ -169,10 +163,8 @@ public class ProjectController extends WikibaseController {
 
     @RequestMapping("/base/brifProject/{projectId}/{page}")
     public ModelAndView getBrifProject(@PathVariable String projectId,@PathVariable String page,HttpServletRequest request, Model model) throws Exception {
-        //String projectId = request.getParameter("projectId");
-        //String page = request.getParameter("page");
         Project project = (Project) baseManager.getObject(Project.class.getName(), projectId);
-        boolean flag = checkIsAttention(projectId,request, model);//判断用户是否已经关注该项目
+        boolean flag = checkIsAttention(projectId,request);//判断用户是否已经关注该项目
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
         if(page!=null && page.equals("2")){

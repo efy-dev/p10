@@ -28,7 +28,7 @@
 
 </script>
   <div class="coupons">
-    <c:if test="${yhq!=null}">
+    <c:if test="${yhq!=null && yhq!='used'}">
       <c:set var="price" value="${yhq.couponBatch.price}"/>
       <div class="celebrate">
       <h5>恭喜您，抢到${fn:substringBefore(price, ".")}元优惠券！<i class="icon"></i></h5>
@@ -42,9 +42,14 @@
       </div>
     </div>
       </c:if>
-    <c:if test="${yhq==null}">
+    <c:if test="${yhq==null || yhq=='used'}">
       <div class="celebrate">
+        <c:if test="${yhq==null}">
         <h5>没有找到该链接的活动，请您看一下其他活动吧~<i class="icon"></i></h5>
+        </c:if>
+        <c:if test="${yhq=='used'}">
+          <h5>您已经领取过该优惠券了哟~<i class="icon"></i></h5>
+        </c:if>
         <div class="ae mg">
           <p><span id="xj">5</span>秒后为您自动跳转</p>
         </div>

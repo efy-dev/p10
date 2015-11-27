@@ -35,7 +35,7 @@ public class ProductController extends WikibaseController {
     BaseManager baseManager;
     @RequestMapping("/product/saveComment.do")
     @ResponseBody
-    public Object saveComment(HttpServletRequest request, Model model) throws Exception {
+    public Object saveComment(HttpServletRequest request) throws Exception {
         String productId = request.getParameter("productId");
         String content = request.getParameter("content");
         MyUser user = AuthorizationUtil.getMyUser();
@@ -67,7 +67,7 @@ public class ProductController extends WikibaseController {
 
     @RequestMapping("/product/saveComment2.do")
     @ResponseBody
-    public Object saveComment2(HttpServletRequest request, Model model) throws Exception {//此方法待作废
+    public Object saveComment2(HttpServletRequest request) throws Exception {//此方法待作废
         String productId = request.getParameter("productId");
         String content = request.getParameter("content");
         String contentId = request.getParameter("contentId");
@@ -114,7 +114,7 @@ public class ProductController extends WikibaseController {
 
     @RequestMapping("/base/storeProduct.do")
     @ResponseBody
-    public String storeProduct(HttpServletRequest request, Model model) throws Exception {
+    public String storeProduct(HttpServletRequest request) throws Exception {
         String productId = request.getParameter("productId");
         ProductStore productStore = new ProductStore();
         MyUser user = AuthorizationUtil.getMyUser();

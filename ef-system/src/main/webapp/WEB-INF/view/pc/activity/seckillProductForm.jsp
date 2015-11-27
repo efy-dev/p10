@@ -73,7 +73,7 @@
             <input type="hidden" name="status" value="1">
         </c:if>
         <c:if test="${not empty object.id}">
-            <input type="hidden" name="status" value="${status}">
+            <input type="hidden" name="status" value="${object.status}">
         </c:if>
         <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=plistSeckillProduct_default"/>
       <div class="am-form-group">

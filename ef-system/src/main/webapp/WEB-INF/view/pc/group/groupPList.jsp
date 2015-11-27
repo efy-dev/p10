@@ -68,7 +68,9 @@
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=viewGroup&id=${group.id}"/>">
                                         查看详情
                                     </a>
-
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void (0);" onclick="addGroup('${group.id}',${group.groupProduct.memberAmount},${fn:length(group.groupMemberList)});">
+                                        凑团
+                                    </a>
                                 </div>
                             </div>
                         </td>
@@ -122,7 +124,28 @@
         });
     }
 
-
+ function addGroup(groupId,amount,length){
+     if(amount<=length){
+         alert("已成团!");
+     }else {
+         $.ajax({
+             type: "get",
+             url: '<c:url value="/tuan/addGroup.do"/>',
+             cache: false,
+             dataType: "json",
+             data: {groupId: groupId, amount: amount, length: length},
+             success: function (data) {
+                 if (data == "1") {
+                     alert("凑团成功!");
+                     $("#" + groupId + " td:eq(3)").text("组团成功");
+                 }
+                 if (data == "0") {
+                     alert("凑团失败!");
+                 }
+             }
+         });
+     }
+ }
 </script>
 
 </body>

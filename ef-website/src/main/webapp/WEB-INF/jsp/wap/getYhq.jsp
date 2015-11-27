@@ -14,7 +14,7 @@
 <div class="coupon-sc">
 
   <div class="cont">
-    <c:if test="${yhq!=null}">
+    <c:if test="${yhq!=null && yhq!='used'}">
     <div class="tc-txt tc-txt2">
       <i class="c-pic"></i>
       <c:set var="price" value="${yhq.couponBatch.price}"/>
@@ -23,10 +23,15 @@
       <div class="ae"> <a href="http://i.efeiyi.com/coupon/list?cf=4" class="but">查看我的优惠券</a></div>
     </div>
     </c:if>
-    <c:if test="${yhq==null}">
+    <c:if test="${yhq==null || yhq=='used'}">
       <div class="tc-txt">
         <i class="s-pic"></i>
+        <c:if test="${yhq==null}">
         <p class="text">没有找到该链接的活动</p>
+        </c:if>
+        <c:if test="${yhq=='used'}">
+          <p class="text">您已经领取过改优惠券了呦</p>
+        </c:if>
         <div class="ae"><a href="http://www.efeiyi.com" class="but act">返回e飞蚁首页</a></div>
       </div>
     </c:if>

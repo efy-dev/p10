@@ -61,7 +61,7 @@ public class User {
         this.id = id;
     }
 
-    @JsonIgnore
+
     @Column(name = "username")
     public String getUsername() {
         return username;

@@ -230,4 +230,5 @@ public class BigTenant implements Serializable,BaseTenant {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
 }

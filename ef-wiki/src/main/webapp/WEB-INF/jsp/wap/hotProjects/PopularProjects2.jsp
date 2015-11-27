@@ -40,8 +40,8 @@
   <div class="dis-q1">
     <div class="dis-q1-tabs">
       <ul class="tabs-nav tabs-nav-1" id="wikiNav">
-        <li class="item active" id="0">热门</li>
-        <li class="item" id="1">关注</li>
+        <li class="item" id="0">热门</li>
+        <li class="item active" id="1">关注</li>
         <li class="item-class"><a href="<c:url value='/category.do'/>">分类</a></li>
       </ul>
       <ul class="tabs-nav tabs-nav-2">
@@ -50,7 +50,7 @@
         <li class="item">地区</li>
       </ul>
       <div class="tabs-bd">
-        <div class="am-tab-panel am-active" style="padding:10px 0 15px 0;width: 100%;float: left;display: block;" id="pubu">
+        <div class="am-tab-panel" style="padding:10px 0 15px 0;width: 100%;float: left;display: none;" id="pubu">
           <c:if test="${!empty  popularProjectsList}">
             <c:forEach var="ppj" items="${popularProjectsList}">
               <ul class="hot" id="box">
@@ -66,7 +66,7 @@
             </c:forEach>
           </c:if>
         </div>
-        <div class="am-tab-panel " style="display:none;">
+        <div class="am-tab-panel am-active" >
           <div class="suit">
             <div class="dynamic" style="border-bottom: 0;">
 
@@ -232,7 +232,7 @@
                 if(data=="false"){
                     var go = window.confirm("去登陆吧?");
                     if(go==true){
-                        window.location.href ="<c:url value='/wap/projectAttention'/>";
+                        window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
                     }
                     else{
                         return false;//取消
@@ -357,7 +357,6 @@
                     }
 
                 }else{
-                    //alert("no data!!!");
                     flag = true;
                 }
                 PBL("#recommends","#recommend",2);
