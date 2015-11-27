@@ -480,7 +480,6 @@ function getHfProduct(e){
       async:true,
       success:function(o){
         if(o==false){
-          //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/showProduct/'/>"+data+"/"+"${projectId}";
@@ -532,7 +531,6 @@ function getHfProduct(e){
       async:true,
       success:function(o){
         if(o==false){
-          //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/showProduct/${product.id}'/>"+"/${projectId}";
@@ -553,7 +551,7 @@ function getHfProduct(e){
                   "<li style=\"margin: 0;border-bottom: 0;\" class=\"ae\"  >"
                   +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></a></div> " +
                   "<div class=\"text\"><span>" +
-                  "<a href=\"#\">${myUser.name2} 回复 "+name+"：</a></span>" +
+                  "<a href=\"#\">${fn:substring(myUser.username, 0,3 )}****${fn:substring(myUser.username,7,11)} 回复 "+name+"：</a></span>" +
                   "<span>"+CommentValue+"</span></div> " +
                   "<div class=\"status ae\"> <div class=\"status-left\">" +
                   "<span>刚刚" +
@@ -569,7 +567,7 @@ function getHfProduct(e){
                   "<li style=\"margin: 0;border-bottom: 0;\" class=\"ae\" id=\""+o.id+"\" about=\"matter\" >"
                   +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></a></div> " +
                   "<div class=\"text\"><span>" +
-                  "<a href=\"#\">${myUser.name2} 回复 "+name+"：</a></span>" +
+                  "<a href=\"#\">${fn:substring(myUser.username, 0,3 )}****${fn:substring(myUser.username,7,11)} 回复 "+name+"：</a></span>" +
                   "<span>"+CommentValue+"</span></div> " +
                   "<div class=\"status ae\"> <div class=\"status-left\">" +
                   "<span>刚刚" +

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -332,7 +333,7 @@ var startNum=1;
                }else{
                  amout1 =data.list[i].amount;
                }
-               var userName = data.list[i].user.username.toString().substring(0,3)+"****"+data.list[i].user.username.toString().substring(7,11);;
+               var userName = data.list[i].user.username.toString().substring(0,3)+"****"+data.list[i].user.username.toString().substring(7,11);
                if(userName==null){
                  userName ="匿名用户";
                }
@@ -375,8 +376,6 @@ function savaUP(productId){
     dataType:"json",
     success:function(data2){
      if(data2=="false"){
-       //alert("您还未登陆，请登录后再操作！！！");
-       //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
        var go = window.confirm("去登陆吧?");
        if(go==true){
          window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
@@ -446,8 +445,6 @@ function savaUP(productId){
       async:true,
       success:function(data){
         if(data==false){
-          //alert("您还未登陆，请登录后再操作！！！");
-          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
@@ -457,7 +454,7 @@ function savaUP(productId){
           }
           return false;
         }
-        $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
+        $(".dialogue").append("<div class='matter'> <p class='text-h1'>${fn:substring(myUser.username, 0,3 )}****${fn:substring(myUser.username,7,11)}</p> " +
                 "<p class='text-time'>刚刚</p> <p class='text-content'>" +
                 "<a href='#' >"+CommentValue+"</a></p> <div class='owner'>" +
                 "<img class='am-circle' src='<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>'/>" +
@@ -492,7 +489,6 @@ function savaUP(productId){
         async: true,
         success:function(data){
           if(data==false){
-            //alert("您还未登陆，请登录后再操作！！！");
             var go = window.confirm("去登陆吧?");
             if(go==true){
               window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
@@ -503,7 +499,7 @@ function savaUP(productId){
             return false;
           }
           $("#"+contentId).append("<div class='respond'> <p><span class='txt-name'>" +
-                  "<a href='#'> ${myUser.name2}：</a>" +
+                  "<a href='#'> ${fn:substring(myUser.username, 0,3 )}****${fn:substring(myUser.username,7,11)}：</a>" +
                   "</span><span class='txt-content'>"+CommentValue+"</span></p> </div> ");
         },
         error:function(){
@@ -530,7 +526,6 @@ function savaUP(productId){
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
-          //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/wapShowProduct/'/>"+productId;
@@ -577,7 +572,6 @@ function savaUP(productId){
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          //showAlert("提示","您还未登陆，请登录后再操作");
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
@@ -620,7 +614,7 @@ function savaUP(productId){
           for(i in data){
             var  pubu =$("#newcommentList");
             var cTime =transdate(data[i].createDateTime);
-            var userName = data[i].user.name2;
+            var userName = data[i].user.username.toString().substring(0,3)+"****"+data.list[i].user.username.toString().substring(7,11);;;
             if(userName==null){
               userName ="匿名用户";
             }
@@ -660,7 +654,7 @@ function savaUP(productId){
           for(i in data){
             var  pubu =$("#newPraiseList");
             var cTime =transdate(data[i].createDateTime);
-            var userName = data[i].user.name2;
+            var userName = data[i].user.username.toString().substring(0,3)+"****"+data.list[i].user.username.toString().substring(7,11);;;
             if(userName==null){
               userName ="匿名用户";
             }
