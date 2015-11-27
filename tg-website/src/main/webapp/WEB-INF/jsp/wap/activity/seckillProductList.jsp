@@ -25,107 +25,94 @@
     <!-- //End--chevron-left-->
     <div class="menu-list">
         <ul class="bd">
-            <li><a href="<c:url value="/miao/list"/>" title="首页">首页</a></li>
+            <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
+            <li><a href="<c:url value="/miao/list"/>" title="秒杀首页">秒杀首页</a></li>
             <li><a href="http://i.efeiyi.com" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
         </ul>
     </div>
 
 </header>
 <!--//End--header-->
+
+
 <article class="seckill">
-    <div class="bd time">
-        <h1 class="bd" id="miaoStatus">距离本场秒杀开始还有</h1>
-
-        <div class="des">
-            <span class="items hour" id="time_h">00</span>
-            <span class="items minute" id="time_m">00</span>
-            <span class="items seconds" id="time_s">00</span>
-        </div>
-    </div>
-    <!-- //End--time-->
-    <div data-am-widget="slider" class="bd am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}'>
-        <ul class="am-slides">
-            <li><img src="http://pro.efeiyi.com/${productList.get(0).productModel.productModel_url}@!miao-product-view">
-            </li>
-        </ul>
-    </div>
-    <!--//End--am-slider-->
-    <div class="bd price-buy">
-        <div class="price">
-            <p class="t1"><em>￥</em><strong>${productList.get(0).price}</strong>
-                <del>￥${productList.get(0).productModel.price}</del>
-            </p>
-            <p class="t2">关注度：${productList.get(0).attentionAmount}</p>
-        </div>
-        <div class="btn-buy"><a href="<c:url value="/miao/${productList.get(0).id}"/>" title="查看商品" id="miaoBuy">查看商品</a></div>
-    </div>
-    <!--//End--price-buy-->
-    <div class="bd t-title">
-        <h3>秒杀预告</h3>
-        <h4>锁定秒杀日，抢购最便宜</h4>
-    </div>
-    <!--//End--price-buy-->
-    <div class="bd s-list">
-        <c:forEach items="${productList}" begin="1" var="product">
-            <div class="items">
-                <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!miao-product-list" width="134"
-                     alt="">
-
-                <div class="info">
-                    <p class="t1"><fmt:formatDate value="${product.startDatetime}" pattern="MM月dd日 HH:mm:ss"/>开抢</p>
-
-                    <p class="t2"><span>${product.productModel.name}</span></p>
-
-                    <p class="t3">${product.productModel.product.subName}</p>
-
-                    <p class="t4">
-                        <em>￥</em><strong>${product.price}</strong>
-                        <del>￥${product.productModel.price}</del>
-                    </p>
-                </div>
-                <div class="divbtm">
-                    <span>关注度：${product.attentionAmount}</span>
-                    <a href="" title="查看商品" >查看商品</a>
+    <div class="bd seckill-pro">
+        <c:if test="${miaoStatus=='2'}">
+            <div class="bd start">
+                <h1 class="bd">本场秒杀正火热进行中...</h1>
+            </div>
+        </c:if>
+        <c:if test="${miaoStatus=='1'&& !isShowTime}">
+            <div class="bd start">
+                <h1 class="bd"><fmt:formatDate value="${productList.get(0).startDatetime}" pattern="MM月dd日 HH:mm:ss"/>
+                    开始秒杀</h1>
+            </div>
+        </c:if>
+        <c:if test="${miaoStatus=='1'&& isShowTime}">
+            <div class="bd start">
+                <h1 class="bd">距秒杀开始还有</h1>
+                <div class="bd s-time">
+                    <ul class="bd">
+                        <li id="time_h">00</li>
+                        <li id="time_m">00</li>
+                        <li id="time_s">00</li>
+                    </ul>
                 </div>
             </div>
-        </c:forEach>
+        </c:if>
+        <!-- //End--time-->
+        <div class="bd bigimg">
+            <img src="http://pro.efeiyi.com/${productList.get(0).productModel.productModel_url}@!miao-product-view">
+
+            <p class="mask">关注度：${productList.get(0).attentionAmount}</p>
+        </div>
+        <!--//End--bigimg-->
+        <div class="bd bigbuy">
+            <div class="title">${productList.get(0).productModel.product.name}</div>
+            <div class="price">
+                <p class="p1"><span>原&nbsp;&nbsp;&nbsp;价：</span>
+                    <del>￥${productList.get(0).productModel.price}</del>
+                </p>
+                <p class="p2"><span>秒杀价：</span><em>￥</em><strong>${productList.get(0).price}</strong></p>
+                <c:if test="${miaoStatus=='2'}">
+                    <a class="btn-buy" href="<c:url value="/miao/${productList.get(0).id}"/>" title="立即抢购" id="miaoBuy">立即抢购</a>
+                </c:if>
+                <c:if test="${miaoStatus=='1'}">
+                    <a class="btn-buy" href="<c:url value="/miao/${productList.get(0).id}"/>" title="立即抢购" id="miaoBuy">查看商品</a>
+                </c:if>
+            </div>
+        </div>
+        <!--//End--price-buy-->
     </div>
-    <!--//End--s-list-->
-    <%--<div class="bd p-list">--%>
-    <%--<h3>往期回顾</h3>--%>
-    <%--<ul class="ul-list">--%>
-    <%--<li>--%>
-    <%--<a href="" title=""><img src="../shop2015/upload/seckill2.jpg" alt=""></a>--%>
-    <%--<p class="t1">太极八卦砚</p>--%>
-    <%--<p class="t2"><del>￥89.00</del><em>￥</em><strong>11</strong></p>--%>
-    <%--<p class="t3">关注度：10000</p>--%>
-    <%--<p class="t4">秒杀结束</p>--%>
-    <%--</li>--%>
-    <%--<li>--%>
-    <%--<a href="" title=""><img src="../shop2015/upload/seckill2.jpg" alt=""></a>--%>
-    <%--<p class="t1">太极八卦砚</p>--%>
-    <%--<p class="t2"><del>￥89.00</del><em>￥</em><strong>11</strong></p>--%>
-    <%--<p class="t3">关注度：10000</p>--%>
-    <%--<p class="t4">秒杀结束</p>--%>
-    <%--</li>--%>
-    <%--<li>--%>
-    <%--<a href="" title=""><img src="../shop2015/upload/seckill2.jpg" alt=""></a>--%>
-    <%--<p class="t1">太极八卦砚</p>--%>
-    <%--<p class="t2"><del>￥89.00</del><em>￥</em><strong>11</strong></p>--%>
-    <%--<p class="t3">关注度：10000</p>--%>
-    <%--<p class="t4">秒杀结束</p>--%>
-    <%--</li>--%>
-    <%--<li>--%>
-    <%--<a href="" title=""><img src="../shop2015/upload/seckill2.jpg" alt=""></a>--%>
-    <%--<p class="t1">太极八卦砚</p>--%>
-    <%--<p class="t2"><del>￥89.00</del><em>￥</em><strong>11</strong></p>--%>
-    <%--<p class="t3">关注度：10000</p>--%>
-    <%--<p class="t4">秒杀结束</p>--%>
-    <%--</li>--%>
-    <%--</ul>--%>
-    <%--</div>--%>
-    <!--//End--p-list-->
+    <!-- //End--seckill-pro-->
+    <c:forEach items="${productList}" begin="1" var="product">
+        <div class="bd seckill-pro">
+            <div class="bd start">
+                <h1 class="bd"><fmt:formatDate value="${product.startDatetime}" pattern="MM月dd日 HH:mm:ss"/>
+                    开始秒杀</h1>
+            </div>
+            <!-- //End--time-->
+            <div class="bd bigimg">
+                <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!miao-product-view">
+
+                <p class="mask">关注度：${product.attentionAmount}</p>
+            </div>
+            <!--//End--bigimg-->
+            <div class="bd bigbuy">
+                <div class="title">${productList.get(0).productModel.product.name}</div>
+                <div class="price">
+                    <p class="p1"><span>原&nbsp;&nbsp;&nbsp;价：</span>
+                        <del>￥${productList.get(0).productModel.price}</del>
+                    </p>
+                    <p class="p2"><span>秒杀价：</span><em>￥</em><strong>${productList.get(0).price}</strong></p>
+                        <a class="btn-buy"  title="敬请期待" >敬请期待</a>
+                </div>
+            </div>
+            <!--//End--price-buy-->
+        </div>
+    </c:forEach>
 </article>
+
 
 <script>
     $().ready(function () {

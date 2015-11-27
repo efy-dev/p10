@@ -11,10 +11,11 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20150831"/>">
-  <link type="text/css" rel="stylesheet"  href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
-  <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
+  <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20151127"/>">
+  <link type="text/css" rel="stylesheet"  href="<c:url value="/scripts/wap/css/app.css?v=20151127"/>">
+  <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20151127"/>">
   <script src="<c:url value="/scripts/wap/js/jquery-1.11.1.min.js"/>" ></script>
+  <script src="<c:url value="/scripts/js/ef.util.js"/>" ></script>
 
   <sitemesh:write property='head'/>
 </head>
@@ -82,8 +83,8 @@
 <![endif]-->
 <script src="<c:url value="/scripts/wap/js/amazeui.min.js"/>"></script>
 <!--自定义js--Start-->
-<script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
-<script src="<c:url value="/scripts/wap/js/myorder.js?v=20150831"/>"></script>
+<script src="<c:url value="/scripts/wap/js/system.js?v=20151127"/>"></script>
+<script src="<c:url value="/scripts/wap/js/myorder.js?v=20151127"/>"></script>
 
 </body>
 </html>

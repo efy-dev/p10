@@ -49,7 +49,7 @@
         </ul>
     </div>
     <!--//End--am-slider-->
-    <div class="bd details">
+    <div class="bd details seckill">
         <div class="bd des-title">
             <strong class="bd txt">${seckillProduct.productModel.name}</strong>
             <a href="#分享" class="share" style="right: 0px;">
@@ -67,52 +67,68 @@
             <%--</a>--%>
         </div>
         <!-- //End--des-title-->
-        <div class="bd des-price des-price-seckill">
-            <p class="bd t0"><span>秒杀价：</span><em>￥</em><strong>${seckillProduct.price}</strong></p>
 
-            <p class="bd t1"><span>飞蚁价：</span>
+        <div class="bd des-price">
+            <div class="s s1"><span>原&nbsp;&nbsp;&nbsp;价：</span>
                 <del>￥${seckillProduct.productModel.price}</del>
-            </p>
-            <c:if test="${!empty seckillProduct.productModel.product.tenant}">
-                <p class="bd t2">
-                    <span>服&nbsp;&nbsp;&nbsp;务：</span>由${seckillProduct.productModel.product.tenant.name}（${seckillProduct.productModel.product.tenant.address}）发货并提供服务
-                </p>
-            </c:if>
+            </div>
+            <div class="s s2"><span>秒杀价：</span><em>￥</em><strong>${seckillProduct.price}</strong></div>
+            <c:if test="${ not empty isShowTime && !isShowTime}">
+                <div class="s s3">
+                    <div class="status2">
+                        <p><fmt:formatDate value="${seckillProduct.startDatetime}" pattern="MM月dd日 HH:mm:ss"/></p>
 
-            <%--<p class="bd tnum">--%>
-            <%--<strong>购买数量</strong>--%>
-            <%--<em class="sub"></em>--%>
-            <%--<input class="txt" type="text" value="1">--%>
-            <%--<em class="add"></em>--%>
-            <%--</p>--%>
-
-            <p class="bd t3">每件商品限抢购一件</p>
-
-            <c:if test="${miaoStatus!='2'}">
-                <p class="bd seckill-time">秒杀倒计时： <strong class="seckill-time"><font id="time-h">00</font>:<font
-                        id="time-m">00</font>:<font
-                        id="time-s">00</font></strong></p>
-            </c:if>
-
-            <p class="bd t3">秒杀规则：下单成功后请在15分钟内完成支付</p>
-
-
-            <c:if test="${miaoStatus=='2'}">
-                <div class="bd time">
-                    <h1 class="bd">距秒杀结束</h1>
-
-                    <div class="des">
-                        <span class="items hour" id="time-h">00</span>
-                        <span class="items minute" id="time-m">00</span>
-                        <span class="items seconds" id="time-s">00</span>
+                        <p>开始秒杀</p>
                     </div>
                 </div>
-                <div class="bd btn-bg" id="miaoBuy"><a href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
-                                                       title="立即抢购">立即抢购</a>
+            </c:if>
+            <c:if test="${not empty isShowTime && isShowTime}">
+                <div class="s s3">
+                    <div class="status3">
+                        <p>距秒杀开始还有</p>
+
+                        <p>
+                            <strong id="time-h">00</strong>
+                            <strong id="time-m">00</strong>
+                            <strong id="time-s">00</strong>
+                        </p>
+                    </div>
                 </div>
             </c:if>
-            <c:if test="${miaoStatus=='1'}">
+            <c:if test="${miaoStatus=='3'}">
+                <div class="s s3">
+                    <div class="status2">
+                        <p>商品已被抢光，用时</p>
 
+                        <p>${minute}分${second}秒</p>
+                    </div>
+                </div>
+            </c:if>
+            <c:if test="${miaoStatus=='2'}">
+                <div class="s s3">
+                    <div class="status1">剩余库存量<strong id="amount">${seckillProduct.amount}</strong>件</div>
+                </div>
+                <div class="s s4">
+                    <strong>秒杀记录：</strong>
+
+                    <div class="bd tabs">
+                        <p>用户名</p>
+
+                        <p>秒杀时间</p>
+                    </div>
+                    <div class="bd info">
+                        <ul id="miaoRecord">
+                        </ul>
+                    </div>
+                </div>
+            </c:if>
+
+            <div class="s s5"><span>秒杀规则：</span>每件商品限抢购一件，下单成功后请在15分钟内完成支付</div>
+            <c:if test="${!empty seckillProduct.productModel.product.tenant}">
+                <div class="s s6"><span>服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：</span>由四川省渠县刘氏竹编工艺有限公司（四川成都）发货并提供服务
+                </div>
+            </c:if>
+            <c:if test="${miaoStatus=='2'}">
                 <div class="bd btn-bg" id="miaoBuy" style="display: none"><a
                         href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
                         title="立即抢购">立即抢购</a>
@@ -121,8 +137,12 @@
             <c:if test="${miaoStatus=='3'}">
                 <div class="bd btn-bg-no">秒杀结束</div>
             </c:if>
-
+            <c:if test="${miaoStatus=='1'}">
+                <div class="bd btn-bg-no">即将开始</div>
+            </c:if>
         </div>
+
+
         <!-- //End--des-price-seckill-->
         <div class="seckill-bor"></div>
         <div class="des-content des-content-seckill">
@@ -198,6 +218,41 @@
 </article>
 
 <script>
+
+    function getProductAmount() {
+        ajaxRequest("<c:url value="/miao/amount.do"/>", {"productId": "${seckillProduct.id}"}, function (data) {
+            $("#amount").html(data);
+            setTimeout("getProductAmount()", 2500);
+        }, function () {
+        }, "post")
+    }
+
+    function getProductOrder() {
+        ajaxRequest("<c:url value="/miao/order.do"/>", {"productModelId": "${seckillProduct.productModel.id}"}, function (data) {
+            var out = "";
+            if (data.length > 0) {
+                var dataLength = 0;
+                if(data.length<=4){
+                    dataLength = data.length;
+                }else{
+                    dataLength = 4;
+                }
+                for (var i = 0; i < dataLength; i++) {
+                    var phone = data[i].user.username;
+                    var datetime = new Date(data[i].createDatetime);
+                    phone = phone.substring(0, 3) + "****" + phone.substring(6, 10);
+                    out += "<li class=\"bd\"><p>" + phone + "</p><p>" + datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds() + "</p></li>"
+                }
+            }
+            $("#miaoRecord").html(out);
+            setTimeout("getProductOrder()", 3000);
+        }, function () {
+        }, "post")
+    }
+
+    setTimeout("getProductOrder()", 3000);
+    setTimeout("getProductAmount()", 2500);
+
     $().ready(function () {
         $("img").each(function () {
             $(this).css("width", "100%")
@@ -206,26 +261,25 @@
     })
 
     function timeEnd() {
-//        $("#miaoStatus").html("本场秒杀正火热进行中...");
+        // $("#miaoStatus").html("本场秒杀正火热进行中...");
         $("#miaoBuy").show();
     }
 
     function show_time() {
         var time_start = new Date().getTime(); //设定当前时间
-        <c:if test="${miaoStatus=='2'}">
-        var time_end = new Date("<fmt:formatDate value="${seckillProduct.endDatetime}" pattern="20YY/MM/dd HH:mm:ss"/>").getTime(); //设定目标时间
-        </c:if>
-        <c:if test="${miaoStatus!='2'}">
-        var time_end = new Date("<fmt:formatDate value="${seckillProduct.startDatetime}" pattern="20YY/MM/dd HH:mm:ss"/>").getTime(); //设定目标时间
-        </c:if>
+        <%--<c:if test="${miaoStatus=='2'}">--%>
+        <%--var time_end = new Date("<fmt:formatDate value="${seckillProduct.endDatetime}" pattern="20YY/MM/dd HH:mm:ss"/>").getTime(); //设定目标时间--%>
+        <%--</c:if>--%>
+        <%--<c:if test="${miaoStatus!='2'}">--%>
+        var time_end = new Date("<fmt:formatDate value="${seckillProduct.startDatetime}"
+                                             pattern="20YY/MM/dd HH:mm:ss"/>").getTime(); //设定目标时间
+        <%--</c:if>--%>
         // 计算时间差
         var time_distance = time_end - time_start;
 
         if (time_distance < 0) {
             timeEnd();
         } else {
-
-
             // 时
             var int_hour = Math.floor(time_distance / 3600000)
             time_distance -= int_hour * 3600000;
