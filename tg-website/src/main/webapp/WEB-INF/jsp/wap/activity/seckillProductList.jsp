@@ -52,7 +52,7 @@
             <div class="bd start">
                 <h1 class="bd">距秒杀开始还有</h1>
                 <div class="bd s-time">
-                    <ul class="bd">
+                    <ul>
                         <li id="time_h">00</li>
                         <li id="time_m">00</li>
                         <li id="time_s">00</li>
