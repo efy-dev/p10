@@ -69,7 +69,7 @@
     </div>
 </div>
 
-<div class="wh nav-new nav-new-list" id="line">
+<div class="wh nav-new" id="line">
     <div class="hd">
         <div class="cate" id="cate">
             <div class="ld"><h2>非遗商品分类<i class="icon-new"></i></h2></div>
