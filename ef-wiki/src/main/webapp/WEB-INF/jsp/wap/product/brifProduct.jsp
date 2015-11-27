@@ -459,7 +459,7 @@ function savaUP(productId){
         }
         $(".dialogue").append("<div class='matter'> <p class='text-h1'>${fn:substring(myUser.username, 0,3 )}****${fn:substring(myUser.username,7,11)}</p> " +
                 "<p class='text-time'>刚刚</p> <p class='text-content'>" +
-                "<a href='#' >"+CommentValue+"</a></p> <div class='owner'>" +
+                "<a href='#' onclick='showmodal2(this)' about='"+data.id+"'>"+CommentValue+"</a></p> <div class='owner'>" +
                 "<img class='am-circle' src='<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>'/>" +
                 "</div> <div class='owner-good'><a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.id+"\")' about='${product.id}' name='up'>" +
                 "<i class='good-1'></i><em>"+data.amount+"</em></a></div> " + "</div>");
@@ -503,7 +503,7 @@ function savaUP(productId){
           }
           $("#"+contentId).append("<div class='respond'> <p><span class='txt-name'>" +
                   "<a href='#'> ${fn:substring(myUser.username, 0,3 )}****${fn:substring(myUser.username,7,11)}：</a>" +
-                  "</span><span class='txt-content'>"+CommentValue+"</span></p> </div> ");
+                  "</span><span class='txt-content' onclick='showmodal2(this)' about='"+data.id+"'>"+CommentValue+"</span></p> </div> ");
         },
         error:function(){
           alert("出错了，请联系管理员！！！");
@@ -617,7 +617,7 @@ function savaUP(productId){
           for(i in data){
             var  pubu =$("#newcommentList");
             var cTime =transdate(data[i].createDateTime);
-            var userName = data[i].user.username.toString().substring(0,3)+"****"+data.list[i].user.username.toString().substring(7,11);;;
+            var userName = data[i].user.username.toString().substring(0,3)+"****"+data[i].user.username.toString().substring(7,11);
             if(userName==null){
               userName ="匿名用户";
             }
@@ -697,7 +697,7 @@ function savaUP(productId){
       data:"",
       dataType:"json",
       success:function(o){
-        window.location.href="<c:url value='/project/showProduct/'/>"+data2;
+        window.location.href="<c:url value='/project/showProduct/'/>"+data2+"/"+data1;
       },
       error:function(){
         alert("出错了，请联系管理员！！！");
@@ -714,7 +714,7 @@ function savaUP(productId){
       data:"",
       dataType:"json",
       success:function(o){
-        window.location.href="<c:url value='/project/showProduct/'/>"+data2;
+        window.location.href="<c:url value='/project/showProduct/'/>"+data2+"/"+data1;
       },
       error:function(){
         alert("出错了，请联系管理员！！！");
