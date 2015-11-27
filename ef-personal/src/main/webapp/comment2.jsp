@@ -53,13 +53,14 @@
     </header>
     <div class="talk">
       <textarea placeholder="没事说句(200字以内)" id="forFather"></textarea>
+      <input type="hidden" id="flag" value="<%=request.getParameter("flag")%>"/>
     </div>
   </form>
 </div>
 
 <script>
   function gotoParent(){
-    window.opener.setValue2( $("#forFather").val());//调用父窗口的方法进行传值
+    window.opener.setValue2( $("#forFather").val(),$("#flag").val());//调用父窗口的方法进行传值
     window.returnValue = true;
     window.close();
   }

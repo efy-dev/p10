@@ -232,34 +232,7 @@
 
             </does>
         </entity>
-        <entity name="MasterHonor" label="传承人殊荣列表"
-                basic="simple" others=""
-                model="com.efeiyi.ec.master.model.MasterHonor">
-            <fields>
-                <field name="id" label="传承人殊荣id" inputType="text"/>
-                <field name="memo" label="传承人殊荣memo" inputType="text"/>
-            </fields>
-            <does>
-                <do name="plistMasterHonor" access="" label="传承人殊荣分页列表"
-                    result="/masterHonor/masterHonorPList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"/>
-                    </query>
-                </do>
 
-                <do name="formMasterHonor" label="保存大师殊荣页" access="" result="/masterHonor/masterHonorForm"/>
-                <do name="saveOrUpdateMasterHonor" label="保存大师殊荣" access=""
-                    result="/masterHonor/masterHonorSaveSuccess">
-                </do>
-                <do name="removeMasterHonor" label="删除大师殊荣" access="" result="json"/>
-                <do name="listMasterHonor" label="传承人列表" access="" result="/masterHonor/masterHonorList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="大师殊荣id" name="id" defaultValue="1" operation="eq"/>
-                    </query>
-                </do>
-
-            </does>
-        </entity>
         <entity name="MasterIntroduction" label="传承人简介列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.master.model.MasterIntroduction">

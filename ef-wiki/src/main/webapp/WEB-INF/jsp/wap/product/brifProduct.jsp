@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -10,33 +11,9 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>商品详情</title>
-  <!-- Set render engine for 360 browser -->
-  <meta name="renderer" content="webkit">
-  <!-- No Baidu Siteapp-->
-  <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
-  <!-- Tile icon for Win8 (144x144 + tile color) -->
-  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
-  <meta name="msapplication-TileColor" content="#0e90d2">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/amazeui.min.css?v=20150831'/>">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/app.css?v=20150831'/>">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/cyclopedia.css?v=20150831'/>">
-  <link type="text/css" rel="stylesheet" href="http://v3.jiathis.com/code/css/jiathis_share.css">
-  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
+
+  <title>作品详情</title>
+
 </head>
 <body style="position: relative;">
 
@@ -61,7 +38,7 @@
       <ul class="bd">
         <li><a href="<c:url value='/base/home.do'/>" title="首页">首页</a></li>
         <li><a href="javascript:void(0);" title="分类" id="acs">消&nbsp;息</a></li>
-        <li><a href="http://www.i.efeiyi.com" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+        <li><a href="http://i.efeiyi.com" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
     </div>
   </div>
@@ -118,6 +95,7 @@ ${product.productDescription.content}
   <div class="inheritor ">
 
     <div class="inheritor-text">
+      <c:if test="${!empty product.master}">
       <a href="http://${product.master.name}.efeiyi.com"><p class="itor-text-1">${product.master.fullName}</p></a>
 
       <p class="itor-text-2">${product.name}</p>
@@ -141,7 +119,7 @@ ${product.productDescription.content}
       </p>
 
       <p class="itor-text-4">${product.master.brief}</p>
-      <a class="gz-fd-icon" href="javascript:void(0);" onclick="saveMasterFllow('${product.master.id}')" id="">
+      <a class="gz-fd-icon" href="javascript:void(0);" onclick="saveMasterFllow('${product.master.id}')" id="${product.master.id}">
         <c:if test="${flag == true}">
           <input id="saveMasterFllow" type="hidden" value="0">
           取消关注
@@ -155,16 +133,18 @@ ${product.productDescription.content}
 
       <div class="gz-fd-img"><a href="http://${product.master.name}.efeiyi.com"><img src="${product.master.favicon}"></a>
       </div>
+      </c:if>
     </div>
+
   </div>
   <!--评论-->
   <div class="review">
     <div class="dialogue">
       <h4 class="pl-name">评论</h4>
       </div>
-
-    </div>
     <div class="more"><a href="javascript:void(0);" onclick="getData()"><i class="time-1"></i>查看更多评论</a></div>
+    </div>
+
     <input type="hidden" name="" id="content" value="" />
 </div>
   <!--评论-->
@@ -179,7 +159,7 @@ ${product.productDescription.content}
       <i class="s-solid ft-a"></i>
       <a href="#" class="ft-a" onclick="storeProduct('${product.id}')"> <i class="good-3"></i> </a>
       <i class="s-solid ft-a"></i>
-      <a href="javascript:void(0);" class="ft-a"   style="position:relative">
+      <a href="javascript:void(0);" class="ft-a" id="io"  style="position:relative">
         <i class="good-4" id="good-4"></i>
         <div class="nr-share" id="nr-share" style="display: none">
         <div class="nr-bg">
@@ -264,7 +244,7 @@ ${product.productDescription.content}
 var startNum=1;
   $(document).ready(function(){
     getData();
-
+  });
     function  getData(){
       $.ajax({
         type:"get",
@@ -282,7 +262,7 @@ var startNum=1;
               }else{
                 amout1 =data.list[i].amount;
               }
-              var userName = data.list[i].user.name2;
+              var userName = data.list[i].user.username.toString().substring(0,3)+"****"+data.list[i].user.username.toString().substring(7,11);
               if(userName==null){
                 userName ="匿名用户";
               }
@@ -320,7 +300,7 @@ var startNum=1;
     }
 
 
-  });
+
   function transdate(endTime){
     var timestamp = Date.parse(new Date());
     var oldTime = parseInt(endTime);
@@ -356,7 +336,7 @@ var startNum=1;
                }else{
                  amout1 =data.list[i].amount;
                }
-               var userName = data.list[i].user.name2;
+               var userName = data.list[i].user.username.toString().substring(0,3)+"****"+data.list[i].user.username.toString().substring(7,11);
                if(userName==null){
                  userName ="匿名用户";
                }
@@ -399,8 +379,6 @@ function savaUP(productId){
     dataType:"json",
     success:function(data2){
      if(data2=="false"){
-       //alert("您还未登陆，请登录后再操作！！！");
-       //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
        var go = window.confirm("去登陆吧?");
        if(go==true){
          window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
@@ -470,8 +448,6 @@ function savaUP(productId){
       async:true,
       success:function(data){
         if(data==false){
-          //alert("您还未登陆，请登录后再操作！！！");
-          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
@@ -481,9 +457,9 @@ function savaUP(productId){
           }
           return false;
         }
-        $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
+        $(".dialogue").append("<div class='matter'> <p class='text-h1'>${fn:substring(myUser.username, 0,3 )}****${fn:substring(myUser.username,7,11)}</p> " +
                 "<p class='text-time'>刚刚</p> <p class='text-content'>" +
-                "<a href='#' >"+CommentValue+"</a></p> <div class='owner'>" +
+                "<a href='#' onclick='showmodal2(this)' about='"+data.id+"'>"+CommentValue+"</a></p> <div class='owner'>" +
                 "<img class='am-circle' src='<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>'/>" +
                 "</div> <div class='owner-good'><a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.id+"\")' about='${product.id}' name='up'>" +
                 "<i class='good-1'></i><em>"+data.amount+"</em></a></div> " + "</div>");
@@ -516,7 +492,6 @@ function savaUP(productId){
         async: true,
         success:function(data){
           if(data==false){
-            //alert("您还未登陆，请登录后再操作！！！");
             var go = window.confirm("去登陆吧?");
             if(go==true){
               window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
@@ -527,8 +502,8 @@ function savaUP(productId){
             return false;
           }
           $("#"+contentId).append("<div class='respond'> <p><span class='txt-name'>" +
-                  "<a href='#'> ${myUser.name2}：</a>" +
-                  "</span><span class='txt-content'>"+CommentValue+"</span></p> </div> ");
+                  "<a href='#'> ${fn:substring(myUser.username, 0,3 )}****${fn:substring(myUser.username,7,11)}：</a>" +
+                  "</span><span class='txt-content' onclick='showmodal2(this)' about='"+data.id+"'>"+CommentValue+"</span></p> </div> ");
         },
         error:function(){
           alert("出错了，请联系管理员！！！");
@@ -554,7 +529,6 @@ function savaUP(productId){
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
-          //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/wapShowProduct/'/>"+productId;
@@ -601,7 +575,6 @@ function savaUP(productId){
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          //showAlert("提示","您还未登陆，请登录后再操作");
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
@@ -644,7 +617,7 @@ function savaUP(productId){
           for(i in data){
             var  pubu =$("#newcommentList");
             var cTime =transdate(data[i].createDateTime);
-            var userName = data[i].user.name2;
+            var userName = data[i].user.username.toString().substring(0,3)+"****"+data[i].user.username.toString().substring(7,11);
             if(userName==null){
               userName ="匿名用户";
             }
@@ -684,7 +657,7 @@ function savaUP(productId){
           for(i in data){
             var  pubu =$("#newPraiseList");
             var cTime =transdate(data[i].createDateTime);
-            var userName = data[i].user.name2;
+            var userName = data[i].user.username.toString().substring(0,3)+"****"+data.list[i].user.username.toString().substring(7,11);;;
             if(userName==null){
               userName ="匿名用户";
             }
@@ -724,7 +697,7 @@ function savaUP(productId){
       data:"",
       dataType:"json",
       success:function(o){
-        window.location.href="<c:url value='/project/showProduct/'/>"+data2;
+        window.location.href="<c:url value='/project/showProduct/'/>"+data2+"/"+data1;
       },
       error:function(){
         alert("出错了，请联系管理员！！！");
@@ -741,7 +714,7 @@ function savaUP(productId){
       data:"",
       dataType:"json",
       success:function(o){
-        window.location.href="<c:url value='/project/showProduct/'/>"+data2;
+        window.location.href="<c:url value='/project/showProduct/'/>"+data2+"/"+data1;
       },
       error:function(){
         alert("出错了，请联系管理员！！！");
@@ -755,20 +728,7 @@ function savaUP(productId){
 
 <!--//End--footer-->
 </div>
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value='/resources/assets/js/jquery.min.js?v=20150831'/>"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 
-<script src="<c:url value='/resources/assets/js/amazeui.ie8polyfill.min.js?v=20150831'/>"></script>
-<![endif]-->
-<script src="<c:url value='/resources/assets/js/amazeui.min.js?v=20150831'/>"></script>
-<!--自定义js--Start-->
-
-<%--<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>--%>
-<script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 
 <!--自定义js--End-->

@@ -10,6 +10,13 @@
                  <match url="/basic/xm.do?qm=plistSeckillProduct_default"/>
                  <match url="/basic/xm.do?qm=plistSeckillProduct_default1"/>
                  <match url="/basic/xm.do?qm=formSeckillProduct"/>
+                 <match url="/basic/xm.do?qm=plistPurchaseOrder_default&amp;viewIdentify=orderProductMiao&amp;viewProductModel=orderMiao"/>
+                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewIdentify=orderProductMiao"/>
+                 <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewProductModel=orderMiao"/>
+                 <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewIdentify=orderProductMiao"/>
+                 <match url="/basic/xm.do?qm=viewProduct&amp;viewIdentify=orderProductMiao"/>
+                 <match url="/basic/xm.do?qm=plistPurchaseOrderProductMiao_default"/>
+                 <match url="/basic/xm.do?qm=plistPurchaseOrderProductMiao_default1"/>
              </jnode>
          </jnode>
         <jnode id="contentManager" url="" text_zh_CN="内容管理" access="admin,operational,c_operational,o_operational,product_manager" state="closed">

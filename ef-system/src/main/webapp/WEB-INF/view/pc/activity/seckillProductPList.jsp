@@ -68,10 +68,12 @@
                 <c:forEach items="${requestScope.pageInfo.list}" var="seckillProduct">
                     <tr id="${seckillProduct.id}">
                         <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
-                        <td width="10%">
+                        <td width="15%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=plistPurchaseOrderProductMiao_default&viewIdentify=orderProductMiao&viewProductModel=orderMiao&productModelId=${seckillProduct.productModel.id}&conditions=productModel.id:${seckillProduct.productModel.id}"/>">
+                                        查看订单
+                                    </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formSeckillProduct&id=${seckillProduct.id}"/>">
                                         编辑
                                     </a>
@@ -89,10 +91,10 @@
                         <td class="am-hide-sm-only" width="10%">
                                 ${seckillProduct.price}
                         </td>
-                        <td class="am-hide-sm-only" width="10%">
+                        <td class="am-hide-sm-only" width="7%">
                                 ${seckillProduct.limitAmount}
                         </td>
-                        <td class="am-hide-sm-only" width="10%">
+                        <td class="am-hide-sm-only" width="8%">
                                 ${seckillProduct.amount}
                         </td>
                         <td class="am-hide-sm-only" width="10%">${seckillProduct.attentionAmount}</td>

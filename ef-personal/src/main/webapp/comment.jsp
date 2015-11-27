@@ -59,7 +59,6 @@
 
 <script>
   function gotoParent(){
-//    var msgId = $("#forFather").attr("name").val();
     window.opener.setValue( $("#forFather").val());//调用父窗口的方法进行传值
     window.returnValue = true;
     window.close();

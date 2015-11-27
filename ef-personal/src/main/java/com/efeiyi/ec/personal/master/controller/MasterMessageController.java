@@ -111,7 +111,7 @@ public class MasterMessageController {
 		MyUser user = AuthorizationUtil.getMyUser();
 		if (!StringTools.isEmpty(messageId)) {
 			MasterMessage message = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(), messageId);
-			getMasterFollowedStatus(message.getMaster());
+			message.setFollowStatus(getMasterFollowedStatus(message.getMaster()));
 			model.addAttribute("object", message);
 			model.addAttribute("myUser", user);
 		}
@@ -219,7 +219,7 @@ public class MasterMessageController {
 		String msgId = request.getParameter("msgId");
 		String content = request.getParameter("content");
 		MyUser user = AuthorizationUtil.getMyUser();
-		if (user == null) {
+		if (user == null || user.getId() == null) {
 			return false;
 		}
 		MasterMessage msg = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(), msgId);
@@ -751,7 +751,7 @@ public class MasterMessageController {
 		if (list != null && list.size() > 0){
 			return list;
 		}else{
-			return null;
+			return new ArrayList<>();
 		}
 	}
 
@@ -983,7 +983,7 @@ public class MasterMessageController {
 		if (list != null && list.size() > 0){
 			return list;
 		}else{
-			return null;
+			return new ArrayList();
 		}
 	}
 
@@ -1003,33 +1003,33 @@ public class MasterMessageController {
 		if (list != null && list.size() > 0){
 			return list;
 		}else{
-			return null;
+			return new ArrayList();
 		}
 	}
-
-	@ResponseBody
-	@RequestMapping("/subWorkComment.do")
-	public Object subWorkComment(HttpServletRequest request){
-		String commId = request.getParameter("commId");
-		String content = request.getParameter("content");
-		MyUser user = AuthorizationUtil.getMyUser();
-		if (user == null || user.getId() == null){
-			return "noRole";
-		}
-		MasterComment comment = (MasterComment) baseManager.getObject(MasterComment.class.getName(),commId);
-		MasterComment subComment = new MasterComment();
-		subComment.setCreateDateTime(new Date());
-		subComment.setUser(user);
-		subComment.setFatherComment(comment);
-		MasterWork masterWork = (MasterWork) baseManager.getObject(MasterWork.class.getName(),comment.getMasterWork().getId());
-		subComment.setMasterWork(masterWork);
-		subComment.setContent(content);
-		subComment.setAmount(0);
-		subComment.setStatus("1");
-		baseManager.saveOrUpdate(MasterComment.class.getName(),subComment);
-		comment.getMasterWork().setAmount(comment.getMasterWork().getAmount()== null?1:comment.getMasterWork().getAmount() + 1);
-		return subComment;
-	}
+//
+//	@ResponseBody
+//	@RequestMapping("/subWorkComment.do")
+//	public Object subWorkComment(HttpServletRequest request){
+//		String commId = request.getParameter("commId");
+//		String content = request.getParameter("content");
+//		MyUser user = AuthorizationUtil.getMyUser();
+//		if (user == null || user.getId() == null){
+//			return "noRole";
+//		}
+//		MasterComment comment = (MasterComment) baseManager.getObject(MasterComment.class.getName(),commId);
+//		MasterComment subComment = new MasterComment();
+//		subComment.setCreateDateTime(new Date());
+//		subComment.setUser(user);
+//		subComment.setFatherComment(comment);
+//		MasterWork masterWork = (MasterWork) baseManager.getObject(MasterWork.class.getName(),comment.getMasterWork().getId());
+//		subComment.setMasterWork(masterWork);
+//		subComment.setContent(content);
+//		subComment.setAmount(0);
+//		subComment.setStatus("1");
+//		baseManager.saveOrUpdate(MasterComment.class.getName(),subComment);
+//		comment.getMasterWork().setAmount(comment.getMasterWork().getAmount()== null?1:comment.getMasterWork().getAmount() + 1);
+//		return subComment;
+//	}
 
 	@ResponseBody
 	@RequestMapping("/getWorks/{qm}/{conditions}/{size}/{index}")
@@ -1155,13 +1155,13 @@ public class MasterMessageController {
 	@RequestMapping("/commentMsg.do")
 	public Object commentMsg(HttpServletRequest request){
 		String content = request.getParameter("content");
-		String msgId = request.getParameter("workId");
+		String msgId = request.getParameter("msgId");
 		String fatherId = request.getParameter("fatherId");
 		MyUser user = AuthorizationUtil.getMyUser();
 		if (user == null || user.getId() == null){
 			return "noRole";
 		}
-		if (content == null){
+		if (StringTools.isEmpty(content) || content == "undefined"){
 			return "nothing";
 		}
 		MasterMessage work = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),msgId);

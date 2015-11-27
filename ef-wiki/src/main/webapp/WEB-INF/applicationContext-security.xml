@@ -20,6 +20,7 @@
     <!--SSO -->
     <http auto-config="true" entry-point-ref="casEntryPoint" use-expressions="true">
         <csrf disabled="true"/>
+        <intercept-url pattern="/wap/projectAttention" access="isAuthenticated()"/>
         <intercept-url pattern="/brifProject/**" access="isAuthenticated()"/>
         <intercept-url pattern="/listProduct/**" access="isAuthenticated()"/>
         <intercept-url pattern="/wapbrifProject/**" access="isAuthenticated()"/>
@@ -32,7 +33,7 @@
         <intercept-url pattern="/find.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/pay/alipay/callback" access="isAnonymous()"/>
         <intercept-url pattern="/sso2.do" access="isAuthenticated()"/>
-        <intercept-url pattern="/pc/category" access="isAuthenticated()"/>
+        <!--<intercept-url pattern="/pc/category" access="isAuthenticated()"/>-->
         <intercept-url pattern="/order/myEfeiyi/list.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/easyBuy/**" access="isAuthenticated()"/>
         <intercept-url pattern="/order/**" access="isAuthenticated()"/>

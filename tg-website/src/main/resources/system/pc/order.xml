@@ -133,6 +133,19 @@
                         <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="orderStatus" defaultValue="17" operation="eq"/>
                     </query>
+                    <query name="byDatetime" label="默认" type="auto" orderBy="id:desc">
+                        <query name="default" label="默认" type="auto" orderBy="id:desc">
+                            <condition name="status" defaultValue="1" operation="eq"/>
+                            <condition name="orderType" defaultValue="2" operation="eq"/>
+                        </query>
+                    </query>
+                </do>
+
+                <do name="listPurchaseOrder" access="" label="秒杀订单列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="orderType" defaultValue="2" operation="eq"/>
+                    </query>
                 </do>
 
                 <do name="saveOrUpdatePurchaseOrder" access="" label="保存订单">
