@@ -40,7 +40,7 @@
     </div>
     <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
-<!--[if (gte IE 9)|!(IE)]><!-->
+<%--<!--[if (gte IE 9)|!(IE)]><!-->
 
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
@@ -51,6 +51,6 @@
 <!--自定义js--Start-->
 
 <script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>--%>
 
 
