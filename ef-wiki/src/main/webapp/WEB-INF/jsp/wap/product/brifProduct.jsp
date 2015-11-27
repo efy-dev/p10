@@ -159,7 +159,7 @@ ${product.productDescription.content}
       <i class="s-solid ft-a"></i>
       <a href="#" class="ft-a" onclick="storeProduct('${product.id}')"> <i class="good-3"></i> </a>
       <i class="s-solid ft-a"></i>
-      <a href="javascript:void(0);" class="ft-a"   style="position:relative">
+      <a href="javascript:void(0);" class="ft-a" id="io"  style="position:relative">
         <i class="good-4" id="good-4"></i>
         <div class="nr-share" id="nr-share" style="display: none">
         <div class="nr-bg">
