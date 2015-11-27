@@ -138,9 +138,9 @@ ${product.productDescription.content}
     <div class="dialogue">
       <h4 class="pl-name">评论</h4>
       </div>
-
-    </div>
     <div class="more"><a href="javascript:void(0);" onclick="getData()"><i class="time-1"></i>查看更多评论</a></div>
+    </div>
+
     <input type="hidden" name="" id="content" value="" />
 </div>
   <!--评论-->
@@ -240,7 +240,7 @@ ${product.productDescription.content}
 var startNum=1;
   $(document).ready(function(){
     getData();
-
+  });
     function  getData(){
       $.ajax({
         type:"get",
@@ -258,7 +258,7 @@ var startNum=1;
               }else{
                 amout1 =data.list[i].amount;
               }
-              var userName = data.list[i].user.name2;
+              var userName = data.list[i].user.username.toString().substring(0,3)+"****"+data.list[i].user.username.toString().substring(7,11);
               if(userName==null){
                 userName ="匿名用户";
               }
@@ -296,7 +296,7 @@ var startNum=1;
     }
 
 
-  });
+
   function transdate(endTime){
     var timestamp = Date.parse(new Date());
     var oldTime = parseInt(endTime);
@@ -332,7 +332,7 @@ var startNum=1;
                }else{
                  amout1 =data.list[i].amount;
                }
-               var userName = data.list[i].user.name2;
+               var userName = data.list[i].user.username.toString().substring(0,3)+"****"+data.list[i].user.username.toString().substring(7,11);;
                if(userName==null){
                  userName ="匿名用户";
                }
