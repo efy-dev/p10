@@ -74,7 +74,7 @@
     <h4 class="pl-name">评论</h4>
 
   </div>
-  <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
+  <div class="more"><a onclick="reloadComments();"><i class="time-1"></i>查看更多评论</a></div>
   <input type="hidden" name="" id="content" value="" />
 </div>
 <div class="suspend">
@@ -114,110 +114,100 @@
 <!--//End--footer-->
 </div>
 <script>
-
   var startNum=1;
   $(document).ready(function(){
-    getData();
-
-    function  getData(){
-      $.ajax({
-        type:"get",
-        url:"<c:url value='/basic/xmj.do?qm=plistMasterComment_message&conditions=masterMessage.id:${object.id}&pageEntity.size=3&pageEntity.index='/>"+startNum,
-        data:"",
-        dataType:"json",
-        success:function(data){
-          console.log(data);
-          if(data.list && data.list != null){
-            for(i in data.list){
-              var  pubu =$(".dialogue");
-              var cTime =transdate(data.list[i].createDateTime);
-              var amout1;
-              if(data.list[i].amount==null){
-                amout1 =0;
-              }else{
-                amout1 =data.list[i].amount;
-              }
-              var userName = data.list[i].user.name2;
-              if(userName==null){
-                userName ="匿名用户";
-              }
-
-              var box = $("<div class='matter' id='"+data.list[i].id+"'> " +
-                      "<p class='text-h1'>"+userName+"</p> " +
-                      "<p class='text-time'>"+cTime+"</p> " +
-                      "<p class='text-content'>" +
-                      "<a href='#'onclick='showModal2(this)' about='"+data.list[i].id+"'>"+data.list[i].content+"</a></p> " +
-                      "<div class='owner'><img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/></div> " +
-                      "<div class='owner-good'>" +
-                      "<a href='#' onclick=\"commentUpAndDown(this,'"+data.list[i].id+"')\" about='${work.id}' name='up'><i class='good-1'></i><em>"+amout1+"</em></a></div> ");
-              pubu.append(box);
-
-              //获取盖楼式回复
-              getReply(data.list[i].id);
-
-              //imgload();
-            }
-
-          }else{
-            flag = true;
-          }
-
-        },
-        error:function(){
-          alert("出错了，请联系管理员！！！");
-          return false;
-        },
-        complete:function(){
-          startNum =startNum+1;
-        }
-      });
-
-    }
-
-
+    getData("<c:url value='/masterMessage/getMsgComment/plistMasterComment_message/${object.id}/5/'/>");
   });
-
-  function getReply(fatherId){
-    var flag =false;
+  function  getData(url){
     $.ajax({
       type:"get",
-      url:"<c:url value='/basic/xmj.do?qm=plistMasterComment_message&conditions=masterMessage.id:${object.id};fatherComment.id:"+fatherId+"&pageEntity.size=20&pageEntity.index=1'/>",
+      url:url+startNum,
+      async:true,
       data:"",
       dataType:"json",
       success:function(data){
-        if(data.list && data.list != null){
-          for(i in data.list){
-            var  pubu =$("#"+fatherId);
-            var cTime =transdate(data.list[i].createDateTime);
+        if(data && data.length > 0){
+          for(var i in data){
+            var  pubu =$(".dialogue");
+            var cTime =transdate(data[i].createDateTime);
             var amout1;
-            if(data.list[i].amount==null){
+            if(data[i].amount==null){
               amout1 =0;
             }else{
-              amout1 =data.list[i].amount;
+              amout1 =data[i].amount;
             }
-            var userName = data.list[i].user.name2;
+            var userName = data[i].user.name2;
             if(userName==null){
               userName ="匿名用户";
             }
-
-            var box = $("<div class='respond' id='"+data.list[i].id+"'> <p><span class='txt-name'>" +
-                    "<a href='#'> "+userName+"：</a>" +
-                    "</span><span class='txt-content' onclick='showmodal2(this)' about='"+data.list[i].id+"'>"+data.list[i].content+"</span></p> </div> ");
+            var box = $("<div class='matter' id='"+data[i].id+"'> " +
+                    "<p class='text-h1'>"+userName+"</p> " +
+                    "<p class='text-time'>"+cTime+"</p> " +
+                    "<p class='text-content'>" +
+                    "<a onclick=\"showModal2(this,true);\" about='"+data[i].id+"'>"+data[i].content+"</a></p> " +
+                    "<div class='owner'><img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/></div> " +
+                    "<div class='owner-good'>" +
+                    "<a onclick=\"commentUpAndDown(this,'"+data[i].id+"')\" about='${object.id}' name='up'><i class='good-1'></i><em>"+amout1+"</em></a></div> ");
             pubu.append(box);
-
             //获取盖楼式回复
-            getReply(data.list[i].id);
-
-            //imgload();
+            getReply(data[i].id , true);
           }
-
-        }else{
-          flag = true;
         }
-
       },
       error:function(){
         alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        startNum =startNum+1;
+      }
+    });
+  }
+  function getReply(fatherId,flagg){
+
+    var flag = false;
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/masterMessage/getSubCommentList.do?fatherId='/>"+fatherId,
+      data:"",
+      async:true,
+      dataType:"json",
+      success:function(data){
+        if(data != null && data.length > 0){
+          var  pubu =$("#"+fatherId);
+          for(var i in data){
+            var amout1;
+            if(data[i].amount==null){
+              amout1 =0;
+            }else{
+              amout1 =data[i].amount;
+            }
+            var userName = data[i].user.name2;
+            if(userName==null){
+              userName ="匿名用户";
+            }
+            if(flagg == true){
+              var box = "<div class='respond'> <p id='"+data[i].id+"'><span class='txt-name'>" +
+                      "<a href='#'> "+userName+"：</a>" +
+                      "</span><span class='txt-content' onclick='showModal2(this,false)' about='"+data[i].id+"'>"+data[i].content+"</span></p> </div>";
+              pubu.append(box);
+            }else{
+              var box = "<p id='"+data[i].id+"'><span class='txt-name'>" +
+                      "<a href='#'> "+userName+"：</a>" +
+                      "</span><span class='txt-content' onclick='showModal2(this,false)' about='"+data[i].id+"'>"+data[i].content+"</span></p>";
+              pubu.after(box);
+            }
+            //获取盖楼式回复
+            getReply(data[i].id,false);
+          }
+        }else{
+          flag = true;
+        }
+      },
+      error:function(XMLHttpRequest , textStatus, errorThrown){
+        console.log(textStatus);
+        alert("出错了，请联系管理员！！！");
+        console.log(errorThrown);
         return false;
       },
       complete:function(){
@@ -226,9 +216,10 @@
         }
       }
     });
-
   }
-
+  function reloadComments(){
+    getData("<c:url value='/masterMessage/getMsgComment/plistMasterComment_message/${object.id}/5/'/>");
+  }
   function savaUP(workId){
     var oper = $("#good-1").attr("name");
     $.ajax({
@@ -267,7 +258,6 @@
       }
     });
   }
-
   function commentUpAndDown(data,commentId){
     var oper = $(data).attr("name");
     var workId = $(data).attr("about");
@@ -307,7 +297,6 @@
       }
     });
   }
-
   function storeWork(workId){
 
     $.ajax({
@@ -340,48 +329,12 @@
       }
     });
   }
-
-  <%--function getMoreComment(){--%>
-    <%--$.ajax({--%>
-      <%--type:"post",--%>
-      <%--url:"<c:url value='/masterMessage/getMoreComment.do?msgId='/>"${object.id},//设置请求的脚本地址--%>
-      <%--data:"",--%>
-      <%--dataType:"json",--%>
-      <%--success:function(data){--%>
-        <%--if(data=="false"){--%>
-          <%--alert("您还未登陆，请登录后再操作");--%>
-          <%--return false;--%>
-        <%--}--%>
-        <%--if(data=="repeat"){--%>
-          <%--alert("您已收藏过了！")--%>
-          <%--return true;--%>
-        <%--}--%>
-        <%--if(data=="true"){--%>
-          <%--alert("您好，收藏成功！")--%>
-          <%--return true;--%>
-        <%--}--%>
-
-      <%--},--%>
-      <%--error:function(){--%>
-
-        <%--alert("出错了，请联系管理员！！！");--%>
-        <%--return false;--%>
-      <%--},--%>
-      <%--complete:function(){--%>
-
-      <%--}--%>
-    <%--});--%>
-  <%--}--%>
-
-
   function showModel(){
     window.open("<c:url value='/comment.jsp'/>");
-
   }
-  function showModal2(data){
+  function showModal2(data,flag){
     $("#content").attr("name",$(data).attr("about"));
-    window.open("<c:url value='/comment2.jsp'/>");
-
+    window.open("<c:url value='/comment2.jsp?flag='/>"+flag);
   }
   function setValue(data){
     var ret =document.getElementById("content").value = data;
@@ -392,22 +345,30 @@
         return false;
       }
       $.ajax({
-        type:"get",
-        url:"<c:url value='/masterMessage/workComment.do?msgId=${object.id}'/>",
-        data:"&content="+CommentValue,
+        type:"post",
+        url:"<c:url value='/masterMessage/commentMsg.do?workId=${object.id}'/>",
+        data:"&content="+CommentValue+"&fatherId=0",
         dataType:"json",
         async:true,
         success:function(data){
-          if(data==false){
+          if(data=="noRole"){
             alert("您还未登陆，请登录后再操作！！！");
             return false;
+          }else if(data=="undefined"){
+            alert("您未发表任何评论，请评论！！！");
+            return false;
+          }else{
+            $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
+                    "<p class='text-time'>刚刚</p> <p class='text-content'>" +
+                    "<a href='#' onclick=\"showModal2(this,false)\" about='"+data.id+"'>"+CommentValue+"</a></p> <div class='owner'>" +
+                    "<img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/>" +
+                    "</div> <div class='owner-good'><a  onclick=\"commentUpAndDown(this,'"+data.id+"')\" about='"+data.id+"' >" +
+                    "<i class='good-1'></i><em>0</em></a></div> " + "</div>");
+            var next = $("a[name='up']").find("em");
+            var num = parseInt(next.html());
+            next.html(num + 1);
           }
-          $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
-                  "<p class='text-time'>刚刚</p> <p class='text-content'>" +
-                  "<a href='#' >"+CommentValue+"</a></p> <div class='owner'>" +
-                  "<img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/>" +
-                  "</div> <div class='owner-good'><a href='#'>" +
-                  "<i class='good-1'></i><em>0</em></a></div> " + "</div>");
+
         },
         error:function(){
           alert("出错了，请联系管理员！！！");
@@ -419,30 +380,45 @@
       });
     }
   }
-
-  function setValue2(data){
+  function setValue2(data,flag){
     var ret =document.getElementById("content").value = data;
-    var contentId = $("#content").attr("name");
+    var fatherId = $("#content").attr("name");
     if(ret && ret.toString().length>=1){
       var CommentValue=$("#content").val();
-      if(CommentValue==null || CommentValue==""){
+      if(CommentValue==null || CommentValue=="" || CommentValue == "undefined"){
         alert("你未发表任何评论，请评论");
         return false;
       }
       $.ajax({
-        type:"get",
-        url:"<c:url value='/masterMessage/commentOther.do?msgId=${object.id}'/>"+"&content="+CommentValue+"&contentId="+contentId,
+        type:"post",
+        url:"<c:url value='/masterMessage/commentMsg.do?msgId=${object.id}'/>"+"&content="+CommentValue+"&fatherId="+fatherId,
         data:"",
         dataType:"json",
-        async: true,
+        async: false,
         success:function(data){
-          if(data==false){
+          if(data=="noRole"){
             alert("您还未登陆，请登录后再操作！！！");
             return false;
+          }else if(data=="undefined"){
+            alert("您未发表任何评论，请评论！！！");
+            return false;
+          }else{
+            if(flag == "true"){
+              $("#"+fatherId).append("<div class='respond' id=\""+fatherId+"\"> <p><span class='txt-name'>" +
+                      "<a href='#'> ${myUser.name2}：</a>" +
+                      "</span><span class='txt-content' onclick=\"showModal2(this,false)\" about='"+data.id+"'>"+CommentValue+"</span></p></div>");
+              var next = $("a[name='"+fatherId+"']").find("em");
+              var num = parseInt(next.html());
+              next.html(num + 1);
+            }else{
+              $("#"+fatherId).after("<p id=\""+fatherId+"\"><span class='txt-name'>" +
+                      "<a href='#'> ${myUser.name2}：</a>" +
+                      "</span><span class='txt-content' onclick=\"showModal2(this,false)\" about='"+data.id+"'>"+CommentValue+"</span></p>");
+              var next = $("a[name='"+fatherId+"']").find("em");
+              var num = parseInt(next.html());
+              next.html(num + 1);
+            }
           }
-          $("#"+contentId).append("<div class='respond'> <p><span class='txt-name'>" +
-                  "<a href='#'> ${myUser.name2}：</a>" +
-                  "</span><span class='txt-content'>"+CommentValue+"</span></p> </div> ");
         },
         error:function(){
           alert("出错了，请联系管理员！！！");
@@ -454,7 +430,6 @@
       });
     }
   }
-
   function transdate(endTime){
     var timestamp = Date.parse(new Date());
     var oldTime = parseInt(endTime);
@@ -471,7 +446,6 @@
     }
     return showTime;
   }
-
   function changeStatus(o,masterId){
     var status = "";
     var str = $(o).find("span").html();

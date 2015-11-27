@@ -180,7 +180,7 @@
                     +"</div></div>"
                     +"<div class=\"dynamic-ft\"> "
                     +"<a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+obj[i].praiseStatus+"</em></a><i class=\"s-solid ft-a\"></i> "
-                    +"<a onclick=\"showModel('"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-2\"></i><em>"+obj[i].amount+"</em></a><i class=\"s-solid ft-a\"></i> "
+                    +"<a onclick=\"showModel('"+obj[i].id+"');\" name=\""+obj[i].id+"\" class=\"ft-a\"> <i class=\"good-2\"></i><em>"+obj[i].amount+"</em></a><i class=\"s-solid ft-a\"></i> "
                     +"<a onclick=\"collected(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+obj[i].storeStatus+"</em></a></div></div>";
             box.append(sub);
           }
@@ -198,33 +198,39 @@
   function showModel(msgId){
     $("#content").attr("name",msgId);
     window.open("<c:url value='/comment.jsp?msgId='/>"+msgId);
-
   }
   function setValue(data){
     var msgId = $("#content").attr("name");
-    console.log(msgId);
     var ret =document.getElementById("content").value = data;
     if(ret && ret.toString().length>=1) {
       var CommentValue = $("#content").val();
-      if (CommentValue == null || CommentValue == "") {
+      if (CommentValue == null || CommentValue == "" || CommentValue == "undefined") {
         alert("你未发表任何评论，请评论");
         return false;
       }
     }
     $.ajax({
       type: "POST",
-      url:"<c:url value='/masterMessage/workComment.do?msgId='/>"+msgId,
-      data:"content="+CommentValue,
+      url:"<c:url value='/masterMessage/commentMsg.do?workId='/>"+msgId,
+      data:"content="+CommentValue+"&fatherId=0",
       async: false,
+      dataType:"json",
       error: function () {
         alert('出错了,请联系系统管理员!');
       },
-      success: function (data) {
-        if(data==false){
+      success: function (msg) {
+        console.log(msg);
+        if(msg=="noRole"){
           alert("您还未登陆，请登录后再操作！！！");
+          return false;
+        }else if(msg=="undefined"){
+          alert("您未发表任何评论，请评论！！！");
           return false;
         }else{
           alert("评论成功!");
+          var next = $("a[name='"+msgId+"']").find("em");
+          var num = parseInt(next.html());
+          next.html(num + 1);
         }
       }
     })
