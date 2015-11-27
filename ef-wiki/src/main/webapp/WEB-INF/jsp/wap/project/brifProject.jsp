@@ -488,8 +488,8 @@
           if(data=="false"){
             //alert("您还未登陆，请登录后再操作");
             var go = window.confirm("去登陆吧?");
-            if(go==true){
-              window.location.href ="<c:url value='/wapbrifProject/${project.id}'/>";
+            if(go==true){//
+              window.location.href ="<c:url value='/wap/brifProject/${project.id}'/>";
             }
             else{
               return false;//取消
