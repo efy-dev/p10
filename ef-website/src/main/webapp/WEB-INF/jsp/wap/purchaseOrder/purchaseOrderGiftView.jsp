@@ -32,7 +32,7 @@
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="edit-text">
-            <em>我精心为你准备了礼物，希望你能收下。</em>
+            <em>${order.giftMessage}</em>
         </div>
         <div class="cupic ae"><img src="${order.giftPictureUrl}"></div>
     </div>

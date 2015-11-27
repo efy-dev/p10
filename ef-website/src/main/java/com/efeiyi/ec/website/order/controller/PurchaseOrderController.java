@@ -75,6 +75,67 @@ public class PurchaseOrderController extends BaseController {
     private PaymentManager paymentManager;
 
 
+    @RequestMapping("/giftBuy/showNameStatus.do")
+    @ResponseBody
+    public boolean changeShowGiftNameStatus(HttpServletRequest request) {
+        try {
+            String purchaseOrderId = request.getParameter("purchaseOrderId");
+            String status = request.getParameter("nameStatus");
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
+            purchaseOrderGift.setShowGiftNameStatus(status);
+            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @RequestMapping({"giftBuy/updateImg.do"})
+    @ResponseBody
+    public boolean updateImg(HttpServletRequest request) {
+        try {
+            String imageUrl = request.getParameter("imageUrl");
+            String purchaseOrderId = request.getParameter("purchaseOrderId");
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
+            purchaseOrderGift.setGiftPictureUrl(imageUrl);
+            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    @RequestMapping("/giftBuy/showPriceStatus.do")
+    @ResponseBody
+    public boolean changeShowGiftPriceStatus(HttpServletRequest request) {
+        try {
+            String purchaseOrderId = request.getParameter("purchaseOrderId");
+            String status = request.getParameter("priceStatus");
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
+            purchaseOrderGift.setShowGiftPriceStatus(status);
+            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @RequestMapping("/giftBuy/saveOrUpdateGiftMessage.do")
+    @ResponseBody
+    public String saveOrUpdateGiftMessage(HttpServletRequest request) {
+        try {
+            String purchaseOrderId = request.getParameter("purchaseOrderId");
+            String message = request.getParameter("giftMessage");
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
+            purchaseOrderGift.setGiftMessage(message);
+            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+            return message;
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+
     @RequestMapping({"/giftBuy/{productId}/{amount}"})
     public String giftBuy(HttpServletRequest request, @PathVariable String productId, Model model, @PathVariable String amount) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productId);

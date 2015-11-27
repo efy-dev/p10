@@ -1,14 +1,17 @@
 package com.efeiyi.ec.website.activity.controller;
 
 import com.efeiyi.ec.activity.model.SeckillProduct;
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
+import javafx.beans.property.adapter.ReadOnlyJavaBeanBooleanProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Path;
@@ -47,9 +50,50 @@ public class SeckillController {
                 iterator.remove();
             }
         }
+        SeckillProduct seckillProduct = (SeckillProduct) pageInfo.getList().get(0);
+
+        String status = "1";
+        if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
+            //秒杀正在进行中
+            status = "2";
+        } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
+            //秒杀已经结束
+            status = "3";
+        } else if (currentDate.getTime() < seckillProduct.getStartDatetime().getTime()) {
+            //即将开始
+            status = "1";
+        }
+
+        if (seckillProduct.getAmount() <= 0) {
+            status = "3";
+        }
+
+        model.addAttribute("isShowTime", seckillProduct.getStartDatetime().getTime() - currentDate.getTime() < (24 * 60 * 60 * 1000));
         model.addAttribute("productList", pageInfo.getList());
         model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("miaoStatus", status);
         return "/activity/seckillProductList";
+    }
+
+    @RequestMapping({"/miao/order.do"})
+    @ResponseBody
+    public List<Object> listSeckillOrder(HttpServletRequest request) throws Exception {
+        String productModelId = request.getParameter("productModelId");
+        XQuery xQuery = new XQuery("listPurchaseOrder_default", request);
+        xQuery.setHeadHql(xQuery.getHeadHql() + " inner join s.purchaseOrderProductList pp ");
+        xQuery.setQueryHql(xQuery.getQueryHql() + " and pp.productModel.id=:productModelId ");
+        xQuery.updateHql();
+        xQuery.put("productModelId", productModelId);
+        List<Object> purchaseOrderList = baseManager.listObject(xQuery);
+        return purchaseOrderList;
+    }
+
+    @RequestMapping({"/miao/amount.do"})
+    @ResponseBody
+    public int fetchProductAmount(HttpServletRequest request) {
+        String seckillProductId = request.getParameter("productId");
+        SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), seckillProductId);
+        return seckillProduct.getAmount();
     }
 
 
@@ -66,18 +110,15 @@ public class SeckillController {
     public String viewSeckillProduct(HttpServletRequest request, Model model, @PathVariable String seckillProductId) throws Exception {
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), seckillProductId);
         seckillProduct.setAttentionAmount((seckillProduct.getAttentionAmount() == null ? seckillProduct.getAttentionAmount() : 0) + 1);
+        baseManager.saveOrUpdate(SeckillProduct.class.getName(), seckillProduct);
         model.addAttribute("seckillProduct", seckillProduct);
 
-        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
+        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default", request);
         purchaseOrderProductQuery.put("productModel_id", seckillProduct.getProductModel().getId());
         List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
         Collections.reverse(purchaseOrderProductList);
 
-//        XQuery productPicturexQuery = new XQuery("listProductPicture_default",request);
-//        productPicturexQuery.put("product_id",seckillProduct.getProductModel().getProduct().getId());
-//        List<Object> productPictureList = baseManager.listObject(productPicturexQuery);
-//        model.addAttribute("productPictureList",productPictureList);
-
+        //需要判断当前的秒杀是否是再24消失内
         //获得当前秒杀的状态 通过时间
         String status = "1";
         Date currentDate = new Date();
@@ -95,6 +136,31 @@ public class SeckillController {
         if (seckillProduct.getAmount() <= 0) {
             status = "3";
         }
+
+        if (status.equals("1")) {
+            //大于24小时
+            model.addAttribute("isShowTime", seckillProduct.getStartDatetime().getTime() - currentDate.getTime() < (24 * 60 * 60 * 1000));
+        }
+
+        if (status == "3") {
+            XQuery xQuery = new XQuery("plistPurchaseOrder_byDatetime", request,1);
+            xQuery.setHeadHql(xQuery.getHeadHql() + " inner join s.purchaseOrderProductList pp ");
+            xQuery.setQueryHql(xQuery.getQueryHql() + " and pp.productModel.id=:productModelId ");
+            xQuery.updateHql();
+            xQuery.put("productModelId", seckillProduct.getProductModel().getId());
+            List<Object> purchaseOrderList = baseManager.listObject(xQuery);
+            if (!purchaseOrderList.isEmpty()){
+                Date finalOrderDatetime = ((PurchaseOrder)purchaseOrderList.get(0)).getCreateDatetime();
+                long userTime = finalOrderDatetime.getTime()-seckillProduct.getStartDatetime().getTime();
+                long time = userTime/1000;
+                long m = time/60;
+                long s = time%60;
+                model.addAttribute("minute",m);
+                model.addAttribute("second",s);
+            }
+        }
+
+
         model.addAttribute("miaoStatus", status);
         return "/activity/seckillProductView";
     }
@@ -113,8 +179,8 @@ public class SeckillController {
                 //秒杀正在进行中
                 status = "2";
                 //再这里减秒杀库存
-                seckillProduct.setAmount(seckillProduct.getAmount()-Integer.parseInt(amount));
-                return "redirect:http://www.efeiyi.com/order/miaoBuy/" + productId + "/" + amount;
+                seckillProduct.setAmount(seckillProduct.getAmount() - Integer.parseInt(amount));
+                return "redirect:http://www.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice();
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
                 //秒杀已经结束
                 status = "3";

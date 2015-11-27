@@ -11,6 +11,6 @@
     <title></title>
 </head>
 <body>
-<img src="http://pro.efeiyi.com/${url}">
+<div class="am-u-sm-12"><img src="http://pro.efeiyi.com/${url}"></div>
 </body>
 </html>
