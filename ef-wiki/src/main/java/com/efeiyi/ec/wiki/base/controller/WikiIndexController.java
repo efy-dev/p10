@@ -134,6 +134,9 @@ public class WikiIndexController extends WikibaseController {
                 + request.getServerName() + ":" + request.getServerPort()
                 + path + "/";
         model.addAttribute("basePath", basePath);
+        if (request.getAttribute("flag")!=null && "2".equals(request.getAttribute("flag").toString())){
+            return new ModelAndView("/hotProjects/PopularProjects2");
+        }
         return new ModelAndView("/hotProjects/PopularProjects");
     }
 

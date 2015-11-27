@@ -50,7 +50,7 @@
         <li class="item">地区</li>
       </ul>
       <div class="tabs-bd">
-        <div class="am-tab-panel" style="padding:10px 0 15px 0;width: 100%;float: left;display: block;" id="pubu">
+        <div class="am-tab-panel" style="padding:10px 0 15px 0;width: 100%;float: left;display: none;" id="pubu">
           <c:if test="${!empty  popularProjectsList}">
             <c:forEach var="ppj" items="${popularProjectsList}">
               <ul class="hot" id="box">
@@ -66,7 +66,7 @@
             </c:forEach>
           </c:if>
         </div>
-        <div class="am-tab-panel am-active" style="display:none;">
+        <div class="am-tab-panel am-active" >
           <div class="suit">
             <div class="dynamic" style="border-bottom: 0;">
 
