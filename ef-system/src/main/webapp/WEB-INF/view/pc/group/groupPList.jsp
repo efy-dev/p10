@@ -125,22 +125,26 @@
     }
 
  function addGroup(groupId,amount,length){
-     $.ajax({
-         type: "get",
-         url: '<c:url value="/tuan/addGroup.do"/>',
-         cache: false,
-         dataType: "json",
-         data:{groupId:groupId,amount:amount,length:length},
-         success: function (data) {
-             if(data=="1"){
-                 alert("凑团成功!");
-                 $("#"+groupId+" td:eq(3)").text("组团成功");
+     if(amount<=length){
+         alert("已成团!");
+     }else {
+         $.ajax({
+             type: "get",
+             url: '<c:url value="/tuan/addGroup.do"/>',
+             cache: false,
+             dataType: "json",
+             data: {groupId: groupId, amount: amount, length: length},
+             success: function (data) {
+                 if (data == "1") {
+                     alert("凑团成功!");
+                     $("#" + groupId + " td:eq(3)").text("组团成功");
+                 }
+                 if (data == "0") {
+                     alert("凑团失败!");
+                 }
              }
-             if(data=="0"){
-                 alert("凑团失败!");
-             }
-         }
-     });
+         });
+     }
  }
 </script>
 
