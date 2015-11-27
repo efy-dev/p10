@@ -13,32 +13,9 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
   <title>e飞蚁工艺</title>
-  <!-- Set render engine for 360 browser -->
-  <meta name="renderer" content="webkit">
-  <!-- No Baidu Siteapp-->
-  <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
-  <!-- Tile icon for Win8 (144x144 + tile color) -->
-  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
-  <meta name="msapplication-TileColor" content="#0e90d2">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/amazeui.min.css?v=20150831'/>">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/app.css?v=20150831'/>">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia.css?v=20150831'/>">
-  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
+
 </head>
 <body>
 
@@ -87,31 +64,7 @@
         </c:if>
       </ul>
     </div>
- <%--   <div class="f-select-group">
-      <div class="select-head">
-        <span>级别：</span>
-        <strong><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
-      </div>
-      <ul class="select-list">
-        <li><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:1&pageEntity.size=10&pageEntity.index='/>')">国家级</a></li>
-        <li><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:2&pageEntity.size=10&pageEntity.index='/>')">省级</a></li>
-        <li><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:3&pageEntity.size=10&pageEntity.index='/>')">市级</a></li>
-        <li><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:4&pageEntity.size=10&pageEntity.index='/>')">县级</a></li>
-      </ul>
-    </div>--%>
-  <%--  <div class="f-select-group cl-act">
-      <div class="select-head">
-        <span>地区：</span>
-        <strong><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_allDirt&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
-      </div>
-      <ul class="select-list">
-        <c:if test="${!empty AddressProvinceList}">
-          <c:forEach var="ap" items="${AddressProvinceList}" varStatus="status">
-            <li><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Dirt&conditions=addressDistrict.addressCity.addressProvince.id:${ap.id}&pageEntity.size=10&pageEntity.index='/>')">${ap.name}</a></li>
-          </c:forEach>
-        </c:if>
-      </ul>
-    </div>--%>
+
   </div>
   <div class="list-f-content">
     <div class="l-f-left">
@@ -412,11 +365,7 @@
       success:function(data){
 
         if(data=="false"){
-          //alert("您还未登陆，请登录后再操作");
 
-        //$('.grounp-f').prepend("<iframe id='qwe' src=\"http://passport.efeiyi.com/login?service=http%3A%2F%2Fmaster.efeiyi.com%2Fef-wiki%2Fj_spring_cas_security_check\"></iframe>");
-        //$('.grounp-f').children('#qwe').remove();
-         // window.location.href ="http://192.168.1.61:8082/ef-wiki/sso2.do";
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/find.do'/>";
@@ -442,13 +391,7 @@
           return true;
         }
         if(data=="del"){
-          /*$("#"+projectId).html("关注");
-          if(oper=="add"){
-            var val = $("#"+projectId).attr("about","del");
-          }
-          if(oper=="del"){
-            var val = $("#"+projectId).attr("about","add");
-          }*/
+
           if(oper=="add" ){
             var parent = $("#"+projectId).parent();
             parent.empty();
@@ -591,16 +534,6 @@
 
 </script>
 <!-- //End--footer-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-<!--自定义js--Start-->
-<script src="<c:url value='/scripts/assets/pc/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/pc/js/cyclopedia.js?v=20150831'/>"></script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 </body>
 </html>

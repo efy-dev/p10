@@ -14,32 +14,9 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
   <title>e飞蚁工艺秀</title>
-  <!-- Set render engine for 360 browser -->
-  <meta name="renderer" content="webkit">
-  <!-- No Baidu Siteapp-->
-  <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
-  <!-- Tile icon for Win8 (144x144 + tile color) -->
-  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
-  <meta name="msapplication-TileColor" content="#0e90d2">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/amazeui.min.css?v=20150831'/>">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/app.css?v=20150831'/>">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia.css?v=20150831'/>">
-  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
+
 
 </head>
 <body>
@@ -503,7 +480,6 @@ function getHfProduct(e){
       async:true,
       success:function(o){
         if(o==false){
-          //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/showProduct/'/>"+data+"/"+"${projectId}";
@@ -555,7 +531,6 @@ function getHfProduct(e){
       async:true,
       success:function(o){
         if(o==false){
-          //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
             window.location.href ="<c:url value='/showProduct/${product.id}'/>"+"/${projectId}";
@@ -576,7 +551,7 @@ function getHfProduct(e){
                   "<li style=\"margin: 0;border-bottom: 0;\" class=\"ae\"  >"
                   +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></a></div> " +
                   "<div class=\"text\"><span>" +
-                  "<a href=\"#\">${myUser.name2} 回复 "+name+"：</a></span>" +
+                  "<a href=\"#\">${fn:substring(myUser.username, 0,3 )}****${fn:substring(myUser.username,7,11)} 回复 "+name+"：</a></span>" +
                   "<span>"+CommentValue+"</span></div> " +
                   "<div class=\"status ae\"> <div class=\"status-left\">" +
                   "<span>刚刚" +
@@ -592,7 +567,7 @@ function getHfProduct(e){
                   "<li style=\"margin: 0;border-bottom: 0;\" class=\"ae\" id=\""+o.id+"\" about=\"matter\" >"
                   +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></a></div> " +
                   "<div class=\"text\"><span>" +
-                  "<a href=\"#\">${myUser.name2} 回复 "+name+"：</a></span>" +
+                  "<a href=\"#\">${fn:substring(myUser.username, 0,3 )}****${fn:substring(myUser.username,7,11)} 回复 "+name+"：</a></span>" +
                   "<span>"+CommentValue+"</span></div> " +
                   "<div class=\"status ae\"> <div class=\"status-left\">" +
                   "<span>刚刚" +
@@ -768,19 +743,7 @@ function getHfProduct(e){
   }
 </script>
 <!-- //End--footer-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<![endif]-->
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-
-<!--自定义js--Start-->
-<script src="<c:url value='/scripts/assets/pc/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/pc/js/cyclopedia.js?v=20150831'/>"></script>
-<script src="<c:url value='/resources/js/alert.js'/>"></script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 </body>
 </html>
 
