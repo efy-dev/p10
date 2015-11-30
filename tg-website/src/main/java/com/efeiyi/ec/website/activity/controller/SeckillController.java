@@ -182,7 +182,7 @@ public class SeckillController {
                 //再这里减秒杀库存
                 seckillProduct.setAmount(seckillProduct.getAmount() - Integer.parseInt(amount));
                 String callback = "a.efeiyi.com/miao/share/"+seckillProduct.getId()+"?userId="+AuthorizationUtil.getMyUser().getId();
-                return "redirect:http://www.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice();
+                return "redirect:http://www2.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice();
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
                 //秒杀已经结束
                 status = "3";
