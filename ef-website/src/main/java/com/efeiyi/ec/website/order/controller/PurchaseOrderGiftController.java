@@ -67,6 +67,11 @@ public class PurchaseOrderGiftController {
             model.addAttribute("purchaseOrder", purchaseOrderGift);
         }
 
+        if (purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRECEIVE)){
+            model.addAttribute("purchaseOrder", purchaseOrderGift);
+            return "/purchaseOrder/giftView";
+        }
+
         if (AuthorizationUtil.isAuthenticated() && AuthorizationUtil.getMyUser().getId().equals(purchaseOrderGift.getUser().getId())) {
             model.addAttribute("order", purchaseOrderGift);
             return "/purchaseOrder/purchaseOrderGiftView";
