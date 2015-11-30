@@ -92,7 +92,6 @@
                 <div class="title">${tenant.name}</div>
                 <ul class="ul-list">
                     <c:forEach items="${productMap.get(tenant.id)}" var="product">
-                        <c:if test="${product.isChoose==1}">
                             <li>
                                 <img class="img" src="http://pro.efeiyi.com/${product.productModel.productModel_url}"
                                      alt="">
@@ -107,12 +106,11 @@
                                         </c:if>
                                     </p>
 
-                                    <p class="price"><em>￥</em><span>${product.productModel.price}</span></p>
+                                    <p class="price"><em>￥</em><span>${product.purchasePrice}</span></p>
 
-                                    <p class="num"><i class="iocn-x"></i><strong>${product.amount}</strong></p>
+                                    <p class="num"><i class="iocn-x"></i><strong>${product.purchaseAmount}</strong></p>
                                 </div>
                             </li>
-                        </c:if>
                     </c:forEach>
                 </ul>
                 <div class="bd ask"><textarea name="message" id="${tenant.id}Message" cols="30" rows="4"

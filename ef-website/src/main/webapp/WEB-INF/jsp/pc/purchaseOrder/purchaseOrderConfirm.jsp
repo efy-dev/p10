@@ -32,51 +32,51 @@
         <span class="clearing-right">
             <a href="#" class="btn-cart-add">新增收货地址</a>
             <div class="active-pop" style="display: none">
-    <div class="pop-up">
-        <div class="pop-h">编辑收货人信息
-            <i class="clase" title="关闭"></i>
-        </div>
-        <div class="m-form">
-            <form id="newAddress">
-                <ul>
-                    <li>
-                        <label>收货人：</label>
-                        <input type="text" name="consignee">
-                    </li>
-                    <li>
-                        <label>所在地区：</label>
+                <div class="pop-up">
+                    <div class="pop-h">编辑收货人信息
+                        <i class="clase" title="关闭"></i>
+                    </div>
+                    <div class="m-form">
+                        <form id="newAddress">
+                            <ul>
+                                <li>
+                                    <label>收货人：</label>
+                                    <input type="text" name="consignee">
+                                </li>
+                                <li>
+                                    <label>所在地区：</label>
 
-                        <form>
-                            <select class="cars" id="province" name="province.id"
-                                    onchange="provinceChange(this)" required>
-                                <option value="请选择">请选择所在省市</option>
-                            </select>
-                            <select class="car1" id="city" name="city.id" required>
-                                <option value="请选择">请选择所在区县</option>
-                            </select>
+                                    <form>
+                                        <select class="cars" id="province" name="province.id"
+                                                onchange="provinceChange(this)" required>
+                                            <option value="请选择">请选择所在省市</option>
+                                        </select>
+                                        <select class="car1" id="city" name="city.id" required>
+                                            <option value="请选择">请选择所在区县</option>
+                                        </select>
+                                    </form>
+                                </li>
+                                <li>
+                                    <label>详细地址：</label>
+                                    <input style="width: 255px" type="text" name="details">
+                                </li>
+                                <li>
+                                    <label>手机号码：</label>
+                                    <input type="text" name="phone">
+                                </li>
+                                <li>
+                                    <label></label>
+                                    <a class="dj-btn" onclick="submitNewAddress()" value="保存收货人信息"
+                                       href="javascript:void(0)">保存收货人信息</a>
+                                    <input type="reset" style="display: none" id="reset">
+                                    <span id="ts" style="border: 0"></span>
+                                </li>
+                            </ul>
                         </form>
-                    </li>
-                    <li>
-                        <label>详细地址：</label>
-                        <input style="width: 255px" type="text" name="details">
-                    </li>
-                    <li>
-                        <label>手机号码：</label>
-                        <input type="text" name="phone">
-                    </li>
-                    <li>
-                        <label></label>
-                        <a class="dj-btn" onclick="submitNewAddress()" value="保存收货人信息"
-                           href="javascript:void(0)">保存收货人信息</a>
-                        <input type="reset" style="display: none" id="reset">
-                        <span id="ts" style="border: 0"></span>
-                    </li>
-                </ul>
-            </form>
-        </div>
-        <div class="sh-bg"></div>
-    </div>
-</div>
+                    </div>
+                    <div class="sh-bg"></div>
+                </div>
+            </div>
         </span>
         </div>
         <div class="page-clearing" id="address">
@@ -145,43 +145,40 @@
                 <div class="page-Commodity">
                     <table>
                         <c:forEach items="${productMap.get(tenant.id)}" var="product">
-                            <c:if test="${product.isChoose==1}">
+                            <tr>
+                                <td width="542">
+                                    <div class="cols1 page-pdl">
+                                        <a href="/product/productModel/${product.productModel.id}" target="_blank">
+                                            <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!product-icon"
+                                                 alt=""/>
+                                        </a>
 
-                                <tr>
-                                    <td width="542">
-                                        <div class="cols1 page-pdl">
-                                            <a href="/product/productModel/${product.productModel.id}" target="_blank">
-                                                <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!product-icon"
-                                                     alt=""/>
+                                        <div class="info">
+                                            <p><a href="/product/productModel/${product.productModel.id}"
+                                                  target="_blank">${product.productModel.product.project.name}</a>
+                                            </p>
+
+                                            <p><a href="/product/productModel/${product.productModel.id}"
+                                                  target="_blank">${product.productModel.name}
+                                                <c:if test="${product.productModel.productPropertyValueList.size()>1}">
+                                                    [
+                                                    <c:forEach
+                                                            items="${product.productModel.productPropertyValueList}"
+                                                            var="ppv">${ppv.projectPropertyValue.value}</c:forEach>]
+                                                </c:if>
                                             </a>
-
-                                            <div class="info">
-                                                <p><a href="/product/productModel/${product.productModel.id}"
-                                                      target="_blank">${product.productModel.product.project.name}</a>
-                                                </p>
-
-                                                <p><a href="/product/productModel/${product.productModel.id}"
-                                                      target="_blank">${product.productModel.name}
-                                                    <c:if test="${product.productModel.productPropertyValueList.size()>1}">
-                                                        [
-                                                        <c:forEach
-                                                                items="${product.productModel.productPropertyValueList}"
-                                                                var="ppv">${ppv.projectPropertyValue.value}</c:forEach>]
-                                                    </c:if>
-                                                </a>
-                                                </p>
-                                            </div>
+                                            </p>
                                         </div>
-                                    </td>
-                                    <td width="171"><span
-                                            class="moneycl">￥${product.productModel.price}</span>
-                                    </td>
-                                    <td width="137">
-                                        <span>x${product.amount}</span>
-                                    </td>
-                                    <td width="102"><span>有货</span></td>
-                                </tr>
-                            </c:if>
+                                    </div>
+                                </td>
+                                <td width="171"><span
+                                        class="moneycl">￥${product.purchasePrice}</span>
+                                </td>
+                                <td width="137">
+                                    <span>x${product.purchaseAmount}</span>
+                                </td>
+                                <td width="102"><span>有货</span></td>
+                            </tr>
                         </c:forEach>
                     </table>
                 </div>
