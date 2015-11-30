@@ -1,6 +1,7 @@
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -122,7 +123,11 @@
     </div>
     <div class="master-text">
       <div class="mas-tx-left">
-        <p>${object.content}</p>
+        <p>
+          <c:if test="${!empty baseIntro.content}">
+            ${baseIntro.content}
+          </c:if>
+        </p>
         <div class="f-r-gd ae"><a href="#"><span>阅读更多</span><i class="sp-icon"></i></a></div>
         <h5>出版著作</h5>
         <ul class="publish">
