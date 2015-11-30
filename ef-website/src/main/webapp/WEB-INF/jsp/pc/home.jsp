@@ -342,7 +342,6 @@
     $().ready(function(){;
         $(".allsort").show()
         $(".cate").removeAttr("id");
-        $("#line").attr("class","wh nav-new");
 
     })
 </script>

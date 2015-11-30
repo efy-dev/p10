@@ -940,7 +940,7 @@
      data:"",
      dataType:"json",
      success:function(o){
-       window.location.href="<c:url value='/project/showProduct/'/>"+data2;
+       window.location.href="<c:url value='/project/showProduct/'/>"+data2+"/"+data1;
      },
      error:function(){
        alert("出错了，请联系管理员！！！");
@@ -957,7 +957,7 @@
      data:"",
      dataType:"json",
      success:function(o){
-       window.location.href="<c:url value='/project/showProduct/'/>"+data2;
+       window.location.href="<c:url value='/project/showProduct/'/>"+data2+"/"+data1;
      },
      error:function(){
        alert("出错了，请联系管理员！！！");
