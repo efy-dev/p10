@@ -2,6 +2,7 @@ package com.efeiyi.ec.website.activity.controller;
 
 import com.efeiyi.ec.activity.model.SeckillProduct;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
@@ -180,6 +181,7 @@ public class SeckillController {
                 status = "2";
                 //再这里减秒杀库存
                 seckillProduct.setAmount(seckillProduct.getAmount() - Integer.parseInt(amount));
+                String callback = "a.efeiyi.com/miao/share/"+seckillProduct.getId()+"?userId="+AuthorizationUtil.getMyUser().getId();
                 return "redirect:http://www.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice();
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
                 //秒杀已经结束
@@ -192,6 +194,17 @@ public class SeckillController {
             } else {
                 return "redirect:/miao/" + productId;
             }
+        }
+    }
+
+    @RequestMapping({"/miao/share/{productId}"})
+    public String share(@PathVariable String productId, HttpServletRequest request){
+        String currentUserId = request.getParameter("userId");
+        SeckillProduct seckillProduct = (SeckillProduct)baseManager.getObject(SeckillProduct.class.getName(),productId);
+        if (AuthorizationUtil.isAuthenticated() && currentUserId.equals(AuthorizationUtil.getUser().getId())){
+            return "/activity/seckillShare";
+        }else {
+            return "redirect:/miao/"+seckillProduct.getId();
         }
     }
 }
