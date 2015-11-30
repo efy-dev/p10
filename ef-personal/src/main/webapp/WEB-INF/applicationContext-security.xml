@@ -21,8 +21,8 @@
         <custom-filter position="CAS_FILTER" ref="casFilter"/>
     </http>
     <b:bean id="casEntryPoint" class="org.springframework.security.web.authentication.CasAuthenticationRedirect">
-        <!--<b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>-->
-        <b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>
+        <b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>
+        <!--<b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>-->
         <b:property name="serviceProperties" ref="serviceProperties"/>
     </b:bean>
     <b:bean id="authenticationSuccessHandler"
@@ -31,8 +31,8 @@
         <b:property name="defaultTargetUrl" value="/"/>
     </b:bean>
     <b:bean id="serviceProperties" class="org.springframework.security.cas.ServiceProperties">
-        <!--<b:property name="service" value="http://master.efeiyi.com/ef-person/j_spring_cas_security_check"/>-->
-        <b:property name="service"  value="http://192.168.1.39:8080/j_spring_cas_security_check"/>
+        <b:property name="service" value="http://master.efeiyi.com/ef-person/j_spring_cas_security_check"/>
+        <!--<b:property name="service"  value="http://localhost:8080/j_spring_cas_security_check"/>-->
         <b:property name="sendRenew" value="false"/>
     </b:bean>
     <b:bean id="casFilter" class="org.springframework.security.cas.web.CasAuthenticationFilter">
@@ -50,8 +50,8 @@
     <b:bean id="requestSingleLogoutFilter"
             class="org.springframework.security.web.authentication.logout.LogoutFilter">
         <b:constructor-arg
-                value="http://192.168.1.57/cas/logout?service=http://192.168.1.39:8080" />
-        <!--value="http://passport.efeiyi.com/logout?service=http://master.efeiyi.com/ef-person"/>-->
+                value="http://passport.efeiyi.com/logout?service=http://master.efeiyi.com/ef-person"/>
+        <!--value="http://192.168.1.57/cas/logout?service=http://localhost:8080" />-->
         <b:constructor-arg>
             <b:bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
         </b:constructor-arg>
@@ -63,8 +63,8 @@
         <b:property name="serviceProperties" ref="serviceProperties"/>
         <b:property name="ticketValidator">
             <b:bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
-                <!--<b:constructor-arg index="0" value="http://passport.efeiyi.com"/>-->
-                 <b:constructor-arg index="0" value="http://192.168.1.57/cas" />
+                <b:constructor-arg index="0" value="http://passport.efeiyi.com"/>
+                 <!--<b:constructor-arg index="0" value="http://192.168.1.57/cas" />-->
             </b:bean>
         </b:property>
         <b:property name="key" value="an_id_for_this_auth_provider_only"/>

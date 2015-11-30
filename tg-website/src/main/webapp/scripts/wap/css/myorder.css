@@ -582,8 +582,8 @@ html, body {height:100%}
 .my-evaluate .merchandise .mer-pic img{width: 100%}
 .my-evaluate .score .score-star label{width: 45px;float: left;font-size: 12px;color: #000;line-height: 22px;}
 .my-evaluate .score .score-star .star{width:83%;float: left;}
-.my-evaluate .score .score-star .star .a-star{width: 43px;float: left;height: 23px;margin-left: 1px;cursor: pointer}
-.my-evaluate .score .score-star .star .no-star{border: 1px solid #ccc;}
+.my-evaluate .score .score-star .star .a-star{width: 43px;float: left;height: 23px;margin-left: 1px;cursor: pointer;border: 1px solid #ccc;}
+.my-evaluate .score .score-star .star .no-star{}
 .my-evaluate .score .score-star .star .ye-star{border: 1px solid #ff9900;background: #ff9900}
 .my-evaluate .score .score-star .star li{padding: 0 18px;border: 1px solid #000;float: left;margin:0 10px 10px 0;line-height: 25px;position: relative;cursor: pointer}
 .my-evaluate .score .score-star .star li a{width: 100%;height: 100%;font-size: 12px;color: #000;}

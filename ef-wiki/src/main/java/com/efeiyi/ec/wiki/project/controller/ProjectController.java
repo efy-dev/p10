@@ -36,7 +36,7 @@ public class ProjectController extends WikibaseController {
     @RequestMapping("/project/brifProject/{projectId}")
     public ModelAndView getBrifProject(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
         Project project = getBrifProjectHeader(projectId);
-        boolean flag = checkIsAttention(request);
+        boolean flag = checkIsAttention(projectId,request);
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
         return new ModelAndView("/project/brifProject");
@@ -58,12 +58,12 @@ public class ProjectController extends WikibaseController {
         }
 
         return flag;
-    }
+    }//Waiting for the invalid 待删除
 
     @RequestMapping("/project/brifMaster/{projectId}")
     public ModelAndView getBrifMaster(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
         Project project = getBrifProjectHeader(projectId);
-        boolean flag = checkIsAttention(request);
+        boolean flag = checkIsAttention(projectId,request);
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
         return new ModelAndView("/project/brifMaster");
@@ -72,7 +72,7 @@ public class ProjectController extends WikibaseController {
     @RequestMapping("/project/listProduct/{projectId}")
     public ModelAndView getListProducts(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
         Project project = getBrifProjectHeader(projectId);
-        boolean flag = checkIsAttention(request);
+        boolean flag = checkIsAttention(projectId,request);
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
         return new ModelAndView("/project/listProduct");

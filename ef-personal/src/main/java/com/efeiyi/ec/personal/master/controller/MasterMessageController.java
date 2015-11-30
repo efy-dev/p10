@@ -176,6 +176,7 @@ public class MasterMessageController {
 				} else {
 					message.setPraiseStatus("赞");
 				}
+				message.setAmount(message.getAmount()==null?0:message.getAmount());
 				String querySql = "from MasterMessageStore m where m.masterMessage.id=:messageId and m.user.id=:userId";
 				LinkedHashMap<String, Object> query = new LinkedHashMap<>();
 				query.put("messageId", message.getId());

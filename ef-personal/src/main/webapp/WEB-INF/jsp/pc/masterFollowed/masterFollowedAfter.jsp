@@ -164,7 +164,7 @@
                     "                                <p>"+data[i].remark+"</p>";
             var attr = data[i].messageAttachmentLists;
             if(attr != null && attr.length == 1){
-              box += "<div class=\"one-pic\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+attr[j].pictureUrl+"\"></a></div>";
+              box += "<div class=\"one-pic\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+attr.pictureUrl+"\"></a></div>";
             }else if(attr != null && attr.length > 1){
               box += "<div class=\"two-pic w-active\"><ul class=\"sudoku\">";
               for(var j in attr){

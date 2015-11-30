@@ -64,7 +64,7 @@
   <div class="great-master">
     <div class="master-pic"><img src="http://tenant.efeiyi.com/${object.favicon}@!master-favicon-view" alt="传承人" class="am-img-thumbnail am-circle"></div>
     <h5>${object.fullName}</h5>
-    <c:if test="${object.projectName != null}">
+    <c:if test="${!empty object.projectName}">
       <p>[${object.projectName}]</p>
     </c:if>
     <div class="great"><em><ming800:status name='level' dataType='Tenant.level' checkedValue='${object.level}' type='normal'/>非物质文化遗产传承人</em><i class="icon-master"></i></div>

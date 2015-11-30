@@ -169,7 +169,7 @@
                     "                                <a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><p>"+data[i].remark+"</p></a>";
             var attr = data[i].messageAttachmentLists;
             if(attr != null && attr.length == 1){
-              sub += "<div class=\"one-pic\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+attr[j].pictureUrl+"@!master-message-little-more\"></a></div>";
+              sub += "<div class=\"one-pic\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+attr.pictureUrl+"@!master-message-little-more\"></a></div>";
             }else if(attr != null && attr.length > 1){
                 if(attr.length < 5){
                     sub += "<div class=\"two-pic w-active\"><ul class=\"sudoku\">";
