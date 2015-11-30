@@ -139,6 +139,9 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrder, productModel, amount, price);
         totalPrice = totalPrice.add(price.multiply(new BigDecimal(amount)));
         baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+        List<PurchaseOrderProduct> purchaseOrderProductList = new ArrayList<>();
+        purchaseOrderProductList.add(purchaseOrderProduct);
+        purchaseOrder.setPurchaseOrderProductList(purchaseOrderProductList);
         totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         purchaseOrder.setTotal(totalPrice);
         purchaseOrder.setOriginalPrice(totalPrice);
