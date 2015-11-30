@@ -167,6 +167,7 @@
     </div>
   </div>
   <!-- //End---->
+  <input id="content" value="" name="" type="hidden" />
   <div class="great" id="changeType">
     <!--大师动态-->
     <div class="suit">
@@ -513,13 +514,53 @@
           "</div>" +
           "<div class=\"dynamic-ft\">" +
           "<a onclick=\"changePraiseStatus(this,'"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+data[i].praiseStatus+"</em></a> <i class=\"s-solid ft-a\"></i>"+
-          "<a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+data[i].id+"\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>9999</em> </a> <i class=\"s-solid ft-a\"></i>" +
+          "<a onclick=\"showModel('"+data[i].id+"');\" name=\""+data[i].id+"\" class=\"ft-a\"> <i class=\"good-2\"></i><em>"+data[i].amount+"</em></a><i class=\"s-solid ft-a\"></i>" +
           "<a onclick=\"collected(this,'"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+data[i].storeStatus+"</em></a>" +
           "</div>"+
           "</div>";
         }
         sub += "</div>";
         box.append(sub);
+      }
+    })
+  }
+  function showModel(msgId){
+    $("#content").attr("name",msgId);
+    window.open("<c:url value='/comment.jsp?msgId='/>"+msgId);
+  }
+  function setValue(data){
+    var msgId = $("#content").attr("name");
+    var ret =document.getElementById("content").value = data;
+    if(ret && ret.toString().length>=1) {
+      var CommentValue = $("#content").val();
+      if (CommentValue == null || CommentValue == "" || CommentValue == "undefined") {
+        alert("你未发表任何评论，请评论");
+        return false;
+      }
+    }
+    $.ajax({
+      type: "POST",
+      url:"<c:url value='/masterMessage/commentMsg.do?msgId='/>"+msgId,
+      data:"content="+CommentValue+"&fatherId=0",
+      async: false,
+      dataType:"json",
+      error: function () {
+        alert('出错了,请联系系统管理员!');
+      },
+      success: function (msg) {
+        console.log(msg);
+        if(msg=="noRole"){
+          alert("您还未登陆，请登录后再操作！！！");
+          return false;
+        }else if(msg=="undefined"){
+          alert("您未发表任何评论，请评论！！！");
+          return false;
+        }else{
+          alert("评论成功!");
+          var next = $("a[name='"+msgId+"']").find("em");
+          var num = parseInt(next.html());
+          next.html(num + 1);
+        }
       }
     })
   }

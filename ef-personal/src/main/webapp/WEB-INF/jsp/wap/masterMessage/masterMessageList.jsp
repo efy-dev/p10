@@ -211,7 +211,7 @@
     }
     $.ajax({
       type: "POST",
-      url:"<c:url value='/masterMessage/commentMsg.do?workId='/>"+msgId,
+      url:"<c:url value='/masterMessage/commentMsg.do?msgId='/>"+msgId,
       data:"content="+CommentValue+"&fatherId=0",
       async: false,
       dataType:"json",
