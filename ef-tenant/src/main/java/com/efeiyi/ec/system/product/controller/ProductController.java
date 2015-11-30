@@ -80,14 +80,19 @@ public class ProductController extends BaseController {
     @ResponseBody
     public String uploadProductImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data = "";
-        String productId = request.getParameter("productId");
-        Product product = (Product) baseManager.getObject(Product.class.getTypeName(), productId);
+        String productId = "";
+        Product product = null;
+        if(request.getParameter("trueUrl")==null||"".equals(request.getParameter("trueUrl"))) {
+            productId = request.getParameter("productId");
+            product = (Product) baseManager.getObject(Product.class.getTypeName(), productId);
+        }
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
         String url = "";
+        Integer sort = 0;
         for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
             ProductPicture productPicture = new ProductPicture();
             //上传文件
@@ -97,16 +102,24 @@ public class ProductController extends BaseController {
             String hz = fileName.substring(fileName.indexOf("."),fileName.length());
             String imgName = fileName.substring(0, fileName.indexOf(hz));
             url = "product/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
-
-            try {
+            if(request.getParameter("trueUrl")!=null&&!"".equals(request.getParameter("trueUrl"))){
+                url = request.getParameter("trueUrl");
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
-                productPicture.setPictureUrl(url);
-                productPicture.setStatus(request.getParameter("status"));
-                productPicture.setProduct(product);
-                baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
-                data = productPicture.getId() + ":" + url+":"+imgName+hz;
-            } catch (Exception e) {
-                e.printStackTrace();
+            }else {
+                try {
+                    aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
+                    productPicture.setPictureUrl(url);
+                    if(request.getParameter("status").equals("3")){
+                        sort = productManager.productPictureSort(product.getId())+1;
+                        productPicture.setSort(sort);
+                    }
+                    productPicture.setStatus(request.getParameter("status"));
+                    productPicture.setProduct(product);
+                    baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
+                    data = productPicture.getId() + ":" + url + ":" + imgName+hz+":"+sort;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         }
@@ -315,6 +328,24 @@ public class ProductController extends BaseController {
             e.printStackTrace();
         }
         return id;
+    }
+
+    @RequestMapping("/changePictureSort.do")
+    @ResponseBody
+    public String changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort ) throws Exception {
+        productManager.changePictureSort(sourceId,sourceSort,targetId,targetSort);
+        return "";
+
+    }
+
+    @RequestMapping("/updatePictureSort.do")
+    @ResponseBody
+    public String updatePictureSort(String id,String sort) throws Exception {
+        ProductPicture productPicture = (ProductPicture)baseManager.getObject(ProductPicture.class.getName(),id);
+        productPicture.setSort(Integer.parseInt(sort));
+        baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+        return sort;
+
     }
 
 }

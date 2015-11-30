@@ -33,16 +33,38 @@ public class PurchaseCommentController {
     @Autowired
     private AliOssUploadManager aliOssUploadManager;
 
+    /**
+     * PC端查看评价
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/finishOrderList.do")
     public String finishOrder(HttpServletRequest request,Model model) throws Exception {
 
         XQuery xQuery = new XQuery("plistPurchaseOrder_default9",request);
+
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("finishList",list);
 
     return "/purchaseOrder/purchaseComment";
-}
+    }
+
+    /**
+     * 移动端查看评价
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("/mobileFinishOrder.do")
+    public String mobileFinishOrder(HttpServletRequest request,Model model){
+        String orderId=request.getParameter("orderId");
+       PurchaseOrder purchaseOrder= (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        model.addAttribute("finishOrder",purchaseOrder);
+        return "/purchaseOrder/purchaseComment";
+    }
 
     /**
      * 评价

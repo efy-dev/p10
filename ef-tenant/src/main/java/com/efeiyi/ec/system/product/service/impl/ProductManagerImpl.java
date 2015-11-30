@@ -1,12 +1,10 @@
 package com.efeiyi.ec.system.product.service.impl;
 import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.product.model.ProductDescription;
-import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.product.model.ProductPropertyValue;
+import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectProperty;
 import com.efeiyi.ec.project.model.ProjectPropertyValue;
+import com.efeiyi.ec.system.product.dao.ProductDao;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.tenant.model.Tenant;
@@ -30,6 +28,9 @@ import java.util.List;
  */
 @Service
 public class ProductManagerImpl implements ProductManager {
+
+    @Autowired
+    private ProductDao productDao;
 
     @Autowired
     private XdoDao xdoDao;
@@ -278,6 +279,22 @@ public class ProductManagerImpl implements ProductManager {
         product.setStatus(status);
         xdoDao.saveOrUpdateObject(product);
         return product;
+    }
+
+    @Override
+    public  Integer productPictureSort(String productId){
+        return productDao.getProductPicture(productId);
+    }
+
+    @Override
+    public void changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort){
+        ProductPicture source = (ProductPicture)xdoDao.getObject(ProductPicture.class.getName(),sourceId);
+        ProductPicture target = (ProductPicture)xdoDao.getObject(ProductPicture.class.getName(),targetId);
+        source.setSort(Integer.parseInt(targetSort));
+        target.setSort(Integer.parseInt(sourceSort ));
+        xdoDao.saveOrUpdateObject(source);
+        xdoDao.saveOrUpdateObject(target);
+
     }
 
 }
