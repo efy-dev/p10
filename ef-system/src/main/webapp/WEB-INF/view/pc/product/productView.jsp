@@ -784,11 +784,11 @@
     });
 
 
-    //提交
-    function toSubmit(result) {
-        $("input[name='resultPage']").val(result);
-        $("form").submit();
-    }
+//    //提交
+//    function toSubmit(result) {
+//        $("input[name='resultPage']").val(result);
+//        $("form").submit();
+//    }
 
 
     function updatePictureStatus(obj, id, status) {

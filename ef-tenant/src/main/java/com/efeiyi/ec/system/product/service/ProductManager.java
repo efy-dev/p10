@@ -24,4 +24,8 @@ public interface ProductManager {
 
     Product setProductStatus(String status,String id);
 
+    Integer productPictureSort(String productId);
+
+    void changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort);
+
 }
