@@ -37,6 +37,7 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -263,7 +264,12 @@ public class PurchaseOrderController extends BaseController {
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cart, model);
         String callback = request.getParameter("callback");
         if (callback != null) {
-
+            callback = URLDecoder.decode(callback,"UTF-8");
+            if (callback.contains("?")){
+                callback+="&purchaseOrderId="+purchaseOrder.getId();
+            }else {
+                callback+="?purchaseOrderId="+purchaseOrder.getId();
+            }
             purchaseOrder.setCallback(callback);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         }
@@ -289,6 +295,12 @@ public class PurchaseOrderController extends BaseController {
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(productModel, price, Integer.parseInt(amount), model);
         String callback = request.getParameter("callback");
         if (callback != null) {
+            callback = URLDecoder.decode(callback,"UTF-8");
+            if (callback.contains("?")){
+                callback+="&purchaseOrderId="+purchaseOrder.getId();
+            }else {
+                callback+="?purchaseOrderId="+purchaseOrder.getId();
+            }
             purchaseOrder.setCallback(callback);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         }
