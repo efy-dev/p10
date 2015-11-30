@@ -69,8 +69,8 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         PurchaseOrder purchaseOrder = createNewPurchaseOrder(productModel, price, amount);
         LinkedHashSet<Tenant> tenantSet = new LinkedHashSet<>();
         tenantSet.add(productModel.getProduct().getTenant());
-        ArrayList<ProductModel> productModelArrayList = new ArrayList<>();
-        productModelArrayList.add(productModel);
+        ArrayList<PurchaseOrderProduct> productModelArrayList = new ArrayList<>();
+        productModelArrayList.add(purchaseOrder.getPurchaseOrderProductList().get(0));
         productMap.put(productModel.getProduct().getTenant().getId(), productModelArrayList);
         model.addAttribute("productMap", productMap);
         model.addAttribute("purchaseOrder", purchaseOrder);
