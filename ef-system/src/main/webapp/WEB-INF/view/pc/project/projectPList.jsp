@@ -35,8 +35,9 @@
 </security:authorize>
         <td width="15%">项目名称</td>
         <td width="15%">项目编号</td>
-        <td width="15%">省</td>
-        <td width="15%">市</td>
+        <td width="10%">类别名称</td>
+        <td width="10%">省</td>
+        <td width="10%">市</td>
         <td width="10%">项目图片</td>
 
     </tr>
@@ -125,10 +126,13 @@
             <td width="15%">
                     ${project.serial}
             </td>
-            <td width="15%">
+            <td width="10%">
+                    ${project.projectCategory.name}
+            </td>
+            <td width="10%">
                     ${project.addressDistrict.addressCity.addressProvince.name}
             </td>
-            <td width="15%">
+            <td width="10%">
                     ${project.addressDistrict.addressCity.name}
             </td>
             <td width="15%">
