@@ -177,7 +177,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
                 baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
             }
         } else {
-            purchaseOrder.setMessage(messageMap.get(purchaseOrder.getTenant().getId() + "Message"));
+//            purchaseOrder.setMessage(messageMap.get(purchaseOrder.getTenant().getId() + "Message"));
         }
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
