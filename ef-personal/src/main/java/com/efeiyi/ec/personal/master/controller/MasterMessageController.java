@@ -224,8 +224,6 @@ public class MasterMessageController {
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("commentId", commentId);
-//			List<MasterWorkPraise> list = baseManager.listObject(queryHql,map);
-
             MasterMessagePraise p2 = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(queryHql, map);
             if (p2 != null && p2.getId() != null)//不为null,说明已经点过赞了
             {
@@ -285,11 +283,6 @@ public class MasterMessageController {
             {
                 return "repeat";
             }
-
-
-            //防止重复点赞
-
-
             praise.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
             praise.setMessage(msg);
             praise.setCreateDateTime(new Date());
@@ -474,14 +467,11 @@ public class MasterMessageController {
     @RequestMapping("/hotMaster/{qm}/{size}/{index}")
     public List getRecommendMaster(HttpServletRequest request, @PathVariable String qm, @PathVariable String size, @PathVariable String index) throws Exception {
         MyUser user = AuthorizationUtil.getMyUser();
-//		String qm = request.getParameter("qm");
         if (null == qm || "".equalsIgnoreCase(qm)) {
             qm = "plistMasterRecommend_group";
         }
         XQuery query = new XQuery(qm, request);
         PageEntity pageEntity = new PageEntity();
-//		String pageIndex = request.getParameter("pageEntity.index");
-//		String pageSize = request.getParameter("pageEntity.size");
         if (index != null) {
             pageEntity.setIndex(Integer.parseInt(index));
             pageEntity.setSize(Integer.parseInt(size));
@@ -554,7 +544,6 @@ public class MasterMessageController {
 
     @RequestMapping("/getMessageView/{msgId}")
     public String forwardMessageViewPage(@PathVariable String msgId, Model model) {
-//		String msgId = request.getParameter("msgId");
         MasterMessage msg = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(), msgId);
         LinkedHashMap<String, Object> queryMap = new LinkedHashMap<>();
         String queryHql1 = "from MasterProject p where p.master.id=:masterId and p.status='1'";
@@ -616,7 +605,6 @@ public class MasterMessageController {
 
     @RequestMapping("/masterView/{masterId}")
     public String masterView(@PathVariable String masterId, Model model) {
-//		String masterId = request.getParameter("masterId");
         MyUser user = AuthorizationUtil.getMyUser();
         Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
         if (user != null && user.getId() != null) {
@@ -647,7 +635,6 @@ public class MasterMessageController {
 
     @RequestMapping("/introView/{masterId}")
     public String introductionView(HttpServletRequest request, @PathVariable String masterId, Model model) throws Exception {
-        //String masterId = request.getParameter("masterId");
         Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
         MyUser user = AuthorizationUtil.getMyUser();
         if (user != null && user.getId() != null) {
