@@ -52,7 +52,7 @@ public class ProjectController extends WikibaseController {
             xQuery.put("project_id", projectid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() >= 1) {
+            if (list != null && !list.isEmpty()) {
                 flag = true;
             }
         }
@@ -152,7 +152,7 @@ public class ProjectController extends WikibaseController {
             xQuery.put("project_id", projectId);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() >= 1) {
+            if (list != null && !list.isEmpty()) {
                 flag = true;
             }
         }
@@ -185,7 +185,7 @@ public class ProjectController extends WikibaseController {
             xQuery.put("master_id", userid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() >= 1) {
+            if (list != null && !list.isEmpty()) {
                 flag = true;
             }
         }
