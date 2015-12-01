@@ -48,7 +48,8 @@ public class ProductController extends WikibaseController {
         }
         ProductComment productComment = new ProductComment();
         productComment.setCreateDateTime(new Date());
-        productComment.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+        //productComment.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+        productComment.setUser(AuthorizationUtil.getUser());
         productComment.setProduct(product);
         productComment.setStatus("1");
         productComment.setContent(content);
@@ -82,7 +83,8 @@ public class ProductController extends WikibaseController {
         }
         ProductComment productComment = new ProductComment();
         productComment.setCreateDateTime(new Date());
-        productComment.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+        //productComment.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+        productComment.setUser(AuthorizationUtil.getUser());
         productComment.setProduct(product);
         productComment.setStatus("1");
         productComment.setContent(content);
@@ -130,7 +132,8 @@ public class ProductController extends WikibaseController {
                 baseManager.remove(ProductStore.class.getName(),ps.getId());
                 return "repeat" ;
             }else{
-                productStore.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+                //productStore.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+                productStore.setUser(AuthorizationUtil.getUser());
                 Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
                 productStore.setProduct(product);
                 productStore.setStatus("1");
@@ -150,7 +153,7 @@ public class ProductController extends WikibaseController {
             xQuery.put("master_id", userid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() >= 1) {
+            if (list != null && !list.isEmpty()) {
                 flag = true;
             }
         }

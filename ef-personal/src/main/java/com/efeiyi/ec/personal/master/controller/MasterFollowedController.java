@@ -5,6 +5,7 @@ import com.efeiyi.ec.master.model.MasterFollowed;
 import com.efeiyi.ec.master.model.MasterMessage;
 import com.efeiyi.ec.master.model.MasterRecommended;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.personal.AuthorizationUtil;
 import com.efeiyi.ec.personal.ConvertMasterModelUtil;
 import com.efeiyi.ec.personal.master.model.MasterListModel;
@@ -12,7 +13,6 @@ import com.efeiyi.ec.personal.master.model.MasterModel;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.ObjectRecommendedManager;
-import org.hibernate.envers.internal.tools.StringTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,17 +40,16 @@ public class MasterFollowedController {
 
 	@ResponseBody
 	@RequestMapping("/followed.do")
-	public String followed(HttpServletRequest request, Model model) {
-		String status = request.getParameter("status");
+	public String followed(HttpServletRequest request) {
 		String masterId = request.getParameter("masterId");
 		Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
-		MyUser myUser = AuthorizationUtil.getMyUser();
-		if (myUser == null || myUser.getId() == null){
+		MyUser user = AuthorizationUtil.getMyUser();
+		if (user == null || user.getId() == null){
 			return "noRole";
 		}
 		LinkedHashMap<String, Object> queryMap = new LinkedHashMap<>();
 		String queryHql = "from MasterFollowed m where m.user.id=:userId and m.master.id=:masterId and m.status = '1'";
-		queryMap.put("userId", myUser.getId());
+		queryMap.put("userId", user.getId());
 		queryMap.put("masterId", masterId);
 		MasterFollowed followed = (MasterFollowed) baseManager.getUniqueObjectByConditions(queryHql, queryMap);
 		if (followed != null){
@@ -61,7 +60,7 @@ public class MasterFollowedController {
 		}else{
 			MasterFollowed follow = new MasterFollowed();
 			follow.setMaster(master);
-			follow.setUser(myUser);
+			follow.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
 			follow.setStatus("1");
 			follow.setCreateDateTime(new Date());
 			baseManager.saveOrUpdate(MasterFollowed.class.getName(), follow);
@@ -97,7 +96,7 @@ public class MasterFollowedController {
 				if (recommendList != null && recommendList.size() > 0){
 					for (MasterRecommended recommended : recommendList){
 						Master master = (Master) baseManager.getObject(Master.class.getName(),recommended.getMaster().getId());
-						master.setFollowStatus(getFollowStatus(master,user));
+						master.setFollowStatus(getFollowStatus(master,(User)baseManager.getObject(User.class.getName(),user.getId())));
 						MasterModel masterModel = ConvertMasterModelUtil.convertMaster(master);
 						models.add(masterModel);
 					}
@@ -105,7 +104,7 @@ public class MasterFollowedController {
 				masterListModel.setMrModelList(models);
 				masterListModel.setMsgModelList(msgLists);
 			}else{
-				List<MasterModel> modelList = getMessageList(request,list,user);
+				List<MasterModel> modelList = getMessageList(request,list);
 				masterListModel.setMsgModelList(modelList);
 			}
 			return masterListModel;
@@ -114,7 +113,7 @@ public class MasterFollowedController {
 			if (list != null && list.size() > 0){
 				for (MasterRecommended recommended : list){
 					Master master = (Master) baseManager.getObject(Master.class.getName(),recommended.getMaster().getId());
-					master.setFollowStatus(getFollowStatus(master,user));
+					master.setFollowStatus(getFollowStatus(master,(User)baseManager.getObject(User.class.getName(),user.getId())));
 					MasterModel masterModel = ConvertMasterModelUtil.convertMaster(master);
 					models.add(masterModel);
 				}
@@ -124,7 +123,7 @@ public class MasterFollowedController {
 		}
 	}
 
-	public String getFollowStatus(Master master , MyUser user){
+	public String getFollowStatus(Master master , User user){
 		if (user != null && user.getId() != null){
 			String queryHql = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId";
 			LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
@@ -142,7 +141,7 @@ public class MasterFollowedController {
 		return master.getFollowStatus();
 	}
 
-	public List getMessageList(HttpServletRequest request ,List<MasterFollowed> followeds , MyUser user)throws Exception{
+	public List getMessageList(HttpServletRequest request ,List<MasterFollowed> followeds)throws Exception{
 		List<MasterModel> models = new ArrayList<>();
 		for (MasterFollowed followed : followeds){
 			XQuery query = new XQuery("listMasterMessage_default",request);

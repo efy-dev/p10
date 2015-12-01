@@ -1,6 +1,6 @@
 package com.efeiyi.ec.master.model;
 
-import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,7 +17,7 @@ public class MasterWorkStore implements Serializable {
 
 	private String id;
 	private MasterWork work;
-	private MyUser user;
+	private User user;
 	private String status;
 	private Date createDateTime;
 
@@ -44,11 +44,11 @@ public class MasterWorkStore implements Serializable {
 
 	@JoinColumn(name="user_id")
 	@ManyToOne(fetch = FetchType.LAZY)
-	public MyUser getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(MyUser user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

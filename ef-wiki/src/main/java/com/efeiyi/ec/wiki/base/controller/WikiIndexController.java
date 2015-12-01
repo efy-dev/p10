@@ -208,11 +208,10 @@ public class WikiIndexController extends WikibaseController {
                     return "del";
                 }else{
                     MasterFollowed masterFollowed = new MasterFollowed();
-                    masterFollowed.setUser(user);
                     masterFollowed.setCreateDateTime(new Date());
                     masterFollowed.setMaster(master);
                     masterFollowed.setStatus("1");
-                    masterFollowed.setUser(user);
+                    masterFollowed.setUser(AuthorizationUtil.getUser());
                     //这里需要同步更新master的粉丝数量字段
                     baseManager.saveOrUpdate(MasterFollowed.class.getName(), masterFollowed);
                     master.setFsAmount(master.getFsAmount()==null?1:master.getFsAmount()+1);
@@ -249,7 +248,8 @@ public class WikiIndexController extends WikibaseController {
             {
                 return "repeat";
             }//防止重复点赞
-            productPraise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+            //productPraise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+            productPraise.setUser(AuthorizationUtil.getUser());
             productPraise.setProduct(product);
             productPraise.setCreateDateTime(new Date());
             productPraise.setType("1");
@@ -317,7 +317,8 @@ public class WikiIndexController extends WikibaseController {
                 return "repeat";
             }
             //防止重复点赞
-            productPraise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+            //productPraise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+            productPraise.setUser(AuthorizationUtil.getUser());
             productPraise.setProduct(product);
             productPraise.setCreateDateTime(new Date());
             productPraise.setType("2");

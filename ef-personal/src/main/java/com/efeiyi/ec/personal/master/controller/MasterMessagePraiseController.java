@@ -6,8 +6,8 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.personal.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.efeiyi.ec.organization.model.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,7 +27,7 @@ public class MasterMessagePraiseController {
 
 	@ResponseBody
 	@RequestMapping("/changePraiseNum.do")
-	public String changePraiseNum(HttpServletRequest request, Model model) {
+	public String changePraiseNum(HttpServletRequest request) {
 		String messageId = request.getParameter("messageId");
 		MyUser user = AuthorizationUtil.getMyUser();
 		if (user == null || user.getId() == null) {
@@ -50,7 +50,7 @@ public class MasterMessagePraiseController {
 		} else {
 			MasterMessagePraise praise = new MasterMessagePraise();
 			MasterMessage message = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(), messageId);
-			praise.setUser(user);
+			praise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
 			praise.setMessage(message);
 			message.setPraiseNum(message.getPraiseNum() == null ? (0 + 1) : (message.getPraiseNum() + 1));
 			message.setPraiseStatus("取消赞");
