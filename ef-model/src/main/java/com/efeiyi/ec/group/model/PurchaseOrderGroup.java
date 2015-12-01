@@ -10,25 +10,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "activity_purchase_order_group")
-public class PurchaseOrderGroup {
+public class PurchaseOrderGroup extends PurchaseOrder{
 
-    private String id;
+
     private PurchaseOrder purchaseOrder;
     private MyGroup myGroup;
     private GroupMember groupMember;
-    private String status; //0删除 1不删除
-
-    @Id
-    @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
-    @GeneratedValue(generator = "id")
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_order_id")
     public PurchaseOrder getPurchaseOrder() {
@@ -57,14 +44,5 @@ public class PurchaseOrderGroup {
 
     public void setGroupMember(GroupMember groupMember) {
         this.groupMember = groupMember;
-    }
-
-    @Column(name = "status")
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

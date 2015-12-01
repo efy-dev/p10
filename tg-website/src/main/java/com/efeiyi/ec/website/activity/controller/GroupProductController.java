@@ -85,14 +85,7 @@ public class GroupProductController {
     public List<GroupProduct> listProduct(HttpServletRequest request,@PathVariable String index) throws Exception {
         XQuery xQuery = new XQuery("listGroupProduct_default",request);
         xQuery.put("status","1");
-        PageEntity pageEntity = new PageEntity();
-        if (index != null) {
-            pageEntity.setIndex(Integer.parseInt(index));
-        }
-        pageEntity.setSize(4);
-        xQuery.setPageEntity(pageEntity);
-        PageInfo pageInfo = baseManager.listPageInfo(xQuery);
-        List<GroupProduct> list = pageInfo.getList();
+        List<GroupProduct> list = baseManager.listObject(xQuery);
         for(GroupProduct groupProduct:list){
             groupProduct.setProductName(groupProduct.getProductModel().getProduct().getName());
         }
@@ -139,6 +132,11 @@ public class GroupProductController {
         Collections.reverse(list);
         }
         return list;
+    }
+    @RequestMapping(value = "/product/playDetails")
+    public String returnPlayDetails(HttpServletRequest request, Model model){
+
+        return  "/playDetails";
     }
 
 }

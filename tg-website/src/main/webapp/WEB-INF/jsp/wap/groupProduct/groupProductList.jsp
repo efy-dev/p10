@@ -26,8 +26,8 @@
     <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20150831"/>">
-    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
-    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css"/>">
+    <link type="text/css" rel="stylesheet"  href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
+    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
 </head>
 <body>
 <header class="am-header custom-header">
@@ -35,10 +35,17 @@
     <!-- //End--chevron-left-->
     <h1 class="am-header-title" style="margin: 0 10%;">我的团长我的团</h1>
     <!-- //End--title-->
-    <div class="am-header-right am-header-nav am-header-right1">
-        <a href="<c:url value="/person/personInfoView.do"/>" class="chevron-right" id="menu">
-            <i class="icon icon-user"></i>
+    <div class="am-header-right am-header-nav">
+        <a href="#chevron-right" class="chevron-right" id="menu">
+            <i class="line"></i>
         </a>
+    </div>
+    <!-- //End--chevron-left-->
+    <div class="menu-list">
+        <ul class="bd">
+            <li><a href="http://www.efeiyi.com" title="首页">e&nbsp;飞&nbsp;蚁&nbsp;商&nbsp;城</a></li>
+            <li><a href="/" title="分类">团&nbsp;购&nbsp;首&nbsp;页</a></li>
+        </ul>
     </div>
 </header>
 <!--//End--header-->
@@ -60,9 +67,16 @@
             <%--</c:forEach>--%>
         </ul>
     </div>
-    <div class="more ae"><a onclick="moreGroupProduct()"><span>下拉了解更多商品...</span><div class="icon"></div></a></div>
+    <%--<div class="more ae"><a onclick="moreGroupProduct()"><span>下拉了解更多商品...</span><div class="icon"></div></a></div>--%>
 </div>
-
+<!--悬浮订单-->
+<!--悬浮订单-->
+<div class="met-nav ae">
+    <a href="<c:url value="/tuan.do"/>"><p><i class="met-1con m-icon"></i></p><p>团购首页</p></a>
+    <a href="<c:url value="/person/myGroup.do"/>"><p><i class="met-2con m-icon"></i></p><p>我的团</p></a>
+    <a href="<c:url value="/person/myPurchaseOrder.do"/>"><p><i class="met-3con m-icon"></i></p><p>我的订单</p></a>
+    <a href="<c:url value="/person/personInfoView.do"/>"><p><i class="met-4con m-icon"></i></p><p>个人中心</p></a>
+</div>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
@@ -144,7 +158,13 @@
         s.parentNode.insertBefore(hm, s);
     })();
 </script>
-
+<script>
+    $(function(){
+        $(document).ready(function(){
+            $(".all-bulk").css("margin-bottom","60px")
+        });
+    })
+</script>
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

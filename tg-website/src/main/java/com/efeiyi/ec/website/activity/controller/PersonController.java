@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -105,6 +106,31 @@ public class PersonController {
     @RequestMapping(value = "/personInfoView.do")
     public String personInfoView(HttpServletRequest request, Model model) throws Exception {
             return "/personGroup/personGroupInfo";
+    }
+    /**
+     *  我的团 level = 0为团长
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/myGroup.do")
+    public String getMyGroup(HttpServletRequest request, Model model) throws Exception {
+        XQuery xQuery = new XQuery("listJoinGroup_default",request);
+        List<Object> groupJoinList = baseManager.listObject(xQuery);
+        List<Object> myCreateProductList = new ArrayList<>();
+        if(!groupJoinList.isEmpty()){
+            Iterator<Object> sListIterator = groupJoinList.iterator();
+            while(sListIterator.hasNext()){
+                GroupMember groupMember = (GroupMember)sListIterator.next();
+                if("0".equals(groupMember.getLevel())){
+                    myCreateProductList.add(groupMember);
+                    sListIterator.remove();
+                }
+            }
+        }
+        model.addAttribute("myCreateProductList", myCreateProductList);
+        model.addAttribute("groupJoinList", groupJoinList);
+        return "/personGroup/myGroup";
     }
 
     /**
