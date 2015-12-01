@@ -36,10 +36,16 @@
   <!-- //End--chevron-left-->
   <h1 class="am-header-title" style="margin: 0 10%;">我的团长我的团</h1>
   <!-- //End--title-->
-  <div class="am-header-right am-header-nav am-header-right1">
-    <a href="<c:url value="/person/personInfoView.do"/>" class="chevron-right" id="menu">
-      <i class="icon icon-user"></i>
+  <div class="am-header-right am-header-nav">
+    <a href="#chevron-right" class="chevron-right" id="menu">
+      <i class="line"></i>
     </a>
+  </div>
+  <div class="menu-list">
+    <ul class="bd">
+      <li><a href="http://www.efeiyi.com" title="首页">e&nbsp;飞&nbsp;蚁&nbsp;商&nbsp;城</a></li>
+      <li><a href="" title="分类">团&nbsp;购&nbsp;首&nbsp;页</a></li>
+    </ul>
   </div>
 </header>
 <!--//End--header-->
@@ -86,7 +92,7 @@
         <div class="black" style="width: ${bil}%;"></div>
         <div class="gray"></div>
       </div>
-      <div class="txt-page ae"><span>拼团倒计时：</span><span>分享红包：${group.groupProduct.bonus}元</span></div>
+      <div class="txt-page ae"><span>拼团倒计时：</span></div>
       <div class="time ae" id="timer">00:00:00</div>
     </div>
     <c:if test="${group.status==1}">
@@ -127,10 +133,10 @@
           ${group.groupProduct.productModel.product.productDescription.content}
           <div class="button ae"><a href="http://www.efeiyi.com/product/productModel/${group.groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
         </div>
-        <div class="tab-btn">
-          <a href="<c:url value="/tuan"/>">更多团购商品<i class="gicon"></i></a>
-          <a href="<c:url value="/product/groupProduct/${group.groupProduct.id}"/>">我要开团<i class="gicon"></i></a>
-        </div>
+        <%--<div class="tab-btn">--%>
+          <%--<a href="<c:url value="/tuan"/>">更多团购商品<i class="gicon"></i></a>--%>
+          <%--<a href="<c:url value="/product/groupProduct/${group.groupProduct.id}"/>">我要开团<i class="gicon"></i></a>--%>
+        <%--</div>--%>
       </div>
       <div class="co-page" style="display: none">
         <c:if test="${not empty purchaseOrderProductList&&fn:length(purchaseOrderProductList) >0}">
@@ -153,7 +159,12 @@
       </div>
     </div>
   </div>
-
+  <div class="met-nav ae">
+    <a href="<c:url value="/tuan.do"/>"><p><i class="met-1con m-icon"></i></p><p>团购首页</p></a>
+    <a href="<c:url value="/person/myGroup.do"/>"><p><i class="met-2con m-icon"></i></p><p>我的团</p></a>
+    <a href="<c:url value="/person/myPurchaseOrder.do"/>"><p><i class="met-3con m-icon"></i></p><p>我的订单</p></a>
+    <a href="<c:url value="/person/personInfoView.do"/>"><p><i class="met-4con m-icon"></i></p><p>个人中心</p></a>
+  </div>
   <!--在线客服-->
   <div class="scroll-bar">
     <div class="scroll-bar-top" style="display: block;">

@@ -22,7 +22,7 @@ public class GroupMember implements Serializable {
     private String level;//
     private GroupMember supGroupMember;
     private List<GroupMember> subGroupMemberList;
-    private String status;//0:取消 1进行中 3：组团成功 5：组团失败
+    private String status;//0:取消 1进行中 2:未支付 3：组团成功 5：组团失败
     private MyGroup myGroup;
     private BigDecimal redPacket;
 
