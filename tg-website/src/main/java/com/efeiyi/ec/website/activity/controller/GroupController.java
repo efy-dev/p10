@@ -87,7 +87,7 @@ public class GroupController {
             member.setLevel("0");
             member.setUser(currentUser);
             baseManager.saveOrUpdate(GroupMember.class.getName(),member);
-            callback = "http://www2.efeiyi.com/tg-website/group/waitPay" + "?groupId=" + group.getId() + "&memberId=" + member.getId() +"&groupProductId=" +groupProductId;
+            callback = "www2.efeiyi.com/tg-website/group/waitPay" + "?groupId=" + group.getId() + "&memberId=" + member.getId() +"&groupProductId=" +groupProductId;
             String callback1 = java.net.URLEncoder.encode(callback,"UTF-8");
             url = "http://www2.efeiyi.com/order/saveOrUpdateOrder2.do" + "?productModelId="+groupProduct.getProductModel().getId()+"&amount="+1+"&price="+groupProduct.getGroupPrice()+"&callback="+callback1;
             return "redirect:" + url;
