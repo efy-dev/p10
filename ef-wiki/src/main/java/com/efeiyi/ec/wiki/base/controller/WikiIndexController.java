@@ -249,7 +249,8 @@ public class WikiIndexController extends WikibaseController {
             {
                 return "repeat";
             }//防止重复点赞
-            productPraise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+            //productPraise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+            productPraise.setUser(AuthorizationUtil.getUser());
             productPraise.setProduct(product);
             productPraise.setCreateDateTime(new Date());
             productPraise.setType("1");
@@ -317,7 +318,8 @@ public class WikiIndexController extends WikibaseController {
                 return "repeat";
             }
             //防止重复点赞
-            productPraise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+            //productPraise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+            productPraise.setUser(AuthorizationUtil.getUser());
             productPraise.setProduct(product);
             productPraise.setCreateDateTime(new Date());
             productPraise.setType("2");
