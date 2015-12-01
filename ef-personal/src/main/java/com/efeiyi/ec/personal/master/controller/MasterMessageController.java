@@ -813,6 +813,14 @@ public class MasterMessageController {
 		XQuery query = new XQuery("listMasterIntroduction_default",request);
 		xQuery.put("master_id",master.getId());
 		query.put("master_id",master.getId());
+		List<MasterIntroduction> list = baseManager.listObject(query);
+		if (!StringTools.isEmpty(list)){
+			for(MasterIntroduction intro : list){
+				if ("1".equals(intro.getType())){
+					model.addAttribute("baseIntro",intro);
+				}
+			}
+		}
 		model.addAttribute("object",master);
 		model.addAttribute("introductionList",baseManager.listObject(query));
 		model.addAttribute("bannerList",baseManager.listObject(xQuery));

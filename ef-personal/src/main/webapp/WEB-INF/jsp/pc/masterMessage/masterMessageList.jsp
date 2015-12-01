@@ -282,21 +282,19 @@
           for (var i in data) {
             var levelName = "";
             if(data[i].level == "1"){
-              levelName = "国际级";
-            }else if(data[i].level == "2"){
               levelName = "国家级";
-            }else if(data[i].level == "3"){
+            }else if(data[i].level == "2"){
               levelName = "省级";
-            }else if(data[i].level == "4"){
+            }else if(data[i].level == "3"){
               levelName = "市级";
-            }else if(data[i].level == "5"){
+            }else if(data[i].level == "4"){
               levelName = "县级";
             }
             var box = "<li>"+
             "            <div class=\"text\">"+
             "              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\">"+data[i].masterName+"</a></p>"+
             "              <p class=\"p2\">"+data[i].projectName+"</p>"+
-            "              <p class=\"p2\">"+levelName+"非物质文化遗产</p>"+
+            "              <p class=\"p2\">"+levelName+"非遗传承人</p>"+
             "            </div>"+
             "            <div class=\"bt-gz\">"+
             "              <a class=\"btn-guan\" name=\"masterFollow"+data[i].id+"\" onclick=\"followMaster('"+data[i].id+"');\">"+
@@ -346,22 +344,20 @@
         if(data != null && data.length > 0) {
           for (var i in data) {
             var levelName = "";
-            if(data[i].level == "1"){
-              levelName = "国际级";
-            }else if(data[i].level == "2"){
-              levelName = "国家级";
-            }else if(data[i].level == "3"){
-              levelName = "省级";
-            }else if(data[i].level == "4"){
-              levelName = "市级";
-            }else if(data[i].level == "5"){
-              levelName = "县级";
-            }
+              if(data[i].level == "1"){
+                  levelName = "国家级";
+              }else if(data[i].level == "2"){
+                  levelName = "省级";
+              }else if(data[i].level == "3"){
+                  levelName = "市级";
+              }else if(data[i].level == "4"){
+                  levelName = "县级";
+              }
             var box = "<li>"+
                     "            <div class=\"text\">"+
                     "              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\">"+data[i].masterName+"</a></p>"+
                     "              <p class=\"p2\">"+data[i].projectName+"</p>"+
-                    "              <p class=\"p2\">"+levelName+"非物质文化遗产</p>"+
+                    "              <p class=\"p2\">"+levelName+"非遗传承人</p>"+
                     "            </div>"+
                     "            <div class=\"bt-gz\">"+
                     "              <a class=\"btn-guan\" name=\"masterFollow"+data[i].id+"\" onclick=\"followMaster('"+data[i].id+"');\">"+
