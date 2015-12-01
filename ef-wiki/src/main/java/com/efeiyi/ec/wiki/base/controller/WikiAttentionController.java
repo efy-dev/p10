@@ -54,7 +54,7 @@ public class WikiAttentionController extends WikibaseController {
             XQuery query2 = new XQuery("listProject2_byCategory", request);
             query2.put("projectCategory_id", projectCategory.getId());
             List<Project> listp = baseManager.listObject(query2);
-            if(listp!=null && listp.size()>=1){
+            if(listp!=null && !listp.isEmpty()){
                 pc.add(listp);
             }
 
