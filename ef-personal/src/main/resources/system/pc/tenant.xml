@@ -156,6 +156,12 @@
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
+                <do name="plistMasterComment" access="" label="工作坊">
+                    <query name="byUser" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="user.id" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
             </does>
         </entity>
 

@@ -72,9 +72,14 @@ public class MasterMessageController {
         List<MasterModel> msgList = new ArrayList<>();
         if (messageList != null && messageList.size() > 0) {
             for (MasterMessage message : messageList) {
-                message.getMaster().setFollowStatus(getFollowStatus(message.getMaster(), (User) baseManager.getObject(User.class.getName(),user.getId())));
+                if (user == null || user.getId() == null){
+                    message.getMaster().setFollowStatus("关注");
+                    message.setPraiseStatus("赞");
+                }else{
+                    message.getMaster().setFollowStatus(getFollowStatus(message.getMaster(), (User) baseManager.getObject(User.class.getName(), user.getId())));
+                    message.setPraiseStatus(getPraiseStatus(message, (User) baseManager.getObject(User.class.getName(), user.getId())));
+                }
                 message.setFollowStatus(message.getMaster().getFollowStatus());
-                message.setPraiseStatus(getPraiseStatus(message, (User) baseManager.getObject(User.class.getName(),user.getId())));
                 message.setMasterId(message.getMaster().getId());
                 message.setMasterName(message.getMaster().getFullName());
                 message.setAmount(message.getAmount() == null ? 0 : message.getAmount());
@@ -230,7 +235,7 @@ public class MasterMessageController {
                 return "repeat";
             }
             //防止重复点赞
-            praise.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
+            praise.setUser((User) baseManager.getObject(User.class.getName(), user.getId()));
             praise.setCreateDateTime(new Date());
             praise.setComment(comment);
             baseManager.saveOrUpdate(MasterMessagePraise.class.getName(), praise);
@@ -283,7 +288,7 @@ public class MasterMessageController {
             {
                 return "repeat";
             }
-            praise.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
+            praise.setUser((User) baseManager.getObject(User.class.getName(), user.getId()));
             praise.setMessage(msg);
             praise.setCreateDateTime(new Date());
             baseManager.saveOrUpdate(MasterMessagePraise.class.getName(), praise);
@@ -335,7 +340,7 @@ public class MasterMessageController {
                 return "repeat";
             }//不为null,说明已经收藏了
         }
-        store.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
+        store.setUser((User) baseManager.getObject(User.class.getName(), user.getId()));
         MasterMessage work = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(), msgId);
         store.setMasterMessage(work);
         store.setStatus("1");
@@ -345,9 +350,19 @@ public class MasterMessageController {
     }
 
     @ResponseBody
-    @RequestMapping("/userComments")
-    public String getUserComments() {
-
+    @RequestMapping("/userComments/{qm}/{size}/{index}")
+    public List getUserComments(HttpServletRequest request, @PathVariable String qm, @PathVariable String size, @PathVariable String index) throws Exception {
+        MyUser user = AuthorizationUtil.getMyUser();
+        XQuery xQuery = new XQuery(qm,request);
+        LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
+        queryMap.put("user_id",user.getId());
+        PageEntity entity = new PageEntity();
+        if (!StringTools.isEmpty(index)){
+            entity.setIndex(Integer.parseInt(index));
+            entity.setSize(Integer.parseInt(size));
+        }
+        xQuery.setPageEntity(entity);
+        List<MasterComment> list = baseManager.listObject(xQuery);
         return null;
     }
 
@@ -526,7 +541,7 @@ public class MasterMessageController {
                 follow.setCreateDateTime(new Date());
                 follow.setMaster(master);
                 follow.setStatus("1");
-                follow.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
+                follow.setUser((User) baseManager.getObject(User.class.getName(), user.getId()));
                 baseManager.saveOrUpdate(MasterFollowed.class.getName(), follow);
                 master.setFsAmount(master.getFsAmount() == null ? 1 : master.getFsAmount() + 1);
                 baseManager.saveOrUpdate(Master.class.getName(), master);
@@ -796,7 +811,7 @@ public class MasterMessageController {
         MyUser user = AuthorizationUtil.getMyUser();
         Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
         master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-        master.setFollowStatus(getFollowStatus(master, (User) baseManager.getObject(User.class.getName(),user.getId())));
+        master.setFollowStatus(getFollowStatus(master, (User) baseManager.getObject(User.class.getName(), user.getId())));
         MasterModel mmd = ConvertMasterModelUtil.convertMaster(master);
         model.addAttribute("object", mmd);
         return "/masterDetails/masterWorkList";
@@ -816,7 +831,7 @@ public class MasterMessageController {
         } else {
             work.setStoreStatus("收藏");
         }
-        work.getMaster().setFollowStatus(getFollowStatus(work.getMaster(), (User) baseManager.getObject(User.class.getName(),user.getId())));
+        work.getMaster().setFollowStatus(getFollowStatus(work.getMaster(), (User) baseManager.getObject(User.class.getName(), user.getId())));
         MasterModel workModel = ConvertMasterModelUtil.convertWork(work);
         model.addAttribute("object", work.getMaster());
         model.addAttribute("work", workModel);
@@ -907,7 +922,7 @@ public class MasterMessageController {
         } else {
             MasterWorkPraise workPraise = new MasterWorkPraise();
             workPraise.setWork(work);
-            workPraise.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
+            workPraise.setUser((User) baseManager.getObject(User.class.getName(), user.getId()));
             workPraise.setCreateDateTime(new Date());
             workPraise.setStatus("1");
             baseManager.saveOrUpdate(MasterWorkPraise.class.getName(), workPraise);
@@ -939,7 +954,7 @@ public class MasterMessageController {
         } else {
             MasterMessagePraise messagePraise = new MasterMessagePraise();
             messagePraise.setMessage(msg);
-            messagePraise.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
+            messagePraise.setUser((User) baseManager.getObject(User.class.getName(), user.getId()));
             messagePraise.setCreateDateTime(new Date());
             messagePraise.setStatus("1");
             baseManager.saveOrUpdate(MasterMessagePraise.class.getName(), messagePraise);
@@ -970,7 +985,7 @@ public class MasterMessageController {
         } else {
             MasterWorkStore story = new MasterWorkStore();
             story.setWork(work);
-            story.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
+            story.setUser((User) baseManager.getObject(User.class.getName(), user.getId()));
             story.setCreateDateTime(new Date());
             story.setStatus("1");
             baseManager.saveOrUpdate(MasterWorkStore.class.getName(), story);
@@ -999,7 +1014,7 @@ public class MasterMessageController {
             msgStore.setStatus("1");
             msgStore.setCreateDateTime(new Date());
             msgStore.setMasterMessage(message);
-            msgStore.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
+            msgStore.setUser((User) baseManager.getObject(User.class.getName(), user.getId()));
             baseManager.saveOrUpdate(MasterMessageStore.class.getName(), msgStore);
             message.setStoreStatus("已关注");
 //			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() + 1);
@@ -1038,7 +1053,7 @@ public class MasterMessageController {
             comment.setFatherComment(fatherCom);
         }
         comment.setMasterWork(work);
-        comment.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
+        comment.setUser((User) baseManager.getObject(User.class.getName(), user.getId()));
         comment.setContent(content);
         comment.setAmount(0);
         comment.setCreateDateTime(new Date());
@@ -1073,7 +1088,7 @@ public class MasterMessageController {
             comment.setFatherComment(fatherCom);
         }
         comment.setMasterMessage(work);
-        comment.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
+        comment.setUser((User) baseManager.getObject(User.class.getName(), user.getId()));
         comment.setContent(content);
         comment.setAmount(0);
         comment.setCreateDateTime(new Date());
@@ -1108,7 +1123,7 @@ public class MasterMessageController {
             praise.setCreateDateTime(new Date());
             praise.setStatus("1");
             praise.setComment(comment);
-            praise.setAuthor((User) baseManager.getObject(User.class.getName(),user.getId()));
+            praise.setAuthor((User) baseManager.getObject(User.class.getName(), user.getId()));
             praise.setUser(comment.getUser());
             baseManager.saveOrUpdate(MasterCommentPraise.class.getName(), praise);
             comment.setAmount(comment.getAmount() == null ? 1 : comment.getAmount() + 1);
@@ -1141,7 +1156,7 @@ public class MasterMessageController {
             praise.setCreateDateTime(new Date());
             praise.setStatus("1");
             praise.setComment(comment);
-            praise.setAuthor((User) baseManager.getObject(User.class.getName(),user.getId()));
+            praise.setAuthor((User) baseManager.getObject(User.class.getName(), user.getId()));
             praise.setUser(comment.getUser());
             baseManager.saveOrUpdate(MasterCommentPraise.class.getName(), praise);
             comment.setAmount(comment.getAmount() == null ? 1 : comment.getAmount() + 1);

@@ -102,7 +102,7 @@ public class User {
     public void setStatus(String status) {
         this.status = status;
     }
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     public Role getRole() {
