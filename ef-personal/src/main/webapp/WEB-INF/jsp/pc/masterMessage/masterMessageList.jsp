@@ -1,4 +1,3 @@
-<%@ page import="com.efeiyi.ec.personal.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -86,7 +85,7 @@
       $(window).scroll(function(){
         var pageH = $(document).height();
         var scrollT = $(window).scrollTop(); //滚动条top
-          var aa = (pageH - winH - scrollT) / winH;
+        var aa = (pageH - winH - scrollT) / winH;
         if(aa < 0.02){
           if(ajaxKey){
                 getData("<c:url value='/masterMessage/mainData/plistMasterMessage_default/0/4/'/>");

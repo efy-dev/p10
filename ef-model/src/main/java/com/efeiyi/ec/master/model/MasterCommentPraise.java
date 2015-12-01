@@ -1,17 +1,13 @@
 package com.efeiyi.ec.master.model;
 
-import com.efeiyi.ec.organization.model.AddressProvince;
-import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,9 +23,9 @@ import java.util.List;
 public class MasterCommentPraise implements Serializable {
 
     private String id;
-    private MyUser user;
+    private User user;
     private MasterComment comment;
-    private MyUser author;
+    private User author;
     private Date createDateTime;
     private String status;
 
@@ -48,11 +44,11 @@ public class MasterCommentPraise implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public MyUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(MyUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -69,11 +65,11 @@ public class MasterCommentPraise implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
-    public MyUser getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(MyUser author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 

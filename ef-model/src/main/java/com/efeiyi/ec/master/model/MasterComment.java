@@ -1,9 +1,9 @@
 package com.efeiyi.ec.master.model;
 
-import com.efeiyi.ec.organization.model.MyUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
+import com.efeiyi.ec.organization.model.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,7 +27,7 @@ public class MasterComment implements Serializable {
 	private MasterMessage masterMessage;
 	private MasterWork masterWork;
 	private Date createDateTime;
-	private MyUser user;
+	private User user;
 	private Integer amount;
 
 
@@ -125,11 +125,11 @@ public class MasterComment implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	public MyUser getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(MyUser user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
