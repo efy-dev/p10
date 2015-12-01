@@ -208,11 +208,10 @@ public class WikiIndexController extends WikibaseController {
                     return "del";
                 }else{
                     MasterFollowed masterFollowed = new MasterFollowed();
-                    masterFollowed.setUser(user);
                     masterFollowed.setCreateDateTime(new Date());
                     masterFollowed.setMaster(master);
                     masterFollowed.setStatus("1");
-                    masterFollowed.setUser(user);
+                    masterFollowed.setUser(AuthorizationUtil.getUser());
                     //这里需要同步更新master的粉丝数量字段
                     baseManager.saveOrUpdate(MasterFollowed.class.getName(), masterFollowed);
                     master.setFsAmount(master.getFsAmount()==null?1:master.getFsAmount()+1);
