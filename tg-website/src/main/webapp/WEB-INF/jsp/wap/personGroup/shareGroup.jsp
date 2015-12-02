@@ -184,6 +184,7 @@
 </div>
 
 <style type="text/css">
+  .my-colonel{margin-bottom: 70px;}
   #MEIQIA-BTN-HOLDER {
     right: 0;bottom: 145px;}
   #MEIQIA-BTN {
