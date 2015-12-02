@@ -93,7 +93,7 @@ public class PurchaseOrderPaymentController {
                 if (purchaseOrder.getOrderType() != null && purchaseOrder.getOrderType().equals("3")) {  //礼品卷
                     orderStatus = PurchaseOrder.ORDER_STATUS_WRGIFT;
                 } else if (purchaseOrder.getOrderType()!=null && purchaseOrder.getOrderType().equals("4")){  //团购
-                    orderStatus = PurchaseOrder.ORDER_STATUS_WRECEIVE;
+                    orderStatus = PurchaseOrder.ORDER_STATUS_WAIT_GROUP;
                 }else {
                     orderStatus = PurchaseOrder.ORDER_STATUS_WRECEIVE;
                 }

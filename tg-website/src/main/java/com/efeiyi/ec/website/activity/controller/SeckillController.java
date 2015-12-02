@@ -188,7 +188,7 @@ public class SeckillController {
                 baseManager.saveOrUpdate(SeckillProduct.class.getName(),seckillProduct);
                 String callback = "www2.efeiyi.com/tg-website/miao/wait/" + seckillProduct.getId() + "?userId=" + AuthorizationUtil.getMyUser().getId();
                 callback = URLEncoder.encode(callback, "UTF-8");
-                return "redirect:http://www2.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice() + "&callback=" + callback;
+                return "redirect:http://www2.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice() + "&callback=" + callback+"&orderType=2";
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
                 //秒杀已经结束
                 status = "3";
@@ -213,6 +213,7 @@ public class SeckillController {
         } else {
             model.addAttribute("redirect", "/miao/share/" + productId + "?userId=" + (request.getParameter("userId") != null ? request.getParameter("userId") : ""));
             model.addAttribute("productId", productId);
+            model.addAttribute("purchaseOrderId",purchaseOrderId);
             return "/activity/orderDeal";
         }
     }
@@ -225,7 +226,7 @@ public class SeckillController {
         seckillProduct.setUsefulAmount((seckillProduct.getUsefulAmount() != null ? seckillProduct.getUsefulAmount() : 0) + 1);
         seckillProduct.setOrderAmount(seckillProduct.getOrderAmount() - 1);
         baseManager.saveOrUpdate(SeckillProduct.class.getName(),seckillProduct);
-        return "/redirect:/miao/"+productId;
+        return "redirect:/miao/"+productId;
     }
 
     @RequestMapping({"/miao/share/{productId}"})
