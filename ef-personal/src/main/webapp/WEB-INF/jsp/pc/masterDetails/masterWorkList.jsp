@@ -33,10 +33,12 @@
   <div class="great-master">
     <div class="master-pic"><img src="http://tenant.efeiyi.com/${object.favicon}@!master-favicon-view" alt="传承人" class="am-img-thumbnail am-circle">
     </div>
-    <h5>${object.masterName}</h5>
-    <p>[${object.projectName}]</p>
+    <h5>${object.fullName}</h5>
+    <c:if test="${!empty object.projectName}">
+      <p>[${object.projectName}]</p>
+    </c:if>
     <div class="great"><em><ming800:status name='level' dataType='Tenant.level' checkedValue='${object.level}' type='normal'/>非物质文化遗产传承人</em><i class="icon-master"></i></div>
-    <p class="text-great">${object.content}</p>
+    <p class="text-great">${object.brief}</p>
     <div class="gz-master">
       <div class="mst-gz">
         <div class="pc-gz">
@@ -54,7 +56,7 @@
             </a>
           </div>
         </div>
-        <div class="mst-text"><span>${object.amount}粉丝</span></div>
+        <div class="mst-text"><span>${object.fsAmount}粉丝</span></div>
       </div>
     </div>
   </div>
@@ -336,10 +338,8 @@
                       "                    <h4 class=\"ae\">"+data[i].projectName+"</h4>"+
                       "                    <div class=\"function-page ae\">"+
                       "                        <div class=\"d-left\">"+
-//                      "                            <a onclick=\"followWork(this,'"+data[i].id+"');\">"+
                       "                                <i class=\"h-i-con\"></i>"+
                       "                                <span>"+data[i].amount+"</span>"+
-//                      "                            </a>"+
                       "                        </div>"+
                       "                        <div class=\"d-right\">"+
                       "                            <div class=\"right1\">"+

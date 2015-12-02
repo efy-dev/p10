@@ -57,7 +57,7 @@
                                     class="s-icon"></i><em>${work.storeStatus}</em></a>
                         </div>
                         <div class="thump-assist">
-                            <a onclick="praiseWork(this,'${work.id}');" href="javascript:void(0)"><i class="z-icon"></i><em>${work.amount}</em></a>
+                            <a onclick="praiseWork(this,'${work.id}');" href="javascript:void(0)"><i class="z-icon"></i><em>${work.fsAmount}</em></a>
                         </div>
                     </div>
                 </div>

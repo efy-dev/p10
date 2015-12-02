@@ -34,6 +34,7 @@
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <script src="<c:url value="/scripts/wap/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/wap/js/alert.js"/>"></script>
 <!--自定义js--Start-->
 <script src="<c:url value="/scripts/wap/js/system.js"/>"></script>
 <script src="<c:url value="/scripts/wap/js/myorder.js?v=20150831"/>"></script>
@@ -52,13 +53,22 @@
                 if(data){
                     window.location.href="<c:url value="${redirect}"/>";
                 }else{
-                    setTimeout("check()",2000);
+                    setTimeout("check()",1000);
                 }
             }
         })
     }
 
     check();
+
+    setTimeout("payError()",5000);
+
+    function payError(){
+        showAlert("提示","支付失败请重新抢购！",function(){
+            window.location.href = "<c:url value="//miao/payError.do?productId=${productId}"/>";
+        })
+    }
+
 </script>
 </body>
 </html>

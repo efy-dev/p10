@@ -35,49 +35,45 @@
 <header class="am-header custom-header newhad">
   <!-- //End--chevron-left-->
 
-  <h1 class="am-header-title"><i class="had-icon"></i>
-    <h1 class="am-header-title"><i class="had-icon"></i>
       <c:if test="${flag==0}">
         <c:if test="${group.status==1}">
-          组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团
+          <h1 class="am-header-title"><i class="had-icon had-add"></i>组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团</h1>
         </c:if>
         <c:if test="${group.status==3}">
-          组团成功
+          <h1 class="am-header-title"><i class="had-icon had-good"></i>组团成功</h1>
         </c:if>
         <c:if test="${group.status==5}">
-          组团失败
+          <h1 class="am-header-title"><i class="had-icon had-not"></i>组团失败</h1>
         </c:if>
         <c:if test="${group.groupProduct.status==0}">
-          活动结束
+          <h1 class="am-header-title"><i class="had-icon had-no"></i>活动结束</h1>
         </c:if>
       </c:if>
       <c:if test="${flag==1||flag==2}">
         <c:if test="${group.status==1&&fn:length(group.groupMemberList)==1}">
-          开团成功
+          <h1 class="am-header-title"><i class="had-icon had-good"></i>开团成功</h1>
         </c:if>
         <c:if test="${group.status==1&&fn:length(group.groupMemberList)>1}">
-          组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团
+          <h1 class="am-header-title"><i class="had-icon had-add"></i>组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团</h1>
         </c:if>
 
         <c:if test="${group.status==3}">
-          组团成功
+          <h1 class="am-header-title"><i class="had-icon had-good"></i>组团成功</h1>
         </c:if>
         <c:if test="${group.status==5}">
-          组团失败
+          <h1 class="am-header-title"><i class="had-icon had-not"></i>组团失败</h1>
         </c:if>
         <c:if test="${group.groupProduct.status==0}">
-          活动结束
+          <h1 class="am-header-title"><i class="had-icon had-no"></i>活动结束</h1>
         </c:if>
       </c:if>
-    </h1>
-  </h1>
   <!-- //End--title-->
 </header>
 <!--//End--header-->
 <div class="newshare ae">
   <!--头部产品-->
   <div class="had-product ae">
-    <div class="had-pic"><a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${group.groupProduct.id}&groupId=${group.id}&memberId=${memberId}"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!group-share-product-view"></a></div>
+    <div class="had-pic"><a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${group.groupProduct.id}&groupId=${group.id}&memberId=${memberId}&show=1"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!group-share-product-view"></a></div>
     <div class="had-txt"><p>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</p><p>${group.groupProduct.memberAmount}人起成团/${group.groupProduct.groupPurchaseTime}天成团</p><p><strong>拼团价${group.groupProduct.groupPrice}</strong>（<s>原价${group.groupProduct.productModel.price}</s>）</p></div>
   </div>
   <!--成团人数-->

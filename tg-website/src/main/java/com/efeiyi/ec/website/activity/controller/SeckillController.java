@@ -97,7 +97,7 @@ public class SeckillController {
     public int fetchProductAmount(HttpServletRequest request) {
         String seckillProductId = request.getParameter("productId");
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), seckillProductId);
-        return seckillProduct.getAmount();
+        return seckillProduct.getUsefulAmount();
     }
 
 
@@ -171,22 +171,23 @@ public class SeckillController {
 
 
     @RequestMapping({"/miao/buy/{productId}/{amount}"})
-    public String miaoBuy(@PathVariable String productId, @PathVariable String amount) throws Exception{
+    public String miaoBuy(@PathVariable String productId, @PathVariable String amount) throws Exception {
         synchronized (this) {
             SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
             String status = "1";
             Date currentDate = new Date();
-            if (seckillProduct.getAmount() <= 0) {
+            if (seckillProduct.getUsefulAmount() <= 0) {
                 return "redirect:/miao/" + productId;
             }
             if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
                 //秒杀正在进行中
                 status = "2";
-                //再这里减秒杀库存
-                seckillProduct.setAmount(seckillProduct.getAmount() - Integer.parseInt(amount));
+                //再这里减秒杀库存 减去可用库存
+                seckillProduct.setUsefulAmount(seckillProduct.getUsefulAmount() - Integer.parseInt(amount));
+                seckillProduct.setOrderAmount((seckillProduct.getOrderAmount()!=null?seckillProduct.getOrderAmount():0)+1);
                 String callback = "a.efeiyi.com/miao/share/" + seckillProduct.getId() + "?userId=" + AuthorizationUtil.getMyUser().getId();
-                callback = URLEncoder.encode(callback,"UTF-8");
-                return "redirect:http://www2.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice()+"&callback="+callback;
+                callback = URLEncoder.encode(callback, "UTF-8");
+                return "redirect:http://www2.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice() + "&callback=" + callback;
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
                 //秒杀已经结束
                 status = "3";
@@ -201,10 +202,38 @@ public class SeckillController {
         }
     }
 
+
+    @RequestMapping({"/miao/wait/{productId}"})
+    public String waitPage(@PathVariable String productId, HttpServletRequest request, Model model) {
+        String purchaseOrderId = request.getParameter("purchaseOrderId");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+        if (purchaseOrder.getOrderStatus() == PurchaseOrder.ORDER_STATUS_WRECEIVE) {
+            return "redirect:/miao/share/" + productId + "?userId=" + (request.getParameter("userId") != null ? request.getParameter("userId") : "");
+        } else {
+            model.addAttribute("redirect", "/miao/share/" + productId + "?userId=" + (request.getParameter("userId") != null ? request.getParameter("userId") : ""));
+            model.addAttribute("productId", productId);
+            return "/orderDeal";
+        }
+    }
+
+    @RequestMapping({"/miao/payError.do"})
+    public String payError(HttpServletRequest request) {
+        //支付失败的时候应该是 +可用库存 -订单库存
+        String productId = request.getParameter("productId");
+        SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
+        seckillProduct.setUsefulAmount((seckillProduct.getUsefulAmount() != null ? seckillProduct.getUsefulAmount() : 0) + 1);
+        seckillProduct.setOrderAmount(seckillProduct.getOrderAmount() - 1);
+        baseManager.saveOrUpdate(SeckillProduct.class.getName(),seckillProduct);
+        return "/redirect:/miao/"+productId;
+    }
+
     @RequestMapping({"/miao/share/{productId}"})
     public String share(@PathVariable String productId, HttpServletRequest request) {
+        //支付成功的时候需要 +不可用库存 -订单库存
         String currentUserId = request.getParameter("userId");
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
+        seckillProduct.setUnusefulAmount((seckillProduct.getUnusefulAmount() != null ? seckillProduct.getUnusefulAmount() : 0) + 1);
+        seckillProduct.setOrderAmount(seckillProduct.getOrderAmount() - 1);
         if (AuthorizationUtil.isAuthenticated() && currentUserId.equals(AuthorizationUtil.getUser().getId())) {
             return "/activity/seckillShare";
         } else {
