@@ -111,7 +111,16 @@
       </c:if>
     </c:if>
     <c:if test="${group.status==3}">
-      <a href="javascript:void(0)" class="btn">已&nbsp;成&nbsp;团</a>
+      <a href="<c:url value="/group/groupBuy.do?groupProductId=${group.groupProduct.id}"/>" class="btn">拼&nbsp;团&nbsp;结&nbsp;束&nbsp;，&nbsp;去&nbsp;开&nbsp;团</a>
+    </c:if>
+    <c:if test="${group.status==4}">
+      <c:if test="${flag==1}">
+        <a href="javascript:void(0)" class="btn" id="btn">组&nbsp;团&nbsp;成&nbsp;功&nbsp;，&nbsp;去&nbsp;分&nbsp;享</a>
+        <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
+      </c:if>
+      <c:if test="${flag==0}">
+        <a href="<c:url value='/group/groupBuy.do'/>${url}" class="btn">参&nbsp;团</a>
+      </c:if>
     </c:if>
     <c:if test="${group.status==5}">
       <a href="javascript:void(0)" class="btn">组&nbsp;团&nbsp;失&nbsp;败</a>
