@@ -54,7 +54,7 @@ public class PurchaseOrderPaymentController {
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
         if (HttpUtil.isPhone(request)) {
             resultHtml = paymentManager.alipayWap(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue());
-        }else {
+        } else {
             resultHtml = paymentManager.alipay(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue());
         }
         model.addAttribute("resultHtml", resultHtml);
@@ -215,11 +215,11 @@ public class PurchaseOrderPaymentController {
     public String paySuccess(@PathVariable String orderId, Model model) throws Exception {
         PurchaseOrderPaymentDetails purchaseOrder = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
-        if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback()!=null){
-            String redirect = URLDecoder.decode(purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback(),"UTF-8");
-            return "redirect:http://"+redirect;
-        }else if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType().equals("3")){
-            return "redirect:/giftReceive/"+purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
+        if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback() != null) {
+            String redirect = URLDecoder.decode(purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback(), "UTF-8");
+            return "redirect:http://" + redirect;
+        } else if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType() != null && purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType().equals("3")) {
+            return "redirect:/giftReceive/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
         }
         return "/purchaseOrder/paySuccess";
     }
