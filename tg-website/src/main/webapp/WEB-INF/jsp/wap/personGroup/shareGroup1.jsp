@@ -166,8 +166,8 @@
           组团失败
         </a>
       </c:if>
-      <c:if test="${group.groupProduct.status==0}" id="nobtn">
-        <a href="javascript:void(0)" class="btn">
+      <c:if test="${group.groupProduct.status==0}" >
+        <a href="javascript:void(0)" class="btn" id="nobtn">
           活动结束
         </a>
       </c:if>
@@ -187,7 +187,7 @@
         </a>
       </c:if>
       <c:if test="${group.status==5}">
-        <a href="javascript:void(0)" class="btn" id="nobtn">
+        <a href="javascript:void(0)" class="btn" id="nobtn" >
           组团失败
         </a>
       </c:if>
@@ -217,12 +217,12 @@
         </a>
       </c:if>
       <c:if test="${group.status==5}">
-        <a href="javascript:void(0)" class="btn" id="nobtn">
+        <a href="javascript:void(0)" class="btn" id="nobtn" >
           组团失败
         </a>
       </c:if>
       <c:if test="${group.groupProduct.status==0}">
-        <a href="javascript:void(0)" class="btn" id="nobtn">
+        <a href="javascript:void(0)" class="btn" id="nobtn" >
           活动结束
         </a>
       </c:if>
