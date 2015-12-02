@@ -35,6 +35,11 @@
                 <match url="/product/saveNewProduct.do"/>
 
             </jnode>
+            <jnode url="/basic/xm.do?qm=plistKCProductModel_default" access="" text_zh_CN="库存列表">
+                <match url="/basic/xm.do?qm=plistKCProductModel_default" />
+                <match url="/basic/xm.do?qm=plistProductModelRecord_default"/>
+
+            </jnode>
             <!--<jnode id="" url=""  state="" access="" text_zh_CN="商品模板">-->
                 <!--<match url=""/>-->
             <!--</jnode>-->
