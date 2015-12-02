@@ -50,7 +50,7 @@
             dataType: "json",//设置请求返回的数据格式
             success: function (data) {
                 if(data){
-                    window.location.href="<c:url value="${redirect}"/>";
+                    window.location.href="<c:url value="/group/createGroup?purchaseOrderId=${purchaseOrderId}&groupProductId=${groupProductId}&groupId=${groupId}&memberId=${memberId}"/>";
                 }else{
                     setTimeout("check()",2000);
                 }

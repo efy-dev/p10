@@ -236,6 +236,7 @@ public class SeckillController {
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
         seckillProduct.setUnusefulAmount((seckillProduct.getUnusefulAmount() != null ? seckillProduct.getUnusefulAmount() : 0) + 1);
         seckillProduct.setOrderAmount(seckillProduct.getOrderAmount() - 1);
+        baseManager.saveOrUpdate(SeckillProduct.class.getName(),seckillProduct);
         if (AuthorizationUtil.isAuthenticated() && currentUserId.equals(AuthorizationUtil.getUser().getId())) {
             return "/activity/seckillShare";
         } else {
