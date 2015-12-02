@@ -51,7 +51,7 @@
     <h5>${category.name}</h5>
     <ul class="b06-page ae">
       <c:forEach items="${projectMap.get(category.id)}" var="project">
-      <li><a href="<c:url value="/product/list/${project.id}"/>"><img src="http://pro.efeiyi.com/${project.picture_wap_url}"></a><p>${project.name}</p></li>
+      <li><a href="<c:url value="/product/list/${project.id}"/>"><img src="http://pro.efeiyi.com/${project.picture_wap_url}@!project-mobile-list"></a><p>${project.name}</p></li>
       </c:forEach>
       <%--<li><a href="#"><img src="<c:url value="/scripts/wap/upload/fl.png"/>"></a></li>--%>
     </ul>
