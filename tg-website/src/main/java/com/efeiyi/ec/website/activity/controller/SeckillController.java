@@ -113,7 +113,7 @@ public class SeckillController {
     @RequestMapping("/miao/{seckillProductId}")
     public String viewSeckillProduct(HttpServletRequest request, Model model, @PathVariable String seckillProductId) throws Exception {
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), seckillProductId);
-        seckillProduct.setAttentionAmount((seckillProduct.getAttentionAmount() == null ? seckillProduct.getAttentionAmount() : 0) + 1);
+        seckillProduct.setAttentionAmount((seckillProduct.getAttentionAmount() != null ? seckillProduct.getAttentionAmount() : 0) + 1);
         baseManager.saveOrUpdate(SeckillProduct.class.getName(), seckillProduct);
         model.addAttribute("seckillProduct", seckillProduct);
 
