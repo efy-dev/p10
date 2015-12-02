@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Path;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.net.URLEncoder;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/11/17 0017.
@@ -52,28 +50,31 @@ public class SeckillController {
                     iterator.remove();
                 }
             }
-            SeckillProduct seckillProduct = (SeckillProduct) pageInfo.getList().get(0);
+            SeckillProduct seckillProduct = null;
+            if (pageInfo != null && pageInfo.getList() != null && !pageInfo.getList().isEmpty()) {
+                seckillProduct = (SeckillProduct) pageInfo.getList().get(0);
 
-            String status = "1";
-            if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
-                //秒杀正在进行中
-                status = "2";
-            } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
-                //秒杀已经结束
-                status = "3";
-            } else if (currentDate.getTime() < seckillProduct.getStartDatetime().getTime()) {
-                //即将开始
-                status = "1";
-            }
+                String status = "1";
+                if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
+                    //秒杀正在进行中
+                    status = "2";
+                } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
+                    //秒杀已经结束
+                    status = "3";
+                } else if (currentDate.getTime() < seckillProduct.getStartDatetime().getTime()) {
+                    //即将开始
+                    status = "1";
+                }
 
-            if (seckillProduct.getAmount() <= 0) {
-                status = "3";
+                if (seckillProduct.getAmount() <= 0) {
+                    status = "3";
+                }
+                model.addAttribute("isShowTime", seckillProduct.getStartDatetime().getTime() - currentDate.getTime() < (24 * 60 * 60 * 1000));
+                model.addAttribute("miaoStatus", status);
             }
-            model.addAttribute("isShowTime", seckillProduct.getStartDatetime().getTime() - currentDate.getTime() < (24 * 60 * 60 * 1000));
-            model.addAttribute("miaoStatus", status);
         }
 
-        model.addAttribute("productList", pageInfo.getList());
+        model.addAttribute("productList", pageInfo.getList() != null ? pageInfo.getList() : new ArrayList<>());
         model.addAttribute("pageInfo", pageInfo);
         return "/activity/seckillProductList";
     }
@@ -170,7 +171,7 @@ public class SeckillController {
 
 
     @RequestMapping({"/miao/buy/{productId}/{amount}"})
-    public String miaoBuy(@PathVariable String productId, @PathVariable String amount) {
+    public String miaoBuy(@PathVariable String productId, @PathVariable String amount) throws Exception{
         synchronized (this) {
             SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
             String status = "1";
@@ -184,7 +185,8 @@ public class SeckillController {
                 //再这里减秒杀库存
                 seckillProduct.setAmount(seckillProduct.getAmount() - Integer.parseInt(amount));
                 String callback = "a.efeiyi.com/miao/share/" + seckillProduct.getId() + "?userId=" + AuthorizationUtil.getMyUser().getId();
-                return "redirect:http://www2.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice();
+                callback = URLEncoder.encode(callback,"UTF-8");
+                return "redirect:http://www2.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice()+"&callback="+callback;
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
                 //秒杀已经结束
                 status = "3";

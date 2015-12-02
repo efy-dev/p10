@@ -186,7 +186,7 @@
                     <i class="clase" title="关闭"></i>
                 </div>
                 <div class="m-form">
-                    <form id="addAddress" action="<c:url value="/myEfeiyi/addAddressOfMob1.do"/>" method="post"
+                    <form id="newAddress" method="post"
                           class="am-form">
 
                         <input type="hidden" name="productModel" value="${productModel.id}">
@@ -216,33 +216,21 @@
                             <label>具体地址</label>
                             <textarea name="details" id="doc-vld-ta-2-1" class="text-act" required></textarea>
                         </div>
-                        <%--<div class="am-form-group">
-                            <p>
-                                <input type="checkbox" id="checkbox" onclick="putVal(this);" name="checkbox"
-                                       value="">
-                                <strong>设为默认地址</strong>
-                                <span>（注：每次下单时都使用该地址）</span>
-                            </p>
-                        </div>--%>
                         <input type="hidden" name="cartId" value="${cart.id}">
                         <label></label>
-                        <%--<input type="submit" class="dj-btn" value="保存收货人信息">--%>
-
                         <p>
-                            <button type="submit" class="am-btn am-btn-default add-btn">保存收货人信息</button>
+                            <button onclick="submitNewAddress()" class="am-btn am-btn-default add-btn">保存收货人信息</button>
                         </p>
+                        <span id="ts" style="border: 0"></span>
                     </form>
                 </div>
                 <div class="sh-bg"></div>
             </div>
         </div>
-
     </div>
-
     <div class="overbg"></div>
 </div>
 <!--//End--弹出地址-->
-
 <!--Start--弹出地址-->
 <div id="order-total" class="alert-delete yhq" style="display:none;">
     <div class="bd cart-coupons" style="position: fixed;">
@@ -301,6 +289,32 @@
 
         });
     })
+
+
+
+
+    function submitNewAddress() {
+        var consignee = $(":input[name='consignee']").val();
+        var phone = $(":input[name='phone']").val();
+        var details = $(":input[name='details']").val();
+        if (consignee == "" || phone == "" || details == "") {
+            $("#ts").text("请完善您的新增地址");
+        } else {
+            var param = $("#newAddress").serialize();
+
+            var success = function (data) {
+//                window.location.href=window.location.href;
+                var html = newAddress(data);
+                $("#address").append(html);
+                $(".active-pop").hide();
+                $("#reset").click();
+                $("#" + data.id).click();
+            }
+            ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
+            }, "post")
+        }
+
+    }
 
     function yhq() {
         var couponid = null;
@@ -449,21 +463,21 @@
     }
 
     function newAddress(it) {
-        var out = ' <div class="page-default"> <span> <div id="' + (it.id) + '" class="default-text" name="addressItem" onclick="chooseAddress(this,\'' + it.id + '\')"> <strong>' + (it.consignee) + ' ' + (it.province.name) + '</strong> </a> </div> </span> <span>' + (it.consignee) + '</span> <span>' + (it.province.name) + '</span> <span>' + (it.city.name) + '</span> <span>' + (it.details) + '</span> <span>' + (it.phone) + '</span> </div>';
-        return out;
+        var out2 = '<li class="cart-btn acd"onclick="chooseAddress(\''+it.id+'\',\''+it.consignee+'\',\''+it.phone+'\',\''+it.province.name+'\',\''+it.city.name+'\',\''+it.details+'\')"><p class="bd title">${address.consignee} ${address.phone}</p><p class="bd des">'+it.province.name+it.city.name+it.details+'</p><p class="bd btns"></p></li><br>';
+        return out2;
     }
 
-    function submitNewAddress() {
-        var param = $("#newAddress").serialize();
-        var success = function (data) {
-            console.log(data)
-            var html = newAddress(data);
-            $("#address").append(html);
-            $(".active-pop").hide();
-        }
-        ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
-        }, "post")
-    }
+    <%--function submitNewAddress() {--%>
+        <%--var param = $("#newAddress").serialize();--%>
+        <%--var success = function (data) {--%>
+            <%--console.log(data)--%>
+            <%--var html = newAddress(data);--%>
+            <%--$("#address").append(html);--%>
+            <%--$(".active-pop").hide();--%>
+        <%--}--%>
+        <%--ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {--%>
+        <%--}, "post")--%>
+    <%--}--%>
 
     function chooseAddress(addressId, consignee, phone, province, city, details) {
         consumerAddress = addressId;

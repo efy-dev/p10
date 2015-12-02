@@ -86,7 +86,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
         purchaseOrder.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-
+        List<PurchaseOrderProduct> purchaseOrderProductList  = new ArrayList<>();
         BigDecimal totalPrice = new BigDecimal(0);
         if (cartProductList != null && cartProductList.size() > 0) {
             for (CartProduct cartProduct : cartProductList) {
@@ -94,12 +94,14 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
                     PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrder, cartProduct.getProductModel(), cartProduct.getAmount(), cartProduct.getProductModel().getPrice());
                     totalPrice = totalPrice.add(cartProduct.getProductModel().getPrice().multiply(new BigDecimal(cartProduct.getAmount())));
                     baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+                    purchaseOrderProductList.add(purchaseOrderProduct);
                 }
             }
             totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         }
         purchaseOrder.setTotal(totalPrice);
         purchaseOrder.setOriginalPrice(totalPrice);
+        purchaseOrder.setPurchaseOrderProductList(purchaseOrderProductList);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         return purchaseOrder;
     }
