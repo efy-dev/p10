@@ -52,7 +52,10 @@ public class SeckillController {
                     iterator.remove();
                 }
             }
-            SeckillProduct seckillProduct = (SeckillProduct) pageInfo.getList().get(0);
+            SeckillProduct seckillProduct = null;
+            if (pageInfo != null && pageInfo.getList() != null && !pageInfo.getList().isEmpty()) {
+                seckillProduct = (SeckillProduct) pageInfo.getList().get(0);
+            }
 
             String status = "1";
             if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
