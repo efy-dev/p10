@@ -185,7 +185,7 @@ public class SeckillController {
                 //再这里减秒杀库存 减去可用库存
                 seckillProduct.setUsefulAmount(seckillProduct.getUsefulAmount() - Integer.parseInt(amount));
                 seckillProduct.setOrderAmount((seckillProduct.getOrderAmount()!=null?seckillProduct.getOrderAmount():0)+1);
-                String callback = "a.efeiyi.com/miao/share/" + seckillProduct.getId() + "?userId=" + AuthorizationUtil.getMyUser().getId();
+                String callback = "www2.efeiyi.com/tg-website/miao/wait/" + seckillProduct.getId() + "?userId=" + AuthorizationUtil.getMyUser().getId();
                 callback = URLEncoder.encode(callback, "UTF-8");
                 return "redirect:http://www2.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice() + "&callback=" + callback;
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {

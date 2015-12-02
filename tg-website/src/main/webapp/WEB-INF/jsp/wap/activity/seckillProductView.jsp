@@ -106,7 +106,7 @@
             </c:if>
             <c:if test="${miaoStatus=='2'}">
                 <div class="s s3">
-                    <div class="status1">剩余库存量<strong id="amount">${seckillProduct.amount}</strong>件</div>
+                    <div class="status1">剩余库存量<strong id="amount">${seckillProduct.usefulAmount}</strong>件</div>
                 </div>
                 <div class="s s4">
                     <strong>秒杀记录：</strong>
