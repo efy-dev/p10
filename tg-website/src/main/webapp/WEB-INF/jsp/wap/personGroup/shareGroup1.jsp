@@ -170,7 +170,7 @@
     </c:if>
     <c:if test="${flag==1}">
       <c:if test="${group.status==1}">
-        <a href="javascript:void(0)" class="btn" id="btn">
+        <a href="javascript:void(0)" class="btn" id="btn" onclick="share()">
           还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，去分享
           <div id="cover" style="display: none;"><em class="bg"></em><img
                   src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt="">
@@ -202,6 +202,9 @@
       <c:if test="${group.status==1}">
         <a href="javascript:void(0)" class="btn">
           还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，去分享
+          <div id="cover" style="display: none;"><em class="bg"></em><img
+                  src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt="">
+          </div>
         </a>
       </c:if>
       <c:if test="${group.status==3}">
@@ -369,6 +372,11 @@
   <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
 <!--//End--footer-->
+<script>
+  function share(){
+    $("#cover").hide();
+  }
+</script>
 <!--悬浮订单-->
 <div class="met-nav ae">
   <a href="<c:url value="/tuan.do"/>"><p><i class="met-1con m-icon"></i></p><p>团购首页</p></a>
