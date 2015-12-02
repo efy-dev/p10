@@ -153,18 +153,6 @@ public class AddressController {
             return "redirect:/order/easyBuy/" + request.getParameter("productModel") + "?amount=" + request.getParameter("amount");
         }
         return "redirect:/order/saveOrUpdateOrder.do?cartId=" + cartId;
-        /*} else {
-            String cartId = request.getParameter("cartId");
-            XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
-            xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
-            baseManager.saveOrUpdate(xSaveOrUpdate);
-            if (cartId == null|| cartId.equals("")) {
-                return "redirect:/order/easyBuy/" + request.getParameter("productModel");
-            }
-            return "redirect:/order/saveOrUpdateOrder.do?cartId=" + cartId;
-        }*/
-
-
     }
 
 
