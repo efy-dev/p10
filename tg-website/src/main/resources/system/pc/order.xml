@@ -13,7 +13,7 @@
                     <query name="default5" label="待发货" type="auto" orderBy="id:desc">
                         <condition name="groupMember.user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="purchaseOrder.orderStatus" defaultValue="5" operation="eq"/>
+                        <condition name="purchaseOrder.orderStatus" defaultValue="3" operation="eq"/>
                     </query>
                     <query name="default7" label="已发货" type="auto" orderBy="id:desc">
                         <condition name="groupMember.user.id" defaultValue="${MY_USER}" operation="eq"/>
