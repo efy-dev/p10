@@ -68,30 +68,6 @@ public class PurchaseOrderController {
         return "/purchaseOrder/purchaseOrderList";
     }
 
-
-    @RequestMapping({"/createGiftImage/{orderId}"})
-    public String createGiftImage(@PathVariable String orderId){
-
-        PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift)baseManager.getObject(PurchaseOrderGift.class.getName(),orderId);
-        return null;
-    }
-
-    /**
-     * 手机端个人中心(订单查询)
-     * @param request
-     * @param model
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping({"/myMobileEfeiyi/list.do"})
-    public String listPruchaseOrderForMobile(HttpServletRequest request, Model model) throws Exception {
-        XQuery xQuery = new XQuery("plistPurchaseOrder_default", request);
-        xQuery.addRequestParamToModel(model, request);
-        List<Object> list = baseManager.listPageInfo(xQuery).getList();
-        model.addAttribute("orderList", list);
-        return "purchaseOrder/purchaseOrder";
-    }
-
     /**
      * 查看订单详情
      * @param model
