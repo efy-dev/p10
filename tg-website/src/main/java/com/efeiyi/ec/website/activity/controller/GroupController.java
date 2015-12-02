@@ -130,18 +130,19 @@ public class GroupController {
         String groupProductId = request.getParameter("groupProductId");
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
-        PurchaseOrderGroup purchaseOrder1 = (PurchaseOrderGroup) baseManager.getObject(PurchaseOrderGroup.class.getName(), purchaseOrderId);
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
         MyGroup myGroup = (MyGroup) baseManager.getObject(MyGroup.class.getName(),groupId);
         GroupMember member = (GroupMember) baseManager.getObject(GroupMember.class.getName(),memberId);
-        User currentUser = purchaseOrder.getUser();
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
 
         PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
         purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
         purchaseOrderGroup.setMyGroup(myGroup);
         purchaseOrderGroup.setGroupMember(member);
-        purchaseOrderGroup.setOrderStatus("3");
+        //判断是否成团未关闭或者未开启
+        if(myGroup.getStatus().equals("2")||myGroup.getStatus().equals("1")){
+            purchaseOrderGroup.setStatus("3");
+        }
         baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
 
         if(myGroup!=null&&"2".equals(myGroup.getStatus())){
@@ -151,6 +152,19 @@ public class GroupController {
         if (member!=null&&"2".equals(member.getStatus())){
             member.setStatus("1");
             baseManager.saveOrUpdate(GroupMember.class.getName(),member);
+        }
+        //人数够，成团操作
+        if(myGroup.getStatus().equals("1")&&(myGroup.getGroupMemberList().size()==myGroup.getGroupProduct().getMemberAmount())){
+            myGroup.setStatus("4");
+            baseManager.saveOrUpdate(MyGroup.class.getName(),myGroup);
+
+            XQuery xQuery = new XQuery("listPurchaseOrderGroup_default2", request);
+            xQuery.put("group_id", myGroup.getId());
+            List<PurchaseOrderGroup> list1 = baseManager.listObject(xQuery);
+            for (PurchaseOrderGroup purchaseOrderGroup1:list1){
+                purchaseOrderGroup1.setStatus("5");
+                baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup1);
+            }
         }
         model.addAttribute("groupId", myGroup.getId());
         String url = "?groupProductId=" + groupProductId + "&groupId=" + myGroup.getId() + "&memberId=" + member.getId();
@@ -315,71 +329,63 @@ public class GroupController {
     }
 
 
-//    //对所有团进行成团操作并发送红包
-//    @RequestMapping(value = "/sendRedPacket")
-//    public void sendRedPacket(HttpServletRequest request, Model model) throws Exception {
-//        XQuery xQuery = new XQuery("listGroup_default3", request);
-//        List<MyGroup> list = baseManager.listObject(xQuery);
-//        for (MyGroup group : list) {
-//            Date createTime = group.getCreateDateTime();
-//            int limintDay = group.getGroupProduct().getGroupPurchaseTime();
-//            Calendar calendar = Calendar.getInstance();
-//            calendar.setTime(createTime);
-//            calendar.add(Calendar.DATE, limintDay);
-//            //calendar.add(Calendar.MINUTE,10);
-//            Date endTime = calendar.getTime();
-//            Date date = new Date();
-//            if (date.after(endTime)) {
-//                if (group.getGroupMemberList().size() - group.getGroupProduct().getMemberAmount() >= 0) {
-//                    group.setStatus("3");
-//                    baseManager.saveOrUpdate(MyGroup.class.getName(), group);
-//
-//                    for (GroupMember member : group.getGroupMemberList()) {
-//                        String userId = member.getUser().getId();
-//                        BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(), userId);
-//                        int i = 0;
-//                        if (member.getSubGroupMemberList() != null && member.getSubGroupMemberList().size() > 0) {
-//                            i = i + member.getSubGroupMemberList().size();
-//                            for (GroupMember member1 : member.getSubGroupMemberList()) {
-//                                if (member1.getSubGroupMemberList() != null && member1.getSubGroupMemberList().size() > 0) {
-//                                    i = i + member1.getSubGroupMemberList().size();
-//                                }
-//                            }
-//
-//                        }
-//                        if (bigUser.getRedPacket() == null) {
-//                            bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
-//                        } else {
-//                            bigUser.setRedPacket(bigUser.getRedPacket().add(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
-//                        }
-//                        if (member.getRedPacket() == null) {
-//                            member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
-//                        } else {
-//                            member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
-//                        }
-//                        baseManager.saveOrUpdate(BigUser.class.getName(), bigUser);
-//                        baseManager.saveOrUpdate(GroupMember.class.getName(), member);
-//
-//                        //发送短信
-//                        this.smsCheckManager.send(member.getUser().getUsername(), "#redPacket#=" + group.getGroupProduct().getBonus().multiply(new BigDecimal(i)), "1109007", PConst.TIANYI);
-//
-//                    }
-//
-//                    XQuery xQuery1 = new XQuery("listPurchaseOrderGroup_default3", request);
-//                    xQuery.put("group_id", group.getId());
-//                    List<PurchaseOrderGroup> list1 = baseManager.listObject(xQuery1);
-//                    for (PurchaseOrderGroup purchaseOrderGroup1 : list1) {
-//                        PurchaseOrder purchaseOrder1 = purchaseOrderGroup1.getPurchaseOrder();
-//                        purchaseOrder1.setOrderStatus("5");
-//                        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder1);
-//                    }
-//                } else {
-//                    group.setStatus("5");
-//                    baseManager.saveOrUpdate(MyGroup.class.getName(), group);
-//                }
-//            }
-//        }
-//    }
+    //对所有团进行成团操作并发送红包
+    @RequestMapping(value = "/sendRedPacket")
+    public void sendRedPacket(HttpServletRequest request, Model model) throws Exception {
+        XQuery xQuery = new XQuery("listGroup_default3", request);
+        List<MyGroup> list = baseManager.listObject(xQuery);
+        for (MyGroup group : list) {
+            Date createTime = group.getCreateDateTime();
+            int limintDay = group.getGroupProduct().getGroupPurchaseTime();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(createTime);
+            calendar.add(Calendar.DATE, limintDay);
+            //calendar.add(Calendar.MINUTE,10);
+            Date endTime = calendar.getTime();
+            Date date = new Date();
+            if (date.after(endTime)) {
+                if (group.getGroupMemberList().size() - group.getGroupProduct().getMemberAmount() >= 0) {
+                    group.setStatus("3");
+                    baseManager.saveOrUpdate(MyGroup.class.getName(), group);
+
+                   /* for (GroupMember member : group.getGroupMemberList()) {
+                        String userId = member.getUser().getId();
+                        BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(), userId);
+                        int i = 0;
+                        if (member.getSubGroupMemberList() != null && member.getSubGroupMemberList().size() > 0) {
+                            i = i + member.getSubGroupMemberList().size();
+                            for (GroupMember member1 : member.getSubGroupMemberList()) {
+                                if (member1.getSubGroupMemberList() != null && member1.getSubGroupMemberList().size() > 0) {
+                                    i = i + member1.getSubGroupMemberList().size();
+                                }
+                            }
+
+                        }
+                        if (bigUser.getRedPacket() == null) {
+                            bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        } else {
+                            bigUser.setRedPacket(bigUser.getRedPacket().add(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
+                        }
+                        if (member.getRedPacket() == null) {
+                            member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        } else {
+                            member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        }
+                        baseManager.saveOrUpdate(BigUser.class.getName(), bigUser);
+                        baseManager.saveOrUpdate(GroupMember.class.getName(), member);
+
+                        //发送短信
+                        this.smsCheckManager.send(member.getUser().getUsername(), "#redPacket#=" + group.getGroupProduct().getBonus().multiply(new BigDecimal(i)), "1109007", PConst.TIANYI);
+
+                    }*/
+
+                } else {
+                    group.setStatus("5");
+                    baseManager.saveOrUpdate(MyGroup.class.getName(), group);
+                }
+            }
+        }
+    }
 
 
 }

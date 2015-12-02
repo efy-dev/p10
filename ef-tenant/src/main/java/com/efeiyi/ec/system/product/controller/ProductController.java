@@ -10,6 +10,7 @@ import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
+import com.efeiyi.ec.system.product.service.ProductModelManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -43,7 +44,8 @@ public class ProductController extends BaseController {
     @Autowired
     private AliOssUploadManager aliOssUploadManager;
 
-
+    @Autowired
+    private ProductModelManager productModelManager;
 
     @Autowired
     private ProductManager productManager;
@@ -300,6 +302,19 @@ public class ProductController extends BaseController {
 
         }
         return  "";
+    }
+
+    @RequestMapping("/updateAmount.do")
+    @ResponseBody
+    public String updateAmount(String id, Integer amount,String creator, HttpServletRequest request) {
+        String tempAmount = null;
+        try {
+            tempAmount = productModelManager.updateAmount(id,amount,creator).toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tempAmount;
     }
 
     @RequestMapping("/changeMaster.do")

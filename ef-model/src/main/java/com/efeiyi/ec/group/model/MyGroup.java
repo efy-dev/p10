@@ -18,7 +18,7 @@ public class MyGroup {
     private String id;
     private GroupProduct groupProduct;//团购商品
     private List<GroupMember> groupMemberList;
-    private String status; //0:取消 1：进行中 3：组团成功 5： 组团失败
+    private String status; //0:取消 1：进行中 2:未激活 3：组团成功团已关闭 4：拼团成功并且团未关闭 5： 组团失败
     private Date createDateTime;
     private List<PurchaseOrderGroup> purchaseOrderGroupList;
     private User manUser;

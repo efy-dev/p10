@@ -183,37 +183,37 @@
             </c:if>
         </fieldset>
     </form>
-    <fieldset>
-        <legend>
+    <%--<fieldset>--%>
+        <%--<legend>--%>
 
-        </legend>
-            <a style="width: 10%;" href="javascript:void(0);"
-               class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-               onclick="toSubmit('1','redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')">
-                保存商品描述
-            </a>
-        <div class="am-form-group">
-            <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data"
-                  id="form1">
-                <input type="hidden" name="id" value="${object.productDescription.id}">
-                <input type="hidden" name="product.id" value="${object.id}">
-                <input type="hidden" name="resultPage" value="0"/>
-                <input type="hidden" name="view" value="${view}">
-                <input type="hidden" name="step" value="description">
-                <label class="am-u-sm-3 am-form-label">商品描述</label>
+        <%--</legend>--%>
+            <%--<a style="width: 10%;" href="javascript:void(0);"--%>
+               <%--class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
+               <%--onclick="toSubmit('1','redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')">--%>
+                <%--保存商品描述--%>
+            <%--</a>--%>
+        <%--<div class="am-form-group">--%>
+            <%--<form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data"--%>
+                  <%--id="form1">--%>
+                <%--<input type="hidden" name="id" value="${object.productDescription.id}">--%>
+                <%--<input type="hidden" name="product.id" value="${object.id}">--%>
+                <%--<input type="hidden" name="resultPage" value="0"/>--%>
+                <%--<input type="hidden" name="view" value="${view}">--%>
+                <%--<input type="hidden" name="step" value="description">--%>
+                <%--<label class="am-u-sm-3 am-form-label">商品描述</label>--%>
 
-                <div class="am-u-sm-9" style="margin-top: 10px;">
-                            <textarea  name="content" class="ckeditor" id="content"
-                                       placeholder="商品描述" required>
-                                ${object.productDescription.content}
+                <%--<div class="am-u-sm-9" style="margin-top: 10px;">--%>
+                            <%--<textarea  name="content" class="ckeditor" id="content"--%>
+                                       <%--placeholder="商品描述" required>--%>
+                                <%--${object.productDescription.content}--%>
 
-                            </textarea>
-                </div>
-            </form>
-            <br>
-        </div>
+                            <%--</textarea>--%>
+                <%--</div>--%>
+            <%--</form>--%>
+            <%--<br>--%>
+        <%--</div>--%>
 
-    </fieldset>
+    <%--</fieldset>--%>
     <fieldset>
         <legend>
 
@@ -392,13 +392,13 @@
 
 
         </legend>
-          <span style="margin-left: 90%;">
-                          <a style="width: 10%;"
-                             class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                             href="javascript:void(0);" onclick="toDiscription(this)">
-                              添加至描述
-                          </a>
-                    </span>
+          <%--<span style="margin-left: 90%;">--%>
+                          <%--<a style="width: 10%;"--%>
+                             <%--class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
+                             <%--href="javascript:void(0);" onclick="toDiscription(this)">--%>
+                              <%--添加至描述--%>
+                          <%--</a>--%>
+                    <%--</span>--%>
             <a id="btn_upload3"></a>
         <div class="am-u-md-13">
             <div class="am-panel am-panel-default">

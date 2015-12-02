@@ -29,10 +29,12 @@
                 <do name="plistPurchaseOrder" access="" label="购买订单"
                     result="/purchaseOrder/purchaseOrderPList" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderHandler">
                     <query name="default" label="默认" type="auto" orderBy="serial:asc">
+                        <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
                         <condition name="id" defaultValue="0" operation="ne" label="订单id" inputType="default"/>
                         <condition name="tenant.id" defaultValue="${MY_TENANT}" operation="eq" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="createDatetime:desc">
+                        <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
                         <condition name="tenant.id" defaultValue="${MY_TENANT}" operation="eq" inputType="default"/>
                         <condition name="orderStatus"  operation="eq" label="订单状态" inputType="select_status" key="purchaseOrder.orderStatus"/>
                         <condition name="serial"  operation="eq" label="订单号" inputType="text"/>

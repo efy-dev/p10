@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>b0102030101开团详情页</title>
+  <title>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->

@@ -78,51 +78,6 @@
 							<li><a style="margin-right: 10px;" href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}" name="payButton">立即支付</a></li>
 						</ul>
 					</c:if>
-
-					<c:if test="${purchaseOrder.orderStatus == '5'}">
-						<ul class="jp-pd jp-pd-btns">
-							<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
-							<li><a style="margin-right: 10px;"
-								   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
-						</ul>
-					</c:if>
-
-					<c:if test="${purchaseOrder.orderStatus == '7'}">
-
-						<ul class="jp-pd jp-pd-btns">
-							<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
-							<li><a style="margin-right: 10px;"
-								   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看物流</a>
-								<a style="margin-right: 0px;" href="#" onclick="showConfirm('提示','是否确定收货',function(){
-										window.location.href='<c:url value="/order/confirmGet/${purchaseOrder.id}"/>';
-										})">确定收货</a></li>
-						</ul>
-					</c:if>
-
-					<c:if test="${purchaseOrder.orderStatus == '13'}">
-						<ul class="jp-pd jp-pd-btns">
-							<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
-							<li><a style="margin-right: 10px;"
-								   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">已完成</a></li>
-						</ul>
-					</c:if>
-
-					<c:if test="${purchaseOrder.orderStatus == '17'}">
-						<ul class="jp-pd jp-pd-btns">
-							<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
-							<li><a style="margin-right: 10px;"
-								   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">已取消</a></li>
-						</ul>
-					</c:if>
-
-					<c:if test="${purchaseOrder.orderStatus == '9'}">
-						<ul class="jp-pd jp-pd-btns">
-							<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
-							<li><a style="margin-right: 10px;"
-								   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
-						</ul>
-					</c:if>
-
 				</div>
 			</c:if>
 			<c:if test="${purchaseOrder.orderStatus!=1}">
@@ -177,13 +132,6 @@
 									   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
 							</ul>
 						</c:if>
-						<c:if test="${purchaseOrder.orderStatus == '1'}">
-							<ul class="jp-pd jp-pd-btns">
-								<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
-								<li><a style="margin-right: 10px;" href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}" name="payButton">立即支付</a></li>
-							</ul>
-						</c:if>
-
 						<c:if test="${purchaseOrder.orderStatus == '5'}">
 							<ul class="jp-pd jp-pd-btns">
 								<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
@@ -224,7 +172,12 @@
 							<ul class="jp-pd jp-pd-btns">
 								<li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
 								<li><a style="margin-right: 10px;"
-									   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
+									   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a>
+									<a style="margin-right: 0px;"
+									   href="<c:url value="/comment/mobileFinishOrder.do?orderId=${purchaseOrder.id}"/>">去&nbsp;评&nbsp;价</a>
+								</li>
+
+
 							</ul>
 						</c:if>
 
@@ -286,13 +239,6 @@
 										   href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
 								</ul>
 							</c:if>
-							<c:if test="${spList.orderStatus == '1'}">
-								<ul class="jp-pd jp-pd-btns">
-									<li>￥${spList.total-spList.coupon.couponBatch.price}</li>
-									<li><a style="margin-right: 10px;" href="<%=PConst.HOSTNAME%>/order/pay/${spList.id}" name="payButton">立即支付</a></li>
-								</ul>
-							</c:if>
-
 							<c:if test="${spList.orderStatus == '5'}">
 								<ul class="jp-pd jp-pd-btns">
 									<li>￥${spList.total-spList.coupon.couponBatch.price}</li>
@@ -333,7 +279,11 @@
 								<ul class="jp-pd jp-pd-btns">
 									<li>￥${spList.total-spList.coupon.couponBatch.price}</li>
 									<li><a style="margin-right: 10px;"
-										   href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看详情</a></li>
+										   href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看详情</a>
+										<a style="margin-right: 0px;"
+										   href="<c:url value="/comment/mobileFinishOrder.do?orderId=${spList.id}"/>"/>">去&nbsp;评&nbsp;价</a>
+									</li>
+
 								</ul>
 							</c:if>
 
