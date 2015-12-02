@@ -57,7 +57,7 @@
 <![endif]-->
 <script src="<c:url value="/resources/assets/js/amazeui.min.js"/>"></script>
 <!--自定义js--Start-->
-<script src="<c:url value="/scripts/wap/js/system.js?v=20151120"/>"></script>
+<script src="<c:url value="/scripts/wap/js/system.js?"/>"></script>
 <!--自定义js--End-->
 
 <div style="display: none">
