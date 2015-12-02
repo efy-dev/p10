@@ -44,35 +44,37 @@ public class SeckillController {
         XQuery seckillQuery = new XQuery("plistSeckillProduct_default", request, 4);
         PageInfo pageInfo = baseManager.listPageInfo(seckillQuery);
         Date currentDate = new Date();
-        Iterator iterator = pageInfo.getList().iterator();
-        while (iterator.hasNext()) {
-            SeckillProduct seckillProduct = (SeckillProduct) iterator.next();
-            if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime() || seckillProduct.getAmount() <= 0) {
-                iterator.remove();
+        if (pageInfo != null && pageInfo.getList() != null && !pageInfo.getList().isEmpty()) {
+            Iterator iterator = pageInfo.getList().iterator();
+            while (iterator.hasNext()) {
+                SeckillProduct seckillProduct = (SeckillProduct) iterator.next();
+                if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime() || seckillProduct.getAmount() <= 0) {
+                    iterator.remove();
+                }
             }
-        }
-        SeckillProduct seckillProduct = (SeckillProduct) pageInfo.getList().get(0);
+            SeckillProduct seckillProduct = (SeckillProduct) pageInfo.getList().get(0);
 
-        String status = "1";
-        if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
-            //秒杀正在进行中
-            status = "2";
-        } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
-            //秒杀已经结束
-            status = "3";
-        } else if (currentDate.getTime() < seckillProduct.getStartDatetime().getTime()) {
-            //即将开始
-            status = "1";
+            String status = "1";
+            if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
+                //秒杀正在进行中
+                status = "2";
+            } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
+                //秒杀已经结束
+                status = "3";
+            } else if (currentDate.getTime() < seckillProduct.getStartDatetime().getTime()) {
+                //即将开始
+                status = "1";
+            }
+
+            if (seckillProduct.getAmount() <= 0) {
+                status = "3";
+            }
+            model.addAttribute("isShowTime", seckillProduct.getStartDatetime().getTime() - currentDate.getTime() < (24 * 60 * 60 * 1000));
+            model.addAttribute("miaoStatus", status);
         }
 
-        if (seckillProduct.getAmount() <= 0) {
-            status = "3";
-        }
-
-        model.addAttribute("isShowTime", seckillProduct.getStartDatetime().getTime() - currentDate.getTime() < (24 * 60 * 60 * 1000));
         model.addAttribute("productList", pageInfo.getList());
         model.addAttribute("pageInfo", pageInfo);
-        model.addAttribute("miaoStatus", status);
         return "/activity/seckillProductList";
     }
 
@@ -144,20 +146,20 @@ public class SeckillController {
         }
 
         if (status == "3") {
-            XQuery xQuery = new XQuery("plistPurchaseOrder_byDatetime", request,1);
+            XQuery xQuery = new XQuery("plistPurchaseOrder_byDatetime", request, 1);
             xQuery.setHeadHql(xQuery.getHeadHql() + " inner join s.purchaseOrderProductList pp ");
             xQuery.setQueryHql(xQuery.getQueryHql() + " and pp.productModel.id=:productModelId ");
             xQuery.updateHql();
             xQuery.put("productModelId", seckillProduct.getProductModel().getId());
             List<Object> purchaseOrderList = baseManager.listObject(xQuery);
-            if (!purchaseOrderList.isEmpty()){
-                Date finalOrderDatetime = ((PurchaseOrder)purchaseOrderList.get(0)).getCreateDatetime();
-                long userTime = finalOrderDatetime.getTime()-seckillProduct.getStartDatetime().getTime();
-                long time = userTime/1000;
-                long m = time/60;
-                long s = time%60;
-                model.addAttribute("minute",m);
-                model.addAttribute("second",s);
+            if (!purchaseOrderList.isEmpty()) {
+                Date finalOrderDatetime = ((PurchaseOrder) purchaseOrderList.get(0)).getCreateDatetime();
+                long userTime = finalOrderDatetime.getTime() - seckillProduct.getStartDatetime().getTime();
+                long time = userTime / 1000;
+                long m = time / 60;
+                long s = time % 60;
+                model.addAttribute("minute", m);
+                model.addAttribute("second", s);
             }
         }
 
@@ -181,7 +183,7 @@ public class SeckillController {
                 status = "2";
                 //再这里减秒杀库存
                 seckillProduct.setAmount(seckillProduct.getAmount() - Integer.parseInt(amount));
-                String callback = "a.efeiyi.com/miao/share/"+seckillProduct.getId()+"?userId="+AuthorizationUtil.getMyUser().getId();
+                String callback = "a.efeiyi.com/miao/share/" + seckillProduct.getId() + "?userId=" + AuthorizationUtil.getMyUser().getId();
                 return "redirect:http://www2.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice();
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
                 //秒杀已经结束
@@ -198,13 +200,13 @@ public class SeckillController {
     }
 
     @RequestMapping({"/miao/share/{productId}"})
-    public String share(@PathVariable String productId, HttpServletRequest request){
+    public String share(@PathVariable String productId, HttpServletRequest request) {
         String currentUserId = request.getParameter("userId");
-        SeckillProduct seckillProduct = (SeckillProduct)baseManager.getObject(SeckillProduct.class.getName(),productId);
-        if (AuthorizationUtil.isAuthenticated() && currentUserId.equals(AuthorizationUtil.getUser().getId())){
+        SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
+        if (AuthorizationUtil.isAuthenticated() && currentUserId.equals(AuthorizationUtil.getUser().getId())) {
             return "/activity/seckillShare";
-        }else {
-            return "redirect:/miao/"+seckillProduct.getId();
+        } else {
+            return "redirect:/miao/" + seckillProduct.getId();
         }
     }
 }
