@@ -52,10 +52,10 @@
         </c:if>
       </c:if>
       <c:if test="${flag==1||flag==2}">
-        <c:if test="${group.status==1&&group.groupMemberList.size==1}">
+        <c:if test="${group.status==1&&fn:length(group.groupMemberList)==1}">
           开团成功
         </c:if>
-        <c:if test="${group.status==1&&group.groupMemberList.size>1}">
+        <c:if test="${group.status==1&&fn:length(group.groupMemberList)>1}">
           组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size}人成团
         </c:if>
 
@@ -107,11 +107,11 @@
         </c:if>
       </c:if>
       <c:if test="${flag==1}">
-        <c:if test="${group.status==1&&group.groupMemberList.size==1}">
+        <c:if test="${group.status==1&&fn:length(group.groupMemberList)==1}">
           恭喜您成功开团当团长，赶快呼唤小伙伴们加入你的团吧
         </c:if>
-        <c:if test="${group.status==1&&group.groupMemberList.size>1}">
-          还差${group.groupProduct.memberAmount-group.groupMemberList.size}人成团，时间有限，赶快去呼唤小伙伴们加入吧
+        <c:if test="${group.status==1&&fn:length(group.groupMemberList)>1}">
+          还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，时间有限，赶快去呼唤小伙伴们加入吧
         </c:if>
         <c:if test="${group.status==3}">
           组团成功啦，恭喜恭喜！不过还有参团名额呢，快去告诉朋友们吧
@@ -125,7 +125,7 @@
       </c:if>
       <c:if test="${flag==2}">
         <c:if test="${group.status==1}">
-          还差${group.groupProduct.memberAmount-group.groupMemberList.size}人成团，时间有限，赶快去呼唤小伙伴们加入吧
+          还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，时间有限，赶快去呼唤小伙伴们加入吧
         </c:if>
         <c:if test="${group.status==3}">
           组团成功啦，恭喜恭喜！不过还有参团名额呢，快去告诉朋友们吧
@@ -153,7 +153,7 @@
       </c:if>
       <c:if test="${flag==1}">
         <c:if test="${group.status==1}">
-          还差${group.groupProduct.memberAmount-group.groupMemberList.size}人成团，去分享
+          还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，去分享
         </c:if>
         <c:if test="${group.status==3}">
           组团成功，去分享
