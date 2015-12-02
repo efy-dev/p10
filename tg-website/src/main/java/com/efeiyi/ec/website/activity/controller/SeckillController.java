@@ -212,7 +212,7 @@ public class SeckillController {
         } else {
             model.addAttribute("redirect", "/miao/share/" + productId + "?userId=" + (request.getParameter("userId") != null ? request.getParameter("userId") : ""));
             model.addAttribute("productId", productId);
-            return "/orderDeal";
+            return "/activity/orderDeal";
         }
     }
 
