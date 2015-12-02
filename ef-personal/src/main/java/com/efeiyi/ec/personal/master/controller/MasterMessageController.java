@@ -826,12 +826,26 @@ public class MasterMessageController {
 
     @RequestMapping("/getPartWorks/{masterId}")
     public String getPartMasterWork(@PathVariable String masterId, Model model) throws Exception {
-        MyUser user = AuthorizationUtil.getMyUser();
         Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
+        MyUser user = AuthorizationUtil.getMyUser();
+        if (user != null && user.getId() != null) {
+            String query = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId and f.status = '1'";
+            LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+            map.put("masterId", masterId);
+            map.put("userId", user.getId());
+            MasterFollowed followed = (MasterFollowed) baseManager.getUniqueObjectByConditions(query, map);
+            if (followed != null) {
+                master.setFollowStatus("已关注");
+            }
+            if (followed == null || followed.getId() == null) {
+                master.setFollowStatus("关注");
+            }
+        } else {
+            master.setFollowStatus("关注");
+        }
         master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-        master.setFollowStatus(getFollowStatus(master, (User) baseManager.getObject(User.class.getName(), user.getId())));
-        MasterModel mmd = ConvertMasterModelUtil.convertMaster(master);
-        model.addAttribute("object", mmd);
+        master.setFsAmount(master.getFsAmount() == null ? 0 : master.getFsAmount());
+        model.addAttribute("object", master);
         return "/masterDetails/masterWorkList";
     }
 
@@ -899,8 +913,6 @@ public class MasterMessageController {
     @ResponseBody
     @RequestMapping("/getWorks/{qm}/{conditions}/{size}/{index}")
     public List getWorks(HttpServletRequest request, @PathVariable String qm, @PathVariable String conditions, @PathVariable String size, @PathVariable String index) throws Exception {
-        //String url = "http://192.168.1.61:8082/importUsers";
-
         XQuery xQuery = new XQuery(qm, request);
         xQuery.put("master_id", conditions);
         PageEntity entity = new PageEntity();

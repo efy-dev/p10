@@ -289,7 +289,7 @@
           $.ajax({
               type: "post",//设置get请求方式
               url: "<c:url value='/masterMessage/commentMsg.do'/>",//设置请求的脚本地址
-              data: "content=" + content + "&fatherId=" + parent + "&workId=" + msgId,//设置请求的数据
+              data: "content=" + content + "&fatherId=" + parent + "&msgId=" + msgId,//设置请求的数据
               async: true,
               dataType: "json",//设置请求返回的数据格式
               success: function (data) {
@@ -353,7 +353,7 @@
             $.ajax({
           type: "post",//设置get请求方式
           url: "<c:url value='/masterMessage/commentMsg.do'/>",//设置请求的脚本地址
-          data: "content=" + content + "&fatherId=" + parent + "&workId=" + msgId,//设置请求的数据
+          data: "content=" + content + "&fatherId=" + parent + "&msgId=" + msgId,//设置请求的数据
           async: false,
           dataType: "json",//设置请求返回的数据格式
           success: function (data) {
