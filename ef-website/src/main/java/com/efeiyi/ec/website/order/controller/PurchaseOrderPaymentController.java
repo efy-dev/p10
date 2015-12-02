@@ -54,7 +54,7 @@ public class PurchaseOrderPaymentController {
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
         if (HttpUtil.isPhone(request)) {
             resultHtml = paymentManager.alipayWap(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue());
-        } else {
+        }else {
             resultHtml = paymentManager.alipay(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue());
         }
         model.addAttribute("resultHtml", resultHtml);
@@ -72,6 +72,7 @@ public class PurchaseOrderPaymentController {
             String resultJson = bufferedReader.readLine();
             String transactionNumber = "";
             String purchaseOrderPaymentId = "";
+            System.out.println(resultJson);
             JSONObject jsonObject = JSONObject.fromObject(resultJson);
             String isTradeSuccess = jsonObject.getString("tradeSuccess");
             //只有支付成功的时候才会保存支付记录
@@ -91,11 +92,8 @@ public class PurchaseOrderPaymentController {
                     purchaseOrderPaymentDetails.setTransactionNumber(transactionNumber);
                     PurchaseOrderPayment purchaseOrderPayment = purchaseOrderPaymentDetails.getPurchaseOrderPayment();
                     purchaseOrderPayment.setStatus("2");
-                    //把实际支付详情存在支付记录中
-                    purchaseOrderPayment.setPayWay(purchaseOrderPaymentDetails.getPayWay());
-                    purchaseOrderPayment.setTransactionNumber(transactionNumber);
                     baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
-
+                    //@TODO 修改订单状态
                     PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
                     if (purchaseOrder == null) {
                         purchaseOrder = ((PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrderPaymentDetails.getPurchaseOrderPayment().getId())).getPurchaseOrder();
@@ -107,19 +105,11 @@ public class PurchaseOrderPaymentController {
                             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
                         }
                     }
-                    //@TODO 使用库存管理组件做库存管理
-                    //修改库存
                     for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
                         purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() - purchaseOrderProduct.getPurchaseAmount());
                         baseManager.saveOrUpdate(ProductModel.class.getName(), purchaseOrderProduct.getProductModel());
                     }
-                    //需要判断订单类型来改变订单状态
-                    //团购的订单在团购端做处理 礼品卷订单在这里处理 如果是礼品卷订单就改为未收礼状态
-                    if (purchaseOrder.getOrderType().equals("3")) {
-                        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRGIFT);
-                    } else {
-                        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //改变订单状态为待收货状态
-                    }
+                    purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //改变订单状态为待收货状态
                     baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
                     baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
                 }
@@ -222,7 +212,7 @@ public class PurchaseOrderPaymentController {
 
 
     @RequestMapping({"/paysuccess/{orderId}"})
-    public String paySuccess(@PathVariable String orderId, Model model)throws Exception{
+    public String paySuccess(@PathVariable String orderId, Model model) throws Exception {
         PurchaseOrderPaymentDetails purchaseOrder = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
         if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback()!=null){
