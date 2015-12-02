@@ -233,7 +233,7 @@ public class GroupController {
         model.addAttribute("group", group);
         model.addAttribute("url", url);
         model.addAttribute("flag",flag);
-        if(show.equals("1")){
+        if(show!=null&&show.equals("1")){
             return "forward:http://www2.efeiyi.com/tg-website/group/joinGroup.do"+url;
         }else {
             return "/personGroup/shareGroup1";
