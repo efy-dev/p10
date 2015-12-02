@@ -99,11 +99,11 @@
       <c:if test="${flag==1}">
         <c:if test="${group.groupProduct.memberAmount-group.groupMemberList.size()>0}">
           <a href="javascript:void(0)" class="btn" id="btn">还&nbsp;差&nbsp;${group.groupProduct.memberAmount-group.groupMemberList.size()}&nbsp;人&nbsp;成&nbsp;团&nbsp;,&nbsp;去&nbsp;分&nbsp;享</a>
-          <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
+          <div id="cover" style="display: none;" onclick="share()"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
         </c:if>
         <c:if test="${group.groupProduct.memberAmount-group.groupMemberList.size()<=0}">
           <a href="javascript:void(0)" class="btn" id="btn">拼&nbsp;团&nbsp;成&nbsp;功&nbsp;，&nbsp;分&nbsp;享&nbsp;得&nbsp;红&nbsp;包</a>
-          <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
+          <div id="cover" style="display: none;" onclick="share()"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
         </c:if>
       </c:if>
       <c:if test="${flag==0}">
@@ -116,7 +116,7 @@
     <c:if test="${group.status==4}">
       <c:if test="${flag==1}">
         <a href="javascript:void(0)" class="btn" id="btn">组&nbsp;团&nbsp;成&nbsp;功&nbsp;，&nbsp;去&nbsp;分&nbsp;享</a>
-        <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
+        <div id="cover" style="display: none;" onclick="share()"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
       </c:if>
       <c:if test="${flag==0}">
         <a href="<c:url value='/group/groupBuy.do'/>${url}" class="btn">参&nbsp;团</a>
@@ -252,6 +252,12 @@
     s.parentNode.insertBefore(j, s)
   })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
   _MEIQIA('entId', 486);
+
+
+  function share(){
+    $("#cover").hide();
+  }
+
 </script>
 
 <!--//End--footer-->
