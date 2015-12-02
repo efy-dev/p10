@@ -44,7 +44,7 @@
     <div class="menu-list">
         <ul class="bd">
             <li><a href="http://www.efeiyi.com" title="首页">e&nbsp;飞&nbsp;蚁&nbsp;商&nbsp;城</a></li>
-            <li><a href="/" title="分类">团&nbsp;购&nbsp;首&nbsp;页</a></li>
+            <li><a href="http://www2.efeiyi.com/tg-website" title="分类">团&nbsp;购&nbsp;首&nbsp;页</a></li>
         </ul>
     </div>
 </header>

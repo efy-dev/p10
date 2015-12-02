@@ -141,7 +141,7 @@ public class GroupController {
         purchaseOrderGroup.setGroupMember(member);
         //判断是否成团未关闭或者未开启
         if(myGroup.getStatus().equals("2")||myGroup.getStatus().equals("1")){
-            purchaseOrderGroup.setStatus("3");
+            purchaseOrderGroup.setOrderStatus("3");
         }
         baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
 
@@ -162,7 +162,7 @@ public class GroupController {
             xQuery.put("group_id", myGroup.getId());
             List<PurchaseOrderGroup> list1 = baseManager.listObject(xQuery);
             for (PurchaseOrderGroup purchaseOrderGroup1:list1){
-                purchaseOrderGroup1.setStatus("5");
+                purchaseOrderGroup1.setOrderStatus("5");
                 baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup1);
             }
         }
@@ -207,6 +207,7 @@ public class GroupController {
         return "redirect:http://www2.efeiyi.com/tg-website/group/shareGroup.do" + url;
     }
 
+
     //判断是否参团 是团长还是团员或者未参团
     @RequestMapping(value = "/shareGroup.do")
     public String shareGroup(HttpServletRequest request, Model model) throws Exception {
@@ -214,6 +215,7 @@ public class GroupController {
         String groupProductId = request.getParameter("groupProductId");
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
+        String show = request.getParameter("show");
         MyGroup group = (MyGroup) baseManager.getObject(MyGroup.class.getName(), groupId);
         String url = "?groupProductId=" + groupProductId + "&groupId=" + groupId + "&memberId=" + memberId;
         int flag = 0;//0未参团 1 团长 2 团员
@@ -231,7 +233,12 @@ public class GroupController {
         model.addAttribute("group", group);
         model.addAttribute("url", url);
         model.addAttribute("flag",flag);
-        return "/personGroup/shareGroup1";
+        if(show.equals("1")){
+            return "forward:http://www2.efeiyi.com/tg-website/group/joinGroup.do"+url;
+        }else {
+            return "/personGroup/shareGroup1";
+        }
+
     }
 
 

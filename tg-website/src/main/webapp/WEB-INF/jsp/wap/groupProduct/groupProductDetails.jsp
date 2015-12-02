@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>b0102030101开团详情页</title>
+  <title>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -40,7 +40,7 @@
 <body>
 <header class="am-header custom-header">
   <div class="am-header-left am-header-nav">
-    <a href="#chevron-left" class="chevron-left"></a>
+    <a href="javascript:history.go(-1)" class="chevron-left"></a>
   </div>
   <!-- //End--chevron-left-->
   <h1 class="am-header-title">我的团长我的团</h1>
