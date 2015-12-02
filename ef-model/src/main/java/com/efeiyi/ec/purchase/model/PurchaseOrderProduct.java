@@ -26,7 +26,7 @@ public class PurchaseOrderProduct {
         this.purchaseOrder = purchaseOrder;
         this.productModel = productModel;
         this.purchaseAmount = purchaseAmount;
-        this.purchasePrice = purchasePrice;
+        this.purchasePrice = purchasePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     public PurchaseOrderProduct(){}
