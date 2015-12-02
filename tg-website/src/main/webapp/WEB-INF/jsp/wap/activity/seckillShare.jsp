@@ -25,8 +25,8 @@
     <p><img src="<c:url value="/scripts/wap/images/icon-wechat.png"/>" alt=""></p>
   </div>
   <div class="bd btns">
-    <a href="">返回商城首页</a>
-    <a href="">查看更多秒杀商品</a>
+    <a href="http://www.efeiyi.com">返回商城首页</a>
+    <a href="http://a.efeiyi.com/miao">查看更多秒杀商品</a>
   </div>
 </div>
 </body>
