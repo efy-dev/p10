@@ -91,6 +91,7 @@
                         <condition name="user.id" operation="eq" label="消费者id" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
                         <condition name="orderStatus" operation="eq" label="订单状态" inputType="select_status"
                                    key="purchaseOrder.orderStatus"/>
                         <condition name="serial" operation="like" label="订单号" inputType="text"/>
