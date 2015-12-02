@@ -44,7 +44,13 @@ $(function(){
             $(this).siblings(".gift .gift-details .elect span").toggleClass("active")
             $(".gift .detailed .font-2").slideToggle()
         })
+        $(".my-evaluate .score .score-star .star .a-star").dblclick(function(){
+            $(".my-evaluate .score .score-star .star .a-star").removeClass("ye-star");
+        });
+        $("#nobtn").removeAttr('href');
+        $("#nobtn").removeAttr('onclick');
     })
+
     //商品评价
     (function(){
         $('.my-evaluate .score .score-star .star li').click(function(){
