@@ -88,6 +88,7 @@
                     <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
                         <condition name="name" operation="like" label="项目名称" inputType="text"/>
                         <condition name="serial" operation="like" label="项目编号" inputType="text"/>
+                        <condition name="projectCategory.name" operation="like" label="类别名称" inputType="text"/>
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
                     </query>
                 </do>

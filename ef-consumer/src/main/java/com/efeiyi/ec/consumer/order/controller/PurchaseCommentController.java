@@ -33,19 +33,41 @@ public class PurchaseCommentController {
     @Autowired
     private AliOssUploadManager aliOssUploadManager;
 
+    /**
+     * PC端查看评�?
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/finishOrderList.do")
     public String finishOrder(HttpServletRequest request,Model model) throws Exception {
 
         XQuery xQuery = new XQuery("plistPurchaseOrder_default9",request);
+
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("finishList",list);
 
     return "/purchaseOrder/purchaseComment";
-}
+    }
 
     /**
-     * 评价
+     * 移动端查看评�?
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("/mobileFinishOrder.do")
+    public String mobileFinishOrder(HttpServletRequest request,Model model){
+        String orderId=request.getParameter("orderId");
+        PurchaseOrder purchaseOrder= (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        model.addAttribute("finishOrder",purchaseOrder);
+        return "/purchaseOrder/purchaseComment";
+    }
+
+    /**
+     * pc评价
      * @param request
      * @return
      * @throws Exception
@@ -101,6 +123,66 @@ public class PurchaseCommentController {
 
 
         return"redirect:/comment/finishOrderList.do";
+    }
+
+    /**
+     * 移动端评价
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/saveMobileComment")
+    public String saveOrUpdateMobilecomment(HttpServletRequest request) throws Exception {
+        int count=0;
+        String id=request.getParameter("productId");
+        XSaveOrUpdate xUpdate =new XSaveOrUpdate("saveOrUpdateComment",request);
+        xUpdate.getParamMap().put("purchaseOrderProduct_id",id);
+        PurchaseOrderComment comment = (PurchaseOrderComment)baseManager.saveOrUpdate(xUpdate);
+
+        String[] url=request.getParameterValues("url");
+        if(url!=null){
+            for(int i=0;i<url.length;i++){
+
+                XSaveOrUpdate commentPicture=new XSaveOrUpdate("saveOrUpdateCommentPicture",request);
+                commentPicture.getParamMap().put("pictureUrl",url[i]);
+                PurchaseOrderCommentPicture picture= (PurchaseOrderCommentPicture) baseManager.saveOrUpdate(commentPicture);
+                picture.setPurchaseOrderComment(comment);
+                baseManager.saveOrUpdate(PurchaseOrderCommentPicture.class.getName(),picture);
+            }
+
+        }
+
+        PurchaseOrderProduct purchaseOrderProduct = (PurchaseOrderProduct)baseManager.getObject(PurchaseOrderProduct.class.getName(),id);
+        purchaseOrderProduct.setStatus("1");
+        purchaseOrderProduct.setPurchaseOrderComment(comment);
+        baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+
+        String productModelId=purchaseOrderProduct.getProductModel().getId();
+        XQuery productModel = new XQuery("listPurchaseOrderProduct_default",request);
+        productModel.put("productModel_id",productModelId);
+        List<Object> purchaseOrderProductList=baseManager.listObject(productModel);
+        if(purchaseOrderProductList.size()!=0){
+            for(int i=0;i<purchaseOrderProductList.size();i++){
+                PurchaseOrderProduct pop= (PurchaseOrderProduct) purchaseOrderProductList.get(i);
+                pop.getPurchaseOrderComment().getStarts();
+                count+= Integer.parseInt(pop.getPurchaseOrderComment().getStarts());
+
+            }
+            Double average=(double)count/purchaseOrderProductList.size();
+            purchaseOrderProduct.setAverage(average);
+            baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+        }
+
+
+
+        String orderId=request.getParameter("orderId");
+        PurchaseOrder purchaseOrder=(PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId);
+        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_FINISHED);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+
+
+        return"redirect:/order/myEfeiyi/list.do";
+
     }
 
     /**

@@ -740,3 +740,6 @@ PRIMARY KEY (`id`)
 )
 ;
 
+----------------------------12.02-----------------------
+ALTER TABLE `master_comment`
+ADD COLUMN `author_id`  char(16) NULL AFTER `comment_number`;

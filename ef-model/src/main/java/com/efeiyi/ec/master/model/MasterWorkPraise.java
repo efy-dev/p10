@@ -1,6 +1,6 @@
 package com.efeiyi.ec.master.model;
 
-import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
@@ -19,7 +19,7 @@ public class MasterWorkPraise implements Serializable {
 
 	private String id;
 	private MasterWork work;
-	private MyUser user;
+	private User user;
 	private MasterComment comment;
 	private String status;
 	private Date createDateTime;
@@ -47,11 +47,11 @@ public class MasterWorkPraise implements Serializable {
 
 	@JoinColumn(name="user_id")
 	@ManyToOne(fetch = FetchType.LAZY)
-	public MyUser getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(MyUser user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

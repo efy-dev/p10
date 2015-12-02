@@ -36,10 +36,16 @@
   <!-- //End--chevron-left-->
   <h1 class="am-header-title" style="margin: 0 10%;">我的团长我的团</h1>
   <!-- //End--title-->
-  <div class="am-header-right am-header-nav am-header-right1">
-    <a href="<c:url value="/person/personInfoView.do"/>" class="chevron-right" id="menu">
-      <i class="icon icon-user"></i>
+  <div class="am-header-right am-header-nav">
+    <a href="#chevron-right" class="chevron-right" id="menu">
+      <i class="line"></i>
     </a>
+  </div>
+  <div class="menu-list">
+    <ul class="bd">
+      <li><a href="http://www.efeiyi.com" title="首页">e&nbsp;飞&nbsp;蚁&nbsp;商&nbsp;城</a></li>
+      <li><a href="" title="分类">团&nbsp;购&nbsp;首&nbsp;页</a></li>
+    </ul>
   </div>
 </header>
 <!--//End--header-->
@@ -86,7 +92,7 @@
         <div class="black" style="width: ${bil}%;"></div>
         <div class="gray"></div>
       </div>
-      <div class="txt-page ae"><span>拼团倒计时：</span><span>分享红包：${group.groupProduct.bonus}元</span></div>
+      <div class="txt-page ae"><span>拼团倒计时：</span></div>
       <div class="time ae" id="timer">00:00:00</div>
     </div>
     <c:if test="${group.status==1}">
@@ -105,7 +111,16 @@
       </c:if>
     </c:if>
     <c:if test="${group.status==3}">
-      <a href="javascript:void(0)" class="btn">已&nbsp;成&nbsp;团</a>
+      <a href="<c:url value="/group/groupBuy.do?groupProductId=${group.groupProduct.id}"/>" class="btn">拼&nbsp;团&nbsp;结&nbsp;束&nbsp;，&nbsp;去&nbsp;开&nbsp;团</a>
+    </c:if>
+    <c:if test="${group.status==4}">
+      <c:if test="${flag==1}">
+        <a href="javascript:void(0)" class="btn" id="btn">组&nbsp;团&nbsp;成&nbsp;功&nbsp;，&nbsp;去&nbsp;分&nbsp;享</a>
+        <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
+      </c:if>
+      <c:if test="${flag==0}">
+        <a href="<c:url value='/group/groupBuy.do'/>${url}" class="btn">参&nbsp;团</a>
+      </c:if>
     </c:if>
     <c:if test="${group.status==5}">
       <a href="javascript:void(0)" class="btn">组&nbsp;团&nbsp;失&nbsp;败</a>
@@ -127,10 +142,10 @@
           ${group.groupProduct.productModel.product.productDescription.content}
           <div class="button ae"><a href="http://www.efeiyi.com/product/productModel/${group.groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
         </div>
-        <div class="tab-btn">
-          <a href="<c:url value="/tuan"/>">更多团购商品<i class="gicon"></i></a>
-          <a href="<c:url value="/product/groupProduct/${group.groupProduct.id}"/>">我要开团<i class="gicon"></i></a>
-        </div>
+        <%--<div class="tab-btn">--%>
+          <%--<a href="<c:url value="/tuan"/>">更多团购商品<i class="gicon"></i></a>--%>
+          <%--<a href="<c:url value="/product/groupProduct/${group.groupProduct.id}"/>">我要开团<i class="gicon"></i></a>--%>
+        <%--</div>--%>
       </div>
       <div class="co-page" style="display: none">
         <c:if test="${not empty purchaseOrderProductList&&fn:length(purchaseOrderProductList) >0}">
@@ -153,7 +168,12 @@
       </div>
     </div>
   </div>
-
+  <div class="met-nav ae">
+    <a href="<c:url value="/tuan.do"/>"><p><i class="met-1con m-icon"></i></p><p>团购首页</p></a>
+    <a href="<c:url value="/person/myGroup.do"/>"><p><i class="met-2con m-icon"></i></p><p>我的团</p></a>
+    <a href="<c:url value="/person/myPurchaseOrder.do"/>"><p><i class="met-3con m-icon"></i></p><p>我的订单</p></a>
+    <a href="<c:url value="/person/personInfoView.do"/>"><p><i class="met-4con m-icon"></i></p><p>个人中心</p></a>
+  </div>
   <!--在线客服-->
   <div class="scroll-bar">
     <div class="scroll-bar-top" style="display: block;">
@@ -164,6 +184,7 @@
 </div>
 
 <style type="text/css">
+  .my-colonel{margin-bottom: 70px;}
   #MEIQIA-BTN-HOLDER {
     right: 0;bottom: 145px;}
   #MEIQIA-BTN {

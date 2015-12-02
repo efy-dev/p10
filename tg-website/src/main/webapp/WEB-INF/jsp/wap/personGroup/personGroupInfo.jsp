@@ -37,10 +37,17 @@
     <!-- //End--chevron-left-->
     <h1 class="am-header-title">我的团</h1>
     <!-- //End--title-->
-    <div class="am-header-right am-header-nav am-header-right1">
+    <div class="am-header-right am-header-nav">
         <a href="#chevron-right" class="chevron-right" id="menu">
-            <i class="icon icon-user"></i>
+            <i class="line"></i>
         </a>
+    </div>
+    <!-- //End--chevron-left-->
+    <div class="menu-list">
+        <ul class="bd">
+            <li><a href="http://www.efeiyi.com" title="首页">e&nbsp;飞&nbsp;蚁&nbsp;商&nbsp;城</a></li>
+            <li><a href="<c:url value="/tuan.do"/>" title="分类">团&nbsp;购&nbsp;首&nbsp;页</a></li>
+        </ul>
     </div>
 </header>
 <!--//End--header-->
@@ -50,9 +57,15 @@
         <li><a href="<c:url value="/person/joinGroupStatus.do"/>"><em>我&nbsp;的&nbsp;参&nbsp;团</em><i class="s-icon"></i></a></li>
         <li><a href="<c:url value="/person/groupBuyStatus.do"/>"><em>我&nbsp;的&nbsp;开&nbsp;团</em><i class="s-icon"></i></a></li>
         <li><a href="<c:url value="/person/myPurchaseOrder.do"/>"><em>我&nbsp;的&nbsp;订&nbsp;单</em><i class="s-icon"></i></a></li>
-        <li><a href="<c:url value="/person/bonusTotal.do"/>"><em>我&nbsp;的&nbsp;红&nbsp;包</em><i class="s-icon"></i></a></li>
         <li><a href="<c:url value="/person/returnGoods.do"/>"><em>申&nbsp;请&nbsp;退&nbsp;货</em><i class="s-icon"></i></a></li>
     </ul>
+</div>
+<!--悬浮订单-->
+<div class="met-nav ae">
+    <a href="<c:url value="/tuan.do"/>"><p><i class="met-1con m-icon"></i></p><p>团购首页</p></a>
+    <a href="<c:url value="/person/joinGroupStatus.do"/>"><p><i class="met-2con m-icon"></i></p><p>我的团</p></a>
+    <a href="<c:url value="/person/myPurchaseOrder.do"/>"><p><i class="met-3con m-icon"></i></p><p>我的订单</p></a>
+    <a href="<c:url value="/person/personInfoView.do"/>"><p><i class="met-4con m-icon"></i></p><p>个人中心</p></a>
 </div>
 <!--//End--footer-->
 <!--[if (gte IE 9)|!(IE)]><!-->

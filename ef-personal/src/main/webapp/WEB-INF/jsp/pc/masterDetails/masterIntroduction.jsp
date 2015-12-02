@@ -1,6 +1,7 @@
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -64,7 +65,7 @@
   <div class="great-master">
     <div class="master-pic"><img src="http://tenant.efeiyi.com/${object.favicon}@!master-favicon-view" alt="传承人" class="am-img-thumbnail am-circle"></div>
     <h5>${object.fullName}</h5>
-    <c:if test="${object.projectName != null}">
+    <c:if test="${!empty object.projectName}">
       <p>[${object.projectName}]</p>
     </c:if>
     <div class="great"><em><ming800:status name='level' dataType='Tenant.level' checkedValue='${object.level}' type='normal'/>非物质文化遗产传承人</em><i class="icon-master"></i></div>
@@ -122,7 +123,11 @@
     </div>
     <div class="master-text">
       <div class="mas-tx-left">
-        <p>${object.content}</p>
+        <p>
+          <c:if test="${!empty baseIntro.content}">
+            ${baseIntro.content}
+          </c:if>
+        </p>
         <div class="f-r-gd ae"><a href="#"><span>阅读更多</span><i class="sp-icon"></i></a></div>
         <h5>出版著作</h5>
         <ul class="publish">

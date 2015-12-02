@@ -25,7 +25,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${objectList}" var="project" end="4">
+            <c:forEach items="${objectList}" var="project" >
                 <tr id="${project.id}">
                     <%--<td>--%>
                         <%--<a id="${tenantProject.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);"  onclick="showConfirm('提示','解除关联同时会删除商品与项目的关联，请谨慎操作；如确实要解除，请在商品管理页重新关联项目。',function(){removeTenantProject('${tenantProject.tenant.id}','${tenantProject.project.id}','${tenantProject.id}')})"><span--%>

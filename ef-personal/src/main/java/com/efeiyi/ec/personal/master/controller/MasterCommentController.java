@@ -2,6 +2,7 @@ package com.efeiyi.ec.personal.master.controller;
 
 import com.efeiyi.ec.master.model.*;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.personal.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class MasterCommentController {
 		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
 		MasterComment comment = new MasterComment();
 		comment.setContent(content);
-		comment.setUser(user);
+		comment.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
 		comment.setAmount(1);
 		comment.setCreateDateTime(new Date());
 		comment.setMasterWork(work);
@@ -63,7 +64,7 @@ public class MasterCommentController {
 		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
 		MasterComment comment = new MasterComment();
 		comment.setContent(content);
-		comment.setUser(user);
+		comment.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
 		comment.setAmount(1);
 		comment.setCreateDateTime(new Date());
 		comment.setMasterWork(work);
@@ -103,7 +104,7 @@ public class MasterCommentController {
 				return "repeat";
 			}
 			//防止重复点赞
-			praise.setUser(user);
+			praise.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
 			praise.setCreateDateTime(new Date());
 			praise.setComment(comment);
 			baseManager.saveOrUpdate(MasterWorkPraise.class.getName(), praise);
@@ -162,7 +163,7 @@ public class MasterCommentController {
 			//防止重复点赞
 
 
-			praise.setUser(user);
+			praise.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
 			praise.setWork(work);
 			praise.setCreateDateTime(new Date());
 			baseManager.saveOrUpdate(MasterWorkPraise.class.getName(), praise);
@@ -214,7 +215,7 @@ public class MasterCommentController {
 				return "repeat" ;
 			}//不为null,说明已经收藏了
 		}
-		store.setUser(user);
+		store.setUser((User) baseManager.getObject(User.class.getName(),user.getId()));
 		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(), workId);
 		store.setWork(work);
 		store.setStatus("1");

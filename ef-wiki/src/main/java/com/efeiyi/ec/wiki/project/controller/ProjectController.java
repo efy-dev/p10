@@ -36,7 +36,7 @@ public class ProjectController extends WikibaseController {
     @RequestMapping("/project/brifProject/{projectId}")
     public ModelAndView getBrifProject(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
         Project project = getBrifProjectHeader(projectId);
-        boolean flag = checkIsAttention(request);
+        boolean flag = checkIsAttention(projectId,request);
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
         return new ModelAndView("/project/brifProject");
@@ -52,18 +52,18 @@ public class ProjectController extends WikibaseController {
             xQuery.put("project_id", projectid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() >= 1) {
+            if (list != null && !list.isEmpty()) {
                 flag = true;
             }
         }
 
         return flag;
-    }
+    }//Waiting for the invalid 待删除
 
     @RequestMapping("/project/brifMaster/{projectId}")
     public ModelAndView getBrifMaster(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
         Project project = getBrifProjectHeader(projectId);
-        boolean flag = checkIsAttention(request);
+        boolean flag = checkIsAttention(projectId,request);
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
         return new ModelAndView("/project/brifMaster");
@@ -72,7 +72,7 @@ public class ProjectController extends WikibaseController {
     @RequestMapping("/project/listProduct/{projectId}")
     public ModelAndView getListProducts(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
         Project project = getBrifProjectHeader(projectId);
-        boolean flag = checkIsAttention(request);
+        boolean flag = checkIsAttention(projectId,request);
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
         return new ModelAndView("/project/listProduct");
@@ -152,7 +152,7 @@ public class ProjectController extends WikibaseController {
             xQuery.put("project_id", projectId);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() >= 1) {
+            if (list != null && !list.isEmpty()) {
                 flag = true;
             }
         }
@@ -185,7 +185,7 @@ public class ProjectController extends WikibaseController {
             xQuery.put("master_id", userid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() >= 1) {
+            if (list != null && !list.isEmpty()) {
                 flag = true;
             }
         }

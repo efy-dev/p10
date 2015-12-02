@@ -1,7 +1,6 @@
 package com.efeiyi.ec.master.model;
 
-import com.efeiyi.ec.organization.model.Consumer;
-import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,7 +19,7 @@ public class MasterFollowed implements Serializable {
 
 	private String id;
 	private Master master;
-	private MyUser user;
+	private User user;
 	private String status;
 	private Date createDateTime;
 
@@ -49,11 +48,11 @@ public class MasterFollowed implements Serializable {
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	public MyUser getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(MyUser user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

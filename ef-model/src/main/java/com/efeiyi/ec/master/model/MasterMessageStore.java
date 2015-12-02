@@ -1,6 +1,6 @@
 package com.efeiyi.ec.master.model;
 
-import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,7 +18,7 @@ public class MasterMessageStore implements Serializable {
 	private String id ;
 	private String status;
 	private MasterMessage masterMessage;
-	private MyUser user;
+	private User user;
 	private Date createDateTime;
 
 
@@ -56,11 +56,11 @@ public class MasterMessageStore implements Serializable {
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	public MyUser getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(MyUser user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

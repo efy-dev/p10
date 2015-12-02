@@ -35,24 +35,18 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         HashMap<String, List> productMap = new HashMap<>();
         PurchaseOrder purchaseOrder = createNewPurchaseOrder(cart.getCartProductList());
         LinkedHashSet<Tenant> tenantSet = new LinkedHashSet<>();
-        List<CartProduct> cartProductList = cart.getCartProductList();
-        for (CartProduct cartProductTemp : cartProductList) {
-            if (cartProductTemp.getIsChoose().equals("1")) {
-                cartProductTemp.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId()));
-                Tenant tenant = cartProductTemp.getProductModel().getProduct().getTenant();
-                tenantSet.add(tenant);
-                if (productMap.get(tenant.getId()) != null) {
-                    productMap.get(tenant.getId()).add(cartProductTemp);
-                } else {
-                    List productList = new ArrayList();
-                    productList.add(cartProductTemp);
-                    productMap.put(tenant.getId(), productList);
-                }
-            }
+        List<PurchaseOrderProduct> cartProductList = purchaseOrder.getPurchaseOrderProductList();
+        for (PurchaseOrderProduct purchaseOrderProductTemp : cartProductList) {
+            purchaseOrderProductTemp.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), purchaseOrderProductTemp.getProductModel().getId()));
+            Tenant tenant = purchaseOrderProductTemp.getProductModel().getProduct().getTenant();
+            tenantSet.add(tenant);
+            List<Object> productList = new ArrayList();
+            productList.add(purchaseOrderProductTemp);
+            productMap.put(tenant.getId(), productList);
         }
         if (tenantSet != null && tenantSet.size() > 1) {
             for (Tenant tenantTemp : tenantSet) {
-                PurchaseOrder subPurchaseOrder = createNewPurchaseOrder(productMap.get(tenantTemp.getId()));
+                PurchaseOrder subPurchaseOrder = createNewPurchaseOrder2(productMap.get(tenantTemp.getId()));
                 subPurchaseOrder.setFatherPurchaseOrder(purchaseOrder);
                 subPurchaseOrder.setTenant(tenantTemp);
                 baseManager.saveOrUpdate(PurchaseOrder.class.getName(), subPurchaseOrder);
@@ -75,8 +69,8 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         PurchaseOrder purchaseOrder = createNewPurchaseOrder(productModel, price, amount);
         LinkedHashSet<Tenant> tenantSet = new LinkedHashSet<>();
         tenantSet.add(productModel.getProduct().getTenant());
-        ArrayList<ProductModel> productModelArrayList = new ArrayList<>();
-        productModelArrayList.add(productModel);
+        ArrayList<PurchaseOrderProduct> productModelArrayList = new ArrayList<>();
+        productModelArrayList.add(purchaseOrder.getPurchaseOrderProductList().get(0));
         productMap.put(productModel.getProduct().getTenant().getId(), productModelArrayList);
         model.addAttribute("productMap", productMap);
         model.addAttribute("purchaseOrder", purchaseOrder);
@@ -87,12 +81,12 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
     private PurchaseOrder createNewPurchaseOrder(List<CartProduct> cartProductList) throws Exception {
 
         PurchaseOrder purchaseOrder = new PurchaseOrder();
-        User user = (User)baseManager.getObject(User.class.getName(),AuthorizationUtil.getMyUser().getId());
+        User user = (User) baseManager.getObject(User.class.getName(), AuthorizationUtil.getMyUser().getId());
         purchaseOrder.setUser(user);
         purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
         purchaseOrder.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-
+        List<PurchaseOrderProduct> purchaseOrderProductList  = new ArrayList<>();
         BigDecimal totalPrice = new BigDecimal(0);
         if (cartProductList != null && cartProductList.size() > 0) {
             for (CartProduct cartProduct : cartProductList) {
@@ -100,7 +94,33 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
                     PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrder, cartProduct.getProductModel(), cartProduct.getAmount(), cartProduct.getProductModel().getPrice());
                     totalPrice = totalPrice.add(cartProduct.getProductModel().getPrice().multiply(new BigDecimal(cartProduct.getAmount())));
                     baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+                    purchaseOrderProductList.add(purchaseOrderProduct);
                 }
+            }
+            totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+        }
+        purchaseOrder.setTotal(totalPrice);
+        purchaseOrder.setOriginalPrice(totalPrice);
+        purchaseOrder.setPurchaseOrderProductList(purchaseOrderProductList);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        return purchaseOrder;
+    }
+
+    private PurchaseOrder createNewPurchaseOrder2(List<PurchaseOrderProduct> purchaseOrderProductList) throws Exception {
+
+        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        User user = (User) baseManager.getObject(User.class.getName(), AuthorizationUtil.getMyUser().getId());
+        purchaseOrder.setUser(user);
+        purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
+        purchaseOrder.setCreateDatetime(new Date());
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+
+        BigDecimal totalPrice = new BigDecimal(0);
+        if (purchaseOrderProductList != null && purchaseOrderProductList.size() > 0) {
+            for (PurchaseOrderProduct purchaseOrderProductTemp : purchaseOrderProductList) {
+                PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrder, purchaseOrderProductTemp.getProductModel(), purchaseOrderProductTemp.getPurchaseAmount(), purchaseOrderProductTemp.getProductModel().getPrice());
+                totalPrice = totalPrice.add(purchaseOrderProductTemp.getProductModel().getPrice().multiply(new BigDecimal(purchaseOrderProductTemp.getPurchaseAmount())));
+                baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
             }
             totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         }
@@ -112,7 +132,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
 
     private PurchaseOrder createNewPurchaseOrder(ProductModel productModel, BigDecimal price, int amount) throws Exception {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
-        User user = (User)baseManager.getObject(User.class.getName(),AuthorizationUtil.getMyUser().getId());
+        User user = (User) baseManager.getObject(User.class.getName(), AuthorizationUtil.getMyUser().getId());
         purchaseOrder.setUser(user);
         purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
         purchaseOrder.setCreateDatetime(new Date());
@@ -121,6 +141,9 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrder, productModel, amount, price);
         totalPrice = totalPrice.add(price.multiply(new BigDecimal(amount)));
         baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+        List<PurchaseOrderProduct> purchaseOrderProductList = new ArrayList<>();
+        purchaseOrderProductList.add(purchaseOrderProduct);
+        purchaseOrder.setPurchaseOrderProductList(purchaseOrderProductList);
         totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         purchaseOrder.setTotal(totalPrice);
         purchaseOrder.setOriginalPrice(totalPrice);
@@ -156,7 +179,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
                 baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
             }
         } else {
-            purchaseOrder.setMessage(messageMap.get(purchaseOrder.getTenant().getId() + "Message"));
+//            purchaseOrder.setMessage(messageMap.get(purchaseOrder.getTenant().getId() + "Message"));
         }
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 

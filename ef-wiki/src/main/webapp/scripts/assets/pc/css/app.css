@@ -48,10 +48,10 @@ a:hover {color:#f00;text-decoration:underline}
 .header .nav-links li a:hover {color:#f00}
 .header .nav-links .title {border-bottom:1px #b2b2b2 solid;color:#999;padding-bottom:5px;margin-bottom:5px}
 /*--//End--header--*/
-.focus {height:481px;position:relative}
+.focus {height:300px;position:relative}
 .focus .slider-main {position:absolute;top:0;left:0;z-index:1}
 .focus .slider-main li {width:100%;height:481px;position:absolute;top:0;left:0;display:none}
-.focus .slider-main li img {width:1000px;height:481px}
+.focus .slider-main li img {width:1000px;height:300px}
 .focus .slider-nav {position:absolute;bottom:25px;left:50%;margin-left:-20px;z-index:2}
 .focus .slider-nav li {width:9px;height:9px;background:#cecfcf;-webkit-border-radius:50%;-moz-border-radius:50%;border-radius:50%;float:left;margin:0 6px;cursor:pointer}
 .focus .slider-nav li.active {background:#ce0203}

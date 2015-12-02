@@ -1,4 +1,3 @@
-<%@ page import="com.efeiyi.ec.personal.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -86,7 +85,7 @@
       $(window).scroll(function(){
         var pageH = $(document).height();
         var scrollT = $(window).scrollTop(); //滚动条top
-          var aa = (pageH - winH - scrollT) / winH;
+        var aa = (pageH - winH - scrollT) / winH;
         if(aa < 0.02){
           if(ajaxKey){
                 getData("<c:url value='/masterMessage/mainData/plistMasterMessage_default/0/4/'/>");
@@ -169,7 +168,7 @@
                     "                                <a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><p>"+data[i].remark+"</p></a>";
             var attr = data[i].messageAttachmentLists;
             if(attr != null && attr.length == 1){
-              sub += "<div class=\"one-pic\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+attr[j].pictureUrl+"@!master-message-little-more\"></a></div>";
+              sub += "<div class=\"one-pic\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+attr.pictureUrl+"@!master-message-little-more\"></a></div>";
             }else if(attr != null && attr.length > 1){
                 if(attr.length < 5){
                     sub += "<div class=\"two-pic w-active\"><ul class=\"sudoku\">";
@@ -282,21 +281,19 @@
           for (var i in data) {
             var levelName = "";
             if(data[i].level == "1"){
-              levelName = "国际级";
-            }else if(data[i].level == "2"){
               levelName = "国家级";
-            }else if(data[i].level == "3"){
+            }else if(data[i].level == "2"){
               levelName = "省级";
-            }else if(data[i].level == "4"){
+            }else if(data[i].level == "3"){
               levelName = "市级";
-            }else if(data[i].level == "5"){
+            }else if(data[i].level == "4"){
               levelName = "县级";
             }
             var box = "<li>"+
             "            <div class=\"text\">"+
             "              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\">"+data[i].masterName+"</a></p>"+
             "              <p class=\"p2\">"+data[i].projectName+"</p>"+
-            "              <p class=\"p2\">"+levelName+"非物质文化遗产</p>"+
+            "              <p class=\"p2\">"+levelName+"非遗传承人</p>"+
             "            </div>"+
             "            <div class=\"bt-gz\">"+
             "              <a class=\"btn-guan\" name=\"masterFollow"+data[i].id+"\" onclick=\"followMaster('"+data[i].id+"');\">"+
@@ -346,22 +343,20 @@
         if(data != null && data.length > 0) {
           for (var i in data) {
             var levelName = "";
-            if(data[i].level == "1"){
-              levelName = "国际级";
-            }else if(data[i].level == "2"){
-              levelName = "国家级";
-            }else if(data[i].level == "3"){
-              levelName = "省级";
-            }else if(data[i].level == "4"){
-              levelName = "市级";
-            }else if(data[i].level == "5"){
-              levelName = "县级";
-            }
+              if(data[i].level == "1"){
+                  levelName = "国家级";
+              }else if(data[i].level == "2"){
+                  levelName = "省级";
+              }else if(data[i].level == "3"){
+                  levelName = "市级";
+              }else if(data[i].level == "4"){
+                  levelName = "县级";
+              }
             var box = "<li>"+
                     "            <div class=\"text\">"+
                     "              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\">"+data[i].masterName+"</a></p>"+
                     "              <p class=\"p2\">"+data[i].projectName+"</p>"+
-                    "              <p class=\"p2\">"+levelName+"非物质文化遗产</p>"+
+                    "              <p class=\"p2\">"+levelName+"非遗传承人</p>"+
                     "            </div>"+
                     "            <div class=\"bt-gz\">"+
                     "              <a class=\"btn-guan\" name=\"masterFollow"+data[i].id+"\" onclick=\"followMaster('"+data[i].id+"');\">"+

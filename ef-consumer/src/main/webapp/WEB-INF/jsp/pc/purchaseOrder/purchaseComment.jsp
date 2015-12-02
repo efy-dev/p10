@@ -42,7 +42,7 @@
     <c:forEach items="${finishList}" var="finish" varStatus="status">
       <c:forEach items="${finish.purchaseOrderProductList}" var="op" varStatus="vs">
 
-        <c:if test="${op.status==null}">
+        <c:if test="${op.status==null or op.status==''}">
           <div class="appraise" status="0" sd="${status.index}${vs.index}">
             <div class="table">
               <table>
@@ -143,7 +143,7 @@
                           <label></label>
                         </dt>
                         <dd>
-                          <input type="button" class="btn" value="评&nbsp&nbsp&nbsp&nbsp价" onclick="comment()">
+                          <input type="button" class="btn" value="评&nbsp&nbsp&nbsp&nbsp价" onclick="comment(this)">
                                  <span style="margin-left: 44px;font-size: 12px;">
                                  <input type="checkbox" class="btn" value="评&nbsp&nbsp&nbsp&nbsp价">匿名评价</span>
                         </dd>
@@ -446,11 +446,11 @@
 
 <script>
 
-  function comment(){
-    var count=$("#stars input[flag='1']").length
+  function comment(obj){
+    var count=$("input[flag='1']",$(obj).parents("form")).length
     $("#starCount").attr("value",count);
-    $("#stars").submit();
-
+//    $("#stars").submit();
+  alert(count);
   }
 
 
