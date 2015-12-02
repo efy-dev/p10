@@ -29,8 +29,7 @@ public class MasterComment implements Serializable {
 	private Date createDateTime;
 	private User user;
 	private Integer amount;
-
-
+	private User author;
 
 	@Id
 	@GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -140,5 +139,15 @@ public class MasterComment implements Serializable {
 
 	public void setAmount(Integer amount) {
 		this.amount = amount;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "author_id")
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 }
