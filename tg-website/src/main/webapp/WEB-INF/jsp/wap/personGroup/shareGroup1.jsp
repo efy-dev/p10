@@ -172,8 +172,8 @@
       <c:if test="${group.status==1}">
         <a href="javascript:void(0)" class="btn" id="btn">
           还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，去分享
-          <div id="cover" style="display: none;" onclick="share()"><em class="bg"></em><img
-                  src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt="">
+          <div id="cover" style="display: none;"><em class="bg" onclick="share()"></em><img
+                  src="<c:url value="/scripts/wap/upload/guide-share.png"/>" onclick="share()"> alt="">
           </div>
         </a>
       </c:if>
@@ -202,8 +202,8 @@
       <c:if test="${group.status==1}">
         <a href="javascript:void(0)" class="btn">
           还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，去分享
-          <div id="cover" style="display: none;" onclick="share()"><em class="bg"></em><img
-                  src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt="">
+          <div id="cover" style="display: none;"><em class="bg" onclick="share()"></em><img
+                  src="<c:url value="/scripts/wap/upload/guide-share.png"/>" onclick="share()"> alt="">
           </div>
         </a>
       </c:if>
