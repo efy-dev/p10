@@ -354,23 +354,41 @@ public class MasterMessageController {
     public List getUserComments(HttpServletRequest request, @PathVariable String qm, @PathVariable String size, @PathVariable String index) throws Exception {
         MyUser user = AuthorizationUtil.getMyUser();
         XQuery xQuery = new XQuery(qm,request);
-        LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-        queryMap.put("user_id",user.getId());
+        xQuery.put("author_id",user.getId());
         PageEntity entity = new PageEntity();
         if (!StringTools.isEmpty(index)){
             entity.setIndex(Integer.parseInt(index));
             entity.setSize(Integer.parseInt(size));
         }
         xQuery.setPageEntity(entity);
-        List<MasterComment> list = baseManager.listObject(xQuery);
-        return null;
+        PageInfo info = baseManager.listPageInfo(xQuery);
+        List<MasterComment> list = info.getList();
+        if (!StringTools.isEmpty(list) && list.size() > 0){
+            return list;
+        }else{
+            return new ArrayList();
+        }
     }
 
     @ResponseBody
-    @RequestMapping("/userPraises")
-    public String getUserPraises() {
-
-        return null;
+    @RequestMapping("/userPraises/{qm}/{size}/{index}")
+    public List getUserPraises(HttpServletRequest request, @PathVariable String qm, @PathVariable String size, @PathVariable String index)throws Exception{
+        MyUser user = AuthorizationUtil.getMyUser();
+        XQuery xQuery = new XQuery(qm,request);
+        xQuery.put("author_id",user.getId());
+        PageEntity entity = new PageEntity();
+        if (!StringTools.isEmpty(index)){
+            entity.setIndex(Integer.parseInt(index));
+            entity.setSize(Integer.parseInt(size));
+        }
+        xQuery.setPageEntity(entity);
+        PageInfo info = baseManager.listPageInfo(xQuery);
+        List<MasterCommentPraise> list = info.getList();
+        if (!StringTools.isEmpty(list) && list.size() > 0){
+            return list;
+        }else{
+            return new ArrayList();
+        }
     }
 
 	/*--------------PC-Start--------------*/
@@ -1047,9 +1065,13 @@ public class MasterMessageController {
         if (!"0".equals(fatherId)) {
             MasterComment fatherCom = (MasterComment) baseManager.getObject(MasterComment.class.getName(), fatherId);
             comment.setFatherComment(fatherCom);
+            comment.setAuthor(fatherCom.getUser());
         } else {
+            User user1 = new User();
+            user1.setId("0");
             MasterComment fatherCom = new MasterComment();
             fatherCom.setId("0");
+            fatherCom.setAuthor(user1);
             comment.setFatherComment(fatherCom);
         }
         comment.setMasterWork(work);
@@ -1081,10 +1103,14 @@ public class MasterMessageController {
         MasterComment comment = new MasterComment();
         if (!"0".equals(fatherId)) {
             MasterComment fatherCom = (MasterComment) baseManager.getObject(MasterComment.class.getName(), fatherId);
+            comment.setAuthor(fatherCom.getUser());
             comment.setFatherComment(fatherCom);
         } else {
+            User user1 = new User();
+            user1.setId("0");
             MasterComment fatherCom = new MasterComment();
             fatherCom.setId("0");
+            fatherCom.setAuthor(user1);
             comment.setFatherComment(fatherCom);
         }
         comment.setMasterMessage(work);
