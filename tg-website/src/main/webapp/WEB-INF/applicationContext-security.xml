@@ -26,6 +26,7 @@
         <intercept-url pattern="/person/personInfoView.do" access="isAuthenticated()"/>
         <intercept-url pattern="/group/groupBuy.do" access="isAuthenticated()"/>
         <intercept-url pattern="/group/shareGroup" access="isAuthenticated()"/>
+        <intercept-url pattern="/miao/buy/*" access="isAuthenticated()"/>
         <!--<intercept-url pattern="/group/createGroup" access="isAuthenticated()"/>-->
         <intercept-url pattern="/order/**" access="isAuthenticated()"/>
         <!--<intercept-url pattern="/sso.do" access="isAuthenticated()"/>
