@@ -228,16 +228,19 @@ public class GroupController {
         MyGroup group = (MyGroup) baseManager.getObject(MyGroup.class.getName(), groupId);
         String url = "?groupProductId=" + groupProductId + "&groupId=" + groupId + "&memberId=" + memberId;
         int flag = 0;//0未参团 1 团长 2 团员
-        for (GroupMember member : group.getGroupMemberList()) {
-            if (member.getUser().getId().equals(user.getId())&&member.getStatus().equals("1")) {
-                if("0".equals(member.getLevel())){
-                    flag = 1;
-                }else{
-                    flag = 2;
+        if(user!=null){
+            for (GroupMember member : group.getGroupMemberList()) {
+                if (member.getUser().getId().equals(user.getId())&&member.getStatus().equals("1")) {
+                    if("0".equals(member.getLevel())){
+                        flag = 1;
+                    }else{
+                        flag = 2;
+                    }
+                    break;
                 }
-                break;
             }
         }
+
         model.addAttribute("memberId",memberId);
         model.addAttribute("group", group);
         model.addAttribute("url", url);

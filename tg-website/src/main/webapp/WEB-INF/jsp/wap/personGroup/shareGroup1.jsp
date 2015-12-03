@@ -172,13 +172,10 @@
       <c:if test="${group.status=='1'}">
         <a href="javascript:void(0)" class="btn" id="btn">
           还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，去分享
-          <div id="cover" style="display: none;"><em class="bg" onclick="share()"></em><img
-                  src="<c:url value="/scripts/wap/upload/guide-share.png"/>" onclick="share()"> alt="">
-          </div>
         </a>
       </c:if>
       <c:if test="${group.status=='4'}">
-        <a href="javascript:void(0)" class="btn">
+        <a href="javascript:void(0)" class="btn" id="btn">
           组团成功，去分享
         </a>
       </c:if>
@@ -200,11 +197,8 @@
     </c:if>
     <c:if test="${flag==2}">
       <c:if test="${group.status=='1'}">
-        <a href="javascript:void(0)" class="btn">
+        <a href="javascript:void(0)" class="btn" id="btn">
           还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，去分享
-          <div id="cover" style="display: none;"><em class="bg" onclick="share()"></em><img
-                  src="<c:url value="/scripts/wap/upload/guide-share.png"/>" onclick="share()"> alt="">
-          </div>
         </a>
       </c:if>
       <c:if test="${group.status=='3'}">
@@ -226,6 +220,9 @@
         </a>
       </c:if>
     </c:if>
+    <div id="cover" style="display: none;"><em class="bg"></em><img
+            src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt="">
+    </div>
   </div>
   <!--成团信息-->
   <div class="new-page ae">
@@ -372,11 +369,6 @@
   <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
 <!--//End--footer-->
-<script>
-  function share(){
-    $("#cover").hide();
-  }
-</script>
 <!--悬浮订单-->
 <div class="met-nav ae">
   <a href="<c:url value="/tuan.do"/>"><p><i class="met-1con m-icon"></i></p><p>团购首页</p></a>
