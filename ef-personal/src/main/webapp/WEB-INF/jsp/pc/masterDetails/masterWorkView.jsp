@@ -36,7 +36,7 @@
     <!--头部-->
     <div class="list-f-title">
         <p><a href="<c:url value='/masterMessage/introView/${work.masterId}'/>">大师</a><i class="fu-icon"></i><a
-                href="<c:url value='/masterMessage/masterView/${work.masterId}'/>">主页</a><i class="fu-icon"></i><span>作品详情</span>
+                href="<c:url value='/masterMessage/getPartWorks/${work.masterId}'/>">作品</a><i class="fu-icon"></i><span>作品详情</span>
         </p>
     </div>
     <div class="ae">

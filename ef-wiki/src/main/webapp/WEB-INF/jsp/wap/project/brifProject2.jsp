@@ -398,8 +398,8 @@
         dataType:"json",
         success:function(data){
           if(data=="false"){
-            //alert("您还未登陆，请登录后再操作");
-            var go = window.confirm("去登陆吧?");
+            //alert("您还未登录，请登录后再操作");
+            var go = window.confirm("去登录吧?");
             if(go==true){
               window.location.href ="<c:url value='/brifProject2/${project.id}'/>";
             }
@@ -465,8 +465,8 @@
         dataType:"json",
         success:function(data){
           if(data=="false"){
-            //alert("您还未登陆，请登录后再操作");
-            var go = window.confirm("去登陆吧?");
+            //alert("您还未登录，请登录后再操作");
+            var go = window.confirm("去登录吧?");
             if(go==true){
               window.location.href ="<c:url value='/brifProject2/${project.id}'/>";
             }
@@ -976,8 +976,8 @@
      dataType:"json",
      success:function(data2){
        if(data2=="false"){
-         //alert("您还未登陆，请登录后再操作！！！");
-         var go = window.confirm("去登陆吧?");
+         //alert("您还未登录，请登录后再操作！！！");
+         var go = window.confirm("去登录吧?");
          if(go==true){
            window.location.href ="<c:url value='/wapbrifProject/${project.id}'/>";
          }

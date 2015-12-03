@@ -353,10 +353,10 @@
     </div>
   </div>
 </div>
-<div class="login-reg">
+<%--<div class="login-reg">
   <a href="#login" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
   <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
-</div>
+</div>--%>
 <!--//End--login-reg-->
 <footer class="bd footer">
   <div class="bd info">
