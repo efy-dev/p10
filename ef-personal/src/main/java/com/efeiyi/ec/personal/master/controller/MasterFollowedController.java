@@ -113,7 +113,7 @@ public class MasterFollowedController {
 			if (list != null && list.size() > 0){
 				for (MasterRecommended recommended : list){
 					Master master = (Master) baseManager.getObject(Master.class.getName(),recommended.getMaster().getId());
-					master.setFollowStatus(getFollowStatus(master,(User)baseManager.getObject(User.class.getName(),user.getId())));
+					master.setFollowStatus("关注");
 					MasterModel masterModel = ConvertMasterModelUtil.convertMaster(master);
 					models.add(masterModel);
 				}

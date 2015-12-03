@@ -55,16 +55,16 @@
         </div>
             <div class="items">
                 <p>用户名</p>
-                <input class="ipt" type="text" name="username" id="username" onblur="checkUserName()" placeholder="">
+                <input class="ipt" type="text" name="username" id="username" onblur="checkUserName()" placeholder=""  />
                 <small name="message" style="color: red;line-height: 22px;"></small>
             </div>
             <div class="items">
                 <p>密码</p>
-                <input class="ipt" type="text" name="password" id="password" placeholder="">
+                <input class="ipt" type="text" name="password" id="password" placeholder="" required />
             </div>
             <div class="items">
                 <p>重复密码</p>
-                <input class="ipt" type="text" name="rePassword" onkeydown="checkPassword()" onkeyup="checkPassword()" id="RePassword" placeholder="">
+                <input class="ipt" type="text" name="rePassword" onkeydown="checkPassword()" onkeyup="checkPassword()" id="RePassword" placeholder=""  />
                 <small name="message" style="color: red;line-height: 22px;"></small>
             </div>
             <div class="items items-agree">
@@ -74,7 +74,7 @@
                 </label>
             </div>
             <div class="items">
-                <input class="btn-reg"  onclick="checkRegister()" id="register" disabled="disabled" value="注   册">
+                <input class="btn-reg"  onclick="checkRegister()" id="register" value="注   册">
             </div>
             <div class="items items-go">
                 <span class="go-reg">已经有账号？<a href="<c:url value="/login.do"/>" title="去登陆">去登陆</a></span>
@@ -341,13 +341,11 @@
         $('#closeBox').click(function(){
             $('.thickframe').hide();
             $("input[type='checkbox']").attr("checked",false);
-            checkAgree();
             return false;
         })
         $('.btnt .btn-img').click(function(){
             $('.thickframe').hide();
             $("input[type='checkbox']").attr("checked",true);
-            checkAgree();
             return false;
         })
     });
@@ -395,10 +393,23 @@
                  return false;
              }
         });
+        if($("#username").val()==""){
+            $("#username").next("small").text("用户名不能为空!");
+        }
+        if($("#password").val()==""){
+            $("#RePassword").next("small").text("密码不能为空!");
+        }else {
+            if ($("#RePassword").val() == "") {
+                $("#RePassword").next("small").text("重复密码不能为空!");
+            }
+        }
         if(!$("input[type='radio']").is(":checked")){
             flag = false;
             alert("请选择类型!");
-        }else {
+        }else  if(!$("input[type='checkbox']").is(":checked")){
+            flag = false;
+            alert("请同意协议后注册!");
+        }else{
             if (flag) {
                 $("#form").submit();
             } else {

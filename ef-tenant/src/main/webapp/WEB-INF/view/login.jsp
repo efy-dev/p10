@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -13,22 +14,7 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/login.css"/>"/>
 </head>
 <body>
-<div class="topbar wh">
-    <div class="hd">
-        <ul class="ul-item">
-            <li><a href="" title="请登录">请登录</a></li>
-            <li><a href="" title="快速注册">快速注册</a></li>
-            <li class="btn-top-wechat">
-                <a title="手机e飞蚁">手机e飞蚁</a>
-                <span class="top-wechat" style="display: none;"></span>
-            </li>
-            <li class="cart">
-                <a href=" " title="购物车"><i class="icon"></i>购物车</a>
-                <span class="tips"><em id="cartAmount">0</em></span>
-            </li>
-        </ul>
-    </div>
-</div>
+
 
 <div class="header wh">
     <div class="hd">
@@ -53,13 +39,13 @@
                 <i class="icon pwd"></i>
                 <input id="password" name="password" class="text1 textam" tabindex="2" minlength="3" placeholder="密码" type="password" value="">
             </div>
-            <div class="am-form-group">
+            <%--<div class="am-form-group">--%>
                 <%--<label for="">--%>
                     <%--<input type="checkbox" tabindex="4" name="rememberMe" value="true">--%>
                     <%--<span>自动登录</span>--%>
                     <%--<a class="forgetpwd" href="" title="忘记密码">忘记密码？</a>--%>
                 <%--</label>--%>
-            </div>
+            <%--</div>--%>
             <input class="btn-submit " type="submit" tabindex="5" value="登 录 工 作 台">
         </form>
     </div>
@@ -103,30 +89,30 @@
             <div class=" foremax">
                 <dl class="fore">
                     <dt>帮助中心</dt>
-                    <dd><a href="#" target="_blank">购物流程</a></dd>
-                    <dd><a href="#" target="_blank">支付方式</a></dd>
-                    <dd><a href="#" target="_blank">配送方式</a></dd>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.gwlc" target="_blank">购物流程</a></dd>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.zffs" target="_blank">支付方式</a></dd>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.psfs" target="_blank">配送方式</a></dd>
                 </dl>
                 <dl class="fore">
                     <dt>商家服务</dt>
-                    <dd><a href="#" target="_blank">入驻须知</a></dd>
-                    <dd><a href="#" target="_blank">入驻流程</a></dd>
-                    <dd><a href="#" target="_blank">入驻咨询</a></dd>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.rzxz" target="_blank">入驻须知</a></dd>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.rzlc" target="_blank">入驻流程</a></dd>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.rzzx" target="_blank">入驻咨询</a></dd>
                 </dl>
                 <dl class="fore">
                     <dt>售后流程</dt>
-                    <dd><a href="#" target="_blank">退货流程</a></dd>
-                    <dd><a href="#" target="_blank">换货流程</a></dd>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.thlc" target="_blank">退货流程</a></dd>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.hhlc" target="_blank">换货流程</a></dd>
                 </dl>
                 <dl class="fore">
                     <dt>服务保障</dt>
-                    <dd><a href="#" target="_blank">正品保障</a></dd>
-                    <dd><a href="#" target="_blank">售后政策</a></dd>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.zpbz" target="_blank">正品保障</a></dd>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.shzc" target="_blank">售后政策</a></dd>
                 </dl>
                 <dl class="fore">
                     <dt>法律声明</dt>
-                    <dd><a href="#" target="_blank">法律声明</a></dd>
-                    <dd><a href="#" target="_blank">安全及隐私声明</a></dd>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.flsm" target="_blank">法律声明</a></dd>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.aqjyssm" target="_blank">安全及隐私声明</a></dd>
                 </dl>
                 <div class="wechatnew" title="手机e飞蚁"><i class="inro-icon"></i></div>
             </div>
@@ -134,17 +120,17 @@
     </div>
     <div class="max-links wh">
         <div class="links wh">
-            <a href="" target="_blank" title="关于我们">关于我们</a>
+            <a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.gywm" target="_blank" title="关于我们">关于我们</a>
             <a class="line"></a>
-            <a href="" target="_blank" title="平台优势">平台优势</a>
+            <a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.ptys" target="_blank" title="平台优势">平台优势</a>
             <a class="line"></a>
-            <a href="" target="_blank" title="诚聘英才">诚聘英才</a>
+            <a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.cpyc" target="_blank" title="诚聘英才">诚聘英才</a>
             <a class="line"></a>
-            <a href="" target="_blank" title="联系我们">联系我们</a>
+            <a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.lxwm" target="_blank" title="联系我们">联系我们</a>
             <a class="line"></a>
-            <a href="" target="_blank" title="意见反馈">意见反馈</a>
+            <a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.yjfk" target="_blank" title="意见反馈">意见反馈</a>
             <a class="line"></a>
-            <a href="" target="_blank" title="非遗简介">非遗简介</a>
+            <a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.fyjj" target="_blank" title="非遗简介">非遗简介</a>
         </div>
         <div class="copyright wh">
             <div class="frlinksimg">
