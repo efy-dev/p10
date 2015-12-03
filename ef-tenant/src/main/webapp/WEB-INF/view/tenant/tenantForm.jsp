@@ -112,7 +112,7 @@
                     <%--<small>输入短简介,限30字以内</small>--%>
                 <%--</div>--%>
             <%--</div>--%>
-            <div class="am-form-group">
+            <div class="am-form-group" style="display: none;">
                 <label for="logo" class="am-u-sm-3 am-form-label">类型</label>
                 <div style="margin-top: 10px;">
                     <span style="padding: 10px;">

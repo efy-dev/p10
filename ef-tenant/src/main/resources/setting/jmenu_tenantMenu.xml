@@ -46,15 +46,15 @@
             <!--<jnode id="" url="/basic/xm.do?qm=productTenantCatalogValue_default"  state="" access="" text_zh_CN="分类管理">-->
                 <!--<match url="productTenantCatalogValue_default"/>-->
             <!--</jnode>-->
-            <jnode id="" url="/basic/xm.do?qm=plistTenantCategory_default"  state="" access="" text_zh_CN="分类管理">
-                <match url="/basic/xm.do?qm=plistTenantCategory_default"/>
-                <match url="/basic/xm.do?qm=formTenantCategory"/>
-                <match url="/basic/xm.do?qm=plistTProduct_default"/>
-                <match url="/basic/xm.do?qm=plistTProduct_default1"/>
-                <match url="/basic/xm.do?qm=viewTenantCategory"/>
+            <!--<jnode id="" url="/basic/xm.do?qm=plistTenantCategory_default"  state="" access="" text_zh_CN="分类管理">-->
+                <!--<match url="/basic/xm.do?qm=plistTenantCategory_default"/>-->
+                <!--<match url="/basic/xm.do?qm=formTenantCategory"/>-->
+                <!--<match url="/basic/xm.do?qm=plistTProduct_default"/>-->
+                <!--<match url="/basic/xm.do?qm=plistTProduct_default1"/>-->
+                <!--<match url="/basic/xm.do?qm=viewTenantCategory"/>-->
 
 
-            </jnode>
+            <!--</jnode>-->
             <!--<jnode id="" url=""  state="" access="" text_zh_CN="橱窗推荐">-->
                 <!--<match url=""/>-->
             <!--</jnode>-->
