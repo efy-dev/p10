@@ -16,7 +16,8 @@
         </div>
         <h2>商户后台</h2>
         <h1>
-            <%=AuthorizationUtil.getMyUser().getBigTenant().getName() %>
+
+            <%=AuthorizationUtil.getMyUser().getBigTenant().getName()==null?"":AuthorizationUtil.getMyUser().getBigTenant().getName() %>
         </h1>
         <span>客服热线：<strong>400-876-8766</strong></span>
     </div>
