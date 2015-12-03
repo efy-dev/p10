@@ -31,7 +31,8 @@
     <!-- //End--chevron-left-->
     <div class="menu-list">
         <ul class="bd">
-            <li><a href="<c:url value="/miao/list"/>" title="首页">首页</a></li>
+            <li><a href="<c:url value="/"/>" title="首页">商城首页</a></li>
+            <li><a href="<c:url value="/miao"/>" title="首页">秒杀首页</a></li>
             <li><a href="http://i.efeiyi.com" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
         </ul>
     </div>
