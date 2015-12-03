@@ -79,7 +79,6 @@ a{outline: none}
     height: auto;
 }
 
-
 /*！--end--！--作品模块--110208工艺详情页-作品*/
 /*，end，110208工艺详情页-作品*/
 /*--介绍--110208工艺详情页-介绍*/
@@ -160,7 +159,7 @@ a{outline: none}
 .loding{text-align: center;width:100%;float: left;margin-bottom: 200px;}
 /*edn//110202工艺首页-关注*/
 /*110202工艺首页-关注后*/
-.craft-l-content{padding: 35px 0;}
+.craft-l-content{padding: 35px 0;border-bottom: 2px solid #000;}
 .craft-l-content .craft-dt{width: 363px!important;position: relative;}
 .craft-l-content .craft-dt .img-dt{width: 160px;height: 160px;position: absolute;left: 0;top:0;}
 .craft-l-content .craft-dt .img-dt img{width: 100%;height: 100%;}
@@ -265,7 +264,7 @@ a{outline: none}
 .details .detaile-left .detaile-share .jiathis_style a:hover .jtico_tsina {background-position:-43px 0}
 .details .detaile-left .detaile-share .jiathis_style a:hover .jtico_cqq {background-position:-65px 0;width:22px}
 .details .detaile-left .detaile-share .thumb-up{width: 305px;float: right;padding: 30px 0}
-.details .detaile-left .detaile-share .thumb-up .thump-assist{float: left;margin-right: 30px;}
+/*.details .detaile-left .detaile-share .thumb-up .thump-assist{float: left;margin-right: 30px;}*/
 .details .detaile-left .detaile-share .thumb-up .thump-assist .z-icon{width: 18px;height: 16px;background:url('../images/cyclopedia.png') no-repeat -49px -2px;float: left;margin-top: 13px;margin-right: 10px;}
 .details .detaile-left .detaile-share .thumb-up .thump-assist em{float: left;font-size: 14px;color: #000;}
 .details .detaile-left .detaile-share .thumb-up .thump-assist a{color: #000;text-decoration: none;outline: none;}
@@ -276,9 +275,9 @@ a{outline: none}
 
 
 .commentP{width: 100%;float: left}
-
-
-
+/*无询价状态*/
+.details .detaile-left .detaile-share .thumb-up .thump-collect{float: right}
+.details .detaile-left .detaile-share .thumb-up .thump-assist{float: right;margin-left: 30px;}
 
 
 
@@ -293,7 +292,7 @@ a{outline: none}
 .details .detaile-left .detaile-content .intro{font-size: 14px;color: #000;}
 .details .detaile-left .detaile-content .intro img{width: 100%;}
 .details .detaile-left .detaile-comment{padding: 0 20px;}
-.details .detaile-left .detaile-comment h4{padding: 20px;font-size: 14px;color: #000;}
+.details .detaile-left .detaile-comment h4{padding: 20px 20px 20px 0;font-size: 14px;color: #000;}
 .details .detaile-left .detaile-comment .comment li{position: relative;padding-left: 55px;border-bottom: 1px solid #ebebeb;margin-bottom: 20px;}
 .details .detaile-left .detaile-comment .comment li a{outline: none;}
 .details .detaile-left .detaile-comment .comment li .img{width: 35px;height: 35px;position: absolute;left: 0;top: 0;}

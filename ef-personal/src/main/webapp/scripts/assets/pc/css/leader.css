@@ -36,7 +36,7 @@ a{outline: none}
 
 .great-nav{width: 1000px;margin: 0 auto;height: 32px;}
 
-    /*关注*/
+/*关注*/
 .pc-gz .bt-gz .gz-icon{width: 10px;height: 10px;margin-top: 5px;margin-right: 3px;background:url('../images/cyclopedia.png') no-repeat 0px 0;float: left}
 .pc-gz .bt-gz em{font-size: 12px;float: left}
 .pc-gz  a{font-size: 12px;color: #000;outline: none;}
@@ -67,10 +67,10 @@ a{outline: none}
 .pc-dy-txt .pc-dy-box h5{font-size: 14px;margin: 27px 0 15px 0;font-weight: 100;}
 .pc-dy-txt .pc-dy-box p{font-size: 12px;color: #999;}
 .pc-dy-txt .pc-dy-box .pc-dy-content{width: 100%;}
-.pc-dy-txt .pc-dy-box .pc-dy-content p{font-size: 14px!important;color: #000!important;margin: 14px 38px  14px 0!important;}
+.pc-dy-txt .pc-dy-box .pc-dy-content p{font-size: 14px!important;color: #000!important;margin: 14px 38px  14px 0!important;float:left;width: 100%}
 .pc-dy-txt .pc-dy-box .pc-dy-content .one-pic{width: 155px;margin-bottom: 15px;}
 .pc-dy-txt .pc-dy-box .pc-dy-content .one-pic img{width: 100%;}
-.pc-dy-txt .pc-dy-box .pc-dy-content .one-tiem{width: 100%;height: 27px;}
+.pc-dy-txt .pc-dy-box .pc-dy-content .one-tiem{width: 100%;height: 27px;float: left}
 .pc-dy-txt .pc-dy-box .pc-dy-content .one-tiem span{float: left;font-size: 12px;color: #ccc;margin-right: 14px;}
 
 .pc-dynamic .p-dy-left .list-dynamic  li .one-state{width: 100%;}
@@ -86,9 +86,9 @@ a{outline: none}
 .dnc-icon-4{width: 16px;height: 14px;background:url('../images/cyclopedia.png') no-repeat -82px -26px;}
 .zq{display: inline-block;margin-right: 10px;}
 
-.pc-dy-txt .pc-dy-box .pc-dy-content .two-pic{width: 328px;margin-left: -8px;}
+.pc-dy-txt .pc-dy-box .pc-dy-content .two-pic{width: 328px;margin-left: -8px;float: left}
 .pc-dy-txt .pc-dy-box .pc-dy-content .two-pic .sudoku{width: 100%;float: left}
-.pc-dy-txt .pc-dy-box .pc-dy-content .two-pic .sudoku li{margin-left: 8px;margin-bottom: 8px;width: 100px;height: 100px;}
+.pc-dy-txt .pc-dy-box .pc-dy-content .two-pic .sudoku li{margin-left: 8px;margin-bottom: 8px;width: 100px;height: 100px;border-top: 0;border-bottom: 0;}
 .pc-dy-txt .pc-dy-box .pc-dy-content .two-pic .sudoku li img{width:100%;height: 100%;}
 .w-active{width: 320px!important;}
 
@@ -129,10 +129,10 @@ a{outline: none}
 .craft-gz .craft-list .craft-l-page li .add{width: 100%;float:left}
 .craft-gz .craft-list .craft-l-page li .add dt{width: 108px;height: 108px;float: left;margin-right: 20px;}
 .craft-gz .craft-list .craft-l-page li .add dt img{width: 100%;height: 100%;}
-.craft-gz .craft-list .craft-l-page li .add  dd{width: 150px;float: left;float: left;margin: 0}
+.craft-gz .craft-list .craft-l-page li .add  dd{width: 150px;float: left;float: left;margin: 0;}
 .craft-gz .craft-list .craft-l-page li .add  dd .txt1{font-size: 14px;color: #000;margin-bottom: 8px;}
 .craft-gz .craft-list .craft-l-page li .add  dd .txt2{font-size: 12px;color: #000;margin-bottom: 8px;}
-.craft-gz .craft-list .craft-l-page li .add  dd .txt3{color:#999899;font-size: 12px;margin-bottom: 8px;height: 21px;OVERFLOW:HIDDEN;}
+.craft-gz .craft-list .craft-l-page li .add  dd .txt3{color:#999899;font-size: 12px;margin-bottom: 8px;height: 21px;}
 /*edn//110202工艺首页-关注*/
 /*110103大师首页-单图*/
 /*110204工艺首页-列表*/
@@ -235,7 +235,7 @@ a{outline: none}
 .details .detaile-left .detaile-content{border-top: 2px solid #000;border-bottom: 2px solid #000;padding: 35px;float: left;width: 100%;margin-top: -1px;}
 .details .detaile-left .detaile-content .intro{font-size: 14px;color: #000;}
 .details .detaile-left .detaile-comment{padding: 0 20px;border-top: 2px solid #000; }
-.details .detaile-left .detaile-comment h4{padding: 20px;font-size: 14px;color: #000;}
+.details .detaile-left .detaile-comment h4{padding: 20px 20px 20px 0;font-size: 14px;color: #000;}
 .details .detaile-left .detaile-comment .comment li{position: relative;padding-left: 55px;border-bottom: 1px solid #ebebeb;margin-bottom: 20px;}
 .details .detaile-left .detaile-comment .comment li a{outline: none;color: #000;text-decoration: none;}
 .details .detaile-left .detaile-comment .comment li .img{width: 35px;height: 35px;position: absolute;left: 0;top: 0;}
@@ -307,7 +307,7 @@ a{outline: none}
 .craft-master2 ul li .text h4{font-size: 12px;color: #000;margin-bottom: 5px;}
 .craft-master2 ul li .text p{font-size: 12px;color: #262626;margin-bottom: 5px;}
 .craft-master2 ul li .text p span{color:#999!important;}
-.craft-master2 ul li .text a{width: 51px;height:31px;padding:5px 6px;border: 1px solid #ccc;display:inline-block}
+.craft-master2 ul li .text .btn-guan{width: 51px;height:31px;padding:5px 6px;border: 1px solid #ccc;display:inline-block}
 .craft-master2 .gz-icon{background:url('../images/cyclopedia.png') no-repeat -34px 0px;width: 10px;height: 10px;float: left;margin-top: 4px;margin-right: 3px;}
 .craft-master2 ul li .text a em{float: left;font-size: 12px;color: #000;}
 .craft-master2 ul li .img{position: absolute;left: 20px;top: 20px;width: 108px;height: 108px;}
@@ -324,7 +324,7 @@ a{outline: none}
 .master-list .pc-dy-box p span{color: #000;}
 .master-list .pc-dy-box .pc-dy-content{margin-top: 20px;}
 .master-list .pc-dy-box .pc-dy-content .list-pic{width: 100%;float: left}
-.master-list .pc-dy-box .pc-dy-content .list-pic li{width: 130px;height: 130px;margin-right: 10px;float: left}
+.master-list .pc-dy-box .pc-dy-content .list-pic li{width: 130px;height: 130px;margin-right: 10px;float: left;border-top: 0;border-bottom: 0;}
 .master-list .pc-dy-box .pc-dy-content .list-pic li img{width: 100%}
 /*弹出框*/
 .word{}
@@ -397,7 +397,7 @@ a{outline: none}
 
 
 
-
+.details .detaile-left .detaile-share .thumb-up .thump-collect .s-icon1{width: 18px;height: 16px;background:url('../images/cyclopedia.png') no-repeat -139px -42px;float: left;margin-top: 14px;margin-right: 10px;}
 
 /*--作品模块--110208工艺详情页-作品*/
 .craft-max{width: 1000px;margin: 0 auto}
@@ -415,7 +415,7 @@ a{outline: none}
 #pubu{position: relative}
 .craft-work3 .river ul{padding-bottom: 102px;}
 .craft-work3 .craft-page{width: 235px;float: left;border: 1px solid #e5e5e5;margin-right: 20px;margin-bottom: 20px;}
-.craft-work3 .craft-page img{width: 100%;float: left;}
+.craft-work3 .craft-page img{width: 100%;height: 100%;float: left;}
 .craft-work3 .craft-page h4{padding: 16px 0 16px 10px;font-size: 14px;float: left;color: #000;}
 .craft-work3 .craft-page .function-page{padding:0 10px 16px 10px;}
 .craft-work3 .craft-page .function-page .d-left{float: left;}
@@ -456,3 +456,5 @@ a{outline: none}
 
 .add-obtain{position: relative;float:left;margin: 0;}
 .obtain{width: 100%;float:left}
+.no-list{width: 682px;height: 440px;border: 1px solid #000;float: left;margin-bottom: 37px;}
+.no-list .no-icon{width: 51px;height: 234px;background: url("../images/cyclopedia.png") 0  -180px;display: inline-block;margin: 107px 0 0 316px;}

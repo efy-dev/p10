@@ -35,7 +35,7 @@
 <body style="float: left">
 <div class="list-find">
   <div class="list-f-title">
-    <p><a href="<c:url value='/masterMessage/index.do'/>">大师</a><i class="fu-icon"></i><a href="<c:url value='/masterMessage/index.do'/>">动态</a><i class="fu-icon"></i><span>动态详情</span></p>
+    <p><a href="<c:url value='/masterMessage/index.do'/>">大师</a><i class="fu-icon"></i><a href="<c:url value='/masterMessage/masterView/${msg.master.id}'/>">主页</a><i class="fu-icon"></i><span>动态详情</span></p>
   </div>
   <div class="ae">
     <div class="details ae">

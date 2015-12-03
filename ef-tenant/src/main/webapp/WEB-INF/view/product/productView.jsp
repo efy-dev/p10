@@ -574,7 +574,7 @@
     }
     var modelIds = [];
     var modelNames = [];
-    var myeditor=CKEDITOR.replace('content', {height: '440px', width: '1000px'});
+  //  var myeditor=CKEDITOR.replace('content', {height: '440px', width: '1000px'});
     $(function () {
 
         $(".copy").each(function () {

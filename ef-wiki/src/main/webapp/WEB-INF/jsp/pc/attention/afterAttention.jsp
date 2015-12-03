@@ -92,7 +92,7 @@
             if(data[i] && data[i].products.length>=1){
 
               for(j in data[i].products){
-               var subChrildBox = ("<li><a href=\"<c:url value='/project/showProduct/'/>"+data[i].products[j].id+"\"><img src=\"http://pro.efeiyi.com/"+data[i].products[j].picture_url+"@!pc-after-attention-1\"></a><p>"+
+               var subChrildBox = ("<li><a href=\"<c:url value='/project/showProduct/'/>"+data[i].products[j].id+"/"+data[i].projectModel.projectId+"\"><img src=\"http://pro.efeiyi.com/"+data[i].products[j].picture_url+"@!pc-after-attention-1\"></a><p>"+
                         "<a href=\"#\">"+data[i].products[j].name+"</a></p></li> ");
                 subBox.children().eq(0).append(subChrildBox);
               }

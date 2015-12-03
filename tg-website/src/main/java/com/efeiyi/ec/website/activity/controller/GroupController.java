@@ -144,6 +144,8 @@ public class GroupController {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
 
         PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
+//        purchaseOrderGroup.setId(purchaseOrderId);
+        purchaseOrderGroup.setStatus("1");
         purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
         purchaseOrderGroup.setMyGroup(myGroup);
         purchaseOrderGroup.setGroupMember(member);

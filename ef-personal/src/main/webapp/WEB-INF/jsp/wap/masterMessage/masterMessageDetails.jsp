@@ -141,8 +141,8 @@
 <!--//End--header-->
 <div class="master-works">
   <div class="user" style="height: 480px;">
-    <img class="img-user" src="/scripts/assets/images/box-tx-3-4-3.jpg" alt=""/>
-    <img class="img-bg" src="/scripts/assets/images/box-tx-3-4-3.jpg" alt=""/>
+    <img class="img-user" src="http://tenant.efeiyi.com/${object.favicon}" alt=""/>
+    <img class="img-bg" src="http://tenant.efeiyi.com/${object.backgroundUrl}" alt=""/>
     <div class="user-info">
       <p class="user-name">${object.fullName}</p>
       <p class="project-name">${object.projectName}</p>

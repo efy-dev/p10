@@ -28,25 +28,34 @@
     <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
     <script src="<c:url value='/resources/js/alert.js'/>"></script>
-    <decorator:head/>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/login.css"/>"/>
+    <jsp:include flush="true"
+                 page="/getMenu.do?jmenuId=tenantMenu&resultPage=/jmenu/tenantHeader&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
+    <sitemesh:write property='head'/>
     <style>
         .efy-active {
             background-color: #9a9a9a;
         }
     </style>
 </head>
+
 <body>
-<jsp:include flush="true"
-             page="/getMenu.do?jmenuId=tenantMenu&resultPage=/jmenu/tenantHeader&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
-<div class="am-cf admin-main">
-    <%----%>
-    <jsp:include flush="true"
-                 page="/getMenu.do?jmenuId=tenantMenu&resultPage=/jmenu/tenantManage&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"></jsp:include>
-    <div class="admin-content" style="height: auto;">
-        <sitemesh:write property='body'/>
+
+<div style="width: 100%;float:left;;">
+    <div class="am-cf admin-main">
+        <%----%>
+        <jsp:include flush="true"
+                     page="/getMenu.do?jmenuId=tenantMenu&resultPage=/jmenu/tenantManage&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"></jsp:include>
+        <div class="admin-content" style="height: auto;">
+            <sitemesh:write property='body'/>
+        </div>
     </div>
 
 </div>
 </body>
-
+<footer>
+    <jsp:include flush="true"
+                 page="/getMenu.do?jmenuId=tenantMenu&resultPage=/jmenu/tenantEnd&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
+    <sitemesh:write property='footer'/>
+</footer>
 </html>
