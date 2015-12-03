@@ -221,7 +221,7 @@
       </c:if>
     </c:if>
     <div id="cover" style="display: none;"><em class="bg"></em><img
-            src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt="">
+            src="<c:url value="/scripts/wap/upload/guide-share.png"/>">
     </div>
   </div>
   <!--成团信息-->
