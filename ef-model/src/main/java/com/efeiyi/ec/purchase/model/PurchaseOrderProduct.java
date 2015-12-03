@@ -21,14 +21,15 @@ public class PurchaseOrderProduct {
     private PurchaseOrderComment purchaseOrderComment;
     private String status;//评价状态 0：未评价 1：已评价
 
-    public PurchaseOrderProduct(PurchaseOrder purchaseOrder,ProductModel productModel,Integer purchaseAmount,BigDecimal purchasePrice){
+    public PurchaseOrderProduct(PurchaseOrder purchaseOrder, ProductModel productModel, Integer purchaseAmount, BigDecimal purchasePrice) {
         this.purchaseOrder = purchaseOrder;
         this.productModel = productModel;
         this.purchaseAmount = purchaseAmount;
-        this.purchasePrice = purchasePrice;
+        this.purchasePrice = purchasePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
-    public PurchaseOrderProduct(){}
+    public PurchaseOrderProduct() {
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
