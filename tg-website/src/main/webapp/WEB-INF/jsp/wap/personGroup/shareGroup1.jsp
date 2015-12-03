@@ -245,7 +245,7 @@
         <strong><img src="<c:url value="/scripts/wap/upload/fx-x-1.png"/>" class="page-pic"></strong>
         <span>团员${fn:substring(member.user.getUsername(), 0,3 )}****${fn:substring(member.user.getUsername(),7,11)}</span>
         <span>${fn:substring(group.createDateTime,0 ,11 )}</span>
-        <span>${fn:substring(group.createDateTime,11 ,19 )}开团</span>
+        <span>${fn:substring(group.createDateTime,11 ,19 )}参团</span>
       </li>
         </c:if>
       </c:forEach>
