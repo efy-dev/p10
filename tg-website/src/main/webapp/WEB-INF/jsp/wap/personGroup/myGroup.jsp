@@ -58,7 +58,7 @@
         <c:forEach items="${myCreateProductList}" var="member" varStatus="rec">
           <c:if test="${member.status!=2}">
           <li>
-            <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
+            <a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
               <p> ${member.myGroup.groupProduct.productModel.product.name} ${member.myGroup.groupProduct.productModel.name}</p>
               <p>${member.myGroup.createDateTime}</p>
               <c:if test="${member.myGroup.status==1}">
@@ -82,7 +82,7 @@
     <div class="ag-ck" style="display: none">
       <ul class="offered ae">
         <c:forEach items="${groupJoinList}" var="member" varStatus="rec">
-          <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
+          <a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
             <li>
               <p>${member.myGroup.groupProduct.productModel.product.name}[${member.myGroup.groupProduct.productModel.name}]</p>
               <p>${member.myGroup.createDateTime}</p>
