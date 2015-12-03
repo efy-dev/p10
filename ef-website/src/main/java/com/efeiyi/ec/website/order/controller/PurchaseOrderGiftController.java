@@ -101,7 +101,7 @@ public class PurchaseOrderGiftController {
         int width = theImg.getWidth(null);
         int height = theImg.getHeight(null);
         BufferedImage bimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Graphics g = bimage.createGraphics();
+        Graphics2D g = bimage.createGraphics();
         g.setColor(Color.black);
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
@@ -139,7 +139,7 @@ public class PurchaseOrderGiftController {
         ImageIcon giftImgIcon = new ImageIcon(pictureUrl);
         BufferedImage combined = new BufferedImage(bimage.getWidth(), bimage.getHeight(), BufferedImage.TYPE_INT_RGB);
         //图像合并
-        g = combined.getGraphics();
+        g = combined.createGraphics();
         g.drawImage(bimage, 0, 10, null);
         g.drawImage(image, 100, 750, null);
         g.drawImage(giftImgIcon.getImage(), 40, 250, null);
