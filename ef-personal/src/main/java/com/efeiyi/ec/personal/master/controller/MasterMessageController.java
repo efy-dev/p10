@@ -863,7 +863,11 @@ public class MasterMessageController {
         } else {
             work.setStoreStatus("收藏");
         }
-        work.getMaster().setFollowStatus(getFollowStatus(work.getMaster(), (User) baseManager.getObject(User.class.getName(), user.getId())));
+        if(user != null && user.getId() != null){
+            work.getMaster().setFollowStatus(getFollowStatus(work.getMaster(), (User) baseManager.getObject(User.class.getName(), user.getId())));
+        }else{
+            work.getMaster().setFollowStatus("关注");
+        }
         MasterModel workModel = ConvertMasterModelUtil.convertWork(work);
         model.addAttribute("object", work.getMaster());
         model.addAttribute("work", workModel);
