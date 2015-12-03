@@ -137,7 +137,7 @@ public class SeckillController {
             status = "1";
         }
 
-        if (seckillProduct.getAmount() <= 0) {
+        if (seckillProduct.getUsefulAmount() <= 0) {
             status = "3";
         }
 
