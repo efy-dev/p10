@@ -16,6 +16,7 @@ public class PurchaseOrderGroup extends PurchaseOrder{
     private PurchaseOrder purchaseOrder;
     private MyGroup myGroup;
     private GroupMember groupMember;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_order_id")
     public PurchaseOrder getPurchaseOrder() {

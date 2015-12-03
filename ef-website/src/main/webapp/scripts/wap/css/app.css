@@ -509,6 +509,9 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .search-sort .tnav {border-bottom:2px solid #000}
 .search-sort .tnav li {width:25%;line-height:3.2rem;float:left;text-align:center;color:#666;font-size:1.2rem;font-weight:bolder}
 .search-sort .tnav .icon-a1 {background:url(../images/icon-new.png) no-repeat 0 0;background-size:100px auto;width:8px;height:20px;display:inline-block;margin-left:6px;position:relative;top:11px}
+.search-sort .tnav .icon-a2 {background:url(../images/icon-new.png) no-repeat 0 0;background-size:100px auto;width:8px;height:20px;display:inline-block;margin-left:2px;position:relative;top:2px;
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);}
 .search-sort .ul-list {padding:0 20px}
 .search-sort .ul-list li {width:48%;margin-top:20px;padding-bottom:10px;font-size:14px;float:left;border-bottom:1px solid #cdcdcd}
 .search-sort .ul-list li img {width:100%}
