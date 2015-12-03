@@ -55,7 +55,7 @@
           </a>
         </div>
         <div class="attention-page">
-          <span>已经被 ${project.fsAmount} 个景泰蓝爱好者关注</span>
+          <span>已经被 <em id="gzNum">${project.fsAmount}</em> 个景泰蓝爱好者关注</span>
         </div>
       </div>
     </div>
@@ -107,12 +107,14 @@
         if(data=="true"){
           $("#"+projectId).empty();
           $("#"+projectId).append("<input id=\"saveProjectFllow\" type=\"hidden\" value=\"0\">  <em>已关注此工艺</em>");
+          $("#gzNum").text(parseInt($("#gzNum").text()+1));
           mark = true;
           return true;
         }
         if(data=="del"){
           $("#"+projectId).empty();
           $("#"+projectId).append("<input id=\"saveProjectFllow\" type=\"hidden\" value=\"1\"> <i class=\"atten-icon\"></i> <em>关注此工艺</em>");
+          $("#gzNum").text(parseInt($("#gzNum").text()-1));
           mark = true;
           return true;
         }
