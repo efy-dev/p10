@@ -30,7 +30,7 @@
     <script src="<c:url value='/resources/js/alert.js'/>"></script>
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/login.css"/>"/>
     <jsp:include flush="true"
-                 page="/getMenu.do?jmenuId=tenantMenu&resultPage=/jmenu/tenantHeader&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}@tenantName=${tenantName}"/>
+                 page="/getMenu.do?jmenuId=tenantMenu&resultPage=/jmenu/tenantHeader&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
     <sitemesh:write property='head'/>
     <style>
         .efy-active {

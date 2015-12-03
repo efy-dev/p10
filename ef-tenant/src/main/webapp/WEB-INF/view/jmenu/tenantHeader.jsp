@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.system.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -15,9 +16,7 @@
         </div>
         <h2>商户后台</h2>
         <h1>
-            <c:if test="${not empty tenantName}">
-                ${tenantName}
-            </c:if>
+            <%=AuthorizationUtil.getMyUser().getBigTenant().getName() %>
         </h1>
         <span>客服热线：<strong>400-876-8766</strong></span>
     </div>
