@@ -1,4 +1,4 @@
-package authentication;
+package com.ming800.core.util;
 
 import com.ming800.core.util.HttpUtil;
 import org.apache.commons.lang.StringUtils;
