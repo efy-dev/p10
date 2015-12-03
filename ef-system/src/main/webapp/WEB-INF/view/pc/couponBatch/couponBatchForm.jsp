@@ -102,7 +102,7 @@
             $.ajax({
                 type: 'post',
                 async: false,
-                url: '/couponBatch/getAllProjectCategory.do',
+                url: '<c:url value="/couponBatch/getAllProjectCategory.do"/>',
                 dataType: 'json',
                 data: {type: 'projectCategory'},
                 success: function (data) {
@@ -131,7 +131,7 @@
             $.ajax({
                 type: 'post',
                 async: false,
-                url: '/couponBatch/getAllProject.do',
+                url: '<c:url value="/couponBatch/getAllProject.do"/>',
                 dataType: 'json',
                 data: {'projectCategory_id': projectCategoryId},
                 success: function (data) {
@@ -156,7 +156,7 @@
             $.ajax({
                 type: 'post',
                 async: false,
-                url: '/couponBatch/getTenantByProject.do',
+                url: '<c:url value="/couponBatch/getTenantByProject.do"/>',
                 dataType: 'json',
                 data: {'project_id': projectId},
                 success: function (data) {
@@ -174,7 +174,7 @@
             $.ajax({
                 type: 'post',
                 async: false,
-                url: '/couponBatch/getProductByProject.do',
+                url: '<c:url value="/couponBatch/getProductByProject.do"/>',
                 dataType: 'json',
                 data: {'project_id': projectId},
                 success: function (data) {

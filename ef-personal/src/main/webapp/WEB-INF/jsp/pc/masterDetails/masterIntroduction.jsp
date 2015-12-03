@@ -149,15 +149,15 @@
       <div class="mas-tx-right">
         <c:if test="${!empty introductionList && introductionList.size() > 0}">
           <c:forEach items="${introductionList}" var="intro">
-            <c:if test="${intro.type == '5'}">
+            <c:if test="${intro.type == '5' && !empty intro.attachmentList && intro.attachmentList.size() > 0}">
               <h5>${intro.title}</h5>
-              <video style="margin-bottom:20px; " controls="controls" src="http://www.iqiyi.com/common/flashplayer/20151008/MainPlayer_5_2_28_1_c3_3_7_5.swf" width="100%" height="384"></video>
+              <c:forEach items="${intro.attachmentList}" var="attr">
+                <video style="margin-bottom:20px; " controls="controls" src="${attr.videoPath}" width="100%" height="384"></video>
+              </c:forEach>
               <p>${intro.content}</p>
-              <c:if test="${!empty intro.attachmentList && intro.attachmentList.size() > 0}">
                 <c:forEach items="${intro.attachmentList}" var="attr">
                   <img src="${attr.videoPath}">
                 </c:forEach>
-              </c:if>
             </c:if>
           </c:forEach>
         <div class="honor">
