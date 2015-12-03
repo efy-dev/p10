@@ -252,12 +252,8 @@
         if($(this).attr("title")=="1"){
           getMasterMessageList(masterId);
         }
-//        if($(this).attr("title")=="3"){
-//          getAllMasterWork(masterId);
-//        }
       }
     });
-//    getFollows("");
 //    getComments("");
 //    getPraises("");
   })

@@ -6,20 +6,6 @@
 <%--<%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page" %>--%>
 <html>
 <head>
-
-    <title><sitemesh:write property='title'/></title>
-    <%
-        if (HttpUtil.isPhone(request)) {
-    %>
-    <%@include file="mobileMainHeader.jsp" %>
-    <%
-    } else {
-    %>
-    <%@include file="pcMainHeader.jsp" %>
-    <%
-        }
-    %>
-    <sitemesh:write property='head'/>
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -39,6 +25,19 @@
         ga('send', 'pageview');
 
     </script>
+    <title><sitemesh:write property='title'/></title>
+    <%
+        if (HttpUtil.isPhone(request)) {
+    %>
+    <%@include file="mobileMainHeader.jsp" %>
+    <%
+    } else {
+    %>
+    <%@include file="pcMainHeader.jsp" %>
+    <%
+        }
+    %>
+    <sitemesh:write property='head'/>
 </head>
 <body>
 
@@ -46,8 +45,8 @@
     if (HttpUtil.isPhone(request)) {
 %>
 <%--导航--%>
-<%--<jsp:include flush="true"--%>
-             <%--page="/getMenu.do?jmenuId=nav&jnodeId=nav&resultPage=/common/nav&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>--%>
+<jsp:include flush="true"
+             page="/getMenu.do?jmenuId=nav&jnodeId=nav&resultPage=/common/nav&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
 
 <%
 } else {

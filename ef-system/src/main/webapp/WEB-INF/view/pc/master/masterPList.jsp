@@ -39,7 +39,6 @@
                 </tr>
                 </thead>
                 <tbody>
-
                 <c:forEach items="${requestScope.pageInfo.list}" var="master">
                     <tr id="${master.id}">
                         <td width="50%">
@@ -55,7 +54,6 @@
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
                                     </security:authorize>
-
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                        href="<c:url value="/basic/xm.do?qm=plistMasterMessage_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span
                                             class="am-icon-trash-o"></span> 最新动态
@@ -63,6 +61,10 @@
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                         href="<c:url value="/basic/xm.do?qm=plistMasterFollowed_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span
                                             class="am-icon-trash-o"></span> 查看粉丝
+                                    </a>
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       href="<c:url value="/basic/xm.do?qm=plistMasterWork_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span
+                                            class="am-icon-trash-o"></span> 查看作品
                                     </a>
                                     <security:authorize ifAnyGranted="admin,operational,c_operational">
                                     <c:set value="0" var="isOk"/>

@@ -148,22 +148,7 @@
             </does>
         </entity>
 
-        <entity name="masterComment" label="评论"  model="com.efeiyi.ec.master.model.MasterComment">
-            <does>
-                <do name="listMasterComment" access="" label="工作坊">
-                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
-                        <condition name="master.id" defaultValue="1" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                    </query>
-                </do>
-                <do name="plistMasterComment" access="" label="工作坊">
-                    <query name="byUser" label="默认" type="auto" orderBy="createDateTime:desc">
-                        <condition name="user.id" defaultValue="1" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                    </query>
-                </do>
-            </does>
-        </entity>
+
 
         <entity name="masterMessage" label="评论"  model="com.efeiyi.ec.master.model.MasterMessage">
             <does>
@@ -286,10 +271,6 @@
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="level" defaultValue="1" operation="eq"/>
                     </query>
-                    <!--<query name="byProject" label="默认" type="auto" orderBy="level:desc">-->
-                        <!--<condition name="status" defaultValue="1" operation="eq"/>-->
-                        <!--<condition name="status" defaultValue="1" operation="eq"/>-->
-                    <!--</query>-->
                 </do>
             </does>
         </entity>
@@ -307,11 +288,28 @@
                         <condition name="masterMessage.id" defaultValue="0" operation="eq"/>
                         <condition name="fatherComment.id" defaultValue="0" operation="eq"/>
                     </query>
+                    <query name="byAuthor" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="author.id" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
                 </do>
-
+                <do name="listMasterComment" access="" label="工作坊">
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="master.id" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
             </does>
         </entity>
-
-
+        <entity name="masterCommentPraise" label="关注前"  model="com.efeiyi.ec.master.model.MasterCommentPraise">
+            <does>
+                <do name="plistMasterCommentPraise" access="" label="关注" result="json">
+                    <query name="byAuthor" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="author.id" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
     </entities>
 </module>

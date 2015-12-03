@@ -22,7 +22,7 @@
 <meta name="msapplication-TileColor" content="#0e90d2">
 <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 <link type="text/css" rel="stylesheet" href="<c:url value="/resources/assets/css/amazeui.min.css"/>">
-<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150929"/>">
-<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150929"/>">
+<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css"/>">
+<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css"/>">
 <script src="<c:url value="/scripts/js/ef.util.js"/>"></script>
 <script src="<c:url value='/resources/js/alert.js'/>"></script>

@@ -497,10 +497,21 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .search .search-item .ul-list li:nth-child(2n-1){float:left}
 .search .search-item .ul-list li:nth-child(3n){float:right}
 .search .search-item .ul-list a {width:100%;line-height:40px;text-align:center;font-size:1.2rem;color:#000;font-weight:bolder;border:3px solid #d1d1d1;float:left}
+.search .search-item .ul-list li.active a {background: #000;color:#fff;border-color: #000;}
 .search .search-item .btn {line-height:35px;text-align:center;background:#000;color:#fff;margin-top:10px}
+.search-item-btn {
+    background: #000;
+    line-height:42px;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+    font-weight: bolder;}
 .search-sort .tnav {border-bottom:2px solid #000}
 .search-sort .tnav li {width:25%;line-height:3.2rem;float:left;text-align:center;color:#666;font-size:1.2rem;font-weight:bolder}
 .search-sort .tnav .icon-a1 {background:url(../images/icon-new.png) no-repeat 0 0;background-size:100px auto;width:8px;height:20px;display:inline-block;margin-left:6px;position:relative;top:11px}
+.search-sort .tnav .icon-a2 {background:url(../images/icon-new.png) no-repeat 0 0;background-size:100px auto;width:8px;height:20px;display:inline-block;margin-left:2px;position:relative;top:2px;
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);}
 .search-sort .ul-list {padding:0 20px}
 .search-sort .ul-list li {width:48%;margin-top:20px;padding-bottom:10px;font-size:14px;float:left;border-bottom:1px solid #cdcdcd}
 .search-sort .ul-list li img {width:100%}
@@ -514,12 +525,13 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .footer-new .info .icon {background-position:0 0;width:68px;height:26px;display:inline-block}
 .footer-new .info .wechat {width:153px;height:153px;display:inline-block;margin:10px 0}
 .footer-new .info .wechat img {width:100%}
-.footer-new .copyright {text-align:center;font-size:10px;line-height:20px;border-top:1px #000 solid;
-    background: #eee}
+.footer-new .copyright {text-align:center;font-size:10px;line-height:20px;border-top:1px #000 solid;background: #eee}
 .footer-new .authentication {
     border-top: 1px solid #000;
     text-align: center;
     padding-bottom: 26px;
+    position: relative;
+    z-index:-1;
 }
 .footer-new .authentication h3 {
     font-size: 1.8rem;
@@ -661,7 +673,28 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 
 .seckill .seckill-pro {border-top: 1px solid #000;border-bottom: 1px solid #000;margin-bottom: 16px;}
 .seckill .seckill-pro:first-child {border-top: 0;}
+.seckill .seckill-pro .start {position: relative}
 .seckill .seckill-pro .start h1 {line-height:46px;font-size: 15px;text-align: center;}
+.seckill .seckill-pro .start .s-time {
+    position: relative;
+    height: 54px;
+    margin-bottom:16px;}
+.seckill .seckill-pro .start .s-time ul {
+    font-size: 30px;
+    font-weight: bolder;
+    position: absolute;
+    top:0;
+    left: 50%;
+    margin-left: -86px;
+}
+.seckill .seckill-pro .start .s-time li {
+    line-height: 46px;
+    padding: 0 7px;
+    border: 4px solid #ccc;
+    float: left;}
+.seckill .seckill-pro .start .s-time li:nth-child(2){
+    border-left:0;border-right:0;
+}
 .seckill .seckill-pro .bigimg {position: relative;}
 .seckill .seckill-pro .bigimg img {width:100%;}
 .seckill .seckill-pro .bigimg .mask {
