@@ -274,7 +274,26 @@ public class HomeController {
         model.addAttribute("recommendedTenantList",recommendedTenantList);
         return "/common/productCategory";
     }
+    @RequestMapping({"/productCategoryList.do"})
+    public String moblieListProductCategory(HttpServletRequest request, Model model) throws Exception {
+        XQuery projectCategoryxQuery = new XQuery("listProjectCategory_default", request);
+        projectCategoryxQuery.setSortHql("");
+        projectCategoryxQuery.updateHql();
+        List<Object> categoryList = baseManager.listObject(projectCategoryxQuery);
+        HashMap<String, List> projectMap = new HashMap<>();
+        for (Object object : categoryList) {
+            XQuery projectQuery = new XQuery("listProject_default", request);
+            projectQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
+            projectQuery.setSortHql("");
+            projectQuery.updateHql();
+            projectMap.put(((ProjectCategory) object).getId(), baseManager.listObject(projectQuery));
 
+        }
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("projectMap", projectMap);
+        return "/common/productCategory";
+
+    }
 
     @RequestMapping({"/news"})
     public String listNews() {
