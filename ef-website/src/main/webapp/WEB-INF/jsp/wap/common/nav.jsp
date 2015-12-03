@@ -57,7 +57,7 @@
         <%--</div>--%>
     <%--</header>--%>
 </c:if>
-<c:if test="${sign == null}">
+<c:if test="${empty sign}">
 
     <header class="am-header custom-header">
         <div class="am-header-left am-header-nav">
