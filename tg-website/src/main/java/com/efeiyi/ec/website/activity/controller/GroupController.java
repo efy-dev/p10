@@ -96,12 +96,17 @@ public class GroupController {
             MyGroup group = (MyGroup) baseManager.getObject(MyGroup.class.getName(),groupId);
             GroupMember supMember = (GroupMember) baseManager.getObject(GroupMember.class.getName(),memberId);
             String level = String.valueOf(Integer.parseInt(supMember.getLevel())+1);
+
+            for(GroupMember groupMember:group.getGroupMemberList()){
+                if(currentUser.getId().equals(groupMember.getUser().getId())){
+                    url = "?groupProductId=" + groupProductId + "&groupId=" + groupId + "&memberId=" + memberId;
+                    return "redirect:/group/shareGroup.do" + url;
+                }
+            }
             GroupMember member = new GroupMember();
             member.setUser(currentUser);
             member.setLevel(level);
-            member.setMyGroup(group);
             member.setStatus("2");
-            member.setRedPacket(new BigDecimal(0));
             member.setSupGroupMember(supMember);
             baseManager.saveOrUpdate(GroupMember.class.getName(),member);
 
@@ -154,6 +159,7 @@ public class GroupController {
         }
         if (member!=null&&"2".equals(member.getStatus())){
             member.setStatus("1");
+            member.setMyGroup(myGroup);
             baseManager.saveOrUpdate(GroupMember.class.getName(),member);
         }
         //人数够，成团操作
@@ -207,7 +213,7 @@ public class GroupController {
         }
         this.smsCheckManager.send(myGroup.getManUser().getUsername(), "#userName#=" + purchaseOrder.getReceiverName() + "&#timeLeft#=" + left + "&#memberLeft#=" + memberLeft, "1108985", PConst.TIANYI);
 
-        return "redirect:http://www2.efeiyi.com/tg-website/group/shareGroup.do" + url;
+        return "redirect:/group/shareGroup.do" + url;
     }
 
 
@@ -237,7 +243,7 @@ public class GroupController {
         model.addAttribute("url", url);
         model.addAttribute("flag",flag);
         if(show!=null&&show.equals("1")){
-            return "forward:http://www2.efeiyi.com/tg-website/group/joinGroup.do"+url;
+            return "forward:/group/joinGroup.do"+url;
         }else {
             return "/personGroup/shareGroup1";
         }
