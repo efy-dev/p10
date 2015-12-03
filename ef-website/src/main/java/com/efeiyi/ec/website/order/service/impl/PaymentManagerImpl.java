@@ -35,15 +35,15 @@ public class PaymentManagerImpl implements PaymentManager {
     private AutoSerialManager autoSerialManager;
 
     static {
-//        BeeCloud.registerApp("130498c1-8928-433b-a01d-c26420f41818", "49fc6d9c-fd5d-4e9c-9ff6-f2d5ef1a1a3e"); //正式环境
-        BeeCloud.registerApp("e7004ae3-5634-4b9f-998d-c4319fbea7b0", "24511f9a-0b63-4fa0-82c6-6a6ffe38371d");//测试环境
+        BeeCloud.registerApp("130498c1-8928-433b-a01d-c26420f41818", "49fc6d9c-fd5d-4e9c-9ff6-f2d5ef1a1a3e"); //正式环境
+//        BeeCloud.registerApp("e7004ae3-5634-4b9f-998d-c4319fbea7b0", "24511f9a-0b63-4fa0-82c6-6a6ffe38371d");//测试环境
     }
 
     @Override
     public String alipay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
         BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
         BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.ALI_WEB, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
-        param.setReturnUrl("http://www2.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
+        param.setReturnUrl("http://www.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
 //        param.setBillTimeout(120);
 //        param.setOptional(optional);
 
@@ -64,7 +64,7 @@ public class PaymentManagerImpl implements PaymentManager {
     public String alipayWap(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
         BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
         BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.ALI_WAP, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
-        param.setReturnUrl("http://www2.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
+        param.setReturnUrl("http://www.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
 //        param.setBillTimeout(120);
 //        param.setOptional(optional);
 
