@@ -58,8 +58,8 @@
 <!--//End--header-->
 <div class="master-works">
   <div class="user">
-    <img class="img-user" src="/scripts/assets/upload/master-0.jpg" alt=""/>
-    <img class="img-bg" src="/scripts/assets/upload/master-1.jpg" alt=""/>
+    <img class="img-user" src="http://tenant.efeiyi.com/${object.favicon}" alt=""/>
+    <img class="img-bg" src="http://tenant.efeiyi.com/${object.backgroundUrl}" alt=""/>
     <div class="user-info">
       <p class="user-name">${object.fullName}</p>
       <p class="project-name">徽派竹刻</p>
