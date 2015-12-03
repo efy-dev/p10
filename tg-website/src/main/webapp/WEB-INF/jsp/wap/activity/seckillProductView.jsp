@@ -240,7 +240,7 @@
                 for (var i = 0; i < dataLength; i++) {
                     var phone = data[i].user.username;
                     var datetime = new Date(data[i].createDatetime);
-                    phone = phone.substring(0, 3) + "****" + phone.substring(6, 10);
+                    phone = phone.substring(0, 3) + "****" + phone.substring(7, 11);
                     out += "<li class=\"bd\"><p>" + phone + "</p><p>" + datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds() + "</p></li>"
                 }
             }
