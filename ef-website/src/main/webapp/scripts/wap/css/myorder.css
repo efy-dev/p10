@@ -251,6 +251,7 @@
 .more a {width:100%;float:left;padding:0.7rem 0;font-size:1.4rem;color:#000;position:relative}
 .more a .icon {background:url(../images/purchase.png)no-repeat 0 0;width:15px;height:17px;position:absolute;left:27%;top:35%;background-size:755%}
 /*b01020301全部商品首页*/
+.all-bulk{padding-bottom: 60px;}
 .all-bulk .price {padding:1rem 1.8rem;margin:0}
 .all-bulk .price li {width:33%;float:left;font-size:1.2rem;color:#000}
 .all-bulk .price li:nth-child(1) {text-align:left}
@@ -258,8 +259,13 @@
 .all-bulk .price li:nth-child(2) {text-align:center;width:46%}
 .all-bulk .price li:nth-child(3) {text-align:right;width:21%}
 /*new分享页面*/
-.newhad .had-icon{z-index: 100;background: url("../images/cart-icon.png") no-repeat  -43px -219px;display: inline-block;background-size: 80px auto;-webkit-background-size: 80px auto;width: 31px;height: 23px;position: absolute;left: 0;top:13px;}
+.newhad .had-icon{z-index: 100;background: url("../images/cart-icon.png") no-repeat ;display: inline-block;background-size: 80px auto;-webkit-background-size: 80px auto;width: 31px;height: 23px;position: absolute;left: 0;top:13px;}
+.newhad .had-add{background-position:  -43px -219px;}
+.newhad .had-no{background-position:  -3px -113px;}
+.newhad .had-good{background-position:  -43px -113px;}
+.newhad .had-not{background-position:  -43px -161px;}
 .newhad .am-header-title{margin: 0 20%;position: relative;padding-left: 37px;}
+.newhad  .am-header-title{text-align: left}
 .newshare .had-product{padding: 16px 0;position: relative;border-bottom: 1px solid #000;border-top: 1px solid #000;margin-top: -1px;}
 .newshare .had-product .had-pic{width: 105px;position: absolute;left: 1.9rem;top: 1.6rem}
 .newshare .had-product .had-pic img{width: 100%}
@@ -404,6 +410,7 @@
 .newcustom .am-slider-a1 .am-control-nav{bottom: 52px;}
 .olli ol.am-control-nav.am-control-paging {bottom:45px}
 .olli .am-slider-a1 .am-control-nav li a.am-active {color:#ce0202}
+.my-colonel{padding-bottom: 60px;}
 .my-colonel .cost {margin-top:0.4rem}
 .my-colonel .cost .txt1 {font-size:16px;color:#999;float:left;width:40%;text-align:left;padding:0.7rem 0 0 1.8rem}
 .my-colonel .cost .txt2 {width:60%;float:right}
@@ -609,7 +616,7 @@ html, body {height:100%}
 .b06-page li img{width: 100%;}
 .b06-page li p{height: 36px;overflow: hidden;text-align: center;font-size: 1rem;color: #000;line-height: 16px;margin-top: 5px;}
 .b06-page li.max-page a{height: 55px;line-height: 55px;border: 3px solid #000;text-align: center;font-size: 12px;display:block;color: #000;}
-/*大首页new*/
+    /*大首页new*/
 .newicon{background:url(../images/newicon.png) no-repeat;background-size:152px auto}
 .newheader{text-align: center}
 .newheader .icon-user{margin-top: 5px;}
