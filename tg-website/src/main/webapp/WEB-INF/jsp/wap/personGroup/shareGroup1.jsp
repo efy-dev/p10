@@ -39,7 +39,7 @@
         <c:if test="${group.status==1}">
           <h1 class="am-header-title"><i class="had-icon had-add"></i>组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团</h1>
         </c:if>
-        <c:if test="${group.status==3}">
+        <c:if test="${group.status==3||group.status==4}">
           <h1 class="am-header-title"><i class="had-icon had-good"></i>组团成功</h1>
         </c:if>
         <c:if test="${group.status==5}">
@@ -57,7 +57,7 @@
           <h1 class="am-header-title"><i class="had-icon had-add"></i>组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团</h1>
         </c:if>
 
-        <c:if test="${group.status==3}">
+        <c:if test="${group.status==3||group.status==4}">
           <h1 class="am-header-title"><i class="had-icon had-good"></i>组团成功</h1>
         </c:if>
         <c:if test="${group.status==5}">
