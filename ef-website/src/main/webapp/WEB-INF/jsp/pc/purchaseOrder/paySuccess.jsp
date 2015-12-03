@@ -13,12 +13,19 @@
     <link href="<c:url value="/scripts/css/myorder.css"/>" type="text/css " rel="stylesheet">
 </head>
 <body>
-<p>您已成功提交付款</p>
+<div class="wr wh">
+    <div class="success">
+        <div class="success-shop">
+            <p>您已成功提交付款</p>
 
-<p>
-    <a href="http://i.efeiyi.com/order/myEfeiyi/view/${order.id}">查看订单</a>
-    <a href="<c:url value="/"/> ">首页</a>
-</p>
+            <p>
+                <a href="http://i.efeiyi.com/order/myEfeiyi/view/${order.id}">查看订单</a>
+                <a href="<c:url value="/"/> ">首页</a>
+            </p>
+        </div>
+
+    </div>
+</div>
 <script type="text/javascript">
     <c:if test="${empty subOrderList}">
     var _gaq = _gaq || [];
