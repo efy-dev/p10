@@ -14,22 +14,7 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/login.css"/>"/>
 </head>
 <body>
-<div class="topbar wh">
-    <div class="hd">
-        <ul class="ul-item">
-            <li><a href="" title="请登录">请登录</a></li>
-            <li><a href="" title="快速注册">快速注册</a></li>
-            <li class="btn-top-wechat">
-                <a title="手机e飞蚁">手机e飞蚁</a>
-                <span class="top-wechat" style="display: none;"></span>
-            </li>
-            <li class="cart">
-                <a href=" " title="购物车"><i class="icon"></i>购物车</a>
-                <span class="tips"><em id="cartAmount">0</em></span>
-            </li>
-        </ul>
-    </div>
-</div>
+
 
 <div class="header wh">
     <div class="hd">
