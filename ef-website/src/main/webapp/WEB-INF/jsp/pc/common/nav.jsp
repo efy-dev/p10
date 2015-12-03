@@ -68,10 +68,10 @@
         </form>
     </div>
 </div>
-
+<c:if test="${sign != null && sign == '000'}">
 <div class="wh nav-new" id="line">
     <div class="hd">
-        <div class="cate" id="cate">
+        <div class="cate">
             <div class="ld"><h2>非遗商品分类<i class="icon-new"></i></h2></div>
             <jsp:include page="/productCategory.do" flush="true"/>
 
@@ -83,7 +83,24 @@
         </div>
     </div>
 </div>
+</c:if>
 
+<c:if test="${empty sign}">
+    <div class="wh nav-new nav-new-list">
+        <div class="hd">
+            <div class="cate" id="cate">
+                <div class="ld"><h2>非遗商品分类<i class="icon-new"></i></h2></div>
+                <jsp:include page="/productCategory.do" flush="true"/>
+
+            </div>
+            <div class="items">
+                <a href="<c:url value="/"/>">首页</a>
+                <a href="">礼品专区</a>
+                <a href="">精选专题</a>
+            </div>
+        </div>
+    </div>
+</c:if>
 <script>
 
     $().ready(function () {
