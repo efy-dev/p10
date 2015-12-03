@@ -395,9 +395,8 @@
                     result="/masterWork/masterWorkPList"
                     execute="com.efeiyi.ec.system.master.controller.MasterWorkPListHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="master.id" defaultValue="1" operation="eq"/>
                     </query>
-
                     <query name="byProject" label="默认" type="auto" orderBy="id:desc">
                         <condition name="project.id" operation="eq"/>
                         <condition name="master.id" operation="eq"/>
@@ -424,7 +423,14 @@
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
-
+                <!--<do name="plistMasterWorks" access="" label="传承人产品分页列表"-->
+                    <!--result="/masterWork/masterWorksPList"-->
+                    <!--execute="com.efeiyi.ec.system.master.controller.MasterWorkPListHandler">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+                        <!--<condition name="master.id" defaultValue="1" operation="eq"/>-->
+                    <!--</query>-->
+                <!--</do>-->
                 <do name="viewMasterWorkImg" label="查看传承人产品页" access="" result="/masterWork/imgView"/>
                 <do name="formMasterWork" label="保存传承人产品页" access="" result="/masterWork/masterWorkForm"
                     execute="com.efeiyi.ec.system.master.controller.MasterWorkHandler"/>
