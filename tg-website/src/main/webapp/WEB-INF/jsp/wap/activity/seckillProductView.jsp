@@ -1,3 +1,4 @@
+<%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -20,7 +21,7 @@
         <a href="<c:url value="/miao"/>" class="chevron-left"></a>
     </div>
     <!-- //End--chevron-left-->
-    <h1 class="am-header-title">${seckillProduct.productModel.name}</h1>
+    <h1 class="am-header-title">${seckillProduct.productModel.product.name}[${seckillProduct.productModel.name}]</h1>
     <!-- //End--title-->
     <div class="am-header-right am-header-nav">
         <a href="#chevron-right" class="chevron-right" id="menu">
@@ -51,7 +52,7 @@
     <!--//End--am-slider-->
     <div class="bd details seckill">
         <div class="bd des-title">
-            <strong class="bd txt">${seckillProduct.productModel.name}</strong>
+            <strong class="bd txt">${seckillProduct.productModel.product.name}[${seckillProduct.productModel.name}]</strong>
             <a href="#分享" class="share" style="right: 0px;">
                 <i class="icon icon-share"></i>
 
@@ -113,6 +114,10 @@
 
                     <div class="bd info">
                         <ul id="miaoRecord">
+                            <li class="bd"><p>&nbsp;</p></li>
+                            <li class="bd"><p>&nbsp;</p></li>
+                            <li class="bd"><p>&nbsp;</p></li>
+                            <li class="bd"><p>&nbsp;</p></li>
                         </ul>
                     </div>
                 </div>
@@ -124,7 +129,7 @@
                 </div>
             </c:if>
             <c:if test="${miaoStatus=='2'}">
-                <div class="bd btn-bg" id="miaoBuy" style="display: none"><a
+                <div class="bd btn-bg" id="miaoBuy"><a
                         href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
                         title="立即抢购">立即抢购</a>
                 </div>
@@ -245,20 +250,25 @@
         }, "post")
     }
 
-    setTimeout("getProductOrder()", 7500);
-    setTimeout("getProductAmount()", 8500);
+    setTimeout("getProductOrder()", 1000);
+    setTimeout("getProductAmount()", 1500);
 
     $().ready(function () {
         $("img").each(function () {
             $(this).css("width", "100%")
         })
+        <c:if test="${miaoStatus=='1'}">
         show_time();
+        </c:if>
     })
 
     function timeEnd() {
         // $("#miaoStatus").html("本场秒杀正火热进行中...");
         $("#miaoBuy").show();
+        window.location.href = window.location.href;
     }
+
+    <% request.setAttribute("currentDate",new Date()); %>
 
     function show_time() {
         var time_start = new Date().getTime(); //设定当前时间
