@@ -48,7 +48,7 @@
     ]);
 
     _gaq.push(
-            <c:forEach items="${order}" var="product">
+            <c:forEach items="${order.purchaseOrderProductList}" var="product">
             ['_addItem',
 
                 '${order.id}', // order ID - required-对应的子订单ID
@@ -57,9 +57,9 @@
 
                 '${product.productModel.name}', // product name-对应的商品名称[规格名]
 
-                '${product.prodcutModel.product.price}', // unit price - required-对应的商品价格
+                '${product.productModel.product.price}', // unit price - required-对应的商品价格
 
-                '${product.productModel.purchaseAmount}' // quantity - required-对应的商品购买数量
+                '${product.productModel.amount}' // quantity - required-对应的商品购买数量
             ]
             </c:forEach>
     );
@@ -108,7 +108,7 @@
 
                 '${product.prodcutModel.product.price}', // unit price - required-对应的商品价格
 
-                '${product.productModel.purchaseAmount}' // quantity - required-对应的商品购买数量
+                '${product.productModel.amount}' // quantity - required-对应的商品购买数量
             ]
             </c:forEach>
             </c:forEach>

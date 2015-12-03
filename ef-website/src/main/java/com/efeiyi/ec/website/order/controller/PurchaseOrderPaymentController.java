@@ -93,9 +93,9 @@ public class PurchaseOrderPaymentController {
                 PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
                 if (purchaseOrder.getOrderType() != null && purchaseOrder.getOrderType().equals("3")) {  //礼品卷
                     orderStatus = PurchaseOrder.ORDER_STATUS_WRGIFT;
-                } else if (purchaseOrder.getOrderType()!=null && purchaseOrder.getOrderType().equals("4")){  //团购
+                } else if (purchaseOrder.getOrderType() != null && purchaseOrder.getOrderType().equals("4")) {  //团购
                     orderStatus = PurchaseOrder.ORDER_STATUS_WAIT_GROUP;
-                }else {
+                } else {
                     orderStatus = PurchaseOrder.ORDER_STATUS_WRECEIVE;
                 }
                 if (purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getOrderStatus().equals("1")) {
@@ -223,16 +223,16 @@ public class PurchaseOrderPaymentController {
     @RequestMapping({"/paysuccess/{orderId}"})
     public String paySuccess(@PathVariable String orderId, Model model) throws Exception {
         PurchaseOrderPaymentDetails purchaseOrder = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
-        List subOrderList=new ArrayList();
-        PurchaseOrder purchaseOrder1=purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder();
+        List subOrderList = new ArrayList();
+        PurchaseOrder purchaseOrder1 = purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder();
 
-        if(purchaseOrder1!=null || purchaseOrder1.getSubPurchaseOrder().size()>0){
-            for(PurchaseOrder purchaseOrderTemp:purchaseOrder1.getSubPurchaseOrder()){
+        if (purchaseOrder1 != null || purchaseOrder1.getSubPurchaseOrder().size() > 0) {
+            for (PurchaseOrder purchaseOrderTemp : purchaseOrder1.getSubPurchaseOrder()) {
                 subOrderList.add(purchaseOrderTemp);
             }
-            model.addAttribute("subOrderList",subOrderList);
+            model.addAttribute("subOrderList", subOrderList);
             model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
-        }else{
+        } else {
             model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
         }
 
