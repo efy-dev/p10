@@ -101,7 +101,7 @@
           <a href="javascript:void(0)" class="btn" id="btn">还&nbsp;差&nbsp;${group.groupProduct.memberAmount-group.groupMemberList.size()}&nbsp;人&nbsp;成&nbsp;团&nbsp;,&nbsp;去&nbsp;分&nbsp;享</a>
         </c:if>
         <c:if test="${group.groupProduct.memberAmount-group.groupMemberList.size()<=0}">
-          <a href="javascript:void(0)" class="btn" id="btn">拼&nbsp;团&nbsp;成&nbsp;功&nbsp;，&nbsp;分&nbsp;享&nbsp;得&nbsp;红&nbsp;包</a>
+          <a href="javascript:void(0)" class="btn" id="btn">拼&nbsp;团&nbsp;成&nbsp;功</a>
         </c:if>
       </c:if>
       <c:if test="${flag==0}">

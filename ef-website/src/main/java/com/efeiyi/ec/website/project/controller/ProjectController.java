@@ -73,6 +73,7 @@ public class ProjectController extends BaseController {
             productQuery.put("project_id",((Project)project).getId());
             productMap.put(((Project)project).getId(),baseManager.listPageInfo(productQuery).getList());
         }
+        model.addAttribute("sign", "000");
         model.addAttribute("productMap",productMap);
         model.addAttribute("projectCategory",projectCategory);
         return "/project/projectList";
