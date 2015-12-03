@@ -34,28 +34,6 @@
         </div>
     </header>
 
-
-
-
-    <%--<header class="am-header custom-header index-header">--%>
-        <%--<div class="logo"><a class="icon" href="" title="e飞蚁"></a></div>--%>
-        <%--<!-- //End--logo-->--%>
-        <%--<div class="newsearch">--%>
-            <%--<form>--%>
-                <%--<input class="newsebox" placeholder="茶叶罐">--%>
-                <%--<input type="submit" class="newsebut" value="搜">--%>
-            <%--</form>--%>
-        <%--</div>--%>
-        <%--<div class="am-header-right am-header-nav">--%>
-            <%--<a href="<c:url value="/cart/view"/>" class="icon icon-cart"><span class="tips"><em--%>
-                    <%--id="cartAmount">0</em></span></a>--%>
-            <%--<% if (AuthorizationUtil.isAuthenticated()) {%>--%>
-            <%--<a href="http://i.efeiyi.com/order/myEfeiyi/list.do" class="icon icon-user"></a>--%>
-            <%--<%} else {%>--%>
-            <%--<a href="<c:url value="/sso.do"/>" class="icon icon-user"></a>--%>
-            <%--<%}%>--%>
-        <%--</div>--%>
-    <%--</header>--%>
 </c:if>
 <c:if test="${empty sign}">
 
