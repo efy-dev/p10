@@ -56,7 +56,7 @@
             <div class="items">
                 <p>用户名</p>
                 <input class="ipt" type="text" name="username" id="username" onblur="checkUserName()" placeholder="">
-                <small name="message" style="color: red"></small>
+                <small name="message" style="color: red;line-height: 22px;"></small>
             </div>
             <div class="items">
                 <p>密码</p>
@@ -65,7 +65,7 @@
             <div class="items">
                 <p>重复密码</p>
                 <input class="ipt" type="text" name="rePassword" onkeydown="checkPassword()" onkeyup="checkPassword()" id="RePassword" placeholder="">
-                <small name="message" style="color: red"></small>
+                <small name="message" style="color: red;line-height: 22px;"></small>
             </div>
             <div class="items items-agree">
                 <label>

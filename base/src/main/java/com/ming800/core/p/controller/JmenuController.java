@@ -57,6 +57,9 @@ public class JmenuController extends BaseController {
         } else {
             model.addAttribute("jnode", jmenu.getChildren().get(0));
         }
+        if(request.getParameter("tenantName")!=null&&!"".equals(request.getParameter("tenantName"))){
+            model.addAttribute("tenantName",request.getParameter("tenantName"));
+        }
         return resultPage;
 
     }
