@@ -2,71 +2,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2015/7/14
-  Time: 10:08
+  Date: 2015/7/10
+  Time: 15:06
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/amazeui.min.css?v=20150831"/>" />
-    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/login.css"/>"/>
-</head>
-<body>
-<div class="topbar wh">
-    <div class="hd">
-        <ul class="ul-item">
-            <li><a href="" title="请登录">请登录</a></li>
-            <li><a href="" title="快速注册">快速注册</a></li>
-            <li class="btn-top-wechat">
-                <a title="手机e飞蚁">手机e飞蚁</a>
-                <span class="top-wechat" style="display: none;"></span>
-            </li>
-            <li class="cart">
-                <a href=" " title="购物车"><i class="icon"></i>购物车</a>
-                <span class="tips"><em id="cartAmount">0</em></span>
-            </li>
-        </ul>
-    </div>
-</div>
-
-<div class="header wh">
-    <div class="hd">
-        <div class="logo">
-            <a class="icon" href="http://www.efeiyi.com" title="e飞蚁-商户后台"></a>
-        </div>
-        <h2>商户后台</h2>
-    </div>
-</div>
-
-<div class="login hd">
-    <div class="login-form">
-        <form action="<c:url value="/j_spring_security_check"/>" method="post">
-            <div class="mt wh">
-                <h3>商户登录</h3><span class="link"><em>没有账号?</em><a class="reg" href="<c:url value="/sign/toRegister.do"/>">立即入驻</a></span>
-            </div>
-            <div class="am-form-group">
-                <i class="icon name"></i>
-                <input id="username" name="username" class="text1 textam" tabindex="1" minlength="3" placeholder="已验证手机" type="text" value="${username}">
-            </div>
-            <div class="am-form-group">
-                <i class="icon pwd"></i>
-                <input id="password" name="password" class="text1 textam" tabindex="2" minlength="3" placeholder="密码" type="password" value="">
-            </div>
-            <div class="am-form-group">
-                <%--<label for="">--%>
-                    <%--<input type="checkbox" tabindex="4" name="rememberMe" value="true">--%>
-                    <%--<span>自动登录</span>--%>
-                    <%--<a class="forgetpwd" href="" title="忘记密码">忘记密码？</a>--%>
-                <%--</label>--%>
-            </div>
-            <input class="btn-submit " type="submit" tabindex="5" value="登 录 工 作 台">
-        </form>
-    </div>
-</div>
-<!-- //End--login-->
-
-
 <div class="footernew wh">
     <div class="publ-top hd">
         <dl class="city">
@@ -160,52 +100,3 @@
         </div>
     </div>
 </div>
-
-
-
-<%--<div class="am-g am-g-fixed" style="max-width: 550px;">--%>
-    <%--<div class="am-u-md-12" style="box-shadow: 0px 0px 2px #626262;">--%>
-        <%--<div class="am-u-md-12" style="text-align: center ;"><h2 style=" margin-top: 1.6rem;">e飞蚁 商家后台系统登录</h2></div>--%>
-        <%--<form class="am-form am-form-horizontal" action="<c:url value="/j_spring_security_check"/>" method="post">--%>
-            <%--<div class="am-form-group">--%>
-                <%--<label for="username" class="am-u-sm-2 am-form-label">用户名</label>--%>
-
-                <%--<div class="am-u-sm-10">--%>
-                    <%--<input type="text" name="username" id="username" value="${username}" placeholder="输入用户名">--%>
-                <%--</div>--%>
-            <%--</div>--%>
-
-            <%--<div class="am-form-group">--%>
-                <%--<label for="password" class="am-u-sm-2 am-form-label">密码</label>--%>
-
-                <%--<div class="am-u-sm-10">--%>
-                    <%--<input type="password" name="password" id="password" placeholder="输入密码">--%>
-                <%--</div>--%>
-            <%--</div>--%>
-
-            <%--<div class="am-form-group">--%>
-                <%--<div class="am-u-sm-10 am-u-sm-offset-2">--%>
-                    <%--<span>--%>
-                        <%--<button type="submit" class="am-btn am-btn-default">登录</button>--%>
-                    <%--</span>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</form>--%>
-    <%--</div>--%>
-
-          <%--<span style="margin-left: 550px;">--%>
-             <%--<a class="am-u-sm-3" href="<c:url value="/sign/toRegister.do"/>"  style="text-decoration: underline;float: right;margin-top: 10px;">商家注册</a>--%>
-          <%--</span>--%>
-
-<%--</div>--%>
-<script type="text/javascript">
-    $(function(){
-        $('.btn-top-wechat').hover(function(){
-            $(this).find('.top-wechat').stop(true).slideDown('fast');
-        },function(){
-            $(this).find('.top-wechat').stop(true).slideUp('fast');
-        });
-    })
-</script>
-</body>
-</html>
