@@ -213,7 +213,7 @@ public class GroupController {
         } else {
             memberLeft = "0";
         }
-        if(myGroup!=null&&myGroup.getStatus()!="2"){
+        if(myGroup!=null&&myGroup.getGroupMemberList().size()>1){
             this.smsCheckManager.send(myGroup.getManUser().getUsername(), "#userName#=" + purchaseOrder.getReceiverName() + "&#timeLeft#=" + left + "&#memberLeft#=" + memberLeft, "1108985", PConst.TIANYI);
         }
         return "redirect:/group/shareGroup.do" + url;
