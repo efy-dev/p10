@@ -24,7 +24,7 @@
 <div class="list-find">
   <!--头部-->
   <div class="list-f-title">
-    <p><a href="<c:url value='/pc/index.do'/>">工艺</a><i class="fu-icon"></i><a href="<c:url value='/pc/index.do'/>">动态</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct/'/><%=request.getAttribute("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
+    <p><a href="<c:url value='/pc/index.do'/>">工艺</a><i class="fu-icon"></i><a href="<c:url value='/project/brifProject/'/><%=request.getAttribute("projectId")%>">${product.name}</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct/'/><%=request.getAttribute("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
   </div>
   <div class="ae">
     <div class="details ae">
