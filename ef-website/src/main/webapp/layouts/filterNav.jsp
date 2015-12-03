@@ -1,12 +1,12 @@
-<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
+<%--检索使用 请勿删除
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2015/8/25
-  Time: 15:12
+  Date: 2015/12/03
+  Time: 17:46
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -16,17 +16,7 @@
 
     <header class="am-header custom-header index-header newheader">
         <div class="logo"><a class="icon" href="" title="e飞蚁"></a></div>
-        <!-- //End--logo-->
-        <div class="newsearch">
-            <form action="<c:url value='/search.do'/>" method="get">
-                <input type="text" class="newsebox" placeholder="搜" name="q" value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>">
-                <input type="submit" class="newsebut" value="搜">
-                <input type="hidden" name="resultPage" value="/searchResult"/>
-                <input type="hidden" name="facetFields" value="project_name"/>
-                <input type="hidden" name="group" value="efeiyi"/>
-                <input type="hidden" name="priceUD" value="0"/>
-            </form>
-        </div>
+        <h1 class="am-header-title">筛选</h1>
         <div class="am-header-right am-header-nav">
             <a href="<c:url value="/cart/view"/>" class="icon icon-cart"><span class="tips"><em
                     id="cartAmount">0</em></span></a>
@@ -44,18 +34,7 @@
         <div class="am-header-left am-header-nav">
             <a href="javascript:history.go(-1)" class="chevron-left"></a>
         </div>
-        <!-- //End--chevron-left-->
-        <div class="newsearch">
-            <form action="<c:url value='/search.do'/>" method="get">
-                <input type="text" class="newsebox" placeholder="搜" name="q" value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>">
-                <input type="submit" class="newsebut" value="搜">
-                <input type="hidden" name="resultPage" value="/searchResult"/>
-                <input type="hidden" name="facetFields" value="project_name"/>
-                <input type="hidden" name="group" value="efeiyi"/>
-                <input type="hidden" name="priceUD" value="0"/>
-            </form>
-        </div>
-        <!-- //End--title-->
+        <h1 class="am-header-title">筛选</h1>
         <div class="am-header-right am-header-nav">
             <a href="#chevron-right" class="chevron-right" id="menu">
                 <i class="line"></i>
