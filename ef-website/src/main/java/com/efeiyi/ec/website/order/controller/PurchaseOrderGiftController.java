@@ -98,8 +98,8 @@ public class PurchaseOrderGiftController {
         URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background.jpg");
         ImageIcon imgIcon = new ImageIcon(backgroundUrl);
         Image theImg = imgIcon.getImage();
-        int width = theImg.getWidth(null);
-        int height = theImg.getHeight(null);
+        int width = 640;
+        int height = 1136;
         BufferedImage bimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bimage.createGraphics();
         g.setColor(Color.black);
