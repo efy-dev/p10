@@ -113,7 +113,7 @@
 
                 '${product.productModel.name}', // product name-对应的商品名称[规格名]
 
-                '${product.prodcutModel.product.price}', // unit price - required-对应的商品价格
+                '${product.productModel.product.price}', // unit price - required-对应的商品价格
 
                 '${product.productModel.amount}' // quantity - required-对应的商品购买数量
             ]
