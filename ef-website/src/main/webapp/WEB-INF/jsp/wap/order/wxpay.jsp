@@ -32,7 +32,7 @@
                     if (res.err_msg == "get_brand_wcpay_request:ok") {//支付成功
                         //跳转到查看支付是否成功
                         <c:if test="${not empty order.callback}">
-                        window.location.href = "${order.callback}";
+                        window.location.href = "http://${order.callback}";
                         </c:if>
                         <c:if test="${empty order.callback}">
                         window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";
@@ -40,7 +40,7 @@
                     }
                     else {
                         <c:if test="${not empty order.callback}">
-                        window.location.href = "${order.callback}";
+                        window.location.href = "http://${order.callback}";
                         </c:if>
                         <c:if test="${empty order.callback}">
                         window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";
