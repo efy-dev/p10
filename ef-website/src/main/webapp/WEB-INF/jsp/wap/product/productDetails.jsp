@@ -87,7 +87,7 @@
             </c:if>
             <p class="bd t2"><span>飞蚁价：</span><dfn>￥</dfn><em>${productModel.price}</em></p>
 
-            <p class="bd t3"><span>  服务：</span>由 <a
+            <p class="bd t3"><span> 服&nbsp;&nbsp;&nbsp;务：</span>由 <a
                     href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>"
                     style="color: #000">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
         </div>
