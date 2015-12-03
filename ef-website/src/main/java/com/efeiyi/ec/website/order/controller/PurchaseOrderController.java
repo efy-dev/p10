@@ -272,6 +272,7 @@ public class PurchaseOrderController extends BaseController {
         String productModelId = request.getParameter("productModelId");
         String amount = request.getParameter("amount");
         float priceFloat = Float.parseFloat(request.getParameter("price"));
+        String orderType = request.getParameter("orderType");
         BigDecimal price = new BigDecimal(priceFloat);
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(productModel, price, Integer.parseInt(amount), model);
@@ -285,6 +286,10 @@ public class PurchaseOrderController extends BaseController {
             }
             purchaseOrder.setCallback(callback);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        }
+        if (orderType!=null){
+            purchaseOrder.setOrderType(orderType);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
         }
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);

@@ -73,8 +73,9 @@ public class GroupController {
         String groupId = request.getParameter("groupId");
         String url = "";
         String callback = "";
+        GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
         if(groupId==null&&memberId==null){
-            GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
+
             MyGroup group = new MyGroup();
             group.setManUser(currentUser);
             group.setStatus("2");
@@ -104,8 +105,10 @@ public class GroupController {
             member.setSupGroupMember(supMember);
             baseManager.saveOrUpdate(GroupMember.class.getName(),member);
 
+            callback = "www2.efeiyi.com/tg-website/group/waitPay" + "?groupId=" + group.getId() + "&memberId=" + member.getId() +"&groupProductId=" +groupProductId;
             //url = "?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId;
-            url = "http://www2.efeiyi.com/order/saveOrUpdateOrder2.do" + "?callback=www2.efeiyi.com/tg-website/group/createGroup" + "&groupId=" + group.getId() + "&memberId=" + member.getId();
+            String callback1 = java.net.URLEncoder.encode(callback,"utf-8");
+            url = "http://www2.efeiyi.com/order/saveOrUpdateOrder2.do" + "?productModelId="+groupProduct.getProductModel().getId()+"&amount="+1+"&price="+groupProduct.getGroupPrice()+"&callback="+callback1;
             return "redirect:" + url;
         }
     }
