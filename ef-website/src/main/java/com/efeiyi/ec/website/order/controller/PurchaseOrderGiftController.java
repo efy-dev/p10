@@ -139,10 +139,10 @@ public class PurchaseOrderGiftController {
         ImageIcon giftImgIcon = new ImageIcon(pictureUrl);
         BufferedImage combined = new BufferedImage(bimage.getWidth(), bimage.getHeight(), BufferedImage.TYPE_INT_RGB);
         //图像合并
-        g = combined.createGraphics();
-        g.drawImage(bimage, 0, 10, null);
-        g.drawImage(image, 100, 750, null);
-        g.drawImage(giftImgIcon.getImage(), 40, 250, null);
+        Graphics2D g1 = combined.createGraphics();
+        g1.drawImage(bimage, 0, 10, null);
+        g1.drawImage(image, 100, 750, null);
+        g1.drawImage(giftImgIcon.getImage(), 40, 250, null);
         //保存到本地
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         ImageIO.write(combined, "jpg", os);
