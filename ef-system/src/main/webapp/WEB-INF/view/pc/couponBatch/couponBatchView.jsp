@@ -15,7 +15,7 @@
             $.ajax({
                 type: 'post',
                 async: false,
-                url: '/couponBatch/sendCoupon.do',
+                url: '<c:url value="/couponBatch/sendCoupon.do"/>',
                 dataType: 'json',
                 data: {
                     username: username,
@@ -41,7 +41,7 @@
             $.ajax({
                 type: 'post',
                 async: false,
-                url: '/couponBatch/searchUserNum.do',
+                url: '<c:url value="/couponBatch/searchUserNum.do"/>',
                 dataType: 'json',
                 data: {
                     username: username,
