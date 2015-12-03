@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -214,7 +215,19 @@ public class PurchaseOrderPaymentController {
     @RequestMapping({"/paysuccess/{orderId}"})
     public String paySuccess(@PathVariable String orderId, Model model) throws Exception {
         PurchaseOrderPaymentDetails purchaseOrder = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
-        model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
+        List subOrderList=new ArrayList();
+        PurchaseOrder purchaseOrder1=purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder();
+
+        if(purchaseOrder1!=null || purchaseOrder1.getSubPurchaseOrder().size()>0){
+            for(PurchaseOrder purchaseOrderTemp:purchaseOrder1.getSubPurchaseOrder()){
+                subOrderList.add(purchaseOrderTemp);
+            }
+            model.addAttribute("subOrderList",subOrderList);
+            model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
+        }else{
+            model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
+        }
+
         if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback() != null) {
             String redirect = purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback();
             return "redirect:http://" + redirect;
