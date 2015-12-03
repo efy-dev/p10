@@ -258,7 +258,7 @@
 .all-bulk .price li:nth-child(2) {text-align:center;width:46%}
 .all-bulk .price li:nth-child(3) {text-align:right;width:21%}
 /*new分享页面*/
-.newhad .had-icon{background: url("../images/cart-icon.png") no-repeat  -43px -219px;display: inline-block;background-size: 80px auto;-webkit-background-size: 80px auto;width: 31px;height: 23px;position: absolute;left: 0;top:13px;}
+.newhad .had-icon{z-index: 100;background: url("../images/cart-icon.png") no-repeat  -43px -219px;display: inline-block;background-size: 80px auto;-webkit-background-size: 80px auto;width: 31px;height: 23px;position: absolute;left: 0;top:13px;}
 .newhad .am-header-title{margin: 0 20%;position: relative;padding-left: 37px;}
 .newshare .had-product{padding: 16px 0;position: relative;border-bottom: 1px solid #000;border-top: 1px solid #000;margin-top: -1px;}
 .newshare .had-product .had-pic{width: 105px;position: absolute;left: 1.9rem;top: 1.6rem}
@@ -269,11 +269,10 @@
 .newshare .had-product .had-txt p strong{color: #cc0000;font-size: 1.4rem}
 .newshare .had-product .had-txt p s{color: #999;}
 .newshare .new-team{padding: 1.6rem 1.9rem;text-align: center;}
+.newshare .new-team .iste{position: relative;display:inline-block;width:5rem;height:5rem;background: #ccc;border-radius: 50%;-webkit-border-radius: 50%;text-align: center;z-index: 10;}
+.newshare .new-team .iste .addnewbd {width: 4.6rem;  height: 4.6rem;  position: absolute;  top:2px;  left:2px;  -webkit-border-radius:50%; }
 .newshare .new-team .old{width:100%;margin-bottom: 15px;display: inline-block;}
-.newshare .new-team .old a{width: 5rem;height: 5rem;position: relative;display: inline-block;}
-.newshare .new-team .old strong{font-weight: bold;right: -12px;top:-8px;width: 2.5rem;height: 2.5rem;border-radius: 3rem;-webkit-border-radius: 3rem;background-color: #cc0000;color: #fff;font-size: 18px;position: absolute;display: block}
-.newshare .new-team .addnewbd{width: 5rem;height: 5rem;border: 2px solid #cecece;border: 2px solid #cecece;border-radius: 3rem;-webkit-border-radius: 3rem;margin: 0 7px;}
-.newshare .new-team .crew a{margin-bottom: 15px;display: inline-block}
+.newshare .new-team .old strong{line-height: 16px;z-index: 5;font-weight: bold;right: 0px;top:0px;width: 1.3rem;height: 1.3rem;border-radius: 50%;-webkit-border-radius: 50%;background-color: #cc0000;color: #fff;font-size:12px;position: absolute;display: block;}
 .newshare .new-team .newtext{font-size: 12px;color: #666;display: inline-block;margin: 15px 0;}
 .newshare .new-page li:nth-child(1){border-top: 4px solid #ccc;border-bottom: 4px solid #ccc;}
 .newshare .new-page li strong{margin-right: 1%;width: 8%;display: inline-block;}
@@ -281,9 +280,10 @@
 .newshare .new-page li span:nth-child(2){margin-right: 2%;width: 34%;}
 .newshare .new-page li span:nth-child(3){width: 25%;}
 .newshare .new-page li span:nth-child(4){width: 26%;}
-.newshare .new-page li .page-pic{width: 22px;height: 22px;display: inline-block;border: 1px solid #ccc;-webkit-border-radius: 3rem;border-radius: 3rem;}
+.newshare .new-page li .page-pic{width: 22px;height: 22px;display: inline-block;-webkit-border-radius:50%;border-radius:50%;}
 .newshare .new-page li{border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;padding: 15px 19px;margin-bottom: 16px;font-size: 12px;}
 /*拼团玩法*/
+.imgicon1{z-index:2;width: 5rem;height: 5rem;background: url("../images/cart-icon.png") no-repeat -16px -249px;position: absolute;left: 7px;top: 0;background-size: 149px auto;-webkit-background-size: 149px auto;}
 .addmethod{margin-bottom: 15px;}
 .method{padding: 0 19px;margin-top: -15px;}
 .method .met-head{padding: 15px 0;}
@@ -303,7 +303,7 @@
 .method .met-footer li strong{border: 1px solid #000;width: 2rem;height: 2rem;text-align: center;-webkit-border-radius: 50% 50%;border-radius: 50% 50%;display: inline-block;line-height:20px;font-size: 10px;}
 /*通用悬浮菜单*/
 .m-icon{background: url("../images/cart-icon.png") no-repeat;display: inline-block;background-size: 80px auto;-webkit-background-size: 80px auto;}
-.met-nav{border: 1px solid #000;border-top-width:2px;position: fixed;bottom: 0;background: #fff;padding: 8px 0;}
+.met-nav{z-index: 20;border: 1px solid #000;border-top-width:2px;position: fixed;bottom: 0;background: #fff;padding: 8px 0;left: 0;}
 .met-nav a{width: 25%;float: left;}
 .met-nav a p{text-align: center;font-size: 12px;color: #000;}
 .met-nav a .met-1con{background-position: 0px -263px;width: 20px;height: 23px;}
@@ -582,8 +582,8 @@ html, body {height:100%}
 .my-evaluate .merchandise .mer-pic img{width: 100%}
 .my-evaluate .score .score-star label{width: 45px;float: left;font-size: 12px;color: #000;line-height: 22px;}
 .my-evaluate .score .score-star .star{width:83%;float: left;}
-.my-evaluate .score .score-star .star .a-star{width: 43px;float: left;height: 23px;margin-left: 1px;cursor: pointer}
-.my-evaluate .score .score-star .star .no-star{border: 1px solid #ccc;}
+.my-evaluate .score .score-star .star .a-star{width: 43px;float: left;height: 23px;margin-left: 1px;cursor: pointer;border: 1px solid #ccc;}
+.my-evaluate .score .score-star .star .no-star{}
 .my-evaluate .score .score-star .star .ye-star{border: 1px solid #ff9900;background: #ff9900}
 .my-evaluate .score .score-star .star li{padding: 0 18px;border: 1px solid #000;float: left;margin:0 10px 10px 0;line-height: 25px;position: relative;cursor: pointer}
 .my-evaluate .score .score-star .star li a{width: 100%;height: 100%;font-size: 12px;color: #000;}
@@ -604,12 +604,12 @@ html, body {height:100%}
 .b06-list .list-q{border-bottom: 1px solid #ccc;}
 .b06-list .list-q:last-child{border-bottom: 0;}
 .b06-list h5{padding: 13px 0;font-size: 12px;color: #000;font-weight: bold}
-.b06-page li{width: 24%;margin-left: 1%;float: left;margin-bottom: 1.3rem}
+.b06-page li{width: 22%;margin-left: 3%;float: left;margin-bottom: 1.3rem}
 .b06-page li:nth-child(4n+1){margin-left: 0;}
 .b06-page li img{width: 100%;}
-.b06-page li p{height: 36px;overflow: hidden;text-align: center;font-size: 1.2rem;color: #000;}
+.b06-page li p{height: 36px;overflow: hidden;text-align: center;font-size: 1rem;color: #000;line-height: 16px;margin-top: 5px;}
 .b06-page li.max-page a{height: 55px;line-height: 55px;border: 3px solid #000;text-align: center;font-size: 12px;display:block;color: #000;}
-    /*大首页new*/
+/*大首页new*/
 .newicon{background:url(../images/newicon.png) no-repeat;background-size:152px auto}
 .newheader{text-align: center}
 .newheader .icon-user{margin-top: 5px;}
@@ -766,3 +766,6 @@ html, body {height:100%}
 .add-ress .addbqt{padding: 15px 19px;width: 100%;float: left}
 .add-ress .bqtn{height: 35px;line-height: 35px;font-size: 12px;color: #000;width: 100%;float: left;border: 1px solid #000;background: #fff;}
 .add-ress .bg{background: rgba(0,0,0,0.5);z-index: 102;left: 0;top:0;bottom: 0;right: 0;width: 100%;height: 100%;position: fixed}
+.my-evaluate .score .bask .fi-icon .uploadify{opacity: 0;}
+.footer .info .wechat{background: url("../images/icon-wechat.png")no-repeat;background-size: 153px auto; }
+#nobtn{background: #ccc;}

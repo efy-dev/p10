@@ -8,22 +8,22 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="groupMember.user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="purchaseOrder.orderStatus" defaultValue="17" operation="ne"/>
+                        <condition name="orderStatus" defaultValue="17" operation="ne"/>
                     </query>
                     <query name="default5" label="待发货" type="auto" orderBy="id:desc">
                         <condition name="groupMember.user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="purchaseOrder.orderStatus" defaultValue="3" operation="eq"/>
+                        <condition name="orderStatus" defaultValue="5" operation="eq"/>
                     </query>
                     <query name="default7" label="已发货" type="auto" orderBy="id:desc">
                         <condition name="groupMember.user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="purchaseOrder.orderStatus" defaultValue="7" operation="eq"/>
+                        <condition name="orderStatus" defaultValue="7" operation="eq"/>
                     </query>
                     <query name="default9" label="未评价" type="auto" orderBy="id:desc">
                         <condition name="groupMember.user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="purchaseOrder.orderStatus" defaultValue="9" operation="eq"/>
+                        <condition name="orderStatus" defaultValue="9" operation="eq"/>
                     </query>
                     <query name="default3" label="拼团中" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>

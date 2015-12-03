@@ -67,15 +67,16 @@ public class PurchaseOrderGiftController {
             model.addAttribute("purchaseOrder", purchaseOrderGift);
         }
 
+        //优先判断是否是送礼人查看当前页面
+        if (AuthorizationUtil.isAuthenticated() && AuthorizationUtil.getMyUser().getId().equals(purchaseOrderGift.getUser().getId())) {
+            model.addAttribute("order", purchaseOrderGift);
+            return "/purchaseOrder/purchaseOrderGiftView";
+        }
         if (purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRECEIVE)){
             model.addAttribute("purchaseOrder", purchaseOrderGift);
             return "/purchaseOrder/giftView";
         }
 
-        if (AuthorizationUtil.isAuthenticated() && AuthorizationUtil.getMyUser().getId().equals(purchaseOrderGift.getUser().getId())) {
-            model.addAttribute("order", purchaseOrderGift);
-            return "/purchaseOrder/purchaseOrderGiftView";
-        }
         return "/purchaseOrder/receiveGift";
     }
 
@@ -100,7 +101,7 @@ public class PurchaseOrderGiftController {
         int width = theImg.getWidth(null);
         int height = theImg.getHeight(null);
         BufferedImage bimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Graphics g = bimage.createGraphics();
+        Graphics2D g = bimage.createGraphics();
         g.setColor(Color.black);
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
@@ -138,11 +139,11 @@ public class PurchaseOrderGiftController {
         ImageIcon giftImgIcon = new ImageIcon(pictureUrl);
         BufferedImage combined = new BufferedImage(bimage.getWidth(), bimage.getHeight(), BufferedImage.TYPE_INT_RGB);
         //图像合并
-        g = combined.getGraphics();
-        g.drawImage(bimage, 0, 10, null);
-        g.drawImage(image, 100, 750, null);
-        g.drawImage(giftImgIcon.getImage(), 40, 250, null);
-        //保存到本地
+        Graphics2D g1 = combined.createGraphics();
+        g1.drawImage(bimage, 0, 10, null);
+        g1.drawImage(image, 100, 750, null);
+        g1.drawImage(giftImgIcon.getImage(), 40, 250, null);
+        g1.dispose();
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         ImageIO.write(combined, "jpg", os);
         InputStream is = new ByteArrayInputStream(os.toByteArray());

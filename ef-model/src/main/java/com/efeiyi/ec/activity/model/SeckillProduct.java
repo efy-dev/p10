@@ -23,7 +23,10 @@ public class SeckillProduct {
     private String id;
     private ProductModel productModel; //关联的商品
     private BigDecimal price; //秒杀的价格
-    private Integer amount;//秒杀商品的库存
+    private Integer amount;//秒杀商品的库存 总库存
+    private Integer usefulAmount; //可用库存
+    private Integer orderAmount; //订单占用库存
+    private Integer unusefulAmount ; //不可用库存
     private Date endDatetime; //秒杀结束时间
     private Date startDatetime; //秒杀开始时间
     private Integer attentionAmount; //关注数
@@ -113,5 +116,32 @@ public class SeckillProduct {
 
     public void setLimitAmount(Integer limitAmount) {
         this.limitAmount = limitAmount;
+    }
+
+    @Column(name = "unuseful_amount")
+    public Integer getUnusefulAmount() {
+        return unusefulAmount;
+    }
+
+    public void setUnusefulAmount(Integer unusefulAmount) {
+        this.unusefulAmount = unusefulAmount;
+    }
+
+    @Column(name = "order_amount")
+    public Integer getOrderAmount() {
+        return orderAmount;
+    }
+
+    public void setOrderAmount(Integer orderAmount) {
+        this.orderAmount = orderAmount;
+    }
+
+    @Column(name = "useful_amount")
+    public Integer getUsefulAmount() {
+        return usefulAmount;
+    }
+
+    public void setUsefulAmount(Integer usefulAmount) {
+        this.usefulAmount = usefulAmount;
     }
 }

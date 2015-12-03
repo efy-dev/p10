@@ -45,7 +45,7 @@
 
     </http>
 
-    <b:bean id="casEntryPoint"  class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
+    <b:bean id="casEntryPoint"  class="com.ming800.core.util.CasAuthenticationRedirect">
         <b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>
         <b:property name="serviceProperties" ref="serviceProperties"/>
     </b:bean>

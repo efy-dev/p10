@@ -65,7 +65,7 @@
             </c:if>
             <!-- //End--time-->
             <div class="bd bigimg">
-                <img src="http://pro.efeiyi.com/${productList.get(0).productModel.productModel_url}@!miao-product-view">
+                <a href="<c:url value="/miao/${productList.get(0).id}"/>" ><img src="http://pro.efeiyi.com/${productList.get(0).productModel.productModel_url}@!miao-product-view"></a>
 
                 <p class="mask">关注度：${productList.get(0).attentionAmount}</p>
             </div>

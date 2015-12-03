@@ -106,16 +106,11 @@
             </c:if>
             <c:if test="${miaoStatus=='2'}">
                 <div class="s s3">
-                    <div class="status1">剩余库存量<strong id="amount">${seckillProduct.amount}</strong>件</div>
+                    <div class="status1">剩余库存量<strong id="amount">${seckillProduct.usefulAmount}</strong>件</div>
                 </div>
                 <div class="s s4">
                     <strong>秒杀记录：</strong>
 
-                    <div class="bd tabs">
-                        <p>用户名</p>
-
-                        <p>秒杀时间</p>
-                    </div>
                     <div class="bd info">
                         <ul id="miaoRecord">
                         </ul>
@@ -222,7 +217,7 @@
     function getProductAmount() {
         ajaxRequest("<c:url value="/miao/amount.do"/>", {"productId": "${seckillProduct.id}"}, function (data) {
             $("#amount").html(data);
-            setTimeout("getProductAmount()", 2500);
+            setTimeout("getProductAmount()", 7500);
         }, function () {
         }, "post")
     }
@@ -232,9 +227,9 @@
             var out = "";
             if (data.length > 0) {
                 var dataLength = 0;
-                if(data.length<=4){
+                if (data.length <= 4) {
                     dataLength = data.length;
-                }else{
+                } else {
                     dataLength = 4;
                 }
                 for (var i = 0; i < dataLength; i++) {
@@ -245,13 +240,13 @@
                 }
             }
             $("#miaoRecord").html(out);
-            setTimeout("getProductOrder()", 3000);
+            setTimeout("getProductOrder()", 8500);
         }, function () {
         }, "post")
     }
 
-    setTimeout("getProductOrder()", 3000);
-    setTimeout("getProductAmount()", 2500);
+    setTimeout("getProductOrder()", 7500);
+    setTimeout("getProductAmount()", 8500);
 
     $().ready(function () {
         $("img").each(function () {

@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -9,7 +10,24 @@
     <meta name="description" content="e飞蚁，中国领先的非物质文化遗产电商与交流平台，汇聚诸多传承人和各类传统工艺" />
 </head>
 <body>
-
+<header class="am-header custom-header index-header newheader">
+    <div class="logo"><a class="icon" href="" title="e飞蚁"></a></div>
+    <!-- //End--logo-->
+    <div class="newsearch">
+        <form>
+            <input class="newsebox" placeholder="茶叶罐">
+            <input type="submit" class="newsebut" value="搜">
+        </form>
+    </div>
+    <div class="am-header-right am-header-nav">
+        <a href="<c:url value="/cart/view"/>" class="icon icon-cart"><span><em>0</em></span></a>
+        <% if (AuthorizationUtil.isAuthenticated()) {%>
+        <a href="http://i.efeiyi.com/order/myEfeiyi/list.do" class="icon icon-user"></a>
+        <%} else {%>
+        <a href="<c:url value="/sso.do"/>" class="icon icon-user"></a>
+        <%}%>
+    </div>
+</header>
 <!--//End--header-->
 <article class="custom newcustom">
     <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}' >
@@ -21,7 +39,7 @@
     </div>
     <!--//End--am-slider-->
     <div class="toolbar">
-        <a class="item asso" href="<c:url value="/productCategory.do"/> ">
+        <a class="item asso" href="<c:url value="/productCategoryList.do"/> ">
             <span><i class="newicon"></i></span>
             <span>分&nbsp;类</span>
         </a>
@@ -29,7 +47,7 @@
             <span><i class="newicon"></i></span>
             <span>专&nbsp;题</span>
         </a>
-        <a class="item user" href="#user">
+        <a class="item user" href="http://master.efeiyi.com">
             <span><i class="newicon"></i></span>
             <span>大&nbsp;师</span>
         </a>

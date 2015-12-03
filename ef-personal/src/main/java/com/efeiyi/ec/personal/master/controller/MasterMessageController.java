@@ -354,23 +354,41 @@ public class MasterMessageController {
     public List getUserComments(HttpServletRequest request, @PathVariable String qm, @PathVariable String size, @PathVariable String index) throws Exception {
         MyUser user = AuthorizationUtil.getMyUser();
         XQuery xQuery = new XQuery(qm,request);
-        LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-        queryMap.put("user_id",user.getId());
+        xQuery.put("author_id",user.getId());
         PageEntity entity = new PageEntity();
         if (!StringTools.isEmpty(index)){
             entity.setIndex(Integer.parseInt(index));
             entity.setSize(Integer.parseInt(size));
         }
         xQuery.setPageEntity(entity);
-        List<MasterComment> list = baseManager.listObject(xQuery);
-        return null;
+        PageInfo info = baseManager.listPageInfo(xQuery);
+        List<MasterComment> list = info.getList();
+        if (!StringTools.isEmpty(list) && list.size() > 0){
+            return list;
+        }else{
+            return new ArrayList();
+        }
     }
 
     @ResponseBody
-    @RequestMapping("/userPraises")
-    public String getUserPraises() {
-
-        return null;
+    @RequestMapping("/userPraises/{qm}/{size}/{index}")
+    public List getUserPraises(HttpServletRequest request, @PathVariable String qm, @PathVariable String size, @PathVariable String index)throws Exception{
+        MyUser user = AuthorizationUtil.getMyUser();
+        XQuery xQuery = new XQuery(qm,request);
+        xQuery.put("author_id",user.getId());
+        PageEntity entity = new PageEntity();
+        if (!StringTools.isEmpty(index)){
+            entity.setIndex(Integer.parseInt(index));
+            entity.setSize(Integer.parseInt(size));
+        }
+        xQuery.setPageEntity(entity);
+        PageInfo info = baseManager.listPageInfo(xQuery);
+        List<MasterCommentPraise> list = info.getList();
+        if (!StringTools.isEmpty(list) && list.size() > 0){
+            return list;
+        }else{
+            return new ArrayList();
+        }
     }
 
 	/*--------------PC-Start--------------*/
@@ -808,12 +826,26 @@ public class MasterMessageController {
 
     @RequestMapping("/getPartWorks/{masterId}")
     public String getPartMasterWork(@PathVariable String masterId, Model model) throws Exception {
-        MyUser user = AuthorizationUtil.getMyUser();
         Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
+        MyUser user = AuthorizationUtil.getMyUser();
+        if (user != null && user.getId() != null) {
+            String query = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId and f.status = '1'";
+            LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+            map.put("masterId", masterId);
+            map.put("userId", user.getId());
+            MasterFollowed followed = (MasterFollowed) baseManager.getUniqueObjectByConditions(query, map);
+            if (followed != null) {
+                master.setFollowStatus("已关注");
+            }
+            if (followed == null || followed.getId() == null) {
+                master.setFollowStatus("关注");
+            }
+        } else {
+            master.setFollowStatus("关注");
+        }
         master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-        master.setFollowStatus(getFollowStatus(master, (User) baseManager.getObject(User.class.getName(), user.getId())));
-        MasterModel mmd = ConvertMasterModelUtil.convertMaster(master);
-        model.addAttribute("object", mmd);
+        master.setFsAmount(master.getFsAmount() == null ? 0 : master.getFsAmount());
+        model.addAttribute("object", master);
         return "/masterDetails/masterWorkList";
     }
 
@@ -831,7 +863,11 @@ public class MasterMessageController {
         } else {
             work.setStoreStatus("收藏");
         }
-        work.getMaster().setFollowStatus(getFollowStatus(work.getMaster(), (User) baseManager.getObject(User.class.getName(), user.getId())));
+        if(user != null && user.getId() != null){
+            work.getMaster().setFollowStatus(getFollowStatus(work.getMaster(), (User) baseManager.getObject(User.class.getName(), user.getId())));
+        }else{
+            work.getMaster().setFollowStatus("关注");
+        }
         MasterModel workModel = ConvertMasterModelUtil.convertWork(work);
         model.addAttribute("object", work.getMaster());
         model.addAttribute("work", workModel);
@@ -881,8 +917,6 @@ public class MasterMessageController {
     @ResponseBody
     @RequestMapping("/getWorks/{qm}/{conditions}/{size}/{index}")
     public List getWorks(HttpServletRequest request, @PathVariable String qm, @PathVariable String conditions, @PathVariable String size, @PathVariable String index) throws Exception {
-        //String url = "http://192.168.1.61:8082/importUsers";
-
         XQuery xQuery = new XQuery(qm, request);
         xQuery.put("master_id", conditions);
         PageEntity entity = new PageEntity();
@@ -1047,9 +1081,13 @@ public class MasterMessageController {
         if (!"0".equals(fatherId)) {
             MasterComment fatherCom = (MasterComment) baseManager.getObject(MasterComment.class.getName(), fatherId);
             comment.setFatherComment(fatherCom);
+            comment.setAuthor(fatherCom.getUser());
         } else {
+            User user1 = new User();
+            user1.setId("0");
             MasterComment fatherCom = new MasterComment();
             fatherCom.setId("0");
+            fatherCom.setAuthor(user1);
             comment.setFatherComment(fatherCom);
         }
         comment.setMasterWork(work);
@@ -1081,10 +1119,14 @@ public class MasterMessageController {
         MasterComment comment = new MasterComment();
         if (!"0".equals(fatherId)) {
             MasterComment fatherCom = (MasterComment) baseManager.getObject(MasterComment.class.getName(), fatherId);
+            comment.setAuthor(fatherCom.getUser());
             comment.setFatherComment(fatherCom);
         } else {
+            User user1 = new User();
+            user1.setId("0");
             MasterComment fatherCom = new MasterComment();
             fatherCom.setId("0");
+            fatherCom.setAuthor(user1);
             comment.setFatherComment(fatherCom);
         }
         comment.setMasterMessage(work);
