@@ -3,7 +3,9 @@ package com.efeiyi.ec.purchase.model;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -22,9 +24,11 @@ public class PurchaseOrder {
     public static final String ORDER_STATUS_WPAY = "1";  //等待付款
     public static final String ORDER_STATUS_WAIT_GROUP = "3" ; //等待成团
     public static final String ORDER_STATUS_WRECEIVE = "5"; //未发货
+    public static final String ORDER_STATUS_WRGIFT = "6"; //待收礼
     public static final String ORDER_STATUS_POSTED = "7";  //已发货
     public static final String ORDER_STATUS_UNCOMMENT = "9"; //未评价
     public static final String ORDER_STATUS_FINISHED = "13"; //已完成
+    public static final String ORDER_STATUS_REFUND = "15"; //已退款
     public static final String ORDER_STATUS_CONSEL = "17"; //已取消
 
     private String id;
@@ -33,7 +37,7 @@ public class PurchaseOrder {
     private List<PurchaseOrderDelivery> purchaseOrderDeliveryList;  //发货记录 订单配送
     private List<PurchaseOrderPayment> purchaseOrderPaymentList;
     private Date createDatetime;       //下单时间
-    private MyUser user;
+    private User user;
     private ConsumerAddress consumerAddress;  //收获地址
     private String status;
     private BigDecimal total;  //订单总价
@@ -49,7 +53,7 @@ public class PurchaseOrder {
     private String receiverName;//收货人姓名
     private String receiverPhone;//收货人联系方式
     private String callback; //回调
-    private String orderType; // 订单类型
+    private String orderType; // 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型
 
     @Column(name = "callback")
     public String getCallback() {
@@ -71,6 +75,7 @@ public class PurchaseOrder {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coupon_id")
+    @JsonIgnore
     public Coupon getCoupon() {
         return coupon;
     }
@@ -89,6 +94,7 @@ public class PurchaseOrder {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "fatherPurchaseOrder")
+    @JsonIgnore
     public List<PurchaseOrder> getSubPurchaseOrder() {
         return subPurchaseOrder;
     }
@@ -99,6 +105,7 @@ public class PurchaseOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "father_purchase_order_id")
+    @JsonIgnore
     public PurchaseOrder getFatherPurchaseOrder() {
         return fatherPurchaseOrder;
     }
@@ -109,6 +116,7 @@ public class PurchaseOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
+    @JsonIgnore
     public Tenant getTenant() {
         return tenant;
     }
@@ -138,6 +146,7 @@ public class PurchaseOrder {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<PurchaseOrderProduct> getPurchaseOrderProductList() {
         return purchaseOrderProductList;
     }
@@ -157,16 +166,19 @@ public class PurchaseOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public MyUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(MyUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_address_id")
+    @JsonIgnore
     public ConsumerAddress getConsumerAddress() {
         return consumerAddress;
     }
@@ -177,6 +189,7 @@ public class PurchaseOrder {
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<PurchaseOrderDelivery> getPurchaseOrderDeliveryList() {
         return purchaseOrderDeliveryList;
     }
@@ -186,6 +199,7 @@ public class PurchaseOrder {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<PurchaseOrderPayment> getPurchaseOrderPaymentList() {
         return purchaseOrderPaymentList;
     }
