@@ -88,12 +88,12 @@
               <div class="center ae">
                 <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup.myGroup.groupProduct.id}"/>" ><img src="http://pro.efeiyi.com/${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
                 <div class="txt ae"><p>交易金额：${purchaseOrderGroup.purchaseOrder.total}元</p>
-                  <c:if test="${purchaseOrderGroup.myGroup.status==1||purchaseOrderGroup.myGroup.status==5}">
+                  <%--<c:if test="${purchaseOrderGroup.myGroup.status==1||purchaseOrderGroup.myGroup.status==5}">
                     <p>返回红包：0元</p>
                   </c:if>
                   <c:if test="${purchaseOrderGroup.myGroup.status==3}">
                     <p>返回红包：${purchaseOrderGroup.groupMember.redPacket}元</p>
-                  </c:if>
+                  </c:if>--%>
                 </div>
               </div>
               <div class="bottom ae">
@@ -142,12 +142,12 @@
                 <div class="center ae">
                   <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup5.myGroup.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
                   <div class="txt ae"><p>交易金额：${purchaseOrderGroup5.purchaseOrder.total}元</p>
-                    <c:if test="${purchaseOrderGroup5.myGroup.status==1||purchaseOrderGroup5.myGroup.status==5}">
+                    <%--<c:if test="${purchaseOrderGroup5.myGroup.status==1||purchaseOrderGroup5.myGroup.status==5}">
                       <p>返回红包：0元</p>
                     </c:if>
                     <c:if test="${purchaseOrderGroup5.myGroup.status==3}">
                       <p>返回红包：${purchaseOrderGroup5.groupMember.redPacket}元</p>
-                    </c:if>
+                    </c:if>--%>
                   </div>
                 </div>
                 <div class="bottom ae">
@@ -190,12 +190,12 @@
               <div class="center ae">
                 <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup7.myGroup.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
                 <div class="txt ae"><p>交易金额：${purchaseOrderGroup7.purchaseOrder.total}元</p>
-                  <c:if test="${purchaseOrderGroup7.myGroup.status==1||purchaseOrderGroup7.myGroup.status==5}">
+                 <%-- <c:if test="${purchaseOrderGroup7.myGroup.status==1||purchaseOrderGroup7.myGroup.status==5}">
                     <p>返回红包：0元</p>
                   </c:if>
                   <c:if test="${purchaseOrderGroup7.myGroup.status==3}">
                     <p>返回红包：${purchaseOrderGroup7.groupMember.redPacket}元</p>
-                  </c:if>
+                  </c:if>--%>
                 </div>
               </div>
               <div class="bottom ae">
@@ -244,12 +244,12 @@
               <div class="center ae">
                 <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup9.myGroup.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
                 <div class="txt ae"><p>交易金额：${purchaseOrderGroup9.purchaseOrder.total}元</p>
-                  <c:if test="${purchaseOrderGroup9.myGroup.status==1||purchaseOrderGroup9.myGroup.status==5}">
+                  <%--<c:if test="${purchaseOrderGroup9.myGroup.status==1||purchaseOrderGroup9.myGroup.status==5}">
                     <p>返回红包：0元</p>
                   </c:if>
                   <c:if test="${purchaseOrderGroup9.myGroup.status==3}">
                     <p>返回红包：${purchaseOrderGroup9.groupMember.redPacket}元</p>
-                  </c:if>
+                  </c:if>--%>
                 </div>
               </div>
               <div class="bottom ae">
