@@ -68,6 +68,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
     public PurchaseOrder saveOrUpdatePurchaseOrder(ProductModel productModel, BigDecimal price, int amount, Model model) throws Exception {
         HashMap<String, List> productMap = new HashMap<>();
         PurchaseOrder purchaseOrder = createNewPurchaseOrder(productModel, price, amount);
+        purchaseOrder.setTenant(productModel.getProduct().getTenant());
         LinkedHashSet<Tenant> tenantSet = new LinkedHashSet<>();
         tenantSet.add(productModel.getProduct().getTenant());
         ArrayList<PurchaseOrderProduct> productModelArrayList = new ArrayList<>();
