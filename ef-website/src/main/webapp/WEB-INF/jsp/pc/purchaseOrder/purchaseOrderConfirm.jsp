@@ -1,354 +1,297 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2015/8/20
-  Time: 16:22
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!doctype html>
+<html class="no-js">
 <head>
-    <title></title>
-    <link href="<c:url value="/scripts/css/myorder.css"/>" type="text/css " rel="stylesheet">
+    <title>确认订单</title>
     <style>
-        .my-clearing .m-form li .dj-btn {
-            padding: 7px 33px;
+        .acd {
+            background: #fff !important;
+            color: #000 !important;
+            border: 1px solid #000 !important;
         }
 
-        .my-clearing .m-form {
-            padding: 15px 37px 32px;
+        .add-btn {
+            background: #fff;
+            height: 3rem;
+            width: 100%;
+            border: 1px solid #000;
+            color: #000;
+            display: block;
+            font-size: 1.2rem
+        }
+
+        .add-address {
+            width: 100%;
+            line-height: 3rem;
+            height: 3rem;
+            text-align: center;
+            border: 1px solid #000;
+            display: block;
+            color: #fff;
+            font-size: 1.2rem;
+            background: #000;
+        }
+
+        .add-ress-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            position: absolute;
+            right: -29px;
+            top: 8px;
+            display: block;
+            background: url("<c:url value="/scripts/wap/images/myorderps.png"/>") no-repeat;
         }
     </style>
 </head>
 <body>
-<div class="wr wh">
-    <!--结算-->
-    <div class="my-clearing">
-        <h1>填写并核对订单信息</h1>
-        <!--地址-->
-        <div class="clearing-site">
-            <span class="clearing-left">收货人信息</span>
-        <span class="clearing-right">
-            <a href="#" class="btn-cart-add">新增收货地址</a>
-            <div class="active-pop" style="display: none">
-    <div class="pop-up">
-        <div class="pop-h">编辑收货人信息
-            <i class="clase" title="关闭"></i>
-        </div>
-        <div class="m-form">
-            <form id="newAddress">
-                <ul>
-                    <li>
-                        <label>收货人：</label>
-                        <input type="text" name="consignee">
-                    </li>
-                    <li>
-                        <label>所在地区：</label>
+<!--//End--header-->
+<article class="bd shop-cart">
+    <div class="bd cart-order">
+        <%
+            boolean b = false;
+        %>
+        <div class="bd order-address" id="order-add">
+            <c:if test="${addressList.size() > 0}">
+                <c:forEach items="${addressList}" var="address">
+                    <c:if test="${address.status=='2'}">
+                        <a href="#btn-edit-addres" class="btn-edit-addres">
+                            <p id="hiddenId" hidden>${address.id}</p>
 
-                        <form>
-                            <select class="cars" id="province" name="province.id"
-                                    onchange="provinceChange(this)" required>
-                                <option value="请选择">请选择所在省市</option>
-                            </select>
-                            <select class="car1" id="city" name="city.id" required>
-                                <option value="请选择">请选择所在区县</option>
-                            </select>
-                        </form>
-                    </li>
-                    <li>
-                        <label>详细地址：</label>
-                        <input style="width: 255px" type="text" name="details">
-                    </li>
-                    <li>
-                        <label>手机号码：</label>
-                        <input type="text" name="phone">
-                    </li>
-                    <li>
-                        <label></label>
-                        <a class="dj-btn" onclick="submitNewAddress()" value="保存收货人信息"
-                           href="javascript:void(0)">保存收货人信息</a>
-                        <input type="reset" style="display: none" id="reset">
-                        <span id="ts" style="border: 0"></span>
-                    </li>
-                </ul>
-            </form>
-        </div>
-        <div class="sh-bg"></div>
-    </div>
-</div>
-        </span>
-        </div>
-        <div class="page-clearing" id="address">
-            <c:forEach items="${addressList}" var="address">
+                            <p class="title"><span>${address.consignee}</span><span>${address.phone}</span></p>
 
-                <div class="page-default">
-            <span>
-                <c:if test="${address.status=='2'}">
-                <div id="${address.id}" class="default-text triangle activeFlag" name="addressItem"
-                     onclick="chooseAddress(this,'${address.id}')">
-                    </c:if>
-                    <c:if test="${address.status=='1'}">
-                    <div class="default-text" name="addressItem" onclick="chooseAddress(this,'${address.id}')">
-                        </c:if>
-                        <strong>${address.consignee} ${address.province.name}</strong>
-                            <%--<i class="triangle" style="display: block"></i>--%>
+                            <p class="txt">${address.province.name}${address.city.name}${address.details}</p>
+                            <a href="#arrow-right" class="arrow-right"></a>
+                            <%
+                                b = true;
+                            %>
                         </a>
-                    </div>
-            </span>
-                    <span>${address.consignee}</span>
-                    <span>${address.province.name}</span>
-                    <span>${address.city.name}</span>
-                    <span>${address.details}</span>
-                    <span>${address.phone}</span>
-                </div>
-            </c:forEach>
-            <%--<div class="dj-p">--%>
-            <%--<a href="#">展开地址--%>
-            <%--<span class="triangle-bg"></span>--%>
-            <%--</a>--%>
-
-            <%--</div>--%>
-        </div>
-        <!--支付-->
-        <div class="clearing-site divtop">
-            <span class="clearing-left">支付方式</span>
-        </div>
-        <div class="page-clearing ">
-            <li id="zhifubao" class="alipay triangle " onclick="zhifubao(this)">
-                <span>支 付 宝</span>
-            </li>
-            <li id="weixin" class="alipay " onclick="weixin(this)">
-                <span>微   信</span>
-            </li>
-        </div>
-        <!--支付-->
-        <!--订货清单-->
-        <div class="clearing-site divtop">
-            <span class="clearing-left">订货清单</span>
-        <span class="clearing-right">
-            <c:if test="${!isEasyBuy}">
-                <a href="<c:url value="/cart/view"/>"
-                   onclick="window.location.href='<c:url value="/cart/view"/>'">返回修改购物车</a>
+                    </c:if>
+                </c:forEach>
+                <c:if test="<%=!b%>">
+                    <a href="#btn-edit-addres" class="btn-edit-addres">请选择一个地址</a>
+                </c:if>
             </c:if>
-        </span>
+            <c:if test="${addressList.size() == 0}">
+                <a href="#btn-edit-addres" class="btn-edit-addres"
+                   style="color: #0000FF;font-size: 1.6rem;float: right">添加收货地址</a>
+            </c:if>
+        </div>
+        <div class="bd order-address" id="order-add1" style="display: none">
+            <a href="#btn-edit-addres" class="btn-edit-addres">
+                <p class="title"><span id="span1">${address.consignee}</span><span id="span2">${address.phone}</span>
+                </p>
+
+                <p class="txt" id="txt">${address.province.name}${address.city.name}${address.details}</p>
+                <a href="#arrow-right" class="arrow-right"></a>
+            </a>
         </div>
         <c:forEach items="${tenantList}" var="tenant">
+            <div class="bd order-list">
+                <div class="title">${tenant.name}</div>
+                <ul class="ul-list">
+                    <c:forEach items="${productMap.get(tenant.id)}" var="product">
+                            <li>
+                                <img class="img" src="http://pro.efeiyi.com/${product.productModel.productModel_url}"
+                                     alt="">
 
-            <div class="page-inventory">
-                <div class="page-store">
-                        ${tenant.name}
-                        <%--<a href="#">收起店铺--%>
-                        <%--<span class="triangle-bg"></span>--%>
-                        <%--</a>--%>
-                </div>
-                <div class="page-Commodity">
-                    <table>
-                        <c:forEach items="${productMap.get(tenant.id)}" var="product">
-                            <c:if test="${product.isChoose==1}">
+                                <div class="bd info">
+                                    <p class="text">${product.productModel.name}
+                                        <c:if test="${product.productModel.productPropertyValueList.size()>1}">
+                                            [
+                                            <c:forEach items="${product.productModel.productPropertyValueList}"
+                                                       var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
+                                            ]
+                                        </c:if>
+                                    </p>
 
-                                <tr>
-                                    <td width="542">
-                                        <div class="cols1 page-pdl">
-                                            <a href="/product/productModel/${product.productModel.id}" target="_blank">
-                                                <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!product-icon"
-                                                     alt=""/>
-                                            </a>
+                                    <p class="price"><em>￥</em><span>${product.purchasePrice}</span></p>
 
-                                            <div class="info">
-                                                <p><a href="/product/productModel/${product.productModel.id}"
-                                                      target="_blank">${product.productModel.product.project.name}</a>
-                                                </p>
-
-                                                <p><a href="/product/productModel/${product.productModel.id}"
-                                                      target="_blank">${product.productModel.name}
-                                                    <c:if test="${product.productModel.productPropertyValueList.size()>1}">
-                                                        [
-                                                        <c:forEach
-                                                                items="${product.productModel.productPropertyValueList}"
-                                                                var="ppv">${ppv.projectPropertyValue.value}</c:forEach>]
-                                                    </c:if>
-                                                </a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td width="171"><span
-                                            class="moneycl">￥${product.productModel.price}</span>
-                                    </td>
-                                    <td width="137">
-                                        <span>x${product.amount}</span>
-                                    </td>
-                                    <td width="102"><span>有货</span></td>
-                                </tr>
-                            </c:if>
-                        </c:forEach>
-                    </table>
-                </div>
-                <div class="page-leaveword">
-                    <label>给店家留言</label>
-                    <input id="${tenant.id}Message" name="message" type="text" placeholder="(如需开具发票，请在此输入开票信息)"
-                           maxlength="45" oninput="updateCount(this)" style="color: black">
-                    <span id="${tenant.id}Count">0/45</span>
-                </div>
+                                    <p class="num"><i class="iocn-x"></i><strong>${product.purchaseAmount}</strong></p>
+                                </div>
+                            </li>
+                    </c:forEach>
+                </ul>
+                <div class="bd ask"><textarea name="message" id="${tenant.id}Message" cols="30" rows="4"
+                                              placeholder="给卖家留言(如需开具发票，请在此输入开票信息)"></textarea></div>
             </div>
         </c:forEach>
-        <!--订货清单-->
-        <!--发票-->
-        <div class="invoice divtop">
-            <%--<div class="title"><input type="checkbox" class="middle-active" value="">开具发票</div>--%>
-            <div class="con-info">
-                <div class="tbar">
-                    <%--<input type="checkbox" class="middle-active" value="">--%>
-                    <span class="name">使用优惠券</span>
-                    <%--<span class="txt">已减</span>--%>
-                    <%--<span class="price">￥20</span>--%>
-                </div>
-                <ul class="list ul-list" id="couponList">
-                    <%--{{ for(var i = 0 ; i<it.length ; i++){ }}--%>
-                    <%--<li>--%>
-                    <%--<input type="checkbox" name="coupon">--%>
-                    <%--<span class="t1">满{{=it.couponBatch.priceLimit}}元立减{{=it.couponBatch.price}}元</span>--%>
-                    <%--<span class="t2">{{=it.rangeLabel}}</span>--%>
-                    <%--<span class="t3">{{=it.startDate}}至{{=it.endDate}}</span>--%>
-                    <%--</li>--%>
-                    <%--{{ } }}--%>
-                </ul>
-                <div class="list div-list" id="couponExchange">
-                    <span>使用兑换码</span>
-                    <input class="ipt-txt" type="text" value="" id="cdkey">
-                    <a class="btn-submit" value="确定使用" onclick="exchangeCoupon()">确定使用</a>
-                    <span class="red" id="exchangeError" style="display: none">订单不满足该优惠券使用条件</span>
-                </div>
-                <ul class="list ul-list ul-list-last" id="exchangeCouponList">
-                    <%--<li>--%>
-                    <%--<input type="checkbox" name="coupon">--%>
-                    <%--<span class="t1">满{{=it.couponBatch.priceLimit}}元立减{{=it.couponBatch.price}}元</span>--%>
-                    <%--<span class="t2">{{=it.rangeLabel}}</span>--%>
-                    <%--<span class="t3">{{=it.startDate}}至{{=it.endDate}}</span>--%>
-                    <%--</li>--%>
-                </ul>
+
+        <!-- //End--order-list-->
+        <div class="bd order-total">
+            <c:if test="${empty purchaseOrder.callback}">
+                <p><strong>优惠券</strong><span class="btn-coupons" id="yhq">0张券可用</span><a href="#arrow-right"
+                                                                                         class="arrow-right"></a></p>
+            </c:if>
+
+            <p><strong>商品金额</strong><span><em>￥</em>${purchaseOrder.total}</span></p>
+            <c:if test="${empty purchaseOrder.callback}">
+                <p><strong>优惠</strong><span><em>￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span>
+                </p>
+            </c:if>
+
+            <p><strong>运费</strong><span><em>￥</em>0.00</span></p>
+        </div>
+        <!-- //End--order-total-->
+        <div class="bd cart-pay">
+            <div class="title">请选择支付方式</div>
+            <ul class="ul-list">
+                <li><a id="zhifubao" onclick="zhifubao(this)" title="支付宝" style="border: 2px solid red"><i
+                        class="icon icon-zfb"></i>支 付 宝</a></li>
+                <li><a id="weixin" onclick="weixin(this)" title="微信支付"><i class="icon icon-wechat"></i>微 信 支 付</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- //End--cart-order-->
+    <div class="bd payment-total-bar">
+        <span>总计付款</span>
+    <span class="txt" id="change" style="float: none">
+        ${purchaseOrder.total}</span>
+        <span>元</span>
+        <a onclick="submitOrder('${purchaseOrder.id}')" class="btn-right">提交订单</a>
+    </div>
+</article>
+
+
+<!--Start--弹出地址-->
+<div id="order-address" class="alert-delete or-address" style="display:none;">
+    <div class="bd cart-address" style="width: 90%;left: 5%;overflow: scroll;top: 2%">
+        <div class="bd list-adress" id="list-order">
+            <ul class="ul-list">
+                <c:forEach items="${addressList}" var="address">
+
+                    <li class="cart-btn acd"
+                        onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.city.name}','${address.details}')">
+                        <p class="bd title">${address.consignee} ${address.phone}</p>
+
+                        <p class="bd des">${address.province.name}${address.city.name}${address.details}</p>
+
+                        <p class="bd btns">
+                                <%--<input type="radio" name="address" id="address" onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.details}')">--%>
+                        </p>
+                    </li>
+                    <br>
+                </c:forEach>
+            </ul>
+            <div class="bd">
+                <a href="#" id="add" class="add-address" onclick="add_Address()" title="新增收货地址">新增收货地址</a>
             </div>
         </div>
-        <!--发票-->
-        <!--结算-->
-        <div class="System">
-            <div class="System-text">
-                <span class="btns"><a target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a></span>
-            <span class="price-info">
-                <%--js 取回来  第一次也是js取 统一js取--%>
-                <p class="price1">总金额：<em id="totalPrice">${purchaseOrder.total}</em> 元</p>
-                <p class="price2">优惠：<em id="couponPrice">0</em>元</p>
-                <p class="price3">应付金额：<strong id="finalPrice">${purchaseOrder.total}</strong> 元</p>
-            </span>
+        <div class="bd list-adress" id="adddiv" style="display: none;">
+            <div class="pop-up" style="position: relative">
+                <a class="add-ress-icon" href="#" onclick="closeAll()"></a>
+
+                <div class="pop-h">新增收货人信息
+                    <i class="clase" title="关闭"></i>
+                </div>
+                <div class="m-form">
+                    <form id="newAddress" method="post"
+                          class="am-form">
+
+                        <input type="hidden" name="productModel" value="${productModel.id}">
+                        <c:if test="${amount != null}">
+                            <input type="hidden" name="amount" value="${amount}">
+                        </c:if>
+                        <input type="hidden" name="callback" value="${callback}">
+                        <input type="hidden" name="groupProductId" value="${groupProductId}">
+
+                        <div class="am-form-group">
+                            <label>收货人</label>
+                            <input type="text" class="txt" name="consignee" value="" required>
+                        </div>
+                        <div class="am-form-group">
+                            <label>手机号</label>
+                            <input type="text" class="txt" name="phone" value="" size="11" maxlength="11">
+                        </div>
+                        <div class="am-form-group">
+                            <label>所在地区</label>
+                            <select id="provinceVal" class="cars" name="province.id"
+                                    onclick="province(this);" required>
+                            </select>
+                            <select id="cityVal" class="car1" name="city.id" onclick="city(this);" required>
+                            </select>
+                        </div>
+                        <div class="am-form-group">
+                            <label>具体地址</label>
+                            <textarea name="details" id="doc-vld-ta-2-1" class="text-act" required></textarea>
+                        </div>
+                        <input type="hidden" name="cartId" value="${cart.id}">
+                        <label></label>
+                        <p>
+                            <button onclick="submitNewAddress()" class="am-btn am-btn-default add-btn">保存收货人信息</button>
+                        </p>
+                        <span id="ts" style="border: 0"></span>
+                    </form>
+                </div>
+                <div class="sh-bg"></div>
             </div>
         </div>
     </div>
+    <div class="overbg"></div>
 </div>
+<!--//End--弹出地址-->
+<!--Start--弹出地址-->
+<div id="order-total" class="alert-delete yhq" style="display:none;">
+    <div class="bd cart-coupons" style="position: fixed;">
+        <div class="title">
+            <h2>优惠券</h2>
+        </div>
+        <!--//ENd-->
+        <ul class="ul-list" id="ul-list">
+        </ul>
+
+        <div class="bd">
+            <a onclick="yhq();" class="cart-btn" id="yhq-btn" title="确定">确定</a>
+        </div>
+    </div>
+    <div class="overbg"></div>
+</div>
+
 <script>
-
     var payment = "1";
-    var consumerAddress = "";
-    if (typeof $(".activeFlag").attr("id") != "undefined") {
-        consumerAddress = $(".activeFlag").attr("id");
-    }
-
-    function zhifubao(element) {
-        $(element).attr("class", "alipay triangle");
-        $("#weixin").attr("class", "alipay");
-        payment = "1";
-    }
-
-    function updateCount(element) {
-        var Id = $(element).attr("id");
-        var tenantId = Id.substring(0, Id.length - 7);
-        var str = $(element).val();
-        var count = str.length;
-        $("#" + tenantId + "Count").html(count + "/45");
-    }
-
-    function weixin(element) {
-        $(element).attr("class", "alipay triangle");
-        $("#zhifubao").attr("class", "alipay");
-        payment = "3";
-    }
-    function submitOrder(element, orderId) {
-        var messageObject = new Object();
-        $("input[name=message]").each(function () {
-            messageObject[$(this).attr("id")] = $(this).val();
-        })
-        var message1 = "";
-        for (var key in messageObject) {
-            message1 += key + ":" + messageObject[key] + ";"
-        }
-        var message = encodeURIComponent(message1);
-        $.ajax({
-            type: 'post',
-            async: false,
-            url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
-            dataType: 'json',
-            success: function (data) {
-                if (data) {
-                    if (consumerAddress == "") {
-                        showAlert("提示", "请选择一个收货地址！");
-                    } else {
-                        var url = "<c:url value="/order/confirm/"/>";
-                        url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message;
-                        element.onclick = null;
-                        $(element).attr("href", url);
-                        $(element).click();
-                        showChooseConfirm("提示", "是否支付成功？", function () {
-                            window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
-                        }, function () {
-                            window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
-                        })
-                    }
-                } else {
-                    showAlert("提示", "抱歉，该商品已售罄！")
-                }
-            },
-
-        });
-    }
-
+    var consumerAddress = $("#hiddenId").text();
+    var totalPrice = $("#change").text();
+    var orderId = "${purchaseOrder.id}";
 
     $(function () {
-        $('.clearing-site span a').click(function () {
-            $(this).siblings('.active-pop').show();
-            $('.clase, .sh-bg').click(function () {
-                $(this).parents('.active-pop').hide();
-            })
-            return false;
-        })
 
-        //网页加载的时候把城市的数据取回来
-        ajaxRequest("<c:url value="/myEfeiyi/address/listProvince.do"/>", {}, function (data) {
-            var out = '<option value="">请选择所在省市</option>';
-            for (var i = 0; i < data.length; i++) {
-                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+        if (!isWeiXin()) {
+            $("#weixin").hide();
+        } else {
+            $("#zhifubao").remove();
+        }
+
+        $.ajax({
+            type: 'get',
+            async: false,
+            url: '<c:url value="/coupon/list/${purchaseOrder.id}"/>',
+            dataType: 'json',
+            data: {
+                status: 1,
+            },
+            success: function (data) {
+                if (data != null) {
+                    var out = '';
+                    $("#yhq").text(data.length + "张优惠券可用");
+                    for (var i = 0; i < data.length; i++) {
+                        /*out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
+                         + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';*/
+                        out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
+                                + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';
+                    }
+                    $("#ul-list").html(out);
+                }
+            },
+            error: function (data) {
+                console.log(data);
             }
-            $("#province").html(out);
-        }, function () {
-        }, "post")
 
+        });
     })
 
-    function provinceChange(element) {
-        var provinceId = $(element).val();
-        ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>", {provinceId: provinceId}, function (data) {
-            var out = '<option value="">请选择所在区县</option>';
-            for (var i = 0; i < data.length; i++) {
-                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
-            }
-            $("#city").html(out);
-        }, function () {
-        }, "post")
-    }
 
-    function newAddress(it) {
-        var out = ' <div class="page-default"> <span> <div id="' + (it.id) + '" class="default-text" name="addressItem" onclick="chooseAddress(this,\'' + it.id + '\')"> <strong>' + (it.consignee) + ' ' + (it.province.name) + '</strong> </a> </div> </span> <span>' + (it.consignee) + '</span> <span>' + (it.province.name) + '</span> <span>' + (it.city.name) + '</span> <span>' + (it.details) + '</span> <span>' + (it.phone) + '</span> </div>';
-        return out;
-    }
+
 
     function submitNewAddress() {
         var consignee = $(":input[name='consignee']").val();
@@ -373,128 +316,334 @@
 
     }
 
-    function chooseAddress(element, addressId) {
-        consumerAddress = addressId
-        $("div[name=addressItem]").each(function () {
-            $(this).attr("class", "default-text");
+    function yhq() {
+        var couponid = null;
+        $("input:radio").each(function () {
+            if (this.checked) {
+                couponid = $(this).attr("id");
+            }
         })
-        $(element).attr("class", "default-text triangle")
+        var couponId = couponid.substring(4, couponid.length);
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/coupon/use.do"/>',
+            dataType: 'json',
+            data: {
+                couponId: couponId,
+                orderId: orderId
+
+            },
+            success: function (data) {
+                if (data == true) {
+                    var t_price = parseFloat(totalPrice);
+                    var chkobjs = document.getElementsByName("radio");
+                    for (var i = 0; i < chkobjs.length; i++) {
+                        if (chkobjs[i].checked) {
+                            t_price = t_price - parseFloat(chkobjs[i].value);
+                            $("#couponPrice").html(chkobjs[i].value);
+                        }
+                    }
+                    $("#change").text(t_price);
+                    $(".yhq").hide();
+                }
+            },
+
+        });
+
     }
 
-    function couponListHtml(it /**/) {
-        var out = ' ';
-        for (var i = 0; i < it.length; i++) {
-            if (it[i]["couponBatch"]["type"] == "1") {
-                out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this)" name="coupon" id="' + it[i].id + '"> <span class="t1">满' + (it[i]["couponBatch"]["priceLimit"]) + '元立减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
-            } else {
-                out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this)" name="coupon" id="' + it[i].id + '"> <span class="t1">减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
-            }
+    function add_Address() {
+        $("#adddiv").attr("style", "display:block;background: #fff;z-index:9999;width: 90%;left: 5%");
+        $("#list-order").attr("style", "display:none");
+    }
+
+    function closeAll() {
+        $(".or-address").attr("style", "display:none");
+        $("#adddiv").attr("style", "display:none");
+        $("#list-order").attr("style", "");
+    }
+
+    function zhifubao(element) {
+        $("#zhifubao").attr("style", "border:2px solid red");
+        if (isWeiXin()) {
+            $("#weixin").attr("style", "");
         }
-        return out;
+
+        payment = "1";
     }
 
-    function getLocalTime(nS) {
-        return new Date(parseInt(nS) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+    function weixin(element) {
+//    $(element).attr("class", "alipay wechat-active");
+        $("#weixin").attr("style", "border:2px solid red");
+        $("#zhifubao").attr("style", "");
+
+//    $("#weixin").attr("class", "paymentActive");
+//    $("#zhifubao").find("i").remove();
+//    $(element).append('<i class="triangle" style="display: block"></i>')
+        payment = "3";
     }
+    function submitOrder(orderId) {
+        var messageObject = new Object();
+        $("textarea[name=message]").each(function () {
+            messageObject[$(this).attr("id")] = $(this).val();
+        })
+        var message1 = "";
+        for (var key in messageObject) {
+            message1 += key + ":" + messageObject[key] + ";"
+        }
+        var message = encodeURIComponent(message1);
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
+            dataType: 'json',
+            success: function (data) {
+                <c:if test="${purchaseOrder.orderType=='2'}">
+                    data = true;
+                </c:if>
+                if (data) {
+                    if (consumerAddress == "") {
+                        showAlert("提示", "请选择一个收货地址！");
+                    } else {
 
-    function exchangeCoupon() {
-        var success = function (data) {
-            if (data == "null") {
-                $("#exchangeError").show();
-            } else {
-                $("#exchangeError").hide();
-                var html = couponListHtml(data);
-                $("#exchangeCouponList").html(html);
-                setTimeout(function () {
-                    $("input[name=coupon]").each(function () {
-                        $(this).click(function () {
-                            var id = $(this).attr("id");
-                            $("input[name=coupon]").each(function () {
-                                if ($(this).attr("id") != id) {
-                                    $(this).removeAttr("checked")
-                                }
-                            });
-                            $(this).attr("checked", "checked");
-                        });
-                    });
-                }, 1000);
+                        var isweixin = "";
 
-                //判断优惠券是否可用
-                if (data[0]["isUseful"] == 1) {
-                    $("#exchangeCouponList").attr("class", "list ul-list");
+                        if (isWeiXin()) {
+                            isweixin = "&isWeiXin=1";
+                            payment = "3"
+                        }
+
+                        var url = "<c:url value="/order/confirm/"/>";
+                        url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin;
+                        window.location.href = url;
+                    }
                 } else {
-                    $("#exchangeCouponList").attr("class", "list ul-list ul-list-last");
-                    $("#" + data[0]["id"]).remove();
+                    showAlert("提示", "抱歉，该商品已售罄！")
                 }
-            }
-        }
-        var param = {"cdkey": $("#cdkey").val(), "purchaseOrderId": "${purchaseOrder.id}"}
-        //初始化优惠券列表
-        ajaxRequest("<c:url value="/exchangeCoupon.do"/>", param, success, function () {
-        }, "post");
+            },
 
+        });
 
     }
 
-    function chooseUsefulCoupon(element) {
-        var status = "1";
-        console.log($(element).is(':checked'));
-        if ($(element).is(':checked') == true) {
-            status = "1";
+
+    $(function () {
+        $('.clearing-site span a').click(function () {
+            $(this).siblings('.active-pop').show();
+            $('.clase, .sh-bg').click(function () {
+                $(this).parents('.active-pop').hide();
+            })
+            return false;
+        })
+
+        //网页加载的时候把城市的数据取回来
+        ajaxRequest("<c:url value="/myEfeiyi/address/listProvince.do"/>", {}, function (data) {
+            var out = '<option value="">请选择</option>';
+            for (var i = 0; i < data.length; i++) {
+                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+            }
+            $("#province").html(out);
+        }, function () {
+        }, "post")
+
+    })
+
+
+    function provinceChange(element) {
+        var provinceId = $(element).val();
+        ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>", {provinceId: provinceId}, function (data) {
+            var out = '<option value="">请选择</option>';
+            for (var i = 0; i < data.length; i++) {
+                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+            }
+            $("#city").html(out);
+        }, function () {
+        }, "post")
+    }
+
+    function newAddress(it) {
+        var out2 = '<li class="cart-btn acd"onclick="chooseAddress(\''+it.id+'\',\''+it.consignee+'\',\''+it.phone+'\',\''+it.province.name+'\',\''+it.city.name+'\',\''+it.details+'\')"><p class="bd title">${address.consignee} ${address.phone}</p><p class="bd des">'+it.province.name+it.city.name+it.details+'</p><p class="bd btns"></p></li><br>';
+        return out2;
+    }
+
+    <%--function submitNewAddress() {--%>
+        <%--var param = $("#newAddress").serialize();--%>
+        <%--var success = function (data) {--%>
+            <%--console.log(data)--%>
+            <%--var html = newAddress(data);--%>
+            <%--$("#address").append(html);--%>
+            <%--$(".active-pop").hide();--%>
+        <%--}--%>
+        <%--ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {--%>
+        <%--}, "post")--%>
+    <%--}--%>
+
+    function chooseAddress(addressId, consignee, phone, province, city, details) {
+        consumerAddress = addressId;
+        var conConsignee = consignee;
+        var conPhone = phone;
+        var conProvince = province;
+        var conCity = city;
+        var conDetails = details;
+
+        console.log(consumerAddress);
+        $("#order-add").attr("style", "display:none");
+        $("#order-add1").attr("style", "display:block");
+        $("#span1").text(conConsignee);
+        $("#span2").text(conPhone);
+        $("#txt").text(conProvince + conCity + conDetails);
+
+    }
+
+    function putVal(o) {
+        var ele = document.getElementById("checkbox");
+        if (ele.checked) {
+            $(o).val("1");
         } else {
-            status = "2";
+            $(o).val("0");
         }
-        //选中优惠卷以后会发送一个请求就是把优惠券绑定到订单当中，绑定完成之后再发送一个请求来更新价格返回的是一个拼装好的json字符串
-        var param = {"purchaseOrderId": "${purchaseOrder.id}", "couponId": $(element).attr("id"), "status": status};
-        var success = function (data) {
-            if (data) {
-                var param = {"purchaseOrderId": "${purchaseOrder.id}"};
-                var success = function (data) {
-                    //输出新的订单价格
-                    data = JSON.parse(data);
-                    console.log(data);
-                    console.log(data["totalPrice"]);
-                    console.log(data["couponPrice"]);
-                    console.log(data["finalPrice"]);
-                    $("#totalPrice").html(data["totalPrice"]);
-                    $("#couponPrice").html(data["couponPrice"]);
-                    $("#finalPrice").html(data["finalPrice"]);
+    }
+    $(function () {
+        $("#add").click(function () {
+            $(this).siblings('.active-pop').show();
+            province();
+            $('.my-order .clase, .my-order .sh-bg').click(function () {
+                $(this).parents('.active-pop').hide();
+            })
+            return false;
+        })
+    });
+    $(function () {
+        $(".hideDiv").click(function () {
+            $(this).siblings('.active-pop').show();
+            $('.my-order .clase, .my-order .sh-bg').click(function () {
+                $(this).parents('.active-pop').hide();
+            })
+            return false;
+        });
+    });
+    function df(id) {
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/myEfeiyi/defaultAddress.do"/>',
+            dataType: 'json',
+            data: {
+                status: 2,
+                id: id
+
+            },
+            success: function (data) {
+                if (data == true) {
+                    window.location.reload();
                 }
-                ajaxRequest("<c:url value="/order/getPurchaseOrderPrice.do"/>", param, success, function () {
-                }, "post");
-            }
-        }
-        ajaxRequest("<c:url value="/useCoupon.do"/>", param, success, function () {
-        }, "post");
+            },
+
+        });
+    }
+    function city(obj) {
+        var pid = $("#provinceVal").val();
+        var v = $(obj).val();
+        $("#cityVal").empty();
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/myEfeiyi/address/listCity.do"/>',
+            dataType: 'json',
+            data: {
+                provinceId: pid
+            },
+            success: function (data) {
+                var obj = eval(data);
+                var rowHtml = "";
+                rowHtml += "<option value='请选择'>请选择</option>";
+                for (var i = 0; i < obj.length; i++) {
+                    rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
+                }
+                $("#cityVal").append(rowHtml);
+                $("#cityVal option[value='" + v + "']").attr("selected", "selected");
+
+            },
+        });
     }
 
+    function province(obj) {
+        var v = $(obj).val();
+        $("#provinceVal").empty();
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/myEfeiyi/address/listProvince.do"/>',
+            dataType: 'json',
+            success: function (data) {
+                var obj = eval(data);
+                var rowHtml = "";
+                rowHtml += "<option value='请选择'>请选择</option>";
+                for (var i = 0; i < obj.length; i++) {
+                    rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
 
-    $().ready(function () {
-        var success = function (data) {
-            var html = couponListHtml(data);
-            $("#couponList").html(html);
-            setTimeout(function () {
-                $("input[name=coupon]").each(function () {
-                    $(this).click(function () {
-                        var id = $(this).attr("id");
-                        $("input[name=coupon]").each(function () {
-                            if ($(this).attr("id") != id) {
-                                $(this).removeAttr("checked")
-                            }
-                        });
-                        $(this).attr("checked", "checked");
-                    });
-                });
-            }, 1000);
+                }
+                $("#provinceVal").append(rowHtml);
+                $("#provinceVal option[value='" + v + "']").attr("selected", "selected");
+                city(v);
+            },
 
+        });
+    }
+
+    function provinceChange(element, o, callback) {
+        $("#citys" + o).empty();
+        var provinceId = $(element).val();
+        ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>",
+                {provinceId: provinceId},
+                function (data) {
+                    var out = '<option value="">请选择</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+                    }
+                    $("#citys" + o).append(out);
+                    if (typeof callback != "undefined") {
+                        callback();
+                    }
+                }
+        )
+    }
+
+    function chooseCity(element, provinceId, cityId, o) {
+        $(element).val(provinceId);
+        var callback = function () {
+            $("#citys" + o).val(cityId);
         }
-        var param = {"price": "${purchaseOrder.total}", "purchaseOrderId": "${purchaseOrder.id}"}
-        //初始化优惠券列表
-        ajaxRequest("<c:url value="/listUserCoupon.do"/>", param, success, function () {
-        }, "post");
+        provinceChange(element, o, callback);
+    }
 
+    <c:forEach items="${addressList}" var="address">
+    chooseCity($("${address.id}"), "${address.province.id}", "${address.city.id}", "${address.id}");
+    </c:forEach>
 
-    });
+    /*  $().ready(function () {
+     $("#addAddress").validate({
+     rules: {
+     consignee: "required",
+     details: "required",
+     name: "required",
+     phone: "required",
+     },
+     });
+     $("#updateAddress").validate({
+     rules: {
+     consignee: "required",
+     details: "required",
+     name: "required",
+     phone: "required",
+     },
+     });
+     });*/
+    /*   function formatDate(now) {
+     return new Date(parseInt(now)).toLocaleString().replace(/:\d{1,2}$/, ' ');
+     }*/
+
 
 </script>
 </body>
