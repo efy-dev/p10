@@ -34,6 +34,9 @@
 <body>
 <header class="am-header custom-header">
   <!-- //End--chevron-left-->
+  <div class="am-header-left am-header-nav">
+    <a href="javascript:history.go(-1)" class="chevron-left"></a>
+  </div>
   <h1 class="am-header-title" style="margin: 0 10%;">我的团长我的团</h1>
   <!-- //End--title-->
   <div class="am-header-right am-header-nav">

@@ -147,7 +147,7 @@
 
     <c:if test="${flag==0}">
       <c:if test="${group.status=='1'||group.status=='4'}">
-        <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${group.groupProduct.id}&groupId=${group.id}&memberId=${memberId}"
+        <a href="<c:url value='/group/groupBuy.do'/>?groupProductId=${group.groupProduct.id}&groupId=${group.id}&memberId=${memberId}"
            class="btn">
           参团
         </a>
