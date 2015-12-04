@@ -230,7 +230,7 @@
             success:function(data){
 
                 if(data=="false"){
-                    var go = window.confirm("去登陆吧?");
+                    var go = window.confirm("去登录吧?");
                     if(go==true){
                         window.location.href ="<c:url value='/wap/projectAttention'/>";
                     }
@@ -536,7 +536,7 @@
             dataType:"json",
             success:function(data){
                 var pubu = $("#hadAttentionProjects");
-
+                pubu.empty();
                 if(data && data.length>=1){
                     for(i in data){
                         for(var key in data[i]){

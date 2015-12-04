@@ -61,3 +61,7 @@ MODIFY COLUMN `group_price`  decimal(10,2) NULL DEFAULT NULL AFTER `member_amoun
 ALTER TABLE `group_product`
 MODIFY COLUMN `bonus`  decimal(10,2) NULL DEFAULT NULL AFTER `create_datetime`;
 
+
+ALTER TABLE `activity_member`
+ADD COLUMN `create_datetime`  date NULL AFTER `red_packet`;
+

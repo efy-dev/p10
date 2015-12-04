@@ -17,6 +17,8 @@
                         <item label="正品保障" value="ec.zpbz"/>
                         <item label="售后政策" value="ec.shzc"/>
                         <item label="退换货流程" value="ec.thhlc"/>
+                        <item label="退货流程" value="ec.thlc"/>
+                        <item label="换货流程" value="ec.hhlc"/>
                         <item label="关于我们" value="ec.gywm"/>
                         <item label="联系我们" value="ec.lxwm"/>
                         <item label="诚聘英才" value="ec.cpyc"/>
@@ -24,6 +26,10 @@
                         <item label="法律声明" value="ec.flsm"/>
                         <item label="安全及隐私声明" value="ec.aqjyssm"/>
                         <item label="平台优势" value="ec.ptys"/>
+                        <item label="入驻须知" value="ec.rzxz"/>
+                        <item label="入驻流程" value="ec.rzlc"/>
+                        <item label="入驻咨询" value="ec.rzzx"/>
+                        <item label="入驻咨询" value="ec.fyjj"/>
                     </statusType>
                 </field>
             </fields>

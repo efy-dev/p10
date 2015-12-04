@@ -366,7 +366,7 @@
 
         if(data=="false"){
 
-          var go = window.confirm("去登陆吧?");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/find.do'/>";
           }
@@ -376,32 +376,17 @@
           return false;
         }
         if(data=="true"){
-          //$("#"+projectId).html("取消关注");
-          if(oper=="add" ){
+
             var parent = $("#"+projectId).parent();
             parent.empty();
             parent.append("<em about=\"del\" id=\""+projectId+"\">已关注</em> </a>");
-          }
-          if(oper=="del"){
-            var parent = $("#"+projectId).parent();
-            parent.empty();
-            parent.append("<i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">关注</em> </a>");
-            //var val = $("#"+projectId).attr("about","add");
-          }
+
           return true;
         }
         if(data=="del"){
-
-          if(oper=="add" ){
-            var parent = $("#"+projectId).parent();
-            parent.empty();
-            parent.append(" <em about=\"del\" id=\""+projectId+"\">已关注</em> </a>");
-          }
-          if(oper=="del"){
             var parent = $("#"+projectId).parent();
             parent.empty();
             parent.append("<i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">关注</em> </a>");
-          }
           return true;
         }
         if(data=="error"){
@@ -416,7 +401,16 @@
       },
       complete:function(){
 
-
+        /*if(oper=="add" ){
+          var parent = $("#"+projectId).parent();
+          parent.empty();
+          parent.append(" <em about=\"del\" id=\""+projectId+"\">已关注</em> </a>");
+        }
+        if(oper=="del"){
+          var parent = $("#"+projectId).parent();
+          parent.empty();
+          parent.append("<i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">关注</em> </a>");
+        }*/
       }
     });
   }

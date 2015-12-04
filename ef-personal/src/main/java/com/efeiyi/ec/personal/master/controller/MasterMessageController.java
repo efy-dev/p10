@@ -145,10 +145,21 @@ public class MasterMessageController {
     }
 
     @RequestMapping("/forwardMasterDetails.do")
-    public String forwardDetails(HttpServletRequest request, Model model) {
+    public String forwardDetails(HttpServletRequest request, Model model) throws Exception {
         String masterId = request.getParameter("masterId");
         Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
+        XQuery xQuery = new XQuery("listMasterIntroduction_default",request);
+        xQuery.put("master_id",masterId);
+        List<MasterIntroduction> list = baseManager.listObject(xQuery);
+        if (!StringTools.isEmpty(list)){
+            for (MasterIntroduction intro : list){
+                if ("1".equals(intro.getType())){
+                    model.addAttribute("baseBrief",intro.getContent());
+                }
+            }
+        }
         model.addAttribute("object", master);
+
         return "/masterMessage/masterMessageDetails";
     }
 

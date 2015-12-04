@@ -2,7 +2,7 @@
 
 <module name="Group" label="团" version="" package="com.efeiyi.ec.purchase.model" path="">
     <entities>
-        <entity name="PurchaseOrderGroup" label="团订单"  model="com.efeiyi.ec.group.model.PurchaseOrderGroup">
+        <entity name="PurchaseOrderGroup" label="团订单" model="com.efeiyi.ec.group.model.PurchaseOrderGroup">
             <does>
                 <do name="listPurchaseOrderGroup" access="" label="团订单列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
@@ -36,6 +36,10 @@
                     <query name="default2" label="拼团中" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="3" operation="eq"/>
                         <condition name="myGroup.id" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="default10" label="上级团员订单" type="auto" orderBy="id:desc">
+                        <condition name="myGroup.id" defaultValue="1" operation="eq"/>
+                        <condition name="groupMember.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>
@@ -82,7 +86,6 @@
                 </do>
             </does>
         </entity>
-
 
 
         <entity name="PurchaseOrder" label="商品列表" model="com.efeiyi.ec.purchase.model.PurchaseOrder">
@@ -138,10 +141,8 @@
                         <condition name="orderStatus" defaultValue="17" operation="eq"/>
                     </query>
                     <query name="byDatetime" label="默认" type="auto" orderBy="id:desc">
-                        <query name="default" label="默认" type="auto" orderBy="id:desc">
-                            <condition name="status" defaultValue="1" operation="eq"/>
-                            <condition name="orderType" defaultValue="2" operation="eq"/>
-                        </query>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="orderType" defaultValue="2" operation="eq"/>
                     </query>
                 </do>
 
@@ -149,6 +150,7 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="orderType" defaultValue="2" operation="eq"/>
+                        <condition name="orderStatus" defaultValue="5" operation="eq"/>
                     </query>
                 </do>
 

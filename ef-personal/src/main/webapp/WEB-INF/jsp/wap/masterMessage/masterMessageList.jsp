@@ -181,7 +181,7 @@
                     +"<div class=\"dynamic-ft\"> "
                     +"<a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+obj[i].praiseStatus+"</em></a><i class=\"s-solid ft-a\"></i> "
                     +"<a onclick=\"showModel('"+obj[i].id+"');\" name=\""+obj[i].id+"\" class=\"ft-a\"> <i class=\"good-2\"></i><em>"+obj[i].amount+"</em></a><i class=\"s-solid ft-a\"></i> "
-                    +"<a onclick=\"collected(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+obj[i].storeStatus+"</em></a></div></div>";
+                    +"<a onclick=\"collected(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-4\"></i><em>"+obj[i].storeStatus+"</em></a></div></div>";
             box.append(sub);
           }
         }else{

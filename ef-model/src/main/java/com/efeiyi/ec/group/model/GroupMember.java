@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +26,16 @@ public class GroupMember implements Serializable {
     private String status;//0:取消 1进行中 2:未激活 3：组团成功 5：组团失败
     private MyGroup myGroup;
     private BigDecimal redPacket;
+    private Date createDateTime;
 
+    @Column(name = "create_datetime")
+    public Date getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

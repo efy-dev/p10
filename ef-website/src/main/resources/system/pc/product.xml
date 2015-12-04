@@ -162,6 +162,15 @@
                 </do>
             </does>
         </entity>
-
+        <entity name="TenantMaster" label="店铺大师列表"  model="com.efeiyi.ec.tenant.model.TenantMaster">
+            <does>
+                <do name="listTenantMaster" access="" label="店铺大师列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
     </entities>
 </module>

@@ -265,7 +265,6 @@
 .newhad .had-good{background-position:  -43px -113px;}
 .newhad .had-not{background-position:  -43px -161px;}
 .newhad .am-header-title{margin: 0 20%;position: relative;padding-left: 37px;}
-.newhad  .am-header-title{text-align: left}
 .newshare .had-product{padding: 16px 0;position: relative;border-bottom: 1px solid #000;border-top: 1px solid #000;margin-top: -1px;}
 .newshare .had-product .had-pic{width: 105px;position: absolute;left: 1.9rem;top: 1.6rem}
 .newshare .had-product .had-pic img{width: 100%}
@@ -407,12 +406,14 @@
 .offered li p:nth-child(2) {font-size:12px;color:#999}
 .offered li span {color:#ff0000;font-size:12px;position:absolute;right:0;margin-top:-22px;top:50%}
 /*开团详情*/
-.newcustom .am-slider-a1 .am-control-nav{bottom: 52px;}
+.pimg{position: fixed;top: -5000px;left: 0;}
+.pimg img{width: 100%}
 .olli ol.am-control-nav.am-control-paging {bottom:45px}
 .olli .am-slider-a1 .am-control-nav li a.am-active {color:#ce0202}
 .my-colonel{padding-bottom: 60px;}
 .my-colonel .cost {margin-top:0.4rem}
-.my-colonel .cost .txt1 {font-size:16px;color:#999;float:left;width:40%;text-align:left;padding:0.7rem 0 0 1.8rem}
+.my-colonel .cost .txt1 {color:#ff0000;float:left;width:40%;text-align:left;padding:0.7rem 0 0 1.8rem;text-decoration:line-through}
+.my-colonel .cost .txt1 strong{font-size:16px;color:#000;}
 .my-colonel .cost .txt2 {width:60%;float:right}
 .my-colonel .cost .txt2 em {padding:0.6rem 0.9rem;float:right;background-color:#d42811;font-size:14px;color:#fff;height: 36px;}
 .my-colonel .cost .txt2 .icon {width:17px;height:36px;background:url(../images/purchase.png)no-repeat 2px -29px;float:right;background-size:169px auto;-webkit-background-size:169px auto}
@@ -752,7 +753,7 @@ html, body {height:100%}
 .tbd .card-pic img{width: 100%;float: left}
 /*礼物订单-物流信息*/
 .newam-header .am-header-title{margin: 0;font-size: 12px;color: #000;}
-.gift .logistics .p-text{border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;padding: 16px 0 16px 103px;position: relative;margin-top: -1px;}
+.gift .logistics .p-text{border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;padding: 16px 0 16px 103px;position: relative;margin-top: -1px;height: 114px;}
 .gift .logistics .p-text p{font-size: 12px;color: #000;line-height: 20px;}
 .gift .logistics .pic{position: absolute;left: 0;top: 16px;width: 87px;height: 70px;}
 .gift .logistics .pic img{width: 100%}

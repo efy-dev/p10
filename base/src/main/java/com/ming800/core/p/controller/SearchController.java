@@ -25,7 +25,7 @@ public class SearchController {
     private CommonManager commonManager;
 
 
-    @RequestMapping("/search.do")
+    @RequestMapping({"/search.do", "/AjaxSearch.do", "/filterSearch.do"})
     public ModelAndView solrSearch(ModelMap modelMap,SearchParamBean searchParamBean) throws Exception {
 
         if (searchParamBean.getQ() == null || "".equals(searchParamBean.getQ().trim())){

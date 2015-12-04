@@ -137,6 +137,8 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .great .dynamic-ft .good-1{width: 18px;height: 18px;background-size:100px auto; background:url(../images/bk-icon.png) no-repeat -95px -128px;float: left;margin:2% 0 0  26%;}
 .great .dynamic-ft .good-2{width: 18px;height: 18px;background-size:100px auto; background:url(../images/bk-icon.png) no-repeat -123px -128px;float: left;margin:2% 0 0  26%;}
 .great .dynamic-ft .good-3{width: 18px;height: 18px;background-size:100px auto; background:url(../images/bk-icon.png) no-repeat -152px -128px;float: left;margin:2% 0 0  50%;}
+.great .dynamic-ft .good-4{width: 18px;height: 18px;background-size:100px auto; background:url(../images/bk-icon.png) no-repeat -152px -128px;float: left;margin:2% 0 0  26%;}
+.suspend .great .dynamic-ft .good-4{width: 18px;height: 18px;background-size:100px auto; background:url(../images/bk-icon.png) no-repeat -152px -128px;float: left;text-align: left;margin:2% 0 0 45%!important;}
 .great .news-press{width: 100%;float: left;padding:1.9rem 1.9rem 0 11rem;position: relative;}
 .great .news-img {position: absolute;top:1.9rem;left:1.9rem;}
 .great .news-img img{width: 100px;}

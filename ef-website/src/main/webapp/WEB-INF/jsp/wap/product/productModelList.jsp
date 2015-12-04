@@ -17,17 +17,18 @@
 <body>
 <artice class="custom">
     <div class="bd list-class">
-        <ul class="ul-list-nav">
-            <li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="人气">人气</a></li>
+        <ul class="ul-list-nav ul-list-nav2">
+            <%--<li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="人气">人气</a></li>--%>
             <li>
                 <c:if test="${str==null}">
                     <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价格</a>
                 </c:if>
                 <c:if test="${str=='desc'}">
-                    <a href="<c:url value="/product/list/${project.id}?sort=asc:price&pageEntity.index=1"/>" title="价  格">价格</a>
+                    <a href="<c:url value="/product/list/${project.id}?sort=asc:price&pageEntity.index=1"/>" title="价  格">价格<i style="background:url(/scripts/wap/images/icon-new.png) no-repeat 0 0;background-size:100px auto;width:8px;height:20px;display:inline-block;margin-left:2px;position:relative;top:2px -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);"></i></a>
                 </c:if>
                 <c:if test="${str=='asc'}">
-                    <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价格</a>
+                    <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价格<i style="background:url(/scripts/wap/images/icon-new.png) no-repeat 0 0;background-size:100px auto;width:8px;height:20px;display:inline-block;margin-left:6px;position:relative;top:11px"></i></a>
                 </c:if>
             </li>
             <li><a href="<c:url value="/product/list/${project.id}?sort=desc:product.createDateTime&pageEntity.index=1"/>" title="新品">新品</a></li>

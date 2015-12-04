@@ -8,6 +8,10 @@
   <mapping path="/coupon/list" decorator="/layouts/myEfeiyiTemplate.jsp"/>
   <mapping path="/registerSuccess.do" decorator="/layouts/registerSuccess.jsp"/>
   <mapping path="/**" decorator="/layouts/mainTemplate.jsp"/>
+
+  <mapping path="/filterSearch.do" decorator="/layouts/filterTemplate.jsp" /><!--检索使用请勿删除-->
+  <mapping path="/AjaxSearch.do" exclue="true" /><!--检索使用请勿删除-->
+
     <!--<mapping path="/getXPage.do" decorator="/layouts/iframe.jsp"/>-->
     <!--<mapping path="/pc/login.do" decorator="/layouts/iframe.jsp"/>-->
     <!--<mapping path="/" decorator="/layouts/iframe.jsp"/>-->

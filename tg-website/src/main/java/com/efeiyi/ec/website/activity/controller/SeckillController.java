@@ -6,6 +6,7 @@ import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import javafx.beans.property.adapter.ReadOnlyJavaBeanBooleanProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +47,7 @@ public class SeckillController {
             Iterator iterator = pageInfo.getList().iterator();
             while (iterator.hasNext()) {
                 SeckillProduct seckillProduct = (SeckillProduct) iterator.next();
-                if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime() || seckillProduct.getAmount() <= 0) {
+                if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime() || seckillProduct.getUsefulAmount() <= 0) {
                     iterator.remove();
                 }
             }
@@ -66,7 +67,7 @@ public class SeckillController {
                     status = "1";
                 }
 
-                if (seckillProduct.getAmount() <= 0) {
+                if (seckillProduct.getUsefulAmount() <= 0) {
                     status = "3";
                 }
                 model.addAttribute("isShowTime", seckillProduct.getStartDatetime().getTime() - currentDate.getTime() < (24 * 60 * 60 * 1000));
@@ -137,7 +138,7 @@ public class SeckillController {
             status = "1";
         }
 
-        if (seckillProduct.getAmount() <= 0) {
+        if (seckillProduct.getUsefulAmount() <= 0) {
             status = "3";
         }
 
@@ -184,11 +185,11 @@ public class SeckillController {
                 status = "2";
                 //再这里减秒杀库存 减去可用库存
                 seckillProduct.setUsefulAmount(seckillProduct.getUsefulAmount() - Integer.parseInt(amount));
-                seckillProduct.setOrderAmount((seckillProduct.getOrderAmount()!=null?seckillProduct.getOrderAmount():0)+1);
-                baseManager.saveOrUpdate(SeckillProduct.class.getName(),seckillProduct);
+                seckillProduct.setOrderAmount((seckillProduct.getOrderAmount() != null ? seckillProduct.getOrderAmount() : 0) + 1);
+                baseManager.saveOrUpdate(SeckillProduct.class.getName(), seckillProduct);
                 String callback = "a.efeiyi.com/miao/wait/" + seckillProduct.getId() + "?userId=" + AuthorizationUtil.getMyUser().getId();
                 callback = URLEncoder.encode(callback, "UTF-8");
-                return "redirect:http://www.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice() + "&callback=" + callback+"&orderType=2";
+                return "redirect:http://www.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice() + "&callback=" + callback + "&orderType=2";
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
                 //秒杀已经结束
                 status = "3";
@@ -213,7 +214,7 @@ public class SeckillController {
         } else {
             model.addAttribute("redirect", "/miao/share/" + productId + "?userId=" + (request.getParameter("userId") != null ? request.getParameter("userId") : ""));
             model.addAttribute("productId", productId);
-            model.addAttribute("purchaseOrderId",purchaseOrderId);
+            model.addAttribute("purchaseOrderId", purchaseOrderId);
             return "/activity/orderDeal";
         }
     }
@@ -225,19 +226,20 @@ public class SeckillController {
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
         seckillProduct.setUsefulAmount((seckillProduct.getUsefulAmount() != null ? seckillProduct.getUsefulAmount() : 0) + 1);
         seckillProduct.setOrderAmount(seckillProduct.getOrderAmount() - 1);
-        baseManager.saveOrUpdate(SeckillProduct.class.getName(),seckillProduct);
-        return "redirect:/miao/"+productId;
+        baseManager.saveOrUpdate(SeckillProduct.class.getName(), seckillProduct);
+        return "redirect:/miao/" + productId;
     }
 
     @RequestMapping({"/miao/share/{productId}"})
-    public String share(@PathVariable String productId, HttpServletRequest request) {
+    public String share(@PathVariable String productId, HttpServletRequest request, Model model) {
         //支付成功的时候需要 +不可用库存 -订单库存
         String currentUserId = request.getParameter("userId");
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
-        seckillProduct.setUnusefulAmount((seckillProduct.getUnusefulAmount() != null ? seckillProduct.getUnusefulAmount() : 0) + 1);
-        seckillProduct.setOrderAmount(seckillProduct.getOrderAmount() - 1);
-        baseManager.saveOrUpdate(SeckillProduct.class.getName(),seckillProduct);
         if (AuthorizationUtil.isAuthenticated() && currentUserId.equals(AuthorizationUtil.getUser().getId())) {
+            model.addAttribute("product", seckillProduct);
+            seckillProduct.setUnusefulAmount((seckillProduct.getUnusefulAmount() != null ? seckillProduct.getUnusefulAmount() : 0) + 1);
+            seckillProduct.setOrderAmount(seckillProduct.getOrderAmount() - 1);
+            baseManager.saveOrUpdate(SeckillProduct.class.getName(), seckillProduct);
             return "/activity/seckillShare";
         } else {
             return "redirect:/miao/" + seckillProduct.getId();

@@ -196,7 +196,7 @@ ${product.productDescription.content}
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          var go = window.confirm("去登陆吧?");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
           }
@@ -379,7 +379,7 @@ function savaUP(productId){
     dataType:"json",
     success:function(data2){
      if(data2=="false"){
-       var go = window.confirm("去登陆吧?");
+       var go = window.confirm("去登录吧?");
        if(go==true){
          window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
        }
@@ -448,7 +448,7 @@ function savaUP(productId){
       async:true,
       success:function(data){
         if(data==false){
-          var go = window.confirm("去登陆吧?");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
           }
@@ -492,7 +492,7 @@ function savaUP(productId){
         async: true,
         success:function(data){
           if(data==false){
-            var go = window.confirm("去登陆吧?");
+            var go = window.confirm("去登录吧?");
             if(go==true){
               window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
             }
@@ -529,7 +529,7 @@ function savaUP(productId){
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
-          var go = window.confirm("去登陆吧?");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/wapShowProduct/'/>"+productId;
           }
@@ -575,7 +575,7 @@ function savaUP(productId){
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          var go = window.confirm("去登陆吧?");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
           }

@@ -18,9 +18,13 @@
         <div class="logo"><a class="icon" href="" title="e飞蚁"></a></div>
         <!-- //End--logo-->
         <div class="newsearch">
-            <form>
-                <input class="newsebox" placeholder="茶叶罐">
+            <form action="<c:url value='/search.do'/>" method="get">
+                <input type="text" class="newsebox" placeholder="搜" name="q" value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>">
                 <input type="submit" class="newsebut" value="搜">
+                <input type="hidden" name="resultPage" value="/searchResult"/>
+                <input type="hidden" name="facetFields" value="project_name"/>
+                <input type="hidden" name="group" value="efeiyi"/>
+                <input type="hidden" name="priceUD" value="0"/>
             </form>
         </div>
         <div class="am-header-right am-header-nav">
@@ -42,9 +46,13 @@
         </div>
         <!-- //End--chevron-left-->
         <div class="newsearch">
-            <form>
-                <input class="newsebox" placeholder="茶叶罐">
+            <form action="<c:url value='/search.do'/>" method="get">
+                <input type="text" class="newsebox" placeholder="搜" name="q" value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>">
                 <input type="submit" class="newsebut" value="搜">
+                <input type="hidden" name="resultPage" value="/searchResult"/>
+                <input type="hidden" name="facetFields" value="project_name"/>
+                <input type="hidden" name="group" value="efeiyi"/>
+                <input type="hidden" name="priceUD" value="0"/>
             </form>
         </div>
         <!-- //End--title-->

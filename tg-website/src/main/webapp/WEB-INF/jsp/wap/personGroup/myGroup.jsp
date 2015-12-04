@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -47,7 +48,7 @@
   <!-- //End--title-->
 </header>
 <!--//End--header-->
-<div class="ag-list ae">
+<div class="ag-list ae" style="padding-bottom: 60px;">
   <ul class="ag-new ae">
     <li class="active">我的开团</li>
     <li>我的参团</li>
@@ -58,9 +59,9 @@
         <c:forEach items="${myCreateProductList}" var="member" varStatus="rec">
           <c:if test="${member.status!=2}">
           <li>
-            <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
+            <a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
               <p> ${member.myGroup.groupProduct.productModel.product.name} ${member.myGroup.groupProduct.productModel.name}</p>
-              <p>${member.myGroup.createDateTime}</p>
+              <p>${fn:substring(member.myGroup.createDateTime,0 ,19 )}</p>
               <c:if test="${member.myGroup.status==1}">
                 <p>${member.myGroup.groupMemberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
                 <span>进行中</span>
@@ -82,10 +83,10 @@
     <div class="ag-ck" style="display: none">
       <ul class="offered ae">
         <c:forEach items="${groupJoinList}" var="member" varStatus="rec">
-          <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
+          <a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
             <li>
               <p>${member.myGroup.groupProduct.productModel.product.name}[${member.myGroup.groupProduct.productModel.name}]</p>
-              <p>${member.myGroup.createDateTime}</p>
+              <p>${fn:substring(member.myGroup.createDateTime,0 ,19 )}</p>
               <c:if test="${member.status!=2&&member.myGroup.status=='1'}">
                 <p>${member.myGroup.groupMemberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
               </c:if>

@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>分享页面</title>
+  <title>【团】${supMan}参加了${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]拼团，还差${number}人成团，快来参团吧~</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -32,6 +32,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
 </head>
 <body>
+<img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!wap-product-pic" style="position: absolute;left: 0;top: -1000px;width: 100%">
 <header class="am-header custom-header newhad">
   <!-- //End--chevron-left-->
 
@@ -39,7 +40,7 @@
         <c:if test="${group.status==1}">
           <h1 class="am-header-title"><i class="had-icon had-add"></i>组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团</h1>
         </c:if>
-        <c:if test="${group.status==3}">
+        <c:if test="${group.status==3||group.status==4}">
           <h1 class="am-header-title"><i class="had-icon had-good"></i>组团成功</h1>
         </c:if>
         <c:if test="${group.status==5}">
@@ -57,7 +58,7 @@
           <h1 class="am-header-title"><i class="had-icon had-add"></i>组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团</h1>
         </c:if>
 
-        <c:if test="${group.status==3}">
+        <c:if test="${group.status==3||group.status==4}">
           <h1 class="am-header-title"><i class="had-icon had-good"></i>组团成功</h1>
         </c:if>
         <c:if test="${group.status==5}">
@@ -73,7 +74,7 @@
 <div class="newshare ae">
   <!--头部产品-->
   <div class="had-product ae">
-    <div class="had-pic"><a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${group.groupProduct.id}&groupId=${group.id}&memberId=${memberId}&show=1"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!group-share-product-view"></a></div>
+    <div class="had-pic"><a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${group.groupProduct.id}&groupId=${group.id}&memberId=${memberId}&show=1&purchaseOrderId=${purchaseOrderId}"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!group-share-product-view"></a></div>
     <div class="had-txt"><p>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</p><p>${group.groupProduct.memberAmount}人起成团/${group.groupProduct.groupPurchaseTime}天成团</p><p><strong>拼团价${group.groupProduct.groupPrice}</strong>（<s>原价${group.groupProduct.productModel.price}</s>）</p></div>
   </div>
   <!--成团人数-->
@@ -221,7 +222,7 @@
       </c:if>
     </c:if>
     <div id="cover" style="display: none;"><em class="bg"></em><img
-            src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt="">
+            src="<c:url value="/scripts/wap/upload/guide-share.png"/>">
     </div>
   </div>
   <!--成团信息-->
@@ -244,8 +245,8 @@
       <li>
         <strong><img src="<c:url value="/scripts/wap/upload/fx-x-1.png"/>" class="page-pic"></strong>
         <span>团员${fn:substring(member.user.getUsername(), 0,3 )}****${fn:substring(member.user.getUsername(),7,11)}</span>
-        <span>${fn:substring(group.createDateTime,0 ,11 )}</span>
-        <span>${fn:substring(group.createDateTime,11 ,19 )}开团</span>
+        <span>${fn:substring(member.createDateTime,0 ,11 )}</span>
+        <span>${fn:substring(member.createDateTime,11 ,19 )}参团</span>
       </li>
         </c:if>
       </c:forEach>
@@ -353,10 +354,10 @@
     </div>
   </div>
 </div>
-<div class="login-reg">
+<%--<div class="login-reg">
   <a href="#login" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
   <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
-</div>
+</div>--%>
 <!--//End--login-reg-->
 <footer class="bd footer">
   <div class="bd info">

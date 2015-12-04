@@ -10,6 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+  <title><sitemesh:write property='title'/></title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20151127"/>">
   <link type="text/css" rel="stylesheet"  href="<c:url value="/scripts/wap/css/app.css?v=20151127"/>">
@@ -60,17 +61,6 @@
   }
 </style>
 <script type='text/javascript'>
-  (function(m, ei, q, i, a, j, s) {
-    m[a] = m[a] || function() {
-              (m[a].a = m[a].a || []).push(arguments)
-            };
-    j = ei.createElement(q),
-            s = ei.getElementsByTagName(q)[0];
-    j.async = true;
-    j.src = i;
-    s.parentNode.insertBefore(j, s)
-  })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
-  _MEIQIA('entId', 486);
 </script>
 <!--end在线客服-->
 <!--[if (gte IE 9)|!(IE)]><!-->
