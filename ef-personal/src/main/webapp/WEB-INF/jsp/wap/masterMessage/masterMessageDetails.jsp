@@ -39,7 +39,7 @@
     <a href="javascript:history.go(-1);" class="chevron-left"></a>
   </div>
   <!-- //End--chevron-left-->
-  <h1 class="am-header-title">${object.fullName}<input type="hidden" id="objText" value="${object.content}"/></h1>
+  <h1 class="am-header-title">${object.fullName}<input type="hidden" id="baseBrief" value="${baseBrief}"/></h1>
   <!-- //End--title-->
   <div class="am-header-right am-header-nav">
     <a href="#chevron-right" class="chevron-right" id="menu">
@@ -141,8 +141,8 @@
 <!--//End--header-->
 <div class="master-works">
   <div class="user" style="height: 480px;">
-    <img class="img-user" src="http://tenant.efeiyi.com/${object.favicon}" alt=""/>
-    <img class="img-bg" src="http://tenant.efeiyi.com/${object.backgroundUrl}" alt=""/>
+    <img class="img-user"  src="http://tenant.efeiyi.com/${object.favicon}@!tenant-mobile-view-icon" alt=""/>
+    <img class="img-bg"  src="http://tenant.efeiyi.com/${object.backgroundUrl}@!tenant-mobile-view-background" alt=""/>
     <div class="user-info">
       <p class="user-name">${object.fullName}</p>
       <p class="project-name">${object.projectName}</p>
@@ -234,9 +234,9 @@
           getMasterMessageList(masterId);
         }
         if($(this).attr("title")=="2"){
-          var brief = $("#objText").val();
           var type = "2";
-          getIntroduction(masterId,type ,brief);
+          var brief = $("#baseBrief").val();
+          getIntroduction(masterId,type,brief);
         }
         if($(this).attr("title")=="3"){
           getMasterProjectList(masterId);
@@ -254,17 +254,84 @@
         }
       }
     });
-//    getComments("");
-//    getPraises("");
   })
-  function getFollows(url){
-
-  }
+  var startNum = 1;
+  var startNumber = 1;
+  $(function(){
+    getComments("<c:url value='/masterMessage/userComments/plistMasterComment_byAuthor/2/'/>");
+    getPraises("<c:url value='/masterMessage/userPraises/plistMasterCommentPraise_byAuthor/2/'/>");
+  })
   function getComments(url){
-
+    $.ajax({
+      type: "POST",
+      url: url + startNum,
+      async: false,
+      data: "",
+      dataType: "json",
+      error: function () {
+        alert('出错了,请联系系统管理员!');
+      },
+      success: function (data) {
+        var box = $("#toComment");
+        var sub = "";
+        if(data && data.length > 0){
+          for(var i in data){
+            var ctime = transdate(data[i].createDateTime);
+            var userName = data[i].user.username.substring(0, 3) + "****" + data[i].user.username.substring(7, 11);
+            sub += "<li class=\"review\">"+
+                    "              <div class=\"matter\">"+
+                    "                <p class=\"text-h1\"><a href=\"#\">"+userName+"</a>回复了你</p>"+
+                    "                <p class=\"text-time\">"+ctime+"</p>"+
+                    "                <p class=\"text-content\"><a href=\"#\" >"+data[i].content+"</a></p>"+
+                    "                <div class=\"owner\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"/></div>"+
+                    "              </div>"+
+                    "            </li>";
+          }
+          box.append(sub);
+        }
+      },complete:function(){
+        startNum = startNum + 1;
+      }
+    })
+  }
+  function moreComments(){
+    getComments("<c:url value='/masterMessage/userComments/plistMasterComment_byAuthor/2/'/>");
+  }
+  function morePraises(){
+    getPraises("<c:url value='/masterMessage/userPraises/plistMasterCommentPraise_byAuthor/2/'/>");
   }
   function getPraises(url){
-
+    $.ajax({
+      type: "POST",
+      url: url + startNumber,
+      async: false,
+      data: "",
+      dataType: "json",
+      error: function () {
+        alert('出错了,请联系系统管理员!');
+      },
+      success: function (data) {
+        var box = $("#toPraise");
+        var sub = "";
+        if(data && data.length > 0){
+          for(var i in data){
+            var ctime = transdate(data[i].createDateTime);
+            var userName = data[i].user.username.substring(0, 3) + "****" + data[i].user.username.substring(7, 11);
+            sub += "<li class=\"review\">"+
+                    "              <div class=\"matter\">"+
+                    "                <p class=\"text-h1\">"+userName+"</p>"+
+                    "                <p class=\"text-time\">"+ctime+"</p>"+
+                    "                <p class=\"text-content\"><a href=\"#\" >觉得你的评论“"+data[i].comment.content+"”很赞</a></p>"+
+                    "                <div class=\"owner\"><img class=\"am-circle\" src=\"../shop2015/upload/120102-p1-11.jpg\"/></div>"+
+                    "              </div>"+
+                    "            </li>";
+          }
+          box.append(sub);
+        }
+      },complete:function(){
+        startNumber = startNumber + 1;
+      }
+    })
   }
   function getMasterProjectList(masterId){
     $.ajax({
@@ -361,7 +428,7 @@
       }
     })
   }
-  function getIntroduction(masterId,type ,brief){
+  function getIntroduction(masterId,type,brief){
     $.ajax({
       type: "POST",
       url: "<c:url value='/masterBrief/getMasterBrief.do'/>",
@@ -371,7 +438,7 @@
       error: function(){alert('出错了,请联系系统管理员!');},
       success: function(data) {
         var box = $("#changeType");
-        box.removeClass();
+//        box.removeClass();
         box.empty();
         var sub = "<div class=\"synopsis\"><p class=\"texp\">" + brief + "</p>" +
                 "<a href=\"#\" class=\"unwind\"><i class=\"texp-active\"></i><span id=\"zk\">展开</span></a></div>" +
@@ -418,7 +485,6 @@
       dataType:"json",
       error: function(){alert('出错了,请联系系统管理员!');},
       success: function(data) {
-        console.log(data);
         var box = $("#noRefresh");
         box.empty();
         var sub = "";
@@ -454,7 +520,7 @@
   }
   $(function(){
     var oParent=$('.master-works');
-    oParent.find('.user').css('height',/*oParent.find('.img-bg').height()+*/'480px');
+    oParent.find('.user').css('height',oParent.find('.img-bg').height()+'480px');
     oParent.find('.user-nav li').click(function(){
       $(this).addClass('active').siblings('li').removeClass('active');
       $(this).append('<i class="user-arrow-up"></i>').siblings('li').find('.user-arrow-up').remove();
@@ -483,6 +549,8 @@
       error: function(){alert('出错了,请联系系统管理员!');},
       success: function(data){
         var box = $("#changeType");
+        box.removeClass();
+        box.addClass("great");
         box.empty();
         var sub = "<div class=\"suit\">";
         for(var i = 0 ;i < data.length ;i++){
@@ -511,7 +579,7 @@
           "<div class=\"dynamic-ft\">" +
           "<a onclick=\"changePraiseStatus(this,'"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+data[i].praiseStatus+"</em></a> <i class=\"s-solid ft-a\"></i>"+
           "<a onclick=\"showModel('"+data[i].id+"');\" name=\""+data[i].id+"\" class=\"ft-a\"> <i class=\"good-2\"></i><em>"+data[i].amount+"</em></a><i class=\"s-solid ft-a\"></i>" +
-          "<a onclick=\"collected(this,'"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+data[i].storeStatus+"</em></a>" +
+          "<a onclick=\"collected(this,'"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-4\"></i><em>"+data[i].storeStatus+"</em></a>" +
           "</div>"+
           "</div>";
         }
@@ -544,7 +612,6 @@
         alert('出错了,请联系系统管理员!');
       },
       success: function (msg) {
-        console.log(msg);
         if(msg=="noRole"){
           alert("您还未登陆，请登录后再操作！！！");
           return false;

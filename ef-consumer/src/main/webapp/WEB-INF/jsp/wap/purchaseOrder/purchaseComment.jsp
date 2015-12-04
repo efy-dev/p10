@@ -11,6 +11,7 @@
 <!--//End--header-->
 <div class="my-evaluate ae">
   <c:forEach items="${finishOrder.purchaseOrderProductList}" var="orderProduct" varStatus="op">
+    <c:if test="${orderProduct.status!='1'}">
   <div class="merchandise pg ae" sd="${op.index}">
     <div class="mer-pic"><a href="#"><img src="<c:url value="http://pro.efeiyi.com/${orderProduct.productModel.productModel_url}"/>"></a></div>
     <div class="mer-text ae">
@@ -49,6 +50,7 @@
       <input type="button" class="butt" value="提&nbsp;&nbsp;&nbsp;&nbsp;交" onclick="tj(this);">
     </form>
   </div>
+    </c:if>
   </c:forEach>
 </div>
 <script src="<c:url value="/scripts/js/jquery.uploadify.min.js"/>"></script>
