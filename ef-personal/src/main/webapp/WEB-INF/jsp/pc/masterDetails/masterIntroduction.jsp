@@ -69,7 +69,7 @@
       <p>[${object.projectName}]</p>
     </c:if>
     <div class="great"><em><ming800:status name='level' dataType='Tenant.level' checkedValue='${object.level}' type='normal'/>非物质文化遗产传承人</em><i class="icon-master"></i></div>
-    <p class="text-great">${object.brief}</p>
+    <%--<p class="text-great">${object.brief}</p>--%>
     <div class="gz-master">
       <div class="mst-gz">
         <div class="pc-gz">
@@ -129,22 +129,24 @@
           </c:if>
         </p>
         <div class="f-r-gd ae"><a href="#"><span>阅读更多</span><i class="sp-icon"></i></a></div>
-        <h5>出版著作</h5>
-        <ul class="publish">
-          <c:if test="${!empty introductionList && introductionList.size() > 0}">
-            <c:forEach items="${introductionList}" var="intro">
-              <c:if test="${intro.type == '3'}">
-                <c:forEach items="${intro.attachmentList}" var="attr">
-                  <li>
-                    <img src="http://tenant.efeiyi.com/${attr.url}@!master-intro-product">
-                    <p>${attr.title}</p>
-                  </li>
-                </c:forEach>
-              </c:if>
-            </c:forEach>
-          </c:if>
-        </ul>
-        <div class="f-r-gd ae"><a href="#"><span>查看更多</span><i class="sp-icon"></i></a></div>
+        <c:if test="${!empty publications}">
+          <h5>出版著作</h5>
+          <ul class="publish">
+            <c:if test="${!empty introductionList && introductionList.size() > 0}">
+              <c:forEach items="${introductionList}" var="intro">
+                <c:if test="${intro.type == '3'}">
+                  <c:forEach items="${intro.attachmentList}" var="attr">
+                    <li>
+                      <img src="http://tenant.efeiyi.com/${attr.url}@!master-intro-product">
+                      <p>${attr.title}</p>
+                    </li>
+                  </c:forEach>
+                </c:if>
+              </c:forEach>
+            </c:if>
+          </ul>
+          <div class="f-r-gd ae"><a href="#"><span>查看更多</span><i class="sp-icon"></i></a></div>
+        </c:if>
       </div>
       <div class="mas-tx-right">
         <c:if test="${!empty introductionList && introductionList.size() > 0}">
@@ -160,21 +162,23 @@
                 </c:forEach>
             </c:if>
           </c:forEach>
-        <div class="honor">
-          <p>获得荣誉</p>
-          <ul class="gain">
-            <c:forEach items="${introductionList}" var="intro">
-              <c:if test="${intro.type == '2'}">
-                <c:forEach items="${intro.attachmentList}" var="attr">
-                  <li>
-                    <div><img src="http://tenant.efeiyi.com/${attr.url}@!master-intro-honour"></div>
-                    <p>${attr.title}</p>
-                  </li>
+          <c:if test="${!empty honors}">
+            <div class="honor">
+              <p>获得荣誉</p>
+              <ul class="gain">
+                <c:forEach items="${introductionList}" var="intro">
+                  <c:if test="${intro.type == '2'}">
+                    <c:forEach items="${intro.attachmentList}" var="attr">
+                      <li>
+                        <div><img src="http://tenant.efeiyi.com/${attr.url}@!master-intro-honour"></div>
+                        <p>${attr.title}</p>
+                      </li>
+                    </c:forEach>
+                  </c:if>
                 </c:forEach>
-              </c:if>
-            </c:forEach>
-          </ul>
-        </div>
+              </ul>
+            </div>
+          </c:if>
         </c:if>
       </div>
     </div>
