@@ -91,6 +91,9 @@
 <script src="<c:url value='/scripts/assets/pc/js/cyclopedia.js'/>"></script>
 
 <script>
+  $(document).ready(function(){
+    $("#pages").html("作品 - ${object.fullName} - e飞蚁");
+  })
   function followMaster(o , masterId){
     var str;
     $.ajax({

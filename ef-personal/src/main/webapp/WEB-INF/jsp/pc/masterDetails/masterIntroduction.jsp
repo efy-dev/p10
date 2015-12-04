@@ -181,6 +181,9 @@
   </div>
 </div>
 <script>
+  $(document).ready(function(){
+    $("#pages").html("介绍 - ${object.fullName} - e飞蚁");
+  })
   function followMaster(o , masterId){
     var str;
     $.ajax({
