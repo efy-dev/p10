@@ -37,6 +37,10 @@
                         <condition name="status" defaultValue="3" operation="eq"/>
                         <condition name="myGroup.id" defaultValue="1" operation="eq"/>
                     </query>
+                    <query name="default10" label="上级团员订单" type="auto" orderBy="id:desc">
+                        <condition name="myGroup.id" defaultValue="1" operation="eq"/>
+                        <condition name="groupMember.id" defaultValue="1" operation="eq"/>
+                    </query>
                 </do>
             </does>
         </entity>
