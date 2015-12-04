@@ -1202,7 +1202,7 @@ a:hover { text-decoration: underline }
 /*商品检索*/
 .bdb-1{border-bottom:3px solid #000;}
 .newmb{margin: 22px 0;}
-.fly-nev .searching{padding:0 120px;}
+.fly-nev .searching{padding:0 36px;}
 .fly-nev .searching .sech-look1{width: 100%;float: left;margin: 22px 0 22px;}
 .fly-nev .searching .sech-look1 li,.fly-nev .searching .sech-look1 li a{float: left;font-size: 12px;color: #999899;}
 .fly-nev .searching .sech-look1 li.icon{width: 4px;height: 7px;margin: 6px 8px 0;background-position:-280px -96px; }
@@ -1255,7 +1255,7 @@ a:hover { text-decoration: underline }
 .addsearching{float: left;border: 2px solid #ccc;margin-bottom: 25px;}
 .addsearching .explain{padding: 51px 0;}
 .addsearching .newexplain{padding: 0;}
-.nav-new-list{border-bottom: 0;text-align: center}
+.nav-new-list{border-bottom: 0}
 .nav-new-list .hd{border-bottom: 3px solid #000;height: 47px;}
 /*店铺检索-搜索*/
 .seek{float: right;margin:4px 36px 4px 0;}
