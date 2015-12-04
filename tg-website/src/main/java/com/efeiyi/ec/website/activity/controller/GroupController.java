@@ -162,6 +162,7 @@ public class GroupController {
         if (member!=null&&"2".equals(member.getStatus())){
             member.setStatus("1");
             member.setMyGroup(myGroup);
+            member.setCreateDateTime(new Date());
             baseManager.saveOrUpdate(GroupMember.class.getName(),member);
         }
         //人数够，成团操作
