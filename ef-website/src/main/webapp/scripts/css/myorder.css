@@ -687,7 +687,7 @@ a:hover { text-decoration: underline }
 .evaluation .mutual .parameter .data .data-list .tally li a { color: #000; text-decoration: none; }
 .evaluation .mutual .parameter .data .data-list .tally li { padding: 7px 14px; border: 1px solid #ccc; font-size: 12px; cursor: pointer }
 .evaluation .mutual .parameter .data .data-list dl { width: 100%; float: left }
-.evaluation .mutual .parameter .data .data-list dl dt { float: left; width: 55px; }
+.evaluation .mutual .parameter .data .data-list dl dt { float: left; }
 .evaluation .mutual .parameter .data .data-list dl dd { float: left; width: 715px; margin: 0 }
 .evaluation .mutual .parameter .data .data-list .tally .cl-active { border: 1px solid #000; background: url(../images/efeiyi-active.png)no-repeat right bottom; }
 /*.evaluation .triangle{position: absolute;bottom:0;right:0;background: url(../images/efeiyi-active.png)no-repeat;width: 17px;height: 17px;}*/
@@ -705,7 +705,7 @@ a:hover { text-decoration: underline }
 .evaluation .dialogue .list-crossover .content { width: 100%; float: left }
 .evaluation .dialogue .list-crossover .content .dt { float: left; font-size: 12px; font-family: simsun; width: 90px!important; }
 .evaluation .dialogue .list-crossover .content dd { float: left; font-size: 12px; font-family: simsun; width: 680px!important; }
-.evaluation .dialogue .list-crossover .content .dt1 { width: 145px!important; float: left; font-size: 12px; font-family: simsun; }
+.evaluation .dialogue .list-crossover .content .dt1 { float: left; font-size: 12px; font-family: simsun; }
 .evaluation .dialogue .list-crossover .content .dd { width: 550px!important; float: left; font-size: 12px; font-family: simsun; }
 .evaluation .add-images { width: 100%; float: left }
 .evaluation .add-images li { width: 80px; height: 80px; float: left; margin: 0 10px 10px 0;position: relative}
@@ -790,12 +790,13 @@ a:hover { text-decoration: underline }
 .payment .btn-payment .btn-payment-r a { width: 100%; height: auto; border: 1px solid #000; padding: 12px 50px; font-size: 12px; text-decoration: none }
 /*我的订单付款*/
 /*公共样式！商品推荐！精品推荐*/
-.recommend { width: 100%; float: left; margin-top: 45px; border: 1px solid #ccc; height: 295px;position: relative}
-.recommend .detail{width: 100%; float: left;height: 295px;}
-.recommend .detail .scroll{width: 100%;height: 295px;position: relative}
+.recommend { width: 100%; float: left; margin-top: 45px; border: 1px solid #ccc;position: relative}
+.recommend .detail{width: 100%; float: left;position: relative}
+.recommend .detail .scroll{width: 100%;position: relative}
 .recommend .topic { width: 100%; float: left; padding: 17px 20px; border-bottom: 1px solid #ccc; }
 .recommend .topic p { font-size: 14px; font-family: simsun; color: #000; }
-.recommend .carousel { margin: 24px auto 0; width: 650px;height: 295px;position: relative;overflow: hidden}
+.recommend .carousel { margin: 24px auto 0; width: 671px;height: 295px;position: relative;overflow: hidden}
+.recommend .carousel .detall{width: 1000%;position: absolute;left: 0;top: 0;}
 .recommend .carousel .li{ width: 100000000000000000000000%;position: absolute;left: 0;height: 295px;}
 .recommend .carousel .car-content { float: left; margin-right: 14px; width: 157px; border: 1px solid #ccc; padding: 10px; }
 .recommend .carousel .car-content dt { width: 130px; height: 130px; }
@@ -804,8 +805,9 @@ a:hover { text-decoration: underline }
 .recommend .carousel .car-content dd p strong { color: #ff0000; font-weight: 100 }
 .recommend .carousel .car-content dd p a { padding: 5px 20px; color: #000; border: 1px solid #000; text-decoration: none; }
 .recommend .carousel .car-content dd p a:hover { background: #000; color: #fff; }
-.recommend .car-left { position: absolute; width: 20px; height: 41px; background: url(../images/efeiyi-gwc.png) no-repeat 0 -50px; left: 60px; top: 35%; cursor: pointer }
-.recommend .car-right { position: absolute; width: 20px; height: 41px; background: url(../images/efeiyi-gwc.png) no-repeat -21px -50px; right: 30px;top: 35%; cursor: pointer }
+.recommend .car-left { position: absolute; width: 20px; height: 41px; background: url(../images/efeiyi-gwc.png) no-repeat 0 -50px; left: 26px; top:119px; cursor: pointer }
+.recommend i.hover{opacity: 0.5;}
+.recommend .car-right { position: absolute; width: 20px; height: 41px; background: url(../images/efeiyi-gwc.png) no-repeat -21px -50px; right: 26px;top: 119px; cursor: pointer }
 /*公共样式*/
 /*公共样式！通用弹出框*/
 .but-bil { font-size: 12px; }
@@ -1074,12 +1076,12 @@ a:hover { text-decoration: underline }
 .header .nav-links li a { white-space: nowrap; text-overflow: ellipsis; width: 87px; table-layout: fixed; overflow: hidden }
 /*我的e飞蚁页面*/
 .efeiyi-collect { margin-bottom: 36px; width: 852px; float: left; }
-.efeiyi-collect .efeiyi-head { height: 48px; float: left; width: 100%; padding: 14px 0 0 20px; border: 1px solid #ccc; }
+.efeiyi-collect .efeiyi-head { height: 48px; float: left; width: 100%; padding: 14px 0 0 20px; border: 1px solid #ccc;margin-top: -1px;}
 .efeiyi-collect .efeiyi-head .efeiyi-left { float: left; font-size: 14px; color: #000; }
 .efeiyi-collect .efeiyi-head .efeiyi-right { float: right; width: 282px; }
 .efeiyi-collect .efeiyi-head .efeiyi-right li { float: right; margin-right: 36px; font-size: 1.2rem }
 .efeiyi-collect .efeiyi-head .efeiyi-right li a { color: #003366; font-size: 12px; }
-.efeiyi-collect .ef-act3 { width: 100%; float: left; border: 1px solid #ccc; margin-top: -1px; }
+.efeiyi-collect .ef-act3 { width: 100%; float: left; border: 1px solid #ccc; margin-top: -1px;border-bottom-width: 0;}
 .efeiyi-collect .ef-act3 td { text-align: center; font-size: 12px; color: #666; border-bottom: 1px solid #ccc; }
 .efeiyi-collect .ef-act3 td strong { color: #ff0000; }
 .efeiyi-collect .ef-act3 td a { color: #003366; }
@@ -1098,6 +1100,21 @@ a:hover { text-decoration: underline }
 .hours { width: 102px; height: 54px; background: url(../upload/kaquan01.png) no-repeat; position: absolute; left: 0; top: 0; font-size: 35px; color: #fff; }
 .hours .yhq { position: relative; width: 100%; float: left; height: 100% }
 .hours span { position: absolute; left: 12px; top: 11px; }
+/*我的yifeiyi 收藏店铺和收藏商品*/
+.efeiyi-col-box{width: 100%;border: 1px solid #ccc;margin-top: -1px;float: left}
+.efeiyi-collect .efeiyi-head .efeiyi-right li.active a{text-decoration: underline}
+.efeiyi-col-box .efeiyi-col-tab{width: 100%;float: left}
+.efeiyi-col-box .efeiyi-col-tab .efeiyi-col-tzoom{width: 100%;float: left;padding: 10px 101px;position: relative}
+.efeiyi-col-box .efeiyi-col-tab .efeiyi-col-tzoom .efeiyi-tzoom-list{width: 100%;float: left;position: relative;height: 189px;overflow: hidden}
+.efeiyi-col-box .efeiyi-col-tab .efeiyi-col-tzoom .efeiyi-tzoom-list ul{width: 2000%;position: absolute;left: 0;top: 0;height: 189px;}
+.efeiyi-col-box .efeiyi-col-tab .efeiyi-col-tzoom .efeiyi-tzoom-list ul li{width: 126px;margin-right: 50px;float: left}
+.efeiyi-col-box .efeiyi-col-tab .efeiyi-col-tzoom .efeiyi-tzoom-list ul li img{width: 126px;}
+.efeiyi-col-box .efeiyi-col-tab .efeiyi-col-tzoom .efeiyi-tzoom-list ul li p{padding: 22px 0;color: #ff0000;font-size: 12px;text-align: center}
+.efeiyi-col-box .add-rigt{position: absolute; width: 20px; height: 41px; background: url(../images/efeiyi-gwc.png) no-repeat -21px -50px; right: 21px;top: 50%; cursor: pointer;margin-top: -22px;}
+.efeiyi-col-box .add-left{position: absolute; width: 20px; height: 41px; background: url(../images/efeiyi-gwc.png) no-repeat -0px -50px; left: 21px;top: 50%; cursor: pointer;margin-top: -22px;}
+.efeiyi-col-box .add{opacity: 0.5;}
+
+
 /*诚信保证*/
 .integrity-2015{width:1000px;margin: 0 auto 160px;}
 .integrity-2015 .h1{text-align: center;font-size: 25px;color: #000;margin: 64px 0 80px 0;}
@@ -1234,13 +1251,18 @@ a:hover { text-decoration: underline }
 .newrecommend .right-recommend a{margin-left: 40px;float: left;width: 224px;}
 .newrecommend .right-recommend a img{width: 100%}
 /*B020103项目商品列表页*/
-.addsearching{float: left;border-top:2px solid #000;border-bottom: 2px solid #000;margin-bottom: 25px;}
+.fly-nev .searching.newsearching{padding-left:36px;}
+.addsearching{float: left;border: 2px solid #ccc;margin-bottom: 25px;}
 .addsearching .explain{padding: 51px 0;}
+.addsearching .newexplain{padding: 0;}
+.nav-new-list{border-bottom: 0;text-align: center}
+.nav-new-list .hd{border-bottom: 3px solid #000;height: 47px;}
 /*店铺检索-搜索*/
 .seek{float: right;margin:4px 36px 4px 0;}
 .seek .s-text{width: 211px;height: 30px;float: left;padding:8px 14px;font-size: 12px;color: #999;}
 .seek .s-btn{width: 30px;height: 30px;background: url("../images/icon-new.png") no-repeat 0 -92px;float: left;margin-left: 2px;}
 /*分类头样式改*/
+.category .explain .more{bottom:11px;}
 .nav-new .cate .allsort .item h3{position: relative}
 .nav-new .cate .allsort .item h3.active.hover .icon-left{background-position: -16px -127px;}
 .nav-new .cate .allsort .item h3.active.hover .icon-right{background-position: -16px -127px;}
@@ -1249,3 +1271,5 @@ a:hover { text-decoration: underline }
 .nav-new .cate .allsort .item h3.active .icon-right{margin-left: 11px;width: 11px;height: 14px;background-position: 0 -127px;}
 /*文字背景*/
 .tbar-txt{width: 100%;position: absolute;bottom: 0;height: 80px;left: 0;padding:0 70px;background: url("../images/icon-new2.png") repeat-x;line-height: 18px;}
+/*首页查看更多*/
+.nav-new .cate .allsort .item .i-mc .links a.addeven{width: 33px;padding: 10px 0;border: 3px solid #000;font-size: 14px;color: #000;text-align: center;height: auto;margin: 0 0 0 10px;line-height: 16px;}
