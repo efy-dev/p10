@@ -44,8 +44,8 @@
 .myorder .jp-pd-btns li:nth-child(2) a:nth-child(1) {margin-right:10px}
 .myorder .Extras {border:1px solid #ccc;width:100%;overflow:hidden;height:auto;padding:11px 8px;margin-bottom:20px}
 .myorder .Extras a {float:left;width:100%;font-size:1rem;font-weight:100;position:relative;color:#000}
-/*左三�?*/
-.myorder .Extras .icon-sj {width:12px;height:12px;margin-top:3px;border-right:1px solid #000;border-bottom:1px solid #000;float:left;transfrom:rotate(-45deg);/*deg:度；旋转的属�?*/ -webkit-transform:rotate(-45deg);/*谷歌和苹果浏览器*/ -ms-transfrom:rotate(-45deg);/*ie浏览�?*/ position:absolute;right:1rem}
+/*左三角*/
+.myorder .Extras .icon-sj {width:12px;height:12px;margin-top:3px;border-right:1px solid #000;border-bottom:1px solid #000;float:left;transfrom:rotate(-45deg);/*deg:度；旋转的属性*/ -webkit-transform:rotate(-45deg);/*谷歌和苹果浏览器*/ -ms-transfrom:rotate(-45deg);/*ie浏览器*/ position:absolute;right:1rem}
 .myorder .aq-btn {width:100%;border:1px solid #000;margin-bottom:80px}
 .myorder .aq-btn a {display:block;padding:12px 0;width:100%;text-align:center;font-size:1rem;color:#000;transition:all 0.5s}
 .myorder .aq-btn a:hover {color:#fff;background:#000}
@@ -75,8 +75,8 @@
 .line-item .figure li span {font-size:1.2rem;color:#000}
 .line-item .figure li span:nth-child(1) {float:left}
 .line-item .figure li span:nth-child(2) {float:right;color:#ff0000}
-/*020201订单详情-未付�?*/
-/*020201订单详情-已付�?*/
+/*020201订单详情-未付款*/
+/*020201订单详情-已付款*/
 .line-item .express-address {padding:0 0.9rem;height:auto;width:100%;overflow:hidden}
 .line-item .an-address {height:90px;display:block}
 .line-item .an-address p {font-size:1rem;color:#000;text-align:center}
@@ -88,8 +88,8 @@
 .line-item .rectangle {width:5px;height:70px;background:url(../images/myorder.fw.png) no-repeat 0px -13px;position:absolute;display:block;top:20px;left:1px}
 .line-item .am-form-group p {font-size:1rem;color:#000;line-height:1.4rem}
 .line-item .am-form-group {width:100%}
-/*020201订单详情-已完�?*/
-/*020202优惠�?*/
+/*020201订单详情-已完成*/
+/*020202优惠券*/
 .discount {width:100%;padding:0 19px;float:left}
 .discount .employ {padding:2rem 0;float:left;width:100%}
 .discount .employ a {padding:4px 30px;display:block;font-size:1rem;border:1px solid #ccc;text-align:center;color:#000}
@@ -116,7 +116,7 @@
 .discount .am-tabs-bd {margin-top:5px;border:0}
 .discount .am-tabs-bd .am-tab-panel {padding:0}
 /*amazeuiorg*/
-/*020202优惠�?*/
+/*020202优惠券*/
 /*020203店铺收藏*/
 .collection {width:100%;padding:0 19px;float:left}
 .collection .collection-list {width:100%;float:left;margin-top:17px}
@@ -170,7 +170,7 @@
 .edit-personal .edit-material ul li input {width:100%;border:1px solid #ccc;padding:1rem;font-size:1rem;background-color:#fff}
 .edit-personal .sex .sex1 {width:50%;border:1px solid #ccc;padding:0.5rem 1rem;font-size:1rem}
 .edit-personal .sex .sex2 {width:50%}
-.edit-personal .am-icon-rq {width:1rem;height:1rem;border-right:1px solid #000;border-bottom:1px solid #000;transfrom:rotate(45deg);-webkit-transform:rotate(45deg);/*谷歌和苹果浏览器*/ -ms-transfrom:rotate(45deg);/*ie浏览�?*/ -o-transfrom:rotate(45deg);/*欧鹏浏览�?*/ -moz-transform:rotate(45deg);/*火狐浏览�?*/}
+.edit-personal .am-icon-rq {width:1rem;height:1rem;border-right:1px solid #000;border-bottom:1px solid #000;transfrom:rotate(45deg);-webkit-transform:rotate(45deg);/*谷歌和苹果浏览器*/ -ms-transfrom:rotate(45deg);/*ie浏览器*/ -o-transfrom:rotate(45deg);/*欧鹏浏览器*/ -moz-transform:rotate(45deg);/*火狐浏览器*/}
 .edit-personal .edit-info {width:100%;float:left;text-align:center;margin-top:2rem}
 .edit-personal .edit-info .a {width:100%;float:left;border:1px solid #000;padding:0.9rem 0;font-size:1.2rem;color:#000;transition:all 0.5s;background-color:#fff}
 .edit-personal .edit-info .a:hover {color:#fff;background-color:#000}
@@ -223,7 +223,7 @@
 /*购物车结算页按钮修改样式*/
 .add-btn {background:#fff;height:3rem;width:100%;border:1px solid #000;color:#000;display:block;font-size:1.2rem}
 .add-address {width:100%;line-height:3rem;height:3rem;text-align:center;border:1px solid #000;display:block;color:#000;font-size:1.2rem}
-/*我的团长我的�?*/
+/*我的团长我的团*/
 .ae {width:100%;float:left}
 .btn {padding:0.75rem 0;width:100%;background:#d42811;text-align:center;float:left;color:#fff;list-style:none;border:0;outline:none}
 .btn:hover {color:#fff}
@@ -235,9 +235,9 @@
 .tab-btn a:nth-child(2) {float:right;padding-left:0;padding-right:1.5rem}
 .tab-btn a:nth-child(2) .gicon {left:85%;top:20%;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);}
 /*三角图标*/
-.s-icon {width:1rem;height:1rem;position:absolute;border-right:1px solid #000;border-bottom:1px solid #000;right:1.4rem;top:1.3rem;transfrom:rotate(-45deg);/*deg:度；旋转的属�?*/ -webkit-transform:rotate(-45deg);/*谷歌和苹果浏览器*/}
+.s-icon {width:1rem;height:1rem;position:absolute;border-right:1px solid #000;border-bottom:1px solid #000;right:1.4rem;top:1.3rem;transfrom:rotate(-45deg);/*deg:度；旋转的属性*/ -webkit-transform:rotate(-45deg);/*谷歌和苹果浏览器*/}
 /*公共样式*/
-/*------每一个商品样�?*/
+/*------每一个商品样式*/
 .colonel-pic {position:relative}
 .colonel-pic .c-page {position:absolute;width:100%;height:2.8rem;padding:0.6rem 1.8rem;background:rgba(0,0,0,0.5);text-align:center;font-size:1.2rem;color:#fff;bottom:0}
 .colonel-pic .c-page span {width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;-webkit-text-overflow:ellipsis;display:inline-block}
@@ -324,7 +324,7 @@
 .packet .button {padding:0 1.8rem}
 .packet .button .btn {margin-bottom:23px}
 .packet .button .btn:nth-child(2) {border:1px solid #000;background:#fff;color:#000}
-/*b01020302我的�?*/
+/*b01020302我的团*/
 .custom-header .icon-user {margin-top:-6px}
 .my-pce .my-pic img {width:100%;margin-bottom:1.5rem}
 .my-pce .my-btn li {width:100%;float:left;border-top:1px solid #dedede;border-bottom:1px solid #dedede;height:3.9rem;margin-top:-1px}
@@ -360,7 +360,7 @@
 .colonel-table .introduce .button .icon1 {width:16px;height:13px;background:url(../images/purchase.png) no-repeat -16px 1px;position:absolute;left:25%;top:38%;display:inline-block;background-size:80px auto}
 .colonel-table .efeiyi-btn {position:relative;padding:1.4rem 0;width:100%;float:left;border-top:1px solid #000;font-size:1.4rem;color:#000;text-align:center}
 .colonel-table .efeiyi-btn .efiyi {width:10px;height:10px;position:absolute;border-right:1px solid #000;border-bottom:1px solid #000;left:65%;top:50%;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);margin-top:-4px;margin-left:0px}
-/*申请�?�?*/
+/*申请退货*/
 .sales-return {padding-top:4rem;font-weight:400}
 .sales-return p:nth-child(1) {font-size:1.5rem;color:#000;text-align:center;margin-bottom:1rem;width:100%}
 .sales-return p:nth-child(2) {font-size:3rem;color:#000;text-align:center;width:100%}
@@ -395,7 +395,7 @@
 .my-packet .top .text p {font-size:14px;color:#000;margin-bottom:1.5rem}
 .my-packet .top .text p:last-child {margin-bottom:0}
 .my-packet .page p {font-size:14px;color:#000;margin-bottom:0.8rem}
-/*我的参团/�?�?*/
+/*我的参团/开团*/
 .ag-list .ag-new{margin-top: -1px}
 .ag-list .ag-new li.active{background: #000;color: #fff;}
 .ag-list .ag-new li{width: 50%;float: left;padding:15px 0;text-align: center;color: #000;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 14px;}
@@ -405,13 +405,15 @@
 .offered li p {font-size:14px;line-height:30px;color:#000}
 .offered li p:nth-child(2) {font-size:12px;color:#999}
 .offered li span {color:#ff0000;font-size:12px;position:absolute;right:0;margin-top:-22px;top:50%}
-/*�?团详�?*/
-.newcustom .am-slider-a1 .am-control-nav{bottom: 52px;}
+/*开团详情*/
+.pimg{position: fixed;top: -5000px;left: 0;}
+.pimg img{width: 100%}
 .olli ol.am-control-nav.am-control-paging {bottom:45px}
 .olli .am-slider-a1 .am-control-nav li a.am-active {color:#ce0202}
 .my-colonel{padding-bottom: 60px;}
 .my-colonel .cost {margin-top:0.4rem}
-.my-colonel .cost .txt1 {font-size:16px;color:#999;float:left;width:40%;text-align:left;padding:0.7rem 0 0 1.8rem}
+.my-colonel .cost .txt1 {color:#ff0000;float:left;width:40%;text-align:left;padding:0.7rem 0 0 1.8rem;text-decoration:line-through}
+.my-colonel .cost .txt1 strong{font-size:16px;color:#000;}
 .my-colonel .cost .txt2 {width:60%;float:right}
 .my-colonel .cost .txt2 em {padding:0.6rem 0.9rem;float:right;background-color:#d42811;font-size:14px;color:#fff;height: 36px;}
 .my-colonel .cost .txt2 .icon {width:17px;height:36px;background:url(../images/purchase.png)no-repeat 2px -29px;float:right;background-size:169px auto;-webkit-background-size:169px auto}
@@ -432,7 +434,7 @@
 .join .Powerweb {height:1rem;position:relative;margin:0.6rem 0}
 .join .Powerweb .black {background:#000;height:1rem;position:absolute;left:0;top:0}
 .join .Powerweb .gray {background:#f3f3f3;width:100%;height:1rem}
-/*待评�?/全部/待收�?/待发�?*/
+/*待评价/全部/待收货/待发货*/
 .od-tab1 .product li {float:left;width:100%;padding-bottom:4px;border-bottom:1px solid #ccc;border-top:1rem solid #f2f2f2}
 .od-tab1 .product li:nth-child(1) {border-top:0}
 .od-tab1 .product li {}
@@ -464,7 +466,7 @@
 .no-order .top .txt p {margin-bottom:1.5rem}
 .no-order .top .txt p:nth-child(1) {font-size:20px}
 .no-order .top .txt .bgpic {width:8.5rem;height:8.5rem;position:absolute;display:inline-block;left:0;top:0;background:url(../images/purchase.png) no-repeat -80px 14px}
-/*优惠券系�?*/
+/*优惠券系列*/
 /*立即领取*/
 html, body {height:100%}
 .coupon-sc {background:url(../images/mylqbg.png) no-repeat top center;width:100%;height:100%;background-size:auto 100%;position:absolute;top:55px;left:0;overflow:hidden}
@@ -482,7 +484,7 @@ html, body {height:100%}
 .coupon-sc .cont .act {color:#fff;background:#000}
 .coupon-sc .cont .but:active, .coupon-sc .cont .cg .but:hover {background:#000;color:#fff}
 .coupon-sc .cont .s-pic {width:62px;height:61px;background:url(../images/mylqbgicon.png) no-repeat -67px 0px;background-size:207% auto;display:inline-block;}
-/*不可优惠�?*/
+/*不可优惠券*/
 .coupon-tab .c-tab {padding:0 1.9rem;margin-top:1rem}
 .coupon-tab .c-tab ul {width:100%;float:left}
 .coupon-tab .c-tab ul .active {background:#000;color:#fff}
@@ -535,14 +537,14 @@ html, body {height:100%}
 }
 
 
-/*兑换码系�?*/
+/*兑换码系列*/
 .convert {padding:2.5rem 1.9rem;position:relative}
 .convert label {font-size:12px;color:#000;width:100%;float:left}
 .convert .text {width:100%;height:50px;border:1px solid #000;padding:15px;text-align:center;font-size:30px;color:#000;margin:10px 0 45px;float:left}
 .convert p {font-size:12px;color:#ff0000;position:absolute;top:55%;left:1.9rem}
 .convert .subtn {padding:0 1.1rem;width:100%;float:left}
 .convert .subtn .btnn {font-size:12px;background:#000;color:#fff;padding:1.2rem 0;float:left;width:100%;border:1px solid #000;outline:none}
-/*兑换码系�?1*/
+/*兑换码系列1*/
 .tab-convert {padding:0 19px}
 .tab-convert ul {width:100%;float:left;padding-bottom:65px}
 .tab-convert ul li {width:100%;float:left;margin-top:25px}
@@ -556,9 +558,9 @@ html, body {height:100%}
 .tab-convert ul li .right .page p {font-size:10px;color:#000;text-align:left;-webkit-transform:scale(0.8);width:100%}
 .tab-convert ul li .right .page p:nth-child(2) {height:18px;overflow:hidden}
 .tab-convert .dh-1 {padding:12px;font-size:12px;color:#000;float:left;border:1px solid #000;width:100%;position:relative;margin-bottom:1.5rem}
-.tab-convert .dh-1 .dh-1-icon {width:1rem;height:1rem;position:absolute;border-right:1px solid #000;border-bottom:1px solid #000;right:1.4rem;top:1.3rem;transfrom:rotate(-45deg);/*deg:度；旋转的属�?*/ -webkit-transform:rotate(-45deg);right:5%;top:36%}
+.tab-convert .dh-1 .dh-1-icon {width:1rem;height:1rem;position:absolute;border-right:1px solid #000;border-bottom:1px solid #000;right:1.4rem;top:1.3rem;transfrom:rotate(-45deg);/*deg:度；旋转的属性*/ -webkit-transform:rotate(-45deg);right:5%;top:36%}
 .tab-convert .dh-btn {padding:11px 0;width:100%;float:left;margin-bottom:15px;background:#000;color:#fff;text-align:center;font-size:12px;border:1px solid #000;outline:none}
-/*可使�?*/
+/*可使用*/
 .tab-add {padding:0 32px}
 .tab-add h5 {font-size:18px;width:100%;float:left;text-align:center;margin-top:25px}
 .tab-add ul li .right {width:100%}
@@ -569,7 +571,7 @@ html, body {height:100%}
 .tab-add1 ul li .right {background:url(../images/mylqyhq.png) no-repeat 0 0px;background-size:111% 288%}
 .tab-add1 .aclass a:nth-child(2) {float:right;background:#999;color:#fff}
 /*--//End--*/
-/*注册中转�?*/
+/*注册中转页*/
 .m-successful h5{font-size: 16px;color: #000;width: 100%;text-align: center;margin-top: 50px;}
 .m-successful p{font-size: 12px;width: 100%;color: #000;margin-top: 25px;text-align: center}
 .m-successful  .kbtn{padding:0 37px;width:100%;}
@@ -605,7 +607,7 @@ html, body {height:100%}
 .my-evaluate .score  .bask .file-pic{float: left;width: 100%}
 .my-evaluate .score  .bask .file-pic img{width: 100%;float: left;}
 .my-evaluate .score  .bask .file-pic .li-img{height: 68px;width: 68px;margin: 0 15px 10px 0;float: left}
-/*分类列表�?*/
+/*分类列表页*/
 .b06-list{padding: 0 1.3rem;}
 .b06-list .list-q{border-bottom: 1px solid #ccc;}
 .b06-list .list-q:last-child{border-bottom: 0;}
@@ -710,7 +712,7 @@ html, body {height:100%}
 .gift .detailed{float: left;font-size:12px;color: #000;width: 100%;margin-top: 6px;}
 .gift .detailed .font-1{float: left;margin-right: 10px;}
 .gift .detailed .font-2{float: right;width: 98px;}
-/*礼物订单付款�?*/
+/*礼物订单付款后*/
 .gift .btb-text{padding-top:12px; }
 .gift .btb-text p{margin-bottom: 12px;line-height: 20px;font-size:12px;color: #000;}
 .gift .car-fx{width: 100%;position: fixed;bottom: 0;border-top: 1px solid #000;border-bottom: 1px solid #000;background: #fff;left: 0;}
@@ -751,7 +753,7 @@ html, body {height:100%}
 .tbd .card-pic img{width: 100%;float: left}
 /*礼物订单-物流信息*/
 .newam-header .am-header-title{margin: 0;font-size: 12px;color: #000;}
-.gift .logistics .p-text{border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;padding: 16px 0 16px 103px;position: relative;margin-top: -1px;}
+.gift .logistics .p-text{border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;padding: 16px 0 16px 103px;position: relative;margin-top: -1px;height: 114px;}
 .gift .logistics .p-text p{font-size: 12px;color: #000;line-height: 20px;}
 .gift .logistics .pic{position: absolute;left: 0;top: 16px;width: 87px;height: 70px;}
 .gift .logistics .pic img{width: 100%}
@@ -765,7 +767,7 @@ html, body {height:100%}
 .slnew .des-content .title{font-size: 14px;padding: 10px 19px}
 /*图片*/
 .img-pic img{width: 100%}
-/*收礼页面弹出�?*/
+/*收礼页面弹出框*/
 .add-ress .add-text{position: absolute;width: 100%;left: 0;bottom: 0;z-index: 103;background: #fff;padding:14px 19px 0 19px; }
 .add-ress .add-text span{padding: 0 0 14px 0;font-size: 12px;color: #000;width: 100%;float: left}
 .add-ress{position: absolute;width: 100%;background: #fff;left: 0;top: 0;}
