@@ -130,10 +130,15 @@
                 </div>
             </c:if>
             <c:if test="${miaoStatus=='2'}">
-                <div class="bd btn-bg" id="miaoBuy"><a
-                        href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
-                        title="立即抢购">立即抢购</a>
-                </div>
+                <c:if test="${recordStatus=='1'}">
+                    <div class="bd btn-bg" id="miaoBuy"><a
+                            href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
+                            title="立即抢购">立即抢购</a>
+                    </div>
+                </c:if>
+                <c:if test="${recordStatus=='0'}">
+                    <div class="bd btn-bg-no">您已参与秒杀</div>
+                </c:if>
             </c:if>
             <c:if test="${miaoStatus=='3'}">
                 <div class="bd btn-bg-no">秒杀结束</div>
