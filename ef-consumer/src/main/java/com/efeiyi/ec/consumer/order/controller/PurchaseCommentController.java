@@ -119,6 +119,14 @@ public class PurchaseCommentController {
         String orderId=request.getParameter("orderId");
         PurchaseOrder purchaseOrder=(PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId);
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_FINISHED);
+        for(PurchaseOrderProduct purchaseOrderProductTemp:purchaseOrder.getPurchaseOrderProductList()){
+            String status=purchaseOrderProductTemp.getStatus();
+            if(!"1".equals(status)){
+                purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_UNCOMMENT);
+                break;
+            }
+        }
+
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
 
 
@@ -178,6 +186,14 @@ public class PurchaseCommentController {
         String orderId=request.getParameter("orderId");
         PurchaseOrder purchaseOrder=(PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId);
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_FINISHED);
+        for(PurchaseOrderProduct purchaseOrderProductTemp:purchaseOrder.getPurchaseOrderProductList()){
+            String status=purchaseOrderProductTemp.getStatus();
+            if(!"1".equals(status)){
+                purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_UNCOMMENT);
+                break;
+            }
+        }
+
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
 
 

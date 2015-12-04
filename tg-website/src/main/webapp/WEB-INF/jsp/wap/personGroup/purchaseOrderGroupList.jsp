@@ -40,7 +40,7 @@
   <!-- //End--title-->
 </header>
 <!--//End--header-->
-<div class="m-order ae">
+<div class="m-order ae" style="padding-bottom: 60px;">
   <div class="order-title ae">
     <ul>
       <li class="active">全部</li>
@@ -286,6 +286,7 @@
     <!--没有相关订单状态-->
   </div>
 </div>
+
 <!--悬浮订单-->
 <div class="met-nav ae">
   <a href="<c:url value="/tuan.do"/>"><p><i class="met-1con m-icon"></i></p><p>团购首页</p></a>

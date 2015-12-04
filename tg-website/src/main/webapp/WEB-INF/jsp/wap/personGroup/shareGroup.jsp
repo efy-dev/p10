@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</title>
+  <title>【团】${supMan}参加了${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]拼团，还差${number}人成团，快来参团吧~</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -84,7 +84,7 @@
   </div>
   <!--价格-->
   <div class="cost ae">
-    <div class="txt1"><s style="font-size: 14px;color: #545454;">原价:${group.groupProduct.productModel.price}元</s></div>
+    <div class="txt1"><strong>原价:${group.groupProduct.productModel.price}元</strong></div>
     <div class="txt2"><em>拼团价:${group.groupProduct.groupPrice}元</em><i class="icon"></i></div>
   </div>
   <!--功能-->
