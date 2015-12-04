@@ -186,7 +186,6 @@
 <script>
   var startNum = 1;
   var startNumber = 1;
-  var ajaxKey = false;
   $(function(){
     getComments("<c:url value='/masterMessage/userComments/plistMasterComment_byAuthor/2/'/>");
     getPraises("<c:url value='/masterMessage/userPraises/plistMasterCommentPraise_byAuthor/2/'/>");
@@ -270,7 +269,7 @@
                     "                <p class=\"text-h1\">"+userName+"</p>"+
                     "                <p class=\"text-time\">"+ctime+"</p>"+
                     "                <p class=\"text-content\"><a href=\"#\" >觉得你的评论“"+data[i].comment.content+"”很赞</a></p>"+
-                    "                <div class=\"owner\"><img class=\"am-circle\" src=\"../shop2015/upload/120102-p1-11.jpg\"/></div>"+
+                    "                <div class=\"owner\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"/></div>"+
                     "              </div>"+
                     "            </li>";
           }

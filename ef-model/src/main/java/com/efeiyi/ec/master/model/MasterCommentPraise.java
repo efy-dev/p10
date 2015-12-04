@@ -52,7 +52,6 @@ public class MasterCommentPraise implements Serializable {
         this.user = user;
     }
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id")
     public MasterComment getComment() {
