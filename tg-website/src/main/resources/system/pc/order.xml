@@ -146,6 +146,7 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="orderType" defaultValue="2" operation="eq"/>
+                        <condition name="orderStatus" defaultValue="5" operation="eq"/>
                     </query>
                 </do>
 
