@@ -65,3 +65,6 @@ MODIFY COLUMN `bonus`  decimal(10,2) NULL DEFAULT NULL AFTER `create_datetime`;
 ALTER TABLE `activity_member`
 ADD COLUMN `create_datetime`  date NULL AFTER `red_packet`;
 
+ALTER TABLE `activity_member`
+MODIFY COLUMN `create_datetime`  datetime NULL DEFAULT NULL AFTER `red_packet`;
+

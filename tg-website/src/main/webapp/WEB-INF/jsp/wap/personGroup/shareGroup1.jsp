@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>【团】${supMan}参加了${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]拼团，还差${number}人成团，快来参团吧~</title>
+  <title>【团】${supMan}参加了团购，还差${number}人成团，快来参团吧~</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -206,8 +206,8 @@
         <a href="<c:url value="/group/groupBuy.do?groupProductId=${group.groupProduct.id}"/>" class="btn">拼团结束&nbsp;去开团</a>
       </c:if>
       <c:if test="${group.status=='4'}">
-        <a href="javascript:void(0)" class="btn">
-          组团成功
+        <a href="javascript:void(0)" class="btn" id="btn">
+          组团成功,去分享
         </a>
       </c:if>
       <c:if test="${group.status=='5'}">
