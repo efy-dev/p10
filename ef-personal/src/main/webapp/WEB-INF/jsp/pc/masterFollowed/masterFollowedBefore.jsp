@@ -112,7 +112,7 @@
                           </c:otherwise>
                         </c:choose>
                       </p>
-                      <p class="txt3">${object.content}</p>
+                      <p class="txt3"></p>
                       <div class="gz2">
                         <div class="bt-gz">
                           <a class="btn-guan" name="masterFollow${object.id}" onclick="followMaster('${object.id}');">
