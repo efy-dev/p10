@@ -65,7 +65,7 @@
 
     function payError(){
         showAlert("提示","支付失败请重新抢购！",function(){
-            window.location.href = "<c:url value="//miao/payError.do?productId=${productId}"/>";
+            window.location.href = "<c:url value="/miao/payError.do?productId=${productId}"/>";
         })
     }
 

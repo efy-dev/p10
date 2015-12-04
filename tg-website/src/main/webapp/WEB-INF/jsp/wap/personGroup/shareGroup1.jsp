@@ -39,7 +39,7 @@
         <c:if test="${group.status==1}">
           <h1 class="am-header-title"><i class="had-icon had-add"></i>组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团</h1>
         </c:if>
-        <c:if test="${group.status==3}">
+        <c:if test="${group.status==3||group.status==4}">
           <h1 class="am-header-title"><i class="had-icon had-good"></i>组团成功</h1>
         </c:if>
         <c:if test="${group.status==5}">
@@ -57,7 +57,7 @@
           <h1 class="am-header-title"><i class="had-icon had-add"></i>组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团</h1>
         </c:if>
 
-        <c:if test="${group.status==3}">
+        <c:if test="${group.status==3||group.status==4}">
           <h1 class="am-header-title"><i class="had-icon had-good"></i>组团成功</h1>
         </c:if>
         <c:if test="${group.status==5}">
@@ -147,7 +147,7 @@
 
     <c:if test="${flag==0}">
       <c:if test="${group.status=='1'||group.status=='4'}">
-        <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${group.groupProduct.id}&groupId=${group.id}&memberId=${memberId}"
+        <a href="<c:url value='/group/groupBuy.do'/>?groupProductId=${group.groupProduct.id}&groupId=${group.id}&memberId=${memberId}"
            class="btn">
           参团
         </a>
@@ -221,7 +221,7 @@
       </c:if>
     </c:if>
     <div id="cover" style="display: none;"><em class="bg"></em><img
-            src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt="">
+            src="<c:url value="/scripts/wap/upload/guide-share.png"/>">
     </div>
   </div>
   <!--成团信息-->
@@ -245,7 +245,7 @@
         <strong><img src="<c:url value="/scripts/wap/upload/fx-x-1.png"/>" class="page-pic"></strong>
         <span>团员${fn:substring(member.user.getUsername(), 0,3 )}****${fn:substring(member.user.getUsername(),7,11)}</span>
         <span>${fn:substring(group.createDateTime,0 ,11 )}</span>
-        <span>${fn:substring(group.createDateTime,11 ,19 )}开团</span>
+        <span>${fn:substring(group.createDateTime,11 ,19 )}参团</span>
       </li>
         </c:if>
       </c:forEach>
@@ -353,10 +353,10 @@
     </div>
   </div>
 </div>
-<div class="login-reg">
+<%--<div class="login-reg">
   <a href="#login" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
   <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
-</div>
+</div>--%>
 <!--//End--login-reg-->
 <footer class="bd footer">
   <div class="bd info">

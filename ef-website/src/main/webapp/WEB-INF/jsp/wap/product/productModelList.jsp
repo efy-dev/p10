@@ -17,8 +17,8 @@
 <body>
 <artice class="custom">
     <div class="bd list-class">
-        <ul class="ul-list-nav">
-            <li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="人气">人气</a></li>
+        <ul class="ul-list-nav ul-list-nav2">
+            <%--<li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="人气">人气</a></li>--%>
             <li>
                 <c:if test="${str==null}">
                     <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价格</a>

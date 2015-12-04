@@ -6,6 +6,7 @@ import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import javafx.beans.property.adapter.ReadOnlyJavaBeanBooleanProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -137,7 +138,7 @@ public class SeckillController {
             status = "1";
         }
 
-        if (seckillProduct.getAmount() <= 0) {
+        if (seckillProduct.getUsefulAmount() <= 0) {
             status = "3";
         }
 
@@ -230,17 +231,18 @@ public class SeckillController {
     }
 
     @RequestMapping({"/miao/share/{productId}"})
-    public String share(@PathVariable String productId, HttpServletRequest request) {
+    public String share(@PathVariable String productId, HttpServletRequest request,Model model) {
         //支付成功的时候需要 +不可用库存 -订单库存
         String currentUserId = request.getParameter("userId");
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
+        model.addAttribute("product",seckillProduct);
         seckillProduct.setUnusefulAmount((seckillProduct.getUnusefulAmount() != null ? seckillProduct.getUnusefulAmount() : 0) + 1);
         seckillProduct.setOrderAmount(seckillProduct.getOrderAmount() - 1);
         baseManager.saveOrUpdate(SeckillProduct.class.getName(),seckillProduct);
-        if (AuthorizationUtil.isAuthenticated() && currentUserId.equals(AuthorizationUtil.getUser().getId())) {
+//        if (AuthorizationUtil.isAuthenticated() && currentUserId.equals(AuthorizationUtil.getUser().getId())) {
             return "/activity/seckillShare";
-        } else {
-            return "redirect:/miao/" + seckillProduct.getId();
-        }
+//        } else {
+//            return "redirect:/miao/" + seckillProduct.getId();
+//        }
     }
 }

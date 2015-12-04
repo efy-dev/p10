@@ -66,7 +66,7 @@ public class GroupProductController {
             }
         }
         if (redirect != null) {
-            return "redirect:" + redirect;
+            return "redirect:http://" + redirect;
         }
         if (registeSuccess != null) {
             return "redirect:" + registeSuccess;

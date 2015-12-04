@@ -24,7 +24,7 @@
 <div class="list-find">
   <!--头部-->
   <div class="list-f-title">
-    <p><a href="<c:url value='/pc/index.do'/>">工艺</a><i class="fu-icon"></i><a href="<c:url value='/pc/index.do'/>">动态</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct/'/><%=request.getAttribute("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
+    <p><a href="<c:url value='/pc/index.do'/>">工艺</a><i class="fu-icon"></i><a href="<c:url value='/project/brifProject/'/><%=request.getAttribute("projectId")%>">${product.name}</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct/'/><%=request.getAttribute("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
   </div>
   <div class="ae">
     <div class="details ae">
@@ -190,7 +190,7 @@
       success:function(data){
         var parentE = $("#saveMasterFllow").parent();
         if(data=="false"){
-          var go = window.confirm("去登陆吧?");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/showProduct/${product.id}'/>"+"/${projectId}";
           }
@@ -334,7 +334,7 @@
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
-          var go = window.confirm("去登陆吧?");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/showProduct/${product.id}'/>"+"/${projectId}";
           }
@@ -480,7 +480,7 @@ function getHfProduct(e){
       async:true,
       success:function(o){
         if(o==false){
-          var go = window.confirm("去登陆吧?");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/showProduct/'/>"+data+"/"+"${projectId}";
           }
@@ -531,7 +531,7 @@ function getHfProduct(e){
       async:true,
       success:function(o){
         if(o==false){
-          var go = window.confirm("去登陆吧?");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/showProduct/${product.id}'/>"+"/${projectId}";
           }
@@ -602,8 +602,8 @@ function getHfProduct(e){
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
-          //alert("您还未登陆，请登录后再操作！！！");
-          var go = window.confirm("去登陆吧?");
+          //alert("您还未登录，请登录后再操作！！！");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/showProduct/'/>"+ds+"/${projectId}";
           }
@@ -657,8 +657,8 @@ function getHfProduct(e){
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
-          //alert("您还未登陆，请登录后再操作！！！");
-          var go = window.confirm("去登陆吧?");
+          //alert("您还未登录，请登录后再操作！！！");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/showProduct/'/>"+productId+"/${projectId}";
           }
@@ -708,9 +708,9 @@ function getHfProduct(e){
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          //alert("您还未登陆，请登录后再操作");
+          //alert("您还未登录，请登录后再操作");
           //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
-          var go = window.confirm("去登陆吧?");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/showProduct/'/>"+productId+"/${projectId}";
           }

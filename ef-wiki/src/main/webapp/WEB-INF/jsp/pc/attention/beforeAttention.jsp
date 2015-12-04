@@ -163,7 +163,7 @@
       success:function(data){
          var parentElement =$("#"+projectId).parent().parent();
         if(data=="false"){
-          var go = window.confirm("去登陆吧?");
+          var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/beforeAttention.do'/>";
           }

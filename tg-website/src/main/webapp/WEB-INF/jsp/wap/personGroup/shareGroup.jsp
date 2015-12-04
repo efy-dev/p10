@@ -34,6 +34,9 @@
 <body>
 <header class="am-header custom-header">
   <!-- //End--chevron-left-->
+  <div class="am-header-left am-header-nav">
+    <a href="javascript:history.go(-1)" class="chevron-left"></a>
+  </div>
   <h1 class="am-header-title" style="margin: 0 10%;">我的团长我的团</h1>
   <!-- //End--title-->
   <div class="am-header-right am-header-nav">
@@ -81,7 +84,7 @@
   </div>
   <!--价格-->
   <div class="cost ae">
-    <div class="txt1"><s style="font-size: 14px;color: #545454;">飞蚁价:${group.groupProduct.productModel.price}元</s></div>
+    <div class="txt1"><s style="font-size: 14px;color: #545454;">原价:${group.groupProduct.productModel.price}元</s></div>
     <div class="txt2"><em>拼团价:${group.groupProduct.groupPrice}元</em><i class="icon"></i></div>
   </div>
   <!--功能-->
@@ -101,7 +104,7 @@
           <a href="javascript:void(0)" class="btn" id="btn">还&nbsp;差&nbsp;${group.groupProduct.memberAmount-group.groupMemberList.size()}&nbsp;人&nbsp;成&nbsp;团&nbsp;,&nbsp;去&nbsp;分&nbsp;享</a>
         </c:if>
         <c:if test="${group.groupProduct.memberAmount-group.groupMemberList.size()<=0}">
-          <a href="javascript:void(0)" class="btn" id="btn">拼&nbsp;团&nbsp;成&nbsp;功&nbsp;，&nbsp;分&nbsp;享&nbsp;得&nbsp;红&nbsp;包</a>
+          <a href="javascript:void(0)" class="btn" id="btn">拼&nbsp;团&nbsp;成&nbsp;功</a>
         </c:if>
       </c:if>
       <c:if test="${flag==0}">
