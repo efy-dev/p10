@@ -449,8 +449,7 @@
   function comment(obj){
     var count=$("input[flag='1']",$(obj).parents("form")).length
     $("#starCount").attr("value",count);
-//    $("#stars").submit();
-  alert(count);
+    $("#stars").submit();
   }
 
 
