@@ -105,13 +105,14 @@ public class PurchaseOrderGiftController {
         g.setColor(Color.black);
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
-        g.setFont(new Font(null, Font.LAYOUT_NO_LIMIT_CONTEXT, 25));
+        g.setFont(new Font(null, Font.LAYOUT_NO_LIMIT_CONTEXT, 20));
         //背景图set文字显示
         if (giftMessage != null) {
-            g.drawString(giftMessage, 40, 180);
+            g.drawString(giftMessage, 0, 180);
         }
-        g.drawString(productModelName, 40, height / 2 + 30);
-        g.drawString((productModelPrice.intValue() != 0 ? productModelPrice.toString() : ""), width / 2 + 200, height / 2 + 30);
+//        String a = productModelName +(productModelPrice.floatValue() != 0 ? productModelPrice.toString() : "");
+        g.drawString(productModelName, 0, height / 2 + 30);
+        g.drawString((productModelPrice.floatValue() != 0 ? productModelPrice.toString() : ""),500 , height / 2 + 30);
         g.dispose();
         //二维码生成
         String content = "http://www.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
@@ -147,6 +148,7 @@ public class PurchaseOrderGiftController {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         ImageIO.write(combined, "jpg", os);
         InputStream is = new ByteArrayInputStream(os.toByteArray());
+        os.close();
         ObjectMetadata meta = new ObjectMetadata();
         // 必须设置ContentLength
         meta.setContentLength(os.size());
@@ -154,6 +156,7 @@ public class PurchaseOrderGiftController {
         String url = "gift/" + purchaseOrderGift.getId() + ".jpg";
         OSSClient client = new OSSClient("http://oss-cn-beijing.aliyuncs.com", accessKeyId, accessKeySecret);
         PutObjectResult result = client.putObject("ec-efeiyi", url, is, meta);
+        is.close();
         return url;
     }
 
