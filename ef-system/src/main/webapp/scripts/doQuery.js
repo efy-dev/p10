@@ -87,10 +87,6 @@ function generateValue(divId) {
 function generateCondition(url,divId, queryModel, queryLabel, conditions, model, tabTitle, baseUrl,param,title) {
 
     queryConditionArray = new Array();
-    if("/"==baseUrl){
-    }else{
-        url = baseUrl+url;
-    }
 
     $.ajax({
         type: "post",
