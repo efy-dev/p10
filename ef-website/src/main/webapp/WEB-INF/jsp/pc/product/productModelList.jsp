@@ -18,14 +18,15 @@
 </head>
 <body>
 <!-- //End--header-->
-<div class="hd category">
+<div class="hd category  product-intro">
+    <div class="wh">
   <div class="breadcrumb wh">
     <ol class="am-breadcrumb">
       <li><a href="/">首页</a></li>
       <li class="am-active">${proName}</li>
     </ol>
   </div>
-
+ </div>
   <!-- //End--breadcrumb-->
     <div class="explain" height="22px">
         <div class="title">
