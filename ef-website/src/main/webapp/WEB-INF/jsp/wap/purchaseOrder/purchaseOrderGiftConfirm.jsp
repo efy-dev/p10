@@ -52,8 +52,10 @@
                 </div>
             </div>
         </div>
-        <div data-am-widget="slider" class="am-slider am-slider-a1 ae" id="slider"
-             data-am-slider='{&quot;directionNav&quot;:false}'>
+        <%--<div data-am-widget="slider" class="am-slider am-slider-a1 ae" id="slider"--%>
+        <%--data-am-slider='{&quot;directionNav&quot;:false}'>--%>
+        <div data-am-widget="slider" id="slider" class="am-slider am-slider-a1 ae"
+             data-am-slider='{&quot;slideshow&quot;:false}' data-am-slider='{&quot;animationLoop&quot;:false}'>
             <ul class="am-slides">
                 <li><img id="1" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever1.png"></li>
                 <li><img id="2" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever2.jpg"></li>
@@ -236,7 +238,10 @@
 
     function submitOrder(orderId) {
 
-        ajaxRequest("<c:url value="/order/giftBuy/updateImg.do"/>", {"imageUrl": getCurrentImg(),"purchaseOrderId":"${purchaseOrder.id}"}, function () {
+        ajaxRequest("<c:url value="/order/giftBuy/updateImg.do"/>", {
+            "imageUrl": getCurrentImg(),
+            "purchaseOrderId": "${purchaseOrder.id}"
+        }, function () {
             $.ajax({
                 type: 'post',
                 async: false,
@@ -252,7 +257,7 @@
                         }
 
                         var url = "<c:url value="/order/confirm/"/>";
-                        url += orderId + "?payment=" + payment + "&message=" +isweixin + "&imageUrl=" + getCurrentImg();
+                        url += orderId + "?payment=" + payment + "&message=" + isweixin + "&imageUrl=" + getCurrentImg();
                         window.location.href = url;
                     } else {
                         showAlert("提示", "抱歉，该商品已售罄！")

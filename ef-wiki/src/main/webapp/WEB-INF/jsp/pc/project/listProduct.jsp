@@ -23,7 +23,7 @@
 <!-- //End--header-->
 <div class="craft-details">
   <div class="craft-banner">
-    <img src="http://pro.efeiyi.com/${project.picture_url}@!pc-project-header">
+    <img src="http://pro.efeiyi.com/${project.picture_pc_url}@!pc-project-header">
     <div class="cart-b-page">
       <h5 class="ae">${project.name}</h5>
       <c:choose>
