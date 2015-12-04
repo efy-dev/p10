@@ -137,7 +137,7 @@
             <p>快递单号：<span>${pl.serial}</span></p>
           </h1>
           <div><hr data-am-widget="divider" style="" class=" am-divider-default" /></div>
-          <iframe id="kuaidi100" name="kuaidi100" src="${dl[i.index]}" width="600" height="380" marginwidth="12" marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe>
+          <div style="float:left;margin-left: -73px;"><iframe id="kuaidi100" name="kuaidi100" src="${dl[i.index]}" width="600" height="380" marginwidth="12" marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe></div>
         </div>
       </c:forEach>
       <!--一个商品-->
