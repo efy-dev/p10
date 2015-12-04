@@ -75,10 +75,11 @@ public class MasterCategoryController {
 		LinkedHashMap<String , Object> queryMap = new LinkedHashMap<>();
 		queryMap.put("provinceId",provinceId);
 		List<Master> list = baseManager.listObject(queryHql,queryMap);
+		MyUser user = AuthorizationUtil.getMyUser();
 		if (list != null && list.size() > 0){
 			for (Master master : list){
 				master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-				getMasterFollowedStatus(master);
+				getMasterFollowedStatus(master,user);
 			}
 		}
 		model.addAttribute("list",list);
@@ -114,10 +115,11 @@ public class MasterCategoryController {
 		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
 		queryMap.put("projectId",projectId);
 		List<MasterProject> mpList = baseManager.listObject(queryHql,queryMap);
+		MyUser user = AuthorizationUtil.getMyUser();
 		List<Master> list = new ArrayList<>();
 		if (mpList != null && mpList.size() > 0){
 			for (MasterProject masterProject : mpList){
-				getMasterFollowedStatus(masterProject.getMaster());
+				getMasterFollowedStatus(masterProject.getMaster(),user);
 				list.add(masterProject.getMaster());
 			}
 		}
@@ -132,23 +134,29 @@ public class MasterCategoryController {
 		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
 		queryMap.put("level",level);
 		List<Master> list = baseManager.listObject(queryHql,queryMap);
+		MyUser user = AuthorizationUtil.getMyUser();
 		if (list != null && list.size() > 0){
 			for (Master master : list){
 				master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-				getMasterFollowedStatus(master);
+				getMasterFollowedStatus(master,user);
 			}
 		}
 		model.addAttribute("list",list);
 		return "/masterCategory/levelCategory";
 	}
 
-	public String getMasterFollowedStatus(Master master){
-		String queryHql = "from MasterFollowed f where f.master.id=:masterId and f.status='1'";
-		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-		queryMap.put("masterId",master.getId());
-		List<MasterFollowed> list = baseManager.listObject(queryHql,queryMap);
-		if (list != null && list.size() > 0){
-			master.setFollowStatus("已关注");
+	public String getMasterFollowedStatus(Master master , MyUser user){
+		if (user != null && user.getId() != null){
+			String queryHql = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId and f.status='1'";
+			LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
+			queryMap.put("masterId",master.getId());
+			queryMap.put("userId",user.getId());
+			List<MasterFollowed> list = baseManager.listObject(queryHql,queryMap);
+			if (list != null && list.size() > 0){
+				master.setFollowStatus("已关注");
+			}else{
+				master.setFollowStatus("关注");
+			}
 		}else{
 			master.setFollowStatus("关注");
 		}
@@ -163,7 +171,7 @@ public class MasterCategoryController {
 	@RequestMapping("/allMaster/{qm}/{size}/{index}")
 	@ResponseBody
 	public List getAllMaster(HttpServletRequest request ,@PathVariable String qm , @PathVariable String size , @PathVariable String index) throws Exception {
-		XQuery xQuery = new XQuery("plistMaster_default",request);
+		XQuery xQuery = new XQuery(qm,request);
 		PageEntity entity = new PageEntity();
 		if (index != null){
 			entity.setSize(Integer.parseInt(size));
@@ -171,10 +179,11 @@ public class MasterCategoryController {
 		}
 		xQuery.setPageEntity(entity);
 		PageInfo pageInfo = baseManager.listPageInfo(xQuery);
+		MyUser user = AuthorizationUtil.getMyUser();
 		List<Master> list = pageInfo.getList();
 		if (list != null && list.size() > 0){
 			for (Master master : list){
-				getMasterFollowedStatus(master);
+				getMasterFollowedStatus(master , user);
 			}
 			return list;
 		}else{

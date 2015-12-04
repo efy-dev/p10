@@ -48,13 +48,63 @@
   <div class="menu-list">
     <div class="menu-page">
       <ul class="bd">
-        <li><a href="" title="首页">首页</a></li>
-        <li><a href="" title="分类">消&nbsp;息</a></li>
-        <li><a href="<c:url value='/personal/getPersonal.do'/>" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+        <li><a href="<c:url value='/masterMessage/index.do'/>" title="首页">首页</a></li>
+        <%if(AuthorizationUtil.getMyUser()!=null && AuthorizationUtil.getMyUser().getId() != null){ %>
+        <li><a href="javascript:void(0);" id="acs" title="分类">消&nbsp;息</a></li>
+        <li><a href="http://www.i.efeiyi.com" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+        <% } %>
+        <%if(AuthorizationUtil.getMyUser()==null || AuthorizationUtil.getMyUser().getId() == null){ %>
+        <li><a href="<c:url value='/sso.do'/>" title="分类">消&nbsp;息</a></li>
+        <% } %>
       </ul>
     </div>
   </div>
 </header>
+<div style="display: none"  id="showMessage" class="pops-up">
+  <div style="background: #fff;position: relative;z-index:10;" data-am-widget="tabs"
+       class="am-tabs am-tabs-default"
+          >
+    <ul class="am-tabs-nav am-cf">
+      <%--<li class="am-active"><a href="[data-tab-panel-0]"><i class="bz-icon1"></i>--%>
+      <%--<span style="float: left;margin-left: 10px;">关注</span><i class="sod-sr"></i></a></li>--%>
+      <li class=""><a href="[data-tab-panel-1]">
+        <i class="bz-icon2"></i>
+        <span style="float: left;margin-left: 10px;">评论</span><i class="sod-sr"></i>
+      </a></li>
+      <li class=""><a href="[data-tab-panel-2]">
+        <i class="bz-icon3"></i>
+        <span style="float: left;margin-left: 10px;">点赞</span></i>
+      </a></li>
+    </ul>
+    <div class="am-tabs-bd">
+      <%--<div data-tab-panel-0 about="alertTab" class="am-tab-panel am-active">--%>
+      <%--<div class="aboud-you">--%>
+      <%--<div class="list-you"><span>这些人最近关注了你</span></div>--%>
+      <%--<ul class="list-name" id="toFollow">--%>
+      <%--<li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>Andy</span></li>--%>
+      <%--</ul>--%>
+      <%--</div>--%>
+      <%--</div>--%>
+      <div data-tab-panel-1 about="alertTab" class="am-tab-panel ">
+        <div class="discuss">
+          <ul class="discuss-2" id="toComment">
+
+          </ul>
+          <div class="more"><a onclick="moreComments();"><i class="time-1"></i>查看更多评论</a></div>
+        </div>
+      </div>
+      <div data-tab-panel-2 about="alertTab" class="am-tab-panel ">
+        <div class="discuss">
+          <ul class="discuss-2" id="toPraise">
+
+          </ul>
+          <div class="more"><a onclick="morePraises();"><i class="time-1"></i>查看更多</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg"></div>
+</div>
 <!--//End--header-->
 <!--地区-->
 <div class="master-class">
@@ -123,7 +173,104 @@
     })
   }
 </script>
+<script>
+  var startNum = 1;
+  var startNumber = 1;
+  $(function(){
+    getComments("<c:url value='/masterMessage/userComments/plistMasterComment_byAuthor/2/'/>");
+    getPraises("<c:url value='/masterMessage/userPraises/plistMasterCommentPraise_byAuthor/2/'/>");
+  })
+  function transdate(endTime){
+    var timestamp = Date.parse(new Date());
+    var oldTime = parseInt(endTime);
+    var intervalTime = (timestamp - oldTime)/1000/60;
+    var showTime = "";
+    if(intervalTime<=59){
+      showTime=intervalTime.toFixed(0)+"分钟前";
+    }else if(1<=(intervalTime/60) && (intervalTime/60)<24){
+      showTime=(intervalTime/60).toFixed(0)+"小时前";
+    }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
+      showTime=(intervalTime/60/24).toFixed(0)+"天前";
+    }else{
+      showTime=new Date(oldTime).toLocaleString().replace(/:\d{1,2}$/,' ');
+    }
+    return showTime;
+  }
+  function getComments(url){
+    $.ajax({
+      type: "POST",
+      url: url + startNum,
+      async: false,
+      data: "",
+      dataType: "json",
+      error: function () {
+        alert('出错了,请联系系统管理员!');
+      },
+      success: function (data) {
+        var box = $("#toComment");
+        var sub = "";
+        if(data && data.length > 0){
+          for(var i in data){
+            var ctime = transdate(data[i].createDateTime);
+            var userName = data[i].user.username.substring(0, 3) + "****" + data[i].user.username.substring(7, 11);
+            sub += "<li class=\"review\">"+
+                    "              <div class=\"matter\">"+
+                    "                <p class=\"text-h1\"><a href=\"#\">"+userName+"</a>回复了你</p>"+
+                    "                <p class=\"text-time\">"+ctime+"</p>"+
+                    "                <p class=\"text-content\"><a href=\"#\" >"+data[i].content+"</a></p>"+
+                    "                <div class=\"owner\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"/></div>"+
+                    "              </div>"+
+                    "            </li>";
+          }
+          box.append(sub);
+        }
+      },complete:function(){
+        startNum = startNum + 1;
+      }
+    })
+  }
+  function moreComments(){
+    getComments("<c:url value='/masterMessage/userComments/plistMasterComment_byAuthor/2/'/>");
+  }
+  function morePraises(){
+    getPraises("<c:url value='/masterMessage/userPraises/plistMasterCommentPraise_byAuthor/2/'/>");
+  }
 
+  function getPraises(url){
+    $.ajax({
+      type: "POST",
+      url: url + startNumber,
+      async: false,
+      data: "",
+      dataType: "json",
+      error: function () {
+        alert('出错了,请联系系统管理员!');
+      },
+      success: function (data) {
+        console.log(data);
+        var box = $("#toPraise");
+        var sub = "";
+        if(data && data.length > 0){
+          for(var i in data){
+            var ctime = transdate(data[i].createDateTime);
+            var userName = data[i].user.username.substring(0, 3) + "****" + data[i].user.username.substring(7, 11);
+            sub += "<li class=\"review\">"+
+                    "              <div class=\"matter\">"+
+                    "                <p class=\"text-h1\">"+userName+"</p>"+
+                    "                <p class=\"text-time\">"+ctime+"</p>"+
+                    "                <p class=\"text-content\"><a href=\"#\" >觉得你的评论“"+data[i].comment.content+"”很赞</a></p>"+
+                    "                <div class=\"owner\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"/></div>"+
+                    "              </div>"+
+                    "            </li>";
+          }
+          box.append(sub);
+        }
+      },complete:function(){
+        startNumber = startNumber + 1;
+      }
+    })
+  }
+</script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>
 <!--<![endif]-->
