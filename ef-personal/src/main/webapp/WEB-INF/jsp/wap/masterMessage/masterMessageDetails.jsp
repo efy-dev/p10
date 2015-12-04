@@ -579,7 +579,7 @@
           "<div class=\"dynamic-ft\">" +
           "<a onclick=\"changePraiseStatus(this,'"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+data[i].praiseStatus+"</em></a> <i class=\"s-solid ft-a\"></i>"+
           "<a onclick=\"showModel('"+data[i].id+"');\" name=\""+data[i].id+"\" class=\"ft-a\"> <i class=\"good-2\"></i><em>"+data[i].amount+"</em></a><i class=\"s-solid ft-a\"></i>" +
-          "<a onclick=\"collected(this,'"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+data[i].storeStatus+"</em></a>" +
+          "<a onclick=\"collected(this,'"+data[i].id+"');\" class=\"ft-a\"> <i class=\"good-4\"></i><em>"+data[i].storeStatus+"</em></a>" +
           "</div>"+
           "</div>";
         }

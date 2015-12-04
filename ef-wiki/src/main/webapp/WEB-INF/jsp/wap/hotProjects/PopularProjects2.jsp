@@ -535,7 +535,7 @@
             dataType:"json",
             success:function(data){
                 var pubu = $("#hadAttentionProjects");
-
+                pubu.empty();
                 if(data && data.length>=1){
                     for(i in data){
                         for(var key in data[i]){

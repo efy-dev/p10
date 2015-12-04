@@ -187,7 +187,7 @@ public class MasterCategoryController {
 			}
 			return list;
 		}else{
-			return null;
+			return new ArrayList();
 		}
 	}
 

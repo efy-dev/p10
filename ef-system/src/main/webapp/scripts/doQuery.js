@@ -87,6 +87,10 @@ function generateValue(divId) {
 function generateCondition(url,divId, queryModel, queryLabel, conditions, model, tabTitle, baseUrl,param,title) {
 
     queryConditionArray = new Array();
+    if("/"==baseUrl){
+    }else{
+        url = baseUrl+url;
+    }
 
     $.ajax({
         type: "post",
@@ -121,18 +125,30 @@ function generateCondition(url,divId, queryModel, queryLabel, conditions, model,
 
 }
 
-function addSelectAndRadios(conditions) {
+function addSelectAndRadios(conditions,baseUrl) {
     for (var i = 0; i < queryConditionArray.length; i++) {
         if (queryConditionArray[i].inputType != "default") {
             var tempId = queryConditionArray[i].propertyName.replace(/\./g, "_");
             var defaultValue = generatePropertyValue(conditions, queryConditionArray[i].propertyName, queryConditionArray[i].propertyValue);
             if (queryConditionArray[i].inputType == "select_dictionary" || queryConditionArray[i].inputType == "radio_dictionary") {
-                addOptions(tempId, "/data/loadDictionaryData.do", defaultValue, {sid: queryConditionArray[i].key}, queryConditionArray[i].inputType, queryConditionArray[i].required);
+                if("/"==baseUrl){
+                    addOptions(tempId, "/data/loadDictionaryData.do", defaultValue, {sid: queryConditionArray[i].key}, queryConditionArray[i].inputType, queryConditionArray[i].required);
+                }else{
+                    addOptions(tempId, baseUrl+"/data/loadDictionaryData.do", defaultValue, {sid: queryConditionArray[i].key}, queryConditionArray[i].inputType, queryConditionArray[i].required);
+                }
             } else if (queryConditionArray[i].inputType == "select_status" || queryConditionArray[i].inputType == "radio_status") {
-                addOptions(tempId, "/basic/xmj.do", defaultValue, {
-                    qm: "statusType",
-                    fieldName: queryConditionArray[i].key
-                }, queryConditionArray[i].inputType, queryConditionArray[i].required);
+                if("/"==baseUrl){
+                    addOptions(tempId, "/basic/xmj.do", defaultValue, {
+                        qm: "statusType",
+                        fieldName: queryConditionArray[i].key
+                    }, queryConditionArray[i].inputType, queryConditionArray[i].required);
+                }else{
+                    addOptions(tempId, baseUrl+"/basic/xmj.do", defaultValue, {
+                        qm: "statusType",
+                        fieldName: queryConditionArray[i].key
+                    }, queryConditionArray[i].inputType, queryConditionArray[i].required);
+                }
+
             }
         }
     }
@@ -311,7 +327,7 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
     div.append(tagStr);
 
 
-    addSelectAndRadios(conditions);
+    addSelectAndRadios(conditions,baseUrl);
 
 
     for (var did = 0; did < datatimeIdArray.length; did++) {
