@@ -150,6 +150,7 @@
   var startNum = 1;
   var ajaxKey = true;
   $(document).ready(function(){
+      $("#pages").html("${msg.master.fullName}的动态 - e飞蚁");
       getData("<c:url value='/masterMessage/getMsgComment/plistMasterComment_message/${msg.id}/10/'/>");
   })
   $(window).load(function(){
