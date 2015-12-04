@@ -57,7 +57,7 @@
     </div>
 </div>
 <div class="scroll-bar" style="z-index: 9999">
-    <div class="scroll-bar-top">
+    <div class="scroll-bar-top" style="display: block;">
         <span class="btn"><i class="icon" style="margin-left: 4px;margin-top: 6px;display: block;"></i></span>
     </div>
 </div>
