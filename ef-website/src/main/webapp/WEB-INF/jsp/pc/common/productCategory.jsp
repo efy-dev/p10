@@ -24,9 +24,10 @@
                     <c:forEach items="${projectMap.get(category.id)}" var="project">
                         <a href="<c:url value="/product/list/${project.id}"/>" title="">${project.name}</a>
                     </c:forEach>
+                    <%--<a class="addeven" href="<c:url value="/product/list/${project.id}"/>" title="查看更多">查看更多</a>--%>
                 </div>
                 <!-- //End--links-->
-                <div class="reco">
+                <%--<div class="reco">--%>
                     <%--<c:forEach items="${projectMap.get(category.id)}" var="project">--%>
                         <%--<c:if test="${not empty recommendedTenantList}">--%>
                             <%--<c:forEach items="${recommendedTenantList}" var="tenant">--%>
@@ -38,7 +39,7 @@
                             <%--</c:forEach>--%>
                         <%--</c:if>--%>
                     <%--</c:forEach>--%>
-                </div>
+                <%--</div>--%>
                     <%--</c:forEach>--%>
             </div>
         </div>
