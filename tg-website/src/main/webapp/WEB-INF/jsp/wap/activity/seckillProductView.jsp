@@ -89,7 +89,7 @@
                     <div class="status3">
                         <p>距秒杀开始还有</p>
 
-                        <p>
+                        <p style="width: 60%;">
                             <strong id="time-h">00</strong>
                             <strong id="time-m">00</strong>
                             <strong id="time-s">00</strong>
