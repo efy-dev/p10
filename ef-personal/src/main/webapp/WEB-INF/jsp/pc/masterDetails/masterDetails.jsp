@@ -279,6 +279,7 @@ function storeMessage(o,msgId){
   var StartMessageNum = 1;
   var StartProductNum = 1;
   $(document).ready(function(){
+    $("#pages").html("主页 - ${object.fullName} - e飞蚁");
     getData("<c:url value='/masterMessage/mainData/plistMasterMessage_default1/master.id:${object.id}/4/'/>");
   })
   function getData(url){

@@ -75,6 +75,7 @@
   var StartRecommendNum = 1;
   var ajaxKey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关
   $(document).ready(function(){
+      $("#pages").html("大师动态 - e飞蚁");
   getData("<c:url value='/masterMessage/mainData/plistMasterMessage_default/0/4/'/>");
   getData2("<c:url value='/masterMessage/subMaster/plistMaster_default/6/'/>");
   getData3("<c:url value='/masterMessage/hotMaster/plistMasterRecommend_group/6/'/>");

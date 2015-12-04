@@ -181,5 +181,17 @@
             </does>
         </entity>
 
+        <entity name="SeckillRecord" label="商品列表" model="com.efeiyi.ec.activity.model.SeckillRecord">
+            <does>
+                <do name="listSeckillRecord" access="" label="订单列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="userId" defaultValue="${MY_USER}" operation="eq"/>
+                        <condition name="seckillProductId" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+
     </entities>
 </module>

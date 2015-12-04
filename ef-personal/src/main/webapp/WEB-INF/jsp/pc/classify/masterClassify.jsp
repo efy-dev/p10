@@ -175,6 +175,7 @@
   }
 
   $(document).ready(function(){
+    $("#pages").html("发现大师 - e飞蚁");
     getData(object,"<c:url value="/masterCategory/getClassifyData.do?qm=plistMaster_all&pageEntity.size=6&pageEntity.index="/>");
     getData2("<c:url value='/masterMessage/subMaster/plistMaster_default/6/'/>");
     getData3("<c:url value='/masterMessage/hotMaster/plistMasterRecommend_group/6/'/>");
