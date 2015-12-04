@@ -8,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="allsort" style="display: none;">
-    <c:forEach items="${categoryList}" var="category">
+    <c:forEach items="${categoryList}" var="category" begin="0" end="7">
         <div class="item">
             <c:if test="${category.id==projectCategory.id}">
             <h3 class="active">
