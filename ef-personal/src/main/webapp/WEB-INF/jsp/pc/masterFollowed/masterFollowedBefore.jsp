@@ -175,6 +175,9 @@
   <%--</div>--%>
 <%--</div>--%>
 <script>
+  $(document).ready(function(){
+    $("#pages").html("关注大师 - e飞蚁");
+  })
   function followMaster(masterId){
     var str;
     $.ajax({

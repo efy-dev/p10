@@ -74,6 +74,7 @@
   var StartMasterNum = 1;
   var StartRecommendNum = 1;
   $(document).ready(function(){
+    $("#pages").html("关注大师 - e飞蚁");
     getData("<c:url value='/masterMessage/getFollowAfterList/plistMasterFollow_default/4/'/>");
     getData2("<c:url value='/masterMessage/subMaster/plistMaster_default/6/'/>");
     getData3("<c:url value='/masterMessage/hotMaster/plistMasterRecommend_group/6/'/>");
