@@ -105,7 +105,7 @@ public class PurchaseOrderGiftController {
         g.setColor(Color.black);
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
-        g.setFont(new Font(null, Font.LAYOUT_NO_LIMIT_CONTEXT, 20));
+        g.setFont(new Font("宋体", Font.PLAIN, 20));
         //背景图set文字显示
         if (giftMessage != null) {
             g.drawString(giftMessage, 0, 180);
