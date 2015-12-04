@@ -188,12 +188,15 @@
                     "<a class='gz-fd-icon'about='"+opertation+"' id='"+data.list[i].master.id+"' href='#' onclick='saveMasterFllow(\""+data.list[i].master.id+"\")'>"+word+"</a> <div class='gz-fd-img'><a href='#'>" +
                     "<img src='"+data.list[i].master.favicon+"'></a></div> </div> </div>");*/
 
-            var box = $(" <li> <div class=\"text\"> <h4><a href=\"http://"+data.list[i].master.name+".efeiyi.com\" >"+data.list[i].master.fullName+"</a></h4> " +
+           /* var box = $(" <li> <div class=\"text\"> <h4><a href=\"http://"+data.list[i].master.name+".efeiyi.com\" >"+data.list[i].master.fullName+"</a></h4> " +
                     "<p>"+levelName+"</p> <p><span>"+data.list[i].master.brief+"</span></p> " +
                     "<a class=\"btn-guan\" href=\"javascript:void(0);\"  about=\""+opertation+"\" onclick=\"saveMasterFllow('"+data.list[i].master.id+"')\"    id=\""+data.list[i].master.id+"\">"+word+"</a> </div> " +
+                    "<div class=\"img\"><a href=\"http://"+data.list[i].master.name+".efeiyi.com\" ><img src=\""+data.list[i].master.favicon+"@!pc-project-master\"></a></div> </li>");*/
+
+            var box = $(" <li> <div class=\"text\"> <h4><a href=\"http://"+data.list[i].master.name+".efeiyi.com\" >"+data.list[i].master.fullName+"</a></h4> " +
+                    "<p>"+levelName+"</p> <p><span></span></p> " +
+                    "<a class=\"btn-guan\" href=\"javascript:void(0);\"  about=\""+opertation+"\" onclick=\"saveMasterFllow('"+data.list[i].master.id+"')\"    id=\""+data.list[i].master.id+"\">"+word+"</a> </div> " +
                     "<div class=\"img\"><a href=\"http://"+data.list[i].master.name+".efeiyi.com\" ><img src=\""+data.list[i].master.favicon+"@!pc-project-master\"></a></div> </li>");
-
-
             pubu.append(box);
           }
 
@@ -345,8 +348,6 @@
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          //alert("您还未登录，请登录后再操作");
-          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           var go = window.confirm("去登录吧?");
           if(go==true){
             window.location.href ="<c:url value='/brifMaster/${project.id}'/>";
