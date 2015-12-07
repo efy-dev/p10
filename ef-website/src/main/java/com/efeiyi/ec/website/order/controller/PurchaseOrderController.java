@@ -170,6 +170,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("productModel", productModel);
         model.addAttribute("purchaseOrderProduct", purchaseOrderProduct);
         model.addAttribute("amount", amount);
+        model.addAttribute("request","/giftBuy/**");
         return "/purchaseOrder/purchaseOrderGiftConfirm";
     }
 
