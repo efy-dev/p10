@@ -111,6 +111,8 @@ public class PurchaseOrderGiftController {
             if(giftMessage.length()>28){
                 g.drawString(giftMessage.substring(0,28), 40, 180);
                 g.drawString(giftMessage.substring(28,giftMessage.length()), 40, 200);
+            }else{
+                g.drawString(giftMessage, 40, 180);
             }
         }
 //        String a = productModelName +(productModelPrice.floatValue() != 0 ? productModelPrice.toString() : "");
