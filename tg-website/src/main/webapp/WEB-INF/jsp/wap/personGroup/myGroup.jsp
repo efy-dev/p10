@@ -74,6 +74,10 @@
                 <p>组团失败</p>
                 <span>拼团结束</span>
               </c:if>
+              <c:if test="${member.myGroup.status==4}">
+                <p>${member.myGroup.groupMemberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
+                <span>进行中</span>
+              </c:if>
             </a>
           </li>
           </c:if>
@@ -88,6 +92,9 @@
               <p>${member.myGroup.groupProduct.productModel.product.name}[${member.myGroup.groupProduct.productModel.name}]</p>
               <p>${fn:substring(member.myGroup.createDateTime,0 ,19 )}</p>
               <c:if test="${member.status!=2&&member.myGroup.status=='1'}">
+                <p>${member.myGroup.groupMemberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
+              </c:if>
+              <c:if test="${member.status!=2&&member.myGroup.status=='4'}">
                 <p>${member.myGroup.groupMemberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
               </c:if>
               <c:if test="${member.status!=2&&member.myGroup.status=='3'}">
