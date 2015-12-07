@@ -117,7 +117,7 @@ public class PurchaseOrderGiftController {
         }
 //        String a = productModelName +(productModelPrice.floatValue() != 0 ? productModelPrice.toString() : "");
         g.drawString(productModelName, 40, height / 2 + 30);
-        g.drawString((productModelPrice.floatValue() != 0 ?"价值:"+ productModelPrice.toString() : "")+"元",480 , height / 2 + 30);
+        g.drawString((productModelPrice.floatValue() != 0 ?"价值:"+ productModelPrice.toString()+"元" : ""),480 , height / 2 + 30);
         g.dispose();
         //二维码生成
         String content = "http://www2.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
