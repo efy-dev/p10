@@ -179,7 +179,19 @@
       <i class="s-solid ft-a"></i>
       <a href="#" class="ft-a" onclick="storeWork('${work.id}')"> <i class="good-3"></i> </a>
       <i class="s-solid ft-a"></i>
-      <a href="#" class="ft-a"> <i class="good-4"></i> </a>
+      <a onclick="showJiathis(this);" class="ft-a" id="io"  style="position:relative">
+        <i class="good-4" id="good-4"></i>
+        <div class="nr-share" id="nr-share" style="display: none">
+          <div class="nr-bg">
+            <div class="jiathis_style">
+              <a class="jiathis_button_weixin"   style="width: 2rem" title="分享到微信"></a>
+              <a class="jiathis_button_tqq"   style="width: 2rem" title="分享到腾讯微博"></a>
+              <a class="jiathis_button_tsina"  style="width: 2rem" title="分享到新浪微博"></a>
+              <a class="jiathis_button_cqq"  style="width: 2rem" title="分享到QQ好友"></a>
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </div>
@@ -570,12 +582,17 @@
       }
     })
   }
+  function showJiathis(o){
+    $(o).find("#nr-share").slideToggle();
+    return false
+  }
 </script>
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
 <![endif]-->
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 <script src="<c:url value='/scripts/assets/js/amazeui.min.js'/>"></script>
 <!--自定义js--Start-->
 <script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
