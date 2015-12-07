@@ -37,17 +37,14 @@
         <div class="cupic ae"><img src="${order.giftPictureUrl}"></div>
     </div>
     <div class="car-state">
-        <div class="btb"><h5>礼物卡片</h5><span><c:if test="${order.orderStatus=='6'}">未收礼</c:if> <c:if
+        <div class="btb"><h5>礼物状态</h5><span><c:if test="${order.orderStatus=='6'}">未收礼</c:if> <c:if
                 test="${order.orderStatus=='5'}">已收礼</c:if> </span></div>
         <div class="btb"><h5>送礼说明</h5></div>
         <div class="btb-text ae">
-            <p>1、点击“送礼给Ta”，选择“发送给微信好友”，即可将礼物链接发送给好友。 </p>
+            <p>1、点击“送礼给Ta”，根据提示送礼给好友，好友通过点击收到的链接开启收礼姿势，正确填写收货信息后即可收礼。 </p>
 
-            <p>2、好友通过点击你发送的链接进入收礼页面，正确填写收货信息后即可成功收礼。</p>
+            <p>2、点击“保存为图片”将生成图片形式的礼物卡片，保存图片后发给好友，好友通过识别图片上的二维码开启收礼姿势，正确填写收货信息后即可收礼。</p>
 
-            <p>3、也可点击“保存为图片”将本页面保存为带有二维码的礼物卡片，然后把图片发给好友。</p>
-
-            <p>4、好友通过识别图片上的二维码就可以进入收礼页面，正确填写收货信息后也可以收礼啦!</p>
         </div>
     </div>
     <div class="car-fx">
