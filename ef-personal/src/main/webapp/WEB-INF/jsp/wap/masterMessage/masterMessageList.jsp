@@ -162,11 +162,11 @@
             var sub = "<div class=\"dynamic\">"
                     +"<div class=\"dynamic-hd\">"
                     +"<a class=\"suit-tx\" href=\"<c:url value='/masterMessage/forwardMasterDetails.do?masterId='/>"+masterId+"\"><img class=\"am-circle\" src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+obj[i].favicon+"\"></a>"
-                    +"<div class=\"suit-name\"><a href=\"#\"><span>"+masterName+"</span></a></div>"
+                    +"<div class=\"suit-name\"><a href=\"<c:url value='/masterMessage/forwardMasterDetails.do?masterId='/>"+masterId+"\"><span>"+masterName+"</span></a></div>"
                     +"<a class=\"suit-gz\" onclick=\"changeStatus(this,'"+masterId+"');\"><input type=\"hidden\" name='"+masterId+"'><span>"+obj[i].followStatus+"</span></a> </div>"
                     +"<div class=\"dynamic-st\">"
                     +"<div class=\"suit-st-text\">"
-                    +"<p><span>"+obj[i].remark+"</span></p>"
+                    +"<a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+obj[i].id+"\"><p><span>"+obj[i].remark+"</span></p></a>"
                     +"</div>";
             var attr = obj[i].messageAttachmentLists;
             if(attr != null && attr.length > 0 ){
