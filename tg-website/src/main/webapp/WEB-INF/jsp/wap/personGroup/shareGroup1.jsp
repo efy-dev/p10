@@ -114,10 +114,10 @@
           还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，时间有限，赶快去呼唤小伙伴们加入吧
         </c:if>
         <c:if test="${group.status=='3'}">
-          组团成功啦，恭喜恭喜！不过还有参团名额呢，快去告诉朋友们吧
+          组团成功啦，恭喜恭喜！听说大boss大出血，又上新了好商品呢~~
         </c:if>
         <c:if test="${group.status=='4'}">
-          组团成功啦，恭喜恭喜！听说大boss大出血，又上新了好商品呢~~
+          组团成功啦，恭喜恭喜！不过还有参团名额呢，快去告诉朋友们吧
         </c:if>
         <c:if test="${group.status=='5'}">
           组团失败，不要气馁，一回生，二回熟，再接再厉呦~~
