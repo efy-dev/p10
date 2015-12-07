@@ -130,7 +130,7 @@
     var startNum = 1;
     var ajaxKey = true;
     $(document).ready(function(){
-        $("#pages").html("${work.projectName}- 甘而可的作品 - e飞蚁");
+        $("#pages").html("${work.projectName}- ${object.fullName}的作品 - e飞蚁");
         getData("<c:url value='/masterMessage/getWorkComment/plistMasterComment_comment/${work.id}/10/'/>");
     })
     $(window).load(function(){

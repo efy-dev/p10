@@ -323,6 +323,7 @@ public class WikiIndexController extends WikibaseController {
             productPraise.setCreateDateTime(new Date());
             productPraise.setType("2");
             productPraise.setWatch("0");
+            productPraise.setStatus("1");
             productPraise.setModerator(productComment.getUser());
             productPraise.setComment(productComment);
             baseManager.saveOrUpdate(ProductPraise.class.getName(), productPraise);

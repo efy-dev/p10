@@ -247,13 +247,23 @@
                     var phone = data[i].user.username;
                     var datetime = new Date(data[i].createDatetime);
                     phone = phone.substring(0, 3) + "****" + phone.substring(7, 11);
-                    out += "<li class=\"bd\"><p>" + phone + "</p><p>" + datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds() + "</p></li>"
+                    out += "<li class=\"bd\"><p>" + phone + "</p><p>" + dateFormat(datetime.getHours()) + ":" + dateFormat(datetime.getMinutes()) + ":" + dateFormat(datetime.getSeconds()) + "</p></li>"
                 }
             }
             $("#miaoRecord").html(out);
             setTimeout("getProductOrder()", 8500);
         }, function () {
         }, "post")
+    }
+
+    function dateFormat(time){
+        var out = ""
+        if(time<10){
+            out = "0"+time;
+        }else{
+            out = time;
+        }
+        return out;
     }
 
     setTimeout("getProductOrder()", 1000);

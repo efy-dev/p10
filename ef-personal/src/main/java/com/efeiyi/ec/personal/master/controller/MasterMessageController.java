@@ -707,6 +707,14 @@ public class MasterMessageController {
             for (MasterIntroduction intro : list) {
                 if ("1".equals(intro.getType())) {
                     model.addAttribute("baseIntro", intro);
+                }else if("2".equals(intro.getType())){
+                    if (!StringTools.isEmpty(intro.getAttachmentList()) && intro.getAttachmentList().size() > 0){
+                        model.addAttribute("publications",intro.getAttachmentList());
+                    }
+                }else if("3".equals(intro.getType())){
+                    if (!StringTools.isEmpty(intro.getAttachmentList()) && intro.getAttachmentList().size() > 0){
+                        model.addAttribute("honors",intro.getAttachmentList());
+                    }
                 }
             }
         }
