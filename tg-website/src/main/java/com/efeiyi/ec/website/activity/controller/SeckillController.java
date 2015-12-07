@@ -41,7 +41,7 @@ public class SeckillController {
      */
     @RequestMapping("/miao")
     public String listSeckillProduct(HttpServletRequest request, Model model) throws Exception {
-        XQuery seckillQuery = new XQuery("plistSeckillProduct_default", request, 4);
+        XQuery seckillQuery = new XQuery("plistSeckillProduct_default", request,4);
         PageInfo pageInfo = baseManager.listPageInfo(seckillQuery);
         Date currentDate = new Date();
         if (pageInfo != null && pageInfo.getList() != null && !pageInfo.getList().isEmpty()) {
