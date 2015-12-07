@@ -219,7 +219,7 @@
                         <input type="hidden" name="cartId" value="${cart.id}">
                         <label></label>
                         <p>
-                            <button onclick="submitNewAddress()" class="am-btn am-btn-default add-btn">保存收货人信息</button>
+                            <button onclick="submitNewAddress()" class="am-btn am-btn-default add-btn" type="button">保存收货人信息</button>
                         </p>
                         <span id="ts" style="border: 0"></span>
                     </form>
@@ -303,12 +303,12 @@
             var param = $("#newAddress").serialize();
 
             var success = function (data) {
-//                window.location.href=window.location.href;
-                var html = newAddress(data);
-                $("#address").append(html);
-                $(".active-pop").hide();
-                $("#reset").click();
-                $("#" + data.id).click();
+                window.location.href=window.location.href;
+//                var html = newAddress(data);
+//                $("#address").append(html);
+//                $(".active-pop").hide();
+//                $("#reset").click();
+//                $("#" + data.id).click();
             }
             ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
             }, "post")
