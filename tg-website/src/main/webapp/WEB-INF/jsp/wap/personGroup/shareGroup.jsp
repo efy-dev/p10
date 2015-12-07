@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>【团】${supMan}参加了${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]拼团，还差${number}人成团，快来参团吧~</title>
+  <title>【团】${supMan}参加了团购，还差${number}人成团，快来参团吧~</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -47,7 +47,7 @@
   <div class="menu-list">
     <ul class="bd">
       <li><a href="http://www.efeiyi.com" title="首页">e&nbsp;飞&nbsp;蚁&nbsp;商&nbsp;城</a></li>
-      <li><a href="" title="分类">团&nbsp;购&nbsp;首&nbsp;页</a></li>
+      <li><a href="http://a.efeiyi.com/tuan" title="分类">团&nbsp;购&nbsp;首&nbsp;页</a></li>
     </ul>
   </div>
 </header>
@@ -68,7 +68,7 @@
     </div>
   </div>--%>
   <div class="custom newcustom">
-    <div data-am-widget="slider" class="am-slider am-slider-a1 am-no-layout" data-am-slider="{&quot;directionNav&quot;:false}">
+    <div data-am-widget="slider" class="am-slider am-slider-a1 am-no-layout am-addol" data-am-slider="{&quot;directionNav&quot;:false}">
       <ul class="am-viewport" style="overflow: hidden; position: relative;">
         <ul class="am-slides" style="width: 1200%; transition-duration: 0.6s; transform: translate3d(-640px, 0px, 0px);">
           <li class="clone c-page" aria-hidden="true" style="width: 320px; float: left; display: block;">

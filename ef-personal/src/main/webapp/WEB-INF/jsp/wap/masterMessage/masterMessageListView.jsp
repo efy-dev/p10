@@ -107,7 +107,7 @@
         <div class="dynamic-ft">
           <a href="#" onclick="changePraiseStatus(this,'${message.id}');" class="ft-a"> <i class="good-1"></i>
               <em><c:if test="${empty message.praiseStatus}">赞</c:if><c:if test="${message.praiseStatus != null}">${message.praiseStatus}</c:if></em>
-          </a> <i class="s-solid ft-a"></i> <a href="#" class="ft-a"> <i class="good-2"></i> <em>9999</em> </a> <i class="s-solid ft-a"></i>
+          </a> <i class="s-solid ft-a"></i> <a href="#" class="ft-a"> <i class="good-2"></i> <em>${message.amount}</em> </a> <i class="s-solid ft-a"></i>
           <a onclick="collected(this,'${message.id}');" class="ft-a"> <i class="good-3"></i> </a> </div>
       </div>
       </c:forEach>

@@ -62,8 +62,6 @@
        class="am-tabs am-tabs-default"
           >
     <ul class="am-tabs-nav am-cf">
-      <li class="am-active"><a href="[data-tab-panel-0]"><i class="bz-icon1"></i>
-        <span style="float: left;margin-left: 10px;">关注</span><i class="sod-sr"></i></a></li>
       <li class=""><a href="[data-tab-panel-1]">
         <i class="bz-icon2"></i>
         <span style="float: left;margin-left: 10px;">评论</span><i class="sod-sr"></i>
@@ -74,63 +72,17 @@
       </a></li>
     </ul>
     <div class="am-tabs-bd">
-      <div data-tab-panel-0 class="am-tab-panel am-active">
-        <div class="aboud-you">
-          <div class="list-you"><span>这些人最近关注了你</span></div>
-          <ul class="list-name" id="toFollows">
-            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>Andy</span></li>
-            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>Lily</span></li>
-            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>wangjl</span></li>
-          </ul>
-          <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
-        </div>
-      </div>
       <div data-tab-panel-1 class="am-tab-panel ">
         <div class="discuss">
           <ul class="discuss-2" id="toComments">
-            <li class="review">
-              <div class="matter">
-                <p class="text-h1"><a href="#">Andya</a>回复了你</p>
-                <p class="text-time">51分钟前</p>
-                <p class="text-content"><a href="#" >原来木板水印是一门高深的技艺，之前从来没
-                  有关注过，真心觉得中国的非遗文化值得我们
-                  去传承。</a></p>
-                <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div>
-              </div>
-            </li>
-            <li class="review">
-              <div class="matter">
-                <p class="text-h1"><a href="#">Joe</a>回复了你</p>
-                <p class="text-time">1小时前</p>
-                <p class="text-content"><a href="#" >原来木板水印是一门高深的技艺，之前从来没
-                  有关注过，真心觉得中国的非遗文化值得我们
-                  去传承。</a></p>
-                <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div>
-              </div>
-            </li>
+
           </ul>
         </div>
       </div>
       <div data-tab-panel-2 class="am-tab-panel ">
         <div class="discuss">
           <ul class="discuss-2" id="toPraises">
-            <li class="review">
-              <div class="matter">
-                <p class="text-h1">Joe</p>
-                <p class="text-time">1小时前</p>
-                <p class="text-content"><a href="#" >觉得你的评论“还不错”很赞</a></p>
-                <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div>
-              </div>
-              <div class="review" style="padding-top: 0.8rem">
-                <div class="matter">
-                  <p class="text-h1"><a href="#">Andy</a>回复了你</p>
-                  <p class="text-time">1小时前</p>
-                  <p class="text-content"><a href="#" >觉得你的评论“中国的非遗文化值得我们去传
-                    承”很赞</a></p>
-                  <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div>
-                </div>
-              </div>
-            </li>
+
           </ul>
         </div>
       </div>
@@ -374,11 +326,15 @@
         var sub = "<ul class=\"list-con\" style=\"padding: 0\" id=\"worksList\" title=\""+masterId+"\">";
         if(data != null && data.length > 0){
           for(var i = 0;i<data.length;i++){
+            var amount = data[i].amount;
+            if(amount == null || amount == "undefined" || amount == ""){
+              amount = 0;
+            }
             sub += "<li class=\"item\" title=\""+data[i].project.id+"\">"+data[i].project.name +
                     "<a href=\"<c:url value='/masterBrief/getMasterWork.do?workId='/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+data[i].pictureUrl+"@!master-intro-product\"></a>" +
                     "<div class=\"txt\"><div class=\"name\">"+data[i].name+"</div><div class=\"txt-info\">" +
-                    "<a href=\"#\" onclick=\"praiseWork(this,'"+data[i].id+"');\"><i class=\"icon good-1\"></i><em>"+data[i].praiseStatus+"</em></a>"+
-                    "<a href=\"<c:url value='/masterBrief/getMasterWork.do?workId='/>"+data[i].id+"\"><i class=\"icon good-2\"></i><em>"+data[i].amount+"</em></a></div></div></li>";
+                    "<a onclick=\"praiseWork(this,'"+data[i].id+"');\"><i class=\"icon good-1\"></i><em>"+data[i].praiseStatus+"</em></a>"+
+                    "<a href=\"<c:url value='/masterBrief/getMasterWork.do?workId='/>"+data[i].id+"\"><i class=\"icon good-2\"></i><em>"+amount+"</em></a></div></div></li>";
           }
         }
         sub += "</ul>";
@@ -389,7 +345,7 @@
   function praiseWork(o,workId){
     $.ajax({
       type: "POST",
-      url: "<c:url value='/masterBrief/masterWorkPraise.do'/>",
+      url: "<c:url value='/masterMessage/praiseWork/'/>"+workId,
       async: false,
       data: "workId=" + workId,
       dataType: "json",
@@ -397,7 +353,16 @@
         alert('出错了,请联系系统管理员!');
       },
       success: function (data) {
-        $(o).find("em").html(data);
+        var em_status = "";
+        if(data == "add"){
+          em_status = "取消赞";
+        }else if(data == "del"){
+          em_status = "赞";
+        }else if(data == "noRole"){
+          alert("您还为登录,请登录后操作!");
+          em_status = "赞";
+        }
+        $(o).find("em").html(em_status);
       }
     })
   }
@@ -417,11 +382,15 @@
         if(data != null && data.length > 0){
           var sub = "";
           for(var i = 0;i<data.length;i++){
+            var amount = data[i].amount;
+            if(amount == null || amount == "undefined" || amount == ""){
+              amount = 0;
+            }
             sub += "<li class=\"item\" title=\""+data[i].project.id+"\">"+data[i].project.name +
                     "<a href=\"<c:url value='/masterBrief/getMasterWork.do?workId='/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+data[i].pictureUrl+"@!master-intro-product\"></a>" +
                     "<div class=\"txt\"><div class=\"name\">"+data[i].name+"</div><div class=\"txt-info\">" +
-                    "<a href=\"#\"><i class=\"icon good-1\"></i><em>"+data[i].praiseStatus+"</em></a>"+
-                    "<a href=\"#\"><i class=\"icon good-2\"></i><em>9999</em></a></div></div></li>";
+                    "<a onclick=\"praiseWork(this,'"+data[i].id+"');\"><i class=\"icon good-1\"></i><em>"+data[i].praiseStatus+"</em></a>"+
+                    "<a href=\"<c:url value='/masterBrief/getMasterWork.do?workId='/>"+data[i].id+"\"><i class=\"icon good-2\"></i><em>"+amount+"</em></a></div></div></li>";
           }
           box.append(sub);
         }

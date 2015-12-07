@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -65,18 +66,26 @@ public class MasterBriefController {
 			queryHql = "from MasterWork p where p.master.id=:masterId and p.status='1'";
 		}
 		List<MasterWork> list = baseManager.listObject(queryHql,queryMap);
-		for (MasterWork work : list){
-			work.setPraiseStatus(work.getPraiseStatus()==null?"赞":work.getPraiseStatus());
+		MyUser user = AuthorizationUtil.getMyUser();
+		if (!StringTools.isEmpty(list)){
+			for (MasterWork work : list){
+				if (user != null && user.getId() != null){
+					work.setPraiseStatus(getPraiseStatus(work, (User) baseManager.getObject(User.class.getName(),user.getId())));
+				}else{
+					work.setPraiseStatus("赞");
+				}
+			}
+			return list;
+		}else{
+			return new ArrayList();
 		}
-		return list;
 	}
-
 
 	@RequestMapping("/getMasterWork.do")
 	public String getMasterWork(HttpServletRequest request , Model model){
 		String workId = request.getParameter("workId");
 		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
-		work.setPraiseStatus(work.getPraiseStatus()==null?"赞":work.getPraiseStatus());
+		work.setPraiseStatus(work.getPraiseStatus() == null ? "赞" : work.getPraiseStatus());
 		MyUser user = AuthorizationUtil.getMyUser();
 		String queryHql = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId and f.status='1'";
 		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
@@ -93,27 +102,41 @@ public class MasterBriefController {
 		return "/masterWork/masterWorkView";
 	}
 
-	@ResponseBody
-	@RequestMapping("/masterWorkPraise.do")
-	public String masterWorkPraise(HttpServletRequest request){
-		String workId = request.getParameter("workId");
-		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
-		MyUser user = AuthorizationUtil.getMyUser();
-		String queryHql = "from MasterWorkPraise w where w.work.id=:workId and w.user.id =:userId";
-		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-		queryMap.put("workId",workId);
-		queryMap.put("userId",user.getId());
-		List<MasterWorkPraise> list = baseManager.listObject(queryHql,queryMap);
-		if (list != null && list.size()> 0 ){
-			work.setPraiseStatus("赞");
-			baseManager.delete(MasterWorkPraise.class.getName(),list.get(0).getId());
-		}else{
+	public String getPraiseStatus(MasterWork work, User user) {
+			String queryHql = "from MasterWorkPraise f where f.work.id=:workId and f.user.id=:userId and f.status='1'";
+			LinkedHashMap<String, Object> queryMap = new LinkedHashMap<>();
+			queryMap.put("workId", work.getId());
+			queryMap.put("userId", user.getId());
+			MasterWorkPraise workPraise = (MasterWorkPraise) baseManager.getUniqueObjectByConditions(queryHql, queryMap);
+		if (workPraise != null && workPraise.getId() != null){
 			work.setPraiseStatus("取消赞");
-			MasterWorkPraise praise = new MasterWorkPraise();
-			praise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
-			praise.setWork(work);
-			baseManager.saveOrUpdate(MasterWorkPraise.class.getName(),praise);
+		}else{
+			work.setPraiseStatus("赞");
 		}
 		return work.getPraiseStatus();
 	}
+
+//	@ResponseBody
+//	@RequestMapping("/masterWorkPraise.do")
+//	public String masterWorkPraise(HttpServletRequest request){
+//		String workId = request.getParameter("workId");
+//		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
+//		MyUser user = AuthorizationUtil.getMyUser();
+//		String queryHql = "from MasterWorkPraise w where w.work.id=:workId and w.user.id =:userId";
+//		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
+//		queryMap.put("workId",workId);
+//		queryMap.put("userId",user.getId());
+//		List<MasterWorkPraise> list = baseManager.listObject(queryHql,queryMap);
+//		if (list != null && list.size()> 0 ){
+//			work.setPraiseStatus("赞");
+//			baseManager.delete(MasterWorkPraise.class.getName(),list.get(0).getId());
+//		}else{
+//			work.setPraiseStatus("取消赞");
+//			MasterWorkPraise praise = new MasterWorkPraise();
+//			praise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
+//			praise.setWork(work);
+//			baseManager.saveOrUpdate(MasterWorkPraise.class.getName(),praise);
+//		}
+//		return work.getPraiseStatus();
+//	}
 }

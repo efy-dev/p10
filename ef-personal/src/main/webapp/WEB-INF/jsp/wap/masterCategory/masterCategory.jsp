@@ -33,15 +33,12 @@
   <div class="am-header-left am-header-nav">
     <a href="javascript:history.go(-1);" class="chevron-left"></a>
   </div>
-  <!-- //End--chevron-left-->
   <h1 class="am-header-title"></h1>
-  <!-- //End--title-->
   <div class="am-header-right am-header-nav">
     <a href="#chevron-right" class="chevron-right" id="menu">
       <i class="line"></i>
     </a>
   </div>
-  <!-- //End--chevron-left-->
   <div class="menu-list">
     <div class="menu-page">
       <ul class="bd">
@@ -63,8 +60,6 @@
        class="am-tabs am-tabs-default"
           >
     <ul class="am-tabs-nav am-cf">
-      <%--<li class="am-active"><a href="[data-tab-panel-0]"><i class="bz-icon1"></i>--%>
-        <%--<span style="float: left;margin-left: 10px;">关注</span><i class="sod-sr"></i></a></li>--%>
       <li class=""><a href="[data-tab-panel-1]">
         <i class="bz-icon2"></i>
         <span style="float: left;margin-left: 10px;">评论</span><i class="sod-sr"></i>
@@ -75,14 +70,6 @@
       </a></li>
     </ul>
     <div class="am-tabs-bd">
-      <%--<div data-tab-panel-0 about="alertTab" class="am-tab-panel am-active">--%>
-        <%--<div class="aboud-you">--%>
-          <%--<div class="list-you"><span>这些人最近关注了你</span></div>--%>
-          <%--<ul class="list-name" id="toFollow">--%>
-            <%--<li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"/></div><span>Andy</span></li>--%>
-          <%--</ul>--%>
-        <%--</div>--%>
-      <%--</div>--%>
       <div data-tab-panel-1 about="alertTab" class="am-tab-panel ">
         <div class="discuss">
           <ul class="discuss-2" id="toComment">

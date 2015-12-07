@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>【团】${supMan}参加了${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]拼团，还差${number}人成团，快来参团吧~</title>
+  <title>【团】${supMan}参加了团购，还差${number}人成团，快来参团吧~</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -114,10 +114,10 @@
           还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，时间有限，赶快去呼唤小伙伴们加入吧
         </c:if>
         <c:if test="${group.status=='3'}">
-          组团成功啦，恭喜恭喜！不过还有参团名额呢，快去告诉朋友们吧
+          组团成功啦，恭喜恭喜！听说大boss大出血，又上新了好商品呢~~
         </c:if>
         <c:if test="${group.status=='4'}">
-          组团成功啦，恭喜恭喜！听说大boss大出血，又上新了好商品呢~~
+          组团成功啦，恭喜恭喜！不过还有参团名额呢，快去告诉朋友们吧
         </c:if>
         <c:if test="${group.status=='5'}">
           组团失败，不要气馁，一回生，二回熟，再接再厉呦~~
@@ -206,8 +206,8 @@
         <a href="<c:url value="/group/groupBuy.do?groupProductId=${group.groupProduct.id}"/>" class="btn">拼团结束&nbsp;去开团</a>
       </c:if>
       <c:if test="${group.status=='4'}">
-        <a href="javascript:void(0)" class="btn">
-          组团成功
+        <a href="javascript:void(0)" class="btn" id="btn">
+          组团成功,去分享
         </a>
       </c:if>
       <c:if test="${group.status=='5'}">
