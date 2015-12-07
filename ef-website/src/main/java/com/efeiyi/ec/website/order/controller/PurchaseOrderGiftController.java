@@ -89,7 +89,7 @@ public class PurchaseOrderGiftController {
         String productModelName = new String();
         BigDecimal productModelPrice = new BigDecimal("0");
         if ("1".equals(purchaseOrderGift.getShowGiftNameStatus())) {
-            productModelName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getName();
+            productModelName ="礼物清单："+ purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getName();
         }
         if ("1".equals(purchaseOrderGift.getShowGiftPriceStatus())) {
             productModelPrice = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getPrice();
@@ -114,8 +114,8 @@ public class PurchaseOrderGiftController {
             }
         }
 //        String a = productModelName +(productModelPrice.floatValue() != 0 ? productModelPrice.toString() : "");
-        g.drawString("礼物清单："+productModelName, 40, height / 2 + 30);
-        g.drawString("价值:"+(productModelPrice.floatValue() != 0 ? productModelPrice.toString() : "")+"元",480 , height / 2 + 30);
+        g.drawString(productModelName, 40, height / 2 + 30);
+        g.drawString((productModelPrice.floatValue() != 0 ?"价值:"+ productModelPrice.toString() : "")+"元",480 , height / 2 + 30);
         g.dispose();
         //二维码生成
         String content = "http://www.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
