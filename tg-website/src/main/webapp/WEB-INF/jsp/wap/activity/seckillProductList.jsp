@@ -98,19 +98,19 @@
                 </div>
                 <!-- //End--time-->
                 <div class="bd bigimg">
-                    <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!miao-product-view">
+                    <a href="<c:url value="/miao/${product.id}"/>" ><img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!miao-product-view"></a>
 
                     <p class="mask">关注度：${product.attentionAmount}</p>
                 </div>
                 <!--//End--bigimg-->
                 <div class="bd bigbuy">
-                    <div class="title">${productList.get(0).productModel.product.name}</div>
+                    <div class="title">${product.productModel.product.name}</div>
                     <div class="price">
                         <p class="p1"><span>原&nbsp;&nbsp;&nbsp;价：</span>
-                            <del>￥${productList.get(0).productModel.price}</del>
+                            <del>￥${product.productModel.price}</del>
                         </p>
-                        <p class="p2"><span>秒杀价：</span><em>￥</em><strong>${productList.get(0).price}</strong></p>
-                        <a class="btn-buy" title="敬请期待">敬请期待</a>
+                        <p class="p2"><span>秒杀价：</span><em>￥</em><strong>${product.price}</strong></p>
+                        <a class="btn-buy" href="<c:url value="/miao/${product.id}"/>" title="敬请期待">查看商品</a>
                     </div>
                 </div>
                 <!--//End--price-buy-->
