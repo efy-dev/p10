@@ -44,7 +44,7 @@
     <h5>${object.fullName}</h5>
     <p>[${object.projectName}]</p>
     <div class="great"><em><ming800:status name='level' dataType='Tenant.level' checkedValue='${object.level}' type='normal'/>非物质文化遗产传承人</em><i class="icon-master"></i></div>
-    <p class="text-great">${object.brief}</p>
+    <%--<p class="text-great">${object.brief}</p>--%>
     <div class="gz-master">
       <div class="mst-gz">
         <div class="pc-gz">
@@ -279,6 +279,7 @@ function storeMessage(o,msgId){
   var StartMessageNum = 1;
   var StartProductNum = 1;
   $(document).ready(function(){
+    $("#pages").html("主页 - ${object.fullName} - e飞蚁");
     getData("<c:url value='/masterMessage/mainData/plistMasterMessage_default1/master.id:${object.id}/4/'/>");
   })
   function getData(url){

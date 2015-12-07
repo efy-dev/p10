@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>【团】${supMan}参加了${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]拼团，还差${number}人成团，快来参团吧~</title>
+  <title>【团】${supMan}参加了团购，还差${number}人成团，快来参团吧~</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -206,8 +206,8 @@
         <a href="<c:url value="/group/groupBuy.do?groupProductId=${group.groupProduct.id}"/>" class="btn">拼团结束&nbsp;去开团</a>
       </c:if>
       <c:if test="${group.status=='4'}">
-        <a href="javascript:void(0)" class="btn">
-          组团成功
+        <a href="javascript:void(0)" class="btn" id="btn">
+          组团成功,去分享
         </a>
       </c:if>
       <c:if test="${group.status=='5'}">
@@ -245,8 +245,8 @@
       <li>
         <strong><img src="<c:url value="/scripts/wap/upload/fx-x-1.png"/>" class="page-pic"></strong>
         <span>团员${fn:substring(member.user.getUsername(), 0,3 )}****${fn:substring(member.user.getUsername(),7,11)}</span>
-        <span>${fn:substring(group.createDateTime,0 ,11 )}</span>
-        <span>${fn:substring(group.createDateTime,11 ,19 )}参团</span>
+        <span>${fn:substring(member.createDateTime,0 ,11 )}</span>
+        <span>${fn:substring(member.createDateTime,11 ,19 )}参团</span>
       </li>
         </c:if>
       </c:forEach>
@@ -389,7 +389,26 @@
 <!--自定义js--Start-->
 <script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
 <script src="<c:url value="/scripts/wap/js/myorder.js?v=20150831"/>"></script>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?99fa5c9048e30c9dada20ea390329f89";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70397028-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 <!--自定义js--End-->
 </body>
 </html>

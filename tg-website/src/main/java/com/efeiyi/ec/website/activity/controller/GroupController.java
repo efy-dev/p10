@@ -162,6 +162,7 @@ public class GroupController {
         if (member!=null&&"2".equals(member.getStatus())){
             member.setStatus("1");
             member.setMyGroup(myGroup);
+            member.setCreateDateTime(new Date());
             baseManager.saveOrUpdate(GroupMember.class.getName(),member);
         }
         //人数够，成团操作
@@ -229,9 +230,21 @@ public class GroupController {
         String memberId = request.getParameter("memberId");
         String show = request.getParameter("show");
         String purchaseOrderId = request.getParameter("purchaseOrderId");
+        String supMan = "";
+        if (purchaseOrderId==null||purchaseOrderId==""){
+            XQuery xQuery = new XQuery("listPurchaseOrderGroup_default10",request);
+            xQuery.put("myGroup_id",groupId);
+            xQuery.put("groupMember_id",memberId);
+            List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
+            purchaseOrderId = list.get(0).getPurchaseOrder().getId();
+
+            PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
+            supMan = purchaseOrder.getReceiverName();
+        }else {
+            PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
+            supMan = purchaseOrder.getReceiverName();
+        }
         MyGroup group = (MyGroup) baseManager.getObject(MyGroup.class.getName(), groupId);
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
-        String supMan = purchaseOrder.getReceiverName();
 
         String url = "?groupProductId=" + groupProductId + "&groupId=" + groupId + "&memberId=" + memberId;
         int flag = 0;//0未参团 1 团长 2 团员

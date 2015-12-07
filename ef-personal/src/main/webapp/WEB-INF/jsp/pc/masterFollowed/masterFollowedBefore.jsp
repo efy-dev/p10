@@ -112,7 +112,7 @@
                           </c:otherwise>
                         </c:choose>
                       </p>
-                      <p class="txt3">${object.content}</p>
+                      <p class="txt3"></p>
                       <div class="gz2">
                         <div class="bt-gz">
                           <a class="btn-guan" name="masterFollow${object.id}" onclick="followMaster('${object.id}');">
@@ -175,6 +175,9 @@
   <%--</div>--%>
 <%--</div>--%>
 <script>
+  $(document).ready(function(){
+    $("#pages").html("关注大师 - e飞蚁");
+  })
   function followMaster(masterId){
     var str;
     $.ajax({

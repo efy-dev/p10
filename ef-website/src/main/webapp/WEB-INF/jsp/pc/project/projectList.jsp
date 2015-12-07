@@ -34,25 +34,25 @@
         <div class="btn btn-next" title="下一页"></div>
     </div>
 </div>
-<div class="wh reco-shop">
-    <div class="hd">
-        <div class="wh shop-img">
-            <div class="img">
-                <ul>
-                    <c:forEach items="${tenantList}" var="tenant">
-                        <li><a href="<c:url value="/tenant/${tenant.id}"/>" title=""><img
-                                src="http://pro.efeiyi.com/${tenant.pictureUrl}@!project-tenant-pc" alt=""></a></li>
-                    </c:forEach>
-                </ul>
-            </div>
-            <div class="icon-new btn-prev btn-no" title="上一个"></div>
-            <div class="icon-new btn-next" title="下一个"></div>
-        </div>
-    </div>
-</div>
+<%--<div class="wh reco-shop">--%>
+    <%--<div class="hd">--%>
+        <%--<div class="wh shop-img">--%>
+            <%--<div class="img">--%>
+                <%--<ul>--%>
+                    <%--<c:forEach items="${tenantList}" var="tenant">--%>
+                        <%--<li><a href="<c:url value="/tenant/${tenant.id}"/>" title=""><img--%>
+                                <%--src="http://pro.efeiyi.com/${tenant.pictureUrl}@!project-tenant-pc" alt=""></a></li>--%>
+                    <%--</c:forEach>--%>
+                <%--</ul>--%>
+            <%--</div>--%>
+            <%--<div class="icon-new btn-prev btn-no" title="上一个"></div>--%>
+            <%--<div class="icon-new btn-next" title="下一个"></div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
 <!-- //End--reco-shop-->
 
-<div class="wh">
+<div class="wh addtop">
     <div class="hd classify">
         <c:forEach items="${projectList}" var="project">
             <div class="items">

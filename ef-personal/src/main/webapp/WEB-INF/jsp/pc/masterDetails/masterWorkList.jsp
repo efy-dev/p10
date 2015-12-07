@@ -38,7 +38,7 @@
       <p>[${object.projectName}]</p>
     </c:if>
     <div class="great"><em><ming800:status name='level' dataType='Tenant.level' checkedValue='${object.level}' type='normal'/>非物质文化遗产传承人</em><i class="icon-master"></i></div>
-    <p class="text-great">${object.brief}</p>
+    <%--<p class="text-great">${object.brief}</p>--%>
     <div class="gz-master">
       <div class="mst-gz">
         <div class="pc-gz">
@@ -91,6 +91,9 @@
 <script src="<c:url value='/scripts/assets/pc/js/cyclopedia.js'/>"></script>
 
 <script>
+  $(document).ready(function(){
+    $("#pages").html("作品 - ${object.fullName} - e飞蚁");
+  })
   function followMaster(o , masterId){
     var str;
     $.ajax({

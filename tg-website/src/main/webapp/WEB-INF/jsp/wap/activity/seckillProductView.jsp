@@ -89,7 +89,7 @@
                     <div class="status3">
                         <p>距秒杀开始还有</p>
 
-                        <p>
+                        <p style="width: 60%;">
                             <strong id="time-h">00</strong>
                             <strong id="time-m">00</strong>
                             <strong id="time-s">00</strong>
@@ -130,10 +130,15 @@
                 </div>
             </c:if>
             <c:if test="${miaoStatus=='2'}">
-                <div class="bd btn-bg" id="miaoBuy"><a
-                        href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
-                        title="立即抢购">立即抢购</a>
-                </div>
+                <c:if test="${recordStatus=='1'}">
+                    <div class="bd btn-bg" id="miaoBuy"><a
+                            href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
+                            title="立即抢购">立即抢购</a>
+                    </div>
+                </c:if>
+                <c:if test="${recordStatus=='0'}">
+                    <div class="bd btn-bg-no">您已参与秒杀</div>
+                </c:if>
             </c:if>
             <c:if test="${miaoStatus=='3'}">
                 <div class="bd btn-bg-no">秒杀结束</div>
@@ -242,13 +247,23 @@
                     var phone = data[i].user.username;
                     var datetime = new Date(data[i].createDatetime);
                     phone = phone.substring(0, 3) + "****" + phone.substring(7, 11);
-                    out += "<li class=\"bd\"><p>" + phone + "</p><p>" + datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds() + "</p></li>"
+                    out += "<li class=\"bd\"><p>" + phone + "</p><p>" + dateFormat(datetime.getHours()) + ":" + dateFormat(datetime.getMinutes()) + ":" + dateFormat(datetime.getSeconds()) + "</p></li>"
                 }
             }
             $("#miaoRecord").html(out);
             setTimeout("getProductOrder()", 8500);
         }, function () {
         }, "post")
+    }
+
+    function dateFormat(time){
+        var out = ""
+        if(time<10){
+            out = "0"+time;
+        }else{
+            out = time;
+        }
+        return out;
     }
 
     setTimeout("getProductOrder()", 1000);

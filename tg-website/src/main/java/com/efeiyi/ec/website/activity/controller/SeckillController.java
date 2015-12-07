@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.activity.controller;
 
 import com.efeiyi.ec.activity.model.SeckillProduct;
+import com.efeiyi.ec.activity.model.SeckillRecord;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -126,6 +127,18 @@ public class SeckillController {
         //需要判断当前的秒杀是否是再24消失内
         //获得当前秒杀的状态 通过时间
         String status = "1";
+        String recordStatus = "1";
+        if (AuthorizationUtil.isAuthenticated()) {
+            XQuery xQuery = new XQuery("listSeckillRecord_default", request);
+            xQuery.put("seckillProductId", seckillProduct.getId());
+            List<Object> recordList = baseManager.listObject(xQuery);
+            if (recordList != null && recordList.isEmpty()) {
+                recordStatus = "1";
+            } else if (recordList != null && !recordList.isEmpty()) {
+                recordStatus = "0";
+            }
+        }
+        model.addAttribute("recordStatus", recordStatus);
         Date currentDate = new Date();
         if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
             //秒杀正在进行中
@@ -172,10 +185,25 @@ public class SeckillController {
 
 
     @RequestMapping({"/miao/buy/{productId}/{amount}"})
-    public String miaoBuy(@PathVariable String productId, @PathVariable String amount) throws Exception {
+    public String miaoBuy(@PathVariable String productId, @PathVariable String amount,HttpServletRequest request) throws Exception {
         synchronized (this) {
+
             SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
             String status = "1";
+            String recordStatus = "1";
+            if (AuthorizationUtil.isAuthenticated()) {
+                XQuery xQuery = new XQuery("listSeckillRecord_default", request);
+                xQuery.put("seckillProductId", seckillProduct.getId());
+                List<Object> recordList = baseManager.listObject(xQuery);
+                if (recordList != null && recordList.isEmpty()) {
+                    recordStatus = "1";
+                } else if (recordList != null && !recordList.isEmpty()) {
+                    recordStatus = "0";
+                }
+            }
+            if (recordStatus.equals("0")){
+                return "redirect:/miao/" + productId;
+            }
             Date currentDate = new Date();
             if (seckillProduct.getUsefulAmount() <= 0) {
                 return "redirect:/miao/" + productId;
@@ -236,6 +264,12 @@ public class SeckillController {
         String currentUserId = request.getParameter("userId");
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
         if (AuthorizationUtil.isAuthenticated() && currentUserId.equals(AuthorizationUtil.getUser().getId())) {
+            //创建秒杀记录 证明当前用户已经参与过该次秒杀
+            SeckillRecord seckillRecord = new SeckillRecord();
+            seckillRecord.setCreateDatetime(new Date());
+            seckillRecord.setUserId(AuthorizationUtil.getMyUser().getId());
+            seckillRecord.setSeckillProductId(seckillProduct.getId());
+            baseManager.saveOrUpdate(SeckillRecord.class.getName(), seckillRecord);
             model.addAttribute("product", seckillProduct);
             seckillProduct.setUnusefulAmount((seckillProduct.getUnusefulAmount() != null ? seckillProduct.getUnusefulAmount() : 0) + 1);
             seckillProduct.setOrderAmount(seckillProduct.getOrderAmount() - 1);
