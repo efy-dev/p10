@@ -78,16 +78,16 @@
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=${view}&tenantId=${tenantId}&id=${product.id}"/>">
                                         修改规格
                                     </a>
-                                    <%--<c:if test="${product.status == '2'}">--%>
-                                        <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="setStatus(this,'1','${product.id}')">--%>
-                                            <%--上架--%>
-                                        <%--</a>--%>
-                                    <%--</c:if>--%>
-                                    <%--<c:if test="${product.status == '1'}">--%>
-                                        <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="setStatus(this,'2','${product.id}')">--%>
-                                            <%--下架--%>
-                                        <%--</a>--%>
-                                    <%--</c:if>--%>
+                                    <c:if test="${product.status == '2'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="setStatus(this,'1','${product.id}')">
+                                            上架
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${product.status == '1'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="setStatus(this,'2','${product.id}')">
+                                            下架
+                                        </a>
+                                    </c:if>
                                         <%--<c:if test="${view == 'newProduct'}">--%>
                                         <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=plistTenantProduct_default&productId=${product.id}&view=${view}"/>">--%>
                                         <%--关联商家--%>
