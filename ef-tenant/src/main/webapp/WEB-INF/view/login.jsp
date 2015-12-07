@@ -33,11 +33,11 @@
             </div>
             <div class="am-form-group">
                 <i class="icon name"></i>
-                <input id="username" name="username" class="text1 textam" tabindex="1" minlength="3" placeholder="已验证手机" type="text" value="${username}">
+                <input id="username" name="username" class="text1 textam" tabindex="1" placeholder="已验证手机" type="text" value="${username}">
             </div>
             <div class="am-form-group">
                 <i class="icon pwd"></i>
-                <input id="password" name="password" class="text1 textam" tabindex="2" minlength="3" placeholder="密码" type="password" value="">
+                <input id="password" name="password" class="text1 textam" tabindex="2" placeholder="密码" type="password" value="">
             </div>
             <%--<div class="am-form-group">--%>
                 <%--<label for="">--%>
