@@ -48,8 +48,8 @@
         </div>
     </div>
     <div class="car-fx">
-        <p  style="display: none"  id="receiveUrl">http://www.efeiyi.com/order/giftReceive/${order.id}</p>
-        <a onclick="weixinSendAppMessage()">送礼给Ta</a>
+        <a id="btn" class="btn-share">送礼给Ta</a>
+        <div id="cover"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt="">
         <a href="<c:url value="/createGiftImage/${order.id}"/> ">保存为图片</a>
     </div>
 </div>
