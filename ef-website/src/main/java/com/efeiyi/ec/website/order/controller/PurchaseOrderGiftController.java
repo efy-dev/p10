@@ -105,14 +105,17 @@ public class PurchaseOrderGiftController {
         g.setColor(Color.black);
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
-        g.setFont(new Font("宋体", Font.PLAIN, 20));
+        g.setFont(new Font("宋体", Font.BOLD, 18));
         //背景图set文字显示
         if (giftMessage != null) {
-            g.drawString(giftMessage, 40, 180);
+            if(giftMessage.length()>28){
+                g.drawString(giftMessage.substring(0,28), 40, 180);
+                g.drawString(giftMessage.substring(28,giftMessage.length()), 40, 200);
+            }
         }
 //        String a = productModelName +(productModelPrice.floatValue() != 0 ? productModelPrice.toString() : "");
-        g.drawString(productModelName, 40, height / 2 + 30);
-        g.drawString((productModelPrice.floatValue() != 0 ? productModelPrice.toString() : "")+"元",500 , height / 2 + 30);
+        g.drawString("礼物清单："+productModelName, 40, height / 2 + 30);
+        g.drawString("价值:"+(productModelPrice.floatValue() != 0 ? productModelPrice.toString() : "")+"元",480 , height / 2 + 30);
         g.dispose();
         //二维码生成
         String content = "http://www.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
