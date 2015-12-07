@@ -1,14 +1,11 @@
 package com.efeiyi.ec.website.interceptor;
 
-import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
-import com.efeiyi.jh.advertisement.model.PromotionPlan;
 import com.efeiyi.jh.advertisement.model.PromotionPurchaseRecord;
 import com.efeiyi.jh.advertisement.model.PromotionUserRecord;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
