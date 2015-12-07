@@ -5,13 +5,13 @@ import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.efeiyi.jh.advertisement.model.PromotionPlan;
 import com.efeiyi.jh.advertisement.model.PromotionUserRecord;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
@@ -38,11 +38,18 @@ public class PromotionPersistenceInterceptor extends HandlerInterceptorAdapter {
                     }
                     promotionUserRecord.setPromotionPlan(promotionPlan);
                     promotionUserRecord.setUser(user);
-                    promotionUserRecord.setRdEndDate(new Date(System.currentTimeMillis() + promotionPlan.getRdDays() * 86400000));
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.add(Calendar.DATE,promotionPlan.getRdDays());
+                    promotionUserRecord.setRdEndDate(calendar.getTime());
                     baseManager.saveOrUpdate(PromotionUserRecord.class.getName(), promotionUserRecord);
                     request.getSession().removeAttribute("pch");
                 }
             }
         }
+    }
+    public static void main(String[]args){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE,30);
+        System.out.println(calendar.getTime());
     }
 }

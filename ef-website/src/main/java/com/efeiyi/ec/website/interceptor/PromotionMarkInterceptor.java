@@ -5,13 +5,13 @@ import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.efeiyi.jh.advertisement.model.PromotionPlan;
 import com.efeiyi.jh.advertisement.model.PromotionUserRecord;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
@@ -41,7 +41,9 @@ public class PromotionMarkInterceptor extends HandlerInterceptorAdapter {
                     promotionUserRecord.setUser(user);
                     PromotionPlan promotionPlan = (PromotionPlan) baseManager.getObject(PromotionPlan.class.getName(), promotionChannel);
                     promotionUserRecord.setPromotionPlan(promotionPlan);
-                    promotionUserRecord.setRdEndDate(new Date(System.currentTimeMillis() + promotionPlan.getRdDays() * 86400000));
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.add(Calendar.DATE,promotionPlan.getRdDays());
+                    promotionUserRecord.setRdEndDate(calendar.getTime());
                     baseManager.saveOrUpdate(PromotionUserRecord.class.getName(), promotionUserRecord);
                 }
                 //只以最后一次点击的返利链接为准
