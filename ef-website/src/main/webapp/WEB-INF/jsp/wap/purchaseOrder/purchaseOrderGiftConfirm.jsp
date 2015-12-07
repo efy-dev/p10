@@ -32,41 +32,43 @@
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="edit-text">
-            <!--确定后的样式-->
-            <!-- <div class="edit-txt1">种地农民卖粮之难，并不只此而已。喜获丰收，本想多卖多赚，孰料供大于求，价格上不去甚至被恶意压低，迟迟兑换不了钞票。</div>-->
-            <!--确定后的样式-->
-            <a href="#" id="add-show" class="edit-txt">编辑祝福语</a>
-
-            <em id="giftMessageContent" style="display:none;">我精心为你准备了礼物，希望你能收下。</em>
-            <!--弹出按钮-->
-            <a href="#" name="add-show" style="display: none" onclick="$('.add-cart').show()"><i class="cart-icon"></i></a>
+            <!--    确定后的样式-->
+            <div class="edit-txt1" name="add-show" style="display: none"><span class="leaveword-num">0/50</span></div>
+            <!--    确定后的样式-->
+            <a href="#"  id="add-show" class="edit-txt">编辑祝福语</a>
             <!--弹出框-->
-
-
             <div style="display: none" class="add-cart">
-                <textarea class="ae" id="giftMessage" maxlength="20"></textarea>
-
+                <textarea class="ae" maxlength="50" id="giftMessage" ></textarea>
+                <span id="leaveword-num" class="leaveword-num1">0/50</span>
                 <div class="atext ae">
                     <a class="cancel">取&nbsp;消</a>
                     <a class="affirm" id="confirmGiftMessage" onclick="updateGiftMessage()">确&nbsp;认</a>
                 </div>
             </div>
         </div>
-        <%--<div data-am-widget="slider" class="am-slider am-slider-a1 ae" id="slider"--%>
-        <%--data-am-slider='{&quot;directionNav&quot;:false}'>--%>
-        <div data-am-widget="slider" id="slider" class="am-slider am-slider-a1 ae"
-             data-am-slider='{&quot;slideshow&quot;:false}' data-am-slider='{&quot;animationLoop&quot;:false}'>
+        <div data-am-widget="slider" class="am-slider am-slider-a1 ae add-suspend"  data-am-slider='{&quot;slideshow&quot;:false}' data-am-slider='{&quot;animationLoop&quot;:false}' >
             <ul class="am-slides">
                 <li><img id="1" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever1.png"></li>
                 <li><img id="2" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever2.jpg"></li>
                 <li><img id="3" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever3.jpg"></li>
-                <li><img id="4" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever3.jpg"></li>
             </ul>
+            <div class="edit-hint"><span>滑动一下，换换卡片风格。</span></div>
         </div>
         <div class="detailed">
             <div class="font-1" style="display: none">礼物清单：${productModel.name}</div>
             <div class="font-2" style="display: none">价值：${productModel.price}元</div>
         </div>
+        <div class="elect">
+            <div class="left">
+                <input type="checkbox" class="add-c1" id="showGiftName" onclick="giftNameStatus(this)">
+                <span>显示礼物名称</span>
+            </div>
+            <div class="right">
+                <input type="checkbox" class="add-c2" id="showGiftPrice" onclick="giftPriceStatus(this)">
+                <span>显示礼物价格</span>
+            </div>
+        </div>
+
     </div>
     <div class="gift-details ae">
         <div class="btb"><h5>礼物详情</h5></div>
@@ -84,16 +86,7 @@
                 <span class="add-sub"></span>
             </div>
         </div>
-        <div class="elect">
-            <div class="left">
-                <input type="checkbox" class="add-c1" id="showGiftName" onclick="giftNameStatus(this)">
-                <span>显示礼物名称</span>
-            </div>
-            <div class="right">
-                <input type="checkbox" class="add-c2" id="showGiftPrice" onclick="giftPriceStatus(this)">
-                <span>显示礼物价格</span>
-            </div>
-        </div>
+
         <div class="bd cart-pay newcart-pay">
             <div class="btb"><h5>请选择支付方式</h5></div>
             <ul class="ul-list ae">
@@ -161,8 +154,10 @@
                 $("#giftMessageContent").html(data);
                 $("#giftMessageContent").show()
                 $("#add-show").hide();
+                $(".edit-txt1").html(data)
+                $(".edit-txt1").show();
                 $("#add-show").attr("id", "add-show1")
-                $("[name=add-show]").show()
+//                $("[name=add-show]").show();
                 $("[name=add-show]").attr("id", "add-show");
                 $(".add-cart").hide();
             }
