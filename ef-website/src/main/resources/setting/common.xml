@@ -9,6 +9,16 @@
     <banners>
         <banner group="master.index" note="传承人首页轮播图" />
         <banner group="ec.home.banner" note="电商轮播图" />
+        <banner group="ec.home.banner.tysz" note="陶冶烧造" />
+        <banner group="ec.home.banner.ctms" note="传统美术" />
+        <banner group="ec.home.banner.zryx" note="织染印绣" />
+        <banner group="ec.home.banner.mpjn" note="茗品佳酿" />
+        <banner group="ec.home.banner.ttmc" note="饕餮美食" />
+        <banner group="ec.home.banner.zycq" note="琢玉成器" />
+        <banner group="ec.home.banner.jszd" note="金石錾锻" />
+        <banner group="ec.home.banner.rjsq" note="如胶似漆" />
+        <banner group="ec.home.banner.mzpz" note="木作编扎" />
+        <banner group="ec.home.banner.yyys" note="医药养生" />
     </banners>
     <!-- 文档 -->
     <documents>
