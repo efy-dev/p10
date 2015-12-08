@@ -22,7 +22,7 @@
         <csrf disabled="true"/>
 
         <!--<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>-->
-        <intercept-url pattern="/getYhq.do" access="isAuthenticated()"/>
+        <intercept-url pattern="/yhq.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/saveOrUpdateOrder.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/pay/alipay/callback" access="isAnonymous()"/>
         <intercept-url pattern="/sso2.do" access="isAuthenticated()"/>
