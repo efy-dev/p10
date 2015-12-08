@@ -3,9 +3,11 @@ package com.efeiyi.ec.website.order.controller;
 import com.aliyun.openservices.oss.OSSClient;
 import com.aliyun.openservices.oss.model.ObjectMetadata;
 import com.aliyun.openservices.oss.model.PutObjectResult;
+import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.purchase.model.PurchaseOrderDelivery;
 import com.efeiyi.ec.purchase.model.PurchaseOrderGift;
 import com.efeiyi.ec.website.order.service.CartManager;
 import com.efeiyi.ec.website.order.service.PaymentManager;
@@ -35,6 +37,8 @@ import java.io.File;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -118,14 +122,15 @@ public class PurchaseOrderGiftController {
 
     public String productPicture(PurchaseOrderGift purchaseOrderGift) throws Exception {
         String giftMessage = purchaseOrderGift.getGiftMessage();
-        String productModelName = new String();
-        BigDecimal productModelPrice = new BigDecimal("0");
-        if ("1".equals(purchaseOrderGift.getShowGiftNameStatus())) {
-            productModelName ="礼物清单："+ purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getName();
+        String productName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getName();
+        String projectName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getProject().getName();
+        String urlString = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProductModel_url();
+        Master master = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getMaster();
+        String masterNamer = new String();
+        if(master!=null){
+            masterNamer = master.getFullName();
         }
-        if ("1".equals(purchaseOrderGift.getShowGiftPriceStatus())) {
-            productModelPrice = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getPrice();
-        }
+        String sender = purchaseOrderGift.getGiftGaverName();
         //背景图设置
         URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background.jpg");
         ImageIcon imgIcon = new ImageIcon(backgroundUrl);
@@ -182,7 +187,7 @@ public class PurchaseOrderGiftController {
         }
 //        String testurl = "http://pro.efeiyi.com/product/%E4%B8%BB%E5%9B%BE20151022173939.jpg@!product-hot";
         String imgName = urlString.substring(urlString.lastIndexOf("/")+1,urlString.length());
-        String imgNameEncode = URLEncoder.encode(imgName,"UTF-8");
+        String imgNameEncode = URLEncoder.encode(imgName, "UTF-8");
         urlString = urlString.substring(0,urlString.lastIndexOf("/")+1)+imgNameEncode;
         URL pictureUrl = new URL("http://pro.efeiyi.com/"+urlString+"@!gift-picture-sender");
 //        URL pictureUrl = new URL(testurl);
