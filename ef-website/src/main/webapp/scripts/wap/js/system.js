@@ -53,11 +53,11 @@ $(function(){
             return false
         })
         $(".gift .elect .add-c1").click(function(){
-            $(this).siblings(".gift .gift-details .elect span").toggleClass("active")
+            $(this).siblings(".gift  .elect span").toggleClass("active")
             $(".gift .detailed .font-1").slideToggle()
         })
         $(".gift .elect .add-c2").click(function(){
-            $(this).siblings(".gift .gift-details .elect span").toggleClass("active")
+            $(this).siblings(".gift  .elect span").toggleClass("active")
             $(".gift .detailed .font-2").slideToggle()
         })
         $(".my-evaluate .score .score-star .star .a-star").dblclick(function(){
@@ -67,9 +67,6 @@ $(function(){
         $("#nobtn").removeAttr('onclick');
 
     })
-    (function(){
-
-    })();
     //商品评价
     (function(){
         $('.my-evaluate .score .score-star .star li').click(function(){
@@ -153,6 +150,7 @@ $(function(){
             $('#cover .bg').click(function(){
                 $(this).parents('#cover').hide();
             })
+            $(".custom-header").css("z-index","0");
             return false;
         });
         //详情和评论-弹出轮播图
