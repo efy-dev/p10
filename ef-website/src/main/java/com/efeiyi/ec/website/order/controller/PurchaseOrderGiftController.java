@@ -153,7 +153,7 @@ public class PurchaseOrderGiftController {
             if(giftMessage.length()<17){
                 g.drawString(giftMessage, 240, 600);
             }
-            if(giftMessage.length()<35){
+            if(17<=giftMessage.length()&&giftMessage.length()<35){
                 g.drawString(giftMessage.substring(0,17), 240, 600);
                 g.drawString(giftMessage.substring(17,giftMessage.length()), 220, 630);
             }
