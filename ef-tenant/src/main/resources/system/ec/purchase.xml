@@ -187,5 +187,32 @@
             </does>
         </entity>
 
+        <entity name="purchaseOrderPaymentDetails" label="purchaseOrderPaymentDetails"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails">
+            <fields>
+                <field name="payWay" label="支付方式" inputType="text">
+                    <statusType fieldName="payWay">
+                        <item label="支付宝" value="1"/>
+                        <item label="银行卡" value="2"/>
+                        <item label="微信" value="3"/>
+                    </statusType>
+                </field>
+            </fields>
+        </entity>
+        <entity name="PurchaseOrderComment" label="PurchaseOrderComment"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.PurchaseOrderComment">
+            <does>
+                <do name="plistPurchaseOrderComment" access="" label="评价"
+                    result="/purchaseOrderComment/purchaseOrderCommentPList" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="purchaseOrderProduct.productModel.product.tenant.id" defaultValue="${MY_TENANT}" operation="eq" inputType="default"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
     </entities>
 </module>
