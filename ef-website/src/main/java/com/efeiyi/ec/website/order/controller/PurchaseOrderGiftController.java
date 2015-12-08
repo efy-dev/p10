@@ -132,7 +132,7 @@ public class PurchaseOrderGiftController {
         }
         String sender = purchaseOrderGift.getGiftGaverName();
         //背景图设置
-        URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background.jpg");
+        URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background1.jpg");
         ImageIcon imgIcon = new ImageIcon(backgroundUrl);
         Image theImg = imgIcon.getImage();
         int width = 640;
