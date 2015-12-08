@@ -41,7 +41,6 @@ public class MasterMessagePraiseController {
 		if (list != null && list.size() > 0) {
 			MasterMessagePraise praise = list.get(0);
 			MasterMessage message = praise.getMessage();
-			message.setPraiseNum(message.getPraiseNum() == null ? 0 : (message.getPraiseNum() - 1));
 			message.setPraiseStatus("赞");
 			baseManager.delete(MasterMessagePraise.class.getName(), praise.getId());
 			message.setPraiseNum(message.getPraiseNum() == null ? 0 : message.getPraiseNum() - 1);
@@ -52,7 +51,6 @@ public class MasterMessagePraiseController {
 			MasterMessage message = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(), messageId);
 			praise.setUser((User)baseManager.getObject(User.class.getName(),user.getId()));
 			praise.setMessage(message);
-			message.setPraiseNum(message.getPraiseNum() == null ? (0 + 1) : (message.getPraiseNum() + 1));
 			message.setPraiseStatus("取消赞");
 			baseManager.saveOrUpdate(MasterMessagePraise.class.getName(), praise);
 			message.setPraiseNum(message.getPraiseNum() == null ? 1 : message.getPraiseNum() + 1);

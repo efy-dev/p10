@@ -52,7 +52,7 @@
                 <div class="suit">
                     <div class="dynamic">
                         <div class="dynamic-hd"><a class="suit-tx"><img class="am-circle"
-                                                                        src="<c:url value="/scripts/assets/upload/120102-p1-1.jpg"/>"></a>
+                                                                        src="<c:url value="/scripts/assets/images/120102-p1-1.jpg"/>"></a>
 
                             <div class="suit-name"><a href="#"><span>${object.master.fullName}</span></a></div>
                             <a class="suit-gz"
@@ -161,9 +161,9 @@
                         } else {
                             amout1 = data[i].amount;
                         }
-                        var userName = data[i].user.name2;
-                        if (userName == null) {
-                            userName = "匿名用户";
+                        var userName = data[i].user.username;
+                        if(userName != null){
+                            userName = userName.substring(0,3) + "****" + userName.substring(7,11);
                         }
                         var box = $("<div class='matter' id='" + data[i].id + "'> " +
                                 "<p class='text-h1'>" + userName + "</p> " +
@@ -209,9 +209,9 @@
                         } else {
                             amout1 = data[i].amount;
                         }
-                        var userName = data[i].user.name2;
-                        if (userName == null) {
-                            userName = "匿名用户";
+                        var userName = data[i].user.username;
+                        if(userName != null){
+                            userName = userName.substring(0,3) + "****" + userName.substring(7,11);
                         }
                         if (flagg == true) {
                             var box = "<div class='respond'> <p id='" + data[i].id + "'><span class='txt-name'>" +
@@ -385,7 +385,11 @@
                         alert("您未发表任何评论，请评论！！！");
                         return false;
                     } else {
-                        $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
+                        var userName = data.user.username;
+                        if(userName != null){
+                            userName = userName.substring(0,3) + "****" + userName.substring(7,11);
+                        }
+                        $(".dialogue").append("<div class='matter'> <p class='text-h1'>"+ userName +"</p> " +
                                 "<p class='text-time'>刚刚</p> <p class='text-content'>" +
                                 "<a href='#' onclick=\"showModal2(this,false)\" about='" + data.id + "'>" + CommentValue + "</a></p> <div class='owner'>" +
                                 "<img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/>" +
@@ -430,16 +434,20 @@
                         alert("您未发表任何评论，请评论！！！");
                         return false;
                     } else {
+                        var userName = data.user.username;
+                        if(userName != null){
+                            userName = userName.substring(0,3) + "****" + userName.substring(7,11);
+                        }
                         if (flag == "true") {
                             $("#" + fatherId).append("<div class='respond' id=\"" + fatherId + "\"> <p><span class='txt-name'>" +
-                                    "<a href='#'> ${myUser.name2}：</a>" +
+                                    "<a href='#'>"+ userName +"：</a>" +
                                     "</span><span class='txt-content' onclick=\"showModal2(this,false)\" about='" + data.id + "'>" + CommentValue + "</span></p></div>");
                             var next = $("a[name='" + fatherId + "']").find("em");
                             var num = parseInt(next.html());
                             next.html(num + 1);
                         } else {
                             $("#" + fatherId).after("<p id=\"" + fatherId + "\"><span class='txt-name'>" +
-                                    "<a href='#'> ${myUser.name2}：</a>" +
+                                    "<a href='#'>"+ userName +"：</a>" +
                                     "</span><span class='txt-content' onclick=\"showModal2(this,false)\" about='" + data.id + "'>" + CommentValue + "</span></p>");
                             var next = $("a[name='" + fatherId + "']").find("em");
                             var num = parseInt(next.html());
