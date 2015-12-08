@@ -3,6 +3,7 @@ package com.efeiyi.ec.website.order.controller;
 import com.aliyun.openservices.oss.OSSClient;
 import com.aliyun.openservices.oss.model.ObjectMetadata;
 import com.aliyun.openservices.oss.model.PutObjectResult;
+import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
@@ -35,6 +36,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,14 +90,15 @@ public class PurchaseOrderGiftController {
 
     public String productPicture(PurchaseOrderGift purchaseOrderGift) throws Exception {
         String giftMessage = purchaseOrderGift.getGiftMessage();
-        String productModelName = new String();
-        BigDecimal productModelPrice = new BigDecimal("0");
-        if ("1".equals(purchaseOrderGift.getShowGiftNameStatus())) {
-            productModelName ="礼物清单："+ purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getName();
+        String productName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getName();
+        String projectName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getProject().getName();
+        String urlString = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProductModel_url();
+        Master master = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getMaster();
+        String masterNamer = new String();
+        if(master!=null){
+            masterNamer = master.getFullName();
         }
-        if ("1".equals(purchaseOrderGift.getShowGiftPriceStatus())) {
-            productModelPrice = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getPrice();
-        }
+        String sender = purchaseOrderGift.getGiftGaverName();
         //背景图设置
         URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background.jpg");
         ImageIcon imgIcon = new ImageIcon(backgroundUrl);
@@ -107,19 +110,28 @@ public class PurchaseOrderGiftController {
         g.setColor(Color.black);
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
-        g.setFont(new Font("宋体", Font.BOLD, 18));
+        g.setFont(new Font("宋体", Font.BOLD, 29));
+        g.drawString(productName,420,270);
+        g.drawString("【"+projectName+"】",400,340);
+        g.setFont(new Font("宋体", Font.BOLD, 27));
+        g.drawString(masterNamer,420,410);
         //背景图set文字显示
+        g.setFont(new Font("宋体", Font.BOLD, 24));
         if (giftMessage != null) {
-            if(giftMessage.length()>28){
-                g.drawString(giftMessage.substring(0,28), 40, 180);
-                g.drawString(giftMessage.substring(28,giftMessage.length()), 40, 200);
-            }else{
-                g.drawString(giftMessage, 40, 180);
+            if(giftMessage.length()<17){
+                g.drawString(giftMessage, 240, 600);
+            }
+            if(giftMessage.length()<35){
+                g.drawString(giftMessage.substring(0,17), 240, 600);
+                g.drawString(giftMessage.substring(17,giftMessage.length()), 220, 630);
+            }
+            if(35<=giftMessage.length()&&giftMessage.length()<50){
+                g.drawString(giftMessage.substring(0,17), 240, 600);
+                g.drawString(giftMessage.substring(17,35), 220, 630);
+                g.drawString(giftMessage.substring(35,giftMessage.length()), 220, 660);
             }
         }
-//        String a = productModelName +(productModelPrice.floatValue() != 0 ? productModelPrice.toString() : "");
-        g.drawString(productModelName, 40, height / 2 + 30);
-        g.drawString((productModelPrice.floatValue() != 0 ?"价值:"+ productModelPrice.toString()+"元" : ""),480 , height / 2 + 30);
+        g.drawString("——"+sender,500,670);
         g.dispose();
         //二维码生成
         String content = "http://www2.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
@@ -141,15 +153,18 @@ public class PurchaseOrderGiftController {
                         Color.BLACK.getRGB() : Color.WHITE.getRGB());
             }
         }
-        //下载礼物图
-        String urlString = purchaseOrderGift.getGiftPictureUrl();
-        URL pictureUrl = new URL(urlString);
+//        String testurl = "http://pro.efeiyi.com/product/%E4%B8%BB%E5%9B%BE20151022173939.jpg@!product-hot";
+        String imgName = urlString.substring(urlString.lastIndexOf("/")+1,urlString.length());
+        String imgNameEncode = URLEncoder.encode(imgName,"UTF-8");
+        urlString = urlString.substring(0,urlString.lastIndexOf("/")+1)+imgNameEncode;
+        URL pictureUrl = new URL("http://pro.efeiyi.com/"+urlString+"@!gift-picture-sender");
+//        URL pictureUrl = new URL(testurl);
         ImageIcon giftImgIcon = new ImageIcon(pictureUrl);
         BufferedImage combined = new BufferedImage(bimage.getWidth(), bimage.getHeight(), BufferedImage.TYPE_INT_RGB);
         //图像合并
         Graphics2D g1 = combined.createGraphics();
-        g1.drawImage(bimage, 0, 10, null);
-        g1.drawImage(image, 100, 750, null);
+        g1.drawImage(bimage, 0, 0, null);
+        g1.drawImage(image, 40, 580, null);
         g1.drawImage(giftImgIcon.getImage(), 40, 250, null);
         g1.dispose();
         ByteArrayOutputStream os = new ByteArrayOutputStream();
