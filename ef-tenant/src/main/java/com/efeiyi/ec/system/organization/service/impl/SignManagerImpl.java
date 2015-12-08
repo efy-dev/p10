@@ -53,6 +53,7 @@ public class SignManagerImpl implements SignManager {
 //            enterpriseTenant.setAccountLocked(false);
 //            enterpriseTenant.setCredentialsExpired(false);
                 tenant.setTenantType("11");
+                tenant.setReview("1");
                 baseDao.saveOrUpdateObject(EnterpriseTenant.class.getName(), tenant);
             }
             if(tenantType.equals("12")){
@@ -65,6 +66,7 @@ public class SignManagerImpl implements SignManager {
 //            privateTenant.setAccountLocked(false);
 //            privateTenant.setCredentialsExpired(false);
                 tenant.setTenantType("12");
+                tenant.setReview("1");
                 baseDao.saveOrUpdateObject(PrivateTenant.class.getName(), tenant);
             }
             if(tenantType.equals("13")){
@@ -77,6 +79,7 @@ public class SignManagerImpl implements SignManager {
 //            personalTenant.setAccountLocked(false);
 //            personalTenant.setCredentialsExpired(false);
                 tenant.setTenantType("13");
+                tenant.setReview("1");
                 baseDao.saveOrUpdateObject(PersonalTenant.class.getName(), tenant);
             }
 

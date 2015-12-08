@@ -50,7 +50,13 @@
                     <input type="text" id="name" name="name" placeholder="商家名称" value="${object.name}" required>
                 </div>
             </div>
+            <div class="am-form-group">
+                <label for="phone" class="am-u-sm-3 am-form-label">联系方式</label>
 
+                <div class="am-u-sm-9">
+                    <input type="text" id="phone" name="phone" placeholder="联系方式" value="${object.phone}" required>
+                </div>
+            </div>
         <%--<div class="am-form-group">--%>
                 <%--<label for="fullName" class="am-u-sm-3 am-form-label">中文姓名</label>--%>
 
@@ -104,6 +110,7 @@
                     <%--<input type="text" id="content" name="content" placeholder="企业商家简介" value="${object.content}" required>--%>
                 </div>
             </div>
+
             <%--<div class="am-form-group">--%>
                 <%--<label for="user-intro" class="am-u-sm-3 am-form-label">短简介</label>--%>
 

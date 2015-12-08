@@ -22,7 +22,7 @@ public class FormTenantHandler implements DoHandler {
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
 
-            modelMap.put("serial" ,autoSerialManager.nextSerial("product"));
+            modelMap.put("serial" ,autoSerialManager.nextSerial("tenant"));
 
         return modelMap;
     }

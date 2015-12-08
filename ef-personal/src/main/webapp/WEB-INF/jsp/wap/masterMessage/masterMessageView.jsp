@@ -52,7 +52,7 @@
                 <div class="suit">
                     <div class="dynamic">
                         <div class="dynamic-hd"><a class="suit-tx"><img class="am-circle"
-                                                                        src="<c:url value="/scripts/assets/images/120102-p1-1.jpg"/>"></a>
+                                                                        src="http://tenant.efeiyi.com/${object.master.favicon}@!tenant-mobile-view-icon"></a>
 
                             <div class="suit-name"><a href="#"><span>${object.master.fullName}</span></a></div>
                             <a class="suit-gz"
