@@ -458,7 +458,7 @@
 .packet .eifyi-ld{display: inline-block;width:100%;}
 .packet .eifyi-ld .ld-img{width: 180px;padding:20px 0;display: inline-block;}
 /*.packet .eifyi-ld img{width: 100%}*/
-.packet .efeiyi-lod .efiyi-logo{width: 144px;display: inline-block;height: 54px;-webkit-background-size: 20px auto;background: url(../images/icon.png) no-repeat 0 0;}
+.packet .efeiyi-lod .efiyi-logo{width: 144px;display: inline-block;height: 54px;-webkit-background-size: 304px auto;background: url(../images/icon.png) no-repeat 0 0;}
 /*没有相关订单*/
 .no-order {padding:0 1.8rem}
 .no-order .b-btn {padding:0 5rem}
