@@ -51,17 +51,17 @@
         </li>
       </ul>
     </div>
-    <div class="bd search-item">
-      <h3 class="bd">用途</h3>
-      <ul class="bd ul-list">
-        <li class="active"><a href="#" title="">全 部</a></li>
-        <li><a href="#" title="">家居摆设</a></li>
-        <li><a href="#" title="">生日礼物</a></li>
-        <li><a href="#" title="">创 意</a></li>
-        <li><a href="#" title="">爱 情</a></li>
-        <li><a href="#" title="">收 藏</a></li>
-      </ul>
-    </div>
+    <%--<div class="bd search-item">--%>
+      <%--<h3 class="bd">用途</h3>--%>
+      <%--<ul class="bd ul-list">--%>
+        <%--<li class="active"><a href="#" title="">全 部</a></li>--%>
+        <%--<li><a href="#" title="">家居摆设</a></li>--%>
+        <%--<li><a href="#" title="">生日礼物</a></li>--%>
+        <%--<li><a href="#" title="">创 意</a></li>--%>
+        <%--<li><a href="#" title="">爱 情</a></li>--%>
+        <%--<li><a href="#" title="">收 藏</a></li>--%>
+      <%--</ul>--%>
+    <%--</div>--%>
   </div>
   <a class="bd search-item-btn" href="javascript:void(0);" onclick="confirm()">确    定</a>
 </article>
