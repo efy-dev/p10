@@ -95,7 +95,7 @@
                     <li>
                 </c:if>
                 <a href="<c:url value="${banner.directUrl}"/> " target="_blank"><img
-                        src="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner" width="1280" height="481"
+                        src="http://pro.efeiyi.com/${banner.imageUrl}@!home1-banner" width="1280" height="481"
                         alt=""/></a></li>
             </c:forEach>
         </ul>
