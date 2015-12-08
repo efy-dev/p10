@@ -96,6 +96,8 @@ public class PurchaseOrderGiftController {
                 e.printStackTrace();
             }
             model.addAttribute("content",content);
+            model.addAttribute("serial",serial);
+            model.addAttribute("lc",lc);
         }
         //优先判断是否是送礼人查看当前页面
         if (AuthorizationUtil.isAuthenticated() && AuthorizationUtil.getMyUser().getId().equals(purchaseOrderGift.getUser().getId())) {
