@@ -129,7 +129,9 @@
             <div class="dynamic-hd"></div>
             <div class="dynamic-st">
               <div class="suit-st-text">
-                <p><span>${message.content}</span></p>
+                <a href="<c:url value='/masterMessage/getMasterMessage.do?messageId='/>${message.id}">
+                  <p><span>${message.remark}</span></p>
+                </a>
               </div>
               <!--图片效果1！-->
               <div class="suit-st-img">
@@ -137,8 +139,6 @@
                   <img src="/scripts/assets/images/images/header1.png">
                 </a>
               </div>
-
-              <!--图片效果2！定死9张图片-->
               <div class="suit-st-ft">
                 <div class="suit-ft-left"><span>${message.dataSource}</span></div>
                 <div class="suit-ft-right"><span>1小时前</span></div>
@@ -528,14 +528,14 @@
           "<div class=\"dynamic-hd\"></div>" +
           "<div class=\"dynamic-st\">" +
           "<div class=\"suit-st-text\">" +
-          "<p><span>"+data[i].content+"</span></p>" +
+          "<p><span><a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+data[i].id+"\">"+data[i].remark+"</a></span></p>" +
           "</div>" ;
           if(data[i].messageAttachmentLists != null && data[i].messageAttachmentLists.length > 0){
             var obj = data[i].messageAttachmentLists;
             for(var j in obj){
               sub += "<div class=\"suit-st-img\">" +
                       "<a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+data[i].id+"\">" +
-                      "<img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+obj[j].pictureUrl+"\">" +
+                      "<img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+obj[j].pictureUrl+"@!master-message-view-big\">" +
                       "</a>" +
                       "</div>" ;
             }

@@ -256,6 +256,7 @@
                     <page>
                         <fields>
                             <field name="status" label="默认值" defaultValue="1" inputType="default" />
+                            <field name="createDatetime" label="默认值" defaultValue="${CURRENT_DATETIME}" inputType="datetime" />
                         </fields>
                     </page>
                 </do>

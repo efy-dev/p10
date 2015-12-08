@@ -7,7 +7,7 @@ $(function(){
     //购物车
     (function(){
         $('.icon-delete').click(function(){
-            $('.alert-delete').fadeIn('fast');
+           $('.alert-delete').fadeIn('fast');
         })
 
         $('.edit-dete').click(function(){
@@ -28,31 +28,53 @@ $(function(){
         $(".add-ress .bg").click(function(){
             $(this).parents().find(".add-ress").hide();
         })
-        $("#add-show").click(function(){
-            $(this).siblings('.add-cart').fadeIn().show()
-            return false
+        $("#add-show,[name=add-show]").click(function(){
+            //输入框计数
+            var textareaText=$('.gift textarea');
+            textareaText.keydown(function(){
+                var aNum=50,
+                    curLength=$(this).val().length,
+                    txtNmu=$(this).siblings('span');
+                if(curLength>=aNum){
+                    var num=$(this).val().substr(0,aNum-10);
+                    $(this).val(num);
+                }
+                else{
+                    txtNmu.text((aNum-1)-$(this).val().length+'/50')
+                }
+            });
+            $(this).siblings('.add-cart').fadeIn().show();
+            return false;
+
+
         })
         $(".gift .add-cart .cancel").click(function(){
             $(this).parents().find('.add-cart').fadeOut().hide()
             return false
         })
-        $(".gift .gift-details .elect .add-c1").click(function(){
-            $(this).siblings(".gift .gift-details .elect span").toggleClass("active")
+        $(".gift .elect .add-c1").click(function(){
+            $(this).siblings(".gift  .elect span").toggleClass("active")
             $(".gift .detailed .font-1").slideToggle()
         })
-        $(".gift .gift-details .elect .add-c2").click(function(){
-            $(this).siblings(".gift .gift-details .elect span").toggleClass("active")
+        $(".gift .elect .add-c2").click(function(){
+            $(this).siblings(".gift  .elect span").toggleClass("active")
             $(".gift .detailed .font-2").slideToggle()
         })
+        $(".my-evaluate .score .score-star .star .a-star").dblclick(function(){
+            $(".my-evaluate .score .score-star .star .a-star").removeClass("ye-star");
+        });
+        $("#nobtn").removeAttr('href');
+        $("#nobtn").removeAttr('onclick');
+
     })
-        //商品评价
+    //商品评价
     (function(){
         $('.my-evaluate .score .score-star .star li').click(function(){
             $(this).toggleClass('active');
         })
     });
 
-    //020102分类导航
+        //020102分类导航
     (function(){
         $('.box-hd .ul-index-list>li .item').click(function(){
             $(this).find('.arrow-down').toggleClass('arrow-up');
@@ -63,13 +85,13 @@ $(function(){
     //020104商品详情
     (function(){
         //收藏
-        //$('.addfav').click(function(){
-        //    $(this).addClass('addfav-end').find('p').html('已收藏');
-        //    $('.alert-red-top').slideDown(100,function(){
-        //        setTimeout('$(".alert-red-top").slideUp(50)',3000)
-        //    });
-        //    return false;
-        //});
+        $('.addfav').click(function(){
+            $(this).addClass('addfav-end').find('p').html('已收藏');
+            $('.alert-red-top').slideDown(100,function(){
+                setTimeout('$(".alert-red-top").slideUp(50)',3000)
+            });
+            return false;
+        });
         //加入购物车悬浮层
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
@@ -128,6 +150,7 @@ $(function(){
             $('#cover .bg').click(function(){
                 $(this).parents('#cover').hide();
             })
+            $(".custom-header").css("z-index","0");
             return false;
         });
         //详情和评论-弹出轮播图
@@ -218,6 +241,12 @@ $(function(){
             $('body').css('height','100%');
             $('.login-reg').css({'margin-top':(bodyH-55)+'px'})
         };
+        $(".ag-list .ag-new li").click(function(){
+            var _bsthis = $(this).index();
+            $(this).addClass("active").siblings().removeClass();
+            $(".ag-new2 .ag-ck").eq(_bsthis).show().siblings().hide()
+
+        })
 
     })();
     //优惠-----优惠券tab
@@ -234,34 +263,28 @@ $(function(){
     (function(){
         //02移动商城/0201商城前台/秒杀—即将开始
         $('.seckill .s-list .items:last').css('border-bottom','0');
-        //秒杀-商品详情-即将开始
-        var tNum=$('.details .des-price-seckill p.tnum'),
-            $sub=tNum.find('.sub'),
-            $add=tNum.find('.add'),
-            $ipt=tNum.find('.txt');
+        //秒杀-详情页-已结束-----------展开
+        var $info=$('.seckill .s4 .info')
+        var $ul=$info.find('ul');
+        var $li=$ul.find('li');
+        $ul.css('height',$li.outerHeight()*4+'px');
 
-        $add.on('click',function(){
-            var $val=$ipt.val();
-            if($val>0){
-                $ipt.val(parseInt($val)+1);
-            }
-            $sub.removeClass('sub-no');
-        })
-        $sub.on('click',function(){
-            var $val=$ipt.val();
-            if($val>1){
-                $ipt.val(parseInt($val)-1);
-                subClassGary();
-            }
+        $info.find('.zk').bind('click',function(){
+            $(this).hide().siblings('a').show();
+            $ul.animate({'height':$li.outerHeight()*$li.size()+'px'},200);
+            return false;
+        });
+        $info.find('.sq').bind('click',function(){
+            $(this).hide().siblings('a').show();
+            $ul.animate({'height':$li.outerHeight()*4+'px'},200);
+            return false;
+        });
 
-        })
-        subClassGary();
-        function subClassGary(){
-            var $val=$ipt.val();
-            if($val==1){
-                $sub.addClass('sub-no')
-            }
-        }
+
+
+
+
+
 
     })();
 })

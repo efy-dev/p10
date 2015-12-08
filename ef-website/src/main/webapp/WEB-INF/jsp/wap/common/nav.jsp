@@ -25,17 +25,85 @@
         <!-- //End--chevron-left-->
         <div class="menu-list">
             <ul class="bd">
-                <li><a href="" title="首页">首页</a></li>
-                <li><a href="" title="分类">分&nbsp;类</a></li>
-                <li class="active"><a href="" title="购物车">购&nbsp;物&nbsp;车</a></li>
-                <li><a href="" title="传承人">传承人</a></li>
-                <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+                <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
+                <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
+                <% if (AuthorizationUtil.isAuthenticated()) {%>
+                <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+                <%} else {%>
+                <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
+                <%}%>
+                <li><a href="http://master.efeiyi.com" title="分类">传承人</a></li>
             </ul>
         </div>
     </header>
 </header>
 </c:if>
-<c:if test="${request!='/giftBuy/**'}">
+<c:if test="${request=='/purchaseOrder/purchaseOrderGiftView'}">
+    <header>
+        <header class="am-header custom-header">
+            <div class="am-header-left am-header-nav">
+                <a href="#chevron-left" class="chevron-left"></a>
+            </div>
+            <!-- //End--chevron-left-->
+            <h1 class="am-header-title">礼物订单</h1>
+            <!-- //End--title-->
+            <!-- //End--chevron-left-->
+            <div class="menu-list">
+                <ul class="bd">
+                    <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
+                    <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
+                    <% if (AuthorizationUtil.isAuthenticated()) {%>
+                    <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+                    <%} else {%>
+                    <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
+                    <%}%>
+                    <li><a href="http://master.efeiyi.com" title="分类">传承人</a></li>
+                </ul>
+            </div>
+        </header>
+    </header>
+</c:if>
+<c:if test="${request=='/purchaseOrder/giftView'}">
+    <header class="am-header custom-header newam-header">
+        <!-- //End--chevron-left-->
+        <h1 class="am-header-title">e飞蚁，领先的非物质文化遗产电商平台</h1>
+        <!-- //End--title-->
+        <!-- //End--chevron-left-->
+        <div class="menu-list">
+            <ul class="bd">
+                <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
+                <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
+                <% if (AuthorizationUtil.isAuthenticated()) {%>
+                <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+                <%} else {%>
+                <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
+                <%}%>
+                <li><a href="http://master.efeiyi.com" title="分类">传承人</a></li>
+            </ul>
+        </div>
+    </header>
+</c:if>
+<c:if test="${request=='/purchaseOrder/receiveGift'}">
+    <header class="am-header custom-header newam-header">
+        <!-- //End--chevron-left-->
+        <h1 class="am-header-title">e飞蚁，领先的非物质文化遗产电商平台</h1>
+        <!-- //End--title-->
+        <!-- //End--chevron-left-->
+        <div class="menu-list">
+            <ul class="bd">
+                <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
+                <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
+                <% if (AuthorizationUtil.isAuthenticated()) {%>
+                <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+                <%} else {%>
+                <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
+                <%}%>
+                <li><a href="http://master.efeiyi.com" title="分类">传承人</a></li>
+            </ul>
+        </div>
+    </header>
+</c:if>
+<c:if test="${request!='/giftBuy/**'&&request!='/purchaseOrder/giftView'&&request!='/purchaseOrder/purchaseOrderGiftView'&&request!='/purchaseOrder/receiveGift'}">
 <c:if test="${sign != null && sign == '000'}">
 
     <header class="am-header custom-header index-header newheader">

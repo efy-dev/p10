@@ -278,12 +278,14 @@
       dataType:"json",
       error:function(){},
       success:function(msg){
+        var next = $(o).find("em");
+        var amount = parseInt(next.html());
         if(msg == "noRole"){
           alert("您还未登录,请登录后操作");
         }else if(msg == "add"){
-          $(o).find("em").html("取消赞");
+          next.html(amount + 1);
         }else if(msg == "del"){
-          $(o).find("em").html("赞");
+          next.html(amount - 1);
         }
       }
     })
@@ -408,7 +410,7 @@
                       "                        <a class=\"suit-gz\" name=\"yesOrNo"+obj[i].masterId+"\" onclick=\"changeFollowedStatus(this , '"+obj[i].masterId+"');\"><span>已关注</span></a> </div>"+
                       "                    <div class=\"dynamic-st\">"+
                       "                        <div class=\"suit-st-text\">"+
-                      "                            <p><span>"+obj[i].content+"</span></p>"+
+                      "                            <p><span><a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+obj[i].id+"\">"+obj[i].remark+"</a></span></p>"+
                       "                        </div>";
                 var attr = obj[i].messageAttachmentLists;
                 if(attr != null && attr.length > 0){
@@ -421,7 +423,7 @@
                       "                            <div class=\"suit-ft-right\"><span>"+ctime+"</span></div>"+
                       "                        </div>"+
                       "                    </div>"+
-                      "                    <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[i].fsAmount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[i].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected(this,'"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+obj[i].storeStatus+"</em></a> </div>"+
+                      "                    <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[i].praiseNum+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[i].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected(this,'"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+obj[i].storeStatus+"</em></a> </div>"+
                       "                </div>";
             }
           }
@@ -438,7 +440,7 @@
                       "                        <a class=\"suit-gz\" name=\"yesOrNo"+obj[j].masterId+"\" onclick=\"changeFollowedStatus(this,'"+obj[j].masterId+"');\"><span>"+obj[j].followStatus+"</span></a> </div>"+
                       "                    <div class=\"dynamic-st\">"+
                       "                        <div class=\"suit-st-text\">"+
-                      "                            <p><span>"+obj[j].content+"</span></p>"+
+                      "                            <p><span><a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+obj[i].id+"\">"+obj[j].remark+"</a></span></p>"+
                       "                        </div>";
               if(obj[j].messageAttachmentLists != null){
                   var attr = obj[j].messageAttachmentLists;
@@ -451,7 +453,7 @@
                       "                            <div class=\"suit-ft-right\"><span>"+ctime+"</span></div>"+
                       "                        </div>"+
                       "                    </div>"+
-                      "                 <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[j].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[j].fsAmount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[j].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[j].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected(this,'"+obj[j].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+obj[j].storeStatus+"</em></a> </div>"+
+                      "                 <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[j].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[j].praiseNum+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[j].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[j].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected(this,'"+obj[j].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i><em>"+obj[j].storeStatus+"</em></a> </div>"+
                       "                </div>";
             }
             box.append(sub);
