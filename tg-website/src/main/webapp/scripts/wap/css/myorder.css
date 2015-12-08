@@ -667,6 +667,8 @@ html, body {height:100%}
 /*尾部new*/
 .nawlogin-reg a{border: 6px solid #999;font-weight: bold}
 /*礼物订单*/
+.gift .edit-hint{position: absolute;right: 5px;bottom: 5px;z-index: 30;}
+.gift .edit-hint span{font-size:10px;-webkit-transform:scale(0.8);color: #000;font-style: italic;line-height: 12px;font-weight: bold}
 .cart-icon{background: url("../images/cart-icon.png");}
 .gift{padding:0 1.9rem;position: relative}
 .gift .add-text{}
@@ -676,10 +678,10 @@ html, body {height:100%}
 .gift .btb span{font-size: 14px;color: #ff0000;float: right;padding: 16px 0 7px;}
 .gift .edit-txt{width: 100%;float: left;border: 2px solid #000;font-size: 12px;color: #000;padding: 15px 0;text-align: center}
 .gift .edit-text{width: 100%;float: left;margin: 15px 0 15px;position: relative;font-size: 12px;color: #000;}
-.gift .edit-txt1{padding: 15px 12px;float: left;width: 100%;border: 2px solid #000;font-size: 12px;color: #000;}
+.gift .edit-txt1{padding: 15px 12px;float: left;width: 100%;border: 2px solid #000;font-size: 12px;color: #000;position: relative}
 .gift .edit-text a{font-size: 12px;color: #000;display: block}
 .gift .edit-text .cart-icon{width: 20px;height: 20px;background-position: 0 0;position: absolute;right:0px;top: 0px;}
-.gift .gift-details .gift-c-d{height: 43px;line-height: 43px;text-align: left;font-size: 12px;color: #000;border-bottom: 1px solid #000;position: relative}
+.gift .gift-details .gift-c-d{height: 43px;line-height: 43px;text-align: left;font-size: 12px;color: #000;border-bottom: 1px solid #ccc;position: relative}
 .gift .gift-details .gift-c-d .sj-icon{width: 10px;height: 10px;border-right: 1px solid #000;border-bottom: 1px solid #000;display:block;position: absolute;right: 16px;top: 50%;margin-top: -4px;transfrom:rotate(-45deg);-webkit-transform:rotate(-45deg);}
 .gift .gift-details .chandise .cha-box{padding-left: 102px;position: relative}
 .gift .gift-details .chandise .cha-box strong{width: 100%;font-size: 12px;color: #000;margin-top: 12px;overflow:hidden;word-break:keep-all;word-wrap:keep-all;white-space:nowrap;table-layout:fixed;-o-text-overflow:ellipsis;text-overflow:ellipsis;float: left}
@@ -696,22 +698,26 @@ html, body {height:100%}
 .gift .gift-details .chandise .cha-box .money{color: #ff0000;float: left;width: 100%;margin-bottom: 5px;}
 .gift .gift-details .chandise .cha-box .money i{float: left;font-size: 12px;font-style:normal;margin: 10px 0 0  7px;}
 .gift .gift-details .chandise .cha-box .money em{float: left;font-size: 20px;}
-.gift .gift-details .elect{padding: 20px 16px;border-top:1px solid #000;border-bottom: 1px solid #000;float: left;width: 100%;margin-top: 15px;font-size: 12px;color: #c8c8c8;}
-.gift .gift-details .elect .left{float: left;width: 50%;text-align: left}
-.gift .gift-details .elect .active{color: #000}
-.gift .gift-details .elect input{vertical-align:middle;margin: 0;}
-.gift .gift-details .elect .right{float: right;width: 50%;text-align: right}
+.gift .elect{padding: 20px 16px;border-top:1px solid #ccc;border-bottom: 1px solid #ccc;float: left;width: 100%;margin-top: 6px;font-size: 12px;color: #c8c8c8;}
+.gift .elect .left{float: left;width: 50%;text-align: left}
+
+.gift .elect .active{color: #000}
+.gift .elect input{vertical-align:middle;margin: 0;}
+.gift .elect .right{float: right;width: 50%;text-align: right}
+.gift .elect span{color: #ccc;font-weight: bold}
+.gift .elect .add-c1{}
 .gift .newcart-pay{border-top: 0;padding: 0;margin-bottom: 50px;}
 .gift .newcart-pay .ul-list{padding: 16px 10px 0;}
 .gift .newpayment-total-bar{background: #fff;border-top: 1px solid #000;}
 .gift .newpayment-total-bar .btn-right{padding: 0 25px;}
+.gift .add-suspend{position: relative}
 /*.gift .add-cart{left:50%;margin-left:-143px;position: absolute;top:50%;border: 2px solid #000;width: 283px;height: 152px;background: #fff;z-index: 5;margin-top: -28px;font-size: 12px;color: #000;}*/
 .gift .add-cart{position: absolute;top:50%;border: 2px solid #000;width: 100%;height: 152px;background: #fff;z-index: 5;margin-top: -28px;font-size: 12px;color: #000;}
 .gift .add-cart textarea{width: 100%;float: left;height: 105px;padding: 11px;outline: none;resize:none;}
 .gift .add-cart .cancel,.gift .add-cart .affirm{outline:none;background: #fff;width: 65px;padding: 5px 0;border: 1px solid #000;text-align: center;float: right;line-height: 12px;margin: 7px 15px 0 0;}
 .gift .detailed{float: left;font-size:12px;color: #000;width: 100%;margin-top: 6px;}
-.gift .detailed .font-1{float: left;margin-right: 10px;}
-.gift .detailed .font-2{float: right;width: 98px;}
+.gift .detailed .font-1{float: left;margin-right: 10px;font-size: 12px;font-weight: bold}
+.gift .detailed .font-2{float: right;width: 100px;font-size: 12px;font-weight: bold}
 /*礼物订单付款后*/
 .gift .btb-text{padding-top:12px; }
 .gift .btb-text p{margin-bottom: 12px;line-height: 20px;font-size:12px;color: #000;}
@@ -765,6 +771,7 @@ html, body {height:100%}
 .slnew .des-price p{font-size: 12px}
 .slnew .des-price {padding:0 1.9rem}
 .slnew .des-content .title{font-size: 14px;padding: 10px 19px}
+.am-addol .am-control-nav{bottom: 50px;}
 /*图片*/
 .img-pic img{width: 100%}
 /*收礼页面弹出框*/
@@ -777,4 +784,5 @@ html, body {height:100%}
 .my-evaluate .score .bask .fi-icon .uploadify{opacity: 0;}
 .footer .info .wechat{background: url("../images/icon-wechat.png")no-repeat;background-size: 153px auto; }
 #nobtn{background: #ccc;}
-.am-addol .am-control-nav{bottom: 50px;}
+.leaveword-num{position: absolute;bottom: 0px;right:6px;font-size: 12px;color: #ccc;}
+.leaveword-num1{position: absolute;bottom: 44px;right:6px;font-size: 12px;color: #ccc;}

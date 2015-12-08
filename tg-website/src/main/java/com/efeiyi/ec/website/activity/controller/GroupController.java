@@ -171,7 +171,7 @@ public class GroupController {
             baseManager.saveOrUpdate(MyGroup.class.getName(),myGroup);
 
             XQuery xQuery = new XQuery("listPurchaseOrderGroup_default2", request);
-            xQuery.put("group_id", myGroup.getId());
+            xQuery.put("myGroup_id", myGroup.getId());
             List<PurchaseOrderGroup> list1 = baseManager.listObject(xQuery);
             for (PurchaseOrderGroup purchaseOrderGroup1:list1){
                 purchaseOrderGroup1.setOrderStatus("5");
@@ -386,45 +386,12 @@ public class GroupController {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(createTime);
             calendar.add(Calendar.DATE, limintDay);
-            //calendar.add(Calendar.MINUTE,10);
             Date endTime = calendar.getTime();
             Date date = new Date();
             if (date.after(endTime)) {
                 if (group.getGroupMemberList().size() - group.getGroupProduct().getMemberAmount() >= 0) {
                     group.setStatus("3");
                     baseManager.saveOrUpdate(MyGroup.class.getName(), group);
-
-                   /* for (GroupMember member : group.getGroupMemberList()) {
-                        String userId = member.getUser().getId();
-                        BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(), userId);
-                        int i = 0;
-                        if (member.getSubGroupMemberList() != null && member.getSubGroupMemberList().size() > 0) {
-                            i = i + member.getSubGroupMemberList().size();
-                            for (GroupMember member1 : member.getSubGroupMemberList()) {
-                                if (member1.getSubGroupMemberList() != null && member1.getSubGroupMemberList().size() > 0) {
-                                    i = i + member1.getSubGroupMemberList().size();
-                                }
-                            }
-
-                        }
-                        if (bigUser.getRedPacket() == null) {
-                            bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
-                        } else {
-                            bigUser.setRedPacket(bigUser.getRedPacket().add(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
-                        }
-                        if (member.getRedPacket() == null) {
-                            member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
-                        } else {
-                            member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
-                        }
-                        baseManager.saveOrUpdate(BigUser.class.getName(), bigUser);
-                        baseManager.saveOrUpdate(GroupMember.class.getName(), member);
-
-                        //发送短信
-                        this.smsCheckManager.send(member.getUser().getUsername(), "#redPacket#=" + group.getGroupProduct().getBonus().multiply(new BigDecimal(i)), "1109007", PConst.TIANYI);
-
-                    }*/
-
                 } else {
                     group.setStatus("5");
                     baseManager.saveOrUpdate(MyGroup.class.getName(), group);

@@ -70,13 +70,15 @@ public class PurchaseOrderGiftController {
         //优先判断是否是送礼人查看当前页面
         if (AuthorizationUtil.isAuthenticated() && AuthorizationUtil.getMyUser().getId().equals(purchaseOrderGift.getUser().getId())) {
             model.addAttribute("order", purchaseOrderGift);
+            model.addAttribute("request","/purchaseOrder/purchaseOrderGiftView");
             return "/purchaseOrder/purchaseOrderGiftView";
         }
         if (purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRECEIVE)){
             model.addAttribute("purchaseOrder", purchaseOrderGift);
+            model.addAttribute("request","/purchaseOrder/giftView");
             return "/purchaseOrder/giftView";
         }
-
+        model.addAttribute("request","/purchaseOrder/receiveGift");
         return "/purchaseOrder/receiveGift";
     }
 
@@ -89,7 +91,7 @@ public class PurchaseOrderGiftController {
         String productModelName = new String();
         BigDecimal productModelPrice = new BigDecimal("0");
         if ("1".equals(purchaseOrderGift.getShowGiftNameStatus())) {
-            productModelName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getName();
+            productModelName ="礼物清单："+ purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getName();
         }
         if ("1".equals(purchaseOrderGift.getShowGiftPriceStatus())) {
             productModelPrice = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getPrice();
@@ -105,17 +107,22 @@ public class PurchaseOrderGiftController {
         g.setColor(Color.black);
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
-        g.setFont(new Font("宋体", Font.PLAIN, 20));
+        g.setFont(new Font("宋体", Font.BOLD, 18));
         //背景图set文字显示
         if (giftMessage != null) {
-            g.drawString(giftMessage, 40, 180);
+            if(giftMessage.length()>28){
+                g.drawString(giftMessage.substring(0,28), 40, 180);
+                g.drawString(giftMessage.substring(28,giftMessage.length()), 40, 200);
+            }else{
+                g.drawString(giftMessage, 40, 180);
+            }
         }
 //        String a = productModelName +(productModelPrice.floatValue() != 0 ? productModelPrice.toString() : "");
         g.drawString(productModelName, 40, height / 2 + 30);
-        g.drawString((productModelPrice.floatValue() != 0 ? productModelPrice.toString() : "")+"元",500 , height / 2 + 30);
+        g.drawString((productModelPrice.floatValue() != 0 ?"价值:"+ productModelPrice.toString()+"元" : ""),480 , height / 2 + 30);
         g.dispose();
         //二维码生成
-        String content = "http://www.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
+        String content = "http://www2.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
         Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
         hints.put(EncodeHintType.MARGIN, 0);
         BitMatrix bitMatrix = null;

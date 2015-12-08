@@ -90,13 +90,13 @@
                                  </c:if>
                             </span>
                         </a>
-                        <c:if test="${purchaseOrder.orderStatus==5 || purchaseOrder.orderStatus==6 || purchaseOrder.orderStatus==7 || purchaseOrder.orderStatus==9 || purchaseOrder.orderStatus==13}">
-                            <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                               style="color: red;" id="refund"
-                               onclick="refund(this,'${purchaseOrder.id}')">
-                                <span class="am-icon-pencil-square-o">退款</span>
-                            </a>
-                        </c:if>
+                        <%--<c:if test="${purchaseOrder.orderStatus==5 || purchaseOrder.orderStatus==6 || purchaseOrder.orderStatus==7 || purchaseOrder.orderStatus==9 || purchaseOrder.orderStatus==13}">--%>
+                            <%--<a class="am-btn am-btn-default am-btn-xs am-text-secondary"--%>
+                               <%--style="color: red;" id="refund"--%>
+                               <%--onclick="refund(this,'${purchaseOrder.id}')">--%>
+                                <%--<span class="am-icon-pencil-square-o">退款</span>--%>
+                            <%--</a>--%>
+                        <%--</c:if>--%>
                     </div>
                 </div>
             </td>

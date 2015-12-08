@@ -15,11 +15,12 @@
                 <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;view=delivery"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderDelivery"/>
             </jnode>
-            <jnode id="" url="" state="closed" match="" extend="" access="" text_zh_CN="退货管理">
-                <match url=""/>
-            </jnode>
-            <jnode id="" url="" state="closed" match="" extend="" access="" text_zh_CN="评价管理">
-                <match url=""/>
+            <!--<jnode id="" url="" state="closed" match="" extend="" access="" text_zh_CN="退货管理">-->
+                <!--<match url=""/>-->
+            <!--</jnode>-->
+            <jnode id="" url="/basic/xm.do?qm=plistPurchaseOrderComment_default&amp;view=comment" state="closed" extend="" access="" text_zh_CN="评价管理">
+                <match url="/basic/xm.do?qm=plistPurchaseOrderComment_default&amp;view=comment"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;view=comment"/>
             </jnode>
         </jnode>
         <jnode id="goodsManager" url="" text_zh_CN="商品管理"><!--系统管理-->

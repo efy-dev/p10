@@ -29,7 +29,8 @@ public class CasAuthenticationRedirect extends org.springframework.security.cas.
             String ctx = request.getContextPath();
             String queryString = request.getQueryString();
             String requestURI = request.getRequestURI();
-            requestURI = requestURI.substring(requestURI.indexOf(ctx) + ctx.length(), requestURI.length());
+            //requestURI = requestURI.substring(requestURI.indexOf(ctx) + ctx.length(), requestURI.length());
+            requestURI = requestURI.substring(requestURI.indexOf(ctx), requestURI.length());
             String serviceUrl = "";
             if (!requestURI.equals("/") && requestURI.length() > 0) {
                 //serviceUrl="?"+ new SimpleUrlAuthenticationSuccessHandler().getTargetUrlParameter();
