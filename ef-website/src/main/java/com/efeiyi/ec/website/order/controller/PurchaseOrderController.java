@@ -400,5 +400,19 @@ public class PurchaseOrderController extends BaseController {
         }
     }
 
+    @RequestMapping({"/addGaverName.do"})
+    @ResponseBody
+    public String addGaverName(HttpServletRequest request) {
+        String gaverName = request.getParameter("gaverName");
+        String purchaseOrderGiftId = request.getParameter("purchaseOrderGiftId");
+        if(gaverName!=null&&gaverName!=""&&purchaseOrderGiftId!=null&&purchaseOrderGiftId!=""){
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(),purchaseOrderGiftId);
+            purchaseOrderGift.setGiftGaverName(gaverName);
+            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(),purchaseOrderGift);
+            return gaverName;
+        }else {
+            return "";
+        }
+    }
 
 }
