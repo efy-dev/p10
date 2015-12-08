@@ -3,6 +3,7 @@ package com.efeiyi.ec.purchase.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,16 +20,16 @@ public class PurchaseOrderComment {
     private List<PurchaseOrderCommentPicture> purchaseOrderCommentPictureList;
     private String status;
     private String content;
-    private String createDatetime;
+    private Date createDatetime;
     private PurchaseOrderBusinessReply purchaseOrderBusinessReply;
 
 
     @Column(name = "create_datetime")
-    public String getCreateDatetime() {
+    public Date getCreateDatetime() {
         return createDatetime;
     }
 
-    public void setCreateDatetime(String createDatetime) {
+    public void setCreateDatetime(Date createDatetime) {
         this.createDatetime = createDatetime;
     }
 
