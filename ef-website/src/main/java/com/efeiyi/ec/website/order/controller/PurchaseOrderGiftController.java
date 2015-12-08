@@ -3,7 +3,6 @@ package com.efeiyi.ec.website.order.controller;
 import com.aliyun.openservices.oss.OSSClient;
 import com.aliyun.openservices.oss.model.ObjectMetadata;
 import com.aliyun.openservices.oss.model.PutObjectResult;
-import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
@@ -36,7 +35,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,18 +62,48 @@ public class PurchaseOrderGiftController {
     @RequestMapping("/giftReceive/{orderId}")
     public String receiveGift(HttpServletRequest request, @PathVariable String orderId, Model model) {
         PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), orderId);
+        PurchaseOrderDelivery purchaseOrderDelivery=purchaseOrderGift.getPurchaseOrderDeliveryList().get(0);
         if (purchaseOrderGift.getOrderType().equals("3") && purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRGIFT)) {
             //判断是否是礼品订单 且可以被收礼
             model.addAttribute("purchaseOrder", purchaseOrderGift);
         }
 
+        String lc = "";//物流公司
+        String serial = "";//物流单号
+        String content = "";//物流信息
+        if(purchaseOrderDelivery!=null){
+            serial = purchaseOrderDelivery.getSerial();
+            lc = purchaseOrderDelivery.getLogisticsCompany();
+            try {
+                URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
+                URLConnection con = url.openConnection();
+                con.setAllowUserInteraction(false);
+                InputStream urlStream = url.openStream();
+                byte b[] = new byte[10000];
+                int numRead = urlStream.read(b);
+                content = new String(b, 0, numRead);
+                while (numRead != -1) {
+                    numRead = urlStream.read(b);
+                    if (numRead != -1) {
+                        String newContent = new String(b, 0, numRead, "UTF-8");
+                        content += newContent;
+                    }
+                }
+                urlStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            model.addAttribute("content",content);
+            model.addAttribute("serial",serial);
+            model.addAttribute("lc",lc);
+        }
         //优先判断是否是送礼人查看当前页面
         if (AuthorizationUtil.isAuthenticated() && AuthorizationUtil.getMyUser().getId().equals(purchaseOrderGift.getUser().getId())) {
             model.addAttribute("order", purchaseOrderGift);
             model.addAttribute("request","/purchaseOrder/giftView");
             return "/purchaseOrder/purchaseOrderGiftView";
         }
-        if (purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRECEIVE)){
+        if (!purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WPAY) && !purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRGIFT)){
             model.addAttribute("purchaseOrder", purchaseOrderGift);
             model.addAttribute("request","/purchaseOrder/giftView");
             return "/purchaseOrder/giftView";
@@ -90,15 +118,14 @@ public class PurchaseOrderGiftController {
 
     public String productPicture(PurchaseOrderGift purchaseOrderGift) throws Exception {
         String giftMessage = purchaseOrderGift.getGiftMessage();
-        String productName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getName();
-        String projectName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getProject().getName();
-        String urlString = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProductModel_url();
-        Master master = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getMaster();
-        String masterNamer = new String();
-        if(master!=null){
-            masterNamer = master.getFullName();
+        String productModelName = new String();
+        BigDecimal productModelPrice = new BigDecimal("0");
+        if ("1".equals(purchaseOrderGift.getShowGiftNameStatus())) {
+            productModelName ="礼物清单："+ purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getName();
         }
-        String sender = purchaseOrderGift.getGiftGaverName();
+        if ("1".equals(purchaseOrderGift.getShowGiftPriceStatus())) {
+            productModelPrice = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getPrice();
+        }
         //背景图设置
         URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background.jpg");
         ImageIcon imgIcon = new ImageIcon(backgroundUrl);

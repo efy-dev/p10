@@ -28,42 +28,43 @@
     <meta name="msapplication-TileColor" content="#0e90d2">
 </head>
 <body>
-
-<!--//End--header-->
 <div class="gift ae">
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
-        <div class="edit-text">
-            <em>${purchaseOrder.giftMessage}</em>
-        </div>
-        <div class="cupic ae"><img src="${purchaseOrder.giftPictureUrl}"></div>
-        <div class="efi-icon ae"><i class="icon"></i></div>
-    </div>
-    <div class="logistics ae">
-        <div class="btb"><h5>物流详情</h5></div>
-        <div class="p-text ae">
-            <div class="txt">
-                <div class="pic"><a href="#"><img src="../shop2015/upload/box-hd-2-2.jpg"> </a></div>
-                <p>物流状态：<ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus"
-                                        checkedValue="${purchaseOrder.orderStatus}" type="normal"/></p>
-                <c:if test="${purchaseOrder.orderStatus==7}">
-
-                    <p>物流公司：<ming800:status name="logisticsCompany" dataType="PurchaseOrderDelivery.logisticsCompany"
-                                            checkedValue="${purchaseOrderDelivery.logisticsCompany}" type="normal"/></p>
-
-                    <p>运单编号：${purchaseOrderDelivery.serial}</p>
-
-                    <%--<p>官方电话：95123</p>--%>
+        <div class="pic-page ae">
+            <div class="pic-img"><img src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!product-icon" width="181" height="101"></div>
+            <div class="pic-text">
+                <p>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}</p>
+                <p class="t2"><i></i><span>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.project.name}</span><em></em></p>
+                <c:if test="${!empty purchaseOrder.purchaseOrderProductList.get(0).productModel.product.master}">
+                <p class="t3">${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.master.name}</p>
                 </c:if>
             </div>
         </div>
-        <c:if test="${purchaseOrder.orderStatus==7}">
-            <div class="btb"><h5>物流跟踪</h5></div>
-            <!--用的时候去掉高-->
-            <div class="ae" style="height: 100px;"></div>
-        </c:if>
+        <div class="c-info ae" style="margin-top:0;">
+            <p>${purchaseOrder.giftMessage}</p>
+            <p>——${purchaseOrder.giftGaverName}</p>
+        </div>
     </div>
-</div>
+    <!-- //End-->
+    <c:if test="${!empty content}">
+    <div class="logistics ae">
+        <div class="part">
+            <h4>感谢您收下礼物，快递小哥正在拼命配送中。</h4>
+            <ul>
+                <li><span>物流状态：</span><em><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${purchaseOrder.orderStatus}" type="normal"/></em></li>
+                <li><span>物流公司：</span><em><ming800:status name="logisticsCompany" dataType="PurchaseOrderDelivery.logisticsCompany" checkedValue="${lc}" type="normal"/></em></li>
+                <li><span>运单编号：</span><em>${serial}</em></li>
+            </ul>
+        </div>
+        <div class="part">
+            <h5>物流跟踪</h5>
+            <div style="width:100%;overflow: hidden;float:left;margin-left:-73px;"><iframe id="kuaidi100" name="kuaidi100" src="${content}" width="600" height="380" marginwidth="12" marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe></div>
 
+        </div>
+    </div>
+</c:if>
+    <div class="efi-icon ae"><i class="icon"></i></div>
+</div>
 </body>
 </html>

@@ -37,11 +37,34 @@
         <div class="cupic ae"><img src="${purchaseOrder.giftPictureUrl}"></div>
         <div class="efi-icon ae"><i class="icon"></i></div>
     </div>
+    <div class="card custom ae">
+        <div class="btb"><h5>礼物卡片</h5></div>
+        <div class="pic-page ae">
+            <div class="pic-img"><img
+                    src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}"
+                    width="181" height="101"></div>
+            <div class="pic-text">
+                <p>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}</p>
+
+                <p class="t2">
+                    <i></i><span>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.project.name}</span><em></em>
+                </p>
+                <c:if test="${not empty purchaseOrder.purchaseOrderProductList.get(0).productModel.product.master}">
+                    <p class="t3">${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.master.fullName}</p>
+                </c:if>
+            </div>
+        </div>
+        <div class="c-info ae" style="margin-top:0;">
+            <p>${purchaseOrder.giftMessage}</p>
+
+            <p>——${purchaseOrder.giftGaverName}</p>
+        </div>
+    </div>
     <form action="<c:url value="/giftConfirm.do"/>" method="post">
 
         <input name="purchaseOrderId" value="${purchaseOrder.id}" type="hidden">
 
-        <div class="btb"><h5>感谢您收下礼物，快填写您的收货信息吧！</h5></div>
+        <div class="btb"><h5>${purchaseOrder.giftGaverName}送您礼物了，快填写您的收货信息吧！</h5></div>
         <ul class="profile ae">
             <li>
                 <strong>收货人：</strong>
@@ -53,7 +76,8 @@
             </li>
             <li>
                 <strong>配送地区：</strong>
-                <label id="add-dext"><p type="text" class="dtxt" placeholder="" onclick="$('.add-ress').show()" id="addressProvince">点击选择配送地区</p></label>
+                <label id="add-dext"><p type="text" class="dtxt" placeholder="" onclick="$('.add-ress').show()"
+                                        id="addressProvince">点击选择配送地区</p></label>
 
                 <div class="add-ress" style="display: none">
                     <div class="add-text shipping-address ae">
@@ -66,7 +90,9 @@
                             <option value="">请选择市</option>
                         </select>
                         <%--<select  name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required=""><option value="">请选择</option></select>--%>
-                        <div class="addbqt"><a style="text-align: center;" onclick="$('.add-ress').hide();$('#addressProvince').html($('option[value='+$('#province').val()+']').html()+$('option[value='+$('#city').val()+']').html());" class="bqtn"
+                        <div class="addbqt"><a style="text-align: center;"
+                                               onclick="$('.add-ress').hide();$('#addressProvince').html($('option[value='+$('#province').val()+']').html()+$('option[value='+$('#city').val()+']').html());"
+                                               class="bqtn"
                                                value="确&nbsp;认&nbsp;选&nbsp;择">确&nbsp;认&nbsp;选&nbsp;择</a></div>
                     </div>
                     <div class="bg"></div>
