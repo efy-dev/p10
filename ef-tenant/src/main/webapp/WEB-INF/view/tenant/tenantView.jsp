@@ -16,14 +16,14 @@
         <table class="am-table am-table-bordered">
             <tbody>
             <tr>
-                <td class="am-primary am-u-md-3">商家名字</td>
-                <td class="am-u-md-3">${object.name}</td>
-                <td class="am-primary am-u-md-3">图标</td>
-                <td class="am-u-md-3" colspan="3"><img width="35px" src="http://pro.efeiyi.com/${object.logoUrl}@!product-model" alt="产品图片"></td>
+                <td class="am-primary am-u-md-3" width="25%">商家名字</td>
+                <td class="am-u-md-3" width="25%">${object.name}</td>
+                <td class="am-primary am-u-md-3" width="25%">图标</td>
+                <td class="am-u-md-3" colspan="3" ><img width="35px" src="http://pro.efeiyi.com/${object.logoUrl}@!product-model" alt="产品图片"></td>
             </tr>
             <tr>
-                <td class="am-primary am-u-md-3">简介</td>
-                <td class="am-u-md-3">${object.content}</td>
+                <td class="am-primary am-u-md-3">联系方式</td>
+                <td class="am-u-md-3">${object.phone}</td>
                 <td class="am-primary am-u-md-3">类型</td>
                 <td class="am-u-md-3" colspan="3">
                     <c:if test="${object.tenantType == '11'}">
@@ -36,6 +36,11 @@
                         个人
                     </c:if>
                 </td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">商家简介</td>
+                <td class="am-u-md-3" colspan="3">${object.content}</td>
+
             </tr>
             </tbody>
         </table>

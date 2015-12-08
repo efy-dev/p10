@@ -41,4 +41,23 @@ public class TenantTypeController {
 			return "/tenantType/personalTenant";
 		}
 	}
+
+    @RequestMapping("/sendTenantTypePage1.do")
+    public String sendTenantTypePage1(Model model){
+        String id = AuthorizationUtil.getMyUser().getBigTenant().getId();
+        BigTenant big = (BigTenant) baseManager.getObject(BigTenant.class.getName(),id);
+        if("11".equals(big.getTenantType())){
+            EnterpriseTenant tenant = (EnterpriseTenant)baseManager.getObject(EnterpriseTenant.class.getName(),id);
+            model.addAttribute("object",tenant);
+            return "/tenantType1/enterpriseTenant";
+        }else if("12".equals(big.getTenantType())){
+            PrivateTenant tenant = (PrivateTenant)baseManager.getObject(PrivateTenant.class.getName(),id);
+            model.addAttribute("object",tenant);
+            return "/tenantType1/privateTenant";
+        }else{
+            PersonalTenant tenant = (PersonalTenant)baseManager.getObject(PersonalTenant.class.getName(),id);
+            model.addAttribute("object",tenant);
+            return "/tenantType1/personalTenant";
+        }
+    }
 }

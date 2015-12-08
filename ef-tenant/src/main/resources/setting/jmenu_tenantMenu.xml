@@ -96,7 +96,18 @@
             </jnode>
         </jnode>
 
+        <jnode id="accountManager2" url="" text_zh_CN="账号审核管理"><!--系统管理-->
+            <jnode id="" url="/tenant/viewTenant1.do" state="" extend="" access="" text_zh_CN="账号审核">
+                <match url="/tenant/viewTenant1.do"/>
+            </jnode>
 
+            <!--<jnode id="" url="/sign/toChangePassword.do" state="" extend="" access="" text_zh_CN="修改密码">-->
+                <!--<match url=""/>-->
+            <!--</jnode>-->
+            <jnode id="" url="/j_spring_security_logout" state="" extend="" access="" text_zh_CN="安全退出">
+                <match url="viewIndex_default"/>
+            </jnode>
+        </jnode>
     </jnode>
 </jmenu>
 
