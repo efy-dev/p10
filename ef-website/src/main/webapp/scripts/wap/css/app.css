@@ -216,7 +216,8 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .details .des-content .discuss .ul-list .item .store {width:100%;float:left;margin-top:15px;border-top:2px solid #e5e5e5}
 .details .des-content .discuss .ul-list .item .store p {width:100%;float:left}
 .details .des-content .discuss .ul-list .item .store p.s-title {margin:15px 0}
-.details-total-bar {height:42px;line-height:42px;background:#fff;position:fixed;left:0;bottom:0;box-sizing:border-box;border-top:2px solid #000;border-bottom:2px solid #000}
+.details-total-bar {height:42px;line-height:42px;background:#fff;position:fixed;left:0;bottom:0;box-sizing:border-box;border-top:2px solid #000;border-bottom:2px solid #000;
+    z-index: 100;}
 .details-total-bar a {font-size:14px;color:#000;float:left;border-right:1px #000 solid;text-align:center}
 .details-total-bar a:last-child {border-right:0}
 .details-total-bar .btn-default {width:15%}
@@ -375,7 +376,7 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .cart-order .order-address {padding:25px 20px;border-bottom:2px #000 solid;position:relative;font-size:12px}
 .cart-order .order-address a {color:#000}
 .cart-order .order-address p {width:100%;float:left;padding-right:20px;box-sizing:border-box}
-.cart-order .order-address .title span {float:left;margin-right:10px}
+.cart-order .order-address .title span {float:left;margin-right:10px;white-space:nowrap}
 .cart-order .order-address .arrow-right:before {position:absolute;top:50%;margin-top:-6px;right:20px}
 .cart-order .edit-address {padding:25px 20px;border-bottom:2px #000 solid}
 .cart-order .edit-address {}
@@ -548,7 +549,7 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 }
 .footer-new .authentication a.icon1 {background-position: 0 0;height: 88px}
 .footer-new .authentication a.icon2 {background-position: 0 -88px;height: 26px;top:-30px}
-.footer-new .authentication a.icon3 {background-position: 0 -114px;height:98px;top:10px;}
+.footer-new .authentication a.icon3 {background-position: 0 -115px;height:98px;top:10px;}
 .footer-new .authentication .line {
     width: 2px;
     height:27px;

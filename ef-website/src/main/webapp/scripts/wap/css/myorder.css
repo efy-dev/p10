@@ -458,7 +458,7 @@
 .packet .eifyi-ld{display: inline-block;width:100%;}
 .packet .eifyi-ld .ld-img{width: 180px;padding:20px 0;display: inline-block;}
 /*.packet .eifyi-ld img{width: 100%}*/
-.packet .efeiyi-lod .efiyi-logo{width: 144px;display: inline-block;height: 54px;-webkit-background-size: 20px auto;background: url(../images/icon.png) no-repeat 0 0;}
+.packet .efeiyi-lod .efiyi-logo{width: 144px;display: inline-block;height: 54px;background: url(../images/icon.png) no-repeat 0 0;background-size:304px auto;}
 /*没有相关订单*/
 .no-order {padding:0 1.8rem}
 .no-order .b-btn {padding:0 5rem}
@@ -704,7 +704,7 @@ html, body {height:100%}
 .gift .elect .active{color: #000}
 .gift .elect input{vertical-align:middle;margin: 0;}
 .gift .elect .right{float: right;width: 50%;text-align: right}
-.gift .elect span{color: #000;font-weight: bold}
+.gift .elect span{color: #ccc;font-weight: bold}
 .gift .elect .add-c1{}
 .gift .newcart-pay{border-top: 0;padding: 0;margin-bottom: 50px;}
 .gift .newcart-pay .ul-list{padding: 16px 10px 0;}
