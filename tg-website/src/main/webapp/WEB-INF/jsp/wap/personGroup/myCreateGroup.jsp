@@ -39,7 +39,7 @@
     <!-- //End--title-->
 </header>
 <!--//End--header-->
-<ul class="offered ae">
+<ul class="offered ae" style="margin-bottom: 66px;">
     <c:forEach items="${myCreateProductList}" var="member" varStatus="rec">
     <c:if test="${member.status!=2}">
         <li>

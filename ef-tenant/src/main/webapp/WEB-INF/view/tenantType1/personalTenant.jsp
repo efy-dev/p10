@@ -127,7 +127,9 @@
                 <label name="addressProvince.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在省 <small>*</small></label>
                 <div class="am-u-sm-9" style="margin-top: 10px">
                     <select id="${object.id}" name="addressProvince.id" onchange="provinceChange(this , '${object.id}')">
-                        <option value="${object.addressProvince.id}">${object.addressProvince.name}</option>
+                        <c:if test="${not empty object.addressProvince}">
+                          <option value="${object.addressProvince.id}">${object.addressProvince.name}</option>
+                        </c:if>
                     </select>
                 </div>
             </div>

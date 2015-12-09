@@ -26,6 +26,7 @@
         <input type="hidden" name="qm" value="saveOrUpdateEnterprisesTenant">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="type" value="11" />
+        <input type="hidden" name="resultPage" value="<c:url value="redirect:/tenantType/sendTenantTypePage.do"/>"/>
         <table>
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">*公司名称</label>
@@ -58,6 +59,7 @@
                         <div class="am-panel am-panel-default">
                             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
                                 <strong> 商品图片</strong>
+                                <input value="${object.frontPhotoUrl}" type="hidden" name="frontPhotoUrl">
                                 <span class="am-icon-chevron-down am-fr"></span></div>
                             <div class="am-panel-bd am-collapse am-in" id="collapse-panel-10" style="height: auto;overflow: hidden">
                                 <ul style="width: 100%"  style="list-style:none">
@@ -89,6 +91,7 @@
                         <div class="am-panel am-panel-default">
                             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
                                 <strong> 商品图片</strong>
+                                <input value="${object.versoPhotoUrl}" type="hidden" name="versoPhotoUrl">
                                 <span class="am-icon-chevron-down am-fr"></span></div>
                             <div class="am-panel-bd am-collapse am-in" id="collapse-panel-11" style="height: auto;overflow: hidden">
                                 <ul style="width: 100%"  style="list-style:none">
@@ -149,6 +152,7 @@
                         <div class="am-panel am-panel-default">
                             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
                                 <strong> 商品图片</strong>
+                                <input value="${object.versoPhotoUrl}" type="hidden" name="versoPhotoUrl">
                                 <span class="am-icon-chevron-down am-fr"></span></div>
                             <div class="am-panel-bd am-collapse am-in" id="collapse-panel-12" style="height: auto;overflow: hidden">
                                 <ul style="width: 100%"  style="list-style:none">
@@ -180,6 +184,7 @@
                         <div class="am-panel am-panel-default">
                             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
                                 <strong> 商品图片</strong>
+                                <input value="${object.taxRegistrationAttachment}" type="hidden" name="taxRegistrationAttachment">
                                 <span class="am-icon-chevron-down am-fr"></span></div>
                             <div class="am-panel-bd am-collapse am-in" id="collapse-panel-13" style="height: auto;overflow: hidden">
                                 <ul style="width: 100%"  style="list-style:none">
@@ -210,6 +215,7 @@
                         <div class="am-panel am-panel-default">
                             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
                                 <strong> 商品图片</strong>
+                                <input value="${object.organizationAttachment}" type="hidden" name="organizationAttachment">
                                 <span class="am-icon-chevron-down am-fr"></span></div>
                             <div class="am-panel-bd am-collapse am-in" id="collapse-panel-14" style="height: auto;overflow: hidden">
                                 <ul style="width: 100%"  style="list-style:none">
@@ -241,6 +247,7 @@
                         <div class="am-panel am-panel-default">
                             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
                                 <strong> 商品图片</strong>
+                                <input value="${object.bankAttachment}" type="hidden" name="bankAttachment">
                                 <span class="am-icon-chevron-down am-fr"></span></div>
                             <div class="am-panel-bd am-collapse am-in" id="collapse-panel-15" style="height: auto;overflow: hidden">
                                 <ul style="width: 100%"  style="list-style:none">
@@ -332,18 +339,19 @@
                 formData: { "imgType": "normal" }, //提交给服务器端的参数
                 onUploadSuccess: function (file, data) {   //一个文件上传成功后的响应事件处理
                     data = data.substring(1,data.length-1)
-                    var tenantId = data.split(":")[0].trim();
-                    var  imgUrl = data.split(":")[1];
-                    var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
+//                    var tenantId = data.split(":")[0].trim();
+//                    var  imgUrl = data.split(":")[1];
+                    var  url = "http://pro.efeiyi.com/"+data+"@!product-model";
                     ///显示图片
-                    var img ='<li style="float: left;margin-right: 10px;" name="'+tenantId+'">'+
+                    var img ='<li style="float: left;margin-right: 10px;" >'+
                             '<dl style="margin-top: 6px;" >'+
                             '  <dt  style="width: 50%">'+
-                            '   <img width="100%" name="'+tenantId+ '"  src="'+url+'" alt="商品主图片">'+
+                            '   <img width="100%" src="'+url+'" alt="商品主图片">'+
                             '  </dt>'+
                             '</dl>'+
                             '</li>';
-                    $("#collapse-panel-1"+o+" ul").append(img);
+                    $("input[name='"+dataType+"']").val(data);
+                    $("#collapse-panel-1"+o+" ul").html(img);
                 }
             });
         }
@@ -353,7 +361,12 @@
         $("#btn_upload3").ready(fileUploads(3,"taxRegistrationAttachment"));
         $("#btn_upload4").ready(fileUploads(4,"organizationAttachment"));
         $("#btn_upload5").ready(fileUploads(5,"bankAttachment"));
-        $("#btn_upload-button").css({"padding":"0em 0em","text-align":"center"});
+        $("#btn_upload0-button").css({"padding":"0em 0em","text-align":"center"});
+        $("#btn_upload1-button").css({"padding":"0em 0em","text-align":"center"});
+        $("#btn_upload2-button").css({"padding":"0em 0em","text-align":"center"});
+        $("#btn_upload3-button").css({"padding":"0em 0em","text-align":"center"});
+        $("#btn_upload4-button").css({"padding":"0em 0em","text-align":"center"});
+        $("#btn_upload5-button").css({"padding":"0em 0em","text-align":"center"});
 
     });
 </script>

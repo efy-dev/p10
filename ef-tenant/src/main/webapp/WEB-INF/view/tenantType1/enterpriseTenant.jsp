@@ -103,7 +103,9 @@
                 <label name="addressProvince.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在省 <small>*</small></label>
                 <div class="am-u-sm-9" style="margin-top: 10px">
                     <select id="${object.id}" name="addressProvince.id" onchange="provinceChange(this , '${object.id}')">
+                     <c:if test="${not empty object.addressProvince}">
                         <option value="${object.addressProvince.id}">${object.addressProvince.name}</option>
+                      </c:if>
                     </select>
                 </div>
             </div>
@@ -321,12 +323,12 @@
                     formData: {"imgType": "normal"}, //提交给服务器端的参数
                     onUploadSuccess: function (file, data) {   //一个文件上传成功后的响应事件处理
                         data = data.substring(1, data.length - 1)
-                        var url = "http://pro.efeiyi.com/" + imgUrl + "@!product-model";
+                        var url = "http://pro.efeiyi.com/" + data + "@!product-model";
                         ///显示图片
                         var img = '<li style="float: left;margin-right: 10px;" >' +
                                 '<dl style="margin-top: 6px;" >' +
                                 '  <dt  style="width: 50%">' +
-                                '   <img width="100%" name="' + tenantId + '"  src="' + url + '" alt="商品主图片">' +
+                                '   <img width="100%"   src="' + url + '" alt="商品主图片">' +
                                 '  </dt>' +
                                 '</dl>' +
                                 '</li>';
