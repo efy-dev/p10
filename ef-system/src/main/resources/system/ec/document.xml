@@ -16,7 +16,6 @@
                         <item label="配送方式" value="ec.psfs"/>
                         <item label="正品保障" value="ec.zpbz"/>
                         <item label="售后政策" value="ec.shzc"/>
-                        <item label="退换货流程" value="ec.thhlc"/>
                         <item label="退货流程" value="ec.thlc"/>
                         <item label="换货流程" value="ec.hhlc"/>
                         <item label="关于我们" value="ec.gywm"/>
@@ -29,7 +28,7 @@
                         <item label="入驻须知" value="ec.rzxz"/>
                         <item label="入驻流程" value="ec.rzlc"/>
                         <item label="入驻咨询" value="ec.rzzx"/>
-                        <item label="入驻咨询" value="ec.fyjj"/>
+                        <item label="非遗简介" value="ec.fyjj"/>
                     </statusType>
                 </field>
             </fields>

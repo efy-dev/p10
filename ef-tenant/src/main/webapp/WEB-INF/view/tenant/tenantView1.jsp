@@ -19,6 +19,7 @@
     <div class="am-u-md-12">
         <form action="<c:url value="/tenant/toCheck.do"/>" method="post" class="am-form am-form-horizontal">
             <input type="hidden" name="id" value="${object.id}">
+            <input type="hidden" name="status" value="${object.status}">
             <input type="hidden" name="flag" value="">
         <div class="am-tabs am-margin" data-am-tabs>
             <ul class="am-tabs-nav am-nav am-nav-tabs">

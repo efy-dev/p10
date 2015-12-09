@@ -28,10 +28,10 @@
                 <tr id="${tenantMaster.id}">
 
                     <td class="am-hide-sm-only">
-                        <c:if test="${tenantReview.reviewStatus=='4'}">
+                        <c:if test="${tenantReview.review=='4'}">
                             审核成功
                         </c:if>
-                        <c:if test="${tenantReview.reviewStatus!='4'}">
+                        <c:if test="${tenantReview.review!='4'}">
                             审核失败
                         </c:if>
                     </td>
