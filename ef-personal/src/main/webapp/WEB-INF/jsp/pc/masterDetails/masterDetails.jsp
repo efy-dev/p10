@@ -103,12 +103,12 @@
         <ul class="publish">
           <li>
             <c:if test="${!empty object.masterProjectList && object.masterProjectList.size() > 0}">
-              <a href="#"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/${object.masterProjectList.get(0).project.picture_pc_url}"> </a>
+              <a href="http://craft2.efeiyi.com/project/brifProject/${object.masterProjectList.get(0).project.id}"><img src="http://pro.efeiyi.com/${object.masterProjectList.get(0).project.picture_pc_url}@!pc-project-list"> </a>
               <p>${object.masterProjectList.get(0).project.name}</p>
             </c:if>
           </li>
         </ul>
-        <div class="f-r-gd ae"><a href="#"><span>查看工艺</span><i class="sp-icon"></i></a></div>
+        <div class="f-r-gd ae"><a href="http://craft2.efeiyi.com/project/brifProject/${object.masterProjectList.get(0).project.id}"><span>查看工艺</span><i class="sp-icon"></i></a></div>
       </div>
     </div>
   </div>
@@ -328,13 +328,17 @@ function storeMessage(o,msgId){
                     "                                    <p><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\">"+data[i].remark+"</a></p>";
             var attr = data[i].messageAttachmentLists;
             if(attr != null && attr.length > 1 ){
-              box += "<div class=\"two-pic\"><ul class=\"sudoku\">";
+              if(attr.length < 5){
+                box += "<div class=\"two-pic w-active\"><ul class=\"sudoku\">";
+              }else{
+                box += "<div class=\"two-pic\"><ul class=\"sudoku\">";
+              }
               for(var j in attr){
                 box += "<li><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+attr[j].pictureUrl+"@!master-message-little-more\"></a> </li>";
               }
               box += "</ul></div>";
             }else if(attr != null && attr.length == 1){
-              box +="<div class=\"one-pic\"><a href=\"#\"><img src=\"http://tenant.efeiyi.com/"+attr[0].pictureUrl+"@!master-message-only-little\"></a></div>"
+              box +="<div class=\"one-pic\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+attr[0].pictureUrl+"@!master-message-only-little\"></a></div>"
             }
               box += "  <div class=\"one-tiem\"><span>"+cTime+"</span><span>来自&nbsp;"+data[i].dataSource+"</span></p></div>"+
                     "                                </div>"+

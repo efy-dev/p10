@@ -145,7 +145,7 @@
             var sub = "<li>"+
                     "                    <div class=\"pc-dy-txt ae\">"+
                     "                        <div class=\"pc-dy-pic \">"+
-                    "                            <div class=\"pc-d-pic\"><a href=\"<c:url value='/masterMessage/masterView/'/>"+data[i].masterId+"\"><img  class=\"am-circle\"  src=\"http://tenant.efeiyi.com/"+data[i].favicon+"@!master-favicon-view\"></a></div>"+
+                    "                            <div class=\"pc-d-pic\"><a href=\"<c:url value='/masterMessage/masterView/'/>"+data[i].masterId+"\"><img  class=\"am-circle\"  src=\"http://tenant.efeiyi.com/"+data[i].favicon+"@!tenant-mobile-view-icon\"></a></div>"+
                     "                            <div class=\"pc-gz gz-pc\">"+
                     "                                <div class=\"bt-gz act-1\">"+
                     "                                    <a class=\"btn-guan\" name=\"masterFollow"+data[i].masterId+"\" onclick=\"followMaster('"+data[i].masterId+"');\">"+
@@ -190,7 +190,7 @@
                     "                            <li>"+
                     "                                <a onclick=\"praiseMessage(this,'"+data[i].id+"');\">"+
                     "                                    <span class=\"pos\">"+
-                    "                                        <span class=\"line\">"+
+                    "                                        <span class=\"line noline\">"+
                     "                                            <i class=\"dnc-icon zq\"></i>"+
                     "                                            <em>赞"+data[i].praiseNum+"</em>"+
                     "                                        </span>"+
@@ -309,7 +309,7 @@
             "              </a>"+
             "            </div>"+
             "            <div class=\"img-q\">"+
-            "              <a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+data[i].favicon+"\"></a>"+
+            "              <a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+data[i].favicon+"@!tenant-mobile-tenant-list\"></a>"+
             "            </div>"+
             "          </li>";
             rightUp.append(box);
@@ -372,7 +372,7 @@
                     "              </a>"+
                     "            </div>"+
                     "            <div class=\"img-q\">"+
-                    "              <a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+data[i].favicon+"\"></a>"+
+                    "              <a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+data[i].favicon+"@!tenant-mobile-tenant-list\"></a>"+
                     "            </div>"+
                     "          </li>";
             rightDown.append(box);
