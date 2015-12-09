@@ -46,11 +46,14 @@
                 </c:if>
             </div>
         </div>
-        <div class="c-info ae" style="margin-top:0;">
-            <p>${purchaseOrder.giftMessage}</p>
-
-            <p>——${purchaseOrder.giftGaverName}</p>
-        </div>
+        <c:if test="${not empty purchaseOrder.giftMessage}">
+            <div class="c-info ae" style="margin-top:0;">
+                <p>${purchaseOrder.giftMessage}</p>
+                <c:if test="${not empty purchaseOrder.giftGaverName}">
+                    <p>——${purchaseOrder.giftGaverName}</p>
+                </c:if>
+            </div>
+        </c:if>
     </div>
     <!-- //End-->
     <div class="logistics ae">

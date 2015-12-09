@@ -90,6 +90,12 @@ public class ProjectController extends BaseController {
             case "医药养生":
                 bannerStr += ".yyys";
                 break;
+            case "文房四宝":
+                bannerStr += ".wfsb";
+                break;
+            case "创意生活":
+                bannerStr += ".cysh";
+                break;
             default:
         }
         //@TODO 轮播图位置
