@@ -11,7 +11,7 @@
 	<div class="card custom ae">
 		<div class="btb"><h5>礼物卡片</h5></div>
 		<div class="cupic ae"><img
-				src="http://pro.efeiyi.com/${order.purchaseOrderProductList.get(0).productModel.productModel_url}@!product-icon">
+				src="http://pro.efeiyi.com/${order.purchaseOrderProductList.get(0).productModel.productModel_url}@!product-hot">
 		</div>
 	</div>
 	<c:if test="${!empty order.giftMessage || !empty order.giftGaverName}">
