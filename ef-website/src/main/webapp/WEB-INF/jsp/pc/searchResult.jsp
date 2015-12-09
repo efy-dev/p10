@@ -137,7 +137,7 @@
                     <c:forEach items="${searchParamBean.searchResultList}" var="result">
                         <li>
                             <a href="http://www2.efeiyi.com/product/productModel/${result.id}" target="_blank" title="">
-                                <img class="imgfilter" src="http://pro.efeiyi.com/${result.picture_url}" alt="">
+                                <img class="imgfilter" src="http://pro.efeiyi.com/${result.picture_url}@!product-hot" alt="">
                                 <p class="wh name">${result.product_name}<c:if test="${result.frequent != 1}">[${result.specification}]</c:if></p>
                                 <p class="wh price">￥${result.product_model_price}</p>
                             </a>
