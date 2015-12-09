@@ -89,7 +89,7 @@
             <div class="ae">
                 <div class="cat-top">
                     <div class="cat-t-o">${projectCategory.name}</div>
-                        <%--<div class="cat-t-t">一处一知音</div>--%>
+                        <div class="cat-t-t">${projectCategory.context}</div>
                         <%--<div class="cat-t-t">一物一乾坤</div>--%>
                 </div>
             </div>
