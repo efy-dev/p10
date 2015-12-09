@@ -67,7 +67,7 @@
         <div class="btb"><h5>${purchaseOrder.giftGaverName}送您礼物了，快填写您的收货信息吧！</h5></div>
         <ul class="profile ae">
             <li>
-                <strong>收货人：</strong>
+                <strong>姓名：</strong>
                 <label class="label"><input name="receiveName" type="text" class="dtxt" placeholder="请填写收货人姓名"></label>
             </li>
             <li>
