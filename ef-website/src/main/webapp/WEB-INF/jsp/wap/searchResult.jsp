@@ -14,7 +14,9 @@
                    onclick="facetForward('<c:url value="/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=${searchParamBean.queryFacet}&priceUD=0&fq=${searchParamBean.fq}"/>')"
                    title="综 合">综 合</a>
             </li>
-            <li>新 品</li>
+            <li>
+                <a href="javascript:void(0);" onclick="sortDate2()" title="新 品">新 品</a>
+            </li>
             <li>
                 <a href="javascript:void(0)" onclick="sortForward4('product_model_price')">价  格
                     <i class="<c:if test='${searchParamBean.priceUD == 0}'>icon-a1</c:if><c:if test='${searchParamBean.priceUD != 0}'>icon-a2</c:if>"></i>
@@ -55,13 +57,18 @@
     var sf = "${searchParamBean.sortField}";
     function sortForward4(sortField) {
         var sortOrder = "asc";
-        if(priceUD == 0 && sf != ""){
+        if(priceUD == 0 && sf != "" && sf != "create_datetime"){
             sortOrder = "";
             priceUD = 1;
         }else{
             priceUD = 0;
         }
         var url = "<c:url value='/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=${searchParamBean.queryFacet}&sortField='/>" + sortField + "&sortOrder=" + sortOrder + "&fq=${searchParamBean.fq}" + "&priceUD=" + priceUD;
+        facetForward(url)
+    }
+
+    function sortDate2() {
+        var url = "<c:url value='/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=${searchParamBean.queryFacet}&sortField=create_datetime'/>"+"&sortOrder=&fq=${searchParamBean.fq}&priceUD=0";
         facetForward(url)
     }
 
