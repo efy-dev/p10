@@ -73,4 +73,19 @@ public class ProductDaoHibernate implements ProductDao{
             return (Integer) objectList.get(0);
         }
     }
+
+
+    @Override
+    public Integer getProductPicture1(String productId) {
+        String sql = "select MAX(sort)  " +
+                "from product_picture pp " +
+                "where pp.product_id = :productId "+
+                " and pp.status in ('1','2') ";
+        List<Object> objectList = this.getSession().createSQLQuery(sql).setParameter("productId",productId).list();
+        if(objectList.get(0)==null){
+            return 0;
+        }else {
+            return (Integer) objectList.get(0);
+        }
+    }
 }

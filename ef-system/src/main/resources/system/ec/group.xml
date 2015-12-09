@@ -38,7 +38,7 @@
                         <condition name="memberList" defaultValue="1" operation="in"/>
                     </query>
                     <query name="default3" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="1,4" operation="in"/>
                     </query>
                     <query name="default4" label="默认" type="auto" orderBy="id:desc">
                         <condition name="groupProduct.id" defaultValue="1" operation="eq"/>

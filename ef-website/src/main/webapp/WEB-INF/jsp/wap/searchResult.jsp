@@ -14,7 +14,9 @@
                    onclick="facetForward('<c:url value="/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=${searchParamBean.queryFacet}&priceUD=0&fq=${searchParamBean.fq}"/>')"
                    title="综 合">综 合</a>
             </li>
-            <li>销 量</li>
+            <li>
+                <a href="javascript:void(0);" onclick="sortDate2()" title="新 品">新 品</a>
+            </li>
             <li>
                 <a href="javascript:void(0)" onclick="sortForward4('product_model_price')">价  格
                     <i class="<c:if test='${searchParamBean.priceUD == 0}'>icon-a1</c:if><c:if test='${searchParamBean.priceUD != 0}'>icon-a2</c:if>"></i>
@@ -35,7 +37,7 @@
             <c:forEach items="${searchParamBean.searchResultList}" var="result">
                 <li>
                     <a href="http://192.168.1.57/ef-website/product/productModel/${result.id}" title="">
-                        <img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${result.picture_url}" alt="">
+                        <img src="http://pro.efeiyi.com/${result.picture_url}@!pc-project-list" alt="">
                         <p class="name">${result.product_name}<c:if test="${result.frequent != 1}">[${result.specification}]</c:if></p>
                         <p class="price"><em>￥</em>${result.product_model_price}</p>
                     </a>
@@ -55,13 +57,18 @@
     var sf = "${searchParamBean.sortField}";
     function sortForward4(sortField) {
         var sortOrder = "asc";
-        if(priceUD == 0 && sf != ""){
+        if(priceUD == 0 && sf != "" && sf != "create_datetime"){
             sortOrder = "";
             priceUD = 1;
         }else{
             priceUD = 0;
         }
         var url = "<c:url value='/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=${searchParamBean.queryFacet}&sortField='/>" + sortField + "&sortOrder=" + sortOrder + "&fq=${searchParamBean.fq}" + "&priceUD=" + priceUD;
+        facetForward(url)
+    }
+
+    function sortDate2() {
+        var url = "<c:url value='/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=${searchParamBean.queryFacet}&sortField=create_datetime'/>"+"&sortOrder=&fq=${searchParamBean.fq}&priceUD=0";
         facetForward(url)
     }
 

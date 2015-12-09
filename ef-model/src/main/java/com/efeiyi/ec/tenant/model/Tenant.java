@@ -38,7 +38,7 @@ public class Tenant implements Serializable {
     private  String pictureUrl;
     private  String address;//商户地址
     private  String phone;
-
+    private  String review;//审核 1:未审核 2:正在审核 3:审核失败 4:审核成功
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -171,5 +171,14 @@ public class Tenant implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Column(name = "review_status")
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
     }
 }

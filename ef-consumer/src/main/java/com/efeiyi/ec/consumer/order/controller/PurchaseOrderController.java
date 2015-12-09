@@ -104,80 +104,16 @@ public class PurchaseOrderController {
             }
         }
         model.addAttribute("couponPrice",couponPrice);
-        String lc = "";
-        String serial = "";
-        String content = "";
-        if (purchaseOrder.getSubPurchaseOrder()==null || purchaseOrder.getSubPurchaseOrder().size() == 0) {
-            List pl = purchaseOrder.getPurchaseOrderDeliveryList();
-            if (pl.size() > 0) {
 
-                serial = purchaseOrder.getPurchaseOrderDeliveryList().get(0).getSerial();
-                lc = purchaseOrder.getPurchaseOrderDeliveryList().get(0).getLogisticsCompany();
+        if (purchaseOrder.getPurchaseOrderDeliveryList() != null && !purchaseOrder.getPurchaseOrderDeliveryList().isEmpty()) {
 
-                try {
-                    URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
-                    URLConnection con = url.openConnection();
-                    con.setAllowUserInteraction(false);
-                    InputStream urlStream = url.openStream();
-                    byte b[] = new byte[10000];
-                    int numRead = urlStream.read(b);
-                    content = new String(b, 0, numRead);
-                    while (numRead != -1) {
-                        numRead = urlStream.read(b);
-                        if (numRead != -1) {
-                            String newContent = new String(b, 0, numRead, "UTF-8");
-                            content += newContent;
-                        }
-                    }
-                    urlStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+             PurchaseOrderDelivery purchaseOrderDelivery=purchaseOrder.getPurchaseOrderDeliveryList().get(0);
+             String  logisticsInfo=getLogistics(purchaseOrderDelivery.getSerial(),purchaseOrderDelivery.getLogisticsCompany());
 
-            dl.add(content);
-            model.addAttribute("dl", dl);
-            model.addAttribute("pl", pl);
+            model.addAttribute("dl",logisticsInfo);
+            model.addAttribute("pl", purchaseOrderDelivery);
         } else {
-            List pl = new ArrayList();
-            for (PurchaseOrder purchaseOrderTemp : purchaseOrder.getSubPurchaseOrder()){
-                if (purchaseOrderTemp.getPurchaseOrderDeliveryList()!=null && purchaseOrderTemp.getPurchaseOrderDeliveryList().size()>0){
-                    for (PurchaseOrderDelivery purchaseOrderDeliveryTemp : purchaseOrderTemp.getPurchaseOrderDeliveryList()){
-                        pl.add(purchaseOrderDeliveryTemp);
-                    }
-                }
-            }
-
-
-
-            for (int i = 0; i < pl.size(); i++) {
-                serial = ((PurchaseOrderDelivery)(pl.get(i))).getSerial();
-                lc = ((PurchaseOrderDelivery)(pl.get(i))).getLogisticsCompany();
-                try {
-                    URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
-                    URLConnection con = url.openConnection();
-                    con.setAllowUserInteraction(false);
-                    InputStream urlStream = url.openStream();
-                    byte b[] = new byte[10000];
-                    int numRead = urlStream.read(b);
-                    content = new String(b, 0, numRead);
-                    while (numRead != -1) {
-                        numRead = urlStream.read(b);
-                        if (numRead != -1) {
-                            String newContent = new String(b, 0, numRead, "UTF-8");
-                            content += newContent;
-                        }
-                    }
-                    dl.add(content);
-                    urlStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            model.addAttribute("pl", pl);
-            model.addAttribute("dl", dl);
+            model.addAttribute("pl", null);
         }
 
         if (purchaseOrder.getOrderType()!=null && purchaseOrder.getOrderType().equals("3")){
@@ -246,6 +182,36 @@ public class PurchaseOrderController {
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         baseManager.remove(PurchaseOrder.class.getName(), orderId);
         return "redirect:/order/myEfeiyi/list.do";
+    }
+
+    /**
+     * 获取物流信息
+     * @param serial
+     * @param logisticsCompany
+     * @return
+     */
+    private String getLogistics(String serial,String logisticsCompany){
+        String content = "";//物流信息
+        try {
+            URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + logisticsCompany + "&nu=" + serial);
+            URLConnection con = url.openConnection();
+            con.setAllowUserInteraction(false);
+            InputStream urlStream = url.openStream();
+            byte b[] = new byte[10000];
+            int numRead = urlStream.read(b);
+            content = new String(b, 0, numRead);
+            while (numRead != -1) {
+                numRead = urlStream.read(b);
+                if (numRead != -1) {
+                    String newContent = new String(b, 0, numRead, "UTF-8");
+                    content += newContent;
+                }
+            }
+            urlStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+           return content;
     }
 
 

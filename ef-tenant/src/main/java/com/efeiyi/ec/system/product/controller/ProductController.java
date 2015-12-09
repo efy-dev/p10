@@ -115,6 +115,10 @@ public class ProductController extends BaseController {
                         sort = productManager.productPictureSort(product.getId())+1;
                         productPicture.setSort(sort);
                     }
+                    if(request.getParameter("status").equals("1")){
+                        sort = productManager.productPictureSort1(product.getId())+1;
+                        productPicture.setSort(sort);
+                    }
                     productPicture.setStatus(request.getParameter("status"));
                     productPicture.setProduct(product);
                     baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
@@ -363,4 +367,36 @@ public class ProductController extends BaseController {
 
     }
 
+
+
+    @RequestMapping("/initSort.do")
+    @ResponseBody
+    public String initSort(HttpServletRequest request){
+        String f = "1";
+        try {
+            XQuery xQuery = new XQuery("listProduct_default1",request);
+            List<Product> productList = baseManager.listObject(xQuery);
+            for(Product product : productList){
+                if(product.getProductPictureList()!=null){
+                    int i=1;
+                    for(ProductPicture productPicture : product.getProductPictureList()){
+                        if("1".equals(productPicture.getStatus())){
+                            productPicture.setSort(i++);
+                            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+
+                        }
+                        if("2".equals(productPicture.getStatus())){
+                            productPicture.setSort(0);
+                            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+                        }
+
+                    }
+                }
+            }
+        } catch (Exception e) {
+            f = "0";
+            e.printStackTrace();
+        }
+        return f;
+    }
 }
