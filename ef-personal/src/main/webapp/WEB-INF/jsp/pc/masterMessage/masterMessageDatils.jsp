@@ -92,7 +92,7 @@
       </div>
       <div class="detaile-right">
         <div class="f-right-gy ae">
-          <div class="h4"><span>传承人</span></div>
+          <div class="h4"><span>大师</span></div>
           <div class="craft-master2">
             <ul class="rf">
               <li>
@@ -208,7 +208,7 @@
                             "        <div class=\"review ae\" style=\"display: none;\">"+
                             "            <textarea></textarea>"+
                             "            <div class=\"btn1 ae\">"+
-                              "                       <input type=\"button\" onclick=\"subOtherComment(this,'"+msgId+"','"+data[i].id+"',true);\" class=\"btn\" value=\"评论\">"+
+                            "                <input type=\"button\" onclick=\"subOtherComment(this,'"+msgId+"','"+data[i].id+"',true);\" class=\"btn\" value=\"评论\">"+
                             "            </div>"+
                             "        </div>"+
                             " </li>";

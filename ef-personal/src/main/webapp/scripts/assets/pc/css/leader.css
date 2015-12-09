@@ -18,6 +18,7 @@ a{outline: none}
 .nav-bars .bars .active{border-bottom: 3px solid #fff;}
 /*公共样式组建*/
 /*110110-110113通用头样式*/
+.pc-dynamic .p-dy-left .list-dynamic  li .one-state .state .pos .line.noline{border-left: 0;}
 .great-master{width: 1000px;height: 381px;margin: 0 auto;padding-top: 40px;text-align: center}
 .great-master .master-pic{width: 103px;height: 103px;margin: 0 auto 24px;}
 .great-master .master-pic img{width: 100%}
@@ -58,11 +59,11 @@ a{outline: none}
 .pc-dynamic{width: 1000px;margin: 0 auto;}
 .pc-dynamic .p-dy-left{float: left;width: 683px;margin-top: 20px;}
 .pc-dynamic .p-dy-left .list-dynamic  li{width: 100%;float: left;border-bottom: 2px solid #000;border-top: 2px solid #000;margin-top: -2px;}
+.pc-dy-txt{padding-bottom: 20px;}
 .pc-dy-txt .pc-dy-pic{width: 117px;float: left;}
 .pc-dy-txt .pc-dy-pic .pc-d-pic{width: 80px;height: 80px;margin: 20px 0 14px 20px;}
 .pc-dy-txt .pc-dy-pic .pc-d-pic img{width: 100%;height: 100%}
 .pc-dy-txt .pc-dy-pic  .act-1{margin-left: 34px;padding: 5px 8px;width: 55px;height: 31px;}
-
 .pc-dy-txt .pc-dy-box{width: 566px;float: left;}
 .pc-dy-txt .pc-dy-box h5{font-size: 14px;margin: 27px 0 15px 0;font-weight: 100;}
 .pc-dy-txt .pc-dy-box p{font-size: 12px;color: #999;}
@@ -125,7 +126,7 @@ a{outline: none}
 .craft-gz .craft-wz{padding: 17px 0;border-bottom: 2px solid #000;font-size: 24px;color: #999;}
 .craft-gz .craft-ts{padding: 35px 0;font-size: 14px;color: #999;text-align: center}
 .craft-gz .craft-list .craft-l-page{margin-left:-20px;width: 1040px;}
-.craft-gz .craft-list .craft-l-page li{width: 320px;border: 1px solid #999;padding: 20px;margin-left: 20px;float: left;margin-bottom: 35px;height: 150px;}
+.craft-gz .craft-list .craft-l-page li{width: 320px;border: 1px solid #999;padding: 20px;margin-left: 20px;float: left;margin-bottom: 35px;min-height: 150px;}
 .craft-gz .craft-list .craft-l-page li .add{width: 100%;float:left}
 .craft-gz .craft-list .craft-l-page li .add dt{width: 108px;height: 108px;float: left;margin-right: 20px;}
 .craft-gz .craft-list .craft-l-page li .add dt img{width: 100%;height: 100%;}
@@ -296,7 +297,7 @@ a{outline: none}
 .details .detaile-right .h4{width: 100%;height: 38px;background: #000;padding: 8px 0 0 9px;font-size: 14px;color: #999}
 .detaile-right .craft-master2 ul{width: 100%}
 .detaile-right .craft-master2{padding:0; }
-.detaile-right .craft-master2 ul li{width: 100%;margin: 0;float: right;margin-top: -1px;}
+.detaile-right .craft-master2 ul li{width: 100%;float: right;margin: -1px 0 0 0;min-height: 154px;}
 .detaile-right .craft-master2 .gz-icon{background: url('../images/cyclopedia.png') no-repeat 0 0px}
 /*end//110209工艺详情页-作品简介*/
 /*--大师--110208工艺详情页-大师*/
