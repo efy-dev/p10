@@ -95,7 +95,7 @@
                 <label><input type="text" name="receiveDetail" class="dtxt add-dext" placeholder="填写具体街道、门牌号"></label>
             </li>
         </ul>
-        <div class="btnq ae"><input type="submit" value="确&nbsp;认&nbsp;提&nbsp;交"></div>
+        <div class="btnq ae"><input type="submit" value="确&nbsp;认"></div>
     </form>
     <div class="efi-icon ae"><i class="icon"></i></div>
 </div>
