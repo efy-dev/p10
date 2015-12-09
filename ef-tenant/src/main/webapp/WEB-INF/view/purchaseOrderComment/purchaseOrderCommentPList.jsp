@@ -29,6 +29,7 @@
                 <thead>
                 <tr>
                     <th class="table-title">评价商品</th>
+                    <th class="table-title">商品规格</th>
                     <th class="table-title">评论用户</th>
                     <th class="table-title">星数</th>
                     <th class="table-title">评价日期</th>
@@ -41,6 +42,7 @@
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&view=${view}&id=${purchaseOrderComment.purchaseOrderProduct.id}'/>">${purchaseOrderComment.purchaseOrderProduct.productModel.product.name}</a>
                         </td>
+                        <td class="am-hide-sm-only">${purchaseOrderComment.purchaseOrderProduct.productModel.name}</td>
                         <td class="am-hide-sm-only">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.username}</td>
                         <td class="am-hide-sm-only">${purchaseOrderComment.starts}</td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderComment.createDatetime}"
@@ -53,6 +55,7 @@
                             <td class="am-hide-sm-only"><a
                                     href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&id=${purchaseOrderComment.purchaseOrderProduct.id}'/>">${purchaseOrderComment.purchaseOrderProduct.productModel.product.name}</a>
                             </td>
+                            <td class="am-hide-sm-only">${purchaseOrderComment.subPurchaseOrderComment.purchaseOrderProduct.productModel.name}</td>
                             <td class="am-hide-sm-only">${purchaseOrderComment.subPurchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.username}</td>
                             <td class="am-hide-sm-only">${purchaseOrderComment.subPurchaseOrderComment.starts}</td>
                             <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderComment.subPurchaseOrderComment.createDatetime}"
