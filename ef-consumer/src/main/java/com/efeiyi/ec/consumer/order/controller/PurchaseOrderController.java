@@ -104,16 +104,14 @@ public class PurchaseOrderController {
             }
         }
         model.addAttribute("couponPrice",couponPrice);
-        String lc = "";
-        String serial = "";
-        String content = "";
-        if (purchaseOrder.getSubPurchaseOrder()==null || purchaseOrder.getSubPurchaseOrder().size() == 0) {
-            List pl = purchaseOrder.getPurchaseOrderDeliveryList();
-            if (pl.size() > 0) {
+        String lc = "";//物流公司
+        String serial = "";//快递单号
+        String content = "";//物流信息
+        if (purchaseOrder.getPurchaseOrderDeliveryList() != null && !purchaseOrder.getPurchaseOrderDeliveryList().isEmpty()) {
 
-                serial = purchaseOrder.getPurchaseOrderDeliveryList().get(0).getSerial();
-                lc = purchaseOrder.getPurchaseOrderDeliveryList().get(0).getLogisticsCompany();
-
+             PurchaseOrderDelivery purchaseOrderDelivery=purchaseOrder.getPurchaseOrderDeliveryList().get(0);
+                serial = purchaseOrderDelivery.getSerial();
+                lc = purchaseOrderDelivery.getLogisticsCompany();
                 try {
                     URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
                     URLConnection con = url.openConnection();
@@ -133,51 +131,11 @@ public class PurchaseOrderController {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
 
-            dl.add(content);
-            model.addAttribute("dl", dl);
-            model.addAttribute("pl", pl);
+            model.addAttribute("dl",content);
+            model.addAttribute("pl", purchaseOrderDelivery);
         } else {
-            List pl = new ArrayList();
-            for (PurchaseOrder purchaseOrderTemp : purchaseOrder.getSubPurchaseOrder()){
-                if (purchaseOrderTemp.getPurchaseOrderDeliveryList()!=null && purchaseOrderTemp.getPurchaseOrderDeliveryList().size()>0){
-                    for (PurchaseOrderDelivery purchaseOrderDeliveryTemp : purchaseOrderTemp.getPurchaseOrderDeliveryList()){
-                        pl.add(purchaseOrderDeliveryTemp);
-                    }
-                }
-            }
-
-
-
-            for (int i = 0; i < pl.size(); i++) {
-                serial = ((PurchaseOrderDelivery)(pl.get(i))).getSerial();
-                lc = ((PurchaseOrderDelivery)(pl.get(i))).getLogisticsCompany();
-                try {
-                    URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
-                    URLConnection con = url.openConnection();
-                    con.setAllowUserInteraction(false);
-                    InputStream urlStream = url.openStream();
-                    byte b[] = new byte[10000];
-                    int numRead = urlStream.read(b);
-                    content = new String(b, 0, numRead);
-                    while (numRead != -1) {
-                        numRead = urlStream.read(b);
-                        if (numRead != -1) {
-                            String newContent = new String(b, 0, numRead, "UTF-8");
-                            content += newContent;
-                        }
-                    }
-                    dl.add(content);
-                    urlStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            model.addAttribute("pl", pl);
-            model.addAttribute("dl", dl);
+            model.addAttribute("pl", null);
         }
 
         if (purchaseOrder.getOrderType()!=null && purchaseOrder.getOrderType().equals("3")){
