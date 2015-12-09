@@ -34,15 +34,14 @@
         <div class="edit-text">
             <em>${purchaseOrder.giftMessage}</em>
         </div>
-        <div class="cupic ae"><img src="${purchaseOrder.giftPictureUrl}"></div>
-        <div class="efi-icon ae"><i class="icon"></i></div>
+        <%--<div class="cupic ae"><img src="${purchaseOrder.giftPictureUrl}"></div>--%>
     </div>
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="pic-page ae">
             <div class="pic-img"><img
-                    src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}"
-                    width="181" height="101"></div>
+                    src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}">
+            </div>
             <div class="pic-text">
                 <p>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}</p>
 
@@ -105,6 +104,7 @@
         </ul>
         <div class="btnq ae"><input type="submit" value="确&nbsp;认&nbsp;提&nbsp;交"></div>
     </form>
+    <div class="efi-icon ae"><i class="icon"></i></div>
 </div>
 
 <script>
