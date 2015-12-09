@@ -81,16 +81,16 @@
                         <th width="20%">操作时间</th>
                         <th width="60%">详  情</th>
                     </tr>
-                    <tr>
-                        <td class="tc"><p>审核未通过</p></td>
-                        <td class="tc"><p>2012-21-21 23:23</p></td>
-                        <td class="tl">
-                            <p>
-                                <span>申请人：XXXXXXXXXXX</span>
-                                <span>电话：18922225555</span>
-                            </p>
-                        </td>
-                    </tr>
+                    <%--<tr>--%>
+                        <%--<td class="tc"><p>审核未通过</p></td>--%>
+                        <%--<td class="tc"><p>2012-21-21 23:23</p></td>--%>
+                        <%--<td class="tl">--%>
+                            <%--<p>--%>
+                                <%--<span>申请人：XXXXXXXXXXX</span>--%>
+                                <%--<span>电话：18922225555</span>--%>
+                            <%--</p>--%>
+                        <%--</td>--%>
+                    <%--</tr>--%>
                 </table>
             </div>
         </div>
@@ -119,32 +119,32 @@
                         <th width="20%">操作时间</th>
                         <th width="60%">详  情</th>
                     </tr>
-                    <tr>
-                        <td class="tc"><p>审核未通过</p></td>
-                        <td class="tc"><p>2012-21-21 23:23</p></td>
-                        <td class="tl">
-                            <p>
-                                <span>法人身份证电子版</span>
-                                <span>请正确上传资质</span>
-                                <%--<a class="btn-txt" href="">修改</a>--%>
-                                <a class="btn-link" href="<c:url value="basic/xm.do?qm=viewTenant1&id=${TENANT.id}"/>">修 改</a>
-                            </p>
-                            <p>
-                                <span>营业执照副本</span>
-                                <span>照片不清晰</span>
-                                <%--<a class="btn-txt" href="">修改</a>--%>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tc"><p>审核未通过</p></td>
-                        <td class="tc"><p>2012-21-21 23:23</p></td>
-                        <td class="tl">
-                            <p>
-                                <span>申请企业入驻</span>
-                            </p>
-                        </td>
-                    </tr>
+                    <%--<tr>--%>
+                        <%--<td class="tc"><p>审核未通过</p></td>--%>
+                        <%--<td class="tc"><p>2012-21-21 23:23</p></td>--%>
+                        <%--<td class="tl">--%>
+                            <%--<p>--%>
+                                <%--<span>法人身份证电子版</span>--%>
+                                <%--<span>请正确上传资质</span>--%>
+                                <%--&lt;%&ndash;<a class="btn-txt" href="">修改</a>&ndash;%&gt;--%>
+                                <%--<a class="btn-link" href="<c:url value="basic/xm.do?qm=viewTenant1&id=${TENANT.id}"/>">修 改</a>--%>
+                            <%--</p>--%>
+                            <%--<p>--%>
+                                <%--<span>营业执照副本</span>--%>
+                                <%--<span>照片不清晰</span>--%>
+                                <%--&lt;%&ndash;<a class="btn-txt" href="">修改</a>&ndash;%&gt;--%>
+                            <%--</p>--%>
+                        <%--</td>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td class="tc"><p>审核未通过</p></td>--%>
+                        <%--<td class="tc"><p>2012-21-21 23:23</p></td>--%>
+                        <%--<td class="tl">--%>
+                            <%--<p>--%>
+                                <%--<span>申请企业入驻</span>--%>
+                            <%--</p>--%>
+                        <%--</td>--%>
+                    <%--</tr>--%>
                 </table>
             </div>
         </div>

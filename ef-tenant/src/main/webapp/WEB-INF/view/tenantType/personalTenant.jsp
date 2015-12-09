@@ -27,6 +27,7 @@
         <input type="hidden" name="qm" value="saveOrUpdatePersonTenant">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="type" value="13" />
+        <input type="hidden" name="resultPage" value="<c:url value="redirect:/tenantType/sendTenantTypePage.do"/>"/>
         <table>
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">*名称</label>
@@ -52,6 +53,7 @@
                         <div class="am-panel am-panel-default">
                             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
                                 <strong> 经营者身份证电子版正面</strong>
+                                <input value="${object.frontPhotoUrl}" type="hidden" name="frontPhotoUrl">
                                 <span class="am-icon-chevron-down am-fr"></span></div>
                             <div class="am-panel-bd am-collapse am-in" id="collapse-panel-10" style="height: auto;overflow: hidden">
                                 <ul style="width: 100%"  style="list-style:none">
@@ -83,6 +85,7 @@
                         <div class="am-panel am-panel-default">
                             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
                                 <strong> 经营者身份证电子版反面</strong>
+                                <input value="${object.versoPhotoUrl}" type="hidden" name="versoPhotoUrl">
                                 <span class="am-icon-chevron-down am-fr"></span></div>
                             <div class="am-panel-bd am-collapse am-in" id="collapse-panel-11" style="height: auto;overflow: hidden">
                                 <ul style="width: 100%"  style="list-style:none">
@@ -114,6 +117,7 @@
                         <div class="am-panel am-panel-default">
                             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
                                 <strong> 手持身份证电子版</strong>
+                                <input value="${object.identityPhotoUrl}" type="hidden" name="identityPhotoUrl">
                                 <span class="am-icon-chevron-down am-fr"></span></div>
                             <div class="am-panel-bd am-collapse am-in" id="collapse-panel-12" style="height: auto;overflow: hidden">
                                 <ul style="width: 100%"  style="list-style:none">
@@ -222,18 +226,19 @@
                 onUploadSuccess: function (file, data) {   //一个文件上传成功后的响应事件处理
                     console.log(data);
                     data = data.substring(1,data.length-1)
-                    var tenantId = data.split(":")[0].trim();
-                    var  imgUrl = data.split(":")[1];
-                    var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
+//                    var tenantId = data.split(":")[0].trim();
+//                    var  imgUrl = data.split(":")[1];
+                    var  url = "http://pro.efeiyi.com/"+data+"@!product-model";
                     ///显示图片
-                    var img ='<li style="float: left;margin-right: 10px;" name="'+tenantId+'">'+
+                    var img ='<li style="float: left;margin-right: 10px;" >'+
                             '<dl style="margin-top: 6px;" >'+
                             '  <dt  style="width: 50%">'+
-                            '   <img width="100%" name="'+tenantId+ '"  src="'+url+'" alt="商品主图片">'+
+                            '   <img width="100%"  src="'+url+'" alt="商品主图片">'+
                             '  </dt>'+
                             '</dl>'+
                             '</li>';
-                    $("#collapse-panel-1"+o+" ul").append(img);
+                    $("input[name='"+dataType+"']").val(data);
+                    $("#collapse-panel-1"+o+" ul").html(img);
                 }
             });
         }
