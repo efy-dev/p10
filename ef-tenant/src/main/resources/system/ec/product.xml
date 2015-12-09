@@ -65,6 +65,12 @@
                         <condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
+
+                <do name="listProduct" label="产品列表" access="" result="/product/productList">
+                    <query name="default1" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="产品序列" name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
             </does>
         </entity>
         <entity name="ProductDescriptionList" label="产品描述列表"

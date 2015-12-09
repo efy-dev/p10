@@ -1,9 +1,6 @@
 package com.efeiyi.ec.personal.master.controller;
 
-import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.master.model.MasterFollowed;
-import com.efeiyi.ec.master.model.MasterMessage;
-import com.efeiyi.ec.master.model.MasterRecommended;
+import com.efeiyi.ec.master.model.*;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.personal.AuthorizationUtil;
@@ -78,7 +75,7 @@ public class MasterFollowedController {
 		List<MasterModel> models = new ArrayList<>();
 		List<MasterModel> msgLists = new ArrayList<>();
 		if (user.getId() != null) {
-			XQuery xQuery = new XQuery("plistMasterFollowed_default", request);
+			XQuery xQuery = new XQuery("listMasterFollow_byUser", request);
 			xQuery.put("user_id", user.getId());
 			List<MasterFollowed> list = baseManager.listObject(xQuery);
 			if (list != null && list.size() < 5){
@@ -88,6 +85,7 @@ public class MasterFollowedController {
 					List<MasterMessage> msgList = baseManager.listObject(query);
 					if (msgList != null && msgList.size() > 0){
 						msgList.get(0).setFollowStatus("已关注");
+						msgList.get(0).setStoreStatus(getStorePraiseStatus(msgList.get(0),(User)baseManager.getObject(User.class.getName(),user.getId())));
 						MasterModel msg = ConvertMasterModelUtil.convertMasterModel(msgList.get(0));
 						msgLists.add(msg);
 					}
@@ -104,7 +102,7 @@ public class MasterFollowedController {
 				masterListModel.setMrModelList(models);
 				masterListModel.setMsgModelList(msgLists);
 			}else{
-				List<MasterModel> modelList = getMessageList(request,list);
+				List<MasterModel> modelList = getMessageList(request,list,user);
 				masterListModel.setMsgModelList(modelList);
 			}
 			return masterListModel;
@@ -121,6 +119,20 @@ public class MasterFollowedController {
 			}
 			return masterListModel;
 		}
+	}
+
+	public String getStorePraiseStatus(MasterMessage message, User user){
+		String queryHql = "from MasterMessageStore p where p.masterMessage.id=:messageId and p.user.id=:userId";
+		LinkedHashMap<String, Object> queryMap = new LinkedHashMap<>();
+		queryMap.put("messageId", message.getId());
+		queryMap.put("userId", user.getId());
+		List<MasterMessageStore> list = baseManager.listObject(queryHql, queryMap);
+		if (list != null && list.size() > 0) {
+			message.setStoreStatus("已收藏");
+		} else {
+			message.setStoreStatus("收藏");
+		}
+		return message.getStoreStatus();
 	}
 
 	public String getFollowStatus(Master master , User user){
@@ -141,7 +153,7 @@ public class MasterFollowedController {
 		return master.getFollowStatus();
 	}
 
-	public List getMessageList(HttpServletRequest request ,List<MasterFollowed> followeds)throws Exception{
+	public List getMessageList(HttpServletRequest request ,List<MasterFollowed> followeds,MyUser user)throws Exception{
 		List<MasterModel> models = new ArrayList<>();
 		for (MasterFollowed followed : followeds){
 			XQuery query = new XQuery("listMasterMessage_default",request);
@@ -149,6 +161,7 @@ public class MasterFollowedController {
 			List<MasterMessage> msgList = baseManager.listObject(query);
 			if (msgList != null && msgList.size() > 0){
 				msgList.get(0).setFollowStatus("已关注");
+				msgList.get(0).setStoreStatus(getStorePraiseStatus(msgList.get(0),(User)baseManager.getObject(User.class.getName(),user.getId())));
 				MasterModel msg = ConvertMasterModelUtil.convertMasterModel(msgList.get(0));
 				models.add(msg);
 			}

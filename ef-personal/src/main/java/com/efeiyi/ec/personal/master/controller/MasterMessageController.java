@@ -75,9 +75,11 @@ public class MasterMessageController {
                 if (user == null || user.getId() == null){
                     message.getMaster().setFollowStatus("关注");
                     message.setPraiseStatus("赞");
+                    message.setStoreStatus("收藏");
                 }else{
                     message.getMaster().setFollowStatus(getFollowStatus(message.getMaster(), (User) baseManager.getObject(User.class.getName(), user.getId())));
                     message.setPraiseStatus(getPraiseStatus(message, (User) baseManager.getObject(User.class.getName(), user.getId())));
+                    message.setStoreStatus(getStorePraiseStatus(message,(User) baseManager.getObject(User.class.getName(), user.getId())));
                 }
                 message.setFollowStatus(message.getMaster().getFollowStatus());
                 message.setMasterId(message.getMaster().getId());
@@ -89,19 +91,6 @@ public class MasterMessageController {
             }
         }
         return msgList;
-    }
-
-    @RequestMapping("/getOnlyMasterMessageList.do")
-    public String getMaster(HttpServletRequest request, Model model) {
-        String masterId = request.getParameter("masterId");
-        String queryHql = "from MasterMessage m where m.master.id=:masterId";
-        LinkedHashMap<String, Object> queryMap = new LinkedHashMap<>();
-        queryMap.put("masterId", masterId);
-        List<MasterMessage> list = baseManager.listObject(queryHql, queryMap);
-        Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
-        model.addAttribute("objectList", list);
-        model.addAttribute("object", master);
-        return "/masterMessage/masterMessageListView";
     }
 
     @RequestMapping("/getMasterMessage.do")
@@ -144,6 +133,20 @@ public class MasterMessageController {
         return message.getPraiseStatus();
     }
 
+    public String getStorePraiseStatus(MasterMessage message, User user){
+        String queryHql = "from MasterMessageStore p where p.masterMessage.id=:messageId and p.user.id=:userId";
+        LinkedHashMap<String, Object> queryMap = new LinkedHashMap<>();
+        queryMap.put("messageId", message.getId());
+        queryMap.put("userId", user.getId());
+        List<MasterMessageStore> list = baseManager.listObject(queryHql, queryMap);
+        if (list != null && list.size() > 0) {
+            message.setStoreStatus("已收藏");
+        } else {
+            message.setStoreStatus("收藏");
+        }
+        return message.getStoreStatus();
+    }
+
     @RequestMapping("/forwardMasterDetails.do")
     public String forwardDetails(HttpServletRequest request, Model model) throws Exception {
         String masterId = request.getParameter("masterId");
@@ -174,6 +177,7 @@ public class MasterMessageController {
         queryMap.put("masterId", master.getId());
         List<MasterMessage> list = baseManager.listObject(queryHql, queryMap);
         MyUser user = AuthorizationUtil.getMyUser();
+        List<MasterModel> models = new ArrayList<>();
         if (list != null && list.size() > 0) {
             for (MasterMessage message : list) {
                 String queryHql1 = "from MasterMessagePraise m where m.message.id=:messageId and m.user.id=:userId";
@@ -197,9 +201,11 @@ public class MasterMessageController {
                 } else {
                     message.setStoreStatus("收藏");
                 }
+                MasterModel model = ConvertMasterModelUtil.convertMasterModel(message);
+                models.add(model);
             }
         }
-        return list;
+        return models;
     }
 
     public String mainMasterProject(List<MasterProject> masterProjects) {

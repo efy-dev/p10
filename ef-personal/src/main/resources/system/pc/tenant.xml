@@ -187,6 +187,9 @@
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="user.id" defaultValue="1" operation="eq"/>
                     </query>
+                    <query name="byUser" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="user.id" defaultValue="1" operation="eq"/>
+                    </query>
                 </do>
                 <do name="plistMasterFollow" access="" label="关注" result="json">
                     <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">

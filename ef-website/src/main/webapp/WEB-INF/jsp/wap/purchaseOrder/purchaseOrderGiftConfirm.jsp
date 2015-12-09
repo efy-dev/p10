@@ -29,50 +29,47 @@
 <body>
 <!--//End--header-->
 <div class="gift ae">
-    <div class="card custom ae">
+    <div class="card custom ae ">
         <div class="btb"><h5>礼物卡片</h5></div>
+        <div class="ae imgb">
+            <img src="http://pro.efeiyi.com/${productModel.productModel_url}" style="width: 100%;">
+        </div>
+        <!--//End-->
         <div class="edit-text">
-            <!--    确定后的样式-->
-            <div class="edit-txt1" name="add-show" style="display: none"><span class="leaveword-num">0/50</span></div>
-            <!--    确定后的样式-->
-            <a href="#"  id="add-show" class="edit-txt">编辑祝福语</a>
-            <!--弹出框-->
-            <div style="display: none" class="add-cart">
-                <textarea class="ae" maxlength="50" id="giftMessage" ></textarea>
-                <span id="leaveword-num" class="leaveword-num1">0/50</span>
+            <div class="edit-txt1">点击此处即可编辑祝福语</div>
+            <!--//End-->
+            <div style="display: none" id="addMessage"  class="add-cart">
+                <textarea id="giftMessage" class="ae" maxlength="50"></textarea>
+                <span id="leaveword-num" class="leaveword-num1"><em>50</em>/50</span>
                 <div class="atext ae">
                     <a class="cancel">取&nbsp;消</a>
                     <a class="affirm" id="confirmGiftMessage" onclick="updateGiftMessage()">确&nbsp;认</a>
                 </div>
             </div>
+            <!--//End-->
         </div>
-        <div data-am-widget="slider" class="am-slider am-slider-a1 ae add-suspend"  data-am-slider='{&quot;slideshow&quot;:false}' data-am-slider='{&quot;animationLoop&quot;:false}' >
-            <ul class="am-slides">
-                <li><img id="1" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever1.png"></li>
-                <li><img id="2" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever2.jpg"></li>
-                <li><img id="3" src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/gift/ever3.jpg"></li>
-            </ul>
-            <div class="edit-hint"><span>滑动一下，换换卡片风格。</span></div>
-        </div>
-        <div class="detailed">
-            <div class="font-1" style="display: none">礼物清单：${productModel.name}</div>
-            <div class="font-2" style="display: none">价值：${productModel.price}元</div>
-        </div>
-        <div class="elect">
-            <div class="left">
-                <input type="checkbox" class="add-c1" id="showGiftName" onclick="giftNameStatus(this)">
-                <span>显示礼物名称</span>
+        <div class="edit-text">
+            <div class="edit-txt2">送礼人姓名</div>
+            <!--//End-->
+            <div style="display: none" id="addGaverName" class="add-cart">
+                <textarea id="giftMessage1" class="ae" maxlength="50"></textarea>
+                <span class="leaveword-num1"></span>
+                <div class="atext ae">
+                    <a class="cancel">取&nbsp;消</a>
+                    <a class="affirm" id="confirmGiftMessage1" onclick="addGaverName()">确&nbsp;认</a>
+                </div>
             </div>
-            <div class="right">
-                <input type="checkbox" class="add-c2" id="showGiftPrice" onclick="giftPriceStatus(this)">
-                <span>显示礼物价格</span>
-            </div>
+            <!--//End-->
         </div>
+        <!--//End-->
+
+
+        <div class="detailed"><div class="font-1" style="display: none">礼物清单：安格尔-公爵夫人像</div><div class="font-2"  style="display: none">价值：5000000元</div></div>
 
     </div>
     <div class="gift-details ae">
         <div class="btb"><h5>礼物详情</h5></div>
-        <a href="#" class="gift-c-d ae"><strong>${productModel.name}</strong><i class="sj-icon"></i></a>
+        <a class="gift-c-d ae"><strong>${productModel.name}</strong><i class="sj-icon"></i></a>
 
         <div class="chandise ae">
             <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>
@@ -151,15 +148,9 @@
         if (message != "") {
             var success = function (data) {
                 console.log("保存成功");
-                $("#giftMessageContent").html(data);
-                $("#giftMessageContent").show()
-                $("#add-show").hide();
                 $(".edit-txt1").html(data)
                 $(".edit-txt1").show();
-                $("#add-show").attr("id", "add-show1")
-//                $("[name=add-show]").show();
-                $("[name=add-show]").attr("id", "add-show");
-                $(".add-cart").hide();
+                $("#addMessage").hide();
             }
             ajaxRequest("<c:url value="/order/giftBuy/saveOrUpdateGiftMessage.do"/>", {
                 "purchaseOrderId": "${purchaseOrder.id}",
@@ -264,6 +255,19 @@
         }, "post");
     }
 
+    function addGaverName(){
+        var gaverName = $("#giftMessage1").val();
+        var success = function (data) {
+            $(".edit-txt2").html(data)
+            $(".edit-txt2").show();
+            $("#addGaverName").hide();
+        }
+        ajaxRequest("<c:url value="/order/addGaverName.do"/>", {
+            "purchaseOrderGiftId": "${purchaseOrder.id}",
+            "gaverName": gaverName
+        }, success, function () {
+        }, "post");
+    }
 </script>
 </body>
 </html>

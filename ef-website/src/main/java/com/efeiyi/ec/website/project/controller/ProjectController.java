@@ -56,9 +56,44 @@ public class ProjectController extends BaseController {
 
     @RequestMapping("/list/{categoryId}")
     public String listProjectByCategory(HttpServletRequest request , @PathVariable String categoryId ,Model model) throws Exception{
-        //@TODO 轮播图位置
-        List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
+        String bannerStr = new String("ec.home.banner");
         ProjectCategory projectCategory = (ProjectCategory) baseManager.getObject(ProjectCategory.class.getName(),categoryId);
+        String strName =  projectCategory.getName();
+        switch (strName) {
+            case "陶冶烧造":
+                bannerStr += ".tyzz";
+                break;
+            case "传统美术":
+                bannerStr += ".ctms";
+                break;
+            case "织染印绣":
+                bannerStr += ".zrxy";
+                break;
+            case "茗品佳酿":
+                bannerStr += ".mpjn";
+                break;
+            case "饕餮美食":
+                bannerStr += ".ttmc";
+                break;
+            case "琢玉成器":
+                bannerStr += ".zycq";
+                break;
+            case "金石錾锻":
+                bannerStr += ".jszd";
+                break;
+            case "如胶似漆":
+                bannerStr += ".rjsq";
+                break;
+            case "木作编扎":
+                bannerStr += ".mzpz";
+                break;
+            case "医药养生":
+                bannerStr += ".yyys";
+                break;
+            default:
+        }
+        //@TODO 轮播图位置
+        List<Object> bannerList = bannerManager.getBannerList(bannerStr);
         model.addAttribute("bannerList", bannerList);
         XQuery projectQuery = new XQuery("listProject_default",request);
         projectQuery.put("projectCategory_id",categoryId);

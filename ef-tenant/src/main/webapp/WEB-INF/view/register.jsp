@@ -60,11 +60,11 @@
             </div>
             <div class="items">
                 <p>密码</p>
-                <input class="ipt" type="text" name="password" id="password" placeholder="" required />
+                <input class="ipt" type="password" name="password" id="password" placeholder="" required />
             </div>
             <div class="items">
                 <p>重复密码</p>
-                <input class="ipt" type="text" name="rePassword" onkeydown="checkPassword()" onkeyup="checkPassword()" id="RePassword" placeholder=""  />
+                <input class="ipt" type="password" name="rePassword" onkeydown="checkPassword()" onkeyup="checkPassword()" id="RePassword" placeholder=""  />
                 <small name="message" style="color: red;line-height: 22px;"></small>
             </div>
             <div class="items items-agree">

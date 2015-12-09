@@ -26,6 +26,12 @@ public class SecurityController {
 
     @RequestMapping({"/main.do"})
     public String main(Model model,HttpServletRequest request){
+        if(AuthorizationUtil.getMyUser().getBigTenant()==null){
+            model.addAttribute("review","1");
+        }else {
+            model.addAttribute("review", AuthorizationUtil.getMyUser().getBigTenant().getReview());
+            model.addAttribute("TENANT", AuthorizationUtil.getMyUser().getBigTenant());
+        }
 
         return "/main";
     }

@@ -64,18 +64,18 @@
                     </div>
                 </div>
                 <!--用途-->
-                <div class="loog-ground ae">
-                    <div class="look-head">
-                        <span>用途：</span>
-                        <strong><a href="#">全部</a></strong>
-                    </div>
-                    <div class="look-body">
-                        <a href="#">家居摆设 </a>
-                        <a href="#">生日礼物</a>
-                        <a href="#">创意</a>
-                        <a href="#">爱情</a>
-                    </div>
-                </div>
+                <%--<div class="loog-ground ae">--%>
+                    <%--<div class="look-head">--%>
+                        <%--<span>用途：</span>--%>
+                        <%--<strong><a href="#">全部</a></strong>--%>
+                    <%--</div>--%>
+                    <%--<div class="look-body">--%>
+                        <%--<a href="#">家居摆设 </a>--%>
+                        <%--<a href="#">生日礼物</a>--%>
+                        <%--<a href="#">创意</a>--%>
+                        <%--<a href="#">爱情</a>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
             </div>
         </div>
         <div class="shop-sort newshop-sort ae">
@@ -92,39 +92,39 @@
                            class="icon <c:if test='${searchParamBean.priceUD == 0}'>arrow-up</c:if><c:if test='${searchParamBean.priceUD != 0}'>arrow-down</c:if>"></i>
                     </a>
                 </li>
-                <li class="line"><i class="icon"></i></li>
-                <li class="active">
-                    <a href="#" title="销量">销量</a>
-                </li>
-                <li class="line"><i class="icon"></i></li>
-                <li class="active">
-                    <a href="#" title="人气">人气</a>
-                </li>
+                <%--<li class="line"><i class="icon"></i></li>--%>
+                <%--<li class="active">--%>
+                    <%--<a href="#" title="销量">销量</a>--%>
+                <%--</li>--%>
+                <%--<li class="line"><i class="icon"></i></li>--%>
+                <%--<li class="active">--%>
+                    <%--<a href="#" title="人气">人气</a>--%>
+                <%--</li>--%>
                 <li class="line"><i class="icon"></i></li>
                 <li class="active">
                     <a href="#" title="新品">新品</a>
                 </li>
                 <li class="line"><i class="icon"></i></li>
             </ul>
-            <ul class="link3">
-                <li>
-                    <input type="checkbox">
-                    <span>诚品宝认证</span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <span>推荐精品</span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <span>纯手工制作</span>
-                </li>
-                <li>
-                    <a href="#">商品</a>
-                    <a href="javascript:void(0)" class="line-i">|</a>
-                    <a href="#" class="hover">店铺</a>
-                </li>
-            </ul>
+            <%--<ul class="link3">--%>
+                <%--<li>--%>
+                    <%--<input type="checkbox">--%>
+                    <%--<span>诚品宝认证</span>--%>
+                <%--</li>--%>
+                <%--<li>--%>
+                    <%--<input type="checkbox">--%>
+                    <%--<span>推荐精品</span>--%>
+                <%--</li>--%>
+                <%--<li>--%>
+                    <%--<input type="checkbox">--%>
+                    <%--<span>纯手工制作</span>--%>
+                <%--</li>--%>
+                <%--<li>--%>
+                    <%--<a href="#">商品</a>--%>
+                    <%--<a href="javascript:void(0)" class="line-i">|</a>--%>
+                    <%--<a href="#" class="hover">店铺</a>--%>
+                <%--</li>--%>
+            <%--</ul>--%>
         </div>
         <div class="category">
             <div class="list-pro">

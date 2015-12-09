@@ -16,6 +16,14 @@
                         <item label="个人" value="13"/>
                     </statusType>
                 </field>
+                <field name="review" label="审核状态" inputType="radio">
+                    <statusType fieldName="review">
+                        <item label="未审核" value="1"/>
+                        <item label="正在审核" value="2"/>
+                        <item label="审核未通过" value="3"/>
+                        <item label="审核成功" value="4"/>
+                    </statusType>
+                </field>
                 <field name="id" label="传承人" inputType="text"/>
                 <field name="name" label="传承人名字" inputType="text"/>
             </fields>
@@ -27,6 +35,7 @@
                     </query>
                 </do>
                 <do name="viewTenant" label="查看商家" access="" result="/tenant/tenantView"/>
+                <do name="viewTenant1" label="查看商家" access="" result="/tenant/tenantView1"  execute="com.efeiyi.ec.system.tenant.controller.FormTenantHandler" />
                 <do name="formTenant" label="保存大师页" access="" result="/tenant/tenantForm" execute="com.efeiyi.ec.system.tenant.controller.FormTenantHandler"/>
                 <do name="saveOrUpdateTenant" label="保存大师" access=""
                     execute="com.efeiyi.ec.system.tenant.controller.SaveTenantHandler"
