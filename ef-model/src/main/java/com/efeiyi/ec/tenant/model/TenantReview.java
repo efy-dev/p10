@@ -58,7 +58,7 @@ public class TenantReview implements Serializable {
         this.createDateTime = createDateTime;
     }
 
-    @Column(name = "review")
+    @Column(name = "review_status")
     public String getReview() {
         return review;
     }
