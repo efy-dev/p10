@@ -25,34 +25,31 @@
            </div>
            <div class="wh info">
                <div class="table">
-                   <div class="enter-btn .wh"><a href="<c:url value="basic/xm.do?qm=viewTenant1&id=${TENANT.id}"/> ">我&nbsp;要&nbsp;入&nbsp;驻</a></div>
+                   <div class="enter-btn .wh"><a href="<c:url value="basic/xm.do?qm=viewTenant1&id=${TENANT.id}"/> ">完&nbsp;善&nbsp;信&nbsp;息</a></div>
                    <div class="enter-flow wh">入&nbsp;住&nbsp;流&nbsp;程</div>
                    <div class="wh enter-wh">
                        <div class="enter-list">
                            <dl>
-                               <dt>注&nbsp;&nbsp;册<i class="enter-1"></i></dt>
+                               <dt>完善信息<i class="enter-1"></i></dt>
                                <dd>
-                                   <p>注册e飞蚁个人用户账号<i class="txt-icon"></i></p>
-                                   <p>点击我要入驻<i class="txt-icon"></i></p>
-                                   <p>同意入驻协议<i class="txt-icon"></i></p>
+                                   <p>店铺信息<i class="txt-icon"></i></p>
+                                   <p>商户资质信息<i class="txt-icon"></i></p>
                                </dd>
                            </dl>
                            <dl>
-                               <dt>填写/提交信息及资料<i class="enter-2"></i></dt>
+                               <dt>提交审核<i class="enter-2"></i></dt>
                                <dd>
-                                   <p>填写公司/个体/个人信息，提交资质<i class="txt-icon"></i></p>
-                                   <p>店铺设置<i class="txt-icon"></i></p>
-                                   <p>设置联系人<i class="txt-icon"></i></p>
+                                   <p>提交e飞蚁审核<i class="txt-icon"></i></p>
                                </dd>
                            </dl>
                            <dl>
-                               <dt>等待e飞蚁审核<i class="enter-3"></i></dt>
+                               <dt>e飞蚁审核<i class="enter-3"></i></dt>
                                <dd>
                                    <p>e飞蚁7个工作日内反馈审核结果<i class="txt-icon"></i></p>
                                </dd>
                            </dl>
                            <dl class="noborder1">
-                               <dt>店&nbsp;铺&nbsp;开&nbsp;通<i class="enter-1"></i></dt>
+                               <dt>店&nbsp;铺&nbsp;开&nbsp;通<i class="enter-4"></i></dt>
                                <dd>
                                    <p>店铺开通<i class="txt-icon"></i></p>
                                    <p>商家登录后台<i class="txt-icon"></i></p>

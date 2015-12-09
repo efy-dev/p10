@@ -25,7 +25,7 @@
                                     <c:forEach items="${childJnode.children}" var="childchildJnode">
                                         <li>
                                                 <%--<c:if test="${!empty requestScope.qm && childchildJnode.contain(requestScope.qm)}">--%>
-                                            <a href="${childchildJnode.url}"
+                                            <a href="<c:url value="${childchildJnode.url}"/>"
                                                class="am-cf ${childchildJnode.jnodeMatch('efy-active',currentJnode!=null?currentJnode:"")}">${childchildJnode.text_zh_CN}</a>
                                                 <%--</c:if>--%>
                                                 <%--<c:if test="${empty requestScope.qm || !childchildJnode.contain(requestScope.qm)}">--%>
@@ -45,7 +45,7 @@
                             <%--</c:if>--%>
                             <%--<c:if test="${!empty requestScope.qm && childchildJnode.contain(requestScope.qm)}">--%>
 
-                            <li><a class="${childJnode.jnodeMatch('efy-active',currentJnode!=null?currentJnode:"")}" href="${childJnode.url}"></span> ${childJnode.text_zh_CN}</a></li>
+                            <li><a class="${childJnode.jnodeMatch('efy-active',currentJnode!=null?currentJnode:"")}" href="<c:url value="${childJnode.url}"/>"></span> ${childJnode.text_zh_CN}</a></li>
                             <%--</c:if>--%>
                         </c:if>
                     </c:if>
@@ -64,7 +64,7 @@
                                     <c:forEach items="${childJnode.children}" var="childchildJnode">
                                         <li>
                                                 <%--<c:if test="${!empty requestScope.qm && childchildJnode.contain(requestScope.qm)}">--%>
-                                            <a href="${childchildJnode.url}"
+                                            <a href="<c:url value="${childchildJnode.url}"/> "
                                                class="am-cf ${childchildJnode.jnodeMatch('efy-active',currentJnode!=null?currentJnode:"")}">${childchildJnode.text_zh_CN}</a>
                                                 <%--</c:if>--%>
                                                 <%--<c:if test="${empty requestScope.qm || !childchildJnode.contain(requestScope.qm)}">--%>
@@ -84,7 +84,7 @@
                             <%--</c:if>--%>
                             <%--<c:if test="${!empty requestScope.qm && childchildJnode.contain(requestScope.qm)}">--%>
 
-                            <li><a class="${childJnode.jnodeMatch('efy-active',currentJnode!=null?currentJnode:"")}" href="${childJnode.url}"></span> ${childJnode.text_zh_CN}</a></li>
+                            <li><a class="${childJnode.jnodeMatch('efy-active',currentJnode!=null?currentJnode:"")}" href="<c:url value="${childJnode.url}"/> "></span> ${childJnode.text_zh_CN}</a></li>
                             <%--</c:if>--%>
                         </c:if>
                     </c:if>

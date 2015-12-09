@@ -98,8 +98,12 @@
         </jnode>
 
         <jnode id="accountManager2" url="" text_zh_CN="账号审核管理"><!--系统管理-->
+            <jnode id="" url="/main.do" state="" extend="" access="" text_zh_CN="账号流程">
+                <match url="/main.do"/>
+            </jnode>
             <jnode id="" url="/tenant/viewTenant1.do" state="" extend="" access="" text_zh_CN="账号审核">
                 <match url="/tenant/viewTenant1.do"/>
+                <match url="/basic/xm.do?qm=viewTenant1"/>
             </jnode>
 
             <!--<jnode id="" url="/sign/toChangePassword.do" state="" extend="" access="" text_zh_CN="修改密码">-->
