@@ -19,19 +19,19 @@
         }
     %>
 </div>
-<footer class="bd footer-new">
+<footer class="footer-new">
     <div class="bd authentication">
         <h3>战略合作伙伴</h3>
         <div class="bd">
             <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织"></a>
             <em class="line"></em>
-            <a class="icon2" title="e飞蚁"></a>
+            <a class="icon2" href="http://www.efeiyi.com" title="e飞蚁"></a>
             <em class="line"></em>
             <a class="icon3" title="中国非物质文化遗产保护协会"></a>
         </div>
     </div>
     <div class="bd info">
-        <a class="icon"></a>
+        <a class="icon" href="http://www.efeiyi.com"></a>
         <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台</div>
         <div class="wechat"><img src="/scripts/images/icon-wechat.png"></div>
         <div class="txt">关注微信公众号</div>
