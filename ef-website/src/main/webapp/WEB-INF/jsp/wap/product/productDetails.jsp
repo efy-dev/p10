@@ -37,7 +37,7 @@
         </ul>
     </div>
     <!--//End--am-slider-->
-    <div class="bd details">
+    <div class="bd details slnew seckill">
         <div class="bd des-title">
             <strong class="bd txt">${productModel.product.name}
                 <c:forEach
@@ -79,15 +79,15 @@
             </c:if>
         </div>
         <!-- //End--des-master-->
-        <div class="bd des-price newdes-price">
+        <div class="bd des-price">
             <c:if test="productModel.marketPrice!=null">
                 <p class="bd t1"><span>市场价：</span>
                     <del>${productModel.marketPrice}</del>
                 </p>
             </c:if>
-            <p class="bd t2 s8"><span>飞蚁价：</span><em>￥</em><strong>${productModel.price}</strong></p>
+            <p class="s s2 s8"><span>飞蚁价：</span><em>￥</em><strong>${productModel.price}</strong></p>
 
-            <p class="bd t3"><span> 服&nbsp;&nbsp;&nbsp;务：</span>由 <a
+            <p class="s s9"><span> 服&nbsp;&nbsp;&nbsp;务：</span>由 <a
                     href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>"
                     style="color: #000">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
         </div>
