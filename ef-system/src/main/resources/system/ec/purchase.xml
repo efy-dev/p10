@@ -136,6 +136,13 @@
                         <item label="已绑定" value="2"/>
                     </statusType>
                 </field>
+                <field name="deliverType" label="发放类型" inputType="text">
+                    <statusType fieldName="deliverType">
+                        <item label="优惠券" value="1"/>
+                        <item label="兑换码" value="2"/>
+                        <item label="通码" value="3"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
                 <do name="plistCoupon" access="admin,operational,o_operational,financial,market,product_manager"

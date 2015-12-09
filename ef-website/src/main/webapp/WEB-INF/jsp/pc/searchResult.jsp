@@ -102,7 +102,7 @@
                 <%--</li>--%>
                 <li class="line"><i class="icon"></i></li>
                 <li class="active">
-                    <a href="#" title="新品">新品</a>
+                    <a href="javascript:void(0);" title="新品" onclick="sortDate()">新品</a>
                 </li>
                 <li class="line"><i class="icon"></i></li>
             </ul>
@@ -190,6 +190,10 @@
     }
     function priceSectionForward(priceSection){
         var url = "<c:url value='/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=${searchParamBean.queryFacet}&priceUD=${searchParamBean.priceUD}&fq=product_model_price:'/>" + priceSection;
+        facetForward(url)
+    }
+    function sortDate() {
+        var url = "<c:url value='/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=${searchParamBean.queryFacet}&sortField=create_datetime'/>"+"&sortOrder=&fq=${searchParamBean.fq}" + "&priceUD=0";
         facetForward(url)
     }
 </script>

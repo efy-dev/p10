@@ -623,7 +623,7 @@ html, body {height:100%}
 .newheader .icon-user{margin-top: 5px;}
 .newheader .logo a{width: 74px;}
 .newheader .newsearch{line-height: 0;margin-top: 13px;display:inline-block;margin-left: 10px;width: 47%}
-.newheader .newsearch .newsebox{height: 28px;outline: none;width: 83%;border: 3px solid #999;padding: 3px 4px;float: left;font-size: 12px;color: #666;display: block;border-right-width: 0;}
+.newheader .newsearch .newsebox{height: 28px;outline: none;width: 83%;border: 1px solid #999;padding: 3px 4px;float: left;font-size: 12px;color: #666;display: block;border-right-width: 0;}
 .newheader .newsearch .newsebut{height: 28px;padding:0 3px;line-height:26px;font-size: 12px;color: #fff;background: #999;float: left;border: 1px solid #999;outline: none}
 .newcustom .toolbar .item:nth-child(2){border-right: 0;border-left: 0;width: 24%;}
 .newcustom .toolbar .item{width: 24%;}
@@ -673,7 +673,9 @@ html, body {height:100%}
 .gift .bg-text{padding: 10px 15px;float: left;width: 100%;background: #f5f5f5;color: #000;font-size: 12px;line-height: 14px;}
 .gift{padding:0 1.9rem;position: relative}
 .gift .add-text{}
-.gift .btb {margin-top:18px;}
+.gift .btb {margin-top:28px;}
+.gift .btb.newbtb{margin: 16px 0;}
+.gift .btb.newbtb h5{margin-top: -8px;}
 .gift .btb h5{
     line-height: 30px;font-size: 14px;float:left}
 .gift .btb span{line-height: 30px;font-size: 14px;color: #ff0000;float: right;}
@@ -686,28 +688,20 @@ html, body {height:100%}
     width: 100%;}
 .gift .edit-txt{width: 100%;float: left;border: 2px solid #000;font-size: 12px;color: #000;text-align: center}
 .gift .edit-text{width: 100%;float: left;margin-top:16px;position: relative;font-size: 12px;color: #000;}
-.gift .edit-txt1{
-    line-height: 75px;
-    text-align: center;float: left;width: 100%;border: 2px solid #000;font-size:10px;color: #000;position: relative;
-}
-.gift .edit-txt2{
-    width:100%;
-    text-align: center;
-    float: left;
-    line-height: 40px;border: 2px solid #000;
-    font-size: 10px;
-}
-
+.gift .edit-txt1{  min-height: 75px;float: left;width: 100%;border: 1px solid #ccc;font-size:10px;color: #ccc;position: relative;padding: 10px;}
+.gift .edit-txt2{  width:100%;  float: left; min-height: 32px;border: 1px solid #ccc;  font-size: 10px;padding: 0 10px;color: #ccc;line-height: 32px;}
+.gift .edit-txt1.edit-txt3{color: #000;padding: 13px 15px;}
 
 
 .gift .edit-text a{font-size: 12px;color: #000;display: block}
 .gift .edit-text .cart-icon{width: 20px;height: 20px;background-position: 0 0;position: absolute;right:0px;top: 0px;}
 .gift .gift-details .gift-c-d{height: 43px;line-height: 43px;text-align: left;font-size: 12px;color: #000;border-bottom: 1px solid #ccc;position: relative}
 .gift .gift-details .gift-c-d .sj-icon{width: 10px;height: 10px;border-right: 1px solid #000;border-bottom: 1px solid #000;display:block;position: absolute;right: 16px;top: 50%;margin-top: -4px;transfrom:rotate(-45deg);-webkit-transform:rotate(-45deg);}
-.gift .gift-details .chandise .cha-box{padding-left: 102px;position: relative}
-.gift .gift-details .chandise .cha-box strong{width: 100%;font-size: 12px;color: #000;margin-top: 12px;overflow:hidden;word-break:keep-all;word-wrap:keep-all;white-space:nowrap;table-layout:fixed;-o-text-overflow:ellipsis;text-overflow:ellipsis;float: left}
+.gift .gift-details .chandise .cha-box{padding:16px 0 16px 102px;position: relative;min-height: 103px;border-bottom: 1px solid #ccc;}
+.gift .gift-details .chandise .cha-box strong{width: 100%;font-size: 12px;color: #000;overflow:hidden;word-break:keep-all;word-wrap:keep-all;white-space:nowrap;table-layout:fixed;-o-text-overflow:ellipsis;text-overflow:ellipsis;float: left;font-weight:bold  }
+.gift .gift-details .chandise .cha-box p{width: 100%;font-size: 12px;color: #000;float: left}
 .gift .gift-details .chandise{position: relative}
-.gift .gift-details .chandise .cha-pic{position: absolute;width: 83px;left: 0;top: 12px;}
+.gift .gift-details .chandise .cha-pic{position: absolute;width: 87px;left: 0;top: 16px;}
 .gift .gift-details .chandise .cha-pic img{width: 100%;}
 .gift .gift-details .chandise .piclist{line-height: 16px;width: 42px;padding:3px 0;text-align: center;display: block;position: absolute;bottom: 0px;right: 0;font-size: 12px;border: 1px solid #000;color: #000;}
 .gift .gift-details .chandise span.add-sub {float:left;width: 100%;position: relative}
@@ -727,9 +721,32 @@ html, body {height:100%}
 .gift .elect span{color: #ccc;font-weight: bold}
 .gift .elect .add-c1{}
 .gift .newcart-pay{border-top: 0;padding: 0;margin-bottom: 50px;}
-.gift .newcart-pay .ul-list{padding: 16px 10px 0;}
+/*.gift .new-yierqiu .btb{border-bottom: 0;}
+.gift .new-yierqiu .btb h5{line-height: 14px;}*/
+.gift .new-yierqiu .zfb-page{display: inline-block;}
+
+.gift .new-yierqiu .ul-list li a{margin-bottom: 0;margin-top:-1px;position: relative;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;border-right-width:0;border-left-width:0;text-align: left;padding:20px 0 0 57px;min-height: 68px;}
+
+.gift .new-yierqiu .ul-list li .icon{left: 0;}
+.gift .new-yierqiu .ul-list li a .zfb-page p{font-size: 12px;color: #000;line-height: 17px;font-weight: bold}
+.gift .new-yierqiu .ul-list li a .zfb-page p:last-child{font-size: 0.8rem;color: #999;}
+.gift .new-yierqiu span.add-zfb{background-image: url(../images/cart-icon.png);}
+.gift .new-yierqiu .add-zfb{-webkit-background-size:83px auto;background-size:83px auto;width: 21px;height: 21px;position: absolute;top: 50%;right: 16px;background-position: -9px -534px;margin-top: -10px;}
+
+
+
+
+
+
+
+
+
+
+
+
 .gift .newpayment-total-bar{background: #fff;border-top: 1px solid #000;}
 .gift .newpayment-total-bar .btn-right{padding: 0 25px;}
+.gift .newpayment-total-bar .btn-right.btn-red{background: #ca2610;}
 .gift .add-suspend{position: relative}
 .gift .pic-page{padding: 16px 0;position: relative;min-height: 110px;}
 .gift .pic-page .pic-text{padding-left:195px;width: 100%;float: left;font-size: 12px;color: #000}

@@ -80,7 +80,15 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">兑换码</td>
-                <td class="am-u-md-3" colspan="3">${object.uniqueKey}</td>
+                <td class="am-u-md-3">
+                    <c:if test="${object.deliverType != 1}">${object.uniqueKey}</c:if>
+                </td>
+                <td class="am-primary am-u-md-3">优惠券发放方式</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="coupon" dataType="coupon.deliverType"
+                                    checkedValue="${object.deliverType}"
+                                    type="normal"/>
+                </td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">生效日期</td>
