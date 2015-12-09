@@ -173,7 +173,7 @@ public class Tenant implements Serializable {
         this.phone = phone;
     }
 
-    @Column(name = "review")
+    @Column(name = "review_status")
     public String getReview() {
         return review;
     }

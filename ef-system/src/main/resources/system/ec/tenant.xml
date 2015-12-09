@@ -264,5 +264,26 @@
 
             </does>
         </entity>
+
+
+        <entity name="TenantReview" label="商家用户审核"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantReview">
+            <does>
+
+                <do name="formTenantReview" label="保存商家用户审核"
+                    execute="com.efeiyi.ec.system.tenant.controller.ToTenantReviewFormHandler"
+                    access="" result="/tenantReview/tenantReviewForm"/>
+                <do name="saveOrUpdateTenantReview" label="保存商家大师" access="" result="/tenantMaster/tenantMasterSaveSuccess">
+                </do>
+                <do name="listTenantReview" label="商家用户审核" access=""
+                    result="/tenantReview/tenantReviewList">
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
     </entities>
 </module>

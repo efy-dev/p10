@@ -232,7 +232,7 @@ public class BigTenant implements Serializable,BaseTenant {
         this.phone = phone;
     }
 
-    @Column(name = "review")
+    @Column(name = "review_status")
     public String getReview() {
         return review;
     }

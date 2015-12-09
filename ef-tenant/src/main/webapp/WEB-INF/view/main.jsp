@@ -81,6 +81,26 @@
                         <th width="20%">操作时间</th>
                         <th width="60%">详  情</th>
                     </tr>
+                    <c:forEach var="tenantReview" items="${tenantReviewList}">
+                        <tr>
+                            <td class="tc">
+                                <p>
+                                    审核未通过
+                                </p>
+                            </td>
+                            <td class="tc">
+                                <p>
+                                    <fmt:formatDate value="${tenantReview.createDateTime}" pattern="yyyy-HH-mm hh:mm:ss"/>
+                                </p>
+                            </td>
+
+                            <td class="tl">
+                                <p>
+                                   ${tenantReview.content}
+                                </p>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     <%--<tr>--%>
                         <%--<td class="tc"><p>审核未通过</p></td>--%>
                         <%--<td class="tc"><p>2012-21-21 23:23</p></td>--%>
@@ -119,6 +139,28 @@
                         <th width="20%">操作时间</th>
                         <th width="60%">详  情</th>
                     </tr>
+                    <c:forEach var="tenantReview" items="${tenantReviewList}">
+                        <tr>
+                            <td class="tc">
+                                <p>
+                                    审核未通过
+                                </p>
+                            </td>
+                            <td class="tc">
+                                <p>
+                                    <fmt:formatDate value="${tenantReview.createDateTime}" pattern="yyyy-HH-mm hh:mm:ss"/>
+                                </p>
+                            </td>
+
+                            <td class="tl">
+                                <p>
+                                      <span>${tenantReview.content}</span>
+                                    <a class="btn-link" href="<c:url value="basic/xm.do?qm=viewTenant1&id=${TENANT.id}"/>">修 改</a>
+
+                                </p>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     <%--<tr>--%>
                         <%--<td class="tc"><p>审核未通过</p></td>--%>
                         <%--<td class="tc"><p>2012-21-21 23:23</p></td>--%>

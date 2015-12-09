@@ -201,6 +201,8 @@
                 <match url="/basic/xm.do?qm=plistTProduct_serial"/>
                 <match url="/basic/xm.do?qm=plistTENANTProduct_default"/>
                 <match url="/basic/xm.do?qm=plistTENANTProduct_default1"/>
+                <match url="/tenant/toSubmitReview.do"/>
+                <match url="/basic/xm.do?qm=formTenantReview"/>
 
 
             </jnode>
