@@ -314,3 +314,8 @@ ADD COLUMN `status`  char(8) NULL AFTER `purchase_order_comment_id`;
 ALTER TABLE `purchase_order`
 ADD COLUMN `purchase_order_address`  varchar(255) NULL AFTER `coupon_id`;
 
+
+ALTER TABLE `purchase_order_gift`
+ADD COLUMN `gift_gaver_name`  varchar(50) NULL AFTER `gift_picture_url`;
+
+

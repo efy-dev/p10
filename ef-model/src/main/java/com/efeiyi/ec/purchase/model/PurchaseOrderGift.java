@@ -15,6 +15,16 @@ public class PurchaseOrderGift extends PurchaseOrder {
     private String showGiftNameStatus; //0不显示 1显示
     private String showGiftPriceStatus; // 0 不显示 1 显示
     private String giftPictureUrl ; //礼物图片
+    private String giftGaverName;  //送礼人姓名
+
+    @Column(name = "gift_gaver_name")
+    public String getGiftGaverName() {
+        return giftGaverName;
+    }
+
+    public void setGiftGaverName(String giftGaverName) {
+        this.giftGaverName = giftGaverName;
+    }
 
     @Column(name = "gift_message")
     public String getGiftMessage() {
