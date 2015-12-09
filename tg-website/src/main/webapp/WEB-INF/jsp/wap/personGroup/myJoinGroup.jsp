@@ -40,7 +40,7 @@
     <!-- //End--title-->
 </header>
 <!--//End--header-->
-<ul class="offered ae">
+<ul class="offered ae" style="margin-bottom: 66px;">
     <c:forEach items="${groupJoinList}" var="member" varStatus="rec">
         <a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
             <li>

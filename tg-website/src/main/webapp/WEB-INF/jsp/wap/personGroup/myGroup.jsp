@@ -48,7 +48,7 @@
   <!-- //End--title-->
 </header>
 <!--//End--header-->
-<div class="ag-list ae" style="padding-bottom: 60px;">
+<div class="ag-list ae" style="padding-bottom: 66px;">
   <ul class="ag-new ae">
     <li class="active">我的开团</li>
     <li>我的参团</li>
