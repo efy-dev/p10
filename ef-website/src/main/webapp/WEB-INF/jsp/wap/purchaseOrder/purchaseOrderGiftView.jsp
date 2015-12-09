@@ -14,11 +14,16 @@
 				src="http://pro.efeiyi.com/${order.purchaseOrderProductList.get(0).productModel.productModel_url}@!product-icon">
 		</div>
 	</div>
+	<c:if test="${!empty order.giftMessage || !empty order.giftGaverName}">
 	<div class="c-info ae">
+		<c:if test="${!empty order.giftMessage}">
 		<p>${order.giftMessage}</p>
-
+         </c:if>
+		<c:if test="${!empty order.giftGaverName}">
 		<p>——${order.giftGaverName}</p>
+		</c:if>
 	</div>
+	</c:if>
 	<!-- //End-->
 	<div class="car-state ae">
 		<div class="btb"><h5>礼物状态</h5><span><c:if test="${order.orderStatus=='6'}">未收礼</c:if> <c:if
@@ -44,7 +49,6 @@
 	<c:if test="${!empty content}">
 	<div class="logistics ae">
 		<div class="part">
-			<h4>感谢您收下礼物，快递小哥正在拼命配送中。</h4>
 			<ul>
 				<li><span>物流状态：</span><em><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus"
 														  checkedValue="${order.orderStatus}" type="normal"/></em></li>
