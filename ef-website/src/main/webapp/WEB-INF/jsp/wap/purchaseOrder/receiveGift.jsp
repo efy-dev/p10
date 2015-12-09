@@ -31,13 +31,6 @@
 <div class="gift ae">
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
-        <div class="edit-text">
-            <em>${purchaseOrder.giftMessage}</em>
-        </div>
-        <%--<div class="cupic ae"><img src="${purchaseOrder.giftPictureUrl}"></div>--%>
-    </div>
-    <div class="card custom ae">
-        <div class="btb"><h5>礼物卡片</h5></div>
         <div class="pic-page ae">
             <div class="pic-img"><img
                     src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}">
