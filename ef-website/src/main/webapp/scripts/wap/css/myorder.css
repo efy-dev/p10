@@ -617,7 +617,7 @@ html, body {height:100%}
 .b06-page li img{width: 100%;}
 .b06-page li p{height: 36px;overflow: hidden;text-align: center;font-size: 1rem;color: #000;line-height: 16px;margin-top: 5px;}
 .b06-page li.max-page a{height: 55px;line-height: 55px;border: 3px solid #000;text-align: center;font-size: 12px;display:block;color: #000;}
-/*大首页new*/
+    /*大首页new*/
 .newicon{background:url(../images/newicon.png) no-repeat;background-size:152px auto}
 .newheader{text-align: center}
 .newheader .icon-user{margin-top: 5px;}
@@ -732,7 +732,7 @@ html, body {height:100%}
 .gift .newpayment-total-bar .btn-right{padding: 0 25px;}
 .gift .add-suspend{position: relative}
 .gift .pic-page{padding: 16px 0;position: relative;min-height: 110px;}
-.gift .pic-page .pic-text{padding-left:195px;width: 100%;float: left;font-size: 12px;color: #000}
+.gift .pic-page .pic-text{padding-left:195px;height:101px;width: 100%;float: left;font-size: 12px;color: #000}
 
 .gift .pic-page .pic-text p{line-height: 15px;margin-bottom: 10px;margin-top: 0;font-weight: bold}
 .gift .pic-page .pic-text p.t2 i,.gift .pic-page .pic-text p.t2 em {
@@ -789,8 +789,8 @@ html, body {height:100%}
 }
 
 
-.gift .pic-page .pic-img{width: 181px;position: absolute;left: 0;top: 16px;}
-.gift .pic-page .pic-img img{width: 100%}
+.gift .pic-page .pic-img{width:181px;height:101px;position:absolute;left:0;top:16px;overflow:hidden}
+.gift .pic-page .pic-img img{width:100%}
 
 
 
@@ -888,7 +888,7 @@ html, body {height:100%}
 }
 .gift-img img {width: 100%;}
 
-/*图片礼品*/
+    /*图片礼品*/
 .imgtbd .imgp{font-size: 12px;color: #fff;padding: 30px 0;text-align: center}
 .tbd{padding: 0;}
 .tbd .add-new-txt{margin-top: 5px;}
