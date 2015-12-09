@@ -85,12 +85,17 @@
                     <del>${productModel.marketPrice}</del>
                 </p>
             </c:if>
-            <p class="bd t2"><span>飞蚁价：</span><dfn>￥</dfn><em>${productModel.price}</em></p>
+            <p class="bd t2 s8"><span>飞蚁价：</span><em>￥</em><strong>${productModel.price}</strong></p>
 
             <p class="bd t3"><span> 服&nbsp;&nbsp;&nbsp;务：</span>由 <a
                     href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>"
                     style="color: #000">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
         </div>
+
+        <%--<div class="bd des-price">--%>
+            <%--<div class="s s2 s8"><span>飞蚁价：</span><em>￥</em><strong>11</strong></div>--%>
+            <%--<div class="s s9"><span>服&nbsp;&nbsp;&nbsp;务：</span>由姚惠芬刺绣刺绣馆（苏绣）发货并提供售后服务</div>--%>
+        <%--</div>--%>
         <!-- //End--des-price-->
         <div class="bd des-format">
             <a id="btn-num" class="bd btn-num">
