@@ -623,8 +623,8 @@ html, body {height:100%}
 .newheader .icon-user{margin-top: 5px;}
 .newheader .logo a{width: 74px;}
 .newheader .newsearch{line-height: 0;margin-top: 13px;display:inline-block;margin-left: 10px;width: 47%}
-.newheader .newsearch .newsebox{height: 28px;outline: none;width: 83%;border: 3px solid #000;padding: 3px 4px;float: left;font-size: 12px;color: #666;display: block;border-right-width: 0;}
-.newheader .newsearch .newsebut{height: 28px;padding:0 3px;line-height:26px;font-size: 12px;color: #fff;background: #000;float: left;border: 1px solid #000;outline: none}
+.newheader .newsearch .newsebox{height: 28px;outline: none;width: 83%;border: 3px solid #999;padding: 3px 4px;float: left;font-size: 12px;color: #666;display: block;border-right-width: 0;}
+.newheader .newsearch .newsebut{height: 28px;padding:0 3px;line-height:26px;font-size: 12px;color: #fff;background: #999;float: left;border: 1px solid #999;outline: none}
 .newcustom .toolbar .item:nth-child(2){border-right: 0;border-left: 0;width: 24%;}
 .newcustom .toolbar .item{width: 24%;}
 .newcustom .toolbar .item span{font-size: 12px;line-height: 12px;height: auto}
@@ -657,7 +657,7 @@ html, body {height:100%}
 .newcustom .max-cat .cat-top .cat-t-o{line-height: 13px;font-weight:bold;display: block;border: 5px solid #000;width: 33px;font-size: 12px;text-align: center;margin-right: 20px;color: #000;float: left;padding: 10px 0;}
 .newcustom .max-cat .cat-top .cat-t-t{font-size: 12px;color: #000;width: 12px;float: left;line-height: 14px;font-weight:bold;margin:5px 10px 0 0;}
 .newcustom .max-cat .cat-bottom li{width: 50%;border: 1px solid #fff;position: relative}
-.newcustom .max-cat .cat-bottom li em{position:absolute;top:13px;color:#fff;font-size:12px;width:16px;overflow:hidden;font-style:italic;line-height:14px;left: 12px;max-height: 120px;}
+.newcustom .max-cat .cat-bottom li em{position:absolute;top:13px;color:#fff;font-size:12px;width:16px;overflow:hidden;font-style:italic;line-height:14px;left: 12px;max-height: 113px;}
 .newcustom .max-cat .cat-bottom li .price{position:absolute;bottom:10px;right:12px;font-size:12px;color:#fff}
 .newcustom .max-cat .cat-bottom li .price i{font-style:normal;font-size:8px}
 .newcustom .max-cat .cat-bottom li .price strong{font-weight:normal}
@@ -732,7 +732,7 @@ html, body {height:100%}
 .gift .newpayment-total-bar .btn-right{padding: 0 25px;}
 .gift .add-suspend{position: relative}
 .gift .pic-page{padding: 16px 0;position: relative;min-height: 110px;}
-.gift .pic-page .pic-text{padding-left:195px;height:101px;width: 100%;float: left;font-size: 12px;color: #000}
+.gift .pic-page .pic-text{padding-left:195px;width: 100%;float: left;font-size: 12px;color: #000}
 
 .gift .pic-page .pic-text p{line-height: 15px;margin-bottom: 10px;margin-top: 0;font-weight: bold}
 .gift .pic-page .pic-text p.t2 i,.gift .pic-page .pic-text p.t2 em {
@@ -789,8 +789,8 @@ html, body {height:100%}
 }
 
 
-.gift .pic-page .pic-img{width:181px;height:101px;position:absolute;left:0;top:16px;overflow:hidden}
-.gift .pic-page .pic-img img{width:100%}
+.gift .pic-page .pic-img{width: 181px;position: absolute;left: 0;top: 16px;}
+.gift .pic-page .pic-img img{width: 100%}
 
 
 
@@ -917,12 +917,15 @@ html, body {height:100%}
 .gift .cupic img{width: 100%}
 /*送礼页面*/
 .slnew .des-content .newul-img{width: 100%}
+
 .slnew .des-content .newul-img .img{margin-bottom:16px;}
-.slnew .des-price p{font-size: 12px}
-.slnew .des-price {padding:0 1.9rem}
-.slnew .des-content .title{font-size: 14px;padding: 10px 19px}
+.slnew .des-price p{font-size: 12px;}
+.slnew .des-price {padding:0 1.9rem;margin-bottom: 0;border-bottom: 0;}
+.slnew .des-content .title{font-size: 14px;padding: 0px 19px 10px;}
 .am-addol .am-control-nav{bottom: 50px;}
 /*图片*/
+.seckill .s8{margin: 9px 0}
+.seckill .s9 span{top: 0}
 .img-pic img{width: 100%}
 /*收礼页面弹出框*/
 .add-ress .add-text{position: absolute;width: 100%;left: 0;bottom: 0;z-index: 103;background: #fff;padding:14px 19px 0 19px; }
