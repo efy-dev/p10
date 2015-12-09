@@ -79,7 +79,7 @@
             </c:if>
         </div>
         <!-- //End--des-master-->
-        <div class="bd des-price">
+        <div class="bd des-price newdes-price">
             <c:if test="productModel.marketPrice!=null">
                 <p class="bd t1"><span>市场价：</span>
                     <del>${productModel.marketPrice}</del>
@@ -178,13 +178,13 @@
         <%--<a class="btn-default" target="_blank"  title="咨询">咨询</a>--%>
         <c:if test="${productModel.amount<=0}">
             <a class="btn-cart" title="放入购物车"><i class="icon"></i>放入购物车</a>
-            <a class="btn-buy" title="售罄">售罄</a>
+            <a style="width:22%;" class="btn-buy" title="售罄">售罄</a>
         </c:if>
         <c:if test="${productModel.amount>0}">
             <a class="btn-cart" onclick="addCart('${productModel.id}')" title="放入购物车"><i class="icon"></i>放入购物车</a>
-            <a class="btn-buy" onclick="immediateBuy('${productModel.id}')" title="立即购买">立即购买</a>
+            <a style="width:22%;" class="btn-buy" onclick="immediateBuy('${productModel.id}')" title="立即购买">立即购买</a>
         </c:if>
-        <a class="btn-default" onclick="giftBuy()" title="送礼">送礼</a>
+        <a style="width: 22%" class="btn-default" onclick="giftBuy()" title="购买">购买送礼</a>
     </div>
 </article>
 <!--Start--选择规格弹出框-->

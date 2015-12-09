@@ -61,7 +61,7 @@ public class ProjectController extends BaseController {
         String strName =  projectCategory.getName();
         switch (strName) {
             case "陶冶烧造":
-                bannerStr += ".tyzz";
+                bannerStr += ".tysz";
                 break;
             case "传统美术":
                 bannerStr += ".ctms";
