@@ -51,19 +51,32 @@
 
     </div>
     <div class="gift-details ae">
-        <div class="btb"><h5>礼物详情</h5></div>
-        <a class="gift-c-d ae"><strong>${productModel.name}</strong><i class="sj-icon"></i></a>
+        <%--<div class="btb"><h5>礼物详情</h5></div>--%>
+        <%--<a class="gift-c-d ae"><strong>${productModel.name}</strong><i class="sj-icon"></i></a>--%>
 
+        <%--<div class="chandise ae">--%>
+            <%--<div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>--%>
+            <%--<div class="cha-box">--%>
+                <%--<strong>${productModel.product.subName}</strong>--%>
+
+                <%--<div class="money">--%>
+                    <%--<em>${productModel.price}</em>--%>
+                    <%--<i>元</i>--%>
+                <%--</div>--%>
+                <%--<span class="add-sub"></span>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+
+        <div class="btb"><h5>礼物详情</h5></div>
         <div class="chandise ae">
             <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>
             <div class="cha-box">
-                <strong>${productModel.product.subName}</strong>
-
+                <strong>${productModel.name}</strong>
+                <p>${productModel.product.subName}</p>
                 <div class="money">
                     <em>${productModel.price}</em>
                     <i>元</i>
                 </div>
-                <span class="add-sub"></span>
             </div>
         </div>
 
