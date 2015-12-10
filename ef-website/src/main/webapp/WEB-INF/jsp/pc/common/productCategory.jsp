@@ -52,11 +52,13 @@
         height: 380px;
         padding: 30px 0;
         position: absolute;
-        top: 10px;
+        top: 30px;
         left: 0;
         background: #fff;
         box-sizing: content-box;
     }
+
+
     .nav-new .cate .allsort .item .i-mc .links {
         width: 240px;
         height: 384px;
