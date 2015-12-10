@@ -40,9 +40,13 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
             purchaseOrderProductTemp.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), purchaseOrderProductTemp.getProductModel().getId()));
             Tenant tenant = purchaseOrderProductTemp.getProductModel().getProduct().getTenant();
             tenantSet.add(tenant);
-            List<Object> productList = new ArrayList();
-            productList.add(purchaseOrderProductTemp);
-            productMap.put(tenant.getId(), productList);
+            if (productMap.get(tenant.getId()) != null) {
+                productMap.get(tenant.getId()).add(purchaseOrderProductTemp);
+            } else {
+                List<Object> productList = new ArrayList();
+                productList.add(purchaseOrderProductTemp);
+                productMap.put(tenant.getId(), productList);
+            }
         }
         if (tenantSet != null && tenantSet.size() > 1) {
             for (Tenant tenantTemp : tenantSet) {
@@ -87,7 +91,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
         purchaseOrder.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-        List<PurchaseOrderProduct> purchaseOrderProductList  = new ArrayList<>();
+        List<PurchaseOrderProduct> purchaseOrderProductList = new ArrayList<>();
         BigDecimal totalPrice = new BigDecimal(0);
         if (cartProductList != null && cartProductList.size() > 0) {
             for (CartProduct cartProduct : cartProductList) {
