@@ -7,7 +7,7 @@
     <entities>
         <entity name="Tenant" label="传承人列表"
                 basic="simple" others=""
-                model="com.efeiyi.ec.tenant.model.Tenant">
+                model="com.efeiyi.ec.tenant.model.BigTenant">
             <fields>
                 <field name="tenantType" label="商家类型" inputType="radio">
                     <statusType fieldName="tenantType">
