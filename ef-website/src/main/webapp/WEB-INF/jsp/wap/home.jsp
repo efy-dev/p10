@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
-<html class="no-js">
+<html class="am-touch js cssanimations">
 <head>
     <title>e飞蚁-领先的非物质文化遗产电商平台</title>
     <meta name="keywords" content="e飞蚁,非物质文化遗产,中国非物质文化遗产,非物质文化遗产网,非遗博览园,非遗节,非遗产品,非遗大师,传统工艺" />
@@ -20,23 +20,45 @@
         </ul>
     </div>
     <!--//End--am-slider-->
+    <%--<div class="toolbar">--%>
+        <%--<a class="item asso" href="<c:url value="/productCategoryList.do"/> ">--%>
+            <%--<span><i class="newicon"></i></span>--%>
+            <%--<span>分&nbsp;类</span>--%>
+        <%--</a>--%>
+        <%--<a class="item sh" href="http://www.efeiyi.com/subject/ig8zlvonengegjk9">--%>
+            <%--<span><i class="newicon"></i></span>--%>
+            <%--<span>专&nbsp;题</span>--%>
+        <%--</a>--%>
+        <%--<a class="item user" href="http://master.efeiyi.com">--%>
+            <%--<span><i class="newicon"></i></span>--%>
+            <%--<span>大&nbsp;师</span>--%>
+        <%--</a>--%>
+        <%--<a class="item coupon" href="#coupon">--%>
+            <%--<span><i class="newicon"></i></span>--%>
+            <%--<span>工&nbsp;艺</span>--%>
+        <%--</a>--%>
+    <%--</div>--%>
     <div class="toolbar">
         <a class="item asso" href="<c:url value="/productCategoryList.do"/> ">
             <span><i class="newicon"></i></span>
             <span>分&nbsp;类</span>
         </a>
-        <a class="item sh" href="http://www.efeiyi.com/subject/ig8zlvonengegjk9">
+        <a class="item sh" href="http://www.efeiyi.com/subject/ihygpskg3j28dh60">
             <span><i class="newicon"></i></span>
             <span>专&nbsp;题</span>
         </a>
-        <a class="item user" href="http://master.efeiyi.com">
+        <a class="item user" href="http://www.efeiyi.com/subject/ihygpb6m24v43zv9">
             <span><i class="newicon"></i></span>
-            <span>大&nbsp;师</span>
+            <span>礼&nbsp;品</span>
         </a>
-        <a class="item coupon" href="#coupon">
-            <span><i class="newicon"></i></span>
-            <span>工&nbsp;艺</span>
-        </a>
+        <!--<a class="item user" href="#user">-->
+        <!--<span><i class="newicon"></i></span>-->
+        <!--<span>大&nbsp;师</span>-->
+        <!--</a>-->
+        <!--<a class="item coupon" href="#coupon">-->
+        <!--<span><i class="newicon"></i></span>-->
+        <!--<span>工&nbsp;艺</span>-->
+        <!--</a>-->
     </div>
     <!--//End--toolbar-->
     <div class="deduce">
