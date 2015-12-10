@@ -55,6 +55,7 @@
                 </dl>
                 <dl class="fore">
                     <dt>服务保障</dt>
+                    <dd><a href="<%=PConst.HOSTNAME%>/document/helpCenter?group=ec.zpbz" target="_blank">正品保障</a></dd>
                     <dd><a href="<%=PConst.HOSTNAME%>/document/helpCenter?group=ec.shzc" target="_blank">售后政策</a></dd>
                 </dl>
                 <dl class="fore">
