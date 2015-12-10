@@ -47,7 +47,7 @@
             <span><i class="newicon"></i></span>
             <span>专&nbsp;题</span>
         </a>
-        <a class="item gift" href="http://www.efeiyi.com/subject/ihzs8v95279y99hz">
+        <a class="item gift" href="http://www.efeiyi.com/subject/ihx20izq1o63bz5w">
             <span><i class="newicon"></i></span>
             <span>礼&nbsp;品</span>
         </a>
