@@ -226,7 +226,7 @@
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.serial}</td>
                     <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/></td>
-                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.tenant.contractNumber}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.bigTenant.contractNumber}</td>
                 </tr>
             </c:forEach>
             </tbody>
