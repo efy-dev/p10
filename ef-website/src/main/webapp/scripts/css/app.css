@@ -926,8 +926,9 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 .focus-new .btn-next {background-position:-46px 0;right:-45px}
 /*--//End---focus-new---*/
 .homenew .deduce{margin-bottom: 38px;}
-.homenew .deduce .list-top{padding: 38px 0 38px 145px;margin-left: -20px;}
-.homenew .deduce .list-top li{width: 135px;height: 135px;float: left;border: 4px solid #a0a0a0;margin-right: 20px;}
+.homenew .deduce .list-top{padding: 38px 0;text-align: center}
+.homenew .deduce .list-top li{width: 135px;height: 135px;border: 4px solid #a0a0a0;
+    margin:0 10px;display: inline-block;}
 .homenew .deduce .list-top li img{width: 100%;}
 .homenew .deduce .list-bottom li{width: 239px;height: 134px;position: relative;margin: 0 1px 1px 0;float: left}
 .homenew .deduce .list-bottom li strong{width:20px;height:110px;position:absolute;top:15px;left:15px;font-size:16px;color:#fff;line-height:18px;font-style:italic;overflow:hidden;z-index:5;font-size: 14px;}
