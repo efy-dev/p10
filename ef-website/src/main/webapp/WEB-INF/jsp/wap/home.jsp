@@ -79,7 +79,7 @@
                             <em>${hotSale.name}</em>
                             <img src="http://pro.efeiyi.com/${hotSale.img}">
                         </a>
-                        <span class="price"><i>￥</i><strong>${hotSaleList.get(0).price}</strong></span>
+                        <span class="price"><i>￥</i><strong>${hotSale.price}</strong></span>
                         <span class="heat"><font>热卖</font></span>
                     </li>
                 </c:forEach>
