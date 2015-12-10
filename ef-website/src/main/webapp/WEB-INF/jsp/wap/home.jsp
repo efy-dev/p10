@@ -43,7 +43,7 @@
             <span><i class="newicon"></i></span>
             <span>分&nbsp;类</span>
         </a>
-        <a class="item sh" href="http://www.efeiyi.com/subject/ihygpskg3j28dh60">
+        <a class="item sh" href="http://www.efeiyi.com/subject/ii09rq66455cnijf">
             <span><i class="newicon"></i></span>
             <span>专&nbsp;题</span>
         </a>
