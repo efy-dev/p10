@@ -7,7 +7,7 @@
     <entities>
         <entity name="Tenant" label="商家列表"
                 basic="simple" others=""
-                model="com.efeiyi.ec.tenant.model.Tenant">
+                model="com.efeiyi.ec.tenant.model.BigTenant">
             <does>
                 <do name="plistTenant" access="" label="商家分页列表"
                     result="/tenant/tenantPList">
