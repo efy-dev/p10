@@ -45,12 +45,12 @@
             <div id="cover" style="display: none;"><em class="bg"></em><img
                     src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt=""></div>
             <div id="cover2" style="display: none">
-                <div class="text-co2">
+                <div class="text-co2" style="left: 17%;">
                     <strong class="cov-titie">提示</strong>
 
                     <p class="covtext">在浏览器中寻找分享按钮，将本页面链接分享给您的好友吧。</p>
 
-                    <div class="ae" style="text-align: center"><a class="covbtn" href="#">确定</a></div>
+                    <div class="ae" style="text-align: center"><a class="covbtn" >确定</a></div>
                 </div>
                 <div class="bg"></div>
             </div>
@@ -94,6 +94,10 @@
             } else {
                 $("#cover2").show();
             }
+        })
+
+        $(".covbtn").click(function(){
+            $("#cover2").hide();
         })
     })
 </script>

@@ -750,7 +750,7 @@ CREATE TABLE `tenant_review` (
 `id`  char(16) NOT NULL ,
 `content`  varchar(255) NULL ,
 `tenant_id`  char(16) NULL ,
-`review`  char(2) NULL ,
+`review_status`  char(2) NULL ,
 `create_datetime`  datetime NULL ,
 PRIMARY KEY (`id`)
 )

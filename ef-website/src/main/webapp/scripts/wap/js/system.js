@@ -7,7 +7,7 @@ $(function(){
     //购物车
     (function(){
         $('.icon-delete').click(function(){
-            $('.alert-delete').fadeIn('fast');
+           $('.alert-delete').fadeIn('fast');
         })
 
         $('.edit-dete').click(function(){
@@ -28,17 +28,19 @@ $(function(){
         $(".add-ress .bg").click(function(){
             $(this).parents().find(".add-ress").hide();
         });
-
+        $(".gift .new-yierqiu .ul-list li a").click(function(){
+            $(this).parent().addClass("add-btn1").siblings().removeClass()
+        })
 
         $(".gift .edit-txt1,.gift .edit-txt2").click(function(){
             $(this).siblings('.add-cart').fadeIn().show();
-            var text=$(".gift textarea").val();
+            var text=$(".gift .add-cart textarea").val();
             var counter=text.length;
-            $("#leaveword-num em").text(50-counter);
+            $(".leaveword-num1 em,.leaveword-num2 em").text(50-counter);
             $(document).keyup(function() {
                 var text=$(".gift textarea").val();
                 var counter=text.length;
-                $("#leaveword-num em").text(50-counter);
+                $(".leaveword-num1 em,.leaveword-num2 em").text(50-counter);
             });
         });
 
@@ -62,14 +64,14 @@ $(function(){
         $("#nobtn").removeAttr('onclick');
 
     })
-        //商品评价
+    //商品评价
     (function(){
         $('.my-evaluate .score .score-star .star li').click(function(){
             $(this).toggleClass('active');
         })
     });
 
-    //020102分类导航
+        //020102分类导航
     (function(){
         $('.box-hd .ul-index-list>li .item').click(function(){
             $(this).find('.arrow-down').toggleClass('arrow-up');
@@ -148,6 +150,16 @@ $(function(){
             $(".custom-header").css("z-index","0");
             return false;
         });
+        $("#line").click(function(){
+           $("#cover2").show();
+           $(".custom-header").css("z-index","0");
+        })
+        $("#cover2 .text-co2 .covbtn").click(function(){
+            $(this).parents("#cover2").hide()
+        })
+        $("#cover2 .bg").click(function(){
+            $(this).parents("#cover2").hide()
+        })
         //详情和评论-弹出轮播图
 
         $('.list-img li').on('click',function(){
@@ -256,7 +268,7 @@ $(function(){
     })();
     //秒杀
     (function(){
-        //02移动商城/0201商城前台/秒杀—即将开始1
+        //02移动商城/0201商城前台/秒杀—即将开始
         $('.seckill .s-list .items:last').css('border-bottom','0');
         //秒杀-详情页-已结束-----------展开
         var $info=$('.seckill .s4 .info')
