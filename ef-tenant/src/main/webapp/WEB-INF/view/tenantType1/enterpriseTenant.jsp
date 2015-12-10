@@ -102,7 +102,7 @@
             <div class="am-form-group">
                 <label name="addressProvince.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在省 <small>*</small></label>
                 <div class="am-u-sm-9" style="margin-top: 10px">
-                    <select id="${object.id}" name="addressProvince.id" onchange="provinceChange(this , '${object.id}')">
+                    <select id="${object.id}" name="addressProvince.id" onchange="provinceChange(this , '${object.id}')" ZH_CN="营业执照所在省">
                      <c:if test="${not empty object.addressProvince}">
                         <option value="${object.addressProvince.id}">${object.addressProvince.name}</option>
                       </c:if>
@@ -112,7 +112,7 @@
             <div class="am-form-group">
                 <label name="addressCity.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在市 <small>*</small></label>
                 <div class="am-u-sm-9" style="margin-top: 10px">
-                    <select id="citys${object.id}" name="addressCity.id">
+                    <select id="citys${object.id}" name="addressCity.id" ZH_CN="营业执照所在市">
                         <option value="${object.addressCity.id}">${object.addressCity.name}</option>
                     </select>
                 </div>
@@ -350,6 +350,12 @@
             $("#btn_upload3-button").css({"padding": "0em 0em", "text-align": "center"});
             $("#btn_upload4-button").css({"padding": "0em 0em", "text-align": "center"});
             $("#btn_upload5-button").css({"padding": "0em 0em", "text-align": "center"});
+            $("#SWFUpload_0").css({left:"5"});
+            $("#SWFUpload_1").css({left:"5"});
+            $("#SWFUpload_2").css({left:"5"});
+            $("#SWFUpload_3").css({left:"5"});
+            $("#SWFUpload_4").css({left:"5"});
+            $("#SWFUpload_5").css({left:"5"});
         }
     });
 </script>
