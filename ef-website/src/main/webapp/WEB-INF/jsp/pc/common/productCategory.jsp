@@ -49,12 +49,21 @@
 <style>
     .nav-new .cate .allsort {
         width: 180px;
-        height: 370px;
+        height: 380px;
         padding: 30px 0;
         position: absolute;
         top: 10px;
         left: 0;
         background: #fff;
+        box-sizing: content-box;
+    }
+    .nav-new .cate .allsort .item .i-mc .links {
+        width: 240px;
+        height: 384px;
+        padding: 28px 41px;
+        float: left;
+        border-left: 1px solid #e5e5e5;
+        border-right: 1px solid #e5e5e5;
         box-sizing: content-box;
     }
     </style>
