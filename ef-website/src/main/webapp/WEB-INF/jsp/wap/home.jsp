@@ -79,7 +79,7 @@
                             <em>${hotSale.name}</em>
                             <img src="http://pro.efeiyi.com/${hotSale.img}">
                         </a>
-                        <span class="price"><i>￥</i><strong>${hotSaleList.get(0).price}</strong></span>
+                        <span class="price"><i>￥</i><strong>${hotSale.price}</strong></span>
                         <span class="heat"><font>热卖</font></span>
                     </li>
                 </c:forEach>
@@ -93,7 +93,7 @@
             <div class="ae">
                 <div class="cat-top">
                     <div class="cat-t-o">${projectCategory.name}</div>
-                        <div class="cat-t-t">${projectCategory.context}</div>
+                        <%--<div class="cat-t-t">${projectCategory.context}</div>--%>
                         <%--<div class="cat-t-t">一物一乾坤</div>--%>
                 </div>
             </div>
