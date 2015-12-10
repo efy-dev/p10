@@ -67,7 +67,7 @@ public class ProjectController extends BaseController {
                 bannerStr += ".ctms";
                 break;
             case "织染印绣":
-                bannerStr += ".zrxy";
+                bannerStr += ".zryx";
                 break;
             case "茗品佳酿":
                 bannerStr += ".mpjn";
