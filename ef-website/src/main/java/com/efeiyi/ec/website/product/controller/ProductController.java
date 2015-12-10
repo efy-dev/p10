@@ -135,34 +135,23 @@ public class ProductController {
         Project project = productModel.getProduct().getProject();
         XQuery xQuery = new XQuery("listProductModel_default",request);
         xQuery.put("product_project_id", project.getId());
-        List<Object> productModelList =  baseManager.listObject(xQuery);
+        List<ProductModel> productModelList =  baseManager.listObject(xQuery);
         Map<ProductModel,String> map = new HashMap<>();
-        if(productModelList!=null&&productModelList.size()>0){
-            for(Object productModelTemp:productModelList){
-                StringBuilder s = new StringBuilder();
-                s.append(((ProductModel) productModelTemp).getProduct().getName());
-                List<ProductPropertyValue> productPropertyValueList = ((ProductModel) productModelTemp).getProductPropertyValueList();
-                if(productPropertyValueList==null||productPropertyValueList.size()==0||productPropertyValueList.size()==1){
+        if(productModelList!=null&&productModelList.size()>0) if(productModelList!=null&&productModelList.size()>0){
+            for(ProductModel productModelTemp:productModelList){
+                StringBuilder s = new StringBuilder(productModelTemp.getProduct().getName());
+                if(productModelTemp.getProduct().getProductModelList().size()==1){
+                    map.put(productModelTemp,s.toString());
+                }else{
+                    s.append("[").append(productModelTemp.getName());
                     if(s.toString().length()>14){
                         s = new StringBuilder(s.substring(0,14));
-                        s.append("...");
+                        s.append("...").append("]");
+                    }else{
+                        s.append("]");
                     }
-                    map.put((ProductModel)productModelTemp,s.toString());
-
-                }else if(productPropertyValueList!=null&&productPropertyValueList.size()>1){
-                    s.append("[");
-                    for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
-                        s.append(productPropertyValue.getProjectPropertyValue().getValue());
-                    }
-                    if(s.toString().length()>14){
-                        s = new StringBuilder(s.substring(0,14));
-                        s.append("...");
-                    }
-                    s.append("]");
-                    map.put((ProductModel) productModelTemp, s.toString());
-
+                    map.put(productModelTemp,s.toString());
                 }
-
             }
         }
         model.addAttribute("productModelList", productModelList);
