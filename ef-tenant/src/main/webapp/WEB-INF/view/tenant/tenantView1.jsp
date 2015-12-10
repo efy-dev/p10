@@ -221,6 +221,8 @@
             }
             $("#btn_upload10").ready(fileUploads(10, "logoUrl"));
             $("#btn_upload11").ready(fileUploads(11, "pictureUrl"));
+            $("#SWFUpload_0").css({left:"5"});
+            $("#SWFUpload_1").css({left:"5"});
             $("#btn_upload10-button").css({"padding": "0em 0em", "text-align": "center"});
             $("#btn_upload11-button").css({"padding": "0em 0em", "text-align": "center"});
         }

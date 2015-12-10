@@ -350,6 +350,12 @@
             $("#btn_upload3-button").css({"padding": "0em 0em", "text-align": "center"});
             $("#btn_upload4-button").css({"padding": "0em 0em", "text-align": "center"});
             $("#btn_upload5-button").css({"padding": "0em 0em", "text-align": "center"});
+            $("#SWFUpload_0").css({left:"5"});
+            $("#SWFUpload_1").css({left:"5"});
+            $("#SWFUpload_2").css({left:"5"});
+            $("#SWFUpload_3").css({left:"5"});
+            $("#SWFUpload_4").css({left:"5"});
+            $("#SWFUpload_5").css({left:"5"});
         }
     });
 </script>

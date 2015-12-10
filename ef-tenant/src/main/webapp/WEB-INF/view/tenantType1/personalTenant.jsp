@@ -230,6 +230,10 @@
             $("#btn_upload0-button").css({"padding": "0em 0em", "text-align": "center"});
             $("#btn_upload1-button").css({"padding": "0em 0em", "text-align": "center"});
             $("#btn_upload2-button").css({"padding": "0em 0em", "text-align": "center"});
+            $("#SWFUpload_0").css({left:"5"});
+            $("#SWFUpload_1").css({left:"5"});
+            $("#SWFUpload_2").css({left:"5"});
+
         }
 
     });
