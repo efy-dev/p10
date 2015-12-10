@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="score ae">
-    <form id="stars" action="<c:url value="/comment/saveMobileComment.do"/>">
+    <form id="stars" action="<c:url value="/comment/saveComment.do"/>">
       <input name="productId" value="${orderProduct.id}" type="hidden"/>
       <input name="orderId" value="${finishOrder.id}" type="hidden"/>
       <input id="starCount" type="hidden" name="starts" value=""/>

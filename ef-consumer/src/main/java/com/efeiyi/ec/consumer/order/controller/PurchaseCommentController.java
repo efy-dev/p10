@@ -9,6 +9,7 @@ import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.p.service.AliOssUploadManager;
+import com.ming800.core.util.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,7 +68,7 @@ public class PurchaseCommentController {
     }
 
     /**
-     * pc评价
+     * 评价
      * @param request
      * @return
      * @throws Exception
@@ -129,76 +130,12 @@ public class PurchaseCommentController {
 
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
 
+        if(HttpUtil.isPhone(request)==true){
 
+            return"redirect:/order/myEfeiyi/list.do";
+
+        }
         return"redirect:/comment/finishOrderList.do";
-    }
-
-    /**
-     * 移动端评价
-     * @param request
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("/saveMobileComment")
-    public String saveOrUpdateMobilecomment(HttpServletRequest request) throws Exception {
-        int count=0;
-        String id=request.getParameter("productId");
-        XSaveOrUpdate xUpdate =new XSaveOrUpdate("saveOrUpdateComment",request);
-        xUpdate.getParamMap().put("purchaseOrderProduct_id",id);
-        PurchaseOrderComment comment = (PurchaseOrderComment)baseManager.saveOrUpdate(xUpdate);
-
-        String[] url=request.getParameterValues("url");
-        if(url!=null){
-            for(int i=0;i<url.length;i++){
-
-                XSaveOrUpdate commentPicture=new XSaveOrUpdate("saveOrUpdateCommentPicture",request);
-                commentPicture.getParamMap().put("pictureUrl",url[i]);
-                PurchaseOrderCommentPicture picture= (PurchaseOrderCommentPicture) baseManager.saveOrUpdate(commentPicture);
-                picture.setPurchaseOrderComment(comment);
-                baseManager.saveOrUpdate(PurchaseOrderCommentPicture.class.getName(),picture);
-            }
-
-        }
-
-        PurchaseOrderProduct purchaseOrderProduct = (PurchaseOrderProduct)baseManager.getObject(PurchaseOrderProduct.class.getName(),id);
-        purchaseOrderProduct.setStatus("1");
-        purchaseOrderProduct.setPurchaseOrderComment(comment);
-        baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
-
-        String productModelId=purchaseOrderProduct.getProductModel().getId();
-        XQuery productModel = new XQuery("listPurchaseOrderProduct_default",request);
-        productModel.put("productModel_id",productModelId);
-        List<Object> purchaseOrderProductList=baseManager.listObject(productModel);
-        if(purchaseOrderProductList.size()!=0){
-            for(int i=0;i<purchaseOrderProductList.size();i++){
-                PurchaseOrderProduct pop= (PurchaseOrderProduct) purchaseOrderProductList.get(i);
-                pop.getPurchaseOrderComment().getStarts();
-                count+= Integer.parseInt(pop.getPurchaseOrderComment().getStarts());
-
-            }
-            Double average=(double)count/purchaseOrderProductList.size();
-            purchaseOrderProduct.setAverage(average);
-            baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
-        }
-
-
-
-        String orderId=request.getParameter("orderId");
-        PurchaseOrder purchaseOrder=(PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId);
-        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_FINISHED);
-        for(PurchaseOrderProduct purchaseOrderProductTemp:purchaseOrder.getPurchaseOrderProductList()){
-            String status=purchaseOrderProductTemp.getStatus();
-            if(!"1".equals(status)){
-                purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_UNCOMMENT);
-                break;
-            }
-        }
-
-        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
-
-
-        return"redirect:/order/myEfeiyi/list.do";
-
     }
 
     /**
