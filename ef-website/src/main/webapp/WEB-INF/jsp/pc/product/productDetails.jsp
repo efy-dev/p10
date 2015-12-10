@@ -18,7 +18,7 @@
             ${product.master.fullName}
         </c:set>
     </c:if>
-    <meta name="keywords" content="${product.project.name},${master},${product.name},${product.subName}, ${productModel.name},${product.tenant.name}"/>
+    <meta name="keywords" content="${product.project.name},${master},${product.name},${product.subName}, ${productModel.name},${product.bigTenant.name}"/>
     <meta name="description" content="${product.name},${productModel.name},${product.subName},${product.project.description}"/>
 </head>
 <body>
@@ -128,7 +128,7 @@
             <div class="des">
                 <div class="colour">服务：</div>
                 <div class="colour-page">
-                    <span>由 <a target="_blank" href="<c:url value="/tenant/${product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</span>
+                    <span>由 <a target="_blank" href="<c:url value="/tenant/${product.tenant.id}"/>">${product.bigTenant.name}</a>[${product.bigTenant.address}] 发货并提供售后服务</span>
                 </div>
             </div>
             <div class="des">

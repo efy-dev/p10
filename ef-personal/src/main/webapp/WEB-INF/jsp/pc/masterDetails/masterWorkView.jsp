@@ -116,8 +116,11 @@
                                         <em>${object.followStatus}</em>
                                     </a>
                                 </div>
-                                <div class="img"><a href="<c:url value='/masterMessage/introView/${object.id}'/>"><img
-                                        src="http://tenant.oss-cn-beijing.aliyuncs.com/${object.favicon}"></a></div>
+                                <div class="img">
+                                    <a href="<c:url value='/masterMessage/introView/${object.id}'/>">
+                                        <img src="http://tenant.efeiyi.com/${object.favicon}@!master-favicon-view">
+                                    </a>
+                                </div>
                             </li>
                         </ul>
                     </div>

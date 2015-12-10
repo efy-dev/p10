@@ -92,25 +92,25 @@
                 <div class="title">${tenant.name}</div>
                 <ul class="ul-list">
                     <c:forEach items="${productMap.get(tenant.id)}" var="product">
-                            <li>
-                                <img class="img" src="http://pro.efeiyi.com/${product.productModel.productModel_url}"
-                                     alt="">
+                        <li>
+                            <img class="img" src="http://pro.efeiyi.com/${product.productModel.productModel_url}"
+                                 alt="">
 
-                                <div class="bd info">
-                                    <p class="text">${product.productModel.name}
-                                        <c:if test="${product.productModel.productPropertyValueList.size()>1}">
-                                            [
-                                            <c:forEach items="${product.productModel.productPropertyValueList}"
-                                                       var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
-                                            ]
-                                        </c:if>
-                                    </p>
+                            <div class="bd info">
+                                <p class="text">${product.productModel.name}
+                                    <c:if test="${product.productModel.productPropertyValueList.size()>1}">
+                                        [
+                                        <c:forEach items="${product.productModel.productPropertyValueList}"
+                                                   var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
+                                        ]
+                                    </c:if>
+                                </p>
 
-                                    <p class="price"><em>￥</em><span>${product.purchasePrice}</span></p>
+                                <p class="price"><em>￥</em><span>${product.purchasePrice}</span></p>
 
-                                    <p class="num"><i class="iocn-x"></i><strong>${product.purchaseAmount}</strong></p>
-                                </div>
-                            </li>
+                                <p class="num"><i class="iocn-x"></i><strong>${product.purchaseAmount}</strong></p>
+                            </div>
+                        </li>
                     </c:forEach>
                 </ul>
                 <div class="bd ask"><textarea name="message" id="${tenant.id}Message" cols="30" rows="4"
@@ -134,26 +134,63 @@
             <p><strong>运费</strong><span><em>￥</em>0.00</span></p>
         </div>
         <!-- //End--order-total-->
-        <div class="bd cart-pay">
-            <div class="title">请选择支付方式</div>
-            <ul class="ul-list">
-                <li><a id="zhifubao" onclick="zhifubao(this)" title="支付宝" style="border: 2px solid red"><i
-                        class="icon icon-zfb"></i>支 付 宝</a></li>
-                <li><a id="weixin" onclick="weixin(this)" title="微信支付"><i class="icon icon-wechat"></i>微 信 支 付</a></li>
+        <%--<div class="bd cart-pay">--%>
+        <%--<div class="title">请选择支付方式</div>--%>
+        <%--<ul class="ul-list">--%>
+        <%--<li><a id="zhifubao" onclick="zhifubao(this)" title="支付宝" style="border: 2px solid red"><i--%>
+        <%--class="icon icon-zfb"></i>支 付 宝</a></li>--%>
+        <%--<li><a id="weixin" onclick="weixin(this)" title="微信支付"><i class="icon icon-wechat"></i>微 信 支 付</a></li>--%>
+        <%--</ul>--%>
+        <%--</div>--%>
+
+    </div>
+
+
+    <!-- //End--cart-order-->
+    <%--<div class="bd payment-total-bar">--%>
+    <%--<span>总计付款</span>--%>
+    <%--<span class="txt" id="change" style="float: none">--%>
+    <%--${purchaseOrder.total}</span>--%>
+    <%--<span>元</span>--%>
+    <%--<a onclick="submitOrder('${purchaseOrder.id}')" class="btn-right">提交订单</a>--%>
+    <%--</div>--%>
+</article>
+<div class="gift ae">
+    <div class="gift-details ae">
+        <div class="bd cart-pay newcart-pay new-yierqiu">
+            <div class="btb"><h5>请选择支付方式</h5></div>
+            <ul class="ul-list ae">
+                <li class="add-btn1" id="zhifubao"><a href="#支付宝" onclick="zhifubao(this)" title="支付宝">
+                    <i class="icon icon-zfb"></i>
+
+                    <div class="zfb-page">
+                        <p>支付宝支付</p>
+
+                        <p>推荐有支付宝账号的用户使用</p>
+                    </div>
+                    <span class="add-zfb"></span>
+                </a></li>
+                <li id="weixin">
+                    <a href="#微信支付" onclick="weixin(this)" title="微信支付">
+                        <i class="icon icon-wechat"></i>
+
+                        <div class="zfb-page">
+                            <p>微信支付</p>
+
+                            <p>推荐安装微信5.0及以上的版本使用</p>
+                        </div>
+                        <span class="add-zfb"></span>
+                    </a>
+                </li>
             </ul>
         </div>
-    </div>
-    <!-- //End--cart-order-->
-    <div class="bd payment-total-bar">
-        <span>总计付款</span>
-    <span class="txt" id="change" style="float: none">
-        ${purchaseOrder.total}</span>
-        <span>元</span>
-        <a onclick="submitOrder('${purchaseOrder.id}')" class="btn-right">提交订单</a>
-    </div>
-</article>
+        <div class="bd payment-total-bar newpayment-total-bar">
+            <span class="txt" id="change">总金额${purchaseOrder.total}元</span>
+            <a href="#btn-right" class="btn-right btn-red" onclick="submitOrder('${purchaseOrder.id}')">结&nbsp;算</a>
+        </div>
 
-
+    </div>
+</div>
 <!--Start--弹出地址-->
 <div id="order-address" class="alert-delete or-address" style="display:none;">
     <div class="bd cart-address" style="width: 90%;left: 5%;overflow: scroll;top: 2%">
@@ -218,6 +255,7 @@
                         </div>
                         <input type="hidden" name="cartId" value="${cart.id}">
                         <label></label>
+
                         <p>
                             <button onclick="submitNewAddress()" class="am-btn am-btn-default add-btn">保存收货人信息</button>
                         </p>
@@ -289,8 +327,6 @@
 
         });
     })
-
-
 
 
     function submitNewAddress() {
@@ -365,18 +401,18 @@
     }
 
     function zhifubao(element) {
-        $("#zhifubao").attr("style", "border:2px solid red");
-        if (isWeiXin()) {
-            $("#weixin").attr("style", "");
-        }
+        $("#zhifubao").attr("class", "add-btn1");
+//        if (isWeiXin()) {
+            $("#weixin").attr("class", "");
+//        }
 
         payment = "1";
     }
 
     function weixin(element) {
 //    $(element).attr("class", "alipay wechat-active");
-        $("#weixin").attr("style", "border:2px solid red");
-        $("#zhifubao").attr("style", "");
+        $("#weixin").attr("class", "add-btn1");
+        $("#zhifubao").attr("class", "");
 
 //    $("#weixin").attr("class", "paymentActive");
 //    $("#zhifubao").find("i").remove();
@@ -400,7 +436,7 @@
             dataType: 'json',
             success: function (data) {
                 <c:if test="${purchaseOrder.orderType=='2'}">
-                    data = true;
+                data = true;
                 </c:if>
                 if (data) {
                     if (consumerAddress == "") {
@@ -463,20 +499,20 @@
     }
 
     function newAddress(it) {
-        var out2 = '<li class="cart-btn acd"onclick="chooseAddress(\''+it.id+'\',\''+it.consignee+'\',\''+it.phone+'\',\''+it.province.name+'\',\''+it.city.name+'\',\''+it.details+'\')"><p class="bd title">${address.consignee} ${address.phone}</p><p class="bd des">'+it.province.name+it.city.name+it.details+'</p><p class="bd btns"></p></li><br>';
+        var out2 = '<li class="cart-btn acd"onclick="chooseAddress(\'' + it.id + '\',\'' + it.consignee + '\',\'' + it.phone + '\',\'' + it.province.name + '\',\'' + it.city.name + '\',\'' + it.details + '\')"><p class="bd title">${address.consignee} ${address.phone}</p><p class="bd des">' + it.province.name + it.city.name + it.details + '</p><p class="bd btns"></p></li><br>';
         return out2;
     }
 
     <%--function submitNewAddress() {--%>
-        <%--var param = $("#newAddress").serialize();--%>
-        <%--var success = function (data) {--%>
-            <%--console.log(data)--%>
-            <%--var html = newAddress(data);--%>
-            <%--$("#address").append(html);--%>
-            <%--$(".active-pop").hide();--%>
-        <%--}--%>
-        <%--ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {--%>
-        <%--}, "post")--%>
+    <%--var param = $("#newAddress").serialize();--%>
+    <%--var success = function (data) {--%>
+    <%--console.log(data)--%>
+    <%--var html = newAddress(data);--%>
+    <%--$("#address").append(html);--%>
+    <%--$(".active-pop").hide();--%>
+    <%--}--%>
+    <%--ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {--%>
+    <%--}, "post")--%>
     <%--}--%>
 
     function chooseAddress(addressId, consignee, phone, province, city, details) {

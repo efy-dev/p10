@@ -27,6 +27,7 @@
 <security:authorize ifAnyGranted="admin,operational,c_operational">
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&view=${view}&tenantId=${tenantId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
     <input onclick="outExcel();" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="生成excel" />
+    <a onclick="initSort(this)"  class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"  >初始化商品图片排序</a>
     </security:authorize>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions};tenant.id:${tenantId}&tenantId=${tenantId}"/>
@@ -170,6 +171,27 @@
     </div>
 </div>
 <script>
+    function initSort(obj){
+        $(obj).attr("disabled","disabled");
+        $(obj).text("正在初始化....");
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/product/initSort.do"/>',
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                if(data=="1"){
+                    alert("初始化成功!");
+                    $(obj).remove();
+                }
+                if(status=="0"){
+                    alert("初始化失败,请重新初始化!");
+                    $(obj).removeAttr("disabled");
+                    $(obj).text("初始化");
+                }
+            }
+        });
+    }
     function setStatus(obj,status,id){
         $.ajax({
             type: "get",

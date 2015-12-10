@@ -42,6 +42,13 @@
                 </div>
             </div>
             <div class="am-form-group">
+                <label for="name" class="am-u-sm-3 am-form-label">商家合同号</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="contractNumber" name="contractNumber" placeholder="商家合同号" value="${object.contractNumber}" >
+                </div>
+            </div>
+            <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">商家名称</label>
 
                 <div class="am-u-sm-9">

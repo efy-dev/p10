@@ -126,44 +126,52 @@ public class PurchaseOrderGiftController {
         String projectName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getProject().getName();
         String urlString = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProductModel_url();
         Master master = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getMaster();
-        String masterNamer = new String();
+        String masterName = new String("");
         if (master != null) {
-            masterNamer = master.getFullName();
+            masterName = master.getFullName();
         }
         String sender = purchaseOrderGift.getGiftGaverName();
         //背景图设置
-        URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background1.jpg");
+        URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background4.jpg");
         ImageIcon imgIcon = new ImageIcon(backgroundUrl);
         Image theImg = imgIcon.getImage();
-        int width = 640;
-        int height = 1136;
+        int width = theImg.getWidth(null);
+        int height = theImg.getHeight(null);
         BufferedImage bimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bimage.createGraphics();
         g.setColor(Color.black);
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
-        g.setFont(new Font("宋体", Font.BOLD, 29));
-        g.drawString(productName, 420, 270);
-        g.drawString("【" + projectName + "】", 400, 340);
-        g.setFont(new Font("宋体", Font.BOLD, 27));
-        g.drawString(masterNamer, 420, 410);
+        if (productName.length() > 7) {
+            g.setFont(new Font("微软雅黑", Font.BOLD, 20));
+            g.drawString(productName, 420, 220);
+        } else {
+            g.setFont(new Font("微软雅黑", Font.BOLD, 29));
+            g.drawString(productName, 420, 220);
+        }
+        g.setFont(new Font("微软雅黑", Font.BOLD, 25));
+        g.drawString("「" + projectName + "」", 420, 290);
+        g.setFont(new Font("微软雅黑", Font.BOLD, 27));
+        g.drawString(masterName, 420, 380);
         //背景图set文字显示
-        g.setFont(new Font("宋体", Font.BOLD, 24));
+        g.setFont(new Font("微软雅黑", Font.ITALIC, 24));
         if (giftMessage != null) {
             if (giftMessage.length() < 17) {
-                g.drawString(giftMessage, 240, 600);
+                g.drawString(giftMessage, 240, 500);
             }
-            if (17<=giftMessage.length()&&giftMessage.length() < 35) {
-                g.drawString(giftMessage.substring(0, 17), 240, 600);
-                g.drawString(giftMessage.substring(17, giftMessage.length()), 220, 630);
+            if (17<=giftMessage.length()&&giftMessage.length() < 32) {
+                g.drawString(giftMessage.substring(0, 17), 240, 500);
+                g.drawString(giftMessage.substring(17, giftMessage.length()), 220, 530);
             }
-            if (35 <= giftMessage.length() && giftMessage.length() < 50) {
-                g.drawString(giftMessage.substring(0, 17), 240, 600);
-                g.drawString(giftMessage.substring(17, 35), 220, 630);
-                g.drawString(giftMessage.substring(35, giftMessage.length()), 220, 660);
+            if (32 <= giftMessage.length() && giftMessage.length() <= 50) {
+                g.drawString(giftMessage.substring(0, 17), 240, 500);
+                g.drawString(giftMessage.substring(17, 33), 220, 530);
+                g.drawString(giftMessage.substring(33, giftMessage.length()), 220, 570);
             }
         }
-        g.drawString("——" + sender, 500, 670);
+        if(sender!=null&&!"".equals(sender)){
+            g.drawString("——" + sender, 500, 600);
+        }
         g.dispose();
         //二维码生成
         String content = "http://www2.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
@@ -196,8 +204,8 @@ public class PurchaseOrderGiftController {
         //图像合并
         Graphics2D g1 = combined.createGraphics();
         g1.drawImage(bimage, 0, 0, null);
-        g1.drawImage(image, 40, 580, null);
-        g1.drawImage(giftImgIcon.getImage(), 40, 250, null);
+        g1.drawImage(image, 40, 480, null);
+        g1.drawImage(giftImgIcon.getImage(), 40, 200, null);
         g1.dispose();
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         ImageIO.write(combined, "jpg", os);

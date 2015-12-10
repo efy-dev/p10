@@ -210,8 +210,9 @@
                     <th class="table-title">订单类型</th>
                     <th class="table-title">产品</th>
                     <th class="table-title">总额/实付金额(元)</th>
+                    <th class="table-title">商家/编号</th>
                     <%--<th class="table-title">支付类型</th>--%>
-                    <th class="table-title">收货地址</th>
+                    <th class="table-title">收货地区</th>
                     <th class="table-title">下单人</th>
                     <th class="table-title">创建日期</th>
 
@@ -301,6 +302,7 @@
                                                                       maxFractionDigits="2" minFractionDigits="2"/> <br>
                             <fmt:formatNumber type="number" value="${purchaseOrder.getRealPayMoney()}"
                                               maxFractionDigits="2" minFractionDigits="2"/></td>
+                        <td class="am-hide-sm-only">${purchaseOrder.bigTenant.name}<br>${purchaseOrder.bigTenant.contractNumber}</td>
                         <td class="am-hide-sm-only">${purchaseOrder.purchaseOrderAddress}</td>
                         <td class="am-hide-sm-only">${purchaseOrder.user.username}</td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both"

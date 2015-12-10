@@ -37,8 +37,8 @@
             </div>
 
             <div class="am-form-group" style="margin-left: 26.3%">
-                <a href="javascript:void (0);" onclick="toSubmitReview('4');" class="am-btn am-btn-primary am-btn-xs">审核成功</a>
                 <a href="javascript:void (0);" onclick="toSubmitReview('3');" class="am-btn am-btn-primary am-btn-xs">审核失败</a>
+                <a href="javascript:void (0);" onclick="toSubmitReview('4');" class="am-btn am-btn-primary am-btn-xs">审核成功</a>
             </div>
         </form>
 </div>
@@ -63,10 +63,9 @@
             url: '<c:url value="/tenant/toSubmitReview.do"/>',
             cache: false,
             dataType: "json",
-            data:{tenantId:tenantId,content:content,reviewStatus:review},
+            data:{tenantId:tenantId,content:content,review:review},
             success: function (data) {
-                var url = "/basic/xm.do?qm=formTenantReview&tenantId="+tenantId+"&review="+data;
-                window.location.href="<c:url value="/" />"+url;
+                window.location.href="<c:url value="/basic/xm.do?qm=formTenantReview&tenantId=" />"+tenantId+"&review="+data;
 
             }
         });

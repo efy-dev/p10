@@ -156,7 +156,7 @@ public class PurchaseOrderController {
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_UNCOMMENT);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         //确定收货后给商家发送已收货短信
-         String phone = purchaseOrder.getTenant().getPhone();
+         String phone = purchaseOrder.getBigTenant().getPhone();
          String purchaseOrderSerial=purchaseOrder.getSerial();
          SmsProvider smsProvider = new YunPianSmsProvider();
          smsProvider.post(phone, purchaseOrderSerial, "1125941");

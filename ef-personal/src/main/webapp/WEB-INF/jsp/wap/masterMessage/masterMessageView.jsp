@@ -113,21 +113,18 @@
 <!--地区-->
 <div class="login-reg">
     <%if (AuthorizationUtil.getMyUser() != null && AuthorizationUtil.getMyUser().getId() != null) { %>
-    <div class="bd logined"><%=AuthorizationUtil.getMyUser().getUsername()%><a class="btn-exit"
-                                                                               href="<c:url value='/j_spring_cas_security_logout'/>">退出</a>
+    <div class="bd logined"><%=AuthorizationUtil.getMyUser().getUsername()%>&nbsp;
+        <a class="btn-exit" href="<c:url value='/j_spring_cas_security_logout'/>">退出</a>
     </div>
     <% } %>
     <%if (AuthorizationUtil.getMyUser() == null || AuthorizationUtil.getMyUser().getId() == null) { %>
-    <a href="<c:url value='http://192.168.1.57/cas/login?service=http%3A%2F%2Flocalhost:8080%2Fj_spring_cas_security_check'/>"
-       class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-    <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+    <a href="<c:url value='/sso.do'/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+    <a href="http://passport.efeiyi.com/register?service=http://master.efeiyi.com/ef-person//sso.do" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
     <% } %>
-
 </div>
 <!--//End--login-reg-->
 <footer class="bd footer">
     <div class="bd info"><a class="icon"></a>
-
         <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台
         </div>
         <div class="wechat"></div>

@@ -35,6 +35,7 @@ public class BigTenant implements Serializable,BaseTenant {
     private Date createDateTime;
     private String status;
     private String serial;//商家编号
+    private String contractNumber;//商家合同号
     //个人信息
     private String identity; // 身份证号
     private String frontPhotoUrl;//正面照片
@@ -239,5 +240,14 @@ public class BigTenant implements Serializable,BaseTenant {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    @Column(name = "contract_number")
+    public String getContractNumber() {
+        return contractNumber;
+    }
+
+    public void setContractNumber(String contractNumber) {
+        this.contractNumber = contractNumber;
     }
 }
