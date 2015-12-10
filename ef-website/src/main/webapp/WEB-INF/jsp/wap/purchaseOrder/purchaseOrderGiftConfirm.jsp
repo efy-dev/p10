@@ -55,16 +55,16 @@
         <%--<a class="gift-c-d ae"><strong>${productModel.name}</strong><i class="sj-icon"></i></a>--%>
 
         <%--<div class="chandise ae">--%>
-            <%--<div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>--%>
-            <%--<div class="cha-box">--%>
-                <%--<strong>${productModel.product.subName}</strong>--%>
+        <%--<div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>--%>
+        <%--<div class="cha-box">--%>
+        <%--<strong>${productModel.product.subName}</strong>--%>
 
-                <%--<div class="money">--%>
-                    <%--<em>${productModel.price}</em>--%>
-                    <%--<i>元</i>--%>
-                <%--</div>--%>
-                <%--<span class="add-sub"></span>--%>
-            <%--</div>--%>
+        <%--<div class="money">--%>
+        <%--<em>${productModel.price}</em>--%>
+        <%--<i>元</i>--%>
+        <%--</div>--%>
+        <%--<span class="add-sub"></span>--%>
+        <%--</div>--%>
         <%--</div>--%>
 
         <div class="btb"><h5>礼物详情</h5></div>
@@ -72,7 +72,9 @@
             <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>
             <div class="cha-box">
                 <strong>${productModel.name}</strong>
+
                 <p>${productModel.product.subName}</p>
+
                 <div class="money">
                     <em>${productModel.price}</em>
                     <i>元</i>
@@ -81,18 +83,18 @@
         </div>
 
         <%--<div class="bd cart-pay newcart-pay">--%>
-            <%--<div class="btb"><h5>请选择支付方式</h5></div>--%>
-            <%--<ul class="ul-list ae">--%>
-                <%--<li><a href="#支付宝" title="支付宝" id="zhifubao1" onclick="zhifubao(this)"><i class="icon icon-zfb"></i>支 付--%>
-                    <%--宝</a>--%>
-                <%--</li>--%>
-                <%--<li><a href="#微信支付" title="微信支付" id="weixin1" onclick="weixin(this)"><i class="icon icon-wechat"></i>微 信--%>
-                    <%--支 付</a></li>--%>
-            <%--</ul>--%>
+        <%--<div class="btb"><h5>请选择支付方式</h5></div>--%>
+        <%--<ul class="ul-list ae">--%>
+        <%--<li><a href="#支付宝" title="支付宝" id="zhifubao1" onclick="zhifubao(this)"><i class="icon icon-zfb"></i>支 付--%>
+        <%--宝</a>--%>
+        <%--</li>--%>
+        <%--<li><a href="#微信支付" title="微信支付" id="weixin1" onclick="weixin(this)"><i class="icon icon-wechat"></i>微 信--%>
+        <%--支 付</a></li>--%>
+        <%--</ul>--%>
         <%--</div>--%>
         <%--<div class="bd payment-total-bar newpayment-total-bar">--%>
-            <%--<span class="txt">共${purchaseOrderProduct.purchaseAmount}件礼物，总金额${purchaseOrder.total}元</span>--%>
-            <%--<a href="#btn-right" class="btn-right" onclick="submitOrder('${purchaseOrder.id}')">结&nbsp;算</a>--%>
+        <%--<span class="txt">共${purchaseOrderProduct.purchaseAmount}件礼物，总金额${purchaseOrder.total}元</span>--%>
+        <%--<a href="#btn-right" class="btn-right" onclick="submitOrder('${purchaseOrder.id}')">结&nbsp;算</a>--%>
         <%--</div>--%>
 
         <div class="bd cart-pay newcart-pay new-yierqiu">
@@ -132,6 +134,7 @@
 <script>
 
     var payment = "1";
+    var gaverNameStats = "0"
 
     function giftNameStatus(element) {
         var status = ""
@@ -211,7 +214,7 @@
     function zhifubao(element) {
         $("#zhifubao").attr("class", "add-btn1");
 //        if (isWeiXin()) {
-            $("#weixin").attr("class", "");
+        $("#weixin").attr("class", "");
 //        }
 
         payment = "1";
@@ -254,40 +257,47 @@
 
     function submitOrder(orderId) {
 
-        ajaxRequest("<c:url value="/order/giftBuy/updateImg.do"/>", {
-            "imageUrl": getCurrentImg(),
-            "purchaseOrderId": "${purchaseOrder.id}"
-        }, function () {
-            $.ajax({
-                type: 'post',
-                async: false,
-                url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
-                dataType: 'json',
-                success: function (data) {
-                    if (data) {
-                        var isweixin = "";
+        if (gaverNameStats == "0") {
+            showAlert("提示", "请填写送礼人姓名！");
+        } else {
 
-                        if (isWeiXin()) {
-                            isweixin = "&isWeiXin=1";
-                            payment = "3"
+
+            ajaxRequest("<c:url value="/order/giftBuy/updateImg.do"/>", {
+                "imageUrl": getCurrentImg(),
+                "purchaseOrderId": "${purchaseOrder.id}"
+            }, function () {
+                $.ajax({
+                    type: 'post',
+                    async: false,
+                    url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data) {
+                            var isweixin = "";
+
+                            if (isWeiXin()) {
+                                isweixin = "&isWeiXin=1";
+                                payment = "3"
+                            }
+
+                            var url = "<c:url value="/order/confirm/"/>";
+                            url += orderId + "?payment=" + payment + "&message=" + isweixin + "&imageUrl=" + getCurrentImg();
+                            window.location.href = url;
+                        } else {
+                            showAlert("提示", "抱歉，该商品已售罄！")
                         }
+                    },
 
-                        var url = "<c:url value="/order/confirm/"/>";
-                        url += orderId + "?payment=" + payment + "&message=" + isweixin + "&imageUrl=" + getCurrentImg();
-                        window.location.href = url;
-                    } else {
-                        showAlert("提示", "抱歉，该商品已售罄！")
-                    }
-                },
-
-            });
-        }, function () {
-        }, "post");
+                });
+            }, function () {
+            }, "post");
+        }
     }
 
     function addGaverName() {
         var gaverName = $("#giftMessage1").val();
         var success = function (data) {
+            gaverNameStats = "1";
             $(".edit-txt2").html(data)
             $(".edit-txt2").show();
             $("#addGaverName").hide();

@@ -174,7 +174,7 @@ public class PurchaseOrderGiftController {
         }
         g.dispose();
         //二维码生成
-        String content = "http://www2.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
+        String content = "http://www.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
         Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
         hints.put(EncodeHintType.MARGIN, 0);
         BitMatrix bitMatrix = null;
