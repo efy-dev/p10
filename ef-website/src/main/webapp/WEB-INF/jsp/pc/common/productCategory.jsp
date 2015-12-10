@@ -8,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="allsort" style="display: none;">
-    <c:forEach items="${categoryList}" var="category" begin="0" end="7">
+    <c:forEach items="${categoryList}" var="category" begin="0" end="8">
         <div class="item">
             <c:if test="${category.id==projectCategory.id}">
             <h3 class="active">
@@ -46,3 +46,15 @@
     </c:forEach>
 </div>
 <!--//End--nav-new-->
+<style>
+    .nav-new .cate .allsort {
+        width: 180px;
+        height: 370px;
+        padding: 30px 0;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        background: #fff;
+        box-sizing: content-box;
+    }
+    </style>
