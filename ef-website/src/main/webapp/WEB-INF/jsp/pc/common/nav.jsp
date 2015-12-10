@@ -95,8 +95,8 @@
             </div>
             <div class="items">
                 <a href="<c:url value="/"/>">首页</a>
-                <a href="">礼品专区</a>
-                <a href="http://www2.efeiyi.com/subject/ig8zlvonengegjk9">精选专题</a>
+                <a href="http://www.efeiyi.com/subject/ihygpb6m24v43zv9">礼品专区</a>
+                <a href="http://www.efeiyi.com/subject/ihygpskg3j28dh60">精选专题</a>
             </div>
         </div>
     </div>
