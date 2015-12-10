@@ -89,7 +89,7 @@
 
             <p class="s s9"><span> 服&nbsp;&nbsp;&nbsp;务：</span>由 <a
                     href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>"
-                    style="color: #000">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
+                    style="color: #000">${product.bigTenant.name}</a>[${product.bigTenant.address}] 发货并提供售后服务</p>
         </div>
 
         <%--<div class="bd des-price">--%>
