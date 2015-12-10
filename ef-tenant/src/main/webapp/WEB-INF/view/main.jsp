@@ -26,7 +26,7 @@
            <div class="wh info">
                <div class="table">
                    <div class="enter-btn .wh"><a href="<c:url value="basic/xm.do?qm=viewTenant1&id=${TENANT.id}"/> ">完&nbsp;善&nbsp;信&nbsp;息</a></div>
-                   <div class="enter-flow wh">入&nbsp;住&nbsp;流&nbsp;程</div>
+                   <div class="enter-flow wh">入&nbsp;驻&nbsp;流&nbsp;程</div>
                    <div class="wh enter-wh">
                        <div class="enter-list">
                            <dl>

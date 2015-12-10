@@ -19,12 +19,17 @@
     <div class="am-u-md-12">
         <form action="<c:url value="/tenant/toCheck.do"/>" method="post" class="am-form am-form-horizontal">
             <input type="hidden" name="id" value="${object.id}">
+            <c:if test="${not empty object.status}">
             <input type="hidden" name="status" value="${object.status}">
+            </c:if>
+<c:if test="${not empty object.status}">
+    <input type="hidden" name="status" value="1">
+    </c:if>
             <input type="hidden" name="flag" value="">
         <div class="am-tabs am-margin" data-am-tabs>
             <ul class="am-tabs-nav am-nav am-nav-tabs">
-                <li class="am-active"><a href="#tab1">基本信息</a></li>
-                <li><a href="#tab2">完善信息</a></li>
+                <li class="am-active" id="t1"><a href="#tab1">基本信息</a></li>
+                <li id="t2"><a href="#tab2" >完善信息</a></li>
             </ul>
 
             <div class="am-tabs-bd">
@@ -62,7 +67,7 @@
 
 
                         <div class="am-form-group">
-                            <label  class="am-u-sm-3 am-form-label">Logo</label>
+                            <label  class="am-u-sm-3 am-form-label">Logo(280*80)</label>
 
                             <div class="am-u-sm-9">
                                 <div id="logoUrl">
@@ -80,7 +85,7 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label  class="am-u-sm-3 am-form-label">商家首页图片</label>
+                            <label  class="am-u-sm-3 am-form-label">商家首页图片(1200*400)</label>
 
                             <div class="am-u-sm-9">
                                 <div id="pictureUrl">
@@ -125,9 +130,15 @@
                         </div>
 
                     </div>
+                       <span style="margin-left: 92%">
+                    <a href="javascript:void (0);" onclick="nextGo('t1','t2');" class="am-btn am-btn-primary am-btn-xs">下一步</a>
+                           </span>
                 </div>
                 <div class="am-tab-panel am-fade" id="tab2">
                     <jsp:include page="/tenantType/sendTenantTypePage1.do" flush="true"/>
+                   <span style="margin-left: 92%">
+                      <a href="javascript:void (0);" onclick="prevGo('t1','t2');" class="am-btn am-btn-primary am-btn-xs">上一步</a>
+                    </span>
                     </div>
             </div>
 
@@ -143,6 +154,28 @@
 </div>
 <script src="<c:url value="/scripts/upload/jquery.uploadify.min.js"/>"></script>
 <script>
+    function nextGo(activity1,activity2){
+          $("#"+activity1).removeClass("am-active");
+        $("#"+activity2).addClass("am-active");
+          var t1 = $("#"+activity1).next("a").attr("href");
+          var t2 = $("#"+activity2).next("a").attr("href");
+        $("#tab1").removeClass("am-active");
+        $("#tab1").removeClass("am-in");
+        $("#tab2").addClass("am-active");
+        $("#tab2").addClass("am-in");
+
+
+    }
+    function prevGo(activity1,activity2){
+        $("#"+activity2).removeClass("am-active");
+        $("#"+activity1).addClass("am-active");
+        $("#tab2").removeClass("am-active");
+        $("#tab2").removeClass("am-in");
+        $("#tab1").addClass("am-active");
+        $("#tab1").addClass("am-in");
+
+
+    }
     $(function(){
 
 
@@ -202,9 +235,9 @@
             $("input").each(function(){
                 if($(this).val()==""){
                     if($(this).attr("type")=="hidden"){
-                        alert("请上传"+$(this).attr("placeholder"));
+                        alert("请上传 "+$(this).attr("placeholder")+"+"+$(this).attr("name"));
                     }else{
-                        alert("请填写"+$(this).attr("placeholder"));
+                        alert("请填写 "+$(this).attr("placeholder"));
                     }
                     f = false;
                     return false;
@@ -214,7 +247,7 @@
         }
         $("select").each(function(){
             if($(this).val()==""){
-                alert("请选择"+$(this).attr("placeholder"));
+                alert("请选择 "+$(this).attr("ZH_CN"));
                 f=false;
                 return false;
             }
