@@ -80,12 +80,12 @@
         </div>
         <!-- //End--des-master-->
         <div class="bd des-price">
-            <c:if test="${not empty productModel.marketPrice&&productModel.product.status==1}">
+            <c:if test="${not empty productModel.marketPrice&&productModel.product.status==1&&productModel.status!=0}">
                 <p class="bd t1"><span>市场价：</span>
                     <del>${productModel.marketPrice}</del>
                 </p>
             </c:if>
-            <c:if test="${not empty productModel.price&&productModel.product.status==1}">
+            <c:if test="${not empty productModel.price&&productModel.product.status==1&&productModel.status!=0}">
             <p class="s s2 s8"><span>飞蚁价：</span><em>￥</em><strong>${productModel.price}</strong></p>
             </c:if>
             <p class="s s9"><span> 服&nbsp;&nbsp;&nbsp;务：</span>由 <a
@@ -98,7 +98,7 @@
             <%--<div class="s s9"><span>服&nbsp;&nbsp;&nbsp;务：</span>由姚惠芬刺绣刺绣馆（苏绣）发货并提供售后服务</div>--%>
         <%--</div>--%>
         <!-- //End--des-price-->
-        <c:if test="${productModel.product.status==1}">
+        <c:if test="${productModel.product.status==1&&productModel.status!=0}">
         <div class="bd des-format">
             <a id="btn-num" class="bd btn-num">
                 <span class="select">数量</span>
@@ -176,7 +176,7 @@
         <!-- //End--des-format-->
     </div>
     <!-- //End---->
-<c:if test="${ productModel.product.status==1}">
+<c:if test="${ productModel.product.status==1&&productModel.status!=0}">
     <div class="bd details-total-bar">
         <c:if test="${empty productModel.product.tenant.id}">
             <a class="btn-default" title="进店">进店</a>
