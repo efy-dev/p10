@@ -49,7 +49,7 @@
                 <%} else {%>
                 <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
                 <%}%>
-                <li><a href="http://master.efeiyi.com" title="分类">传承人</a></li>
+                <%--<li><a href="http://master.efeiyi.com" title="分类">传承人</a></li>--%>
             </ul>
         </div>
     </header>

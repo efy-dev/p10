@@ -31,7 +31,7 @@
     <!-- //End--title-->
     <div class="am-header-right am-header-nav am-header-right1">
       <a href="#chevron-right" class="chevron-right" id="menu">
-        <i class="icon icon-user"></i>
+        <%--<i class="icon icon-user"></i>--%>
       </a>
     </div>
   </header>

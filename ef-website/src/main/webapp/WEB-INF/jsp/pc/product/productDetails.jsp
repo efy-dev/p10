@@ -116,12 +116,14 @@
             </c:if>
             <!-- //End-->
             <div class="master-cost">
-                <c:if test="productModel.marketPrice!=null">
+                <c:if test="${not empty productModel.marketPrice&&productModel.product.status==1}">
                     <p><font>市场价：</font><em>${productModel.marketPrice}</em></p>
                 </c:if>
+              <c:if test="${not empty productModel.price&&productModel.product.status==1}">
                 <p>飞蚁价</p>
 
                 <p><strong>￥</strong><span>${productModel.price}</span></p>
+              </c:if>
             </div>
             <!-- //End-->
             <!-- //End-->
@@ -181,7 +183,7 @@
                 <c:if test="${productModel.amount <= 0}">
                     <a id="modelId" class="btn btn-append" title="售罄">售罄</a>
                 </c:if>
-                <c:if test="${productModel.amount > 0}">
+                <c:if test="${productModel.amount > 0&&productModel.product.status==1}">
                     <a id="modelId" class="btn btn-append"
                        onclick="addCart('${productModel.id}')"  title="放入购物车" dis>放入购物车</a>
                     <a class="btn btn-buy" onclick="immediateBuy('${productModel.id}')"
@@ -234,7 +236,7 @@
             </div>
             <!-- //End-->
             <div class="btns">
-                <c:if test="${productModel.amount > 0}">
+                <c:if test="${productModel.amount > 0&&productModel.product.status==1}">
                     <a class="buy" href="<c:url value="/order/easyBuy/${productModel.id}?amount=1"/>" title="立即购买">立 即 购 买</a>
                     <a class="append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}&amount=1&redirect=/product/productModel/${productModel.id}"/>" title="放入购物车"><i
                             class="icon"></i>放 入 购 物 车</a>

@@ -142,8 +142,13 @@ public class PurchaseOrderGiftController {
         g.setColor(Color.black);
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
-        g.setFont(new Font("微软雅黑", Font.BOLD, 29));
-        g.drawString(productName, 420, 220);
+        if (productName.length() > 7) {
+            g.setFont(new Font("微软雅黑", Font.BOLD, 20));
+            g.drawString(productName, 420, 220);
+        } else {
+            g.setFont(new Font("微软雅黑", Font.BOLD, 29));
+            g.drawString(productName, 420, 220);
+        }
         g.setFont(new Font("微软雅黑", Font.BOLD, 25));
         g.drawString("「" + projectName + "」", 420, 290);
         g.setFont(new Font("微软雅黑", Font.BOLD, 27));
@@ -164,12 +169,12 @@ public class PurchaseOrderGiftController {
                 g.drawString(giftMessage.substring(33, giftMessage.length()), 220, 570);
             }
         }
-        if(sender!=null){
+        if(sender!=null&&!"".equals(sender)){
             g.drawString("——" + sender, 500, 600);
         }
         g.dispose();
         //二维码生成
-        String content = "http://www2.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
+        String content = "http://www.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
         Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
         hints.put(EncodeHintType.MARGIN, 0);
         BitMatrix bitMatrix = null;

@@ -48,7 +48,8 @@
     <div class="hd">
         <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
         <form action="<c:url value='/search.do'/>" method="get">
-            <input type="text" class="txt" placeholder="" name="q" id="q" value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>">
+            <input type="text" class="txt" placeholder="" name="q" id="q"
+                   value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>">
             <input type="submit" class="icon-new btn" value="">
             <%-- 全文检索测试 --%>
             <input type="hidden" id="resultPage" name="resultPage" value="/searchResult"/>
@@ -57,32 +58,32 @@
             <input type="hidden" id="priceUD" name="priceUD" value="0"/>
             <%-- End全文检索测试 --%>
             <%--<div class="keywords">--%>
-                <%--<a href="">剪纸</a>--%>
-                <%--<a href="">景泰蓝</a>--%>
-                <%--<a href="">景德镇</a>--%>
-                <%--<a href="">二锅头</a>--%>
-                <%--<a href="">徽州三雕</a>--%>
-                <%--<a href="">藏药</a>--%>
-                <%--<a href="">十全大补丸</a>--%>
+            <%--<a href="">剪纸</a>--%>
+            <%--<a href="">景泰蓝</a>--%>
+            <%--<a href="">景德镇</a>--%>
+            <%--<a href="">二锅头</a>--%>
+            <%--<a href="">徽州三雕</a>--%>
+            <%--<a href="">藏药</a>--%>
+            <%--<a href="">十全大补丸</a>--%>
             <%--</div>--%>
         </form>
     </div>
 </div>
 <c:if test="${sign != null && sign == '000'}">
-<div class="wh nav-new" id="line">
-    <div class="hd">
-        <div class="cate">
-            <div class="ld"><h2>非遗商品分类<i class="icon-new"></i></h2></div>
-            <jsp:include page="/productCategory.do" flush="true"/>
+    <div class="wh nav-new" id="line">
+        <div class="hd">
+            <div class="cate">
+                <div class="ld"><h2>非遗商品分类<i class="icon-new"></i></h2></div>
+                <jsp:include page="/productCategory.do" flush="true"/>
 
-        </div>
-        <div class="items">
-            <a href="<c:url value="/"/>">首页</a>
-            <a href="http://www.efeiyi.com/subject/ihygpb6m24v43zv9">礼品专区</a>
-            <a href="http://www.efeiyi.com/subject/ihygpskg3j28dh60">精选专题</a>
+            </div>
+            <div class="items">
+                <a href="<c:url value="/"/>">首页</a>
+                <a href="http://www.efeiyi.com/subject/ihygpb6m24v43zv9">礼品专区</a>
+                <a href="http://www.efeiyi.com/subject/ihygpskg3j28dh60">精选专题</a>
+            </div>
         </div>
     </div>
-</div>
 </c:if>
 
 <c:if test="${empty sign}">

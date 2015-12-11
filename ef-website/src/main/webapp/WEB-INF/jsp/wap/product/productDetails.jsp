@@ -80,13 +80,14 @@
         </div>
         <!-- //End--des-master-->
         <div class="bd des-price">
-            <c:if test="productModel.marketPrice!=null">
+            <c:if test="${not empty productModel.marketPrice&&productModel.product.status==1}">
                 <p class="bd t1"><span>市场价：</span>
                     <del>${productModel.marketPrice}</del>
                 </p>
             </c:if>
+            <c:if test="${not empty productModel.price&&productModel.product.status==1}">
             <p class="s s2 s8"><span>飞蚁价：</span><em>￥</em><strong>${productModel.price}</strong></p>
-
+            </c:if>
             <p class="s s9"><span> 服&nbsp;&nbsp;&nbsp;务：</span>由 <a
                     href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>"
                     style="color: #000">${product.bigTenant.name}</a>[${product.bigTenant.address}] 发货并提供售后服务</p>
@@ -173,6 +174,7 @@
         <!-- //End--des-format-->
     </div>
     <!-- //End---->
+<c:if test="${ productModel.product.status==1}">
     <div class="bd details-total-bar">
         <c:if test="${empty productModel.product.tenant.id}">
             <a class="btn-default" title="进店">进店</a>
@@ -191,6 +193,7 @@
         </c:if>
         <a style="width: 22%" class="btn-default" onclick="giftBuy()" title="购买">购买送礼</a>
     </div>
+</c:if>
 </article>
 <!--Start--选择规格弹出框-->
 <div class="am-modal-actions dialog-des-format" id="my-actions">

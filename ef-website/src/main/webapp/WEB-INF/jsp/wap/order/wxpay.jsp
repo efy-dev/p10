@@ -32,7 +32,7 @@
                     if (res.err_msg == "get_brand_wcpay_request:ok") {//支付成功
                         //跳转到查看支付是否成功
                         <c:if test="${order.orderType=='3'}">
-                        window.location.href = "http://www2.efeiyi.com/giftReceive/${orderId}";
+                        window.location.href = "http://www.efeiyi.com/giftReceive/${orderId}";
                         </c:if>
                         <c:if test="${not empty order.callback && order.orderType!='3'}">
                         window.location.href = "${order.callback}";

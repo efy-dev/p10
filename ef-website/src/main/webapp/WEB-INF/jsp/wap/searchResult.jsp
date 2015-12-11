@@ -36,7 +36,7 @@
             <%-- 数据显示 --%>
             <c:forEach items="${searchParamBean.searchResultList}" var="result">
                 <li>
-                    <a href="http://192.168.1.57/ef-website/product/productModel/${result.id}" title="">
+                    <a href="<c:url value="/product/productModel/${result.id}"/>" title="">
                         <img src="http://pro.efeiyi.com/${result.picture_url}@!pc-project-list" alt="">
                         <p class="name">${result.product_name}<c:if test="${result.frequent != 1}">[${result.specification}]</c:if></p>
                         <p class="price"><em>￥</em>${result.product_model_price}</p>

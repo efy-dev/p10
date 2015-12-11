@@ -117,7 +117,7 @@ public class PurchaseOrder {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id" , updatable = false, insertable = false)
+    @JoinColumn(name = "tenant_id" )
     @JsonIgnore
     public Tenant getTenant() {
         return tenant;
@@ -128,7 +128,7 @@ public class PurchaseOrder {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
+    @JoinColumn(name = "tenant_id" ,updatable = false, insertable = false)
     @JsonIgnore
     public BigTenant getBigTenant() {
         return bigTenant;

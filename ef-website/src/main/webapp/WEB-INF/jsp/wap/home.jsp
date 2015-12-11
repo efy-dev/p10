@@ -15,7 +15,7 @@
     <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}' >
         <ul class="am-slides">
             <c:forEach items="${bannerList}" var="banner">
-                <li><a ><img src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner"/>"></a></li>
+                <li><a href="<c:url value="${banner.directUrl}"/> " ><img src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner"/>"></a></li>
             </c:forEach>
         </ul>
     </div>
@@ -43,11 +43,11 @@
             <span><i class="newicon"></i></span>
             <span>分&nbsp;类</span>
         </a>
-        <a class="item sh" href="http://www.efeiyi.com/subject/ihygpskg3j28dh60">
+        <a class="item sh" href="http://www.efeiyi.com/subject/ii09rq66455cnijf">
             <span><i class="newicon"></i></span>
             <span>专&nbsp;题</span>
         </a>
-        <a class="item gift" href="http://www.efeiyi.com/subject/ihzs8v95279y99hz">
+        <a class="item gift" href="http://www.efeiyi.com/subject/ihx20izq1o63bz5w">
             <span><i class="newicon"></i></span>
             <span>礼&nbsp;品</span>
         </a>
@@ -79,7 +79,7 @@
                             <em>${hotSale.name}</em>
                             <img src="http://pro.efeiyi.com/${hotSale.img}">
                         </a>
-                        <span class="price"><i>￥</i><strong>${hotSaleList.get(0).price}</strong></span>
+                        <span class="price"><i>￥</i><strong>${hotSale.price}</strong></span>
                         <span class="heat"><font>热卖</font></span>
                     </li>
                 </c:forEach>
@@ -93,7 +93,7 @@
             <div class="ae">
                 <div class="cat-top">
                     <div class="cat-t-o">${projectCategory.name}</div>
-                        <div class="cat-t-t">${projectCategory.context}</div>
+                        <%--<div class="cat-t-t">${projectCategory.context}</div>--%>
                         <%--<div class="cat-t-t">一物一乾坤</div>--%>
                 </div>
             </div>
