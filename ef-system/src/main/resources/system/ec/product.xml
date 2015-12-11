@@ -109,6 +109,11 @@
                         <condition name="project.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
+                <do name="listProduct" label="产品列表" access="" result="/product/productList">
+                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="产品序列" name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
                 <!--写两个list主要是为了不用一个列表页面，因为后台涉及到点击页面中的链接菜单选中的问题-->
                 <do name="listTenantProduct" label="产品列表" access="" result="/product/tenantProductList">
                     <query name="tenant" label="商家产品" type="auto" orderBy="id:desc">

@@ -684,7 +684,7 @@ public class ProductController extends BaseController {
     public String initSort(HttpServletRequest request){
         String f = "1";
         try {
-            XQuery xQuery = new XQuery("listProduct_default1",request);
+            XQuery xQuery = new XQuery("listProduct_default2",request);
             List<Product> productList = baseManager.listObject(xQuery);
             for(Product product : productList){
                 if(product.getProductPictureList()!=null){

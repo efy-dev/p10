@@ -627,6 +627,7 @@
                 var pictureId = data.split(":")[0].trim();
                 var imgUrl = data.split(":")[1];
                 var imgName = data.split(":")[2];
+                var sort = data.split(":")[3];
                 var url = "http://pro.efeiyi.com/" + imgUrl + "@!product-model";
                 var trueUrl = "http://pro.efeiyi.com/" + imgUrl + "@!water-mask";
                 var updatePictrueUrl = '<c:url value="/product/updatePictureSort.do"/>';
@@ -644,7 +645,7 @@
 //                        ' </td>' +
 //                        '</tr>';
                 ///显示图片
-                var img = '<li style="float: left;margin-right: 10px;width:200px;" name="' + pictureId + '">' +
+                var img = '<li style="float: left;margin-right: 10px;width:200px;" sort="'+sort+'" name="' + pictureId + '">' +
                         '<dl style="margin-top: 6px;" >' +
                         '  <dt  style="width: 100%">' +
                         '    <a title="点击查看原图" href="javascript:void (0);" onclick="tc(\'' + trueUrl + '\')">' +
