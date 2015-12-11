@@ -1,5 +1,5 @@
 <%@ page import="com.ming800.core.p.PConst" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %><%=PConst.HOSTNAME%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script src="<c:url value="/scripts/js/system.js?v=929"/>"></script>
 <div class="footer wh">
