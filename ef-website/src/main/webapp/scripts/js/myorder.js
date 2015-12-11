@@ -72,15 +72,14 @@ $(function(){
     });
     //
     $('.but-bil').click(function(){
-        alert('sadasdsa')
         $(this).parent().find('.common-popup').show()
     })
-    //°ïÖúÖÐÐÄ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     $('.help-order .page .left dt').click(function(){
         $(this).toggleClass('active');
         $(this).siblings('dd').slideToggle('fast');
     })
-    //ÎÒµÄ¿¨È¯
+    //ï¿½ÒµÄ¿ï¿½È¯
     $('.my-kj .am-tabs-nav .ul-list li.items').click(function(){
         var amTabPanel=$(this).parents('.ul-list').siblings('.am-tabs-bd');
         var $index=$(this).index();
