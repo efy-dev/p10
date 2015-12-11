@@ -7,6 +7,7 @@
     <script>
         var gobackUrl = "<c:url value="/product/productModel/${order.purchaseOrderProductList.get(0).productModel.id}"/>"
     </script>
+    <title>礼品</title>
 </head>
 <body>
 <!--//End--header-->
