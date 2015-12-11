@@ -168,6 +168,7 @@
                     </div>
                 </c:if>
             </div>
+         <c:if test="${productModel.product.status==1}">
             <div class="des">
                 <div class="colour">数量：</div>
                 <div class="colour-page">
@@ -179,6 +180,7 @@
                     <!-- //End-->
                 </div>
             </div>
+        </c:if>
             <div class="choose-btns">
                 <c:if test="${productModel.amount <= 0}">
                     <a id="modelId" class="btn btn-append" title="售罄">售罄</a>

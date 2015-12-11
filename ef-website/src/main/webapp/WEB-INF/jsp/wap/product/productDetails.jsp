@@ -98,6 +98,7 @@
             <%--<div class="s s9"><span>服&nbsp;&nbsp;&nbsp;务：</span>由姚惠芬刺绣刺绣馆（苏绣）发货并提供售后服务</div>--%>
         <%--</div>--%>
         <!-- //End--des-price-->
+        <c:if test="${productModel.product.status==1}">
         <div class="bd des-format">
             <a id="btn-num" class="bd btn-num">
                 <span class="select">数量</span>
@@ -108,6 +109,7 @@
                 </span>
             </a>
         </div>
+        </c:if>
         <%--<div class="bd des-price">--%>
         <%--<p class="bd p-price"><span>价格：</span><em>￥</em><strong>${productModel.price()}</strong></p>--%>
 
