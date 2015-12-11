@@ -4,6 +4,9 @@
 <!doctype html>
 <html class="no-js">
 <head>
+    <script>
+        var gobackUrl = "<c:url value="/product/productModel/${order.purchaseOrderProductList.get(0).productModel.id}"/>"
+    </script>
 </head>
 <body>
 <!--//End--header-->
@@ -32,6 +35,7 @@
             <div class="btb"><h5>送礼说明</h5></div>
             <div class="btb-text ae">
                 <p>方式一：点击“送礼给Ta”，根据提示送礼给好友，好友通过点击收到的链接进入收礼页面，正确填写收货信息后即可收礼。</p>
+
                 <p>方式二：点击“保存为图片”将生成图片形式的礼物卡片，保存图片后发给好友，好友通过识别图片上的二维码进入收礼页面，正确填写收货信息后即可收礼。</p>
             </div>
         </c:if>
@@ -45,12 +49,12 @@
             <div id="cover" style="display: none;"><em class="bg"></em><img
                     src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt=""></div>
             <div id="cover2" style="display: none">
-                <div class="text-co2" style="left: 17%;">
+                <div class="text-co2">
                     <strong class="cov-titie">提示</strong>
 
                     <p class="covtext">在浏览器中寻找分享按钮，将本页面链接分享给您的好友吧。</p>
 
-                    <div class="ae" style="text-align: center"><a class="covbtn" >确定</a></div>
+                    <div class="ae" style="text-align: center"><a class="covbtn">确定</a></div>
                 </div>
                 <div class="bg"></div>
             </div>
@@ -96,7 +100,7 @@
             }
         })
 
-        $(".covbtn").click(function(){
+        $(".covbtn").click(function () {
             $("#cover2").hide();
         })
     })

@@ -42,6 +42,9 @@ $(function(){
                 var counter=text.length;
                 $(".leaveword-num1 em,.leaveword-num2 em").text(50-counter);
             });
+            var imgheight = $(".newcustom .deduce-all li img").height();
+            alert(imgheight);
+            $(".newcustom .deduce-all li .mask").css({height:imgheight})
         });
 
 
@@ -66,9 +69,12 @@ $(function(){
     })
     //商品评价
     (function(){
+
         $('.my-evaluate .score .score-star .star li').click(function(){
             $(this).toggleClass('active');
-        })
+        });
+
+
     });
 
         //020102分类导航
@@ -140,26 +146,31 @@ $(function(){
                 return false;
             })
             return false;
-        })
+        });
         //分享
-        $('.details .des-title a.share,.my-colonel .iwill .txt4 .txcon,.packet .button .ad,#btn').click(function(){
-            $('#cover').show();
+        (function(){
+            $('.details .des-title a.share,.my-colonel .iwill .txt4 .txcon,.packet .button .ad,#btn').click(function(){
+                $('#cover').show();
+                $(".custom-header").css("z-index","0");
+                return false;
+            });
             $('#cover .bg').click(function(){
                 $(this).parents('#cover').hide();
             })
-            $(".custom-header").css("z-index","0");
-            return false;
-        });
-        $("#line").click(function(){
-           $("#cover2").show();
-           $(".custom-header").css("z-index","0");
-        })
-        $("#cover2 .text-co2 .covbtn").click(function(){
-            $(this).parents("#cover2").hide()
-        })
-        $("#cover2 .bg").click(function(){
-            $(this).parents("#cover2").hide()
-        })
+
+            $("#line").click(function(){
+                $("#cover2").show();
+                $(".custom-header").css("z-index","0");
+            })
+            $("#cover2 .text-co2 .covbtn").click(function(){
+                $(this).parents("#cover2").hide()
+            })
+            $("#cover2 .bg").click(function(){
+                $(this).parents("#cover2").hide()
+            })
+        })();
+
+
         //详情和评论-弹出轮播图
 
         $('.list-img li').on('click',function(){
