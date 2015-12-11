@@ -117,7 +117,7 @@ public class PurchaseOrderController {
         }
 
         if (purchaseOrder.getOrderType()!=null && purchaseOrder.getOrderType().equals("3")){
-            return "redirect:http://www.efeiyi.com/order/giftReceive/"+purchaseOrder.getId();
+            return "redirect:http://www.efeiyi.com/giftReceive/"+purchaseOrder.getId();
         }
 
         return "/purchaseOrder/purchaseOrderView";

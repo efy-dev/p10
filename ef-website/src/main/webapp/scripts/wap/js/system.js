@@ -42,12 +42,7 @@ $(function(){
                 var counter=text.length;
                 $(".leaveword-num1 em,.leaveword-num2 em").text(50-counter);
             });
-            var imgheight = $(".newcustom .deduce-all li img").height();
-            alert(imgheight);
-            $(".newcustom .deduce-all li .mask").css({height:imgheight})
         });
-
-
         $(".gift .add-cart .cancel").click(function(){
             $(this).parents().find('.add-cart').fadeOut().hide()
             return false
@@ -65,7 +60,6 @@ $(function(){
         });
         $("#nobtn").removeAttr('href');
         $("#nobtn").removeAttr('onclick');
-
     })
     //商品评价
     (function(){
@@ -73,11 +67,8 @@ $(function(){
         $('.my-evaluate .score .score-star .star li').click(function(){
             $(this).toggleClass('active');
         });
-
-
     });
-
-        //020102分类导航
+    //020102分类导航
     (function(){
         $('.box-hd .ul-index-list>li .item').click(function(){
             $(this).find('.arrow-down').toggleClass('arrow-up');
@@ -175,7 +166,6 @@ $(function(){
 
         $('.list-img li').on('click',function(){
             var $swiper=$('#swiper');
-
             //$(this).parents('.list-img')
             $swiper.find('.am-slides').html($(this).parents('.list-img').html())
             //计算弹出框中图片的定位
