@@ -140,6 +140,10 @@ public class ProductController extends BaseController {
                         sort = productManager.productPictureSort(product.getId())+1;
                        productPicture.setSort(sort);
                     }
+                    if(request.getParameter("status").equals("1")){
+                        sort = productManager.productPictureSort1(product.getId())+1;
+                        productPicture.setSort(sort);
+                    }
                     productPicture.setStatus(request.getParameter("status"));
                     productPicture.setProduct(product);
                     baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
