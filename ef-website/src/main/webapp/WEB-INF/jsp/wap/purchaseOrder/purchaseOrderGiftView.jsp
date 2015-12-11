@@ -95,13 +95,19 @@
         $("#share").click(function () {
             if (isWeiXin()) {
                 $("#cover").show();
+                $(".custom-header").css("z-index","0");
             } else {
                 $("#cover2").show();
+                $(".custom-header").css("z-index","0");
             }
         })
 
         $(".covbtn").click(function () {
             $("#cover2").hide();
+        })
+
+        $('#cover').click(function(){
+            $(this).hide();
         })
     })
 </script>
