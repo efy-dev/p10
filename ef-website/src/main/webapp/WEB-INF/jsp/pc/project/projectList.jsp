@@ -85,10 +85,8 @@
                             <div class="img-small">
                                 <a href="<c:url value="/product/productModel/${product.productModelList.get(0).id}"/>">
                                     <strong class="tbar">${product.name}</strong>
-                                        <%--${product.productModelList.size()}--%>
-                                    <img class="imgfilter"
-                                         src="http://pro.efeiyi.com/${product.productModelList.get(0).productModel_url}@!project-list-product-pc"
-                                         alt="">
+                                    <span class="mask"></span>
+                                    <img class="imgfilter" src="http://pro.efeiyi.com/${product.productModelList.get(0).productModel_url}@!project-list-product-pc" alt="">
                                     <span class="money"><em>￥</em><font>${product.productModelList.get(0).price.intValue()}</font></span>
                                 </a>
                             </div>
