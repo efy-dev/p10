@@ -156,7 +156,7 @@
           <span style="float: left;margin-left: 10px;">简介</span><i class="sod-sr"></i></a></li>
         <li class=""><a href="[data-tab-panel-1]">
           <i class="bz-icon2"></i>
-          <span style="float: left;margin-left: 10px;" onclick="getData('<c:url value='/basic/xmj.do?qm=plistMasterProject_master&conditions=project.id:${project.id}&pageEntity.size=5&pageEntity.index='/>')">传承人</span><i class="sod-sr"></i>
+          <span style="float: left;margin-left: 10px;" onclick="getData('<c:url value='/basic/xmj.do?qm=plistMasterProject_master&conditions=project.id:${project.id}&pageEntity.size=5&pageEntity.index='/>')">大师</span><i class="sod-sr"></i>
         </a></li>
         <li class="am-active"><a href="[data-tab-panel-0]">
           <i class="bz-icon3"></i>
