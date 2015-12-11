@@ -27,7 +27,10 @@
 
     <header class="am-header custom-header">
         <div class="am-header-left am-header-nav">
-            <a href="javascript:history.go(-1)" class="chevron-left"></a>
+            <a href="javascript:if(typeof gobackUrl=='undefined'){
+            history.go(-1)}else{
+            window.location.href= gobackUrl;
+            }" class="chevron-left"></a>
         </div>
         <!-- //End--chevron-left-->
         <h1 class="am-header-title" id="title">分类</h1>

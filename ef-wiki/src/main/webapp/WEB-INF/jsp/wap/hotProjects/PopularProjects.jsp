@@ -31,7 +31,7 @@
     <!-- //End--title-->
     <div class="am-header-right am-header-nav am-header-right1">
       <a href="#chevron-right" class="chevron-right" id="menu">
-        <i class="icon icon-user"></i>
+       <%-- <i class="icon icon-user"></i>--%>
       </a>
     </div>
   </header>
@@ -140,17 +140,7 @@
         </div>
       </div>
     </div>
-    <!--地区-->
-<%--     <div class="login-reg">
-         <%if(AuthorizationUtil.getMyUser()!=null && AuthorizationUtil.getMyUser().getId() != null){ %>
-         <div class="bd logined"><%=AuthorizationUtil.getMyUser().getUsername()%><a class="btn-exit" href="<c:url value='/j_spring_cas_security_logout'/>">退出</a></div>
-         <% } %>
-         <%if(AuthorizationUtil.getMyUser()==null || AuthorizationUtil.getMyUser().getId() == null){ %>
-         <a href="<c:url value='/sso.do'/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-         <a href="http://passport.efeiyi.com/register?service=http://http://master.efeiyi.com/ef-wiki/sso.do" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
-         <% } %>
 
-    </div>--%>
 </div>
 </div>
 <script>
