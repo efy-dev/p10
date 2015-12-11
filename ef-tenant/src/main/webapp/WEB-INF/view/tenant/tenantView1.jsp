@@ -182,6 +182,7 @@
         var t = '${object.tenantType}';
         $("input[name='tenantType'][value='"+t+"']").attr("checked",true);
         if('${object.review}'=='2' ||'${object.review}'=='4' ) {
+            alert("您的信息已经提交，我们将在7个工作日内完成审核，请耐心等待！");
             $("input,textarea").each(function () {
                 $(this).attr("readOnly", "readOnly");
             });
