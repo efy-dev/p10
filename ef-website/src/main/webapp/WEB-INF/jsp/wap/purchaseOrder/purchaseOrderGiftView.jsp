@@ -40,8 +40,7 @@
             </div>
         </c:if>
     </div>
-    <c:if test="${order.orderStatus=='6'}">
-
+    <c:if test="${order.orderStatus!='5'}">
         <div class="car-fx">
             <a href="#" id="share">送礼给Ta</a>
             <a href="<c:url value="/createGiftImage/${order.id}"/> ">保存为图片</a>
