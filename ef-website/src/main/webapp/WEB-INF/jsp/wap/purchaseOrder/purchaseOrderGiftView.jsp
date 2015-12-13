@@ -40,7 +40,7 @@
             </div>
         </c:if>
     </div>
-    <c:if test="${order.orderStatus!='5'}">
+    <c:if test="${order.orderStatus!='5'&& order.orderStatus!='1'}">
         <div class="car-fx">
             <a href="#" id="share">送礼给Ta</a>
             <a href="<c:url value="/createGiftImage/${order.id}"/> ">保存为图片</a>
@@ -94,10 +94,10 @@
         $("#share").click(function () {
             if (isWeiXin()) {
                 $("#cover").show();
-                $(".custom-header").css("z-index","0");
+                $(".custom-header").css("z-index", "0");
             } else {
                 $("#cover2").show();
-                $(".custom-header").css("z-index","0");
+                $(".custom-header").css("z-index", "0");
             }
         })
 
@@ -105,7 +105,7 @@
             $("#cover2").hide();
         })
 
-        $('#cover').click(function(){
+        $('#cover').click(function () {
             $(this).hide();
         })
     })

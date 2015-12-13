@@ -172,7 +172,7 @@
 
     <error-page>
         <error-code>401</error-code>
-        <location>/</location>
+        <location>/401</location>
     </error-page>
 
     <welcome-file-list>
