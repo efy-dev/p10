@@ -25,5 +25,7 @@ public interface ProductManager {
 
     public  Integer productPictureSort(String productId);
 
+    Integer productPictureSort1(String productId);
+
     public void changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort);
 }

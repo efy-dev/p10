@@ -97,6 +97,30 @@
                                         </a>
                                     </c:if>
                                     <security:authorize ifAnyGranted="admin,operational,c_operational">
+                                        <c:if test="${tenant.review=='4'}">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                               href="<c:url value="/basic/xm.do?qm=formTenantReview&tenantId=${tenant.id}&review=4"/>"  >
+                                                <span class="am-icon-heart">审核成功</span>
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${tenant.review=='1' || empty tenant.review}">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                               href="<c:url value="/basic/xm.do?qm=formTenantReview&tenantId=${tenant.id}&review=3"/>" >
+                                                <span class="am-icon-heart">未审核</span>
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${tenant.review=='3'}">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                               href="<c:url value="/basic/xm.do?qm=formTenantReview&tenantId=${tenant.id}&review=3"/>" >
+                                                <span class="am-icon-heart">重新审核</span>
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${tenant.review=='2'}">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                               href="<c:url value="/basic/xm.do?qm=formTenantReview&tenantId=${tenant.id}&review=3"/>" >
+                                                <span class="am-icon-heart">开始审核</span>
+                                            </a>
+                                        </c:if>
                                     <c:if test="${empty tenant.tenantRecommendedList}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                            onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"

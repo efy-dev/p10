@@ -67,7 +67,7 @@ public class ProjectController extends BaseController {
                 bannerStr += ".ctms";
                 break;
             case "织染印绣":
-                bannerStr += ".zrxy";
+                bannerStr += ".zryx";
                 break;
             case "茗品佳酿":
                 bannerStr += ".mpjn";
@@ -89,6 +89,12 @@ public class ProjectController extends BaseController {
                 break;
             case "医药养生":
                 bannerStr += ".yyys";
+                break;
+            case "文房四宝":
+                bannerStr += ".wfsb";
+                break;
+            case "创意生活":
+                bannerStr += ".cysh";
                 break;
             default:
         }

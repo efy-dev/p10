@@ -19,6 +19,8 @@
         <banner group="ec.home.banner.rjsq" note="如胶似漆" />
         <banner group="ec.home.banner.mzpz" note="木作编扎" />
         <banner group="ec.home.banner.yyys" note="医药养生" />
+        <banner group="ec.home.banner.wfsb" note="文房四宝" />
+        <banner group="ec.home.banner.cysh" note="创意生活" />
     </banners>
     <!-- 文档 -->
     <documents>

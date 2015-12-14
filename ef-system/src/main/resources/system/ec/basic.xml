@@ -22,6 +22,8 @@
                         <item label="如胶似漆" value="ec.home.banner.rjsq"/>
                         <item label="木作编扎" value="ec.home.banner.mzpz"/>
                         <item label="医药养生" value="ec.home.banner.yyys"/>
+                        <item label="文房四宝" value="ec.home.banner.wfsb"/>
+                        <item label="创意生活" value="ec.home.banner.cysh"/>
                     </statusType>
                 </field>
             </fields>

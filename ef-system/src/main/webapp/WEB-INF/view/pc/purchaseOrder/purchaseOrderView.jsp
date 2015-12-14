@@ -211,6 +211,7 @@
                 <th class="table-title">购买个数</th>
                 <th class="table-title">产品编号</th>
                 <th class="table-title">产品单价(元)</th>
+                <th class="table-title">商家编号</th>
             </tr>
             </thead>
             <tbody>
@@ -225,6 +226,7 @@
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.serial}</td>
                     <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/></td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.bigTenant.contractNumber}</td>
                 </tr>
             </c:forEach>
             </tbody>

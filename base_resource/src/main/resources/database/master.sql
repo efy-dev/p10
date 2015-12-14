@@ -743,3 +743,15 @@ PRIMARY KEY (`id`)
 ----------------------------12.02-----------------------
 ALTER TABLE `master_comment`
 ADD COLUMN `author_id`  char(16) NULL AFTER `comment_number`;
+
+
+-------------12.9-------------
+CREATE TABLE `tenant_review` (
+`id`  char(16) NOT NULL ,
+`content`  varchar(255) NULL ,
+`tenant_id`  char(16) NULL ,
+`review_status`  char(2) NULL ,
+`create_datetime`  datetime NULL ,
+PRIMARY KEY (`id`)
+)
+;

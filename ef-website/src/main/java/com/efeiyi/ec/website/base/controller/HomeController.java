@@ -55,9 +55,9 @@ public class HomeController {
     public String authenticationTest() {
         System.out.println(AuthorizationUtil.isAuthenticated());
         String name = "13693097151";
-        LinkedHashMap<String,Object> param = new LinkedHashMap<>();
-        param.put("username",name);
-        MyUser myUser = (MyUser)baseManager.getUniqueObjectByConditions("select obj from "+MyUser.class.getName()+" obj where obj.username=:username",param);
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("username", name);
+        MyUser myUser = (MyUser) baseManager.getUniqueObjectByConditions("select obj from " + MyUser.class.getName() + " obj where obj.username=:username", param);
         String password = "123123";
         AuthenticationManager am = new SampleAuthenticationManager();
         try {
@@ -86,9 +86,9 @@ public class HomeController {
 
 
     @RequestMapping({"/logoutHandler"})
-    public String logoutHandler(HttpServletResponse response){
+    public String logoutHandler(HttpServletResponse response) {
         //只有手动退出的时候清除cookie
-        CookieTool.addCookie(response,"userinfo","",1,".efeiyi.com");
+        CookieTool.addCookie(response, "userinfo", "", 1, ".efeiyi.com");
         return "redirect:/";
     }
 
@@ -211,7 +211,7 @@ public class HomeController {
             model.addAttribute("bannerActivityList", bannerActivityList);
         }
         model.addAttribute("projectMap", projectMap);
-        model.addAttribute("recommendedTenantList",recommendedTenantList);
+        model.addAttribute("recommendedTenantList", recommendedTenantList);
         return "/home";
     }
 
@@ -271,9 +271,10 @@ public class HomeController {
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("recommendedCategoryList", recommendedCategoryList);
         model.addAttribute("projectMap", projectMap);
-        model.addAttribute("recommendedTenantList",recommendedTenantList);
+        model.addAttribute("recommendedTenantList", recommendedTenantList);
         return "/common/productCategory";
     }
+
     @RequestMapping({"/productCategoryList.do"})
     public String moblieListProductCategory(HttpServletRequest request, Model model) throws Exception {
         XQuery projectCategoryxQuery = new XQuery("listProjectCategory_default", request);
@@ -310,6 +311,17 @@ public class HomeController {
     @RequestMapping({"/404"})
     public String show404() {
         return "/common/404";
+    }
+
+    @RequestMapping("/401")
+    public String show401(HttpServletResponse response) throws Exception {
+        return "redirect:/";
+    }
+
+    @RequestMapping("/401test")
+    public String show(HttpServletResponse response) throws Exception {
+        response.sendError(401, "测试");
+        return "/home";
     }
 
 

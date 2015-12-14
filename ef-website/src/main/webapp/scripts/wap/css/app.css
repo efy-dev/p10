@@ -125,6 +125,8 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .details .des-master p span {color:#000!important;margin-right:7px}
 .details .des-master .img {width:40px;height:40px;position:absolute;top:0;left:15px}
 .details .des-master .img img {width:100%}
+.details .newdes-price{padding: 0 15px;}
+.details .newdes-price p{font-size: 12px;}
 .details .des-price p.t1 {color:#999;margin-bottom:0}
 .details .des-price p.t2 em {color:#f00;font-size:18px;font-family:Times New Roman}
 .details .des-price p.t2 dfn {color:#f00;vertical-align:3px}

@@ -495,6 +495,10 @@ public class ProductManagerImpl implements ProductManager{
     }
 
     @Override
+    public  Integer productPictureSort1(String productId){
+        return productDao.getProductPicture1(productId);
+    }
+    @Override
     public void changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort){
           ProductPicture source = (ProductPicture)xdoDao.getObject(ProductPicture.class.getName(),sourceId);
           ProductPicture target = (ProductPicture)xdoDao.getObject(ProductPicture.class.getName(),targetId);

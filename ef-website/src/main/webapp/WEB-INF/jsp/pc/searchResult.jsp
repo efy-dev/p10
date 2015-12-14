@@ -102,7 +102,7 @@
                 <%--</li>--%>
                 <li class="line"><i class="icon"></i></li>
                 <li class="active">
-                    <a href="#" title="新品">新品</a>
+                    <a href="javascript:void(0);" title="新品" onclick="sortDate()">新品</a>
                 </li>
                 <li class="line"><i class="icon"></i></li>
             </ul>
@@ -136,8 +136,8 @@
                     <%-- 数据显示 --%>
                     <c:forEach items="${searchParamBean.searchResultList}" var="result">
                         <li>
-                            <a href="http://www2.efeiyi.com/product/productModel/${result.id}" target="_blank" title="">
-                                <img class="imgfilter" src="http://pro.efeiyi.com/${result.picture_url}" alt="">
+                            <a href="<c:url value="/product/productModel/${result.id}"/>" target="_blank" title="">
+                                <img class="imgfilter" src="http://pro.efeiyi.com/${result.picture_url}@!product-hot" alt="">
                                 <p class="wh name">${result.product_name}<c:if test="${result.frequent != 1}">[${result.specification}]</c:if></p>
                                 <p class="wh price">￥${result.product_model_price}</p>
                             </a>
@@ -190,6 +190,10 @@
     }
     function priceSectionForward(priceSection){
         var url = "<c:url value='/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=${searchParamBean.queryFacet}&priceUD=${searchParamBean.priceUD}&fq=product_model_price:'/>" + priceSection;
+        facetForward(url)
+    }
+    function sortDate() {
+        var url = "<c:url value='/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=${searchParamBean.queryFacet}&sortField=create_datetime'/>"+"&sortOrder=&fq=${searchParamBean.fq}" + "&priceUD=0";
         facetForward(url)
     }
 </script>

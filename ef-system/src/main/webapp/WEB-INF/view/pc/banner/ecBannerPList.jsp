@@ -28,7 +28,7 @@
 </div>
 
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
-<div class="admin-content">
+<div class="">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
 

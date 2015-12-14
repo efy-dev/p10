@@ -94,7 +94,10 @@
                         <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
                         <condition name="orderStatus" operation="eq" label="订单状态" inputType="select_status"
                                    key="purchaseOrder.orderStatus"/>
+                        <condition name="orderType" operation="eq" label="订单类型" inputType="select_status"
+                                   key="purchaseOrder.orderType"/>
                         <condition name="serial" operation="like" label="订单号" inputType="text"/>
+                        <condition name="bigTenant.contractNumber" operation="eq" label="商家编号" inputType="text"/>
                         <condition name="createDatetime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
                         <condition name="createDatetime" operation="le" label="截止时间" inputType="date" dataType="date"/>
                     </query>
@@ -134,6 +137,13 @@
                     <statusType fieldName="whetherBind">
                         <item label="未绑定" value="1"/>
                         <item label="已绑定" value="2"/>
+                    </statusType>
+                </field>
+                <field name="deliverType" label="发放类型" inputType="text">
+                    <statusType fieldName="deliverType">
+                        <item label="优惠券" value="1"/>
+                        <item label="兑换码" value="2"/>
+                        <item label="通码" value="3"/>
                     </statusType>
                 </field>
             </fields>

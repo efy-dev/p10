@@ -17,7 +17,7 @@
                 <c:forEach items="${jnode.children}" var="childJnode">
                     <c:if test="${!empty childJnode.children&& childJnode.children.size()>0}">
 
-                        <c:if test="${childJnode.text_zh_CN!='账号审核管理'}">
+                        <c:if test="${childJnode.text_zh_CN!='入驻审核管理'}">
                             <li class="admin-parent">
                                 <a class="am-cf" data-am-collapse="{target: '#${childJnode.id}'}"><span
                                         class="am-icon-file"></span> ${childJnode.text_zh_CN}</a>
@@ -56,7 +56,7 @@
                 <c:forEach items="${jnode.children}" var="childJnode">
                     <c:if test="${!empty childJnode.children&& childJnode.children.size()>0}">
 
-                        <c:if test="${childJnode.text_zh_CN=='账号审核管理'}">
+                        <c:if test="${childJnode.text_zh_CN=='入驻审核管理'}">
                             <li class="admin-parent">
                                 <a class="am-cf" data-am-collapse="{target: '#${childJnode.id}'}"><span
                                         class="am-icon-file"></span> ${childJnode.text_zh_CN}</a>

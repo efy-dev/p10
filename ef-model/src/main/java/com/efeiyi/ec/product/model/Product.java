@@ -4,6 +4,7 @@ import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectProperty;
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
@@ -34,6 +35,7 @@ public class Product implements Serializable{
     private Project project;
     private Date createDateTime;
     private Tenant tenant;
+    private BigTenant bigTenant;
 //    private List<ProjectProperty> projectPropertyList;//项目属性 可以使用project获得
 //    private List<ProductPropertyValue> productPropertyValueList;//项目属性值（所有可能的值）可以使用project获得
     private Integer recommendedIndex;//首页推荐排序字段
@@ -204,7 +206,7 @@ public class Product implements Serializable{
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
+    @JoinColumn(name = "tenant_id", updatable = false, insertable = false)
     @JsonIgnore
     public Tenant getTenant() {
         return tenant;
@@ -212,6 +214,17 @@ public class Product implements Serializable{
 
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
+    @JsonIgnore
+    public BigTenant getBigTenant() {
+        return bigTenant;
+    }
+
+    public void setBigTenant(BigTenant bigTenant) {
+        this.bigTenant = bigTenant;
     }
 
     @Column(name = "sub_name")

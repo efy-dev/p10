@@ -37,7 +37,7 @@
         </ul>
     </div>
     <!--//End--am-slider-->
-    <div class="bd details">
+    <div class="bd details slnew seckill">
         <div class="bd des-title">
             <strong class="bd txt">${productModel.product.name}
                 <c:forEach
@@ -79,19 +79,26 @@
             </c:if>
         </div>
         <!-- //End--des-master-->
-        <div class="bd des-price newdes-price">
-            <c:if test="productModel.marketPrice!=null">
+        <div class="bd des-price">
+            <c:if test="${not empty productModel.marketPrice&&productModel.product.status==1&&productModel.status!=0}">
                 <p class="bd t1"><span>市场价：</span>
                     <del>${productModel.marketPrice}</del>
                 </p>
             </c:if>
-            <p class="bd t2"><span>飞蚁价：</span><dfn>￥</dfn><em>${productModel.price}</em></p>
-
-            <p class="bd t3"><span> 服&nbsp;&nbsp;&nbsp;务：</span>由 <a
+            <c:if test="${not empty productModel.price&&productModel.product.status==1&&productModel.status!=0}">
+            <p class="s s2 s8"><span>飞蚁价：</span><em>￥</em><strong>${productModel.price}</strong></p>
+            </c:if>
+            <p class="s s9"><span> 服&nbsp;&nbsp;&nbsp;务：</span>由 <a
                     href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>"
-                    style="color: #000">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
+                    style="color: #000">${product.bigTenant.name}</a>[${product.bigTenant.address}] 发货并提供售后服务</p>
         </div>
+
+        <%--<div class="bd des-price">--%>
+            <%--<div class="s s2 s8"><span>飞蚁价：</span><em>￥</em><strong>11</strong></div>--%>
+            <%--<div class="s s9"><span>服&nbsp;&nbsp;&nbsp;务：</span>由姚惠芬刺绣刺绣馆（苏绣）发货并提供售后服务</div>--%>
+        <%--</div>--%>
         <!-- //End--des-price-->
+        <c:if test="${productModel.product.status==1&&productModel.status!=0}">
         <div class="bd des-format">
             <a id="btn-num" class="bd btn-num">
                 <span class="select">数量</span>
@@ -102,6 +109,7 @@
                 </span>
             </a>
         </div>
+        </c:if>
         <%--<div class="bd des-price">--%>
         <%--<p class="bd p-price"><span>价格：</span><em>￥</em><strong>${productModel.price()}</strong></p>--%>
 
@@ -168,6 +176,7 @@
         <!-- //End--des-format-->
     </div>
     <!-- //End---->
+<c:if test="${ productModel.product.status==1&&productModel.status!=0}">
     <div class="bd details-total-bar">
         <c:if test="${empty productModel.product.tenant.id}">
             <a class="btn-default" title="进店">进店</a>
@@ -186,6 +195,7 @@
         </c:if>
         <a style="width: 22%" class="btn-default" onclick="giftBuy()" title="购买">购买送礼</a>
     </div>
+</c:if>
 </article>
 <!--Start--选择规格弹出框-->
 <div class="am-modal-actions dialog-des-format" id="my-actions">

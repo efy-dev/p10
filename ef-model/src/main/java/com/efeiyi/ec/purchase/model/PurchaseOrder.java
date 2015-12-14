@@ -4,6 +4,7 @@ import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
@@ -44,6 +45,7 @@ public class PurchaseOrder {
     private BigDecimal originalPrice; //订单原价
     private String orderStatus; //订单状态
     private Tenant tenant;
+    private BigTenant bigTenant;
     private List<PurchaseOrder> subPurchaseOrder;
     private PurchaseOrder fatherPurchaseOrder;
     private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信 4优惠券
@@ -115,7 +117,7 @@ public class PurchaseOrder {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
+    @JoinColumn(name = "tenant_id" )
     @JsonIgnore
     public Tenant getTenant() {
         return tenant;
@@ -123,6 +125,17 @@ public class PurchaseOrder {
 
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id" ,updatable = false, insertable = false)
+    @JsonIgnore
+    public BigTenant getBigTenant() {
+        return bigTenant;
+    }
+
+    public void setBigTenant(BigTenant bigTenant) {
+        this.bigTenant = bigTenant;
     }
 
     @Id

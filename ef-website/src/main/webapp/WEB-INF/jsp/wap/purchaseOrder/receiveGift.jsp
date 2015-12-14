@@ -31,18 +31,10 @@
 <div class="gift ae">
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
-        <div class="edit-text">
-            <em>${purchaseOrder.giftMessage}</em>
-        </div>
-        <div class="cupic ae"><img src="${purchaseOrder.giftPictureUrl}"></div>
-        <div class="efi-icon ae"><i class="icon"></i></div>
-    </div>
-    <div class="card custom ae">
-        <div class="btb"><h5>礼物卡片</h5></div>
         <div class="pic-page ae">
             <div class="pic-img"><img
-                    src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}"
-                    width="181" height="101"></div>
+                    width="181" height="101" src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}">
+            </div>
             <div class="pic-text">
                 <p>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}</p>
 
@@ -67,7 +59,7 @@
         <div class="btb"><h5>${purchaseOrder.giftGaverName}送您礼物了，快填写您的收货信息吧！</h5></div>
         <ul class="profile ae">
             <li>
-                <strong>收货人：</strong>
+                <strong>姓名：</strong>
                 <label class="label"><input name="receiveName" type="text" class="dtxt" placeholder="请填写收货人姓名"></label>
             </li>
             <li>
@@ -103,8 +95,9 @@
                 <label><input type="text" name="receiveDetail" class="dtxt add-dext" placeholder="填写具体街道、门牌号"></label>
             </li>
         </ul>
-        <div class="btnq ae"><input type="submit" value="确&nbsp;认&nbsp;提&nbsp;交"></div>
+        <div class="btnq ae"><input type="submit" value="确&nbsp;认"></div>
     </form>
+    <div class="efi-icon ae"><i class="icon"></i></div>
 </div>
 
 <script>

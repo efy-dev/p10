@@ -92,9 +92,9 @@ public class PurchaseOrderPaymentController {
                 PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
                 if (purchaseOrder.getOrderType() != null && purchaseOrder.getOrderType().equals("3")) {  //礼品卷
                     orderStatus = PurchaseOrder.ORDER_STATUS_WRGIFT;
-                } else if (purchaseOrder.getOrderType()!=null && purchaseOrder.getOrderType().equals("4")){  //团购
+                } else if (purchaseOrder.getOrderType() != null && purchaseOrder.getOrderType().equals("4")) {  //团购
                     orderStatus = PurchaseOrder.ORDER_STATUS_WAIT_GROUP;
-                }else {
+                } else {
                     orderStatus = PurchaseOrder.ORDER_STATUS_WRECEIVE;
                 }
                 if (purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getOrderStatus().equals("1")) {
@@ -157,34 +157,39 @@ public class PurchaseOrderPaymentController {
 
     @RequestMapping({"/pay/wxParam/{orderId}"})
     public String getWxOpenId(HttpServletRequest request, Model model, @PathVariable String orderId) throws Exception {
-        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
-        String result;
-        //1、网页授权后获取传递的code，用于获取openId
-        String code = request.getParameter("code");
-        if (request.getSession().getAttribute(code) != null) {
-            result = request.getSession().getAttribute(code).toString();
-        } else {
-            System.out.println("1、 page code value：" + code);
-            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
-            result = HttpUtil.getHttpResponse(urlForOpenId, null);
-            request.getSession().setAttribute(code, result);
+        try {
+
+            PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
+            String result;
+            //1、网页授权后获取传递的code，用于获取openId
+            String code = request.getParameter("code");
+            if (request.getSession().getAttribute(code) != null) {
+                result = request.getSession().getAttribute(code).toString();
+            } else {
+                System.out.println("1、 page code value：" + code);
+                String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+                result = HttpUtil.getHttpResponse(urlForOpenId, null);
+                request.getSession().setAttribute(code, result);
+            }
+            System.out.println("2、get openid result：" + result);
+            JSONObject jsonObject = JSONObject.fromObject(result);
+            if (jsonObject.containsKey("errcode")) {
+                throw new RuntimeException("get openId error：" + result);
+            }
+            String openid = jsonObject.getString("openid");
+            JSONObject jsonStr = (JSONObject) paymentManager.wxpay(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue(), openid);
+            model.addAttribute("appId", jsonStr.getString("appId"));
+            model.addAttribute("timeStamp", jsonStr.getString("timeStamp"));
+            model.addAttribute("pk", jsonStr.getString("package"));
+            model.addAttribute("paySign", jsonStr.getString("paySign"));
+            model.addAttribute("signType", jsonStr.getString("signType"));
+            model.addAttribute("nonceStr", jsonStr.getString("nonceStr"));
+            model.addAttribute("orderId", purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getId());
+            model.addAttribute("order", purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder());
+            return "/order/wxpay";
+        } catch (Exception e) {
+            return "redirect:http://i.efeiyi.com";
         }
-        System.out.println("2、get openid result：" + result);
-        JSONObject jsonObject = JSONObject.fromObject(result);
-        if (jsonObject.containsKey("errcode")) {
-            throw new RuntimeException("get openId error：" + result);
-        }
-        String openid = jsonObject.getString("openid");
-        JSONObject jsonStr = (JSONObject) paymentManager.wxpay(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue(), openid);
-        model.addAttribute("appId", jsonStr.getString("appId"));
-        model.addAttribute("timeStamp", jsonStr.getString("timeStamp"));
-        model.addAttribute("pk", jsonStr.getString("package"));
-        model.addAttribute("paySign", jsonStr.getString("paySign"));
-        model.addAttribute("signType", jsonStr.getString("signType"));
-        model.addAttribute("nonceStr", jsonStr.getString("nonceStr"));
-        model.addAttribute("orderId", purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getId());
-        model.addAttribute("order", purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder());
-        return "/order/wxpay";
     }
 
     @RequestMapping({"/pay/weixin/native/{orderId}"})

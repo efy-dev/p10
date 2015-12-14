@@ -314,7 +314,7 @@
                         <c:if test="${!empty object.productPictureList}">
                             <c:forEach var="productPicture" items="${object.productPictureList}">
                                 <c:if test="${productPicture.status != '3' && productPicture.status != '9'}">
-                                    <li style="float: left;margin-right: 10px;width: 200px;"
+                                    <li style="float: left;margin-right: 10px;width: 200px;" sort="${productPicture.sort}"
                                         name="${productPicture.id}">
                                         <dl style="margin-top: 6px;">
                                             <dt style="width: 100%">
@@ -373,16 +373,18 @@
                                                    url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
                                             </dd>
                                             <dd style="width: 100%;text-align: center;">
-                                                <c:if test="${empty productPicture.sort}">
-                                                    <a href="javascript:void (0)" onclick="toUpdatePictureSort(this,'<c:url value="/product/updatePictureSort.do"/>')" sort="0" id="${productPicture.id}">
-                                                           初始化排序
-                                                    </a>
-                                                </c:if>
-                                <c:if test="${not empty productPicture.sort}">
-                                                <a href="javascript:void (0)" onclick="toUpdatePictureSort(this,'<c:url value="/product/updatePictureSort.do"/>')" sort="${productPicture.sort}" id="${productPicture.id}">
-                                                        ${productPicture.sort}
-                                                </a>
-                                </c:if>
+                                                <a href="javascript:void(0);" onclick="leftImg(this);">左移</a>
+                                                <a href="javascript:void(0);" onclick="rightImg(this);">右移</a>
+                                                <%--<c:if test="${empty productPicture.sort}">--%>
+                                                    <%--<a href="javascript:void (0)" onclick="toUpdatePictureSort(this,'<c:url value="/product/updatePictureSort.do"/>')" sort="0" id="${productPicture.id}">--%>
+                                                           <%--初始化排序--%>
+                                                    <%--</a>--%>
+                                                <%--</c:if>--%>
+                                <%--<c:if test="${not empty productPicture.sort}">--%>
+                                                <%--<a href="javascript:void (0)" onclick="toUpdatePictureSort(this,'<c:url value="/product/updatePictureSort.do"/>')" sort="${productPicture.sort}" id="${productPicture.id}">--%>
+                                                        <%--${productPicture.sort}--%>
+                                                <%--</a>--%>
+                                <%--</c:if>--%>
                                             </dd>
                                             <%--<dd style="width: 100%;text-align: center;">--%>
                                                     <%--<a href="javascript:void(0);"   onclick="changeImg('${productPicture.pictureUrl}');">替换图片</a>--%>
@@ -625,6 +627,7 @@
                 var pictureId = data.split(":")[0].trim();
                 var imgUrl = data.split(":")[1];
                 var imgName = data.split(":")[2];
+                var sort = data.split(":")[3];
                 var url = "http://pro.efeiyi.com/" + imgUrl + "@!product-model";
                 var trueUrl = "http://pro.efeiyi.com/" + imgUrl + "@!water-mask";
                 var updatePictrueUrl = '<c:url value="/product/updatePictureSort.do"/>';
@@ -642,7 +645,7 @@
 //                        ' </td>' +
 //                        '</tr>';
                 ///显示图片
-                var img = '<li style="float: left;margin-right: 10px;width:200px;" name="' + pictureId + '">' +
+                var img = '<li style="float: left;margin-right: 10px;width:200px;" sort="'+sort+'" name="' + pictureId + '">' +
                         '<dl style="margin-top: 6px;" >' +
                         '  <dt  style="width: 100%">' +
                         '    <a title="点击查看原图" href="javascript:void (0);" onclick="tc(\'' + trueUrl + '\')">' +
@@ -670,9 +673,14 @@
                         '<dd style="width: 100%;text-align: center;" >' +
                         '  <a href="javascript:void(0);" onclick="copyInit(this);"   class="copy" url="' + trueUrl + '">' + '复制图片地址' + '</a>' +
                         '</dd>' +
-                        '<dd style="width: 100%;text-align: center;" >' +
-                        '   <a href="javascript:void (0)" onclick="toUpdatePictureSort(this,\''+updatePictrueUrl+'\')" sort="0" id="' + pictureId + '">初始化排序'+
-                        '</a>' +
+                        '<dd style="width: 100%;text-align: center;" sort="" >' +
+                        '<a href="javascript:void(0);" onclick="leftImg(this);">'+
+                        '左移'+
+                        '</a>'+
+                        '<a href="javascript:void(0);" onclick="rightImg(this);">'+
+                        '右移'+'</a>'+
+//                        '   <a href="javascript:void (0)" onclick="toUpdatePictureSort(this,\''+updatePictrueUrl+'\')" sort="0" id="' + pictureId + '">初始化排序'+
+//                        '</a>' +
                         '</dd>' +
 //                        '<dd style="width: 100%;text-align: center;" >' +
 //                        '   <a href="javascript:void(0);"   onclick="changeImg(\'' + imgUrl + '\');">' + '替换图片' + '</a>' +
@@ -939,6 +947,65 @@
 
 
             }
+
+    }
+    function leftImg(obj){
+        var li = $(obj).parents("li");
+        var sourceId = $(li).attr("name");
+        var sourceSort = $(li).attr("sort");
+        var getLeft = $(li).prev();
+        var targetId = $(getLeft).attr("name");
+        var targetSort = $(getLeft).attr("sort");
+
+        if (getLeft.length == 0) {
+            alert("已经是第一个了!");
+        } else   if(sourceSort == ""|| targetSort == ""){
+            $(getLeft).before(li);
+        }else {
+            $.ajax({
+                type: "get",
+                url: '<c:url value="/product/changePictureSort.do"/>',
+                cache: false,
+                dataType: "json",
+                data: {sourceId: sourceId, sourceSort: sourceSort, targetId: targetId, targetSort: targetSort},
+                success: function (data) {
+                    $(getLeft).before(li);
+                    $(li).attr("sort", targetSort);
+                    $(getLeft).attr("sort", sourceSort);
+                }
+            });
+
+        }
+
+    }
+    function rightImg(obj){
+        var li = $(obj).parents("li");
+        var sourceId = $(li).attr("name");
+        var sourceSort = $(li).attr("sort");
+        var getRight = $(li).next();
+        var targetId = $(getRight).attr("name");
+        var targetSort = $(getRight).attr("sort");
+
+        if (getRight.length == 0) {
+            alert("已经是最后一个了!");
+        } else  if(sourceSort==""||targetSort==""){
+            $(getRight).after(li);
+        }else {
+            $.ajax({
+                type: "get",
+                url: '<c:url value="/product/changePictureSort.do"/>',
+                cache: false,
+                dataType: "json",
+                data: {sourceId: sourceId, sourceSort: sourceSort, targetId: targetId, targetSort: targetSort},
+                success: function (data) {
+                    $(getRight).after(li);
+                    $(li).attr("sort", targetSort);
+                    $(getRight).attr("sort", sourceSort)
+                }
+            });
+
+
+        }
 
     }
     function toDiscription(obj){
