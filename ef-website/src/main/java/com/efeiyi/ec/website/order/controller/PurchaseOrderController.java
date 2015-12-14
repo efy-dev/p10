@@ -101,7 +101,7 @@ public class PurchaseOrderController extends BaseController {
             purchaseOrderGift.setGiftPictureUrl(imageUrl);
             baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
@@ -170,13 +170,9 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("productModel", productModel);
         model.addAttribute("purchaseOrderProduct", purchaseOrderProduct);
         model.addAttribute("amount", amount);
-        model.addAttribute("request","/giftBuy/**");
+        model.addAttribute("request", "/giftBuy/**");
         return "/purchaseOrder/purchaseOrderGiftConfirm";
     }
-
-
-
-
 
 
     @RequestMapping({"/easyBuy/{productModelId}"})
@@ -247,11 +243,11 @@ public class PurchaseOrderController extends BaseController {
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cart, model);
         String callback = request.getParameter("callback");
         if (callback != null) {
-            callback = URLDecoder.decode(callback,"UTF-8");
-            if (callback.contains("?")){
-                callback+="&purchaseOrderId="+purchaseOrder.getId();
-            }else {
-                callback+="?purchaseOrderId="+purchaseOrder.getId();
+            callback = URLDecoder.decode(callback, "UTF-8");
+            if (callback.contains("?")) {
+                callback += "&purchaseOrderId=" + purchaseOrder.getId();
+            } else {
+                callback += "?purchaseOrderId=" + purchaseOrder.getId();
             }
             purchaseOrder.setCallback(callback);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
@@ -269,7 +265,7 @@ public class PurchaseOrderController extends BaseController {
     }
 
     @RequestMapping("/saveOrUpdateOrder2.do")
-    public String saveOrUpdateOrder(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+    public String saveOrUpdateOrder2(HttpServletRequest request, Model model) throws Exception {
         String productModelId = request.getParameter("productModelId");
         String amount = request.getParameter("amount");
         float priceFloat = Float.parseFloat(request.getParameter("price"));
@@ -279,19 +275,32 @@ public class PurchaseOrderController extends BaseController {
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(productModel, price, Integer.parseInt(amount), model);
         String callback = request.getParameter("callback");
         if (callback != null) {
-            callback = URLDecoder.decode(callback,"UTF-8");
-            if (callback.contains("?")){
-                callback+="&purchaseOrderId="+purchaseOrder.getId();
-            }else {
-                callback+="?purchaseOrderId="+purchaseOrder.getId();
+            callback = URLDecoder.decode(callback, "UTF-8");
+            if (callback.contains("?")) {
+                callback += "&purchaseOrderId=" + purchaseOrder.getId();
+            } else {
+                callback += "?purchaseOrderId=" + purchaseOrder.getId();
             }
             purchaseOrder.setCallback(callback);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         }
-        if (orderType!=null){
+        if (orderType != null) {
             purchaseOrder.setOrderType(orderType);
-            baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         }
+        XQuery xQuery = new XQuery("listConsumerAddress_default", request);
+        xQuery.addRequestParamToModel(model, request);
+        List addressList = baseManager.listObject(xQuery);
+        model.addAttribute("addressList", addressList);
+        model.addAttribute("purchaseOrder", purchaseOrder);
+        model.addAttribute("isEasyBuy", true);
+        return "/purchaseOrder/purchaseOrderConfirm";
+    }
+
+    @RequestMapping("/saveOrUpdateOrder3.do")
+    public String saveOrUpdateOrder3(HttpServletRequest request, Model model) throws Exception {
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), request.getParameter("purchaseOrderId"));
+        purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(purchaseOrder, model);
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
         List addressList = baseManager.listObject(xQuery);
@@ -400,17 +409,26 @@ public class PurchaseOrderController extends BaseController {
         }
     }
 
+    @RequestMapping({"/checkOrderStatus.do"})
+    @ResponseBody
+    public String checkOrderStatus(HttpServletRequest request) {
+        String purchaseOrderId = request.getParameter("purchaseOrderId");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+        return purchaseOrder.getOrderStatus();
+    }
+
+
     @RequestMapping({"/addGaverName.do"})
     @ResponseBody
     public String addGaverName(HttpServletRequest request) {
         String gaverName = request.getParameter("gaverName");
         String purchaseOrderGiftId = request.getParameter("purchaseOrderGiftId");
-        if(gaverName!=null&&gaverName!=""&&purchaseOrderGiftId!=null&&purchaseOrderGiftId!=""){
-            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(),purchaseOrderGiftId);
+        if (gaverName != null && gaverName != "" && purchaseOrderGiftId != null && purchaseOrderGiftId != "") {
+            PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderGiftId);
             purchaseOrderGift.setGiftGaverName(gaverName);
-            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(),purchaseOrderGift);
+            baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
             return gaverName;
-        }else {
+        } else {
             return "";
         }
     }

@@ -83,6 +83,22 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         return purchaseOrder;
     }
 
+
+    @Override
+    public PurchaseOrder saveOrUpdatePurchaseOrder(PurchaseOrder purchaseOrder, Model model) throws Exception {
+        HashMap<String, List> productMap = new HashMap<>();
+        createNewPurchaseOrder(purchaseOrder);
+        LinkedHashSet<Tenant> tenantSet = new LinkedHashSet<>();
+        tenantSet.add(purchaseOrder.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getTenant());
+        ArrayList<PurchaseOrderProduct> productModelArrayList = new ArrayList<>();
+        productModelArrayList.add(purchaseOrder.getPurchaseOrderProductList().get(0));
+        productMap.put(purchaseOrder.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getTenant().getId(), productModelArrayList);
+        model.addAttribute("productMap", productMap);
+        model.addAttribute("purchaseOrder", purchaseOrder);
+        model.addAttribute("tenantList", tenantSet);
+        return purchaseOrder;
+    }
+
     private PurchaseOrder createNewPurchaseOrder(List<CartProduct> cartProductList) throws Exception {
 
         PurchaseOrder purchaseOrder = new PurchaseOrder();
@@ -152,6 +168,15 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         purchaseOrder.setTotal(totalPrice);
         purchaseOrder.setOriginalPrice(totalPrice);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        return purchaseOrder;
+    }
+
+    private PurchaseOrder createNewPurchaseOrder(PurchaseOrder purchaseOrder) throws Exception {
+        User user = (User) baseManager.getObject(User.class.getName(), AuthorizationUtil.getMyUser().getId());
+        purchaseOrder.setUser(user);
+        purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
+        purchaseOrder.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         return purchaseOrder;
     }
