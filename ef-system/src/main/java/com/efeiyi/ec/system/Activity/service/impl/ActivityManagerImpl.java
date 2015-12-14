@@ -1,21 +1,12 @@
 package com.efeiyi.ec.system.Activity.service.impl;
 
-import com.efeiyi.ec.group.model.GroupMember;
-import com.efeiyi.ec.group.model.MyGroup;
-import com.efeiyi.ec.group.model.PurchaseOrderGroup;
-import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.master.model.MasterMessage;
-import com.efeiyi.ec.master.model.MasterProject;
-import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.activity.group.model.GroupMember;
+import com.efeiyi.ec.activity.group.model.MyGroup;
+import com.efeiyi.ec.activity.group.model.PurchaseOrderGroup;
 import com.efeiyi.ec.organization.model.User;
-import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.system.Activity.service.ActivityManager;
-import com.efeiyi.ec.system.master.service.MasterManager;
-import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.tenant.model.TenantMaster;
-import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.service.AutoSerialManager;
 import org.springframework.beans.factory.annotation.Autowired;

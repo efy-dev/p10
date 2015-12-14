@@ -1,14 +1,12 @@
 package com.efeiyi.ec.website.activity.controller;
 
-import com.efeiyi.ec.activity.model.SeckillProduct;
-import com.efeiyi.ec.activity.model.SeckillRecord;
+import com.efeiyi.ec.activity.seckill.model.SeckillProduct;
+import com.efeiyi.ec.activity.seckill.model.SeckillRecord;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import javafx.beans.property.adapter.ReadOnlyJavaBeanBooleanProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Path;
 import java.net.URLEncoder;
 import java.util.*;
 
