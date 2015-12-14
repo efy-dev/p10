@@ -70,7 +70,14 @@ public class PurchaseOrderGiftController {
             //判断是否是礼品订单 且可以被收礼
             model.addAttribute("purchaseOrder", purchaseOrderGift);
         }
-
+        String productName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getName();
+        String projectName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getProject().getName();
+        String giftMessage = purchaseOrderGift.getGiftMessage();
+        String sender = purchaseOrderGift.getGiftGaverName();
+        model.addAttribute("giftMessage",giftMessage);
+        model.addAttribute("productName",productName);
+        model.addAttribute("projectName",projectName);
+        model.addAttribute("sender",sender);
         String lc = "";//物流公司
         String serial = "";//物流单号
         String content = "";//物流信息
@@ -125,14 +132,9 @@ public class PurchaseOrderGiftController {
         String productName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getName();
         String projectName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getProject().getName();
         String urlString = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProductModel_url();
-        Master master = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getMaster();
-        String masterName = new String("");
-        if (master != null) {
-            masterName = master.getFullName();
-        }
         String sender = purchaseOrderGift.getGiftGaverName();
         //背景图设置
-        URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background4.jpg");
+        URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background5.jpg");
         ImageIcon imgIcon = new ImageIcon(backgroundUrl);
         Image theImg = imgIcon.getImage();
         int width = theImg.getWidth(null);
@@ -152,14 +154,13 @@ public class PurchaseOrderGiftController {
         g.setFont(new Font("微软雅黑", Font.BOLD, 25));
         g.drawString("「" + projectName + "」", 420, 290);
         g.setFont(new Font("微软雅黑", Font.BOLD, 27));
-        g.drawString(masterName, 420, 380);
         //背景图set文字显示
         g.setFont(new Font("微软雅黑", Font.ITALIC, 24));
         if (giftMessage != null) {
             if (giftMessage.length() < 17) {
                 g.drawString(giftMessage, 240, 500);
             }
-            if (17<=giftMessage.length()&&giftMessage.length() < 32) {
+            if (17 <= giftMessage.length() && giftMessage.length() < 32) {
                 g.drawString(giftMessage.substring(0, 17), 240, 500);
                 g.drawString(giftMessage.substring(17, giftMessage.length()), 220, 530);
             }
@@ -169,7 +170,7 @@ public class PurchaseOrderGiftController {
                 g.drawString(giftMessage.substring(33, giftMessage.length()), 220, 570);
             }
         }
-        if(sender!=null&&!"".equals(sender)){
+        if (sender != null && !"".equals(sender)) {
             g.drawString("——" + sender, 500, 600);
         }
         g.dispose();
@@ -235,6 +236,9 @@ public class PurchaseOrderGiftController {
     public String confirmGift(HttpServletRequest request, Model model) {
         String purchaseOrderId = request.getParameter("purchaseOrderId");
         PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+        if (!purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRGIFT)) {
+            return "redirect:/giftReceive/" + purchaseOrderGift.getId();
+        }
         AddressProvince addressProvince = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), request.getParameter("province.id"));
         AddressCity addressCity = (AddressCity) baseManager.getObject(AddressCity.class.getName(), request.getParameter("city.id"));
         String detail = request.getParameter("receiveDetail");

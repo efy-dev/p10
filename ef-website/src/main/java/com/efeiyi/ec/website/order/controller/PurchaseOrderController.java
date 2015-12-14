@@ -3,8 +3,6 @@ package com.efeiyi.ec.website.order.controller;
 import com.aliyun.openservices.oss.OSSClient;
 import com.aliyun.openservices.oss.model.ObjectMetadata;
 import com.aliyun.openservices.oss.model.PutObjectResult;
-import com.efeiyi.ec.activity.model.SeckillProduct;
-import com.efeiyi.ec.group.model.GroupProduct;
 import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
