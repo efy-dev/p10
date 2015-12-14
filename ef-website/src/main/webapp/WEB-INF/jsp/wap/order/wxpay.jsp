@@ -42,12 +42,7 @@
                         </c:if>
                     }
                     else {
-                        <c:if test="${not empty order.callback}">
-                        window.location.href = "${order.callback}";
-                        </c:if>
-                        <c:if test="${empty order.callback}">
                         window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";
-                        </c:if>
                     }
                 }
         );
