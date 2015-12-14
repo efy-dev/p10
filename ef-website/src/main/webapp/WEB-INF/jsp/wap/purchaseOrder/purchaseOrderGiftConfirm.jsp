@@ -71,7 +71,7 @@
         <div class="chandise ae">
             <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>
             <div class="cha-box">
-                <strong>${productModel.name}</strong>
+                <strong>${productModel.product.name}[${productModel.name}]</strong>
 
                 <p>${productModel.product.subName}</p>
 
