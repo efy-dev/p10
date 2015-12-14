@@ -14,19 +14,22 @@
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="pic-page ae">
-            <div class="pic-img"><img src="http://pro.efeiyi.com/${order.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture" width="181"></div>
+            <div class="pic-img"><img
+                    src="http://pro.efeiyi.com/${order.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture"
+                    width="181"></div>
             <div class="pic-text">
                 <p>${productName}</p>
+
                 <p class="t2"><i></i><span>${projectName}</span><em></em></p>
             </div>
         </div>
     </div>
     <div class="c-info ae" style="margin-top:0;">
         <c:if test="${not empty giftMessage}">
-        <p>${giftMessage}</p>
+            <p>${giftMessage}</p>
         </c:if>
         <c:if test="${not empty sender}">
-        <p>——${sender}</p>
+            <p>——${sender}</p>
         </c:if>
     </div>
     <!-- //End-->
