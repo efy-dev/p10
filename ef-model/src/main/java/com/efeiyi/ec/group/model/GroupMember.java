@@ -1,5 +1,6 @@
-package com.efeiyi.ec.activity.group.model;
+package com.efeiyi.ec.group.model;
 
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;

@@ -1,5 +1,6 @@
-package com.efeiyi.ec.activity.seckill.model;
+package com.efeiyi.ec.activity.model;
 
+import com.efeiyi.ec.organization.model.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

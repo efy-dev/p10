@@ -1,9 +1,10 @@
-package com.efeiyi.ec.activity.seckill.model;
+package com.efeiyi.ec.activity.model;
 
 import com.efeiyi.ec.product.model.ProductModel;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Fetch;
 import java.math.BigDecimal;
 import java.util.Date;
 

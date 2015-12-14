@@ -1,4 +1,4 @@
-package com.efeiyi.ec.activity.group.model;
+package com.efeiyi.ec.group.model;
 
 import com.efeiyi.ec.product.model.ProductModel;
 import org.hibernate.annotations.GenericGenerator;

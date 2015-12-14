@@ -1,7 +1,7 @@
 package com.efeiyi.ec.website.activity.controller;
-import com.efeiyi.ec.activity.group.model.GroupMember;
-import com.efeiyi.ec.activity.group.model.PurchaseOrderGroup;
+import com.efeiyi.ec.group.model.GroupMember;
 import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.group.model.PurchaseOrderGroup;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
