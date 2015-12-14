@@ -132,14 +132,9 @@ public class PurchaseOrderGiftController {
         String productName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getName();
         String projectName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getProject().getName();
         String urlString = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProductModel_url();
-        Master master = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getMaster();
-        String masterName = new String("");
-        if (master != null) {
-            masterName = master.getFullName();
-        }
         String sender = purchaseOrderGift.getGiftGaverName();
         //背景图设置
-        URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background4.jpg");
+        URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background5.jpg");
         ImageIcon imgIcon = new ImageIcon(backgroundUrl);
         Image theImg = imgIcon.getImage();
         int width = theImg.getWidth(null);
@@ -159,7 +154,6 @@ public class PurchaseOrderGiftController {
         g.setFont(new Font("微软雅黑", Font.BOLD, 25));
         g.drawString("「" + projectName + "」", 420, 290);
         g.setFont(new Font("微软雅黑", Font.BOLD, 27));
-        g.drawString(masterName, 420, 380);
         //背景图set文字显示
         g.setFont(new Font("微软雅黑", Font.ITALIC, 24));
         if (giftMessage != null) {

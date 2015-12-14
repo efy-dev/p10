@@ -20,6 +20,12 @@
     <%--<link type="text/css" rel="stylesheet" src="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">--%>
     <%--<link type="text/css" rel="stylesheet" src="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">--%>
     <style>
+        *{
+            -webkit-box-sizing: border-box;
+        }
+        body{margin: 0;
+            padding: 0;
+        }
         .gift-img {
             width: 100%;
             height: 100%;
@@ -41,13 +47,14 @@
             background: #fff;
         }
         .gift-img img {width: 100%;}
+
     </style>
 </head>
 <body>
 <div class="gift-img">
     <h1>长按下方图片，选择保存图片，再将其发送给您的好友</h1>
 
-    <div class="img"><img src="http://pro.efeiyi.com/${url}" alt=""></div>
+    <div class="img"><img src="http://pro.efeiyi.com/${url}" style="border:5px solid#c30;" alt=""></div>
 </div>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
