@@ -13,20 +13,22 @@
 <div class="gift ae">
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
-        <div class="cupic ae"><img
-                src="http://pro.efeiyi.com/${order.purchaseOrderProductList.get(0).productModel.productModel_url}@!product-hot">
+        <div class="pic-page ae">
+            <div class="pic-img"><img src="http://pro.efeiyi.com/${order.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture" width="181"></div>
+            <div class="pic-text">
+                <p>${productName}</p>
+                <p class="t2"><i></i><span>${projectName}</span><em></em></p>
+            </div>
         </div>
     </div>
-    <c:if test="${!empty order.giftMessage || !empty order.giftGaverName}">
-    <div class="c-info ae">
-        <c:if test="${!empty order.giftMessage}">
-            <p>${order.giftMessage}</p>
+    <div class="c-info ae" style="margin-top:0;">
+        <c:if test="${not empty giftMessage}">
+        <p>${giftMessage}</p>
         </c:if>
-        <c:if test="${!empty order.giftGaverName}">
-            <p>——${order.giftGaverName}</p>
+        <c:if test="${not empty sender}">
+        <p>——${sender}</p>
         </c:if>
     </div>
-    </c:if>
     <!-- //End-->
     <div class="car-state ae">
         <div class="btb"><h5>礼物状态</h5><span id="giftStatus"><c:if test="${order.orderStatus=='6'}">未收礼</c:if> <c:if
