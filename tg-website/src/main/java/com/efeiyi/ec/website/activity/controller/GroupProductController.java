@@ -1,6 +1,6 @@
 package com.efeiyi.ec.website.activity.controller;
 
-import com.efeiyi.ec.group.model.GroupProduct;
+import com.efeiyi.ec.activity.group.model.GroupProduct;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
