@@ -166,7 +166,7 @@ public class PurchaseOrderGiftController {
             if (giftMessage.length() < 17) {
                 g.drawString(giftMessage, 240, 500);
             }
-            if (17<=giftMessage.length()&&giftMessage.length() < 32) {
+            if (17 <= giftMessage.length() && giftMessage.length() < 32) {
                 g.drawString(giftMessage.substring(0, 17), 240, 500);
                 g.drawString(giftMessage.substring(17, giftMessage.length()), 220, 530);
             }
@@ -176,7 +176,7 @@ public class PurchaseOrderGiftController {
                 g.drawString(giftMessage.substring(33, giftMessage.length()), 220, 570);
             }
         }
-        if(sender!=null&&!"".equals(sender)){
+        if (sender != null && !"".equals(sender)) {
             g.drawString("——" + sender, 500, 600);
         }
         g.dispose();
@@ -242,6 +242,9 @@ public class PurchaseOrderGiftController {
     public String confirmGift(HttpServletRequest request, Model model) {
         String purchaseOrderId = request.getParameter("purchaseOrderId");
         PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+        if (!purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRGIFT)) {
+            return "redirect:/giftReceive/" + purchaseOrderGift.getId();
+        }
         AddressProvince addressProvince = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), request.getParameter("province.id"));
         AddressCity addressCity = (AddressCity) baseManager.getObject(AddressCity.class.getName(), request.getParameter("city.id"));
         String detail = request.getParameter("receiveDetail");

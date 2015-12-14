@@ -100,7 +100,6 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
     }
 
     private PurchaseOrder createNewPurchaseOrder(List<CartProduct> cartProductList) throws Exception {
-
         PurchaseOrder purchaseOrder = new PurchaseOrder();
         User user = (User) baseManager.getObject(User.class.getName(), AuthorizationUtil.getMyUser().getId());
         purchaseOrder.setUser(user);
@@ -177,6 +176,8 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         purchaseOrder.setUser(user);
         purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
         purchaseOrder.setCreateDatetime(new Date());
+        purchaseOrder.setStatus("0");
+        purchaseOrder.setOrderType(PurchaseOrder.ORDER_STATUS_WPAY);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         return purchaseOrder;
     }
