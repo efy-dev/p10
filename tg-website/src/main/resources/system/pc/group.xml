@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<module name="Group" label="团" version="" package="com.efeiyi.ec.group.model" path="">
+<module name="Group" label="团" version="" package="com.efeiyi.ec.activity.group.model" path="">
 
     <entities>
-        <entity name="Group" label="团"  model="com.efeiyi.ec.group.model.MyGroup">
+        <entity name="Group" label="团"  model="com.efeiyi.ec.activity.group.model.MyGroup">
             <does>
                 <do name="listGroup" access="" label="团列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
@@ -27,7 +27,7 @@
                 </do>
             </does>
         </entity>
-        <entity name="Member" label="团员"  model="com.efeiyi.ec.group.model.GroupMember">
+        <entity name="Member" label="团员"  model="com.efeiyi.ec.activity.group.model.GroupMember">
             <does>
                 <do name="listMember" access="" label="团员列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">

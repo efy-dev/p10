@@ -1,10 +1,8 @@
 package com.efeiyi.ec.website.base.controller;
 
-import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
-import com.ming800.core.p.model.Banner;
 import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import org.springframework.beans.factory.annotation.Autowired;

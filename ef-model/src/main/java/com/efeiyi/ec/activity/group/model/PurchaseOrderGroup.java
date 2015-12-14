@@ -1,7 +1,6 @@
-package com.efeiyi.ec.group.model;
+package com.efeiyi.ec.activity.group.model;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
