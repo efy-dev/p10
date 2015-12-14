@@ -35,39 +35,40 @@
 <img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!wap-product-pic" style="position: absolute;left: 0;top: -1000px;width: 100%">
 <header class="am-header custom-header newhad">
   <!-- //End--chevron-left-->
-
-      <c:if test="${flag==0}">
-        <c:if test="${group.status==1}">
-          <h1 class="am-header-title"><i class="had-icon had-add"></i>组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团</h1>
-        </c:if>
-        <c:if test="${group.status==3||group.status==4}">
-          <h1 class="am-header-title"><i class="had-icon had-good"></i>组团成功</h1>
-        </c:if>
-        <c:if test="${group.status==5}">
-          <h1 class="am-header-title"><i class="had-icon had-not"></i>组团失败</h1>
-        </c:if>
-        <c:if test="${group.groupProduct.status==0}">
-          <h1 class="am-header-title"><i class="had-icon had-no"></i>活动结束</h1>
-        </c:if>
+  <c:if test="${group.groupProduct.status==1}">
+    <c:if test="${flag==0}">
+      <c:if test="${group.status==1}">
+        <h1 class="am-header-title"><i class="had-icon had-add"></i>组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团</h1>
       </c:if>
-      <c:if test="${flag==1||flag==2}">
-        <c:if test="${group.status==1&&fn:length(group.groupMemberList)==1}">
-          <h1 class="am-header-title"><i class="had-icon had-good"></i>开团成功</h1>
-        </c:if>
-        <c:if test="${group.status==1&&fn:length(group.groupMemberList)>1}">
-          <h1 class="am-header-title"><i class="had-icon had-add"></i>组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团</h1>
-        </c:if>
-
-        <c:if test="${group.status==3||group.status==4}">
-          <h1 class="am-header-title"><i class="had-icon had-good"></i>组团成功</h1>
-        </c:if>
-        <c:if test="${group.status==5}">
-          <h1 class="am-header-title"><i class="had-icon had-not"></i>组团失败</h1>
-        </c:if>
-        <c:if test="${group.groupProduct.status==0}">
-          <h1 class="am-header-title"><i class="had-icon had-no"></i>活动结束</h1>
-        </c:if>
+      <c:if test="${group.status==3||group.status==4}">
+        <h1 class="am-header-title"><i class="had-icon had-good"></i>组团成功</h1>
       </c:if>
+      <c:if test="${group.status==5}">
+        <h1 class="am-header-title"><i class="had-icon had-not"></i>组团失败</h1>
+      </c:if>
+      <c:if test="${group.groupProduct.status==0}">
+        <h1 class="am-header-title"><i class="had-icon had-no"></i>活动结束</h1>
+      </c:if>
+    </c:if>
+    <c:if test="${flag==1||flag==2}">
+      <c:if test="${group.status==1&&fn:length(group.groupMemberList)==1}">
+        <h1 class="am-header-title"><i class="had-icon had-good"></i>开团成功</h1>
+      </c:if>
+      <c:if test="${group.status==1&&fn:length(group.groupMemberList)>1}">
+        <h1 class="am-header-title"><i class="had-icon had-add"></i>组团中，还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团</h1>
+      </c:if>
+
+      <c:if test="${group.status==3||group.status==4}">
+        <h1 class="am-header-title"><i class="had-icon had-good"></i>组团成功</h1>
+      </c:if>
+      <c:if test="${group.status==5}">
+        <h1 class="am-header-title"><i class="had-icon had-not"></i>组团失败</h1>
+      </c:if>
+    </c:if>
+  </c:if>
+  <c:if test="${group.groupProduct.status==0}">
+    <h1 class="am-header-title"><i class="had-icon had-no"></i>活动结束</h1>
+  </c:if>
   <!-- //End--title-->
 </header>
 <!--//End--header-->
@@ -89,137 +90,142 @@
       </div>
 
     <div class="newtext">
-      <c:if test="${flag==0}">
-        <c:if test="${group.status=='1'}">
-          还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，时间有限，小伙伴们都抢疯了，你还在等什么捏~~
+      <c:if test="${group.groupProduct.status=='1'}">
+        <c:if test="${flag==0}">
+          <c:if test="${group.status=='1'}">
+            还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，时间有限，小伙伴们都抢疯了，你还在等什么捏~~
+          </c:if>
+          <c:if test="${group.status=='3'}">
+            组团成功啦，可是没有你的参与，伦家不开心呢，快去开个团吧
+          </c:if>
+          <c:if test="${group.status=='4'}">
+            组团成功啦！不过还有参团名额呢，赶快参与吧
+          </c:if>
+          <c:if test="${group.status=='5'}">
+            组团失败，不要气馁，自己开个团试试看~~
+          </c:if>
+          <c:if test="${group.groupProduct.status=='0'}">
+            哎呀，你来的太晚了，商品已被抢完啦
+          </c:if>
         </c:if>
-        <c:if test="${group.status=='3'}">
-          组团成功啦，可是没有你的参与，伦家不开心呢，快去开个团吧
+        <c:if test="${flag==1}">
+          <c:if test="${group.status=='1'&&fn:length(group.groupMemberList)==1}">
+            恭喜您成功开团当团长，赶快呼唤小伙伴们加入你的团吧
+          </c:if>
+          <c:if test="${group.status=='1'&&fn:length(group.groupMemberList)>1}">
+            还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，时间有限，赶快去呼唤小伙伴们加入吧
+          </c:if>
+          <c:if test="${group.status=='3'}">
+            组团成功啦，恭喜恭喜！听说大boss大出血，又上新了好商品呢~~
+          </c:if>
+          <c:if test="${group.status=='4'}">
+            组团成功啦，恭喜恭喜！不过还有参团名额呢，快去告诉朋友们吧
+          </c:if>
+          <c:if test="${group.status=='5'}">
+            组团失败，不要气馁，一回生，二回熟，再接再厉呦~~
+          </c:if>
+          <c:if test="${group.groupProduct.status=='0'}">
+            哎呀，商品太热销，已经抢完啦
+          </c:if>
         </c:if>
-        <c:if test="${group.status=='4'}">
-          组团成功啦！不过还有参团名额呢，赶快参与吧
-        </c:if>
-        <c:if test="${group.status=='5'}">
-          组团失败，不要气馁，自己开个团试试看~~
-        </c:if>
-        <c:if test="${group.groupProduct.status=='0'}">
-          哎呀，你来的太晚了，商品已被抢完啦
+        <c:if test="${flag==2}">
+          <c:if test="${group.status=='1'}">
+            还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，时间有限，赶快去呼唤小伙伴们加入吧
+          </c:if>
+          <c:if test="${group.status=='3'}">
+            组团成功啦，恭喜恭喜！听说大boss大出血，又上新了好商品呢~~
+          </c:if>
+          <c:if test="${group.status=='4'}">
+            组团成功啦，恭喜恭喜！不过还有参团名额呢，快去告诉朋友们吧
+          </c:if>
+          <c:if test="${group.status=='5'}">
+            组团失败，不要气馁，自己开个团试试看~~
+          </c:if>
         </c:if>
       </c:if>
-      <c:if test="${flag==1}">
-        <c:if test="${group.status=='1'&&fn:length(group.groupMemberList)==1}">
-          恭喜您成功开团当团长，赶快呼唤小伙伴们加入你的团吧
-        </c:if>
-        <c:if test="${group.status=='1'&&fn:length(group.groupMemberList)>1}">
-          还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，时间有限，赶快去呼唤小伙伴们加入吧
-        </c:if>
-        <c:if test="${group.status=='3'}">
-          组团成功啦，恭喜恭喜！听说大boss大出血，又上新了好商品呢~~
-        </c:if>
-        <c:if test="${group.status=='4'}">
-          组团成功啦，恭喜恭喜！不过还有参团名额呢，快去告诉朋友们吧
-        </c:if>
-        <c:if test="${group.status=='5'}">
-          组团失败，不要气馁，一回生，二回熟，再接再厉呦~~
-        </c:if>
-        <c:if test="${group.groupProduct.status=='0'}">
-          哎呀，商品太热销，已经抢完啦
-        </c:if>
-      </c:if>
-      <c:if test="${flag==2}">
-        <c:if test="${group.status=='1'}">
-          还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，时间有限，赶快去呼唤小伙伴们加入吧
-        </c:if>
-        <c:if test="${group.status=='3'}">
-          组团成功啦，恭喜恭喜！听说大boss大出血，又上新了好商品呢~~
-        </c:if>
-        <c:if test="${group.status=='4'}">
-          组团成功啦，恭喜恭喜！不过还有参团名额呢，快去告诉朋友们吧
-        </c:if>
-        <c:if test="${group.status=='5'}">
-          组团失败，不要气馁，自己开个团试试看~~
-        </c:if>
-        <c:if test="${group.groupProduct.status=='0'}">
-          哎呀，商品太热销，已经抢完啦
-        </c:if>
+      <c:if test="${group.groupProduct.status=='0'}">
+        哎呀，商品太热销，已经抢完啦
       </c:if>
 
     </div>
 
-    <c:if test="${flag==0}">
-      <c:if test="${group.status=='1'||group.status=='4'}">
-        <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${group.groupProduct.id}&groupId=${group.id}&memberId=${memberId}"
-           class="btn">
-          参团
-        </a>
+
+    <c:if test="${group.groupProduct.status=='1'}">
+      <c:if test="${flag==0}">
+        <c:if test="${group.status=='1'||group.status=='4'}">
+          <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${group.groupProduct.id}&groupId=${group.id}&memberId=${memberId}"
+             class="btn">
+            参团
+          </a>
+        </c:if>
+        <c:if test="${group.status=='3'}">
+          <a href="javascript:void(0)" class="btn" id="nobtn">
+            拼团结束
+          </a>
+        </c:if>
+        <c:if test="${group.status=='5'}">
+          <a href="javascript:void(0)" class="btn" id="nobtn">
+            组团失败
+          </a>
+        </c:if>
+        <c:if test="${group.groupProduct.status=='0'}" >
+          <a href="javascript:void(0)" class="btn" id="nobtn">
+            活动结束
+          </a>
+        </c:if>
       </c:if>
-      <c:if test="${group.status=='3'}">
-        <a href="javascript:void(0)" class="btn" id="nobtn">
-          拼团结束
-        </a>
+      <c:if test="${flag==1}">
+        <c:if test="${group.status=='1'}">
+          <a href="javascript:void(0)" class="btn" id="btn">
+            还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，去分享
+          </a>
+        </c:if>
+        <c:if test="${group.status=='4'}">
+          <a href="javascript:void(0)" class="btn" id="btn">
+            组团成功，去分享
+          </a>
+        </c:if>
+        <c:if test="${group.status=='5'}">
+          <a href="javascript:void(0)" class="btn" id="nobtn" >
+            组团失败
+          </a>
+        </c:if>
+        <c:if test="${group.groupProduct.status=='0'}">
+          <a href="javascript:void(0)" class="btn" id="nobtn">
+            活动结束
+          </a>
+        </c:if>
+        <c:if test="${group.status=='3'}">
+          <a href="javascript:void(0)" class="btn" id="nobtn">
+            拼团结束
+          </a>
+        </c:if>
       </c:if>
-      <c:if test="${group.status=='5'}">
-        <a href="javascript:void(0)" class="btn" id="nobtn">
-          组团失败
-        </a>
-      </c:if>
-      <c:if test="${group.groupProduct.status=='0'}" >
-        <a href="javascript:void(0)" class="btn" id="nobtn">
-          活动结束
-        </a>
+      <c:if test="${flag==2}">
+        <c:if test="${group.status=='1'}">
+          <a href="javascript:void(0)" class="btn" id="btn">
+            还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，去分享
+          </a>
+        </c:if>
+        <c:if test="${group.status=='3'}">
+          <a href="<c:url value="/group/groupBuy.do?groupProductId=${group.groupProduct.id}"/>" class="btn">拼团结束&nbsp;去开团</a>
+        </c:if>
+        <c:if test="${group.status=='4'}">
+          <a href="javascript:void(0)" class="btn" id="btn">
+            组团成功,去分享
+          </a>
+        </c:if>
+        <c:if test="${group.status=='5'}">
+          <a href="javascript:void(0)" class="btn" id="nobtn" >
+            组团失败
+          </a>
+        </c:if>
       </c:if>
     </c:if>
-    <c:if test="${flag==1}">
-      <c:if test="${group.status=='1'}">
-        <a href="javascript:void(0)" class="btn" id="btn">
-          还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，去分享
-        </a>
-      </c:if>
-      <c:if test="${group.status=='4'}">
-        <a href="javascript:void(0)" class="btn" id="btn">
-          组团成功，去分享
-        </a>
-      </c:if>
-      <c:if test="${group.status=='5'}">
-        <a href="javascript:void(0)" class="btn" id="nobtn" >
-          组团失败
-        </a>
-      </c:if>
-      <c:if test="${group.groupProduct.status=='0'}">
-        <a href="javascript:void(0)" class="btn" id="nobtn">
-          活动结束
-        </a>
-      </c:if>
-      <c:if test="${group.status=='3'}">
-        <a href="javascript:void(0)" class="btn" id="nobtn">
-          拼团结束
-        </a>
-      </c:if>
-    </c:if>
-    <c:if test="${flag==2}">
-      <c:if test="${group.status=='1'}">
-        <a href="javascript:void(0)" class="btn" id="btn">
-          还差${group.groupProduct.memberAmount-group.groupMemberList.size()}人成团，去分享
-        </a>
-      </c:if>
-      <c:if test="${group.status=='3'}">
-        <a href="<c:url value="/group/groupBuy.do?groupProductId=${group.groupProduct.id}"/>" class="btn">拼团结束&nbsp;去开团</a>
-      </c:if>
-      <c:if test="${group.status=='4'}">
-        <a href="javascript:void(0)" class="btn" id="btn">
-          组团成功,去分享
-        </a>
-      </c:if>
-      <c:if test="${group.status=='5'}">
-        <a href="javascript:void(0)" class="btn" id="nobtn" >
-          组团失败
-        </a>
-      </c:if>
-      <c:if test="${group.groupProduct.status=='0'}">
-        <a href="javascript:void(0)" class="btn" id="nobtn" >
-          活动结束
-        </a>
-      </c:if>
+    <c:if test="${group.groupProduct.status=='0'}">
+      <a href="javascript:void(0)" class="btn" id="nobtn" >
+        活动结束
+      </a>
     </c:if>
     <div id="cover" style="display: none;"><em class="bg"></em><img
             src="<c:url value="/scripts/wap/upload/guide-share.png"/>">
