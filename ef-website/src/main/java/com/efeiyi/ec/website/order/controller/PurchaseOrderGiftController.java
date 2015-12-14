@@ -70,7 +70,14 @@ public class PurchaseOrderGiftController {
             //判断是否是礼品订单 且可以被收礼
             model.addAttribute("purchaseOrder", purchaseOrderGift);
         }
-
+        String productName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getName();
+        String projectName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getProject().getName();
+        String giftMessage = purchaseOrderGift.getGiftMessage();
+        String sender = purchaseOrderGift.getGiftGaverName();
+        model.addAttribute("giftMessage",giftMessage);
+        model.addAttribute("productName",productName);
+        model.addAttribute("projectName",projectName);
+        model.addAttribute("sender",sender);
         String lc = "";//物流公司
         String serial = "";//物流单号
         String content = "";//物流信息
