@@ -1,10 +1,12 @@
 package com.efeiyi.ec.system.professional.service.impl;
 
 import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.Professional;
 import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectPropertyValue;
+import com.efeiyi.ec.system.organization.dao.UserDao;
 import com.efeiyi.ec.system.product.dao.ProductDao;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
@@ -20,6 +22,7 @@ import org.springframework.util.StringUtils;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -32,7 +35,8 @@ public class ProfessionalManagerImpl implements ProfessionalManager{
     @Autowired
     private XdoDao xdoDao;
 
-
+    @Autowired
+    private UserDao userDao;
     @Override
     public String saveProfessional(Professional professional) throws Exception{
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -64,5 +68,19 @@ public class ProfessionalManagerImpl implements ProfessionalManager{
         }
         xdoDao.saveOrUpdateObject(tempProfessional);
         return tempProfessional.getId();
+    }
+
+    @Override
+    public boolean checkUsername(String username){
+        boolean flag = true;
+        MyUser myUser = null;
+        String queryStr = "SELECT u FROM MyUser u WHERE u.username=:username AND u.status != 0";
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("username", username);
+        myUser =  userDao.getUniqueMyUserByConditions(username, queryStr, queryParamMap);
+        if(myUser == null){
+            flag = false;
+        }
+        return  flag;
     }
 }
