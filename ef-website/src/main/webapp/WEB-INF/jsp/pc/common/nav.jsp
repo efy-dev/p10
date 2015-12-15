@@ -26,8 +26,15 @@
             %>
             <li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>
             <li>
-                <a href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do"
-                   title="快速注册">快速注册</a></li>
+            <li><a id="register" href="#" onclick="ga('send', 'event', {
+                                                      'eventCategory': '按钮点击',
+                                                      'eventAction': '点击注册',
+                                                      'eventLabel': '导航条注册',
+                                                      'eventValue': 1,
+                                                      'hitCallback': function () {
+                                                        window.location.href= 'http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do';
+                                                      }
+                                                      });" title="快速注册">快速注册</a></li>
             <%
                 }
             %>
