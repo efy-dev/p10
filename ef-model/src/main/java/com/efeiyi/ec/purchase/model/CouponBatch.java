@@ -10,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
 @Entity
 @Table(name = "purchase_coupon_batch")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class CouponBatch implements Serializable{
+public class CouponBatch implements Serializable {
     private String id;
     private String name; //优惠券名称
     private Integer amount;//生成优惠券数量
@@ -31,7 +32,7 @@ public class CouponBatch implements Serializable{
     private Float priceLimit;//使用限制价格 比如满100用
     private String pictureUrl;//优惠券图片
 
-    private String type ; //优惠券类型  1 满减卷 2 现金卷  需要配置固定类型
+    private String type; //优惠券类型  1 满减卷 2 现金卷  需要配置固定类型
     private String range; //优惠券使用范围 1 全场通用  2 品类使用 3 店铺使用 4 单品使用 需要在配置文件中配置一下固定类型
     private Project project; //品类  没有可以为空
     private Tenant tenant;  //店铺    没有可以为空
@@ -176,8 +177,21 @@ public class CouponBatch implements Serializable{
     }
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "couponBatch")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "couponBatch")
     public List<Coupon> getCouponList() {
+        return couponList;
+    }
+
+    @Transient
+    public List<Coupon> fetchCouponList() {
+        List<Coupon> couponList = getCouponList();
+        Iterator<Coupon> iterator = couponList.iterator();
+        while (iterator.hasNext()) {
+            Coupon coupon = iterator.next();
+            if (coupon.getWhetherBind().equals("2")) { //已绑定
+                iterator.remove();
+            }
+        }
         return couponList;
     }
 

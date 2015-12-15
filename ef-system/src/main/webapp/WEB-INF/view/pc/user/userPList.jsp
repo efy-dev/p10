@@ -35,6 +35,7 @@
     <td>用户名</td>
     <td>真实姓名</td>
     <td>角色</td>
+      <td>创建时间</td>
   </tr>
 
   <c:forEach items="${requestScope.pageInfo.list}" var="user">
@@ -53,6 +54,8 @@
       <td width="20%">${user.name}</td>
       <td width="20%">${user.role.cname}
       </td>
+        <td width="20%"><fmt:formatDate value="${user.createDatetime}" pattern="yyyy-MM-dd hh:mm" type="both"/>
+        </td>
     </tr>
   </c:forEach>
 </table>
