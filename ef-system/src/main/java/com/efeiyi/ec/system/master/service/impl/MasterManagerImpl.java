@@ -5,6 +5,7 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.system.master.dao.MasterWorkRecommendedDao;
 import com.efeiyi.ec.system.master.service.MasterManager;
 import com.efeiyi.ec.system.master.service.MasterWorkRecommendedManager;
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.efeiyi.ec.tenant.model.TenantProject;
@@ -35,7 +36,7 @@ public class MasterManagerImpl implements MasterManager {
             tenantMaster = (TenantMaster)xdoDao.getObject(TenantMaster.class.getName(),tenantMasterId);
             if(tenantMaster == null){
                 tenantMaster = new TenantMaster();
-                tenantMaster.setTenant((Tenant)xdoDao.getObject(Tenant.class.getName(),tenantId));
+                tenantMaster.setTenant((BigTenant) xdoDao.getObject(BigTenant.class.getName(), tenantId));
                 tenantMaster.setMaster((Master)xdoDao.getObject(Master.class.getName(),masterId));
                 tenantMaster.setStatus("1");
             }else {
@@ -54,7 +55,7 @@ public class MasterManagerImpl implements MasterManager {
             xdoDao.saveOrUpdateObject(TenantMaster.class.getName(), tenantMaster);
             List<MasterProject> masterProjectList =  xdoDao.getObjectList("from MasterProject where status = '1'and project.status!='0' and master.id = ?",new Object[]{masterId});
 
-            Tenant tenant = (Tenant)xdoDao.getObject(Tenant.class.getName(),tenantId);
+            BigTenant tenant = (BigTenant)xdoDao.getObject(BigTenant.class.getName(),tenantId);
             if(masterProjectList!=null){
                 for (MasterProject masterProject :masterProjectList){
                     TenantProject tenantProject = null;

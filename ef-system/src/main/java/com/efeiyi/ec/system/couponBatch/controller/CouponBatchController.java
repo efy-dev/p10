@@ -6,6 +6,7 @@ import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.efeiyi.ec.system.product.model.ProductDateModel;
 import com.efeiyi.ec.system.util.ExportExcel;
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.controller.BaseController;
@@ -130,13 +131,13 @@ public class CouponBatchController extends BaseController {
 
     @RequestMapping("/getTenantByProject.do")
     @ResponseBody
-    public List<Tenant> getTenantByProject(Model model, HttpServletRequest request) throws Exception {
+    public List<BigTenant> getTenantByProject(Model model, HttpServletRequest request) throws Exception {
         String id = request.getParameter("project_id");
         XQuery xQuery = new XQuery("listTenantProject_default3", request);
         xQuery.put("project_id", id);
         List<Object> list = baseManager.listObject(xQuery);
 
-        List<Tenant> tList = new ArrayList<>();
+        List<BigTenant> tList = new ArrayList<>();
         TenantProject tenantProject = null;
         for (int i = 0; i < list.size(); i++) {
             tenantProject = (TenantProject) list.get(i);
