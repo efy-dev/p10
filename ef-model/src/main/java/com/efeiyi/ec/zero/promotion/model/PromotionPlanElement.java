@@ -1,5 +1,6 @@
 package com.efeiyi.ec.zero.promotion.model;
 
+
 /**
  * Created by Administrator on 2015/12/7.
  * 用于页面显示 返利计划、注册量、订单数量及支付总额

@@ -1,12 +1,9 @@
-package com.efeiyi.jh.advertisement.model;
+package com.efeiyi.ec.zero.promotion.model;
 
-import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/12/3.
