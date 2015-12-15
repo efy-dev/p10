@@ -27,31 +27,24 @@
     <meta name="msapplication-TileColor" content="#0e90d2">
 </head>
 <body>
-<!--//End--header-->
 <div class="gift ae">
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="pic-page ae">
-            <div class="pic-img"><img
-                    width="181" height="101" src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture">
-            </div>
+            <div class="pic-img"><img src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture" width="181"></div>
             <div class="pic-text">
                 <p>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}</p>
-                <p class="t2">
-                    <i></i><span>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.project.name}</span><em></em>
-                </p>
+                <p class="t2"><i></i><span>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.project.name}</span><em></em></p>
+                <!--<p class="t3">朱炳仁</p>-->
             </div>
         </div>
         <div class="c-info ae" style="margin-top:0;">
             <p>${purchaseOrder.giftMessage}</p>
-
             <p>——${purchaseOrder.giftGaverName}</p>
         </div>
     </div>
     <form action="<c:url value="/giftConfirm.do"/>" method="post">
-
         <input name="purchaseOrderId" value="${purchaseOrder.id}" type="hidden">
-
         <div class="btb"><h5>${purchaseOrder.giftGaverName}送您礼物了，快填写您的收货信息吧！</h5></div>
         <ul class="profile ae">
             <li>
@@ -60,42 +53,27 @@
             </li>
             <li>
                 <strong>手机号码：</strong>
-                <label><input type="text" name="receivePhone" class="dtxt" placeholder="请填写手机号码"></label>
+                <label><input name="receivePhone" type="text" class="dtxt" placeholder="请填写手机号码"></label>
             </li>
             <li>
                 <strong>配送地区：</strong>
-                <label id="add-dext"><p type="text" class="dtxt" placeholder="" onclick="$('.add-ress').show()"
-                                        id="addressProvince">点击选择配送地区</p></label>
-
-                <div class="add-ress" style="display: none">
-                    <div class="add-text shipping-address ae">
-                        <span>配送地区</span>
-                        <select name="province.id" class="cars  am-selected am-dropdown am-selected-btn" required
-                                id="province" onchange="provinceChange(this)">
-                            <option value="">请选择省</option>
-                        </select>
-                        <select name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required id="city">
-                            <option value="">请选择市</option>
-                        </select>
-                        <%--<select  name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required=""><option value="">请选择</option></select>--%>
-                        <div class="addbqt"><a style="text-align: center;"
-                                               onclick="$('.add-ress').hide();$('#addressProvince').html($('option[value='+$('#province').val()+']').html()+$('option[value='+$('#city').val()+']').html());"
-                                               class="bqtn"
-                                               value="确&nbsp;认&nbsp;选&nbsp;择">确&nbsp;认&nbsp;选&nbsp;择</a></div>
-                    </div>
-                    <div class="bg"></div>
-                </div>
+                <select  name="province.id" class="cars  am-selected am-dropdown am-selected-btn"
+                         id="province" onchange="provinceChange(this)">
+                    <%--<option value="110000">北京市</option>--%>
+                </select>
+                <select  name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required="" id="city"><option value="">请选择</option></select>
+                <%--<select  name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required=""><option value="">请选择</option></select>--%>
             </li>
             <li>
                 <strong>详细地址：</strong>
-                <label><input type="text" name="receiveDetail" class="dtxt add-dext" placeholder="填写具体街道、门牌号"></label>
+                <label><input type="text" class="dtxt add-dext"  name="receiveDetail"   placeholder="填写具体街道、门牌号"></label>
+
             </li>
         </ul>
         <div class="btnq ae"><input type="submit" value="确&nbsp;认"></div>
+        <div class="efi-icon ae"><i class="icon"></i></div>
     </form>
-    <div class="efi-icon ae"><i class="icon"></i></div>
 </div>
-
 <script>
 
     $().ready(function () {

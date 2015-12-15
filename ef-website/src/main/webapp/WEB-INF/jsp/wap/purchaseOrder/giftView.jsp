@@ -41,9 +41,6 @@
                 <p class="t2">
                     <i></i><span>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.project.name}</span><em></em>
                 </p>
-                <c:if test="${!empty purchaseOrder.purchaseOrderProductList.get(0).productModel.product.master}">
-                    <p class="t3">${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.master.fullName}</p>
-                </c:if>
             </div>
         </div>
         <c:if test="${not empty purchaseOrder.giftMessage}">
