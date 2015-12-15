@@ -273,11 +273,12 @@ public class CouponController {
                 List result = baseManager.listObject(xQuery2);
                 if (result != null && result.size() > 0) {
                     coupon = (Coupon) result.get(0);
-                    if (coupon.getStatus().equals("2")) {
+                    if (coupon.getStatus().equals("2") || coupon.getWhetherBind().equals("2")) {
                         return "null";
                     }
                     Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), AuthorizationUtil.getMyUser().getId());
                     coupon.setConsumer(consumer);
+                    coupon.setWhetherBind("2");
                     baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
                     SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
                     coupon.setStartTimeL(simpleDateFormat2.format(coupon.getCouponBatch().getStartDate()));
