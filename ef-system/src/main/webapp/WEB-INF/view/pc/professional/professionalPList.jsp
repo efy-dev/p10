@@ -18,7 +18,7 @@
     <title></title>
     <script>
         function removeProfessional(professionalId){
-            jQuery.ajax({
+            $.ajax({
                 type:"GET",
                 url:'<c:url value="/basic/xmj.do?qm=removeProfessional"/>',
                 data:{id:professionalId},

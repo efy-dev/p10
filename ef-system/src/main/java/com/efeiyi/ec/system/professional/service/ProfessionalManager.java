@@ -11,4 +11,5 @@ import com.efeiyi.ec.system.product.model.ProductModelBean;
  */
 public interface ProfessionalManager {
    String saveProfessional(Professional professional) throws Exception;
+    boolean checkUsername(String username);
 }
