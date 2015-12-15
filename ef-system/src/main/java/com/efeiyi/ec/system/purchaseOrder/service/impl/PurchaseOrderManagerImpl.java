@@ -60,11 +60,12 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
             purchaseOrderDelivery.setCreateDateTime(new Date());
             purchaseOrderDelivery.setSerial(serial);
             purchaseOrderDelivery.setLogisticsCompany(logisticsCompany);
-            MyUser user = AuthorizationUtil.getMyUser();
-            System.out.println(user.getFullName());
+            //MyUser user = AuthorizationUtil.getMyUser();
+            //System.out.println(user.getFullName());
             //purchaseOrderDelivery.setConsumerAddress();
             purchaseOrderDelivery.setStatus("1");
-            baseManager.saveOrUpdate("PurchaseOrderDelivery.class", purchaseOrderDelivery);
+            baseManager.saveOrUpdate(PurchaseOrderDelivery.class.getName(), purchaseOrderDelivery);
+            System.out.println("purchaseOrderDeliveryId:================================"+purchaseOrderDelivery.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }

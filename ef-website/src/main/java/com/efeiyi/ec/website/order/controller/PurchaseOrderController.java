@@ -89,7 +89,7 @@ public class PurchaseOrderController extends BaseController {
         }
     }
 
-    @RequestMapping({"giftBuy/updateImg.do"})
+    @RequestMapping({"/giftBuy/updateImg.do"})
     @ResponseBody
     public boolean updateImg(HttpServletRequest request) {
         try {

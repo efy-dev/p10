@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 //不要把jsonIgnore注释了
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
@@ -22,6 +23,8 @@ public class User {
     private String password;
     private Role role;
     private String status;
+    protected Date createDatetime;
+
     @JsonIgnore
     @Column(name = "password")
     public String getPassword() {
@@ -113,5 +116,12 @@ public class User {
         this.role = role;
     }
 
+    @Column(name = "create_datetime")
+    public Date getCreateDatetime() {
+        return createDatetime;
+    }
 
+    public void setCreateDatetime(Date createDatetime) {
+        this.createDatetime = createDatetime;
+    }
 }

@@ -3,6 +3,7 @@ package com.efeiyi.ec.system.purchaseOrder.dao.hibernate;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.system.purchaseOrder.dao.PurchaseOrderDao;
+import com.ming800.core.base.dao.hibernate.BaseDaoSupport;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PurchaseOrderDaoHibernate implements PurchaseOrderDao {
+public class PurchaseOrderDaoHibernate extends BaseDaoSupport<PurchaseOrder> implements PurchaseOrderDao{
 
     @Autowired
     @Qualifier("sessionFactory")
@@ -25,20 +26,20 @@ public class PurchaseOrderDaoHibernate implements PurchaseOrderDao {
     }
 
 
+    @Override
+    public String updateOrderStatus(PurchaseOrder purchaseOrder) {
 
+//        Session session = this.getSession();
+//        String hql = "update PurchaseOrder set orderStatus = :orderStatus where id=:id";
+//        Query query = session.createQuery(hql)
+//                .setString("orderStatus", purchaseOrder.getOrderStatus())
+//                .setString("id", purchaseOrder.getId());
+//        query.executeUpdate();
 
-     @Override
-     public String updateOrderStatus(PurchaseOrder purchaseOrder){
+        super.saveOrUpdateObject(purchaseOrder);
+        return purchaseOrder.getId();
 
-         Session session = this.getSession();
-         String hql = "update PurchaseOrder set orderStatus = :orderStatus where id=:id";
-         Query query =  session.createQuery(hql)
-                 .setString("orderStatus", purchaseOrder.getOrderStatus())
-                 .setString("id", purchaseOrder.getId());
-         query.executeUpdate();
-         return  purchaseOrder.getId();
-
-     }
+    }
 
     @Override
     public List getResult() {
@@ -64,7 +65,7 @@ public class PurchaseOrderDaoHibernate implements PurchaseOrderDao {
                 "  where po.status != '0' " +
                 "  order by po.create_datetime desc";
         List objectList = this.getSession().createSQLQuery(sql).list();
-        return  objectList;
+        return objectList;
     }
 
 
