@@ -35,7 +35,7 @@
     <!-- //End-->
     <div class="car-state ae">
         <div class="btb"><h5>礼物状态</h5><span id="giftStatus"><c:if test="${order.orderStatus=='6'}">未收礼</c:if> <c:if
-                test="${order.orderStatus=='5'}">已收礼</c:if></span></div>
+                test="${order.orderStatus!='6'&&order.orderStatus!='1'}">已收礼</c:if></span></div>
         <c:if test="${order.orderStatus=='6'}">
             <div class="btb"><h5>送礼说明</h5></div>
             <div class="btb-text ae">

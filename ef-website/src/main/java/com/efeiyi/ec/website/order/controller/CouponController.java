@@ -113,7 +113,7 @@ public class CouponController {
                 }
             } else if (coupon.getCouponBatch().getRange().equals("3")) {
                 for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
-                    if (purchaseOrderProduct.getProductModel().getProduct().getTenant().equals(coupon.getCouponBatch().getTenant().getId())) {
+                    if (purchaseOrderProduct.getProductModel().getProduct().getTenant().getId().equals(coupon.getCouponBatch().getTenant().getId())) {
                         if (coupon.getCouponBatch().getType().equals("1")) {
                             BigDecimal totalPrice = new BigDecimal(0);
                             for (PurchaseOrderProduct purchaseOrderProductTemp : purchaseOrder.getPurchaseOrderProductList()) {
