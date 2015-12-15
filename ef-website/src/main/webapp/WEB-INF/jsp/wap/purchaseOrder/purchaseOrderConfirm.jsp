@@ -97,7 +97,7 @@
                                  alt="">
 
                             <div class="bd info">
-                                <p class="text">${product.productModel.name}
+                                <p class="text">${product.name}[${product.productModel.name}]
                                     <c:if test="${product.productModel.productPropertyValueList.size()>1}">
                                         [
                                         <c:forEach items="${product.productModel.productPropertyValueList}"
