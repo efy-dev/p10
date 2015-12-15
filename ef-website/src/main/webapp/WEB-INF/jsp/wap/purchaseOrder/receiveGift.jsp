@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>礼物订单-付款后</title>
+    <title>${purchaseOrder.giftGaverName}送您礼物了，快快点击去收礼吧</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -33,17 +33,13 @@
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="pic-page ae">
             <div class="pic-img"><img
-                    width="181" height="101" src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}">
+                    width="181" height="101" src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture">
             </div>
             <div class="pic-text">
                 <p>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}</p>
-
                 <p class="t2">
                     <i></i><span>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.project.name}</span><em></em>
                 </p>
-                <c:if test="${not empty purchaseOrder.purchaseOrderProductList.get(0).productModel.product.master}">
-                    <p class="t3">${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.master.fullName}</p>
-                </c:if>
             </div>
         </div>
         <div class="c-info ae" style="margin-top:0;">
