@@ -73,6 +73,7 @@ public class PurchaseOrderController extends BaseController {
             if (null == purchaseOrder.getFatherPurchaseOrder()) {//如果是父订单发货 所有的子订单都得变成已发货状态
                 purchaseOrder.setOrderStatus("7");
                 id = purchaseOrderManager.updateOrderStatus(purchaseOrder, serial, logisticsCompany);
+                System.out.println("id:--------------------------------------------------"+id);
                 List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
                 if (null != subPurchaseOrderList && subPurchaseOrderList.size() > 0) {
                     PurchaseOrder p1 = null;
