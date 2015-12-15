@@ -25,20 +25,18 @@ public class PurchaseOrderDaoHibernate implements PurchaseOrderDao {
     }
 
 
+    @Override
+    public String updateOrderStatus(PurchaseOrder purchaseOrder) {
 
+        Session session = this.getSession();
+        String hql = "update PurchaseOrder set orderStatus = :orderStatus where id=:id";
+        Query query = session.createQuery(hql)
+                .setString("orderStatus", purchaseOrder.getOrderStatus())
+                .setString("id", purchaseOrder.getId());
+        query.executeUpdate();
+        return purchaseOrder.getId();
 
-     @Override
-     public String updateOrderStatus(PurchaseOrder purchaseOrder){
-
-         Session session = this.getSession();
-         String hql = "update PurchaseOrder set orderStatus = :orderStatus where id=:id";
-         Query query =  session.createQuery(hql)
-                 .setString("orderStatus", purchaseOrder.getOrderStatus())
-                 .setString("id", purchaseOrder.getId());
-         query.executeUpdate();
-         return  purchaseOrder.getId();
-
-     }
+    }
 
     @Override
     public List getResult() {
@@ -64,7 +62,7 @@ public class PurchaseOrderDaoHibernate implements PurchaseOrderDao {
                 "  where po.status != '0' " +
                 "  order by po.create_datetime desc";
         List objectList = this.getSession().createSQLQuery(sql).list();
-        return  objectList;
+        return objectList;
     }
 
 
