@@ -401,9 +401,9 @@
     </jnode>
 
 
-    <jnode id="systemManager" access="admin,product_manager" url="/main.do?jnodeId=systemManager" text_zh_CN="系统管理">
-        <jnode url="" id="userManager" access="admin,operational,product_manager" state="closed" text_zh_CN="用户管理">
-            <jnode url="/basic/xm.do?qm=plistUser_default" access="admin,product_manager" text_zh_CN="用户列表">
+    <jnode id="systemManager" access="admin,product_manager,operational" url="/main.do?jnodeId=systemManager" text_zh_CN="系统管理">
+        <jnode url="" id="userManager" access="admin,operational,product_manager,operational" state="closed" text_zh_CN="用户管理">
+            <jnode url="/basic/xm.do?qm=plistUser_default" access="admin,product_manager,operational" text_zh_CN="用户列表">
                 <match url="/basic/xm.do?qm=plistUser_default"/>
                 <match url="/basic/xm.do?qm=plistUser_default1"/>
                 <match url="/basic/xm.do?qm=plistUser_default2"/>
