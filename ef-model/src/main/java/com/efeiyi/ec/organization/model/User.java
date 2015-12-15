@@ -2,6 +2,7 @@ package com.efeiyi.ec.organization.model;
 
 
 
+//import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,6 +25,7 @@ public class User {
     private Role role;
     private String status;
     protected Date createDatetime;
+//    private PromotionPlan sourcePromotion;//来源推广渠道
 
     @JsonIgnore
     @Column(name = "password")
@@ -124,4 +126,14 @@ public class User {
     public void setCreateDatetime(Date createDatetime) {
         this.createDatetime = createDatetime;
     }
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "zero_promotion_plan_id")
+//    public PromotionPlan getSourcePromotion() {
+//        return sourcePromotion;
+//    }
+//
+//    public void setSourcePromotion(PromotionPlan sourcePromotion) {
+//        this.sourcePromotion = sourcePromotion;
+//    }
 }
