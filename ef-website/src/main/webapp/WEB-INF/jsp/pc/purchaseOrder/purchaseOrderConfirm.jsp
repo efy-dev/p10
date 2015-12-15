@@ -231,7 +231,7 @@
         <!--结算-->
         <div class="System">
             <div class="System-text">
-                <span class="btns"><a target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a></span>
+                <span class="btns"><a target="_blank" onclick="(this,'${purchaseOrder.id}')">提交订单</a></span>
             <span class="price-info">
                 <%--js 取回来  第一次也是js取 统一js取--%>
                 <p class="price1">总金额：<em id="totalPrice">${purchaseOrder.total}</em> 元</p>
@@ -243,6 +243,11 @@
     </div>
 </div>
 <script>
+    //GA统计用的商品map
+    var productMap =  {};
+    <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct">
+    productMap['${purchaseOrderProduct.productModel.id}'] = ${purchaseOrderProduct.purchaseAmount};
+    </c:forEach>
 
     var payment = "1";
     var consumerAddress = "";
@@ -294,6 +299,23 @@
                         element.onclick = null;
                         $(element).attr("href", url);
                         $(element).click();
+
+                        //逐条发送商品下单记录给GA
+                        $.each(productMap, function(key, value) {
+                            ga('ec:setAction', 'purchase', {
+                                'id': key,
+                                'affiliation': 'efeiyi',
+                                'revenue': ${purchaseOrder.total},
+                                'step' : 1,
+                                'option' : payment,
+//                            'tax': '2.85',
+//                            'shipping': '5.34',
+//                            'coupon': 'SUMMER2013'    // User added a coupon at checkout.
+                            });
+                        });
+                        ga('send', 'pageview');
+
+
                         showChooseConfirm("提示", "是否支付成功？", function () {
                             window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
                         }, function () {

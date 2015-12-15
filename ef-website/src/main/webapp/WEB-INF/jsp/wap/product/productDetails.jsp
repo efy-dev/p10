@@ -309,7 +309,8 @@
 
     function addCart(o) {
         var t = document.getElementById("value").value;
-        window.location.href = "<c:url value="/cart/addProduct.do?id="/>" + o + "&amount=" + t + "&redirect=/product/productModel/" + o;
+        addToCart(t,o);
+        <%--window.location.href = "<c:url value="/cart/addProduct.do?id="/>" + o + "&amount=" + t + "&redirect=/product/productModel/" + o;--%>
     }
 
     function giftBuy() {
@@ -320,6 +321,29 @@
     function immediateBuy(o) {
         var t = document.getElementById("value").value;
         window.location.href = "<c:url value=""/>" + "/order/easyBuy/" + o + "?amount=" + t;
+    }
+
+    //跟踪加入购物车事件
+    function addToCart(t,o) {
+        ga('ec:addProduct', {
+            'id': "${productModel.id}",
+            'name': "【${product.name} ${productModel.name}】${product.subName}",
+            'category': "${product.project.name}",
+            'brand': "${product.tenant.name}",
+            'variant': "${product.subName}",
+            'price': "${product.price}",
+            'quantity': t
+        });
+        ga('ec:setAction', 'add');
+        ga('send', 'event', {
+            'eventCategory': 'addToCart',
+            'eventAction': 'add',
+            'eventLabel': 'detail',
+            'eventValue': t,
+            'hitCallback': function () {
+                window.location.href = "<c:url value="/cart/addProduct.do?id="/>" + o + "&amount=" + t + "&redirect=/product/productModel/" + o;
+            }
+        });
     }
 </script>
 <!--[if (gte IE 9)|!(IE)]><!-->
