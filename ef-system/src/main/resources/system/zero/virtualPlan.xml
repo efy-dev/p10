@@ -26,7 +26,7 @@
             </fields>
             <does>
                 <do name="plistVirtualPlan" access="" label="虚拟计划分页列表" result="/zero/virtual/virtualPlanPList"
-                        execute="com.efeiyi.ec.system.zero.virtualplan.handler.VirtualPlanListHandler">
+                        execute="com.efeiyi.ec.system.zero.virtual.handler.VirtualPlanListHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -34,7 +34,7 @@
                 <do name="formVirtualPlan" label="虚拟数据" access="" result="/zero/virtualplan/virtualPlanForm"/>
                 <do name="removeVirtualPlan" label="删除虚拟数据" access="" result="redirect:/basic/xm.do?qm=plistVirtualPlan_default"/>
                 <do name="saveOrUpdateVirtualPlan" label="新建或更新虚拟计划" access="" result="redirect:/basic/xm.do?qm=plistVirtualPlan_default"
-                    execute="com.efeiyi.ec.system.zero.virtualplan.handler.VirtualPlanSaveHandler">
+                    execute="com.efeiyi.ec.system.zero.virtual.handler.VirtualPlanSaveHandler">
                     <page>
                         <fields>
                             <field name="createDatetime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"/>

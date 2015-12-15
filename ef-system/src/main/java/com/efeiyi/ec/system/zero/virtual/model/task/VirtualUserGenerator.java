@@ -1,7 +1,7 @@
-package com.efeiyi.ec.system.zero.virtualplan.model.task;
+package com.efeiyi.ec.system.zero.virtual.model.task;
 
 import com.efeiyi.ec.organization.model.User;
-import com.efeiyi.ec.system.zero.virtualplan.util.VirtualPlanConstant;
+import com.efeiyi.ec.system.zero.virtual.util.VirtualPlanConstant;
 import com.efeiyi.ec.zero.virtual.model.VirtualPlan;
 import com.efeiyi.ec.zero.virtual.model.VirtualUser;
 import com.efeiyi.ec.zero.virtual.model.VirtualUserPlan;

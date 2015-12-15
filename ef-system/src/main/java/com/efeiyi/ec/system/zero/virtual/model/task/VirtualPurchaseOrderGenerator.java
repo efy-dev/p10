@@ -1,4 +1,4 @@
-package com.efeiyi.ec.system.zero.virtualplan.model.task;
+package com.efeiyi.ec.system.zero.virtual.model.task;
 
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;

@@ -1,4 +1,4 @@
-package com.efeiyi.ec.system.zero.virtualplan.util;
+package com.efeiyi.ec.system.zero.virtual.util;
 
 /**
  * Created by Administrator on 2015/12/10.

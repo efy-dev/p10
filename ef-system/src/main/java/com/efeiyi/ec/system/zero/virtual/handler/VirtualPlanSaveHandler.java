@@ -1,4 +1,4 @@
-package com.efeiyi.ec.system.zero.virtualplan.handler;
+package com.efeiyi.ec.system.zero.virtual.handler;
 
 import com.efeiyi.ec.zero.virtual.model.VirtualPlan;
 import com.ming800.core.base.dao.XdoDao;

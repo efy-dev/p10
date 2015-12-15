@@ -1,7 +1,7 @@
-package com.efeiyi.ec.system.zero.virtualplan.handler;
+package com.efeiyi.ec.system.zero.virtual.handler;
 
-import com.efeiyi.ec.system.zero.virtualplan.service.VirtualPlanManagerService;
-import com.efeiyi.ec.system.zero.virtualplan.util.VirtualPlanConstant;
+import com.efeiyi.ec.system.zero.virtual.service.VirtualPlanManagerService;
+import com.efeiyi.ec.system.zero.virtual.util.VirtualPlanConstant;
 import com.efeiyi.ec.zero.virtual.model.VirtualOrderPlan;
 import com.efeiyi.ec.zero.virtual.model.VirtualPlan;
 import com.efeiyi.ec.zero.virtual.model.VirtualPlanElement;

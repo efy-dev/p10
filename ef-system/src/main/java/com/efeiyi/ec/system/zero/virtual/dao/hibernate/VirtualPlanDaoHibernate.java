@@ -1,7 +1,7 @@
-package com.efeiyi.ec.system.zero.virtualplan.dao.hibernate;
+package com.efeiyi.ec.system.zero.virtual.dao.hibernate;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
-import com.efeiyi.ec.system.zero.virtualplan.dao.VirtualPlanDao;
+import com.efeiyi.ec.system.zero.virtual.dao.VirtualPlanDao;
 import com.efeiyi.ec.zero.virtual.model.VirtualOrderPlan;
 import com.efeiyi.ec.zero.virtual.model.VirtualUser;
 import com.efeiyi.ec.zero.virtual.model.VirtualUserPlan;

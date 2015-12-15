@@ -1,4 +1,4 @@
-package com.efeiyi.ec.system.zero.virtualplan.service;
+package com.efeiyi.ec.system.zero.virtual.service;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.zero.virtual.model.VirtualOrderPlan;

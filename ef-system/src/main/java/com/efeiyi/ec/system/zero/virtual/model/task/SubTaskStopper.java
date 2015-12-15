@@ -1,8 +1,8 @@
-package com.efeiyi.ec.system.zero.virtualplan.model.task;
+package com.efeiyi.ec.system.zero.virtual.model.task;
 
 
-import com.efeiyi.ec.system.zero.virtualplan.model.timer.SubTimer;
-import com.efeiyi.ec.system.zero.virtualplan.model.timer.SuperTimer;
+import com.efeiyi.ec.system.zero.virtual.model.timer.SubTimer;
+import com.efeiyi.ec.system.zero.virtual.model.timer.SuperTimer;
 import com.efeiyi.ec.zero.virtual.model.VirtualPlan;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.efeiyi.ec.system.zero.virtualplan.model.timer;
+package com.efeiyi.ec.system.zero.virtual.model.timer;
 
 
 import com.efeiyi.ec.zero.virtual.model.VirtualPlan;

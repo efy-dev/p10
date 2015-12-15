@@ -1,9 +1,9 @@
-package com.efeiyi.ec.system.zero.virtualplan.model.task;
+package com.efeiyi.ec.system.zero.virtual.model.task;
 
 
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.system.zero.virtualplan.model.timer.SuperTimer;
-import com.efeiyi.ec.system.zero.virtualplan.util.VirtualPlanConstant;
+import com.efeiyi.ec.system.zero.virtual.model.timer.SuperTimer;
+import com.efeiyi.ec.system.zero.virtual.util.VirtualPlanConstant;
 import com.efeiyi.ec.zero.virtual.model.VirtualOrderPlan;
 import com.efeiyi.ec.zero.virtual.model.VirtualPlan;
 import com.efeiyi.ec.zero.virtual.model.VirtualProductModel;

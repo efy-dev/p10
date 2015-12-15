@@ -1,7 +1,7 @@
-package com.efeiyi.ec.system.zero.virtualplan.model.timer;
+package com.efeiyi.ec.system.zero.virtual.model.timer;
 
-import com.efeiyi.ec.system.zero.virtualplan.model.task.BaseTimerTask;
-import com.efeiyi.ec.system.zero.virtualplan.model.task.SubTaskStopper;
+import com.efeiyi.ec.system.zero.virtual.model.task.BaseTimerTask;
+import com.efeiyi.ec.system.zero.virtual.model.task.SubTaskStopper;
 import org.apache.log4j.Logger;
 
 import java.util.Timer;
