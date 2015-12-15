@@ -41,6 +41,23 @@ public interface PurchaseOrderManager {
      */
     PurchaseOrder saveOrUpdatePurchaseOrder(ProductModel productModel, BigDecimal price, int amount, Model model) throws Exception;
 
+    /**
+     * 支持现有订单重新走下单流程
+     * @param purchaseOrder  创建好的订单  包括 商品信息，店铺信息，callback（这里的callback存到数据库的时候是不需要URLEncode的）
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    PurchaseOrder saveOrUpdatePurchaseOrder(PurchaseOrder purchaseOrder, Model model) throws Exception;
+
+    /**
+     *  确认订单的接口，修改订单的状态 在个人中心可见，判断支付方式跳转到相应的支付环境
+     * @param purchaseOrder
+     * @param consumerAddress
+     * @param messageMap
+     * @param payWay
+     * @return
+     */
     PurchaseOrder confirmPurchaseOrder(PurchaseOrder purchaseOrder ,ConsumerAddress consumerAddress,HashMap<String, String> messageMap,String payWay);
 
 

@@ -1,5 +1,6 @@
 package com.efeiyi.ec.consumer.order.controller;
 
+import com.efeiyi.ec.activity.group.model.PurchaseOrderGroup;
 import com.efeiyi.ec.consumer.organization.model.SendCode;
 import com.efeiyi.ec.consumer.organization.model.SmsProvider;
 import com.efeiyi.ec.consumer.organization.model.YunPianSmsProvider;
@@ -9,6 +10,7 @@ import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.*;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.util.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +39,7 @@ public class PurchaseOrderController {
 
     /**
      * PC端订单列表
+     *
      * @param request
      * @param model
      * @return
@@ -49,15 +52,15 @@ public class PurchaseOrderController {
         model.addAttribute("status", orderStatus);
         XQuery xQuery = null;
 
-        if (orderStatus == null || orderStatus == "" || orderStatus =="0") {
+        if (orderStatus == null || orderStatus == "" || orderStatus == "0") {
             xQuery = new XQuery("plistPurchaseOrder_default", request, 10);
         } else {
-            xQuery = new XQuery("plistPurchaseOrder_default"+orderStatus+"", request, 10);
+            xQuery = new XQuery("plistPurchaseOrder_default" + orderStatus + "", request, 10);
 
         }
         xQuery.addRequestParamToModel(model, request);
 
-        xQuery.setQueryHql((xQuery.getQueryHql())+ " and s.fatherPurchaseOrder.id is null");
+        xQuery.setQueryHql((xQuery.getQueryHql()) + " and s.fatherPurchaseOrder.id is null");
         xQuery.updateHql();
 
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
@@ -70,32 +73,33 @@ public class PurchaseOrderController {
 
     /**
      * 查看订单详情
+     *
      * @param model
      * @param orderId
      * @return
      */
     @RequestMapping({"/myEfeiyi/view/{orderId}"})
-    public String viewPurchaseOrder(Model model, @PathVariable String orderId) {
+    public String viewPurchaseOrder(Model model, @PathVariable String orderId, HttpServletRequest request) {
         List dl = new ArrayList();
         double couponPrice = 0;
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
-        model.addAttribute("coupon","0");
-        if(purchaseOrder.getOrderStatus().equals("1")||purchaseOrder.getOrderStatus().equals("17")){
-            PurchaseOrderPayment purchaseOrderPaymentTemp=purchaseOrder.getPurchaseOrderPaymentList().get(0);
-            for(PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp:purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()){
-                if(purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")){
-                    couponPrice +=purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice();
-                    model.addAttribute("coupon","1");
+        model.addAttribute("coupon", "0");
+        if (purchaseOrder.getOrderStatus().equals("1") || purchaseOrder.getOrderStatus().equals("17")) {
+            PurchaseOrderPayment purchaseOrderPaymentTemp = purchaseOrder.getPurchaseOrderPaymentList().get(0);
+            for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
+                if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
+                    couponPrice += purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice();
+                    model.addAttribute("coupon", "1");
                 }
             }
-        }else {
-            for(PurchaseOrderPayment purchaseOrderPaymentTemp:purchaseOrder.getPurchaseOrderPaymentList()){
-                if(purchaseOrderPaymentTemp.getStatus().equals("2")){
-                    for(PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp:purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()){
-                        if(purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")){
-                            couponPrice +=purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice();
-                            model.addAttribute("coupon","1");
+        } else {
+            for (PurchaseOrderPayment purchaseOrderPaymentTemp : purchaseOrder.getPurchaseOrderPaymentList()) {
+                if (purchaseOrderPaymentTemp.getStatus().equals("2")) {
+                    for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
+                        if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
+                            couponPrice += purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice();
+                            model.addAttribute("coupon", "1");
                         }
                     }
 
@@ -103,21 +107,23 @@ public class PurchaseOrderController {
 
             }
         }
-        model.addAttribute("couponPrice",couponPrice);
+        model.addAttribute("couponPrice", couponPrice);
 
         if (purchaseOrder.getPurchaseOrderDeliveryList() != null && !purchaseOrder.getPurchaseOrderDeliveryList().isEmpty()) {
 
-             PurchaseOrderDelivery purchaseOrderDelivery=purchaseOrder.getPurchaseOrderDeliveryList().get(0);
-             String  logisticsInfo=getLogistics(purchaseOrderDelivery.getSerial(),purchaseOrderDelivery.getLogisticsCompany());
+            PurchaseOrderDelivery purchaseOrderDelivery = purchaseOrder.getPurchaseOrderDeliveryList().get(0);
+            String logisticsInfo = getLogistics(purchaseOrderDelivery.getSerial(), purchaseOrderDelivery.getLogisticsCompany());
 
-            model.addAttribute("dl",logisticsInfo);
+            model.addAttribute("dl", logisticsInfo);
             model.addAttribute("pl", purchaseOrderDelivery);
         } else {
             model.addAttribute("pl", null);
         }
 
-        if (purchaseOrder.getOrderType()!=null && purchaseOrder.getOrderType().equals("3")){
-            return "redirect:http://www.efeiyi.com/giftReceive/"+purchaseOrder.getId();
+        if (HttpUtil.isPhone(request)) {
+            if (purchaseOrder.getOrderType() != null && purchaseOrder.getOrderType().equals("3")) {
+                return "redirect:http://www.efeiyi.com/giftReceive/" + purchaseOrder.getId();
+            }
         }
 
         return "/purchaseOrder/purchaseOrderView";
@@ -125,6 +131,7 @@ public class PurchaseOrderController {
 
     /**
      * 取消订单
+     *
      * @param orderId
      * @return
      * @throws Exception
@@ -147,6 +154,7 @@ public class PurchaseOrderController {
 
     /**
      * 确定收货
+     *
      * @param orderId
      * @return
      */
@@ -156,15 +164,16 @@ public class PurchaseOrderController {
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_UNCOMMENT);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         //确定收货后给商家发送已收货短信
-         String phone = purchaseOrder.getBigTenant().getPhone();
-         String purchaseOrderSerial=purchaseOrder.getSerial();
-         SmsProvider smsProvider = new YunPianSmsProvider();
-         smsProvider.post(phone, purchaseOrderSerial, "1125941");
+        String phone = purchaseOrder.getBigTenant().getPhone();
+        String purchaseOrderSerial = purchaseOrder.getSerial();
+        SmsProvider smsProvider = new YunPianSmsProvider();
+        smsProvider.post(phone, purchaseOrderSerial, "1125941");
         return "redirect:/order/myEfeiyi/list.do";
     }
 
     /**
      * 订单删除
+     *
      * @param orderId
      * @return
      */
@@ -183,14 +192,30 @@ public class PurchaseOrderController {
         baseManager.remove(PurchaseOrder.class.getName(), orderId);
         return "redirect:/order/myEfeiyi/list.do";
     }
-
+    /**
+     * 订单列表显示团购详情页
+     * @param request
+     * @return
+     */
+    @RequestMapping("/groupBuyView")
+    public String getGroupBuy(HttpServletRequest request) throws Exception {
+        String purchaseOrderId=request.getParameter("orderId");
+        XQuery xQuery=new XQuery("PurchaseOrderGroup_default",request);
+        xQuery.put("purchaseOrder_id",purchaseOrderId);
+        PurchaseOrderGroup purchaseOrderGroup = (PurchaseOrderGroup) baseManager.listObject(xQuery).get(0);
+        String memberId = purchaseOrderGroup.getGroupMember().getId();
+        String groupId = purchaseOrderGroup.getMyGroup().getId();
+        String groupProductId = purchaseOrderGroup.getMyGroup().getGroupProduct().getId();
+        return null;
+    }
     /**
      * 获取物流信息
+     *
      * @param serial
      * @param logisticsCompany
      * @return
      */
-    private String getLogistics(String serial,String logisticsCompany){
+    private String getLogistics(String serial, String logisticsCompany) {
         String content = "";//物流信息
         try {
             URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + logisticsCompany + "&nu=" + serial);
@@ -211,7 +236,7 @@ public class PurchaseOrderController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-           return content;
+        return content;
     }
 
 

@@ -11,6 +11,7 @@
 <%
     if (AuthorizationUtil.getMyUser().getId() == null) {
 %>
+<c:if test="${request!='/purchaseOrder/receiveGift'}">
 <div class="login-reg">
     <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
     <a id="signin"
@@ -18,9 +19,11 @@
        class="btn-reg"
        onclick="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
 </div>
+    </c:if>
 <%
     }
 %>
+<c:if test="${request!='/purchaseOrder/receiveGift'}">
 <footer class="footer-new">
     <div class="bd authentication">
         <h3>战略合作伙伴</h3>
@@ -53,6 +56,7 @@
     <%--</div>--%>
     <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
+</c:if>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <!--<![endif]-->
 <!--[if lte IE 8 ]>

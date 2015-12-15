@@ -79,13 +79,13 @@ $(function(){
     //020104商品详情
     (function(){
         //收藏
-        //$('.addfav').click(function(){
-        //    $(this).addClass('addfav-end').find('p').html('已收藏');
-        //    $('.alert-red-top').slideDown(100,function(){
-        //        setTimeout('$(".alert-red-top").slideUp(50)',3000)
-        //    });
-        //    return false;
-        //});
+        $('.addfav').click(function(){
+            $(this).addClass('addfav-end').find('p').html('已收藏');
+            $('.alert-red-top').slideDown(100,function(){
+                setTimeout('$(".alert-red-top").slideUp(50)',3000)
+            });
+            return false;
+        });
         //加入购物车悬浮层
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
@@ -145,8 +145,8 @@ $(function(){
                 $(".custom-header").css("z-index","0");
                 return false;
             });
-            $('#cover .bg').click(function(){
-                $(this).parents('#cover').hide();
+            $('#cover').click(function(){
+                $(this).hide();
             })
 
             $("#line").click(function(){
