@@ -183,6 +183,8 @@
                     <query name="defaultFlag" label="可用列表" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="0" operation="ne"/>
                         <condition name="defaultFlag" defaultValue="1" operation="eq"/>
+                        <condition name="endDate" defaultValue="${CURRENT_DATETIME}" operation="ge"
+                                   dataType="datetime"/>
                     </query>
                 </do>
             </does>

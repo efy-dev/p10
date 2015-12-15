@@ -46,7 +46,7 @@
         </c:if>
     </div>
     <c:if test="${order.orderStatus!='6'}">
-    <div class="car-fx" id="giftButton" style="display: none">
+    <div class="car-fx" id="giftButton">
         </c:if>
         <c:if test="${order.orderStatus=='6'}">
         <div class="car-fx" id="giftButton">

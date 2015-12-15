@@ -133,7 +133,7 @@ input {outline: none}
 .category .list-pro .ul-item li .icon-hand {background-position:-56px -96px}
 .category .list-pro .ul-item li img {width:100%;height:225px;float:left;margin-bottom:16px;position:relative;z-index:1}
 .category .list-pro .ul-item li p {text-align:right;color:#000;padding-right:20px}
-.category .list-pro .ul-item li .name {font-size:16px;font-weight:bolder;height:25px}
+.category .list-pro .ul-item li .name {width:100%;font-size:16px;font-weight:bolder;height:25px;overflow: hidden;text-overflow:ellipsis;white-space:nowrap}
 .category .list-pro .ul-item li .price {font-size:12px;height:20px}
 .category .list-pro .ul-item li .wh {min-width:280px}
 /*--//End--*/
@@ -195,12 +195,8 @@ input {outline: none}
 .explosion .shop-sort .link1 li a {color:#000;font-size:14px}
 .explosion .shop-sort .link1 li a:hover {background:#000;color:#fff}
 /*--End--explosion--*/
-.pages .am-pagination>li {color:#000}
-.pages .am-pagination>li a, .pages .am-pagination>li a:hover {background:none;border:0;border-bottom:1px #3f3f3f solid;padding:0;color:#000;cursor:pointer}
-.pages .am-pagination>li.am-active a {border-bottom:0}
-.pages .am-pagination>li a:hover {color:#f00}
-.pages .am-pagination>li.default {}
-.pages .am-pagination {margin:100px 0;float:right}
+.am-pagination>li.am-active a{background-color: #000;border-color: #000;}
+.am-pagination>li.am-active a:hover{background-color: #000;border-color: #000;}
 /*--End--pages--*/
 .product-intro .am-breadcrumb {padding:8px 36px;margin-bottom:0;font-size:12px}
 .product-intro .am-breadcrumb li {color:#000}

@@ -1,9 +1,7 @@
 package com.efeiyi.ec.system.purchaseOrder.service.impl;
 
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderDelivery;
-import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.system.purchaseOrder.dao.PurchaseOrderDao;
 import com.efeiyi.ec.system.purchaseOrder.service.PurchaseOrderManager;
 import com.ming800.core.base.service.BaseManager;
@@ -42,29 +40,21 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
     private PurchaseOrderDao purchaseOrderDao;
 
     @Autowired
-    private AutoSerialManager autoSerialManager;
-
-    @Autowired
     private BaseManager baseManager;
 
 
     @Override
     public String updateOrderStatus(PurchaseOrder purchaseOrder, String serial, String logisticsCompany) {
 
-        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         try {
             purchaseOrderDao.updateOrderStatus(purchaseOrder);
-            //String purchaseOrderDeliverySerial = autoSerialManager.nextSerial("purchaseOrderDelivery");
             PurchaseOrderDelivery purchaseOrderDelivery = new PurchaseOrderDelivery();
             purchaseOrderDelivery.setPurchaseOrder(purchaseOrder);
             purchaseOrderDelivery.setCreateDateTime(new Date());
             purchaseOrderDelivery.setSerial(serial);
             purchaseOrderDelivery.setLogisticsCompany(logisticsCompany);
-            MyUser user = AuthorizationUtil.getMyUser();
-            System.out.println(user.getFullName());
-            //purchaseOrderDelivery.setConsumerAddress();
             purchaseOrderDelivery.setStatus("1");
-            baseManager.saveOrUpdate("PurchaseOrderDelivery.class", purchaseOrderDelivery);
+            baseManager.saveOrUpdate(PurchaseOrderDelivery.class.getName(), purchaseOrderDelivery);
         } catch (Exception e) {
             e.printStackTrace();
         }
