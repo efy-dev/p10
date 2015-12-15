@@ -1,15 +1,10 @@
 package com.efeiyi.ec.system.Activity.controller;
 
-import com.efeiyi.ec.group.model.MyGroup;
-import com.efeiyi.ec.group.model.GroupMember;
-import com.efeiyi.ec.organization.model.BigUser;
-import com.efeiyi.ec.purchase.model.PurchaseOrder;
-import com.efeiyi.ec.group.model.PurchaseOrderGroup;
+import com.efeiyi.ec.activity.group.model.MyGroup;
 import com.efeiyi.ec.system.Activity.service.ActivityManager;
 import com.efeiyi.ec.system.purchaseOrder.service.SmsCheckManager;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
-import com.ming800.core.p.PConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

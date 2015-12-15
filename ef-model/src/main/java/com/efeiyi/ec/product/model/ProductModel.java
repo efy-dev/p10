@@ -1,6 +1,5 @@
 package com.efeiyi.ec.product.model;
 
-import com.efeiyi.ec.group.model.GroupProduct;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
