@@ -68,8 +68,8 @@
     <bean id="userManager" class="com.efeiyi.ec.system.organization.service.impl.UserManagerImpl">
         <property name="userDao" ref="userDao"/>
     </bean>
-    <!--<bean id="promotionPlanManagerImpl" class="com.efeiyi.ec.zero.promotion.impl.PromotionPlanManagerImpl"/>-->
-    <!--<bean id="promotionPlanDao" class="com.efeiyi.jh.dao.promotionPlan.hibernate.PromotionPlanDaoHibernate"/>-->
+    <bean id="promotionPlanManagerImpl" class="com.efeiyi.ec.system.zero.promotion.sevice.impl.PromotionPlanManagerImpl"/>
+    <bean id="promotionPlanDao" class="com.efeiyi.ec.system.zero.promotion.dao.hibernate.PromotionPlanDaoHibernate"/>
 
     <bean id="virtualPlanManagerImpl" class="com.efeiyi.ec.system.zero.virtual.service.impl.VirtualPlanManagerImpl"/>
     <bean id="virtualPlanDao" class="com.efeiyi.ec.system.zero.virtual.dao.hibernate.VirtualPlanDaoHibernate"/>

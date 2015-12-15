@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="advertisement" label="返利管理" version="" package="com.efeiyi.ec.zero.promotion.model" path="">
+    <entities>
+        <entity name="PCPromotionPlan" label="返利" model="com.efeiyi.ec.zero.promotion.model.PromotionPlan">
+            <fields>
+                <field name="name" label="分享渠道" inputType="text">
+                    <statusType fieldName="name">
+                        <item label="请选择" value=""/>
+                        <item label="内部员工" value="1"/>
+                        <item label="合作伙伴" value="3"/>
+                        <item label="其他" value="5"/>
+                        <item label="广告商" value="7"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistPromotionPlan" access="" label="返利分页列表" result="/zero/promotion/promotionPlanPList"
+                        execute="com.efeiyi.ec.system.zero.promotion.handler.PromotionPlanListHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="formPromotionPlan" label="返利表单" access="" result="/zero/promotion/promotionPlanForm"/>
+                <do name="removePromotionPlan" label="删除返利链接" access="" result="redirect:/basic/xm.do?qm=plistPromotionPlan_default"/>
+                <do name="saveOrUpdatePromotionPlan" label="新建或更新" access="" result="redirect:/basic/xm.do?qm=plistPromotionPlan_default"
+                    execute="com.efeiyi.ec.system.zero.promotion.handler.PromotionPlanSaveHandler">
+                    <page>
+                        <fields>
+                            <field name="createDatetime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"/>
+                        </fields>
+                    </page>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="PCPurchaseOrder" label="商品列表" model="com.efeiyi.ec.purchase.model.PurchaseOrder">
+            <fields>
+                <field name="orderStatus" label="订单状态" inputType="text">
+                    <statusType fieldName="orderStatus">
+                        <item label="等待付款" value="1"/>
+                        <item label="未发货" value="5"/>
+                        <item label="已发货" value="7"/>
+                        <item label="未评价" value="9"/>
+                        <item label="已完成" value="13"/>
+                        <item label="订单已取消" value="17"/>
+                    </statusType>
+                </field>
+                <field name="payWay" label="支付方式" inputType="text">
+                    <statusType fieldName="payWay">
+                        <item label="支付宝" value="1"/>
+                        <item label="银行卡" value="2"/>
+                        <item label="微信" value="3"/>
+                    </statusType>
+                </field>
+            </fields>
+        </entity>
+
+    </entities>
+</module>
