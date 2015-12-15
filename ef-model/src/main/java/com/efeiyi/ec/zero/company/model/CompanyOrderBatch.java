@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * Created by Administrator on 2015/12/14.
- * 企业礼品卡管理 Model类
+ * 企业礼品卡批次管理 Model类
  */
 
 @Entity
@@ -18,7 +18,7 @@ public class CompanyOrderBatch {
 
     private String id;
     private String serial;
-    private String companyName;//企业用户名
+    private String companyName;//企业用户名称
     private ProductModel productModel;//选择的礼品
     private Integer amount;//礼品卡数量
     private String message;//祝福语

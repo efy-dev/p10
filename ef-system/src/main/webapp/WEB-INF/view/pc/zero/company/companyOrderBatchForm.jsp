@@ -9,20 +9,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
-<%--<%@include file="/layouts/public.jsp" %>--%>
+<%
+  String path = request.getContextPath();
+  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path ;
+%>
 <html>
 <head>
-  <title>企业礼品卡信息</title>
+  <title>企业礼品卡批次信息</title>
+  <script type="text/javascript" src="/scripts/function.js"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
   <div class="am-fl am-cf">
-    <strong class="am-text-primary am-text-lg">企业礼品卡信息</strong>
+    <strong class="am-text-primary am-text-lg">企业礼品卡批次信息</strong>
   </div>
 </div>
 <hr/>
 <div class="am-g">
-  <form <%--id="giftForm" onsubmit="return afterSubmitForm('giftForm')"--%>
+  <form id="orderBatchForm" onsubmit="return afterSubmitForm2zero('orderBatchForm')"
         action="<c:url value='/basic/xm.do?qm=saveOrUpdateCompanyOrderBatch'/>"
         method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
     <input type="hidden" name="id" value="${object.id}">
@@ -41,7 +45,7 @@
       <label name="productModel_id" for="productModel_idName" class="am-u-sm-3 am-form-label">礼品名称<small>*</small></label>
       <div class="am-u-sm-9">
         <input type="text" id="productModel_idName" title="礼品名称" placeholder="礼品名称"
-               onclick="m8uDialog.dialog2zero('productModel_id','productModel_idName','productModel', '<%=path%>')"
+               onclick="m8uDialog.openDialog2zero('productModel_id','productModel_idName','productModel', '<%=basePath%>')"
                value="${object.productModel.product.name}<c:if test="${not empty object.productModel}">[${object.productModel.name}]</c:if>"
                required="true" readonly>
         <input type="hidden" id="productModel_id"  name="productModel.id" value="${object.productModel.id}">

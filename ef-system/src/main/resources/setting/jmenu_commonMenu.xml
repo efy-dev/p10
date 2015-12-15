@@ -70,6 +70,15 @@
                 <match url="/virtualPlan/getTypeObjectView.do"/>
             </jnode>
         </jnode>
+        <jnode url="" id="companyManager" access="admin,manager" state="closed"  text_zh_CN="企业礼品卡管理">
+            <jnode url="/basic/xm.do?qm=plistCompanyOrderBatch_default"  access="admin,manager" text_zh_CN="礼品卡批次管理">
+                <match url="/basic/xm.do?qm=formCompanyOrderBatch&amp;company=company"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistPromotionPlan_default"  access="admin,manager" text_zh_CN="礼品卡订单管理">
+                <match url="/basic/xm.do?qm=formPromotionPlan&amp;company=company"/>
+                <match url="/promotionPlan/getZCLInfo.do"/>
+            </jnode>
+        </jnode>
     </jnode>
     <jnode id="efecOrderAndConsumer" access="admin,operational,o_operational,financial,product_manager,market" url="/main.do?jnodeId=efecOrderAndConsumer" text_zh_CN="订单与消费者">
         <jnode url="" id="orderManager" access="admin,operational,o_operational,financial,product_manager,market" state="closed" text_zh_CN="订单管理">

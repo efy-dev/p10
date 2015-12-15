@@ -11,14 +11,14 @@
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
-    <title>企业礼品卡</title>
+    <title>企业礼品卡批次管理</title>
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;">
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formCompanyOrderBatch&company=company"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
-           value="新建礼品卡"/>
+           value="新建礼品卡批次"/>
 </div>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
@@ -46,7 +46,7 @@
                                     class="am-icon-trash-o"></span> 删除
                             </button>
                             <button onclick="window.location.href='<c:url
-                                    value="/gift/saveOrderGiftList.do?gift=gift&id=${gift.id}"/>'"
+                                    value="/company/saveCompanyOrderGiftList.do?id=${gift.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                     class="am-icon-edit"></span> 生成礼品卡
                             </button>
