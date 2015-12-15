@@ -145,36 +145,41 @@ public class PurchaseOrderGiftController {
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
         g.setFont(new Font("微软雅黑", Font.BOLD, 20));
+        g.setColor(Color.LIGHT_GRAY);
         if(productName.length()<=8){
-            g.drawString(productName, 477, 203);
+            g.drawString(productName, 447, 203);
         }else if(8<productName.length()&&productName.length()<17){
-            g.drawString(productName.substring(0,8), 477, 203);
-            g.drawString(productName.substring(8,productName.length()), 477, 233);
+            g.drawString(productName.substring(0,8), 447, 203);
+            g.drawString(productName.substring(8,productName.length()), 447, 233);
         }else {
-            g.drawString(productName.substring(0,8), 477, 203);
-            g.drawString(productName.substring(8,16), 477, 233);
-            g.drawString(productName.substring(8,productName.length()), 477, 253);
+            g.drawString(productName.substring(0,8), 447, 203);
+            g.drawString(productName.substring(8,16), 447, 233);
+            g.drawString(productName.substring(8,productName.length()), 447, 253);
         }
-        g.drawString("「" + projectName + "」", 477, 313);
+        g.drawString("「" + projectName + "」", 447, 313);
         //背景图set文字显示
-        g.setFont(new Font("宋体", Font.ITALIC, 22));
+        g.setFont(new Font("微软雅黑", Font.BOLD, 22));
+        g.setColor(Color.black);
         if (giftMessage != null) {
-            if (giftMessage.length() < 17) {
+            if (giftMessage.length() < 15) {
                 g.drawString(giftMessage, 267, 493);
-            }
-            if (17 <= giftMessage.length() && giftMessage.length() < 35) {
-                g.drawString(giftMessage.substring(0, 17), 267, 493);
-                g.drawString(giftMessage.substring(17, giftMessage.length()), 267, 541);
-            }
-            if (32 <= giftMessage.length() && giftMessage.length() <= 50) {
-                g.drawString(giftMessage.substring(0, 17), 267, 493);
-                g.drawString(giftMessage.substring(17, 33), 267, 541);
-                g.drawString(giftMessage.substring(33, giftMessage.length()), 267, 589);
+            }else if (15 <= giftMessage.length() && giftMessage.length() < 30) {
+                g.drawString(giftMessage.substring(0, 15), 267, 493);
+                g.drawString(giftMessage.substring(15, giftMessage.length()), 267, 541);
+            }else if (30 <= giftMessage.length() && giftMessage.length() <45) {
+                g.drawString(giftMessage.substring(0, 15), 267, 493);
+                g.drawString(giftMessage.substring(15, 30), 267, 541);
+                g.drawString(giftMessage.substring(30, giftMessage.length()), 267, 589);
+            }else {
+                g.drawString(giftMessage.substring(0, 15), 267, 493);
+                g.drawString(giftMessage.substring(15, 30), 267, 541);
+                g.drawString(giftMessage.substring(30, 45), 267, 589);
+                g.drawString(giftMessage.substring(45, giftMessage.length()), 267, 637);
             }
         }
         if (sender != null && !"".equals(sender)) {
-            g.drawString("——", 480, 642);
-            g.drawString(sender, 540, 642);
+            g.drawString("——", 480, 662);
+            g.drawString(sender, 540, 662);
         }
         g.dispose();
         //二维码生成
@@ -196,6 +201,16 @@ public class PurchaseOrderGiftController {
                         Color.BLACK.getRGB() : Color.WHITE.getRGB());
             }
         }
+        //载入logo
+        URL logoUrl = new URL("http://pro.efeiyi.com/gift/test1.jpg");
+        BufferedImage logo = ImageIO.read(logoUrl);
+        int widthLogo = logo.getWidth(), heightLogo = logo.getHeight();
+        // 计算图片放置位置
+        Graphics2D g2 = image.createGraphics();
+        int x = (image.getWidth() - widthLogo) / 2;
+        int y = (image.getHeight() - logo.getHeight()) / 2;
+        g2.drawImage(logo, x, y, widthLogo, heightLogo, null);
+        g2.dispose();
         String imgName = urlString.substring(urlString.lastIndexOf("/") + 1, urlString.length());
         String imgNameEncode = URLEncoder.encode(imgName, "UTF-8");
         urlString = urlString.substring(0, urlString.lastIndexOf("/") + 1) + imgNameEncode;
