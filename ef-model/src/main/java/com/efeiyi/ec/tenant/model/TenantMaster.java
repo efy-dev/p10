@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class TenantMaster {
 
     private String id;
-    private Tenant tenant;
+    private BigTenant tenant;
     private Master master;
     private String status;
 
@@ -32,13 +32,16 @@ public class TenantMaster {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
-    public Tenant getTenant() {
+    public BigTenant getTenant() {
         return tenant;
     }
 
-    public void setTenant(Tenant tenant) {
+    public void setTenant(BigTenant tenant) {
         this.tenant = tenant;
     }
+
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "master_id")
     public Master getMaster() {

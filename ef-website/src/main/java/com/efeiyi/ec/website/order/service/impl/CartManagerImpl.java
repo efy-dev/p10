@@ -175,9 +175,7 @@ public class CartManagerImpl implements CartManager {
             List<CartProduct> cartProductList = sessionCart.getCartProductList();
             for (CartProduct cartProductTemp : cartProductList) {
                 cartProductTemp.setCart(realCart);
-                realCart.getCartProductList().add(cartProductTemp);
-                baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
-                updateTotalPrice(realCart);
+                addToCart(realCart,cartProductTemp.getProductModel(),cartProductTemp.getAmount());
                 baseManager.saveOrUpdate(Cart.class.getName(), realCart);
             }
         }

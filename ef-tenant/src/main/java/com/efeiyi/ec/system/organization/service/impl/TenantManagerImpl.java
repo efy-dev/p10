@@ -31,7 +31,7 @@ public class TenantManagerImpl implements TenantManager{
             tenantProject = (TenantProject)xdoDao.getObject(TenantProject.class.getName(),tenantProjectId);
             if(tenantProject == null){
                 tenantProject = new TenantProject();
-                tenantProject.setTenant((Tenant)xdoDao.getObject(Tenant.class.getName(),tenantId));
+                tenantProject.setTenant((BigTenant) xdoDao.getObject(BigTenant.class.getName(), tenantId));
                 tenantProject.setProject((Project) xdoDao.getObject(Project.class.getName(), projectId));
                 tenantProject.setStatus("1");
             }else {
@@ -98,7 +98,7 @@ public class TenantManagerImpl implements TenantManager{
             tenantMaster = (TenantMaster)xdoDao.getObject(TenantMaster.class.getName(),tenantMasterId);
             if(tenantMaster == null){
                 tenantMaster = new TenantMaster();
-                tenantMaster.setTenant((Tenant)xdoDao.getObject(Tenant.class.getName(),tenantId));
+                tenantMaster.setTenant((BigTenant)xdoDao.getObject(BigTenant.class.getName(),tenantId));
                 tenantMaster.setMaster((Master)xdoDao.getObject(Master.class.getName(),masterId));
                 tenantMaster.setStatus("1");
             }else {
@@ -117,7 +117,7 @@ public class TenantManagerImpl implements TenantManager{
             xdoDao.saveOrUpdateObject(TenantMaster.class.getName(), tenantMaster);
             List<MasterProject> masterProjectList =  xdoDao.getObjectList("from MasterProject where status = '1'and project.status!='0' and master.id = ?",new Object[]{masterId});
 
-            Tenant tenant = (Tenant)xdoDao.getObject(Tenant.class.getName(),tenantId);
+            BigTenant tenant = (BigTenant)xdoDao.getObject(BigTenant.class.getName(),tenantId);
             if(masterProjectList!=null){
                 for (MasterProject masterProject :masterProjectList){
                     TenantProject tenantProject = null;

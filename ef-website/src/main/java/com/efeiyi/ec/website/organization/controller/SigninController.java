@@ -185,27 +185,6 @@ public class SigninController extends BaseController {
     public String forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String redirect = request.getParameter("callUrl");
         String registeSuccess = request.getParameter("registeSuccess");
-        String userId = request.getParameter("userId");
-        if (userId != null && !"".equals(userId)) {
-            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
-            XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
-            List<Object> couponBatchList = baseManager.listObject(xQuery);
-            for (Object couponBatchTemp : couponBatchList) {
-                if (((CouponBatch) couponBatchTemp).getCouponList().size() < ((CouponBatch) couponBatchTemp).getAmount()) {
-                    Coupon coupon = new Coupon();
-                    coupon.setStatus("1");
-                    coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
-                    coupon.setCouponBatch((CouponBatch) couponBatchTemp);
-                    Date currentDate = new Date();
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-                    String currentDateStr = simpleDateFormat.format(currentDate);
-                    coupon.setUniqueKey(currentDateStr + coupon.getSerial());
-                    coupon.setConsumer(consumer);
-                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
-                }
-            }
-
-        }
         if (redirect != null) {
             return "redirect:http://" + redirect;
         }
@@ -259,6 +238,7 @@ public class SigninController extends BaseController {
     @RequestMapping({"/registerSuccess.do"})
     public String transitPage(HttpServletRequest request, Model model) throws Exception {
         String userId = request.getParameter("userId");
+        int couponAmount = 0;
         if (userId != null && !"".equals(userId)) {
             Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
             XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
@@ -274,20 +254,36 @@ public class SigninController extends BaseController {
                     String currentDateStr = simpleDateFormat.format(currentDate);
                     coupon.setUniqueKey(currentDateStr + coupon.getSerial());
                     coupon.setConsumer(consumer);
+                    coupon.setWhetherBind("2");
                     baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                    couponAmount++;
+                } else if (((CouponBatch) couponBatchTemp).fetchCouponList().size() > 0) {
+                    List<Coupon> couponList = ((CouponBatch) couponBatchTemp).fetchCouponList();
+                    Coupon coupon = couponList.get(0);
+                    coupon.setWhetherBind("2");
+                    coupon.setConsumer(consumer);
+                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                    couponAmount++;
                 }
             }
 
+        } else {
+            return "redirect:/sso.do";
         }
-        return "/registerSuccess";
+        if (couponAmount == 0) {
+            return "redirect:/sso.do";
+        } else {
+            model.addAttribute("couponAmount",couponAmount);
+            return "/registerSuccess";
+        }
     }
 
     @RequestMapping({"/wx/userInfo"})
     public String wxPay(HttpServletRequest request) throws Exception {
         String dataKey = "unionid";
-        String callback = request.getServerName()+":"+request.getServerPort()+"/wx/bind";
-        callback = URLEncoder.encode(callback,"UTF-8");
-        String redirect = "http://www.efeiyi.com/wx/getInfo.do?callback="+callback+"&dataKey="+dataKey;
+        String callback = request.getServerName() + ":" + request.getServerPort() + "/wx/bind";
+        callback = URLEncoder.encode(callback, "UTF-8");
+        String redirect = "http://www.efeiyi.com/wx/getInfo.do?callback=" + callback + "&dataKey=" + dataKey;
         return "redirect:" + redirect;
     }
 

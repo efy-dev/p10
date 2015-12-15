@@ -15,7 +15,7 @@ import java.io.Serializable;
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class TenantProject implements Serializable {
     private String id;
-    private Tenant tenant;
+    private BigTenant tenant;
     private Project project;
     private String status;
 
@@ -32,13 +32,15 @@ public class TenantProject implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
-    public Tenant getTenant() {
+    public BigTenant getTenant() {
         return tenant;
     }
 
-    public void setTenant(Tenant tenant) {
+    public void setTenant(BigTenant tenant) {
         this.tenant = tenant;
     }
+
+
 
 
 

@@ -72,10 +72,10 @@
             <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>
             <div class="cha-box">
                 <c:if test="${productModel.product.productModelList.size()==1}">
-                <strong>${productModel.name}</strong>
+                    <strong>${productModel.name}</strong>
                 </c:if>
                 <c:if test="${productModel.product.productModelList.size()>1}">
-                    <strong>${productModel.product.name}$[{productModel.name}]</strong>
+                    <strong>${productModel.product.name}[${productModel.name}]</strong>
                 </c:if>
                 <p>${productModel.product.subName}</p>
 
@@ -300,17 +300,21 @@
 
     function addGaverName() {
         var gaverName = $("#giftMessage1").val();
-        var success = function (data) {
-            gaverNameStats = "1";
-            $(".edit-txt2").html(data)
-            $(".edit-txt2").show();
+        if (gaverName != "" && typeof gaverName != "undefined") {
+            var success = function (data) {
+                gaverNameStats = "1";
+                $(".edit-txt2").html(data)
+                $(".edit-txt2").show();
+                $("#addGaverName").hide();
+            }
+            ajaxRequest("<c:url value="/order/addGaverName.do"/>", {
+                "purchaseOrderGiftId": "${purchaseOrder.id}",
+                "gaverName": gaverName
+            }, success, function () {
+            }, "post");
+        } else {
             $("#addGaverName").hide();
         }
-        ajaxRequest("<c:url value="/order/addGaverName.do"/>", {
-            "purchaseOrderGiftId": "${purchaseOrder.id}",
-            "gaverName": gaverName
-        }, success, function () {
-        }, "post");
     }
 </script>
 </body>

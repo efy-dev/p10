@@ -82,11 +82,11 @@
 								<a href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}"/>立&nbsp;即&nbsp;支&nbsp;付</a>
 							</c:when>
 						</c:choose>
-							<%--<c:choose>--%>
-							<%--<c:when test="${purchaseOrder.orderType == '4'}">--%>
-							<%--<a href="#">查&nbsp;看&nbsp;团&nbsp;购</a>--%>
-							<%--</c:when>--%>
-							<%--</c:choose>--%>
+							<c:choose>
+							<c:when test="${purchaseOrder.orderType == '4'}">
+								<a href="<c:url value="/order/groupBuyView?orderId=${spList.id}"/>">查&nbsp;看&nbsp;团&nbsp;购</a>
+							</c:when>
+							</c:choose>
 					</div>
 				</div>
 			</c:if>
@@ -156,9 +156,9 @@
 								<c:when test="${purchaseOrder.orderType == '3'}">
 									<a href="<%=PConst.HOSTNAME%>/giftReceive/${purchaseOrder.id}">查&nbsp;看&nbsp;礼&nbsp;品</a>
 								</c:when>
-								<%--<c:when test="${purchaseOrder.orderType == '4'}">--%>
-								<%--<a href="#">查&nbsp;看&nbsp;团&nbsp;购</a>--%>
-								<%--</c:when>--%>
+								<c:when test="${purchaseOrder.orderType == '4'}">
+									<a href="<c:url value="/order/groupBuyView?orderId=${purchaseOrder.id}"/>">查&nbsp;看&nbsp;团&nbsp;购</a>
+								</c:when>
 							</c:choose>
 						</div>
 					</div>
@@ -229,9 +229,9 @@
 									<c:when test="${spList.orderType == '3'}">
 										<a href="<%=PConst.HOSTNAME%>/giftReceive/${spList.id}">查&nbsp;看&nbsp;礼&nbsp;品</a>
 									</c:when>
-									<%--<c:when test="${spList.orderType == '4'}">--%>
-									<%--<a href="#">查&nbsp;看&nbsp;团&nbsp;购</a>--%>
-									<%--</c:when>--%>
+									<c:when test="${spList.orderType == '4'}">
+									<a href="<c:url value="/order/groupBuyView?orderId=${spList.id}"/>">查&nbsp;看&nbsp;团&nbsp;购</a>
+									</c:when>
 								</c:choose>
 							</div>
 						</div>

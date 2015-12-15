@@ -144,34 +144,42 @@ public class PurchaseOrderGiftController {
         g.setColor(Color.black);
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
-        if (productName.length() > 7) {
-            g.setFont(new Font("微软雅黑", Font.BOLD, 20));
-            g.drawString(productName, 420, 220);
-        } else {
-            g.setFont(new Font("微软雅黑", Font.BOLD, 29));
-            g.drawString(productName, 420, 220);
+        g.setFont(new Font("微软雅黑", Font.BOLD, 20));
+        g.setColor(Color.LIGHT_GRAY);
+        if(productName.length()<=8){
+            g.drawString(productName, 447, 203);
+        }else if(8<productName.length()&&productName.length()<17){
+            g.drawString(productName.substring(0,8), 447, 203);
+            g.drawString(productName.substring(8,productName.length()), 447, 233);
+        }else {
+            g.drawString(productName.substring(0,8), 447, 203);
+            g.drawString(productName.substring(8,16), 447, 233);
+            g.drawString(productName.substring(8,productName.length()), 447, 253);
         }
-        g.setFont(new Font("微软雅黑", Font.BOLD, 25));
-        g.drawString("「" + projectName + "」", 420, 290);
-        g.setFont(new Font("微软雅黑", Font.BOLD, 27));
+        g.drawString("「" + projectName + "」", 447, 313);
         //背景图set文字显示
-        g.setFont(new Font("微软雅黑", Font.ITALIC, 24));
+        g.setFont(new Font("微软雅黑", Font.BOLD, 22));
+        g.setColor(Color.black);
         if (giftMessage != null) {
-            if (giftMessage.length() < 17) {
-                g.drawString(giftMessage, 240, 500);
-            }
-            if (17 <= giftMessage.length() && giftMessage.length() < 32) {
-                g.drawString(giftMessage.substring(0, 17), 240, 500);
-                g.drawString(giftMessage.substring(17, giftMessage.length()), 220, 530);
-            }
-            if (32 <= giftMessage.length() && giftMessage.length() <= 50) {
-                g.drawString(giftMessage.substring(0, 17), 240, 500);
-                g.drawString(giftMessage.substring(17, 33), 220, 530);
-                g.drawString(giftMessage.substring(33, giftMessage.length()), 220, 570);
+            if (giftMessage.length() < 15) {
+                g.drawString(giftMessage, 267, 493);
+            }else if (15 <= giftMessage.length() && giftMessage.length() < 30) {
+                g.drawString(giftMessage.substring(0, 15), 267, 493);
+                g.drawString(giftMessage.substring(15, giftMessage.length()), 267, 541);
+            }else if (30 <= giftMessage.length() && giftMessage.length() <45) {
+                g.drawString(giftMessage.substring(0, 15), 267, 493);
+                g.drawString(giftMessage.substring(15, 30), 267, 541);
+                g.drawString(giftMessage.substring(30, giftMessage.length()), 267, 589);
+            }else {
+                g.drawString(giftMessage.substring(0, 15), 267, 493);
+                g.drawString(giftMessage.substring(15, 30), 267, 541);
+                g.drawString(giftMessage.substring(30, 45), 267, 589);
+                g.drawString(giftMessage.substring(45, giftMessage.length()), 267, 637);
             }
         }
         if (sender != null && !"".equals(sender)) {
-            g.drawString("——" + sender, 500, 600);
+            g.drawString("——", 480, 662);
+            g.drawString(sender, 540, 662);
         }
         g.dispose();
         //二维码生成
@@ -180,8 +188,7 @@ public class PurchaseOrderGiftController {
         hints.put(EncodeHintType.MARGIN, 0);
         BitMatrix bitMatrix = null;
         try {
-            bitMatrix = new QRCodeWriter().encode(content,
-                    BarcodeFormat.QR_CODE, 154, 154, hints);//二维码像素
+            bitMatrix = new QRCodeWriter().encode(content,BarcodeFormat.QR_CODE, 120, 120, hints);//二维码像素
         } catch (WriterException e) {
             e.printStackTrace();
         }
@@ -194,19 +201,28 @@ public class PurchaseOrderGiftController {
                         Color.BLACK.getRGB() : Color.WHITE.getRGB());
             }
         }
-//        String testurl = "http://pro.efeiyi.com/product/%E4%B8%BB%E5%9B%BE20151022173939.jpg@!product-hot";
+        //载入logo
+        URL logoUrl = new URL("http://pro.efeiyi.com/gift/test1.jpg");
+        BufferedImage logo = ImageIO.read(logoUrl);
+        int widthLogo = logo.getWidth(), heightLogo = logo.getHeight();
+        // 计算图片放置位置
+        Graphics2D g2 = image.createGraphics();
+        int x = (image.getWidth() - widthLogo) / 2;
+        int y = (image.getHeight() - logo.getHeight()) / 2;
+        g2.drawImage(logo, x, y, widthLogo, heightLogo, null);
+        g2.dispose();
         String imgName = urlString.substring(urlString.lastIndexOf("/") + 1, urlString.length());
         String imgNameEncode = URLEncoder.encode(imgName, "UTF-8");
         urlString = urlString.substring(0, urlString.lastIndexOf("/") + 1) + imgNameEncode;
         URL pictureUrl = new URL("http://pro.efeiyi.com/" + urlString + "@!gift-picture-sender");
-//        URL pictureUrl = new URL(testurl);
         ImageIcon giftImgIcon = new ImageIcon(pictureUrl);
         BufferedImage combined = new BufferedImage(bimage.getWidth(), bimage.getHeight(), BufferedImage.TYPE_INT_RGB);
         //图像合并
         Graphics2D g1 = combined.createGraphics();
         g1.drawImage(bimage, 0, 0, null);
-        g1.drawImage(image, 40, 480, null);
-        g1.drawImage(giftImgIcon.getImage(), 40, 200, null);
+        g1.drawImage(image, 47, 480, null);
+        //商品图片位置
+        g1.drawImage(giftImgIcon.getImage(), 37, 183, null);
         g1.dispose();
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         ImageIO.write(combined, "jpg", os);

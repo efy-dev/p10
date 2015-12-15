@@ -7,6 +7,7 @@ import com.efeiyi.ec.project.model.ProjectPropertyValue;
 import com.efeiyi.ec.system.product.dao.ProductDao;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.service.AutoSerialManager;
@@ -102,7 +103,9 @@ public class ProductManagerImpl implements ProductManager{
                 product.setProject((Project) xdoDao.getObject(Project.class.getName(), product.getProject().getId()));
             }
             if ("".equals(product.getTenant().getId())){
-                product.setTenant((Tenant) xdoDao.getObject(Tenant.class.getName(), product.getTenant().getId()));
+               product.setBigTenant(null);
+            }else {
+                product.setBigTenant((BigTenant) xdoDao.getObject(BigTenant.class.getName(), product.getTenant().getId()));
             }
 
 

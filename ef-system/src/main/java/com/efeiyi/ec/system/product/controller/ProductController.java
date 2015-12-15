@@ -8,6 +8,7 @@ import com.efeiyi.ec.project.model.ProjectCategoryProductModel;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.system.product.service.ProductModelManager;
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.ming800.core.base.controller.BaseController;
@@ -275,20 +276,21 @@ public class ProductController extends BaseController {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
             String identify = sdf.format(new Date());
             String url = "";
-            if(multipartRequest.getFile("picture_url1")!=null) {
-                if (!multipartRequest.getFile("picture_url1").getOriginalFilename().equals("")) {
-                    url = "product/" + identify + multipartRequest.getFile("picture_url1").getOriginalFilename();
-                    product.setPicture_url(url);
+            try {
 
-                }
-            }
 //            try {
 //                Product product1 =        productManager.saveProduct(product);
 //                System.out.print(product1.getMaster().getName());
 //            }catch (Exception e){
 //
 //            }
-            try {
+                if(multipartRequest.getFile("picture_url1")!=null&&!"".equals(multipartRequest.getFile("picture_url1"))) {
+                    if (!multipartRequest.getFile("picture_url1").getOriginalFilename().equals("")) {
+                        url = "product/" + identify + multipartRequest.getFile("picture_url1").getOriginalFilename();
+                        product.setPicture_url(url);
+                        aliOssUploadManager.uploadFile(multipartRequest.getFile("picture_url1"), "ec-efeiyi", url);
+                    }
+                }
                 Product temProduct = productManager.saveProduct(product);
                 //  &tenantId=${tenantId}&masterId=${masterId}&id=
                 String tenantId = "0";
@@ -299,8 +301,9 @@ public class ProductController extends BaseController {
                 if (temProduct.getMaster() != null) {
                     masterId = temProduct.getMaster().getId();
                 }
+
                 resultPage = resultPage + "&tenantId="+tenantId+"&masterId="+masterId+"&id="+temProduct.getId();
-                aliOssUploadManager.uploadFile(multipartRequest.getFile("picture_url1"), "ec-efeiyi", url);
+
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -427,7 +430,7 @@ public class ProductController extends BaseController {
     public String linkTenant(String tenantId, String productId) {
         try {
             Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-            product.setTenant((Tenant) baseManager.getObject(Tenant.class.getName(), tenantId));
+            product.setBigTenant((BigTenant) baseManager.getObject(BigTenant.class.getName(), tenantId));
             baseManager.saveOrUpdate(Product.class.getName(), product);
         } catch (Exception e) {
             e.printStackTrace();

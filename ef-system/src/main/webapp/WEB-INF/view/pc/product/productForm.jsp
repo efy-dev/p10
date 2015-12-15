@@ -116,7 +116,7 @@
           <select name="tenantCheck" onchange="changeTenant(this)">
             <option value="0">请选择</option>
             <c:forEach var="tenant" items="${tenantList}">
-              <option value="${tenant.id}" <c:if test="${object.tenant.id == tenant.id}">selected="selected"</c:if> <c:if test="${tenantId == tenant.id}">selected="selected"</c:if> >${tenant.name}</option>
+              <option value="${tenant.id}" <c:if test="${object.bigTenant.id == tenant.id}">selected="selected"</c:if> <c:if test="${tenantId == tenant.id}">selected="selected"</c:if> >${tenant.name}</option>
             </c:forEach>
           </select>
           <!--<small>必填项*</small>-->
