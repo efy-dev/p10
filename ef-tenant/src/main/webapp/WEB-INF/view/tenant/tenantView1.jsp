@@ -22,7 +22,7 @@
             <c:if test="${not empty object.status}">
             <input type="hidden" name="status" value="${object.status}">
             </c:if>
-<c:if test="${not empty object.status}">
+<c:if test="${empty object.status}">
     <input type="hidden" name="status" value="1">
     </c:if>
             <input type="hidden" name="flag" value="">
