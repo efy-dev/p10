@@ -30,8 +30,9 @@
                     <% if (AuthorizationUtil.isAuthenticated()) {%>
                     <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
                     <%} else {%>
-                    <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
+                    <li><a href="<c:url value="/sso.do?callUrl=i.efeiyi.com"/>" title="个人中心">个人中心</a></li>
                     <%}%>
+                    <li><a href="<c:url value="/productCategoryList.do"/>" title="个人中心">分类</a></li>
                 </ul>
             </div>
         </header>
@@ -56,7 +57,7 @@
                     <%} else {%>
                     <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
                     <%}%>
-                    <li><a href="http://master.efeiyi.com" title="分类">传承人</a></li>
+                    <li><a href="<c:url value="/productCategoryList.do"/>" title="个人中心">分类</a></li>
                 </ul>
             </div>
         </header>
@@ -77,7 +78,7 @@
                 <%} else {%>
                 <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
                 <%}%>
-                <li><a href="http://master.efeiyi.com" title="分类">传承人</a></li>
+                <li><a href="<c:url value="/productCategoryList.do"/>" title="个人中心">分类</a></li>
             </ul>
         </div>
     </header>
@@ -97,7 +98,7 @@
                 <%} else {%>
                 <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
                 <%}%>
-                <li><a href="http://master.efeiyi.com" title="分类">传承人</a></li>
+                <li><a href="<c:url value="/productCategoryList.do"/>" title="个人中心">分类</a></li>
             </ul>
         </div>
     </header>
@@ -163,6 +164,7 @@
                     <%} else {%>
                     <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
                     <%}%>
+                    <li><a href="<c:url value="/productCategoryList.do"/>" title="个人中心">分类</a></li>
                 </ul>
             </div>
         </header>
