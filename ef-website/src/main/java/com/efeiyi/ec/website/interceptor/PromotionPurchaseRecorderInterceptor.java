@@ -1,12 +1,14 @@
 package com.efeiyi.ec.website.interceptor;
 
+import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
-import com.efeiyi.jh.advertisement.model.PromotionPurchaseRecord;
-import com.efeiyi.jh.advertisement.model.PromotionUserRecord;
+import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,20 +26,20 @@ public class PromotionPurchaseRecorderInterceptor extends HandlerInterceptorAdap
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+//        User user = AuthorizationUtil.getUser();
+        MyUser user = (MyUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("user", AuthorizationUtil.getUser());
-        PromotionUserRecord promotionUserRecord = (PromotionUserRecord) baseManager.getUniqueObjectByConditions("from PromotionUserRecord x where x.user=:user", queryParamMap);
+        queryParamMap.put("identifier", user.getSource());
+        PromotionPlan promotionPlan = (PromotionPlan) baseManager.getUniqueObjectByConditions("from PromotionPlan x where x.identifier=:identifier", queryParamMap);
         //营销返利有效并且没有超出RD有效期，记录订单
-        if (promotionUserRecord != null && !"0".equals(promotionUserRecord.getLatestPromotionPlan().getStatus())&& promotionUserRecord.getRdEndDate().compareTo(new Date()) >= 0) {
+        if (!"0".equals(promotionPlan.getStatus()) && user.getRdEndDay() != null && new Date().compareTo(user.getRdEndDay()) < 0) {
             String path = request.getServletPath();
             String orderId = path.substring(path.lastIndexOf("/") + 1);
             PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
             PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
-            PromotionPurchaseRecord promotionPurchaseRecord = new PromotionPurchaseRecord();
-            promotionPurchaseRecord.setPurchaseOrder(purchaseOrder);
-            promotionPurchaseRecord.setPromotionPlan(promotionUserRecord.getLatestPromotionPlan());
-            promotionPurchaseRecord.setPromotionUserRecord(promotionUserRecord);
-            baseManager.saveOrUpdate(PromotionPurchaseRecord.class.getName(), promotionPurchaseRecord);
+            purchaseOrder.setSource(user.getSource());
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         }
         return super.preHandle(request, response, handler);
     }

@@ -231,7 +231,7 @@
         <!--结算-->
         <div class="System">
             <div class="System-text">
-                <span class="btns"><a target="_blank" onclick="(this,'${purchaseOrder.id}')">提交订单</a></span>
+                <span class="btns"><a target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a></span>
             <span class="price-info">
                 <%--js 取回来  第一次也是js取 统一js取--%>
                 <p class="price1">总金额：<em id="totalPrice">${purchaseOrder.total}</em> 元</p>
