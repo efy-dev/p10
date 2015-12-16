@@ -52,7 +52,7 @@
                     </div>
                 </td>
                 <td>${PPE.promotionPlan.urlDescription}</td>
-                <td>${PPE.promotionPlan.url}?pch=${PPE.promotionPlan.id}</td>
+                <td>${PPE.promotionPlan.url}?source=${PPE.promotionPlan.id}</td>
                 <td>
                     <ming800:status name="name" dataType="PCPromotionPlan.name"
                                     checkedValue="${PPE.promotionPlan.name}" type="normal"/>

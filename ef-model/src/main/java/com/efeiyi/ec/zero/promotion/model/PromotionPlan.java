@@ -16,8 +16,8 @@ public class PromotionPlan {
     private String identifier;
     private String name;
     private String url;
-//    private String urlMark;
-//    private String urlDescription;
+    private String urlMark;
+    private String urlDescription;
     private Date createDatetime;
     private String status;
     private Integer rdDays;
@@ -60,23 +60,23 @@ public class PromotionPlan {
         this.url = url;
     }
 
-//    @Column(name = "url_mark")
-//    public String getUrlMark() {
-//        return urlMark;
-//    }
-//
-//    public void setUrlMark(String urlMark) {
-//        this.urlMark = urlMark;
-//    }
-//
-//    @Column(name = "url_description")
-//    public String getUrlDescription() {
-//        return urlDescription;
-//    }
-//
-//    public void setUrlDescription(String urlDescription) {
-//        this.urlDescription = urlDescription;
-//    }
+    @Column(name = "url_mark")
+    public String getUrlMark() {
+        return urlMark;
+    }
+
+    public void setUrlMark(String urlMark) {
+        this.urlMark = urlMark;
+    }
+
+    @Column(name = "url_description")
+    public String getUrlDescription() {
+        return urlDescription;
+    }
+
+    public void setUrlDescription(String urlDescription) {
+        this.urlDescription = urlDescription;
+    }
 
     @Column(name = "create_datetime")
     public Date getCreateDatetime() {

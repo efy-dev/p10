@@ -1,6 +1,6 @@
 package com.efeiyi.ec.system.zero.promotion.sevice.impl;
 
-import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.system.zero.promotion.dao.PromotionPlanDao;
 import com.efeiyi.ec.system.zero.promotion.sevice.PromotionPlanManagerService;
@@ -40,7 +40,7 @@ public class PromotionPlanManagerImpl implements PromotionPlanManagerService {
     }
 
     @Override
-    public List<User> getZCLInformation(PromotionPlan promotionPlan, PageEntity pageEntity) throws Exception {
+    public List<MyUser> getZCLInformation(PromotionPlan promotionPlan, PageEntity pageEntity) throws Exception {
         return promotionPlanDao.getZCLInformation(promotionPlan, pageEntity);
     }
 
