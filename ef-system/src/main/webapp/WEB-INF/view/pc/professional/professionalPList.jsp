@@ -20,11 +20,11 @@
         function removeProfessional(professionalId){
             $.ajax({
                 type:"GET",
-                url:'<c:url value="/basic/xmj.do?qm=removeProfessional"/>',
+                url:'<c:url value="/professional/removeProfessional.do"/>',
                 data:{id:professionalId},
                 dataType:"json",
                 success:function(data){
-                    $("#"+professionalId).remove();
+                    $("#"+data).remove();
                 }
             });
         }

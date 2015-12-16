@@ -59,4 +59,19 @@ public class ProfessionalController extends BaseController {
         }
         return  flag;
     }
+
+    @RequestMapping("/removeProfessional.do")
+    @ResponseBody
+    public String removeProfessional(String id){
+
+
+        try{
+            Professional professional = (Professional)baseManager.getObject(Professional.class.getName(), id);
+            professional.setStatus("0");
+            baseManager.saveOrUpdate(Professional.class.getName(),professional);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  id;
+    }
 }
