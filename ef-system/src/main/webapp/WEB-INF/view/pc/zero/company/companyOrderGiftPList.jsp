@@ -14,16 +14,15 @@
     <title>企业礼品卡管理</title>
 </head>
 <body style="height: auto">
-<%--<div style="text-align: left;margin-left: 10px;">--%>
-    <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formCompanyOrderBatch&company=company"/>'"--%>
-           <%--type="button" class="am-btn am-btn-default am-btn-xs"--%>
-           <%--style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"--%>
-           <%--value="新建礼品卡批次"/>--%>
-<%--</div>--%>
+<div style="text-align: left;margin-left: 10px;">
+    <input onclick="window.history.go(-1);"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="返回"/>
+</div>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr style="text-align:left">
-            <%--<td>操作</td>--%>
             <td>礼品卡编号</td>
             <td>企业用户</td>
             <td>礼品名称</td>
@@ -34,36 +33,6 @@
         </tr>
         <c:forEach items="${requestScope.pageInfo.list}" var="gift">
             <tr>
-                <%--<td>
-                    <div class="am-btn-toolbar">
-                        <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
-                            <c:if test="${batch.status == '1'}">
-                                <button onclick="window.location.href='<c:url
-                                        value="/basic/xm.do?qm=formCompanyOrderBatch&company=company&id=${batch.id}"/>'"
-                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                        class="am-icon-edit"></span> 编辑
-                                </button>
-                                <button onclick="window.location.href='<c:url
-                                        value="/basic/xm.do?qm=removeCompanyOrderBatch&id=${batch.id}"/>'"
-                                        class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                        class="am-icon-trash-o"></span> 删除
-                                </button>
-                                <button onclick="window.location.href='<c:url
-                                        value="/company/saveCompanyOrderGiftList.do?id=${batch.id}"/>'"
-                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                        class="am-icon-edit"></span> 生成礼品卡
-                                </button>
-                            </c:if>
-                            <c:if test="${batch.status == '2'}">
-                                <button &lt;%&ndash;onclick="window.location.href='<c:url
-                                        value="/company/saveCompanyOrderGiftList.do?id=${batch.id}"/>'"&ndash;%&gt;
-                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                        class="am-icon-edit"></span> 查看礼品卡
-                                </button>
-                            </c:if>
-                        </div>
-                    </div>
-                </td>--%>
                 <td>${gift.serial}</td>
                 <td>${gift.companyOrderBatch.companyName}</td>
                 <td>${gift.companyOrderBatch.productModel.product.name}

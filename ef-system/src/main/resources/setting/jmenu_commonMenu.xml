@@ -81,8 +81,8 @@
                 <match url="/basic/xm.do?qm=formCompanyOrderBatch&amp;company=company"/>
                 <match url="/basic/xm.do?qm=plistPurchaseOrderGift_companyOrderBatch&amp;company=company"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderGift_companyDefault"  access="admin,manager" text_zh_CN="礼品卡订单管理">
-                <match url="/basic/xm.do?qm=formPromotionPlan&amp;gift=gift"/>
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderGift_companyDefault"  access="admin,manager" text_zh_CN="企业礼品卡列表">
+                <!--<match url="/basic/xm.do?qm=formPromotionPlan&amp;gift=gift"/>-->
             </jnode>
         </jnode>
     </jnode>

@@ -6,15 +6,14 @@ import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.system.zero.company.dao.CompanyOrderBatchDao;
 import com.efeiyi.ec.zero.company.model.CompanyOrderBatch;
 import com.ming800.core.p.service.AutoSerialManager;
-import org.apache.commons.lang.RandomStringUtils;
 import org.hibernate.CacheMode;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +22,7 @@ import java.util.List;
  * 企业礼品卡批次 Dao实现类
  */
 
+@SuppressWarnings("JpaQlInspection")
 @Repository
 public class CompanyOrderBatchDaoHibernate implements CompanyOrderBatchDao {
 
@@ -55,7 +55,6 @@ public class CompanyOrderBatchDaoHibernate implements CompanyOrderBatchDao {
             purchaseOrderProduct.setPurchaseOrder(orderGift);
             purchaseOrderProduct.setPurchaseAmount(1);
 
-
             orderGift.setSerial(serial);
             orderGift.setOrderType("5");// 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型 5.企业礼品卡类型
             orderGift.setStatus("1");//0假删 1正常
@@ -79,6 +78,13 @@ public class CompanyOrderBatchDaoHibernate implements CompanyOrderBatchDao {
         }
         session.flush();
 //        System.out.print(System.currentTimeMillis()-begin);
+    }
+
+    @Override
+    public List<PurchaseOrderGift> getOrderGiftList(CompanyOrderBatch companyOrderBatch) throws Exception {
+        String hql = "from PurchaseOrderGift as pog where pog.companyOrderBatch = :companyOrderBatch and pog.status != '0' and pog.orderType = '5'";
+        Query query = this.getSession().createQuery(hql).setParameter("companyOrderBatch", companyOrderBatch);
+        return query.list();
     }
 
 }

@@ -58,6 +58,11 @@
                                         class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                         class="am-icon-edit"></span> 查看礼品卡
                                 </button>
+                                <button onclick="window.location.href='<c:url
+                                        value="/company/downloadOrderGiftsTxt.do?id=${batch.id}"/>'"
+                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                        class="am-icon-edit"></span> 下载礼品卡链接
+                                </button>
                             </c:if>
                         </div>
                     </div>
