@@ -29,27 +29,27 @@
             <mvc:mapping path="**"/>
             <bean class="com.efeiyi.ec.website.interceptor.DriverInterceptor"/>
         </mvc:interceptor>
-       <!--<mvc:interceptor>-->
-           <!--<mvc:mapping path="/"/>-->
-           <!--<mvc:mapping path="/**"/>-->
-           <!--<mvc:mapping path="**"/>-->
-           <!--<mvc:exclude-mapping path="/sso.do"/>-->
-           <!--<mvc:exclude-mapping path="/sso2.do"/>-->
-           <!--<bean class="com.efeiyi.ec.website.interceptor.PromotionMarkInterceptor"/>-->
-       <!--</mvc:interceptor>-->
+       <mvc:interceptor>
+           <mvc:mapping path="/"/>
+           <mvc:mapping path="/**"/>
+           <mvc:mapping path="**"/>
+           <mvc:exclude-mapping path="/sso.do"/>
+           <mvc:exclude-mapping path="/sso2.do"/>
+           <bean class="com.efeiyi.ec.website.interceptor.PromotionMarkInterceptor"/>
+       </mvc:interceptor>
        <!--<mvc:interceptor>-->
            <!--<mvc:mapping path="/sso.do"/>-->
            <!--<mvc:mapping path="/sso2.do"/>-->
            <!--<bean class="com.efeiyi.ec.website.interceptor.PromotionPersistenceInterceptor"/>-->
        <!--</mvc:interceptor>-->
-       <!--<mvc:interceptor>-->
-           <!--<mvc:mapping path="/registerSuccess.do"/>-->
-           <!--<bean class="com.efeiyi.ec.website.interceptor.PromotionRegisterSuccessPersistenceInterceptor"/>-->
-       <!--</mvc:interceptor>-->
-       <!--<mvc:interceptor>-->
-           <!--<mvc:mapping path="/order/pay/**"/>-->
-           <!--<bean class="com.efeiyi.ec.website.interceptor.PromotionPurchaseRecorderInterceptor"/>-->
-       <!--</mvc:interceptor>-->
+       <mvc:interceptor>
+           <mvc:mapping path="/registerSuccess.do"/>
+           <bean class="com.efeiyi.ec.website.interceptor.PromotionRegisterSuccessPersistenceInterceptor"/>
+       </mvc:interceptor>
+       <mvc:interceptor>
+           <mvc:mapping path="/order/pay/**"/>
+           <bean class="com.efeiyi.ec.website.interceptor.PromotionPurchaseRecorderInterceptor"/>
+       </mvc:interceptor>
     </mvc:interceptors>
 
 

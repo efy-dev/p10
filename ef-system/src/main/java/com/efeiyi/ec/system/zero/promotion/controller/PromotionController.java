@@ -1,6 +1,6 @@
 package com.efeiyi.ec.system.zero.promotion.controller;
 
-import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.system.zero.promotion.sevice.PromotionPlanManagerService;
 import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -22,6 +23,7 @@ import java.util.List;
  */
 
 @Controller
+@RequestMapping("/promotionPlan")
 public class PromotionController {
     @Autowired
     private BaseManager baseManager;
@@ -30,7 +32,7 @@ public class PromotionController {
     @Qualifier("promotionPlanManagerImpl")
     private PromotionPlanManagerService promotionPlanManagerService;
 
-    @RequestMapping("/promotionPlan/getZCLInfo.do")
+    @RequestMapping("/getZCLInfo.do")
     public ModelAndView getZCLInformation(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String promotionPlanId = request.getParameter("id");
         if (promotionPlanId.isEmpty() || promotionPlanId.trim().equals("")){
@@ -48,15 +50,20 @@ public class PromotionController {
             pageEntity.setSize(Integer.parseInt(pageSize));
         }
 
-        List<User> userList = promotionPlanManagerService.getZCLInformation(promotionPlan, pageEntity);
-//        pageEntity.setCount(promotionPlan.getPromotionUserRecordList().size());
+        List<MyUser> userList = promotionPlanManagerService.getZCLInformation(promotionPlan, pageEntity);
+
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("source", promotionPlan.getIdentifier());
+        long size = (long) baseManager.getUniqueObjectByConditions("select count(*) from MyUser x where x.source=:source", queryParamMap);
+        pageEntity.setCount((int)size);
+
         modelMap.put("userList", userList);
         modelMap.put("pageEntity", pageEntity);
 
-        return new ModelAndView("/advertisement/promotionPlanUsersPList");
+        return new ModelAndView("/zero/promotion/promotionPlanUsersPList");
     }
 
-    @RequestMapping("/promotionPlan/getDDLInfo.do")
+    @RequestMapping("/getDDLInfo.do")
     public ModelAndView getDDLInformation(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String promotionPlanId = request.getParameter("id");
         if (promotionPlanId.isEmpty() || promotionPlanId.trim().equals("")){
@@ -75,10 +82,10 @@ public class PromotionController {
         }
 
         List<PurchaseOrder> orderList = promotionPlanManagerService.getDDLInformation(promotionPlan, pageEntity);
-        pageEntity.setCount(Integer.parseInt(promotionPlanManagerService.getDDL(promotionPlan)));
+        pageEntity.setCount((int)Long.parseLong(promotionPlanManagerService.getDDL(promotionPlan)));
         modelMap.put("orderList", orderList);
         modelMap.put("pageEntity", pageEntity);
 
-        return new ModelAndView("/advertisement/promotionPlanOrdersPList");
+        return new ModelAndView("/zero/promotion/promotionPlanOrdersPList");
     }
 }

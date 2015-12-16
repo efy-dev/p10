@@ -1,6 +1,6 @@
 package com.efeiyi.ec.system.zero.promotion.sevice;
 
-import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.ming800.core.taglib.PageEntity;
@@ -43,7 +43,7 @@ public interface PromotionPlanManagerService {
      * @return 注册用户列表
      * @throws Exception
      */
-    List<User> getZCLInformation(PromotionPlan promotionPlan, PageEntity pageEntity)throws Exception;
+    List<MyUser> getZCLInformation(PromotionPlan promotionPlan, PageEntity pageEntity)throws Exception;
 
     /**
      * 获取通过返利链接购物的订单

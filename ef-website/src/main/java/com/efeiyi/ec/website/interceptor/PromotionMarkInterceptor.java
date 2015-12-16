@@ -37,7 +37,6 @@ public class PromotionMarkInterceptor extends HandlerInterceptorAdapter {
                 //返利计划是有效的
                 if (promotionPlan != null && !"0".equals(promotionPlan.getStatus())) {
                     if (AuthorizationUtil.isAuthenticated()) {
-//                        User user = AuthorizationUtil.getUser();
                         MyUser user = (MyUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                         user.setSource(promotionSource);
 
@@ -45,7 +44,7 @@ public class PromotionMarkInterceptor extends HandlerInterceptorAdapter {
                         Calendar calendar = Calendar.getInstance();
                         calendar.add(Calendar.DATE, promotionPlan.getRdDays());
                         user.setRdEndDay(calendar.getTime());
-                        baseManager.saveOrUpdate(User.class.getName(), user);
+                        baseManager.saveOrUpdate(MyUser.class.getName(), user);
                     }
                     //只以最后一次点击的返利链接为准,存入Session和Cookie
                     HttpSession session = request.getSession();
