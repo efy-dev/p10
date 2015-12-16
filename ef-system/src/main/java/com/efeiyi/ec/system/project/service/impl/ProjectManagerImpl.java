@@ -12,6 +12,7 @@ import com.efeiyi.ec.system.product.dao.ProductDao;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.system.project.service.ProjectManager;
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.efeiyi.ec.tenant.model.TenantProject;
@@ -42,7 +43,7 @@ public class ProjectManagerImpl implements ProjectManager{
             tenantProject = (TenantProject)xdoDao.getObject(TenantProject.class.getName(),tenantProjectId);
             if(tenantProject == null){
                 tenantProject = new TenantProject();
-                tenantProject.setTenant((Tenant)xdoDao.getObject(Tenant.class.getName(),tenantId));
+                tenantProject.setTenant((BigTenant)xdoDao.getObject(BigTenant.class.getName(),tenantId));
                 tenantProject.setProject((Project) xdoDao.getObject(Project.class.getName(), projectId));
                 tenantProject.setStatus("1");
             }else {

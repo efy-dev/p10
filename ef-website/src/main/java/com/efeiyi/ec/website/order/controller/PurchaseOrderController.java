@@ -89,7 +89,7 @@ public class PurchaseOrderController extends BaseController {
         }
     }
 
-    @RequestMapping({"giftBuy/updateImg.do"})
+    @RequestMapping({"/giftBuy/updateImg.do"})
     @ResponseBody
     public boolean updateImg(HttpServletRequest request) {
         try {
@@ -357,9 +357,14 @@ public class PurchaseOrderController extends BaseController {
         realCart.setTotalPrice(new BigDecimal(0));
         baseManager.saveOrUpdate(Cart.class.getName(), realCart);
         for (CartProduct cartProductTemp : realCart.getCartProductList()) {
-            if (cartProductTemp.getIsChoose().equals("1")) {
-                baseManager.remove(CartProduct.class.getName(), cartProductTemp.getId());
+            for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+                if (cartProductTemp.getProductModel().getId().equals(purchaseOrderProduct.getProductModel().getId())) {
+                    baseManager.remove(CartProduct.class.getName(), cartProductTemp.getId());
+                    break;
+                }
             }
+//            if (cartProductTemp.getIsChoose().equals("1")) {
+//            }
         }
 
 

@@ -67,7 +67,7 @@
       </c:if>
       <c:if test="${productModel.amount>0}">
       <div class="item p-btn">
-        <a class="cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}&amount=1"/>" title="加入购物车"><i class="icon"></i>加入购物车</a>
+        <a class="cart" href="#" onclick="addToCart()" title="加入购物车"><i class="icon"></i>加入购物车</a>
         <a class="buy"  href="<c:url value="/order/easyBuy/${productModel.id}?amount=1"/>"} title="立即购买">立即购买</a>
       </div>
        </c:if>
@@ -124,5 +124,29 @@
 <![endif]-->
 <script href="<c:url value='/scripts/js/amazeui.min.js'/>"></script>
 <script href="<c:url value='/scripts/js/system.js'/>"></script>
+<script>
+  //跟踪加入购物车事件
+  function addToCart(t,o) {
+    ga('ec:addProduct', {
+      'id': "${productModel.id}",
+      'name': "【${productModel.product.name} ${productModel.name}】${productModel.product.subName}",
+      'category': "${productModel.product.project.name}",
+      'brand': "${productModel.product.tenant.name}",
+      'variant': "${productModel.product.subName}",
+      'price': "${productModel.product.price}",
+      'quantity': 1
+    });
+    ga('ec:setAction', 'add');
+    ga('send', 'event', {
+      'eventCategory': 'addToCart',
+      'eventAction': 'add',
+      'eventLabel': 'detail',
+      'eventValue': 1,
+      'hitCallback': function () {
+        window.location.href = "<c:url value="/cart/addProduct.do?id=${productModel.id}&amount=1"/>";
+      }
+    });
+  }
+</script>
 </body>
 </html>

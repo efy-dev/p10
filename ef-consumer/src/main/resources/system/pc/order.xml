@@ -25,6 +25,14 @@
                         <item label="微信" value="3"/>
                     </statusType>
                 </field>
+                <field name="orderType" label="订单类型" inputType="text">
+                    <statusType fieldName="orderType">
+                        <item label="普通类型" value="1"/>
+                        <item label="秒杀类型" value="2"/>
+                        <item label="礼品卷类型" value="3"/>
+                        <item label="团购类型" value="4"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
                 <do name="plistPurchaseOrder" access="" label="订单列表">
@@ -292,7 +300,15 @@
         </entity>
 
 
-
+        <entity name="PurchaseOrderGroup" label="团购订单" model="com.efeiyi.ec.group.model.PurchaseOrderGroup">
+            <does>
+                <do name="PurchaseOrderGroup" access="" label="团购分享详情">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="purchaseOrder.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
 
 
     </entities>

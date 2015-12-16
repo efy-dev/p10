@@ -40,13 +40,13 @@
         <label class="ae">评价：</label>
         <textarea class="ae sc-text" name="content"></textarea>
       </div>
-      <div class="bask ae">
-        <label class="ae">晒单：</label>
-        <div class="file-pic" id="sd${op.index}">
-          <a class="fileimg fi-icon"><input id="uploadInput${op.index}"  style="display:block;height:68px;width:68px;opacity:0;"></a>
-        </div>
+      <%--<div class="bask ae">--%>
+        <%--<label class="ae">晒单：</label>--%>
+        <%--<div class="file-pic" id="sd${op.index}">--%>
+          <%--<a class="fileimg fi-icon"><input id="uploadInput${op.index}"  style="display:block;height:68px;width:68px;opacity:0;"></a>--%>
+        <%--</div>--%>
 
-      </div>
+      <%--</div>--%>
       <input type="button" class="butt" value="提&nbsp;&nbsp;&nbsp;&nbsp;交" onclick="tj(this);">
     </form>
   </div>

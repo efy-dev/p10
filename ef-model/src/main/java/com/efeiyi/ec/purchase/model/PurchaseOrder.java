@@ -1,11 +1,10 @@
 package com.efeiyi.ec.purchase.model;
 
 import com.efeiyi.ec.organization.model.ConsumerAddress;
-import com.efeiyi.ec.organization.model.Consumer;
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -55,7 +54,8 @@ public class PurchaseOrder {
     private String receiverName;//收货人姓名
     private String receiverPhone;//收货人联系方式
     private String callback; //回调
-    private String orderType; // 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型
+    private String orderType; // 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型 5.企业礼品卡类型
+    private String source;//来源推广渠道
 
     @Column(name = "callback")
     public String getCallback() {
@@ -306,5 +306,14 @@ public class PurchaseOrder {
         }
         resultPrice = resultPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         return resultPrice;
+    }
+
+    @Column(name = "source")
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }

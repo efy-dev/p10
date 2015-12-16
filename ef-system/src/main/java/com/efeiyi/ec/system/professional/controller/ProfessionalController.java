@@ -29,7 +29,6 @@ public class ProfessionalController extends BaseController {
     @Autowired
     private BaseManager baseManager;
 
-
     @Autowired
     private ProfessionalManager professionalManager;
 
@@ -48,5 +47,31 @@ public class ProfessionalController extends BaseController {
         return  resultPage;
     }
 
+    @RequestMapping("/checkUsername.do")
+    @ResponseBody
+    public boolean checkUsername(String username){
 
+        boolean flag = true;
+        try{
+            flag = professionalManager.checkUsername(username);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  flag;
+    }
+
+    @RequestMapping("/removeProfessional.do")
+    @ResponseBody
+    public String removeProfessional(String id){
+
+
+        try{
+            Professional professional = (Professional)baseManager.getObject(Professional.class.getName(), id);
+            professional.setStatus("0");
+            baseManager.saveOrUpdate(Professional.class.getName(),professional);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  id;
+    }
 }

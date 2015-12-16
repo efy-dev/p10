@@ -1,8 +1,9 @@
 package com.efeiyi.ec.purchase.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.efeiyi.ec.zero.company.model.CompanyOrderBatch;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 /**
  * Created by Administrator on 2015/11/19 0019.
@@ -16,6 +17,7 @@ public class PurchaseOrderGift extends PurchaseOrder {
     private String showGiftPriceStatus; // 0 不显示 1 显示
     private String giftPictureUrl ; //礼物图片
     private String giftGaverName;  //送礼人姓名
+    private CompanyOrderBatch companyOrderBatch;//企业礼品卡批次
 
     @Column(name = "gift_gaver_name")
     public String getGiftGaverName() {
@@ -60,5 +62,16 @@ public class PurchaseOrderGift extends PurchaseOrder {
 
     public void setGiftPictureUrl(String giftPictureUrl) {
         this.giftPictureUrl = giftPictureUrl;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "zero_company_order_batch_id")
+    @JsonIgnore
+    public CompanyOrderBatch getCompanyOrderBatch() {
+        return companyOrderBatch;
+    }
+
+    public void setCompanyOrderBatch(CompanyOrderBatch companyOrderBatch) {
+        this.companyOrderBatch = companyOrderBatch;
     }
 }

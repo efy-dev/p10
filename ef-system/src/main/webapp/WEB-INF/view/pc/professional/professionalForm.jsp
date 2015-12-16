@@ -37,7 +37,7 @@
 
                 <div class="am-u-sm-9">
                     <input type="text" name="username" id="username" placeholder="用户名" value="${object.username}"
-                           required>
+                           >
                 </div>
             </div>
             <div class="am-form-group">
@@ -144,13 +144,31 @@
 
     function toSubmit(result) {
         $("input[name='resultPage']").val(result);
-        if ($("select[name='tenantCheck']").val() == "0") {
-            alert("请选择商家!");
+        var username = $("#username").val();
+        if(username==""){
+            alert("用户名不能为空!");
+        }else {
+            $.ajax({
+                type: "GET",
+                url: '<c:url value="/professional/checkUsername.do"/>',
+                data: {username: username},
+                dataType: "json",
+                success: function (data) {
+                    if(data){
+                        alert("用户名已存在!");
+                    }else{
+                        if ($("select[name='tenantCheck']").val() == "0") {
+                            alert("请选择商家!");
 
-        } else {
+                        } else {
 
-            $("input[name='bigTenant.id']").val($("select[name='tenantCheck']").val());
-            $("form").submit();
+                            $("input[name='bigTenant.id']").val($("select[name='tenantCheck']").val());
+                            $("form").submit();
+                        }
+                    }
+                }
+            });
+
         }
 
     }

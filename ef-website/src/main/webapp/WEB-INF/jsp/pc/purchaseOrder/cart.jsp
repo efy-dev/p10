@@ -111,8 +111,11 @@
                             <td width="96">
                     <span>
                     <p><a onclick="showConfirm('提示','是否确认删除',function(){
-                        window.location.href = '<c:url value="/cart/removeProduct.do?cartProductId=${product.id}"/>';
-                    })">删除</a></p>
+                            addToCart('${product.amount}','${product.productModel.id}',
+                            '${product.productModel.price}','${product.productModel.product.subName}',
+                            '${product.productModel.product.tenant.name}','${product.productModel.product.project.name}',
+                            '${product.productModel.product.name}${product.productModel.name}','${product.id}')
+                            })">删除</a></p>
                     <%--<p><a href="#">移到我的收藏</a></p>--%>
                     </span>
                             </td>
@@ -226,10 +229,10 @@
         var success = function (data) {
             if(data != null){
                 $("#" + cartProductId + "Amount").val(data["amount"]);
-                $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
-                $("#hiddenTotalPrice").html(data["cartCatch"]["totalPrice"]);
+                $("#totalPrice").html(data["cartCatch"]["totalPrice"].toFixed(2));
+                $("#hiddenTotalPrice").html(data["cartCatch"]["totalPrice"].toFixed(2));
                 $("#hiddenCoupon").html("");
-                $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
+                $("#" + cartProductId + "Price").html((data["productModel"]["price"] * data["amount"]).toFixed(2));
             }else{
                 showAlert("提示","库存不足");
             }
@@ -248,10 +251,10 @@
             if(data != null){
                 console.log(data);
                 $("#" + cartProductId + "Amount").val(data["amount"]);
-                $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
-                $("#hiddenTotalPrice").html(data["cartCatch"]["totalPrice"]);
+                $("#totalPrice").html(data["cartCatch"]["totalPrice"].toFixed(2));
+                $("#hiddenTotalPrice").html(data["cartCatch"]["totalPrice"].toFixed(2));
                 $("#hiddenCoupon").html("");
-                $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
+                $("#" + cartProductId + "Price").html((data["productModel"]["price"] * data["amount"]).toFixed(2));
             }else{
                 showAlert("提示","库存不足");
             }
@@ -269,10 +272,10 @@
         var success = function (data) {
             console.log(data);
             $("#" + cartProductId + "Amount").val(data["amount"]);
-            $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
-            $("#hiddenTotalPrice").html(data["cartCatch"]["totalPrice"]);
+            $("#totalPrice").html(data["cartCatch"]["totalPrice"].toFixed(2));
+            $("#hiddenTotalPrice").html(data["cartCatch"]["totalPrice"].toFixed(2));
             $("#hiddenCoupon").html("");
-            $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
+            $("#" + cartProductId + "Price").html((data["productModel"]["price"] * data["amount"]).toFixed(2));
         }
         ajaxRequest("<c:url value="/cart/subtractProductCount.do"/>", param, success, function () {
         }, "post")
@@ -395,7 +398,28 @@
 
 
     }
-
+    //跟踪移除购物车事件
+    function addToCart(t, o, price, sName, tName, pName, name, pid) {
+        ga('ec:addProduct', {
+            'id': o,
+            'name': "【" + name + "】" + sName,
+            'category': pName,
+            'brand': tName,
+            'variant': sName,
+            'price': price,
+            'quantity': t
+        });
+        ga('ec:setAction', 'remove');
+        ga('send', 'event', {
+            'eventCategory': 'addToCart',
+            'eventAction': 'remove',
+            'eventLabel': 'detail',
+            'eventValue': t,
+            'hitCallback': function () {
+                window.location.href = '<c:url value="/cart/removeProduct.do?cartProductId="/>' + pid;
+            }
+        });
+    }
 
 </script>
 </body>

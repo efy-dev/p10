@@ -27,11 +27,11 @@
 <security:authorize ifAnyGranted="admin,operational,c_operational">
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&view=${view}&tenantId=${tenantId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
     <input onclick="outExcel();" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="生成excel" />
-    <a onclick="initSort(this)"  class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 135px;margin-left:2px;height: 35px;"  >初始化商品图片排序</a>
+    <%--<a onclick="initSort(this)"  class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 135px;margin-left:2px;height: 35px;"  >初始化商品图片排序</a>--%>
     </security:authorize>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions};tenant.id:${tenantId}&tenantId=${tenantId}"/>
-<div class="admin-content">
+<div class="">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
         </div>

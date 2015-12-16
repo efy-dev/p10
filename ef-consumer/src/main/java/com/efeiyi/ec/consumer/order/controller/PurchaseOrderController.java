@@ -1,5 +1,6 @@
 package com.efeiyi.ec.consumer.order.controller;
 
+import com.efeiyi.ec.activity.group.model.PurchaseOrderGroup;
 import com.efeiyi.ec.consumer.organization.model.SendCode;
 import com.efeiyi.ec.consumer.organization.model.SmsProvider;
 import com.efeiyi.ec.consumer.organization.model.YunPianSmsProvider;
@@ -191,7 +192,23 @@ public class PurchaseOrderController {
         baseManager.remove(PurchaseOrder.class.getName(), orderId);
         return "redirect:/order/myEfeiyi/list.do";
     }
-
+    /**
+     * 订单列表显示团购详情页
+     * @param request
+     * @return
+     */
+    @RequestMapping("/groupBuyView")
+    public String getGroupBuy(HttpServletRequest request) throws Exception {
+        String purchaseOrderId=request.getParameter("orderId");
+//        XQuery xQuery=new XQuery("PurchaseOrderGroup_default",request);
+//        xQuery.put("purchaseOrder_id",purchaseOrderId);
+//        PurchaseOrderGroup purchaseOrderGroup = (PurchaseOrderGroup) baseManager.listObject(xQuery).get(0);
+        PurchaseOrderGroup purchaseOrderGroup = (PurchaseOrderGroup) baseManager.getObject(PurchaseOrderGroup.class.getName(),purchaseOrderId);
+        String memberId = purchaseOrderGroup.getGroupMember().getId();
+        String groupId = purchaseOrderGroup.getMyGroup().getId();
+        String groupProductId = purchaseOrderGroup.getMyGroup().getGroupProduct().getId();
+        return "redirect:Http://a.efeiyi.com/group/shareGroup?memberId="+memberId+"&groupId="+groupId+"&groupProductId="+groupProductId+"&purchaseOrderId="+purchaseOrderId+"";
+    }
     /**
      * 获取物流信息
      *

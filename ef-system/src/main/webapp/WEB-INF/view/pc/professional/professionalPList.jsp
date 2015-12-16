@@ -18,20 +18,20 @@
     <title></title>
     <script>
         function removeProfessional(professionalId){
-            jQuery.ajax({
+            $.ajax({
                 type:"GET",
-                url:'<c:url value="/basic/xmj.do?qm=removeProfessional"/>',
+                url:'<c:url value="/professional/removeProfessional.do"/>',
                 data:{id:professionalId},
                 dataType:"json",
                 success:function(data){
-                    $("#"+professionalId).remove();
+                    $("#"+data).remove();
                 }
             });
         }
     </script>
 </head>
 <body>
-<div class="admin-content">
+<div class="">
     <div class="am-g">
         <div style="text-align: left;margin-left: 10px;">
 <security:authorize ifAnyGranted="admin,operational,c_operational">

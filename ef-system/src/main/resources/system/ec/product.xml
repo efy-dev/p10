@@ -106,10 +106,10 @@
                         <condition name="project.id" defaultValue="0" operation="eq"/>
                     </query>
                     <query name="default1" label="项目管理产品" type="auto" orderBy="id:desc">
-                        <condition name="project.id" defaultValue="1" operation="eq"/>
+                        <condition label="status" name="status" defaultValue="1"  operation="eq"/>
+                        <condition label="project.id" name="project.id" defaultValue="1" operation="eq"/>
                     </query>
-                </do>
-                <do name="listProduct" label="产品列表" access="" result="/product/productList">
+
                     <query name="default2" label="默认" type="auto" orderBy="id:desc">
                         <condition label="产品序列" name="status" defaultValue="0" operation="ne"/>
                     </query>

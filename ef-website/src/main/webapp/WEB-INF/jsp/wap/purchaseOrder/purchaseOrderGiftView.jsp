@@ -7,6 +7,29 @@
     <script>
         var gobackUrl = "<c:url value="/product/productModel/${order.purchaseOrderProductList.get(0).productModel.id}"/>"
     </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>${order.giftGaverName}送您礼物了，快快点击去收礼吧</title>
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+    <!-- No Baidu Siteapp-->
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileColor" content="#0e90d2">
+    <img src="http://pro.efeiyi.com/${order.purchaseOrderProductList.get(0).productModel.productModel_url}@!wap-product-pic" style="position: absolute;left: 0;top: -1000px;width: 100%">
 </head>
 <body>
 <!--//End--header-->
@@ -35,7 +58,7 @@
     <!-- //End-->
     <div class="car-state ae">
         <div class="btb"><h5>礼物状态</h5><span id="giftStatus"><c:if test="${order.orderStatus=='6'}">未收礼</c:if> <c:if
-                test="${order.orderStatus=='5'}">已收礼</c:if></span></div>
+                test="${order.orderStatus!='6'&&order.orderStatus!='1'}">已收礼</c:if></span></div>
         <c:if test="${order.orderStatus=='6'}">
             <div class="btb"><h5>送礼说明</h5></div>
             <div class="btb-text ae">
@@ -46,7 +69,7 @@
         </c:if>
     </div>
     <c:if test="${order.orderStatus!='6'}">
-    <div class="car-fx" id="giftButton" style="display: none">
+    <div class="car-fx" id="giftButton">
         </c:if>
         <c:if test="${order.orderStatus=='6'}">
         <div class="car-fx" id="giftButton">

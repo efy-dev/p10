@@ -63,12 +63,16 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
         System.out.println("loadUserByUsername");
+        MyUser myUser = null;
+        try {
+        byte[] b = username.getBytes("ISO-8859-1");
+        username = new String(b,"UTF-8");
         String queryStr = "SELECT u FROM MyUser u WHERE u.username=:username AND u.status != 0";
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("username", username);
         System.out.println("username is " + username);
-        MyUser myUser = null;
-        try {
+
+
             myUser =  userDao.getUniqueMyUserByConditions(username, queryStr, queryParamMap);
         }catch (Exception e){
             e.printStackTrace();

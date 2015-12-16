@@ -11,7 +11,7 @@
 <%
     if (AuthorizationUtil.getMyUser().getId() == null) {
 %>
-<c:if test="${request!='/purchaseOrder/receiveGift'}">
+<c:if test="${request!='/purchaseOrder/receiveGift'&&request!='/purchaseOrder/giftView'}">
 <div class="login-reg">
     <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
     <a id="signin"
@@ -23,7 +23,7 @@
 <%
     }
 %>
-<c:if test="${request!='/purchaseOrder/receiveGift'}">
+<c:if test="${request!='/purchaseOrder/receiveGift'&&request!='/purchaseOrder/giftView'}">
 <footer class="footer-new">
     <div class="bd authentication">
         <h3>战略合作伙伴</h3>

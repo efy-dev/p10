@@ -651,3 +651,109 @@ function deleteFile(attachmentId) {
     });
 }
 
+
+//zero using
+m8uDialog.openDialog2zero = function (artDialogLogId, artDialogLogName, type, basePath) {
+    var modalTitle = "";
+    var url = basePath;
+    var url2 = "";
+    if (type == 'productModel') {       /*所有商品*/
+        url = url + '/gift/productModel/list/json';
+        url2 = basePath + '/gift/productModelLikesProductName/list/json?name=';
+        modalTitle = '选择商品';
+        dialog2zero(url, artDialogLogId, artDialogLogName, modalTitle, url2);
+    }
+    /*else if (type == 'user') {       /!*所有用户*!/
+     url = url + '/gift/user/list/json';
+     url2 = basePath + '/gift/userLikesName/list/json?name=';
+     modalTitle = '选择用户';
+     dialog1(url, artDialogLogId, artDialogLogName, modalTitle, url2);
+     }*/
+};
+
+function dialog2zero(url, artDialogLogId, artDialogLogName, modalTitle,url2) {
+    var modalStart = "<div class=\"am-modal am-modal-no-btn\" id=\"modalSelect\">" +
+        "<div class=\"am-modal-dialog\">" +
+        "<div class=\"am-modal-hd\">" + modalTitle +
+        "<span data-am-modal-close class=\"am-close\">&times;</span>" +
+        "</div>" +
+        "<div>" +
+        "<label>名&nbsp;&nbsp;称: &nbsp;</label>"+
+        "<input type=\"text\" id=\"modalName\" placeholder=\"名称\">"+
+        "<input type=\"button\" onclick=\"selectPS2zero('"+artDialogLogId+"','"+artDialogLogName+"','"+url2+"')\" value=\"查询\">"+
+        "</div>"+
+        "<div class=\"am-modal-bd\"> "+
+        "<div id=\"selectItemDiv\" style=\"height: 200px;overflow-y: auto\">";
+    var modalEnd = "</div></div> </div> </div>";
+    var modalContent = "";
+    console.log($("#modalSelect").attr("id"));
+    $.ajax({
+        type: "post",
+        url: url,
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                modalContent += "<div class=\"am-u-md-4\">" +
+                    "<a href=\"javascript:void(0);\" onclick=\"choose2zero(this,'"+artDialogLogId+"','"+artDialogLogName+"')\" name=\""+data[i].name +"\" id=\""+data[i].id+"\">"+data[i].name+"</a>"+
+                    "</div>";
+            }
+            if(data.length == 0){
+                modalContent = "<div style='color: red'>没有您需要的信息!</div>";
+            }
+            var out = modalStart + modalContent + modalEnd;
+            if (typeof $("#modalSelect").attr("id") != "undefined") {
+                var modalDiv = document.getElementById("modalSelect");
+                modalDiv.parentNode.removeChild(modalDiv);
+            }
+            $("body").append(out);
+            $("#modalSelect").modal({
+                width: 500, height: 300
+            });
+        }
+    });
+}
+
+var selectPS2zero=function(artDialogLogId, artDialogLogName, url){
+    var name = $("#modalName").val();
+    var modalContent = "";
+    var newUrl = encodeURI(url+name);
+    $.ajax({
+        type: "post",
+        url: newUrl,
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                modalContent += "<div class=\"am-u-md-4\">" +
+                    "<a href=\"javascript:void(0);\" onclick=\"choose2zero(this,'"+artDialogLogId+"','"+artDialogLogName+"')\" name=\""+data[i].name+"\" id=\""+data[i].id+"\">"+data[i].name+"</a>" +
+                    "</div>";
+            }
+            if(data.length == 0){
+                modalContent = "<div style='color: red'>没有您需要的信息!</div>";
+            }
+            $("#selectItemDiv").html(modalContent);
+        }
+    });
+};
+
+function choose2zero(element, artDialogLogId, artDialogLogName) {
+    $("#" + artDialogLogId).attr("value", $(element).attr("id"));
+    $("#modalSelect").modal('close');
+    $("#" + artDialogLogName).attr("value", $(element).attr("name"));
+}
+
+function afterSubmitForm2zero(formId){
+    var form2 = document.getElementById(formId);
+    var a = form2.elements.length;//所有的控件个数
+    for (var j=0;j<a;j++){
+        if(form2.elements[j].required){
+            if(form2.elements[j].value=="" || form2.elements[j].value==null){
+                alert(form2.elements[j].title + "不能为空");
+                form2.elements[j].focus();
+                return false;
+            }
+        }
+    }
+    return true;
+}

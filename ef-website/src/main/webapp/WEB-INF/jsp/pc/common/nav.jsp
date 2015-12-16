@@ -26,8 +26,15 @@
             %>
             <li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>
             <li>
-                <a href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do"
-                   title="快速注册">快速注册</a></li>
+            <li><a id="register" href="#" onclick="ga('send', 'event', {
+                                                      'eventCategory': '按钮点击',
+                                                      'eventAction': '点击注册',
+                                                      'eventLabel': '导航条注册',
+                                                      'eventValue': 1,
+                                                      'hitCallback': function () {
+                                                        window.location.href= 'http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do';
+                                                      }
+                                                      });" title="快速注册">快速注册</a></li>
             <%
                 }
             %>
@@ -46,7 +53,7 @@
 <!-- //End--topbar-->
 <div class="header-new wh">
     <div class="hd">
-        <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
+        <div class="logo"><a class="icon" href="http://www.efeiyi.com" title="e飞蚁-爱非遗"></a></div>
         <form action="<c:url value='/search.do'/>" method="get">
             <input type="text" class="txt" placeholder="" name="q" id="q"
                    value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>">

@@ -138,8 +138,8 @@
                 console.log(data);
                 console.log($("#" + cartProductId + "Amount"));
                 $("#" + cartProductId + "Amount").val(data["amount"]);
-                $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
-                $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
+                $("#totalPrice").html(data["cartCatch"]["totalPrice"].toFixed(2));
+                $("#" + cartProductId + "Price").html((data["productModel"]["price"] * data["amount"]).toFixed(2));
             }else{
                 showAlert("提示","商品库存不足!");
             }
@@ -158,8 +158,8 @@
             if(data != null){
                 console.log(data);
                 $("#" + cartProductId + "Amount").val(data["amount"]);
-                $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
-                $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
+                $("#totalPrice").html(data["cartCatch"]["totalPrice"].toFixed(2));
+                $("#" + cartProductId + "Price").html((data["productModel"]["price"] * data["amount"]).toFixed(2));
             }else{
                 showAlert("提示","商品库存不足!");
             }
@@ -177,8 +177,8 @@
         var success = function (data) {
             console.log(data);
             $("#" + cartProductId + "Amount").val(data["amount"]);
-            $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
-            $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
+            $("#totalPrice").html(data["cartCatch"]["totalPrice"].toFixed(2));
+            $("#" + cartProductId + "Price").html((data["productModel"]["price"] * data["amount"]).toFixed(2));
         }
         ajaxRequest("<c:url value="/cart/subtractProductCount.do"/>", param, success, function () {
         }, "post")
