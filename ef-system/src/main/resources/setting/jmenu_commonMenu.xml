@@ -79,10 +79,10 @@
         <jnode url="" id="companyManager" access="admin,manager" state="closed"  text_zh_CN="企业礼品卡管理">
             <jnode url="/basic/xm.do?qm=plistCompanyOrderBatch_default"  access="admin,manager" text_zh_CN="礼品卡批次管理">
                 <match url="/basic/xm.do?qm=formCompanyOrderBatch&amp;company=company"/>
+                <match url="/basic/xm.do?qm=plistPurchaseOrderGift_companyOrderBatch&amp;company=company"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPromotionPlan_default"  access="admin,manager" text_zh_CN="礼品卡订单管理">
-                <match url="/basic/xm.do?qm=formPromotionPlan&amp;company=company"/>
-                <match url="/promotionPlan/getZCLInfo.do"/>
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderGift_companyDefault"  access="admin,manager" text_zh_CN="礼品卡订单管理">
+                <match url="/basic/xm.do?qm=formPromotionPlan&amp;gift=gift"/>
             </jnode>
         </jnode>
     </jnode>
