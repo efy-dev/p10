@@ -16,7 +16,7 @@
 <html>
 <head>
   <title>企业礼品卡批次信息</title>
-  <script type="text/javascript" src="/scripts/function.js"></script>
+  <script type="text/javascript" src="<c:url value="/scripts/function.js"/>"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
