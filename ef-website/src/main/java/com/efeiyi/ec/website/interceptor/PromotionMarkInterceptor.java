@@ -45,7 +45,7 @@ public class PromotionMarkInterceptor extends HandlerInterceptorAdapter {
                         Calendar calendar = Calendar.getInstance();
                         calendar.add(Calendar.DATE, promotionPlan.getRdDays());
                         user.setRdEndDay(calendar.getTime());
-                        baseManager.saveOrUpdate(User.class.getName(), user);
+                        baseManager.saveOrUpdate(MyUser.class.getName(), user);
                     }
                     //只以最后一次点击的返利链接为准,存入Session和Cookie
                     HttpSession session = request.getSession();

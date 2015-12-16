@@ -44,7 +44,7 @@ public class PromotionRegisterSuccessPersistenceInterceptor extends HandlerInter
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.DATE,promotionPlan.getRdDays());
                 user.setRdEndDay(calendar.getTime());
-                baseManager.saveOrUpdate(User.class.getName(), user);
+                baseManager.saveOrUpdate(MyUser.class.getName(), user);
                 request.getSession().removeAttribute("promotionSource");
             }
         }
