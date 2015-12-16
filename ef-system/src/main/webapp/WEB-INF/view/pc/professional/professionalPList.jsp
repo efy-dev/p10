@@ -31,7 +31,7 @@
     </script>
 </head>
 <body>
-<div class="admin-content">
+<div class="">
     <div class="am-g">
         <div style="text-align: left;margin-left: 10px;">
 <security:authorize ifAnyGranted="admin,operational,c_operational">
