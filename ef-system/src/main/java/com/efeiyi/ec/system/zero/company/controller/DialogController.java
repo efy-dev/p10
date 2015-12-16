@@ -50,7 +50,8 @@ public class DialogController {
     @RequestMapping({"/gift/productModelLikesProductName/list/json"})
     public Set<Object> listProductLikesName(HttpServletRequest request) throws Exception{
         String name = request.getParameter("name");
-        return modalServiceManager.getListLikesProductName(name.trim(), "ProductModel", "1");
+        return modalServiceManager.getListLikesName(name.trim(), "ProductModel", "1");
+//        return modalServiceManager.getListLikesProductName(name.trim(), "ProductModel", "1");
     }
 
 //    /**

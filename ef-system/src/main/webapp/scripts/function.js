@@ -726,7 +726,7 @@ var selectPS2zero=function(artDialogLogId, artDialogLogName, url){
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 modalContent += "<div class=\"am-u-md-4\">" +
-                    "<a href=\"javascript:void(0);\" onclick=\"choose(this,'"+artDialogLogId+"','"+artDialogLogName+"')\" name=\""+data[i].name+"\" id=\""+data[i].id+"\">"+data[i].name+"</a>" +
+                    "<a href=\"javascript:void(0);\" onclick=\"choose2zero(this,'"+artDialogLogId+"','"+artDialogLogName+"')\" name=\""+data[i].name+"\" id=\""+data[i].id+"\">"+data[i].name+"</a>" +
                     "</div>";
             }
             if(data.length == 0){
