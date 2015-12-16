@@ -11,28 +11,30 @@
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
-    <title>企业礼品卡批次管理</title>
+    <title>企业礼品卡管理</title>
 </head>
 <body style="height: auto">
-<div style="text-align: left;margin-left: 10px;">
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formCompanyOrderBatch&company=company"/>'"
-           type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
-           value="新建礼品卡批次"/>
-</div>
+<%--<div style="text-align: left;margin-left: 10px;">--%>
+    <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formCompanyOrderBatch&company=company"/>'"--%>
+           <%--type="button" class="am-btn am-btn-default am-btn-xs"--%>
+           <%--style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"--%>
+           <%--value="新建礼品卡批次"/>--%>
+<%--</div>--%>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr style="text-align:left">
-            <td>操作</td>
+            <%--<td>操作</td>--%>
             <td>礼品卡编号</td>
             <td>企业用户</td>
             <td>礼品名称</td>
             <td>礼品数量</td>
+            <td>礼品卡状态</td>
+            <td>礼品卡类型</td>
             <td>创建时间</td>
         </tr>
-        <c:forEach items="${requestScope.pageInfo.list}" var="batch">
+        <c:forEach items="${requestScope.pageInfo.list}" var="gift">
             <tr>
-                <td>
+                <%--<td>
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
                             <c:if test="${batch.status == '1'}">
@@ -53,23 +55,29 @@
                                 </button>
                             </c:if>
                             <c:if test="${batch.status == '2'}">
-                                <button onclick="window.location.href='<c:url
-                                        value="/basic/xm.do?qm=plistPurchaseOrderGift_companyOrderBatch&company=company&conditions=companyOrderBatch.id:${batch.id}"/>'"
+                                <button &lt;%&ndash;onclick="window.location.href='<c:url
+                                        value="/company/saveCompanyOrderGiftList.do?id=${batch.id}"/>'"&ndash;%&gt;
                                         class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                         class="am-icon-edit"></span> 查看礼品卡
                                 </button>
                             </c:if>
                         </div>
                     </div>
+                </td>--%>
+                <td>${gift.serial}</td>
+                <td>${gift.companyOrderBatch.companyName}</td>
+                <td>${gift.companyOrderBatch.productModel.product.name}
+                    <c:if test="${not empty gift.companyOrderBatch.productModel}">[${gift.companyOrderBatch.productModel.name}]</c:if>
                 </td>
-                <td>${batch.serial}</td>
-                <td>${batch.companyName}</td>
-                <td>${batch.productModel.product.name}
-                    <c:if test="${not empty batch.productModel}">[${batch.productModel.name}]</c:if>
-                </td>
-                <td>${batch.amount}</td>
+                <td>1</td>
                 <td>
-                    <fmt:formatDate value="${batch.createDatetime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" checkedValue="${gift.orderStatus}" type="normal"/>
+                </td>
+                <td>
+                    <ming800:status name="orderType" dataType="purchaseOrder.orderType" checkedValue="${gift.orderType}" type="normal"/>
+                </td>
+                <td>
+                    <fmt:formatDate value="${gift.createDatetime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </td>
             </tr>
         </c:forEach>
