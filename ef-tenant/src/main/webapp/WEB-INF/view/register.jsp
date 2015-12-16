@@ -56,6 +56,7 @@
             <div class="items">
                 <p>用户名</p>
                 <input class="ipt" type="text" name="username" id="username" onblur="checkUserName()" placeholder=""  />
+
                 <small name="message" style="color: red;line-height: 22px;"></small>
             </div>
             <div class="items">
