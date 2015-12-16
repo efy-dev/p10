@@ -68,3 +68,7 @@ ADD COLUMN `create_datetime`  date NULL AFTER `red_packet`;
 ALTER TABLE `activity_member`
 MODIFY COLUMN `create_datetime`  datetime NULL DEFAULT NULL AFTER `red_packet`;
 
+alter table activity_seckill_record rename activity_seckill
+
+alter table activity_group_buy rename activity_group
+

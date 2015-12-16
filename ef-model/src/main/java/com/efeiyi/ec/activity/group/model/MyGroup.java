@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Administrator on 2015/10/21.
  */
 @Entity
-@Table(name = "activity_group_buy")
+@Table(name = "activity_group")
 public class MyGroup {
     private String id;
     private GroupProduct groupProduct;//团购商品
