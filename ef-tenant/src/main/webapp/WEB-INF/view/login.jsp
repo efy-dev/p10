@@ -7,7 +7,8 @@
   Time: 10:08
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
+<%request.setCharacterEncoding("UTF-8"); %>
 <html>
 <head>
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/amazeui.min.css?v=20150831"/>" />
