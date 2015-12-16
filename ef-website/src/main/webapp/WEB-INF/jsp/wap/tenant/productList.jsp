@@ -55,10 +55,7 @@
     <!-- //End---->
     <div class="bd list-class">
       <ul class="ul-list-nav ul-list-nav2">
-        <li><a href="#热门分类" title="热门分类">热门分类</a></li>
-        <c:if test="${empty tenantMasterList}">
-          <li><a title="了解大师">了解大师</a></li>
-        </c:if>
+        <li><a href="<c:url value="/productCategoryList.do"/> " title="热门分类">热门分类</a></li>
         <c:if test="${not empty tenantMasterList}">
         <li><a href="http://${tenantMasterList.get(0).master.name}.efeiyi.com" title="了解大师">了解大师</a></li>
        </c:if>
