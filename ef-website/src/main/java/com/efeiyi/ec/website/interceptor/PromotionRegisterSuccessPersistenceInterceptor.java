@@ -39,7 +39,7 @@ public class PromotionRegisterSuccessPersistenceInterceptor extends HandlerInter
 
             //营销返利有效时记录在注册来源
             if (promotionPlan != null && !"0".equals(promotionPlan.getStatus())) {
-                MyUser user = (MyUser) baseManager.getObject(User.class.getName(), request.getParameter("userId"));
+                MyUser user = (MyUser) baseManager.getObject(MyUser.class.getName(), request.getParameter("userId"));
                 user.setSource(promotionSource);
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.DATE,promotionPlan.getRdDays());

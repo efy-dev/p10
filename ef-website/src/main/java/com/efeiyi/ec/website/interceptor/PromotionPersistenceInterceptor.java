@@ -21,6 +21,7 @@ import java.util.LinkedHashMap;
  * 拦截登录，判断用户是否点击过营销返利链接，并记录
  * Created by Administrator on 2015/12/4.
  */
+@Deprecated
 public class PromotionPersistenceInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private BaseManager baseManager;

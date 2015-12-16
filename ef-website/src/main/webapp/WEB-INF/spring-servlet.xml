@@ -37,11 +37,11 @@
            <mvc:exclude-mapping path="/sso2.do"/>
            <bean class="com.efeiyi.ec.website.interceptor.PromotionMarkInterceptor"/>
        </mvc:interceptor>
-       <mvc:interceptor>
-           <mvc:mapping path="/sso.do"/>
-           <mvc:mapping path="/sso2.do"/>
-           <bean class="com.efeiyi.ec.website.interceptor.PromotionPersistenceInterceptor"/>
-       </mvc:interceptor>
+       <!--<mvc:interceptor>-->
+           <!--<mvc:mapping path="/sso.do"/>-->
+           <!--<mvc:mapping path="/sso2.do"/>-->
+           <!--<bean class="com.efeiyi.ec.website.interceptor.PromotionPersistenceInterceptor"/>-->
+       <!--</mvc:interceptor>-->
        <mvc:interceptor>
            <mvc:mapping path="/registerSuccess.do"/>
            <bean class="com.efeiyi.ec.website.interceptor.PromotionRegisterSuccessPersistenceInterceptor"/>
