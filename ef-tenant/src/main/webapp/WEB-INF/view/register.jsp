@@ -49,9 +49,9 @@
         </div>
         <form action="<c:url value="/sign/Register.do"/>" method="post" id="form">
         <div class="radio">
-            <span class="t1"><input name="tenantType" value="13" type="radio">企业</span>
+            <span class="t1"><input name="tenantType" value="11" type="radio">企业</span>
             <span class="t2"><input name="tenantType" value="12" type="radio">个体</span>
-            <span class="t3"><input name="tenantType" value="11" type="radio">个人</span>
+            <span class="t3"><input name="tenantType" value="13" type="radio">个人</span>
         </div>
             <div class="items">
                 <p>用户名</p>
