@@ -54,7 +54,7 @@ public class PurchaseOrder {
     private String receiverName;//收货人姓名
     private String receiverPhone;//收货人联系方式
     private String callback; //回调
-    private String orderType; // 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型
+    private String orderType; // 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型 5.企业礼品卡类型
 //    private PromotionPlan sourcePromotion;//来源推广渠道
 
     @Column(name = "callback")
