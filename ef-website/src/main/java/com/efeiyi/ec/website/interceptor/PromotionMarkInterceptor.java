@@ -49,7 +49,7 @@ public class PromotionMarkInterceptor extends HandlerInterceptorAdapter {
                     //只以最后一次点击的返利链接为准,存入Session和Cookie
                     HttpSession session = request.getSession();
                     session.setAttribute("source", promotionSource);
-                    CookieTool.addCookie(response, "source", promotionSource, promotionPlan.getRdDays() * 86400);
+                    CookieTool.addCookie(response, "source", promotionSource, promotionPlan.getRdDays() * 86400,"www.efeiyi.com");
                 }
             }
         }

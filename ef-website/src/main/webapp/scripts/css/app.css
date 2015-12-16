@@ -780,6 +780,7 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 .nav-new a:hover{text-decoration: none}
 .nav-new .hd {
     position: relative;
+    height:45px;
 }
 .nav-new .cate {
     width: 180px;

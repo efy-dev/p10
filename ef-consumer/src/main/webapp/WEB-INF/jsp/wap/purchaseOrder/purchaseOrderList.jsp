@@ -149,7 +149,7 @@
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '9'}">
 									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-									<a href="<c:url value="/comment/finishOrder.do?orderId=${purchaseOrder.id}"/>">去&nbsp;评&nbsp;价</a>
+									<a href="<c:url value="/comment/mobileFinishOrder.do?orderId=${purchaseOrder.id}"/>">去&nbsp;评&nbsp;价</a>
 								</c:when>
 							</c:choose>
 							<c:choose>
@@ -222,7 +222,7 @@
 									</c:when>
 									<c:when test="${purchaseOrder.orderStatus == '9'}">
 										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-										<a href="<c:url value="/comment/finishOrder.do?orderId=${spList.id}"/>">去&nbsp;评&nbsp;价</a>
+										<a href="<c:url value="/comment/mobileFinishOrder.do?orderId=${spList.id}"/>">去&nbsp;评&nbsp;价</a>
 									</c:when>
 								</c:choose>
 								<c:choose>

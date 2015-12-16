@@ -1115,7 +1115,7 @@ a:hover { text-decoration: underline }
 .efeiyi-col-box .add{opacity: 0.5;}
 
 
-    /*诚信保证*/
+/*诚信保证*/
 .integrity-2015{width:1000px;margin: 0 auto 160px;}
 .integrity-2015 .h1{text-align: center;font-size: 25px;color: #000;margin: 64px 0 80px 0;}
 .integrity-2015 .h2{font-size: 20px;color: #000;}
@@ -1258,9 +1258,9 @@ a:hover { text-decoration: underline }
 .nav-new-list{border-bottom: 0}
 .nav-new-list .hd{border-bottom: 3px solid #000;}
 /*店铺检索-搜索*/
-.homenew .deduce .list-bottom li .mask{background: url("../upload/line-1.png") repeat-y;z-index: 4;width:239px;height: 134px;position: absolute;left: 0;top: 0;opacity: 1;}
-.homenew .max-cat .category .cat-right li .mask{background: url("../upload/line-1.png") repeat-y;z-index: 4;width:220px;height: 177px;position: absolute;left: 0;top: 0;opacity: 1;}
-.classify .items .img-small a .mask{background: url("../upload/line-1.png") repeat-y;z-index: 4;width:220px;height: 177px;position: absolute;left: 0;top: 0;opacity: 1;}
+.homenew .deduce .list-bottom li .mask{background: url("../images/line-1.png") repeat-y;z-index: 4;width:239px;height: 134px;position: absolute;left: 0;top: 0;opacity: 1;}
+.homenew .max-cat .category .cat-right li .mask{background: url("../images/line-1.png") repeat-y;z-index: 4;width:220px;height: 177px;position: absolute;left: 0;top: 0;opacity: 1;}
+.classify .items .img-small a .mask{background: url("../images/line-1.png") repeat-y;z-index: 4;width:220px;height: 177px;position: absolute;left: 0;top: 0;opacity: 1;}
 .homenew .max-cat .category .cat-right li a{width: 100%;float: left}
 .seek{float: right;margin:4px 36px 4px 0;}
 .seek .s-text{width: 211px;height: 30px;float: left;padding:8px 14px;font-size: 12px;color: #999;}

@@ -19,7 +19,7 @@
 
 </head>
 <body>
-<div class="admin-content">
+<div class="">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
