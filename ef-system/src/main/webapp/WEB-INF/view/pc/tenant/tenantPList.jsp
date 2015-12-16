@@ -105,7 +105,7 @@
                                         </c:if>
                                         <c:if test="${tenant.review=='1' || empty tenant.review}">
                                             <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                               href="<c:url value="/basic/xm.do?qm=formTenantReview&tenantId=${tenant.id}&review=3"/>" >
+                                               href="<c:url value="/basic/xm.do?qm=formTenantReview&tenantId=${tenant.id}&review=1"/>" >
                                                 <span class="am-icon-heart">未审核</span>
                                             </a>
                                         </c:if>
@@ -117,7 +117,7 @@
                                         </c:if>
                                         <c:if test="${tenant.review=='2'}">
                                             <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                               href="<c:url value="/basic/xm.do?qm=formTenantReview&tenantId=${tenant.id}&review=3"/>" >
+                                               href="<c:url value="/basic/xm.do?qm=formTenantReview&tenantId=${tenant.id}&review=2"/>" >
                                                 <span class="am-icon-heart">开始审核</span>
                                             </a>
                                         </c:if>
