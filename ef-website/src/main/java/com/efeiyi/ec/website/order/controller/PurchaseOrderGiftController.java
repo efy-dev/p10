@@ -267,6 +267,7 @@ public class PurchaseOrderGiftController {
         purchaseOrderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //订单改为未发货状态
         baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
         model.addAttribute("purchaseOrder", purchaseOrderGift);
+        model.addAttribute("request", "/purchaseOrder/giftView");
         return "/purchaseOrder/giftView";
     }
 
