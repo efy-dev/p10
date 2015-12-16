@@ -75,6 +75,7 @@
                         <item label="秒杀" value="2"/>
                         <item label="礼品券" value="3"/>
                         <item label="团购" value="4"/>
+                        <item label="企业礼品卡" value="5"/>
                     </statusType>
                 </field>
 

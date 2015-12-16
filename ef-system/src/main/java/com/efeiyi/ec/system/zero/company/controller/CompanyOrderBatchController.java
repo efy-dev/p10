@@ -39,9 +39,9 @@ public class CompanyOrderBatchController {
         }
         companyOrderBatchServiceManager.buildOrderGiftSetByCompanyOrderBatch(companyOrderBatch);
 
-//        companyOrderBatch.setStatus("2");
-//        baseManager.saveOrUpdate(CompanyOrderBatch.class().getName(), companyOrderBatch);
-        return new ModelAndView("redirect:/basic/xm.do?qm=plistCompanyOrderBatch_default");
+        companyOrderBatch.setStatus("2");
+        baseManager.saveOrUpdate(CompanyOrderBatch.class.getName(), companyOrderBatch);
+        return new ModelAndView("redirect:/basic/xm.do?qm=plistPurchaseOrderGift_companyOrderBatch&company=company&conditions=companyOrderBatch.id:" + companyOrderBatch.getId());
     }
 
 }

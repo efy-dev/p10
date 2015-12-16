@@ -36,7 +36,7 @@ public class DialogController {
      */
     @RequestMapping({"/gift/productModel/list/json"})
     public List listProduct(Model model, HttpServletRequest request) throws Exception{
-        XQuery xQuery = new XQuery("listProductModel_default", request);
+        XQuery xQuery = new XQuery("listProductModel_companyDefault", request);
         return baseManager.listObject(xQuery);
 //        return modalServiceManager.getListProductModel();
     }
@@ -53,28 +53,28 @@ public class DialogController {
         return modalServiceManager.getListLikesProductName(name.trim(), "ProductModel", "1");
     }
 
-    /**
-     * 获取所有用户
-     * @param request request
-     * @return list
-     * @throws Exception
-     */
-    @RequestMapping({"/gift/user/list/json"})
-    public List listUser(HttpServletRequest request) throws Exception{
-        XQuery xQuery = new XQuery("listUser_default", request);
-        return baseManager.listObject(xQuery);
-    }
-
-    /**
-     * 根据用户名称获取企业用户
-     * @param request request
-     * @return set
-     * @throws Exception
-     */
-    @RequestMapping({"/gift/userLikesName/list/json"})
-    public Set<Object> listUserLikesName(HttpServletRequest request) throws Exception{
-        String username = request.getParameter("name");
-        return modalServiceManager.getListLikesName(username.trim(), "User", "3");
-    }
+//    /**
+//     * 获取所有用户
+//     * @param request request
+//     * @return list
+//     * @throws Exception
+//     */
+//    @RequestMapping({"/gift/user/list/json"})
+//    public List listUser(HttpServletRequest request) throws Exception{
+//        XQuery xQuery = new XQuery("listUser_default", request);
+//        return baseManager.listObject(xQuery);
+//    }
+//
+//    /**
+//     * 根据用户名称获取企业用户
+//     * @param request request
+//     * @return set
+//     * @throws Exception
+//     */
+//    @RequestMapping({"/gift/userLikesName/list/json"})
+//    public Set<Object> listUserLikesName(HttpServletRequest request) throws Exception{
+//        String username = request.getParameter("name");
+//        return modalServiceManager.getListLikesName(username.trim(), "User", "3");
+//    }
 
 }

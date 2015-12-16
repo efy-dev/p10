@@ -21,8 +21,24 @@
         <entity name="PCProductModel" label="礼品" model="com.efeiyi.ec.product.model.ProductModel">
             <does>
                 <do name="listProductModel" access="" label="礼品列表">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="companyDefault" label="默认" type="auto" orderBy="id:desc">
                         <condition name="product.status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="PCPurchaseOrderGift" label="企业礼品卡" model="com.efeiyi.ec.purchase.model.PurchaseOrderGift">
+            <does>
+                <do name="plistPurchaseOrderGift" access="" label="企业礼品卡分页列表" result="/zero/company/companyOrderGiftPList">
+                    <query name="companyDefault" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="orderType" defaultValue="5" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                    <query name="companyOrderBatch" label="礼品卡批次" type="auto" orderBy="id:desc">
+                        <condition name="orderType" defaultValue="5" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="companyOrderBatch.id" defaultValue="" operation="eq"/>
                     </query>
                 </do>
             </does>
