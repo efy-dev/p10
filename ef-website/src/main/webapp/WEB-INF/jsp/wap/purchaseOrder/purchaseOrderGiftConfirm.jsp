@@ -82,6 +82,7 @@
                 <div class="money">
                     <em>${productModel.price}</em>
                     <i>元</i>
+                    <i>X ${amount}</i>
                 </div>
             </div>
         </div>
