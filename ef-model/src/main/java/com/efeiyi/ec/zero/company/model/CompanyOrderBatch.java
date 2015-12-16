@@ -55,7 +55,7 @@ public class CompanyOrderBatch {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productModel_id")
+    @JoinColumn(name = "product_model_id")
     public ProductModel getProductModel() {
         return productModel;
     }
