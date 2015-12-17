@@ -39,7 +39,7 @@ public class PurchaseOrder {
     private Date createDatetime;       //下单时间
     private User user;
     private ConsumerAddress consumerAddress;  //收获地址
-    private String status;
+    private String status;//0假删 1正常 2企业礼品卡  9虚拟订单
     private BigDecimal total;  //订单总价
     private BigDecimal originalPrice; //订单原价
     private String orderStatus; //订单状态
