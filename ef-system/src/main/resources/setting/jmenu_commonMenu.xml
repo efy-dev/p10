@@ -73,7 +73,8 @@
         <jnode url="" id="rebateManager" access="admin,manager" state="closed"  text_zh_CN="返利管理">
             <jnode url="/basic/xm.do?qm=plistPromotionPlan_default"  access="admin,manager" text_zh_CN="返利列表">
                 <match url="/basic/xm.do?qm=formPromotionPlan&amp;rebate=rebate"/>
-                <match url="/promotionPlan/getZCLInfo.do"/>
+                <match url="/promotionPlan/getRegisterCountInfo.do?rebate=rebate"/>
+                <match url="/promotionPlan/getOrderCountInfo.do?rebate=rebate"/>
             </jnode>
         </jnode>
         <jnode url="" id="companyManager" access="admin,manager" state="closed"  text_zh_CN="企业礼品卡管理">
@@ -83,6 +84,12 @@
             </jnode>
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderGift_companyDefault"  access="admin,manager" text_zh_CN="企业礼品卡列表">
                 <!--<match url="/basic/xm.do?qm=formPromotionPlan&amp;gift=gift"/>-->
+            </jnode>
+        </jnode>
+        <jnode url="" id="giftOrderManager" access="admin,manager" state="closed"  text_zh_CN="礼品订单批量管理">
+            <jnode url="/basic/xm.do?qm=plistBatchGift_default"  access="admin,manager" text_zh_CN="大礼包">
+                <match url="/basic/xm.do?qm=plistBatchGift"/>
+                <match url="/basic/xm.do?qm=listBatchGift"/>
             </jnode>
         </jnode>
     </jnode>
