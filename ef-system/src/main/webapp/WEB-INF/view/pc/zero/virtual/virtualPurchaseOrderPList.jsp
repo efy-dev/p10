@@ -30,7 +30,6 @@
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr style="text-align:left">
             <td>操作</td>
-            <td>订单编号</td>
             <td>用户</td>
             <td>商品编号</td>
             <td>商品名称</td>
@@ -56,7 +55,6 @@
                         </div>
                     </div>
                 </td>
-                <td>${pop.purchaseOrder.serial}</td>
                 <td>${pop.purchaseOrder.user.username}</td>
                 <td>${pop.productModel.serial}</td>
                 <td>${pop.productModel.name}</td>
@@ -72,6 +70,7 @@
 <div style="clear: both">
     <c:url value="/virtualPlan/getTypeObjectList.do" var="url"/>
     <ming800:pcPageList bean="${pageEntity}" url="${url}">
+        <ming800:pcPageParam name="virtual" value="virtual"/>
         <ming800:pcPageParam name="id" value="${planId}"/>
         <ming800:pcPageParam name="type" value="${objectType}"/>
     </ming800:pcPageList>

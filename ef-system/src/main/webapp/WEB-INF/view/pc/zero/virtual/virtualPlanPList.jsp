@@ -15,7 +15,7 @@
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;">
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formVirtualPlan&VirtualPlan=VirtualPlan"/>'"
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formVirtualPlan&virtual=virtual"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="新建虚拟数据批次"/>
@@ -33,6 +33,7 @@
             <td>起始时间</td>
             <td>终止时间</td>
             <td>任务状态</td>
+            <td>创建时间</td>
         </tr>
         <c:forEach items="${VPEList}" var="vpe">
             <tr>
@@ -40,7 +41,7 @@
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
                             <button onclick="window.location.href='<c:url
-                                    value="/basic/xm.do?qm=formVirtualPlan&VirtualPlan=VirtualPlan&id=${vpe.virtualPlan.id}"/>'"
+                                    value="/basic/xm.do?qm=formVirtualPlan&virtual=virtual&id=${vpe.virtualPlan.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                     class="am-icon-edit"></span> 编辑
                             </button>
@@ -50,12 +51,12 @@
                                     class="am-icon-trash-o"></span> 删除
                             </button>
                             <button onclick="window.location.href='<c:url
-                                    value="/pausePlan.do?id=${vpe.virtualPlan.id}&resultPage=/basic/xm.do?qm=plistVirtualPlan_default"/>'"
+                                    value="/virtualPlan/pausePlan.do?id=${vpe.virtualPlan.id}&resultPage=/basic/xm.do?qm=plistVirtualPlan_default"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                     class="am-icon-edit"></span> 暂停任务
                             </button>
                             <button onclick="window.location.href='<c:url
-                                    value="/startPlan.do?id=${vpe.virtualPlan.id}&resultPage=/basic/xm.do?qm=plistVirtualPlan_default"/>'"
+                                    value="/virtualPlan/startPlan.do?id=${vpe.virtualPlan.id}&resultPage=/basic/xm.do?qm=plistVirtualPlan_default"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                     class="am-icon-trash-o"></span> 开始任务
                             </button>
@@ -63,7 +64,7 @@
                     </div>
                 </td>
                 <td>
-                    <a href="<c:url value="/virtualPlan/getTypeObjectView.do?id=${vpe.virtualPlan.id}&type=${vpe.type}"/>">${vpe.virtualPlan.serial}</a>
+                    <a href="<c:url value="/virtualPlan/getTypeObjectView.do?virtual=virtual&id=${vpe.virtualPlan.id}&type=${vpe.type}"/>">${vpe.virtualPlan.serial}</a>
                 </td>
                 <td>
                     <ming800:status name="status" dataType="PCVirtualPlan.planType" checkedValue="${vpe.virtualPlan.planType}"
@@ -71,7 +72,7 @@
                 </td>
                 <td><%--关联数量--%>${vpe.relation}</td>
                 <td><%--已完成数量--%><%--${vpe.complete}--%>
-                    <a href="<c:url value="/virtualPlan/getTypeObjectList.do?id=${vpe.virtualPlan.id}&type=${vpe.type}"/>">${vpe.complete}</a>
+                    <a href="<c:url value="/virtualPlan/getTypeObjectList.do?virtual=virtual&id=${vpe.virtualPlan.id}&type=${vpe.type}"/>">${vpe.complete}</a>
                 </td>
                 <td><%--起始日期--%>${vpe.virtualPlan.startDate}
                     <%--<fmt:formatDate value="${plan.startDate}" pattern="yyyy-MM-dd"/>--%>
@@ -88,6 +89,9 @@
                 <td>
                     <ming800:status name="status" dataType="PCVirtualPlan.status" checkedValue="${vpe.virtualPlan.status}"
                                     type="normal"/>
+                </td>
+                <td>
+                    <fmt:formatDate value="${vpe.virtualPlan.createDatetime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </td>
             </tr>
         </c:forEach>

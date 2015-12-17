@@ -30,6 +30,7 @@ import java.util.List;
  */
 
 @Controller
+@RequestMapping("/virtualPlan")
 public class VirtualPlanController {
 
     @Autowired
@@ -64,7 +65,7 @@ public class VirtualPlanController {
         modelMap.addAttribute(virtualPlan);
         return new ModelAndView("redirect:" + request.getParameter("resultPage"),modelMap);
     }
-    @RequestMapping("/virtualPlan/getTypeObjectList.do")
+    @RequestMapping("/getTypeObjectList.do")
     public ModelAndView getTypeObjectList(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
         //虚拟计划Id
@@ -105,7 +106,7 @@ public class VirtualPlanController {
         return new ModelAndView("redirect:/basic/xm.do?qm=plistVirtualPlan_default");
     }
 
-    @RequestMapping("/virtualPlan/getTypeObjectView.do")
+    @RequestMapping("/getTypeObjectView.do")
     public ModelAndView getTypeObjectView(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
         //虚拟计划Id
@@ -138,7 +139,7 @@ public class VirtualPlanController {
         return new ModelAndView("redirect:/basic/xm.do?qm=plistVirtualPlan_default");
     }
 
-    @RequestMapping("/virtualPlan/saveVirtualUser.do")
+    @RequestMapping("/saveVirtualUser.do")
     public ModelAndView saveVirtualUser(VirtualUserPlan virtualUserPlan) throws Exception{
         baseManager.delete(VirtualPlan.class.getName(), virtualUserPlan.getId());
         virtualUserPlan.setImplementClass("com.efeiyi.jh.model.task.VirtualUserGenerator");
@@ -155,7 +156,7 @@ public class VirtualPlanController {
         pageEntity.setCount(virtualOrderPlan.getVirtualPurchaseOrderList().size());
         modelMap.put("popList", popList);
 
-        return new ModelAndView("/virtualPlan/virtualPurchaseOrderPList");
+        return new ModelAndView("/zero/virtual/virtualPurchaseOrderPList");
     }
 
     private ModelAndView virtualUserList(ModelMap modelMap) throws Exception{
@@ -166,7 +167,7 @@ public class VirtualPlanController {
         pageEntity.setCount(virtualUserPlan.getVirtualUserList().size());
         modelMap.put("vUserList", vUserList);
 
-        return new ModelAndView("/virtualPlan/virtualUserPList");
+        return new ModelAndView("/zero/virtual/virtualUserPList");
     }
 
     private ModelAndView virtualUserView(ModelMap modelMap) throws Exception{
@@ -176,7 +177,7 @@ public class VirtualPlanController {
         BeanUtils.copyProperties(virtualUserPlan, virtualPlan);
         modelMap.put("object", virtualUserPlan);
 
-        return new ModelAndView("/virtualPlan/user/virtualPlanUserView");
+        return new ModelAndView("/zero/virtual/user/virtualPlanUserView");
     }
 
     private ModelAndView virtualOrderView(ModelMap modelMap) throws Exception{
@@ -185,7 +186,7 @@ public class VirtualPlanController {
         VirtualOrderPlan virtualOrderPlan = new VirtualOrderPlan();
         BeanUtils.copyProperties(virtualOrderPlan, virtualPlan);
         modelMap.put("object", virtualOrderPlan);
-        return new ModelAndView("/virtualPlan/order/virtualPlanOrderView");
+        return new ModelAndView("/zero/virtual/order/virtualPlanOrderView");
     }
 
 }

@@ -37,6 +37,7 @@
 <div style="clear: both">
     <c:url value="/virtualPlan/getTypeObjectList.do" var="url"/>
     <ming800:pcPageList bean="${pageEntity}" url="${url}">
+        <ming800:pcPageParam name="virtual" value="virtual"/>
         <ming800:pcPageParam name="id" value="${planId}"/>
         <ming800:pcPageParam name="type" value="${objectType}"/>
     </ming800:pcPageList>

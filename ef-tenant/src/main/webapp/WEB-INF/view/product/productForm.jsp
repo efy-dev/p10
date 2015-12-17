@@ -24,7 +24,7 @@
 
     <fieldset>
         <legend class="" style="font-size: 17px">商品信息</legend>
-        <form action="<c:url value="/product/saveNewProduct.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">
+        <form action="<c:url value="/product/saveNewProduct.do?view=${view}"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
             <%--<form action="<c:url value="/basic/xm.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">--%>
             <input type="hidden" name="id" value="${object.id}">
             <input type="hidden" name="qm" value="saveOrUpdateProduct">
@@ -82,7 +82,24 @@
                     <!--<small>必填项*</small>-->
                 </div>
             </div>
+                <div class="am-form-group">
+                    <label for="picture_url" class="am-u-sm-3 am-form-label">商品图片(wiki)</label>
 
+                    <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.picture_url}">
+                           <span>
+                             <input type="hidden" name="picture_url" value="${object.picture_url}"/>
+                             <img width="7%" src="http://pro.efeiyi.com/${object.picture_url}@!product-model">
+                             <a href="javascript:void (0);" onclick="delImg(this)">删除</a>
+                           </span>
+                       </c:if>
+                </span>
+                        <input type="file" id="picture_url" name="picture_url1" placeholder="picture_url"
+                               value="${object.picture_url}" >
+                    </div>
+
+                </div>
             <div class="am-form-group">
                 <label name="serial" class="am-u-sm-3 am-form-label">关联商家</label>
 
@@ -308,6 +325,9 @@
     }
 
 
+    function delImg(obj){
+        $(obj).parent().remove();
+    }
 
 </script>
 
