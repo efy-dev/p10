@@ -9,7 +9,6 @@
 
     <mvc:resources mapping="/resources/" location="/resources/**"/>
     <mvc:resources mapping="/scripts/**" location="/scripts/"/>
-    <mvc:resources mapping="/DatePicker/**" location="/DatePicker/"/>
 <!--    <mvc:resources mapping="/scripts/**" location="/scripts/"/>
     <mvc:resources mapping="/images/**" location="/images/"/>
     <mvc:resources mapping="/m8/**" location="/m8/"/>
