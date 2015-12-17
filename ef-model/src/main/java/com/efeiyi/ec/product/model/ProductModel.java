@@ -31,7 +31,8 @@ public class ProductModel implements Serializable {
     private ProductModelDescription productModelDescription;
     private String customProperty;//自定义属性值
     private List<ProductPicture> productPictureList;
-
+    private Integer popularityAmount;
+    private Integer saleAmount;
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
     public List<ProductPicture> getProductPictureList() {
@@ -173,5 +174,22 @@ public class ProductModel implements Serializable {
 
     public void setCustomProperty(String customProperty) {
         this.customProperty = customProperty;
+    }
+
+    @Column(name = "popularity_amount")
+    public Integer getPopularityAmount() {
+        return popularityAmount;
+    }
+
+    public void setPopularityAmount(Integer popularityAmount) {
+        this.popularityAmount = popularityAmount;
+    }
+    @Column(name = "sale_amount")
+    public Integer getSaleAmount() {
+        return saleAmount;
+    }
+
+    public void setSaleAmount(Integer saleAmount) {
+        this.saleAmount = saleAmount;
     }
 }

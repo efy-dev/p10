@@ -62,10 +62,22 @@ public class ProductController {
             sort = sortString.split(":");
         }
         String str = null;
+        int activeFlag = 0;
         if(sort.length>0){
             str = sort[0];
+            switch(sort[1]){
+                case "price": activeFlag = 1;
+                    break;
+                case "popularityAmount": activeFlag = 2;
+                    break;
+                case "saleAmount":  activeFlag = 3;
+                    break;
+                case "product.createDateTime":  activeFlag = 4;
+                    break;
+                default: activeFlag = 0;
+            }
         }
-
+        model.addAttribute("flag",activeFlag);
         xQuery.addRequestParamToModel(model,request);
         List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
         Map<ProductModel,String> map = new HashMap<>();
@@ -200,6 +212,8 @@ public class ProductController {
     @RequestMapping({"/productModel/{productModelId}"})
     public String productDetalis(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+        productModel.setPopularityAmount(productModel.getAmount()+1);
+        baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
         Product product = productModel.getProduct();
         Project project = product.getProject();
         XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);

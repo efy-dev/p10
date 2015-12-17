@@ -40,18 +40,20 @@
   <!-- //End--explain-->
   <div class="shop-sort wh">
       <ul class="link1">
-
-          <li class="active">
-              <c:if test="${str==null}">
+          <li id="price">
+              <c:if test="${str==null||flag==2||flag==3||flag==4}">
               <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格</a>
               </c:if>
-              <c:if test="${str=='desc'}">
+              <c:if test="${flag==1&&str=='desc'}">
               <a href="<c:url value="/product/list/${project.id}?sort=asc:price&pageEntity.index=1"/>" title="价  格">价  格<i class="icon arrow-down"></i></a>
               </c:if>
-              <c:if test="${str=='asc'}">
+              <c:if test="${flag==1&&str=='asc'}">
               <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格<i class="icon arrow-up"></i></a>
                </c:if>
-                  </li>
+          </li>
+          <li id="popularityAmount"> <a href="<c:url value="/product/list/${project.id}?sort=desc:popularityAmount&pageEntity.index=1"/>" title="人  气">人  气</a></li>
+          <li id="saleAmount"><a href="<c:url value="/product/list/${project.id}?sort=desc:saleAmount&pageEntity.index=1"/>" title="销  量">销  量</a></li>
+          <li id="time"><a href="<c:url value="/product/list/${project.id}?sort=desc:product.createDateTime&pageEntity.index=1"/>" title="新  品">新  品</a></li>
       </ul>
   </div>
   <!-- //End--shop-sort-->
@@ -99,5 +101,19 @@
 
 <script href="<c:url value='/scripts/js/amazeui.min.js'/>"></script>
 <script href="<c:url value='/scripts/js/system.js'/>"></script>
+<script>
+    $().ready(function(){
+        var a = ${flag};
+        if(a==1){
+            $('#price').addClass("active")
+        }else if(a==2){
+            $('#popularityAmount').addClass("active")
+        }else if(a==3){
+            $('#saleAmount').addClass("active");
+        }else if(a==4){
+            $('#time').addClass("active");
+        }
+    })
+</script>
 </body>
 </html>
