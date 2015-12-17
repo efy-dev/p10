@@ -27,7 +27,7 @@
   <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=viewTenant&view=tenantList&id=${tenantId}" />
   <input type="hidden" name="tenant.id" value="${tenantId}" />
   <input type="hidden" name="project.id" value="" />
-<div class="admin-content">
+<div class="">
   <div class="am-g">
     <div class="am-u-sm-12">
       <table class="am-table am-table-striped am-table-hover table-main">

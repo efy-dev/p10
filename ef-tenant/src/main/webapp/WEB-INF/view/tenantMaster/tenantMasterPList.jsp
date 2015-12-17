@@ -37,7 +37,7 @@
 
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}&tenantId=${tenantId}"/>
 
-<div class="admin-content">
+<div class="">
     <div class="am-g">
         <input name="tenantId" type="hidden" value="${tenantId}">
         <div class="am-u-sm-12">
