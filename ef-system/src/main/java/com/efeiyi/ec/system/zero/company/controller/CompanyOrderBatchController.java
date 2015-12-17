@@ -64,7 +64,7 @@ public class CompanyOrderBatchController {
 
         companyOrderBatch.setStatus("2");
         baseManager.saveOrUpdate(CompanyOrderBatch.class.getName(), companyOrderBatch);
-        return new ModelAndView("redirect:/basic/xm.do?qm=plistPurchaseOrderGift_companyOrderBatch&company=company&conditions=companyOrderBatch.id:" + companyOrderBatch.getId());
+        return new ModelAndView("redirect:/basic/xm.do?qm=plistPurchaseOrderGift_companyOrderBatch&type=company&conditions=companyOrderBatch.id:" + companyOrderBatch.getId());
     }
 
 }

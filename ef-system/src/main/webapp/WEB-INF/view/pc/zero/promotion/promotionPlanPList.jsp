@@ -58,13 +58,13 @@
                                     checkedValue="${PPE.promotionPlan.name}" type="normal"/>
                 </td>
                 <td>
-                    <a href="<c:url value="/promotionPlan/getZCLInfo.do?id=${PPE.promotionPlan.id}"/>">${PPE.registerCount}</a>
+                    <a href="<c:url value="/promotionPlan/getRegisterCountInfo.do?rebate=rebate&id=${PPE.promotionPlan.id}"/>">${PPE.registerCount}</a>
                 </td>
                 <td>
-                    <a href="<c:url value="/promotionPlan/getDDLInfo.do?id=${PPE.promotionPlan.id}"/>">${PPE.orderCount}</a>
+                    <a href="<c:url value="/promotionPlan/getOrderCountInfo.do?rebate=rebate&id=${PPE.promotionPlan.id}"/>">${PPE.orderCount}</a>
                 </td>
                 <td>${PPE.orderAmount}</td>
-                <td>${PPE.ordePaidAmount}</td>
+                <td>${PPE.orderPaidAmount}</td>
                 <td>
                     <fmt:formatDate value="${PPE.promotionPlan.createDatetime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </td>

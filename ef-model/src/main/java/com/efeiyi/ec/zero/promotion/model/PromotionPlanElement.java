@@ -10,7 +10,7 @@ public class PromotionPlanElement {
     private String registerCount;//注册量
     private String orderCount;//订单数量
     private String orderAmount;//订单总额
-    private String ordePaidAmount;//实付金额
+    private String orderPaidAmount;//实付金额
 
     public PromotionPlan getPromotionPlan() {
         return promotionPlan;
@@ -44,11 +44,11 @@ public class PromotionPlanElement {
         this.orderAmount = orderAmount;
     }
 
-    public String getOrdePaidAmount() {
-        return ordePaidAmount;
+    public String getOrderPaidAmount() {
+        return orderPaidAmount;
     }
 
-    public void setOrdePaidAmount(String ordePaidAmount) {
-        this.ordePaidAmount = ordePaidAmount;
+    public void setOrderPaidAmount(String orderPaidAmount) {
+        this.orderPaidAmount = orderPaidAmount;
     }
 }

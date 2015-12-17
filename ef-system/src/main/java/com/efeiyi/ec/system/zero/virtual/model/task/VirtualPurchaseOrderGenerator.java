@@ -41,8 +41,9 @@ public class VirtualPurchaseOrderGenerator extends BaseTimerTask {
 
         PurchaseOrder purchaseOrder = new PurchaseOrder();
         purchaseOrder.setCreateDatetime(new Date());
-        purchaseOrder.setMessage("虚拟专用");
-        purchaseOrder.setOrderType("虚拟专用");
+//        purchaseOrder.setMessage("虚拟专用");
+//        purchaseOrder.setOrderType("虚拟专用");
+        purchaseOrder.setStatus("9");//虚拟专用
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_FINISHED);
         purchaseOrder.setUser(virtualUser.getUser());
 

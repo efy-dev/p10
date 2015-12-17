@@ -54,7 +54,7 @@
                             </c:if>
                             <c:if test="${batch.status == '2'}">
                                 <button onclick="window.location.href='<c:url
-                                        value="/basic/xm.do?qm=plistPurchaseOrderGift_companyOrderBatch&company=company&conditions=companyOrderBatch.id:${batch.id}"/>'"
+                                        value="/basic/xm.do?qm=plistPurchaseOrderGift_companyOrderBatch&type=company&conditions=companyOrderBatch.id:${batch.id}"/>'"
                                         class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                         class="am-icon-edit"></span> 查看礼品卡
                                 </button>
