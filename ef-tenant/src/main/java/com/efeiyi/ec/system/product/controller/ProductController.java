@@ -25,10 +25,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -177,14 +179,27 @@ public class ProductController extends BaseController {
     public String saveNewProduct(Product product, ProductDescription productDescription,
                                  ProductPicture productPicture, ProductModelBean productModelBean,
                                  HttpServletRequest request,
+                                 MultipartRequest multipartRequest,
                                  String resultPage, Model model, String step) {
 
         model.addAttribute("view", request.getParameter("view"));
 
 
         if ("product".equals(step)) {
-
-
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            String identify = sdf.format(new Date());
+            String url = "";
+            if(multipartRequest.getFile("picture_url1")!=null&&!"".equals(multipartRequest.getFile("picture_url1"))) {
+                if (!multipartRequest.getFile("picture_url1").getOriginalFilename().equals("")) {
+                    url = "product/" + identify + multipartRequest.getFile("picture_url1").getOriginalFilename();
+                    product.setPicture_url(url);
+                    try {
+                        aliOssUploadManager.uploadFile(multipartRequest.getFile("picture_url1"), "ec-efeiyi", url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
             Product temProduct = productManager.saveProduct(product);
             String tenantId = "0";
             String masterId = "0";

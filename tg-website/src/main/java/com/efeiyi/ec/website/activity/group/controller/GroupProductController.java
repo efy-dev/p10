@@ -35,9 +35,9 @@ public class GroupProductController {
     @Autowired
     private AutoSerialManager autoSerialManager;
 
-    @RequestMapping({"/tuan","/tuan.do"})
+    @RequestMapping({"/tuan", "/tuan.do"})
     public String listProduct1(HttpServletRequest request, Model model) throws Exception {
-     return  "/groupProduct/groupProductList";
+        return "/groupProduct/groupProductList";
     }
 
 
@@ -76,31 +76,34 @@ public class GroupProductController {
 
     /**
      * 团购产品列表
+     *
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/product/groupProduct.do/{index}")
     @ResponseBody
-    public List<GroupProduct> listProduct(HttpServletRequest request,@PathVariable String index) throws Exception {
-        XQuery xQuery = new XQuery("listGroupProduct_default",request);
-        xQuery.put("status","1");
+    public List<GroupProduct> listProduct(HttpServletRequest request, @PathVariable String index) throws Exception {
+        XQuery xQuery = new XQuery("listGroupProduct_default", request);
+        xQuery.put("status", "1");
         List<GroupProduct> list = baseManager.listObject(xQuery);
-        for(GroupProduct groupProduct:list){
+        for (GroupProduct groupProduct : list) {
             groupProduct.setProductName(groupProduct.getProductModel().getProduct().getName());
         }
         return list;
     }
+
     /**
      * 开团详情页
+     *
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/product/groupProduct/{groupProductId}")
-    public String groupProductDetails(@PathVariable String groupProductId ,HttpServletRequest request, Model model) throws Exception {
+    public String groupProductDetails(@PathVariable String groupProductId, HttpServletRequest request, Model model) throws Exception {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
-        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
+        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default", request);
         purchaseOrderProductQuery.put("productModel_id", groupProduct.getProductModel().getId());
         List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
         Collections.reverse(purchaseOrderProductList);
@@ -108,17 +111,19 @@ public class GroupProductController {
         model.addAttribute("purchaseOrderProductList", purchaseOrderProductList);
         return "/groupProduct/groupProductDetails";
     }
+
     /**
      * 评价详情
+     *
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/product/groupProduct/purchaseOrderComment/{groupProductId}/{index}")
     @ResponseBody
-    public List<Object> getPurchaseOrderCommentList(@PathVariable String groupProductId ,HttpServletRequest request,@PathVariable String index) throws Exception {
+    public List<Object> getPurchaseOrderCommentList(@PathVariable String groupProductId, HttpServletRequest request, @PathVariable String index) throws Exception {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
-        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
+        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default", request);
         purchaseOrderProductQuery.put("productModel_id", groupProduct.getProductModel().getId());
         PageEntity pageEntity = new PageEntity();
         if (index != null) {
@@ -128,15 +133,16 @@ public class GroupProductController {
         purchaseOrderProductQuery.setPageEntity(pageEntity);
         PageInfo pageInfo = baseManager.listPageInfo(purchaseOrderProductQuery);
         List<Object> list = pageInfo.getList();
-        if(list!=null&&list.size()>0){
-        Collections.reverse(list);
+        if (list != null && list.size() > 0) {
+            Collections.reverse(list);
         }
         return list;
     }
-    @RequestMapping(value = "/product/playDetails")
-    public String returnPlayDetails(HttpServletRequest request, Model model){
 
-        return  "/playDetails";
+    @RequestMapping(value = "/product/playDetails")
+    public String returnPlayDetails(HttpServletRequest request, Model model) {
+
+        return "/playDetails";
     }
 
 }

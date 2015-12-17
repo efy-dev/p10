@@ -40,13 +40,13 @@
                             <img class="img" src="<c:url value="http://pro.efeiyi.com/${product.productModel.productModel_url}@!cart-product-mobile"/>" alt=""/>
 
                             <div class="bd info">
-                                <p class="title">${product.productModel.name}
-                                    <c:if test="${product.productModel.productPropertyValueList.size()>1}">
-                                    [
-                                    <c:forEach items="${product.productModel.productPropertyValueList}"
-                                               var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
-                                    ]
-                                </c:if>
+                                <p class="title">${product.productModel.product.name}[${product.productModel.name}]
+                                    <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
+                                    <%--[--%>
+                                    <%--<c:forEach items="${product.productModel.productPropertyValueList}"--%>
+                                               <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                                    <%--]--%>
+                                <%--</c:if>--%>
                                 </p>
 
                                 <p class="info-opt">
