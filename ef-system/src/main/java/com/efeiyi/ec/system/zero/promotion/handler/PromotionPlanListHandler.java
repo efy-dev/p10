@@ -53,7 +53,7 @@ public class PromotionPlanListHandler implements DoHandler {
 
                 queryParamMap.put("orderStatus", PurchaseOrder.ORDER_STATUS_WRECEIVE);
                 BigDecimal orderPaidAmount = (BigDecimal) baseManager.getUniqueObjectByConditions("select sum(total) from PurchaseOrder x where x.source=:source and orderStatus=:orderStatus", queryParamMap);
-                promotionPlanElement.setOrdePaidAmount(orderPaidAmount == null ? "0.00" : orderPaidAmount.toString());//设置实付金额
+                promotionPlanElement.setOrderPaidAmount(orderPaidAmount == null ? "0.00" : orderPaidAmount.toString());//设置实付金额
 //                if (!pp.getPromotionUserRecordList().isEmpty()){//设置注册量
 //                    promotionPlanElement.setZCL(String.valueOf(pp.getPromotionUserRecordList().size()));
 //                }
@@ -71,7 +71,7 @@ public class PromotionPlanListHandler implements DoHandler {
     private PromotionPlanElement setDDLAndZFEAndSFE(PromotionPlanElement promotionPlanElement, PromotionPlan promotionPlan) throws Exception {
         promotionPlanElement.setOrderCount(promotionPlanManagerService.getDDL(promotionPlan));//设置订单数
         promotionPlanElement.setOrderAmount(promotionPlanManagerService.getZFE(promotionPlan));//设置订单总额
-        promotionPlanElement.setOrdePaidAmount(promotionPlanManagerService.getSFE(promotionPlan));//设置实付金额
+        promotionPlanElement.setOrderPaidAmount(promotionPlanManagerService.getSFE(promotionPlan));//设置实付金额
         return promotionPlanElement;
     }
 
