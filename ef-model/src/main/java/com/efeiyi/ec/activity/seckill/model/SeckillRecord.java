@@ -20,7 +20,7 @@ import java.util.Date;
 //        ;
 
 @Entity
-@Table(name = "activity_seckill_record")
+@Table(name = "activity_seckill")
 public class SeckillRecord {
 
     private String id;

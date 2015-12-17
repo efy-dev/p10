@@ -19,7 +19,7 @@
     </div>
 </div>
 <hr/>
-<c:if test="${review!='4'}">
+<c:if test="${review=='2' || review=='3'}">
 <div class="am-g">
 
 
@@ -57,18 +57,21 @@
     function toSubmitReview(review){
         var tenantId = '${tenantId}';
         var content = $("#content").val();
+        if(content==""){
+            alert("请填写审核意见!");
+        }else {
+            $.ajax({
+                type: "get",
+                url: '<c:url value="/tenant/toSubmitReview.do"/>',
+                cache: false,
+                dataType: "json",
+                data: {tenantId: tenantId, content: content, review: review},
+                success: function (data) {
+                    window.location.href = "<c:url value="/basic/xm.do?qm=formTenantReview&tenantId=" />" + tenantId + "&review=" + data;
 
-        $.ajax({
-            type: "get",
-            url: '<c:url value="/tenant/toSubmitReview.do"/>',
-            cache: false,
-            dataType: "json",
-            data:{tenantId:tenantId,content:content,review:review},
-            success: function (data) {
-                window.location.href="<c:url value="/basic/xm.do?qm=formTenantReview&tenantId=" />"+tenantId+"&review="+data;
-
-            }
-        });
+                }
+            });
+        }
     }
 
 </script>
