@@ -256,6 +256,14 @@
             }
 
         });
+        var card = $("input[name='identity']").val();
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if(card!="") {
+            if (!reg.test(card)) {
+                alert("身份证格式不正确!");
+                f = false;
+            }
+        }
         if(f){
 
             $("form").submit();

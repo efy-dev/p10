@@ -32,7 +32,7 @@ public class PromotionController {
     @Qualifier("promotionPlanManagerImpl")
     private PromotionPlanManagerService promotionPlanManagerService;
 
-    @RequestMapping("/getZCLInfo.do")
+    @RequestMapping("/getRegisterCountInfo.do")
     public ModelAndView getZCLInformation(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String promotionPlanId = request.getParameter("id");
         if (promotionPlanId.isEmpty() || promotionPlanId.trim().equals("")){
@@ -63,7 +63,7 @@ public class PromotionController {
         return new ModelAndView("/zero/promotion/promotionPlanUsersPList");
     }
 
-    @RequestMapping("/getDDLInfo.do")
+    @RequestMapping("/getOrderCountInfo.do")
     public ModelAndView getDDLInformation(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String promotionPlanId = request.getParameter("id");
         if (promotionPlanId.isEmpty() || promotionPlanId.trim().equals("")){
