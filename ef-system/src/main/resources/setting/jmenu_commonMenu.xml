@@ -65,9 +65,9 @@
         </jnode>
         <jnode url="" id="checkManager" access="admin,manager" state="closed"  text_zh_CN="虚拟数据系统">
             <jnode url="/basic/xm.do?qm=plistVirtualPlan_default"  access="admin,manager" text_zh_CN="虚拟数据列表">
-                <match url="/basic/xm.do?qm=formVirtualPlan&amp;VirtualPlan=VirtualPlan"/>
-                <match url="/virtualPlan/getTypeObjectList.do"/>
-                <match url="/virtualPlan/getTypeObjectView.do"/>
+                <match url="/basic/xm.do?qm=formVirtualPlan&amp;virtual=virtual"/>
+                <match url="/virtualPlan/getTypeObjectList.do?virtual=virtual"/>
+                <match url="/virtualPlan/getTypeObjectView.do?virtual=virtual"/>
             </jnode>
         </jnode>
         <jnode url="" id="rebateManager" access="admin,manager" state="closed"  text_zh_CN="返利管理">
@@ -80,10 +80,10 @@
         <jnode url="" id="companyManager" access="admin,manager" state="closed"  text_zh_CN="企业礼品卡管理">
             <jnode url="/basic/xm.do?qm=plistCompanyOrderBatch_default"  access="admin,manager" text_zh_CN="礼品卡批次管理">
                 <match url="/basic/xm.do?qm=formCompanyOrderBatch&amp;company=company"/>
-                <match url="/basic/xm.do?qm=plistPurchaseOrderGift_companyOrderBatch&amp;company=company"/>
+                <match url="/basic/xm.do?qm=plistPurchaseOrderGift_companyOrderBatch&amp;type=company"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderGift_companyDefault"  access="admin,manager" text_zh_CN="企业礼品卡列表">
-                <!--<match url="/basic/xm.do?qm=formPromotionPlan&amp;gift=gift"/>-->
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderGift_companyDefault&amp;type=gift"  access="admin,manager" text_zh_CN="企业礼品卡列表">
+                <match url="/basic/xm.do?qm=plistPurchaseOrderGift_companyDefault&amp;type=gift"/>
             </jnode>
         </jnode>
         <jnode url="" id="giftOrderManager" access="admin,manager" state="closed"  text_zh_CN="礼品订单批量管理">
