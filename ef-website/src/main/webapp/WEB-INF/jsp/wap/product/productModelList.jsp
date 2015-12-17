@@ -15,25 +15,24 @@
     <meta name="description" content="${project.description}" />
 </head>
 <body>
-<artice class="custom">
-    <div class="bd list-class">
-        <ul class="ul-list-nav ul-list-nav2">
-            <%--<li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="人气">人气</a></li>--%>
+<artice>
+    <div class="bd search-sort">
+        <ul class="bd tnav">
+            <li><a href="<c:url value="/product/list/${project.id}?sort=desc:saleAmount&pageEntity.index=1"/>" title="销 量">销 量</a></li>
             <li>
-                <c:if test="${str==null}">
-                    <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价格</a>
-                </c:if>
-                <c:if test="${str=='desc'}">
-                    <a href="<c:url value="/product/list/${project.id}?sort=asc:price&pageEntity.index=1"/>" title="价  格">价格<i style="background:url(/scripts/wap/images/icon-new.png) no-repeat 0 0;background-size:100px auto;width:8px;height:20px;display:inline-block;margin-left:2px;position:relative;top:2px -webkit-transform: rotate(-180deg);
-    transform: rotate(-180deg);"></i></a>
-                </c:if>
-                <c:if test="${str=='asc'}">
-                    <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价格<i style="background:url(/scripts/wap/images/icon-new.png) no-repeat 0 0;background-size:100px auto;width:8px;height:20px;display:inline-block;margin-left:6px;position:relative;top:11px"></i></a>
-                </c:if>
+            <c:if test="${str==null||flag==2||flag==3||flag==4}">
+                <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="销 量">价 格</a>
+            </c:if>
+            <c:if test="${flag==1&&str=='desc'}">
+            <a href="<c:url value="/product/list/${project.id}?sort=asc:price&pageEntity.index=1"/>" title="销 量">价 格</a><i class="icon-a2"></i>
+            </c:if>
+            <c:if test="${flag==1&&str=='asc'}">
+            <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="销 量">价 格</a><i class="icon-a1"></i>
+            </c:if>
             </li>
-            <li><a href="<c:url value="/product/list/${project.id}?sort=desc:product.createDateTime&pageEntity.index=1"/>" title="新品">新品</a></li>
+            <li><a href="<c:url value="/product/list/${project.id}?sort=desc:popularityAmount&pageEntity.index=1"/>" title="人 气">人 气</a></li>
+            <li><a href="<c:url value="/product/list/${project.id}?sort=desc:product.createDateTime&pageEntity.index=1"/>" title="新 品">新 品</a></li>
         </ul>
-        <%--<div class="list-ad1"><a><img src="http://pro.efeiyi.com/${project.picture_wap_url}@!project-wap-view" alt=""/></a></div>--%>
          <c:if test="${productModelList.size()>0}">
             <ul class="ul-list">
                 <c:forEach items="${productModelList}" var="productModel" varStatus="rec">

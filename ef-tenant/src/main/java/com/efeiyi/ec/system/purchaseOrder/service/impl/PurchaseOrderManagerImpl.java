@@ -45,9 +45,6 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
     private PurchaseOrderDao purchaseOrderDao;
 
     @Autowired
-    private AutoSerialManager autoSerialManager;
-
-    @Autowired
     private BaseManager baseManager;
 
 
@@ -55,10 +52,8 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
     @Override
     public String updateOrderStatus(PurchaseOrder purchaseOrder,String serial,String logisticsCompany) {
 
-        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         try {
             purchaseOrderDao.updateOrderStatus(purchaseOrder);
-            //String serial = autoSerialManager.nextSerial("purchaseOrderDelivery");
             PurchaseOrderDelivery purchaseOrderDelivery = new PurchaseOrderDelivery();
             purchaseOrderDelivery.setPurchaseOrder(purchaseOrder);
             purchaseOrderDelivery.setCreateDateTime(new Date());
@@ -66,7 +61,6 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
             purchaseOrderDelivery.setLogisticsCompany(logisticsCompany);
             MyUser user = AuthorizationUtil.getMyUser();
             System.out.println(user.getFullName());
-            //purchaseOrderDelivery.setConsumerAddress();
             purchaseOrderDelivery.setStatus("1");
             baseManager.saveOrUpdate("PurchaseOrderDelivery.class", purchaseOrderDelivery);
         }catch (Exception e){
