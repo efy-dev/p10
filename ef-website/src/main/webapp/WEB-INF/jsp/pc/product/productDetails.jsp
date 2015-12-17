@@ -392,16 +392,16 @@
     }
     function addCart(o){
         var t = document.getElementById("value").value;
-        addToCart(t,o);
+        addToCart(t,o,"<c:url value="/cart/addProduct.do?id="/>"+o +"&amount="+ t+"&redirect=/product/productModel/"+o);
         <%--window.location.href = "<c:url value="/cart/addProduct.do?id="/>"+o +"&amount="+ t+"&redirect=/product/productModel/"+o;--%>
     }
     function immediateBuy(o){
         var t = document.getElementById("value").value;
-        addToCart(t,o);
+        addToCart(t,o,"<c:url value=""/>"+"/order/easyBuy/"+o +"?amount="+ t);
         <%--window.location.href = "<c:url value=""/>"+"/order/easyBuy/"+o +"?amount="+ t;--%>
     }
     //跟踪加入购物车事件
-    function addToCart(t,o) {
+    function addToCart(t,o,callBackUrl) {
         ga('ec:addProduct', {
             'id': "${productModel.id}",
             'name': "【${product.name} ${productModel.name}】${product.subName}",
@@ -418,7 +418,7 @@
             'eventLabel': 'detail',
             'eventValue': t,
             'hitCallback': function () {
-                window.location.href = "<c:url value="/cart/addProduct.do?id="/>"+o +"&amount="+ t+"&redirect=/product/productModel/"+o;
+                window.location.href = callBackUrl;
             }
         });
     }
