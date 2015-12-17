@@ -41,6 +41,15 @@
                 </do>
             </does>
         </entity>
+        <entity name="Tenant1" label="商家列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.Tenant">
+            <does>
+
+                <do name="removeTenant1" label="删除商家" access="" result="json"/>
+
+            </does>
+        </entity>
         <entity name="personalTenant" label="个人商家列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.PersonalTenant">

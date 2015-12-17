@@ -20,7 +20,7 @@
         function removeTenant(divId){
             $.ajax({
                 type: "get",
-                url: '<c:url value="/basic/xmj.do?qm=removeTenant"/>',
+                url: '<c:url value="/basic/xmj.do?qm=removeTenant1"/>',
                 cache: false,
                 dataType: "json",
                 data:{id:divId},
@@ -65,7 +65,7 @@
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       onclick="showConfirm('提示','是否删除',function(){removeTenant('${tenant.id}')})" href="#"><span
+                                       onclick="showConfirm('提示','是否删除',function(){removeTenant('${tenant.id}')})" href="javascript:void(0);"><span
                                             class="am-icon-trash-o"></span>删除
                                     </a>
                                     </security:authorize>
