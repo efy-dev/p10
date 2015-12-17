@@ -123,24 +123,24 @@
                     </div>
                 </fieldset>
             </div>
-            <div class="am-form-group">
-                <label name="addressProvince.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在省 <small>*</small></label>
-                <div class="am-u-sm-9" style="margin-top: 10px">
-                    <select id="${object.id}" name="addressProvince.id" onchange="provinceChange(this , '${object.id}')" ZH_CN="营业执照所在省">
-                        <c:if test="${not empty object.addressProvince}">
-                          <option value="${object.addressProvince.id}">${object.addressProvince.name}</option>
-                        </c:if>
-                    </select>
-                </div>
-            </div>
-            <div class="am-form-group">
-                <label name="addressCity.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在市 <small>*</small></label>
-                <div class="am-u-sm-9" style="margin-top: 10px">
-                    <select id="citys${object.id}" name="addressCity.id" ZH_CN="营业执照所在市">
-                        <option value="${object.addressCity.id}">${object.addressCity.name}</option>
-                    </select>
-                </div>
-            </div>
+            <%--<div class="am-form-group">--%>
+                <%--<label name="addressProvince.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在省 <small>*</small></label>--%>
+                <%--<div class="am-u-sm-9" style="margin-top: 10px">--%>
+                    <%--<select id="${object.id}" name="addressProvince.id" onchange="provinceChange(this , '${object.id}')" ZH_CN="营业执照所在省">--%>
+                        <%--<c:if test="${not empty object.addressProvince}">--%>
+                          <%--<option value="${object.addressProvince.id}">${object.addressProvince.name}</option>--%>
+                        <%--</c:if>--%>
+                    <%--</select>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="am-form-group">--%>
+                <%--<label name="addressCity.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在市 <small>*</small></label>--%>
+                <%--<div class="am-u-sm-9" style="margin-top: 10px">--%>
+                    <%--<select id="citys${object.id}" name="addressCity.id" ZH_CN="营业执照所在市">--%>
+                        <%--<option value="${object.addressCity.id}">${object.addressCity.name}</option>--%>
+                    <%--</select>--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
 </center>
 <script src="<c:url value="/scripts/upload/jquery.uploadify.min.js"/>"></script>
@@ -153,17 +153,17 @@
         provinceChange(element, o,callback);
     }
 
-    $.post("<c:url value="/address/listProvince.do"/>",
-            function (data) {
-                var obj = eval(data);
-                var out = '<option value="">请选择</option>';
-                for (var i = 0; i < obj.length; i++) {
-                    out += '<option value="' + obj[i]["id"] + '">' + obj[i]["name"] + '</option>';
-                }
-                $("#${object.id}").append(out);
-                chooseCity($("#${object.id}") , "${object.addressProvince.id}","${object.addressCity.id}","${object.id}");
-            }
-    )
+    <%--$.post("<c:url value="/address/listProvince.do"/>",--%>
+            <%--function (data) {--%>
+                <%--var obj = eval(data);--%>
+                <%--var out = '<option value="">请选择</option>';--%>
+                <%--for (var i = 0; i < obj.length; i++) {--%>
+                    <%--out += '<option value="' + obj[i]["id"] + '">' + obj[i]["name"] + '</option>';--%>
+                <%--}--%>
+                <%--$("#${object.id}").append(out);--%>
+                <%--chooseCity($("#${object.id}") , "${object.addressProvince.id}","${object.addressCity.id}","${object.id}");--%>
+            <%--}--%>
+    <%--)--%>
 
     function provinceChange(element, o, callback) {
         $("#citys" + o).empty();
