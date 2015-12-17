@@ -1,13 +1,8 @@
 package com.efeiyi.ec.system.purchaseOrder.dao;
 
 
-
-import com.efeiyi.ec.organization.model.BigUser;
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.ming800.core.base.dao.BaseDao;
-
-import java.util.LinkedHashMap;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,7 +11,7 @@ import java.util.LinkedHashMap;
  * Time: 下午4:18
  * To change this template use File | Settings | File Templates.
  */
-public interface PurchaseOrderDao {
+public interface PurchaseOrderDao extends BaseDao<PurchaseOrder>{
 
     /**
      * 改变订单状态
