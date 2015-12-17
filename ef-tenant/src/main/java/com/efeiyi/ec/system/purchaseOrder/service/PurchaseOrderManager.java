@@ -1,11 +1,6 @@
 package com.efeiyi.ec.system.purchaseOrder.service;
 
-import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
-import com.ming800.core.does.model.PageInfo;
-import com.ming800.core.taglib.PageEntity;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
