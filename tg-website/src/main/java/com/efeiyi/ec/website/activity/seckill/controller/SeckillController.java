@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.activity.controller;
+package com.efeiyi.ec.website.activity.seckill.controller;
 
 import com.efeiyi.ec.activity.seckill.model.SeckillProduct;
 import com.efeiyi.ec.activity.seckill.model.SeckillRecord;
