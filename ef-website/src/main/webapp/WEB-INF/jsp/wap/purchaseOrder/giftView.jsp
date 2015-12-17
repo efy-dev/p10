@@ -56,17 +56,19 @@
     <!-- //End-->
     <div class="logistics ae">
         <div class="part">
-            <h4>感谢您收下礼物，快递小哥正在拼命配送中。</h4>
+            <c:if test="${purchaseOrder.status==5}">
+            <h4>感谢您收下礼物，礼物正在准备出库。</h4>
+             </c:if>
+            <c:if test="${purchaseOrder.status==7}">
+                <h4>感谢您收下礼物，快递小哥正在拼命配送中。</h4>
             <ul>
-                <li><span>物流状态：</span><em><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus"
-                                                          checkedValue="${purchaseOrder.orderStatus}"
-                                                          type="normal"/></em></li>
                 <li><span>物流公司：</span><em><c:if test="${not empty lc}"><ming800:status name="logisticsCompany"
                                                                                        dataType="PurchaseOrderDelivery.logisticsCompany"
                                                                                        checkedValue="${lc}"
                                                                                        type="normal"/></c:if> </em></li>
                 <li><span>运单编号：</span><em><c:if test="${not empty serial}">${serial}</c:if> </em></li>
             </ul>
+            </c:if>
         </div>
         <c:if test="${!empty content}">
             <div class="part">
