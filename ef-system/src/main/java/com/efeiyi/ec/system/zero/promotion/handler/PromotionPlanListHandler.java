@@ -11,6 +11,7 @@ import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.ui.ModelMap;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -47,12 +48,12 @@ public class PromotionPlanListHandler implements DoHandler {
                 long orderCount = (long) baseManager.getUniqueObjectByConditions("select count(*) from PurchaseOrder x where x.source=:source", queryParamMap);
                 promotionPlanElement.setOrderCount(Long.toString(orderCount));//设置订单数
 
-                long orderAmount = (long) baseManager.getUniqueObjectByConditions("select count(total) from PurchaseOrder x where x.source=:source", queryParamMap);
-                promotionPlanElement.setOrderAmount(Long.toString(orderAmount));//设置订单总额
+                BigDecimal orderAmount = (BigDecimal) baseManager.getUniqueObjectByConditions("select sum(total) from PurchaseOrder x where x.source=:source", queryParamMap);
+                promotionPlanElement.setOrderAmount(orderAmount == null ? "0.00" : orderAmount.toString());//设置订单总额
 
                 queryParamMap.put("orderStatus", PurchaseOrder.ORDER_STATUS_WRECEIVE);
-                long orderPaidAmount = (long) baseManager.getUniqueObjectByConditions("select count(total) from PurchaseOrder x where x.source=:source and orderStatus=:orderStatus", queryParamMap);
-                promotionPlanElement.setOrdePaidAmount(Long.toString(orderPaidAmount));//设置实付金额
+                BigDecimal orderPaidAmount = (BigDecimal) baseManager.getUniqueObjectByConditions("select sum(total) from PurchaseOrder x where x.source=:source and orderStatus=:orderStatus", queryParamMap);
+                promotionPlanElement.setOrdePaidAmount(orderPaidAmount == null ? "0.00" : orderPaidAmount.toString());//设置实付金额
 //                if (!pp.getPromotionUserRecordList().isEmpty()){//设置注册量
 //                    promotionPlanElement.setZCL(String.valueOf(pp.getPromotionUserRecordList().size()));
 //                }

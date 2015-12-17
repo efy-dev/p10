@@ -85,6 +85,12 @@
                 <!--<match url="/basic/xm.do?qm=formPromotionPlan&amp;gift=gift"/>-->
             </jnode>
         </jnode>
+        <jnode url="" id="giftOrderManager" access="admin,manager" state="closed"  text_zh_CN="礼品订单批量管理">
+            <jnode url="/basic/xm.do?qm=plistBatchGift_default"  access="admin,manager" text_zh_CN="大礼包">
+                <match url="/basic/xm.do?qm=plistBatchGift"/>
+                <match url="/basic/xm.do?qm=listBatchGift"/>
+            </jnode>
+        </jnode>
     </jnode>
     <jnode id="efecOrderAndConsumer" access="admin,operational,o_operational,financial,product_manager,market" url="/main.do?jnodeId=efecOrderAndConsumer" text_zh_CN="订单与消费者">
         <jnode url="" id="orderManager" access="admin,operational,o_operational,financial,product_manager,market" state="closed" text_zh_CN="订单管理">
