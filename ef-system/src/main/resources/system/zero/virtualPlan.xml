@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module name="VirtualPlan" label="虚拟计划" version="" package="com.efeiyi.ec.zero.virtualplan.model" path="">
     <entities>
-        <entity name="PCVirtualPlan" label="虚拟计划" model=" com.efeiyi.ec.zero.virtual.model.VirtualPlan">
+        <entity name="PCVirtualPlan" label="虚拟计划" model="com.efeiyi.ec.zero.virtual.model.VirtualPlan">
             <fields>
                 <field name="status" label="状态" inputType="text">
                     <statusType fieldName="status">
@@ -31,7 +31,7 @@
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-                <do name="formVirtualPlan" label="虚拟数据" access="" result="/zero/virtualplan/virtualPlanForm"/>
+                <do name="formVirtualPlan" label="虚拟数据" access="" result="/zero/virtual/virtualPlanForm"/>
                 <do name="removeVirtualPlan" label="删除虚拟数据" access="" result="redirect:/basic/xm.do?qm=plistVirtualPlan_default"/>
                 <do name="saveOrUpdateVirtualPlan" label="新建或更新虚拟计划" access="" result="redirect:/basic/xm.do?qm=plistVirtualPlan_default"
                     execute="com.efeiyi.ec.system.zero.virtual.handler.VirtualPlanSaveHandler">
