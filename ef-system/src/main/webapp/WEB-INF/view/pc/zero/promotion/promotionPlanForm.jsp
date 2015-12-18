@@ -46,6 +46,15 @@
         </div>
 
         <div class="am-form-group">
+            <label for="url" class="am-u-sm-3 am-form-label">链接标识<small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="text" name="identifier" id="identifier" style="width: auto"
+                       title="链接标识" placeholder="链接标识"
+                       value="${object.identifier}" required="true">
+            </div>
+        </div>
+
+        <div class="am-form-group">
             <label for="name" class="am-u-sm-3 am-form-label">分享渠道<small>*</small></label>
             <div class="am-u-sm-9" style="width: 240px;float: left">
                 <ming800:status name="nameSelect" dataType="PCPromotionPlan.name"
