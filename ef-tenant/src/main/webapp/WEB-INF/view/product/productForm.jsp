@@ -282,8 +282,13 @@
         else{
             $("input[name='master.id']").val($("input[name='masterCheck']:checked").val());
             $("input[name='project.id']").val($("input[name='projectCheck']:checked").val());
+            if( $("input[name='project.id']").val()==""){
+                alert("请选择项目");
+            }else{
+                $("form").submit();
+            }
       //      $("input[name='tenant.id']").val($("select[name='tenantCheck']").val());
-            $("form").submit();
+       //
         }
 
     }
