@@ -97,13 +97,13 @@
                                  alt="">
 
                             <div class="bd info">
-                                <p class="text">${product.name}[${product.productModel.name}]
-                                    <c:if test="${product.productModel.productPropertyValueList.size()>1}">
-                                        [
-                                        <c:forEach items="${product.productModel.productPropertyValueList}"
-                                                   var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
-                                        ]
-                                    </c:if>
+                                <p class="text">${product.productModel.product.name}[${product.productModel.name}]
+                                    <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
+                                        <%--[--%>
+                                        <%--<c:forEach items="${product.productModel.productPropertyValueList}"--%>
+                                                   <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                                        <%--]--%>
+                                    <%--</c:if>--%>
                                 </p>
 
                                 <p class="price"><em>￥</em><span>${product.purchasePrice}</span></p>
