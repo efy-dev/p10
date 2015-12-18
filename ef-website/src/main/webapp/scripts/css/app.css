@@ -950,7 +950,7 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 .homenew .max-cat .category .cat-right{float: right;width: 884px;}
 .homenew .max-cat .category .cat-right li{width: 220px;height: 177px;float: left;margin: 0 1px 1px 0;position: relative}
 .homenew .max-cat .category .cat-right li img{width: 100%;}
-.homenew .max-cat .category .cat-right li strong{width:20px;height:110px;position:absolute;top:16px;left:15px;font-size:16px;color:#fff;line-height:18px;font-style:italic;overflow:hidden;z-index:5;font-size: 14px;}
+.homenew .max-cat .category .cat-right li strong{width:20px;height:146px;position:absolute;top:16px;left:15px;font-size:16px;color:#fff;line-height:18px;font-style:italic;overflow:hidden;z-index:5;font-size: 14px;}
 .homenew .max-cat .category .cat-right li .cat-money{position:absolute;right:15px;bottom:15px;color:#fff;font-size:14px;font-family:Times New Roman;font-weight: bold}
 .homenew .max-cat .category .cat-right li .cat-money em{font-size: 12px;}
 /*--//End--首页--*/
@@ -1193,7 +1193,6 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
     background: #434343;
 }
 /*--//ENd--footernew--*/
-
 
 
 
