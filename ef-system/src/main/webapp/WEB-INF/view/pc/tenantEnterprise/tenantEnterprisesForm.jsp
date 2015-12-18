@@ -21,6 +21,7 @@
     <input type="hidden" name="qm" value="saveOrUpdateEnterprisesTenant">
     <input type="hidden" name="id" value="${object.id}">
     <input type="hidden" name="type" value="11" />
+      <input type="hidden" name="review" value="${object.review}" />
     <table>
       <div class="am-form-group">
         <label for="name" class="am-u-sm-3 am-form-label">*公司名称</label>
@@ -362,7 +363,18 @@
       $("#btn_upload3").ready(fileUploads(3,"taxRegistrationAttachment"));
       $("#btn_upload4").ready(fileUploads(4,"organizationAttachment"));
       $("#btn_upload5").ready(fileUploads(5,"bankAttachment"));
-      $("#btn_upload-button").css({"padding":"0em 0em","text-align":"center"});
+      $("#btn_upload0-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#btn_upload1-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#btn_upload2-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#btn_upload3-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#btn_upload4-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#btn_upload5-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#SWFUpload_0").css({left:"5"});
+      $("#SWFUpload_1").css({left:"5"});
+      $("#SWFUpload_2").css({left:"5"});
+      $("#SWFUpload_3").css({left:"5"});
+      $("#SWFUpload_4").css({left:"5"});
+      $("#SWFUpload_5").css({left:"5"});
 
   });
 </script>

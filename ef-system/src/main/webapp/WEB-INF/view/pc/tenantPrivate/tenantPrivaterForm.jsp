@@ -23,6 +23,7 @@
     <input type="hidden" name="qm" value="saveOrUpdatePrivaterTenant">
     <input type="hidden" name="id" value="${object.id}">
     <input type="hidden" name="type" value="12" />
+      <input type="hidden" name="review" value="${object.review}" />
     <table>
       <div class="am-form-group">
         <label for="name" class="am-u-sm-3 am-form-label">*名称</label>
@@ -315,7 +316,14 @@
     $("#btn_upload1").ready(fileUploads(1,"versoPhotoUrl"));
     $("#btn_upload2").ready(fileUploads(2,"businessLicense"));
     $("#btn_upload3").ready(fileUploads(3,"taxRegistrationAttachment"));
-    $("#btn_upload-button").css({"padding":"0em 0em","text-align":"center"});
+      $("#btn_upload0-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#btn_upload1-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#btn_upload2-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#btn_upload3-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#SWFUpload_0").css({left:"5"});
+      $("#SWFUpload_1").css({left:"5"});
+      $("#SWFUpload_2").css({left:"5"});
+      $("#SWFUpload_3").css({left:"5"});
 
   });
 </script>

@@ -27,6 +27,7 @@
               enctype="multipart/form-data">
             <input type="hidden" value="saveOrUpdateTenant" name="qm">
             <input type="hidden" name="id" value="${object.id}">
+            <input type="hidden" name="review" value="${object.review}">
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">商家编号</label>
 
