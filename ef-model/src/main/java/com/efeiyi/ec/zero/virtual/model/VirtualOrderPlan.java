@@ -1,6 +1,7 @@
 package com.efeiyi.ec.zero.virtual.model;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class VirtualOrderPlan extends VirtualPlan{
     private Integer orderAmountCeil;
     private List<VirtualProductModel> virtualProductModelList;
     private VirtualUserPlan virtualUserPlan;
-    private Date peakTime;//均值小时
+    private Time peakTime;//均值小时
     private Integer standardDeviation; //标准差小时
     private List<VirtualPurchaseOrder> virtualPurchaseOrderList;
 
@@ -46,11 +47,11 @@ public class VirtualOrderPlan extends VirtualPlan{
     }
 
     @Column(name = "peak_time")
-    public Date getPeakTime() {
+    public Time getPeakTime() {
         return peakTime;
     }
 
-    public void setPeakTime(Date peakTime) {
+    public void setPeakTime(Time peakTime) {
         this.peakTime = peakTime;
     }
 

@@ -160,13 +160,16 @@ public class VirtualPlanController {
     @RequestMapping("/saveVirtualOrderPlan.do")
     public ModelAndView saveVirtualOrderPlan(HttpServletRequest request)throws Exception{
         String id = request.getParameter("id");
-        //获取父类virtualPlan基本属性值
-        VirtualPlan virtualPlan = (VirtualPlan) baseManager.getObject(VirtualPlan.class.getName(), id);
-        VirtualOrderPlan virtualOrderPlan = new VirtualOrderPlan();
-        BeanUtils.copyProperties(virtualOrderPlan, virtualPlan);
-        //删除父类virtualPlan 并制空ID
-        baseManager.delete(VirtualPlan.class.getName(), id);
-        virtualOrderPlan.setId(null);
+        VirtualOrderPlan virtualOrderPlan = (VirtualOrderPlan) baseManager.getObject(VirtualOrderPlan.class.getName(), id);
+        if (virtualOrderPlan == null){
+            //获取父类virtualPlan基本属性值
+            VirtualPlan virtualPlan = (VirtualPlan) baseManager.getObject(VirtualPlan.class.getName(), id);
+            virtualOrderPlan = new VirtualOrderPlan();
+            BeanUtils.copyProperties(virtualOrderPlan, virtualPlan);
+            //删除父类virtualPlan 并制空ID
+            baseManager.delete(VirtualPlan.class.getName(), id);
+            virtualOrderPlan.setId(null);
+        }
         //获取除父类外的基本属性值
         virtualOrderPlan = getBaseProperty(virtualOrderPlan, request);
         //获取关联对象
@@ -219,10 +222,18 @@ public class VirtualPlanController {
 
     private ModelAndView virtualOrderView(ModelMap modelMap, HttpServletRequest request) throws Exception{
         String planId = (String) modelMap.get("planId");
-        VirtualPlan virtualPlan = (VirtualPlan)baseManager.getObject(VirtualPlan.class.getName(), planId);
-        VirtualOrderPlan virtualOrderPlan = new VirtualOrderPlan();
-        BeanUtils.copyProperties(virtualOrderPlan, virtualPlan);
+        VirtualOrderPlan virtualOrderPlan = (VirtualOrderPlan) baseManager.getObject(VirtualOrderPlan.class.getName(), planId);
+        if (virtualOrderPlan == null){
+            VirtualPlan virtualPlan = (VirtualPlan)baseManager.getObject(VirtualPlan.class.getName(), planId);
+            virtualOrderPlan = new VirtualOrderPlan();
+            BeanUtils.copyProperties(virtualOrderPlan, virtualPlan);
+        }else {
+            long time = virtualOrderPlan.getCreateDatetime().getTime();
+            virtualOrderPlan.setCreateDatetime(new Date(time));
+        }
         modelMap.put("object", virtualOrderPlan);
+        //获取订单计划已经建立关系的商品ID列表和name列表
+        modelMap = getVirtualProductModelIdAndNameList(modelMap, virtualOrderPlan);
 
         //获取虚拟用户计划列表
         XQuery xQuery = new XQuery("listVirtualUserPlan_default",request);
@@ -235,6 +246,28 @@ public class VirtualPlanController {
         modelMap.put("productModelList", productModelList);
 
         return new ModelAndView("/zero/virtual/order/virtualPlanOrderView");
+    }
+
+    private ModelMap getVirtualProductModelIdAndNameList(ModelMap modelMap, VirtualOrderPlan virtualOrderPlan)throws Exception{
+        String pmIdList = "";
+        String pmNameList = "";
+        if (virtualOrderPlan.getVirtualProductModelList() != null){
+            for (VirtualProductModel vpm:virtualOrderPlan.getVirtualProductModelList()){
+                if (pmIdList.equals("")){
+                    pmIdList = vpm.getProductModel().getId();
+                }else {
+                    pmIdList += "," + vpm.getProductModel().getId();
+                }
+                if (pmNameList.equals("")){
+                    pmNameList = vpm.getProductModel().getProduct().getName() + "[" + vpm.getProductModel().getName() + "]";
+                }else {
+                    pmNameList += "," + vpm.getProductModel().getProduct().getName() + "[" + vpm.getProductModel().getName() + "]";
+                }
+            }
+        }
+        modelMap.put("pmIdList", pmIdList);
+        modelMap.put("pmNameList", pmNameList);
+        return modelMap;
     }
 
     private VirtualOrderPlan getBaseProperty(VirtualOrderPlan virtualOrderPlan, HttpServletRequest request)throws Exception{
@@ -266,7 +299,13 @@ public class VirtualPlanController {
         //获取选择的商品id字符串，以","分隔
         String productModelIdList = request.getParameter("productModelIdList");
         String[] productModelIds = productModelIdList.split(",");
-
+        //解除订单计划修改之前关联的商品
+        if (virtualOrderPlan.getVirtualProductModelList() != null && !virtualOrderPlan.getVirtualProductModelList().isEmpty()){
+            for (VirtualProductModel vpm: virtualOrderPlan.getVirtualProductModelList()){
+                baseManager.delete(VirtualProductModel.class.getName(), vpm.getId());
+            }
+        }
+        //建立订单与选择的商品之间的关联关系
         for (String id: productModelIds){
             VirtualProductModel virtualProductModel = new VirtualProductModel();
             //获取productModel
