@@ -31,7 +31,7 @@
         <ul class="ul-list">
             <%-- 没有获取到数据时显示 --%>
             <c:if test="${empty searchParamBean.searchResultList}">
-                抱歉，没有找到“${searchParamBean.q}”的搜索结果，您可以换个关键词试试。
+                抱歉，没有搜索结果，您可以换个<font color="red">关键词</font>、<font color="red">分类条件</font>、<font color="red">价格区间</font>试试。</span>
             </c:if>
             <%-- 数据显示 --%>
             <c:forEach items="${searchParamBean.searchResultList}" var="result">
