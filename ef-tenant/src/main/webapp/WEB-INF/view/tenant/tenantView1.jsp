@@ -58,6 +58,13 @@
                             </div>
                         </div>
                         <div class="am-form-group">
+                            <label for="address" class="am-u-sm-3 am-form-label">商家地址</label>
+
+                            <div class="am-u-sm-9">
+                                <input type="text" id="address" name="address" placeholder="商家地址" value="${object.address}" >
+                            </div>
+                        </div>
+                        <div class="am-form-group">
                             <label for="phone" class="am-u-sm-3 am-form-label">联系方式</label>
 
                             <div class="am-u-sm-9">
