@@ -196,7 +196,7 @@
 
 </c:if>
 <c:if test="${review=='4'}">
-    欢迎来到后台管理系统
+
 </c:if>
 </body>
 </html>
