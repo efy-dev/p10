@@ -516,3 +516,27 @@ top:2px;}
 }
 .admin-main{background: #fff;}
 .admin-content{background: none;overflow: inherit}
+
+.audit .success h2 {
+    font-size: 18px;
+    font-weight: normal;
+    text-align: center;
+    margin:70px 0;
+}
+.audit .success .brid {
+    width: 80%;
+    min-width:850px;
+    margin: 0 auto;
+    font-size: 12px;
+}
+.audit .success .brid ul{
+    width: 100%;
+    float: left;
+    padding:20px 25px;
+    border: 1px solid #000;
+}
+.audit .success .brid li {
+    width: 100%;
+    float: left;
+    margin-bottom: 24px;
+}
