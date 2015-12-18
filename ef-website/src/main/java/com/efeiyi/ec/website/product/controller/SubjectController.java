@@ -32,9 +32,23 @@ public class SubjectController {
 
         model.addAttribute("subject",subject);
         model.addAttribute("productModelList",productModelList);
-
+        if (subject.getTemplate().equals("2")){
+            return "redirect:/subject/activity/"+subjectId;
+        }
         return "/product/subjectView";
 
+    }
+
+    @RequestMapping({"/subject/activity/{subjectId}"})
+    public String viewActivity(@PathVariable String subjectId ,HttpServletRequest request,Model model)throws Exception{
+        Subject subject = (Subject)baseManager.getObject(Subject.class.getName(),subjectId);
+        XQuery xQuery = new XQuery("listSubjectProductModel_default",request);
+        xQuery.put("subject_id",subjectId);
+        List<Object> productModelList = baseManager.listObject(xQuery);
+
+        model.addAttribute("subject",subject);
+        model.addAttribute("productModelList",productModelList);
+        return "/product/subjectActivityView";
     }
 
 }

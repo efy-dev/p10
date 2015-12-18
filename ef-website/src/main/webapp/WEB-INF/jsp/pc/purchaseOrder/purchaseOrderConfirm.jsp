@@ -159,13 +159,13 @@
                                             </p>
 
                                             <p><a href="/product/productModel/${product.productModel.id}"
-                                                  target="_blank">${product.productModel.name}
-                                                <c:if test="${product.productModel.productPropertyValueList.size()>1}">
-                                                    [
-                                                    <c:forEach
-                                                            items="${product.productModel.productPropertyValueList}"
-                                                            var="ppv">${ppv.projectPropertyValue.value}</c:forEach>]
-                                                </c:if>
+                                                  target="_blank">${product.productModel.product.name}[${product.productModel.name}]
+                                                    <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
+                                                    <%--[--%>
+                                                    <%--<c:forEach--%>
+                                                    <%--items="${product.productModel.productPropertyValueList}"--%>
+                                                    <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>]--%>
+                                                    <%--</c:if>--%>
                                             </a>
                                             </p>
                                         </div>
@@ -244,7 +244,7 @@
 </div>
 <script>
     //GA统计用的商品map
-    var productMap =  {};
+    var productMap = {};
     <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct">
     productMap['${purchaseOrderProduct.productModel.id}'] = ${purchaseOrderProduct.purchaseAmount};
     </c:forEach>
@@ -301,13 +301,13 @@
                         $(element).click();
 
                         //逐条发送商品下单记录给GA
-                        $.each(productMap, function(key, value) {
+                        $.each(productMap, function (key, value) {
                             ga('ec:setAction', 'purchase', {
                                 'id': key,
                                 'affiliation': 'efeiyi',
                                 'revenue': ${purchaseOrder.total},
-                                'step' : 1,
-                                'option' : payment,
+                                'step': 1,
+                                'option': payment,
 //                            'tax': '2.85',
 //                            'shipping': '5.34',
 //                            'coupon': 'SUMMER2013'    // User added a coupon at checkout.
