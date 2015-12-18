@@ -39,34 +39,35 @@ public class VirtualPurchaseOrderGenerator extends BaseTimerTask {
         List<VirtualUser> virtualUserList = virtualOrderPlan.getVirtualUserPlan().getVirtualUserList();
         VirtualUser virtualUser = virtualUserList.remove(random.nextInt(virtualUserList.size()));
 
-        PurchaseOrder purchaseOrder = new PurchaseOrder();
-        purchaseOrder.setCreateDatetime(new Date());
+//        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        VirtualPurchaseOrder virtualPurchaseOrder = new VirtualPurchaseOrder();
+        virtualPurchaseOrder.setCreateDatetime(new Date());
 //        purchaseOrder.setMessage("虚拟专用");
 //        purchaseOrder.setOrderType("虚拟专用");
-        purchaseOrder.setStatus("9");//虚拟专用
-        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_FINISHED);
-        purchaseOrder.setUser(virtualUser.getUser());
+        virtualPurchaseOrder.setStatus("9");//虚拟专用
+        virtualPurchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_FINISHED);
+        virtualPurchaseOrder.setUser(virtualUser.getUser());
 
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
-        purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
+        purchaseOrderProduct.setPurchaseOrder(virtualPurchaseOrder);
         purchaseOrderProduct.setProductModel(productModel);
         purchaseOrderProduct.setPurchaseAmount(1);
         purchaseOrderProduct.setPurchasePrice(productModel.getPrice());
 
-        VirtualPurchaseOrder virtualPurchaseOrder = new VirtualPurchaseOrder();
-        virtualPurchaseOrder.setPurchaseOrder(purchaseOrder);
+//        VirtualPurchaseOrder virtualPurchaseOrder = new VirtualPurchaseOrder();
+//        virtualPurchaseOrder.setPurchaseOrder(purchaseOrder);
         virtualPurchaseOrder.setVirtualOrderPlan(virtualOrderPlan);
 
         PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
         purchaseOrderPayment.setUser(virtualUser.getUser());
         purchaseOrderPayment.setStatus("1");
-        purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
+        purchaseOrderPayment.setPurchaseOrder(virtualPurchaseOrder);
         purchaseOrderPayment.setCreateDateTime(new Date());
         purchaseOrderPayment.setPayWay("4");
         purchaseOrderPayment.setPaymentAmount(productModel.getPrice());
 
         logger.info(new Date() + ":" + virtualUser.getUser().getUsername() + " purchase a " + purchaseOrderProduct.getProductModel().getName());
-        session.saveOrUpdate(purchaseOrder);
+//        session.saveOrUpdate(virtualPurchaseOrder);
         session.saveOrUpdate(purchaseOrderProduct);
         session.saveOrUpdate(virtualPurchaseOrder);
         session.saveOrUpdate(purchaseOrderPayment);

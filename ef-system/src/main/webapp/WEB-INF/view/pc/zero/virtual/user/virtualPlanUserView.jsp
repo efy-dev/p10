@@ -19,7 +19,7 @@
     </div>
 </div>
 <div class="am-g">
-    <form action="<c:url value='/virtualPlan/saveVirtualUser.do'/>"
+    <form action="<c:url value='/virtualPlan/saveVirtualUserPlan.do'/>"
           method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="${object.status}"/>
@@ -89,11 +89,13 @@
             </div>
         </div>
 
+        <c:if test="${object.status == '1'}">
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
             </div>
         </div>
+        </c:if>
 
     </form>
 </div>

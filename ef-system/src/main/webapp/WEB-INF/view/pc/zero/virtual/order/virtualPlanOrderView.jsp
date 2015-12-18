@@ -9,10 +9,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>虚拟订单计划信息</title>
-    <script src="<c:url value='/DatePicker/WdatePicker.js'/>"></script>
+    <script src="<c:url value='/resources/plugins/My97DatePicker/WdatePicker.js'/>"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -22,7 +23,8 @@
 </div>
 <hr/>
 <div class="am-g">
-    <form action="<c:url value=''/>"
+    <form id="orderPlanForm" onsubmit="return isSubmitForm()"
+          action="<c:url value='/virtualPlan/saveVirtualOrderPlan.do'/>"
           method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="${object.status}"/>
@@ -120,23 +122,153 @@
         </div>
 
         <div class="am-form-group">
-            <label class="am-u-sm-3 am-form-label">选择商品<small>*</small></label>
+            <label class="am-u-sm-3 am-form-label">选择用户计划<small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="hidden" name="virtualUserPlan.id" id="virtualUserPlanId"
+                       placeholder="用户计划" value="${object.virtualUserPlan.id}" required="true">
+                <input type="text" name="virtualUserPlan.description" id="virtualUserPlanName"
+                       placeholder="用户计划" data-am-modal="{target: '#userPlanModal'}"
+                       value="${object.virtualUserPlan.description}" >
+            </div>
         </div>
 
+        <div class="am-form-group">
+            <label class="am-u-sm-3 am-form-label">选择商品<small>*</small></label>
+            <div class="am-u-sm-9">
+                <c:set var="pmIdList" value="" scope="page" property="String"/>
+                <c:set var="pmNameList" value="" scope="page" property="String"/>
+                <c:forEach items="${object.virtualProductModelList}" var="virtualProductModel">
+                    <%--<c:set var="pmIdList" value="${pmIdList = pmIdList + virtualProductModel.productModel.id + ','}" scope="page"/>--%>
+                    <%--<c:set var="pmNameList" value="${pmNameList = pmNameList + virtualProductModel.productModel.name + ','}" scope="page"/>--%>
+                </c:forEach>
+                <input type="hidden" name="productModelIdList" id="productModelIdList"
+                       placeholder="商品" value="${pmIdList}" required="true">
+                <input type="text" name="productModelNameList" id="productModelNameList"
+                       placeholder="商品" data-am-modal="{target: '#productModels'}" value="${pmNameList}" >
+            </div>
+        </div>
+
+        <c:if test="${object.status == '1'}">
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
             </div>
         </div>
+        </c:if>
 
     </form>
 </div>
+
+<div class="am-popup" id="userPlanModal" style="height: 500px">
+    <div class="am-popup-inner">
+        <div class="am-popup-hd">
+            <h4 class="am-popup-title">用户计划</h4>
+            <span data-am-modal-close class="am-close">&times;</span>
+        </div>
+        <div class="am-popup-bd" style="height: 10px">
+            <input type="text" name="selUserPlan"  style="float: left" placeholder="编号或名称" value=""/>
+            <a style="width: 10%;float: left;margin-left: 10px;"
+               class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+               href="javascript:void(0);" onclick="selUserPlan()">查找
+            </a>
+        </div>
+        <div class="am-popup-bd" style="height: 420px">
+            <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+                <tr>
+                    <td class="am-text-center" width="14%">操作</td>
+                    <td class="am-text-center" width="17%">用户计划编号</td>
+                    <td class="am-text-center" width="17%">用户计划名称</td>
+                </tr>
+            </table>
+            <div style="height: 350px; overflow-y: auto; margin-top: 0px">
+            <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover"
+                   id="userPlanTable">
+                <tbody>
+                <c:forEach var="plan" items="${userPlanList}">
+                    <tr name="${plan.description}" serial="${plan.serial}">
+                        <td align="center" width="33%">
+                            <a style="width: 10%;"
+                               class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                               href="javascript:void(0);" onclick="selectUserPlan('${plan.id}','${plan.description}')">
+                                选择
+                            </a>
+                        </td>
+                        <td class="am-text-center" width="33%">${plan.serial}</td>
+                        <td class="am-text-center" width="33%">${plan.description}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="am-popup" id="productModels" style="height: 550px">
+    <div class="am-popup-inner">
+        <div class="am-popup-hd">
+            <h4 class="am-popup-title">选择商品</h4>
+            <span data-am-modal-close class="am-close">&times;</span>
+        </div>
+        <div class="am-popup-bd" style="height: 10px">
+            <input type="text" name="selProductModel"  style="float: left" placeholder="编号或名称" value=""/>
+            <a style="width: 10%;float: left;margin-left: 10px;"
+               class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+               href="javascript:void(0);" onclick="selProductModel()">查找
+            </a>
+        </div>
+        <div class="am-popup-bd" style="height: 420px">
+            <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+                <tr>
+                    <td class="am-text-center" width="4%">操作</td>
+                    <th class="am-text-center" width="8%">规格编号</th>
+                    <th class="am-text-center" width="17%">规格名称</th>
+                </tr>
+            </table>
+            <div style="height: 350px; overflow-y: auto;">
+                <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover"
+                       id="productModelTable">
+                    <tbody>
+                    <c:forEach var="productModel" items="${productModelList}">
+                        <tr name="${productModel.name}" serial="${productModel.serial}">
+                            <td align="center" width="13%">
+                                <input type="checkbox" name="pModel" value="${productModel.id}" title="${productModel.product.name}[${productModel.name}]">
+                            </td>
+                            <td class="am-text-center" width="33%">${productModel.serial}</td>
+                            <td class="am-text-center" width="53%">${productModel.product.name}[${productModel.name}]</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            <div style="height: 10px; margin-top: 10px" align="center">
+                <input type="button" name="cancel" value="取消" onclick="btnCancel()"/>
+                <input type="button" name="confirm" value="确定" onclick="btnConfirm()"/>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    function startLessThanEnd(val){
-        if(afterSubmitForm(val) && amountCheck() /*&& timeCheck()*/){
+    function isSubmitForm(){
+        if(afterSubmitForm() && amountCheck()){
             return true;
         }
         return false;
+    }
+    function afterSubmitForm(){
+        var form = document.getElementById("orderPlanForm");
+        var a = form.elements.length;//所有的控件个数
+        for (var j=0;j<a;j++){
+            if(form.elements[j].required){
+                if(form.elements[j].value=="" || form.elements[j].value==null){
+                    alert(form.elements[j].placeholder + "不能为空");
+                    form.elements[j].focus();
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     function amountCheck(){
         var oaf = $("#orderAmountFloor").val();
@@ -147,14 +279,69 @@
         }
         return true;
     }
-    function timeCheck(){
-        var st = $("#startTime").val();
-        var et = $("#endTime").val();
-        if(et<=st){
-            alert("任务运行开始时间应该小于结束时间");
-            return false;
+
+    function selUserPlan(){
+        var v = $("input[name='selUserPlan']").val();
+        if(v==""){
+            $("#userPlanTable tr:gt(0)").each(function(){
+                $(this).show();
+            });
+        }else {
+            $("#userPlanTable tr:gt(0)").each(function () {
+                if ($(this).attr("name").indexOf(v)!=-1 || $(this).attr("serial").indexOf(v) != -1 ) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
         }
-        return true;
+    }
+    function selectUserPlan(id,name){
+        $("#virtualUserPlanId").val(id);
+        $("#virtualUserPlanName").val(name);
+        $("#userPlanModal").modal('close');
+    }
+
+    function selProductModel(){
+        var v = $("input[name='selProductModel']").val();
+        if(v==""){
+            $("#productModelTable tr:gt(0)").each(function(){
+                $(this).show();
+            });
+        }else {
+            $("#productModelTable tr:gt(0)").each(function () {
+                if ($(this).attr("name").indexOf(v)!=-1 || $(this).attr("serial").indexOf(v) != -1 ) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    }
+
+    function btnCancel(){
+        $("#productModels").modal('close');
+    }
+    function btnConfirm(){
+        var idList = "";
+        var nameList = "";
+        $("input[name='pModel']:checked").each(function(){
+//            alert($(this).attr("title"));
+            if(idList != ""){
+                idList = idList + "," + $(this).val();
+            }else {
+                idList = $(this).val();
+            }
+            if(nameList != ""){
+                nameList = nameList + "," + $(this).attr("title");
+            }else {
+                nameList = $(this).attr("title");
+            }
+        });
+
+        $("#productModelIdList").val(idList);
+        $("#productModelNameList").val(nameList);
+        $("#productModels").modal('close');
     }
 </script>
 </body>
