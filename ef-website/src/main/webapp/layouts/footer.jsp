@@ -108,6 +108,11 @@
         </div>
     </div>
 </div>
+<div class="scroll-bar" style="z-index: 9999">
+    <div class="scroll-bar-top">
+        <span class="btn"><i class="icon" style="margin-left: 4px;margin-top: 6px;display: block;"></i></span>
+    </div>
+</div>
 <style type="text/css">
     #MEIQIA-BTN-HOLDER {
         right: 0;bottom: 252px;}
