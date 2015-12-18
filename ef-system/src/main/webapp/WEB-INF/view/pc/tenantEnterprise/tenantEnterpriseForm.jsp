@@ -28,6 +28,7 @@
             <input type="hidden" name="tenantType" value="11">
             <input type="hidden" value="saveOrUpdateEnterpriseTenant" name="qm">
             <input type="hidden" name="id" value="${object.id}">
+            <input type="hidden" name="review" value="1">
             <div class="am-form-group">
                 <label for="serial" class="am-u-sm-3 am-form-label">商家编号</label>
 

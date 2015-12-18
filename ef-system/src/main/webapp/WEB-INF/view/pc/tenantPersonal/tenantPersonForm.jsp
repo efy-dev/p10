@@ -22,6 +22,7 @@
     <input type="hidden" name="qm" value="saveOrUpdatePersonTenant">
     <input type="hidden" name="id" value="${object.id}">
     <input type="hidden" name="type" value="13" />
+      <input type="hidden" name="review" value="${object.review}" />
     <table>
       <div class="am-form-group">
         <label for="name" class="am-u-sm-3 am-form-label">*名称</label>
@@ -135,22 +136,22 @@
               </div>
           </fieldset>
       </div>
-      <div class="am-form-group">
-        <label name="addressProvince.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在省 <small>*</small></label>
-        <div class="am-u-sm-9" style="margin-top: 10px">
-          <select id="${object.id}" name="addressProvince.id" onchange="provinceChange(this , '${object.id}')">
-            <option value="${object.addressProvince.id}">${object.addressProvince.name}</option>
-          </select>
-        </div>
-      </div>
-      <div class="am-form-group">
-        <label name="addressCity.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在市 <small>*</small></label>
-        <div class="am-u-sm-9" style="margin-top: 10px">
-          <select id="citys${object.id}" name="addressCity.id">
-            <option value="${object.addressCity.id}">${object.addressCity.name}</option>
-          </select>
-        </div>
-      </div>
+      <%--<div class="am-form-group">--%>
+        <%--<label name="addressProvince.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在省 <small>*</small></label>--%>
+        <%--<div class="am-u-sm-9" style="margin-top: 10px">--%>
+          <%--<select id="${object.id}" name="addressProvince.id" onchange="provinceChange(this , '${object.id}')">--%>
+            <%--<option value="${object.addressProvince.id}">${object.addressProvince.name}</option>--%>
+          <%--</select>--%>
+        <%--</div>--%>
+      <%--</div>--%>
+      <%--<div class="am-form-group">--%>
+        <%--<label name="addressCity.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在市 <small>*</small></label>--%>
+        <%--<div class="am-u-sm-9" style="margin-top: 10px">--%>
+          <%--<select id="citys${object.id}" name="addressCity.id">--%>
+            <%--<option value="${object.addressCity.id}">${object.addressCity.name}</option>--%>
+          <%--</select>--%>
+        <%--</div>--%>
+      <%--</div>--%>
       <div class="am-form-group">
         <div class="am-u-sm-9 am-u-sm-push-3">
 <security:authorize ifAnyGranted="admin,operational,c_operational">
@@ -171,17 +172,17 @@
     provinceChange(element, o,callback);
   }
 
-  $.post("<c:url value="/address/listProvince.do"/>",
-          function (data) {
-            var obj = eval(data);
-            var out = '<option value="">请选择</option>';
-            for (var i = 0; i < obj.length; i++) {
-              out += '<option value="' + obj[i]["id"] + '">' + obj[i]["name"] + '</option>';
-            }
-            $("#${object.id}").append(out);
-            chooseCity($("#${object.id}") , "${object.addressProvince.id}","${object.addressCity.id}","${object.id}");
-          }
-  )
+  <%--$.post("<c:url value="/address/listProvince.do"/>",--%>
+          <%--function (data) {--%>
+            <%--var obj = eval(data);--%>
+            <%--var out = '<option value="">请选择</option>';--%>
+            <%--for (var i = 0; i < obj.length; i++) {--%>
+              <%--out += '<option value="' + obj[i]["id"] + '">' + obj[i]["name"] + '</option>';--%>
+            <%--}--%>
+            <%--$("#${object.id}").append(out);--%>
+            <%--chooseCity($("#${object.id}") , "${object.addressProvince.id}","${object.addressCity.id}","${object.id}");--%>
+          <%--}--%>
+  <%--)--%>
 
   function provinceChange(element, o, callback) {
     $("#citys" + o).empty();
@@ -243,8 +244,12 @@
       $("#btn_upload0").ready(fileUploads(0,"frontPhotoUrl"));
       $("#btn_upload1").ready(fileUploads(1,"versoPhotoUrl"));
       $("#btn_upload2").ready(fileUploads(2,"identityPhotoUrl"));
-      $("#btn_upload-button").css({"padding":"0em 0em","text-align":"center"});
-
+      $("#btn_upload0-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#btn_upload1-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#btn_upload2-button").css({"padding": "0em 0em", "text-align": "center"});
+      $("#SWFUpload_0").css({left:"5"});
+      $("#SWFUpload_1").css({left:"5"});
+      $("#SWFUpload_2").css({left:"5"});
   });
 
 </script>
