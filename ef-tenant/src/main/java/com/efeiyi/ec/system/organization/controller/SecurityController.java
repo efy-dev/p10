@@ -52,5 +52,9 @@ public class SecurityController {
 
         return "/main";
     }
+    @RequestMapping({"/help.do"})
+    public String help(Model model,HttpServletRequest request){
 
+        return "/help";
+    }
 }

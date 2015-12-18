@@ -16,7 +16,7 @@
 <html>
 <head>
   <title></title>
-    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/seller.css?v=20151207"/> ">
+    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/seller.css?v=20151218"/> ">
 </head>
 <body>
    <c:if test="${review=='1'}">
@@ -196,7 +196,24 @@
 
 </c:if>
 <c:if test="${review=='4'}">
+    <div class="audit">
+        <div class="success">
+            <h2>恭喜您审核通过，欢迎入驻e飞蚁商户后台！</h2>
+            <div class="brid">
+                <ul>
+                    <li>请仔细阅读以下内容：</li>
+                    <li>使用流程：</li>
+                    <li><img src="<c:url value="/scripts/images/audit1.jpg"/>" alt="" /></li>
+                    <li>1、查看店铺基本信息，关联大师与项目。其中，关联项目为必填项。</li>
+                    <li>2、上传商品，按照要求填写商品基本信息，上传商品图片。</li>
+                    <li>3、到“商品列表”页面点击“上架”，完成该商品的上架出售。</li>
+                    <li>4、发货，用户可在“订单管理”页面查看并处理订单，并在“发货记录管理”中查看发货状态。</li>
+                    <li>具体使用说明详见<a style="color:#f90" target="_blank" href="<c:url value="/help.do"/>">《商户后台使用手册》</a></li>
+                </ul>
+            </div>
+        </div>
 
+    </div>
 </c:if>
 </body>
 </html>
