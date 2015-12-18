@@ -59,7 +59,7 @@
 %>
 <%@include file="mobileFooter.jsp" %>
 <%
-} else {
+    } else {
 %>
 <%@include file="footer.jsp" %>
 <%
