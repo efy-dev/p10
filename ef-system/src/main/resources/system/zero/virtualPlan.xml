@@ -34,12 +34,28 @@
                 <do name="formVirtualPlan" label="虚拟数据" access="" result="/zero/virtual/virtualPlanForm"/>
                 <do name="removeVirtualPlan" label="删除虚拟数据" access="" result="redirect:/basic/xm.do?qm=plistVirtualPlan_default"/>
                 <do name="saveOrUpdateVirtualPlan" label="新建或更新虚拟计划" access="" result="redirect:/basic/xm.do?qm=plistVirtualPlan_default"
-                    execute="com.efeiyi.ec.system.zero.virtual.handler.VirtualPlanSaveHandler">
-                    <page>
-                        <fields>
-                            <field name="createDatetime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"/>
-                        </fields>
-                    </page>
+                    execute="com.efeiyi.ec.system.zero.virtual.handler.VirtualPlanSaveHandler"/>
+            </does>
+        </entity>
+
+        <entity name="PCVirtualUserPlan" label="虚拟用户计划" model="com.efeiyi.ec.zero.virtual.model.VirtualUserPlan">
+            <does>
+                <do name="listVirtualUserPlan" access="" label="虚拟用户计划列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="9" operation="eq"/>
+                        <condition name="planType" defaultValue="user" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="PCProductModel" label="虚拟用户计划" model="com.efeiyi.ec.product.model.ProductModel">
+            <does>
+                <do name="listProductModel" access="" label="虚拟用户计划列表">
+                    <query name="virtualOrder" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="product.status" defaultValue="1" operation="eq"/>
+                    </query>
                 </do>
             </does>
         </entity>
