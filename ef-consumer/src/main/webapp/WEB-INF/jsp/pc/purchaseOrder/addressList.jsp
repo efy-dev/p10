@@ -199,10 +199,7 @@
 </div>
 </div>
 </div>
-<script src="<c:url value="/scripts/js/jquery.min.js"/>"></script>
 
-<script src="<c:url value="/scripts/js/amazeui.min.js"/>"></script>
-<script src="<c:url value="/scripts/js/system.js"/>"></script>
 <script src="<c:url value="/scripts/js/jquery.validate.js"/>"></script>
 
 <script>
