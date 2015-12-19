@@ -14,7 +14,7 @@
 </head>
 <body>
 <c:if test="${request=='/giftBuy/**'}">
-    <header>
+    <header id="header">
         <header class="am-header custom-header">
             <div class="am-header-left am-header-nav">
                 <a href="javascript:history.go(-1)" class="chevron-left"></a>
@@ -39,7 +39,7 @@
     </header>
 </c:if>
 <c:if test="${request=='/purchaseOrder/purchaseOrderGiftView'}">
-    <header>
+    <header id="header">
         <header class="am-header custom-header">
             <div class="am-header-left am-header-nav">
                 <a href="javascript:history.go(-1)" class="chevron-left"></a>
@@ -64,7 +64,7 @@
     </header>
 </c:if>
 <c:if test="${request=='/purchaseOrder/giftView'}">
-    <header class="am-header custom-header newam-header">
+    <header id="header" class="am-header custom-header newam-header">
         <!-- //End--chevron-left-->
         <h1 class="am-header-title">e飞蚁，领先的非物质文化遗产电商平台</h1>
         <!-- //End--title-->
@@ -84,7 +84,7 @@
     </header>
 </c:if>
 <c:if test="${request=='/purchaseOrder/receiveGift'}">
-    <header class="am-header custom-header newam-header">
+    <header id="header" class="am-header custom-header newam-header">
         <!-- //End--chevron-left-->
         <h1 class="am-header-title">e飞蚁，领先的非物质文化遗产电商平台</h1>
         <!-- //End--title-->
@@ -106,7 +106,7 @@
 <c:if test="${request!='/giftBuy/**'&&request!='/purchaseOrder/giftView'&&request!='/purchaseOrder/purchaseOrderGiftView'&&request!='/purchaseOrder/receiveGift'}">
     <c:if test="${sign != null && sign == '000'}">
 
-        <header class="am-header custom-header index-header newheader">
+        <header id="header" class="am-header custom-header index-header newheader">
             <div class="logo"><a class="icon" href="" title="e飞蚁"></a></div>
             <!-- //End--logo-->
             <div class="newsearch">
@@ -133,7 +133,7 @@
     </c:if>
     <c:if test="${empty sign}">
 
-        <header class="am-header custom-header newheader">
+        <header id="header" class="am-header custom-header newheader">
             <div class="am-header-left am-header-nav">
                 <a href="javascript:history.go(-1)" class="chevron-left"></a>
             </div>
