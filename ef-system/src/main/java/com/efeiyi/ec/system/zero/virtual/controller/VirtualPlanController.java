@@ -48,7 +48,7 @@ public class VirtualPlanController {
 
         List<VirtualPlan> virtualPlanList = new ArrayList<>();
         virtualPlan = (VirtualPlan)baseManager.getObject(VirtualPlan.class.getName(), virtualPlan.getId());
-        if(!VirtualPlanConstant.planStatusStarted.equals(virtualPlan.getStatus()) && !VirtualPlanConstant.planStatusFinished.equals(virtualPlan.getStatus())) {
+        if(VirtualPlanConstant.planStatusInit.equals(virtualPlan.getStatus())) {
             virtualPlanList.add(virtualPlan);
             CoreTaskScheduler.getInstance().execute(virtualPlanList);
         }

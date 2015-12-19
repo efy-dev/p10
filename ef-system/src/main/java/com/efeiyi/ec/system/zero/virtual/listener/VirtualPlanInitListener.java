@@ -64,10 +64,10 @@ public class VirtualPlanInitListener implements ServletContextListener {
     private void resetTaskStatus() {
         SessionFactory sessionFactory = ((SessionFactory) ApplicationContextUtil.getApplicationContext().getBean("scheduleSessionFactory"));
         Session session = sessionFactory.openSession();
-        Query listQuery = session.createQuery("from VirtualPlan where status <> " + VirtualPlanConstant.planStatusFinished);
+        Query listQuery = session.createQuery("from VirtualPlan where status = " + VirtualPlanConstant.planStatusStarted);
         List<VirtualPlan> virtualPlanList = listQuery.list();
         for (VirtualPlan virtualPlan : virtualPlanList) {
-            virtualPlan.setStatus(VirtualPlanConstant.planStatusNormal);
+            virtualPlan.setStatus(VirtualPlanConstant.planStatusInit);
             session.saveOrUpdate(virtualPlan);
         }
         session.flush();

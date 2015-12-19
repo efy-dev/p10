@@ -23,7 +23,8 @@ public class PurchaseOrderTaskScheduler extends BaseTimerTask {
 
     @Override
     public boolean cancel() {
-        SuperTimer.getInstance().getSubTaskTempStoreMap().put(virtualOrderPlan, productModelList);
+        //暂停时保存进度，先放弃了，太啰嗦
+//        SuperTimer.getInstance().getSubTaskTempStoreMap().put(virtualOrderPlan, productModelList);
         try {
             if (session == null || !session.isOpen()) {
                 session = sessionFactory.openSession();
@@ -39,7 +40,7 @@ public class PurchaseOrderTaskScheduler extends BaseTimerTask {
 
     private void resetPlanStatus() {
         virtualOrderPlan = (VirtualOrderPlan) session.get(VirtualOrderPlan.class, virtualOrderPlan.getId());
-        virtualOrderPlan.setStatus(VirtualPlanConstant.planStatusNormal);
+        virtualOrderPlan.setStatus(VirtualPlanConstant.planStatusInit);
         session.saveOrUpdate(virtualOrderPlan);
         session.flush();
         session.close();
@@ -54,10 +55,11 @@ public class PurchaseOrderTaskScheduler extends BaseTimerTask {
 
         //生成ProductModel随机productModel
         productModelList = (List<ProductModel>) SuperTimer.getInstance().getSubTaskTempStoreMap().remove(virtualOrderPlan);
-        if (productModelList == null || productModelList.isEmpty()) {
+        //取回暂停的进度，取消了，太罗嗦
+//        if (productModelList == null || productModelList.isEmpty()) {
             productModelList = generateProductModelList();
-            logger.info("PurchaseOrderTaskScheduler is resuming task.");
-        }
+//            logger.info("PurchaseOrderTaskScheduler is resuming task.");
+//        }
         Random random = new Random();
 
         //生成随机时间点
