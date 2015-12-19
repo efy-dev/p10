@@ -113,7 +113,7 @@ $(function(){
             $(this).addClass('active').siblings('li').removeClass('active');
         });
         //收藏
-        //var oBiao=$('.preview .collect .biao');
+        var oBiao=$('.preview .collect .biao');
         //oBiao.hover(function(){
         //    var $span=$(this).siblings('span');
         //    $span.text('添加收藏');
@@ -124,7 +124,7 @@ $(function(){
         //        $span.text('添加收藏');
         //    }
         //})
-        //
+
         //oBiao.find('.icon').toggle(
         //    function(){
         //        var $span=$(this).parents('.biao').siblings('span');
@@ -158,6 +158,19 @@ $(function(){
         $('.itemInfo .ul-list li').click(function(){
             $(this).addClass('active');
         })
+
+        $(".homenew .deduce .list-bottom li .mask,.homenew .max-cat .category .cat-right li .mask,.classify .items .img-small a .mask").parents("a").hover(function(){
+            $(this).animate({"opacity":"0.6"},200);
+        },function(){
+            $(this).animate({"opacity":"1"},200);
+        });
+
+
+
+
+
+
+
     })();
     //
     (function(){
@@ -221,13 +234,24 @@ $(function(){
             })
         })
     })();
-    //商品详情评价2015116图片
+    //商品详情
     (function(){
+        //商品详情评价2015116图片
         $('.dis-pic .dis-ol .one-li').click(function(){
             var index = $(this).index()
             $(this).addClass('active').siblings().removeClass('active');
             $(this).parents('.dis-ol').siblings('.box-pic').find('.list-pic').eq(index).show().siblings().hide();
-        })
+        });
+    });
+
+    $('#btn-gift').bind('click',function(){
+        var $div=$('.dialog-gift');
+        var $close=$div.find('.icon-close');
+        $div.show();
+        $close.bind('click',function(){
+            $div.hide();
+        });
+        return false;
     });
     //购物车
     (function(){
@@ -270,6 +294,13 @@ $(function(){
             $(this).find('h3').removeClass('hover');
             $(this).find('.i-mc').fadeOut(10);
         });
+
+        //新导航分类展开收起
+        var navList=$('.nav-new-list');
+        navList.find('h2').bind('click',function(){
+            navList.find('.allsort').slideToggle(100);
+        });
+
         //轮播图
         (function(){
             var $focus=$('.focus-new');
@@ -385,11 +416,7 @@ $(function(){
         };
 
 
-        //分类展开收起
-        var cate=$('#cate');
-        cate.find('h2').bind('click',function(){
-            cate.find('.allsort').slideToggle(100);
-        })
+
 
     })();
 
