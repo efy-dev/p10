@@ -7,6 +7,7 @@ import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.DoQuery;
 import com.ming800.core.does.service.DoManager;
+import com.ming800.core.util.ApplicationContextUtil;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,7 +48,8 @@ public class BatchLogisticsController {
         List<PurchaseOrderProduct> list = (List<PurchaseOrderProduct>) xdoManager.list(tempDo, tempDoQuery, conditions);
         if(BatchLogisticsReactor.runningFlag.get() == BatchLogisticsReactor.idle) {
             BatchLogisticsReactor.runningFlag.set(BatchLogisticsReactor.busy);
-            new Thread(new BatchLogisticsReactor(list)).start();
+
+            new Thread(new BatchLogisticsReactor(list,ApplicationContextUtil.getApplicationContext())).start();
         }
         modelMap.put("objectList", list);
 

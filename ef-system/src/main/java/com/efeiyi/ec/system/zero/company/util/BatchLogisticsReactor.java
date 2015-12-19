@@ -4,6 +4,7 @@ import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderDelivery;
 import com.efeiyi.ec.purchase.model.PurchaseOrderGift;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import com.ming800.core.util.JsonUtil;
 import org.apache.commons.codec.binary.Base64;
@@ -16,6 +17,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.context.ApplicationContext;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -37,8 +39,11 @@ public class BatchLogisticsReactor implements Runnable {
     public static AtomicInteger runningFlag = new AtomicInteger(0);
     public static final int idle = 0;
     public static final int busy = 1;
+    private ApplicationContext applicationContext;
+    private BaseManager baseManager;
 
-    public BatchLogisticsReactor(List<PurchaseOrderProduct> purchaseOrderProductList) {
+    public BatchLogisticsReactor(List<PurchaseOrderProduct> purchaseOrderProductList,ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
         this.purchaseOrderProductList = purchaseOrderProductList;
     }
 
@@ -46,12 +51,100 @@ public class BatchLogisticsReactor implements Runnable {
     public void run() {
         try {
             session = sessionFactory.openSession();
+            baseManager = (BaseManager)applicationContext.getBean("baseManagerImpl");
             post2Deppon();
+//            post2Deppon2();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             session.close();
             BatchLogisticsReactor.runningFlag.set(idle);
+        }
+    }
+
+    private void post2Deppon2() {
+        HttpClient httpClient = new DefaultHttpClient();
+        httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
+        String url = "http://58.40.17.67/dop/order/ewaybillNewSyncSieveOrder.action";
+        HttpPost httppost = new HttpPost(url);
+        Map jsonMap = new HashMap();
+        jsonMap.put("backSignBill", "0");
+        jsonMap.put("customerCode", "F2015120966058945");
+        jsonMap.put("customerID", "EWBHUAYUNN");
+        jsonMap.put("deliveryType", "3");
+        jsonMap.put("logisticCompanyID", "DEPPON");
+        jsonMap.put("orderSource", "EWBHUAYUNN");
+        jsonMap.put("serviceType", "2");
+        jsonMap.put("payType", "2");
+        jsonMap.put("sieveOrder", "Y");
+        jsonMap.put("transportType", "QC_JZKH");
+        jsonMap.put("vistReceive", "N");
+        jsonMap.put("isOut", "Y");
+        jsonMap.put("smsNotify", true);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrderProductList) {
+            try {
+                purchaseOrderProduct = (PurchaseOrderProduct) baseManager.getObject(PurchaseOrderProduct.class.getName(), purchaseOrderProduct.getId());
+                jsonMap.put("cargoName", purchaseOrderProduct.getProductModel().getProduct().getName() + "[" + purchaseOrderProduct.getProductModel().getName() + "]");
+                jsonMap.put("logisticID", "EWHY" + purchaseOrderProduct.getPurchaseOrder().getSerial());
+                jsonMap.put("gmtCommit", dateFormat.format(purchaseOrderProduct.getPurchaseOrder().getCreateDatetime()));
+
+                Map senderMap = new HashMap();
+                senderMap.put("name", "e飞蚁-中国非遗电商平台");
+                senderMap.put("phone", "4008768766");
+                senderMap.put("province", "北京");
+                senderMap.put("city", "北京");
+                senderMap.put("county", "朝阳区");
+                senderMap.put("address", "北京市朝阳区酒仙桥东路9号电子城A2西侧6层");
+                jsonMap.put("sender", senderMap);
+
+                Map receiverMap = new HashMap();
+                PurchaseOrderDelivery purchaseOrderDelivery = purchaseOrderProduct.getPurchaseOrder().getPurchaseOrderDeliveryList().get(0);
+                receiverMap.put("name", purchaseOrderProduct.getPurchaseOrder().getReceiverName());
+                receiverMap.put("mobile", purchaseOrderProduct.getPurchaseOrder().getReceiverPhone());
+                receiverMap.put("province", purchaseOrderDelivery.getConsumerAddress().getProvince());
+                receiverMap.put("city", purchaseOrderDelivery.getConsumerAddress().getCity());
+                receiverMap.put("county", purchaseOrderDelivery.getConsumerAddress().getDistrict());
+                receiverMap.put("address", purchaseOrderDelivery.getConsumerAddress().getDetails());
+                jsonMap.put("receiver", receiverMap);
+
+                String jsonString = JsonUtil.getJsonString(jsonMap);
+                String apiKey = "deppontest";
+                long timestamp = System.currentTimeMillis();
+                String digest = jsonString + apiKey + timestamp;
+                digest = md5(digest);
+                digest = new String(Base64.encodeBase64(digest.getBytes()));
+                StringEntity stringEntity = new StringEntity("companyCode=EWBHUAYUNN&params=" + jsonString + "&digest=" + digest + "&timestamp=" + timestamp, "utf-8");
+                stringEntity.setContentType("application/x-www-form-urlencoded");
+                httppost.setEntity(stringEntity);
+                byte[] b = new byte[(int) stringEntity.getContentLength()];
+                stringEntity.getContent().read(b);
+                HttpResponse response = null;
+                response = httpClient.execute(httppost);
+
+                HttpEntity entity = response.getEntity();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(
+                        entity.getContent(), "UTF-8"));
+                StringBuilder result = new StringBuilder();
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    result.append(line);
+                }
+                Map map = JsonUtil.parseJsonStringToMap(result.toString());
+                if ("1000".equals(map.get("resultCode"))) {
+
+                    purchaseOrderProduct.getPurchaseOrder().setOrderStatus(PurchaseOrder.ORDER_STATUS_POSTED);//efeiyi已发货
+                    purchaseOrderDelivery.setStatus("2");//物流未发货
+                    purchaseOrderDelivery.setSerial((String) map.get("mailNo"));
+                    purchaseOrderDelivery.setLogisticsCompany("DEPPON");
+
+                    baseManager.saveOrUpdate(purchaseOrderDelivery.getClass().getName(),purchaseOrderDelivery);
+                    baseManager.saveOrUpdate(purchaseOrderProduct.getPurchaseOrder().getClass().getName(),purchaseOrderProduct.getPurchaseOrder());
+                }
+                System.out.println(purchaseOrderDelivery.getSerial());
+            } catch (Exception e) {
+                continue;
+            }
         }
     }
 

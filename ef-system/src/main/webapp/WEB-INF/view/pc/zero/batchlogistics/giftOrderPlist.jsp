@@ -21,7 +21,7 @@
            value="返回"/>
 </div>
 <div style="text-align: left;margin-left: 10px;">
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=listBatchGift_default"/>'"
+    <input onclick="window.location.href='<c:url value="/batch/deppon.do?qm=listBatchGift_default&result=redirect:/basic/xm.do?qm=plistBatchGift_default"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="点击有惊喜"/>
