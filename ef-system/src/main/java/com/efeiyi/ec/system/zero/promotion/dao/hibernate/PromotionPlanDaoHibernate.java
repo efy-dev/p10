@@ -37,7 +37,7 @@ public class PromotionPlanDaoHibernate implements PromotionPlanDao {
         Query query = this.getSession().createQuery(hql)
                 .setParameter("source", promotionPlan.getIdentifier());
         List list = query.list();
-        if (!list.isEmpty()){
+        if (list != null || !list.isEmpty()){
             return list.get(0).toString();
         }
         return null;
@@ -53,7 +53,7 @@ public class PromotionPlanDaoHibernate implements PromotionPlanDao {
         Query query = this.getSession().createQuery(hql)
                 .setParameter("source", promotionPlan.getIdentifier());
         List list = query.list();
-        if (!list.isEmpty()){
+        if (list != null || !list.isEmpty()){
             return list.get(0).toString();
         }
         return null;
@@ -65,7 +65,7 @@ public class PromotionPlanDaoHibernate implements PromotionPlanDao {
         Query query = this.getSession().createQuery(hql)
                 .setParameter("source", promotionPlan.getIdentifier());
         List list = query.list();
-        if (!list.isEmpty()){
+        if (list != null || !list.isEmpty()){
             return String.valueOf(list.get(0));
         }
         return null;
