@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -187,61 +188,14 @@ public class BatchLogisticsReactor implements Runnable {
                 jsonMap.put("sender", senderMap);
 
                 Map receiverMap = new HashMap();
-                PurchaseOrderDelivery purchaseOrderDelivery = purchaseOrderProduct.getPurchaseOrder().getPurchaseOrderDeliveryList().get(0);
                 receiverMap.put("name", purchaseOrderProduct.getPurchaseOrder().getReceiverName());
                 receiverMap.put("mobile", purchaseOrderProduct.getPurchaseOrder().getReceiverPhone());
-                receiverMap.put("province", purchaseOrderDelivery.getConsumerAddress().getProvince());
-                receiverMap.put("city", purchaseOrderDelivery.getConsumerAddress().getCity());
-                receiverMap.put("county", purchaseOrderDelivery.getConsumerAddress().getDistrict());
-                receiverMap.put("address", purchaseOrderDelivery.getConsumerAddress().getDetails());
-//                PurchaseOrderDelivery purchaseOrderDelivery = new PurchaseOrderDelivery();
-//                receiverMap.put("name", purchaseOrderProduct.getPurchaseOrder().getReceiverName());
-//                receiverMap.put("mobile", purchaseOrderProduct.getPurchaseOrder().getReceiverPhone());
-//                receiverMap.put("province", "上海");
-//                receiverMap.put("city", "上海");
-//                receiverMap.put("county", "青浦区");
-//                receiverMap.put("address", "明珠路");
+                receiverMap.put("province", purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getProvince().getName());
+                receiverMap.put("city", purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getCity().getName());
+                receiverMap.put("address", purchaseOrderProduct.getPurchaseOrder().getPurchaseOrderAddress());
                 jsonMap.put("receiver", receiverMap);
 
                 String jsonString = JsonUtil.getJsonString(jsonMap);
-//            String jsonString =
-//                    "{\"backSignBill\": \"0\"," +
-//                    "\"businessNetworkNo\": \"W011302020515\"," +
-//                    "\"cargoName\": \"干果\"," +
-//                    "\"customerCode\": \"F2015120966058945\"," +
-//                    "\"customerID\": \"EWBHUAYUNN\"," +
-//                    "\"deliveryType\": \"0\"," +
-//                "\"insuranceValue\": 3000," +
-//                    "\"logisticCompanyID\": \"DEPPON\"," +
-//                    "\"orderSource\": \"EWBHUAYUNN\"," +
-//                    "\"logisticID\": \"EWHY" + purchaseOrderProduct.getPurchaseOrder().getSerial() + "\"," +
-//                    "\"serviceType\": \"1\"," +
-//                    "\"payType\": \"0\"," +
-//                    "\"gmtCommit\": \" 2012-11-27 18:44:19\"," +
-//                    "\"sieveOrder\": \"Y\"," +
-//                    "\"sender\": {\"name\": \"郭诗园\"," +
-//                    "\"mobile\": \"234321223121\"," +
-//                    "\"province\": \"上海\"," +
-//                    "\"city\": \"上海\"," +
-//                    "\"county\": \"青浦区\"," +
-//                    "\"address\": \"明珠路\"}," +
-//                    "\"receiver\": {\"name\": \"上帝发誓\"," +
-//                    "\"phone\": \"234234324\"," +
-//                    "\"province\": \"北京\"," +
-//                    "\"city\": \"北京\"," +
-//                    "\"county\": \"朝阳区\"," +
-//                    "\"address\": \"三里屯街道\"}," +
-//                    "\"smsNotify\": true," +
-//                    "\"toNetworkNo\": \"W01061502\"," +
-//                    "\"totalNumber\": 500," +
-//                    "\"totalVolume\": 0.1," +
-//                    "\"totalWeight\": 300," +
-//                    "\"transportType\": \"QC_JZKH\"," +
-//                    "\"vistReceive\": \"Y\"," +
-//                    "\"isOut\": \"Y\"}"
-                ;
-
-
 //        System.out.println("明文：" + jsonString);
                 String apiKey = "deppontest";
                 long timestamp = System.currentTimeMillis();
@@ -261,6 +215,7 @@ public class BatchLogisticsReactor implements Runnable {
                 HttpResponse response = null;
                 response = httpClient.execute(httppost);
 
+
                 HttpEntity entity = response.getEntity();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
                         entity.getContent(), "UTF-8"));
@@ -270,20 +225,23 @@ public class BatchLogisticsReactor implements Runnable {
                     result.append(line);
                 }
                 Map map = JsonUtil.parseJsonStringToMap(result.toString());
-//        System.out.println(map);
-                if ("1000".equals(map.get("resultCode"))) {
 
+                //返回成功的
+                if ("1000".equals(map.get("resultCode"))) {
                     purchaseOrderProduct.getPurchaseOrder().setOrderStatus(PurchaseOrder.ORDER_STATUS_POSTED);//efeiyi已发货
-                    purchaseOrderDelivery.setStatus("2");//物流未发货
-                    purchaseOrderDelivery.setSerial((String) map.get("mailNo"));
+                    PurchaseOrderDelivery purchaseOrderDelivery = new PurchaseOrderDelivery();
+                    purchaseOrderDelivery.setPurchaseOrder(purchaseOrderProduct.getPurchaseOrder());
+                    purchaseOrderDelivery.setConsumerAddress(purchaseOrderProduct.getPurchaseOrder().getConsumerAddress());
+                    purchaseOrderDelivery.setCreateDateTime(new Date(timestamp));
+                    purchaseOrderDelivery.setSerial((String) map.get("mailNo"));//运单号
+                    purchaseOrderDelivery.setStatus("1");//物流已发货
 //            purchaseOrderDelivery.setSerial("1234");
                     purchaseOrderDelivery.setLogisticsCompany("DEPPON");
-
                     session.saveOrUpdate(purchaseOrderDelivery);
                     session.saveOrUpdate(purchaseOrderProduct.getPurchaseOrder());
                     session.flush();
+                    System.out.println(purchaseOrderDelivery.getSerial());
                 }
-                System.out.println(purchaseOrderDelivery.getSerial());
             } catch (Exception e) {
                 continue;
             }
