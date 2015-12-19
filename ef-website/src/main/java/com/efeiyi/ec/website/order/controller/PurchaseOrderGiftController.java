@@ -188,7 +188,7 @@ public class PurchaseOrderGiftController {
         hints.put(EncodeHintType.MARGIN, 0);
         BitMatrix bitMatrix = null;
         try {
-            bitMatrix = new QRCodeWriter().encode(content,BarcodeFormat.QR_CODE, 120, 120, hints);//二维码像素
+            bitMatrix = new QRCodeWriter().encode(content,BarcodeFormat.QR_CODE, 150, 150, hints);//二维码像素
         } catch (WriterException e) {
             e.printStackTrace();
         }
@@ -220,7 +220,7 @@ public class PurchaseOrderGiftController {
         //图像合并
         Graphics2D g1 = combined.createGraphics();
         g1.drawImage(bimage, 0, 0, null);
-        g1.drawImage(image, 47, 480, null);
+        g1.drawImage(image, 47, 470, null);
         //商品图片位置
         g1.drawImage(giftImgIcon.getImage(), 37, 183, null);
         g1.dispose();
