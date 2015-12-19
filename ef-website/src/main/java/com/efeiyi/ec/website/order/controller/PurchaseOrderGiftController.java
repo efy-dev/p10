@@ -6,6 +6,7 @@ import com.aliyun.openservices.oss.model.PutObjectResult;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressProvince;
+import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderDelivery;
 import com.efeiyi.ec.purchase.model.PurchaseOrderGift;
@@ -40,6 +41,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -264,6 +266,13 @@ public class PurchaseOrderGiftController {
         purchaseOrderGift.setReceiverName(receiveName);
         purchaseOrderGift.setReceiverPhone(receivePhone);
         purchaseOrderGift.setPurchaseOrderAddress(address);
+
+        ConsumerAddress consumerAddress = new ConsumerAddress();
+        consumerAddress.setProvince(addressProvince);
+        consumerAddress.setCity(addressCity);
+        purchaseOrderGift.setConsumerAddress(consumerAddress);
+        baseManager.saveOrUpdate(ConsumerAddress.class.getName(), consumerAddress);
+
         purchaseOrderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //订单改为未发货状态
         baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
         model.addAttribute("purchaseOrder", purchaseOrderGift);
