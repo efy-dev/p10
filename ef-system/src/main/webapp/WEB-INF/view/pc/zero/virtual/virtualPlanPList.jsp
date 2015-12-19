@@ -40,6 +40,7 @@
                 <td>
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
+                            <c:if test="${vpe.virtualPlan.status == '1' || vpe.virtualPlan.status == '2'}">
                             <button onclick="window.location.href='<c:url
                                     value="/basic/xm.do?qm=formVirtualPlan&virtual=virtual&id=${vpe.virtualPlan.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
@@ -50,16 +51,21 @@
                                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                     class="am-icon-trash-o"></span> 删除
                             </button>
+                            </c:if>
+                            <c:if test="${vpe.virtualPlan.status == '3' && vpe.virtualPlan.planType != 'user'}">
                             <button onclick="window.location.href='<c:url
                                     value="/virtualPlan/pausePlan.do?id=${vpe.virtualPlan.id}&resultPage=/basic/xm.do?qm=plistVirtualPlan_default"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                     class="am-icon-edit"></span> 暂停任务
                             </button>
+                            </c:if>
+                            <c:if test="${vpe.virtualPlan.status == '2' || vpe.virtualPlan.status == '5'}">
                             <button onclick="window.location.href='<c:url
                                     value="/virtualPlan/startPlan.do?id=${vpe.virtualPlan.id}&resultPage=/basic/xm.do?qm=plistVirtualPlan_default"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                     class="am-icon-trash-o"></span> 开始任务
                             </button>
+                            </c:if>
                         </div>
                     </div>
                 </td>

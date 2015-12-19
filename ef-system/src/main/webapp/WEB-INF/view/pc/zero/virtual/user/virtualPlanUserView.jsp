@@ -89,7 +89,7 @@
             </div>
         </div>
 
-        <c:if test="${object.status == '1'}">
+        <c:if test="${object.status == '1' || object.status == '2'}">
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>

@@ -35,7 +35,7 @@ public class VirtualPlanDaoHibernate implements VirtualPlanDao {
         Query query = this.getSession().createQuery(hql)
                 .setParameter("virtualOrderPlan", virtualOrderPlan);
         List list = query.list();
-        if (!list.isEmpty()){
+        if (list != null || !list.isEmpty()){
             return Integer.parseInt(list.get(0).toString());
         }
         return null;

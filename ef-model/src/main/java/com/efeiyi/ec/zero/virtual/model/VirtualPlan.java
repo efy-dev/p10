@@ -16,7 +16,7 @@ public class VirtualPlan {
 
     private String id;
     private String serial;
-    private String status;
+    private String status;// 0假删 1已建立 2已初始化(用户计划&订单计划) 3运行中 5暂停 7停止 9完成
     private Date createDatetime;
     private String planType;
     private String startTime;

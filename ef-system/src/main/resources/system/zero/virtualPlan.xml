@@ -7,6 +7,7 @@
                     <statusType fieldName="status">
                         <item label="已删除" value="0"/>
                         <item label="已建立" value="1"/>
+                        <item label="已初始化" value="2"/>
                         <item label="运行中" value="3"/>
                         <item label="暂停" value="5"/>
                         <item label="停止" value="7"/>
@@ -49,9 +50,9 @@
             </does>
         </entity>
 
-        <entity name="PCProductModel" label="虚拟用户计划" model="com.efeiyi.ec.product.model.ProductModel">
+        <entity name="PCProductModel" label="虚拟订单计划商品" model="com.efeiyi.ec.product.model.ProductModel">
             <does>
-                <do name="listProductModel" access="" label="虚拟用户计划列表">
+                <do name="listProductModel" access="" label="虚拟订单计划商品列表">
                     <query name="virtualOrder" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="0" operation="ne"/>
                         <condition name="product.status" defaultValue="1" operation="eq"/>

@@ -149,9 +149,11 @@ public class VirtualPlanController {
             baseManager.delete(VirtualPlan.class.getName(), virtualUserPlan.getId());
             virtualUserPlan.setImplementClass("com.efeiyi.ec.system.zero.virtual.model.task.VirtualUserGenerator");
             virtualUserPlan.setId(null);
+            virtualUserPlan.setStatus("2");
             baseManager.saveOrUpdate(VirtualUserPlan.class.getName(), virtualUserPlan);
         }else {
             userPlan.setCount(virtualUserPlan.getCount());
+            userPlan.setStatus("2");
             baseManager.saveOrUpdate(VirtualUserPlan.class.getName(), userPlan);
         }
         return new ModelAndView("redirect:/basic/xm.do?qm=plistVirtualPlan_default");
@@ -175,6 +177,7 @@ public class VirtualPlanController {
         //获取关联对象
         virtualOrderPlan = getRelationObject(virtualOrderPlan, request);
         //保存订单计划
+        virtualOrderPlan.setStatus("2");
         baseManager.saveOrUpdate(VirtualOrderPlan.class.getName(), virtualOrderPlan);
         //保存订单计划关联商品
         saveVirtualProductModelList(virtualOrderPlan, request);
@@ -280,7 +283,7 @@ public class VirtualPlanController {
         virtualOrderPlan.setOrderAmountCeil(Integer.parseInt(orderAmountCeil));
         virtualOrderPlan.setOrderAmountFloor(Integer.parseInt(orderAmountFloor));
         virtualOrderPlan.setStandardDeviation(Integer.parseInt(standardDeviation));
-        virtualOrderPlan.setImplementClass("com.efeiyi.ec.system.zero.virtual.model.task.VirtualPurchaseOrderGenerator");
+        virtualOrderPlan.setImplementClass("com.efeiyi.ec.system.zero.virtual.model.task.PurchaseOrderTaskScheduler");
         return virtualOrderPlan;
     }
 

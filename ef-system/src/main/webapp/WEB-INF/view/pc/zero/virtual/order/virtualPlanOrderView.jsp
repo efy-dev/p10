@@ -141,7 +141,7 @@
             </div>
         </div>
 
-        <c:if test="${object.status == '1'}">
+        <c:if test="${object.status == '1' || object.status == '2'}">
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
@@ -271,7 +271,7 @@
     function amountCheck(){
         var oaf = $("#orderAmountFloor").val();
         var oac = $("#orderAmountCeil").val();
-        if(oac<=oaf){
+        if(oac-oaf<=0){
             alert("订单数量下限应小于数量上限");
             return false;
         }

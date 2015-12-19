@@ -35,7 +35,7 @@ public class VirtualPlanListHandler implements DoHandler {
         List<VirtualPlanElement> vpeList = new ArrayList<>();
         List<VirtualPlan> virtualPlanList = ((PageInfo)modelMap.get("pageInfo")).getList();
 
-        if (!virtualPlanList.isEmpty()){
+        if (virtualPlanList != null && !virtualPlanList.isEmpty()){
             for (VirtualPlan vp:virtualPlanList){
                 VirtualPlanElement vpe = new VirtualPlanElement();
                 vpe.setVirtualPlan(vp);
