@@ -26,6 +26,7 @@
         <input type="hidden" name="qm" value="saveOrUpdateEnterprisesTenant">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="type" value="11" />
+        <input type="hidden" name="review" value="${object.review}" />
         <input type="hidden" name="resultPage" value="<c:url value="redirect:/tenantType/sendTenantTypePage.do"/>"/>
         <table>
             <div class="am-form-group">

@@ -40,8 +40,6 @@
             <tr>
                 <td class="am-primary am-u-md-3" width="25%">商家地址</td>
                 <td class="am-u-md-3" width="25%">${object.address}</td>
-                <td class="am-primary am-u-md-3" width="25%"></td>
-                <td class="am-u-md-3" colspan="3" ></td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">商家简介</td>

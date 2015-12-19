@@ -1,16 +1,15 @@
 package com.efeiyi.ec.system.zero.virtual.controller;
 
+import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.system.zero.virtual.model.task.CoreTaskScheduler;
 import com.efeiyi.ec.system.zero.virtual.model.timer.SubTimer;
 import com.efeiyi.ec.system.zero.virtual.model.timer.SuperTimer;
 import com.efeiyi.ec.system.zero.virtual.service.VirtualPlanManagerService;
 import com.efeiyi.ec.system.zero.virtual.util.VirtualPlanConstant;
-import com.efeiyi.ec.zero.virtual.model.VirtualOrderPlan;
-import com.efeiyi.ec.zero.virtual.model.VirtualPlan;
-import com.efeiyi.ec.zero.virtual.model.VirtualUser;
-import com.efeiyi.ec.zero.virtual.model.VirtualUserPlan;
+import com.efeiyi.ec.zero.virtual.model.*;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.XQuery;
 import com.ming800.core.taglib.PageEntity;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Administrator on 2015/12/9.
@@ -46,7 +48,7 @@ public class VirtualPlanController {
 
         List<VirtualPlan> virtualPlanList = new ArrayList<>();
         virtualPlan = (VirtualPlan)baseManager.getObject(VirtualPlan.class.getName(), virtualPlan.getId());
-        if(!VirtualPlanConstant.planStatusStarted.equals(virtualPlan.getStatus())) {
+        if(!VirtualPlanConstant.planStatusStarted.equals(virtualPlan.getStatus()) && !VirtualPlanConstant.planStatusFinished.equals(virtualPlan.getStatus())) {
             virtualPlanList.add(virtualPlan);
             CoreTaskScheduler.getInstance().execute(virtualPlanList);
         }
@@ -65,6 +67,7 @@ public class VirtualPlanController {
         modelMap.addAttribute(virtualPlan);
         return new ModelAndView("redirect:" + request.getParameter("resultPage"),modelMap);
     }
+
     @RequestMapping("/getTypeObjectList.do")
     public ModelAndView getTypeObjectList(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
@@ -125,7 +128,7 @@ public class VirtualPlanController {
         }
         //虚拟计划对象--订单order
         if (!type.isEmpty() && type.trim().equals(VirtualPlanConstant.PLAN_TYPE_ORDER)){
-            return virtualOrderView(modelMap);
+            return virtualOrderView(modelMap, request);
         }
         //虚拟计划对象--点赞praise
         if (!type.isEmpty() && type.trim().equals(VirtualPlanConstant.PLAN_TYPE_PRAISE)){}
@@ -139,12 +142,43 @@ public class VirtualPlanController {
         return new ModelAndView("redirect:/basic/xm.do?qm=plistVirtualPlan_default");
     }
 
-    @RequestMapping("/saveVirtualUser.do")
-    public ModelAndView saveVirtualUser(VirtualUserPlan virtualUserPlan) throws Exception{
-        baseManager.delete(VirtualPlan.class.getName(), virtualUserPlan.getId());
-        virtualUserPlan.setImplementClass("com.efeiyi.jh.model.task.VirtualUserGenerator");
-        virtualUserPlan.setId(null);
-        baseManager.saveOrUpdate(VirtualUserPlan.class.getName(), virtualUserPlan);
+    @RequestMapping("/saveVirtualUserPlan.do")
+    public ModelAndView saveVirtualUserPlan(VirtualUserPlan virtualUserPlan) throws Exception{
+        VirtualUserPlan userPlan = (VirtualUserPlan)baseManager.getObject(VirtualUserPlan.class.getName(), virtualUserPlan.getId());
+        if (userPlan == null){
+            baseManager.delete(VirtualPlan.class.getName(), virtualUserPlan.getId());
+            virtualUserPlan.setImplementClass("com.efeiyi.ec.system.zero.virtual.model.task.VirtualUserGenerator");
+            virtualUserPlan.setId(null);
+            baseManager.saveOrUpdate(VirtualUserPlan.class.getName(), virtualUserPlan);
+        }else {
+            userPlan.setCount(virtualUserPlan.getCount());
+            baseManager.saveOrUpdate(VirtualUserPlan.class.getName(), userPlan);
+        }
+        return new ModelAndView("redirect:/basic/xm.do?qm=plistVirtualPlan_default");
+    }
+
+    @RequestMapping("/saveVirtualOrderPlan.do")
+    public ModelAndView saveVirtualOrderPlan(HttpServletRequest request)throws Exception{
+        String id = request.getParameter("id");
+        VirtualOrderPlan virtualOrderPlan = (VirtualOrderPlan) baseManager.getObject(VirtualOrderPlan.class.getName(), id);
+        if (virtualOrderPlan == null){
+            //获取父类virtualPlan基本属性值
+            VirtualPlan virtualPlan = (VirtualPlan) baseManager.getObject(VirtualPlan.class.getName(), id);
+            virtualOrderPlan = new VirtualOrderPlan();
+            BeanUtils.copyProperties(virtualOrderPlan, virtualPlan);
+            //删除父类virtualPlan 并制空ID
+            baseManager.delete(VirtualPlan.class.getName(), id);
+            virtualOrderPlan.setId(null);
+        }
+        //获取除父类外的基本属性值
+        virtualOrderPlan = getBaseProperty(virtualOrderPlan, request);
+        //获取关联对象
+        virtualOrderPlan = getRelationObject(virtualOrderPlan, request);
+        //保存订单计划
+        baseManager.saveOrUpdate(VirtualOrderPlan.class.getName(), virtualOrderPlan);
+        //保存订单计划关联商品
+        saveVirtualProductModelList(virtualOrderPlan, request);
+
         return new ModelAndView("redirect:/basic/xm.do?qm=plistVirtualPlan_default");
     }
 
@@ -172,21 +206,118 @@ public class VirtualPlanController {
 
     private ModelAndView virtualUserView(ModelMap modelMap) throws Exception{
         String planId = (String) modelMap.get("planId");
-        VirtualPlan virtualPlan = (VirtualPlan)baseManager.getObject(VirtualPlan.class.getName(), planId);
-        VirtualUserPlan virtualUserPlan = new VirtualUserPlan();
-        BeanUtils.copyProperties(virtualUserPlan, virtualPlan);
+        VirtualUserPlan virtualUserPlan = (VirtualUserPlan)baseManager.getObject(VirtualUserPlan.class.getName(), planId);
+        if (virtualUserPlan == null){
+            VirtualPlan virtualPlan = (VirtualPlan)baseManager.getObject(VirtualPlan.class.getName(), planId);
+            virtualUserPlan = new VirtualUserPlan();
+            BeanUtils.copyProperties(virtualUserPlan, virtualPlan);
+        }else{
+            long time = virtualUserPlan.getCreateDatetime().getTime();
+            virtualUserPlan.setCreateDatetime(new Date(time));
+        }
         modelMap.put("object", virtualUserPlan);
 
         return new ModelAndView("/zero/virtual/user/virtualPlanUserView");
     }
 
-    private ModelAndView virtualOrderView(ModelMap modelMap) throws Exception{
+    private ModelAndView virtualOrderView(ModelMap modelMap, HttpServletRequest request) throws Exception{
         String planId = (String) modelMap.get("planId");
-        VirtualPlan virtualPlan = (VirtualPlan)baseManager.getObject(VirtualPlan.class.getName(), planId);
-        VirtualOrderPlan virtualOrderPlan = new VirtualOrderPlan();
-        BeanUtils.copyProperties(virtualOrderPlan, virtualPlan);
+        VirtualOrderPlan virtualOrderPlan = (VirtualOrderPlan) baseManager.getObject(VirtualOrderPlan.class.getName(), planId);
+        if (virtualOrderPlan == null){
+            VirtualPlan virtualPlan = (VirtualPlan)baseManager.getObject(VirtualPlan.class.getName(), planId);
+            virtualOrderPlan = new VirtualOrderPlan();
+            BeanUtils.copyProperties(virtualOrderPlan, virtualPlan);
+        }else {
+            long time = virtualOrderPlan.getCreateDatetime().getTime();
+            virtualOrderPlan.setCreateDatetime(new Date(time));
+        }
         modelMap.put("object", virtualOrderPlan);
+        //获取订单计划已经建立关系的商品ID列表和name列表
+        modelMap = getVirtualProductModelIdAndNameList(modelMap, virtualOrderPlan);
+
+        //获取虚拟用户计划列表
+        XQuery xQuery = new XQuery("listVirtualUserPlan_default",request);
+        List<VirtualUserPlan> userPlanList = baseManager.listObject(xQuery);
+        modelMap.put("userPlanList", userPlanList);
+
+        //获取商品列表
+        xQuery = new XQuery("listProductModel_virtualOrder",request);
+        List<ProductModel> productModelList = baseManager.listObject(xQuery);
+        modelMap.put("productModelList", productModelList);
+
         return new ModelAndView("/zero/virtual/order/virtualPlanOrderView");
+    }
+
+    private ModelMap getVirtualProductModelIdAndNameList(ModelMap modelMap, VirtualOrderPlan virtualOrderPlan)throws Exception{
+        String pmIdList = "";
+        String pmNameList = "";
+        if (virtualOrderPlan.getVirtualProductModelList() != null){
+            for (VirtualProductModel vpm:virtualOrderPlan.getVirtualProductModelList()){
+                if (pmIdList.equals("")){
+                    pmIdList = vpm.getProductModel().getId();
+                }else {
+                    pmIdList += "," + vpm.getProductModel().getId();
+                }
+                if (pmNameList.equals("")){
+                    pmNameList = vpm.getProductModel().getProduct().getName() + "[" + vpm.getProductModel().getName() + "]";
+                }else {
+                    pmNameList += "," + vpm.getProductModel().getProduct().getName() + "[" + vpm.getProductModel().getName() + "]";
+                }
+            }
+        }
+        modelMap.put("pmIdList", pmIdList);
+        modelMap.put("pmNameList", pmNameList);
+        return modelMap;
+    }
+
+    private VirtualOrderPlan getBaseProperty(VirtualOrderPlan virtualOrderPlan, HttpServletRequest request)throws Exception{
+        String peakTime = request.getParameter("peakTime");
+        String orderAmountCeil = request.getParameter("orderAmountCeil");
+        String orderAmountFloor = request.getParameter("orderAmountFloor");
+        String standardDeviation = request.getParameter("standardDeviation");
+
+        virtualOrderPlan.setPeakTime(Time.valueOf(peakTime));
+        virtualOrderPlan.setOrderAmountCeil(Integer.parseInt(orderAmountCeil));
+        virtualOrderPlan.setOrderAmountFloor(Integer.parseInt(orderAmountFloor));
+        virtualOrderPlan.setStandardDeviation(Integer.parseInt(standardDeviation));
+        virtualOrderPlan.setImplementClass("com.efeiyi.ec.system.zero.virtual.model.task.VirtualPurchaseOrderGenerator");
+        return virtualOrderPlan;
+    }
+
+    private VirtualOrderPlan getRelationObject(VirtualOrderPlan virtualOrderPlan, HttpServletRequest request)throws Exception{
+        String userPlanId = request.getParameter("virtualUserPlan.id");
+        VirtualUserPlan virtualUserPlan = (VirtualUserPlan) baseManager.getObject(VirtualUserPlan.class.getName(), userPlanId);
+        virtualOrderPlan.setVirtualUserPlan(virtualUserPlan);
+        return virtualOrderPlan;
+    }
+
+    private void saveVirtualProductModelList(VirtualOrderPlan virtualOrderPlan, HttpServletRequest request)throws Exception{
+        //获取随机订单数的区间
+        Random random = new Random();
+        Integer start = virtualOrderPlan.getOrderAmountFloor();
+        Integer end = virtualOrderPlan.getOrderAmountCeil();
+        //获取选择的商品id字符串，以","分隔
+        String productModelIdList = request.getParameter("productModelIdList");
+        String[] productModelIds = productModelIdList.split(",");
+        //解除订单计划修改之前关联的商品
+        if (virtualOrderPlan.getVirtualProductModelList() != null && !virtualOrderPlan.getVirtualProductModelList().isEmpty()){
+            for (VirtualProductModel vpm: virtualOrderPlan.getVirtualProductModelList()){
+                baseManager.delete(VirtualProductModel.class.getName(), vpm.getId());
+            }
+        }
+        //建立订单与选择的商品之间的关联关系
+        for (String id: productModelIds){
+            VirtualProductModel virtualProductModel = new VirtualProductModel();
+            //获取productModel
+            ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), id);
+            virtualProductModel.setProductModel(productModel);
+            //获取随机数量
+            Integer randomAmount = random.nextInt(end - start + 1) + start;
+            virtualProductModel.setRandomAmount(randomAmount);
+
+            virtualProductModel.setVirtualOrderPlan(virtualOrderPlan);
+            baseManager.saveOrUpdate(VirtualProductModel.class.getName(), virtualProductModel);
+        }
     }
 
 }

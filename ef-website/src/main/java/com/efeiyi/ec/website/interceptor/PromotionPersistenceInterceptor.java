@@ -4,6 +4,7 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
+import com.efeiyi.ec.zero.promotion.model.PromotionUserRecord;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.util.CookieTool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 /**
  * 拦截登录，判断用户是否点击过营销返利链接，并记录
  * Created by Administrator on 2015/12/4.
  */
-@Deprecated
+//@Deprecated
 public class PromotionPersistenceInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private BaseManager baseManager;
@@ -54,6 +56,14 @@ public class PromotionPersistenceInterceptor extends HandlerInterceptorAdapter {
                         calendar.add(Calendar.DATE,promotionPlan.getRdDays());
                         user.setRdEndDay(calendar.getTime());
                         baseManager.saveOrUpdate(MyUser.class.getName(), user);
+
+                        //生成一条类日志
+                        PromotionUserRecord promotionUserRecord = new PromotionUserRecord();
+                        promotionUserRecord.setCreateDatetime(new Date());
+                        promotionUserRecord.setIdentifier(promotionSource);
+                        promotionUserRecord.setUser(user);
+                        baseManager.saveOrUpdate(PromotionUserRecord.class.getName(), promotionUserRecord);
+
                         request.getSession().removeAttribute("source");
                     }
                 }

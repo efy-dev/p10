@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>虚拟数据批次信息</title>
-    <script src="<c:url value='/DatePicker/WdatePicker.js'/>"></script>
+    <script src="<c:url value="/resources/plugins/My97DatePicker/WdatePicker.js"/>"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -96,7 +96,7 @@
         $("#planType").val(val);
     }
     function startLessThanEnd(val){
-        if(afterSubmitForm(val) && dateCheck() && timeCheck()){
+        if(afterSubmitForm2zero(val) && dateCheck() && timeCheck()){
             return true;
         }
         return false;
@@ -116,6 +116,20 @@
         if(et<=st){
             alert("任务运行开始时间应该小于结束时间");
             return false;
+        }
+        return true;
+    }
+    function afterSubmitForm2zero(formId){
+        var form2 = document.getElementById(formId);
+        var a = form2.elements.length;//所有的控件个数
+        for (var j=0;j<a;j++){
+            if(form2.elements[j].required){
+                if(form2.elements[j].value=="" || form2.elements[j].value==null){
+                    alert(form2.elements[j].title + "不能为空");
+                    form2.elements[j].focus();
+                    return false;
+                }
+            }
         }
         return true;
     }

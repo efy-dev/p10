@@ -28,6 +28,7 @@
             <input type="hidden" value="saveOrUpdateTenant" name="qm">
             <input type="hidden" name="id" value="${object.id}">
             <input type="hidden" name="status" value="1">
+            <input type="hidden" name="review" value="${object.review}">
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">商家编号</label>
 
@@ -48,6 +49,13 @@
 
                 <div class="am-u-sm-9">
                     <input type="text" id="name" name="name" placeholder="商家名称" value="${object.name}" required>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label for="address" class="am-u-sm-3 am-form-label">商家地址</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="address" name="address" placeholder="商家地址" value="${object.address}" required>
                 </div>
             </div>
             <div class="am-form-group">

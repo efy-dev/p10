@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmenu id="tenantMenu">
     <jnode id="" url="" text_zh_CN="">
+        <jnode id="helpDocument" url="" state="" text_zh_CN="首页"><!--系统管理-->
+            <jnode id="" url="/main.do" state="closed" extend="" access="" text_zh_CN="使用流程">
+                <match url="/main.do"/>
+            </jnode>
+        </jnode>
         <jnode id="serviceManager" url="" state="" text_zh_CN="业务管理"><!--系统管理-->
             <jnode id="" url="/basic/xm.do?qm=plistPurchaseOrder_default&amp;view=order" state="closed" extend="" access="" text_zh_CN="订单管理">
                 <match url="/basic/xm.do?qm=plistPurchaseOrder_default&amp;view=order"/>

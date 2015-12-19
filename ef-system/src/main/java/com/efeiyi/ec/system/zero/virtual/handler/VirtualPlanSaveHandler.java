@@ -11,6 +11,7 @@ import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.ui.ModelMap;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/7/23.
@@ -39,6 +40,7 @@ public class VirtualPlanSaveHandler implements DoHandler {
         if ("new".equals(type)){
             virtualPlan.setStatus("1");
             virtualPlan.setSerial(autoSerialManager.nextSerial("virtualPlan"));
+            virtualPlan.setCreateDatetime(new Date());
         }
 
         modelMap.put("object", virtualPlan);

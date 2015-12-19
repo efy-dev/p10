@@ -74,7 +74,7 @@
             <div class="part">
                 <h5>物流跟踪</h5>
 
-                <div style="width:100%;overflow: hidden;float:left;margin-left:-73px;">
+                <div style="width:100%;float:left;margin-left:-57px;">
                     <iframe id="kuaidi100" name="kuaidi100" src="${content}" width="600" height="380" marginwidth="12"
                             marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe>
                 </div>
