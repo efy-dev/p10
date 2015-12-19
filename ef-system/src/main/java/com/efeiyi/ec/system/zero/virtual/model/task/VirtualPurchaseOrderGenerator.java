@@ -8,7 +8,6 @@ import com.efeiyi.ec.zero.virtual.model.*;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.hibernate.exception.GenericJDBCException;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.Date;
 import java.util.List;
@@ -21,7 +20,6 @@ public class VirtualPurchaseOrderGenerator extends BaseTimerTask {
 
     private VirtualOrderPlan virtualOrderPlan;
     private List<ProductModel> productModelList;
-    private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
 
 
     public VirtualPurchaseOrderGenerator(List<ProductModel> productModelList, VirtualOrderPlan virtualOrderPlan) {
@@ -38,12 +36,7 @@ public class VirtualPurchaseOrderGenerator extends BaseTimerTask {
         virtualOrderPlan = (VirtualOrderPlan) session.get(VirtualOrderPlan.class, virtualOrderPlan.getId());
         ProductModel productModel = productModelList.remove(random.nextInt(productModelList.size()));
         VirtualUserPlan virtualUserPlan = (VirtualUserPlan)session.get(VirtualUserPlan.class.getName(),virtualOrderPlan.getVirtualUserPlan().getId());
-//        Query query = session.createQuery("from VirtualUser x where x.virtualUserPlan=:virtualUserPlan").setParameter("virtualUserPlan",virtualUserPlan);
-//        List<VirtualUser> virtualUserList = query.list();
-//        virtualUserPlan = (VirtualUserPlan)session.get(VirtualUserPlan.class,virtualUserPlan.getId());
         List<VirtualUser> virtualUserList = virtualUserPlan.getVirtualUserList();
-//        TransactionSynchronizationManager.initSynchronization();
-        baseManager.getObject(virtualUserPlan.getClass().getName(),virtualUserPlan.getId());
         VirtualUser virtualUser = virtualUserList.remove(random.nextInt(virtualUserList.size()));
 
 //        PurchaseOrder purchaseOrder = new PurchaseOrder();
