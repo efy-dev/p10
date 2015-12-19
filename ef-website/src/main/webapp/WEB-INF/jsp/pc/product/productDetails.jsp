@@ -23,6 +23,9 @@
     <meta name="description" content="${product.name},${productModel.name},${product.subName},${product.project.description}"/>
 </head>
 <body>
+<script>
+    var t= "";
+</script>
 <!-- //End--header-->
 <div class="hd product-intro">
     <div class="wh">
@@ -437,12 +440,12 @@
     }
 </script>
 <script>
-    var t = document.getElementById("value").value;
+//    var t = document.getElementById("value").value;
     var url = "http://www.efeiyi.com/order/giftBuy/${productModel.id}/" + t;
     $('#native').qrcode({
         render: "div",
         text: url,
-        width : 176,
+        width : 172,
         height : 184
     });
 </script>
