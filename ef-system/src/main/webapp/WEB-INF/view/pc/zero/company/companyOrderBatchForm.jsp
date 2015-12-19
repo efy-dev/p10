@@ -9,14 +9,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
-<%
-  String path = request.getContextPath();
-  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path ;
-%>
 <html>
 <head>
   <title>企业礼品卡批次信息</title>
-  <script type="text/javascript" src="<c:url value="/scripts/function.js"/>"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -40,18 +35,16 @@
                value="${object.companyName}" required="true">
       </div>
     </div>
-
     <div class="am-form-group">
-      <label name="productModel_id" for="productModel_idName" class="am-u-sm-3 am-form-label">礼品名称<small>*</small></label>
+      <label name="productModelId" for="productModelName" class="am-u-sm-3 am-form-label">礼品名称<small>*</small></label>
       <div class="am-u-sm-9">
-        <input type="text" id="productModel_idName" title="礼品名称" placeholder="礼品名称"
-               onclick="m8uDialog.openDialog2zero('productModel_id','productModel_idName','productModel', '<%=basePath%>')"
-               value="${object.productModel.product.name}<c:if test="${not empty object.productModel}">[${object.productModel.name}]</c:if>"
-               required="true" readonly>
-        <input type="hidden" id="productModel_id"  name="productModel.id" value="${object.productModel.id}">
+        <input type="hidden" name="productModel.id" id="productModelId" title="礼品名称"
+               placeholder="礼品名称" value="${object.productModel.id}" required="true">
+        <input type="text" name="productModelName" id="productModelName" title="礼品名称"
+               placeholder="礼品名称" data-am-modal="{target: '#selProductModel'}" readonly
+               value="${object.productModel.product.name}<c:if test="${not empty object.productModel}">[${object.productModel.name}]</c:if>" >
       </div>
     </div>
-
     <div class="am-form-group">
       <label for="amount" class="am-u-sm-3 am-form-label">礼品卡数量<small>*</small></label>
       <div class="am-u-sm-9">
@@ -59,14 +52,12 @@
                value="${object.amount}" required="true">
       </div>
     </div>
-
     <div class="am-form-group">
       <label for="message" class="am-u-sm-3 am-form-label">祝福语<small>*</small></label>
       <div class="am-u-sm-9">
         <textarea name="message" id="message" title="祝福语" placeholder="祝福语" required="true">${object.message}</textarea>
       </div>
     </div>
-
     <div class="am-form-group">
       <div class="am-u-sm-9 am-u-sm-push-3">
         <input type="submit" class="am-btn am-btn-primary" value="保存"/>
@@ -75,5 +66,80 @@
 
   </form>
 </div>
+
+<div class="am-popup" id="selProductModel" style="height: 550px">
+  <div class="am-popup-inner">
+    <div class="am-popup-hd">
+      <h4 class="am-popup-title">选择商品</h4>
+      <span data-am-modal-close class="am-close">&times;</span>
+    </div>
+    <div class="am-popup-bd" style="height: 10px">
+      <input type="text" name="selProductModel"  style="float: left" placeholder="编号或名称" value=""/>
+      <a style="width: 10%;float: left;margin-left: 10px;"
+         class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+         href="javascript:void(0);" onclick="selProductModel()">查找
+      </a>
+    </div>
+    <div class="am-popup-bd" style="height: 420px">
+      <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+        <tr>
+          <td class="am-text-center" width="4%">操作</td>
+          <th class="am-text-center" width="8%">规格编号</th>
+          <th class="am-text-center" width="17%">规格名称</th>
+        </tr>
+      </table>
+      <div style="height: 350px; overflow-y: auto;">
+        <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover"
+               id="productModelTable">
+          <tbody>
+          <c:forEach var="productModel" items="${productModelList}">
+            <tr name="${productModel.name}" serial="${productModel.serial}">
+              <td align="center" width="13%">
+                <a style="width: 10%;"
+                   class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                   href="javascript:void(0);" onclick="selectProductModel('${productModel.id}','${productModel.product.name}<c:if test="${not empty productModel}">[${productModel.name}]</c:if>')">
+                  选择
+                </a>
+              </td>
+              <td class="am-text-center" width="33%">${productModel.serial}</td>
+              <td class="am-text-center" width="53%">
+                ${productModel.product.name}
+                  <c:if test="${not empty productModel}">
+                    [${productModel.name}]
+                  </c:if>
+              </td>
+            </tr>
+          </c:forEach>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function selProductModel(){
+    var v = $("input[name='selProductModel']").val();
+    if(v==""){
+      $("#productModelTable tr:gt(0)").each(function(){
+        $(this).show();
+      });
+    }else {
+      $("#productModelTable tr:gt(0)").each(function () {
+        if ($(this).attr("name").indexOf(v)!=-1 || $(this).attr("serial").indexOf(v) != -1 ) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+    }
+  }
+  function selectProductModel(id,name){
+    $("#productModelId").val(id);
+    $("#productModelName").val(name);
+    $("#selProductModel").modal('close');
+  }
+</script>
+
 </body>
 </html>

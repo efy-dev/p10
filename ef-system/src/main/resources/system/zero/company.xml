@@ -10,7 +10,8 @@
                     </query>
                 </do>
 
-                <do name="formCompanyOrderBatch" label="企业礼品卡批次信息" access="" result="/zero/company/companyOrderBatchForm"/>
+                <do name="formCompanyOrderBatch" label="企业礼品卡批次信息" access="" result="/zero/company/companyOrderBatchForm"
+                    execute="com.efeiyi.ec.system.zero.company.handler.PurchaseOrderGiftFormHandler"/>
                 <do name="removeCompanyOrderBatch" label="删除企业礼品卡批次信息" access="" result="redirect:/basic/xm.do?qm=plistCompanyOrderBatch_default"/>
                 <do name="saveOrUpdateCompanyOrderBatch" label="保存或更新企业礼品卡批次信息" access="" result="redirect:/basic/xm.do?qm=plistCompanyOrderBatch_default"
                     execute="com.efeiyi.ec.system.zero.company.controller.CompanyOrderBatchFormHandler">
@@ -22,6 +23,7 @@
             <does>
                 <do name="listProductModel" access="" label="礼品列表">
                     <query name="companyDefault" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
                         <condition name="product.status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
@@ -33,11 +35,11 @@
                 <do name="plistPurchaseOrderGift" access="" label="企业礼品卡分页列表" result="/zero/company/companyOrderGiftPList"
                     execute="com.efeiyi.ec.system.zero.company.handler.PurchaseOrderGiftPListHandler">
                     <query name="companyDefault" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="orderType" defaultValue="5" operation="eq"/>
+                        <condition name="orderType" defaultValue="3" operation="eq"/>
                         <condition name="status" defaultValue="2" operation="eq"/>
                     </query>
                     <query name="companyOrderBatch" label="同批次礼品卡" type="auto" orderBy="id:desc">
-                        <condition name="orderType" defaultValue="5" operation="eq"/>
+                        <condition name="orderType" defaultValue="3" operation="eq"/>
                         <condition name="status" defaultValue="2" operation="eq"/>
                         <condition name="companyOrderBatch.id" defaultValue="" operation="eq"/>
                     </query>

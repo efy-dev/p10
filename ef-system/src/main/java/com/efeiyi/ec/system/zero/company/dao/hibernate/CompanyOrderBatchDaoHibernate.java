@@ -56,7 +56,7 @@ public class CompanyOrderBatchDaoHibernate implements CompanyOrderBatchDao {
             purchaseOrderProduct.setPurchaseAmount(1);
 
             orderGift.setSerial(serial);
-            orderGift.setOrderType("5");// 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型 5.企业礼品卡类型
+            orderGift.setOrderType("3");// 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型 /*5.企业礼品卡类型--未使用，使用3礼品卷类型 修改时一并修改配置文件*/
             orderGift.setStatus("2");//0假删 1正常 2企业礼品卡  9虚拟订单
             orderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRGIFT);//订单状态6 待收礼;填写订单后为5未发货
             orderGift.setShowGiftNameStatus("1");//0不显示 1显示
