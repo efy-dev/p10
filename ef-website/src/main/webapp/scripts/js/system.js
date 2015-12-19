@@ -246,7 +246,6 @@ $(function(){
 
     $('#btn-gift').bind('click',function(){
         t = document.getElementById("value").value;
-        alert(t);
         var $div=$('.dialog-gift');
         var $close=$div.find('.icon-close');
         $div.show();
