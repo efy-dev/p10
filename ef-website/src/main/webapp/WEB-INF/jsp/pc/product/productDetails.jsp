@@ -442,7 +442,7 @@
     $('#native').qrcode({
         render: "div",
         text: url,
-        width : 170,
+        width : 176,
         height : 184
     });
 </script>
