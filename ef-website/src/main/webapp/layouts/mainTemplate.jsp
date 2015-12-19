@@ -47,9 +47,9 @@
 <%
 } else {
 %>
-<div class="wh">
+<%--<div class="wh">--%>
     <sitemesh:write property='body'/>
-</div>
+<%--</div>--%>
 <%
     }
 %>

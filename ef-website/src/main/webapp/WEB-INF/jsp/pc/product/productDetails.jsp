@@ -12,6 +12,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
+    <script src="<c:url value="/resources/jquery/jquery.qrcode.min.js"/>"></script>
     <title>【${product.name} ${productModel.name}】${product.subName} -e飞蚁</title>
     <c:if test="${product.master!=null}">
         <c:set var="master">
@@ -190,6 +191,7 @@
                        onclick="addCart('${productModel.id}')"  title="放入购物车" dis>放入购物车</a>
                     <a class="btn btn-buy" onclick="immediateBuy('${productModel.id}')"
                        title="立即购买">立即购买</a>
+                    <a class="btn" id="btn-gift" title="购买送礼">购买送礼</a>
                 </c:if>
                 <%--<a class="btn btn-append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车">放入购物车</a>--%>
                 <%--<a class="btn btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>" title="立即购买">立即购买</a>--%>
@@ -297,10 +299,21 @@
             </c:if>
         </div>
     </div>
-
-
-
 </div>
+<!--Start-/*够阿米送礼弹出框*/-->
+<div class="dialog-gift" style="display: none;">
+    <div class="content">
+        <div class="title">${productModel.name}</div>
+        <div class="code">
+            <p class="img" ><div id="native" style="display: inline-block;"></div></p>
+            <p class="txt">扫码立即送礼</p>
+            <p class="info"><img src="<c:url value="/scripts/images/dialog-gift-img.png"/>" alt=""></p>
+        </div>
+        <div class="icon-close" title="关闭"></div>
+    </div>
+    <div class="overbg"></div>
+</div>
+<!--//End-/*够阿米送礼弹出框*/-->
 <script type="text/javascript">
 
     $().ready(function(){
@@ -422,6 +435,16 @@
             }
         });
     }
+</script>
+<script>
+    var t = document.getElementById("value").value;
+    var url = "http://www.efeiyi.com/order/giftBuy/${productModel.id}/" + t;
+    $('#native').qrcode({
+        render: "div",
+        text: url,
+        width : 170,
+        height : 184
+    });
 </script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 </body>
