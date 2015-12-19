@@ -7,9 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title>虚拟订单计划信息</title>
@@ -135,12 +134,6 @@
         <div class="am-form-group">
             <label class="am-u-sm-3 am-form-label">选择商品<small>*</small></label>
             <div class="am-u-sm-9">
-                <c:set var="pmIdList" value="" scope="page" property="String"/>
-                <c:set var="pmNameList" value="" scope="page" property="String"/>
-                <c:forEach items="${object.virtualProductModelList}" var="virtualProductModel">
-                    <%--<c:set var="pmIdList" value="${pmIdList = pmIdList + virtualProductModel.productModel.id + ','}" scope="page"/>--%>
-                    <%--<c:set var="pmNameList" value="${pmNameList = pmNameList + virtualProductModel.productModel.name + ','}" scope="page"/>--%>
-                </c:forEach>
                 <input type="hidden" name="productModelIdList" id="productModelIdList"
                        placeholder="商品" value="${pmIdList}" required="true">
                 <input type="text" name="productModelNameList" id="productModelNameList"
@@ -232,7 +225,12 @@
                     <c:forEach var="productModel" items="${productModelList}">
                         <tr name="${productModel.name}" serial="${productModel.serial}">
                             <td align="center" width="13%">
-                                <input type="checkbox" name="pModel" value="${productModel.id}" title="${productModel.product.name}[${productModel.name}]">
+                                <c:if test="${fn:contains(pmIdList, productModel.id)}">
+                                    <input type="checkbox" name="pModel" value="${productModel.id}" checked="checked" title="${productModel.product.name}[${productModel.name}]">
+                                </c:if>
+                                <c:if test="${not fn:contains(pmIdList, productModel.id)}">
+                                    <input type="checkbox" name="pModel" value="${productModel.id}" title="${productModel.product.name}[${productModel.name}]">
+                                </c:if>
                             </td>
                             <td class="am-text-center" width="33%">${productModel.serial}</td>
                             <td class="am-text-center" width="53%">${productModel.product.name}[${productModel.name}]</td>
