@@ -24,10 +24,11 @@
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr style="text-align:left">
             <td>操作</td>
-            <td>虚拟数据批次</td>
-            <td>虚拟数据对象</td>
+            <td>批次编号</td>
+            <td>批次名称</td>
+            <td>批次对象</td>
             <td>关联数量</td>
-            <td>已完成数量</td>
+            <td>完成数量</td>
             <td>起始日期</td>
             <td>终止日期</td>
             <td>起始时间</td>
@@ -72,6 +73,7 @@
                 <td>
                     <a href="<c:url value="/virtualPlan/getTypeObjectView.do?virtual=virtual&id=${vpe.virtualPlan.id}&type=${vpe.type}"/>">${vpe.virtualPlan.serial}</a>
                 </td>
+                <td><%--名称--%>${vpe.virtualPlan.description}</td>
                 <td>
                     <ming800:status name="status" dataType="PCVirtualPlan.planType" checkedValue="${vpe.virtualPlan.planType}"
                                     type="normal"/>
