@@ -26,10 +26,11 @@
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <img src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!wap-product-pic" style="position: absolute;left: 0;top: -1000px;width: 100%">
+    <img src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!wap-product-pic"
+         style="position: absolute;left: 0;top: -1000px;width: 100%">
 </head>
 <body>
-<div class="gift ae">
+<div id="cardDiv" class="gift ae">
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="pic-page ae">
@@ -57,32 +58,70 @@
     <div class="logistics ae">
         <div class="part">
             <c:if test="${purchaseOrder.status==5}">
-            <h4>感谢您收下礼物，礼物正在准备出库。</h4>
-             </c:if>
+                <h4>感谢您收下礼物，礼物正在准备出库。</h4>
+            </c:if>
             <c:if test="${purchaseOrder.status==7}">
                 <h4>感谢您收下礼物，快递小哥正在拼命配送中。</h4>
-            <ul>
-                <li><span>物流公司：</span><em><c:if test="${not empty lc}"><ming800:status name="logisticsCompany"
-                                                                                       dataType="PurchaseOrderDelivery.logisticsCompany"
-                                                                                       checkedValue="${lc}"
-                                                                                       type="normal"/></c:if> </em></li>
-                <li><span>运单编号：</span><em><c:if test="${not empty serial}">${serial}</c:if> </em></li>
-            </ul>
+                <ul>
+                    <li><span>物流公司：</span><em><c:if test="${not empty lc}"><ming800:status name="logisticsCompany"
+                                                                                           dataType="PurchaseOrderDelivery.logisticsCompany"
+                                                                                           checkedValue="${lc}"
+                                                                                           type="normal"/></c:if> </em>
+                    </li>
+                    <li><span>运单编号：</span><em><c:if test="${not empty serial}">${serial}</c:if> </em></li>
+                </ul>
             </c:if>
         </div>
+
         <c:if test="${!empty content}">
-            <div class="part">
-                <h5>物流跟踪</h5>
+            <%--<a id="showPostStatus1">查看物流</a>--%>
 
-                <div style="width:100%;float:left;margin-left:-57px;">
-                    <iframe id="kuaidi100" name="kuaidi100" src="${content}" width="600" height="380" marginwidth="12"
-                            marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe>
-                </div>
+            <a id="showPostStatus"
+               style="width:100%; float:left;text-align:center;margin-top: 10px;padding: 1rem 0.9rem;font-size: 1rem;border: 1px solid #ccc;background: #000;color: #fff;">
+                查看物流
+            </a>
 
-            </div>
+
         </c:if>
     </div>
     <div class="efi-icon ae"><i class="icon"></i></div>
 </div>
+
+<div id="postDiv" class="part" style="display: none;">
+
+    <div>
+        <a id="showGiftCard"
+           style=" float:left;text-align:center;margin-top: 10px;padding: 1rem 0.9rem;font-size: 1rem;border: 1px solid #ccc;background: #000;color: #fff;">
+            返回查看礼品卡
+        </a>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <h5>物流跟踪</h5>
+
+    <div style="width:100%;float:left;margin-left:-34px;">
+        <iframe id="kuaidi100" name="kuaidi100" src="${content}" width="600" height="380" marginwidth="12"
+                marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe>
+    </div>
+
+</div>
+
+<script>
+    $().ready(function () {
+        $("#showPostStatus").click(function () {
+            $("#postDiv").slideToggle();
+            $("#cardDiv").slideToggle();
+            $("#header").slideToggle();
+        });
+
+        $("#showGiftCard").click(function () {
+            $("#postDiv").slideToggle();
+            $("#cardDiv").slideToggle();
+            $("#header").slideToggle();
+        });
+    });
+</script>
 </body>
 </html>

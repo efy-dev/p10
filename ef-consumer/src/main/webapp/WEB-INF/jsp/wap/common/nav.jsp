@@ -13,7 +13,7 @@
 </head>
 <body>
 <c:if test="${sign != null and sign == '000'}">
-    <header class="am-header custom-header index-header">
+    <header id="header" class="am-header custom-header index-header">
         <div class="logo"><a class="icon" href="" title="e飞蚁"></a></div>
         <!-- //End--logo-->
         <div class="am-header-right am-header-nav">
@@ -25,7 +25,7 @@
 </c:if>
 <c:if test="${sign == null}">
 
-    <header class="am-header custom-header">
+    <header id="header" class="am-header custom-header">
         <div class="am-header-left am-header-nav">
             <a href="javascript:if(typeof gobackUrl=='undefined'){
             history.go(-1)}else{
