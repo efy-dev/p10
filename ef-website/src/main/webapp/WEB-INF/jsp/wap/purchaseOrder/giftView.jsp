@@ -34,7 +34,7 @@
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="pic-page ae">
             <div class="pic-img"><img
-                    src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!product-icon"
+                    src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture"
                     width="181" height="101"></div>
             <div class="pic-text">
                 <p>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}</p>
