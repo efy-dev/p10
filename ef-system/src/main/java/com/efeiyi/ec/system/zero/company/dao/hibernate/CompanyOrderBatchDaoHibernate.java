@@ -82,7 +82,7 @@ public class CompanyOrderBatchDaoHibernate implements CompanyOrderBatchDao {
 
     @Override
     public List<PurchaseOrderGift> getOrderGiftList(CompanyOrderBatch companyOrderBatch) throws Exception {
-        String hql = "from PurchaseOrderGift as pog where pog.companyOrderBatch = :companyOrderBatch and pog.status != '0' and pog.orderType = '5'";
+        String hql = "from PurchaseOrderGift as pog where pog.companyOrderBatch = :companyOrderBatch and pog.status != '0' and pog.orderType = '3'";
         Query query = this.getSession().createQuery(hql).setParameter("companyOrderBatch", companyOrderBatch);
         return query.list();
     }
