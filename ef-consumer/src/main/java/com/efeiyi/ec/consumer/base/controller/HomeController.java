@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 
@@ -114,6 +115,17 @@ public class HomeController {
 //    public String show5004Test(){
 //       throw new RuntimeException();
 //    }
+
+    @RequestMapping("/401")
+    public String show401(HttpServletResponse response) throws Exception {
+        return "redirect:/";
+    }
+
+    @RequestMapping("/401test")
+    public String show(HttpServletResponse response) throws Exception {
+        response.sendError(401, "测试");
+        return "/home";
+    }
 
 
     @RequestMapping({"/test.do"})

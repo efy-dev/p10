@@ -87,7 +87,7 @@
             </jnode>
         </jnode>
         <jnode url="" id="giftOrderManager" access="admin,operational,c_operational,o_operational,product_manager" state="closed"  text_zh_CN="礼品订单批量管理">
-            <jnode url="/basic/xm.do?qm=plistBatchGift_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="大礼包">
+            <jnode url="/basic/xm.do?qm=plistBatchGift_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="大礼包批量发送">
                 <match url="/basic/xm.do?qm=plistBatchGift"/>
                 <match url="/basic/xm.do?qm=listBatchGift"/>
             </jnode>

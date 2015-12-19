@@ -14,43 +14,34 @@
     <title>返利链接注册用户列表</title>
 </head>
 <body style="height: auto">
-<div style="text-align: left;margin-left: 10px;">
+<span style="text-align: left;margin-left: 10px;">
     <input onclick="window.history.go(-1);"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回"/>
-</div>
-<div style="text-align: left;margin-left: 10px;">
+</span>
+<span style="text-align: left;margin-left: 10px;">
     <input onclick="window.location.href='<c:url value="/batch/deppon.do?qm=listBatchGift_default&result=redirect:/basic/xm.do?qm=plistBatchGift_default"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
-           value="点击有惊喜"/>
-</div>
+           value="启动批量"/>
+</span>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr style="text-align:left">
-            <td>订单状态</td>
             <td>订单序列号</td>
-            <td>运单号</td>
+            <td>商品规格</td>
             <td>商品名</td>
-            <td>商品id</td>
             <td>购买数量</td>
-            <td>买入价</td>
+            <td>价格</td>
         </tr>
         <c:forEach items="${pageInfo.list}" var="purchaseOrderProduct">
             <tr>
-                <td><ming800:status name="purchaseOrder.orderStatus" dataType="BigPrize.purchaseOrder.orderStatus"
-                                    checkedValue="${purchaseOrderProduct.purchaseOrder.orderStatus}"
-                                    type="normal"/></td>
                 <td>${purchaseOrderProduct.purchaseOrder.serial}</td>
-                <td><c:forEach items="${purchaseOrderProduct.purchaseOrder.purchaseOrderDeliveryList}"
-                               var="purchaseOrderDelivery">
-                    ${purchaseOrderDelivery.serial}
-                </c:forEach></td>
                 <td>${purchaseOrderProduct.productModel.name}</td>
-                <td>${purchaseOrderProduct.productModel.id}</td>
+                <td>${purchaseOrderProduct.productModel.product.name}</td>
                 <td>${purchaseOrderProduct.purchaseAmount}</td>
-                <td>${purchaseOrderProduct.purchasePrice}</td>
+                <td>${purchaseOrderProduct.productModel.price}</td>
             </tr>
         </c:forEach>
     </table>
