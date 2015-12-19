@@ -15,6 +15,7 @@ public class VirtualPlanConstant {
 
     final public static String planStatusDeleted = "0";
     final public static String planStatusNormal = "1";
+    final public static String planStatusInit = "2";
     final public static String planStatusStarted = "3";
     final public static String planStatusStopped = "5";
     final public static String planStatusFinished = "9";

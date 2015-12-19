@@ -149,11 +149,11 @@ public class VirtualPlanController {
             baseManager.delete(VirtualPlan.class.getName(), virtualUserPlan.getId());
             virtualUserPlan.setImplementClass("com.efeiyi.ec.system.zero.virtual.model.task.VirtualUserGenerator");
             virtualUserPlan.setId(null);
-            virtualUserPlan.setStatus("2");
+            virtualUserPlan.setStatus(VirtualPlanConstant.planStatusInit);
             baseManager.saveOrUpdate(VirtualUserPlan.class.getName(), virtualUserPlan);
         }else {
             userPlan.setCount(virtualUserPlan.getCount());
-            userPlan.setStatus("2");
+            userPlan.setStatus(VirtualPlanConstant.planStatusInit);
             baseManager.saveOrUpdate(VirtualUserPlan.class.getName(), userPlan);
         }
         return new ModelAndView("redirect:/basic/xm.do?qm=plistVirtualPlan_default");
@@ -177,7 +177,7 @@ public class VirtualPlanController {
         //获取关联对象
         virtualOrderPlan = getRelationObject(virtualOrderPlan, request);
         //保存订单计划
-        virtualOrderPlan.setStatus("2");
+        virtualOrderPlan.setStatus(VirtualPlanConstant.planStatusInit);
         baseManager.saveOrUpdate(VirtualOrderPlan.class.getName(), virtualOrderPlan);
         //保存订单计划关联商品
         saveVirtualProductModelList(virtualOrderPlan, request);
