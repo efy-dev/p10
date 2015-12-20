@@ -666,15 +666,15 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 
 /*--//End-*/
 @media (max-width:1200px) {
-.btn-arrow-down {left:584px}
+    .btn-arrow-down {left:584px}
 }
 
 @media (min-width:1200px) {
-.btn-arrow-down {left:50%;margin-left:-16px}
+    .btn-arrow-down {left:50%;margin-left:-16px}
 }
 
 @media (max-height:720px) {
-.login-wrap {height:564px}
+    .login-wrap {height:564px}
 }
 /*商品详情评价2015116*/
 .sift {width:100%;border-bottom:1px solid #ededed;float:left;margin-bottom:18px;position:relative}
@@ -816,7 +816,7 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 .classify .items .img-big .tbar2 {width:20px;color:#fff;line-height:20px;font-size:18px;font-weight:bold;padding:17px 8px;box-sizing:content-box;display:inline-block}
 .classify .items .img-big .txt {width:310px;height:60px;line-height:20px;bottom:10px;color:#fff;font-size:12px;font-weight:bold}
 .classify .items .img-small a {float:left;margin-left:1px;margin-bottom:1px;position:relative}
-.classify .items .img-small .tbar {width:20px;height:110px;position:absolute;top:16px;left:15px;font-size:16px;color:#fff;line-height:18px;font-style:italic;overflow:hidden;z-index:5;font-size:14px;font-weight:bold}
+.classify .items .img-small .tbar {width:20px;height:146px;position:absolute;top:16px;left:15px;font-size:16px;color:#fff;line-height:18px;font-style:italic;overflow:hidden;z-index:5;font-size:14px;font-weight:bold}
 .classify .items .img-small .money {position:absolute;right:15px;bottom:15px;color:#fff;font-size:14px;font-family:Times New Roman;font-weight:bold}
 /*--//ENd--homenew--*/
 .footernew {border-top:1px solid #000}
