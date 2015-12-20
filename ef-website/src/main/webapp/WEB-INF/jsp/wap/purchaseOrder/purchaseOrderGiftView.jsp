@@ -30,7 +30,10 @@
     <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
     <img src="http://pro.efeiyi.com/${order.purchaseOrderProductList.get(0).productModel.productModel_url}@!wap-product-pic" style="position: absolute;left: 0;top: -1000px;width: 100%">
+
 </head>
+
+
 <body>
 <!--//End--header-->
 <div class="gift ae">
@@ -57,8 +60,8 @@
     </div>
     <!-- //End-->
     <div class="car-state ae">
-        <div class="btb"><h5>礼物状态</h5><span id="giftStatus"><c:if test="${order.orderStatus=='6'}">未收礼</c:if> <c:if
-                test="${order.orderStatus!='6'&&order.NorderStatus!='1'}">已收礼</c:if></span></div>
+        <div class="btb"><h5>礼物状态</h5><span id="giftStatus"><c:if test="${order.orderStatus=='6'}">未收礼</c:if>
+            <c:if test="${order.orderStatus!='6'&&order.NorderStatus!='1'}">已收礼</c:if></span></div>
         <c:if
                 test="${order.orderStatus!='6'&&order.orderStatus!='1'}">
         <div class="btn-again">
@@ -82,7 +85,6 @@
             </c:if>
             <a href="#" id="share">送礼给Ta</a>
             <a href="<c:url value="/createGiftImage/${order.id}"/> ">保存为图片</a>
-                <a class="url" href="">复制链接</a>
             <div id="cover" style="display: none;"><em class="bg"></em><img
                     src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt=""></div>
             <div id="cover2" style="display: none">
@@ -165,5 +167,9 @@
             })
         })
     </script>
+
+
 </body>
+
+
 </html>

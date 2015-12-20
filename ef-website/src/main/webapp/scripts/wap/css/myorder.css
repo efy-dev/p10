@@ -780,7 +780,7 @@ html, body {height:100%}
 .gift .car-fx {width:100%;line-height:40px;position:fixed;bottom:0;background:#fff;left:0}
 .gift .car-fx a {float:left;text-align:center;font-size:12px;width:25%;background:#0f0f0f;color:#fff;
     position: relative;}
-.gift .car-fx a:first-child {width:50%;background:#ca2610;font-size:14px}
+.gift .car-fx a:first-child {width:75%;background:#ca2610;font-size:14px}
 .gift .car-fx a.url:after{
     content: '';
     width:1px;
