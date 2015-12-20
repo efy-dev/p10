@@ -57,10 +57,10 @@
     <!-- //End-->
     <div class="logistics ae">
         <div class="part">
-            <c:if test="${purchaseOrder.status==5}">
+            <c:if test="${purchaseOrder.orderStatus=='5'}">
                 <h4>感谢您收下礼物，礼物正在准备出库。</h4>
             </c:if>
-            <c:if test="${purchaseOrder.status==7}">
+            <c:if test="${purchaseOrder.orderStatus=='7'}">
                 <h4>感谢您收下礼物，快递小哥正在拼命配送中。</h4>
                 <ul>
                     <li><span>物流公司：</span><em><c:if test="${not empty lc}"><ming800:status name="logisticsCompany"
