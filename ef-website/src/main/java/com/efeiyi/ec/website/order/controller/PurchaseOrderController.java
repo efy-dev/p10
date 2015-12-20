@@ -137,6 +137,22 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/giftBuy/{productId}/{amount}"})
     public String giftBuy(HttpServletRequest request, @PathVariable String productId, Model model, @PathVariable String amount) throws Exception {
+
+        String requestUrl = request.getRequestURL().toString();
+        String requestParam = request.getQueryString();
+//        http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/1#btn-right?
+//        http://www.efeiyi.com/giftReceive/iidvpcgt3j0ab3hz?from=singlemessage&isa
+        try {
+            if (!HttpUtil.isPhone(request)) {
+                String url = requestUrl + "?" + requestParam;
+                url = URLEncoder.encode(url, "UTF-8");
+                return "redirect:/toMobile.do?mobileUrl=" + url;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productId);
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProductModel(productModel);
