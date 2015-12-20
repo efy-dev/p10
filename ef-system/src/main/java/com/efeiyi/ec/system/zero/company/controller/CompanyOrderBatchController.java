@@ -51,7 +51,7 @@ public class CompanyOrderBatchController {
         response.setContentType("text/csv;charset=UTF-8");
         response.setHeader("Content-disposition", "attachment;filename="+companyOrderBatch.getSerial()+".txt");
         for(PurchaseOrderGift purchaseOrderGift : list ){
-            response.getWriter().write("http://www.eifeiy.com/giftReceive/" + purchaseOrderGift.getId() + "\n");
+            response.getWriter().write("http://www.efeiyi.com/giftReceive/" + purchaseOrderGift.getId() + "\n");
         }
         response.getWriter().flush();
     }
