@@ -460,6 +460,7 @@
     $('#btn-gift').bind('click', function () {
         var t = document.getElementById("value").value;;
         var url = "http://www.efeiyi.com/order/giftBuy/${productModel.id}/"+t;
+        $("#native").html("");
         $('#native').qrcode({
             render: "div",
             text: url,

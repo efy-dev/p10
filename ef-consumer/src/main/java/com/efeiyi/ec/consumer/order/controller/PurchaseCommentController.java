@@ -106,8 +106,10 @@ public class PurchaseCommentController {
        if(purchaseOrderProductList.size()!=0){
            for(int i=0;i<purchaseOrderProductList.size();i++){
                PurchaseOrderProduct pop= (PurchaseOrderProduct) purchaseOrderProductList.get(i);
-               pop.getPurchaseOrderComment().getStarts();
-               count+= Integer.parseInt(pop.getPurchaseOrderComment().getStarts());
+               if(pop.getPurchaseOrderComment().getStarts()!=null){
+                   pop.getPurchaseOrderComment().getStarts();
+                   count+= Integer.parseInt(pop.getPurchaseOrderComment().getStarts());
+               }
 
            }
            Double average=(double)count/purchaseOrderProductList.size();
