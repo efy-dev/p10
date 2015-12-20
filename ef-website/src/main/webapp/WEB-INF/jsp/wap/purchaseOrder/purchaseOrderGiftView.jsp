@@ -62,12 +62,6 @@
     <div class="car-state ae">
         <div class="btb"><h5>礼物状态</h5><span id="giftStatus"><c:if test="${order.orderStatus=='6'}">未收礼</c:if>
             <c:if test="${order.orderStatus!='6'&&order.orderStatus!='1'}">已收礼</c:if></span></div>
-        <c:if
-                test="${order.orderStatus!='6'&&order.orderStatus!='1'}">
-        <div class="btn-again">
-            <a href="<c:url value="/order/giftBuy/${order.purchaseOrderProductList.get(0).productModel.id}/${order.purchaseOrderProductList.get(0).purchaseAmount}"/>" title="再买一份">再买一份</a>
-        </div>
-        </c:if>
         <c:if test="${order.orderStatus=='6'||order.orderStatus=='1'}">
             <div class="btb"><h5>送礼说明</h5></div>
             <div class="btb-text ae">
@@ -76,6 +70,10 @@
                 <p>方式二：点击“保存为图片”将生成图片形式的礼物卡片，保存图片后发给好友，好友通过识别图片上的二维码进入收礼页面，正确填写收货信息后即可收礼。</p>
             </div>
         </c:if>
+        <div class="btn-again">
+            <a href="<c:url value="/order/giftBuy/${order.purchaseOrderProductList.get(0).productModel.id}/${order.purchaseOrderProductList.get(0).purchaseAmount}"/>" title="再买一份">再买一份</a>
+        </div>
+
     </div>
     <c:if test="${order.orderStatus!='6'}">
     <div class="car-fx" id="giftButton">
