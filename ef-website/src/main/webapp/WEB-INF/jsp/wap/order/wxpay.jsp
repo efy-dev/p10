@@ -30,16 +30,30 @@
                 function (res) {
 //                    alert(res.err_code + res.err.desc + res.err_msg);
                     if (res.err_msg == "get_brand_wcpay_request:ok") {//支付成功
-                        //跳转到查看支付是否成功
-                        <c:if test="${order.orderType=='3'}">
-                        window.location.href = "http://www.efeiyi.com/giftReceive/${orderId}";
-                        </c:if>
-                        <c:if test="${not empty order.callback && order.orderType!='3'}">
-                        window.location.href = "${order.callback}";
-                        </c:if>
-                        <c:if test="${empty order.callback && order.orderType!='3'}">
-                        window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";
-                        </c:if>
+
+                        <c:set var="payAmount" value="0"  scope="page"/>
+                        <c:forEach items="${order.purchaseOrderPaymentList}" var="payment">
+                        <c:set var="payAmount" value="${payAmount = payAmount + payment.paymentAmount}" scope="page"/>
+                        </c:forEach>
+                        //加入GA追踪
+                        ga('send', 'event', {
+                            'eventCategory': '微信支付',
+                            'eventAction': '支付成功',
+                            'eventLabel': 'wap支付',
+                            'eventValue': ${payAmount},
+                            'hitCallback': function () {
+//                              //跳转到查看支付是否成功
+                                <c:if test="${order.orderType=='3'}">
+                                window.location.href = "http://www.efeiyi.com/giftReceive/${orderId}";
+                                </c:if>
+                                <c:if test="${not empty order.callback && order.orderType!='3'}">
+                                window.location.href = "${order.callback}";
+                                </c:if>
+                                <c:if test="${empty order.callback && order.orderType!='3'}">
+                                window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";
+                                </c:if>
+                            }
+                        });
                     }
                     else {
                         window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";

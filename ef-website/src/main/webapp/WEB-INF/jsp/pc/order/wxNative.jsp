@@ -48,7 +48,17 @@
     function checkOrderStatus() {
         ajaxRequest("<c:url value="/order/orderCheck/${order.id}"/>", {}, function (data) {
             if (data) {
-                window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${order.purchaseOrderPayment.purchaseOrder.id}";
+                //加入GA追踪
+                ga('send', 'event', {
+                    'eventCategory': '微信支付',
+                    'eventAction': '支付成功',
+                    'eventLabel': 'PC支付',
+                    'eventValue': ${order.purchaseOrderPayment.paymentAmount},
+                    'hitCallback': function () {
+                        window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${order.purchaseOrderPayment.purchaseOrder.id}";
+                    }
+                });
+
             }
         }, function () {
         }, "get")

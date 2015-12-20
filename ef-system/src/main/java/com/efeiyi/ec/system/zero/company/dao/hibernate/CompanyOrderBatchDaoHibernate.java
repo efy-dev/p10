@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.zero.company.dao.hibernate;
 
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderGift;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
@@ -66,7 +67,12 @@ public class CompanyOrderBatchDaoHibernate implements CompanyOrderBatchDao {
             orderGift.setCreateDatetime(new Date());
             orderGift.setCompanyOrderBatch(companyOrderBatch);
 
+            User user = new User();
+            user.setName(companyOrderBatch.getCompanyName());//存个用户，否则收礼时找不到purchaseOrderGift.user会404
+            orderGift.setUser(user);
+
             session.saveOrUpdate(orderGift);
+            session.saveOrUpdate(user);
             session.saveOrUpdate(purchaseOrderProduct);
 
             count++;
