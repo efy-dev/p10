@@ -25,7 +25,7 @@
             </ul>
         </div>
         <div class="scan-img">
-            <div class="scan-img-left" id="native"></div>
+            <div class="scan-img-left"><div id="native" style="float:left;margin-left: 16px;margin-top: 16px;"></div></div>
             <div class="scan-img-right"></div>
         </div>
     </div>
@@ -34,6 +34,7 @@
     $('#native').qrcode({
         render: "div",
         text: "${codeUrl}"
+
     });
 
     var i = 1000;
