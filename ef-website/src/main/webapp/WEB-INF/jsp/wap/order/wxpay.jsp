@@ -31,12 +31,16 @@
 //                    alert(res.err_code + res.err.desc + res.err_msg);
                     if (res.err_msg == "get_brand_wcpay_request:ok") {//支付成功
 
+                        <c:set var="payAmount" value="0"  scope="page"/>
+                        <c:forEach items="${order.purchaseOrderPaymentList}" var="payment">
+                        <c:set var="payAmount" value="${payAmount = payAmount + payment.paymentAmount}" scope="page"/>
+                        </c:forEach>
                         //加入GA追踪
                         ga('send', 'event', {
                             'eventCategory': '微信支付',
                             'eventAction': '支付成功',
                             'eventLabel': 'wap支付',
-                            'eventValue': 1,
+                            'eventValue': ${payAmount},
                             'hitCallback': function () {
 //                              //跳转到查看支付是否成功
                                 <c:if test="${order.orderType=='3'}">
