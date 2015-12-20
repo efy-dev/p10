@@ -40,7 +40,7 @@
                             'eventCategory': '支付成功',
                             'eventAction': '微信',
                             'eventLabel': 'wap',
-                            'eventValue': ${payAmount},
+                            'eventValue': parseInt(${payAmount * 100}),
                             'hitCallback': function () {
 //                              //跳转到查看支付是否成功
                                 <c:if test="${order.orderType=='3'}">

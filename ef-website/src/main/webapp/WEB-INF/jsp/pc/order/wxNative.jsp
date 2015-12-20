@@ -53,7 +53,7 @@
                     'eventCategory': '支付成功',
                     'eventAction': '微信',
                     'eventLabel': 'PC',
-                    'eventValue': ${order.purchaseOrderPayment.paymentAmount},
+                    'eventValue': parseInt(${order.purchaseOrderPayment.paymentAmount * 100}),
                     'hitCallback': function () {
                         window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${order.purchaseOrderPayment.purchaseOrder.id}";
                     }

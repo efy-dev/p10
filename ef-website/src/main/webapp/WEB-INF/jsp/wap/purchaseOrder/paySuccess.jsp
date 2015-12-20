@@ -40,7 +40,7 @@
         'eventCategory': '支付成功',
         'eventAction': '支付宝',
         'eventLabel': '移动',
-        'eventValue': ${payAmount},
+        'eventValue': parseInt(${payAmount * 100}),
         'hitCallback': function () {
         <%--window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${order.purchaseOrderPayment.purchaseOrder.id}";--%>
         }
