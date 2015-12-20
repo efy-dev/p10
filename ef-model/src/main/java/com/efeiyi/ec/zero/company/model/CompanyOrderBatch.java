@@ -19,6 +19,7 @@ public class CompanyOrderBatch {
     private String id;
     private String serial;
     private String companyName;//企业用户名称
+    private String giverName;//送礼人名称
     private ProductModel productModel;//选择的礼品
     private Integer amount;//礼品卡数量
     private String message;//祝福语
@@ -52,6 +53,15 @@ public class CompanyOrderBatch {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    @Column(name = "giver_name")
+    public String getGiverName() {
+        return giverName;
+    }
+
+    public void setGiverName(String gaverName) {
+        this.giverName = gaverName;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

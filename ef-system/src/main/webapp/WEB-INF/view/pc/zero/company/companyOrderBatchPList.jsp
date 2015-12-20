@@ -26,6 +26,7 @@
             <td>操作</td>
             <td>礼品卡编号</td>
             <td>企业用户</td>
+            <td>送礼人</td>
             <td>礼品名称</td>
             <td>礼品数量</td>
             <td>创建时间</td>
@@ -48,20 +49,17 @@
                                 </button>
                                 <button onclick="window.location.href='<c:url
                                         value="/company/saveCompanyOrderGiftList.do?id=${batch.id}"/>'"
-                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                        class="am-icon-edit"></span> 生成礼品卡
+                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only">生成礼品卡
                                 </button>
                             </c:if>
                             <c:if test="${batch.status == '2'}">
                                 <button onclick="window.location.href='<c:url
                                         value="/basic/xm.do?qm=plistPurchaseOrderGift_companyOrderBatch&type=company&conditions=companyOrderBatch.id:${batch.id}"/>'"
-                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                        class="am-icon-edit"></span> 查看礼品卡
+                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only">查看礼品卡
                                 </button>
                                 <button onclick="window.location.href='<c:url
                                         value="/company/downloadOrderGiftsTxt.do?id=${batch.id}"/>'"
-                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                        class="am-icon-edit"></span> 下载礼品卡链接
+                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only">下载礼品卡链接
                                 </button>
                             </c:if>
                         </div>
@@ -69,6 +67,7 @@
                 </td>
                 <td>${batch.serial}</td>
                 <td>${batch.companyName}</td>
+                <td>${batch.giverName}</td>
                 <td>${batch.productModel.product.name}
                     <c:if test="${not empty batch.productModel}">[${batch.productModel.name}]</c:if>
                 </td>

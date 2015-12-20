@@ -4,6 +4,7 @@ import com.efeiyi.ec.purchase.model.PurchaseOrderGift;
 import com.efeiyi.ec.system.zero.company.service.CompanyOrderBatchServiceManager;
 import com.efeiyi.ec.zero.company.model.CompanyOrderBatch;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,19 +40,26 @@ public class CompanyOrderBatchController {
     @RequestMapping("/company/downloadOrderGiftsTxt.do")
     public void downloadOrderGiftsTxt(HttpServletRequest request,HttpServletResponse response)throws Exception{
         String id = request.getParameter("id");
+        CompanyOrderBatch companyOrderBatch = new CompanyOrderBatch();
+        List<PurchaseOrderGift> list;
+        String filename;
         if (id.isEmpty() || id.trim().equals("")){
-            throw new Exception("企业礼品卡批次Id不能为空");
+            XQuery xQuery = new XQuery("listPurchaseOrderGift_companyDefault", request);
+            list = baseManager.listObject(xQuery);
+            filename = "All.txt";
+        }else {
+            companyOrderBatch = (CompanyOrderBatch) baseManager.getObject(CompanyOrderBatch.class.getName(), id);
+            list = companyOrderBatchServiceManager.getOrderGiftList(companyOrderBatch);
+            filename = companyOrderBatch.getSerial() + ".txt";
         }
-        CompanyOrderBatch companyOrderBatch = (CompanyOrderBatch) baseManager.getObject(CompanyOrderBatch.class.getName(), id);
 
-        List<PurchaseOrderGift> list = companyOrderBatchServiceManager.getOrderGiftList(companyOrderBatch);
         if (list == null || list.size() < 1){
             throw new Exception("获取企业礼品卡失败");
         }
         response.setContentType("text/csv;charset=UTF-8");
-        response.setHeader("Content-disposition", "attachment;filename="+companyOrderBatch.getSerial()+".txt");
+        response.setHeader("Content-disposition", "attachment;filename="+filename);
         for(PurchaseOrderGift purchaseOrderGift : list ){
-            response.getWriter().write("http://www.efeiyi.com/giftReceive/" + purchaseOrderGift.getId() + "\n");
+            response.getWriter().write(purchaseOrderGift.getCompanyOrderBatch().getSerial()+"\t"+"http://www.efeiyi.com/giftReceive/" + purchaseOrderGift.getId() + "\n\r");
         }
         response.getWriter().flush();
     }
