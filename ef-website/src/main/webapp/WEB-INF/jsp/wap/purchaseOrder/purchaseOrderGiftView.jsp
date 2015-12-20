@@ -61,11 +61,11 @@
     <!-- //End-->
     <div class="car-state ae">
         <div class="btb"><h5>礼物状态</h5><span id="giftStatus"><c:if test="${order.orderStatus=='6'}">未收礼</c:if>
-            <c:if test="${order.orderStatus!='6'&&order.NorderStatus!='1'}">已收礼</c:if></span></div>
+            <c:if test="${order.orderStatus!='6'&&order.orderStatus!='1'}">已收礼</c:if></span></div>
         <c:if
                 test="${order.orderStatus!='6'&&order.orderStatus!='1'}">
         <div class="btn-again">
-            <a href="<c:url value="/order/giftBuy/${order.purchaseOrderProductList.get(0).productModel.id}1"/>" title="再买一份">再买一份</a>
+            <a href="<c:url value="/order/giftBuy/${order.purchaseOrderProductList.get(0).productModel.id}/${order.purchaseOrderProductList.get(0).purchaseAmount}"/>" title="再买一份">再买一份</a>
         </div>
         </c:if>
         <c:if test="${order.orderStatus=='6'||order.orderStatus=='1'}">
