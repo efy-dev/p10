@@ -47,9 +47,9 @@
 <%
 } else {
 %>
-<%--<div class="wh">--%>
+<div class="wh">
     <sitemesh:write property='body'/>
-<%--</div>--%>
+</div>
 <%
     }
 %>
@@ -59,7 +59,7 @@
 %>
 <%@include file="mobileFooter.jsp" %>
 <%
-    } else {
+} else {
 %>
 <%@include file="footer.jsp" %>
 <%
