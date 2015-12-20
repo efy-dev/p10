@@ -48,7 +48,7 @@
 <!-- //End--topbar-->
 <div class="header-new wh">
     <div class="hd">
-        <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
+        <div class="logo"><a class="icon" href="<%=PConst.HOSTNAME%>" target="_blank" title="e飞蚁-爱非遗"></a></div>
         <form action="<%=PConst.HOSTNAME%>/search.do" method="get">
             <input type="text" class="txt" placeholder="" name="q" id="q"
                    value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>">
