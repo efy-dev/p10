@@ -37,9 +37,9 @@
                         </c:forEach>
                         //加入GA追踪
                         ga('send', 'event', {
-                            'eventCategory': '微信支付',
-                            'eventAction': '支付成功',
-                            'eventLabel': 'wap支付',
+                            'eventCategory': '支付成功',
+                            'eventAction': '微信',
+                            'eventLabel': 'wap',
                             'eventValue': ${payAmount},
                             'hitCallback': function () {
 //                              //跳转到查看支付是否成功
