@@ -38,31 +38,31 @@
         </header>
     </header>
 </c:if>
-<c:if test="${request=='/purchaseOrder/purchaseOrderGiftView'}">
-    <header id="header">
-        <header class="am-header custom-header">
-            <div class="am-header-left am-header-nav">
-                <a href="javascript:history.go(-1)" class="chevron-left"></a>
-            </div>
-            <!-- //End--chevron-left-->
-            <h1 class="am-header-title">礼物订单</h1>
-            <!-- //End--title-->
-            <!-- //End--chevron-left-->
-            <div class="menu-list">
-                <ul class="bd">
-                    <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
-                    <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
-                    <% if (AuthorizationUtil.isAuthenticated()) {%>
-                    <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
-                    <%} else {%>
-                    <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
-                    <%}%>
-                    <li><a href="<c:url value="/productCategoryList.do"/>" title="个人中心">分类</a></li>
-                </ul>
-            </div>
-        </header>
-    </header>
-</c:if>
+<%--<c:if test="${request=='/purchaseOrder/purchaseOrderGiftView'}">--%>
+    <%--<header id="header">--%>
+        <%--<header class="am-header custom-header">--%>
+            <%--<div class="am-header-left am-header-nav">--%>
+                <%--<a href="javascript:history.go(-1)" class="chevron-left"></a>--%>
+            <%--</div>--%>
+            <%--<!-- //End--chevron-left-->--%>
+            <%--<h1 class="am-header-title">礼物订单</h1>--%>
+            <%--<!-- //End--title-->--%>
+            <%--<!-- //End--chevron-left-->--%>
+            <%--<div class="menu-list">--%>
+                <%--<ul class="bd">--%>
+                    <%--<li><a href="http://www.efeiyi.com" title="首页">首页</a></li>--%>
+                    <%--<li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>--%>
+                    <%--<% if (AuthorizationUtil.isAuthenticated()) {%>--%>
+                    <%--<li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>--%>
+                    <%--<%} else {%>--%>
+                    <%--<li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>--%>
+                    <%--<%}%>--%>
+                    <%--<li><a href="<c:url value="/productCategoryList.do"/>" title="个人中心">分类</a></li>--%>
+                <%--</ul>--%>
+            <%--</div>--%>
+        <%--</header>--%>
+    <%--</header>--%>
+<%--</c:if>--%>
 <c:if test="${request=='/purchaseOrder/giftView'}">
     <header id="header" class="am-header custom-header newam-header">
         <!-- //End--chevron-left-->
