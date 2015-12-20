@@ -80,9 +80,8 @@
                style="width:100%; float:left;text-align:center;margin-top: 10px;padding: 1rem 0.9rem;font-size: 1rem;border: 1px solid #ccc;background: #000;color: #fff;">
                 查看物流
             </a>
-
-
         </c:if>
+        <div class="bd" style="margin-top:10px;font-size:16px;font-weight:bolder">也想送好礼？10秒快速注册，更多非遗好礼等着你~~</div>
     </div>
     <div class="efi-icon ae"><i class="icon"></i></div>
 </div>
