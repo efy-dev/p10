@@ -37,10 +37,10 @@
                         </c:forEach>
                         //加入GA追踪
                         ga('send', 'event', {
-                            'eventCategory': '微信支付',
-                            'eventAction': '支付成功',
-                            'eventLabel': 'wap支付',
-                            'eventValue': ${payAmount},
+                            'eventCategory': '支付成功',
+                            'eventAction': '微信',
+                            'eventLabel': 'wap',
+                            'eventValue': parseInt(${payAmount * 100}),
                             'hitCallback': function () {
 //                              //跳转到查看支付是否成功
                                 <c:if test="${order.orderType=='3'}">

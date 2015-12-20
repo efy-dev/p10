@@ -50,10 +50,10 @@
             if (data) {
                 //加入GA追踪
                 ga('send', 'event', {
-                    'eventCategory': '微信支付',
-                    'eventAction': '支付成功',
-                    'eventLabel': 'PC支付',
-                    'eventValue': ${order.purchaseOrderPayment.paymentAmount},
+                    'eventCategory': '支付成功',
+                    'eventAction': '微信',
+                    'eventLabel': 'PC',
+                    'eventValue': parseInt(${order.purchaseOrderPayment.paymentAmount * 100}),
                     'hitCallback': function () {
                         window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${order.purchaseOrderPayment.purchaseOrder.id}";
                     }

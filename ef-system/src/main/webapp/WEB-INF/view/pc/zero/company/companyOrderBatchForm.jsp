@@ -36,6 +36,13 @@
       </div>
     </div>
     <div class="am-form-group">
+      <label name="giverName" for="giverName" class="am-u-sm-3 am-form-label">送礼人名称<small>*</small></label>
+      <div class="am-u-sm-9">
+        <input type="text" id="giverName" name="giverName" title="送礼人名称" placeholder="送礼人名称"
+               value="${object.giverName}" required="true">
+      </div>
+    </div>
+    <div class="am-form-group">
       <label name="productModelId" for="productModelName" class="am-u-sm-3 am-form-label">礼品名称<small>*</small></label>
       <div class="am-u-sm-9">
         <input type="hidden" name="productModel.id" id="productModelId" title="礼品名称"
