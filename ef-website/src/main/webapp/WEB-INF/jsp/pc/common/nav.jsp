@@ -38,7 +38,7 @@
             <%
                 }
             %>
-            <li><a href="http://www.efeiyi.com/document/helpCenter?group=ec.gwlc" title="商家入驻">商家入驻</a></li>
+            <li><a href="http://www.efeiyi.com/document/helpCenter?group=ec.rzlc" title="商家入驻">商家入驻</a></li>
             <li class="btn-top-wechat">
                 <a title="手机e飞蚁">手机e飞蚁</a>
                 <span class="top-wechat"></span>

@@ -19,10 +19,15 @@
             ${product.master.fullName}
         </c:set>
     </c:if>
-    <meta name="keywords" content="${product.project.name},${master},${product.name},${product.subName}, ${productModel.name},${product.bigTenant.name}"/>
-    <meta name="description" content="${product.name},${productModel.name},${product.subName},${product.project.description}"/>
+    <meta name="keywords"
+          content="${product.project.name},${master},${product.name},${product.subName}, ${productModel.name},${product.bigTenant.name}"/>
+    <meta name="description"
+          content="${product.name},${productModel.name},${product.subName},${product.project.description}"/>
 </head>
 <body>
+<script>
+
+</script>
 <!-- //End--header-->
 <div class="hd product-intro">
     <div class="wh">
@@ -120,18 +125,19 @@
                 <c:if test="${not empty productModel.marketPrice&&productModel.product.status==1}">
                     <p><font>市场价：</font><em>${productModel.marketPrice}</em></p>
                 </c:if>
-              <c:if test="${not empty productModel.price&&productModel.product.status==1}">
-                <p>飞蚁价</p>
+                <c:if test="${not empty productModel.price&&productModel.product.status==1}">
+                    <p>飞蚁价</p>
 
-                <p><strong>￥</strong><span>${productModel.price}</span></p>
-              </c:if>
+                    <p><strong>￥</strong><span>${productModel.price}</span></p>
+                </c:if>
             </div>
             <!-- //End-->
             <!-- //End-->
             <div class="des">
                 <div class="colour">服务：</div>
                 <div class="colour-page">
-                    <span>由 <a target="_blank" href="<c:url value="/tenant/${product.tenant.id}"/>">${product.bigTenant.name}</a>[${product.bigTenant.address}] 发货并提供售后服务</span>
+                    <span>由 <a target="_blank"
+                               href="<c:url value="/tenant/${product.tenant.id}"/>">${product.bigTenant.name}</a>[${product.bigTenant.address}] 发货并提供售后服务</span>
                 </div>
             </div>
             <div class="des">
@@ -169,26 +175,26 @@
                     </div>
                 </c:if>
             </div>
-         <c:if test="${productModel.product.status==1&&productModel.status!=0}">
-            <div class="des">
-                <div class="colour">数量：</div>
-                <div class="colour-page">
-                    <div class="amount">
-                        <a  onclick="subtractProduct()" class="btn-sub" title="减"><i class="icon icon-add"></i></a>
-                        <input id = "value" class="txt" type="text" value="1"/>
-                        <a  onclick="addProduct()" class="btn-add" title="加"><i class="icon icon-sub"></i></a>
+            <c:if test="${productModel.product.status==1&&productModel.status!=0}">
+                <div class="des">
+                    <div class="colour">数量：</div>
+                    <div class="colour-page">
+                        <div class="amount">
+                            <a onclick="subtractProduct()" class="btn-sub" title="减"><i class="icon icon-add"></i></a>
+                            <input id="value" class="txt" type="text" value="1"/>
+                            <a onclick="addProduct()" class="btn-add" title="加"><i class="icon icon-sub"></i></a>
+                        </div>
+                        <!-- //End-->
                     </div>
-                    <!-- //End-->
                 </div>
-            </div>
-        </c:if>
+            </c:if>
             <div class="choose-btns">
                 <c:if test="${productModel.amount <= 0}">
                     <a id="modelId" class="btn btn-append" title="售罄">售罄</a>
                 </c:if>
                 <c:if test="${productModel.amount > 0&&productModel.product.status==1}">
                     <a id="modelId" class="btn btn-append"
-                       onclick="addCart('${productModel.id}')"  title="放入购物车" dis>放入购物车</a>
+                       onclick="addCart('${productModel.id}')" title="放入购物车" dis>放入购物车</a>
                     <a class="btn btn-buy" onclick="immediateBuy('${productModel.id}')"
                        title="立即购买">立即购买</a>
                     <a class="btn" id="btn-gift" title="购买送礼">购买送礼</a>
@@ -241,8 +247,11 @@
             <!-- //End-->
             <div class="btns">
                 <c:if test="${productModel.amount > 0&&productModel.product.status==1&&productModel.status!=0}">
-                    <a class="buy" href="<c:url value="/order/easyBuy/${productModel.id}?amount=1"/>" title="立即购买">立 即 购 买</a>
-                    <a class="append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}&amount=1&redirect=/product/productModel/${productModel.id}"/>" title="放入购物车"><i
+                    <a class="buy" href="<c:url value="/order/easyBuy/${productModel.id}?amount=1"/>" title="立即购买">立 即 购
+                        买</a>
+                    <a class="append"
+                       href="<c:url value="/cart/addProduct.do?id=${productModel.id}&amount=1&redirect=/product/productModel/${productModel.id}"/>"
+                       title="放入购物车"><i
                             class="icon"></i>放 入 购 物 车</a>
                 </c:if>
             </div>
@@ -259,9 +268,9 @@
         <div class="wh part">
             <c:if test="${not empty productPictureList&&fn:length(productPictureList)>0&&empty product.productDescription.content}">
                 <c:forEach items="${productPictureList}" var="productPicture">
-             <p>
-                    <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!pc-detail-view"/>
-             </p>
+                    <p>
+                        <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!pc-detail-view"/>
+                    </p>
                 </c:forEach>
 
             </c:if>
@@ -305,8 +314,12 @@
     <div class="content">
         <div class="title">${productModel.name}</div>
         <div class="code">
-            <p class="img" ><div id="native" style="display: inline-block;"></div></p>
+            <p class="img">
+
+            <div id="native" style="display: inline-block;"></div>
+            </p>
             <p class="txt">扫码立即送礼</p>
+
             <p class="info"><img src="<c:url value="/scripts/images/dialog-gift-img.png"/>" alt=""></p>
         </div>
         <div class="icon-close" title="关闭"></div>
@@ -316,18 +329,18 @@
 <!--//End-/*够阿米送礼弹出框*/-->
 <script type="text/javascript">
 
-    $().ready(function(){
-        ajaxRequest("<c:url value="/product/favorite/productFavoriteStatus.do"/>",{"id":"${productModel.id}"},function(data){
-            if(data){
+    $().ready(function () {
+        ajaxRequest("<c:url value="/product/favorite/productFavoriteStatus.do"/>", {"id": "${productModel.id}"}, function (data) {
+            if (data) {
                 $("#show").hide();
                 $("#hidden").show();
-            }else{
+            } else {
                 $("#show").show();
                 $("#hidden").hide();
             }
-        },function(){},"get")
+        }, function () {
+        }, "get")
     })
-
 
 
     function collect(o) {
@@ -390,31 +403,31 @@
 
     function subtractProduct() {
         var t = $("#value");
-        if(t.val()<=1){
+        if (t.val() <= 1) {
             document.getElementById("classid").value = 1;
         }
-        t.val(parseInt(t.val())-1)
+        t.val(parseInt(t.val()) - 1)
     }
     function addProduct() {
         var t = $("#value");
         var t1 = ${productModel.amount};
-        t.val(parseInt(t.val())+1)
-        if(t.val()>=t1){
+        t.val(parseInt(t.val()) + 1)
+        if (t.val() >= t1) {
             document.getElementById("value").value = t1;
         }
     }
-    function addCart(o){
+    function addCart(o) {
         var t = document.getElementById("value").value;
-        addToCart(t,o,"<c:url value="/cart/addProduct.do?id="/>"+o +"&amount="+ t+"&redirect=/product/productModel/"+o);
+        addToCart(t, o, "<c:url value="/cart/addProduct.do?id="/>" + o + "&amount=" + t + "&redirect=/product/productModel/" + o);
         <%--window.location.href = "<c:url value="/cart/addProduct.do?id="/>"+o +"&amount="+ t+"&redirect=/product/productModel/"+o;--%>
     }
-    function immediateBuy(o){
+    function immediateBuy(o) {
         var t = document.getElementById("value").value;
-        addToCart(t,o,"<c:url value=""/>"+"/order/easyBuy/"+o +"?amount="+ t);
+        addToCart(t, o, "<c:url value=""/>" + "/order/easyBuy/" + o + "?amount=" + t);
         <%--window.location.href = "<c:url value=""/>"+"/order/easyBuy/"+o +"?amount="+ t;--%>
     }
     //跟踪加入购物车事件
-    function addToCart(t,o,callBackUrl) {
+    function addToCart(t, o, callBackUrl) {
         ga('ec:addProduct', {
             'id': "${productModel.id}",
             'name': "【${product.name} ${productModel.name}】${product.subName}",
@@ -437,13 +450,30 @@
     }
 </script>
 <script>
-    var t = document.getElementById("value").value;
-    var url = "http://www.efeiyi.com/order/giftBuy/${productModel.id}/" + t;
-    $('#native').qrcode({
-        render: "div",
-        text: url,
-        width : 176,
-        height : 184
+    //    var t = document.getElementById("value").value;
+//    $('#native').qrcode({
+//        render: "div",
+//        text: url,
+//        width: 172,
+//        height: 184
+//    });
+    $('#btn-gift').bind('click', function () {
+        var t = document.getElementById("value").value;;
+        var url = "http://www.efeiyi.com/order/giftBuy/${productModel.id}/"+t;
+        $("#native").html("");
+        $('#native').qrcode({
+            render: "div",
+            text: url,
+            width: 172,
+            height: 184
+        });
+        var $div = $('.dialog-gift');
+        var $close = $div.find('.icon-close');
+        $div.show();
+        $close.bind('click', function () {
+            $div.hide();
+        });
+        return false;
     });
 </script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>

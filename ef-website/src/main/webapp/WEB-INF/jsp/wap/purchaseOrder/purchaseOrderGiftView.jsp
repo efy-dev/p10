@@ -59,7 +59,7 @@
     <div class="car-state ae">
         <div class="btb"><h5>礼物状态</h5><span id="giftStatus"><c:if test="${order.orderStatus=='6'}">未收礼</c:if> <c:if
                 test="${order.orderStatus!='6'&&order.orderStatus!='1'}">已收礼</c:if></span></div>
-        <c:if test="${order.orderStatus=='6'}">
+        <c:if test="${order.orderStatus=='6'||order.orderStatus=='1'}">
             <div class="btb"><h5>送礼说明</h5></div>
             <div class="btb-text ae">
                 <p>方式一：点击“送礼给Ta”，根据提示送礼给好友，好友通过点击收到的链接进入收礼页面，正确填写收货信息后即可收礼。</p>
