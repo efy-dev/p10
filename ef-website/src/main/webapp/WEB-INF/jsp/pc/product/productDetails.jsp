@@ -26,8 +26,7 @@
 </head>
 <body>
 <script>
-    var t = "";
-    var url = "http://www.efeiyi.com/order/giftBuy/${productModel.id}/"
+
 </script>
 <!-- //End--header-->
 <div class="hd product-intro">
@@ -458,6 +457,23 @@
 //        width: 172,
 //        height: 184
 //    });
+    $('#btn-gift').bind('click', function () {
+        var t = document.getElementById("value").value;;
+        var url = "http://www.efeiyi.com/order/giftBuy/${productModel.id}/"+t;
+        $('#native').qrcode({
+            render: "div",
+            text: url,
+            width: 172,
+            height: 184
+        });
+        var $div = $('.dialog-gift');
+        var $close = $div.find('.icon-close');
+        $div.show();
+        $close.bind('click', function () {
+            $div.hide();
+        });
+        return false;
+    });
 </script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 </body>
