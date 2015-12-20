@@ -18,6 +18,23 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
     public void postHandle(HttpServletRequest request,
                            HttpServletResponse response, Object o, ModelAndView mav)
             throws Exception {
+
+//        String requestUrl = request.getRequestURL().toString();
+//        String requestParam = request.getQueryString();
+////        http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/1#btn-right?
+////        http://www.efeiyi.com/giftReceive/iidvpcgt3j0ab3hz?from=singlemessage&isa
+//        try {
+//            if (!HttpUtil.isPhone(request)) {
+//                String url = requestUrl + "?" + requestParam;
+//                url = URLEncoder.encode(url,"UTF-8");
+//                if (requestUrl.contains("/order/giftBuy") || requestUrl.contains("/giftReceive")) {
+//                    response.sendRedirect("/toMobile.do?mobileUrl="+url);
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
         if (mav != null && mav.getViewName() != null && !mav.getViewName().startsWith("redirect") && !mav.getViewName().startsWith("forward")) {
 
             if (!HttpUtil.isPhone(request.getHeader("User-Agent"))) {
@@ -32,22 +49,7 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获取当前请求的路径
-        String requestUrl = request.getRequestURL().toString();
-        String requestParam  = request.getQueryString();
-        if (request.getParameter("weixinTest") != null) {
-            boolean isWeixin = HttpUtil.isWeixin(request);
-            if (isWeixin) {
-                if (!AuthorizationUtil.isAuthenticated()) {
-                    String redirect_uri = "http://www.efeiyi.com/wx/login?redirect="+requestUrl;
-                    String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                            "appid=" + WxPayConfig.APPID +
-                            "&redirect_uri=" +
-                            URLEncoder.encode(redirect_uri, "UTF-8") +
-                            "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
-                    response.sendRedirect(url+"?"+requestParam);
-                }
-            }
-        }
+
 
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
