@@ -8,6 +8,9 @@
 <html class="no-js">
 <head>
 	<title>个人中心</title>
+	<style>
+		.myorder .order-section .money-btn a{width: 80px}
+	</style>
 </head>
 <body>
 <!--//End--header-->
@@ -119,7 +122,7 @@
 						</ul>
 						<!-- 商品-->
 						<div class="payment">实付款：<em>${purchaseOrder.total}</em>元</div>
-						<div class="money-btn">
+						<div class="money-btn" >
 							<c:choose>
 								<c:when test="${purchaseOrder.orderStatus == '3'}">
 									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
