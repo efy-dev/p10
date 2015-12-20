@@ -71,7 +71,7 @@
 						</c:forEach>
 					</ul>
 					<!-- 商品-->
-					<div class="payment">应付款：<em>${purchaseOrder.total}</em>元</div>
+					<div class="payment">应付款：<em>${purchaseOrder.total-purchaseOrder.getOrderPayMoney()}</em>元</div>
 					<div class="money-btn">
 						<c:choose>
 							<c:when test="${purchaseOrder.orderStatus == '3'}">
@@ -121,7 +121,7 @@
 							</c:forEach>
 						</ul>
 						<!-- 商品-->
-						<div class="payment">实付款：<em>${purchaseOrder.total}</em>元</div>
+						<div class="payment">实付款：<em>${purchaseOrder.total-purchaseOrder.getOrderPayMoney()}</em>元</div>
 						<div class="money-btn" >
 							<c:choose>
 								<c:when test="${purchaseOrder.orderStatus == '3'}">
@@ -195,7 +195,7 @@
 								</c:forEach>
 							</ul>
 							<!-- 商品-->
-							<div class="payment">实付款：<em>${spList.total}</em>元</div>
+							<div class="payment">实付款：<em>${spList.total-purchaseOrder.getOrderPayMoney()}</em>元</div>
 							<div class="money-btn">
 								<c:choose>
 									<c:when test="${spList.orderStatus == '3'}">
