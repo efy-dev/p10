@@ -62,7 +62,10 @@
                     <dd><a href="<c:url value="/document/helpCenter?group=ec.flsm"/>" target="_blank">法律声明</a></dd>
                     <dd><a href="<c:url value="/document/helpCenter?group=ec.aqjyssm"/>" target="_blank">安全及隐私声明</a></dd>
                 </dl>
-                <div class="wechatnew" title="手机e飞蚁"><i class="inro-icon"></i></div>
+                <div class="wechatnew" title="手机e飞蚁">
+                    <i class="inro-icon0"></i>
+                    <i class="inro-icon"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -82,9 +85,12 @@
         </div>
         <div class="copyright wh">
             <div class="frlinksimg">
+                <div class="simgbox">
                 <strong>战略合作伙伴</strong>
-                <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织" target="_blank"></a><em class="line"></em><a class="icon3" title="中国非物质文化遗产保护协会"></a><em class="line"></em><a class="icon2" title="中国非物质文化遗产保护协会"></a></div>
-            <div class="info">Copyright ? 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
+                <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织" target="_blank"></a><em class="line"></em><a class="icon3" title="中国非物质文化遗产保护协会"></a><em class="line"></em><a class="icon2" title="中国非物质文化遗产保护协会"></a>
+                </div>
+             </div>
+                <div class="info">Copyright ? 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
         </div>
         <!--<div class="copyright wh">
             <div class="phone">
