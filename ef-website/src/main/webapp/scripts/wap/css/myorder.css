@@ -45,7 +45,7 @@
 .myorder .order-section .payment{text-align: right;width: 100%;float: left;min-height: 40px;line-height: 40px;background: #fff;margin-bottom: 10px;font-size: 12px;color: #000;padding: 0 19px;}
 .myorder .order-section .payment em{color:#ff0000;}
 .myorder .order-section .money-btn{width: 100%;float: left;margin-bottom: 10px;padding: 0 19px;}
-.myorder .order-section .money-btn a{width: 100px;height: 35px;line-height: 35px;text-align: center;font-size: 12px;color: #000;border: 1px solid #ccc;float: right;margin-right: 15px;background: #fff;}
+.myorder .order-section .money-btn a{width: 80px;height: 35px;line-height: 35px;text-align: center;font-size: 12px;color: #000;border: 1px solid #ccc;float: right;margin-right: 15px;background: #fff;}
 .myorder .order-section .money-btn a:nth-child(1){margin-right: 0}
 .myorder .list-topic {width:100%;border-bottom:1px solid #ccc;overflow:hidden;padding:10px 0;height:auto}
 .myorder .list-topic:last-child {width:100%;border-bottom:0;overflow:hidden;padding:10px 0;height:auto}
@@ -438,7 +438,7 @@
 /*开团详情*/
 .pimg {position:fixed;top:-5000px;left:0}
 .pimg img {width:100%}
-.olli ol.am-control-nav.am-control-paging {bottom:45px}
+.olli ol.am-control-nav.am-control-paging {bottom:38px}
 .olli .am-slider-a1 .am-control-nav li a.am-active {color:#ce0202}
 .my-colonel {padding-bottom:60px}
 .my-colonel .cost {margin-top:0.4rem}
@@ -761,10 +761,36 @@ html, body {height:100%}
 /*礼物订单付款后*/
 .gift .btb-text {padding-top:12px}
 .gift .btb-text p {margin-bottom:12px;line-height:20px;font-size:12px;color:#000}
+.gift .btn-again {
+    width: 100%;
+    float: left;
+    margin: 20px 0;
+    text-align: center;
+}
+.gift .btn-again a {
+    width: 175px;
+    line-height: 30px;
+    border:3px solid #a0a0a0;
+    display:inline-block;
+    font-size: 12px;
+    font-weight: bolder;
+    color: #000;
+}
+
 .gift .car-fx {width:100%;line-height:40px;position:fixed;bottom:0;background:#fff;left:0}
-.gift .car-fx a {float:left;display:block;text-align:center;font-size:12px;color:#000}
-.gift .car-fx a:nth-child(1) {width:67%;background:#ca2610;color:#fff;font-size:14px}
-.gift .car-fx a:nth-child(2) {width:33%;background:#0f0f0f;color:#fff}
+.gift .car-fx a {float:left;text-align:center;font-size:12px;width:25%;background:#0f0f0f;color:#fff;
+    position: relative;}
+.gift .car-fx a:first-child {width:50%;background:#ca2610;font-size:14px}
+.gift .car-fx a.url:after{
+    content: '';
+    width:1px;
+    height:36px;
+    background: #4d4d4d;
+    position: absolute;
+    top:2px;
+    left: 0;
+}
+
 .gift .efi-icon {text-align:center;padding:28px 0 8px}
 .gift .efi-icon .icon {width:74px;display:inline-block;background-position:0 0;height:27px}
 .gift .profile {margin-bottom:22px}
@@ -852,3 +878,72 @@ html, body {height:100%}
 /*统一支付*/
 .order-gift {border-top:1px solid #000;width:100%;float:left}
 .order-gift .newcart-pay {margin-bottom:20px}
+/*移动端分享赚红包*/
+.packet{padding: 0 19px;}
+.packet .pac-text{padding: 50px 0;}
+.packet .pac-text li{font-size: 25px;line-height: 25px;color: #000;font-weight: bold;width: 100%;text-align: center;margin-bottom: 15px;}
+.packet .pac-text li em{color: #ffb100;font-weight: bold}
+.packet .pac-text li:last-child{margin-bottom: 0px;}
+.packet .pac-btn{width: 100%;float: left;line-height: 42px;height: 42px;text-align: center;color: #fff;background: #000;}
+.packet .link{padding: 15px 0;}
+.packet .link a{font-size: 12px;color: #000;position: relative}
+.packet .link a  .pac-icon{position: absolute;width:10px;height: 10px;border-right:1px solid #000;border-bottom: 1px solid #000;}
+.packet .link a:nth-child(1){float: left;padding-left: 15px;}
+.packet .link a:nth-child(1) .pac-icon{  -webkit-transform: rotate(135deg);  -moz-transform: rotate(135deg);  -ms-transform: rotate(135deg);  -o-transform: rotate(135deg);  transform: rotate(135deg);left: 0;top: 5px;}
+.packet .link a:nth-child(2){float: right;padding-right: 15px;}
+.packet .link a:nth-child(2) .pac-icon{  -webkit-transform: rotate(-45deg);  -moz-transform: rotate(-45deg);  -ms-transform: rotate(-45deg);  -o-transform: rotate(-45deg);  transform: rotate(-45deg);right: 0;top: 5px;}
+/*移动端活动*/
+.activity{background: #f5f5f5;border-top:1px solid #808080;padding: 0 19px;}
+.activity h5{padding: 25px;font-size: 14px;line-height: 14px;color:#808080;text-align: center;float: left;width: 100%}
+.activity p{line-height: 21px;font-size: 12px;color:#808080;margin-bottom: 22px;width: 100%;float: left}
+.activity p strong{color: #000;font-weight: bold}
+/*好友点击人物*/
+.t-use-top{padding: 25px 19px;position: relative;background: #fff;min-height: 100px;}
+.t-use-top .user-pic{width: 4rem;height: 4rem;position: absolute;left: 19px;top: 25px;}
+.t-use-top .user-pic img{width: 100%;border-radius: 4px 4px 4px 4px;}
+.t-use-top .user-text{padding-left: 5rem}
+.t-use-top .user-text h4{font-size: 1rem;color: #666;line-height: 12px;margin-bottom: 3px}
+.t-use-top .user-text h4 span{margin-right: 15px;color: #ccc;font-weight: bold;font-size: 1rem}
+.t-use-top .user-text h4 span:last-child{margin-right: 0;}
+.t-use-top .user-text p{font-size: 12px;color: #000;}
+/*好友点击优惠券*/
+.t-use-center{background:#f5f5f5;padding-top: 25px;}
+.t-use-center  ul{padding-bottom: 0;}
+.t-use-center  ul li{margin-top: 0;width: 100%;float: left}
+.t-use-center  ul li:nth-child(1){padding: 0 15px;}
+.t-use-center ul li .right{width: 100%;}
+.t-use-center  ul li:nth-child(2){padding: 14px 15px 8px;font-size: 12px}
+.t-use-center  ul li .state-1{color: #e81313;font-weight: bold}
+.t-use-center  ul li .state-2{font-size: 12px;color: #000;padding: 14px 15px 8px;}
+.t-use-center  ul li .state-3{position: relative;font-size: 12px;color: #000;padding: 14px 15px;}
+.t-use-center  ul li .state-3 a{color: #e81313;font-size: 12px;position: absolute;top: 14px;right: 0;}
+.t-use-center  ul li:last-child{margin-bottom: 25px;}
+.t-use-center  ul li input{background: #fff;border: 1px solid #e9e9e9;margin-top: 0;font-size: 12px;}
+.t-use-center  ul li .int-text{width: 72%;float: left;padding: 12px;}
+.t-use-center  ul li .int-btn{width: 26%;float: right;color: #303030;padding: 12px 0;}
+.t-use-center  ul li .right .page p{-webkit-transform:scale(1);text-align: center;}
+.t-use-botton{padding:25px 19px;}
+.t-use-botton .botn{width: 100%;float: left;background: #000;color: #fff;text-align: center;padding: 13px 0;}
+/*好友点击扩展*/
+.extended{padding-bottom: 42px;}
+.extended li{width: 100%;float: left;margin-bottom: 16px;}
+.extended .hader-list{height: 45px;line-height: 45px;width: 100%;float: left;color: #000;font-size: 12px;text-align: center;background: #f5f5f5;border-top: 1px solid #c8c8c8;border-bottom: 1px solid #c8c8c8;}
+.extended .t-use-top{padding:16px 19px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;margin-top: -1px;}
+.extended .t-use-top .user-text{padding:0 2rem 0 4rem;position: relative}
+.extended .t-use-top .user-text strong{font-size: 18px;color: #000;position: absolute;right: 0;top: 25%;display: inline-block;line-height: 18px;}
+.extended .illustrate{padding:  0 19px 25px;}
+.extended .illustrate h5{font-size: 12px;color: #000;font-weight: bold;margin-bottom: 16px;line-height: 12px;}
+.extended .illustrate p{font-size: 12px;color: #000;line-height: 21px;}
+.add-cord .user-pic{width: 30px;height: 30px;top: 15px;}
+.add-cord .user-pic img{border-radius: 3px 3px 3px 3px;}
+.extended .cost-name li{padding: 16px 19px;width: 100%;float: left;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;margin-top: -1px;min-height: 107px;position: relative;margin-bottom: 16px;}
+.extended .cost-name li .sit-pic{width: 72px;height: 72px;position: absolute;left: 19px;top: 16px;}
+.extended .cost-name li .sit-pic img{width: 100%}
+.extended .cost-name li .sit-txt{padding-left: 82px;width: 100%;float: left;position: relative;min-height: 72px;}
+.extended .cost-name li .sit-txt p:nth-child(1){min-height: 40px;overflow: hidden;width: 100%;line-height: 18px;font-size: 12px;margin-bottom: 15px;}
+.extended .cost-name li .sit-txt p:nth-child(2){font-size: 14px;color: #e71f19;}
+.extended .cost-name li .sit-txt a{width: 75px;height: 28px;position: absolute;right: 0;bottom: 0;line-height: 28px;text-align: center;border: 1px solid #000;font-size: 12px;color: #000;}
+.extended .t-use-top .user-text p{width: 210px;}
+.footer-fx .footer-btn{height: 42px;line-height: 42px;width: 100%;float: left;text-align: center;font-size: 12px;color: #fff;background: #000;}
+.footer-fx{position: fixed;bottom: 0;width: 100%;left:0}
+.newcustom-header .am-header-title{margin: 0 20%;font-size: 18px;}
