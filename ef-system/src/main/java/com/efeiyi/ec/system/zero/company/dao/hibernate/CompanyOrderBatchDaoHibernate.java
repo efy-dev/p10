@@ -63,12 +63,13 @@ public class CompanyOrderBatchDaoHibernate implements CompanyOrderBatchDao {
             orderGift.setShowGiftNameStatus("1");//0不显示 1显示
             orderGift.setShowGiftPriceStatus("1");//0不显示 1显示
             orderGift.setGiftMessage(companyOrderBatch.getMessage());
-            orderGift.setGiftGaverName(companyOrderBatch.getCompanyName());//送礼人姓名
+            orderGift.setGiftGaverName(companyOrderBatch.getGiverName());//送礼人姓名
             orderGift.setCreateDatetime(new Date());
             orderGift.setCompanyOrderBatch(companyOrderBatch);
 
             User user = new User();
             user.setName(companyOrderBatch.getCompanyName());//存个用户，否则收礼时找不到purchaseOrderGift.user会404
+            user.setStatus("0");
             orderGift.setUser(user);
 
             session.saveOrUpdate(orderGift);

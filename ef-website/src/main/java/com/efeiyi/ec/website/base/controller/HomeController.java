@@ -13,6 +13,7 @@ import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import com.ming800.core.util.CookieTool;
 import com.ming800.core.util.StringUtil;
+import com.sun.javafx.sg.prism.NGShape;
 import org.apache.solr.common.util.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -340,6 +342,17 @@ public class HomeController {
     public String test() {
         return "/test";
     }
+
+
+    @RequestMapping({"/toMobile.do"})
+    public String toMobileHandler(HttpServletRequest request,Model model) throws Exception{
+        String url = request.getParameter("mobileUrl");
+        url = URLDecoder.decode(url,"UTF-8");
+        model.addAttribute("url",url);
+        return "/toMobile";
+
+    }
+
 
 
 }

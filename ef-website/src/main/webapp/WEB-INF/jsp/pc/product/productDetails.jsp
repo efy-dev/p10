@@ -318,7 +318,7 @@
 
             <div id="native" style="display: inline-block;"></div>
             </p>
-            <p class="txt">扫码立即送礼</p>
+            <p class="txt">扫码下单</p>
 
             <p class="info"><img src="<c:url value="/scripts/images/dialog-gift-img.png"/>" alt=""></p>
         </div>

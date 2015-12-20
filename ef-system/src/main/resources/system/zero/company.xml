@@ -32,6 +32,12 @@
 
         <entity name="PCPurchaseOrderGift" label="企业礼品卡" model="com.efeiyi.ec.purchase.model.PurchaseOrderGift">
             <does>
+                <do name="listPurchaseOrderGift" access="" label="企业礼品卡列表">
+                    <query name="companyDefault" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="orderType" defaultValue="3" operation="eq"/>
+                        <condition name="status" defaultValue="2" operation="eq"/>
+                    </query>
+                </do>
                 <do name="plistPurchaseOrderGift" access="" label="企业礼品卡分页列表" result="/zero/company/companyOrderGiftPList"
                     execute="com.efeiyi.ec.system.zero.company.handler.PurchaseOrderGiftPListHandler">
                     <query name="companyDefault" label="默认" type="auto" orderBy="id:desc">

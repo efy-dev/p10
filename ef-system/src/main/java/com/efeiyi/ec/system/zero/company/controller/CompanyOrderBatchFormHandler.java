@@ -69,9 +69,11 @@ public class CompanyOrderBatchFormHandler implements DoHandler {
     private CompanyOrderBatch getBaseProperty(CompanyOrderBatch companyOrderBatch, HttpServletRequest request)throws Exception{
         String amount = request.getParameter("amount");
         String message = request.getParameter("message");
+        String giverName = request.getParameter("giverName");
         String companyName = request.getParameter("companyName");
         companyOrderBatch.setMessage(message);
         companyOrderBatch.setAmount(Integer.parseInt(amount));
+        companyOrderBatch.setGiverName(giverName);
         companyOrderBatch.setCompanyName(companyName);
         return companyOrderBatch;
     }

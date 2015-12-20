@@ -1065,6 +1065,43 @@ a:hover { text-decoration: underline }
 .max-four .a-btn:hover { background: #000; color: #fff; }
 .max-four .five-max { position: fixed; right: 0; top: 0 }
 .max-four .logo-four { width: 158px; height: 191px; background: url('../images/efeiyicuowu.png') no-repeat right -405px; float: right; margin-top: 234px; }
+
+
+
+.error404 {
+    width: 360px;
+    height: 280px;
+    position: fixed;
+    top:50%;
+    left: 50%;
+    margin-left: -180px;
+    margin-top: -140px;
+    text-align: center;
+}
+.error404 .codebg {
+    width: 201px;
+    height: 193px;
+    background:url(../images/code404bg.png) no-repeat;
+    padding-top: 15px;
+    display: inline-block;
+}
+.error404 h1{
+    width: 100%;
+    float: left;
+    height: 18px;
+    line-height: 18px;
+    font-size: 18px;
+}
+.error404 h2{
+    width: 100%;
+    float: left;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    height: 14px;
+    line-height: 14px;
+    font-size: 14px;
+}
+
 /*404错误信息*/
 .header .nav-links { width: 873px; padding: 33px 53px; left: -535px; }
 .header .nav-links ul { width: 109px; }
