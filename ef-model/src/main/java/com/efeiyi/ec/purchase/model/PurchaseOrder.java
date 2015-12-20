@@ -307,6 +307,36 @@ public class PurchaseOrder {
         resultPrice = resultPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         return resultPrice;
     }
+    @Transient
+    public BigDecimal getOrderPayMoney(){
+        BigDecimal couponPrice= new BigDecimal(0);
+        if (this.getOrderStatus().equals("1") || this.getOrderStatus().equals("17")) {
+            PurchaseOrderPayment purchaseOrderPaymentTemp = this.getPurchaseOrderPaymentList().get(0);
+            for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
+                if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
+                    System.out.println(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice());
+                    couponPrice = couponPrice.add(BigDecimal.valueOf(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice()));
+
+                }
+            }
+        } else {
+            for (PurchaseOrderPayment purchaseOrderPaymentTemp : this.getPurchaseOrderPaymentList()) {
+                if (purchaseOrderPaymentTemp.getStatus().equals("2")) {
+                    for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
+                        if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
+                            couponPrice = couponPrice.add(BigDecimal.valueOf(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice()));
+
+                        }
+                    }
+
+                }
+
+            }
+        }
+        couponPrice = couponPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+        return couponPrice;
+
+    }
 
     @Column(name = "source")
     public String getSource() {
