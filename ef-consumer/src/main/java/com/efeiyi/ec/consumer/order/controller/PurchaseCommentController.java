@@ -112,8 +112,8 @@ public class PurchaseCommentController {
                }
 
            }
-           Double average=(double)count/purchaseOrderProductList.size();
-           purchaseOrderProduct.setAverage(average);
+           Integer average=count/purchaseOrderProductList.size();
+           purchaseOrderProduct.setAverage(average+"");
            baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
        }
 

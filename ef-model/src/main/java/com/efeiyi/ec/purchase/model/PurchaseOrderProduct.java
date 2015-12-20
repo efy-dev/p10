@@ -20,7 +20,7 @@ public class PurchaseOrderProduct {
     private BigDecimal purchasePrice;
     private PurchaseOrderComment purchaseOrderComment;
     private String status;//评价状态 1：已评价
-    private Double average;
+    private String average;
 
     public PurchaseOrderProduct(PurchaseOrder purchaseOrder,ProductModel productModel,Integer purchaseAmount,BigDecimal purchasePrice){
         this.purchaseOrder = purchaseOrder;
@@ -101,11 +101,11 @@ public class PurchaseOrderProduct {
     }
 
     @Column(name = "average")
-    public Double getAverage() {
+    public String getAverage() {
         return average;
     }
 
-    public void setAverage(Double average) {
+    public void setAverage(String average) {
         this.average = average;
     }
 }
