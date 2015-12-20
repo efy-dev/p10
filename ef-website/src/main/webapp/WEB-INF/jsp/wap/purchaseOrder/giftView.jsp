@@ -81,9 +81,8 @@
                 查看物流
             </a>
         </c:if>
-        <div class="bd" style="margin-top:10px;font-size:16px;font-weight:bolder">也想送好礼？10秒快速注册，更多非遗好礼等着你~~</div>
+        <div class="bd" style="margin-top:10px;font-size:12px;">也想送好礼？10秒快速注册，更多好礼等着你。</div>
     </div>
-    <div class="efi-icon ae"><i class="icon"></i></div>
 </div>
 
 <div id="postDiv" class="part" style="display: none;">
@@ -106,7 +105,50 @@
     </div>
 
 </div>
+<br>
+<c:if test="${purchaseOrder.orderStatus!='6'}">
 
+    <div class="login-reg">
+        <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+        <a id="signin"
+           href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do"
+           class="btn-reg"
+           onclick="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+    </div>
+
+<footer class="footer-new">
+    <div class="bd authentication">
+        <h3>战略合作伙伴</h3>
+
+        <div class="bd">
+            <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织"></a>
+            <em class="line"></em>
+            <a class="icon2" href="http://www.efeiyi.com" title="e飞蚁"></a>
+            <em class="line"></em>
+            <a class="icon3" title="中国非物质文化遗产保护协会"></a>
+        </div>
+    </div>
+    <div class="bd info">
+        <a class="icon" href="http://www.efeiyi.com"></a>
+
+        <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台
+        </div>
+        <div class="wechat"><img src="/scripts/images/icon-wechat.png"></div>
+        <div class="txt">关注微信公众号</div>
+        <div class="txt">领取超值代金券</div>
+    </div>
+    <%--<div class="bd info">--%>
+    <%--<a class="icon"></a>--%>
+
+    <%--<div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台--%>
+    <%--</div>--%>
+    <%--<div class="wechat"  id="wechat"><img src="/scripts/images/icon-wechat.png"></div>--%>
+    <%--<div class="txt" id="wechatStr1">关注微信公众号</div>--%>
+    <%--<div class="txt"id="wechatStr2">领取好礼</div>--%>
+    <%--</div>--%>
+    <div class="bd copyright">京ICP备15032511号-1</div>
+</footer>
+</c:if>
 <script>
     $().ready(function () {
         $("#showPostStatus").click(function () {
