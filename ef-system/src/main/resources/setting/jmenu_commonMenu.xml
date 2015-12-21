@@ -57,10 +57,16 @@
                 <match url="/basic/xm.do?qm=plistPCProductModel_default"/>
 
             </jnode>
-
             <jnode url="/basic/xm.do?qm=plistAdvertisement_default" access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="首页推荐广告">
                 <match url="/basic/xm.do?qm=plistAdvertisement_default"/>
                 <match url="/basic/xm.do?qm=formAdvertisement"/>
+            </jnode>
+        </jnode>
+        <jnode url="" id="rebateManager" access="admin,operational,c_operational,o_operational,product_manager" state="closed"  text_zh_CN="来源渠道管理">
+            <jnode url="/basic/xm.do?qm=plistPromotionPlan_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="来源渠道列表">
+                <match url="/basic/xm.do?qm=formPromotionPlan&amp;rebate=rebate"/>
+                <match url="/promotionPlan/getRegisterCountInfo.do?rebate=rebate"/>
+                <match url="/promotionPlan/getOrderCountInfo.do?rebate=rebate"/>
             </jnode>
         </jnode>
     </jnode>
@@ -142,13 +148,6 @@
                 <match url="/basic/xm.do?qm=formVirtualPlan&amp;virtual=virtual"/>
                 <match url="/virtualPlan/getTypeObjectList.do?virtual=virtual"/>
                 <match url="/virtualPlan/getTypeObjectView.do?virtual=virtual"/>
-            </jnode>
-        </jnode>
-        <jnode url="" id="rebateManager" access="admin,operational,c_operational,o_operational,product_manager" state="closed"  text_zh_CN="来源渠道管理">
-            <jnode url="/basic/xm.do?qm=plistPromotionPlan_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="来源渠道列表">
-                <match url="/basic/xm.do?qm=formPromotionPlan&amp;rebate=rebate"/>
-                <match url="/promotionPlan/getRegisterCountInfo.do?rebate=rebate"/>
-                <match url="/promotionPlan/getOrderCountInfo.do?rebate=rebate"/>
             </jnode>
         </jnode>
         <jnode url="" id="companyManager" access="admin,operational,c_operational,o_operational,product_manager" state="closed"  text_zh_CN="企业礼品卡管理">
