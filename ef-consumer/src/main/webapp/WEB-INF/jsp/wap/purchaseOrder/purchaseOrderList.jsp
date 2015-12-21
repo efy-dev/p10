@@ -145,7 +145,6 @@
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '13'}">
 									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-									<a href="#">已&nbsp;完&nbsp;成</a>
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '17'}">
 									<a href="#">已&nbsp;取&nbsp;消</a>
@@ -218,7 +217,6 @@
 									</c:when>
 									<c:when test="${purchaseOrder.orderStatus == '13'}">
 										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-										<a href="#">已&nbsp;完&nbsp;成</a>
 									</c:when>
 									<c:when test="${purchaseOrder.orderStatus == '17'}">
 										<a href="#">已&nbsp;取&nbsp;消</a>
