@@ -82,7 +82,7 @@
 							</c:when>
 							<c:when test="${purchaseOrder.orderStatus == '1'}">
 								<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-								<a href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}"/>立&nbsp;即&nbsp;支&nbsp;付</a>
+								<a href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}" name="payButton"/>立&nbsp;即&nbsp;支&nbsp;付</a>
 							</c:when>
 						</c:choose>
 							<c:choose>
@@ -266,5 +266,28 @@
 		<div class="aq-btn"><a href="<c:url value="/j_spring_cas_security_logout"/>">安全退出</a></div>
 	</div>
 </div>
+<script>
+
+	function isWeiXin(){
+		var ua = window.navigator.userAgent.toLowerCase();
+		if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	var  isWeiXinFlag = isWeiXin();
+
+	$().ready(function(){
+		$("a[name=payButton]").each(function(){
+			if(isWeiXinFlag){
+				$(this).attr("href",$(this).attr("href")+"?isWeiXin=true");
+			}else{
+				$(this).attr("href",$(this).attr("href")+"?isWeiXin=false");
+			}
+		});
+	})
+</script>
 </body>
 </html>
