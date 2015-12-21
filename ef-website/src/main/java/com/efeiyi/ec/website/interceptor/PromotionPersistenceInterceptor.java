@@ -35,7 +35,7 @@ public class PromotionPersistenceInterceptor extends HandlerInterceptorAdapter {
         if(promotionSource == null){
             Cookie cookie = CookieTool.getCookieByName(request, "source");
             if(cookie != null){
-                promotionSource = CookieTool.getCookieByName(request,"source").getValue();
+                promotionSource = cookie.getValue();
             }
         }
         if (promotionSource != null) {
@@ -50,12 +50,12 @@ public class PromotionPersistenceInterceptor extends HandlerInterceptorAdapter {
 
                     //和旧的返利标识不同时，记录
                     if(!promotionSource.equals(user.getSource())){
-                        user.setSource(promotionSource);
-                        //刷新营销返利链接有效期
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.add(Calendar.DATE,promotionPlan.getRdDays());
-                        user.setRdEndDay(calendar.getTime());
-                        baseManager.saveOrUpdate(MyUser.class.getName(), user);
+//                        user.setSource(promotionSource);
+//                        //刷新营销返利链接有效期
+//                        Calendar calendar = Calendar.getInstance();
+//                        calendar.add(Calendar.DATE,promotionPlan.getRdDays());
+//                        user.setRdEndDay(calendar.getTime());
+//                        baseManager.saveOrUpdate(MyUser.class.getName(), user);
 
                         //生成一条类日志
                         PromotionUserRecord promotionUserRecord = new PromotionUserRecord();
