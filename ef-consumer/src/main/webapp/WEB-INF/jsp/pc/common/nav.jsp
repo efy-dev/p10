@@ -13,7 +13,7 @@
 <div class="topbar wh">
     <div class="hd">
         <ul class="ul-item">
-            <%--<li><a href="" title="商家入驻">商家入驻</a></li>--%>
+            <li><a href="<%=PConst.HOSTNAME%>/document/helpCenter?group=ec.rzlc" title="商家入驻">商家入驻</a></li>
             <%
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
@@ -33,7 +33,7 @@
             <%
                 }
             %>
-            <%--<li><a href="" title="商家入驻">商家入驻</a></li>--%>
+            <li><a href="<%=PConst.HOSTNAME%>/document/helpCenter?group=ec.rzlc" title="商家入驻">商家入驻</a></li>
             <li class="btn-top-wechat">
                 <a title="手机e飞蚁">手机e飞蚁</a>
                 <span class="top-wechat"></span>

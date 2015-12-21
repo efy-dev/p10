@@ -51,8 +51,10 @@
 					<div class="shop-name"><span>${purchaseOrder.tenant.name}</span>
 					<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus"
 										  checkedValue="${purchaseOrder.orderStatus}" type="normal"/></span>
+						<c:if test="${purchaseOrder.orderType!=1}">
 					<span><ming800:status name="orderType" dataType="PurchaseOrder.orderType"
 										  checkedValue="${purchaseOrder.orderType}" type="normal"/></span></div>
+					</c:if>
 					<!-- 商品-->
 					<ul class="shops ae">
 						<c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct">
