@@ -63,7 +63,7 @@
     <h1>长按下方图片，选择保存图片，再将其发送给您的好友</h1>
 
     <div class="img" style="border:5px solid#c30;">
-        <img src="http://pro.efeiyi.com/${url}@!gift-card" alt="礼物图片">
+        <img src="http://pro.efeiyi.com/${url}@!gift-card-temp2" alt="礼物图片">
     </div>
 </div>
 </body>

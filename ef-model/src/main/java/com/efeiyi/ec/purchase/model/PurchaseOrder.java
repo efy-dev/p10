@@ -314,7 +314,6 @@ public class PurchaseOrder {
             PurchaseOrderPayment purchaseOrderPaymentTemp = this.getPurchaseOrderPaymentList().get(0);
             for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
                 if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
-                    System.out.println(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice());
                     couponPrice = couponPrice.add(BigDecimal.valueOf(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice()));
 
                 }
