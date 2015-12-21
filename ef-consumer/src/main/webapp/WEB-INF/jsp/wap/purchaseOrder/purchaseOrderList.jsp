@@ -53,8 +53,8 @@
 										  checkedValue="${purchaseOrder.orderStatus}" type="normal"/></span>
 						<c:if test="${purchaseOrder.orderType!=1}">
 					<span><ming800:status name="orderType" dataType="PurchaseOrder.orderType"
-										  checkedValue="${purchaseOrder.orderType}" type="normal"/></span></div>
-					</c:if>
+										  checkedValue="${purchaseOrder.orderType}" type="normal"/></span></c:if></div>
+
 					<!-- 商品-->
 					<ul class="shops ae">
 						<c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct">
