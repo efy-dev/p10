@@ -78,7 +78,7 @@
                 <a class="btn-reg" href="javascript:void (0);"  onclick="checkRegister()" id="register">注   册</a>
             </div>
             <div class="items items-go">
-                <span class="go-reg">已经有账号？<a href="<c:url value="/login.do"/>" title="去登陆">去登陆</a></span>
+                <span class="go-reg">已经有账号？<a href="<c:url value="/login.do"/>" title="去登陆">去登录</a></span>
             </div>
         </form>
     </div>
