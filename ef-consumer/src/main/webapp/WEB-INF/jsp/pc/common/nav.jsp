@@ -13,7 +13,7 @@
 <div class="topbar wh">
     <div class="hd">
         <ul class="ul-item">
-            <li><a href="<%=PConst.HOSTNAME%>/document/helpCenter?group=ec.rzlc" title="商家入驻">商家入驻</a></li>
+            <%--<li><a href="<%=PConst.HOSTNAME%>/document/helpCenter?group=ec.rzlc" title="商家入驻">商家入驻</a></li>--%>
             <%
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
