@@ -59,7 +59,7 @@ public class BatchLogisticsReactor implements Runnable {
             e.printStackTrace();
         } finally {
             session.close();
-            BatchLogisticsReactor.runningFlag.set(idle);
+            BatchLogisticsReactor.runningFlag.compareAndSet(idle,busy);
         }
     }
 

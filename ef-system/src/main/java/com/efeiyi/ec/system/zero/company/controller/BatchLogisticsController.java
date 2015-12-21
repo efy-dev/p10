@@ -2,13 +2,11 @@ package com.efeiyi.ec.system.zero.company.controller;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.system.zero.company.util.BatchLogisticsReactor;
-import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.DoQuery;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.util.ApplicationContextUtil;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,11 +28,6 @@ public class BatchLogisticsController {
     private DoManager doManager;
     @Autowired
     private XdoManager xdoManager;
-    @Autowired
-    private BaseManager baseManager;
-
-    @Autowired
-    private SessionFactory sessionFactory;
 
     @RequestMapping("/deppon.do")
     public ModelAndView submit2Deppon(HttpServletRequest request, ModelMap modelMap) throws Exception {
@@ -46,10 +39,8 @@ public class BatchLogisticsController {
         Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
         List<PurchaseOrderProduct> list = (List<PurchaseOrderProduct>) xdoManager.list(tempDo, tempDoQuery, conditions);
-        if(BatchLogisticsReactor.runningFlag.get() == BatchLogisticsReactor.idle) {
-            BatchLogisticsReactor.runningFlag.set(BatchLogisticsReactor.busy);
-
-            new Thread(new BatchLogisticsReactor(list,ApplicationContextUtil.getApplicationContext())).start();
+        if(BatchLogisticsReactor.runningFlag.compareAndSet(BatchLogisticsReactor.idle, BatchLogisticsReactor.busy)){
+            new Thread(new BatchLogisticsReactor(list, ApplicationContextUtil.getApplicationContext())).start();
         }
         modelMap.put("objectList", list);
 
