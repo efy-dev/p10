@@ -49,11 +49,11 @@
         <ul class="profile ae">
             <li>
                 <strong>姓名：</strong>
-                <label class="label"><input name="receiveName" type="text" class="dtxt" placeholder="请填写收货人姓名"></label>
+                <label class="label"><input id = "name" name="receiveName" required="" type="text" class="dtxt" placeholder="请填写收货人姓名"></label>
             </li>
             <li>
                 <strong>手机号码：</strong>
-                <label><input name="receivePhone" type="text" class="dtxt" placeholder="请填写手机号码"></label>
+                <label><input name="receivePhone"  id= "phoneNumber" type="text" required="" class="dtxt" placeholder="请填写手机号码"></label>
             </li>
             <li>
                 <strong>配送地区：</strong>
@@ -98,7 +98,19 @@
         }, function () {
         }, "post")
     }
+//    function check() {
+//        var name = $("#name").val();
+//        var phoneNumber = $("#phoneNumber").val();
+//        if (name == "") {
+//            showAlert("提示", "请填写收礼人姓名");
+//        }
+//        if(phoneNumber==""){
+//            showAlert("提示","请填写收礼人电话")
+//        }
+//                }
 
 </script>
+
+
 </body>
 </html>
