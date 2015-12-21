@@ -716,4 +716,36 @@ public class ProductController extends BaseController {
         }
         return f;
     }
+
+
+    @RequestMapping("/initProductViewSort.do")
+    @ResponseBody
+    public String initProductViewSort(HttpServletRequest request){
+        String f = "1";
+        try {
+            XQuery xQuery = new XQuery("listProduct_default2",request);
+            List<Product> productList = baseManager.listObject(xQuery);
+            for(Product product : productList){
+                if(product.getProductPictureList()!=null){
+                    int i=1;
+                    for(ProductPicture productPicture : product.getProductPictureList()){
+                        if("3".equals(productPicture.getStatus())&&productPicture.getSort()==null){
+                            productPicture.setSort(i++);
+                            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+
+                        }
+                        if("9".equals(productPicture.getStatus())&&productPicture.getSort()==null){
+                            productPicture.setSort(i++);
+                            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+                        }
+
+                    }
+                }
+            }
+        } catch (Exception e) {
+            f = "0";
+            e.printStackTrace();
+        }
+        return f;
+    }
 }

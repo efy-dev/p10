@@ -70,8 +70,8 @@
                 <match url="/virtualPlan/getTypeObjectView.do?virtual=virtual"/>
             </jnode>
         </jnode>
-        <jnode url="" id="rebateManager" access="admin,operational,c_operational,o_operational,product_manager" state="closed"  text_zh_CN="返利管理">
-            <jnode url="/basic/xm.do?qm=plistPromotionPlan_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="返利列表">
+        <jnode url="" id="rebateManager" access="admin,operational,c_operational,o_operational,product_manager" state="closed"  text_zh_CN="来源渠道管理">
+            <jnode url="/basic/xm.do?qm=plistPromotionPlan_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="来源渠道列表">
                 <match url="/basic/xm.do?qm=formPromotionPlan&amp;rebate=rebate"/>
                 <match url="/promotionPlan/getRegisterCountInfo.do?rebate=rebate"/>
                 <match url="/promotionPlan/getOrderCountInfo.do?rebate=rebate"/>
@@ -87,7 +87,7 @@
             </jnode>
         </jnode>
         <jnode url="" id="giftOrderManager" access="admin,operational,c_operational,o_operational,product_manager" state="closed"  text_zh_CN="礼品订单批量管理">
-            <jnode url="/basic/xm.do?qm=plistBatchGift_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="大礼包批量发送">
+            <jnode url="/basic/xm.do?qm=plistBatchGift_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="物流信息对接">
                 <match url="/basic/xm.do?qm=plistBatchGift"/>
                 <match url="/basic/xm.do?qm=listBatchGift"/>
             </jnode>
