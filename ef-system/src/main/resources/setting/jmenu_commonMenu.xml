@@ -120,7 +120,13 @@
                 <match url="/basic/xm.do?qm=plistConsumerCoupon_default"/>
                 <match url="/basic/xm.do?qm=plistConsumer_search"/>
             </jnode>
+
         </jnode>
+    <jnode url="" id="userTemp" access="admin,operational,o_operational,financial,product_manager,market" state="closed" text_zh_CN="用户列表">
+        <jnode url="/basic/xm.do?qm=listUserTemp_default" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="用户列表">
+            <match url="/basic/xm.do?qm=listUserTemp_default"/>
+        </jnode>
+    </jnode>
         <jnode url="" id="consumer" access="admin,operational,o_operational,financial,product_manager,market" state="closed" text_zh_CN="优惠券管理">
             <jnode url="/basic/xm.do?qm=plistCoupon_default&amp;view=coupon" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="优惠券列表">
                 <match url="/basic/xm.do?qm=plistCoupon_default&amp;view=coupon"/>
