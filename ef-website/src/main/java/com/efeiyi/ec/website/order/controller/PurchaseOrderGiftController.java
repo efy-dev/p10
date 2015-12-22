@@ -26,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -298,5 +299,32 @@ public class PurchaseOrderGiftController {
         return "/purchaseOrder/giftView";
     }
 
-
+    @RequestMapping("/giftReceive/checkAddress.do")
+    @ResponseBody
+    public boolean checkAddressDetail(HttpServletRequest request) {
+        String addressDetail = request.getParameter("addressDetail");
+        if(addressDetail==null){
+            return false;
+        }
+        int len = addressDetail.length();
+        for (int i = 0; i < len; i++)
+        {
+            char codePoint = addressDetail.charAt(i);
+            if (!isNotEmojiCharacter(codePoint))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    private static boolean isNotEmojiCharacter(char codePoint)
+    {
+        return (codePoint == 0x0) ||
+                (codePoint == 0x9) ||
+                (codePoint == 0xA) ||
+                (codePoint == 0xD) ||
+                ((codePoint >= 0x20) && (codePoint <= 0xD7FF)) ||
+                ((codePoint >= 0xE000) && (codePoint <= 0xFFFD)) ||
+                ((codePoint >= 0x10000) && (codePoint <= 0x10FFFF));
+    }
 }
