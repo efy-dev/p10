@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.net.URL;
 
 /**
  * Created by Administrator on 2015/12/22.
@@ -42,19 +43,30 @@ public class UserGiftController extends BaseController{
         hints.put(EncodeHintType.MARGIN, 0);
         BitMatrix bitMatrix = null;
         try {
-            bitMatrix = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, 150, 150, hints);//二维码像素
+            bitMatrix = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, 180, 180, hints);//二维码像素
         } catch (WriterException e) {
             e.printStackTrace();
         }
         int qRWidth = bitMatrix.getWidth();
         int qRHeight = bitMatrix.getHeight();
-        BufferedImage image = new BufferedImage(qRWidth, qRHeight, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image = new BufferedImage(qRWidth, qRHeight, BufferedImage.TYPE_INT_RGB);
         for (int x = 0; x < qRWidth; x++) {
             for (int y = 0; y < qRHeight; y++) {
                 image.setRGB(x, y, bitMatrix.get(x, y) == true ?
                         Color.BLACK.getRGB() : Color.WHITE.getRGB());
             }
         }
+
+        URL logoUrl = new URL("http://pro.efeiyi.com/gift/test1.jpg");
+        BufferedImage logo = ImageIO.read(logoUrl);
+        int widthLogo = logo.getWidth(), heightLogo = logo.getHeight();
+        // 计算图片放置位置
+        Graphics2D g2 = image.createGraphics();
+        int x = (image.getWidth() - widthLogo) / 2;
+        int y = (image.getHeight() - logo.getHeight()) / 2;
+        g2.drawImage(logo, x, y, widthLogo, heightLogo, null);
+        g2.dispose();
+
         String path = this.getClass().getResource("/").getPath().toString() + "com/efeiyi/ec/system/download/";
         String fileName = userID+".jpg";
         File downloadFile = new File(path+fileName);
@@ -74,7 +86,5 @@ public class UserGiftController extends BaseController{
         }
         byte[] bytes = FileUtils.readFileToByteArray(downloadFile);
         return new ResponseEntity<byte[]>(bytes,headers, HttpStatus.OK);
-
-//        return userID+".jpg";
     }
 }

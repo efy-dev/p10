@@ -28,7 +28,7 @@
                 <thead>
                 <tr>
 
-                    <td class="table-set">用户ID</td>
+                    <td class="table-set">链接</td>
                     <td class="table-set">用户名</td>
                     <td class="table-set">操作</td>
 
@@ -37,7 +37,7 @@
                 <tbody>
                 <c:forEach items="${objectList}" var="user">
                     <tr>
-                        <td class="am-hide-sm-only">${user.id}</td>
+                        <td class="am-hide-sm-only">http://www.efeiyi.com/subject/activity/iia4ndpr2vgul3i4?source=user_${user.id}</td>
                         <td class="am-hide-sm-only">${user.username}</td>
                         <td class="am-hide-sm-only">
                             <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
