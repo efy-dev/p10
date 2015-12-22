@@ -319,6 +319,29 @@
 
             </does>
         </entity>
+        <entity name="UserTemp" label="用户"
+                basic="simple" others=""
+                model="com.efeiyi.ec.organization.model.User">
+            <fields>
+                <field name="sex" label="性别" inputType="text">
+                    <statusType fieldName="sex">
+                        <item label="男" value="1"/>
+                        <item label="女" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="listUserTemp" label="用户列表" access="" result="/consumer/userList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition label="手机号" name="username" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
 
     </entities>
 

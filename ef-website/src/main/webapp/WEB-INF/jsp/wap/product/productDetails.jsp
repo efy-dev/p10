@@ -193,7 +193,7 @@
             <a class="btn-cart" onclick="addCart('${productModel.id}')" title="放入购物车"><i class="icon"></i>放入购物车</a>
             <a style="width:22%;" class="btn-buy" onclick="immediateBuy('${productModel.id}')" title="立即购买">立即购买</a>
         </c:if>
-        <a style="width: 22%" class="btn-default" onclick="giftBuy()" title="购买">送礼给Ta</a>
+        <a style="width: 22%" class="btn-default" onclick="giftBuy()" title="购买">购买送Ta</a>
     </div>
 </c:if>
 </article>
