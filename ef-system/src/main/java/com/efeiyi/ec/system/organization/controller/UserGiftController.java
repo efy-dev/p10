@@ -67,9 +67,9 @@ public class UserGiftController extends BaseController{
         g2.drawImage(logo, x, y, widthLogo, heightLogo, null);
         g2.dispose();
 
-        String path = this.getClass().getResource("/").getPath().toString() + "com/efeiyi/ec/system/download/";
+        String path = this.getClass().getResource("/").getPath().toString() + "com/efeiyi/ec/system/download";
         String fileName = userID+".jpg";
-        File downloadFile = new File(path+fileName);
+        File downloadFile = new File(path+"//"+fileName);
         try {
             ImageIO.write(image, "jpg", downloadFile);
         } catch (IOException e) {
