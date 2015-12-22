@@ -38,7 +38,7 @@ public class UserGiftController extends BaseController{
     @ResponseBody
     public ResponseEntity<byte[]> createQRCode(HttpServletRequest request) throws IOException {
         String userID = request.getParameter("userID");
-        String content = "http://www.efeiyi.com/subject/activity/iia4ndpr2vgul3i4?source=user_"+userID;
+        String content = "http://www.efeiyi.com/subject/iibegant1zwnlnby?source=user_"+userID;
         Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
         hints.put(EncodeHintType.MARGIN, 0);
         BitMatrix bitMatrix = null;

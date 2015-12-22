@@ -56,7 +56,7 @@
         <p><span class="am-icon-bookmark"></span> 公告</p>
         <p>手机：<%=AuthorizationUtil.getMyUser().getUsername()%></p>
         <div style="width: 100%;table-layout:fixed; word-break: break-all; overflow:hidden; ">
-          <p>链接：http://www.efeiyi.com/subject/activity/iia4ndpr2vgul3i4?source=user_<%=AuthorizationUtil.getMyUser().getId()%></p>
+          <p>链接：http://www.efeiyi.com/subject/iibegant1zwnlnby?source=user_<%=AuthorizationUtil.getMyUser().getId()%></p>
         </div>
 
         <p>

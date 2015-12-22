@@ -39,7 +39,7 @@
                 <tbody>
                 <c:forEach items="${objectList}" var="user">
                     <tr>
-                        <td class="am-hide-sm-only">http://www.efeiyi.com/subject/activity/iia4ndpr2vgul3i4?source=user_${user.id}</td>
+                        <td class="am-hide-sm-only">http://www.efeiyi.com/subject/iibegant1zwnlnby?source=user_${user.id}</td>
                         <td class="am-hide-sm-only">${user.username}</td>
                         <td class="am-hide-sm-only">${user.name}</td>
                         <td class="am-hide-sm-only">${user.name2}</td>
