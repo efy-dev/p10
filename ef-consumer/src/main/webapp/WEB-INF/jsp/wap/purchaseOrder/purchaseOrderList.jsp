@@ -51,8 +51,10 @@
 					<div class="shop-name"><span>${purchaseOrder.tenant.name}</span>
 					<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus"
 										  checkedValue="${purchaseOrder.orderStatus}" type="normal"/></span>
+						<c:if test="${purchaseOrder.orderType!=1}">
 					<span><ming800:status name="orderType" dataType="PurchaseOrder.orderType"
-										  checkedValue="${purchaseOrder.orderType}" type="normal"/></span></div>
+										  checkedValue="${purchaseOrder.orderType}" type="normal"/></span></c:if></div>
+
 					<!-- 商品-->
 					<ul class="shops ae">
 						<c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct">
@@ -145,7 +147,6 @@
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '13'}">
 									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-									<a href="#">已&nbsp;完&nbsp;成</a>
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '17'}">
 									<a href="#">已&nbsp;取&nbsp;消</a>
@@ -218,7 +219,6 @@
 									</c:when>
 									<c:when test="${purchaseOrder.orderStatus == '13'}">
 										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-										<a href="#">已&nbsp;完&nbsp;成</a>
 									</c:when>
 									<c:when test="${purchaseOrder.orderStatus == '17'}">
 										<a href="#">已&nbsp;取&nbsp;消</a>

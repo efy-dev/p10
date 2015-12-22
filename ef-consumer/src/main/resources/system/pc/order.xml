@@ -27,10 +27,9 @@
                 </field>
                 <field name="orderType" label="订单类型" inputType="text">
                     <statusType fieldName="orderType">
-                        <item label="普通类型" value="1"/>
-                        <item label="秒杀类型" value="2"/>
-                        <item label="礼品卷类型" value="3"/>
-                        <item label="团购类型" value="4"/>
+                        <item label="秒杀订单" value="2"/>
+                        <item label="礼品订单" value="3"/>
+                        <item label="团购订单" value="4"/>
                     </statusType>
                 </field>
             </fields>
