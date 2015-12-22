@@ -69,12 +69,13 @@
                 <match url="/promotionPlan/getOrderCountInfo.do?rebate=rebate"/>
             </jnode>
         </jnode>
-    </jnode>
-    <jnode url="" id="userTemp" access="admin,operational,o_operational,financial,product_manager,market" state="closed" text_zh_CN="用户列表">
-        <jnode url="/basic/xm.do?qm=listUserTemp_default" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="用户列表">
-            <match url="/basic/xm.do?qm=listUserTemp_default"/>
+        <jnode url="" id="userTemp" access="admin,operational,o_operational,financial,product_manager,market" state="closed" text_zh_CN="用户列表">
+            <jnode url="/basic/xm.do?qm=listUserTemp_default" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="用户列表">
+                <match url="/basic/xm.do?qm=listUserTemp_default"/>
+            </jnode>
         </jnode>
     </jnode>
+
     <jnode id="efecOrderAndConsumer" access="admin,operational,o_operational,financial,product_manager,market" url="/main.do?jnodeId=efecOrderAndConsumer" text_zh_CN="订单与消费者">
         <jnode url="" id="orderManager" access="admin,operational,o_operational,financial,product_manager,market" state="closed" text_zh_CN="订单管理">
             <jnode url="/basic/xm.do?qm=plistPurchaseOrder_default&amp;viewIdentify=orderProduct&amp;viewProductModel=order" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="订单列表">
