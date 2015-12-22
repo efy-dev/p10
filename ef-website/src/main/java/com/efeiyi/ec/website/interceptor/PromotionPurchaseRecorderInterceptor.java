@@ -32,7 +32,7 @@ public class PromotionPurchaseRecorderInterceptor extends HandlerInterceptorAdap
         if (promotionSource == null) {
             Cookie cookie = CookieTool.getCookieByName(request, "source");
             if (cookie != null) {
-                promotionSource = CookieTool.getCookieByName(request, "source").getValue();
+                promotionSource = cookie.getValue();
             }
         }
         if (promotionSource != null) {
@@ -42,7 +42,7 @@ public class PromotionPurchaseRecorderInterceptor extends HandlerInterceptorAdap
 
             //营销返利有效并且没有超出RD有效期，记录订单
             MyUser user = (MyUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (!"0".equals(promotionPlan.getStatus()) && user.getRdEndDay() != null && new Date().compareTo(user.getRdEndDay()) < 0) {
+            if (!"0".equals(promotionPlan.getStatus()) /*&& user.getRdEndDay() != null && new Date().compareTo(user.getRdEndDay()) < 0*/) {
                 String path = request.getServletPath();
                 String orderId = path.substring(path.lastIndexOf("/") + 1);
                 PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);

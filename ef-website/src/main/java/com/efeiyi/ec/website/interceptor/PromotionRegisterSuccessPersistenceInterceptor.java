@@ -31,7 +31,7 @@ public class PromotionRegisterSuccessPersistenceInterceptor extends HandlerInter
         if(promotionSource == null){
             Cookie cookie = CookieTool.getCookieByName(request, "source");
             if(cookie != null){
-                promotionSource = CookieTool.getCookieByName(request,"source").getValue();
+                promotionSource = cookie.getValue();
             }
         }
         if (promotionSource != null) {
@@ -48,7 +48,7 @@ public class PromotionRegisterSuccessPersistenceInterceptor extends HandlerInter
                 user.setSource(promotionSource);
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.DATE,promotionPlan.getRdDays());
-                user.setRdEndDay(calendar.getTime());
+//                user.setRdEndDay(calendar.getTime());
                 baseManager.saveOrUpdate(MyUser.class.getName(), user);
 
                 //生成一条类日志

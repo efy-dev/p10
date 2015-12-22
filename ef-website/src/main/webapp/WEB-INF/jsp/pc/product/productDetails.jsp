@@ -197,7 +197,7 @@
                        onclick="addCart('${productModel.id}')" title="放入购物车" dis>放入购物车</a>
                     <a class="btn btn-buy" onclick="immediateBuy('${productModel.id}')"
                        title="立即购买">立即购买</a>
-                    <a class="btn" id="btn-gift" title="购买送礼">购买送礼</a>
+                    <a class="btn" id="btn-gift" title="购买送礼">购买送Ta</a>
                 </c:if>
                 <%--<a class="btn btn-append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车">放入购物车</a>--%>
                 <%--<a class="btn btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>" title="立即购买">立即购买</a>--%>
