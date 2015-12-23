@@ -7,6 +7,7 @@
 <body>
 <!--//End--header-->
 <div class="gift ae">
+    <form>
     <div class="card custom ae ">
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="ae imgb">
@@ -42,7 +43,7 @@
             <!--//End-->
         </div>
         <!--//End-->
-
+        <div class="hint"><input type="checkbox" id="showGiftName" onclick="giftNameStatus(this)">是否告诉他是什么礼物</div>
 
     </div>
     <div class="gift-details ae">
@@ -130,6 +131,7 @@
         </div>
 
     </div>
+        </form>
 </div>
 <script>
 
@@ -151,7 +153,7 @@
         }
         ajaxRequest("<c:url value="/order/giftBuy/showNameStatus.do"/>", {
             "purchaseOrderId": "${purchaseOrder.id}",
-            "nameStatus": status
+            "status": status
         }, success, function () {
         }, "post");
     }
@@ -312,6 +314,8 @@
             $("#addGaverName").hide();
         }
     }
+
+
 </script>
 </body>
 </html>

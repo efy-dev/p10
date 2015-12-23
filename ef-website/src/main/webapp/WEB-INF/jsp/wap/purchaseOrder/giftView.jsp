@@ -34,9 +34,18 @@
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="pic-page ae">
-            <div class="pic-img"><img
+            <div class="pic-img">
+                <c:if test="${purchaseOrderGift.showGiftNameStatus=='1'}">
+                <a  href="<c:url value="/product/productModel/${purchaseOrder.purchaseOrderProductList.get(0).productModel.id}"/>">
+                    </c:if>
+                        <c:if test="${purchaseOrderGift.showGiftNameStatus=='0'}">
+                        <a>
+                            </c:if>
+                     <img
                     src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture"
-                    width="181" height="101"></div>
+                    width="181" height="101">
+                     </a>
+            </div>
             <div class="pic-text">
                 <p>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}</p>
 
@@ -81,7 +90,7 @@
                 查看物流
             </a>
         </c:if>
-        <div class="bd" style="margin-top:10px;font-size:12px;">也想送好礼？10秒快速注册，更多好礼等着你。</div>
+        <div class="registration"><p>也想送好礼？</p><p>10秒注册，更多好礼等着你。</p></div>
     </div>
 </div>
 
