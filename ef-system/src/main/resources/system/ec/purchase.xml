@@ -280,6 +280,7 @@
                         <item label="汇通快运" value="huitongkuaidi"/>
                         <item label="天天快递" value="tiantian"/>
                         <item label="UPS" value="ups"/>
+                        <item label="德邦" value="DEPPON"/>
                     </statusType>
                 </field>
             </fields>
