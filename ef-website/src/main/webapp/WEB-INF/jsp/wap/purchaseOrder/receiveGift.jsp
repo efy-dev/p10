@@ -42,7 +42,16 @@
                 </a>
             </div>
             <div class="pic-text">
-                <p>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}</p>
+                <p>
+                    <c:if test="${purchaseOrderGift.showGiftNameStatus=='1'}">
+                        <a  href="<c:url value="/product/productModel/${purchaseOrder.purchaseOrderProductList.get(0).productModel.id}"/>" style="color: #000">
+                    </c:if>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}
+                </a>
+                        <c:if test="${purchaseOrderGift.showGiftNameStatus=='0'}">
+                        <a  style="color: #000">
+                            </c:if>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}
+                        </a>
+                </p>
                 <p class="t2"><i></i><span>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.project.name}</span><em></em></p>
                 <!--<p class="t3">朱炳仁</p>-->
             </div>
