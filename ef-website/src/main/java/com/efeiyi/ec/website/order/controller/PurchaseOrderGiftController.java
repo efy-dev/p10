@@ -97,6 +97,7 @@ public class PurchaseOrderGiftController {
             model.addAttribute("productName", productName);
             model.addAttribute("projectName", projectName);
             model.addAttribute("sender", sender);
+            model.addAttribute("purchaseOrderGift",purchaseOrderGift);
             String lc = "";//物流公司
             String serial = "";//物流单号
             String content = "";//物流信息
