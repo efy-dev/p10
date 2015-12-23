@@ -41,7 +41,7 @@ public class PromotionPurchaseRecorderInterceptor extends HandlerInterceptorAdap
             PromotionPlan promotionPlan = (PromotionPlan) baseManager.getUniqueObjectByConditions("from PromotionPlan x where x.identifier=:identifier", queryParamMap);
 
             //营销返利有效并且没有超出RD有效期，记录订单
-            MyUser user = (MyUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//            MyUser user = (MyUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if (!"0".equals(promotionPlan.getStatus()) /*&& user.getRdEndDay() != null && new Date().compareTo(user.getRdEndDay()) < 0*/) {
                 String path = request.getServletPath();
                 String orderId = path.substring(path.lastIndexOf("/") + 1);
