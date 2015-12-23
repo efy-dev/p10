@@ -91,6 +91,9 @@
         <div class="btn-again">
             <a href="<c:url value="/order/giftBuy/${order.purchaseOrderProductList.get(0).productModel.id}/${order.purchaseOrderProductList.get(0).purchaseAmount}"/>" title="再买一份">再买一份</a>
         </div>
+        <div class="btn-again" style="margin-top: 0">
+            <a href="<c:url value="/order/easyBuy/${order.purchaseOrderProductList.get(0).productModel.id}/${order.purchaseOrderProductList.get(0).purchaseAmount}"/>" title="送自己">送自己</a>
+        </div>
 
     </div>
     <c:if test="${order.orderStatus!='6'}">
