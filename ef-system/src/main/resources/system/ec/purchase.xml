@@ -67,6 +67,7 @@
                         <item label="已完成" value="13"/>
                         <item label="已退款" value="15"/>
                         <item label="已取消" value="17"/>
+                        <item label="发货失败" value="19"/>
                     </statusType>
                 </field>
                 <field name="orderType" label="订单类型" inputType="text">

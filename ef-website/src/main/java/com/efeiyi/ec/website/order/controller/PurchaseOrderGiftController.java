@@ -12,6 +12,8 @@ import com.efeiyi.ec.purchase.model.PurchaseOrderGift;
 import com.efeiyi.ec.website.order.service.CartManager;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
+import com.efeiyi.ec.website.organization.model.SmsProvider;
+import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -294,6 +296,9 @@ public class PurchaseOrderGiftController {
 
         purchaseOrderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //订单改为未发货状态
         baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+        SmsProvider smsProvider = new YunPianSmsProvider();
+        String phoneNumber  =  purchaseOrderGift.getUser().getUsername();
+        smsProvider.post(phoneNumber,"","1185009");
         model.addAttribute("purchaseOrder", purchaseOrderGift);
         model.addAttribute("request", "/purchaseOrder/giftView");
         return "/purchaseOrder/giftView";
