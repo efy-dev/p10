@@ -20,6 +20,7 @@
         <module>ef-wiki</module>
         <module>ef-consumer</module>
         <module>tg-website</module>
+        <module>app-wikiServer</module>
     </modules>
 
     <repositories>

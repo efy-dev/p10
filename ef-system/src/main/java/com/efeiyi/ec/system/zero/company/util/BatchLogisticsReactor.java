@@ -5,6 +5,7 @@ import com.efeiyi.ec.purchase.model.PurchaseOrderDelivery;
 import com.efeiyi.ec.purchase.model.PurchaseOrderGift;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.p.service.CommonManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import com.ming800.core.util.JsonUtil;
 import org.apache.commons.codec.binary.Base64;
@@ -42,6 +43,7 @@ public class BatchLogisticsReactor implements Runnable {
     public static final int busy = 1;
     private ApplicationContext applicationContext;
     private BaseManager baseManager;
+    private CommonManager commonManager = ((CommonManager) ApplicationContextUtil.getApplicationContext().getBean("commonManager"));
 
     public BatchLogisticsReactor(List<PurchaseOrderProduct> purchaseOrderProductList,ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
@@ -59,7 +61,7 @@ public class BatchLogisticsReactor implements Runnable {
             e.printStackTrace();
         } finally {
             session.close();
-            BatchLogisticsReactor.runningFlag.compareAndSet(idle,busy);
+            BatchLogisticsReactor.runningFlag.compareAndSet(busy,idle);
         }
     }
 
@@ -91,12 +93,12 @@ public class BatchLogisticsReactor implements Runnable {
                 jsonMap.put("gmtCommit", dateFormat.format(purchaseOrderProduct.getPurchaseOrder().getCreateDatetime()));
 
                 Map senderMap = new HashMap();
-                senderMap.put("name", "e飞蚁-中国非遗电商平台");
-                senderMap.put("phone", "4008768766");
-                senderMap.put("province", "北京");
-                senderMap.put("city", "北京");
-                senderMap.put("county", "朝阳区");
-                senderMap.put("address", "北京市朝阳区酒仙桥东路9号电子城A2西侧6层");
+                senderMap.put("name", commonManager.getCompanyAddresses().get("efeiyi").get("name"));
+                senderMap.put("phone", commonManager.getCompanyAddresses().get("efeiyi").get("phone"));
+                senderMap.put("province", commonManager.getCompanyAddresses().get("efeiyi").get("province"));
+                senderMap.put("city", commonManager.getCompanyAddresses().get("efeiyi").get("city"));
+                senderMap.put("country", commonManager.getCompanyAddresses().get("efeiyi").get("country"));
+                senderMap.put("address", commonManager.getCompanyAddresses().get("efeiyi").get("address"));
                 jsonMap.put("sender", senderMap);
 
                 Map receiverMap = new HashMap();
@@ -179,12 +181,12 @@ public class BatchLogisticsReactor implements Runnable {
                 jsonMap.put("gmtCommit", dateFormat.format(purchaseOrderProduct.getPurchaseOrder().getCreateDatetime()));
 
                 Map senderMap = new HashMap();
-                senderMap.put("name", "e飞蚁-中国非遗电商平台");
-                senderMap.put("phone", "4008768766");
-                senderMap.put("province", "北京");
-                senderMap.put("city", "北京");
-                senderMap.put("county", "朝阳区");
-                senderMap.put("address", "北京市朝阳区酒仙桥东路9号电子城A2西侧6层");
+                senderMap.put("name", commonManager.getCompanyAddresses().get("efeiyi").get("name"));
+                senderMap.put("phone", commonManager.getCompanyAddresses().get("efeiyi").get("phone"));
+                senderMap.put("province", commonManager.getCompanyAddresses().get("efeiyi").get("province"));
+                senderMap.put("city", commonManager.getCompanyAddresses().get("efeiyi").get("city"));
+                senderMap.put("country", commonManager.getCompanyAddresses().get("efeiyi").get("country"));
+                senderMap.put("address", commonManager.getCompanyAddresses().get("efeiyi").get("address"));
                 jsonMap.put("sender", senderMap);
 
                 Map receiverMap = new HashMap();

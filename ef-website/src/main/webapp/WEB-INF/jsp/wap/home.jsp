@@ -15,7 +15,7 @@
     <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}' >
         <ul class="am-slides">
             <c:forEach items="${bannerList}" var="banner">
-                <li><a href="<c:url value="${banner.directUrl}"/> " ><img src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!home1-banner"/>"></a></li>
+                <li><a href="<c:url value="${banner.wapUrl}"/> " ><img src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner"/>"></a></li>
             </c:forEach>
         </ul>
     </div>
@@ -47,7 +47,7 @@
             <span><i class="newicon"></i></span>
             <span>专&nbsp;题</span>
         </a>
-        <a class="item gift" href="http://www.efeiyi.com/subject/ihx20izq1o63bz5w">
+        <a class="item gift" href="http://www.efeiyi.com/subject/iibegant1zwnlnby">
             <span><i class="newicon"></i></span>
             <span>礼&nbsp;品</span>
         </a>

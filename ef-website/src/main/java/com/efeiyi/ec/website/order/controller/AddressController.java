@@ -136,9 +136,6 @@ public class AddressController {
 
     @RequestMapping({"addAddressOfMob1.do"})
     public String addAddressOfMobile1(HttpServletRequest request) throws Exception {
-        /*XQuery xQuery = new XQuery("ListConsumerAddress_default", request);
-        List list = baseManager.listObject(xQuery);*/
-        /*if ("1".equals(request.getParameter("checkbox"))||list.size()==0) {*/
         String id = AuthorizationUtil.getMyUser().getId();
         String hql = "update organization_consumer_address set status = '1'where status<>0 and consumer_id='" + id + "'";
         baseManager.executeSql(null, hql, null);
