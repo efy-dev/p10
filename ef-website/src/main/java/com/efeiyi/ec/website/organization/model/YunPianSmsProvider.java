@@ -65,12 +65,12 @@ public class YunPianSmsProvider implements SmsProvider {
     public SendCode post(String phone, String content, String tpl_id) {
 
         try {
-            content = URLEncoder.encode("#code#=" + content + "&#company#=e飞蚁", ENCODING);
+            content = URLEncoder.encode("#null#=" + content, ENCODING);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String postData = "apikey=" + apikey + "&mobile=" + phone + "&tpl_id=" + tpl_id + "&tpl_value=" + content + "";
+        String postData = "apikey=" + apikey + "&mobile=" + "18515239850" + "&tpl_id=" + tpl_id + "&tpl_value=" + content + "";
 
 
         System.out.println(postData);
