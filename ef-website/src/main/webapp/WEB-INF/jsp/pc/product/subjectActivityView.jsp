@@ -9,7 +9,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>【 精选专题 】 -e飞蚁</title>
+    <title>【 精选专题 】 -e飞蚁</title>
+    <meta name="description" content="">
 </head>
 <body>
 ${subject.subjectDescription.content}

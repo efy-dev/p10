@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>【 精选专题 】 -e飞蚁</title>
+    <meta name="description" content="">
 </head>
 <body>
 <div class="hd goods-rec">
