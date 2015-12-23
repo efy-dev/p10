@@ -103,30 +103,36 @@ public class PurchaseOrderGiftController {
             String content = "";//物流信息
             if (purchaseOrderGift.getPurchaseOrderDeliveryList() != null && !purchaseOrderGift.getPurchaseOrderDeliveryList().isEmpty()) {
                 PurchaseOrderDelivery purchaseOrderDelivery = purchaseOrderGift.getPurchaseOrderDeliveryList().get(0);
-                serial = purchaseOrderDelivery.getSerial();
-                lc = purchaseOrderDelivery.getLogisticsCompany();
-                try {
-                    URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
-                    URLConnection con = url.openConnection();
-                    con.setAllowUserInteraction(false);
-                    InputStream urlStream = url.openStream();
-                    byte b[] = new byte[10000];
-                    int numRead = urlStream.read(b);
-                    content = new String(b, 0, numRead);
-                    while (numRead != -1) {
-                        numRead = urlStream.read(b);
-                        if (numRead != -1) {
-                            String newContent = new String(b, 0, numRead, "UTF-8");
-                            content += newContent;
+
+                if(!"0".equals(purchaseOrderDelivery.getStatus())){
+
+                    serial = purchaseOrderDelivery.getSerial();
+                    lc = purchaseOrderDelivery.getLogisticsCompany();
+                    try {
+                        URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
+                        URLConnection con = url.openConnection();
+                        con.setAllowUserInteraction(false);
+                        InputStream urlStream = url.openStream();
+                        byte b[] = new byte[10000];
+                        int numRead = urlStream.read(b);
+                        content = new String(b, 0, numRead);
+                        while (numRead != -1) {
+                            numRead = urlStream.read(b);
+                            if (numRead != -1) {
+                                String newContent = new String(b, 0, numRead, "UTF-8");
+                                content += newContent;
+                            }
                         }
+                        urlStream.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    urlStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    model.addAttribute("content", content);
+                    model.addAttribute("serial", serial);
+                    model.addAttribute("lc", lc);
+
                 }
-                model.addAttribute("content", content);
-                model.addAttribute("serial", serial);
-                model.addAttribute("lc", lc);
+
             }
             //优先判断是否是送礼人查看当前页面
             if (AuthorizationUtil.isAuthenticated() && AuthorizationUtil.getMyUser().getId().equals(purchaseOrderGift.getUser().getId())) {
