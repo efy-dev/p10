@@ -14,5 +14,33 @@
 </head>
 <body>
 ${subject.subjectDescription.content}
+
+<script>
+
+//    function giftBuy(amountInputId) {
+//        var amount = $("#" + amountInputId).val();
+//        var url = "";
+//        if (typeof amount != "undefined") {
+//            url = "http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/" + amount;
+//        } else {
+//            url = "http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/1";
+//        }
+//        window.location.href = url;
+//    }
+//
+//
+//    function easyBuy(amountInputId) {
+//        var amount = $("#" + amountInputId).val();
+//        var url = "";
+//        if (typeof amount != "undefined") {
+//            url = "http://www.efeiyi.com/order/easyBuy/ihykdmfn1k8httnz?amount=" + amount;
+//        } else {
+//            url = "http://www.efeiyi.com/order/easyBuy/ihykdmfn1k8httnz?amount=1";
+//        }
+//        window.location.href = url;
+//    }
+
+</script>
+
 </body>
 </html>
