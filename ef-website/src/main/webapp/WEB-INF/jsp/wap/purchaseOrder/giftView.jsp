@@ -90,7 +90,7 @@
                 查看物流
             </a>
         </c:if>
-        <div class="bd" style="margin-top:10px;font-size:12px;">也想送好礼？10秒快速注册，更多好礼等着你。</div>
+        <div class="registration"><p>也想送好礼？</p><p>10秒注册，更多好礼等着你。</p></div>
     </div>
 </div>
 
