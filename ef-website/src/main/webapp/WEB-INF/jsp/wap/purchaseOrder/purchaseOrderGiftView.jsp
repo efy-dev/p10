@@ -95,7 +95,7 @@
                title="再买一份">再买一份</a>
         </div>
         <div class="btn-again" style="margin-top: 0">
-            <a href="<c:url value="/order/easyBuy/${order.purchaseOrderProductList.get(0).productModel.id}/${order.purchaseOrderProductList.get(0).purchaseAmount}"/>" title="送给自己">送给自己</a>
+            <a href="<c:url value="/order/easyBuy/${order.purchaseOrderProductList.get(0).productModel.id}?amount=${order.purchaseOrderProductList.get(0).purchaseAmount}"/>" title="送给自己">送给自己</a>
         </div>
 
     </div>
