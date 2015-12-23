@@ -15,7 +15,7 @@
     <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}' >
         <ul class="am-slides">
             <c:forEach items="${bannerList}" var="banner">
-                <li><a href="<c:url value="${banner.wapUrl}"/> " ><img src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner"/>"></a></li>
+                <li><a href="<c:url value="${banner.wapUrl}"/> " ><img src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!home1-banner"/>"></a></li>
             </c:forEach>
         </ul>
     </div>
