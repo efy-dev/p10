@@ -6,7 +6,7 @@
   <mapping path="/comment/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
   <mapping path="/purchaseCollect/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
   <mapping path="/coupon/list" decorator="/layouts/myEfeiyiTemplate.jsp"/>
-  <mapping path="/registerSuccess.do" decorator="/layouts/registerSuccess.jsp"/>
+  <mapping path="/registerSuccess**" decorator="/layouts/registerSuccess.jsp"/>
   <mapping path="/createGiftImage/**" exclue="true"/>
   <mapping path="/**" decorator="/layouts/mainTemplate.jsp"/>
   <mapping path="/subject/activity/**" decorator="/layouts/empty.jsp"/>
