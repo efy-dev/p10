@@ -223,7 +223,7 @@ input[type="checkbox"], textarea,select {border-radius:0;box-shadow:none}
 .details-total-bar a {font-size:14px;color:#000;float:left;border-right:1px #000 solid;text-align:center}
 .details-total-bar a:last-child {border-right:0}
 .details-total-bar .btn-default {width:15%}
-.details-total-bar .btn-cart {background:#000;width:40%;color:#fff}
+.details-total-bar .btn-cart {background:#d42811;width:40%;color:#fff}
 .details-total-bar .btn-cart .icon {background-position:-110px -27px;width:19px;height:13px;display:inline-block;margin-right:3px;position:relative;top:1px}
 .details-total-bar .btn-buy {width:30%}
 /*--//End--*/
