@@ -13,6 +13,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,6 +34,7 @@ public class CommonManagerImpl implements CommonManager {
     private static HashMap<String, CommonSerial> autoSerialMap = new HashMap<>();
     private static HashMap<String, String> logisticsCompanyMap = new HashMap<>();
     private static HashMap<String, CommonSearch> searchParamMap = new HashMap<>();
+    private static Map<String, Map<String,String>> companyAddresses = new HashMap<>();
    // private static int jmenuId = 1;
 
     private static void initCommon() throws Exception {
@@ -49,6 +51,7 @@ public class CommonManagerImpl implements CommonManager {
                 getCommonTagByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getLogisticsCompany(new SAXReader().read(xmlFiles.getInputStream()));
                 getProductSearchParamByGroup(new SAXReader().read(xmlFiles.getInputStream()));
+                getCompanyAddress(new SAXReader().read(xmlFiles.getInputStream()));
             }
         }catch (Exception e){
              // e.printStackTrace();
@@ -56,6 +59,37 @@ public class CommonManagerImpl implements CommonManager {
         }
 
 
+    }
+
+    /**
+     * 公司地址信息，物流用
+     * @param infoDocument
+     */
+    private static void getCompanyAddress(Document infoDocument) {
+        if(infoDocument!=null){
+            List<Node> companyNodeList = infoDocument.selectNodes("common/companyAddresses/company");
+            if(companyNodeList!=null){
+                for(Node node : companyNodeList){
+                    Map<String,String> companyMap = new HashMap<String,String>();
+
+                    companyMap.put("name",node.selectSingleNode("@name").getText());
+                    companyMap.put("phone",node.selectSingleNode("@phone").getText());
+                    companyMap.put("province",node.selectSingleNode("@province").getText());
+                    companyMap.put("city",node.selectSingleNode("@city").getText());
+                    companyMap.put("country",node.selectSingleNode("@country").getText());
+                    companyMap.put("address",node.selectSingleNode("@address").getText());
+                    companyAddresses.put(node.selectSingleNode("@group").getText(),companyMap);
+                }
+            }
+        }
+    }
+
+    /**
+     * 取得公司地址
+     * @return
+     */
+    public static Map getCompanyAddress(){
+        return companyAddresses;
     }
 
     /**
@@ -314,5 +348,10 @@ public class CommonManagerImpl implements CommonManager {
         return  commonSearch;
     }
 
-
+    /**
+     * 获取公司地址*/
+    @Override
+    public Map<String,Map<String,String>> getCompanyAddresses() throws Exception{
+        return companyAddresses;
+    }
 }

@@ -53,18 +53,7 @@ public class CouponController {
             couponTemp.setStartTimeL(simpleDateFormat.format(couponTemp.getCouponBatch().getStartDate()));
             couponTemp.setEndTimeL(simpleDateFormat.format(couponTemp.getCouponBatch().getEndDate()));
             if (!isUserful(purchaseOrder, couponTemp)) {
-//                if (couponTemp.getCouponBatch().getPriceLimit() > price) {
                 couponIterator.remove();
-//                }
-//                if (couponTemp.getCouponBatch().getRange().equals("1")) {
-//                    couponTemp.setRangeLabel("全场通用");
-//                } else if (couponTemp.getCouponBatch().getRange().equals("2")) {
-//                    couponTemp.setRangeLabel("品类使用");
-//                } else if (couponTemp.getCouponBatch().getRange().equals("3")) {
-//                    couponTemp.setRangeLabel("店铺使用");
-//                } else if (couponTemp.getCouponBatch().getRange().equals("4")) {
-//                    couponTemp.setRangeLabel("单品使用");
-//                }
             }
         }
         return couponList;
@@ -397,13 +386,11 @@ public class CouponController {
         String limitTime1 = "2015-" + month + "-" + day + " " + hour + ":" + min + ":" + "00";
         Date limitTime = DateUtil.parseAllDate(limitTime1);
         Date date = new Date();
-
         String queryHql = "from " + Consumer.class.getName() + " t where t.createDatetime >= :limitTime and t.createDatetime <= :timeNow order by t.id desc";
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("limitTime", limitTime);
         queryParamMap.put("timeNow", date);
         List<Consumer> list1 = baseManager.listObject(queryHql, queryParamMap);
-
         XQuery xQuery2 = new XQuery("listCouponBatch_default", request);
         List<CouponBatch> list2 = baseManager.listObject(xQuery2);
         List list = new ArrayList();
@@ -423,6 +410,9 @@ public class CouponController {
         return "/purchaseOrder/couponMessage";
 
     }
+
+
+    //------------------------------------------------------以下代码 待优化---------------------------------------------------
 
     @RequestMapping("yhq.do")
     public String yhq(HttpServletRequest request, Model model) {

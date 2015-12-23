@@ -30,6 +30,7 @@ public class PurchaseOrder {
     public static final String ORDER_STATUS_FINISHED = "13"; //已完成
     public static final String ORDER_STATUS_REFUND = "15"; //已退款
     public static final String ORDER_STATUS_CONSEL = "17"; //已取消
+    public static final String ORDER_STATUS_FAILED = "19"; //发货失败
 
     private String id;
     private String serial;          //订单号

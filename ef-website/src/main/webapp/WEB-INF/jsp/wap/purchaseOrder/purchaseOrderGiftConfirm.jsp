@@ -44,11 +44,6 @@
         <!--//End-->
 
 
-        <div class="detailed">
-            <div class="font-1" style="display: none">礼物清单：安格尔-公爵夫人像</div>
-            <div class="font-2" style="display: none">价值：5000000元</div>
-        </div>
-
     </div>
     <div class="gift-details ae">
         <%--<div class="btb"><h5>礼物详情</h5></div>--%>
@@ -115,7 +110,7 @@
                     </div>
                     <span class="add-zfb"></span>
                 </a></li>
-                <li id="weixin">
+                <li class="add-btn1" id="weixin">
                     <a href="#微信支付" onclick="weixin(this)" title="微信支付">
                         <i class="icon icon-wechat"></i>
 

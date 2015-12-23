@@ -73,7 +73,7 @@
 
     <bean id="virtualPlanManagerImpl" class="com.efeiyi.ec.system.zero.virtual.service.impl.VirtualPlanManagerImpl"/>
     <bean id="virtualPlanDao" class="com.efeiyi.ec.system.zero.virtual.dao.hibernate.VirtualPlanDaoHibernate"/>
-
+    <bean id="commonManager" class="com.ming800.core.p.service.impl.CommonManagerImpl" />
     <!--<bean id="modalServiceManagerImpl" class="com.efeiyi.jh.service.companyGift.impl.ModalServiceManagerImpl"/>-->
     <!--<bean id="modalDaoHibernate" class="com.efeiyi.jh.dao.companyGift.hibernate.ModalDaoHibernate"/>-->
 

@@ -1285,11 +1285,11 @@ a:hover { text-decoration: underline }
 .ytacu .cg .btn{width: 150px!important;height: 40px;line-height: 40px;font-size: 12px;background: #000;color: #fff!important;display: inline-block;text-align: center;outline: none;float: none!important;}
 /*注册成功*/
 .successful{width: 1000px;margin: 169px auto 0;min-height: 550px;}
-.successful h5{font-size: 48px;color: #000;text-align: center;margin-bottom: 48px;}
-.successful p{font-size: 32px;color: #000;margin-bottom: 39px;text-align: center}
+.successful h5{font-size: 40px;color: #000;text-align: center;margin-bottom: 48px;line-height: 40px;}
+.successful p{font-size: 30px;color: #000;margin-bottom: 39px;text-align: center}
 .successful p span{font-size: 12px;color: #000;}
-.successful .btn-q{margin: 0 auto 29px;width: 531px;height: 54px;}
-.successful .btn-q a{text-decoration: none;outline:none;width: 240px;height: 43px;border: 1px solid #000;background: #000;color: #fff;text-align: center;font-size: 16px;line-height: 43px;}
+.successful .btn-q{margin: 0 auto;width: 531px;height: 54px;}
+.successful .btn-q a{text-decoration: none;outline:none;width: 240px;height: 50px;border: 1px solid #d42811;background: #d42811;color: #fff;text-align: center;font-size: 16px;line-height: 50px;}
 .successful .btn-q .but1{float: left}
 .successful .btn-q .but2{float: right}
 /*商品检索*/

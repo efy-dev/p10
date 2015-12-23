@@ -45,12 +45,9 @@ public class PurchaseOrderPaymentController {
     @Autowired
     private PaymentManager paymentManager;
 
-    @Autowired
-    private AutoSerialManager autoSerialManager;
-
     @RequestMapping({"/pay/alipay/{orderId}"})
     public String aliPay(HttpServletRequest request, Model model, @PathVariable String orderId) {
-        String resultHtml = "";
+        String resultHtml;
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
         if (HttpUtil.isPhone(request)) {
             resultHtml = paymentManager.alipayWap(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue());
@@ -72,7 +69,6 @@ public class PurchaseOrderPaymentController {
             String resultJson = bufferedReader.readLine();
             String transactionNumber = "";
             String purchaseOrderPaymentId = "";
-            System.out.println(resultJson);
             JSONObject jsonObject = JSONObject.fromObject(resultJson);
             String isTradeSuccess = jsonObject.getString("tradeSuccess");
             //只有支付成功的时候才会保存支付记录
@@ -102,7 +98,7 @@ public class PurchaseOrderPaymentController {
                     PurchaseOrderPayment purchaseOrderPayment = purchaseOrderPaymentDetails.getPurchaseOrderPayment();
                     purchaseOrderPayment.setStatus("2");
                     baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
-                    //@TODO 修改订单状态
+                    // 修改订单状态
                     if (purchaseOrder == null) {
                         purchaseOrder = ((PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrderPaymentDetails.getPurchaseOrderPayment().getId())).getPurchaseOrder();
                     }
@@ -129,9 +125,6 @@ public class PurchaseOrderPaymentController {
     }
 
 
-    /*
-* 付款
-* */
     @RequestMapping({"/payOrder/{orderId}"})
     public String payPurchaseOrder(HttpServletRequest request, Model model) {
         String orderId = request.getParameter("orderId");
@@ -144,8 +137,6 @@ public class PurchaseOrderPaymentController {
     public String wxPay(HttpServletRequest request, @PathVariable String orderId) throws Exception {
         //@TODO 添加订单数据部分
         String redirect_uri = "http://www.efeiyi.com/order/pay/wxParam/" + orderId;
-//        redirect_uri = redirect_uri + "?orderId=" + orderId;
-        //scope 参数视各自需求而定，这里用scope=snsapi_base 不弹出授权页面直接授权目的只获取统一支付接口的openid
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
