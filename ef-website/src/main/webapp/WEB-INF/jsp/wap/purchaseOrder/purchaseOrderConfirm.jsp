@@ -193,9 +193,9 @@
 </div>
 <!--Start--弹出地址-->
 <div id="order-address" class="alert-delete or-address" style="display:none;">
-    <div class="bd cart-address" style="width: 90%;left: 5%;overflow: scroll;top: 2%">
+    <div class="bd cart-address" style="width: 90%;left: 5%;overflow: scroll;top: 2%" >
         <div class="bd list-adress" id="list-order">
-            <ul class="ul-list">
+            <ul class="ul-list" id="address">
                 <c:forEach items="${addressList}" var="address">
 
                     <li class="cart-btn acd"
@@ -257,7 +257,8 @@
                         <label></label>
 
                         <p>
-                            <button onclick="submitNewAddress()" class="am-btn am-btn-default add-btn">保存收货人信息</button>
+                            <button onclick="submitNewAddress()" type="button" class="am-btn am-btn-default add-btn">保存收货人信息</button>
+                            <input type="reset" id="reset" style="display: none">
                         </p>
                         <span id="ts" style="border: 0"></span>
                     </form>
@@ -344,6 +345,9 @@
                 $("#address").append(html);
                 $(".active-pop").hide();
                 $("#reset").click();
+                $("#order-address").hide();
+                $("#adddiv").hide();
+                $("#list-order").show();
                 $("#" + data.id).click();
             }
             ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
@@ -499,7 +503,7 @@
     }
 
     function newAddress(it) {
-        var out2 = '<li class="cart-btn acd"onclick="chooseAddress(\'' + it.id + '\',\'' + it.consignee + '\',\'' + it.phone + '\',\'' + it.province.name + '\',\'' + it.city.name + '\',\'' + it.details + '\')"><p class="bd title">${address.consignee} ${address.phone}</p><p class="bd des">' + it.province.name + it.city.name + it.details + '</p><p class="bd btns"></p></li><br>';
+        var out2 = '<li id="'+it.id+'" class="cart-btn acd" onclick="chooseAddress(\'' + it.id + '\',\'' + it.consignee + '\',\'' + it.phone + '\',\'' + it.province.name + '\',\'' + it.city.name + '\',\'' + it.details + '\')"><p class="bd title">' + it.consignee + '  ' + it.phone + '</p><p class="bd des">' + it.province.name + it.city.name + it.details + '</p><p class="bd btns"></p></li><br>';
         return out2;
     }
 
