@@ -47,10 +47,12 @@ public class PromotionMarkInterceptor extends HandlerInterceptorAdapter {
 //                        baseManager.saveOrUpdate(MyUser.class.getName(), user);
 //                    }
                     //只以最后一次点击的返利链接为准,存入Session和Cookie
-                    HttpSession session = request.getSession();
-                    session.setAttribute("source", promotionSource);
                     CookieTool.addCookie(response, "source", promotionSource, promotionPlan.getRdDays() * 86400,"www.efeiyi.com");
+                }else{
+                    CookieTool.addCookie(response, "source", promotionSource, 86400 * 30,"www.efeiyi.com");
                 }
+                HttpSession session = request.getSession();
+                session.setAttribute("source", promotionSource);
             }
         }
         return super.preHandle(request, response, handler);
