@@ -70,7 +70,7 @@ public class YunPianSmsProvider implements SmsProvider {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String postData = "apikey=" + apikey + "&mobile=" + "18515239850" + "&tpl_id=" + tpl_id + "&tpl_value=" + content + "";
+        String postData = "apikey=" + apikey + "&mobile=" + phone + "&tpl_id=" + tpl_id + "&tpl_value=" + content + "";
 
 
         System.out.println(postData);
