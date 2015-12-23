@@ -37,7 +37,7 @@
                 <td>${purchaseOrderProduct.productModel.product.name}</td>
                 <td>${purchaseOrderProduct.purchaseAmount}</td>
                 <td>${purchaseOrderProduct.productModel.price}</td>
-                <td>${purchaseOrderProduct.purchaseOrder.message}</td>
+                <td><a href="#" onclick="showReason(this.title)" title='${purchaseOrderProduct.purchaseOrder.message}' type="button">查看详情</a></td>
             </tr>
         </c:forEach>
     </table>
@@ -52,6 +52,26 @@
 <script>
     if (${not empty msg}) {
         alert("${msg}");
+    }
+    function showReason(val){
+        var modalStr = "<div class=\"am-modal am-modal-no-btn\" id=\"modalShow\">" +
+                "<div class=\"am-modal-dialog\">" +
+                "<div class=\"am-modal-hd\">" +
+                "<span data-am-modal-close class=\"am-close\">&times;</span>"+
+                "</div>"+
+                "<div class=\"am-popup-bd\" style=\"height: 10px\">"+
+                "<span>"+ val +"</span>"+
+                "</div>"+
+                "</div>"+
+                "</div>";
+        if (typeof $("#modalShow").attr("id") != "undefined") {
+            var modalDiv = document.getElementById("modalShow");
+            modalDiv.parentNode.removeChild(modalDiv);
+        }
+        $("body").append(modalStr);
+        $("#modalShow").modal({
+            width: 450, height: 150
+        });
     }
 </script>
 </body>
