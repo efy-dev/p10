@@ -81,6 +81,12 @@
                     <i>X ${amount}</i>
                 </div>
             </div>
+            <div class="bd order-total add-order-total">
+                <p id="btn-coupon"><strong>优惠券</strong><span id="yhq">0张券可用</span><a href="#arrow-right" class="arrow-right"></a></p>
+                <p><strong>商品金额</strong><span><em>￥</em>${productModel.price*amount}</span></p>
+                <p><strong class="grey">返现</strong><span><em>￥</em>0</span></p>
+                <p><strong>运费</strong><span><em>￥</em>30</span></p>
+            </div>
         </div>
 
         <%--<div class="bd cart-pay newcart-pay">--%>
@@ -126,17 +132,48 @@
             </ul>
         </div>
         <div class="bd payment-total-bar newpayment-total-bar">
-            <span class="txt" style="font-size: 16px;">总金额:${purchaseOrder.total}元</span>
+            <span class="txt" style="font-size: 16px;">总金额:<span id="change">${purchaseOrder.total}</span>元</span>
             <a href="#btn-right" class="btn-right btn-red" onclick="submitOrder('${purchaseOrder.id}')">结&nbsp;算</a>
         </div>
 
     </div>
         </form>
 </div>
+<div id="order-total" class="alert-delete yhq" style="display:none;">
+    <div class="bd cart-coupons" style="position: fixed;">
+        <div class="title">
+            <h2>优惠券</h2>
+        </div>
+        <!--//ENd-->
+        <ul class="ul-list" id="ul-list">
+        </ul>
+
+        <div class="bd">
+            <a onclick="yhq();" class="cart-btn" id="yhq-btn" title="确定">确定</a>
+        </div>
+    </div>
+    <div class="overbg"></div>
+</div>
+
+
+<%--<li>
+    <input type="radio" name="radio" value="5" id="cboxie996pvkgbe01gh4">
+    <c:if test="${data[i]["couponBatch"]["type"]==1}">
+    <p>满200元减5元</p>
+    </c:if>
+    <p>满200元减5元</p>
+    <p>有效期：2015-09-06 00:00至2016-09-06 00:00</p>
+    <p>适用范围：全网通用</p>
+</li>--%>
+
+
+
+
 <script>
 
     var payment = "1";
-    var gaverNameStats = "0"
+    var gaverNameStats = "0";
+    var totalPrice = $("#change").text();
 
     function giftNameStatus(element) {
         var status = ""
@@ -315,6 +352,83 @@
         }
     }
 
+    $(function () {
+        $.ajax({
+            type: 'get',
+            async: false,
+            url: '<c:url value="/coupon/list/${purchaseOrder.id}"/>',
+            dataType: 'json',
+            data: {
+                status: 1,
+            },
+            success: function (data) {
+                if (data != null) {
+                    var out = '';
+                    $("#yhq").text(data.length + "张优惠券可用");
+                    for (var i = 0; i < data.length; i++) {
+                        out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">';
+                        if(data[i].couponBatch.type != null && data[i].couponBatch.type==1){
+                            out += '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>';
+                        }else if(data[i].couponBatch.type != null && data[i].couponBatch.type==2){
+                            out += '<p>'+data[i]["couponBatch"]["price"]+"元"+'</p>';
+                        }
+                            out += '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>';
+                        if(data[i].couponBatch.range!=null && data[i].couponBatch.range==1){
+                            out += '<p>适用范围：全网通用</p> </li>';
+                        }else if(data[i].couponBatch.range!=null && data[i].couponBatch.range==2){
+                            out += '<p>适用范围：品类专用</p> </li>';
+                        }else if(data[i].couponBatch.range!=null && data[i].couponBatch.range==3){
+                            out += '<p>适用范围：店铺专用</p> </li>';
+                        }else if(data[i].couponBatch.range!=null && data[i].couponBatch.range==4){
+                            out += '<p>适用范围：单品专用</p> </li>';
+                        }
+                    }
+                    $("#ul-list").html(out);
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            }
+
+        });
+    })
+
+    function yhq() {
+        var couponid = null;
+        $("input:radio").each(function () {
+            if (this.checked) {
+                couponid = $(this).attr("id");
+            }
+        })
+        var couponId = couponid.substring(4, couponid.length);
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/coupon/use.do"/>',
+            dataType: 'json',
+            data: {
+                couponId: couponId,
+                orderId: "${purchaseOrder.id}"
+
+            },
+            success: function (data) {
+                if (data == true) {
+                    var t_price = parseFloat(totalPrice);
+                    var chkobjs = document.getElementsByName("radio");
+                    for (var i = 0; i < chkobjs.length; i++) {
+                        if (chkobjs[i].checked) {
+                            t_price = t_price - parseFloat(chkobjs[i].value);
+                            $("#couponPrice").html(chkobjs[i].value);
+                        }
+                    }
+                    $("#change").text(t_price);
+                    $(".yhq").hide();
+                }
+            },
+
+        });
+
+    }
 
 </script>
 </body>
