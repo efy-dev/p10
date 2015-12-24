@@ -32,7 +32,7 @@
                                                       'eventLabel': '导航条注册',
                                                       'eventValue': 1,
                                                       'hitCallback': function () {
-                                                        window.location.href= 'http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do';
+                                                        window.location.href= 'http://passport.efeiyi.com/register?service=http://localhost:8080/sso.do?registeSuccess=/registerSuccess.do';
                                                       }
                                                       });" title="快速注册">快速注册</a></li>
             <%
