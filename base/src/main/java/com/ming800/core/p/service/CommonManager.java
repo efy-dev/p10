@@ -3,6 +3,7 @@ package com.ming800.core.p.service;
 import com.ming800.core.p.model.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -70,4 +71,8 @@ public interface CommonManager {
      * @throws Exception
      */
     CommonSearch getSearchParam(String group) throws  Exception;
+
+    /**
+     * 获取公司地址*/
+    public Map<String,Map<String,String>> getCompanyAddresses() throws Exception;
 }

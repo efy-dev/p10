@@ -12,6 +12,8 @@ import com.efeiyi.ec.purchase.model.PurchaseOrderGift;
 import com.efeiyi.ec.website.order.service.CartManager;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
+import com.efeiyi.ec.website.organization.model.SmsProvider;
+import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -95,35 +97,42 @@ public class PurchaseOrderGiftController {
             model.addAttribute("productName", productName);
             model.addAttribute("projectName", projectName);
             model.addAttribute("sender", sender);
+            model.addAttribute("purchaseOrderGift",purchaseOrderGift);
             String lc = "";//物流公司
             String serial = "";//物流单号
             String content = "";//物流信息
             if (purchaseOrderGift.getPurchaseOrderDeliveryList() != null && !purchaseOrderGift.getPurchaseOrderDeliveryList().isEmpty()) {
                 PurchaseOrderDelivery purchaseOrderDelivery = purchaseOrderGift.getPurchaseOrderDeliveryList().get(0);
-                serial = purchaseOrderDelivery.getSerial();
-                lc = purchaseOrderDelivery.getLogisticsCompany();
-                try {
-                    URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
-                    URLConnection con = url.openConnection();
-                    con.setAllowUserInteraction(false);
-                    InputStream urlStream = url.openStream();
-                    byte b[] = new byte[10000];
-                    int numRead = urlStream.read(b);
-                    content = new String(b, 0, numRead);
-                    while (numRead != -1) {
-                        numRead = urlStream.read(b);
-                        if (numRead != -1) {
-                            String newContent = new String(b, 0, numRead, "UTF-8");
-                            content += newContent;
+
+                if(!"0".equals(purchaseOrderDelivery.getStatus())){
+
+                    serial = purchaseOrderDelivery.getSerial();
+                    lc = purchaseOrderDelivery.getLogisticsCompany();
+                    try {
+                        URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
+                        URLConnection con = url.openConnection();
+                        con.setAllowUserInteraction(false);
+                        InputStream urlStream = url.openStream();
+                        byte b[] = new byte[10000];
+                        int numRead = urlStream.read(b);
+                        content = new String(b, 0, numRead);
+                        while (numRead != -1) {
+                            numRead = urlStream.read(b);
+                            if (numRead != -1) {
+                                String newContent = new String(b, 0, numRead, "UTF-8");
+                                content += newContent;
+                            }
                         }
+                        urlStream.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    urlStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    model.addAttribute("content", content);
+                    model.addAttribute("serial", serial);
+                    model.addAttribute("lc", lc);
+
                 }
-                model.addAttribute("content", content);
-                model.addAttribute("serial", serial);
-                model.addAttribute("lc", lc);
+
             }
             //优先判断是否是送礼人查看当前页面
             if (AuthorizationUtil.isAuthenticated() && AuthorizationUtil.getMyUser().getId().equals(purchaseOrderGift.getUser().getId())) {
@@ -294,6 +303,9 @@ public class PurchaseOrderGiftController {
 
         purchaseOrderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //订单改为未发货状态
         baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
+        SmsProvider smsProvider = new YunPianSmsProvider();
+        String phoneNumber  =  purchaseOrderGift.getUser().getUsername();
+        smsProvider.post(phoneNumber,"","1185009");
         model.addAttribute("purchaseOrder", purchaseOrderGift);
         model.addAttribute("request", "/purchaseOrder/giftView");
         return "/purchaseOrder/giftView";

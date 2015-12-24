@@ -312,7 +312,14 @@
 <!--Start-/*够阿米送礼弹出框*/-->
 <div class="dialog-gift" style="display: none;">
     <div class="content">
-        <div class="title">${productModel.name}</div>
+        <div class="title">
+      <c:if test="${fn:length(product.productModelList)==1}">
+        ${productModel.name}
+      </c:if>
+            <c:if test="${fn:length(product.productModelList)>1}">
+                ${product.name}[${productModel.name}]
+            </c:if>
+        </div>
         <div class="code">
             <p class="img">
 

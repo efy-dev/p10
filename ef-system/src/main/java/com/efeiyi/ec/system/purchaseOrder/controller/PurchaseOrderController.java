@@ -193,7 +193,12 @@ public class PurchaseOrderController extends BaseController {
                 sysOrder = purchaseOrder.getFatherPurchaseOrder().getSerial();
             }
             String logisticsCompanyZHCN = request.getParameter("logisticsCompanyZHCN");
-            this.smsCheckManager.send(purchaseOrder.getUser().getUsername(), "#purchaseOrderSerial#=" + sysOrder + "&#LogisticsCompany#=" + logisticsCompanyZHCN + "&#serial#=" + serial, "1035759", PConst.TIANYI);
+            if("3".equals(purchaseOrder.getOrderType())){
+                this.smsCheckManager.send(purchaseOrder.getReceiverPhone(), "#LogisticsCompany#=" + logisticsCompanyZHCN + "&#serial#=" + serial, "1184993", PConst.TIANYI);
+
+            }else{
+                this.smsCheckManager.send(purchaseOrder.getUser().getUsername(), "#purchaseOrderSerial#=" + sysOrder + "&#LogisticsCompany#=" + logisticsCompanyZHCN + "&#serial#=" + serial, "1035759", PConst.TIANYI);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

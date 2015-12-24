@@ -13,7 +13,14 @@
 </head>
 <body>
 <%--${redirect}--%>
-
+<div class="packet ae">
+    <div class="efeiyi-lod ae">
+        <a class="efiyi-logo"></a>
+        <a class="eifyi-ld">
+            <div class="ld-img"><img src="<c:url value="/scripts/wap/images/jazq2.gif"/>"></div>
+        </a>
+    </div>
+</div>
 
 <script>
     function jsApiCall() {

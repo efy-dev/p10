@@ -112,10 +112,15 @@ public class PurchaseOrderController {
         if (purchaseOrder.getPurchaseOrderDeliveryList() != null && !purchaseOrder.getPurchaseOrderDeliveryList().isEmpty()) {
 
             PurchaseOrderDelivery purchaseOrderDelivery = purchaseOrder.getPurchaseOrderDeliveryList().get(0);
-            String logisticsInfo = getLogistics(purchaseOrderDelivery.getSerial(), purchaseOrderDelivery.getLogisticsCompany());
+            if (!purchaseOrderDelivery.getStatus().equals("0")) {
+                String logisticsInfo = getLogistics(purchaseOrderDelivery.getSerial(), purchaseOrderDelivery.getLogisticsCompany());
+                model.addAttribute("dl", logisticsInfo);
+                model.addAttribute("pl", purchaseOrderDelivery);
+            } else {
+                model.addAttribute("pl", null);
+            }
 
-            model.addAttribute("dl", logisticsInfo);
-            model.addAttribute("pl", purchaseOrderDelivery);
+
         } else {
             model.addAttribute("pl", null);
         }
@@ -186,23 +191,26 @@ public class PurchaseOrderController {
         baseManager.remove(PurchaseOrder.class.getName(), orderId);
         return "redirect:/order/myEfeiyi/list.do";
     }
+
     /**
      * 订单列表显示团购详情页
+     *
      * @param request
      * @return
      */
     @RequestMapping("/groupBuyView")
     public String getGroupBuy(HttpServletRequest request) throws Exception {
-        String purchaseOrderId=request.getParameter("orderId");
+        String purchaseOrderId = request.getParameter("orderId");
 //        XQuery xQuery=new XQuery("PurchaseOrderGroup_default",request);
 //        xQuery.put("purchaseOrder_id",purchaseOrderId);
 //        PurchaseOrderGroup purchaseOrderGroup = (PurchaseOrderGroup) baseManager.listObject(xQuery).get(0);
-        PurchaseOrderGroup purchaseOrderGroup = (PurchaseOrderGroup) baseManager.getObject(PurchaseOrderGroup.class.getName(),purchaseOrderId);
+        PurchaseOrderGroup purchaseOrderGroup = (PurchaseOrderGroup) baseManager.getObject(PurchaseOrderGroup.class.getName(), purchaseOrderId);
         String memberId = purchaseOrderGroup.getGroupMember().getId();
         String groupId = purchaseOrderGroup.getMyGroup().getId();
         String groupProductId = purchaseOrderGroup.getMyGroup().getGroupProduct().getId();
-        return "redirect:Http://a.efeiyi.com/group/shareGroup?memberId="+memberId+"&groupId="+groupId+"&groupProductId="+groupProductId+"&purchaseOrderId="+purchaseOrderId+"";
+        return "redirect:Http://a.efeiyi.com/group/shareGroup?memberId=" + memberId + "&groupId=" + groupId + "&groupProductId=" + groupProductId + "&purchaseOrderId=" + purchaseOrderId + "";
     }
+
     /**
      * 获取物流信息
      *

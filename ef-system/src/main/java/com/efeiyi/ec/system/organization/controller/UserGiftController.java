@@ -43,7 +43,7 @@ public class UserGiftController extends BaseController{
         hints.put(EncodeHintType.MARGIN, 0);
         BitMatrix bitMatrix = null;
         try {
-            bitMatrix = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, 180, 180, hints);//二维码像素
+            bitMatrix = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);//二维码像素
         } catch (WriterException e) {
             e.printStackTrace();
         }
@@ -53,11 +53,11 @@ public class UserGiftController extends BaseController{
         for (int x = 0; x < qRWidth; x++) {
             for (int y = 0; y < qRHeight; y++) {
                 image.setRGB(x, y, bitMatrix.get(x, y) == true ?
-                        Color.BLACK.getRGB() : Color.WHITE.getRGB());
+                        new Color(157,10,15).getRGB() : Color.WHITE.getRGB());
             }
         }
 
-        URL logoUrl = new URL("http://pro.efeiyi.com/gift/test1.jpg");
+        URL logoUrl = new URL("http://pro.efeiyi.com/gift/gift2.png");
         BufferedImage logo = ImageIO.read(logoUrl);
         int widthLogo = logo.getWidth(), heightLogo = logo.getHeight();
         // 计算图片放置位置
