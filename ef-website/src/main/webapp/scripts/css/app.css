@@ -863,7 +863,7 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 .footer .frlinksimg .line {width:2px;height:40px;display:inline-block;margin:0 20px;position:relative;top:-36px;background:#434343}
 /*--//ENd--footernew--*/
 .dialog-gift {position:fixed;z-index:999}
-.dialog-gift .content {width:600px;height:416px;background:#fff;border:3px solid #999;position:fixed;top:50%;left:50%;margin-top:-208px;margin-left:-300px;z-index:2}
+.dialog-gift .content {width:600px;height:468px;background:#fff;border:3px solid #999;position:fixed;top:50%;left:50%;margin-top:-234px;margin-left:-300px;z-index:2}
 .dialog-gift .content .title {width:600px;font-size:18px;color:#333;text-align:center;font-weight:bolder;margin-top:27px;margin-bottom:14px;height:18px;line-height:18px;float:left}
 .dialog-gift .content .code {width:600px;text-align:center;float:left}
 .dialog-gift .content .code p {width:100%;float:left}

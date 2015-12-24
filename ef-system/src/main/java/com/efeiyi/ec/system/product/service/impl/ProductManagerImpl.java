@@ -147,6 +147,7 @@ public class ProductManagerImpl implements ProductManager{
                         }else {
                             productModel.setMarketPrice(null);
                         }
+                        productModel.setWeight(productModelBean.getWeight()[i]);
                         productModel.setProduct(product);
                         productModel.setSerial(autoSerialManager.nextSerial("productModel"));
                         productModel.setStatus(status[i]);
@@ -196,6 +197,7 @@ public class ProductManagerImpl implements ProductManager{
                             }else {
                                 productModel.setMarketPrice(null);
                             }
+                            productModel.setWeight(productModelBean.getWeight()[i]);
                          //   productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
                             productModel.setName(productModelBean.getModelName()[i]);
                          //   productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
@@ -228,6 +230,7 @@ public class ProductManagerImpl implements ProductManager{
                             }else {
                                 productModel.setMarketPrice(null);
                             }
+                            productModel.setWeight(productModelBean.getWeight()[i]);
                     //        productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
                             productModel.setName(productModelBean.getModelName()[i]);
                     //        productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
@@ -256,6 +259,7 @@ public class ProductManagerImpl implements ProductManager{
             }else {
                 productModel.setMarketPrice(null);
             }
+            productModel.setWeight(productModelBean.getDefaultWeight());
             productModel.setProduct(product);
             productModel.setSerial(autoSerialManager.nextSerial("productModel"));
             productModel.setStatus(productModelBean.getDefaultStatus());
@@ -272,6 +276,7 @@ public class ProductManagerImpl implements ProductManager{
             if(!"".equals(productModelBean.getDefaultMarketPrice())) {
                 productModel.setMarketPrice(new BigDecimal(productModelBean.getDefaultMarketPrice()));
             }
+            productModel.setWeight(productModelBean.getDefaultWeight());
        //     productModel.setAmount(Integer.parseInt(productModelBean.getDefaultAmount()));
             productModel.setName(productModelBean.getDefaultName());
        //     productModel.setPrice(new BigDecimal(productModelBean.getDefaultPrice()));

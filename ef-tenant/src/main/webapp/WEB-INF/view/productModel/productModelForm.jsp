@@ -117,12 +117,13 @@
                         <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover"
                                id="productModel">
                             <tr>
-                                <th class="am-text-center" width="15%">操作</th>
+                                <th class="am-text-center" width="10%">操作</th>
                                 <th class="am-text-center" width="15%">商品名称</th>
                                 <th class="am-text-center" width="15%">属性</th>
-                                <th class="am-text-center" width="15%">库存</th>
+                                <th class="am-text-center" width="10%">库存</th>
                                 <th class="am-text-center" width="15%">价格(元)</th>
                                 <th class="am-text-center" width="15%">市场价格(元)</th>
+                                <th class="am-text-center" width="10%">重量(kg)</th>
                             </tr>
                             <c:set var="iscontain" value="false" />
                             <c:forEach var="item" items="${object.productModelList}">
@@ -159,6 +160,10 @@
                                         <input type="text" name="defaultMarketPrice" style="width: 50%;height: 30px;"
                                                value=""/>
                                     </td>
+                                    <td align="center">
+                                        <input type="text" name="defaultWeight" style="width: 50%;height: 30px;"
+                                               value="" required/>
+                                    </td>
                                 </tr>
                             </c:if>
                             <c:if test="${not empty object.productModelList}">
@@ -191,6 +196,10 @@
                                             <td align="center">
                                                 <input type="text" name="defaultMarketPrice" style="width: 50%;height: 30px;"
                                                        value="${model.marketPrice}"/>
+                                            </td>
+                                            <td align="center">
+                                                <input type="text" name="defaultWeight" style="width: 50%;height: 30px;"
+                                                       value="${model.weight}" required/>
                                             </td>
                                         </tr>
                                     </c:if>
@@ -241,6 +250,10 @@
                                         <td align="center">
                                             <input type="text" name="marketPrice" style="width: 50%;height: 30px;"
                                                    value="${model.marketPrice}"/>
+                                        </td>
+                                        <td align="center">
+                                            <input type="text" name="weight" style="width: 50%;height: 30px;"
+                                                   value="${model.weight}" required/>
                                         </td>
                                         </tr>
                                     </c:if>
@@ -325,6 +338,9 @@
                 '<td align="center">' +
                 ' <input type="text" name="marketPrice" style="width: 50%;height: 30px;" value=""/>' +
                 '</td>' +
+                '<td align="center">' +
+                ' <input type="text" name="weight" style="width: 50%;height: 30px;" value="" required/>' +
+                '</td>' +
                 '</tr>';
         $("#productModel").append(tr);
     }
@@ -332,7 +348,25 @@
     //提交
     function toSubmit(result) {
         $("input[name='resultPage']").val(result);
-        $("form").submit();
+        var f = true;
+        $("input[name*='eight']").each(function(){
+            if($(this).val()==""){
+                f = false;
+                return false;
+            }
+        });
+        if(f) {
+            if ($("#productModel tr[flag='default']").length == 1) {
+                $("form").submit();
+            } else {
+                alert("保存失败!");
+            }
+        }else{
+            alert("请填写商品规格重量!");
+        }
+
+
+
     }
     /****属性 生成商品模型***/
     function projectPropertyClick(obj) {
@@ -434,6 +468,9 @@
                     '</td>' +
                     '<td align="center">' +
                     ' <input type="text" name="marketPrice" style="width: 50%;height: 30px;" value=""/>' +
+                    '</td>' +
+                    '<td align="center">' +
+                    ' <input type="text" name="weight" style="width: 50%;height: 30px;" value="" required/>' +
                     '</td>' +
                     '</tr>';
 

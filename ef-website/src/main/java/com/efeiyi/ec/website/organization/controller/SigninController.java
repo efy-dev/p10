@@ -9,6 +9,8 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
+import com.efeiyi.ec.website.organization.model.SmsProvider;
+import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
@@ -28,6 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -143,7 +146,6 @@ public class SigninController extends BaseController {
     }
 
 
-
     @RequestMapping("/sso.do")
     public String forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String redirect = request.getParameter("callUrl");
@@ -168,10 +170,10 @@ public class SigninController extends BaseController {
     }
 
 
-
     @RequestMapping({"/registerSuccess.do"})
     public String transitPage(HttpServletRequest request, Model model) throws Exception {
         String userId = request.getParameter("userId");
+        MyUser user = (MyUser) baseManager.getObject(MyUser.class.getName(),userId);
         int couponAmount = 0;
         if (userId != null && !"".equals(userId)) {
             Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
@@ -200,21 +202,54 @@ public class SigninController extends BaseController {
                     couponAmount++;
                 }
             }
+            SmsProvider smsProvider = new YunPianSmsProvider();
+            String phoneNumber  =  user.getUsername();
+            smsProvider.post(phoneNumber,"","1186309");
 
         } else {
             return "redirect:/sso.do";
         }
-        if (couponAmount == 0) {
             return "redirect:/sso.do";
-        } else {
-//            model.addAttribute("couponAmount",couponAmount);
-            return "redirect:/registerSuccess/"+couponAmount;
-        }
+
     }
 
+    @RequestMapping({"/createCoupon.do"})
+    @ResponseBody
+    public boolean transitPage(HttpServletRequest request) throws Exception {
+        String userId = request.getParameter("userId");
+        if (userId != null && !"".equals(userId)) {
+            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
+            XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
+            List<Object> couponBatchList = baseManager.listObject(xQuery);
+            for (Object couponBatchTemp : couponBatchList) {
+                if (((CouponBatch) couponBatchTemp).getCouponList().size() < ((CouponBatch) couponBatchTemp).getAmount()) {
+                    Coupon coupon = new Coupon();
+                    coupon.setStatus("1");
+                    coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
+                    coupon.setCouponBatch((CouponBatch) couponBatchTemp);
+                    Date currentDate = new Date();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+                    String currentDateStr = simpleDateFormat.format(currentDate);
+                    coupon.setUniqueKey(currentDateStr + coupon.getSerial());
+                    coupon.setConsumer(consumer);
+                    coupon.setWhetherBind("2");
+                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                } else if (((CouponBatch) couponBatchTemp).fetchCouponList().size() > 0) {
+                    List<Coupon> couponList = ((CouponBatch) couponBatchTemp).fetchCouponList();
+                    Coupon coupon = couponList.get(0);
+                    coupon.setWhetherBind("2");
+                    coupon.setConsumer(consumer);
+                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                }
+            }
+        }
+        return true;
+    }
+
+
     @RequestMapping("/registerSuccess/{couponAmount}")
-    public String successPage(@PathVariable String couponAmount ,HttpServletRequest request,Model model){
-        model.addAttribute("couponAmount",couponAmount);
+    public String successPage(@PathVariable String couponAmount, HttpServletRequest request, Model model) {
+        model.addAttribute("couponAmount", couponAmount);
         return "/registerSuccess";
     }
 
@@ -233,7 +268,6 @@ public class SigninController extends BaseController {
         model.addAttribute("unionid", unionid);
         return "/wxRedirect";
     }
-
 
 
 }

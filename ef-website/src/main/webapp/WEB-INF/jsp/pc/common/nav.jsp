@@ -32,7 +32,7 @@
                                                       'eventLabel': '导航条注册',
                                                       'eventValue': 1,
                                                       'hitCallback': function () {
-                                                        window.location.href= 'http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do';
+                                                        window.location.href= 'http://passport.efeiyi.com/register?service=http://localhost:8080/sso.do?registeSuccess=/registerSuccess.do';
                                                       }
                                                       });" title="快速注册">快速注册</a></li>
             <%
@@ -86,6 +86,7 @@
             </div>
             <div class="items">
                 <a href="<c:url value="/"/>">首页</a>
+                <a href="http://www.efeiyi.com/subject/activity/iia4ndpr2vgul3i4">春节大礼包</a>
                 <a href="http://www.efeiyi.com/subject/ihygpb6m24v43zv9">礼品专区</a>
                 <a href="http://www.efeiyi.com/subject/ihygpskg3j28dh60">精选专题</a>
             </div>
@@ -103,6 +104,7 @@
             </div>
             <div class="items">
                 <a href="<c:url value="/"/>">首页</a>
+                <a href="http://www.efeiyi.com/subject/activity/iia4ndpr2vgul3i4">春节大礼包</a>
                 <a href="http://www.efeiyi.com/subject/ihygpb6m24v43zv9">礼品专区</a>
                 <a href="http://www.efeiyi.com/subject/ihygpskg3j28dh60">精选专题</a>
             </div>

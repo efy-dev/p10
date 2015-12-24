@@ -170,6 +170,9 @@ public class PurchaseOrderGiftController {
         int height = theImg.getHeight(null);
         BufferedImage bimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bimage.createGraphics();
+        // 设置“抗锯齿”的属性
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g.setColor(Color.black);
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
@@ -236,6 +239,8 @@ public class PurchaseOrderGiftController {
         int widthLogo = logo.getWidth(), heightLogo = logo.getHeight();
         // 计算图片放置位置
         Graphics2D g2 = image.createGraphics();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         int x = (image.getWidth() - widthLogo) / 2;
         int y = (image.getHeight() - logo.getHeight()) / 2;
         g2.drawImage(logo, x, y, widthLogo, heightLogo, null);
