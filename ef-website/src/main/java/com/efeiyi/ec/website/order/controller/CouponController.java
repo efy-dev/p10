@@ -97,7 +97,9 @@ public class CouponController {
                         } else {
                             isUseful = true;
                         }
-                        break;
+                        if (isUseful) {
+                            break;
+                        }
                     }
                 }
             } else if (coupon.getCouponBatch().getRange().equals("3")) {
@@ -119,7 +121,9 @@ public class CouponController {
                         } else {
                             isUseful = true;
                         }
-                        break;
+                        if (isUseful) {
+                            break;
+                        }
                     } else {
                         isUseful = false;
                     }
