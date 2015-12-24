@@ -33,6 +33,7 @@ public class ProductModel implements Serializable {
     private List<ProductPicture> productPictureList;
     private Integer popularityAmount;
     private Integer saleAmount;
+    private Double weight;
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
     public List<ProductPicture> getProductPictureList() {
@@ -191,5 +192,14 @@ public class ProductModel implements Serializable {
 
     public void setSaleAmount(Integer saleAmount) {
         this.saleAmount = saleAmount;
+    }
+
+    @Column(name = "weight")
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
     }
 }

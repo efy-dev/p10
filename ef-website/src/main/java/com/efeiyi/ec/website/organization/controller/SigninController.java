@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -143,7 +144,6 @@ public class SigninController extends BaseController {
     }
 
 
-
     @RequestMapping("/sso.do")
     public String forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String redirect = request.getParameter("callUrl");
@@ -166,7 +166,6 @@ public class SigninController extends BaseController {
         CookieTool.addCookie(response, "userinfo", myUser.getId(), 10000000, ".efeiyi.com");
         response.sendRedirect(request.getContextPath() + "/");
     }
-
 
 
     @RequestMapping({"/registerSuccess.do"})
@@ -208,13 +207,47 @@ public class SigninController extends BaseController {
             return "redirect:/sso.do";
         } else {
 //            model.addAttribute("couponAmount",couponAmount);
-            return "redirect:/registerSuccess/"+couponAmount;
+            return "redirect:/registerSuccess/" + couponAmount;
         }
     }
 
+    @RequestMapping({"/createCoupon.do"})
+    @ResponseBody
+    public boolean transitPage(HttpServletRequest request) throws Exception {
+        String userId = request.getParameter("userId");
+        if (userId != null && !"".equals(userId)) {
+            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
+            XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
+            List<Object> couponBatchList = baseManager.listObject(xQuery);
+            for (Object couponBatchTemp : couponBatchList) {
+                if (((CouponBatch) couponBatchTemp).getCouponList().size() < ((CouponBatch) couponBatchTemp).getAmount()) {
+                    Coupon coupon = new Coupon();
+                    coupon.setStatus("1");
+                    coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
+                    coupon.setCouponBatch((CouponBatch) couponBatchTemp);
+                    Date currentDate = new Date();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+                    String currentDateStr = simpleDateFormat.format(currentDate);
+                    coupon.setUniqueKey(currentDateStr + coupon.getSerial());
+                    coupon.setConsumer(consumer);
+                    coupon.setWhetherBind("2");
+                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                } else if (((CouponBatch) couponBatchTemp).fetchCouponList().size() > 0) {
+                    List<Coupon> couponList = ((CouponBatch) couponBatchTemp).fetchCouponList();
+                    Coupon coupon = couponList.get(0);
+                    coupon.setWhetherBind("2");
+                    coupon.setConsumer(consumer);
+                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                }
+            }
+        }
+        return true;
+    }
+
+
     @RequestMapping("/registerSuccess/{couponAmount}")
-    public String successPage(@PathVariable String couponAmount ,HttpServletRequest request,Model model){
-        model.addAttribute("couponAmount",couponAmount);
+    public String successPage(@PathVariable String couponAmount, HttpServletRequest request, Model model) {
+        model.addAttribute("couponAmount", couponAmount);
         return "/registerSuccess";
     }
 
@@ -233,7 +266,6 @@ public class SigninController extends BaseController {
         model.addAttribute("unionid", unionid);
         return "/wxRedirect";
     }
-
 
 
 }

@@ -50,7 +50,7 @@ public class CompanyOrderBatchController {
         }else {
             companyOrderBatch = (CompanyOrderBatch) baseManager.getObject(CompanyOrderBatch.class.getName(), id);
             list = companyOrderBatchServiceManager.getOrderGiftList(companyOrderBatch);
-            filename = companyOrderBatch.getSerial() + ".txt";
+            filename = companyOrderBatch.getSerial() + ".csv";
         }
 
         if (list == null || list.size() < 1){
@@ -59,7 +59,7 @@ public class CompanyOrderBatchController {
         response.setContentType("text/csv;charset=UTF-8");
         response.setHeader("Content-disposition", "attachment;filename="+filename);
         for(PurchaseOrderGift purchaseOrderGift : list ){
-            response.getWriter().write(purchaseOrderGift.getCompanyOrderBatch().getSerial()+"\t"+"http://www.efeiyi.com/giftReceive/" + purchaseOrderGift.getId() + "\r\n");
+            response.getWriter().write(purchaseOrderGift.getSerial()+","+"http://www.efeiyi.com/giftReceive/" + purchaseOrderGift.getId() + "\r\n");
         }
         response.getWriter().flush();
     }

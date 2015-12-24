@@ -194,7 +194,9 @@ public class BatchLogisticsReactor implements Runnable {
                 Map receiverMap = new HashMap();
                 receiverMap.put("name", purchaseOrderProduct.getPurchaseOrder().getReceiverName());
                 receiverMap.put("mobile", purchaseOrderProduct.getPurchaseOrder().getReceiverPhone());
-                receiverMap.put("province", purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getProvince().getName());
+                String receiverProvince = purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getProvince().getName();
+                receiverProvince = commonManager.getProvinceConverter().get(receiverProvince) == null ? receiverProvince : commonManager.getProvinceConverter().get(receiverProvince);
+                receiverMap.put("province", receiverProvince);
                 receiverMap.put("city", purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getCity().getName());
                 receiverMap.put("address", purchaseOrderProduct.getPurchaseOrder().getPurchaseOrderAddress());
                 jsonMap.put("receiver", receiverMap);
@@ -218,8 +220,7 @@ public class BatchLogisticsReactor implements Runnable {
                 byte[] b = new byte[(int) stringEntity.getContentLength()];
                 stringEntity.getContent().read(b);
                 System.out.println("报文:" + new String(b, "utf-8"));
-                HttpResponse response = null;
-                response = httpClient.execute(httppost);
+                HttpResponse response = httpClient.execute(httppost);
 
 
                 HttpEntity entity = response.getEntity();

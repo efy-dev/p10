@@ -74,5 +74,10 @@ public interface CommonManager {
 
     /**
      * 获取公司地址*/
-    public Map<String,Map<String,String>> getCompanyAddresses() throws Exception;
+    Map<String,Map<String,String>> getCompanyAddresses() throws Exception;
+    /**
+     * 获取物流地址转换
+     * @return
+     */
+    Map<String,String> getProvinceConverter();
 }

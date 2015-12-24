@@ -170,7 +170,7 @@
                     </div>
                     <span class="add-zfb"></span>
                 </a></li>
-                <li id="weixin">
+                <li class="add-btn1"  id="weixin">
                     <a href="#微信支付" onclick="weixin(this)" title="微信支付">
                         <i class="icon icon-wechat"></i>
 
