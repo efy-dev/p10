@@ -51,7 +51,7 @@
                 highLight=""
                 highLightFields="" highLightSimplePre="" highLightSimplePost=""
                 defType="" qf="" solrClientCount=""
-                solrServerCoreUrl="http://101.200.182.7/solr/product/dataimport?command=delta-import"
+                solrServerCoreUrl="http://101.200.182.7/solr/product/dataimport?command=delta-import&amp;clean=false"
                 solrServerHost="101.200.182.7" username="efy" password="helloword" port="80"/>
     </searchs>
     <provinces>
