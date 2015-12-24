@@ -76,10 +76,10 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping("/giftBuy/showNameStatus.do")
     @ResponseBody
-    public boolean changeShowGiftNameStatus(HttpServletRequest request) {
+    public boolean changeShowGiftStatus(HttpServletRequest request) {
         try {
             String purchaseOrderId = request.getParameter("purchaseOrderId");
-            String status = request.getParameter("nameStatus");
+            String status = request.getParameter("status");
             PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
             purchaseOrderGift.setShowGiftNameStatus(status);
             baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
@@ -164,11 +164,8 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/giftBuy/{productId}/{amount}"})
     public String giftBuy(HttpServletRequest request, @PathVariable String productId, Model model, @PathVariable String amount) throws Exception {
-
         String requestUrl = request.getRequestURL().toString();
         String requestParam = request.getQueryString();
-//        http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/1#btn-right?
-//        http://www.efeiyi.com/giftReceive/iidvpcgt3j0ab3hz?from=singlemessage&isa
         try {
             if (!HttpUtil.isPhone(request)) {
                 String url = requestUrl + "?" + requestParam;
@@ -178,8 +175,6 @@ public class PurchaseOrderController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productId);
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProductModel(productModel);
@@ -406,11 +401,7 @@ public class PurchaseOrderController extends BaseController {
                     break;
                 }
             }
-//            if (cartProductTemp.getIsChoose().equals("1")) {
-//            }
         }
-
-
         String resultPage = "";
         if (payment.equals("1")) {//支付宝
             resultPage = "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
@@ -432,7 +423,6 @@ public class PurchaseOrderController extends BaseController {
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
         ConsumerAddress consumerAddress = (ConsumerAddress) object;
         consumerAddress.setStatus("2");
-
         String hql = "select obj from " + ConsumerAddress.class.getName() + " obj where obj.status=2 and obj.consumer.id='" + consumerAddress.getConsumer().getId() + "'";
         if (baseManager.listObject(hql) != null && baseManager.listObject(hql).size() > 0) {
             ConsumerAddress consumerAddressTemp = (ConsumerAddress) (baseManager.listObject(hql).get(0));

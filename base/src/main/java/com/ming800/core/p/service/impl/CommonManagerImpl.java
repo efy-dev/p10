@@ -13,6 +13,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,6 +34,8 @@ public class CommonManagerImpl implements CommonManager {
     private static HashMap<String, CommonSerial> autoSerialMap = new HashMap<>();
     private static HashMap<String, String> logisticsCompanyMap = new HashMap<>();
     private static HashMap<String, CommonSearch> searchParamMap = new HashMap<>();
+    private static Map<String, Map<String,String>> companyAddresses = new HashMap<>();
+    private static Map<String,String> provinceConverter = new HashMap<String,String>();
    // private static int jmenuId = 1;
 
     private static void initCommon() throws Exception {
@@ -49,6 +52,8 @@ public class CommonManagerImpl implements CommonManager {
                 getCommonTagByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getLogisticsCompany(new SAXReader().read(xmlFiles.getInputStream()));
                 getProductSearchParamByGroup(new SAXReader().read(xmlFiles.getInputStream()));
+                getCompanyAddress(new SAXReader().read(xmlFiles.getInputStream()));
+                getProvinceConverter(new SAXReader().read(xmlFiles.getInputStream()));
             }
         }catch (Exception e){
              // e.printStackTrace();
@@ -56,6 +61,49 @@ public class CommonManagerImpl implements CommonManager {
         }
 
 
+    }
+
+    /**
+     * 取得物流地址转换
+     * @return
+     */
+    @Override
+    public Map<String,String> getProvinceConverter(){
+        return provinceConverter;
+    }
+
+    private static void getProvinceConverter(Document infoDocument) {
+        if(infoDocument!=null){
+            List<Node> companyNodeList = infoDocument.selectNodes("common/provinces/province");
+            if(companyNodeList!=null){
+                for(Node node : companyNodeList){
+                    provinceConverter.put(node.selectSingleNode("@key").getText(),node.selectSingleNode("@value").getText());
+                }
+            }
+        }
+    }
+
+    /**
+     * 公司地址信息，物流用
+     * @param infoDocument
+     */
+    private static void getCompanyAddress(Document infoDocument) {
+        if(infoDocument!=null){
+            List<Node> companyNodeList = infoDocument.selectNodes("common/companyAddresses/company");
+            if(companyNodeList!=null){
+                for(Node node : companyNodeList){
+                    Map<String,String> companyMap = new HashMap<String,String>();
+
+                    companyMap.put("name",node.selectSingleNode("@name").getText());
+                    companyMap.put("phone",node.selectSingleNode("@phone").getText());
+                    companyMap.put("province",node.selectSingleNode("@province").getText());
+                    companyMap.put("city",node.selectSingleNode("@city").getText());
+                    companyMap.put("country",node.selectSingleNode("@country").getText());
+                    companyMap.put("address",node.selectSingleNode("@address").getText());
+                    companyAddresses.put(node.selectSingleNode("@group").getText(),companyMap);
+                }
+            }
+        }
     }
 
     /**
@@ -314,5 +362,10 @@ public class CommonManagerImpl implements CommonManager {
         return  commonSearch;
     }
 
-
+    /**
+     * 获取公司地址*/
+    @Override
+    public Map<String,Map<String,String>> getCompanyAddresses() throws Exception{
+        return companyAddresses;
+    }
 }

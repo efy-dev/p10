@@ -7,6 +7,7 @@
 <body>
 <!--//End--header-->
 <div class="gift ae">
+    <form>
     <div class="card custom ae ">
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="ae imgb">
@@ -42,12 +43,7 @@
             <!--//End-->
         </div>
         <!--//End-->
-
-
-        <div class="detailed">
-            <div class="font-1" style="display: none">礼物清单：安格尔-公爵夫人像</div>
-            <div class="font-2" style="display: none">价值：5000000元</div>
-        </div>
+        <div class="hint"><input type="checkbox" id="showGiftName" onclick="giftNameStatus(this)">告诉Ta什么礼物</div>
 
     </div>
     <div class="gift-details ae">
@@ -115,7 +111,7 @@
                     </div>
                     <span class="add-zfb"></span>
                 </a></li>
-                <li id="weixin">
+                <li class="add-btn1" id="weixin">
                     <a href="#微信支付" onclick="weixin(this)" title="微信支付">
                         <i class="icon icon-wechat"></i>
 
@@ -130,11 +126,12 @@
             </ul>
         </div>
         <div class="bd payment-total-bar newpayment-total-bar">
-            <span class="txt">总金额${purchaseOrder.total}元</span>
+            <span class="txt" style="font-size: 16px;">总金额:${purchaseOrder.total}元</span>
             <a href="#btn-right" class="btn-right btn-red" onclick="submitOrder('${purchaseOrder.id}')">结&nbsp;算</a>
         </div>
 
     </div>
+        </form>
 </div>
 <script>
 
@@ -156,7 +153,7 @@
         }
         ajaxRequest("<c:url value="/order/giftBuy/showNameStatus.do"/>", {
             "purchaseOrderId": "${purchaseOrder.id}",
-            "nameStatus": status
+            "status": status
         }, success, function () {
         }, "post");
     }
@@ -317,6 +314,8 @@
             $("#addGaverName").hide();
         }
     }
+
+
 </script>
 </body>
 </html>

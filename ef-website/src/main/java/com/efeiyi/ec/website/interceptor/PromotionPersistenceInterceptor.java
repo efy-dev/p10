@@ -32,24 +32,24 @@ public class PromotionPersistenceInterceptor extends HandlerInterceptorAdapter {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         //先Session后cookie找返利计划
         String promotionSource = (String) request.getSession().getAttribute("source");
-        if(promotionSource == null){
+        if (promotionSource == null) {
             Cookie cookie = CookieTool.getCookieByName(request, "source");
-            if(cookie != null){
+            if (cookie != null) {
                 promotionSource = cookie.getValue();
             }
         }
         if (promotionSource != null) {
             if (AuthorizationUtil.isAuthenticated()) {
-                LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-                queryParamMap.put("identifier", promotionSource);
-                PromotionPlan promotionPlan = (PromotionPlan) baseManager.getUniqueObjectByConditions("from PromotionPlan x where x.identifier=:identifier", queryParamMap);
+//                LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+//                queryParamMap.put("identifier", promotionSource);
+//                PromotionPlan promotionPlan = (PromotionPlan) baseManager.getUniqueObjectByConditions("from PromotionPlan x where x.identifier=:identifier", queryParamMap);
 
                 //营销计划有效
-                if (promotionPlan != null && !"0".equals(promotionPlan.getStatus())) {
-                    MyUser user = (MyUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//                if (promotionPlan != null && !"0".equals(promotionPlan.getStatus())) {
+                MyUser user = (MyUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-                    //和旧的返利标识不同时，记录
-                    if(!promotionSource.equals(user.getSource())){
+                //和旧的返利标识不同时，记录
+//                    if(!promotionSource.equals(user.getSource())){
 //                        user.setSource(promotionSource);
 //                        //刷新营销返利链接有效期
 //                        Calendar calendar = Calendar.getInstance();
@@ -57,16 +57,16 @@ public class PromotionPersistenceInterceptor extends HandlerInterceptorAdapter {
 //                        user.setRdEndDay(calendar.getTime());
 //                        baseManager.saveOrUpdate(MyUser.class.getName(), user);
 
-                        //生成一条类日志
-                        PromotionUserRecord promotionUserRecord = new PromotionUserRecord();
-                        promotionUserRecord.setCreateDatetime(new Date());
-                        promotionUserRecord.setIdentifier(promotionSource);
-                        promotionUserRecord.setUser(user);
-                        baseManager.saveOrUpdate(PromotionUserRecord.class.getName(), promotionUserRecord);
+                //生成一条返利有关的登录日志
+                PromotionUserRecord promotionUserRecord = new PromotionUserRecord();
+                promotionUserRecord.setCreateDatetime(new Date());
+                promotionUserRecord.setIdentifier(promotionSource);
+                promotionUserRecord.setUser(user);
+                baseManager.saveOrUpdate(PromotionUserRecord.class.getName(), promotionUserRecord);
 
-                        request.getSession().removeAttribute("source");
-                    }
-                }
+//                request.getSession().removeAttribute("source");
+//                    }
+//                }
             }
         }
     }

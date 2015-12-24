@@ -116,9 +116,10 @@ input[type="checkbox"], textarea,select {border-radius:0;box-shadow:none}
 
 .details .des-title .icon {width:20px;height:20px;display:inline-block;margin-top:5px}
 .details .des-title .icon-share {background-position:-80px -84px}
-#cover {position:fixed;right:0;bottom:0;width:100%;height:100%;z-index:1100;display:none}
+#cover,#cover3 {position:fixed;right:0;bottom:0;width:100%;height:100%;z-index:1100;display:none}
 #cover img {width:260px;height:180px;position:absolute;top:5px;right:18px}
-#cover .bg {position:fixed;right:0;bottom:0;width:100%;height:100%;background-color:rgba(0,0,0,.7)}
+#cover3 img{width:103px;height:75px;position:absolute;top:40px;right:18px}
+#cover .bg ,#cover3 .bg{position:fixed;right:0;bottom:0;width:100%;height:100%;background-color:rgba(0,0,0,.7)}
 .details .des-title p {width:100%;float:left;margin-top:-3px}
 .details .des-master {width:100%;padding:0 15px 0 68px;float:left;position:relative;margin:15px 0}
 .details .des-master p {color:#999;font-size:12px;line-height:20px}
@@ -223,9 +224,9 @@ input[type="checkbox"], textarea,select {border-radius:0;box-shadow:none}
 .details-total-bar a {font-size:14px;color:#000;float:left;border-right:1px #000 solid;text-align:center}
 .details-total-bar a:last-child {border-right:0}
 .details-total-bar .btn-default {width:15%}
-.details-total-bar .btn-cart {background:#000;width:40%;color:#fff}
+.details-total-bar .btn-cart {background:#d42811;width:35%;color:#fff}
 .details-total-bar .btn-cart .icon {background-position:-110px -27px;width:19px;height:13px;display:inline-block;margin-right:3px;position:relative;top:1px}
-.details-total-bar .btn-buy {width:30%}
+.details-total-bar .btn-buy {width:25%}
 /*--//End--*/
 .details-shop {padding:0 20px}
 .details-shop .s-part {position:relative;padding:20px 0 20px 130px;font-size:1.4rem;border-bottom:1px solid #000}

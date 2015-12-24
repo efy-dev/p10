@@ -34,11 +34,28 @@
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="pic-page ae">
-            <div class="pic-img"><img
-                    src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture"
-                    width="181" height="101"></div>
+            <div class="pic-img">
+                <c:if test="${purchaseOrderGift.showGiftNameStatus=='1'}">
+                <a href="<c:url value="/product/productModel/${purchaseOrder.purchaseOrderProductList.get(0).productModel.id}"/>">
+                    </c:if>
+                    <c:if test="${purchaseOrderGift.showGiftNameStatus=='0'}">
+                    <a>
+                        </c:if>
+                        <img
+                                src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture"
+                                width="181" height="101">
+                    </a>
+            </div>
             <div class="pic-text">
-                <p>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}</p>
+                <p>
+                    <c:if test="${purchaseOrderGift.showGiftNameStatus=='1'}">
+                    <a href="<c:url value="/product/productModel/${purchaseOrder.purchaseOrderProductList.get(0).productModel.id}"/>"
+                       style="color: #000">
+                        </c:if>
+                        <c:if test="${purchaseOrderGift.showGiftNameStatus=='0'}">
+                        <a style="color: #000">
+                            </c:if>
+                            ${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}</a></p>
 
                 <p class="t2">
                     <i></i><span>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.project.name}</span><em></em>
@@ -80,8 +97,11 @@
                style="width:100%; float:left;text-align:center;margin-top: 10px;padding: 1rem 0.9rem;font-size: 1rem;border: 1px solid #ccc;background: #000;color: #fff;">
                 查看物流
             </a>
+            <br><br>
         </c:if>
-        <div class="bd" style="margin-top:10px;font-size:12px;">也想送好礼？10秒快速注册，更多好礼等着你。</div>
+        <div class="registration"><p>也想送好礼？</p>
+
+            <p>10秒注册，更多好礼等着你。</p></div>
     </div>
 </div>
 
@@ -116,38 +136,38 @@
            onclick="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
     </div>
 
-<footer class="footer-new">
-    <div class="bd authentication">
-        <h3>战略合作伙伴</h3>
+    <footer class="footer-new">
+        <div class="bd authentication">
+            <h3>战略合作伙伴</h3>
 
-        <div class="bd">
-            <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织"></a>
-            <em class="line"></em>
-            <a class="icon2" href="http://www.efeiyi.com" title="e飞蚁"></a>
-            <em class="line"></em>
-            <a class="icon3" title="中国非物质文化遗产保护协会"></a>
+            <div class="bd">
+                <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织"></a>
+                <em class="line"></em>
+                <a class="icon2" href="http://www.efeiyi.com" title="e飞蚁"></a>
+                <em class="line"></em>
+                <a class="icon3" title="中国非物质文化遗产保护协会"></a>
+            </div>
         </div>
-    </div>
-    <div class="bd info">
-        <a class="icon" href="http://www.efeiyi.com"></a>
+        <div class="bd info">
+            <a class="icon" href="http://www.efeiyi.com"></a>
 
-        <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台
+            <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台
+            </div>
+            <div class="wechat"><img src="/scripts/images/icon-wechat.png"></div>
+            <div class="txt">关注微信公众号</div>
+            <div class="txt">领取超值代金券</div>
         </div>
-        <div class="wechat"><img src="/scripts/images/icon-wechat.png"></div>
-        <div class="txt">关注微信公众号</div>
-        <div class="txt">领取超值代金券</div>
-    </div>
-    <%--<div class="bd info">--%>
-    <%--<a class="icon"></a>--%>
+            <%--<div class="bd info">--%>
+            <%--<a class="icon"></a>--%>
 
-    <%--<div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台--%>
-    <%--</div>--%>
-    <%--<div class="wechat"  id="wechat"><img src="/scripts/images/icon-wechat.png"></div>--%>
-    <%--<div class="txt" id="wechatStr1">关注微信公众号</div>--%>
-    <%--<div class="txt"id="wechatStr2">领取好礼</div>--%>
-    <%--</div>--%>
-    <div class="bd copyright">京ICP备15032511号-1</div>
-</footer>
+            <%--<div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台--%>
+            <%--</div>--%>
+            <%--<div class="wechat"  id="wechat"><img src="/scripts/images/icon-wechat.png"></div>--%>
+            <%--<div class="txt" id="wechatStr1">关注微信公众号</div>--%>
+            <%--<div class="txt"id="wechatStr2">领取好礼</div>--%>
+            <%--</div>--%>
+        <div class="bd copyright">京ICP备15032511号-1</div>
+    </footer>
 </c:if>
 <script>
     $().ready(function () {

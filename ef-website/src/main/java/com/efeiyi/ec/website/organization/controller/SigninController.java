@@ -4,39 +4,23 @@ package com.efeiyi.ec.website.organization.controller;
  * Created by Administrator on 2014/11/13.
  */
 
-import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
-import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
-import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.efeiyi.ec.website.organization.service.BranchManager;
-import com.efeiyi.ec.website.organization.service.RoleManager;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
-import com.efeiyi.ec.website.organization.service.UserManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.XQuery;
-import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.CookieTool;
-import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -45,15 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 
@@ -68,15 +49,9 @@ import java.util.List;
 @Controller
 public class SigninController extends BaseController {
     @Autowired
-    private RoleManager roleManager;
-    @Autowired
     private BranchManager branchManager;
     @Autowired
     private BaseManager baseManager;
-    @Autowired
-    private UserManager userManager;
-    @Autowired
-    private XdoManager xdoManager;
     @Autowired
     private SmsCheckManager smsCheckManager;
 
@@ -169,18 +144,6 @@ public class SigninController extends BaseController {
     }
 
 
-    /**
-     * 跳转到注册页面的controller
-     */
-    @RequestMapping(value = {"/pc/enroll.do", "/pc/register"})
-    public String enroll(HttpServletRequest request, Model model) {
-        String source = request.getParameter("source");
-        if (source != null) {
-            model.addAttribute("source", source);
-        }
-        return "/register";
-    }
-
     @RequestMapping("/sso.do")
     public String forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String redirect = request.getParameter("callUrl");
@@ -204,36 +167,6 @@ public class SigninController extends BaseController {
         response.sendRedirect(request.getContextPath() + "/");
     }
 
-    @RequestMapping({"/login"})
-    public String login(HttpServletRequest request, Model model) {
-        String error = request.getParameter("error");
-        if (error != null) {
-            model.addAttribute("error", "true");
-        }
-        return "/login";
-    }
-
-    @RequestMapping({"/register"})
-    public String register(HttpServletRequest request, Model model) {
-        return "/register";
-    }
-
-    @RequestMapping({"/forgetPwd"})
-    public String forgetPwd(HttpServletRequest request) {
-        return "/forgetPassword";
-    }
-
-    @RequestMapping({"/setPwd"})
-    public String setPwd(HttpServletRequest request, Model model) throws Exception {
-        String username = request.getParameter("username");
-        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("username", username);
-        String hql = "from BigUser s where s.username=:username";
-        BigUser biguser = (BigUser) baseManager.getUniqueObjectByConditions(hql, queryParamMap);
-        model.addAttribute("user", biguser);
-        return "/setPassword";
-
-    }
 
     @RequestMapping({"/registerSuccess.do"})
     public String transitPage(HttpServletRequest request, Model model) throws Exception {
@@ -273,9 +206,49 @@ public class SigninController extends BaseController {
         if (couponAmount == 0) {
             return "redirect:/sso.do";
         } else {
-            model.addAttribute("couponAmount",couponAmount);
-            return "/registerSuccess";
+//            model.addAttribute("couponAmount",couponAmount);
+            return "redirect:/registerSuccess/" + couponAmount;
         }
+    }
+
+    @RequestMapping({"/createCoupon.do"})
+    @ResponseBody
+    public boolean transitPage(HttpServletRequest request) throws Exception {
+        String userId = request.getParameter("userId");
+        if (userId != null && !"".equals(userId)) {
+            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
+            XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
+            List<Object> couponBatchList = baseManager.listObject(xQuery);
+            for (Object couponBatchTemp : couponBatchList) {
+                if (((CouponBatch) couponBatchTemp).getCouponList().size() < ((CouponBatch) couponBatchTemp).getAmount()) {
+                    Coupon coupon = new Coupon();
+                    coupon.setStatus("1");
+                    coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
+                    coupon.setCouponBatch((CouponBatch) couponBatchTemp);
+                    Date currentDate = new Date();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+                    String currentDateStr = simpleDateFormat.format(currentDate);
+                    coupon.setUniqueKey(currentDateStr + coupon.getSerial());
+                    coupon.setConsumer(consumer);
+                    coupon.setWhetherBind("2");
+                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                } else if (((CouponBatch) couponBatchTemp).fetchCouponList().size() > 0) {
+                    List<Coupon> couponList = ((CouponBatch) couponBatchTemp).fetchCouponList();
+                    Coupon coupon = couponList.get(0);
+                    coupon.setWhetherBind("2");
+                    coupon.setConsumer(consumer);
+                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                }
+            }
+        }
+        return true;
+    }
+
+
+    @RequestMapping("/registerSuccess/{couponAmount}")
+    public String successPage(@PathVariable String couponAmount, HttpServletRequest request, Model model) {
+        model.addAttribute("couponAmount", couponAmount);
+        return "/registerSuccess";
     }
 
     @RequestMapping({"/wx/userInfo"})
@@ -292,19 +265,6 @@ public class SigninController extends BaseController {
         String unionid = request.getParameter("unionid");
         model.addAttribute("unionid", unionid);
         return "/wxRedirect";
-    }
-
-    private static class SampleAuthenticationManager implements AuthenticationManager {
-        static final List<GrantedAuthority> AUTHORITIES = new ArrayList<GrantedAuthority>();
-
-        static {
-            AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
-        }
-
-        public Authentication authenticate(Authentication auth) throws AuthenticationException {
-            return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
-                    auth.getCredentials(), AUTHORITIES);
-        }
     }
 
 

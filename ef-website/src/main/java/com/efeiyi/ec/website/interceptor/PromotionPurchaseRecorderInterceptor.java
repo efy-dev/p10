@@ -36,20 +36,20 @@ public class PromotionPurchaseRecorderInterceptor extends HandlerInterceptorAdap
             }
         }
         if (promotionSource != null) {
-            LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-            queryParamMap.put("identifier", promotionSource);
-            PromotionPlan promotionPlan = (PromotionPlan) baseManager.getUniqueObjectByConditions("from PromotionPlan x where x.identifier=:identifier", queryParamMap);
+//            LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+//            queryParamMap.put("identifier", promotionSource);
+//            PromotionPlan promotionPlan = (PromotionPlan) baseManager.getUniqueObjectByConditions("from PromotionPlan x where x.identifier=:identifier", queryParamMap);
 
             //营销返利有效并且没有超出RD有效期，记录订单
-            MyUser user = (MyUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (!"0".equals(promotionPlan.getStatus()) /*&& user.getRdEndDay() != null && new Date().compareTo(user.getRdEndDay()) < 0*/) {
-                String path = request.getServletPath();
-                String orderId = path.substring(path.lastIndexOf("/") + 1);
-                PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
-                PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
-                purchaseOrder.setSource(promotionSource);
-                baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-            }
+//            MyUser user = (MyUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//            if (!"0".equals(promotionPlan.getStatus()) /*&& user.getRdEndDay() != null && new Date().compareTo(user.getRdEndDay()) < 0*/) {
+            String path = request.getServletPath();
+            String orderId = path.substring(path.lastIndexOf("/") + 1);
+            PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
+            PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
+            purchaseOrder.setSource(promotionSource);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+//            }
         }
         return super.preHandle(request, response, handler);
     }

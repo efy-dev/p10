@@ -67,6 +67,7 @@
                         <item label="已完成" value="13"/>
                         <item label="已退款" value="15"/>
                         <item label="已取消" value="17"/>
+                        <item label="发货失败" value="19"/>
                     </statusType>
                 </field>
                 <field name="orderType" label="订单类型" inputType="text">
@@ -280,6 +281,7 @@
                         <item label="汇通快运" value="huitongkuaidi"/>
                         <item label="天天快递" value="tiantian"/>
                         <item label="UPS" value="ups"/>
+                        <item label="德邦" value="DEPPON"/>
                     </statusType>
                 </field>
             </fields>

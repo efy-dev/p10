@@ -385,8 +385,9 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     public void setLastLogoutDatetime(Date lastLogoutDatetime) {
         this.lastLogoutDatetime = lastLogoutDatetime;
     }
+
     private String source;//来源推广渠道
-    private Date rdEndDay;//推广渠道有效时间
+//    private Date rdEndDay;//推广渠道有效时间
     @Column(name = "source")
     public String getSource() {
         return source;
@@ -396,12 +397,12 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
         this.source = source;
     }
 
-    @Column(name = "rd_end_day")
-    public Date getRdEndDay() {
-        return rdEndDay;
-    }
-
-    public void setRdEndDay(Date rdEndDay) {
-        this.rdEndDay = rdEndDay;
-    }
+//    @Column(name = "rd_end_day")
+//    public Date getRdEndDay() {
+//        return rdEndDay;
+//    }
+//
+//    public void setRdEndDay(Date rdEndDay) {
+//        this.rdEndDay = rdEndDay;
+//    }
 }

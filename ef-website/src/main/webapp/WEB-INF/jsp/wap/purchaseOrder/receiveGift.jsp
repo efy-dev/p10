@@ -31,9 +31,27 @@
     <div class="card custom ae">
         <div class="btb"><h5>礼物卡片</h5></div>
         <div class="pic-page ae">
-            <div class="pic-img"><img src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture" width="181"></div>
+            <div class="pic-img">
+                <c:if test="${purchaseOrderGift.showGiftNameStatus=='1'}">
+                <a  href="<c:url value="/product/productModel/${purchaseOrder.purchaseOrderProductList.get(0).productModel.id}"/>">
+                    </c:if>
+                        <c:if test="${purchaseOrderGift.showGiftNameStatus=='0'}">
+                        <a>
+                            </c:if>
+                <img src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture" width="181">
+                </a>
+            </div>
             <div class="pic-text">
-                <p>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}</p>
+                <p>
+                    <c:if test="${purchaseOrderGift.showGiftNameStatus=='1'}">
+                        <a  href="<c:url value="/product/productModel/${purchaseOrder.purchaseOrderProductList.get(0).productModel.id}"/>" style="color: #000">
+                    </c:if>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}
+                </a>
+                        <c:if test="${purchaseOrderGift.showGiftNameStatus=='0'}">
+                        <a  style="color: #000">
+                            </c:if>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}
+                        </a>
+                </p>
                 <p class="t2"><i></i><span>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.project.name}</span><em></em></p>
                 <!--<p class="t3">朱炳仁</p>-->
             </div>
@@ -43,7 +61,7 @@
             <p>——${purchaseOrder.giftGaverName}</p>
         </div>
     </div>
-    <form action="<c:url value="/giftConfirm.do"/>" method="post">
+    <form action="<c:url value="/giftConfirm.do"/>" method="post" id="formId">
         <input name="purchaseOrderId" value="${purchaseOrder.id}" type="hidden">
         <div class="btb"><h5>${purchaseOrder.giftGaverName}送您礼物了，快填写您的收货信息吧！</h5></div>
         <ul class="profile ae">
@@ -66,11 +84,11 @@
             </li>
             <li>
                 <strong>详细地址：</strong>
-                <label><input type="text" class="dtxt add-dext"  name="receiveDetail"   placeholder="填写具体街道、门牌号"></label>
+                <label><input type="text" class="dtxt add-dext"  name="receiveDetail" id = "addressDetail"  placeholder="填写具体街道、门牌号"></label>
 
             </li>
         </ul>
-        <div class="btnq ae"><input type="submit" value="确&nbsp;认"></div>
+        <div class="btnq ae"><input type="button" value="确&nbsp;认" onclick="check()"></div>
         <div class="efi-icon ae"><i class="icon"></i></div>
     </form>
 </div>
@@ -98,19 +116,53 @@
         }, function () {
         }, "post")
     }
-//    function check() {
-//        var name = $("#name").val();
-//        var phoneNumber = $("#phoneNumber").val();
-//        if (name == "") {
-//            showAlert("提示", "请填写收礼人姓名");
+    function check() {
+        var name=$("#receiveName").val();
+        var phoneNumber=$("#phoneNumber").val();
+        var addressDetail = $("#addressDetail").val();
+        var province = $("#province").val();
+        var city = $("#city").val();
+        var success = function (data) {
+            if (!data) {
+                showAlert("提示", "非法输入");
+            }else{
+                $("#formId").submit();
+            }
+        }
+        if(name=="" || phoneNumber=="" || addressDetail==""||province==""||city==""){
+            showAlert("提示", "您填写的信息不完整");
+        }else{
+            ajaxRequest("<c:url value="/giftReceive/checkAddress.do"/>", {
+                "addressDetail": addressDetail,
+            }, success, function () {
+            }, "post");
+//            if(reg.test(email)){
+//                $("#personalInfo").submit();
+//                $("#yx").html("");
+//                $("#tj").html("");
+//
+//            }else{
+//                $("#yx").html("您的邮箱格式不正确");
+//                $("#tj").html("");
+//            }
+
+        }
+
+    }
+
+//        if(addressDetail==""){
+//            alert("您的信息不完整");
+////            $("#tj").html("您填写的信息不完整");
+//        }else{
+//            if(reg.test(addressDetail)){
+//
+//            }else{
+//                alert("非法字符");
+//            }
+//
 //        }
-//        if(phoneNumber==""){
-//            showAlert("提示","请填写收礼人电话")
-//        }
-//                }
+
 
 </script>
-
-
 </body>
 </html>
