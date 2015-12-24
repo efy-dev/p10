@@ -68,6 +68,12 @@ public class UserGiftController extends BaseController{
         g2.dispose();
 
         String path = this.getClass().getResource("/").getPath().toString() + "com/efeiyi/ec/system/download";
+
+        File downloadFileTest = new File(path);
+        if (!downloadFileTest.exists()) {
+            downloadFileTest.mkdir();
+        }
+
         String fileName = userID+".jpg";
         File downloadFile = new File(path+"//"+fileName);
         try {

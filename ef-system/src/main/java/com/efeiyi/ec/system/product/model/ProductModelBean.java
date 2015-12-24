@@ -16,6 +16,7 @@ public class ProductModelBean implements Serializable {
     private  String [] modelProperty;
     private  String [] property;
     private  String [] marketPrice;
+    private  Double [] weight;
     private  String productId;
     private  String defaultId;
     private  String defaultStatus;
@@ -23,6 +24,7 @@ public class ProductModelBean implements Serializable {
     private  String defaultAmount;
     private  String defaultPrice;
     private  String defaultMarketPrice;
+    private  Double defaultWeight;
 
     public String getProductId() {
         return productId;
@@ -143,5 +145,21 @@ public class ProductModelBean implements Serializable {
 
     public void setMarketPrice(String[] marketPrice) {
         this.marketPrice = marketPrice;
+    }
+
+    public Double[] getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double[] weight) {
+        this.weight = weight;
+    }
+
+    public Double getDefaultWeight() {
+        return defaultWeight;
+    }
+
+    public void setDefaultWeight(Double defaultWeight) {
+        this.defaultWeight = defaultWeight;
     }
 }
