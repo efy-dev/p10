@@ -140,7 +140,7 @@
                 <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=coupon"/>
                 <match url="/basic/xm.do?qm=plistCoupon_search"/>
                 <match url="/basic/xm.do?qm=plistCoupon_default"/>
-                <match url="/basic/xm.do?qm=viewCoupon"/>
+                <match url="/basic/xm.do?qm=viewCoupon&amp;view=coupon"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="优惠券批次">
                 <match url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch"/>

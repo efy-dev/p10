@@ -71,7 +71,7 @@
                         </td>
                         </security:authorize>
                         <td class="am-hide-sm-only">
-                            <a href="<c:url value='/basic/xm.do?qm=viewCoupon&id=${coupon.id}'/>">${coupon.serial}
+                            <a href="<c:url value='/basic/xm.do?qm=viewCoupon&view=${view}&id=${coupon.id}'/>">${coupon.serial}
                         </td>
                         <td class="am-hide-sm-only">
                             <c:if test="${coupon.whetherBind == '1'}">
