@@ -46,7 +46,7 @@ public class CompanyOrderBatchController {
         if (id.isEmpty() || id.trim().equals("")){
             XQuery xQuery = new XQuery("listPurchaseOrderGift_companyDefault", request);
             list = baseManager.listObject(xQuery);
-            filename = "All.txt";
+            filename = "All.csv";
         }else {
             companyOrderBatch = (CompanyOrderBatch) baseManager.getObject(CompanyOrderBatch.class.getName(), id);
             list = companyOrderBatchServiceManager.getOrderGiftList(companyOrderBatch);
