@@ -68,6 +68,11 @@
                 <match url="/promotionPlan/getRegisterCountInfo.do?rebate=rebate"/>
                 <match url="/promotionPlan/getOrderCountInfo.do?rebate=rebate"/>
             </jnode>
+            <jnode url="/basic/xm.do?qm=plistIndividualPromotionPlan_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="用户来源渠道列表">
+                <!--<match url="/basic/xm.do?qm=formPromotionPlan&amp;rebate=rebate"/>-->
+                <!--<match url="/promotionPlan/getRegisterCountInfo.do?rebate=rebate"/>-->
+                <!--<match url="/promotionPlan/getOrderCountInfo.do?rebate=rebate"/>-->
+            </jnode>
         </jnode>
         <jnode url="" id="userTemp" access="admin,operational,o_operational,financial,product_manager,market" state="closed" text_zh_CN="用户列表">
             <jnode url="/basic/xm.do?qm=listUserTemp_default" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="用户列表">
