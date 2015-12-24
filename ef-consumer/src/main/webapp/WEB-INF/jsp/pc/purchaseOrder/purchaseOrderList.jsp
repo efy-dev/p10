@@ -135,7 +135,9 @@
               <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                 <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
                 <p><a href="<%=PConst.HOSTNAME%>/order/pay/${order.id}">付款</a></p>
-                <p><a href="<c:url value="/order/cancelOrder/${order.id}"/>">删除订单</a></p>
+                <p><a href="#" onclick="showConfirm('提示','是否删除订单',function(){
+                        window.location.href='<c:url value="/order/cancelOrder/${order.id}"/>';
+                        })">删除订单</a></p>
               </td>
             </c:if>
               <c:if test="${order.orderStatus == 17}">
@@ -198,8 +200,9 @@
                 <c:if test="${order.orderStatus == 15}">
                   <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                     <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
-                    <p><a href="<c:url value="/order/cancelOrder/${order.id}"/>">删除订单</a></p>
-                  </td>
+                    <p><a href="#" onclick="showConfirm('提示','是否删除订单',function(){
+                            window.location.href='<c:url value="/order/cancelOrder/${order.id}"/>';
+                            })">删除订单</a></p>                  </td>
                 </c:if>
                 <c:if test="${order.orderStatus == 3}">
                   <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
@@ -224,13 +227,17 @@
                 <c:if test="${order.orderStatus == 13}">
                   <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                     <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
-                    <p><a href="<c:url value="/order/cancelOrder/${order.id}"/>">删除订单</a></p>
+                    <p><a href="#" onclick="showConfirm('提示','是否删除订单',function(){
+                            window.location.href='<c:url value="/order/cancelOrder/${order.id}"/>';
+                            })">删除订单</a></p>
                   </td>
                 </c:if>
                 <c:if test="${order.orderStatus == 9}">
                   <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                     <p><a href="<c:url value="/comment/finishOrderList.do"/>">去评价</a></p>
-                    <p><a href="<c:url value="/order/cancelOrder/${order.id}"/>">删除订单</a></p>
+                    <p><a href="#" onclick="showConfirm('提示','是否删除订单',function(){
+                            window.location.href='<c:url value="/order/cancelOrder/${order.id}"/>';
+                            })">删除订单</a></p>
                   </td>
                 </c:if>
               </tr>
@@ -283,19 +290,20 @@
                   </td>
                   <c:if test="${order.orderStatus == 6}">
                     <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
-                      <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
+                      <p><a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看</a></p>
                     </td>
                   </c:if>
                   <c:if test="${order.orderStatus == 15}">
                     <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                       <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
-                      <p><a href="<c:url value="/order/cancelOrder/${spList.id}"/>">删除订单</a></p>
-
+                      <p><a href="#" onclick="showConfirm('提示','是否删除订单',function(){
+                              window.location.href='<c:url value="/order/cancelOrder/${spList.id}"/>';
+                              })">删除订单</a></p>
                     </td>
                   </c:if>
                   <c:if test="${order.orderStatus == 3}">
                     <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
-                      <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
+                      <p><a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看</a></p>
                     </td>
                   </c:if>
                   <c:if test="${spList.orderStatus == 5}">
@@ -316,15 +324,17 @@
                   <c:if test="${spList.orderStatus == 13}">
                     <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                       <p><a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看</a></p>
-                      <p><a href="<c:url value="/order/cancelOrder/${spList.id}"/>">删除订单</a></p>
-
+                      <p><a href="#" onclick="showConfirm('提示','是否删除订单',function(){
+                              window.location.href='<c:url value="/order/cancelOrder/${spList.id}"/>';
+                              })">删除订单</a></p>
                     </td>
                   </c:if>
                   <c:if test="${spList.orderStatus == 9}">
                     <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                       <p><a href="<c:url value="/comment/finishOrderList.do"/>">去评价</a></p>
-                      <p><a href="<c:url value="/order/cancelOrder/${spList.id}"/>">删除订单</a></p>
-
+                      <p><a href="#" onclick="showConfirm('提示','是否删除订单',function(){
+                              window.location.href='<c:url value="/order/cancelOrder/${spList.id}"/>';
+                              })">删除订单</a></p>
                     </td>
                   </c:if>
                 </tr>
