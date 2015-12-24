@@ -87,13 +87,13 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
             }
 
         }
-       if(updateSerials.isEmpty()){
-            synchronized (updateSerials) {
-                if( updateSerials.isEmpty()) {
-                    updateSerials = makeSerials(group);
-                }
-            }
-        }//此代码块可能有些冗余，为了安全起见，先行保留
+//       if(updateSerials.isEmpty()){
+//            synchronized (updateSerials) {
+//                if( updateSerials.isEmpty()) {
+//                    updateSerials = makeSerials(group);
+//                }
+//            }
+//        }//此代码块可能有些冗余，为了安全起见，先行保留
 
        synchronized (updateSerials) {
              if(!updateSerials.isEmpty()) {

@@ -42,11 +42,13 @@
                                         class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                         class="am-icon-edit"></span> 编辑
                                 </button>
-                                <button onclick="window.location.href='<c:url
-                                        value="/basic/xm.do?qm=removeCompanyOrderBatch&id=${batch.id}"/>'"
-                                        class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                        class="am-icon-trash-o"></span> 删除
-                                </button>
+                            </c:if>
+                            <button onclick="window.location.href='<c:url
+                                    value="/basic/xm.do?qm=removeCompanyOrderBatch&id=${batch.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                    class="am-icon-trash-o"></span> 删除
+                            </button>
+                            <c:if test="${batch.status == '1'}">
                                 <button onclick="window.location.href='<c:url
                                         value="/company/saveCompanyOrderGiftList.do?id=${batch.id}"/>'"
                                         class="am-btn am-btn-default am-btn-xs am-hide-sm-only">生成礼品卡
