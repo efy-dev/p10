@@ -185,7 +185,7 @@
             </ul>
         </div>
         <div class="bd payment-total-bar newpayment-total-bar">
-            <span class="txt" >总金额:<span id="change">${purchaseOrder.total}</span>元</span>
+            <span class="txt" >总金额<span id="change">${purchaseOrder.total}</span>元</span>
             <a href="#btn-right" class="btn-right btn-red" onclick="submitOrder('${purchaseOrder.id}')">结&nbsp;算</a>
         </div>
 
