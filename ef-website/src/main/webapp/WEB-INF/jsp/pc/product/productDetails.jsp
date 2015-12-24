@@ -471,8 +471,8 @@
         $('#native').qrcode({
             render: "div",
             text: url,
-            width: 172,
-            height: 184
+//            width: 172,
+//            height: 184
         });
         var $div = $('.dialog-gift');
         var $close = $div.find('.icon-close');
