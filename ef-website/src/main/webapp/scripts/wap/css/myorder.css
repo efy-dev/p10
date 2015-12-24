@@ -276,7 +276,7 @@
 .join .cb {margin-bottom:1.6rem}
 /*------加载更多*/
 .more {text-align:center;font-size:1.2rem;background:#e6e6e6;border-top:1px solid #ccc}
-.more a {width:100%;float:left;padding:0.7rem 0;font-size:1.4rem;color:#000;position:relative;background: #e6e6e6}
+.more a {width:100%;float:left;padding:4px 0;font-size:1.4rem;color:#000;position:relative;background: #e6e6e6}
 .more a .icon {background:url(../images/purchase.png)no-repeat 0 0;width:15px;height:17px;position:absolute;left:27%;top:35%;background-size:755%}
 /*b01020301全部商品首页*/
 .all-bulk {padding-bottom:60px}
@@ -694,21 +694,16 @@ html, body {height:100%}
 .gift .edit-txt1 {min-height:75px;float:left;width:100%;border:1px solid #ccc;font-size:10px;color:#ccc;position:relative;padding:10px}
 .gift .edit-txt2 {width:100%;float:left;min-height:32px;border:1px solid #ccc;font-size:10px;padding:0 10px;color:#ccc;line-height:32px}
 .gift .hint{height: 40px;line-height: 40px;width: 100%;float: left;font-size: 12px;color: #000;background: #f5f5f5;margin-top: 16px;}
-.gift .hint input{margin: 0 12px;}
+.gift .hint input{margin: 0 12px;vertical-align:middle}
 .gift .btn-again.add-mgno{margin:0 0 15px 0;}
-
-
-
-
-
-
-
+.gift .bott{border-bottom: 1px solid #000;padding-bottom: 22px;}
+.gift .add-order-total{border-top: 1px solid #ccc;margin-top:-1px;border-bottom: 1px solid #ccc;}
 .gift .edit-txt1.edit-txt3 {color:#000;padding:13px 15px}
 .gift .edit-text a {font-size:12px;color:#000;display:block}
 .gift .edit-text .cart-icon {width:20px;height:20px;background-position:0 0;position:absolute;right:0px;top:0px}
 .gift .gift-details .gift-c-d {height:43px;line-height:43px;text-align:left;font-size:12px;color:#000;border-bottom:1px solid #ccc;position:relative}
 .gift .gift-details .gift-c-d .sj-icon {width:10px;height:10px;border-right:1px solid #000;border-bottom:1px solid #000;display:block;position:absolute;right:16px;top:50%;margin-top:-4px;transfrom:rotate(-45deg);-webkit-transform:rotate(-45deg)}
-.gift .gift-details .chandise .cha-box {padding:16px 0 16px 102px;position:relative;min-height:103px;border-bottom:1px solid #ccc;float:left}
+.gift .gift-details .chandise .cha-box {width: 100%;padding:16px 0 16px 102px;position:relative;min-height:103px;border-bottom:1px solid #ccc;float:left}
 .gift .gift-details .chandise .cha-box strong {width:100%;font-size:12px;color:#000;overflow:hidden;word-break:keep-all;word-wrap:keep-all;white-space:nowrap;table-layout:fixed;-o-text-overflow:ellipsis;text-overflow:ellipsis;float:left;font-weight:bold}
 .gift .gift-details .chandise .cha-box p {width:100%;font-size:12px;color:#000;float:left}
 .gift .gift-details .chandise {position:relative}
@@ -788,11 +783,11 @@ html, body {height:100%}
 .gift .c-info {padding:10px 15px;background:#f5f5f5;margin-top:16px}
 .gift .c-info p {width:100%;font-size:10px;line-height:15px;float:left}
 .gift .c-info p:nth-child(2) {text-align:right}
-.gift .logistics h4 {font-size:12px;font-weight:bolder;margin-top:20px;line-height:30px;border-bottom:2px solid #ccc}
+.gift .logistics h4 {font-size:12px;font-weight:bolder;margin-top:20px;line-height:30px;border-bottom:1px solid #ccc}
 .gift .logistics h5 {font-size:10px;font-weight:bolder;line-height:42px;border-bottom:1px solid #ccc}
 .gift .logistics .part ul {width:100%;float:left;padding:10px 0;border-bottom:1px solid #ccc}
 .gift .logistics .part li {width:100%;float:left;font-size:12px;line-height:20px}
-.gift .logistics .registration{width: 100%;height: 88px;background: #f5f5f5;font-size: 14px;color: #000;font-weight: bold;line-height: 88px;text-align: center;padding-top: 18px;margin: 22px 0;border-bottom: 1px solid #000;}
+.gift .logistics .registration{width: 100%;height: 88px;background: #f5f5f5;font-size: 14px;color: #000;font-weight: bold;line-height: 88px;text-align: center;padding-top: 18px;margin-top: 22px;}
 .gift .logistics .registration p{line-height:24px; }
 .gift-img {width:100%;height:100%;float:left;text-align:center;background:#000}
 .gift-img h1 {line-height:58px;color:#fff;font-size:12px;font-weight:bolder}
@@ -945,7 +940,7 @@ html, body {height:100%}
 .topic .topic-txt.topic-txt p{padding:25px 0;line-height: 24px;font-size: 14px;color: #282828;text-align: left;float: left}
 .topic .topic-txt.topic-txt .bg-link{width: 100%;height: 50px;line-height: 50px;background: #fff;border-radius: 5px;float: left;margin-bottom: 13px;color: #000;}
 .topic .topic-txt.topic-txt .txc{text-align: center}
-.topic .txc-box{padding: 14px;background: #fff;float: left;width: 100%;font-weight: bold;line-height: 22px;font-size: 12px;color: #282828;border-radius: 10px;text-align: left;margin-bottom: 20px;}
+.topic .txc-box{padding: 14px;background: #f1f1f1;float: left;width: 100%;font-weight: bold;line-height: 22px;font-size: 12px;color: #282828;border-radius: 10px;text-align: left;margin-bottom: 20px;}
 .topic .txc-btn{margin-bottom: 40px;width: 100%;float: left;padding: 0 25px;}
 .topic .txc-btn a:nth-child(1){float: left}
 .topic .txc-btn a:nth-child(2){float: right}
@@ -960,7 +955,7 @@ html, body {height:100%}
 .topic .plan .plan-box li .plan-text p:nth-child(1){font-size: 10px;}
 .topic .plan .plan-box li .plan-text p:nth-child(2){font-size: 13px;line-height: 18px;}
 .topic .plan .plan-issue{width: 100%;float: left;margin-bottom: 25px;}
-.topic .plan .plan-issue li{float: left;width: 100%;min-height: 55px;background: #fff;border-radius:5px;position: relative;margin-bottom: 10px;}
+.topic .plan .plan-issue li{float: left;width: 100%;min-height: 55px;background: #f1f1f1;border-radius:5px;position: relative;margin-bottom: 10px;}
 .topic .plan .plan-issue li:last-child{margin-bottom: 0;}
 .topic .plan .plan-issue li .plan-txt{padding:9px 0 0  32px;font-size: 12px;color: #000;text-align: left}
 .topic .plan .plan-issue li .plan-txt p:nth-child(1){line-height: 16px;margin-bottom: 8px;}
@@ -975,24 +970,46 @@ html, body {height:100%}
 .wechat-btn:hover{color: #565656;}
 .atmosphere-pictures img{width: 100%}
 /*闯关英雄榜*/
-.weachat-tab{text-align: center}
+.weachat-tab{text-align: center;}
 .weachat-tab .wea-tab{margin-bottom: 15px;display: inline-block}
 .weachat-tab .wea-tab .wea-icon{width: 50px;height: 50px;background: url("../images/wechat-icon.png") no-repeat ;background-size: 350px auto;margin-right: 30px;float: left;cursor: pointer}
 .weachat-tab .wea-tab .wea-icon:last-child{margin-right: 0;}
 .weachat-tab .wea-tab .wea-i-1{background-position: 0 -213px;}
 .weachat-tab .wea-tab .wea-i-1.active{background-position: 0 -280px;}
 .weachat-tab .wea-tab .wea-i-2{background-position: 0 -356px;}
-.weachat-tab .wea-tab .wea-i-2.active{background-position: 0 -432px;}
+.weachat-tab .wea-tab .wea-i-2.active{background-position: 0 -433px;}
 .weachat-tab .wea-tab .wea-i-3{background-position: 0 -507px;}
 .weachat-tab .wea-tab .wea-i-3.active{background-position: 0 -584px;}
-.weachat-tab .wea-box .fiy-box{width: 100%;float: left}
-.weachat-tab .wea-box .fiy-box ul{padding:0 19px;}
-.weachat-tab .wea-box .fiy-box li{width: 100%;float: left;height: 50px;line-height: 50px;padding: 0 16px;background: #fff;border-radius: 10px;margin-bottom: 20px;color: #000}
-.weachat-tab .wea-box .fiy-box li .fiy-text{float: left;position: relative}
-.weachat-tab .wea-box .fiy-box li .fiy-text .fiy-pic{width: 31px;height: 31px;position: absolute;left: 0;top: 0;}
-.weachat-tab .wea-box .fiy-box li .fiy-text .fiy-pic img{width: 100%;border-radius: 50%;}
-.weachat-tab .wea-box .fiy-box li .fiy-text .fiy-txt{padding-left: 40px;font-size: 12px;color: #000;}
-.weachat-tab .wea-box .fiy-box li .fiy-buck{float: right;font-size: 12px;}
+.weachat-tab .fiy-box{width: 100%;float: left}
+.weachat-tab .fiy-box ul{padding:0 19px;}
+.weachat-tab .fiy-box li{width: 100%;float: left;height: 50px;line-height: 50px;padding: 0 16px;background: #fff;border-radius: 10px;margin-bottom: 10px;color: #000}
+.weachat-tab .fiy-box li .fiy-text{float: left;position: relative}
+.weachat-tab .fiy-box li .fiy-text .fiy-pic{width: 31px;height: 31px;position: absolute;left: 0;top: 0;}
+.weachat-tab .fiy-box li .fiy-text .fiy-pic img{width: 100%;border-radius: 50%;}
+.weachat-tab .fiy-box li .fiy-text .fiy-txt{padding-left: 40px;font-size: 12px;color: #000;}
+.weachat-tab .fiy-box li .fiy-buck{float: right;font-size: 12px;}
 /*获得奖励去好包*/
 .rewarded{margin: 22px 0;display: inline-block;text-align: center;width:300px;background: url("../images/wechat-icon.png") no-repeat 0 -707px;height: 54px;background-size:350px auto}
+.bouns-box{padding: 0 19px;}
+.bouns-box .bonus{padding:0 22px;background:#f1f1f1;border-radius: 10px;text-align: center}
+.bouns-box .bonus .bouns-like{padding:28px 0;width: 100%;display: inline-block;font-size: 22px;color: #565656;}
+.bouns-box .bonus .bouns-like span{font-size: 64px;color:#ffb100;font-weight: bold}
+.bouns-box .bonus .bouns-text{font-size: 12px;color: #353535;line-height: 20px;text-align: left}
+.bouns-box .bonus .ds-btn{width: 100%;display: inline-block;margin: 20px 0;}
+.bouns-box .bonus .ds-btn a{display: inline-block}
+.bouns-box .fiy-box ul{padding: 0;}
+.bouns-box .fiy-title{text-align: center;margin-top: 20px;}
+.bouns-box .fiy-title .fiy-icon{width: 147px;height: 25px;background: url("../images/wechat-icon.png") no-repeat 0 -154px;background-size: 350px auto;display: inline-block}
+.bouns-box .text-fiy{font-size: 10px;color: #000;text-align: left;margin: 10px 0;}
+.bouns-box .text-fiy span{font-size: 12px}
+/*活动说明*/
+.wechat-top{width: 236px;height: 31px;display: inline-block;background: url("../images/wechat-icon.png") no-repeat 0 -846px;background-size: 350px auto;margin: 49px 0 32px;}
+.explain{padding: 0 30px;position: relative}
+.explain .explain-top h5,.explain .explain-bot h5{font-size: 12px;color: #000;float: left;width: 100%;margin-bottom: 5px;line-height: 14px;}
+.explain .explain-top p{margin-bottom: 22px;font-size: 10px;color: #000;width: 100%;float: left}
+.explain .explain-bot{margin-top: 19px;width: 100%;float: left}
+.explain .explain-bot p{font-size: 10px;color: #000;float: left;width: 100%;line-height: 20px;margin-bottom: 9px;}
+.explain .explain-btn{margin: 40px 0 52px;float: left;text-align: center;width: 100%}
+.explain .explain-btn a{display: inline-block}
+.explain .explain-bg{width: 97px;height: 188px;display: inline-block;background: url("../images/wechat-icon.png") no-repeat 0 -997px;background-size: 350px auto;position: absolute;right: 0;bottom: 0;opacity: 0.1}
 
