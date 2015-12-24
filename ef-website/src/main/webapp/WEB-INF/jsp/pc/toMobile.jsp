@@ -24,7 +24,7 @@
 <body>
 <div class="error404">
     <div class="content">
-        <div class="codebg" style="background: white"></div>
+        <div class="codebg" style="background: white;height: 220px;width: 220px;" ></div>
         <h2>您访问的页面只能在移动端显示哦！</h2>
 
         <h1>手机扫码试试吧</h1>
@@ -41,8 +41,8 @@
     $('.codebg').qrcode({
         render: "div",
         text: "${url}",
-        width: "200",
-        height: "200",
+        width: "220",
+        height: "220",
     })
 
 //    $().ready(function(){

@@ -76,10 +76,10 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping("/giftBuy/showNameStatus.do")
     @ResponseBody
-    public boolean changeShowGiftNameStatus(HttpServletRequest request) {
+    public boolean changeShowGiftStatus(HttpServletRequest request) {
         try {
             String purchaseOrderId = request.getParameter("purchaseOrderId");
-            String status = request.getParameter("nameStatus");
+            String status = request.getParameter("status");
             PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
             purchaseOrderGift.setShowGiftNameStatus(status);
             baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
