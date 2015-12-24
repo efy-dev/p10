@@ -47,14 +47,12 @@
         $('#btn-buy').on('click',function(){
             $('.dialog').each(function(){
                 $(this).show();
-
                 $(this).find('.con').css({
-                    'display':'block',
                     'height':'230px',
                     'margin-top':'-115px'
                 });
                 $(this).find('.info').hide();
-            })
+            });
             clickInput();
             $('.btn-true').on('click',function(){
                 var $val=$('#ipt').val();
@@ -90,22 +88,29 @@
             });
 
             $('#close').on('click',function(){
-                $(this).parents('.dialog').hide();
-            })
+                var $div=$(this).parents('.dialog');
+                $div.each(function(){
+                    $(this).hide();
+                    $(this).find('.con').css({
+                        'height':'',
+                        'margin-top':''
+                    });
+                    $(this).find('.info').show();
+                });
+                $('#ipt').val('1');
+                $('body').css('overflow','visible');
+
+                $('#add,#sub').unbind();
+            });
+
+
+
+
+
         }
     })
 </script>
 
-<%--<script src="<c:url value="/resources/jquery/jquery.qrcode.min.js"/>"></script>--%>
-<script>
-//    function generateQrcode(url){
-//        $('#table').qrcode({
-//            render: "div",
-//            text: url,
-//            background:"#FF0000"
-//        });
-//    }
-</script>
 
 </body>
 </html>
