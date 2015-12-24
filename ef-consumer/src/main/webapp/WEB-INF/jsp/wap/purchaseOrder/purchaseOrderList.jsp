@@ -85,6 +85,10 @@
 							<c:when test="${purchaseOrder.orderStatus == '1'}">
 								<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
 								<a href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}" name="payButton"/>立&nbsp;即&nbsp;支&nbsp;付</a>
+								<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+										window.location.href='<c:url value="/order/cancelOrder/${purchaseOrder.id}"/>';
+										})">删&nbsp;除&nbsp;订&nbsp;单</a>
+
 							</c:when>
 						</c:choose>
 							<c:choose>
@@ -134,6 +138,9 @@
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '15'}">
 									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
+									<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+											window.location.href='<c:url value="/order/cancelOrder/${purchaseOrder.id}"/>';
+											})">删&nbsp;除&nbsp;订&nbsp;单</a>
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '5'}">
 									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
@@ -143,17 +150,20 @@
 									<a href="#" onclick="showConfirm('提示','是否确定收货',function(){
 											window.location.href='<c:url
 											value="/order/confirmGet/${purchaseOrder.id}"/>';
-											})">确定收货</a>
+											})">确&nbsp;定&nbsp;收&nbsp;货</a>
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '13'}">
 									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-								</c:when>
-								<c:when test="${purchaseOrder.orderStatus == '17'}">
-									<a href="#">已&nbsp;取&nbsp;消</a>
+									<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+											window.location.href='<c:url value="/order/cancelOrder/${purchaseOrder.id}"/>';
+											})">删&nbsp;除&nbsp;订&nbsp;单</a>
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '9'}">
 									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
 									<a href="<c:url value="/comment/mobileFinishOrder.do?orderId=${purchaseOrder.id}"/>">去&nbsp;评&nbsp;价</a>
+									<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+											window.location.href='<c:url value="/order/cancelOrder/${purchaseOrder.id}"/>';
+											})">删&nbsp;除&nbsp;订&nbsp;单</a>
 								</c:when>
 							</c:choose>
 							<c:choose>
@@ -207,6 +217,9 @@
 									</c:when>
 									<c:when test="${spList.orderStatus == '15'}">
 										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
+										<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+												window.location.href='<c:url value="/order/cancelOrder/${spList.id}"/>';
+												})">删&nbsp;除&nbsp;订&nbsp;单</a>
 									</c:when>
 									<c:when test="${spList.orderStatus == '5'}">
 										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
@@ -215,17 +228,20 @@
 										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;物&nbsp;流</a>
 										<a href="#" onclick="showConfirm('提示','是否确定收货',function(){
 												window.location.href='<c:url value="/order/confirmGet/${spList.id}"/>';
-												})">确定收货</a>
+												})">确&nbsp;定&nbsp;收&nbsp;货</a>
 									</c:when>
 									<c:when test="${purchaseOrder.orderStatus == '13'}">
 										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-									</c:when>
-									<c:when test="${purchaseOrder.orderStatus == '17'}">
-										<a href="#">已&nbsp;取&nbsp;消</a>
+										<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+												window.location.href='<c:url value="/order/cancelOrder/${spList.id}"/>';
+												})">删&nbsp;除&nbsp;订&nbsp;单</a>
 									</c:when>
 									<c:when test="${purchaseOrder.orderStatus == '9'}">
 										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
 										<a href="<c:url value="/comment/mobileFinishOrder.do?orderId=${spList.id}"/>">去&nbsp;评&nbsp;价</a>
+										<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+												window.location.href='<c:url value="/order/cancelOrder/${spList.id}"/>';
+												})">删&nbsp;除&nbsp;订&nbsp;单</a>
 									</c:when>
 								</c:choose>
 								<c:choose>
