@@ -35,6 +35,7 @@ public class CommonManagerImpl implements CommonManager {
     private static HashMap<String, String> logisticsCompanyMap = new HashMap<>();
     private static HashMap<String, CommonSearch> searchParamMap = new HashMap<>();
     private static Map<String, Map<String,String>> companyAddresses = new HashMap<>();
+    private static Map<String,String> provinceConverter = new HashMap<String,String>();
    // private static int jmenuId = 1;
 
     private static void initCommon() throws Exception {
@@ -52,6 +53,7 @@ public class CommonManagerImpl implements CommonManager {
                 getLogisticsCompany(new SAXReader().read(xmlFiles.getInputStream()));
                 getProductSearchParamByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCompanyAddress(new SAXReader().read(xmlFiles.getInputStream()));
+                getProvinceConverter(new SAXReader().read(xmlFiles.getInputStream()));
             }
         }catch (Exception e){
              // e.printStackTrace();
@@ -59,6 +61,26 @@ public class CommonManagerImpl implements CommonManager {
         }
 
 
+    }
+
+    /**
+     * 取得物流地址转换
+     * @return
+     */
+    @Override
+    public Map<String,String> getProvinceConverter(){
+        return provinceConverter;
+    }
+
+    private static void getProvinceConverter(Document infoDocument) {
+        if(infoDocument!=null){
+            List<Node> companyNodeList = infoDocument.selectNodes("common/provinces/province");
+            if(companyNodeList!=null){
+                for(Node node : companyNodeList){
+                    provinceConverter.put(node.selectSingleNode("@key").getText(),node.selectSingleNode("@value").getText());
+                }
+            }
+        }
     }
 
     /**
@@ -82,14 +104,6 @@ public class CommonManagerImpl implements CommonManager {
                 }
             }
         }
-    }
-
-    /**
-     * 取得公司地址
-     * @return
-     */
-    public static Map getCompanyAddress(){
-        return companyAddresses;
     }
 
     /**

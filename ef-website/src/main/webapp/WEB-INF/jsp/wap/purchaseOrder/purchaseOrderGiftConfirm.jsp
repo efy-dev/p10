@@ -43,7 +43,7 @@
             <!--//End-->
         </div>
         <!--//End-->
-        <div class="hint"><input type="checkbox" id="showGiftName" onclick="giftNameStatus(this)">是否告诉他是什么礼物</div>
+        <div class="hint"><input type="checkbox" id="showGiftName" onclick="giftNameStatus(this)">告诉Ta什么礼物</div>
 
     </div>
     <div class="gift-details ae">
