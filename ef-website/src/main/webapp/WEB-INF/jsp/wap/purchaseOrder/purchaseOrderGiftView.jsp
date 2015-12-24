@@ -161,6 +161,8 @@
 
     </div>
 </div>
+<br>
+<br>
 <div id="postDiv" class="part" style="display: none;">
 
     <div>

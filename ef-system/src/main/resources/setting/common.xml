@@ -43,7 +43,21 @@
         <logisticsCompany memo="ups" name="UPS"/>
     </logisticsCompanys>
     <companyAddresses>
-        <company group="efeiyi" name="e飞蚁-中国非遗电商平台" phone="4008768766" province="北京" city="北京" country="朝阳区"
+        <company group="efeiyi" name="e飞蚁-中国非遗电商平台" phone="4008768766" province="北京" city="北京市" country="朝阳区"
                  address="北京市朝阳区酒仙桥东路9号电子城A2西侧6层"/>
     </companyAddresses>
+    <searchs>
+        <search group="efeiyi" recommendedModel="com.ming800.core.p.model.CommonSearch" rows="0" defaultQ=""
+                highLight=""
+                highLightFields="" highLightSimplePre="" highLightSimplePost=""
+                defType="" qf="" solrClientCount=""
+                solrServerCoreUrl="http://101.200.182.7/solr/product/dataimport?command=delta-import&amp;clean=false"
+                solrServerHost="101.200.182.7" username="efy" password="helloword" port="80"/>
+    </searchs>
+    <provinces>
+        <province key="北京市" value="北京"/>
+        <province key="上海市" value="上海"/>
+        <province key="天津市" value="天津"/>
+        <province key="重庆市" value="重庆"/>
+    </provinces>
 </common>

@@ -34,6 +34,10 @@
             <mvc:mapping path="/basic/**"/>
             <bean class="com.efeiyi.ec.system.listener.controller.RoleListener"/>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/product/**"/>
+            <bean class="com.efeiyi.ec.system.interceptor.SearchDeltaImportController"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
 
