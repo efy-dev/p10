@@ -344,9 +344,7 @@ public class CouponController {
             }
         }
         model.addAttribute("couponList", couponList);
-
         return couponList;
-
     }
 
     @RequestMapping({"/coupon/listCoupon"})
@@ -413,7 +411,6 @@ public class CouponController {
                 list.add(coupon);
             }
         }
-
         model.addAttribute("list", list);
         return "/purchaseOrder/couponMessage";
 
@@ -433,23 +430,18 @@ public class CouponController {
         Coupon coupon = null;
         Date date = new Date();
         String couponBatchId = request.getParameter("couponBatchId");
-
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), AuthorizationUtil.getMyUser().getId());
         CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(), couponBatchId);
-
         XQuery xQuery1 = new XQuery("listCoupon_have", request);
         xQuery1.put("couponBatch_id", couponBatchId);
         xQuery1.put("consumer_id", consumer.getId());
         List haveUser = baseManager.listObject(xQuery1);
         synchronized (this) {
             if (couponBatch != null) {
-
                 if (haveUser == null || haveUser.size() == 0) {
-
                     XQuery xQuery3 = new XQuery("listCoupon_qbyhq", request);
                     xQuery3.put("couponBatch_id", couponBatchId);
                     List yhqList = baseManager.listObject(xQuery3);
-
                     XQuery xQuery2 = new XQuery("listCoupon_pdyhq", request);
                     xQuery2.put("couponBatch_id", couponBatchId);
                     List result = baseManager.listObject(xQuery2);
@@ -471,20 +463,13 @@ public class CouponController {
                         baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
                         model.addAttribute("yhq", coupon);
                     } else {
-
                         model.addAttribute("yhq", null);
-
                     }
                 } else {
-
                     model.addAttribute("yhq", "used");
                 }
-
-
             } else {
-
                 model.addAttribute("yhq", null);
-
             }
         }
         return "/getYhq";

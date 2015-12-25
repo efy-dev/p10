@@ -191,6 +191,11 @@ public class WxController {
         //生成signature
         String signature = "jsapi_ticket="+ticket+"&noncestr="+nonceStr+"&timestamp="+timestamp+"&url=http://mp.weixin.qq.com?params=value";
         signature = StringUtil.encodePassword(signature,"SHA1");
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.println(signature);
+        System.out.println("-------------------------------------------------------------------------");
+//        System.out.println();
+
         //@TODO 全局缓存
         return signature;
     }
