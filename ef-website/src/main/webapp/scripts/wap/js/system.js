@@ -60,6 +60,20 @@ $(function(){
         });
         $("#nobtn").removeAttr('href');
         $("#nobtn").removeAttr('onclick');
+
+        $('.cart-coupons .ul-list').each(function(){
+            var $input=$(this).find('input');
+
+            $(this).find('li').click(function(){
+                $input.removeAttr('checked');
+                $(this).find('input').prop('checked','checked');
+            })
+        })
+
+
+
+
+
     })
     //商品评价
     (function(){
@@ -79,13 +93,13 @@ $(function(){
     //020104商品详情
     (function(){
         //收藏
-        //$('.addfav').click(function(){
-        //    $(this).addClass('addfav-end').find('p').html('已收藏');
-        //    $('.alert-red-top').slideDown(100,function(){
-        //        setTimeout('$(".alert-red-top").slideUp(50)',3000)
-        //    });
-        //    return false;
-        //});
+        $('.addfav').click(function(){
+            $(this).addClass('addfav-end').find('p').html('已收藏');
+            $('.alert-red-top').slideDown(100,function(){
+                setTimeout('$(".alert-red-top").slideUp(50)',3000)
+            });
+            return false;
+        });
         //加入购物车悬浮层
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
@@ -160,7 +174,15 @@ $(function(){
                 $(this).parents("#cover2").hide()
             })
         })();
-
+        (function(){
+            $("#covbtn").click(function(){
+                $("#cover3").show();
+                $(".custom-header").css("z-index","0");
+            })
+            $("#cover3 .bg").click(function(){
+                $(this).parents("#cover3").hide()
+            })
+        })();
 
         //详情和评论-弹出轮播图
 
@@ -195,13 +217,16 @@ $(function(){
     })();
     //订单
     (function(){
-        $('.btn-coupons').click(function(){
+        $('#btn-coupon').click(function(){
             $('body,document').css('overflow','hidden');
-            $('#order-total').show().css({'top':($('.order-total').position().top-120)+'px'});
-            $('.cart-btn').click(function(){
-                $(this).parents('.alert-delete').hide();
-                $('body,document').css('overflow','visible');
+            $('#order-total').each(function(){
+                $(this).show();
+                $(this).find('.overbg').click(function(){
+                    $(this).parent('#order-total').hide();
+                    $('body,document').css('overflow','');
+                })
             })
+
         });
 
         $('.btn-edit-addres').click(function(){
@@ -287,12 +312,39 @@ $(function(){
             $ul.animate({'height':$li.outerHeight()*4+'px'},200);
             return false;
         });
-
-
-
-
-
-
-
     })();
-})
+    //分享页面好友点击
+    (function(){
+        var add =  $(".extended .t-use-top").height();
+        var center =  add/2;
+        var text =  center-9;
+        $(".extended .t-use-top .user-text strong").css("top",text);
+    })();
+    (function(){
+        $(".t-use-center ul li .state-3").parent("li").css({margin:"0",padding:"0"})
+    })();
+    (function(){
+        var banheight = $(".colonel-pic .c-page").height();
+        var banhei = banheight+12
+        var maxhei = banhei+7
+        $(".olli ol.am-control-nav.am-control-paging").css("bottom",maxhei)
+    })();
+    (function(){
+        $(".weachat-tab .wea-tab .wea-icon").click(function(){
+            var _index = $(this).index();
+            $(this).addClass("active").siblings().removeClass("active");
+           $(".wea-box .fiy-box").eq(_index).show().siblings().hide();
+
+        })
+    })();
+    (function(){
+        var _body = $("#bodyone").height();
+        var _wechead = $(".wechat-header").height();
+        var max = _body-_wechead;
+       $(".explain").css("min-height",max)
+    })();
+    (function(){
+        var bd = $("body").height();
+        $(".wechat-bg").css("min-height",bd)
+    })();
+});

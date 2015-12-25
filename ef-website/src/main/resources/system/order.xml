@@ -218,7 +218,6 @@
                     <query name="byorder" label="可用列表" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>
-                        <condition name="couponBatch.priceLimit" defaultValue="1" operation="le"/>
                         <condition name="couponBatch.startDate" defaultValue="1" operation="le"/>
                         <condition name="couponBatch.endDate" defaultValue="1" operation="ge"/>
                     </query>

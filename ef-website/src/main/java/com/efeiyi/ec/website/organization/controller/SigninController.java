@@ -9,6 +9,8 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
+import com.efeiyi.ec.website.organization.model.SmsProvider;
+import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
@@ -171,6 +173,7 @@ public class SigninController extends BaseController {
     @RequestMapping({"/registerSuccess.do"})
     public String transitPage(HttpServletRequest request, Model model) throws Exception {
         String userId = request.getParameter("userId");
+        MyUser user = (MyUser) baseManager.getObject(MyUser.class.getName(),userId);
         int couponAmount = 0;
         if (userId != null && !"".equals(userId)) {
             Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
@@ -199,16 +202,15 @@ public class SigninController extends BaseController {
                     couponAmount++;
                 }
             }
+            SmsProvider smsProvider = new YunPianSmsProvider();
+            String phoneNumber  =  user.getUsername();
+            smsProvider.post(phoneNumber,"","1186309");
 
         } else {
             return "redirect:/sso.do";
         }
-        if (couponAmount == 0) {
             return "redirect:/sso.do";
-        } else {
-//            model.addAttribute("couponAmount",couponAmount);
-            return "redirect:/registerSuccess/" + couponAmount;
-        }
+
     }
 
     @RequestMapping({"/createCoupon.do"})
