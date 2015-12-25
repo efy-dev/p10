@@ -333,7 +333,8 @@ $(function(){
         $(".weachat-tab .wea-tab .wea-icon").click(function(){
             var _index = $(this).index();
             $(this).addClass("active").siblings().removeClass("active");
-           $(".wea-box .fiy-box").eq(_index).show().siblings().hide()
+           $(".wea-box .fiy-box").eq(_index).show().siblings().hide();
+
         })
     })();
     (function(){
@@ -342,7 +343,8 @@ $(function(){
         var max = _body-_wechead;
        $(".explain").css("min-height",max)
     })();
-
-
-
+    (function(){
+        var bd = $("body").height();
+        $(".wechat-bg").css("min-height",bd)
+    })();
 });

@@ -144,18 +144,6 @@
     <div class="overbg"></div>
 </div>
 
-
-<%--<li>
-    <input type="radio" name="radio" value="5" id="cboxie996pvkgbe01gh4">
-    <c:if test="${data[i]["couponBatch"]["type"]==1}">
-    <p>满200元减5元</p>
-    </c:if>
-    <p>满200元减5元</p>
-    <p>有效期：2015-09-06 00:00至2016-09-06 00:00</p>
-    <p>适用范围：全网通用</p>
-</li>--%>
-
-
 <script>
 
     var payment = "1";
@@ -222,12 +210,6 @@
 
 
     $().ready(function () {
-//
-//        $('#slider').flexslider('pause');
-//        $("#confirmGiftMessage").click(function () {
-//            updateGiftMessage();
-//        });
-
         if (!isWeiXin()) {
             $("#weixin").hide();
             payment = 1;
@@ -248,13 +230,8 @@
     }
 
     function weixin(element) {
-//    $(element).attr("class", "alipay wechat-active");
         $("#weixin").attr("class", "add-btn1");
         $("#zhifubao").attr("class", "");
-
-//    $("#weixin").attr("class", "paymentActive");
-//    $("#zhifubao").find("i").remove();
-//    $(element).append('<i class="triangle" style="display: block"></i>')
         payment = "3";
     }
 
@@ -269,15 +246,6 @@
             if (clazz == "am-active") {
                 imgId = $($(elements[i]).find("a")).html()
             }
-//            if(elements.find("a").html()=="1"){
-//                imgId = "1";
-//            }else if (elements.find("a").html()=="2"){
-//                imgId = "2";
-//            }else if (elements.find("a").html()=="3"){
-//                imgId = "3"
-//            }else if (elements.find("a").html()=="4"){
-//                imgId = "4";
-//            }
         }
         return $("#" + imgId).attr("src");
     }
@@ -411,7 +379,8 @@
                         }
                     }
                     $("#change").text(t_price);
-                    $(".yhq").hide();
+                    $("#order-total").hide();
+                    $("body").css("overflow","scroll")
                 }
             },
 
