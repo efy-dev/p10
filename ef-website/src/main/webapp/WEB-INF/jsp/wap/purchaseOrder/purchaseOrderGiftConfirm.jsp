@@ -8,136 +8,125 @@
 <!--//End--header-->
 <div class="gift ae">
     <form>
-    <div class="card custom ae ">
-        <div class="btb"><h5>礼物卡片</h5></div>
-        <div class="ae imgb">
-            <img src="http://pro.efeiyi.com/${productModel.productModel_url}" style="width: 100%;">
-        </div>
-        <!--//End-->
-        <div class="edit-text">
-            <div class="edit-txt1">点击此处即可编辑祝福语</div>
-            <!--//End-->
-            <div style="display: none" id="addMessage" class="add-cart">
-                <textarea id="giftMessage" class="ae" maxlength="50"></textarea>
-                <span id="leaveword-num" class="leaveword-num1"><em>50</em>/50</span>
-
-                <div class="atext ae">
-                    <a class="cancel">取&nbsp;消</a>
-                    <a class="affirm" id="confirmGiftMessage" onclick="updateGiftMessage()">确&nbsp;认</a>
-                </div>
+        <div class="card custom ae ">
+            <div class="btb"><h5>礼物卡片</h5></div>
+            <div class="ae imgb">
+                <img src="http://pro.efeiyi.com/${productModel.productModel_url}" style="width: 100%;">
             </div>
             <!--//End-->
-        </div>
-        <div class="edit-text">
-            <div class="edit-txt2">送礼人姓名</div>
-            <!--//End-->
-            <div style="display: none" id="addGaverName" class="add-cart">
-                <textarea id="giftMessage1" class="ae" maxlength="50"></textarea>
-                <span class="leaveword-num1"></span>
+            <div class="edit-text">
+                <div class="edit-txt1">点击此处即可编辑祝福语</div>
+                <!--//End-->
+                <div style="display: none" id="addMessage" class="add-cart">
+                    <textarea id="giftMessage" class="ae" maxlength="50"></textarea>
+                    <span id="leaveword-num" class="leaveword-num1"><em>50</em>/50</span>
 
-                <div class="atext ae">
-                    <a class="cancel">取&nbsp;消</a>
-                    <a class="affirm" id="confirmGiftMessage1" onclick="addGaverName()">确&nbsp;认</a>
-                </div>
-            </div>
-            <!--//End-->
-        </div>
-        <!--//End-->
-        <div class="hint"><input type="checkbox" id="showGiftName" onclick="giftNameStatus(this)">告诉Ta什么礼物</div>
-
-    </div>
-    <div class="gift-details ae">
-        <%--<div class="btb"><h5>礼物详情</h5></div>--%>
-        <%--<a class="gift-c-d ae"><strong>${productModel.name}</strong><i class="sj-icon"></i></a>--%>
-
-        <%--<div class="chandise ae">--%>
-        <%--<div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>--%>
-        <%--<div class="cha-box">--%>
-        <%--<strong>${productModel.product.subName}</strong>--%>
-
-        <%--<div class="money">--%>
-        <%--<em>${productModel.price}</em>--%>
-        <%--<i>元</i>--%>
-        <%--</div>--%>
-        <%--<span class="add-sub"></span>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-
-        <div class="btb"><h5>礼物详情</h5></div>
-        <div class="chandise ae">
-            <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>
-            <div class="cha-box">
-                <c:if test="${productModel.product.productModelList.size()==1}">
-                    <strong>${productModel.name}</strong>
-                </c:if>
-                <c:if test="${productModel.product.productModelList.size()>1}">
-                    <strong>${productModel.product.name}[${productModel.name}]</strong>
-                </c:if>
-                <p>${productModel.product.subName}</p>
-
-                <div class="money">
-                    <em>${productModel.price}</em>
-                    <i>元</i>
-                    <i>X ${amount}</i>
-                </div>
-            </div>
-            <div class="bd order-total add-order-total">
-                <p id="btn-coupon"><strong>优惠券</strong><span id="yhq">0张券可用</span><a href="#arrow-right" class="arrow-right"></a></p>
-                <p><strong>商品金额</strong><span><em>￥</em>${productModel.price*amount}</span></p>
-                <p><strong class="grey">返现</strong><span><em>￥</em>0</span></p>
-                <p><strong>运费</strong><span><em>￥</em>30</span></p>
-            </div>
-        </div>
-
-        <%--<div class="bd cart-pay newcart-pay">--%>
-        <%--<div class="btb"><h5>请选择支付方式</h5></div>--%>
-        <%--<ul class="ul-list ae">--%>
-        <%--<li><a href="#支付宝" title="支付宝" id="zhifubao1" onclick="zhifubao(this)"><i class="icon icon-zfb"></i>支 付--%>
-        <%--宝</a>--%>
-        <%--</li>--%>
-        <%--<li><a href="#微信支付" title="微信支付" id="weixin1" onclick="weixin(this)"><i class="icon icon-wechat"></i>微 信--%>
-        <%--支 付</a></li>--%>
-        <%--</ul>--%>
-        <%--</div>--%>
-        <%--<div class="bd payment-total-bar newpayment-total-bar">--%>
-        <%--<span class="txt">共${purchaseOrderProduct.purchaseAmount}件礼物，总金额${purchaseOrder.total}元</span>--%>
-        <%--<a href="#btn-right" class="btn-right" onclick="submitOrder('${purchaseOrder.id}')">结&nbsp;算</a>--%>
-        <%--</div>--%>
-
-        <div class="bd cart-pay newcart-pay new-yierqiu">
-            <div class="btb"><h5>请选择支付方式</h5></div>
-            <ul class="ul-list ae">
-                <li class="add-btn1" id="zhifubao"><a href="#支付宝" onclick="zhifubao(this)" title="支付宝">
-                    <i class="icon icon-zfb"></i>
-
-                    <div class="zfb-page">
-                        <p>支付宝支付</p>
-
-                        <p>推荐有支付宝账号的用户使用</p>
+                    <div class="atext ae">
+                        <a class="cancel">取&nbsp;消</a>
+                        <a class="affirm" id="confirmGiftMessage" onclick="updateGiftMessage()">确&nbsp;认</a>
                     </div>
-                    <span class="add-zfb"></span>
-                </a></li>
-                <li class="add-btn1" id="weixin">
-                    <a href="#微信支付" onclick="weixin(this)" title="微信支付">
-                        <i class="icon icon-wechat"></i>
+                </div>
+                <!--//End-->
+            </div>
+            <div class="edit-text">
+                <div class="edit-txt2">送礼人姓名</div>
+                <!--//End-->
+                <div style="display: none" id="addGaverName" class="add-cart">
+                    <textarea id="giftMessage1" class="ae" maxlength="50"></textarea>
+                    <span class="leaveword-num1"></span>
+
+                    <div class="atext ae">
+                        <a class="cancel">取&nbsp;消</a>
+                        <a class="affirm" id="confirmGiftMessage1" onclick="addGaverName()">确&nbsp;认</a>
+                    </div>
+                </div>
+                <!--//End-->
+            </div>
+            <!--//End-->
+            <div class="hint"><input type="checkbox" id="showGiftName" onclick="giftNameStatus(this)">告诉Ta什么礼物</div>
+
+        </div>
+        <div class="gift-details ae">
+            <%--<div class="btb"><h5>礼物详情</h5></div>--%>
+            <%--<a class="gift-c-d ae"><strong>${productModel.name}</strong><i class="sj-icon"></i></a>--%>
+
+            <%--<div class="chandise ae">--%>
+            <%--<div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>--%>
+            <%--<div class="cha-box">--%>
+            <%--<strong>${productModel.product.subName}</strong>--%>
+
+            <%--<div class="money">--%>
+            <%--<em>${productModel.price}</em>--%>
+            <%--<i>元</i>--%>
+            <%--</div>--%>
+            <%--<span class="add-sub"></span>--%>
+            <%--</div>--%>
+            <%--</div>--%>
+
+            <div class="btb"><h5>礼物详情</h5></div>
+            <div class="chandise ae">
+                <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>
+                <div class="cha-box">
+                    <c:if test="${productModel.product.productModelList.size()==1}">
+                        <strong>${productModel.name}</strong>
+                    </c:if>
+                    <c:if test="${productModel.product.productModelList.size()>1}">
+                        <strong>${productModel.product.name}[${productModel.name}]</strong>
+                    </c:if>
+                    <p>${productModel.product.subName}</p>
+
+                    <div class="money">
+                        <em>${productModel.price}</em>
+                        <i>元</i>
+                        <i>X ${amount}</i>
+                    </div>
+                </div>
+                <div class="bd order-total add-order-total">
+                    <p id="btn-coupon"><strong>优惠券</strong><span id="yhq">0张券可用</span><a href="#arrow-right"
+                                                                                         class="arrow-right"></a></p>
+
+                    <p><strong>商品金额</strong><span><em>￥</em>${productModel.price*amount}</span></p>
+
+                    <p><strong>优惠</strong><span id="couponPrice"><em>-￥</em>0</span></p>
+
+                    <p><strong>运费</strong><span><em>￥</em>0</span></p>
+                </div>
+            </div>
+
+            <div class="bd cart-pay newcart-pay new-yierqiu">
+                <div class="btb"><h5>请选择支付方式</h5></div>
+                <ul class="ul-list ae">
+                    <li class="add-btn1" id="zhifubao"><a href="#支付宝" onclick="zhifubao(this)" title="支付宝">
+                        <i class="icon icon-zfb"></i>
 
                         <div class="zfb-page">
-                            <p>微信支付</p>
+                            <p>支付宝支付</p>
 
-                            <p>推荐安装微信5.0及以上的版本使用</p>
+                            <p>推荐有支付宝账号的用户使用</p>
                         </div>
                         <span class="add-zfb"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="bd payment-total-bar newpayment-total-bar">
-            <span class="txt" style="font-size: 16px;">总金额:<span id="change">${purchaseOrder.total}</span>元</span>
-            <a href="#btn-right" class="btn-right btn-red" onclick="submitOrder('${purchaseOrder.id}')">结&nbsp;算</a>
-        </div>
+                    </a></li>
+                    <li class="add-btn1" id="weixin">
+                        <a href="#微信支付" onclick="weixin(this)" title="微信支付">
+                            <i class="icon icon-wechat"></i>
 
-    </div>
-        </form>
+                            <div class="zfb-page">
+                                <p>微信支付</p>
+
+                                <p>推荐安装微信5.0及以上的版本使用</p>
+                            </div>
+                            <span class="add-zfb"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bd payment-total-bar newpayment-total-bar">
+                <span class="txt" style="font-size: 16px;">总金额:<span id="change">${purchaseOrder.total}</span>元</span>
+                <a href="#btn-right" class="btn-right btn-red" onclick="submitOrder('${purchaseOrder.id}')">结&nbsp;算</a>
+            </div>
+
+        </div>
+    </form>
 </div>
 <div id="order-total" class="alert-delete yhq" style="display:none;">
     <div class="bd cart-coupons" style="position: fixed;">
@@ -165,8 +154,6 @@
     <p>有效期：2015-09-06 00:00至2016-09-06 00:00</p>
     <p>适用范围：全网通用</p>
 </li>--%>
-
-
 
 
 <script>
@@ -220,7 +207,7 @@
         if (message != "") {
             var success = function (data) {
                 console.log("保存成功");
-                $(".edit-txt1").css({color:"#000"});
+                $(".edit-txt1").css({color: "#000"});
                 $(".edit-txt1").html(data)
                 $(".edit-txt1").show();
                 $("#addMessage").hide();
@@ -339,7 +326,7 @@
         if (gaverName != "" && typeof gaverName != "undefined") {
             var success = function (data) {
                 gaverNameStats = "1";
-                $(".edit-txt2").css({color:"#000"});
+                $(".edit-txt2").css({color: "#000"});
                 $(".edit-txt2").html(data)
                 $(".edit-txt2").show();
                 $("#addGaverName").hide();
@@ -369,19 +356,19 @@
                     $("#yhq").text(data.length + "张优惠券可用");
                     for (var i = 0; i < data.length; i++) {
                         out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">';
-                        if(data[i].couponBatch.type != null && data[i].couponBatch.type==1){
+                        if (data[i].couponBatch.type != null && data[i].couponBatch.type == 1) {
                             out += '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>';
-                        }else if(data[i].couponBatch.type != null && data[i].couponBatch.type==2){
-                            out += '<p>'+data[i]["couponBatch"]["price"]+"元"+'</p>';
+                        } else if (data[i].couponBatch.type != null && data[i].couponBatch.type == 2) {
+                            out += '<p>' + data[i]["couponBatch"]["price"] + "元" + '</p>';
                         }
-                            out += '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>';
-                        if(data[i].couponBatch.range!=null && data[i].couponBatch.range==1){
+                        out += '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>';
+                        if (data[i].couponBatch.range != null && data[i].couponBatch.range == 1) {
                             out += '<p>适用范围：全网通用</p> </li>';
-                        }else if(data[i].couponBatch.range!=null && data[i].couponBatch.range==2){
+                        } else if (data[i].couponBatch.range != null && data[i].couponBatch.range == 2) {
                             out += '<p>适用范围：品类专用</p> </li>';
-                        }else if(data[i].couponBatch.range!=null && data[i].couponBatch.range==3){
+                        } else if (data[i].couponBatch.range != null && data[i].couponBatch.range == 3) {
                             out += '<p>适用范围：店铺专用</p> </li>';
-                        }else if(data[i].couponBatch.range!=null && data[i].couponBatch.range==4){
+                        } else if (data[i].couponBatch.range != null && data[i].couponBatch.range == 4) {
                             out += '<p>适用范围：单品专用</p> </li>';
                         }
                     }
@@ -420,7 +407,7 @@
                     for (var i = 0; i < chkobjs.length; i++) {
                         if (chkobjs[i].checked) {
                             t_price = t_price - parseFloat(chkobjs[i].value);
-                            $("#couponPrice").html(chkobjs[i].value);
+                            $("#couponPrice").html("<em>-￥</em>"+chkobjs[i].value);
                         }
                     }
                     $("#change").text(t_price);
