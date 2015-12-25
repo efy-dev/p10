@@ -20,10 +20,15 @@ function initWx(initUrl) {
             "onMenuShareWeibo",
             "onMenuShareQZone"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     };
-    ajaxRequest(initUrl, {"noncestr": noncestr, "timestamp": timestamp}, function (data) {
-        config.signature=data;
-    },function(){},"get");
+    ajaxRequest(initUrl, {
+        "nonceStr": noncestr,
+        "timestamp": timestamp,
+        "callUrl": "http://www.efeiyi.com/wx/init.do"
+    }, function (data) {
+        config.signature = data;
+        wx.config(config);
+    }, function () {
+    }, "get");
 
-    wx.config(config);
 
 }

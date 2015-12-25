@@ -178,6 +178,7 @@ public class WxController {
     public String initWxConfig(HttpServletRequest request) throws Exception {
         String timestamp = request.getParameter("timestamp");
         String nonceStr = request.getParameter("nonceStr");
+        String callUrl = request.getParameter("callUrl");
         //首先获得accessToken
         String fetchAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET;
         String tokenResult = HttpUtil.getHttpResponse(fetchAccessTokenUrl, null);
@@ -189,7 +190,7 @@ public class WxController {
         JSONObject ticketObject = JSONObject.fromObject(ticketResult);
         String ticket = ticketObject.getString("ticket");
         //生成signature
-        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=http://www.efeiyi.com/wx/init.do";
+        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + "Wm3WZYTPz0wzccnW" + "&timestamp=" + timestamp + "&url="+callUrl;
         System.out.println(signature);
         signature = StringUtil.encodePassword(signature, "SHA1");
         System.out.println("-------------------------------------------------------------------------");
