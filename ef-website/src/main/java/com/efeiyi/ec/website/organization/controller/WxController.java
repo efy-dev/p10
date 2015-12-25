@@ -4,12 +4,14 @@ import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.model.WxCalledRecord;
 import com.ming800.core.util.HttpUtil;
+import com.ming800.core.util.StringUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
@@ -167,10 +169,44 @@ public class WxController {
     }
 
 
-    private void setUserInfo(String consumerId,JSONObject userJsonObject){
+    private void setUserInfo(String consumerId, JSONObject userJsonObject) {
 
 
+    }
 
+
+    @RequestMapping({"/init.do"})
+    @ResponseBody
+    public String initWxConfig(HttpServletRequest request) throws Exception {
+        String timestamp = request.getParameter("timestamp");
+        String nonceStr = request.getParameter("nonceStr");
+        String callUrl = request.getParameter("callUrl");
+        //首先获得accessToken
+        String fetchAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET;
+        String tokenResult = HttpUtil.getHttpResponse(fetchAccessTokenUrl, null);
+        JSONObject tokenObject = JSONObject.fromObject(tokenResult);
+        String accessToken = tokenObject.getString("access_token");
+        //获得jsapiTickit
+        String fetchJsApiTicketUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + accessToken + "&type=jsapi";
+        String ticketResult = HttpUtil.getHttpResponse(fetchJsApiTicketUrl, null);
+        JSONObject ticketObject = JSONObject.fromObject(ticketResult);
+        String ticket = ticketObject.getString("ticket");
+        //生成signature
+        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + "Wm3WZYTPz0wzccnW" + "&timestamp=" + timestamp + "&url="+"http://www.efeiyi.com/wx/wxTest.do";
+        System.out.println(signature);
+        signature = StringUtil.encodePassword(signature, "SHA1");
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.println(signature);
+        System.out.println("-------------------------------------------------------------------------");
+//        System.out.println();
+
+        //@TODO 全局缓存
+        return signature;
+    }
+
+    @RequestMapping({"/wxTest.do"})
+    public String wxTest(HttpServletRequest request) {
+        return "/wxTest";
     }
 
 

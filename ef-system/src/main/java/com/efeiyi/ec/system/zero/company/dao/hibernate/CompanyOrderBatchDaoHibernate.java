@@ -62,7 +62,7 @@ public class CompanyOrderBatchDaoHibernate implements CompanyOrderBatchDao {
             orderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRGIFT);//订单状态6 待收礼;填写订单后为5未发货
             orderGift.setShowGiftNameStatus("1");//0不显示 1显示
             orderGift.setShowGiftPriceStatus("1");//0不显示 1显示
-            orderGift.setGiftMessage(companyOrderBatch.getMessage());
+            orderGift.setGiftMessage(companyOrderBatch.getMessage());//祝福语
             orderGift.setGiftGaverName(companyOrderBatch.getGiverName());//送礼人姓名
             orderGift.setCreateDatetime(new Date());
             orderGift.setCompanyOrderBatch(companyOrderBatch);

@@ -36,10 +36,10 @@
       </div>
     </div>
     <div class="am-form-group">
-      <label name="giverName" for="giverName" class="am-u-sm-3 am-form-label">送礼人名称<small>*</small></label>
+      <label name="giverName" for="giverName" class="am-u-sm-3 am-form-label">送礼人名称<small>&nbsp;&nbsp;</small></label>
       <div class="am-u-sm-9">
         <input type="text" id="giverName" name="giverName" title="送礼人名称" placeholder="送礼人名称"
-               value="${object.giverName}" required="true">
+               value="${object.giverName}">
       </div>
     </div>
     <div class="am-form-group">
@@ -60,9 +60,9 @@
       </div>
     </div>
     <div class="am-form-group">
-      <label for="message" class="am-u-sm-3 am-form-label">祝福语<small>*</small></label>
+      <label for="message" class="am-u-sm-3 am-form-label">祝福语<small>&nbsp;&nbsp;</small></label>
       <div class="am-u-sm-9">
-        <textarea name="message" id="message" title="祝福语" placeholder="祝福语" required="true">${object.message}</textarea>
+        <textarea name="message" id="message" title="祝福语" placeholder="祝福语">${object.message}</textarea>
       </div>
     </div>
     <div class="am-form-group">
