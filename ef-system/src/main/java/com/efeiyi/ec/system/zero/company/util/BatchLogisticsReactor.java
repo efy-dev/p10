@@ -290,6 +290,7 @@ public class BatchLogisticsReactor implements Runnable {
                 session.saveOrUpdate(purchaseOrderProduct.getPurchaseOrder());
                 session.flush();
             } catch (Exception e) {
+                e.printStackTrace();
                 continue;
             }
         }
