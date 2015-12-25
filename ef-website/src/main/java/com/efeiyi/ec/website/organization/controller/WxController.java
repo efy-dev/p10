@@ -190,7 +190,7 @@ public class WxController {
         JSONObject ticketObject = JSONObject.fromObject(ticketResult);
         String ticket = ticketObject.getString("ticket");
         //生成signature
-        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + "Wm3WZYTPz0wzccnW" + "&timestamp=" + timestamp + "&url="+callUrl;
+        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + "Wm3WZYTPz0wzccnW" + "&timestamp=" + timestamp + "&url="+"http://www.efeiyi.com/wx/init.do";
         System.out.println(signature);
         signature = StringUtil.encodePassword(signature, "SHA1");
         System.out.println("-------------------------------------------------------------------------");
