@@ -184,13 +184,14 @@ public class WxController {
         JSONObject tokenObject = JSONObject.fromObject(tokenResult);
         String accessToken = tokenObject.getString("access_token");
         //获得jsapiTickit
-        String fetchJsApiTicketUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+accessToken+"&type=jsapi";
-        String ticketResult = HttpUtil.getHttpResponse(fetchJsApiTicketUrl,null);
+        String fetchJsApiTicketUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + accessToken + "&type=jsapi";
+        String ticketResult = HttpUtil.getHttpResponse(fetchJsApiTicketUrl, null);
         JSONObject ticketObject = JSONObject.fromObject(ticketResult);
         String ticket = ticketObject.getString("ticket");
         //生成signature
-        String signature = "jsapi_ticket="+ticket+"&noncestr="+nonceStr+"&timestamp="+timestamp+"&url=http://mp.weixin.qq.com?params=value";
-        signature = StringUtil.encodePassword(signature,"SHA1");
+        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=http://www.efeiyi.com/wx/init.do";
+        System.out.println(signature);
+        signature = StringUtil.encodePassword(signature, "SHA1");
         System.out.println("-------------------------------------------------------------------------");
         System.out.println(signature);
         System.out.println("-------------------------------------------------------------------------");
@@ -201,7 +202,7 @@ public class WxController {
     }
 
     @RequestMapping({"/wxTest.do"})
-    public String wxTest(HttpServletRequest request){
+    public String wxTest(HttpServletRequest request) {
         return "/wxTest";
     }
 
