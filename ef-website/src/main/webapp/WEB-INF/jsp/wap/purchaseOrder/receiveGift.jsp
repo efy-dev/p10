@@ -61,14 +61,22 @@
                 <!--<p class="t3">朱炳仁</p>-->
             </div>
         </div>
+        <c:if test="${not empty purchaseOrder.giftGaverName}">
         <div class="c-info ae" style="margin-top:0;">
             <p>${purchaseOrder.giftMessage}</p>
             <p>——${purchaseOrder.giftGaverName}</p>
         </div>
+        </c:if>
     </div>
     <form action="<c:url value="/giftConfirm.do"/>" method="post" id="formId">
         <input name="purchaseOrderId" value="${purchaseOrder.id}" type="hidden">
-        <div class="btb"><h5>${purchaseOrder.giftGaverName}送您礼物了，快填写您的收货信息吧！</h5></div>
+        <div class="btb"><h5>
+        <c:if test="${empty purchaseOrder.giftGaverName}">
+            快填写您的收货信息吧！
+        </c:if>
+            <c:if test="${not empty purchaseOrder.giftGaverName}">
+                ${purchaseOrder.giftGaverName}送您礼物了，快填写您的收货信息吧！
+            </c:if></h5></div>
         <ul class="profile ae">
             <li>
                 <strong>姓名：</strong>

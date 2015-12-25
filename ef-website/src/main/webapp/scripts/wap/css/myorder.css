@@ -621,8 +621,8 @@ html, body {height:100%}
 .newheader .newsearch {line-height:0;margin-top:13px;display:inline-block;margin-left:10px;width:47%}
 .newheader .newsearch .newsebox {height:28px;width:83%;border:1px solid #999;padding:4px;float:left;font-size:12px;color:#666;display:block;border-right-width:0}
 .newheader .newsearch .newsebut {height:28px;padding:0 3px;line-height:26px;font-size:12px;color:#fff;background:#999;float:left;border:1px solid #999;outline:none}
-.newcustom .toolbar .item:nth-child(2) {border-right:0;border-left:0;width:34%}
-.newcustom .toolbar .item {width:33%}
+.newcustom .toolbar .item:nth-child(2) {border-right:0;border-left:0;width:25%}
+.newcustom .toolbar .item {width:25%}
 .newcustom .toolbar .item span {font-size:12px;line-height:12px;height:auto;font-weight:bolder}
 .newcustom .toolbar .item .newicon {background:url(../images/nav-icon.png) no-repeat;background-size:46px;width:46px;height:30px;display:inline-block}
 .newcustom .toolbar .asso .newicon {background-position:0 0}
@@ -630,6 +630,8 @@ html, body {height:100%}
 .newcustom .toolbar .gift .newicon {background-position:0 -60px}
 .newcustom .toolbar .user .newicon {background-position:-30px -54px;width:50px}
 .newcustom .toolbar .coupon .newicon {background-position:-62px -54px}
+.newcustom .toolbar .gift-bag .newicon{background-position:0 -90px}
+.newcustom .toolbar .gift-bag .red-col{color: #cc0000;}
 .newcustom .toolbar {border-top:4px solid #999;border-bottom:4px solid #999}
 .newcustom .deduce {width:100%}
 .newcustom .deduce .list-top {background-color:#ccc;padding:15px 13px 0;width:100%;float:left}
@@ -955,7 +957,7 @@ html, body {height:100%}
 .topic .plan .plan-box li .plan-text p:nth-child(1){font-size: 10px;}
 .topic .plan .plan-box li .plan-text p:nth-child(2){font-size: 13px;line-height: 18px;}
 .topic .plan .plan-issue{width: 100%;float: left;margin-bottom: 25px;}
-.topic .plan .plan-issue li{float: left;width: 100%;min-height: 55px;background: #f1f1f1;border-radius:5px;position: relative;margin-bottom: 10px;}
+.topic .plan .plan-issue li{float: left;width: 100%;min-height: 55px;background: #f1f1f1;border-radius:10px;position: relative;margin-bottom: 10px;}
 .topic .plan .plan-issue li:last-child{margin-bottom: 0;}
 .topic .plan .plan-issue li .plan-txt{padding:9px 0 0  32px;font-size: 12px;color: #000;text-align: left}
 .topic .plan .plan-issue li .plan-txt p:nth-child(1){line-height: 16px;margin-bottom: 8px;}
@@ -972,12 +974,12 @@ html, body {height:100%}
 /*闯关英雄榜*/
 .weachat-tab{text-align: center;}
 .weachat-tab .wea-tab{margin-bottom: 15px;display: inline-block}
-.weachat-tab .wea-tab .wea-icon{width: 50px;height: 50px;background: url("../images/wechat-icon.png") no-repeat ;background-size: 350px auto;margin-right: 30px;float: left;cursor: pointer}
+.weachat-tab .wea-tab .wea-icon{width: 51px;height: 51px;background: url("../images/wechat-icon.png") no-repeat ;background-size: 350px auto;margin-right: 30px;float: left;cursor: pointer}
 .weachat-tab .wea-tab .wea-icon:last-child{margin-right: 0;}
 .weachat-tab .wea-tab .wea-i-1{background-position: 0 -213px;}
-.weachat-tab .wea-tab .wea-i-1.active{background-position: 0 -280px;}
-.weachat-tab .wea-tab .wea-i-2{background-position: 0 -356px;}
-.weachat-tab .wea-tab .wea-i-2.active{background-position: 0 -433px;}
+.weachat-tab .wea-tab .wea-i-1.active{background-position: 0 -279px;}
+.weachat-tab .wea-tab .wea-i-2{background-position: 0 -355px;}
+.weachat-tab .wea-tab .wea-i-2.active{background-position: 0 -432px;}
 .weachat-tab .wea-tab .wea-i-3{background-position: 0 -507px;}
 .weachat-tab .wea-tab .wea-i-3.active{background-position: 0 -584px;}
 .weachat-tab .fiy-box{width: 100%;float: left}
@@ -989,7 +991,7 @@ html, body {height:100%}
 .weachat-tab .fiy-box li .fiy-text .fiy-txt{padding-left: 40px;font-size: 12px;color: #000;}
 .weachat-tab .fiy-box li .fiy-buck{float: right;font-size: 12px;}
 /*获得奖励去好包*/
-.rewarded{margin: 22px 0;display: inline-block;text-align: center;width:300px;background: url("../images/wechat-icon.png") no-repeat 0 -707px;height: 54px;background-size:350px auto}
+.rewarded{margin: 15px 0;display: inline-block;text-align: center;width:300px;background: url("../images/wechat-icon.png") no-repeat 0 -707px;height: 54px;background-size:350px auto}
 .bouns-box{padding: 0 19px;}
 .bouns-box .bonus{padding:0 22px;background:#f1f1f1;border-radius: 10px;text-align: center}
 .bouns-box .bonus .bouns-like{padding:28px 0;width: 100%;display: inline-block;font-size: 22px;color: #565656;}
@@ -999,9 +1001,9 @@ html, body {height:100%}
 .bouns-box .bonus .ds-btn a{display: inline-block}
 .bouns-box .fiy-box ul{padding: 0;}
 .bouns-box .fiy-title{text-align: center;margin-top: 20px;}
-.bouns-box .fiy-title .fiy-icon{width: 147px;height: 25px;background: url("../images/wechat-icon.png") no-repeat 0 -154px;background-size: 350px auto;display: inline-block}
-.bouns-box .text-fiy{font-size: 10px;color: #000;text-align: left;margin: 10px 0;}
-.bouns-box .text-fiy span{font-size: 12px}
+.bouns-box .fiy-title .fiy-icon{width: 89px;height: 25px;background: url("../images/wechat-icon.png") no-repeat 0 -113px;background-size: 265px auto;display: inline-block}
+.bouns-box .text-fiy{font-size: 10px;color: #000;text-align: left;margin: 10px 0;position: relative}
+.bouns-box .text-fiy .right-btn{font-size: 10px;color: #000;position: absolute;right: 0;top: 0;font-weight: bold}
 /*活动说明*/
 .wechat-top{width: 236px;height: 31px;display: inline-block;background: url("../images/wechat-icon.png") no-repeat 0 -846px;background-size: 350px auto;margin: 49px 0 32px;}
 .explain{padding: 0 30px;position: relative}
@@ -1009,7 +1011,8 @@ html, body {height:100%}
 .explain .explain-top p{margin-bottom: 22px;font-size: 10px;color: #000;width: 100%;float: left}
 .explain .explain-bot{margin-top: 19px;width: 100%;float: left}
 .explain .explain-bot p{font-size: 10px;color: #000;float: left;width: 100%;line-height: 20px;margin-bottom: 9px;}
+.explain .explain-bot p span{font-weight: bold}
 .explain .explain-btn{margin: 40px 0 52px;float: left;text-align: center;width: 100%}
 .explain .explain-btn a{display: inline-block}
-.explain .explain-bg{width: 97px;height: 188px;display: inline-block;background: url("../images/wechat-icon.png") no-repeat 0 -997px;background-size: 350px auto;position: absolute;right: 0;bottom: 0;opacity: 0.1}
+.explain .explain-bg{width: 97px;height: 188px;display: inline-block;background: url("../images/wechat-icon.png") no-repeat 0 -997px;background-size: 350px auto;position: absolute;right: 0;top: 266px;opacity: 0.1}
 
