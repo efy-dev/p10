@@ -333,15 +333,16 @@ public class CouponController {
         couponQuery.put("couponBatch_startDate", new Date());
         couponQuery.put("couponBatch_endDate", new Date());
         List<Coupon> couponList = baseManager.listObject(couponQuery);
-        for (Coupon coupon : couponList) {
-            if(isUserful(purchaseOrder,coupon)){
+        Iterator<Coupon> couponIterator = couponList.iterator();
+        while (couponIterator.hasNext()) {
+            Coupon coupon = couponIterator.next();
+            if (isUserful(purchaseOrder, coupon)) {
                 coupon.getCouponBatch().setStartDateString(df.format(coupon.getCouponBatch().getStartDate()));
                 coupon.getCouponBatch().setEndDateString(df.format(coupon.getCouponBatch().getEndDate()));
-            }else {
-                couponList.remove(coupon);
+            } else {
+                couponIterator.remove();
             }
         }
-
         model.addAttribute("couponList", couponList);
 
         return couponList;

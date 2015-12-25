@@ -4,6 +4,7 @@ import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.model.WxCalledRecord;
 import com.ming800.core.util.HttpUtil;
+import com.ming800.core.util.StringUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -167,10 +168,36 @@ public class WxController {
     }
 
 
-    private void setUserInfo(String consumerId,JSONObject userJsonObject){
+    private void setUserInfo(String consumerId, JSONObject userJsonObject) {
 
 
+    }
 
+
+    @RequestMapping({"/init.do"})
+    public String initWxConfig(HttpServletRequest request) throws Exception {
+        String timestamp = request.getParameter("timestamp");
+        String nonceStr = request.getParameter("nonceStr");
+        //首先获得accessToken
+        String fetchAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET;
+        String tokenResult = HttpUtil.getHttpResponse(fetchAccessTokenUrl, null);
+        JSONObject tokenObject = JSONObject.fromObject(tokenResult);
+        String accessToken = tokenObject.getString("access_token");
+        //获得jsapiTickit
+        String fetchJsApiTicketUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+accessToken+"&type=jsapi";
+        String ticketResult = HttpUtil.getHttpResponse(fetchJsApiTicketUrl,null);
+        JSONObject ticketObject = JSONObject.fromObject(ticketResult);
+        String ticket = ticketObject.getString("ticket");
+        //生成signature
+        String signature = "jsapi_ticket="+ticket+"&noncestr="+nonceStr+"&timestamp="+timestamp+"&url=http://mp.weixin.qq.com?params=value";
+        signature = StringUtil.encodePassword(signature,"SHA1");
+        //@TODO 全局缓存
+        return signature;
+    }
+
+    @RequestMapping({"/wxTest.do"})
+    public String wxTest(HttpServletRequest request){
+        return "/wxTest";
     }
 
 
