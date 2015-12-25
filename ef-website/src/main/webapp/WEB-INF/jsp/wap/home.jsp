@@ -51,6 +51,10 @@
             <span><i class="newicon"></i></span>
             <span>礼&nbsp;品</span>
         </a>
+        <a class="item gift-bag" href="http://www.efeiyi.com/subject/iibegant1zwnlnby">
+            <span><i class="newicon"></i></span>
+            <span class="red-col">春节大礼包</span>
+        </a>
         <!--<a class="item user" href="#user">-->
         <!--<span><i class="newicon"></i></span>-->
         <!--<span>大&nbsp;师</span>-->
