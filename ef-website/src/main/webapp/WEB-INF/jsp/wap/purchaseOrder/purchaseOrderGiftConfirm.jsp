@@ -183,6 +183,7 @@
         if (message != "") {
             var success = function (data) {
                 console.log("保存成功");
+                $(".edit-txt1").css({color:"#000"});
                 $(".edit-txt1").html(data)
                 $(".edit-txt1").show();
                 $("#addMessage").hide();
@@ -301,6 +302,7 @@
         if (gaverName != "" && typeof gaverName != "undefined") {
             var success = function (data) {
                 gaverNameStats = "1";
+                $(".edit-txt2").css({color:"#000"});
                 $(".edit-txt2").html(data)
                 $(".edit-txt2").show();
                 $("#addGaverName").hide();
