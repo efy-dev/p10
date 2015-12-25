@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
@@ -175,6 +176,7 @@ public class WxController {
 
 
     @RequestMapping({"/init.do"})
+    @ResponseBody
     public String initWxConfig(HttpServletRequest request) throws Exception {
         String timestamp = request.getParameter("timestamp");
         String nonceStr = request.getParameter("nonceStr");
@@ -190,7 +192,7 @@ public class WxController {
         JSONObject ticketObject = JSONObject.fromObject(ticketResult);
         String ticket = ticketObject.getString("ticket");
         //生成signature
-        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + "Wm3WZYTPz0wzccnW" + "&timestamp=" + timestamp + "&url="+"http://www.efeiyi.com/wx/init.do";
+        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + "Wm3WZYTPz0wzccnW" + "&timestamp=" + timestamp + "&url="+"http://www.efeiyi.com/wx/wxTest.do";
         System.out.println(signature);
         signature = StringUtil.encodePassword(signature, "SHA1");
         System.out.println("-------------------------------------------------------------------------");

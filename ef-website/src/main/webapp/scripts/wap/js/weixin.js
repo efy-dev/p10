@@ -6,25 +6,7 @@
 
 //初始化微信参数
 function initWx(initUrl) {
-    wx.ready(function () {
-        wx.onMenuShareAppMessage({
-            title: '测试标题', // 分享标题
-            desc: '测试描述', // 分享描述
-            link: 'http://www.efeiyi.com/wx/init.do', // 分享链接
-            imgUrl: 'http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/Clipboard%20Image.png', // 分享图标
-            type: 'link', // 分享类型,music、video或link，不填默认为link
-            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-            success: function () {
-                alert("点击确认分享")
-            },
-            cancel: function () {
-                // 用户取消分享后执行的回调函数
-            }
-        });
-    });
-    wx.error(function (res) {
-        alert("微信验证失败");
-    });
+
     var noncestr = "Wm3WZYTPz0wzccnW";
     var timestamp = new Date().getTime();
     var config = {
@@ -33,7 +15,7 @@ function initWx(initUrl) {
         timestamp: timestamp, // 必填，生成签名的时间戳
         nonceStr: noncestr, // 必填，生成签名的随机串
         signature: '',// 必填，签名，见附录1
-        jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     };
     ajaxRequest(initUrl, {
         "nonceStr": noncestr,
@@ -42,6 +24,27 @@ function initWx(initUrl) {
     }, function (data) {
         config.signature = data;
         wx.config(config);
+
+        wx.ready(function () {
+            wx.onMenuShareAppMessage({
+                title: '测试标题', // 分享标题
+                desc: '测试描述', // 分享描述
+                link: 'http://www.efeiyi.com/wx/wxTest.do', // 分享链接
+                imgUrl: 'http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/Clipboard%20Image.png', // 分享图标
+                type: 'link', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+                    alert("点击确认分享")
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        });
+        wx.error(function (res) {
+            alert("微信验证失败");
+        });
+
     }, function () {
     }, "get");
 
