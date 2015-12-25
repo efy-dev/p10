@@ -8,7 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:if test="${sign != null && sign == '000'}">
+<c:if test="${bannerFlag=='true'}">
 <div class="top-ad" id="top-ad">
     <div class="top-ad-wrap"><a href="http://www.efeiyi.com/subject/activity/iia4ndpr2vgul3i4" title=""><img src="<c:url value="/scripts/images/topb.jpg"/>" alt=""></a></div>
     <a class="btn btn-close" href="javascript:void(0);" title="关闭">关闭</a>

@@ -98,7 +98,7 @@ public class HomeController {
         //首页轮播图
         List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
         model.addAttribute("bannerList", bannerList);
-
+        model.addAttribute("bannerFlag","true");
         //传承人
         List<Object> masterList = objectRecommendedManager.getRecommendedList("ec.masterRecommended");
         model.addAttribute("masterList", masterList);
