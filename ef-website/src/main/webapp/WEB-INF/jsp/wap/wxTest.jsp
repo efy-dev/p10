@@ -17,28 +17,16 @@
 <a onclick="wxShare()">分享测试</a>
 
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script src="<c:url value="/resources/js/weixin.js"/>"></script>
+<script src="<c:url value="/scripts/wap/js/weixin.js"/>"></script>
+
 <script>
 
-  initWx("<c:url value="/wx/init.do"/>");
+    initWx("<c:url value="/wx/init.do"/>");
 
 
-  function wxShare(){
-    wx.onMenuShareAppMessage({
-      title: '测试标题', // 分享标题
-      desc: '测试描述', // 分享描述
-      link: '', // 分享链接
-      imgUrl: '', // 分享图标
-      type: '', // 分享类型,music、video或link，不填默认为link
-      dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-      success: function () {
-        // 用户确认分享后执行的回调函数
-      },
-      cancel: function () {
-        // 用户取消分享后执行的回调函数
-      }
-    });
-  }
+    function wxShare() {
+
+    }
 
 </script>
 </body>
