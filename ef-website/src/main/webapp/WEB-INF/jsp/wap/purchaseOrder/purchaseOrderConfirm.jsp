@@ -295,6 +295,11 @@
 
     $(function () {
 
+        $("#yhq").click(function(){
+            $("#order-total").show();
+
+        });
+
         if (!isWeiXin()) {
             $("#weixin").hide();
         } else {

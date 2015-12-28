@@ -184,7 +184,7 @@ public class PurchaseOrderController {
 
         baseManager.remove(PurchaseOrder.class.getName(), orderId);
 
-        return "redirect:/order/myEfeiyi/list.do";
+        return "redirect:/order/myEfeiyi/list.do?status=17";
     }
 
     /**
