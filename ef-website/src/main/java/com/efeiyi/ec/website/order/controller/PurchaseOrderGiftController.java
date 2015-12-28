@@ -162,6 +162,7 @@ public class PurchaseOrderGiftController {
         String projectName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getProject().getName();
         String urlString = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProductModel_url();
         String sender = purchaseOrderGift.getGiftGaverName();
+        Integer amount = purchaseOrderGift.getPurchaseOrderProductList().get(0).getPurchaseAmount();
         //背景图设置
         URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background5.jpg");
         ImageIcon imgIcon = new ImageIcon(backgroundUrl);
@@ -189,6 +190,7 @@ public class PurchaseOrderGiftController {
             g.drawString(productName.substring(8, productName.length()), 447, 253);
         }
         g.drawString("「" + projectName + "」", 447, 313);
+        g.drawString("数量："+amount+" 个", 447, 393);
         //背景图set文字显示
         g.setFont(new Font("微软雅黑", Font.BOLD, 22));
         g.setColor(Color.black);

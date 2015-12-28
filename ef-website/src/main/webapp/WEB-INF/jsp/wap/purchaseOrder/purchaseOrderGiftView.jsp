@@ -73,8 +73,8 @@
                     width="181"></div>
             <div class="pic-text">
                 <p>${productName}</p>
-
                 <p class="t2"><i></i><span>${projectName}</span><em></em></p>
+                <p class="t4">数量：<span>${order.purchaseOrderProductList.get(0).purchaseAmount}</span>个</p>
             </div>
         </div>
     </div>

@@ -58,6 +58,7 @@
                         </c:if>
                 </p>
                 <p class="t2"><i></i><span>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.project.name}</span><em></em></p>
+                <p class="t4">数量：<span>${purchaseOrder.purchaseOrderProductList.get(0).purchaseAmount}</span>个</p>
                 <!--<p class="t3">朱炳仁</p>-->
             </div>
         </div>
