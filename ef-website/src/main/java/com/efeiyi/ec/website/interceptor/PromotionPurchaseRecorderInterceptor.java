@@ -28,6 +28,8 @@ public class PromotionPurchaseRecorderInterceptor extends HandlerInterceptorAdap
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        try {
+
         String promotionSource = (String) request.getSession().getAttribute("source");
         if (promotionSource == null) {
             Cookie cookie = CookieTool.getCookieByName(request, "source");
@@ -52,6 +54,9 @@ public class PromotionPurchaseRecorderInterceptor extends HandlerInterceptorAdap
             purchaseOrder.setSource(promotionSource);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 //            }
+        }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return super.preHandle(request, response, handler);
     }

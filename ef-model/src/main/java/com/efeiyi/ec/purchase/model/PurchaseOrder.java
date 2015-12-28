@@ -1,7 +1,6 @@
 package com.efeiyi.ec.purchase.model;
 
-import com.efeiyi.ec.organization.model.ConsumerAddress;
-import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
@@ -22,7 +21,7 @@ import java.util.List;
 public class PurchaseOrder {
 
     public static final String ORDER_STATUS_WPAY = "1";  //等待付款
-    public static final String ORDER_STATUS_WAIT_GROUP = "3" ; //等待成团
+    public static final String ORDER_STATUS_WAIT_GROUP = "3"; //等待成团
     public static final String ORDER_STATUS_WRECEIVE = "5"; //未发货
     public static final String ORDER_STATUS_WRGIFT = "6"; //待收礼
     public static final String ORDER_STATUS_POSTED = "7";  //已发货
@@ -57,6 +56,41 @@ public class PurchaseOrder {
     private String callback; //回调
     private String orderType; // 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型 5.企业礼品卡类型
     private String source;//来源推广渠道
+
+    private AddressProvince province;
+    private AddressDistrict district;
+    private AddressCity city;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_province_id")
+    public AddressProvince getProvince() {
+        return province;
+    }
+
+    public void setProvince(AddressProvince province) {
+        this.province = province;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_city_id")
+    public AddressCity getCity() {
+        return city;
+    }
+
+    public void setCity(AddressCity city) {
+        this.city = city;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_district_id")
+    public AddressDistrict getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(AddressDistrict district) {
+        this.district = district;
+    }
+
 
     @Column(name = "callback")
     public String getCallback() {
@@ -118,7 +152,7 @@ public class PurchaseOrder {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id" )
+    @JoinColumn(name = "tenant_id")
     @JsonIgnore
     public Tenant getTenant() {
         return tenant;
@@ -129,7 +163,7 @@ public class PurchaseOrder {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id" ,updatable = false, insertable = false)
+    @JoinColumn(name = "tenant_id", updatable = false, insertable = false)
     @JsonIgnore
     public BigTenant getBigTenant() {
         return bigTenant;
@@ -187,7 +221,6 @@ public class PurchaseOrder {
     public void setUser(User user) {
         this.user = user;
     }
-
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -308,9 +341,10 @@ public class PurchaseOrder {
         resultPrice = resultPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         return resultPrice;
     }
+
     @Transient
-    public BigDecimal getOrderPayMoney(){
-        BigDecimal couponPrice= new BigDecimal(0);
+    public BigDecimal getOrderPayMoney() {
+        BigDecimal couponPrice = new BigDecimal(0);
         if (this.getOrderStatus().equals("1") || this.getOrderStatus().equals("17")) {
             PurchaseOrderPayment purchaseOrderPaymentTemp = this.getPurchaseOrderPaymentList().get(0);
             for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
