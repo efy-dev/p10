@@ -171,20 +171,13 @@ public class WxController {
         return "redirect:" + redirect;
     }
 
-
-    private void setUserInfo(String consumerId, JSONObject userJsonObject) {
-
-
-    }
-
-
     @RequestMapping({"/init.do"})
     @ResponseBody
     public String initWxConfig(HttpServletRequest request) throws Exception {
         String timestamp = request.getParameter("timestamp");
         String nonceStr = request.getParameter("nonceStr");
         String callUrl = request.getParameter("callUrl");
-        String ticket = "";
+        String ticket;
 
         //获取当前的ticket
         String hql = "select obj from " + WxCalledRecord.class.getName() + " obj where obj.dataKey=:dataKey order by obj.createDatetime desc";
@@ -214,7 +207,7 @@ public class WxController {
             ticket = ((WxCalledRecord) wxCallRecordList.get(0)).getData();
         }
         //生成signature
-        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + callUrl;
+        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + URLDecoder.decode(callUrl,"UTF-8");
         System.out.println(signature);
         signature = StringUtil.encodePassword(signature, "SHA1");
 

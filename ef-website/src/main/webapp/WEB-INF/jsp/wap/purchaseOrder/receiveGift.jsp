@@ -130,7 +130,7 @@
         }, "post")
     }
     function check() {
-        var name=$("#receiveName").val();
+        var name=$("#name").val();
         var phoneNumber=$("#phoneNumber").val();
         var addressDetail = $("#addressDetail").val();
         var province = $("#province").val();

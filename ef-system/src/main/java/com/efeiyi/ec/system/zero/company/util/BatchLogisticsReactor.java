@@ -3,7 +3,9 @@ package com.efeiyi.ec.system.zero.company.util;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderDelivery;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.efeiyi.ec.system.purchaseOrder.service.SmsCheckManager;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.CommonManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import com.ming800.core.util.JsonUtil;
@@ -43,6 +45,7 @@ public class BatchLogisticsReactor implements Runnable {
     private ApplicationContext applicationContext;
     private BaseManager baseManager;
     private CommonManager commonManager = ((CommonManager) ApplicationContextUtil.getApplicationContext().getBean("commonManager"));
+    private SmsCheckManager smsCheckManager = ((SmsCheckManager) ApplicationContextUtil.getApplicationContext().getBean("smsCheckManager"));
 
     public BatchLogisticsReactor(List<PurchaseOrderProduct> purchaseOrderProductList, ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
@@ -200,7 +203,7 @@ public class BatchLogisticsReactor implements Runnable {
                 receiverMap.put("province", purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getProvince().getName());
                 receiverMap.put("city", purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getCity().getName());
                 receiverMap.put("address", purchaseOrderProduct.getPurchaseOrder().getPurchaseOrderAddress());
-                receiverMap.put("county",detailAddressMap.get("county"));
+//                receiverMap.put("county",detailAddressMap.get("county"));
                 jsonMap.put("receiver", receiverMap);
 
                 String jsonString = JsonUtil.getJsonString(jsonMap);
@@ -271,6 +274,7 @@ public class BatchLogisticsReactor implements Runnable {
 
                 //返回成功的
                 if ("1000".equals(map.get("resultCode"))) {
+
                     purchaseOrderProduct.getPurchaseOrder().setOrderStatus(PurchaseOrder.ORDER_STATUS_POSTED);//efeiyi已发货
                     PurchaseOrderDelivery purchaseOrderDelivery = new PurchaseOrderDelivery();
                     purchaseOrderDelivery.setPurchaseOrder(purchaseOrderProduct.getPurchaseOrder());
@@ -281,11 +285,25 @@ public class BatchLogisticsReactor implements Runnable {
 //            purchaseOrderDelivery.setSerial("1234");
                     purchaseOrderDelivery.setLogisticsCompany("DEPPON");
                     session.saveOrUpdate(purchaseOrderDelivery);
+                    // 发短信
+                    if("3".equals(purchaseOrderProduct.getPurchaseOrder().getOrderType())){
+                        this.smsCheckManager.send(purchaseOrderProduct.getPurchaseOrder().getReceiverPhone(), "#LogisticsCompany#=debangwuliu&#serial#=" + purchaseOrderDelivery.getSerial(), "1184993", PConst.TIANYI);
 
+                    }else{
+                        this.smsCheckManager.send(purchaseOrderProduct.getPurchaseOrder().getUser().getUsername(), "#purchaseOrderSerial#=" + purchaseOrderProduct.getPurchaseOrder().getSerial() + "&#LogisticsCompany#=debangwuliu&#serial#=" + purchaseOrderDelivery.getSerial(), "1035759", PConst.TIANYI);
+                    }
                     System.out.println(purchaseOrderDelivery.getSerial());
                 } else {
-                    purchaseOrderProduct.getPurchaseOrder().setOrderStatus(PurchaseOrder.ORDER_STATUS_FAILED);//发货失败
+//                    purchaseOrderProduct.getPurchaseOrder().setOrderStatus(PurchaseOrder.ORDER_STATUS_FAILED);//发货失败
                     purchaseOrderProduct.getPurchaseOrder().setMessage("DEPPON：" + dateFormat.format(new Date()) + "原因：" + result);
+
+                    //发货失败，自动修改订单号
+                    String [] serials = purchaseOrderProduct.getPurchaseOrder().getSerial().split("-");
+                    if(serials.length == 1){
+                        purchaseOrderProduct.getPurchaseOrder().setSerial(serials[0] + "-1");
+                    }else {
+                        purchaseOrderProduct.getPurchaseOrder().setSerial(serials[0] + Integer.parseInt(serials[1]) + 1);
+                    }
                 }
                 session.saveOrUpdate(purchaseOrderProduct.getPurchaseOrder());
                 session.flush();

@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -43,14 +44,22 @@
     <!-- //End--chevron-left-->
     <h1 class="am-header-title">礼物订单</h1>
     <!-- //End--title-->
+    <div class="am-header-right am-header-nav">
+        <a href="#chevron-right" class="chevron-right" id="menu">
+            <i class="line"></i>
+        </a>
+    </div>
     <!-- //End--chevron-left-->
     <div class="menu-list">
         <ul class="bd">
-            <li><a href="" title="首页">首页</a></li>
-            <li><a href="" title="分类">分&nbsp;类</a></li>
-            <li class="active"><a href="" title="购物车">购&nbsp;物&nbsp;车</a></li>
-            <li><a href="" title="传承人">传承人</a></li>
-            <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+            <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
+            <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
+            <% if (AuthorizationUtil.isAuthenticated()) {%>
+            <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+            <%} else {%>
+            <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
+            <%}%>
+            <li><a href="<c:url value="/productCategoryList.do"/>" title="个人中心">分类</a></li>
         </ul>
     </div>
 </header>
