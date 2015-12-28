@@ -171,13 +171,6 @@ public class WxController {
         return "redirect:" + redirect;
     }
 
-
-    private void setUserInfo(String consumerId, JSONObject userJsonObject) {
-
-
-    }
-
-
     @RequestMapping({"/init.do"})
     @ResponseBody
     public String initWxConfig(HttpServletRequest request) throws Exception {

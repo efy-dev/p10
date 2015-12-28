@@ -188,6 +188,9 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WPAY);
         purchaseOrder.setPayWay(payWay);
         if (consumerAddress != null) {
+            purchaseOrder.setProvince(consumerAddress.getProvince());
+            purchaseOrder.setCity(consumerAddress.getCity());
+            purchaseOrder.setDistrict(consumerAddress.getDistrict());
             String purchaseOrderAddress = (consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : "") + " " + (consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : "") + " " + (consumerAddress.getDetails() != null ? consumerAddress.getDetails() : "");
             purchaseOrder.setPurchaseOrderAddress(purchaseOrderAddress);
             purchaseOrder.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "");

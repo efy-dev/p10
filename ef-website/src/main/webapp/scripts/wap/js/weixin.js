@@ -48,6 +48,18 @@ function initWx(initUrl) {
                     // 用户取消分享后执行的回调函数
                 }
             });
+
+            wx.onMenuShareTimeline({
+                title: wx_share_title, // 分享标题
+                link: wx_share_link, // 分享链接
+                imgUrl: wx_share_imgUrl, // 分享图标
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
         });
         wx.error(function (res) {
             alert("微信验证失败");
