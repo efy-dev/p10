@@ -46,7 +46,9 @@ public class PromotionPurchaseRecorderInterceptor extends HandlerInterceptorAdap
             String path = request.getServletPath();
             String orderId = path.substring(path.lastIndexOf("/") + 1);
             PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
-            PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
+
+            //orderId是PurchaseOrder.id或purchaseOrderPaymentDetails.id
+            PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails != null ? purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder() : (PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(), orderId);
             purchaseOrder.setSource(promotionSource);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 //            }
