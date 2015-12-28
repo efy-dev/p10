@@ -170,9 +170,6 @@
                 <match url="/basic/xm.do?qm=plistBatchGift"/>
                 <match url="/basic/xm.do?qm=listBatchGift"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistBatchFailedOrder_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="物流发送失败订单">
-                <match url="/basic/xm.do?qm=plistBatchFailedOrder"/>
-            </jnode>
         </jnode>
     </jnode>
     <jnode id="efecProductAndTenant" access="admin,operational,c_operational,o_operational,financial,product_manager" url="/main.do?jnodeId=efecProductAndTenant" text_zh_CN="商品与商家">

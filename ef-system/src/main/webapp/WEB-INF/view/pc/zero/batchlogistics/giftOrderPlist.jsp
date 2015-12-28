@@ -21,11 +21,13 @@
            value="返回"/>
 </span>
 <span style="text-align: left;margin-left: 10px;">
-    <input onclick="window.location.href='<c:url value="/batch/deppon.do?qm=listBatchGift_default&result=redirect:/basic/xm.do?qm=plistBatchGift_default"/>'"
+    <input onclick="window.location.href='<c:url
+            value="/batch/deppon.do?qm=listBatchGift_default&result=redirect:/basic/xm.do?qm=plistBatchGift_default"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="启动批量"/>
 </span>
+
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr style="text-align:left">
@@ -34,6 +36,7 @@
             <td>商品名</td>
             <td>购买数量</td>
             <td>价格</td>
+            <td>发送详情</td>
         </tr>
         <c:forEach items="${pageInfo.list}" var="purchaseOrderProduct">
             <tr>
@@ -42,6 +45,11 @@
                 <td>${purchaseOrderProduct.productModel.product.name}</td>
                 <td>${purchaseOrderProduct.purchaseAmount}</td>
                 <td>${purchaseOrderProduct.productModel.price}</td>
+                <td><c:if test="${not empty purchaseOrderProduct.purchaseOrder.message}"><a href="#"
+                                                                                            onclick="showReason(this.title)"
+                                                                                            title='${purchaseOrderProduct.purchaseOrder.message}'
+                                                                                            type="button">查看详情</a></c:if>
+                </td>
             </tr>
         </c:forEach>
     </table>
@@ -56,6 +64,26 @@
 <script>
     if (${not empty msg}) {
         alert("${msg}");
+    }
+    function showReason(val){
+        var modalStr = "<div class=\"am-modal am-modal-no-btn\" id=\"modalShow\">" +
+                "<div class=\"am-modal-dialog\">" +
+                "<div class=\"am-modal-hd\">" +
+                "<span data-am-modal-close class=\"am-close\">&times;</span>"+
+                "</div>"+
+                "<div class=\"am-popup-bd\" style=\"height: 10px\">"+
+                "<span>"+ val +"</span>"+
+                "</div>"+
+                "</div>"+
+                "</div>";
+        if (typeof $("#modalShow").attr("id") != "undefined") {
+            var modalDiv = document.getElementById("modalShow");
+            modalDiv.parentNode.removeChild(modalDiv);
+        }
+        $("body").append(modalStr);
+        $("#modalShow").modal({
+            width: 450, height: 150
+        });
     }
 </script>
 </body>
