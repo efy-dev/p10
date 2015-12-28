@@ -184,7 +184,7 @@ public class WxController {
         String timestamp = request.getParameter("timestamp");
         String nonceStr = request.getParameter("nonceStr");
         String callUrl = request.getParameter("callUrl");
-        String ticket = "";
+        String ticket;
 
         //获取当前的ticket
         String hql = "select obj from " + WxCalledRecord.class.getName() + " obj where obj.dataKey=:dataKey order by obj.createDatetime desc";
