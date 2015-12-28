@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
 /**
  * Created by Administrator on 2015/12/24.
  */
-public class SearchDeltaImportController extends HandlerInterceptorAdapter {
+public class ProductModifyInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     @Qualifier("commonManager")
@@ -32,6 +32,7 @@ public class SearchDeltaImportController extends HandlerInterceptorAdapter {
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+
 
         CommonSearch commonSearch = null;
         try {
