@@ -97,7 +97,10 @@
                                  alt="">
 
                             <div class="bd info">
-                                <p class="text">${product.productModel.product.name}[${product.productModel.name}]
+                                <p class="text">${product.productModel.product.name}
+                                    <c:if test="${null!=product.productModel.name || ''!=product.productModel.name}">
+                                        [${product.productModel.name}]
+                                    </c:if>
                                     <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
                                         <%--[--%>
                                         <%--<c:forEach items="${product.productModel.productPropertyValueList}"--%>
@@ -368,33 +371,38 @@
                 couponid = $(this).attr("id");
             }
         })
-        var couponId = couponid.substring(4, couponid.length);
-        $.ajax({
-            type: 'post',
-            async: false,
-            url: '<c:url value="/coupon/use.do"/>',
-            dataType: 'json',
-            data: {
-                couponId: couponId,
-                orderId: orderId
+        if(couponid!=null){
+            var couponId = couponid.substring(4, couponid.length);
+            $.ajax({
+                type: 'post',
+                async: false,
+                url: '<c:url value="/coupon/use.do"/>',
+                dataType: 'json',
+                data: {
+                    couponId: couponId,
+                    orderId: orderId
 
-            },
-            success: function (data) {
-                if (data == true) {
-                    var t_price = parseFloat(totalPrice);
-                    var chkobjs = document.getElementsByName("radio");
-                    for (var i = 0; i < chkobjs.length; i++) {
-                        if (chkobjs[i].checked) {
-                            t_price = t_price - parseFloat(chkobjs[i].value);
-                            $("#couponPrice").html(chkobjs[i].value);
+                },
+                success: function (data) {
+                    if (data == true) {
+                        var t_price = parseFloat(totalPrice);
+                        var chkobjs = document.getElementsByName("radio");
+                        for (var i = 0; i < chkobjs.length; i++) {
+                            if (chkobjs[i].checked) {
+                                t_price = t_price - parseFloat(chkobjs[i].value);
+                                $("#couponPrice").html(chkobjs[i].value);
+                            }
                         }
+                        $("#change").text(t_price);
+                        $(".yhq").hide();
                     }
-                    $("#change").text(t_price);
-                    $(".yhq").hide();
-                }
-            },
+                },
 
-        });
+            });
+
+        }else{
+            $(".yhq").hide();
+        }
 
     }
 

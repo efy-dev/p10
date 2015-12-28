@@ -203,7 +203,7 @@ public class BatchLogisticsReactor implements Runnable {
                 receiverMap.put("province", purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getProvince().getName());
                 receiverMap.put("city", purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getCity().getName());
                 receiverMap.put("address", purchaseOrderProduct.getPurchaseOrder().getPurchaseOrderAddress());
-                receiverMap.put("county",detailAddressMap.get("county"));
+//                receiverMap.put("county",detailAddressMap.get("county"));
                 jsonMap.put("receiver", receiverMap);
 
                 String jsonString = JsonUtil.getJsonString(jsonMap);
@@ -294,8 +294,16 @@ public class BatchLogisticsReactor implements Runnable {
                     }
                     System.out.println(purchaseOrderDelivery.getSerial());
                 } else {
-                    purchaseOrderProduct.getPurchaseOrder().setOrderStatus(PurchaseOrder.ORDER_STATUS_FAILED);//发货失败
+//                    purchaseOrderProduct.getPurchaseOrder().setOrderStatus(PurchaseOrder.ORDER_STATUS_FAILED);//发货失败
                     purchaseOrderProduct.getPurchaseOrder().setMessage("DEPPON：" + dateFormat.format(new Date()) + "原因：" + result);
+
+                    //发货失败，自动修改订单号
+                    String [] serials = purchaseOrderProduct.getPurchaseOrder().getSerial().split("-");
+                    if(serials.length == 1){
+                        purchaseOrderProduct.getPurchaseOrder().setSerial(serials[0] + "-1");
+                    }else {
+                        purchaseOrderProduct.getPurchaseOrder().setSerial(serials[0] + Integer.parseInt(serials[1]) + 1);
+                    }
                 }
                 session.saveOrUpdate(purchaseOrderProduct.getPurchaseOrder());
                 session.flush();
