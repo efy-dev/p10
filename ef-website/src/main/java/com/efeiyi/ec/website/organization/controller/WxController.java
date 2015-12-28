@@ -214,7 +214,7 @@ public class WxController {
             ticket = ((WxCalledRecord) wxCallRecordList.get(0)).getData();
         }
         //生成signature
-        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + callUrl;
+        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + URLDecoder.decode(callUrl,"UTF-8");
         System.out.println(signature);
         signature = StringUtil.encodePassword(signature, "SHA1");
 
