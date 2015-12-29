@@ -44,7 +44,10 @@
                         <div class="am-intro-right am-u-sm-7 item-act">
                             <a href="<%=PConst.HOSTNAME%>/product/productModel/${purchaseOrderProduct.productModel.id}">
                                 <p class="item-acr">
-                                        ${purchaseOrderProduct.productModel.product.name}[${purchaseOrderProduct.productModel.name}]
+                                        ${purchaseOrderProduct.productModel.product.name}
+                                            <c:if test="${purchaseOrderProduct.productModel.product.productModelList.size()>1}">
+                                                [${purchaseOrderProduct.productModel.name}]
+                                            </c:if>
 
                                 </p></a>
 
