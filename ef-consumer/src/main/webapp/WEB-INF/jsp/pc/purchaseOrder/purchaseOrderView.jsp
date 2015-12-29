@@ -59,7 +59,9 @@
                             <td class="commodity_price_unit1  price9"><a
                                     href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">
                                     ${op.productModel.product.name}
-                                [${op.productModel.name}]
+                                        <c:if test="${op.productModel.product.productModelList.size()>1}">
+                                            [${op.productModel.name}]
+                                        </c:if>
                             </a></td>
 
                             <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>

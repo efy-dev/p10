@@ -64,8 +64,9 @@
 										onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></div>
 								<div class="shops-text">
 									<p>${purchaseOrderProduct.productModel.product.name}</p>
-
-									<p>${purchaseOrderProduct.productModel.name}</p>
+									<c:if test="${purchaseOrderProduct.productModel.product.productModelList.size()>1}">
+										<p>${purchaseOrderProduct.productModel.name}</p>
+									</c:if>
 									<span class="money-txt">￥${purchaseOrderProduct.productModel.price}</span>
 									<span class="list-txt">x${purchaseOrderProduct.purchaseAmount}</span>
 								</div>
@@ -118,8 +119,9 @@
 									</div>
 									<div class="shops-text">
 										<p>${purchaseOrderProduct.productModel.product.name}</p>
-
-										<p>${purchaseOrderProduct.productModel.name}</p>
+										<c:if test="${purchaseOrderProduct.productModel.product.productModelList.size()>1}">
+											<p>${purchaseOrderProduct.productModel.name}</p>
+										</c:if>
 										<span class="money-txt">￥${purchaseOrderProduct.productModel.price}</span>
 										<span class="list-txt">x${purchaseOrderProduct.purchaseAmount}</span>
 									</div>
@@ -198,7 +200,9 @@
 										<div class="shops-text">
 											<p>${purchaseOrderProduct.productModel.product.name}</p>
 
-											<p>${purchaseOrderProduct.productModel.name}</p>
+											<c:if test="${purchaseOrderProduct.productModel.product.productModelList.size()>1}">
+												<p>${purchaseOrderProduct.productModel.name}</p>
+											</c:if>
 											<span class="money-txt">￥${purchaseOrderProduct.productModel.price}</span>
 											<span class="list-txt">x${purchaseOrderProduct.purchaseAmount}</span>
 										</div>

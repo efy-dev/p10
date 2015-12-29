@@ -126,8 +126,10 @@
                                                                                        src="<c:url value="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}"/>"
                                                                                        alt="产品"/></a></div>
                         <div class="am-intro-right am-u-sm-7 item-act">
-                            <p class="item-acr">${purchaseOrderProduct.productModel.product.name}[${purchaseOrderProduct.productModel.name}]
-
+                            <p class="item-acr">${purchaseOrderProduct.productModel.product.name}
+                                <c:if test="${purchaseOrderProduct.productModel.product.productModelList.size()>1}">
+                                    [${purchaseOrderProduct.productModel.name}]
+                                </c:if>
                             </p>
 
                             <p class="item-rmb">
