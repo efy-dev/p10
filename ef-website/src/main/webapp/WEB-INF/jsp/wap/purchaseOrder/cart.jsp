@@ -293,7 +293,32 @@
         }, "post")
     }
 
+</script>
+<script type="text/javascript">
+    var _mvq = window._mvq || [];
+    window._mvq = _mvq;
+    _mvq.push(['$setAccount', 'm-197303-0']);
 
+    _mvq.push(['$setGeneral', 'cartview', '', /*用户名*/ '', /*用户id*/ '']);
+    _mvq.push(['$logConversion']);
+    <c:if test="${empty tenantList}">
+    _mvq.push(['$addItem', '']);
+    </c:if>
+    <c:if test="${!empty tenantList}">
+    _mvq.push(['$addItem', <c:forEach items="${tenantList}" var="tenant" varStatus="tenantIndex">
+        <c:forEach items="${productMap.get(tenant.id)}" var="product" varStatus="productIndex">
+        <c:if test="${tenantIndex.index!=(tenantList.size()-1) or productIndex.index!=(productMap.get(tenant.id).size()-1)}">
+        '${product.productModel.id}',
+        </c:if>
+        <c:if test="${tenantIndex.index==(tenantList.size()-1)}">
+        <c:if test="${productIndex.index==(productMap.get(tenant.id).size()-1)}">
+        '${product.productModel.id}'
+        </c:if>
+        </c:if>
+        </c:forEach>
+        </c:forEach>]);
+    </c:if>
+    _mvq.push(['$logData']);
 </script>
 </body>
 </html>
