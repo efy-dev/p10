@@ -149,12 +149,8 @@ public class SigninController extends BaseController {
     @RequestMapping("/sso.do")
     public String forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String redirect = request.getParameter("callUrl");
-        String registeSuccess = request.getParameter("registeSuccess");
         if (redirect != null) {
             return "redirect:http://" + redirect;
-        }
-        if (registeSuccess != null) {
-            return "redirect:" + registeSuccess;
         }
 //        response.sendRedirect(request.getContextPath() + "/sso2.do");
         return "redirect:/sso2.do";
@@ -169,49 +165,6 @@ public class SigninController extends BaseController {
         response.sendRedirect(request.getContextPath() + "/");
     }
 
-
-    @RequestMapping({"/registerSuccess.do"})
-    public String transitPage(HttpServletRequest request, Model model) throws Exception {
-        String userId = request.getParameter("userId");
-        MyUser user = (MyUser) baseManager.getObject(MyUser.class.getName(),userId);
-        int couponAmount = 0;
-        if (userId != null && !"".equals(userId)) {
-            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
-            XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
-            List<Object> couponBatchList = baseManager.listObject(xQuery);
-            for (Object couponBatchTemp : couponBatchList) {
-                if (((CouponBatch) couponBatchTemp).getCouponList().size() < ((CouponBatch) couponBatchTemp).getAmount()) {
-                    Coupon coupon = new Coupon();
-                    coupon.setStatus("1");
-                    coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
-                    coupon.setCouponBatch((CouponBatch) couponBatchTemp);
-                    Date currentDate = new Date();
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-                    String currentDateStr = simpleDateFormat.format(currentDate);
-                    coupon.setUniqueKey(currentDateStr + coupon.getSerial());
-                    coupon.setConsumer(consumer);
-                    coupon.setWhetherBind("2");
-                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
-                    couponAmount++;
-                } else if (((CouponBatch) couponBatchTemp).fetchCouponList().size() > 0) {
-                    List<Coupon> couponList = ((CouponBatch) couponBatchTemp).fetchCouponList();
-                    Coupon coupon = couponList.get(0);
-                    coupon.setWhetherBind("2");
-                    coupon.setConsumer(consumer);
-                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
-                    couponAmount++;
-                }
-            }
-            SmsProvider smsProvider = new YunPianSmsProvider();
-            String phoneNumber  =  user.getUsername();
-            smsProvider.post(phoneNumber,"","1186309");
-
-        } else {
-            return "redirect:/sso.do";
-        }
-            return "redirect:/sso.do";
-
-    }
 
     @RequestMapping({"/createCoupon.do"})
     @ResponseBody
