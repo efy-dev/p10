@@ -290,7 +290,23 @@
                                                 ${purchaseOrderProduct.purchaseOrderComment.content}
                                             </c:if>
                                         </div>
-                                        <div class="star"><i class="star-icon star-5"></i></div>
+                                        <div class="star">
+                                            <c:if test="${empty purchaseOrderProduct.purchaseOrderComment.starts||purchaseOrderProduct.purchaseOrderComment.starts=='5'}">
+                                            <i class="star-icon star-5"></i>
+                                            </c:if>
+                                            <c:if test="${purchaseOrderProduct.purchaseOrderComment.starts=='4'}">
+                                                <i class="star-icon star-4"></i>
+                                            </c:if>
+                                            <c:if test="${purchaseOrderProduct.purchaseOrderComment.starts=='3'}">
+                                                <i class="star-icon star-3"></i>
+                                            </c:if>
+                                            <c:if test="${purchaseOrderProduct.purchaseOrderComment.starts=='2'}">
+                                                <i class="star-icon star-2"></i>
+                                            </c:if>
+                                            <c:if test="${purchaseOrderProduct.purchaseOrderComment.starts=='1'}">
+                                                <i class="star-icon star-1"></i>
+                                            </c:if>
+                                        </div>
                                         <c:set var="user">
                                             ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                         </c:set>
