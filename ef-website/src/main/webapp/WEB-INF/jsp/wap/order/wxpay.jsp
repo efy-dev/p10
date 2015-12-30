@@ -87,6 +87,17 @@
     }
 </script>
 <script>callpay();</script>
+<script type="text/javascript">
+    var _mvq = window._mvq || [];
+    window._mvq = _mvq;
+    _mvq.push(['$setAccount', 'm-197303-0']);
+
+    _mvq.push(['$setGeneral', 'ordercreate', '', /*用户名*/ '', /*用户id*/ '']);
+    _mvq.push(['$logConversion']);
+    _mvq.push(['$addOrder',/*订单号*/ '${order.serial}', /*订单金额*/ '${order.total-order.getOrderPayMoney()}']);
+    _mvq.push(['$addItem', /*订单号*/ '', /*商品id*/ '', /*商品名称*/ '', /*商品价格*/ '', /*商品数量*/ '', /*商品页url*/ '', /*商品页图片url*/ '']);
+    _mvq.push(['$logData']);
+</script>
 
 </body>
 </html>
