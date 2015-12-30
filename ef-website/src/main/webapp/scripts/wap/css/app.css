@@ -501,10 +501,8 @@ input[type="checkbox"], textarea,select {border-radius:0;box-shadow:none}
 .search .form-search input[type="button"] {background:#000;color:#fff;position:absolute;top:0;right:0;font-size:12px}
 .search .search-item {margin-bottom:20px}
 .search .search-item h3 {font-size:1.2rem;color:#666;font-weight:bolder}
-.search .search-item .ul-list {margin-top:10px;text-align:center}
-.search .search-item .ul-list li {display:inline-block;width:31%}
-.search .search-item .ul-list li:nth-child(2n-1){float:left}
-.search .search-item .ul-list li:nth-child(3n){float:right}
+.search .search-item .ul-list {margin-top:10px;text-align:center;margin-left: -2%;}
+.search .search-item .ul-list li {float: left;width:31%;margin-left:2%;margin-bottom:2%}
 .search .search-item .ul-list a {width:100%;line-height:40px;text-align:center;font-size:1.2rem;color:#000;font-weight:bolder;border:3px solid #d1d1d1;float:left}
 .search .search-item .ul-list li.active a {background: #000;color:#fff;border-color: #000;}
 .search .search-item .btn {line-height:35px;text-align:center;background:#000;color:#fff;margin-top:10px}

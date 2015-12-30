@@ -112,7 +112,11 @@
                         <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a>
                         <div class="info">
                           <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><p>${op.productModel.product.project.projectCategory.name}</p>
-                            <p>${op.productModel.product.name}[${op.productModel.name}]
+                            <p>${op.productModel.product.name}
+                              <c:if test="${op.productModel.product.productModelList.size()>1}">
+                                [${op.productModel.name}]
+                              </c:if>
+
                             </p></a>
                         </div>
                       </div>
@@ -172,7 +176,9 @@
                           <div class="info">
                             <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><p>${op.productModel.product.project.projectCategory.name}</p>
                               <p>${op.productModel.product.name}
-                                [${op.productModel.name}]
+                                <c:if test="${op.productModel.product.productModelList.size()>1}">
+                                  [${op.productModel.name}]
+                                </c:if>
                               </p></a>
 
                           </div>
@@ -268,8 +274,12 @@
                             <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a>
                             <div class="info">
                               <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><p>${op.productModel.product.project.projectCategory.name}</p>
-                                <p>${op.productModel.product.name}[${op.productModel.name}]
-                                </p></a>
+                                <p>${op.productModel.product.name}
+                               <c:if test="${op.productModel.product.productModelList.size()>1}">
+                                  [${op.productModel.name}]
+                                </c:if>
+                                </p>
+                              </a>
 
                             </div>
                           </div>

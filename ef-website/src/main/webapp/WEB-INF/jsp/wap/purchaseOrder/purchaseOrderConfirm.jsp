@@ -130,7 +130,7 @@
 
             <p><strong>商品金额</strong><span><em>￥</em>${purchaseOrder.total}</span></p>
             <c:if test="${empty purchaseOrder.callback}">
-                <p><strong>优惠</strong><span><em>￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span>
+                <p><strong>优惠</strong><span><em>-￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span>
                 </p>
             </c:if>
 
