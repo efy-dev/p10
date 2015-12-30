@@ -92,8 +92,8 @@
                     <query name="search" label="查询" type="auto" orderBy="createDateTime:desc">
                         <condition name="purchaseOrder.tenant.id" defaultValue="${MY_TENANT}" operation="eq" inputType="default"/>
                         <condition name="status" operation="eq" inputType="select_status" key="purchaseOrderDelivery.status" label="发货状态"/>
+                        <condition name="logisticsCompany" operation="eq" inputType="select_status" key="purchaseOrderDelivery.logisticsCompany" label="物流公司"/>
                         <condition name="purchaseOrder.serial" operation="eq" inputType="text" label="订单号"/>
-                        <condition name="logisticsCompany" operation="likes" inputType="text" label="物流公司"/>
                         <condition name="createDateTime" operation="ge" label="发货时间起" inputType="date" dataType="date"/>
                         <condition name="createDateTime" operation="le" label="发货时间止" inputType="date" dataType="date"/>
                     </query>

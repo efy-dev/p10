@@ -52,7 +52,11 @@
                                             checkedValue="${purchaseOrderDelivery.status}"
                                             type="normal"/>
                         </td>
-                        <td class="am-hide-sm-only">${purchaseOrderDelivery.logisticsCompany}</td>
+                        <td>
+                            <ming800:status name="logisticsCompany" dataType="purchaseOrderDelivery.logisticsCompany"
+                                            checkedValue="${purchaseOrderDelivery.logisticsCompany}"
+                                            type="normal"/>
+                        </td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderDelivery.createDateTime}"
                                                                     type="both" pattern="yyyy-MM-dd HH:mm"/></td>
 
