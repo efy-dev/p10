@@ -296,9 +296,9 @@
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="发货状态" inputType="select_status"
                                    key="purchaseOrderDelivery.status"/>
+                        <condition name="logisticsCompany" operation="eq" label="物流公司" inputType="select_status" key="purchaseOrderDelivery.logisticsCompany"/>
                         <condition name="serial" operation="like" label="发货记录编号" inputType="text"/>
                         <condition name="purchaseOrder.serial" operation="like" label="订单号" inputType="text"/>
-                        <condition name="logisticsCompany" operation="like" label="物流公司" inputType="text"/>
                         <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
                         <condition name="createDateTime" operation="le" label="截止时间" inputType="date" dataType="date"/>
                     </query>
