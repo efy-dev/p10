@@ -91,6 +91,7 @@
                     </query>
                     <query name="consumer" label="查找" type="auto" orderBy="id:desc">
                         <condition name="user.id" operation="eq" label="消费者id" inputType="default"/>
+                        <condition name="status" operation="eq" defaultValue="1" label="订单状态" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
@@ -99,6 +100,7 @@
                         <condition name="orderType" operation="eq" label="订单类型" inputType="select_status"
                                    key="purchaseOrder.orderType"/>
                         <condition name="serial" operation="like" label="订单号" inputType="text"/>
+                        <condition name="user.username" operation="eq" label="下单人" inputType="text"/>
                         <condition name="bigTenant.contractNumber" operation="eq" label="商家编号" inputType="text"/>
                         <condition name="createDatetime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
                         <condition name="createDatetime" operation="le" label="截止时间" inputType="date" dataType="date"/>
