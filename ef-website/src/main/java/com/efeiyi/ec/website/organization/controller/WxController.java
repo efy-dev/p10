@@ -210,10 +210,6 @@ public class WxController {
         String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + URLDecoder.decode(callUrl,"UTF-8");
         System.out.println(signature);
         signature = StringUtil.encodePassword(signature, "SHA1");
-
-//        System.out.println();
-
-        //@TODO 全局缓存
         return signature;
     }
 
