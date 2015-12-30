@@ -96,7 +96,7 @@
                 <p>方式一：点击“送礼给Ta”，根据提示送礼给好友，好友通过点击收到的链接进入收礼页面，正确填写收货信息后即可收礼。</p>
 
                 <p>方式二：点击“保存为图片”将生成图片形式的礼物卡片，保存图片后发给好友，好友通过识别图片上的二维码进入收礼页面，正确填写收货信息后即可收礼。</p>
-                <%--<p>方式三：短信送礼，点击”复制链接“，根据提示复制链接,将链接地址通过短信发给好友，好友点击链接，填入收货地址即可收礼。</p>--%>
+                <p>方式三：短信送礼，点击”复制链接“，根据提示复制链接,将链接地址通过短信发给好友，好友点击链接，填入收货地址即可收礼。</p>
             </div>
         </c:if>
         <div class="btn-again">
@@ -114,9 +114,9 @@
         <c:if test="${order.orderStatus=='6'}">
         <div class="car-fx" id="giftButton">
             </c:if>
-            <a href="#" id="share" style="width: 75%">送礼给Ta</a>
+            <a href="#" id="share">送礼给Ta</a>
             <a href="<c:url value="/createGiftImage/${order.id}"/> ">保存为图片</a>
-
+            <a class="url" href="#" id="share1">复制链接</a>
             <div id="cover" style="display: none;"><em class="bg"></em><img
                     src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt=""></div>
             <div id="cover2" style="display: none">
@@ -129,6 +129,7 @@
                 </div>
                 <div class="bg"></div>
             </div>
+            <div id="cover3" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share2.png"/>" alt=""></div>
         </div>
 
 
@@ -242,7 +243,15 @@
                 $(".custom-header").css("z-index", "0");
             }
         })
-
+        $("#share1").click(function () {
+            if (isWeiXin()) {
+                $("#cover").show();
+                $(".custom-header").css("z-index", "0");
+            } else {
+                $("#cover3").show();
+                $(".custom-header").css("z-index", "0");
+            }
+        })
         $(".covbtn").click(function () {
             $("#cover2").hide();
         })
