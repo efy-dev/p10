@@ -301,7 +301,7 @@ public class BatchLogisticsReactor implements Runnable {
                     if(serials.length == 1){
                         purchaseOrderProduct.getPurchaseOrder().setSerial(serials[0] + "-1");
                     }else {
-                        purchaseOrderProduct.getPurchaseOrder().setSerial(serials[0] + "-" + Integer.parseInt(serials[1]) + 1);
+                        purchaseOrderProduct.getPurchaseOrder().setSerial(serials[0] + "-" + (Integer.parseInt(serials[1]) + 1));
                     }
                 }
                 session.saveOrUpdate(purchaseOrderProduct.getPurchaseOrder());
