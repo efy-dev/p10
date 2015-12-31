@@ -98,9 +98,11 @@
                     result="/consumer/consumerPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
                         <condition name="sex"  operation="eq" inputType="select_status" label="性别" key="consumer.sex" dataType="int"/>
                         <condition name="username"  operation="eq" inputType="text" label="用户名"/>
                         <!--<condition name="phone"  operation="eq" inputType="text" label="电话"/>-->

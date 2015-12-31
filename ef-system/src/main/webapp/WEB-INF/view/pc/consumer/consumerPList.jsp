@@ -20,7 +20,7 @@
         function removeConsumer(consumerId){
             jQuery.ajax({
                 type:"GET",
-                url:'<c:url value="/basic/xmj.do?qm=removeConsumer"/>',
+                url:'<c:url value="/consumer/remove.do"/>',
                 data:{id:consumerId},
                 dataType:"json",
                 success:function(data){
@@ -47,6 +47,7 @@
                     <th class="table-title">性别</th>
                     <th class="table-title">账户余额</th>
                     <th class="table-title">积分</th>
+                    <th class="table-title">注册时间</th>
 
                 </tr>
                 </thead>
@@ -92,6 +93,8 @@
                         </td>
                         <td class="am-hide-sm-only">${consumer.deposit}</td>
                         <td class="am-hide-sm-only">${consumer.score}</td>
+                        <td class="am-hide-sm-only"><fmt:formatDate value="${consumer.createDatetime}" type="both"
+                                                                    pattern="yyyy-MM-dd HH:mm"/></td>
                     </tr>
                 </c:forEach>
                 </tbody>
