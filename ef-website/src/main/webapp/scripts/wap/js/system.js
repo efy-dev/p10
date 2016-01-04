@@ -7,7 +7,7 @@ $(function(){
     //购物车
     (function(){
         $('.icon-delete').click(function(){
-           $('.alert-delete').fadeIn('fast');
+            $('.alert-delete').fadeIn('fast');
         })
 
         $('.edit-dete').click(function(){
@@ -61,21 +61,21 @@ $(function(){
         $("#nobtn").removeAttr('href');
         $("#nobtn").removeAttr('onclick');
 
-        $('.cart-coupons .ul-list').each(function(){
-            var $input=$(this).find('input');
+        /*   $('.cart-coupons .ul-list').each(function(){
+         var $input=$(this).find('input');
 
-            $(this).find('li').click(function(){
-                $input.removeAttr('checked');
-                $(this).find('input').prop('checked','checked');
-            })
-        })
-
+         $(this).find('li').click(function(){
+         $input.removeAttr('checked');
+         $(this).find('input').prop('checked','checked');
+         })
+         })
+         */
 
 
 
 
     })
-    //商品评价
+        //商品评价
     (function(){
 
         $('.my-evaluate .score .score-star .star li').click(function(){
@@ -93,13 +93,13 @@ $(function(){
     //020104商品详情
     (function(){
         //收藏
-        //$('.addfav').click(function(){
-        //    $(this).addClass('addfav-end').find('p').html('已收藏');
-        //    $('.alert-red-top').slideDown(100,function(){
-        //        setTimeout('$(".alert-red-top").slideUp(50)',3000)
-        //    });
-        //    return false;
-        //});
+        $('.addfav').click(function(){
+            $(this).addClass('addfav-end').find('p').html('已收藏');
+            $('.alert-red-top').slideDown(100,function(){
+                setTimeout('$(".alert-red-top").slideUp(50)',3000)
+            });
+            return false;
+        });
         //加入购物车悬浮层
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
@@ -161,6 +161,7 @@ $(function(){
             });
             $('#cover').click(function(){
                 $(this).hide();
+                $(".custom-header").css("z-index","");
             })
 
             $("#line").click(function(){
@@ -169,9 +170,11 @@ $(function(){
             })
             $("#cover2 .text-co2 .covbtn").click(function(){
                 $(this).parents("#cover2").hide()
+                $(".custom-header").css("z-index","");
             })
             $("#cover2 .bg").click(function(){
                 $(this).parents("#cover2").hide()
+                $(".custom-header").css("z-index","");
             })
         })();
         (function(){
@@ -181,6 +184,7 @@ $(function(){
             })
             $("#cover3 .bg").click(function(){
                 $(this).parents("#cover3").hide()
+                $(".custom-header").css("z-index","");
             })
         })();
 
@@ -333,18 +337,25 @@ $(function(){
         $(".weachat-tab .wea-tab .wea-icon").click(function(){
             var _index = $(this).index();
             $(this).addClass("active").siblings().removeClass("active");
-           $(".wea-box .fiy-box").eq(_index).show().siblings().hide();
+            $(".wea-box .fiy-box").eq(_index).show().siblings().hide();
 
         })
     })();
-    (function(){
-        var _body = $("#bodyone").height();
-        var _wechead = $(".wechat-header").height();
-        var max = _body-_wechead;
-       $(".explain").css("min-height",max)
-    })();
+    //微信问题-背景高度
     (function(){
         var bd = $("body").height();
         $(".wechat-bg").css("min-height",bd)
+    })();
+    //微信问题选项
+    (function(){
+        var _this =$(".addae").index()-1;
+        var _index = $(".topic").length;
+        $(".topic .topic-txt.topic-txt .bg-link").click(function(){
+            _this++;
+            $(".topic").eq(_this).addClass("active").siblings().removeClass("active");
+            if(_this == _index){
+                window.location.href="http://www.baidu.com"
+            }
+        });
     })();
 });
