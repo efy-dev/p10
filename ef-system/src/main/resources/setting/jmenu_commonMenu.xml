@@ -169,6 +169,7 @@
             <jnode url="/basic/xm.do?qm=plistBatchGift_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="物流信息对接">
                 <match url="/basic/xm.do?qm=plistBatchGift"/>
                 <match url="/basic/xm.do?qm=listBatchGift"/>
+                <match url="/basic/xm.do?qm=viewBatchGift"/>
             </jnode>
         </jnode>
     </jnode>
