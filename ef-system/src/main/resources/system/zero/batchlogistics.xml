@@ -15,6 +15,7 @@
                     <query name="default" label="默认" type="auto" orderBy="purchaseOrder.createDatetime:desc">
                         <condition name="productModel.id" defaultValue="ihykdmfn1k8httnz" operation="eq"/>
                         <condition name="purchaseOrder.orderStatus" defaultValue="5" operation="eq"/>
+                        <condition name="purchaseOrder.status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="listBatchGift" access="" label="大礼包订单不分页" result="/zero/batchlogistics/giftOrderPlist">
@@ -23,6 +24,7 @@
                         <condition name="purchaseOrder.orderStatus" defaultValue="5" operation="eq"/>
                     </query>
                 </do>
+                <do name="viewBatchGift" access="" label="大礼包订单详情" result="/zero/batchlogistics/giftOrderView"/>
             </does>
         </entity>
     </entities>
