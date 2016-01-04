@@ -4,10 +4,10 @@ import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
+import com.efeiyi.ec.system.couponBatch.service.CouponBatchManager;
 import com.efeiyi.ec.system.product.model.ProductDateModel;
 import com.efeiyi.ec.system.util.ExportExcel;
 import com.efeiyi.ec.tenant.model.BigTenant;
-import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
@@ -31,7 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Random;
 
 @Controller
 @RequestMapping("/couponBatch")
@@ -41,38 +40,14 @@ public class CouponBatchController extends BaseController {
     private BaseManager baseManager;
     @Autowired
     private AutoSerialManager autoSerialManager;
+    @Autowired
+    private CouponBatchManager couponBatchManager;
 
     @RequestMapping("/createCoupon.do")
     @ResponseBody
     public String createCoupon(String id, int amount) throws Exception {
-        Coupon coupon = null;
         CouponBatch couponBatch = (CouponBatch) super.baseManager.getObject("com.efeiyi.ec.purchase.model.CouponBatch", id);
-        List<Coupon> couponList = couponBatch.getCouponList();
-        int createdCouponAmount = 0;
-        if(null != couponList && couponList.size()>0){
-            createdCouponAmount = couponList.size();
-        }
-        for (int i = 0; i < amount-createdCouponAmount; i++) {
-            coupon = new Coupon();
-            coupon.setStatus("1");
-            coupon.setCouponBatch(couponBatch);
-            String serial = autoSerialManager.nextSerial("systemAutoSerial");
-            coupon.setSerial(serial);
-            coupon.setWhetherBind("1");
-
-
-            StringBuffer randomValidateCode = new StringBuffer();
-            for(int j = 0;j <8;j++){
-                Random random = new Random();
-                randomValidateCode.append(random.nextInt(10));
-            }
-
-            coupon.setUniqueKey(randomValidateCode+serial);
-            baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
-        }
-
-        couponBatch.setIsCreatedCoupon(2);
-        baseManager.saveOrUpdate(CouponBatch.class.getName(), couponBatch);
+        couponBatchManager.createCouponByBatch(couponBatch,amount);
         return id;
     }
 
