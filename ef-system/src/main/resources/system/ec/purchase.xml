@@ -284,6 +284,7 @@
                         <item label="天天快递" value="tiantian"/>
                         <item label="UPS" value="ups"/>
                         <item label="德邦" value="DEPPON"/>
+                        <item label="国通快递" value="guotongkuaidi"/>
                     </statusType>
                 </field>
             </fields>
