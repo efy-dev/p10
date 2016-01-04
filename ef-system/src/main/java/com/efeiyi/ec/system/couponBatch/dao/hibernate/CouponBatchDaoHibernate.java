@@ -49,7 +49,7 @@ public class CouponBatchDaoHibernate implements CouponBatchDao{
 
 
             StringBuffer randomValidateCode = new StringBuffer();
-            for(int j = 0;j <8;j++){
+            for(int j = 0;j <3;j++){
                 Random random = new Random();
                 randomValidateCode.append(random.nextInt(10));
             }
