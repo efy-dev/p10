@@ -245,7 +245,7 @@
         })
         $("#share1").click(function () {
             if (isWeiXin()) {
-                $("#cover").show();
+                $("#cover3").show();
                 $(".custom-header").css("z-index", "0");
             } else {
                 $("#cover3").show();
