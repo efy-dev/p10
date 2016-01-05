@@ -1021,5 +1021,9 @@ html, body {height:100%}
 /*支付成功*/
 .win-payment{text-align: center}
 .win-payment span{display: inline-block;width: 100%}
-.win-payment span:nth-child(1){margin: 30px 0;font-size: 16px;color: #000;}
+.win-payment span:nth-child(1){margin: 36px 0 15px;font-size: 16px;color: #000;}
+.win-payment span:nth-child(2){margin: 0 0 38px;font-size: 19px;}
 .win-payment span a{font-size: 14px;color: #000;text-decoration: underline;margin: 0 50px;}
+.win-add{border-bottom: 1px solid #000;padding-top: 0;}
+.win-add a{border: 6px solid #999;}
+.win-payment .winicon{background:url(../images/cart-icon.png) no-repeat -63px -146px;display:inline-block;background-size:106px auto;-webkit-background-size:106px auto;width:35px;height:35px;}

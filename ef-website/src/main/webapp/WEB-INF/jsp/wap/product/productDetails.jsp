@@ -50,8 +50,17 @@
 				<p>分享</p>
 			</a>
 
-			<div id="cover"><em class="bg"></em><img src="/scripts/wap/upload/guide-share.png" class="share-picture"
+			<div id="cover" style="display: none;"><em class="bg"></em><img src="/scripts/wap/upload/guide-share.png" class="share-picture"
 													 alt=""></div>
+			<div id="cover2" style="display: none">
+				<div class="text-co2">
+					<strong class="cov-titie">提示</strong>
+
+					<p class="covtext">在浏览器中寻找分享按钮，将本页面分享给您的好友吧。</p>
+
+					<div class="ae" style="text-align: center"><a class="covbtn">确定</a></div>
+				</div>
+			</div>
 			<a id="show" onclick="collect('${productModel.id}')" class="addfav">
 				<i class="icon icon-addfav"></i>
 
@@ -361,6 +370,22 @@
 			$(".share-picture").css("width", "auto");
 		})
 	})
+	$().ready(function () {
+		$(".share").click(function () {
+			if (isWeiXin()) {
+				$("#cover").show();
+				$(".custom-header").css("z-index", "0");
+			} else {
+				$("#cover2").show();
+				$(".custom-header").css("z-index", "0");
+			}
+		})
+		$("#cover").click(function () {
+			$(this).hide();
+		})
+
+	})
+
 </script>
 <script type="text/javascript">
 	var _mvq = window._mvq || [];

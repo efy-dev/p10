@@ -108,7 +108,7 @@ public class CouponController {
                         if (coupon.getCouponBatch().getType().equals("1")) {
                             BigDecimal totalPrice = new BigDecimal(0);
                             for (PurchaseOrderProduct purchaseOrderProductTemp : purchaseOrder.getPurchaseOrderProductList()) {
-                                if (purchaseOrderProductTemp.getProductModel().getProduct().getTenant().equals(coupon.getCouponBatch().getTenant().getId())) {
+                                if (purchaseOrderProductTemp.getProductModel().getProduct().getTenant().getId().equals(coupon.getCouponBatch().getTenant().getId())) {
                                     totalPrice = totalPrice.add(purchaseOrderProduct.getPurchasePrice());
                                 }
                             }
