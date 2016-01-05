@@ -60,7 +60,6 @@
 
 					<div class="ae" style="text-align: center"><a class="covbtn">确定</a></div>
 				</div>
-				<div class="bg"></div>
 			</div>
 			<a id="show" onclick="collect('${productModel.id}')" class="addfav">
 				<i class="icon icon-addfav"></i>
