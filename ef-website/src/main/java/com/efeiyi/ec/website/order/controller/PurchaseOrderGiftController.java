@@ -300,13 +300,8 @@ public class PurchaseOrderGiftController {
         purchaseOrderGift.setReceiverName(receiveName);
         purchaseOrderGift.setReceiverPhone(receivePhone);
         purchaseOrderGift.setPurchaseOrderAddress(address);
-
-        ConsumerAddress consumerAddress = new ConsumerAddress();
-        consumerAddress.setProvince(addressProvince);
-        consumerAddress.setCity(addressCity);
-        purchaseOrderGift.setConsumerAddress(consumerAddress);
-        consumerAddress.setConsignee(receiveName);
-        baseManager.saveOrUpdate(ConsumerAddress.class.getName(), consumerAddress);
+        purchaseOrderGift.setProvince(addressProvince);
+        purchaseOrderGift.setCity(addressCity);
 
         purchaseOrderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //订单改为未发货状态
         baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
