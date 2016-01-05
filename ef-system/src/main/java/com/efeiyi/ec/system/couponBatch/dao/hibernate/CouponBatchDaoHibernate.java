@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by Administrator on 2016/1/4.
@@ -19,54 +21,60 @@ import java.util.Random;
  */
 @Repository
 public class CouponBatchDaoHibernate implements CouponBatchDao{
-
     @Autowired
     private XdoDaoSupport xdoDaoSupport;
     @Autowired
     private AutoSerialManager autoSerialManager;
 
+    private Lock lock = new ReentrantLock();
     /*
     * 通过优惠券批次批量生成二维码
     * */
     @Override
     public void createCouponByBatch(CouponBatch couponBatch,int amount) throws Exception {
-        Session session = xdoDaoSupport.getSession();//使用同一个session
-        session.setCacheMode(CacheMode.IGNORE);//关闭二级缓存
-        Coupon coupon = null;
-        int count = 0;
-        List<Coupon> couponList = couponBatch.getCouponList();
-        int createdCouponAmount = 0;
-        if(null != couponList && couponList.size()>0){
-            createdCouponAmount = couponList.size();
-        }
-        for (int i = 0; i < amount-createdCouponAmount; i++) {
-            coupon = new Coupon();
-            coupon.setStatus("1");
-            coupon.setCouponBatch(couponBatch);
-            String serial = autoSerialManager.nextSerial("systemAutoSerial");
-            coupon.setSerial(serial);
-            coupon.setWhetherBind("1");
+        lock.lock();
+        try{
+            Session session = xdoDaoSupport.getSession();//使用同一个session
+            session.setCacheMode(CacheMode.IGNORE);//关闭二级缓存
+            Coupon coupon = null;
+            int count = 0;
+            List<Coupon> couponList = couponBatch.getCouponList();
+            int createdCouponAmount = 0;
+            if(null != couponList && couponList.size()>0){
+                createdCouponAmount = couponList.size();
+            }
+            for (int i = 0; i < amount-createdCouponAmount; i++) {
+                coupon = new Coupon();
+                coupon.setStatus("1");
+                coupon.setCouponBatch(couponBatch);
+                String serial = autoSerialManager.nextSerial("systemAutoSerial");
+                coupon.setSerial(serial);
+                coupon.setWhetherBind("1");
 
 
-            StringBuffer randomValidateCode = new StringBuffer();
-            for(int j = 0;j <3;j++){
-                Random random = new Random();
-                randomValidateCode.append(random.nextInt(10));
+                StringBuffer randomValidateCode = new StringBuffer();
+                for(int j = 0;j <3;j++){
+                    Random random = new Random();
+                    randomValidateCode.append(random.nextInt(10));
+                }
+
+                coupon.setUniqueKey(randomValidateCode+serial);
+                session.saveOrUpdate(Coupon.class.getName(), coupon);
+
+                count++;
+                if(count == 200){
+                    session.flush();
+                    session.clear();
+                    count = 0;
+                }
             }
 
-            coupon.setUniqueKey(randomValidateCode+serial);
-            session.saveOrUpdate(Coupon.class.getName(), coupon);
-
-            count++;
-            if(count == 500){
-                session.flush();
-                session.clear();
-                count = 0;
-            }
+            couponBatch.setIsCreatedCoupon(2);
+            session.saveOrUpdate(CouponBatch.class.getName(), couponBatch);
+            session.flush();
+        }finally {
+            lock.unlock();
         }
 
-        couponBatch.setIsCreatedCoupon(2);
-        session.saveOrUpdate(CouponBatch.class.getName(), couponBatch);
-        session.flush();
     }
 }

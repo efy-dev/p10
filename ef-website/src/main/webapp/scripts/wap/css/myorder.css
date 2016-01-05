@@ -44,7 +44,7 @@
 .myorder .order-section .payment{text-align:right;width:100%;float:left;min-height:40px;line-height:40px;background:#fff;margin-bottom:10px;font-size:12px;color:#000;padding:0 19px}
 .myorder .order-section .payment em{color:#f00}
 .myorder .order-section .money-btn{width:100%;float:left;margin-bottom:10px;padding:0 19px}
-.myorder .order-section .money-btn a{width:80px;height:35px;line-height:35px;text-align:center;font-size:12px;color:#000;border:1px solid #ccc;float:right;margin-right:15px;background:#fff}
+.myorder .order-section .money-btn a{width:65px;height:25px;line-height:25px;text-align:center;font-size:12px;color:#000;border:1px solid #ccc;float:right;margin-right:7px;background:#fff}
 .myorder .order-section .money-btn a:nth-child(1){margin-right:0}
 .myorder .list-topic {width:100%;border-bottom:1px solid #ccc;overflow:hidden;padding:10px 0;height:auto}
 .myorder .list-topic:last-child {width:100%;border-bottom:0;overflow:hidden;padding:10px 0;height:auto}
@@ -778,7 +778,7 @@ html, body {height:100%}
 .gift .profile li .label {}
 .gift .profile li label {width:100%;float:left;margin-bottom:0;cursor:pointer}
 .gift .profile li .dtxt,.gift .profile .am-dropdown{width:100%;float:left;color:#000;padding:15px 12px;font-size:12px;font-weight:100;border:1px  solid #ccc}
-.gift .profile .am-dropdown{margin-bottom:15px;min-width:48px}
+.gift .profile .am-dropdown{margin-bottom:15px;min-height:48px;background: #fff;}
 .gift .btnq input {width:100%;height:35px;text-align:center;line-height:35px;color:#000;font-size:12px;border:1px solid #000;background:#fff}
 .details .newdes-price font {font-size:12px;color:#f00;float:left}
 .details .newdes-price em {font-size:18px;float:left}
@@ -1018,3 +1018,8 @@ html, body {height:100%}
 .explain .explain-bg{width: 97px;height: 188px;display: inline-block;background: url("../images/wechat-icon.png") no-repeat 0 -997px;background-size: 350px auto;position: fixed;right: 0;bottom: 0;opacity: 0.1}
 .cart-ft:nth-child(1){float: left}
 .cart-ft:nth-child(2){float: right}
+/*支付成功*/
+.win-payment{text-align: center}
+.win-payment span{display: inline-block;width: 100%}
+.win-payment span:nth-child(1){margin: 30px 0;font-size: 16px;color: #000;}
+.win-payment span a{font-size: 14px;color: #000;text-decoration: underline;margin: 0 50px;}

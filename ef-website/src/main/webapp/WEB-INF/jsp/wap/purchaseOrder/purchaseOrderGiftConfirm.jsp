@@ -71,7 +71,11 @@
                         <strong>${productModel.name}</strong>
                     </c:if>
                     <c:if test="${productModel.product.productModelList.size()>1}">
-                        <strong>${productModel.product.name}[${productModel.name}]</strong>
+                        <strong>${productModel.product.name}
+                            <c:if test="${null!=productModel.name || ''!=productModel.name}">
+                                [${productModel.name}]
+                            </c:if>
+                        </strong>
                     </c:if>
                     <p>${productModel.product.subName}</p>
 
