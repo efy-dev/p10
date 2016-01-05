@@ -129,16 +129,6 @@
                 </div>
                 <div class="bg"></div>
             </div>
-                <div id="cover4" style="display: none">
-                    <div class="text-co2">
-                        <strong class="cov-titie">提示</strong>
-
-                        <p class="covtext">请点击浏览器中的“复制网址”功能，请链接发给您的好友吧。</p>
-
-                        <div class="ae" style="text-align: center"><a class="covbtn">确定</a></div>
-                    </div>
-                    <div class="bg"></div>
-                </div>
             <div id="cover3" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share2.png"/>" alt=""></div>
         </div>
 
@@ -258,7 +248,7 @@
                 $("#cover3").show();
                 $(".custom-header").css("z-index", "0");
             } else {
-                $("#cover4").show();
+                $("#cover3").show();
                 $(".custom-header").css("z-index", "0");
             }
         })
