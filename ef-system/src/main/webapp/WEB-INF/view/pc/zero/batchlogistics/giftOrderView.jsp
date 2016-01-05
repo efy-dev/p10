@@ -12,7 +12,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
-  <title>礼品卡详情</title>
+  <title>订单详情</title>
   <script>
     function saveReceiver(purchaseOrderId,orderStatus){
       if(orderStatus == '7' || orderStatus == '9' || orderStatus == '13'){
