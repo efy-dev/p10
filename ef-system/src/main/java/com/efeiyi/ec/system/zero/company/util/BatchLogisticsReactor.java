@@ -295,7 +295,7 @@ public class BatchLogisticsReactor implements Runnable {
                     System.out.println(purchaseOrderDelivery.getSerial());
                 } else {
 //                    purchaseOrderProduct.getPurchaseOrder().setOrderStatus(PurchaseOrder.ORDER_STATUS_FAILED);//发货失败
-                    purchaseOrderProduct.getPurchaseOrder().setMessage((" DEPPON：" + dateFormat.format(new Date()) + " 原因：" + result + " " + purchaseOrderProduct.getPurchaseOrder().getMessage()).substring(0,purchaseOrderProduct.getPurchaseOrder().getMessage().length() > 1024 ? 1024 : purchaseOrderProduct.getPurchaseOrder().getMessage().length()));
+                    purchaseOrderProduct.getPurchaseOrder().setMessage((" DEPPON：" + dateFormat.format(new Date()) + " 原因：" + result + " " + purchaseOrderProduct.getPurchaseOrder().getMessage() == null ? "" : purchaseOrderProduct.getPurchaseOrder().getMessage()).substring(0,purchaseOrderProduct.getPurchaseOrder().getMessage().length() > 1024 ? 1024 : purchaseOrderProduct.getPurchaseOrder().getMessage().length()));
                     //发货失败，自动修改订单号
                     String [] serials = purchaseOrderProduct.getPurchaseOrder().getSerial().split("-");
                     if(serials.length == 1){
