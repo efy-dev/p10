@@ -112,16 +112,16 @@
       <tbody>
       <tr>
         <td class="am-primary am-u-md-3">收货人姓名</td>
-        <td class="am-u-md-3"><input type="text" id="name" value="${object.purchaseOrder.receiverName}"></td>
+        <td class="am-u-md-3"><input type="text" id="name" value="${object.purchaseOrder.receiverName}" style="width: 100%"></td>
         <td class="am-primary am-u-md-3">电话</td>
         <td class="am-u-md-3">
-          <input type="text" id="phone" value="${object.purchaseOrder.receiverPhone}">
+          <input type="text" id="phone" value="${object.purchaseOrder.receiverPhone}" style="width: 100%">
         </td>
       </tr>
       <tr>
         <td class="am-primary am-u-md-3">收货地址</td>
         <td class="am-u-md-3">
-          <input type="text" id="address" value="${object.purchaseOrder.purchaseOrderAddress}">
+          <input type="text" id="address" value="${object.purchaseOrder.purchaseOrderAddress}" style="width: 100%">
         </td>
         <td class="am-primary am-u-md-3">保存</td>
         <td class="am-u-md-3">
