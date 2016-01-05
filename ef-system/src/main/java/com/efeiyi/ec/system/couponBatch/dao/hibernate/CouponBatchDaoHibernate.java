@@ -5,7 +5,6 @@ import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.efeiyi.ec.system.couponBatch.dao.CouponBatchDao;
 import com.ming800.core.base.dao.hibernate.XdoDaoSupport;
 import com.ming800.core.p.service.AutoSerialManager;
-import org.apache.log4j.Logger;
 import org.hibernate.CacheMode;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @Repository
 public class CouponBatchDaoHibernate implements CouponBatchDao{
-    private static Logger logger = Logger.getLogger(CouponBatchDaoHibernate.class);
     @Autowired
     private XdoDaoSupport xdoDaoSupport;
     @Autowired
@@ -45,10 +43,6 @@ public class CouponBatchDaoHibernate implements CouponBatchDao{
             if(null != couponList && couponList.size()>0){
                 createdCouponAmount = couponList.size();
             }
-
-            System.out.println("amount-createdCouponAmount: "+(amount-createdCouponAmount));
-            logger.info("amount-createdCouponAmount: " + (amount - createdCouponAmount));
-            logger.error("amount-createdCouponAmount: "+(amount-createdCouponAmount));
             for (int i = 0; i < amount-createdCouponAmount; i++) {
                 coupon = new Coupon();
                 coupon.setStatus("1");
@@ -68,13 +62,11 @@ public class CouponBatchDaoHibernate implements CouponBatchDao{
                 session.saveOrUpdate(Coupon.class.getName(), coupon);
 
                 count++;
-                if(count == 500){
+                if(count == 200){
                     session.flush();
                     session.clear();
                     count = 0;
                 }
-                System.out.println("i--->"+i);
-                logger.info("i--->"+i);
             }
 
             couponBatch.setIsCreatedCoupon(2);
