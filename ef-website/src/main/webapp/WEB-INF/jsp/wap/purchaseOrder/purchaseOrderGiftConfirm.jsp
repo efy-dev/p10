@@ -32,7 +32,7 @@
                 <div class="edit-txt2">送礼人姓名</div>
                 <!--//End-->
                 <div style="display: none" id="addGaverName" class="add-cart">
-                    <textarea id="giftMessage1" class="ae" maxlength="50"></textarea>
+                    <textarea id="giftMessage1" class="ae" maxlength="4"></textarea>
                     <span class="leaveword-num1"></span>
 
                     <div class="atext ae">
