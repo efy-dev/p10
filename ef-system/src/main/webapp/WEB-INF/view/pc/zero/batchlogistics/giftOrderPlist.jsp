@@ -20,6 +20,7 @@
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回"/>
 </span>
+
 <span style="text-align: left;margin-left: 10px;">
     <input onclick="window.location.href='<c:url
             value="/batch/deppon.do?qm=listBatchGift_default&result=redirect:/basic/xm.do?qm=plistBatchGift_default"/>'"
@@ -28,16 +29,26 @@
            value="启动批量"/>
 </span>
 
+<span style="text-align: left;margin-left: 10px;">
+    <input onclick="startUpAppoint()"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="指定启动"/>
+</span>
+
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr style="text-align:left">
             <td>操作</td>
+            <td align="center">
+                <input type="checkbox" id="appointAll" name="appointAll" onchange="appointAll()" title="指定当前页">
+            </td>
             <td>订单序列号</td>
             <td>商品规格</td>
             <td>商品名</td>
             <td>购买数量</td>
             <td>价格</td>
-            <td>发送详情</td>
+            <td>发送状态</td>
         </tr>
         <c:forEach items="${pageInfo.list}" var="purchaseOrderProduct">
             <tr>
@@ -56,6 +67,9 @@
                         </div>
                     </div>
                 </td>
+                <td align="center">
+                    <input type="checkbox" name="appoint" value="${purchaseOrderProduct.id}" title="选择">
+                </td>
                 <td>${purchaseOrderProduct.purchaseOrder.serial}</td>
                 <td>${purchaseOrderProduct.productModel.name}</td>
                 <td>${purchaseOrderProduct.productModel.product.name}</td>
@@ -63,9 +77,7 @@
                 <td>${purchaseOrderProduct.productModel.price}</td>
                 <td>
                     <c:if test="${not empty purchaseOrderProduct.purchaseOrder.message}">
-                        <a href="#" onclick="showReason(this.title)"
-                           title='${purchaseOrderProduct.purchaseOrder.message}'
-                           type="button">查看详情</a>
+                        发送失败
                     </c:if>
                 </td>
             </tr>
@@ -83,25 +95,26 @@
     if (${not empty msg}) {
         alert("${msg}");
     }
-    function showReason(val){
-        var modalStr = "<div class=\"am-modal am-modal-no-btn\" id=\"modalShow\">" +
-                "<div class=\"am-modal-dialog\">" +
-                "<div class=\"am-modal-hd\">" +
-                "<span data-am-modal-close class=\"am-close\">&times;</span>"+
-                "</div>"+
-                "<div class=\"am-popup-bd\" style=\"height: 10px\">"+
-                "<span>"+ val +"</span>"+
-                "</div>"+
-                "</div>"+
-                "</div>";
-        if (typeof $("#modalShow").attr("id") != "undefined") {
-            var modalDiv = document.getElementById("modalShow");
-            modalDiv.parentNode.removeChild(modalDiv);
+
+    function appointAll(){
+        if($("#appointAll").is(":checked")){
+            $("[name='appoint']").prop("checked", true);
+        }else {
+            $("[name='appoint']").prop("checked", false);
         }
-        $("body").append(modalStr);
-        $("#modalShow").modal({
-            width: 450, height: 150
+    }
+
+    function startUpAppoint(){
+        var idList = "";
+        $("input[name='appoint']:checked").each(function(){
+            if(idList != ""){
+                idList = idList + "," + $(this).val();
+            }else {
+                idList = $(this).val();
+            }
         });
+
+        window.location.href="<c:url value='/batch/deppon2.do?idList='/>" + idList;
     }
 </script>
 </body>
