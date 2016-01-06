@@ -164,13 +164,6 @@ $(function(){
         },function(){
             $(this).animate({"opacity":"1"},200);
         });
-
-
-
-
-
-
-
     })();
     //
     (function(){
@@ -234,14 +227,24 @@ $(function(){
             })
         })
     })();
-
-    //商品详情评价2015116图片
+    //商品详情
     (function(){
+        //商品详情评价2015116图片
         $('.dis-pic .dis-ol .one-li').click(function(){
             var index = $(this).index()
             $(this).addClass('active').siblings().removeClass('active');
             $(this).parents('.dis-ol').siblings('.box-pic').find('.list-pic').eq(index).show().siblings().hide();
-        })
+        });
+    })();
+
+    $('#btn-gift').bind('click',function(){
+        var $div=$('.dialog-gift');
+        var $close=$div.find('.icon-close');
+        $div.show();
+        $close.bind('click',function(){
+            $div.hide();
+        });
+        return false;
     });
     //购物车
     (function(){
@@ -353,14 +356,6 @@ $(function(){
             }
             timer=setInterval(autoFocus,iSpeed);
         })();
-
-
-
-
-
-
-
-
     })();
     //二期---B020101分类推荐首页
     (function(){
@@ -404,11 +399,5 @@ $(function(){
                 btnNext.delay(100).animate({'opacity':'0.2'},10);
             }
         };
-
-
-
-
     })();
-
-
 })

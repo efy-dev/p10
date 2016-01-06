@@ -108,12 +108,8 @@
         </div>
 
     </div>
-    <c:if test="${order.orderStatus!='6'}">
+    <c:if test="${order.orderStatus=='6'}">
     <div class="car-fx" id="giftButton">
-        </c:if>
-        <c:if test="${order.orderStatus=='6'}">
-        <div class="car-fx" id="giftButton">
-            </c:if>
             <a href="#" id="share">送礼给Ta</a>
             <a href="<c:url value="/createGiftImage/${order.id}"/> ">保存为图片</a>
             <a class="url" href="#" id="share1">复制链接</a>
@@ -132,7 +128,7 @@
             <div id="cover3" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share2.png"/>" alt=""></div>
         </div>
 
-
+    </c:if>
         <c:if test="${!empty content}">
             <div class="logistics ae">
                 <div class="part">
