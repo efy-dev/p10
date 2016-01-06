@@ -34,13 +34,13 @@ public class PromotionController {
 
     @RequestMapping("/getRegisterCountInfo.do")
     public ModelAndView getZCLInformation(ModelMap modelMap, HttpServletRequest request) throws Exception {
-        String promotionPlanId = request.getParameter("id");
-        if (promotionPlanId.isEmpty() || promotionPlanId.trim().equals("")){
-            throw new Exception("获取注册详情失败:promotionPlanId为空!");
+        String source = request.getParameter("source");
+        String type = request.getParameter("type");
+        if (source == null || source.trim().equals("")){
+            throw new Exception("获取注册详情失败:source为空!");
         }
-        modelMap.put("promotionPlanId", promotionPlanId);
-
-        PromotionPlan promotionPlan = (PromotionPlan)baseManager.getObject(PromotionPlan.class.getName(), promotionPlanId);
+        modelMap.put("source", source);
+        modelMap.put("type", type);
 
         PageEntity pageEntity = new PageEntity();
         String pageIndex = request.getParameter("pageEntity.index");
@@ -50,10 +50,10 @@ public class PromotionController {
             pageEntity.setSize(Integer.parseInt(pageSize));
         }
 
-        List<MyUser> userList = promotionPlanManagerService.getZCLInformation(promotionPlan, pageEntity);
+        List<MyUser> userList = promotionPlanManagerService.getZCLInformation(source, pageEntity);
 
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("source", promotionPlan.getIdentifier());
+        queryParamMap.put("source", source);
         long size = (long) baseManager.getUniqueObjectByConditions("select count(*) from MyUser x where x.source=:source", queryParamMap);
         pageEntity.setCount((int)size);
 
@@ -65,13 +65,13 @@ public class PromotionController {
 
     @RequestMapping("/getOrderCountInfo.do")
     public ModelAndView getDDLInformation(ModelMap modelMap, HttpServletRequest request) throws Exception {
-        String promotionPlanId = request.getParameter("id");
-        if (promotionPlanId.isEmpty() || promotionPlanId.trim().equals("")){
-            throw new Exception("获取注册详情失败:promotionPlanId为空!");
+        String source = request.getParameter("source");
+        String type = request.getParameter("type");
+        if (source == null || source.trim().equals("")){
+            throw new Exception("获取订单详情失败:source为空!");
         }
-        modelMap.put("promotionPlanId", promotionPlanId);
-
-        PromotionPlan promotionPlan = (PromotionPlan)baseManager.getObject(PromotionPlan.class.getName(), promotionPlanId);
+        modelMap.put("source", source);
+        modelMap.put("type", type);
 
         PageEntity pageEntity = new PageEntity();
         String pageIndex = request.getParameter("pageEntity.index");
@@ -81,8 +81,13 @@ public class PromotionController {
             pageEntity.setSize(Integer.parseInt(pageSize));
         }
 
-        List<PurchaseOrder> orderList = promotionPlanManagerService.getDDLInformation(promotionPlan, pageEntity);
-        pageEntity.setCount((int)Long.parseLong(promotionPlanManagerService.getDDL(promotionPlan)));
+        List<PurchaseOrder> orderList = promotionPlanManagerService.getDDLInformation(source, pageEntity);
+
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("source", source);
+        long size = (long) baseManager.getUniqueObjectByConditions("select count(*) from PurchaseOrder x where x.source=:source", queryParamMap);
+        pageEntity.setCount((int)size);
+
         modelMap.put("orderList", orderList);
         modelMap.put("pageEntity", pageEntity);
 

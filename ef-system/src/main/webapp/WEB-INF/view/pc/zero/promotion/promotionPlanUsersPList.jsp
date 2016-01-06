@@ -45,8 +45,8 @@
 <div style="clear: both">
     <c:url value="/promotionPlan/getRegisterCountInfo.do" var="url"/>
     <ming800:pcPageList bean="${pageEntity}" url="${url}">
-        <ming800:pcPageParam name="rebate" value="rebate"/>
-        <ming800:pcPageParam name="id" value="${promotionPlanId}"/>
+        <ming800:pcPageParam name="type" value="${type}"/>
+        <ming800:pcPageParam name="source" value="${source}"/>
     </ming800:pcPageList>
 </div>
 </body>

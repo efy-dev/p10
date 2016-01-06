@@ -72,20 +72,20 @@ public class PromotionPlanDaoHibernate implements PromotionPlanDao {
     }
 
     @Override
-    public List<MyUser> getZCLInformation(PromotionPlan promotionPlan, PageEntity pageEntity) throws Exception {
+    public List<MyUser> getZCLInformation(String source, PageEntity pageEntity) throws Exception {
         String hql = "from MyUser u where u.source=:source";
         Query query = this.getSession().createQuery(hql)
-                .setParameter("source", promotionPlan.getIdentifier())
+                .setParameter("source", source)
                 .setFirstResult(pageEntity.getrIndex())
                 .setMaxResults(pageEntity.getSize());
         return query.list();
     }
 
     @Override
-    public List<PurchaseOrder> getDDLInformation(PromotionPlan promotionPlan, PageEntity pageEntity) throws Exception {
+    public List<PurchaseOrder> getDDLInformation(String source, PageEntity pageEntity) throws Exception {
         String hql = "select po from PurchaseOrder po where po.source=:source";
         Query query = this.getSession().createQuery(hql)
-                .setParameter("source", promotionPlan.getIdentifier())
+                .setParameter("source", source)
                 .setFirstResult(pageEntity.getrIndex())
                 .setMaxResults(pageEntity.getSize());
         return query.list();

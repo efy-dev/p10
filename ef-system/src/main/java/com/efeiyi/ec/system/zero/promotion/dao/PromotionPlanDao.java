@@ -39,19 +39,19 @@ public interface PromotionPlanDao {
 
     /**
      * 获取通过返利链接注册的用户
-     * @param promotionPlan 返利链接
+     * @param source 连接标识
      * @param pageEntity 分页信息
      * @return 注册的用户列表
      * @throws Exception
      */
-    List<MyUser> getZCLInformation(PromotionPlan promotionPlan, PageEntity pageEntity)throws Exception;
+    List<MyUser> getZCLInformation(String source, PageEntity pageEntity)throws Exception;
 
     /**
      * 获取通过返利链接购物的订单
-     * @param promotionPlan 返利链接
+     * @param source 连接标识
      * @param pageEntity 分页信息
      * @return 订单详情列表
      * @throws Exception
      */
-    List<PurchaseOrder> getDDLInformation(PromotionPlan promotionPlan, PageEntity pageEntity)throws Exception;
+    List<PurchaseOrder> getDDLInformation(String source, PageEntity pageEntity)throws Exception;
 }

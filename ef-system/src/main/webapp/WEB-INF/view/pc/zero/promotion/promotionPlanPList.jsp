@@ -58,10 +58,10 @@
                                     checkedValue="${PPE.promotionPlan.name}" type="normal"/>
                 </td>
                 <td>
-                    <a href="<c:url value="/promotionPlan/getRegisterCountInfo.do?rebate=rebate&id=${PPE.promotionPlan.id}"/>">${PPE.registerCount}</a>
+                    <a href="<c:url value="/promotionPlan/getRegisterCountInfo.do?type=rebate&source=${PPE.promotionPlan.identifier}"/>">${PPE.registerCount}</a>
                 </td>
                 <td>
-                    <a href="<c:url value="/promotionPlan/getOrderCountInfo.do?rebate=rebate&id=${PPE.promotionPlan.id}"/>">${PPE.orderCount}</a>
+                    <a href="<c:url value="/promotionPlan/getOrderCountInfo.do?type=rebate&source=${PPE.promotionPlan.identifier}"/>">${PPE.orderCount}</a>
                 </td>
                 <td>${PPE.orderAmount}</td>
                 <td>${PPE.orderPaidAmount}</td>

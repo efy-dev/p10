@@ -56,8 +56,12 @@
                                 </c:url>'><span class="am-icon-trash-o">生成二维码并下载</span>
                                     </a>
                                 </td>
-                                <td class="am-hide-sm-only">${statistics.registerCount}</td>
-                                <td class="am-hide-sm-only">${statistics.orderCount}</td>
+                                <td class="am-hide-sm-only">
+                                    <a href="<c:url value="/promotionPlan/getRegisterCountInfo.do?type=user&source=user_${user.id}"/>">${statistics.registerCount}</a>
+                                </td>
+                                <td class="am-hide-sm-only">
+                                    <a href="<c:url value="/promotionPlan/getOrderCountInfo.do?type=user&source=user_${user.id}"/>">${statistics.orderCount}</a>
+                                </td>
                                 <td class="am-hide-sm-only">${statistics.orderAmount}</td>
                                 <td class="am-hide-sm-only">${statistics.orderPaidAmount}</td>
                             </tr>
