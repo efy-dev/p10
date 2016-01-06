@@ -42,6 +42,7 @@
         <logisticsCompany memo="tiantian" name="天天快递"/>
         <logisticsCompany memo="ups" name="UPS"/>
         <logisticsCompany memo="guotongkuaidi" name="国通快递"/>
+        <logisticsCompany memo="debangwuliu" name="德邦物流"/>
     </logisticsCompanys>
     <companyAddresses>
         <company group="efeiyi" name="北京永新华韵文化创意有限公司" phone="4008768766" province="北京" city="北京市" county="朝阳区"
