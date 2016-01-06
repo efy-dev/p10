@@ -433,7 +433,7 @@ input[type="checkbox"], textarea,select {border-radius:0;box-shadow:none}
 .login-reg .logined a {width:auto;line-height:36px;border:0}
 /*--//End--*/
 .footer .info {padding:50px 0;text-align:center;border-top:1px #ccc solid}
-.footer .info .icon {background-position:0 0;width:68px;height:26px;display:inline-block}
+.footer .info .icon { background: url(../images/icon-footer.png) no-repeat 0 -88px;  background-size:89px auto;  width: 89px;  display: inline-block;  position: relative;  height: 27px;}
 .footer .info .wechat {width:153px;height:153px;display:inline-block;margin:10px 0}
 .footer .info .wechat img {width:100%}
 .footer .copyright {text-align:center;font-size:10px;line-height:20px;border-top:1px #ccc solid;color:#999}
@@ -529,7 +529,8 @@ input[type="checkbox"], textarea,select {border-radius:0;box-shadow:none}
 .search-sort .ul-list li:nth-child(2n) {float:right}
 /*--//End--*/
 .footer-new .info {padding:50px 0;text-align:center;border-top:1px #000 solid}
-.footer-new .info .icon {background-position:0 0;width:68px;height:26px;display:inline-block}
+/*.footer-new .info .icon {background-position:0 0;width:68px;height:26px;display:inline-block}*/
+.footer-new .info .icon { background: url(../images/icon-footer.png) no-repeat 0 -88px;  background-size:89px auto;  width: 89px;  display: inline-block;  position: relative;  height: 27px;}
 .footer-new .info .wechat {width:153px;height:153px;display:inline-block;margin:10px 0}
 .footer-new .info .wechat img {width:100%}
 .footer-new .copyright {text-align:center;font-size:10px;line-height:20px;border-top:1px #000 solid;background: #eee}
