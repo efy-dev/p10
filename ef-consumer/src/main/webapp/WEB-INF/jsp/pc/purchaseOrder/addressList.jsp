@@ -238,8 +238,10 @@
     $(function () {
         $(".hideDiv").click(function () {
             $(this).siblings('.active-pop').show();
+            $('.header-new,.topbar,.nav-new-list,.footernew').css('z-index','-1');
             $('.my-order .clase, .my-order .sh-bg').click(function () {
                 $(this).parents('.active-pop').hide();
+                $('.header,.footer').css('z-index','');
             })
             return false;
         });

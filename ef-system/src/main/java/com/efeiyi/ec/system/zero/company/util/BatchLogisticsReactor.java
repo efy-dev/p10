@@ -200,8 +200,8 @@ public class BatchLogisticsReactor implements Runnable {
                 Map receiverMap = new HashMap();
                 receiverMap.put("name", purchaseOrderProduct.getPurchaseOrder().getReceiverName());
                 receiverMap.put("mobile", purchaseOrderProduct.getPurchaseOrder().getReceiverPhone());
-                receiverMap.put("province", purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getProvince().getName());
-                receiverMap.put("city", purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getCity().getName());
+                receiverMap.put("province", purchaseOrderProduct.getPurchaseOrder().getProvince().getName());
+                receiverMap.put("city", purchaseOrderProduct.getPurchaseOrder().getCity().getName());
                 receiverMap.put("address", purchaseOrderProduct.getPurchaseOrder().getPurchaseOrderAddress());
 //                receiverMap.put("county",detailAddressMap.get("county"));
                 jsonMap.put("receiver", receiverMap);
@@ -295,7 +295,7 @@ public class BatchLogisticsReactor implements Runnable {
                     System.out.println(purchaseOrderDelivery.getSerial());
                 } else {
 //                    purchaseOrderProduct.getPurchaseOrder().setOrderStatus(PurchaseOrder.ORDER_STATUS_FAILED);//发货失败
-                    purchaseOrderProduct.getPurchaseOrder().setMessage("DEPPON：" + dateFormat.format(new Date()) + "原因：" + result);
+                    purchaseOrderProduct.getPurchaseOrder().setMessage((" DEPPON：" + dateFormat.format(new Date()) + " 原因：" + result));
                     //发货失败，自动修改订单号
                     String [] serials = purchaseOrderProduct.getPurchaseOrder().getSerial().split("-");
                     if(serials.length == 1){
