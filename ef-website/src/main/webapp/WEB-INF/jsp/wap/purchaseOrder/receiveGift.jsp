@@ -93,8 +93,8 @@
                          id="province" onchange="provinceChange(this)">
                     <%--<option value="110000">北京市</option>--%>
                 </select>
-                <select  name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required="" id="city"><option value="">请选择</option></select>
-                <%--<select  name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required=""><option value="">请选择</option></select>--%>
+                <select  name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required="" id="city" onchange="cityChange(this)"><option value="">请选择</option></select>
+                <select  name="district.id" class="car1  am-selected am-dropdown am-selected-btn" required="" id="district"><option value="">请选择</option></select>
             </li>
             <li>
                 <strong>详细地址：</strong>
@@ -122,7 +122,7 @@
     function provinceChange(element) {
         var provinceId = $(element).val();
         ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>", {provinceId: provinceId}, function (data) {
-            var out = '<option value="">请选择所在区县</option>';
+            var out = '<option value="">请选择所在城市</option>';
             for (var i = 0; i < data.length; i++) {
                 out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
             }
@@ -130,12 +130,25 @@
         }, function () {
         }, "post")
     }
+    function cityChange(element) {
+        var cityId = $(element).val();
+        ajaxRequest("<c:url value="/myEfeiyi/address/listDistrict.do"/>", {cityId: cityId}, function (data) {
+            var out = '<option value="">请选择所在区县</option>';
+            for (var i = 0; i < data.length; i++) {
+                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+            }
+            $("#district").html(out);
+        }, function () {
+        }, "post")
+    }
+
     function check() {
         var name=$("#name").val();
         var phoneNumber=$("#phoneNumber").val();
         var addressDetail = $("#addressDetail").val();
         var province = $("#province").val();
         var city = $("#city").val();
+        var district = $("#district").val();
         var success = function (data) {
             if (!data) {
                 showAlert("提示", "非法输入");
@@ -143,7 +156,7 @@
                 $("#formId").submit();
             }
         }
-        if(name=="" || phoneNumber=="" || addressDetail==""||province==""||city==""){
+        if(name=="" || phoneNumber=="" || addressDetail==""||province==""||city==""||district==""){
             showAlert("提示", "您填写的信息不完整");
         }else{
             ajaxRequest("<c:url value="/giftReceive/checkAddress.do"/>", {
