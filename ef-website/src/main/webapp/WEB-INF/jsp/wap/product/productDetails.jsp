@@ -60,6 +60,7 @@
 
 					<div class="ae" style="text-align: center"><a class="covbtn">确定</a></div>
 				</div>
+				<div class="bg"></div>
 			</div>
 			<a id="show" onclick="collect('${productModel.id}')" class="addfav">
 				<i class="icon icon-addfav"></i>
@@ -377,16 +378,31 @@
 				$(".custom-header").css("z-index", "0");
 			} else {
 				$("#cover2").show();
+				$(".details .des-master .img,.slnew .des-price p").css("z-index", "-1");
 				$(".custom-header").css("z-index", "0");
 			}
 		})
 		$("#cover").click(function () {
 			$(this).hide();
+			$(".details .des-master .img,.slnew .des-price p").css("z-index", "");
 		})
 
 	})
 
 </script>
+<style type="text/css">
+	#cover2 .text-co2 {
+		width: 282px;
+		height: 153px;
+		background: #fff;
+		border: 1px solid #c4c4c4;
+		position: absolute;
+		z-index: 10;
+		top: -42px;
+		left: 50%;
+		margin-left: -140px;
+	}
+</style>
 <script type="text/javascript">
 	var _mvq = window._mvq || [];
 	window._mvq = _mvq;
