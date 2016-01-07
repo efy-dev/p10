@@ -61,6 +61,14 @@ public class VirtualPlanDaoHibernate implements VirtualPlanDao {
         return query.list();
     }
 
+    @Override
+    public void deleteVirtualPlan(String id) throws Exception {
+        String sql = "delete from virtual_plan where id = :id";
+        Query query = this.getSession().createSQLQuery(sql)
+                .setString("id", id);
+        query.executeUpdate();
+    }
+
 
     /*@Override
     public List<User> getZCLInfomation(PromotionPlan promotionPlan, PageEntity pageEntity) throws Exception {

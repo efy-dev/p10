@@ -36,4 +36,9 @@ public class VirtualPlanManagerImpl implements VirtualPlanManagerService {
     public List<VirtualUser> getVirtualUserList(VirtualUserPlan virtualUserPlan, PageEntity pageEntity) throws Exception {
         return virtualPlanDao.getVirtualUserList(virtualUserPlan, pageEntity);
     }
+
+    @Override
+    public void deleteVirtualPlan(String id) throws Exception {
+        virtualPlanDao.deleteVirtualPlan(id);
+    }
 }

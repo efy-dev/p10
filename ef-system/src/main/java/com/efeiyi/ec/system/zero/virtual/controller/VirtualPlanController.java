@@ -146,7 +146,7 @@ public class VirtualPlanController {
     public ModelAndView saveVirtualUserPlan(VirtualUserPlan virtualUserPlan) throws Exception{
         VirtualUserPlan userPlan = (VirtualUserPlan)baseManager.getObject(VirtualUserPlan.class.getName(), virtualUserPlan.getId());
         if (userPlan == null){
-            baseManager.delete(VirtualPlan.class.getName(), virtualUserPlan.getId());
+            vpmService.deleteVirtualPlan(virtualUserPlan.getId());
             virtualUserPlan.setImplementClass("com.efeiyi.ec.system.zero.virtual.model.task.VirtualUserGenerator");
             virtualUserPlan.setId(null);
             virtualUserPlan.setStatus(VirtualPlanConstant.planStatusInit);
@@ -169,7 +169,7 @@ public class VirtualPlanController {
             virtualOrderPlan = new VirtualOrderPlan();
             BeanUtils.copyProperties(virtualOrderPlan, virtualPlan);
             //删除父类virtualPlan 并制空ID
-            baseManager.delete(VirtualPlan.class.getName(), id);
+            vpmService.deleteVirtualPlan(id);
             virtualOrderPlan.setId(null);
         }
         //获取除父类外的基本属性值
