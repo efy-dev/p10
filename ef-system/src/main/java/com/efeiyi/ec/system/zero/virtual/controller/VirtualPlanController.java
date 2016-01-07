@@ -1,6 +1,7 @@
 package com.efeiyi.ec.system.zero.virtual.controller;
 
 import com.efeiyi.ec.product.model.ProductModel;
+import com.efeiyi.ec.purchase.model.PurchaseOrderComment;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.system.zero.virtual.model.task.CoreTaskScheduler;
 import com.efeiyi.ec.system.zero.virtual.model.timer.SubTimer;
@@ -183,6 +184,41 @@ public class VirtualPlanController {
         saveVirtualProductModelList(virtualOrderPlan, request);
 
         return new ModelAndView("redirect:/basic/xm.do?qm=plistVirtualPlan_default");
+    }
+
+    @RequestMapping("/getOrderProduct.do")
+    public ModelAndView getOrderProduct(ModelMap modelMap, HttpServletRequest request)throws Exception{
+        String popId = request.getParameter("id");
+        String planId = request.getParameter("planId");
+        if (popId == null || popId.trim().equals("")){
+            throw new Exception("获取订单商品对象失败:id为空");
+        }
+        PurchaseOrderProduct pop = (PurchaseOrderProduct) baseManager.getObject(PurchaseOrderProduct.class.getName(), popId);
+        modelMap.put("object", pop);
+        modelMap.put("planId", planId);
+        return new ModelAndView("/zero/virtual/virtualPurchaseOrderForm");
+    }
+
+    @RequestMapping("/saveOrderProductContent.do")
+    public ModelAndView saveOrderProductContent(HttpServletRequest request)throws Exception{
+        String popId = request.getParameter("id");
+        String planId = request.getParameter("planId");
+        String content = request.getParameter("content");
+        if (popId == null || popId.trim().equals("")){
+            throw new Exception("获取订单商品对象失败:id为空");
+        }
+        PurchaseOrderProduct pop = (PurchaseOrderProduct) baseManager.getObject(PurchaseOrderProduct.class.getName(), popId);
+        PurchaseOrderComment poc = new PurchaseOrderComment();
+        poc.setContent(content);
+        poc.setPurchaseOrderProduct(pop);
+        poc.setStatus("1");
+        poc.setCreateDatetime(new Date());
+        baseManager.saveOrUpdate(poc.getClass().getName(), poc);
+        pop.setPurchaseOrderComment(poc);
+        pop.setStatus("1");
+        baseManager.saveOrUpdate(pop.getClass().getName(), pop);
+
+        return new ModelAndView("redirect:/virtualPlan/getTypeObjectList.do?virtual=virtual&id="+planId+"&type=order");
     }
 
     private ModelAndView virtualOrderList(ModelMap modelMap) throws Exception {

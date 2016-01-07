@@ -43,7 +43,7 @@ public class VirtualPlanDaoHibernate implements VirtualPlanDao {
 
     @Override
     public List<PurchaseOrderProduct> getOrderProductList(VirtualOrderPlan virtualOrderPlan, PageEntity pageEntity) throws Exception {
-        String hql = "select pop from PurchaseOrderProduct pop, VirtualPurchaseOrder vpo where vpo.virtualOrderPlan = :virtualOrderPlan";
+        String hql = "select pop from PurchaseOrderProduct pop, VirtualPurchaseOrder vpo where vpo.virtualOrderPlan = :virtualOrderPlan and vpo.id=pop.purchaseOrder.id and pop.purchaseOrder.status <>0";
         Query query = this.getSession().createQuery(hql)
                 .setParameter("virtualOrderPlan", virtualOrderPlan)
                 .setFirstResult(pageEntity.getrIndex())
