@@ -65,7 +65,7 @@
 
             <div class="btb"><h5>礼物详情</h5></div>
             <div class="chandise ae">
-                <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>
+                <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}" height="90px"></div>
                 <div class="cha-box">
                     <c:if test="${productModel.product.productModelList.size()==1}">
                         <strong>${productModel.name}</strong>
