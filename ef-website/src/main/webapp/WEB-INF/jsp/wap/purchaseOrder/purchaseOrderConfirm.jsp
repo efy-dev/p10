@@ -322,11 +322,27 @@
                     var out = '';
                     $("#yhq").text(data.length + "张优惠券可用");
                     for (var i = 0; i < data.length; i++) {
-                        /*out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
-                         + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';*/
+                        out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">';
+                        if (data[i].couponBatch.type != null && data[i].couponBatch.type == 1) {
+                            out += '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>';
+                        } else if (data[i].couponBatch.type != null && data[i].couponBatch.type == 2) {
+                            out += '<p>' + data[i]["couponBatch"]["price"] + "元" + '</p>';
+                        }
+                        out += '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>';
+                        if (data[i].couponBatch.range != null && data[i].couponBatch.range == 1) {
+                            out += '<p>适用范围：全网通用</p> </li>';
+                        } else if (data[i].couponBatch.range != null && data[i].couponBatch.range == 2) {
+                            out += '<p>适用范围：品类专用</p> </li>';
+                        } else if (data[i].couponBatch.range != null && data[i].couponBatch.range == 3) {
+                            out += '<p>适用范围：店铺专用</p> </li>';
+                        } else if (data[i].couponBatch.range != null && data[i].couponBatch.range == 4) {
+                            out += '<p>适用范围：单品专用</p> </li>';
+                        }
+                    }
+                   /* for (var i = 0; i < data.length; i++) {
                         out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
                                 + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';
-                    }
+                    }*/
                     $("#ul-list").html(out);
                 }
             },
