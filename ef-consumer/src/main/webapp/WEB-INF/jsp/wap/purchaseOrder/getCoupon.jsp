@@ -78,7 +78,7 @@
         <a href="<%=PConst.HOSTNAME%>/product/list/${coupon.couponBatch.project.id}">使&nbsp;用</a>
       </c:if>
       <c:if test="${coupon.couponBatch.range ==3}">
-        <a href="<%=PConst.HOSTNAME%>/tenant/${coupon.couponBatch.tenant.id}">使&nbsp;用</a>
+        <a href="<%=PConst.HOSTNAME%>/tenantOfMobile/${coupon.couponBatch.tenant.id}">使&nbsp;用</a>
       </c:if>
       <c:if test="${coupon.couponBatch.range ==4}">
         <a href="<%=PConst.HOSTNAME%>/product/productModel/${coupon.couponBatch.product.productModelList.get(0).id}">使&nbsp;用</a>
