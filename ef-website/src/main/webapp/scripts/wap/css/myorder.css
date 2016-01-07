@@ -9,6 +9,7 @@
 .myorder .order-head dt img{width:100%}
 .myorder .order-head dd {font-size:0.9rem;float:left;padding-left:70px;width:100%;color:#666}
 .myorder .order-head dd:nth-child(2){bottom:0;position:absolute}
+.myorder .order-head dd:nth-child(3){margin-top: 8px;}
 .myorder .order-head dd a{font-size:0.9rem;color:#666}
 .myorder .marctive {margin:0}
 .myorder .myfunction ul {padding:20px 19px 28px;width:100%;float:left}
@@ -71,8 +72,8 @@
 .myorder .jp-pd-btns li a {padding:8px 10px}
 .myorder .jp-pd-btns li:nth-child(2) {float:right}
 .myorder .jp-pd-btns li:nth-child(2) a:nth-child(1) {margin-right:10px}
-.myorder .Extras {border:1px solid #ccc;width:100%;overflow:hidden;height:auto;padding:11px 8px;margin-bottom:20px}
-.myorder .Extras a {float:left;width:100%;font-size:1rem;font-weight:100;position:relative;color:#000}
+.myorder .Extras {border:1px solid #ccc;width:100%;overflow:hidden;height:auto;padding:11px 8px;margin-bottom:20px;color: #000;}
+.myorder .Extras a {float:left;width:100%;font-size:1rem;font-weight:100;position:relative;color:#000;opacity: 1;}
 /*左三角*/
 .myorder .Extras .icon-sj {width:12px;height:12px;margin-top:3px;border-right:1px solid #000;border-bottom:1px solid #000;float:left;transfrom:rotate(-45deg);/*deg:度；旋转的属性*/ -webkit-transform:rotate(-45deg);/*谷歌和苹果浏览器*/ -ms-transfrom:rotate(-45deg);/*ie浏览器*/ position:absolute;right:1rem}
 .myorder .aq-btn {width:100%;border:1px solid #000;margin-bottom:80px}
@@ -699,7 +700,7 @@ html, body {height:100%}
 .gift .hint input{margin: 0 12px;vertical-align:middle}
 .gift .btn-again.add-mgno{margin:0 0 15px 0;}
 .gift .bott{border-bottom: 1px solid #000;padding-bottom: 22px;}
-.gift .add-order-total{border-top: 1px solid #ccc;margin-top:-1px;border-bottom: 1px solid #ccc;}
+.gift .add-order-total{border-top: 1px solid #ccc;margin-top:-1px;border-bottom: 1px solid #ccc;padding: 20px 0}
 .gift .edit-txt1.edit-txt3 {color:#000;padding:13px 15px}
 .gift .edit-text a {font-size:12px;color:#000;display:block}
 .gift .edit-text .cart-icon {width:20px;height:20px;background-position:0 0;position:absolute;right:0px;top:0px}
@@ -934,7 +935,8 @@ html, body {height:100%}
 .wechat-header .head-number{position: absolute;font-size: 15px;color: #000;right: 37px;top: 8px;line-height: 15px;font-weight: bold}
 .wechat-header .add-head{font-size: 12px;color:#ae846d;padding: 0 27px;width: 100%;float: left;text-align: left;margin-bottom: 20px;margin-top: -10px;}
 /*题目*/
-.topic{text-align: center;display: none}
+.topic{text-align: center;}
+.addtopic{display: none}
 .topic.active{display: block}
 .topic h5{margin: 5px 0 25px 0;display: inline-block;font-size: 18px;color: #000;line-height: 18px;font-weight: bold}
 .topic h5 span{margin: 0 2px}
@@ -1026,4 +1028,19 @@ html, body {height:100%}
 .win-payment span a{font-size: 14px;color: #000;text-decoration: underline;margin: 0 50px;}
 .win-add{border-bottom: 1px solid #000;padding-top: 0;}
 .win-add a{border: 6px solid #999;}
+.addtop{position: relative;height: 291px;}
+.addtop .add-new-btn{position: absolute;bottom: 20px;left: 0px;}
+.myorder .aq-btn a.new-aq-btn{background: #000;color: #fff;}
 .win-payment .winicon{background:url(../images/cart-icon.png) no-repeat -63px -146px;display:inline-block;background-size:106px auto;-webkit-background-size:106px auto;width:35px;height:35px;}
+/*余额功能*/
+.detail-money{background: #f5f5f5;width: 100%;float:left;padding: 0 19px;}
+.detail-money .detail-h1{font-size: 12px;color: #333;width: 100%;float: left;margin: 20px 0 0 0 ;font-weight: bold}
+.detail-money .detail-h2{font-size: 22px;color: #ff3333;width: 100%;float: left;margin:7px 0 16px 0;line-height: 30px;}
+.detail-money .detail-h2 em{font-size: 30px;}
+/*余额明细*/
+.detail-list{width: 100%;float: left;padding: 0 19px;border-top: 1px solid #ccc;}
+.detail-list .detail-title{font-size: 12px;color: #333;margin: 18px 0 12px;font-weight: bold;}
+.detail-list .detail td{width:25%;border: 1px solid #ccc;font-size: 9px;color: #ccc;text-align: center;color: #000;}
+.detail-list .detail tr td:last-child{padding: 9px 12px;}
+
+
