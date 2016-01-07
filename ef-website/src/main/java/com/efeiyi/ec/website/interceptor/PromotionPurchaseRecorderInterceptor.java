@@ -28,28 +28,35 @@ public class PromotionPurchaseRecorderInterceptor extends HandlerInterceptorAdap
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String promotionSource = (String) request.getSession().getAttribute("source");
-        if (promotionSource == null) {
-            Cookie cookie = CookieTool.getCookieByName(request, "source");
-            if (cookie != null) {
-                promotionSource = cookie.getValue();
+        try {
+
+            String promotionSource = (String) request.getSession().getAttribute("source");
+            if (promotionSource == null) {
+                Cookie cookie = CookieTool.getCookieByName(request, "source");
+                if (cookie != null) {
+                    promotionSource = cookie.getValue();
+                }
             }
-        }
-        if (promotionSource != null) {
+            if (promotionSource != null) {
 //            LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
 //            queryParamMap.put("identifier", promotionSource);
 //            PromotionPlan promotionPlan = (PromotionPlan) baseManager.getUniqueObjectByConditions("from PromotionPlan x where x.identifier=:identifier", queryParamMap);
 
-            //营销返利有效并且没有超出RD有效期，记录订单
+                //营销返利有效并且没有超出RD有效期，记录订单
 //            MyUser user = (MyUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //            if (!"0".equals(promotionPlan.getStatus()) /*&& user.getRdEndDay() != null && new Date().compareTo(user.getRdEndDay()) < 0*/) {
-            String path = request.getServletPath();
-            String orderId = path.substring(path.lastIndexOf("/") + 1);
-            PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
-            PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
-            purchaseOrder.setSource(promotionSource);
-            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+                String path = request.getServletPath();
+                String orderId = path.substring(path.lastIndexOf("/") + 1);
+                PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
+
+                //orderId是PurchaseOrder.id或purchaseOrderPaymentDetails.id
+                PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails != null ? purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder() : (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+                purchaseOrder.setSource(promotionSource);
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 //            }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return super.preHandle(request, response, handler);
     }

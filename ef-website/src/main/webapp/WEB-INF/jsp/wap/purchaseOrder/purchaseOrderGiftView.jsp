@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -43,14 +44,22 @@
     <!-- //End--chevron-left-->
     <h1 class="am-header-title">礼物订单</h1>
     <!-- //End--title-->
+    <div class="am-header-right am-header-nav">
+        <a href="#chevron-right" class="chevron-right" id="menu">
+            <i class="line"></i>
+        </a>
+    </div>
     <!-- //End--chevron-left-->
     <div class="menu-list">
         <ul class="bd">
-            <li><a href="" title="首页">首页</a></li>
-            <li><a href="" title="分类">分&nbsp;类</a></li>
-            <li class="active"><a href="" title="购物车">购&nbsp;物&nbsp;车</a></li>
-            <li><a href="" title="传承人">传承人</a></li>
-            <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+            <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
+            <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
+            <% if (AuthorizationUtil.isAuthenticated()) {%>
+            <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+            <%} else {%>
+            <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
+            <%}%>
+            <li><a href="<c:url value="/productCategoryList.do"/>" title="个人中心">分类</a></li>
         </ul>
     </div>
 </header>
@@ -64,8 +73,8 @@
                     width="181"></div>
             <div class="pic-text">
                 <p>${productName}</p>
-
                 <p class="t2"><i></i><span>${projectName}</span><em></em></p>
+                <p class="t4">数量：<span>${order.purchaseOrderProductList.get(0).purchaseAmount}</span>个</p>
             </div>
         </div>
     </div>
@@ -87,7 +96,7 @@
                 <p>方式一：点击“送礼给Ta”，根据提示送礼给好友，好友通过点击收到的链接进入收礼页面，正确填写收货信息后即可收礼。</p>
 
                 <p>方式二：点击“保存为图片”将生成图片形式的礼物卡片，保存图片后发给好友，好友通过识别图片上的二维码进入收礼页面，正确填写收货信息后即可收礼。</p>
-                <%--<p>方式三：短信送礼，点击”复制链接“，根据提示复制链接,将链接地址通过短信发给好友，好友点击链接，填入收货地址即可收礼。</p>--%>
+                <p>方式三：短信送礼，点击”复制链接“，根据提示复制链接,将链接地址通过短信发给好友，好友点击链接，填入收货地址即可收礼。</p>
             </div>
         </c:if>
         <div class="btn-again">
@@ -99,15 +108,11 @@
         </div>
 
     </div>
-    <c:if test="${order.orderStatus!='6'}">
+    <c:if test="${order.orderStatus=='6'}">
     <div class="car-fx" id="giftButton">
-        </c:if>
-        <c:if test="${order.orderStatus=='6'}">
-        <div class="car-fx" id="giftButton">
-            </c:if>
-            <a href="#" id="share" style="width: 75%">送礼给Ta</a>
+            <a href="#" id="share">送礼给Ta</a>
             <a href="<c:url value="/createGiftImage/${order.id}"/> ">保存为图片</a>
-
+            <a class="url" href="#" id="share1">复制链接</a>
             <div id="cover" style="display: none;"><em class="bg"></em><img
                     src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt=""></div>
             <div id="cover2" style="display: none">
@@ -120,9 +125,10 @@
                 </div>
                 <div class="bg"></div>
             </div>
+            <div id="cover3" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share2.png"/>" alt=""></div>
         </div>
 
-
+    </c:if>
         <c:if test="${!empty content}">
             <div class="logistics ae">
                 <div class="part">
@@ -229,16 +235,29 @@
                 $("#cover").show();
                 $(".custom-header").css("z-index", "0");
             } else {
+                $(".covtext").html("在浏览器中寻找分享按钮，将本页面链接分享给您的好友吧。");
                 $("#cover2").show();
                 $(".custom-header").css("z-index", "0");
             }
         })
-
+        $("#share1").click(function () {
+            if (isWeiXin()) {
+                $("#cover3").show();
+                $(".custom-header").css("z-index", "0");
+            } else {
+                $(".covtext").html("请点击浏览器中的“复制网址”功能，请链接发给您的好友吧。");
+                $("#cover2").show();
+                $(".custom-header").css("z-index", "0");
+            }
+        })
         $(".covbtn").click(function () {
             $("#cover2").hide();
         })
 
         $('#cover').click(function () {
+            $(this).hide();
+        })
+        $('#cover3').click(function () {
             $(this).hide();
         })
     })

@@ -290,7 +290,23 @@
                                                 ${purchaseOrderProduct.purchaseOrderComment.content}
                                             </c:if>
                                         </div>
-                                        <div class="star"><i class="star-icon star-5"></i></div>
+                                        <div class="star">
+                                            <c:if test="${empty purchaseOrderProduct.purchaseOrderComment.starts||purchaseOrderProduct.purchaseOrderComment.starts=='5'}">
+                                            <i class="star-icon star-5"></i>
+                                            </c:if>
+                                            <c:if test="${purchaseOrderProduct.purchaseOrderComment.starts=='4'}">
+                                                <i class="star-icon star-4"></i>
+                                            </c:if>
+                                            <c:if test="${purchaseOrderProduct.purchaseOrderComment.starts=='3'}">
+                                                <i class="star-icon star-3"></i>
+                                            </c:if>
+                                            <c:if test="${purchaseOrderProduct.purchaseOrderComment.starts=='2'}">
+                                                <i class="star-icon star-2"></i>
+                                            </c:if>
+                                            <c:if test="${purchaseOrderProduct.purchaseOrderComment.starts=='1'}">
+                                                <i class="star-icon star-1"></i>
+                                            </c:if>
+                                        </div>
                                         <c:set var="user">
                                             ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                         </c:set>
@@ -471,8 +487,8 @@
         $('#native').qrcode({
             render: "div",
             text: url,
-            width: 172,
-            height: 184
+//            width: 172,
+//            height: 184
         });
         var $div = $('.dialog-gift');
         var $close = $div.find('.icon-close');
@@ -484,6 +500,18 @@
     });
 </script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+
+<script type="text/javascript">
+    var _mvq = window._mvq || [];
+    window._mvq = _mvq;
+    _mvq.push(['$setAccount', 'm-197303-0']);
+    _mvq.push(['$setGeneral', 'goodsdetail', '', /*用户名*/ '', /*用户id*/ '']);
+    _mvq.push(['$logConversion']);
+
+    _mvq.push(['$addGoods', /*分类id*/ '', /*品牌id*/ '',/*商品名称*/ '${productModel.name}',/*商品ID*/ '${productModel.id}',/*商品售价*/ '${productModel.price}',
+     /*商品图片url*/ 'http://pro.efeiyi.com/${productModel.productModel_url}', /*分类名*/ '${productModel.product.project.name}', /*品牌名*/ '', /*商品库存状态1或是0*/ '${productModel.product.status}', /*网络价*/ '',/*收藏人数*/ '', /*商品下架时间*/ '']);
+    _mvq.push(['$logData']);
+</script>
 </body>
 </html>
 

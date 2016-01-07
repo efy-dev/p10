@@ -1,7 +1,9 @@
 package com.efeiyi.ec.system.zero.company.controller;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.efeiyi.ec.system.zero.company.service.CompanyOrderBatchServiceManager;
 import com.efeiyi.ec.system.zero.company.util.BatchLogisticsReactor;
+import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.DoQuery;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +31,8 @@ public class BatchLogisticsController {
     private DoManager doManager;
     @Autowired
     private XdoManager xdoManager;
+    @Autowired
+    private BaseManager baseManager;
 
     @RequestMapping("/deppon.do")
     public ModelAndView submit2Deppon(HttpServletRequest request, ModelMap modelMap) throws Exception {
@@ -48,12 +53,38 @@ public class BatchLogisticsController {
         return new ModelAndView(resultPage, modelMap);
     }
 
+    @RequestMapping("/deppon2.do")
+    public ModelAndView submit2Deppon2(HttpServletRequest request, ModelMap modelMap) throws Exception {
+
+        String idList = request.getParameter("idList");
+        List<PurchaseOrderProduct> list = getPOPList(idList);
+
+        if(BatchLogisticsReactor.runningFlag.compareAndSet(BatchLogisticsReactor.idle, BatchLogisticsReactor.busy)){
+            new Thread(new BatchLogisticsReactor(list, ApplicationContextUtil.getApplicationContext())).start();
+        }
+
+        return new ModelAndView("redirect:/basic/xm.do?qm=plistBatchGift_default");
+    }
+
     @RequestMapping("/test.do")
     public void test(HttpServletRequest request, HttpServletResponse response) {
 
         String companyCode = request.getParameter("companyCode");
         System.out.println(companyCode);
 //        baseManager.getObject("com.efeiyi.ec.zero.virtual.model.VirtualPlan",)
+    }
+
+    private List getPOPList(String idList){
+        List<PurchaseOrderProduct> popList = new ArrayList<>();
+        String[] ids = idList.split(",");
+        for (String id: ids){
+            PurchaseOrderProduct pop = (PurchaseOrderProduct) baseManager.getObject(PurchaseOrderProduct.class.getName(), id);
+            if (pop == null){
+                continue;
+            }
+            popList.add(pop);
+        }
+        return popList;
     }
 
 }

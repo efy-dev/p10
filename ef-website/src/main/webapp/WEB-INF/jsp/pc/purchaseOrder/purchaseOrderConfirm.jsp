@@ -159,7 +159,10 @@
                                             </p>
 
                                             <p><a href="/product/productModel/${product.productModel.id}"
-                                                  target="_blank">${product.productModel.product.name}[${product.productModel.name}]
+                                                  target="_blank">${product.productModel.product.name}
+                                                <c:if test="${null!=product.productModel.name || ''!=product.productModel.name}">
+                                                    [${product.productModel.name}]
+                                                </c:if>
                                                     <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
                                                     <%--[--%>
                                                     <%--<c:forEach--%>

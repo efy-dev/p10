@@ -53,7 +53,6 @@ public class CommonManagerImpl implements CommonManager {
                 getLogisticsCompany(new SAXReader().read(xmlFiles.getInputStream()));
                 getProductSearchParamByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCompanyAddress(new SAXReader().read(xmlFiles.getInputStream()));
-                getProvinceConverter(new SAXReader().read(xmlFiles.getInputStream()));
             }
         }catch (Exception e){
              // e.printStackTrace();
@@ -61,26 +60,6 @@ public class CommonManagerImpl implements CommonManager {
         }
 
 
-    }
-
-    /**
-     * 取得物流地址转换
-     * @return
-     */
-    @Override
-    public Map<String,String> getProvinceConverter(){
-        return provinceConverter;
-    }
-
-    private static void getProvinceConverter(Document infoDocument) {
-        if(infoDocument!=null){
-            List<Node> companyNodeList = infoDocument.selectNodes("common/provinces/province");
-            if(companyNodeList!=null){
-                for(Node node : companyNodeList){
-                    provinceConverter.put(node.selectSingleNode("@key").getText(),node.selectSingleNode("@value").getText());
-                }
-            }
-        }
     }
 
     /**
@@ -98,7 +77,7 @@ public class CommonManagerImpl implements CommonManager {
                     companyMap.put("phone",node.selectSingleNode("@phone").getText());
                     companyMap.put("province",node.selectSingleNode("@province").getText());
                     companyMap.put("city",node.selectSingleNode("@city").getText());
-                    companyMap.put("country",node.selectSingleNode("@country").getText());
+                    companyMap.put("county",node.selectSingleNode("@county").getText());
                     companyMap.put("address",node.selectSingleNode("@address").getText());
                     companyAddresses.put(node.selectSingleNode("@group").getText(),companyMap);
                 }

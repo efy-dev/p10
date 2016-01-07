@@ -50,6 +50,7 @@
                         <condition name="companyOrderBatch.id" defaultValue="" operation="eq"/>
                     </query>
                 </do>
+                <do name="removePurchaseOrderGift" label="删除礼品卡信息" access="" result="redirect:/basic/xm.do?qm=plistBatchGift_default"/>
             </does>
         </entity>
     </entities>

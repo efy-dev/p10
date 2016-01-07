@@ -7,7 +7,7 @@ $(function(){
     //购物车
     (function(){
         $('.icon-delete').click(function(){
-           $('.alert-delete').fadeIn('fast');
+            $('.alert-delete').fadeIn('fast');
         })
 
         $('.edit-dete').click(function(){
@@ -60,8 +60,22 @@ $(function(){
         });
         $("#nobtn").removeAttr('href');
         $("#nobtn").removeAttr('onclick');
+
+        /*   $('.cart-coupons .ul-list').each(function(){
+         var $input=$(this).find('input');
+
+         $(this).find('li').click(function(){
+         $input.removeAttr('checked');
+         $(this).find('input').prop('checked','checked');
+         })
+         })
+         */
+
+
+
+
     })
-    //商品评价
+        //商品评价
     (function(){
 
         $('.my-evaluate .score .score-star .star li').click(function(){
@@ -140,13 +154,14 @@ $(function(){
         });
         //分享
         (function(){
-            $('.details .des-title a.share,.my-colonel .iwill .txt4 .txcon,.packet .button .ad,#btn').click(function(){
+            $('.my-colonel .iwill .txt4 .txcon,.packet .button .ad,#btn').click(function(){
                 $('#cover').show();
                 $(".custom-header").css("z-index","0");
                 return false;
             });
             $('#cover').click(function(){
                 $(this).hide();
+                $(".custom-header").css("z-index","");
             })
 
             $("#line").click(function(){
@@ -155,12 +170,23 @@ $(function(){
             })
             $("#cover2 .text-co2 .covbtn").click(function(){
                 $(this).parents("#cover2").hide()
+                $(".custom-header").css("z-index","");
             })
             $("#cover2 .bg").click(function(){
                 $(this).parents("#cover2").hide()
+                $(".custom-header").css("z-index","");
             })
         })();
-
+        (function(){
+            $("#covbtn").click(function(){
+                $("#cover3").show();
+                $(".custom-header").css("z-index","0");
+            })
+            $("#cover3 .bg").click(function(){
+                $(this).parents("#cover3").hide()
+                $(".custom-header").css("z-index","");
+            })
+        })();
 
         //详情和评论-弹出轮播图
 
@@ -195,13 +221,16 @@ $(function(){
     })();
     //订单
     (function(){
-        $('.btn-coupons').click(function(){
+        $('#btn-coupon').click(function(){
             $('body,document').css('overflow','hidden');
-            $('#order-total').show().css({'top':($('.order-total').position().top-120)+'px'});
-            $('.cart-btn').click(function(){
-                $(this).parents('.alert-delete').hide();
-                $('body,document').css('overflow','visible');
+            $('#order-total').each(function(){
+                $(this).show();
+                $(this).find('.overbg').click(function(){
+                    $(this).parent('#order-total').hide();
+                    $('body,document').css('overflow','');
+                })
             })
+
         });
 
         $('.btn-edit-addres').click(function(){
@@ -287,12 +316,46 @@ $(function(){
             $ul.animate({'height':$li.outerHeight()*4+'px'},200);
             return false;
         });
-
-
-
-
-
-
-
     })();
-})
+    //分享页面好友点击
+    (function(){
+        var add =  $(".extended .t-use-top").height();
+        var center =  add/2;
+        var text =  center-9;
+        $(".extended .t-use-top .user-text strong").css("top",text);
+    })();
+    (function(){
+        $(".t-use-center ul li .state-3").parent("li").css({margin:"0",padding:"0"})
+    })();
+    (function(){
+        var banheight = $(".colonel-pic .c-page").height();
+        var banhei = banheight+12
+        var maxhei = banhei+7
+        $(".olli ol.am-control-nav.am-control-paging").css("bottom",maxhei)
+    })();
+    (function(){
+        $(".weachat-tab .wea-tab .wea-icon").click(function(){
+            var _index = $(this).index();
+            $(this).addClass("active").siblings().removeClass("active");
+            $(".wea-box .fiy-box").eq(_index).show().siblings().hide();
+
+        })
+    })();
+    //微信问题-背景高度
+    (function(){
+        var bd = $("body").height();
+        $(".wechat-bg").css("min-height",bd)
+    })();
+    //微信问题选项
+    (function(){
+        var _this =$(".addae").index()-1;
+        var _index = $(".topic").length;
+        $(".topic .topic-txt.topic-txt .bg-link").click(function(){
+            _this++;
+            $(".topic").eq(_this).addClass("active").siblings().removeClass("active");
+            if(_this == _index){
+                window.location.href="http://www.baidu.com"
+            }
+        });
+    })();
+});

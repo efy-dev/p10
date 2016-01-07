@@ -9,7 +9,7 @@
 <head>
 	<title>个人中心</title>
 	<style>
-		.myorder .order-section .money-btn a{width: 80px}
+		.myorder .order-section .money-btn a{width: 65px}
 	</style>
 </head>
 <body>
@@ -64,8 +64,9 @@
 										onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></div>
 								<div class="shops-text">
 									<p>${purchaseOrderProduct.productModel.product.name}</p>
-
-									<p>${purchaseOrderProduct.productModel.name}</p>
+									<c:if test="${purchaseOrderProduct.productModel.product.productModelList.size()>1}">
+										<p>${purchaseOrderProduct.productModel.name}</p>
+									</c:if>
 									<span class="money-txt">￥${purchaseOrderProduct.productModel.price}</span>
 									<span class="list-txt">x${purchaseOrderProduct.purchaseAmount}</span>
 								</div>
@@ -77,19 +78,23 @@
 					<div class="money-btn">
 						<c:choose>
 							<c:when test="${purchaseOrder.orderStatus == '3'}">
-								<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
+								<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a>
 							</c:when>
 							<c:when test="${purchaseOrder.orderStatus == '6'}">
-								<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
+								<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a>
 							</c:when>
 							<c:when test="${purchaseOrder.orderStatus == '1'}">
-								<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-								<a href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}" name="payButton"/>立&nbsp;即&nbsp;支&nbsp;付</a>
+								<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a>
+								<a href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}" name="payButton"/>立即支付</a>
+								<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+										window.location.href='<c:url value="/order/cancelOrder/${purchaseOrder.id}"/>';
+										})">删除订单</a>
+
 							</c:when>
 						</c:choose>
 							<c:choose>
 							<c:when test="${purchaseOrder.orderType == '4'}">
-								<a href="<c:url value="/order/groupBuyView?orderId=${spList.id}"/>">查&nbsp;看&nbsp;团&nbsp;购</a>
+								<a href="<c:url value="/order/groupBuyView?orderId=${spList.id}"/>">查看团购</a>
 							</c:when>
 							</c:choose>
 					</div>
@@ -114,8 +119,9 @@
 									</div>
 									<div class="shops-text">
 										<p>${purchaseOrderProduct.productModel.product.name}</p>
-
-										<p>${purchaseOrderProduct.productModel.name}</p>
+										<c:if test="${purchaseOrderProduct.productModel.product.productModelList.size()>1}">
+											<p>${purchaseOrderProduct.productModel.name}</p>
+										</c:if>
 										<span class="money-txt">￥${purchaseOrderProduct.productModel.price}</span>
 										<span class="list-txt">x${purchaseOrderProduct.purchaseAmount}</span>
 									</div>
@@ -127,41 +133,47 @@
 						<div class="money-btn" >
 							<c:choose>
 								<c:when test="${purchaseOrder.orderStatus == '3'}">
-									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
+									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a>
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '6'}">
-									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
+									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a>
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '15'}">
-									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
+									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a>
+									<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+											window.location.href='<c:url value="/order/cancelOrder/${purchaseOrder.id}"/>';
+											})">删除订单</a>
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '5'}">
-									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
+									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a>
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '7'}">
-									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;物&nbsp;流</a>
+									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看物流</a>
 									<a href="#" onclick="showConfirm('提示','是否确定收货',function(){
 											window.location.href='<c:url
 											value="/order/confirmGet/${purchaseOrder.id}"/>';
 											})">确定收货</a>
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '13'}">
-									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-								</c:when>
-								<c:when test="${purchaseOrder.orderStatus == '17'}">
-									<a href="#">已&nbsp;取&nbsp;消</a>
+									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a>
+									<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+											window.location.href='<c:url value="/order/cancelOrder/${purchaseOrder.id}"/>';
+											})">删除订单</a>
 								</c:when>
 								<c:when test="${purchaseOrder.orderStatus == '9'}">
-									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-									<a href="<c:url value="/comment/mobileFinishOrder.do?orderId=${purchaseOrder.id}"/>">去&nbsp;评&nbsp;价</a>
+									<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a>
+									<a href="<c:url value="/comment/mobileFinishOrder.do?orderId=${purchaseOrder.id}"/>">去评价</a>
+									<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+											window.location.href='<c:url value="/order/cancelOrder/${purchaseOrder.id}"/>';
+											})">删除订单</a>
 								</c:when>
 							</c:choose>
 							<c:choose>
 								<c:when test="${purchaseOrder.orderType == '3'}">
-									<a href="<%=PConst.HOSTNAME%>/giftReceive/${purchaseOrder.id}">查&nbsp;看&nbsp;礼&nbsp;品</a>
+									<a href="<%=PConst.HOSTNAME%>/giftReceive/${purchaseOrder.id}">查看礼品</a>
 								</c:when>
 								<c:when test="${purchaseOrder.orderType == '4'}">
-									<a href="<c:url value="/order/groupBuyView?orderId=${purchaseOrder.id}"/>">查&nbsp;看&nbsp;团&nbsp;购</a>
+									<a href="<c:url value="/order/groupBuyView?orderId=${purchaseOrder.id}"/>">查看团购</a>
 								</c:when>
 							</c:choose>
 						</div>
@@ -188,7 +200,9 @@
 										<div class="shops-text">
 											<p>${purchaseOrderProduct.productModel.product.name}</p>
 
-											<p>${purchaseOrderProduct.productModel.name}</p>
+											<c:if test="${purchaseOrderProduct.productModel.product.productModelList.size()>1}">
+												<p>${purchaseOrderProduct.productModel.name}</p>
+											</c:if>
 											<span class="money-txt">￥${purchaseOrderProduct.productModel.price}</span>
 											<span class="list-txt">x${purchaseOrderProduct.purchaseAmount}</span>
 										</div>
@@ -200,40 +214,46 @@
 							<div class="money-btn">
 								<c:choose>
 									<c:when test="${spList.orderStatus == '3'}">
-										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
+										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看详情</a>
 									</c:when>
 									<c:when test="${spList.orderStatus == '6'}">
-										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
+										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看详情</a>
 									</c:when>
 									<c:when test="${spList.orderStatus == '15'}">
-										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
+										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看详情</a>
+										<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+												window.location.href='<c:url value="/order/cancelOrder/${spList.id}"/>';
+												})">删除订单</a>
 									</c:when>
 									<c:when test="${spList.orderStatus == '5'}">
-										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
+										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看详情</a>
 									</c:when>
 									<c:when test="${spList.orderStatus == '7'}">
-										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;物&nbsp;流</a>
+										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看物流</a>
 										<a href="#" onclick="showConfirm('提示','是否确定收货',function(){
 												window.location.href='<c:url value="/order/confirmGet/${spList.id}"/>';
 												})">确定收货</a>
 									</c:when>
 									<c:when test="${purchaseOrder.orderStatus == '13'}">
-										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-									</c:when>
-									<c:when test="${purchaseOrder.orderStatus == '17'}">
-										<a href="#">已&nbsp;取&nbsp;消</a>
+										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看详情</a>
+										<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+												window.location.href='<c:url value="/order/cancelOrder/${spList.id}"/>';
+												})">删除订单</a>
 									</c:when>
 									<c:when test="${purchaseOrder.orderStatus == '9'}">
-										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查&nbsp;看&nbsp;详&nbsp;情</a>
-										<a href="<c:url value="/comment/mobileFinishOrder.do?orderId=${spList.id}"/>">去&nbsp;评&nbsp;价</a>
+										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看详情</a>
+										<a href="<c:url value="/comment/mobileFinishOrder.do?orderId=${spList.id}"/>">去评价</a>
+										<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+												window.location.href='<c:url value="/order/cancelOrder/${spList.id}"/>';
+												})">删除订单</a>
 									</c:when>
 								</c:choose>
 								<c:choose>
 									<c:when test="${spList.orderType == '3'}">
-										<a href="<%=PConst.HOSTNAME%>/giftReceive/${spList.id}">查&nbsp;看&nbsp;礼&nbsp;品</a>
+										<a href="<%=PConst.HOSTNAME%>/giftReceive/${spList.id}">查看礼品</a>
 									</c:when>
 									<c:when test="${spList.orderType == '4'}">
-									<a href="<c:url value="/order/groupBuyView?orderId=${spList.id}"/>">查&nbsp;看&nbsp;团&nbsp;购</a>
+									<a href="<c:url value="/order/groupBuyView?orderId=${spList.id}"/>">查看团购</a>
 									</c:when>
 								</c:choose>
 							</div>

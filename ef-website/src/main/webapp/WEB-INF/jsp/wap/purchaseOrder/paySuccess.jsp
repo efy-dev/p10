@@ -13,12 +13,14 @@
     <link href="<c:url value="/scripts/css/myorder.css"/>" type="text/css " rel="stylesheet">
 </head>
 <body>
-<p>您已成功提交付款</p>
-
-<p>
-    <a href="http://i.efeiyi.com/order/myEfeiyi/view/${order.id}">查看订单</a>
-    <a href="<c:url value="/"/> ">首页</a>
-</p>
+<div class="win-payment ae">
+    <span><i class="winicon"></i></span>
+    <span>您已成功提交付款</span>
+    <div class="login-reg nawlogin-reg win-add">
+        <a href="http://i.efeiyi.com/order/myEfeiyi/view/${order.id}" class="btn-login" title="查看订单">查&nbsp;看&nbsp;订&nbsp;单</a>
+        <a href="http://www.efeiyi.com" class="btn-reg">首&nbsp;&nbsp;&nbsp;&nbsp;页</a>
+    </div>
+</div>
 <script>
     <%--showChooseConfirm("提示","是否支付成功？",function(){--%>
     <%--window.location.href = "<c:url value="/order/myEfeiyi/view/${order.id}"/>"--%>

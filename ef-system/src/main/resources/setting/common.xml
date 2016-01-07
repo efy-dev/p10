@@ -41,10 +41,12 @@
         <logisticsCompany memo="huitongkuaidi" name="汇通快运"/>
         <logisticsCompany memo="tiantian" name="天天快递"/>
         <logisticsCompany memo="ups" name="UPS"/>
+        <logisticsCompany memo="guotongkuaidi" name="国通快递"/>
+        <logisticsCompany memo="debangwuliu" name="德邦物流"/>
     </logisticsCompanys>
     <companyAddresses>
-        <company group="efeiyi" name="e飞蚁-中国非遗电商平台" phone="4008768766" province="北京" city="北京市" country="朝阳区"
-                 address="北京市朝阳区酒仙桥东路9号电子城A2西侧6层"/>
+        <company group="efeiyi" name="北京永新华韵文化创意有限公司" phone="4008768766" province="北京" city="北京市" county="朝阳区"
+                 address="北京市朝阳区广渠东路2号"/>
     </companyAddresses>
     <searchs>
         <search group="efeiyi" recommendedModel="com.ming800.core.p.model.CommonSearch" rows="0" defaultQ=""
@@ -54,10 +56,4 @@
                 solrServerCoreUrl="http://101.200.182.7/solr/product/dataimport?command=delta-import&amp;clean=false"
                 solrServerHost="101.200.182.7" username="efy" password="helloword" port="80"/>
     </searchs>
-    <provinces>
-        <province key="北京市" value="北京"/>
-        <province key="上海市" value="上海"/>
-        <province key="天津市" value="天津"/>
-        <province key="重庆市" value="重庆"/>
-    </provinces>
 </common>

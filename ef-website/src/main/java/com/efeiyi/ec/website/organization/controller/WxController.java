@@ -4,17 +4,22 @@ import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.model.WxCalledRecord;
 import com.ming800.core.util.HttpUtil;
+import com.ming800.core.util.StringUtil;
 import net.sf.json.JSONObject;
+import org.omg.CORBA.Current;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/25 0025.
@@ -166,11 +171,51 @@ public class WxController {
         return "redirect:" + redirect;
     }
 
+    @RequestMapping({"/init.do"})
+    @ResponseBody
+    public String initWxConfig(HttpServletRequest request) throws Exception {
+        String timestamp = request.getParameter("timestamp");
+        String nonceStr = request.getParameter("nonceStr");
+        String callUrl = request.getParameter("callUrl");
+        String ticket;
 
-    private void setUserInfo(String consumerId,JSONObject userJsonObject){
+        //获取当前的ticket
+        String hql = "select obj from " + WxCalledRecord.class.getName() + " obj where obj.dataKey=:dataKey order by obj.createDatetime desc";
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("dataKey", "jsapi_ticket");
+        List<Object> wxCallRecordList = baseManager.listObject(hql, param);
 
+        if ((wxCallRecordList != null && wxCallRecordList.isEmpty()) || (wxCallRecordList != null && !wxCallRecordList.isEmpty() && System.currentTimeMillis() - ((WxCalledRecord) wxCallRecordList.get(0)).getCreateDatetime().getTime() >= 7000000)) {
+            //首先获得accessToken
+            String fetchAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET;
+            String tokenResult = HttpUtil.getHttpResponse(fetchAccessTokenUrl, null);
+            JSONObject tokenObject = JSONObject.fromObject(tokenResult);
+            String accessToken = tokenObject.getString("access_token");
+            //获得jsapiTickit
+            String fetchJsApiTicketUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + accessToken + "&type=jsapi";
+            String ticketResult = HttpUtil.getHttpResponse(fetchJsApiTicketUrl, null);
+            JSONObject ticketObject = JSONObject.fromObject(ticketResult);
+            ticket = ticketObject.getString("ticket");
 
+            WxCalledRecord wxCalledRecord = new WxCalledRecord();
+            wxCalledRecord.setData(ticket);
+            wxCalledRecord.setDataKey("jsapi_ticket");
+            wxCalledRecord.setCreateDatetime(new Date());
+            wxCalledRecord.setAccessToken(accessToken);
+            baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
+        } else {
+            ticket = ((WxCalledRecord) wxCallRecordList.get(0)).getData();
+        }
+        //生成signature
+        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + URLDecoder.decode(callUrl,"UTF-8");
+        System.out.println(signature);
+        signature = StringUtil.encodePassword(signature, "SHA1");
+        return signature;
+    }
 
+    @RequestMapping({"/wxTest.do"})
+    public String wxTest(HttpServletRequest request) {
+        return "/wxTest";
     }
 
 

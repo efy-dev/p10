@@ -24,12 +24,12 @@
                         <div class="dh">
                             <form>
                                 <div class="exchange">
-                                    <label>请输入您的兑换码</label>
+                                    <label style="margin: 0;">请输入您的兑换码</label>
                                     <input type="text" name="cdkey" id="cdkey"/>
                                 </div>
                                 <p id="tx"></p>
                                 <i class="no"></i>
-                                <input class="btn"  onclick="exchangeCoupon()" value="马上领取">
+                                <input class="btn" type="button"  onclick="exchangeCoupon()" value="马上领取" style="cursor: pointer">
                             </form>
                         </div>
                         <div class="bg"></div>
@@ -294,7 +294,7 @@ function exchangeCoupon() {
 }
 
 $('#coupon-dialog').click(function(){
-    $('.topbar,.header,.footer').css('z-index','-1');
+    $('.topbar,.header,.footer,.nav-new').css('z-index','-1');
     $('#tk').show();
     $('#tk').find('.no').click(function(){
         $('#tk').hide();

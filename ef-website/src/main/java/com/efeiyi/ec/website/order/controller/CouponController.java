@@ -97,7 +97,9 @@ public class CouponController {
                         } else {
                             isUseful = true;
                         }
-                        break;
+                        if (isUseful) {
+                            break;
+                        }
                     }
                 }
             } else if (coupon.getCouponBatch().getRange().equals("3")) {
@@ -106,7 +108,7 @@ public class CouponController {
                         if (coupon.getCouponBatch().getType().equals("1")) {
                             BigDecimal totalPrice = new BigDecimal(0);
                             for (PurchaseOrderProduct purchaseOrderProductTemp : purchaseOrder.getPurchaseOrderProductList()) {
-                                if (purchaseOrderProductTemp.getProductModel().getProduct().getTenant().equals(coupon.getCouponBatch().getTenant().getId())) {
+                                if (purchaseOrderProductTemp.getProductModel().getProduct().getTenant().getId().equals(coupon.getCouponBatch().getTenant().getId())) {
                                     totalPrice = totalPrice.add(purchaseOrderProduct.getPurchasePrice());
                                 }
                             }
@@ -119,7 +121,9 @@ public class CouponController {
                         } else {
                             isUseful = true;
                         }
-                        break;
+                        if (isUseful) {
+                            break;
+                        }
                     } else {
                         isUseful = false;
                     }
@@ -326,19 +330,21 @@ public class CouponController {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         XQuery couponQuery = new XQuery("listCoupon_byorder", request);
-        couponQuery.put("couponBatch_priceLimit", purchaseOrder.getTotal().floatValue());
         couponQuery.put("couponBatch_startDate", new Date());
         couponQuery.put("couponBatch_endDate", new Date());
         List<Coupon> couponList = baseManager.listObject(couponQuery);
-        for (Coupon coupon : couponList) {
-            coupon.getCouponBatch().setStartDateString(df.format(coupon.getCouponBatch().getStartDate()));
-            coupon.getCouponBatch().setEndDateString(df.format(coupon.getCouponBatch().getEndDate()));
+        Iterator<Coupon> couponIterator = couponList.iterator();
+        while (couponIterator.hasNext()) {
+            Coupon coupon = couponIterator.next();
+            if (isUserful(purchaseOrder, coupon)) {
+                coupon.getCouponBatch().setStartDateString(df.format(coupon.getCouponBatch().getStartDate()));
+                coupon.getCouponBatch().setEndDateString(df.format(coupon.getCouponBatch().getEndDate()));
+            } else {
+                couponIterator.remove();
+            }
         }
-
         model.addAttribute("couponList", couponList);
-
         return couponList;
-
     }
 
     @RequestMapping({"/coupon/listCoupon"})
@@ -405,7 +411,6 @@ public class CouponController {
                 list.add(coupon);
             }
         }
-
         model.addAttribute("list", list);
         return "/purchaseOrder/couponMessage";
 
@@ -425,23 +430,18 @@ public class CouponController {
         Coupon coupon = null;
         Date date = new Date();
         String couponBatchId = request.getParameter("couponBatchId");
-
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), AuthorizationUtil.getMyUser().getId());
         CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(), couponBatchId);
-
         XQuery xQuery1 = new XQuery("listCoupon_have", request);
         xQuery1.put("couponBatch_id", couponBatchId);
         xQuery1.put("consumer_id", consumer.getId());
         List haveUser = baseManager.listObject(xQuery1);
         synchronized (this) {
             if (couponBatch != null) {
-
                 if (haveUser == null || haveUser.size() == 0) {
-
                     XQuery xQuery3 = new XQuery("listCoupon_qbyhq", request);
                     xQuery3.put("couponBatch_id", couponBatchId);
                     List yhqList = baseManager.listObject(xQuery3);
-
                     XQuery xQuery2 = new XQuery("listCoupon_pdyhq", request);
                     xQuery2.put("couponBatch_id", couponBatchId);
                     List result = baseManager.listObject(xQuery2);
@@ -463,20 +463,13 @@ public class CouponController {
                         baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
                         model.addAttribute("yhq", coupon);
                     } else {
-
                         model.addAttribute("yhq", null);
-
                     }
                 } else {
-
                     model.addAttribute("yhq", "used");
                 }
-
-
             } else {
-
                 model.addAttribute("yhq", null);
-
             }
         }
         return "/getYhq";

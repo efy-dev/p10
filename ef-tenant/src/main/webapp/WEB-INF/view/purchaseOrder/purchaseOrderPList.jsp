@@ -51,6 +51,7 @@
         <th>订单号</th>
         <th>订单状态</th>
         <th>总额/实付金额</th>
+        <th>下单人</th>
         <th>收货人</th>
         <!--<th>ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" type="select" /> </th> -->
         <th>下单时间</th>
@@ -121,6 +122,9 @@
                 <fmt:formatNumber type="number" value="${purchaseOrder.getRealPayMoney()}" maxFractionDigits="2" minFractionDigits="2"/>
             </td>
             <td width="10%">
+                    ${purchaseOrder.user.username}
+            </td>
+            <td width="10%">
               ${purchaseOrder.receiverName}
             </td>
             <td width="20%">
@@ -128,7 +132,7 @@
             </td>
         </tr>
         <tr id="collapse-panel-${status.index}" class="am-collapse">
-            <td colspan="6">
+            <td colspan="7">
              <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover" width="90%">
                 <tr>
                     <th class="am-text-center">图片</th>

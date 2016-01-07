@@ -4,6 +4,7 @@ import com.aliyun.openservices.oss.OSSClient;
 import com.aliyun.openservices.oss.model.ObjectMetadata;
 import com.aliyun.openservices.oss.model.PutObjectResult;
 import com.efeiyi.ec.organization.model.AddressCity;
+import com.efeiyi.ec.organization.model.AddressDistrict;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
@@ -162,6 +163,7 @@ public class PurchaseOrderGiftController {
         String projectName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getProject().getName();
         String urlString = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProductModel_url();
         String sender = purchaseOrderGift.getGiftGaverName();
+        Integer amount = purchaseOrderGift.getPurchaseOrderProductList().get(0).getPurchaseAmount();
         //背景图设置
         URL backgroundUrl = new URL("http://pro.efeiyi.com/gift/background5.jpg");
         ImageIcon imgIcon = new ImageIcon(backgroundUrl);
@@ -170,6 +172,9 @@ public class PurchaseOrderGiftController {
         int height = theImg.getHeight(null);
         BufferedImage bimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bimage.createGraphics();
+        // 设置“抗锯齿”的属性
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g.setColor(Color.black);
         g.drawImage(theImg, 0, 0, null);
         //设置字体、字型、字号
@@ -186,6 +191,7 @@ public class PurchaseOrderGiftController {
             g.drawString(productName.substring(8, productName.length()), 447, 253);
         }
         g.drawString("「" + projectName + "」", 447, 313);
+        g.drawString("数量："+amount+" 个", 447, 393);
         //背景图set文字显示
         g.setFont(new Font("微软雅黑", Font.BOLD, 22));
         g.setColor(Color.black);
@@ -236,6 +242,8 @@ public class PurchaseOrderGiftController {
         int widthLogo = logo.getWidth(), heightLogo = logo.getHeight();
         // 计算图片放置位置
         Graphics2D g2 = image.createGraphics();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         int x = (image.getWidth() - widthLogo) / 2;
         int y = (image.getHeight() - logo.getHeight()) / 2;
         g2.drawImage(logo, x, y, widthLogo, heightLogo, null);
@@ -286,20 +294,16 @@ public class PurchaseOrderGiftController {
         }
         AddressProvince addressProvince = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), request.getParameter("province.id"));
         AddressCity addressCity = (AddressCity) baseManager.getObject(AddressCity.class.getName(), request.getParameter("city.id"));
+        AddressDistrict addressDistrict =  (AddressDistrict) baseManager.getObject(AddressDistrict.class.getName(), request.getParameter("district.id"));
         String detail = request.getParameter("receiveDetail");
-        String address = addressProvince.getName() + addressCity.getName() + detail;
+        String address = addressProvince.getName() + addressCity.getName() + addressDistrict.getName() + detail;
         String receiveName = request.getParameter("receiveName");
         String receivePhone = request.getParameter("receivePhone");
         purchaseOrderGift.setReceiverName(receiveName);
         purchaseOrderGift.setReceiverPhone(receivePhone);
         purchaseOrderGift.setPurchaseOrderAddress(address);
-
-        ConsumerAddress consumerAddress = new ConsumerAddress();
-        consumerAddress.setProvince(addressProvince);
-        consumerAddress.setCity(addressCity);
-        purchaseOrderGift.setConsumerAddress(consumerAddress);
-        consumerAddress.setConsignee(receiveName);
-        baseManager.saveOrUpdate(ConsumerAddress.class.getName(), consumerAddress);
+        purchaseOrderGift.setProvince(addressProvince);
+        purchaseOrderGift.setCity(addressCity);
 
         purchaseOrderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //订单改为未发货状态
         baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);

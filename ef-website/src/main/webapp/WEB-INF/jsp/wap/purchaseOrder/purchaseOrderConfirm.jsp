@@ -97,7 +97,10 @@
                                  alt="">
 
                             <div class="bd info">
-                                <p class="text">${product.productModel.product.name}[${product.productModel.name}]
+                                <p class="text">${product.productModel.product.name}
+                                    <c:if test="${null!=product.productModel.name || ''!=product.productModel.name}">
+                                        [${product.productModel.name}]
+                                    </c:if>
                                     <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
                                         <%--[--%>
                                         <%--<c:forEach items="${product.productModel.productPropertyValueList}"--%>
@@ -127,7 +130,7 @@
 
             <p><strong>商品金额</strong><span><em>￥</em>${purchaseOrder.total}</span></p>
             <c:if test="${empty purchaseOrder.callback}">
-                <p><strong>优惠</strong><span><em>￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span>
+                <p><strong>优惠</strong><span><em>-￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span>
                 </p>
             </c:if>
 
@@ -185,7 +188,7 @@
             </ul>
         </div>
         <div class="bd payment-total-bar newpayment-total-bar">
-            <span class="txt" >总金额:<span id="change">${purchaseOrder.total}</span>元</span>
+            <span class="txt" >总金额<span id="change">${purchaseOrder.total}</span>元</span>
             <a href="#btn-right" class="btn-right btn-red" onclick="submitOrder('${purchaseOrder.id}')">结&nbsp;算</a>
         </div>
 
@@ -295,6 +298,11 @@
 
     $(function () {
 
+        $("#yhq").click(function(){
+            $("#order-total").show();
+
+        });
+
         if (!isWeiXin()) {
             $("#weixin").hide();
         } else {
@@ -363,33 +371,38 @@
                 couponid = $(this).attr("id");
             }
         })
-        var couponId = couponid.substring(4, couponid.length);
-        $.ajax({
-            type: 'post',
-            async: false,
-            url: '<c:url value="/coupon/use.do"/>',
-            dataType: 'json',
-            data: {
-                couponId: couponId,
-                orderId: orderId
+        if(couponid!=null){
+            var couponId = couponid.substring(4, couponid.length);
+            $.ajax({
+                type: 'post',
+                async: false,
+                url: '<c:url value="/coupon/use.do"/>',
+                dataType: 'json',
+                data: {
+                    couponId: couponId,
+                    orderId: orderId
 
-            },
-            success: function (data) {
-                if (data == true) {
-                    var t_price = parseFloat(totalPrice);
-                    var chkobjs = document.getElementsByName("radio");
-                    for (var i = 0; i < chkobjs.length; i++) {
-                        if (chkobjs[i].checked) {
-                            t_price = t_price - parseFloat(chkobjs[i].value);
-                            $("#couponPrice").html(chkobjs[i].value);
+                },
+                success: function (data) {
+                    if (data == true) {
+                        var t_price = parseFloat(totalPrice);
+                        var chkobjs = document.getElementsByName("radio");
+                        for (var i = 0; i < chkobjs.length; i++) {
+                            if (chkobjs[i].checked) {
+                                t_price = t_price - parseFloat(chkobjs[i].value);
+                                $("#couponPrice").html(chkobjs[i].value);
+                            }
                         }
+                        $("#change").text(t_price);
+                        $(".yhq").hide();
                     }
-                    $("#change").text(t_price);
-                    $(".yhq").hide();
-                }
-            },
+                },
 
-        });
+            });
+
+        }else{
+            $(".yhq").hide();
+        }
 
     }
 

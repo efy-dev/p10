@@ -1,4 +1,3 @@
-@charset utf-8;
 body, h1, h2, h3, h4, h5, h6, ul, li, dl, dt, dd, img, input, a, p, strong, em, i {margin:0;padding:0;border:0;list-style:none;font-family:Microsoft YaHei}
 strong, b, em {font-weight:normal;font-style:normal}
 img {border:0}
@@ -111,7 +110,7 @@ input {outline:none}
 .breadcrumb li, .breadcrumb a {font-size:12px;color:#999}
 .breadcrumb .am-active {color:#000}
 .breadcrumb .am-breadcrumb {margin:7px 0;padding:0}
-.breadcrumb .am-breadcrumb > li + li:before {content:>\00a0;color:#000;font-size:12px}
+.breadcrumb .am-breadcrumb > li + li:before {content:'\00a0';color:#000;font-size:12px}
 /*--//End--breadcrumb--*/
 .category .explain {width:100%;padding:20px 0;float:left;position:relative;background:#f2f2f2;overflow:hidden}
 .category .explain .title {width:100px;float:left;margin-left:160px}
@@ -201,7 +200,7 @@ input {outline:none}
 .product-intro .am-breadcrumb {padding:8px 36px;margin-bottom:0;font-size:12px}
 .product-intro .am-breadcrumb li {color:#000}
 .product-intro .am-breadcrumb li a {color:#999}
-.product-intro .am-breadcrumb>li+li:before {content:>;color:#000}
+.product-intro .am-breadcrumb>li+li:before {content:'>';color:#000}
 .product-intro .itemInfo {background:#fff;width:100%;float:left;margin-top:20px;margin-bottom:20px}
 .product-intro .itemInfo .preview {float:left;margin-left:20px;position:relative}
 .product-intro .itemInfo .preview .slider-img {width:60px;float:left;margin-top:60px}
@@ -863,7 +862,7 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 .footer .frlinksimg .line {width:2px;height:40px;display:inline-block;margin:0 20px;position:relative;top:-36px;background:#434343}
 /*--//ENd--footernew--*/
 .dialog-gift {position:fixed;z-index:999}
-.dialog-gift .content {width:600px;height:416px;background:#fff;border:3px solid #999;position:fixed;top:50%;left:50%;margin-top:-208px;margin-left:-300px;z-index:2}
+.dialog-gift .content {width:600px;height:468px;background:#fff;border:3px solid #999;position:fixed;top:50%;left:50%;margin-top:-234px;margin-left:-300px;z-index:2}
 .dialog-gift .content .title {width:600px;font-size:18px;color:#333;text-align:center;font-weight:bolder;margin-top:27px;margin-bottom:14px;height:18px;line-height:18px;float:left}
 .dialog-gift .content .code {width:600px;text-align:center;float:left}
 .dialog-gift .content .code p {width:100%;float:left}
@@ -872,3 +871,47 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 .dialog-gift .content .icon-close:hover {transform:rotate(180deg)}
 .dialog-gift .overbg {width:100%;height:100%;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0, 0, 0, .5);z-index:1}
 /*--//End-/够阿米送礼弹出框/--*/
+.top-ad {
+    width:100%;
+    min-width:1200px;
+    height:auto;
+    float: left;
+}
+.top-ad-wrap {
+    width:100%;
+    min-width:1200px;
+    height:260px;
+    float: left;
+    overflow: hidden;
+    position: relative;
+}
+.top-ad-wrap a {
+    position: absolute;
+    top:0;
+    left:50%;
+    margin-left:-960px;
+}
+.top-ad .btn {
+    width:50px;
+    height:22px;
+    line-height:22px;
+    text-align: center;
+    border: 2px solid #c4a774;
+    position: absolute;
+    right: 0;
+    top:234px;
+    font-size:12px;
+    box-sizing: content-box;
+    color: #fff;
+    text-decoration: none;
+    z-index:9991;
+    transition: all .0s
+}
+
+.top-ad .btn-open {top:0px;
+    height:31px;
+    line-height:31px;
+    border: 0;
+    color: #999;
+    display: none;}
+.top-ad .btn-open:hover {background:#333}

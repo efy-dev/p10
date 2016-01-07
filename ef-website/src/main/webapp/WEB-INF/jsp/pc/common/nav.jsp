@@ -8,6 +8,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:if test="${bannerFlag=='true'}">
+<div class="top-ad" id="top-ad">
+    <div class="top-ad-wrap"><a href="http://www.efeiyi.com/subject/activity/iia4ndpr2vgul3i4" title=""><img src="<c:url value="/scripts/images/topb.jpg"/>" alt=""></a></div>
+    <a class="btn btn-close" href="javascript:void(0);" title="关闭">关闭</a>
+    <a class="btn btn-open" href="javascript:void(0);" title="关闭">展开</a>
+</div>
+    </c:if>
 <div class="topbar wh">
     <div class="hd">
         <ul class="ul-item">
@@ -104,6 +111,7 @@
             </div>
             <div class="items">
                 <a href="<c:url value="/"/>">首页</a>
+                <a href="http://www.efeiyi.com/subject/activity/iia4ndpr2vgul3i4">春节大礼包</a>
                 <a href="http://www.efeiyi.com/subject/ihygpb6m24v43zv9">礼品专区</a>
                 <a href="http://www.efeiyi.com/subject/ihygpskg3j28dh60">精选专题</a>
             </div>
@@ -119,5 +127,28 @@
         ajaxRequest("<c:url value="/cart/cartAmount.do"/>", {}, success, function () {
         }, "post");
     });
+    //顶部广告位
+    (function(){
+        var timer=null;
+        var topAd=$('#top-ad');
+        var oBnaner=topAd.find('.top-ad-wrap');
+        topAd.each(function(){
+            $(this).find('.btn-close').on('click',function(){
+                oBnaner.slideUp(300);
+                $(this).hide().siblings('.btn').show(300);
+                return false;
+            });
+            $(this).find('.btn-open').on('click',function(){
+                oBnaner.slideDown(300);
+                $(this).hide().siblings('.btn').show(300);
+                return false;
+            });
+        });
+
+        timer= setTimeout(function(){
+            oBnaner.slideUp(300);
+            topAd.find('.btn-close').hide().siblings('.btn').show(300);
+        },5000);
+    })();
 
 </script>

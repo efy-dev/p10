@@ -33,27 +33,40 @@
                     <td class="table-set">真实姓名</td>
                     <td class="table-set">昵称</td>
                     <td class="table-set">操作</td>
-
+                    <td class="table-set">注册量</td>
+                    <td class="table-set">订单数</td>
+                    <td class="table-set">订单总额</td>
+                    <td class="table-set">实付总额</td>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${objectList}" var="user">
-                    <c:if test="${(!empty user.name) || (!empty user.name2)}">
-                        <tr>
-                            <td class="am-hide-sm-only">
-                                http://www.efeiyi.com/subject/iibegant1zwnlnby?source=user_${user.id}</td>
-                            <td class="am-hide-sm-only">${user.username}</td>
-                            <td class="am-hide-sm-only">${user.name}</td>
-                            <td class="am-hide-sm-only">${user.name2}</td>
-                            <td class="am-hide-sm-only">
-                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                   href='<c:url value="/userGift/createQRCode.do">
+                <c:forEach items="${objectList}" var="user" varStatus="status">
+                    <c:forEach items="${statisticsList}" var="statistics" begin="${status.index}" end="${status.index}">
+                        <c:if test="${(!empty user.name) || (!empty user.name2)}">
+                            <tr>
+                                <td class="am-hide-sm-only">
+                                    http://www.efeiyi.com/subject/iibegant1zwnlnby?source=user_${user.id}</td>
+                                <td class="am-hide-sm-only">${user.username}</td>
+                                <td class="am-hide-sm-only">${user.name}</td>
+                                <td class="am-hide-sm-only">${user.name2}</td>
+                                <td class="am-hide-sm-only">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       href='<c:url value="/userGift/createQRCode.do">
                                <c:param name="userID" value="${user.id}"></c:param>
                                 </c:url>'><span class="am-icon-trash-o">生成二维码并下载</span>
-                                </a>
-                            </td>
-                        </tr>
-                    </c:if>
+                                    </a>
+                                </td>
+                                <td class="am-hide-sm-only">
+                                    <a href="<c:url value="/promotionPlan/getRegisterCountInfo.do?type=user&source=user_${user.id}"/>">${statistics.registerCount}</a>
+                                </td>
+                                <td class="am-hide-sm-only">
+                                    <a href="<c:url value="/promotionPlan/getOrderCountInfo.do?type=user&source=user_${user.id}"/>">${statistics.orderCount}</a>
+                                </td>
+                                <td class="am-hide-sm-only">${statistics.orderAmount}</td>
+                                <td class="am-hide-sm-only">${statistics.orderPaidAmount}</td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
                 </c:forEach>
                 </tbody>
             </table>
