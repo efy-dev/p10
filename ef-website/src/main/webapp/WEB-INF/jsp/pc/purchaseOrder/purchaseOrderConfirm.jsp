@@ -49,9 +49,12 @@
                                     <form>
                                         <select class="cars" id="province" name="province.id"
                                                 onchange="provinceChange(this)" required>
-                                            <option value="请选择">请选择所在省市</option>
+                                            <option value="请选择">请选择所在省</option>
                                         </select>
-                                        <select class="car1" id="city" name="city.id" required>
+                                        <select class="car1" id="city" name="city.id" onchange="cityChange(this)" required>
+                                            <option value="请选择">请选择所在市</option>
+                                        </select>
+                                        <select class="car1" id="district" name="district.id" required>
                                             <option value="请选择">请选择所在区县</option>
                                         </select>
                                     </form>
@@ -99,6 +102,7 @@
                     <span>${address.consignee}</span>
                     <span>${address.province.name}</span>
                     <span>${address.city.name}</span>
+                    <span>${address.district.name}</span>
                     <span>${address.details}</span>
                     <span>${address.phone}</span>
                 </div>
@@ -358,7 +362,7 @@
     function provinceChange(element) {
         var provinceId = $(element).val();
         ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>", {provinceId: provinceId}, function (data) {
-            var out = '<option value="">请选择所在区县</option>';
+            var out = '<option value="">请选择所在市</option>';
             for (var i = 0; i < data.length; i++) {
                 out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
             }
@@ -367,8 +371,20 @@
         }, "post")
     }
 
+    function cityChange(element) {
+        var cityId = $(element).val();
+        ajaxRequest("<c:url value="/myEfeiyi/address/listDistrict.do"/>", {cityId: cityId}, function (data) {
+            var out = '<option value="">请选择所在区县</option>';
+            for (var i = 0; i < data.length; i++) {
+                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+            }
+            $("#district").html(out);
+        }, function () {
+        }, "post")
+    }
+
     function newAddress(it) {
-        var out = ' <div class="page-default"> <span> <div id="' + (it.id) + '" class="default-text" name="addressItem" onclick="chooseAddress(this,\'' + it.id + '\')"> <strong>' + (it.consignee) + ' ' + (it.province.name) + '</strong> </a> </div> </span> <span>' + (it.consignee) + '</span> <span>' + (it.province.name) + '</span> <span>' + (it.city.name) + '</span> <span>' + (it.details) + '</span> <span>' + (it.phone) + '</span> </div>';
+        var out = ' <div class="page-default"> <span> <div id="' + (it.id) + '" class="default-text" name="addressItem" onclick="chooseAddress(this,\'' + it.id + '\')"> <strong>' + (it.consignee) + ' ' + (it.province.name) + '</strong> </a> </div> </span> <span>' + (it.consignee) + '</span> <span>' + (it.province.name) + '</span> <span>' + (it.city.name) + '</span> <span>' + (it.district.name) + '</span> <span>' + (it.details) + '</span> <span>' + (it.phone) + '</span> </div>';
         return out;
     }
 

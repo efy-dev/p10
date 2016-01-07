@@ -61,7 +61,7 @@
 
                             <p class="title"><span>${address.consignee}</span><span>${address.phone}</span></p>
 
-                            <p class="txt">${address.province.name}${address.city.name}${address.details}</p>
+                            <p class="txt">${address.province.name}${address.city.name}${address.district.name}${address.details}</p>
                             <a href="#arrow-right" class="arrow-right"></a>
                             <%
                                 b = true;
@@ -83,7 +83,7 @@
                 <p class="title"><span id="span1">${address.consignee}</span><span id="span2">${address.phone}</span>
                 </p>
 
-                <p class="txt" id="txt">${address.province.name}${address.city.name}${address.details}</p>
+                <p class="txt" id="txt">${address.province.name}${address.city.name}${address.district.name}${address.details}</p>
                 <a href="#arrow-right" class="arrow-right"></a>
             </a>
         </div>
@@ -101,12 +101,12 @@
                                     <c:if test="${null!=product.productModel.name || ''!=product.productModel.name}">
                                         [${product.productModel.name}]
                                     </c:if>
-                                    <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
+                                        <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
                                         <%--[--%>
                                         <%--<c:forEach items="${product.productModel.productPropertyValueList}"--%>
-                                                   <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                                        <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
                                         <%--]--%>
-                                    <%--</c:if>--%>
+                                        <%--</c:if>--%>
                                 </p>
 
                                 <p class="price"><em>￥</em><span>${product.purchasePrice}</span></p>
@@ -202,10 +202,10 @@
                 <c:forEach items="${addressList}" var="address">
 
                     <li class="cart-btn acd"
-                        onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.city.name}','${address.details}')">
+                        onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.city.name}','${address.district.name}','${address.details}')">
                         <p class="bd title">${address.consignee} ${address.phone}</p>
 
-                        <p class="bd des">${address.province.name}${address.city.name}${address.details}</p>
+                        <p class="bd des">${address.province.name}${address.city.name}${address.district.name}${address.details}</p>
 
                         <p class="bd btns">
                                 <%--<input type="radio" name="address" id="address" onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.details}')">--%>
@@ -250,6 +250,8 @@
                                     onclick="province(this);" required>
                             </select>
                             <select id="cityVal" class="car1" name="city.id" onclick="city(this);" required>
+                            </select>
+                            <select id="districtVal" class="car1" name="district.id" onclick="district(this);" required>
                             </select>
                         </div>
                         <div class="am-form-group">
@@ -420,7 +422,7 @@
     function zhifubao(element) {
         $("#zhifubao").attr("class", "add-btn1");
 //        if (isWeiXin()) {
-            $("#weixin").attr("class", "");
+        $("#weixin").attr("class", "");
 //        }
 
         payment = "1";
@@ -516,7 +518,7 @@
     }
 
     function newAddress(it) {
-        var out2 = '<li id="'+it.id+'" class="cart-btn acd" onclick="chooseAddress(\'' + it.id + '\',\'' + it.consignee + '\',\'' + it.phone + '\',\'' + it.province.name + '\',\'' + it.city.name + '\',\'' + it.details + '\')"><p class="bd title">' + it.consignee + '  ' + it.phone + '</p><p class="bd des">' + it.province.name + it.city.name + it.details + '</p><p class="bd btns"></p></li><br>';
+        var out2 = '<li id="'+it.id+'" class="cart-btn acd" onclick="chooseAddress(\'' + it.id + '\',\'' + it.consignee + '\',\'' + it.phone + '\',\'' + it.province.name + '\',\'' + it.city.name + '\',\'' + it.district.name + '\',\'' + it.details + '\')"><p class="bd title">' + it.consignee + '  ' + it.phone + '</p><p class="bd des">' + it.province.name + it.city.name + it.details + '</p><p class="bd btns"></p></li><br>';
         return out2;
     }
 
@@ -532,12 +534,13 @@
     <%--}, "post")--%>
     <%--}--%>
 
-    function chooseAddress(addressId, consignee, phone, province, city, details) {
+    function chooseAddress(addressId, consignee, phone, province, city, district, details) {
         consumerAddress = addressId;
         var conConsignee = consignee;
         var conPhone = phone;
         var conProvince = province;
         var conCity = city;
+        var conDistrict = district;
         var conDetails = details;
 
         console.log(consumerAddress);
@@ -545,7 +548,7 @@
         $("#order-add1").attr("style", "display:block");
         $("#span1").text(conConsignee);
         $("#span2").text(conPhone);
-        $("#txt").text(conProvince + conCity + conDetails);
+        $("#txt").text(conProvince + conCity + conDistrict + conDetails);
 
     }
 
@@ -595,6 +598,33 @@
 
         });
     }
+
+    function district(obj) {
+        var cid = $("#cityVal").val();
+        var v = $(obj).val();
+        $("#districtVal").empty();
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/myEfeiyi/address/listDistrict.do"/>',
+            dataType: 'json',
+            data: {
+                cityId: cid
+            },
+            success: function (data) {
+                var obj = eval(data);
+                var rowHtml = "";
+                rowHtml += "<option value='请选择'>请选择</option>";
+                for (var i = 0; i < obj.length; i++) {
+                    rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
+                }
+                $("#districtVal").append(rowHtml);
+                $("#districtVal option[value='" + v + "']").attr("selected", "selected");
+
+            },
+        });
+    }
+
     function city(obj) {
         var pid = $("#provinceVal").val();
         var v = $(obj).val();
@@ -616,7 +646,7 @@
                 }
                 $("#cityVal").append(rowHtml);
                 $("#cityVal option[value='" + v + "']").attr("selected", "selected");
-
+                district(v);
             },
         });
     }
