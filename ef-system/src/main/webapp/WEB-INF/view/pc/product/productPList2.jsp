@@ -195,7 +195,7 @@
         });
     }
     function outExcel(){
-        var  home = "商品编号,商品名称,商品规格编号,商品规格名称,价格,市场价格,库存,链接,状态,项目,店铺,类别,商品创建时间";
+        var  home = "商品编号,商品名称,商品规格编号,商品规格名称,价格,市场价格,库存,市场链接,运营链接,状态,项目,店铺,类别,商品创建时间";
         var  on = "上架";
         var  down = "下架";
         window.location.href = "<c:url value="/product/outExcel.do"/>"+"?home="+home+"&on="+on+"&down="+down;
