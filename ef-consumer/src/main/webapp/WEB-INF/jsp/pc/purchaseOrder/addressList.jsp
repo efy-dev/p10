@@ -39,6 +39,8 @@
                                         </select>
                                         <select id="cityVal" class="car1" name="city.id" onclick="city(this);" required>
                                         </select>
+                                        <select id="district12" class="car1" name="district.id"  required>
+                                        </select>
                                         <span class="active-d span2" id="hao" style="border: 0;color: #000"></span>
                                     </form>
 
@@ -87,7 +89,7 @@
                 <tr>
                     <td width="76" style="text-align: right;"><span>所在地区：</span></td>
                     <td width="600">
-                        <span>${address.province.name} ${address.city.name}</span>
+                        <span>${address.province.name} ${address.city.name} ${address.district.name}</span>
 
                     </td>
                     <td width="188" class="ae-rg1">
@@ -165,8 +167,11 @@
                                                           <option value="${pro.id}">${pro.name}</option>
                                                       </c:forEach>
                                                   </select>
-                                                  <select id="citys${address.id}" name="city.id" class="car1" required>
+                                                  <select id="citys${address.id}" name="city.id" class="car1"  onchange="cityChange(this , '${address.id}')"    required>
                                                   </select>
+                                                  <select id="districts${address.id}" name="district.id" class="car1" required>
+                                                  </select>
+
                                               </form>
                                           </li>
                                           <li>
@@ -266,6 +271,34 @@
 
         });
     }
+    function district1(obj){
+
+        var cityId =$("#cityVal").val();
+        var v=$(obj).val();
+        $("#district12").empty();
+
+        $.ajax({
+            type:'post',
+            async:'false',
+            url:'<c:url value="/myEfeiyi/address/listDistrict.do"/>',
+            dataType: 'json',
+            data: {
+                cityId: cityId
+            },
+            success: function(data){
+                var obj = eval(data);
+                var rowHtml = "";
+                rowHtml +="<option value='请选择'>请选择所在地区</option>"
+                for(var i = 0;i<obj.length;i++){
+                    rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
+                }
+                $("#district12").append(rowHtml);
+                $("#distrtict12 option[value='" + v + "']").attr("selected", "selected");
+            }
+
+        })
+
+    }
     function city(obj) {
         var pid = $("#provinceVal").val();
         var v = $(obj).val();
@@ -287,7 +320,7 @@
                 }
                 $("#cityVal").append(rowHtml);
                 $("#cityVal option[value='" + v + "']").attr("selected", "selected");
-
+                district1(v);
             },
         });
     }
@@ -316,7 +349,7 @@
         });
     }
 
-    function provinceChange(element, o, callback) {
+    function provinceChange(element, o, callback,element1,callback1) {
         $("#citys" + o).empty();
         var provinceId = $(element).val();
         ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>",
@@ -330,20 +363,44 @@
                     if(typeof callback!= "undefined"){
                         callback();
                     }
+                    cityChange(element1,o,callback1);
+
+                }
+        )
+    }
+    function cityChange(element1, o, callback1) {
+        $("#districts" + o).empty();
+        var cityId = $(element1).val();
+        ajaxRequest("<c:url value="/myEfeiyi/address/listDistrict.do"/>",
+                {cityId: cityId},
+                function (data) {
+                    var out = '<option value="">请选择</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+                    }
+                    $("#districts" + o).append(out);
+                    if(typeof callback1!= "undefined"){
+                        callback1();
+                    }
                 }
         )
     }
 
-    function chooseCity(element,provinceId,cityId,o){
+    function chooseCity(element,provinceId,cityId,o,districtId,element1){
         $(element).val(provinceId);
+        $(element1).val(cityId);
         var callback = function(){
             $("#citys" + o).val(cityId);
         }
-        provinceChange(element, o,callback);
+        var callback1 = function(){
+            $("#districts" + o).val(districtId);
+        }
+        provinceChange(element, o,callback,element1,callback1);
+
     }
 
     <c:forEach items="${addressList}" var="address">
-    chooseCity($("#${address.id}") , "${address.province.id}","${address.city.id}","${address.id}");
+    chooseCity($("#${address.id}") , "${address.province.id}","${address.city.id}","${address.id}","${address.district.id}",$("#citys${address.id}"));
     </c:forEach>
 
     $().ready(function () {
