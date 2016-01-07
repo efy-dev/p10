@@ -454,7 +454,7 @@ public class ProductManagerImpl implements ProductManager{
                             BigDecimal m = (BigDecimal) os[j];
                             sheet1.addCell(new Label(j,i+1,m.toString(), wcf_left));
 //                            row.createCell(j).setCellValue(m.toString());
-                        } else if(j == 8){
+                        } else if(j == 9){
                             Integer status = Integer.parseInt(os[j].toString());
                             if(status ==  1){
                                 sheet1.addCell(new Label(j,i+1,on, wcf_left));
@@ -463,7 +463,7 @@ public class ProductManagerImpl implements ProductManager{
                                 sheet1.addCell(new Label(j,i+1,down, wcf_left));
 //                                row.createCell(j).setCellValue(down);
                             }
-                        }else if(j == 12){
+                        }else if(j == 13){
                             Date date2 = (Date)os[j];
                             sheet1.addCell(new Label(j,i+1, sdf1.format(date2), wcf_left));
                         }else {
