@@ -43,7 +43,7 @@
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
                             <button onclick="window.location.href='<c:url
-                                    value=""/>'"
+                                    value="/virtualPlan/getOrderProduct.do?id=${pop.id}&planId=${planId}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                     class="am-icon-edit"></span> 编辑
                             </button>
@@ -57,7 +57,7 @@
                 </td>
                 <td>${pop.purchaseOrder.user.username}</td>
                 <td>${pop.productModel.serial}</td>
-                <td>${pop.productModel.name}</td>
+                <td>${pop.productModel.product.name}[${pop.productModel.name}]</td>
                 <td>${pop.purchasePrice}</td>
                 <td>
                     <fmt:formatDate value="${pop.purchaseOrder.createDatetime}" pattern="yyyy-MM-dd HH:mm:ss"/>

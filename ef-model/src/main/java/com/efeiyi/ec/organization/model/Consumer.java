@@ -15,6 +15,7 @@ public class Consumer extends BigUser {
     private BigDecimal deposit;
     private Integer score;
     private String unionid;
+    private BigDecimal balance;
     //private List<ProjectContent> projectContents;
 
     @Column(name = "deposit")
@@ -42,6 +43,15 @@ public class Consumer extends BigUser {
 
     public void setUnionid(String unionid) {
         this.unionid = unionid;
+    }
+
+    @Column(name = "balance")
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
    /* @ManyToMany(fetch = FetchType.LAZY,mappedBy = "consumer")

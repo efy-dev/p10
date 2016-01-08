@@ -29,4 +29,9 @@ public class CompanyOrderBatchServiceManagerImpl implements CompanyOrderBatchSer
     public List<PurchaseOrderGift> getOrderGiftList(CompanyOrderBatch companyOrderBatch) throws Exception {
         return companyOrderBatchDao.getOrderGiftList(companyOrderBatch);
     }
+
+    @Override
+    public void removeOrderGift(String giftId) throws Exception {
+        companyOrderBatchDao.removeOrderGift(giftId);
+    }
 }

@@ -318,4 +318,20 @@ ADD COLUMN `purchase_order_address`  varchar(255) NULL AFTER `coupon_id`;
 ALTER TABLE `purchase_order_gift`
 ADD COLUMN `gift_gaver_name`  varchar(50) NULL AFTER `gift_picture_url`;
 
+/-----------------------添加余额明细表-----------------/
+CREATE TABLE `balance_record` (
+`id`  char(16) NOT NULL ,
+`current_balance`  decimal(10,2) NULL ,
+`change_balance`  decimal(10,2) NULL ,
+`result_balance`  decimal(10,2) NULL ,
+`type`  varchar(20) NULL ,
+`status`  varchar(2) NULL ,
+`key`  varchar(20) NULL ,
+`create_date_time`  datetime NULL ,
+`consumer_id`  char(16) NULL
+)
+;
+/-------------consumer表增加余额字段----------------/
+ALTER TABLE `organization_consumer`
+ADD COLUMN `balance`  decimal(10,2) NULL AFTER `unionid`;
 

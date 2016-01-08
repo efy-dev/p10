@@ -21,7 +21,7 @@
         alert("订单已取消，不能修改收货人信息");
       }else{
         jQuery.ajax({
-          type: "GET",
+          type: "POST",
           url: '<c:url value="/batch/updateReceiver.do"/>',
           data: {name: $('#name').val(), phone: $('#phone').val(),address:$('#address').val(),id:purchaseOrderId},
           dataType: "json",

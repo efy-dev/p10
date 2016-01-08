@@ -64,6 +64,16 @@ public class CompanyOrderBatchController {
         response.getWriter().flush();
     }
 
+    @RequestMapping("/company/removePurchaseOrderGift.do")
+    public ModelAndView removePurchaseOrderGift(HttpServletRequest request) throws Exception {
+        String giftId = request.getParameter("id");
+        if (giftId == null || giftId.trim().equals("")){
+            throw new Exception("获取礼品订单失败:订单Id为空");
+        }
+        companyOrderBatchServiceManager.removeOrderGift(giftId);
+        return new ModelAndView("redirect:/basic/xm.do?qm=plistBatchGift_default");
+    }
+
     private ModelAndView orderGiftListSave(CompanyOrderBatch companyOrderBatch, String orderBatchId)throws Exception{
         if (companyOrderBatch == null){
             throw new Exception("Id为" + orderBatchId + "的企业礼品卡不存在");
