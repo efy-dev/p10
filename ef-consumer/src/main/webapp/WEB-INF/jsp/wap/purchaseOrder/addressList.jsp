@@ -17,7 +17,7 @@
           <span>${address.phone}</span>
         </div>
         <div class="content-list">
-          <p>${address.province.name}${address.city.name}${address.details}</p>
+          <p>${address.province.name}${address.city.name}${address.district.name}${address.details}</p>
         </div>
         <ul class="botton-list">
           <li><a href="#"  onclick="showConfirm('提示','是否删除',function(){

@@ -43,7 +43,7 @@ public class VirtualPlanDaoHibernate implements VirtualPlanDao {
 
     @Override
     public List<PurchaseOrderProduct> getOrderProductList(VirtualOrderPlan virtualOrderPlan, PageEntity pageEntity) throws Exception {
-        String hql = "select pop from PurchaseOrderProduct pop, VirtualPurchaseOrder vpo where vpo.virtualOrderPlan = :virtualOrderPlan";
+        String hql = "select pop from PurchaseOrderProduct pop, VirtualPurchaseOrder vpo where vpo.virtualOrderPlan = :virtualOrderPlan and vpo.id=pop.purchaseOrder.id and pop.purchaseOrder.status <>0";
         Query query = this.getSession().createQuery(hql)
                 .setParameter("virtualOrderPlan", virtualOrderPlan)
                 .setFirstResult(pageEntity.getrIndex())
@@ -59,6 +59,14 @@ public class VirtualPlanDaoHibernate implements VirtualPlanDao {
                 .setFirstResult(pageEntity.getrIndex())
                 .setMaxResults(pageEntity.getSize());
         return query.list();
+    }
+
+    @Override
+    public void deleteVirtualPlan(String id) throws Exception {
+        String sql = "delete from virtual_plan where id = :id";
+        Query query = this.getSession().createSQLQuery(sql)
+                .setString("id", id);
+        query.executeUpdate();
     }
 
 

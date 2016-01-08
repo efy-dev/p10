@@ -7,7 +7,7 @@
 <body>
 
 <!--//End--header-->
-<div class="shipping-address">
+<div class="shipping-address" style="margin-bottom: 20px;">
   <form action="<c:url value="/myEfeiyi/addAddressOfMob.do"/>" method="post" id="addAddress">
   <div class="address">
       <ul>
@@ -22,14 +22,17 @@
         </li>
         <li>
           <label>所在地区</label>
-          <select  id="provinceVal" class="cars " name="province.id" onchange="province(this)"
+          <select  id="provinceVal" class="cars  am-selected am-dropdown am-selected-btn" name="province.id" onchange="province(this)"
                   required>
             <option value="请选择">请选择</option>
             <c:forEach var="pro" items="${province}">
                <option value="${pro.id}">${pro.name}</option>
             </c:forEach>
           </select>
-          <select  id="cityVal" class="car1 " name="city.id" required>
+          <select  id="cityVal" class="car1  am-selected am-dropdown am-selected-btn" name="city.id" onchange="district(this)"  required>
+            <option value="请选择">请选择</option>
+          </select>
+          <select  id="districtVal" class="car1  am-selected am-dropdown am-selected-btn" name="district.id" required>
             <option value="请选择">请选择</option>
           </select>
         </li>
@@ -122,6 +125,32 @@
         }
         $("#cityVal").append(rowHtml);
         $("#cityVal option[value='" + v + "']").attr("selected", "selected");
+
+      },
+    });
+  }
+
+  function district(obj) {
+    var cityId = $("#cityVal").val();
+    var v = $(obj).val();
+    $("#districtVal").empty();
+    $.ajax({
+      type: 'post',
+      async: false,
+      url: '<c:url value="/myEfeiyi/address/listDistrict.do"/>',
+      dataType: 'json',
+      data: {
+        cityId: cityId
+      },
+      success: function (data) {
+        var obj = eval(data);
+        var rowHtml = "";
+        rowHtml += "<option value='请选择'>请选择</option>";
+        for (var i = 0; i < obj.length; i++) {
+          rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
+        }
+        $("#districtVal").append(rowHtml);
+        $("#districtVal option[value='" + v + "']").attr("selected", "selected");
 
       },
     });

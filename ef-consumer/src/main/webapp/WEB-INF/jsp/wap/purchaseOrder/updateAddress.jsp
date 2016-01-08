@@ -28,7 +28,9 @@
               <option value="${pro.id}">${pro.name}</option>
             </c:forEach>
           </select>
-          <select id="citys${address.id}" name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required>
+          <select id="citys${address.id}" name="city.id" class="car1  am-selected am-dropdown am-selected-btn"   onchange="cityChange(this , '${address.id}')"  required>
+          </select>
+          <select id="districts${address.id}" name="district.id" class="car1  am-selected am-dropdown am-selected-btn" required>
           </select>
         </li>
         <li>
@@ -150,7 +152,7 @@
     });
   }
 
-  function provinceChange(element, o, callback) {
+  function provinceChange(element, o, callback,element1,callback1) {
     $("#citys" + o).empty();
     var provinceId = $(element).val();
     ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>",
@@ -164,19 +166,44 @@
               if(typeof callback!= "undefined"){
                 callback();
               }
+              cityChange(element1,o,callback1);
+
+            }
+    )
+  }
+  function cityChange(element1, o, callback1) {
+    $("#districts" + o).empty();
+    var cityId = $(element1).val();
+    ajaxRequest("<c:url value="/myEfeiyi/address/listDistrict.do"/>",
+            {cityId: cityId},
+            function (data) {
+              var out = '<option value="">请选择</option>';
+              for (var i = 0; i < data.length; i++) {
+                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+              }
+              $("#districts" + o).append(out);
+              if(typeof callback1!= "undefined"){
+                callback1();
+              }
             }
     )
   }
 
-  function chooseCity(element,provinceId,cityId,o){
+
+
+  function chooseCity(element,provinceId,cityId,o,districtId,element1){
     $(element).val(provinceId);
+    $(element1).val(cityId);
     var callback = function(){
       $("#citys" + o).val(cityId);
     }
-    provinceChange(element, o,callback);
+    var callback1 = function(){
+      $("#districts"+o).val(districtId)
+    }
+    provinceChange(element, o,callback,element1,callback1);
   }
 
-  chooseCity($("#${address.id}") , "${address.province.id}","${address.city.id}","${address.id}");
+  chooseCity($("#${address.id}") , "${address.province.id}","${address.city.id}","${address.id}","${address.district.id}",$("#citys${address.id}"));
 
   $().ready(function () {
     $("#addAddress").validate({
