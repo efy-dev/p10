@@ -331,6 +331,7 @@ CREATE TABLE `balance_record` (
 `consumer_id`  char(16) NULL
 )
 ;
-
-
+/-------------consumer表增加余额字段----------------/
+ALTER TABLE `organization_consumer`
+ADD COLUMN `balance`  decimal(10,2) NULL AFTER `unionid`;
 
