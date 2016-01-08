@@ -16,12 +16,12 @@ import java.util.Date;
 public class BalanceRecord {
 
     private String id;
-    private BigDecimal currentBalance;
-    private BigDecimal changeBalance;
-    private BigDecimal resultBalance;
-    private String type;
-    private String status;
-    private String key;
+    private BigDecimal currentBalance;//原始余额
+    private BigDecimal changeBalance;//变动余额
+    private BigDecimal resultBalance;//变动后余额
+    private String type;//类型 1：购买商品返现的余额  2：微信答题发放的余额
+    private String status;//状态  0：假删  1： 正常  2：收入  3：支出
+    private String key;//标示字段（订单id或者回滚余额变动明细id等都使用该字段）
     private Date createDateTime;
     private Consumer consumer;
 
