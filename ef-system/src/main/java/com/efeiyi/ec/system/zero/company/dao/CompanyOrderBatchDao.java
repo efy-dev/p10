@@ -14,4 +14,6 @@ public interface CompanyOrderBatchDao {
     void buildOrderGiftSetByCompanyOrderBatch(CompanyOrderBatch companyOrderBatch) throws Exception;
 
     List<PurchaseOrderGift> getOrderGiftList(CompanyOrderBatch companyOrderBatch)throws Exception;
+
+    void removeOrderGift(String giftId)throws Exception;
 }

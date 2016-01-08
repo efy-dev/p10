@@ -38,4 +38,18 @@ public interface VirtualPlanDao {
      * @throws Exception
      */
     List<VirtualUser> getVirtualUserList(VirtualUserPlan virtualUserPlan, PageEntity pageEntity)throws Exception;
+
+    /**
+     * 删除虚拟计划-真删(保存对象计划)
+     * @param id 计划Id
+     * @throws Exception
+     */
+    void deleteVirtualPlan(String id)throws Exception;
+
+    /**
+     * 删除虚拟计划-假删
+     * @param id 计划Id
+     * @throws Exception
+     */
+    void removeVirtualPlan(String id)throws Exception;
 }

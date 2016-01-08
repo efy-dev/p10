@@ -72,7 +72,7 @@ public class PurchaseOrderController {
     }
 
     /**
-     * 查看订单详情
+     * 查看订单详情1    
      *
      * @param model
      * @param orderId

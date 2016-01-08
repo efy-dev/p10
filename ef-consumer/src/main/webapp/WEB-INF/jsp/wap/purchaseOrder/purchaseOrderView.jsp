@@ -150,7 +150,7 @@
             </div>
             <div class="order-js-list">
                 <h1>
-                    <p><ming800:status name="logisticsCompany" dataType="PurchaseOrderDelivery.logisticsCompany"
+                    <p>物流公司：<ming800:status name="logisticsCompany" dataType="PurchaseOrderDelivery.logisticsCompany"
                                        checkedValue="${pl.logisticsCompany}" type="normal"/></p>
 
                     <p>快递单号：<span>${pl.serial}</span></p>

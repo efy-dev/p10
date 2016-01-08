@@ -1,6 +1,7 @@
 package com.efeiyi.ec.system.zero.virtual.controller;
 
 import com.efeiyi.ec.product.model.ProductModel;
+import com.efeiyi.ec.purchase.model.PurchaseOrderComment;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.system.zero.virtual.model.task.CoreTaskScheduler;
 import com.efeiyi.ec.system.zero.virtual.model.timer.SubTimer;
@@ -146,7 +147,7 @@ public class VirtualPlanController {
     public ModelAndView saveVirtualUserPlan(VirtualUserPlan virtualUserPlan) throws Exception{
         VirtualUserPlan userPlan = (VirtualUserPlan)baseManager.getObject(VirtualUserPlan.class.getName(), virtualUserPlan.getId());
         if (userPlan == null){
-            baseManager.delete(VirtualPlan.class.getName(), virtualUserPlan.getId());
+            vpmService.deleteVirtualPlan(virtualUserPlan.getId());
             virtualUserPlan.setImplementClass("com.efeiyi.ec.system.zero.virtual.model.task.VirtualUserGenerator");
             virtualUserPlan.setId(null);
             virtualUserPlan.setStatus(VirtualPlanConstant.planStatusInit);
@@ -169,7 +170,7 @@ public class VirtualPlanController {
             virtualOrderPlan = new VirtualOrderPlan();
             BeanUtils.copyProperties(virtualOrderPlan, virtualPlan);
             //删除父类virtualPlan 并制空ID
-            baseManager.delete(VirtualPlan.class.getName(), id);
+            vpmService.deleteVirtualPlan(id);
             virtualOrderPlan.setId(null);
         }
         //获取除父类外的基本属性值
@@ -182,6 +183,51 @@ public class VirtualPlanController {
         //保存订单计划关联商品
         saveVirtualProductModelList(virtualOrderPlan, request);
 
+        return new ModelAndView("redirect:/basic/xm.do?qm=plistVirtualPlan_default");
+    }
+
+    @RequestMapping("/getOrderProduct.do")
+    public ModelAndView getOrderProduct(ModelMap modelMap, HttpServletRequest request)throws Exception{
+        String popId = request.getParameter("id");
+        String planId = request.getParameter("planId");
+        if (popId == null || popId.trim().equals("")){
+            throw new Exception("获取订单商品对象失败:id为空");
+        }
+        PurchaseOrderProduct pop = (PurchaseOrderProduct) baseManager.getObject(PurchaseOrderProduct.class.getName(), popId);
+        modelMap.put("object", pop);
+        modelMap.put("planId", planId);
+        return new ModelAndView("/zero/virtual/virtualPurchaseOrderForm");
+    }
+
+    @RequestMapping("/saveOrderProductContent.do")
+    public ModelAndView saveOrderProductContent(HttpServletRequest request)throws Exception{
+        String popId = request.getParameter("id");
+        String planId = request.getParameter("planId");
+        String content = request.getParameter("content");
+        if (popId == null || popId.trim().equals("")){
+            throw new Exception("获取订单商品对象失败:id为空");
+        }
+        PurchaseOrderProduct pop = (PurchaseOrderProduct) baseManager.getObject(PurchaseOrderProduct.class.getName(), popId);
+        PurchaseOrderComment poc = new PurchaseOrderComment();
+        poc.setContent(content);
+        poc.setPurchaseOrderProduct(pop);
+        poc.setStatus("1");
+        poc.setCreateDatetime(new Date());
+        baseManager.saveOrUpdate(poc.getClass().getName(), poc);
+        pop.setPurchaseOrderComment(poc);
+        pop.setStatus("1");
+        baseManager.saveOrUpdate(pop.getClass().getName(), pop);
+
+        return new ModelAndView("redirect:/virtualPlan/getTypeObjectList.do?virtual=virtual&id="+planId+"&type=order");
+    }
+
+    @RequestMapping("/removeVirtualPlan.do")
+    public ModelAndView removeVirtualPlan(HttpServletRequest request)throws Exception{
+        String id = request.getParameter("id");
+        if (id == null || id.trim().equals("")){
+            throw new Exception("删除计划失败:计划ID为空");
+        }
+        vpmService.removeVirtualPlan(id);
         return new ModelAndView("redirect:/basic/xm.do?qm=plistVirtualPlan_default");
     }
 

@@ -40,7 +40,8 @@ public class ProductDaoHibernate implements ProductDao{
         String sql = "select " +
                 "p.serial as 商品编号,p.name as 商品名称," +
                 "pm.serial as 商品规格编号,pm.name as 商品规格名称,pm.price as 价格,pm.market_price as 市场价格,pm.amount as 库存," +
-                "CONCAT('http://www.efeiyi.com/product/list/',pt.id) as 链接,"+
+                "CONCAT('http://www.efeiyi.com/product/list/',pt.id) as 市场链接,"+
+                "CONCAT('http://www.efeiyi.com/product/productModel/',pm.id) as 运营链接,"+
                 "p.status " +
                 "as 状态, " +
                 "pt.name as 项目,t.name as 店铺," +

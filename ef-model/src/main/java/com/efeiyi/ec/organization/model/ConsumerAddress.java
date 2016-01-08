@@ -88,7 +88,8 @@ public class ConsumerAddress {
         this.email = email;
     }
 
-    @Column(name = "address_district_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="address_district_id")
     public AddressDistrict getDistrict() {
         return district;
     }
