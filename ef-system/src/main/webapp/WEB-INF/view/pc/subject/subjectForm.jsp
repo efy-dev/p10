@@ -246,7 +246,7 @@
 
    $(function(){
 
-     CKEDITOR.replace('content', { height: '440px', width: '1000px' });
+     CKEDITOR.replace('content', { height: '440px', width: '1000px','startupMode':'source' });
      $(".copy").each(function(){
        copyInit($(this));
      });
