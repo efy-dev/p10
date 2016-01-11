@@ -34,7 +34,7 @@
             </div>
             <div class="am-form-group">
                 <i class="icon name"></i>
-                <input id="username" name="username" class="text1 textam" tabindex="1" placeholder="已验证手机" type="text" value="${username}">
+                <input id="username" name="username" class="text1 textam" tabindex="1" placeholder="请输入用户名" type="text" value="${username}">
             </div>
             <div class="am-form-group">
                 <i class="icon pwd"></i>

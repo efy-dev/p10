@@ -7,7 +7,7 @@ $(function(){
     //购物车
     (function(){
         $('.icon-delete').click(function(){
-            $('.alert-delete').fadeIn('fast');
+           $('.alert-delete').fadeIn('fast');
         })
 
         $('.edit-dete').click(function(){
@@ -61,21 +61,19 @@ $(function(){
         $("#nobtn").removeAttr('href');
         $("#nobtn").removeAttr('onclick');
 
-        /*   $('.cart-coupons .ul-list').each(function(){
-         var $input=$(this).find('input');
-
-         $(this).find('li').click(function(){
-         $input.removeAttr('checked');
-         $(this).find('input').prop('checked','checked');
-         })
-         })
-         */
+   /*     $('.balance').each(function(){
+            var $input=$(this).find('input');
+            $(this).click(function(){
+                $input.removeAttr('checked');
+                $(this).find('input').prop('checked','checked');
+            })
+        })*/
 
 
 
 
     })
-        //商品评价
+    //商品评价
     (function(){
 
         $('.my-evaluate .score .score-star .star li').click(function(){
@@ -156,6 +154,7 @@ $(function(){
         (function(){
             $('.my-colonel .iwill .txt4 .txcon,.packet .button .ad,#btn').click(function(){
                 $('#cover').show();
+
                 $(".custom-header").css("z-index","0");
                 return false;
             });
@@ -166,14 +165,17 @@ $(function(){
 
             $("#line").click(function(){
                 $("#cover2").show();
+                $(".details .des-master .img,.slnew .des-price p").css("z-index","-1");
                 $(".custom-header").css("z-index","0");
             })
             $("#cover2 .text-co2 .covbtn").click(function(){
                 $(this).parents("#cover2").hide()
+                $(".details .des-master .img,.slnew .des-price p").css("z-index","");
                 $(".custom-header").css("z-index","");
             })
             $("#cover2 .bg").click(function(){
                 $(this).parents("#cover2").hide()
+                $(".details .des-master .img,.slnew .des-price p").css("z-index","");
                 $(".custom-header").css("z-index","");
             })
         })();
@@ -337,7 +339,7 @@ $(function(){
         $(".weachat-tab .wea-tab .wea-icon").click(function(){
             var _index = $(this).index();
             $(this).addClass("active").siblings().removeClass("active");
-            $(".wea-box .fiy-box").eq(_index).show().siblings().hide();
+           $(".wea-box .fiy-box").eq(_index).show().siblings().hide();
 
         })
     })();

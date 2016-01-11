@@ -57,7 +57,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a  id="${project.id}" tenantProjectId="0" class="am-btn am-btn-default am-btn-xs am-text-secondary" status="0" href="javascript:void(0);" onclick="linkProject(this,'${project.id}');"><span
-                                            class="am-icon-pencil-square-o">关联商家</span>
+                                            class="am-icon-pencil-square-o">关联项目</span>
                                     </a>
                                 </div>
                             </div>
@@ -119,11 +119,11 @@
                     success: function (data) {
                         if(status == '0'){
                             $(obj).attr("status","1");
-                            $(obj).find("span").text("解除商家");
+                            $(obj).find("span").text("解除项目");
                             $(obj).attr("tenantProjectId",data)
                         }else{
                             $(obj).attr("status","0");
-                            $(obj).find("span").text("关联商家");
+                            $(obj).find("span").text("关联项目");
                             $(obj).attr("tenantProjectId",data)
                         }
 //                $("a[status='1'] span").text("关联商家");

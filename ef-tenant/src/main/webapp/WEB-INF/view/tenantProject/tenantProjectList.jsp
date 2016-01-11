@@ -13,7 +13,7 @@
 <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6">
         <%--<a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/product/project/toTenantProject.do?tenantId=${tenantId}"/>">关联项目</a>--%>
-        <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=plistTProject_default&tenantId=${tenantId}"/>">关联项目</a>
+        <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=plistTProject_default&tenantId=${tenantId}"/>">关联与店铺相关的项目</a>
     </div>
     <div class="am-u-sm-12">
         <table class="am-table am-table-striped am-table-hover table-main">
@@ -29,7 +29,7 @@
                 <tr id="${tenantProject.id}">
                     <td>
                         <a id="${tenantProject.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);"  onclick="showConfirm('提示','解除关联同时会删除商品与项目的关联，请谨慎操作；如确实要解除，请在商品管理页重新关联项目。',function(){removeTenantProject('${tenantProject.tenant.id}','${tenantProject.project.id}','${tenantProject.id}')})"><span
-                                class="am-icon-pencil-square-o"></span> 解除商家
+                                class="am-icon-pencil-square-o"></span> 解除项目
                         </a>
                     </td>
                     <td class="am-hide-sm-only">

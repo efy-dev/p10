@@ -17,7 +17,7 @@ import java.util.List;
 public interface PurchaseOrderDao extends BaseDao<PurchaseOrder>{
 
     String updateOrderStatus(PurchaseOrder purchaseOrder);
-    public List getResult();
+    List getResult(String startTime,String endTime,String selectTenant);
 
 
 }
