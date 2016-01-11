@@ -2,6 +2,10 @@ package com.efeiyi.ec.system.zero.company.util;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.jacob.activeX.ActiveXComponent;
+import com.jacob.com.ComThread;
+import com.jacob.com.Dispatch;
+import com.jacob.com.Variant;
 import com.ming800.core.util.ApplicationContextUtil;
 import net.sourceforge.rtf.RTFTemplate;
 import net.sourceforge.rtf.context.image.FormatBase;
@@ -194,32 +198,24 @@ public class BatchPrintReactor implements Runnable {
      * 打印
      */
     private void executePrint(File docTarget) {
-//        JFileChooser fileChooser = new JFileChooser(); // 创建打印作业
-        // 构建打印请求属性集
-        HashPrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-        // 设置打印格式，因为未确定类型，所以选择autosense
-        DocFlavor flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
-        // 定位默认的打印服务
-        PrintService defaultService = PrintServiceLookup.lookupDefaultPrintService();
-        InputStream fis = null;
+        ComThread.InitSTA();
+        ActiveXComponent wd = new ActiveXComponent("Word.Application");
         try {
-            DocPrintJob job = defaultService.createPrintJob(); // 创建打印作业
-            fis = new FileInputStream(docTarget); // 构造待打印的文件流
-            DocAttributeSet das = new HashDocAttributeSet();
-            Doc doc = new SimpleDoc(fis, flavor, das);
-            job.print(doc, pras);
-            deleteOldFile(docTarget);
+            // 不打开文档
+            Dispatch.put(wd, "Visible", new Variant(false));
+            Dispatch document = wd.getProperty("Documents").toDispatch();
+            // 打开文档
+            Dispatch doc = Dispatch.invoke(document, "Open", Dispatch.Method,
+                    new Object[] { docTarget.getAbsolutePath() }, new int[1]).toDispatch();
+            // 开始打印
+            Dispatch.callN(doc, "PrintOut", new Object[]{});
+            wd.invoke("Quit", new Variant[]{});
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            //打印完的把名字改了
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            // 始终释放资源
+            ComThread.Release();
+            deleteOldFile(docTarget);
         }
     }
 
