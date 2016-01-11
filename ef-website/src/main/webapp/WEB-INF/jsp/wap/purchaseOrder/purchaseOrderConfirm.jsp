@@ -226,7 +226,7 @@
                     <i class="clase" title="关闭"></i>
                 </div>
                 <div class="m-form">
-                    <form id="newAddress" method="post"
+                    <form id="newAddress" style="height:276px;overflow-y:scroll" method="post"
                           class="am-form">
 
                         <input type="hidden" name="productModel" value="${productModel.id}">
