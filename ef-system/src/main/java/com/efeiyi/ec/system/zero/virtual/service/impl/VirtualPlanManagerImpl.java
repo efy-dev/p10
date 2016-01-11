@@ -41,4 +41,9 @@ public class VirtualPlanManagerImpl implements VirtualPlanManagerService {
     public void deleteVirtualPlan(String id) throws Exception {
         virtualPlanDao.deleteVirtualPlan(id);
     }
+
+    @Override
+    public void removeVirtualPlan(String id) throws Exception {
+        virtualPlanDao.removeVirtualPlan(id);
+    }
 }

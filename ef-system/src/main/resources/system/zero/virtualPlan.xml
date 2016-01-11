@@ -17,9 +17,9 @@
                 <field name="planType" label="对象" inputType="text">
                     <statusType fieldName="planType">
                         <item label="订单" value="order"/>
-                        <item label="点赞" value="praise"/>
-                        <item label="收藏" value="collect"/>
-                        <item label="人气" value="popularity"/>
+                        <!--<item label="点赞" value="praise"/>-->
+                        <!--<item label="收藏" value="collect"/>-->
+                        <!--<item label="人气" value="popularity"/>-->
                         <!--<item label="商品" value="product"/>-->
                         <item label="用户" value="user"/>
                     </statusType>

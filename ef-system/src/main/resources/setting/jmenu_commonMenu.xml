@@ -168,10 +168,14 @@
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderGift_companyDefault&amp;type=gift"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="企业礼品卡列表">
                 <match url="/basic/xm.do?qm=plistPurchaseOrderGift_companyDefault&amp;type=gift"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistBatchGift_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="物流信息对接">
+            <jnode url="/basic/xm.do?qm=plistBatchGift_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="物流信息对接发送">
                 <match url="/basic/xm.do?qm=plistBatchGift"/>
                 <match url="/basic/xm.do?qm=listBatchGift"/>
                 <match url="/basic/xm.do?qm=viewBatchGift"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistGiftBatchPrint_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="物流信息对接打单">
+                <match url="/basic/xm.do?qm=plistGiftBatchPrint"/>
+                <match url="/basic/xm.do?qm=listGiftBatchPrint"/>
             </jnode>
         </jnode>
     </jnode>

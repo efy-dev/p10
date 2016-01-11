@@ -69,6 +69,14 @@ public class VirtualPlanDaoHibernate implements VirtualPlanDao {
         query.executeUpdate();
     }
 
+    @Override
+    public void removeVirtualPlan(String id) throws Exception {
+        String sql = "update virtual_plan set status = '0' where id = :id";
+        Query query = this.getSession().createSQLQuery(sql)
+                .setString("id", id);
+        query.executeUpdate();
+    }
+
 
     /*@Override
     public List<User> getZCLInfomation(PromotionPlan promotionPlan, PageEntity pageEntity) throws Exception {
