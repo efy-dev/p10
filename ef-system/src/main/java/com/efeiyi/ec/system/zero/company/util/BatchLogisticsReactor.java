@@ -116,6 +116,7 @@ public class BatchLogisticsReactor implements Runnable {
                 receiverMap.put("mobile", purchaseOrderProduct.getPurchaseOrder().getReceiverPhone());
                 receiverMap.put("province", purchaseOrderProduct.getPurchaseOrder().getProvince().getName());
                 receiverMap.put("city", purchaseOrderProduct.getPurchaseOrder().getCity().getName());
+                receiverMap.put("county", purchaseOrderProduct.getPurchaseOrder().getDistrict() == null ? "" : purchaseOrderProduct.getPurchaseOrder().getDistrict().getName());
                 receiverMap.put("address", purchaseOrderProduct.getPurchaseOrder().getPurchaseOrderAddress());
 //                receiverMap.put("county",detailAddressMap.get("county"));
                 jsonMap.put("receiver", receiverMap);
