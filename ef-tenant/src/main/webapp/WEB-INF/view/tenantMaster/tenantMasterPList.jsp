@@ -56,7 +56,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a  id="${master.id}" tenantMasterId="0" class="am-btn am-btn-default am-btn-xs am-text-secondary" status="0" href="javascript:void(0);" onclick="linkMaster(this,'${master.id}');"><span
-                                            class="am-icon-pencil-square-o">关联商家</span>
+                                            class="am-icon-pencil-square-o">关联大师</span>
                                     </a>
                                 </div>
                             </div>
@@ -98,29 +98,31 @@
         var tenantId = $("input[name='tenantId']").val();
         var tenantMasterId = $(obj).attr("tenantMasterId");
         var status = $(obj).attr("status");
-        $.ajax({
-            type: "get",
-            url: '<c:url value="/tenant/linkMaster.do"/>',
-            cache: false,
-            dataType: "json",
-            data:{tenantId:tenantId,masterId:masterId,tenantMasterId:tenantMasterId,status:status},
-            success: function (data) {
-                alert(data);
-                if(status == '0'){
-                    $(obj).attr("status","1");
-                    $(obj).find("span").text("解除商家");
-                    $(obj).attr("tenantMasterId",data)
-                }else{
-                    $(obj).attr("status","0");
-                    $(obj).find("span").text("关联商家");
-                    $(obj).attr("tenantMasterId",data)
-                }
+        var r=confirm("关联大师后,大师所关联的项目也会与店铺关联,确认关联吗");
+        if(r) {
+            $.ajax({
+                type: "get",
+                url: '<c:url value="/tenant/linkMaster.do"/>',
+                cache: false,
+                dataType: "json",
+                data: {tenantId: tenantId, masterId: masterId, tenantMasterId: tenantMasterId, status: status},
+                success: function (data) {
+                    if (status == '0') {
+                        $(obj).attr("status", "1");
+                        $(obj).find("span").text("解除大师");
+                        $(obj).attr("tenantMasterId", data)
+                    } else {
+                        $(obj).attr("status", "0");
+                        $(obj).find("span").text("关联大师");
+                        $(obj).attr("tenantMasterId", data)
+                    }
 //                $("a[status='1'] span").text("关联商家");
 //                $("a[status='1']").attr("status",'0');
 //                $(obj).find("span").text("解除商家");
 //                $(obj).attr("status",'1');
-            }
-        });
+                }
+            });
+        }
     }
 </script>
 </body>
