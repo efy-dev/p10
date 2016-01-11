@@ -10,7 +10,7 @@
 
   $(function(){
 
-    setInterval(couponTime,1000);
+  var s= setInterval(couponTime,1000);
     var index=5;
     function couponTime(){
       if(index>0){
@@ -20,7 +20,9 @@
 
       }else{
         index=0;
+        clearInterval(s);
         window.location.href = "http://www.efeiyi.com";
+
       }
     }
   })
