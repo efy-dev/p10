@@ -133,17 +133,48 @@
 
         }
 
-
+        function downloadOrder(){
+            var startTime = $("#startTime").val();
+            var endTime = $("#endTime").val();
+            var selectTenant = $("#tenant3").val();
+            window.location.href = "<c:url value='/purchaseOrder/downloadOrders.do?startTime='/>"+startTime+"&endTime="+endTime+"&selectTenant="+selectTenant;
+        }
     </script>
 </head>
 <body>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content" style="height: auto">
     <div class="am-g">
+        <div class="am-form-group am-form-icon" style="width: 150px;float: left">
+            <i class="am-icon-calendar"></i>
+            <input type="text" id="startTime" name="startTime"
+                   class="am-form-field am-input-sm"
+                   placeholder="下载日期起"  data-am-datepicker readonly>
+        </div>
+        <div style="float: left">&nbsp;&nbsp;至&nbsp;&nbsp;</div>
+        <div class="am-form-group am-form-icon" style="width: 150px;float: left">
+            <i class="am-icon-calendar"></i>
+            <input type="text" id="endTime" name="startTime"
+                   class="am-form-field am-input-sm"
+                   placeholder="下载日期止"  data-am-datepicker readonly>
+        </div>
+
+        <div class="am-form-group" id="xztenant" style="width: 260px;float: left;text-align: center">
+            <label class="am-u-sm-4 am-form-label" style="padding: 0;">选择商家</label>
+
+            <div class="am-u-sm-8" name="selectTenant" id="selectTenant" style="display: inline-block;padding: 0">
+                <select name="tenant3" id="tenant3" style="width:180px;float:left;">
+                    <c:forEach items="${tenantList}" var="tenant">
+                    <option value="${tenant.id}">${tenant.name}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+
         <div class="am-u-sm-12 am-u-md-6">
             <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-               style="color: red;" id="downloadOrder"
-               href='<c:url value="/purchaseOrder/downloadOrders.do"></c:url>'>
+               style="color: red;" id="downloadOrder" onclick="downloadOrder()"
+               >
                 <span class="am-icon-pencil-square-o">下载订单</span>
             </a>
         </div>

@@ -19,6 +19,6 @@ public interface PurchaseOrderManager {
 
     String updateOrderStatus(PurchaseOrder purchaseOrder);
 
-    String outExcel(String path,String[] homes) throws WriteException;
+    String outExcel(String path,String[] homes,String startTime,String endTime,String selectTenant) throws WriteException;
 
 }
