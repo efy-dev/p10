@@ -1,11 +1,13 @@
 package com.efeiyi.ec.consumer.order.controller;
 
 import com.efeiyi.ec.activity.group.model.PurchaseOrderGroup;
+import com.efeiyi.ec.balance.model.BalanceRecord;
 import com.efeiyi.ec.consumer.organization.model.SendCode;
 import com.efeiyi.ec.consumer.organization.model.SmsProvider;
 import com.efeiyi.ec.consumer.organization.model.YunPianSmsProvider;
 import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.*;
 import com.ming800.core.base.service.BaseManager;
@@ -22,9 +24,11 @@ import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -72,7 +76,7 @@ public class PurchaseOrderController {
     }
 
     /**
-     * 查看订单详情
+     * 查看订单详情1    
      *
      * @param model
      * @param orderId
@@ -136,7 +140,7 @@ public class PurchaseOrderController {
      * @throws Exception
      */
     @RequestMapping({"/cancelOrder/{orderId}"})
-    public String cancelPurchaseOrder(@PathVariable String orderId) throws Exception {
+    public String cancelPurchaseOrder(HttpServletRequest request,@PathVariable String orderId) throws Exception {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         if("1".equals(purchaseOrder.getOrderStatus())){
             for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
@@ -151,6 +155,30 @@ public class PurchaseOrderController {
         }
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_CONSEL);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+       //订单取消回滚余额
+        String consumerId =AuthorizationUtil.getMyUser().getId();
+        XQuery xQuery=new XQuery("listBalanceRecord_default1",request);
+        xQuery.put("consumer_id",consumerId);
+        xQuery.put("key",orderId);
+        List balanceDetailList=baseManager.listObject(xQuery);
+
+       Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+        BigDecimal balance =consumer.getBalance();
+        if(balanceDetailList.size()>0){
+            BalanceRecord balanceRecord1= (BalanceRecord) balanceDetailList.get(0);
+
+            BalanceRecord balanceRecord=new BalanceRecord();
+            balanceRecord.setConsumer(consumer);
+            balanceRecord.setCurrentBalance(balance);
+            balanceRecord.setChangeBalance(balanceRecord1.getChangeBalance());
+            balanceRecord.setResultBalance(balance.add(balanceRecord1.getChangeBalance()));
+            balanceRecord.setCreateDateTime(new Date());
+            balanceRecord.setStatus("2");
+            balanceRecord.setType("3");
+            balanceRecord.setKey(balanceRecord1.getId());
+
+
+        }
         return "redirect:/order/myEfeiyi/list.do";
     }
 

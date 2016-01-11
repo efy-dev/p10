@@ -35,67 +35,69 @@ import java.util.Map.Entry;
  */
 @Controller
 @RequestMapping("/freight")
-public class SeachFreightFromDepponController {
+public class SearchFreightFromDepponController {
 
-    @RequestMapping(value ="/seachPrice.do", method = RequestMethod.POST)
+    @RequestMapping(value ="/searchPrice.do")//, method = RequestMethod.POST)
     @ResponseBody
     public String submit2Deppon(HttpServletRequest request) throws Exception {
-        String productCode = ((DepponProduct) ContextUtils.getBean("product")).getProductCode();
-        String cost="";
 
-        JSONObject jsonObj = (JSONObject)JSONObject.parse(request.getParameter("json").toString());
-        String jsonString = jsonObj.toJSONString();
-        String weight = request.getParameter("weight");
-        if(jsonString ==null && "".equals(jsonString)){
-            return "the args is necessary";
-        }
-        String apiKey = "deppontest";
-        long timestamp = System.currentTimeMillis();
-        String digest = jsonString + apiKey + timestamp;
-        System.out.println("param+apikey+timestamp:  " + digest);
-        digest = md5(digest);
-        System.out.println("MD5(param+apikey+timestamp):  " + digest);
-        digest = new String(Base64.encodeBase64(digest.getBytes()));
-        System.out.println("base64(MD5(param+apikey+timestamp)):  " + digest);
+            String  productCode = ((DepponProduct) ContextUtils.getBean("depponProduct")).getProductCode();
+            String cost="";
+            JSONObject jsonObj = (JSONObject)JSONObject.parse(request.getParameter("json").toString());
+            String jsonString = jsonObj.toJSONString();
+            String weight = request.getParameter("weight");
+            if(jsonString ==null && "".equals(jsonString)){
+                return "the args is necessary";
+            }
+            String apiKey = "301695b57488025761a85027704c22b5";
+            long timestamp = System.currentTimeMillis();
+            String digest = jsonString + apiKey + timestamp;
+            System.out.println("param+apikey+timestamp:  " + digest);
+            digest = md5(digest);
+            System.out.println("MD5(param+apikey+timestamp):  " + digest);
+            digest = new String(Base64.encodeBase64(digest.getBytes()));
+            System.out.println("base64(MD5(param+apikey+timestamp)):  " + digest);
 
-        HttpClient httpClient = new DefaultHttpClient();
-        String url = "http://58.40.17.67/dop/order/queryPrice.action";
-        HttpPost httppost = new HttpPost(url);
-        StringEntity stringEntity = new StringEntity("companyCode=EWBHUAYUNN&params=" + jsonString + "&digest=" + digest+"&timestamp="+timestamp,"utf-8");
-        stringEntity.setContentType("application/x-www-form-urlencoded");
-        httppost.setEntity(stringEntity);
-        System.out.println("url:  " + url);
-        byte [] b = new byte[(int)stringEntity.getContentLength()];
-        stringEntity.getContent().read(b);
-        System.out.println("报文:" + new String(b,"utf-8"));
+            HttpClient httpClient = new DefaultHttpClient();
+            String url = "http://api.deppon.com/dop/order/queryPrice.action";
+            HttpPost httppost = new HttpPost(url);
+            StringEntity stringEntity = new StringEntity("companyCode=EWBHUAYUNN&params=" + jsonString + "&digest=" + digest+"&timestamp="+timestamp,"utf-8");
+            stringEntity.setContentType("application/x-www-form-urlencoded");
+            httppost.setEntity(stringEntity);
+            System.out.println("url:  " + url);
+            byte [] b = new byte[(int)stringEntity.getContentLength()];
+            stringEntity.getContent().read(b);
+            System.out.println("报文:" + new String(b,"utf-8"));
 
-        HttpResponse response = httpClient.execute(httppost);
-        HttpEntity entity = response.getEntity();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(
-                entity.getContent(), "UTF-8"));
+            HttpResponse response = httpClient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    entity.getContent(), "UTF-8"));
 
-        String line;
-        StringBuilder stringBuilder = new StringBuilder();
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-        }
-        System.out.println(stringBuilder.toString());
-        JSONObject jasonObject = (JSONObject) JSONObject.parse(stringBuilder.toString());
-        JSONObject jasonObject2 = jasonObject.getJSONObject("responseParam");
-        JSONArray jsonArray =  jasonObject2.getJSONArray("priceInfo");
+            String line;
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+            System.out.println(stringBuilder.toString());
+            JSONObject jasonObject = (JSONObject) JSONObject.parse(stringBuilder.toString());
+            JSONObject jasonObject2 = jasonObject.getJSONObject("responseParam");
+            JSONArray jsonArray =  jasonObject2.getJSONArray("priceInfo");
 
-        if (!jsonArray.isEmpty()){
-            for (int i=0;i<jsonArray.size();i++){
-                if (productCode.equals(jsonArray.getJSONObject(i).getString("productCode"))){
-                    cost = calculateFreight(jsonArray.getJSONObject(i),weight);
-                    break;
+            if (!jsonArray.isEmpty()){
+                for (int i=0;i<jsonArray.size();i++){
+                    if (productCode.equals(jsonArray.getJSONObject(i).getString("productCode"))){
+                        cost = calculateFreight(jsonArray.getJSONObject(i),weight);
+                        break;
+
+                    }
 
                 }
-
             }
-        }
 
-        return cost;
+            return cost;
+
+
     }
 
 

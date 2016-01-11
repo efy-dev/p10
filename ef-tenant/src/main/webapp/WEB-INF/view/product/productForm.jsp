@@ -283,8 +283,11 @@
             $("input[name='master.id']").val($("input[name='masterCheck']:checked").val());
             $("input[name='project.id']").val($("input[name='projectCheck']:checked").val());
             if( $("input[name='project.id']").val()==""){
-                alert("请选择项目");
+                alert("关联项目为必选项，若您的店铺还没有关联的项目，请您到 账号管理>基本信息>关联与店铺相关的项目 中关联项目后，再上传商品，否则您将无法在前台查看该商品");
             }else{
+                if('${object.id}'!="") {
+                    alert("保存成功后,请您对已修改的商品重新上架!");
+                }
                 $("form").submit();
             }
       //      $("input[name='tenant.id']").val($("select[name='tenantCheck']").val());

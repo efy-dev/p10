@@ -221,6 +221,16 @@ public class VirtualPlanController {
         return new ModelAndView("redirect:/virtualPlan/getTypeObjectList.do?virtual=virtual&id="+planId+"&type=order");
     }
 
+    @RequestMapping("/removeVirtualPlan.do")
+    public ModelAndView removeVirtualPlan(HttpServletRequest request)throws Exception{
+        String id = request.getParameter("id");
+        if (id == null || id.trim().equals("")){
+            throw new Exception("删除计划失败:计划ID为空");
+        }
+        vpmService.removeVirtualPlan(id);
+        return new ModelAndView("redirect:/basic/xm.do?qm=plistVirtualPlan_default");
+    }
+
     private ModelAndView virtualOrderList(ModelMap modelMap) throws Exception {
         String planId = (String) modelMap.get("planId");
         VirtualOrderPlan virtualOrderPlan = (VirtualOrderPlan)baseManager.getObject(VirtualOrderPlan.class.getName(), planId);

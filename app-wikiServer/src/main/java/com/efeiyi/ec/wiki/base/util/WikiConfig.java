@@ -6,5 +6,5 @@ package com.efeiyi.ec.wiki.base.util;
  */
 public class WikiConfig {
     public static final String appKey = "BL2QEuXUXNoGbNeHObD4EzlX+KuGc70U";
-    public static final String SQL_USER_GET ="from MyUser WHERE username=? AND status='1'";
+    public static final String SQL_USER_GET ="from MyUser WHERE username= :username AND status<>'0'";
 }
