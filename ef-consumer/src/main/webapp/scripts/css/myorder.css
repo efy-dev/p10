@@ -25,8 +25,8 @@ a:hover { text-decoration: underline }
 .my-order .order-nav { width: 1000px; height: auto; margin: 0 auto; overflow: hidden; margin: 62px auto 150px; }
 .my-order .order-nav .layout-nav { float: left; width: 110px; height: auto; padding: 20px 14px 25px; border: 1px solid #ccc; }
 .my-order .order-nav .layout-nav .order { height: auto; }
-.my-order .order-nav .layout-nav .order span { padding: 0 16px; }
-.my-order .order-nav .layout-nav .order p { font-size: 12px; color: #000; font-family: Times New Roman; margin-top: 12px; padding-left: 2px; }
+.my-order .order-nav .layout-nav .order span {width: 100%;display: inline-block;text-align: center}
+.my-order .order-nav .layout-nav .order p {text-align: center; font-size: 12px; color: #000; font-family: Times New Roman; margin-top: 12px; padding-left: 2px; }
 .my-order .order-nav .layout-li { margin-top: 15px; }
 .my-order .order-nav .layout-li .liul a { color: #000; font-size: 12px; padding-left: 4px; }
 .my-order .order-nav .layout-li li { padding-bottom: 7px; cursor: pointer;text-align: center;width: 100%}
@@ -513,8 +513,10 @@ a:hover { text-decoration: underline }
 .my-clearing .default-active { border: 1px solid #000; }
 .my-clearing .page-default span a strong { padding-left: 15px; }
 .my-clearing .page-default .triangle img { position: absolute; left: 121px; top: 18px; }
+.my-clearing .page-box-m{width: 100%;float: left;height: 40px;overflow: hidden}
 .my-clearing .page-clearing .dj-p { width: 100%; float: left; padding: 22px 0 0 15px; }
 .my-clearing .triangle-bg { background: url('../images/efeiyi-gwc.png') no-repeat -62px 0; width: 13px; height: 6px; position: absolute; left: 53px; top: 5px; }
+.my-clearing .triangle-bg2 { background: url('../images/efeiyi-gwc.png') no-repeat -62px 0; width: 13px; height: 6px; position: absolute; left: 53px; top: 5px;transfrom:rotate(180deg);-webkit-transform:rotate(180deg); }
 .my-clearing .page-clearing .dj-p a { float: left; font-size: 12px; color: #003366; position: relative; outline: none; }
 .my-clearing .divtop { margin-top: 40px; }
 .my-clearing .alipay { text-align: center; margin-right: 34px; float: left; cursor: pointer; padding: 10px 44px; background-color: #fff; border: 1px solid #ccc; font-size: 12px; color: #000; position: relative; width: 141px; }
@@ -522,7 +524,8 @@ a:hover { text-decoration: underline }
 .my-clearing .page-store { height: 55px; line-height: 55px; }
 .my-clearing .page-store a { outline: none; font-size: 12px; font-family: simsun; color: #003366; position: relative; padding-right: 50px; }
 .my-clearing .page-inventory { border: 1px solid #ccc; width: 1000px; overflow: hidden; margin-top: -1px; float: left; padding: 23px 0 22px 20px; }
-.my-clearing .page-inventory .triangle-bg { background: url('../images/efeiyi-gwc.png') no-repeat -62px 0; width: 13px; height: 6px; position: absolute; left: 53px; top: 2px; }
+.my-clearing .page-inventory .triangle-bg{ background: url('../images/efeiyi-gwc.png') no-repeat -62px 0; width: 13px; height: 6px; position: absolute; left: 53px; top: 2px; }
+.my-clearing .page-inventory .triangle-bg2{ background: url('../images/efeiyi-gwc.png') no-repeat -62px 0; width: 13px; height: 6px; position: absolute; left: 53px; top: 2px;transfrom:rotate(180deg);-webkit-transform:rotate(180deg);}
 .my-clearing .my-clearing .wh1 { width: 100%; float: left; margin-bottom: 27px; min-height: 700px; }
 .my-clearing .active-box { padding-left: 16px; }
 .my-clearing .middle-active { vertical-align: middle; width: 12px; height: 12px; }
@@ -540,12 +543,12 @@ a:hover { text-decoration: underline }
 .my-clearing .page-leaveword input { font-size: 12px; color: #ccc; padding: 13px 11px; border: 1px solid #ccc; width: 800px; height: 40px; color: #333 }
 .my-clearing .page-leaveword span { font-size: 12px; font-family: Arial; }
 /*表单弹出*/
-.my-clearing .pop-up { width: 696px; border: 1px solid #000; background-color: #fff; position: fixed; left: 50%; top: 50%; z-index: 9999; margin-top: -290px; margin-left: -286px; }
+.my-clearing .pop-up { width: 696px; border: 1px solid #000; background-color: #fff; position: fixed; left: 50%; top: 50%; z-index: 9999; margin-top: -201px; margin-left: -348px; }
 .my-clearing .pop-h { padding-left: 20px; font-size: 14px; color: #000; font-family: Microsoft YaHei; line-height: 44px; border-bottom: 1px solid #000; background: #fff; }
 .apt { }
 .my-clearing .m-form { padding: 15px 37px 33px; background: #fff; }
 .my-clearing .m-form li { height: 44px; line-height: 44px; }
-.my-clearing .m-form li input { border: 1px solid #000; padding: 3px; color: #000; font-size: 12px; font-family: simsun; }
+.my-clearing .m-form li input { border: 1px solid #000; padding: 3px; color: #000; font-size: 12px; font-family: simsun;height: 28px;}
 .my-clearing .m-form li label { width: 81px; color: #000; font-size: 12px; font-family: simsun; font-weight: normal; text-align: right }
 .my-clearing .m-form li select { border: 1px solid #000; color: #000; font-size: 14px; font-family: simsun; padding: 4px 13px; }
 .my-clearing .m-form li select option { color: #000; font-size: 12px; font-family: simsun; }
@@ -553,9 +556,9 @@ a:hover { text-decoration: underline }
 .my-clearing .m-form li .car1 { width: 108px; }
 .my-clearing .m-form li .car2 { width: 142px; }
 .my-clearing .m-form li strong { font-size: 10px; color: #666; }
-.my-clearing .m-form li .dj-btn { width: 163px; height: 25px; border: 1px solid #000; background: #fff; color: #000; font-size: 12px; font-family: simsun; outline: none; }
+.my-clearing .m-form li .dj-btn { width: 163px; border: 1px solid #000; background: #fff; color: #000; font-size: 12px; font-family: simsun; outline: none; }
 .my-clearing .m-form li .dj-btn:hover { background: #000; color: #fff; transition: all 0.5s; }
-.my-clearing .m-form li span { float: inherit; width: 145px; height: 25px; border: 1px solid #fe0000; color: #fe0000; font-size: 12px; font-family: simsun; line-height: 25px; padding: 5px 13px; }
+.my-clearing .m-form li span { float: inherit; width: 145px; height: 28px; border: 1px solid #fe0000; color: #fe0000; font-size: 12px; font-family: simsun; line-height: 25px; padding: 7px 13px; }
 .my-clearing .clase { width: 15px; height: 15px; position: absolute; top: 15px; right: 20px; cursor: pointer; transition: all 0.5s; background: url(../images/efeiyi-icon.png) no-repeat; }
 .my-clearing .sh-bg { position: fixed; background: #000; opacity: 0.6; z-index: -1; right: 0; top: 0; left: 0; bottom: 0; }
 /*表单弹出*/

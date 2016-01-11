@@ -29,8 +29,8 @@ a:hover { text-decoration: underline }
 .my-order .order-nav .layout-nav .order p { font-size: 12px; color: #000; font-family: Times New Roman; margin-top: 12px; padding-left: 2px; }
 .my-order .order-nav .layout-li { margin-top: 15px; }
 .my-order .order-nav .layout-li .liul a { color: #000; font-size: 12px; padding-left: 4px; }
-.my-order .order-nav .layout-li li { padding-bottom: 7px; cursor: pointer }
-.my-order .order-nav .layout-li li a { color: #666; padding-left: 4px; font-family: simsun; font-size: 12px; outline: none; }
+.my-order .order-nav .layout-li li { padding-bottom: 7px; cursor: pointer;text-align: center;width: 100%}
+.my-order .order-nav .layout-li li a { color: #666; width: 100%;padding-left: 4px; font-family: simsun; font-size: 12px; outline: none;display: inline-block}
 .aborder { padding-top: 7px; border-top: 1px solid #666; }
 .my-order .layout-col { width: 853px; float: right; position: relative }
 .my-order .filter-bar { width: 780px; }
@@ -161,7 +161,7 @@ a:hover { text-decoration: underline }
 .my-order .ae-rg a { margin-right: 40px; }
 .my-order .yes-border { border: 1px solid #ccc; }
 /*表单弹出*/
-.my-order .pop-up { width: 696px; border: 1px solid #000; background-color: #fff; position: fixed; left: 50%; top: 50%; z-index: 9999; margin-top: -290px; margin-left: -286px; }
+.my-order .pop-up { width: 696px; border: 1px solid #000; background-color: #fff; position: fixed; left: 50%; top: 50%; z-index: 9999; margin-top: -127px; margin-left: -286px; }
 .my-order .pop-h { padding-left: 20px; font-size: 14px; color: #000; font-family: Microsoft YaHei; line-height: 44px; border-bottom: 1px solid #000; background: #fff; }
 .my-order .m-form { padding: 15px 37px 32px; background: #fff; }
 .my-order .m-form li { height: 44px; line-height: 44px; }
@@ -407,8 +407,6 @@ a:hover { text-decoration: underline }
 .my-clearing .clearing-site { width: 1000px; height: 49px; line-height: 49px; border: 1px solid #ccc; padding: 0 43px 0 23px; float: left }
 .my-clearing .clearing-site span { font-size: 12px; font-family: simsun; }
 .my-clearing .clearing-site span a { outline: none; font-size: 12px; font-family: simsun; color: #003366; }
-
-
 .my-clearing .invoice { width: 1000px; border: 1px solid #ccc; padding: 0 43px 0 23px; float: left }
 .my-clearing .invoice .title {width:100%;font-size: 12px; font-family: simsun;
     line-height: 48px;
@@ -420,7 +418,6 @@ a:hover { text-decoration: underline }
     top:-3px;
     margin-right:5px;
 }
-
 .my-clearing .invoice .con-info {
     width:100%;
     float: left;
@@ -441,7 +438,6 @@ a:hover { text-decoration: underline }
 .my-clearing .invoice .con-info .tbar span.price {
     color:#f00
 }
-
 .my-clearing .invoice .con-info .list {
     width:915px;
     float: left;
@@ -470,11 +466,9 @@ a:hover { text-decoration: underline }
 .my-clearing .invoice .con-info .ul-list li span.t3 {
     width:220px;
 }
-
 .my-clearing .invoice .con-info .ul-list-last li span {
     color: #999;
 }
-
 .my-clearing .invoice .con-info .div-list {
     line-height: 40px;
     margin-bottom: 20px;
@@ -503,8 +497,11 @@ a:hover { text-decoration: underline }
     color: #fff;
     text-align: center;
 }
-
-
+.my-clearing .balance{width: 1000px;float:left;border: 1px solid #e5e5e5;margin-top: 40px;padding: 0 20px;}
+.my-clearing .balance .balance-titie{font-size: 14px;color: #000;line-height: 14px;margin: 15px 0 18px;width: 100%;float:left}
+.my-clearing .balance .balance-text{font-size: 14px;line-height: 14px;margin-bottom: 16px;width: 100%;float:left}
+.my-clearing .balance .balance-text input{margin:0 4px 0 0;vertical-align:middle;}
+.my-clearing .wdbb{width: 100%}
 .my-clearing .clearing-left { float: left }
 .my-clearing .clearing-right { float: right }
 .my-clearing .page-clearing { border: 1px solid #ccc; width: 1000px; overflow: hidden; margin-top: -1px; float: left; padding: 23px 0 22px 44px; }
@@ -516,8 +513,10 @@ a:hover { text-decoration: underline }
 .my-clearing .default-active { border: 1px solid #000; }
 .my-clearing .page-default span a strong { padding-left: 15px; }
 .my-clearing .page-default .triangle img { position: absolute; left: 121px; top: 18px; }
+.my-clearing .page-box-m{width: 100%;float: left;height: 40px;overflow: hidden}
 .my-clearing .page-clearing .dj-p { width: 100%; float: left; padding: 22px 0 0 15px; }
 .my-clearing .triangle-bg { background: url('../images/efeiyi-gwc.png') no-repeat -62px 0; width: 13px; height: 6px; position: absolute; left: 53px; top: 5px; }
+.my-clearing .triangle-bg2 { background: url('../images/efeiyi-gwc.png') no-repeat -62px 0; width: 13px; height: 6px; position: absolute; left: 53px; top: 5px;transfrom:rotate(180deg);-webkit-transform:rotate(180deg); }
 .my-clearing .page-clearing .dj-p a { float: left; font-size: 12px; color: #003366; position: relative; outline: none; }
 .my-clearing .divtop { margin-top: 40px; }
 .my-clearing .alipay { text-align: center; margin-right: 34px; float: left; cursor: pointer; padding: 10px 44px; background-color: #fff; border: 1px solid #ccc; font-size: 12px; color: #000; position: relative; width: 141px; }
@@ -525,7 +524,8 @@ a:hover { text-decoration: underline }
 .my-clearing .page-store { height: 55px; line-height: 55px; }
 .my-clearing .page-store a { outline: none; font-size: 12px; font-family: simsun; color: #003366; position: relative; padding-right: 50px; }
 .my-clearing .page-inventory { border: 1px solid #ccc; width: 1000px; overflow: hidden; margin-top: -1px; float: left; padding: 23px 0 22px 20px; }
-.my-clearing .page-inventory .triangle-bg { background: url('../images/efeiyi-gwc.png') no-repeat -62px 0; width: 13px; height: 6px; position: absolute; left: 53px; top: 2px; }
+.my-clearing .page-inventory .triangle-bg{ background: url('../images/efeiyi-gwc.png') no-repeat -62px 0; width: 13px; height: 6px; position: absolute; left: 53px; top: 2px; }
+.my-clearing .page-inventory .triangle-bg2{ background: url('../images/efeiyi-gwc.png') no-repeat -62px 0; width: 13px; height: 6px; position: absolute; left: 53px; top: 2px;transfrom:rotate(180deg);-webkit-transform:rotate(180deg);}
 .my-clearing .my-clearing .wh1 { width: 100%; float: left; margin-bottom: 27px; min-height: 700px; }
 .my-clearing .active-box { padding-left: 16px; }
 .my-clearing .middle-active { vertical-align: middle; width: 12px; height: 12px; }
@@ -543,12 +543,12 @@ a:hover { text-decoration: underline }
 .my-clearing .page-leaveword input { font-size: 12px; color: #ccc; padding: 13px 11px; border: 1px solid #ccc; width: 800px; height: 40px; color: #333 }
 .my-clearing .page-leaveword span { font-size: 12px; font-family: Arial; }
 /*表单弹出*/
-.my-clearing .pop-up { width: 696px; border: 1px solid #000; background-color: #fff; position: fixed; left: 50%; top: 50%; z-index: 9999; margin-top: -290px; margin-left: -286px; }
+.my-clearing .pop-up { width: 696px; border: 1px solid #000; background-color: #fff; position: fixed; left: 50%; top: 50%; z-index: 9999; margin-top: -201px; margin-left: -348px; }
 .my-clearing .pop-h { padding-left: 20px; font-size: 14px; color: #000; font-family: Microsoft YaHei; line-height: 44px; border-bottom: 1px solid #000; background: #fff; }
 .apt { }
 .my-clearing .m-form { padding: 15px 37px 33px; background: #fff; }
 .my-clearing .m-form li { height: 44px; line-height: 44px; }
-.my-clearing .m-form li input { border: 1px solid #000; padding: 3px; color: #000; font-size: 12px; font-family: simsun; }
+.my-clearing .m-form li input { border: 1px solid #000; padding: 3px; color: #000; font-size: 12px; font-family: simsun;height: 28px;}
 .my-clearing .m-form li label { width: 81px; color: #000; font-size: 12px; font-family: simsun; font-weight: normal; text-align: right }
 .my-clearing .m-form li select { border: 1px solid #000; color: #000; font-size: 14px; font-family: simsun; padding: 4px 13px; }
 .my-clearing .m-form li select option { color: #000; font-size: 12px; font-family: simsun; }
@@ -556,26 +556,28 @@ a:hover { text-decoration: underline }
 .my-clearing .m-form li .car1 { width: 108px; }
 .my-clearing .m-form li .car2 { width: 142px; }
 .my-clearing .m-form li strong { font-size: 10px; color: #666; }
-.my-clearing .m-form li .dj-btn { width: 163px; height: 25px; border: 1px solid #000; background: #fff; color: #000; font-size: 12px; font-family: simsun; outline: none; }
+.my-clearing .m-form li .dj-btn { width: 163px; border: 1px solid #000; background: #fff; color: #000; font-size: 12px; font-family: simsun; outline: none; }
 .my-clearing .m-form li .dj-btn:hover { background: #000; color: #fff; transition: all 0.5s; }
-.my-clearing .m-form li span { float: inherit; width: 145px; height: 25px; border: 1px solid #fe0000; color: #fe0000; font-size: 12px; font-family: simsun; line-height: 25px; padding: 5px 13px; }
+.my-clearing .m-form li span { float: inherit; width: 145px; height: 28px; border: 1px solid #fe0000; color: #fe0000; font-size: 12px; font-family: simsun; line-height: 25px; padding: 7px 13px; }
 .my-clearing .clase { width: 15px; height: 15px; position: absolute; top: 15px; right: 20px; cursor: pointer; transition: all 0.5s; background: url(../images/efeiyi-icon.png) no-repeat; }
 .my-clearing .sh-bg { position: fixed; background: #000; opacity: 0.6; z-index: -1; right: 0; top: 0; left: 0; bottom: 0; }
 /*表单弹出*/
 .my-clearing .System {width: 1000px; border: 1px solid #ccc; float: left; margin-top: 40px;}
 .my-clearing .System .System-text {float:right;
     padding:18px;}
-.my-clearing .System .System-text span {font-size: 12px; font-family: simsun; color: #000; float: right }
+.my-clearing .System .System-text span {font-size: 16px; font-family: simsun; color: #000; float: right;text-align: right;}
 .my-clearing .System .System-text span strong { font-weight: 100; color: #ff0000; }
 .my-clearing .System .System-text span a {width:135px;height:60px;
     line-height: 60px;border: 1px solid #000; font-size: 12px; font-family: simsun;
-    float: left;
+    float:right;
     text-align: center;
     background: #000;
     color: #fff;
     font-size: 16px;
     font-family:Microsoft YaHei;
     margin-left:20px;
+    text-decoration: none;
+    margin-top: 24px;
 }
 .my-clearing .sh-bg { position: fixed; background: #000; opacity: 0.6; z-index: -1; right: 0; top: 0; left: 0; bottom: 0; }
 /*购物成功*/
@@ -586,62 +588,62 @@ a:hover { text-decoration: underline }
 .success-shop p a { color: #f1961a; margin: 0 20px 53px; font-size: 12px; font-family: simsun; text-decoration: underline}
 
 .success-share {
-	width: 100%;
-	height: 100%;
-	background:rgba(0,0,0,0.3);
-	position: fixed;
-	top:0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	z-index: 99;
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.3);
+    position: fixed;
+    top:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 99;
 }
 .success-share .content {
-	width: 806px;
-	height: 430px;
-	background: #fff;
-	position:absolute;
-	top:50%;
-	left: 50%;
-	margin-top:-215px;
-	margin-left: -403px;
-	text-align: center;
+    width: 806px;
+    height: 430px;
+    background: #fff;
+    position:absolute;
+    top:50%;
+    left: 50%;
+    margin-top:-215px;
+    margin-left: -403px;
+    text-align: center;
 }
 .success-share .content h2 {
-	width: 100%;
-	line-height: 107px;
-	font-size: 28px;
-	font-weight: bolder;
+    width: 100%;
+    line-height: 107px;
+    font-size: 28px;
+    font-weight: bolder;
 }
 .success-share .content .code {
-	width:auto;
-	margin: 0 auto;
-	display: inline-block;
+    width:auto;
+    margin: 0 auto;
+    display: inline-block;
 }
 .success-share .content .code li {
-	float:left;
+    float:left;
 }
 .success-share .content .code li.line {
-	width: 2px;
-	height: 157px;
-	background: #4a4a4a;
-	margin:18px 40px;
+    width: 2px;
+    height: 157px;
+    background: #4a4a4a;
+    margin:18px 40px;
 }
 .success-share .content .info {
-	width: 100%;
-	float: left;
-	margin-top: 28px;
+    width: 100%;
+    float: left;
+    margin-top: 28px;
 }
 .success-share .content .info p{
-	font-size: 18px;
+    font-size: 18px;
 }
 .success-share .content .icon-close{
-	background:url(../images/login.png) no-repeat 0 0;
-	width:31px;
-	height: 29px;
-	position: absolute;
-	top:10px;right:10px;
-	cursor: pointer;
+    background:url(../images/login.png) no-repeat 0 0;
+    width:31px;
+    height: 29px;
+    position: absolute;
+    top:10px;right:10px;
+    cursor: pointer;
 }
 /*找回密码*/
 .dentification { width: 100%; min-height: 550px; float: left }
@@ -1160,7 +1162,7 @@ a:hover { text-decoration: underline }
 .evaluation .add-file object{width: 100%;height: 100%;opacity: 0;cursor: pointer}
 .evaluation .add-file .uploadify-button{opacity: 0;}
 #file{height: 100%;width: 100%}
-.jc-hc { height: 39px; width: 769px; border-top: 1px solid #cccccc; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; position: absolute; right: 30px; top: 0px; }
+.jc-hc { height: 40px; width: 769px; border-top: 1px solid #cccccc; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; position: absolute; right: 30px; top: 0px; }
 .jc-hc a { color: #003366; font-size: 12px; float: right; margin-right: 30px; margin-top: 10px; }
 /*我的订单按钮*/
 /*.od-id p a{margin-left: 55px;width: 100px;height: 25px;color: #fff;font-size: 12px;background: #000;padding:6px 30px;text-decoration: none;}*/
@@ -1208,7 +1210,7 @@ a:hover { text-decoration: underline }
 .efeiyi-col-box .add{opacity: 0.5;}
 
 
-    /*诚信保证*/
+/*诚信保证*/
 .integrity-2015{width:1000px;margin: 0 auto 160px;}
 .integrity-2015 .h1{text-align: center;font-size: 25px;color: #000;margin: 64px 0 80px 0;}
 .integrity-2015 .h2{font-size: 20px;color: #000;}
@@ -1371,3 +1373,10 @@ a:hover { text-decoration: underline }
 .tbar-txt{width: 100%;position: absolute;bottom: 0;height: 80px;left: 0;padding:0 70px;background: url("../images/icon-new2.png") repeat-x;line-height: 18px;}
 /*首页查看更多*/
 .nav-new .cate .allsort .item .i-mc .links a.addeven{width: 33px;padding: 10px 0;border: 3px solid #000;font-size: 14px;color: #000;text-align: center;height: auto;margin: 0 0 0 10px;line-height: 16px;}
+/*余额页面*/
+.addextra-l{width: 100%;float: left;margin-bottom: 20px;}
+.extra-b .extra-titie{border: 1px solid #ccc;height: 50px;line-height: 50px;padding: 0 28px;font-size: 12px;color: #000;}
+.extra-b .extra-list{border: 1px solid #ccc;margin-top: -1px;padding: 27px;}
+.extra-b .extra-list td{text-align: center;height: 65px;border: 1px solid #ccc;padding:0 20px;font-size: 12px;color: #333;}
+/*修改左侧导航*/
+.detail-nav{text-align: center;color: #000;line-height: 18px;font-size: 12px;margin-top: 15px;margin-bottom: -15px;}

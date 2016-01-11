@@ -258,11 +258,15 @@ public class PurchaseOrderController extends BaseController {
         xQuery.addRequestParamToModel(model, request);
         List addressList = baseManager.listObject(xQuery);
 
+        String consumerId = AuthorizationUtil.getMyUser().getId();
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("productModel", productModel);
         model.addAttribute("amount", amount);
         model.addAttribute("isEasyBuy", true);
+        model.addAttribute("consumer", consumer);
 
         return "/purchaseOrder/purchaseOrderConfirm";
     }
@@ -292,10 +296,15 @@ public class PurchaseOrderController extends BaseController {
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
         List addressList = baseManager.listObject(xQuery);
+
+        String consumerId = AuthorizationUtil.getMyUser().getId();
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("isEasyBuy", false);
         model.addAttribute("cart", cart);
+        model.addAttribute("consumer", consumer);
         request.getSession().removeAttribute("cart");
         return "/purchaseOrder/purchaseOrderConfirm";
     }
@@ -327,9 +336,14 @@ public class PurchaseOrderController extends BaseController {
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
         List addressList = baseManager.listObject(xQuery);
+
+        String consumerId = AuthorizationUtil.getMyUser().getId();
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("isEasyBuy", true);
+        model.addAttribute("consumer", consumer);
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 
@@ -340,9 +354,14 @@ public class PurchaseOrderController extends BaseController {
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
         List addressList = baseManager.listObject(xQuery);
+
+        String consumerId = AuthorizationUtil.getMyUser().getId();
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("isEasyBuy", true);
+        model.addAttribute("consumer", consumer);
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 
@@ -368,6 +387,7 @@ public class PurchaseOrderController extends BaseController {
         String isWeiXin = request.getParameter("isWeiXin");//移动网站页面用的
         String addressId = request.getParameter("address");
         String message = request.getParameter("message");
+        String balance = request.getParameter("balance");
         //买家留言
         HashMap<String, String> messageMap = new HashMap<>();
         if (message != null) {
