@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.order.controller;
 
+import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.ProductModel;
@@ -230,7 +231,7 @@ public class PurchaseOrderPaymentController {
 
     @RequestMapping({"/checkInventory/{orderId}"})
     @ResponseBody
-    public boolean checkInventory(@PathVariable String orderId) {
+    public boolean checkInventory(@PathVariable String orderId, HttpServletRequest request) {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
             if (purchaseOrderProduct.getPurchaseAmount() > purchaseOrderProduct.getProductModel().getAmount()) {
@@ -240,5 +241,18 @@ public class PurchaseOrderPaymentController {
         return true;
     }
 
+    @RequestMapping({"/checkBalance"})
+    @ResponseBody
+    public boolean checkBalance(HttpServletRequest request){
+        BigDecimal balance = new BigDecimal(request.getParameter("balance"));
+        String consumerId = AuthorizationUtil.getMyUser().getId();
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+        int result = balance.compareTo(consumer.getBalance());
+        if(result==1){
+            return false;
+        }else {
+            return true;
+        }
+    }
 
 }

@@ -22,6 +22,7 @@
     </style>
 </head>
 <body>
+<script src="/scripts/js/jquery-1.4.2.min.js"></script>
 <div class="wr wh">
     <!--结算-->
     <div class="my-clearing">
@@ -83,9 +84,10 @@
         </span>
         </div>
         <div class="page-clearing" id="address">
+            <div class="page-box-m">
             <c:forEach items="${addressList}" var="address">
 
-                <div class="page-default">
+                <div class="page-default" style="position:relative">
             <span>
                 <c:if test="${address.status=='2'}">
                 <div id="${address.id}" class="default-text triangle activeFlag" name="addressItem"
@@ -105,16 +107,30 @@
                     <span>${address.district.name}</span>
                     <span>${address.details}</span>
                     <span>${address.phone}</span>
+                    <div class="jc-hc" style="display: none;height: 40px;">
+                        <a href="#">删除</a>
+                        <a href="#"  class="edit-act">编辑</a>
+                        <a href="#">设为默认地址</a>
+                    </div>
                 </div>
             </c:forEach>
-            <%--<div class="dj-p">--%>
-            <%--<a href="#">展开地址--%>
-            <%--<span class="triangle-bg"></span>--%>
-            <%--</a>--%>
+            </div>
+           <%-- <div class="dj-p">
+                <a href="#" id="pg-box">展开地址
+                    <span class="triangle-bg"></span>
+                </a>
 
-            <%--</div>--%>
+            </div>--%>
+            <div class="dj-p">
+            <a href="#"  style="display: block">展开地址
+            <span class="triangle-bg2"></span>
+            </a>
+
+            </div>
+
         </div>
         <!--支付-->
+
         <div class="clearing-site divtop">
             <span class="clearing-left">支付方式</span>
         </div>
@@ -235,6 +251,15 @@
             </div>
         </div>
         <!--发票-->
+        <!--余额支付-->
+        <c:if test="${null != consumer.balance && 0<consumer.balance}">
+            <div class="balance">
+                <form>
+                    <div class="balance-titie">余额支付</div>
+                    <div class="balance-text"><input type="checkbox" onclick="useBalance(this)">使用余额支付<span>${consumer.balance}</span>元</div>
+                </form>
+            </div>
+        </c:if>
         <!--结算-->
         <div class="System">
             <div class="System-text">
@@ -242,7 +267,8 @@
             <span class="price-info">
                 <%--js 取回来  第一次也是js取 统一js取--%>
                 <p class="price1">总金额：<em id="totalPrice">${purchaseOrder.total}</em> 元</p>
-                <p class="price2">优惠：<em id="couponPrice">0</em>元</p>
+                <p class="price2">优惠：-<em id="couponPrice">0.00</em>元</p>
+                <p class="price2">余额：-<em id="balance">0.00</em>元</p>
                 <p class="price3">应付金额：<strong id="finalPrice">${purchaseOrder.total}</strong> 元</p>
             </span>
             </div>
@@ -283,6 +309,7 @@
     }
     function submitOrder(element, orderId) {
         var messageObject = new Object();
+        var balance = $("#balance").text();
         $("input[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
         })
@@ -294,40 +321,53 @@
         $.ajax({
             type: 'post',
             async: false,
-            url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
+            url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>'+'?balance='+balance,
             dataType: 'json',
             success: function (data) {
                 if (data) {
                     if (consumerAddress == "") {
                         showAlert("提示", "请选择一个收货地址！");
                     } else {
-                        var url = "<c:url value="/order/confirm/"/>";
-                        url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message;
-                        element.onclick = null;
-                        $(element).attr("href", url);
-                        $(element).click();
+                        $.ajax({
+                            type: 'post',
+                            async: false,
+                            url: '<c:url value="/order/checkBalance"/>'+'?balance='+balance,
+                            dataType: 'json',
+                            success: function (data1) {
+                                if(data1){
+                                    var url = "<c:url value="/order/confirm/"/>";
+                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + "&balance=" + balance;
+                                    element.onclick = null;
+                                    $(element).attr("href", url);
+                                    $(element).click();
 
-                        //逐条发送商品下单记录给GA
-                        $.each(productMap, function (key, value) {
-                            ga('ec:setAction', 'purchase', {
-                                'id': key,
-                                'affiliation': 'efeiyi',
-                                'revenue': ${purchaseOrder.total},
-                                'step': 1,
-                                'option': payment,
+                                    //逐条发送商品下单记录给GA
+                                    $.each(productMap, function (key, value) {
+                                        ga('ec:setAction', 'purchase', {
+                                            'id': key,
+                                            'affiliation': 'efeiyi',
+                                            'revenue': ${purchaseOrder.total},
+                                            'step': 1,
+                                            'option': payment,
 //                            'tax': '2.85',
 //                            'shipping': '5.34',
 //                            'coupon': 'SUMMER2013'    // User added a coupon at checkout.
-                            });
+                                        });
+                                    });
+                                    ga('send', 'pageview');
+
+
+                                    showChooseConfirm("提示", "是否支付成功？", function () {
+                                        window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
+                                    }, function () {
+                                        window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
+                                    })
+                                }else{
+                                    showAlert("提示","抱歉，余额不足！")
+                                }
+                            }
                         });
-                        ga('send', 'pageview');
 
-
-                        showChooseConfirm("提示", "是否支付成功？", function () {
-                            window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
-                        }, function () {
-                            window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
-                        })
                     }
                 } else {
                     showAlert("提示", "抱歉，该商品已售罄！")
@@ -534,6 +574,40 @@
 
     });
 
+    function df(addressId,consumerId) {
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/myEfeiyi/defaultAddress.do"/>',
+            dataType: 'json',
+            data: {
+                status: 2,
+                id: addressId,
+                consumerId:consumerId,
+
+            },
+            success: function (data) {
+                if (data == true) {
+                    window.location.reload();
+                }
+            },
+
+        });
+    }
+
+    //使用余额
+    function useBalance(element){
+        var totalPrice = $("#totalPrice").text();
+        var couponPrice = $("#couponPrice").text();
+        var balance = ${consumer.balance}.toFixed(2);
+        if ($(element).is(':checked') == true){
+            $("#balance").html(balance);
+            $("#finalPrice").html((totalPrice-balance-couponPrice).toFixed(2));
+        }else if($(element).is(':checked') == false){
+            $("#balance").html("0.00");
+            $("#finalPrice").html((totalPrice-couponPrice).toFixed(2));
+        }
+    }
 </script>
 </body>
 </html>
