@@ -196,7 +196,7 @@
 </div>
 <!--Start--弹出地址-->
 <div id="order-address" class="alert-delete or-address" style="display:none;">
-    <div class="bd cart-address" style="width: 90%;left: 5%;overflow: scroll;top: 2%" >
+    <div class="bd cart-address">
         <div class="bd list-adress" id="list-order">
             <ul class="ul-list" id="address">
                 <c:forEach items="${addressList}" var="address">
