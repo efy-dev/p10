@@ -3,6 +3,7 @@ package com.efeiyi.ec.system.zero.company.controller;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.system.zero.company.service.CompanyOrderBatchServiceManager;
 import com.efeiyi.ec.system.zero.company.util.BatchLogisticsReactor;
+import com.efeiyi.ec.system.zero.company.util.BatchPrintReactor;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;
@@ -87,4 +88,34 @@ public class BatchLogisticsController {
         return popList;
     }
 
+    @RequestMapping("/batchPrint.do")
+    public ModelAndView printWaybill(HttpServletRequest request,ModelMap modelMap) throws Exception{
+        String qm = request.getParameter("qm");
+        request.setAttribute("qm", qm);
+        String conditions = request.getParameter("conditions");
+
+        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+        List<PurchaseOrderProduct> list = (List<PurchaseOrderProduct>) xdoManager.list(tempDo, tempDoQuery, conditions);
+        if(BatchPrintReactor.runningFlag.compareAndSet(BatchPrintReactor.idle, BatchPrintReactor.busy)){
+            new Thread(new BatchPrintReactor(list)).start();
+        }
+        modelMap.put("objectList", list);
+
+        String resultPage = request.getParameter("result");
+        return new ModelAndView(resultPage, modelMap);
+    }
+
+    @RequestMapping("/batchPrint2.do")
+    public ModelAndView printWaybill2(HttpServletRequest request) throws Exception {
+
+        String idList = request.getParameter("idList");
+        List<PurchaseOrderProduct> list = getPOPList(idList);
+
+        if(BatchPrintReactor.runningFlag.compareAndSet(BatchPrintReactor.idle, BatchPrintReactor.busy)){
+            new Thread(new BatchPrintReactor(list)).start();
+        }
+
+        return new ModelAndView("redirect:/basic/xm.do?qm=plistGiftBatchPrint_default");
+    }
 }

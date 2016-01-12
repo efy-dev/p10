@@ -5,6 +5,8 @@ import cn.beecloud.BCPay;
 import cn.beecloud.BCPayResult;
 import cn.beecloud.BeeCloud;
 import cn.beecloud.bean.BCPayParameter;
+import com.efeiyi.ec.balance.model.BalanceRecord;
+import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
@@ -172,6 +174,85 @@ public class PaymentManagerImpl implements PaymentManager {
             purchaseOrderPaymentDetails.setPayWay("4");
             purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
             baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
+        }
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
+        if (purchaseOrder.getCoupon() != null) {
+            purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
+        } else {
+            purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal());
+        }
+        purchaseOrderPaymentDetails.setPayWay(purchaseOrder.getPayWay());
+        purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
+        baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
+        return purchaseOrderPaymentDetails;
+    }
+
+    @Override
+    public PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder, String balance) {
+        Float balance1 = Float.parseFloat(balance);
+        PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
+        purchaseOrderPayment.setStatus("1");
+        purchaseOrderPayment.setCreateDateTime(new Date());
+        purchaseOrderPayment.setPaymentAmount(purchaseOrder.getTotal());
+        purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
+        purchaseOrderPayment.setPayWay("1");
+        try {
+            purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("payment"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String userid = AuthorizationUtil.getMyUser().getId();
+        User user = (User) baseManager.getObject(User.class.getName(), userid);
+        purchaseOrderPayment.setUser(user);
+        baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
+        //支付详情
+        if (purchaseOrder.getCoupon() != null) {
+            Coupon coupon = purchaseOrder.getCoupon();
+            coupon.setStatus("2");
+            baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+            PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
+            purchaseOrderPaymentDetails.setCoupon(coupon);
+            purchaseOrderPaymentDetails.setMoney(new BigDecimal(coupon.getCouponBatch().getPrice()));
+            purchaseOrderPaymentDetails.setPayWay("4");
+            purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
+            baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
+        }
+        if(balance1>0){
+            String consumerId = AuthorizationUtil.getMyUser().getId();
+            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+            BigDecimal currentBalance = consumer.getBalance();
+            consumer.setBalance(currentBalance.subtract(new BigDecimal(balance1)));
+            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+
+            PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
+            purchaseOrderPaymentDetails.setPayWay("5");
+            purchaseOrderPaymentDetails.setMoney(new BigDecimal(balance1));
+            purchaseOrderPaymentDetails.setCreateDateTime(new Date());
+            baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(),purchaseOrderPaymentDetails);
+
+            BalanceRecord balanceRecord = new BalanceRecord();
+            balanceRecord.setCreateDateTime(new Date());
+            balanceRecord.setChangeBalance(new BigDecimal(balance1));
+            balanceRecord.setCurrentBalance(currentBalance);
+            balanceRecord.setResultBalance(currentBalance.subtract(new BigDecimal(balance1)));
+            balanceRecord.setConsumer(consumer);
+            balanceRecord.setKey(purchaseOrder.getId());
+            balanceRecord.setStatus("3");
+            balanceRecord.setType("4");
+            baseManager.saveOrUpdate(BalanceRecord.class.getName(),balanceRecord);
+
+            if(purchaseOrder.getCoupon() !=null){
+                int r = new BigDecimal(balance1).compareTo(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
+                if(r == 0){
+                    return purchaseOrderPaymentDetails;
+                }
+            }else {
+                int r = new BigDecimal(balance1).compareTo(purchaseOrder.getTotal());
+                if(r == 0){
+                    return purchaseOrderPaymentDetails;
+                }
+            }
+
         }
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
         if (purchaseOrder.getCoupon() != null) {

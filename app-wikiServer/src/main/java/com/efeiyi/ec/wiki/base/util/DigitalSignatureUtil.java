@@ -37,6 +37,7 @@ public class DigitalSignatureUtil {
       str.append("key=" + WikiConfig.appKey);
 
       String md5Value = MD5(str.toString());
+
       if(md5Value.equals(signmsg)){
           flag = true;
       }

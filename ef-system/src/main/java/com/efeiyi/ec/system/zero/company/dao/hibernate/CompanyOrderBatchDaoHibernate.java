@@ -66,6 +66,7 @@ public class CompanyOrderBatchDaoHibernate implements CompanyOrderBatchDao {
             orderGift.setGiftGaverName(companyOrderBatch.getGiverName());//送礼人姓名
             orderGift.setCreateDatetime(new Date());
             orderGift.setCompanyOrderBatch(companyOrderBatch);
+            orderGift.setTenant(companyOrderBatch.getProductModel().getProduct().getTenant());//订单里加上商户，不然下载不到订单
 
             User user = new User();
             user.setName(companyOrderBatch.getCompanyName());//存个用户，否则收礼时找不到purchaseOrderGift.user会404

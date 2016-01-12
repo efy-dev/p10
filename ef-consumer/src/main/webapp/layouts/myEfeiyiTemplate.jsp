@@ -45,6 +45,10 @@
            <span><img id="uploadPi" src="" width="48" height="48"></span>
           <p>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
         </div>
+          <div class="detail-nav">
+              <p>余额</p>
+              <p>￥<span id="balance"></span></p>
+          </div>
         <c:set var="match" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
         <jsp:include flush="true" page="/getMenu.do?jmenuId=orderMenu&jnodeId=orderManager&resultPage=/purchaseOrder/purchaseOrderTemplate&match=${match} "/>
       </div>
@@ -67,6 +71,17 @@
                 }else if(data!=null || data!=null){
                     $("#uploadPi").attr("src", "http://pro.efeiyi.com/" + data + "@!user-pic");
                 }
+            }
+        })
+
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: "<c:url value='/myEfeiyi/getBalance.do'/>",
+            dataType: 'json',
+            success: function (data) {
+            $("#balance").html(data);
+
             }
         })
     })

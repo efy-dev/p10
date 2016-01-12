@@ -67,8 +67,8 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
     }
 
     @Override
-    public String outExcel(String path, String[] homes) throws WriteException {
-        List<Object[]> resultList = purchaseOrderDao.getResult();
+    public String outExcel(String path, String[] homes,String startTime,String endTime,String selectTenant) throws WriteException {
+        List<Object[]> resultList = purchaseOrderDao.getResult(startTime,endTime,selectTenant);
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

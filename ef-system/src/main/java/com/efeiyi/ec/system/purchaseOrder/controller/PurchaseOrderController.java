@@ -10,6 +10,7 @@ import com.efeiyi.ec.system.util.HTTPParam;
 import com.efeiyi.ec.system.util.HTTPSend;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AutoSerialManager;
 import net.sf.json.JSONObject;
@@ -20,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -358,12 +360,15 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping("/downloadOrders.do")
     @ResponseBody
-    public  ResponseEntity<byte[]> downloadOrders() throws Exception {
-        String[] homes ={"订单号","支付方式","订单总价","订单状态","订单原价","收货人地址","收货人姓名","收货人联系方式","下单时间","商品名称","商品编号","下单人","优惠券","优惠券编号","优惠券名称","优惠价格","优惠条件","店铺"};
+    public  ResponseEntity<byte[]> downloadOrders(HttpServletRequest request) throws Exception {
+        String startTime = request.getParameter("startTime");
+        String endTime = request.getParameter("endTime");
+        String selectTenant = request.getParameter("selectTenant");
+        String[] homes ={"订单号","支付方式","订单总价","订单状态","订单原价","收货人地址","收货人姓名","收货人联系方式","下单时间","商品名称","商品编号","下单人","优惠券","优惠券编号","优惠券名称","优惠价格","优惠条件","店铺","订单类型"};
 
         String path = this.getClass().getResource("/").getPath().toString() + "com/efeiyi/ec/system/download";
 
-        String fileName = purchaseOrderManager.outExcel(path,homes);
+        String fileName = purchaseOrderManager.outExcel(path,homes,startTime,endTime,selectTenant);
 
         File downloadFile = new File(path+"//"+fileName);
         HttpHeaders headers = new HttpHeaders();
@@ -374,5 +379,4 @@ public class PurchaseOrderController extends BaseController {
         return new ResponseEntity<byte[]>(bytes,headers, HttpStatus.OK);
 
     }
-
 }

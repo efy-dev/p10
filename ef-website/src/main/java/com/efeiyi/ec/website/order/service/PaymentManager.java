@@ -18,5 +18,7 @@ public interface PaymentManager {
 
     PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder);
 
+    PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder, String balance);
+
     String alipayWap(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount);
 }

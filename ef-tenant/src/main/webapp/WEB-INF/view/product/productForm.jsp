@@ -57,7 +57,14 @@
                     <!--<small>必填项*</small>-->
                 </div>
             </div>
+                <div class="am-form-group">
+                    <label name="subName" class="am-u-sm-3 am-form-label">商品副名称</label>
 
+                    <div class="am-u-sm-9">
+                        <input type="text" name="subName" id="subName" placeholder="商品副名称" value="${object.subName}">
+                        <!--<small>必填项*</small>-->
+                    </div>
+                </div>
             <%--<div class="am-form-group">--%>
             <%--<label name="price" class="am-u-sm-3 am-form-label">市场价格</label>--%>
 
@@ -204,8 +211,8 @@
 
     $(function(){
         //新建初始化
-        var status = '${object.status}';
-        $("input[name='status'][value='"+status+"']").attr("checked",true);
+        var type = '${object.type}';
+        $("input[name='type'][value='"+type+"']").attr("checked",true);
 
         if(${empty object.id}){
             var date = new Date();
@@ -283,8 +290,11 @@
             $("input[name='master.id']").val($("input[name='masterCheck']:checked").val());
             $("input[name='project.id']").val($("input[name='projectCheck']:checked").val());
             if( $("input[name='project.id']").val()==""){
-                alert("请选择项目");
+                alert("关联项目为必选项，若您的店铺还没有关联的项目，请您到 账号管理>基本信息>关联与店铺相关的项目 中关联项目后，再上传商品，否则您将无法在前台查看该商品");
             }else{
+                if('${object.id}'!="") {
+                    alert("保存成功后,请您对已修改的商品重新上架!");
+                }
                 $("form").submit();
             }
       //      $("input[name='tenant.id']").val($("select[name='tenantCheck']").val());

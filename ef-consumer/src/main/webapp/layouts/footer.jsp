@@ -63,7 +63,7 @@
                     <dd><a href="<%=PConst.HOSTNAME%>/document/helpCenter?group=ec.flsm" target="_blank">法律声明</a></dd>
                     <dd><a href="<%=PConst.HOSTNAME%>/document/helpCenter?group=ec.aqjyssm" target="_blank">安全及隐私声明</a></dd>
                 </dl>
-                <div class="wechatnew" title="手机e飞蚁"><i class="inro-icon"></i></div>
+                <div class="wechatnew" title="手机e飞蚁"><i class="inro-icon0"></i><i class="inro-icon"></i></div>
             </div>
         </div>
     </div>

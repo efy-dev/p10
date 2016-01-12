@@ -1,7 +1,9 @@
 package com.efeiyi.ec.consumer.order.controller;
 
+import com.efeiyi.ec.balance.model.BalanceRecord;
 import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
 
 import com.ming800.core.base.service.BaseManager;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -178,6 +181,52 @@ public class PersonalInforController {
 
             return avatar;
 
+
+    }
+
+    /**
+     * 用于个人中心菜单获取账户余额
+     * @return
+     */
+    @RequestMapping("/getBalance.do")
+    @ResponseBody
+    public String getBalance(){
+        String consumerId=AuthorizationUtil.getMyUser().getId();
+        Consumer consumer= (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+        if(consumer.getBalance()!=null){
+            String  balance = consumer.getBalance().toString();
+            return balance;
+        }else{
+            return "0.00";
+        }
+
+
+    }
+    /**
+     * 获取余额明细
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/getBalanceDetailsList.do")
+    public String getBalanceDetailList(HttpServletRequest request,Model model) throws Exception {
+
+        String consumerId=AuthorizationUtil.getMyUser().getId();
+        Consumer consumer= (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+        if(consumer.getBalance()==null){
+            model.addAttribute("balance","0.00");
+        }else {
+            model.addAttribute("balance",consumer.getBalance());
+        }
+
+
+        XQuery xQuery=new XQuery("listBalanceRecord_default",request);
+        xQuery.put("consumer_id",consumerId);
+       List balanceDetailList=baseManager.listObject(xQuery);
+
+        model.addAttribute("balanceDetailList",balanceDetailList);
+        return "/purchaseOrder/balanceDetailList";
 
     }
 
