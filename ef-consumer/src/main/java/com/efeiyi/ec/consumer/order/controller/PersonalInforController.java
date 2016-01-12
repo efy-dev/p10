@@ -214,7 +214,12 @@ public class PersonalInforController {
 
         String consumerId=AuthorizationUtil.getMyUser().getId();
         Consumer consumer= (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
-        model.addAttribute("balance",consumer.getBalance());
+        if(consumer.getBalance()==null){
+            model.addAttribute("balance","0.00");
+        }else {
+            model.addAttribute("balance",consumer.getBalance());
+        }
+
 
         XQuery xQuery=new XQuery("listBalanceRecord_default",request);
         xQuery.put("consumer_id",consumerId);
