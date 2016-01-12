@@ -95,8 +95,8 @@ public class CompanyOrderBatchDaoHibernate implements CompanyOrderBatchDao {
     }
 
     @Override
-    public void removeOrderGift(String giftId) throws Exception {
-        String sql = "UPDATE purchase_order SET status = 0 where id = :id";
+    public void cancelOrderGift(String giftId) throws Exception {
+        String sql = "UPDATE purchase_order SET order_status = "+ PurchaseOrder.ORDER_STATUS_CONSEL +" where id = :id";
         Query query = this.getSession().createSQLQuery(sql)
                 .setString("id", giftId);
         query.executeUpdate();

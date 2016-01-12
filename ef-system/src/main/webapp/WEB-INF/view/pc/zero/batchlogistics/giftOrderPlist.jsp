@@ -56,9 +56,8 @@
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs">
                             <button onclick="window.location.href='<c:url
-                                    value="/company/removePurchaseOrderGift.do?id=${purchaseOrderProduct.purchaseOrder.id}"/>'"
-                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                    class="am-icon-trash-o"></span> 删除
+                                    value="/company/cancelPurchaseOrderGift.do?id=${purchaseOrderProduct.purchaseOrder.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">取消订单
                             </button>
                             <button onclick="window.location.href='<c:url
                                     value="/basic/xm.do?qm=viewBatchGift&id=${purchaseOrderProduct.id}"/>'"

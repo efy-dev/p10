@@ -64,13 +64,13 @@ public class CompanyOrderBatchController {
         response.getWriter().flush();
     }
 
-    @RequestMapping("/company/removePurchaseOrderGift.do")
-    public ModelAndView removePurchaseOrderGift(HttpServletRequest request) throws Exception {
+    @RequestMapping("/company/cancelPurchaseOrderGift.do")
+    public ModelAndView cancelPurchaseOrderGift(HttpServletRequest request) throws Exception {
         String giftId = request.getParameter("id");
         if (giftId == null || giftId.trim().equals("")){
             throw new Exception("获取礼品订单失败:订单Id为空");
         }
-        companyOrderBatchServiceManager.removeOrderGift(giftId);
+        companyOrderBatchServiceManager.cancelOrderGift(giftId);
         return new ModelAndView("redirect:/basic/xm.do?qm=plistBatchGift_default");
     }
 
