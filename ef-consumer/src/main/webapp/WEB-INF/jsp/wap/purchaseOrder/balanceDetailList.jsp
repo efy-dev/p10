@@ -26,18 +26,18 @@
 			<tr>
 				<td><p><fmt:formatDate value="${balanceDetailList.createDateTime}"
 									   pattern="yyyy-MM-dd"/></p><p><fmt:formatDate value="${balanceDetailList.createDateTime}" pattern="H:mm:ss"/></p></td>
+				<c:if test="${balanceDetailList.status==2}">
+					<td>￥${balanceDetailList.changeBalance}</td>
+					<td>--</td>
+				</c:if>
 				<c:if test="${balanceDetailList.status==3}">
-					<td>￥${balanceDetailList.changeBalance}</td>
-					<td>--</td>
-				</c:if>
-				<c:if test="${balanceDetailList.status==4}">
 					<td>--</td>
 					<td>￥${balanceDetailList.changeBalance}</td>
 				</c:if>
-                <c:if test="${balanceDetailList.status==4}">
+                <c:if test="${balanceDetailList.status==3}">
 					<td>购买商品使用</td>
 				</c:if>
-				<c:if test="${balanceDetailList.status==3}">
+				<c:if test="${balanceDetailList.status==2}">
 					<td>${balanceDetailList.type}</td>
 				</c:if>
 
