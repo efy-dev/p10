@@ -349,7 +349,7 @@
     function toSubmit(result) {
         $("input[name='resultPage']").val(result);
         var f = true;
-        $("input[name*='eight']").each(function(){
+        $("tr[status!='0'] input[name*='eight']").each(function(){
             if($(this).val()==""){
                 f = false;
                 return false;
