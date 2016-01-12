@@ -275,7 +275,7 @@
 <!--//End--弹出地址-->
 <!--Start--弹出地址-->
 <div id="order-total" class="alert-delete yhq" style="display:none;">
-    <div class="bd cart-coupons" style="position: fixed;">
+    <div class="bd cart-coupons addtop"<%-- style="position: fixed;--%>">
         <div class="title">
             <h2>优惠券</h2>
         </div>
