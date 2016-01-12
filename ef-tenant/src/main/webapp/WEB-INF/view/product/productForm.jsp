@@ -57,7 +57,14 @@
                     <!--<small>必填项*</small>-->
                 </div>
             </div>
+                <div class="am-form-group">
+                    <label name="subName" class="am-u-sm-3 am-form-label">商品副名称</label>
 
+                    <div class="am-u-sm-9">
+                        <input type="text" name="subName" id="subName" placeholder="商品副名称" value="${object.subName}">
+                        <!--<small>必填项*</small>-->
+                    </div>
+                </div>
             <%--<div class="am-form-group">--%>
             <%--<label name="price" class="am-u-sm-3 am-form-label">市场价格</label>--%>
 
@@ -204,8 +211,8 @@
 
     $(function(){
         //新建初始化
-        var status = '${object.status}';
-        $("input[name='status'][value='"+status+"']").attr("checked",true);
+        var type = '${object.type}';
+        $("input[name='type'][value='"+type+"']").attr("checked",true);
 
         if(${empty object.id}){
             var date = new Date();

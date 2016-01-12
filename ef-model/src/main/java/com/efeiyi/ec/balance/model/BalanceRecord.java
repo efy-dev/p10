@@ -81,7 +81,7 @@ public class BalanceRecord {
         this.status = status;
     }
 
-    @Column(name = "key")
+    @Column(name = "balance_key")
     public String getKey() {
         return key;
     }
