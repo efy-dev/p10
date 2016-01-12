@@ -299,6 +299,10 @@ public class PurchaseOrderController extends BaseController {
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+        if(null == consumer.getBalance()){
+            consumer.setBalance(new BigDecimal(0));
+            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+        }
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
@@ -339,6 +343,10 @@ public class PurchaseOrderController extends BaseController {
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+        if(null == consumer.getBalance()){
+            consumer.setBalance(new BigDecimal(0));
+            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+        }
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
@@ -357,6 +365,10 @@ public class PurchaseOrderController extends BaseController {
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+        if(null == consumer.getBalance()){
+            consumer.setBalance(new BigDecimal(0));
+            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+        }
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);

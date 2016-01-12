@@ -321,7 +321,7 @@
         $.ajax({
             type: 'post',
             async: false,
-            url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>'+'?balance='+balance,
+            url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
             dataType: 'json',
             success: function (data) {
                 if (data) {
@@ -599,7 +599,7 @@
     function useBalance(element){
         var totalPrice = $("#totalPrice").text();
         var couponPrice = $("#couponPrice").text();
-        var balance = ${consumer.balance}.toFixed(2);
+        var balance = (${consumer.balance}).toFixed(2);
         if ($(element).is(':checked') == true){
             $("#balance").html(balance);
             $("#finalPrice").html((totalPrice-balance-couponPrice).toFixed(2));
