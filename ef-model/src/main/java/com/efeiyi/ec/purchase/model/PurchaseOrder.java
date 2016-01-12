@@ -31,6 +31,13 @@ public class PurchaseOrder {
     public static final String ORDER_STATUS_CONSEL = "17"; //已取消
     public static final String ORDER_STATUS_SCANNING = "19"; //待扫运单
 
+    //支付方式
+    public static final String ZHIFUBAO = "1"; //支付宝
+    public static final String YINHANGKA = "2"; //银行卡
+    public static final String WEIXIN = "3";    //微信支付
+    public static final String YOUHUIQUAN = "4";    //优惠券
+    public static final String YUE = "5";       //余额
+
     private String id;
     private String serial;          //订单号
     private List<PurchaseOrderProduct> purchaseOrderProductList;
@@ -47,7 +54,7 @@ public class PurchaseOrder {
     private BigTenant bigTenant;
     private List<PurchaseOrder> subPurchaseOrder;
     private PurchaseOrder fatherPurchaseOrder;
-    private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信 4优惠券
+    private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信 4优惠券 5.余额
     private String message; //买家留言
     private Coupon coupon; //优惠券
     private String purchaseOrderAddress;//收货人地址

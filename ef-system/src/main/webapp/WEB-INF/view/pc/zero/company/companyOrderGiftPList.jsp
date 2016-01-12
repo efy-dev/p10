@@ -38,6 +38,7 @@
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr style="text-align:left">
+            <td></td>
             <td>礼品卡编号</td>
             <td>企业用户</td>
             <td>送礼人</td>
@@ -49,6 +50,17 @@
         </tr>
         <c:forEach items="${requestScope.pageInfo.list}" var="gift">
             <tr>
+                <td class="am-hide-sm-only"><a
+                        href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=${viewIdentify}&id=${gift.id}'/>">订单详情
+                </a>
+                    <br>
+                    <%--<c:if test="${empty purchaseOrder.fatherPurchaseOrder}">--%>
+                        <%--父订单--%>
+                    <%--</c:if>--%>
+                    <%--<c:if test="${not empty purchaseOrder.fatherPurchaseOrder}">--%>
+                        <%--子订单--%>
+                    <%--</c:if>--%>
+                </td>
                 <td>
                     <a href="javascript:void (0);" onclick="checkUrl('${gift.id}')" title="收礼链接">${gift.serial}</a>
                 </td>

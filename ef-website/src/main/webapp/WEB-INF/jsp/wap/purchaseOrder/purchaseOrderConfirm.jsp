@@ -196,7 +196,7 @@
 </div>
 <!--Start--弹出地址-->
 <div id="order-address" class="alert-delete or-address" style="display:none;">
-    <div class="bd cart-address" style="width: 90%;left: 5%;overflow: scroll;top: 2%" >
+    <div class="bd cart-address">
         <div class="bd list-adress" id="list-order">
             <ul class="ul-list" id="address">
                 <c:forEach items="${addressList}" var="address">
@@ -226,7 +226,7 @@
                     <i class="clase" title="关闭"></i>
                 </div>
                 <div class="m-form">
-                    <form id="newAddress" method="post"
+                    <form id="newAddress" style="height:276px;overflow-y:scroll" method="post"
                           class="am-form">
 
                         <input type="hidden" name="productModel" value="${productModel.id}">
@@ -277,7 +277,7 @@
 <!--//End--弹出地址-->
 <!--Start--弹出地址-->
 <div id="order-total" class="alert-delete yhq" style="display:none;">
-    <div class="bd cart-coupons" style="position: fixed;">
+    <div class="bd cart-coupons addtop"<%-- style="position: fixed;--%>">
         <div class="title">
             <h2>优惠券</h2>
         </div>
@@ -324,11 +324,27 @@
                     var out = '';
                     $("#yhq").text(data.length + "张优惠券可用");
                     for (var i = 0; i < data.length; i++) {
-                        /*out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
-                         + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';*/
+                        out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">';
+                        if (data[i].couponBatch.type != null && data[i].couponBatch.type == 1) {
+                            out += '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>';
+                        } else if (data[i].couponBatch.type != null && data[i].couponBatch.type == 2) {
+                            out += '<p>' + data[i]["couponBatch"]["price"] + "元" + '</p>';
+                        }
+                        out += '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>';
+                        if (data[i].couponBatch.range != null && data[i].couponBatch.range == 1) {
+                            out += '<p>适用范围：全网通用</p> </li>';
+                        } else if (data[i].couponBatch.range != null && data[i].couponBatch.range == 2) {
+                            out += '<p>适用范围：品类专用</p> </li>';
+                        } else if (data[i].couponBatch.range != null && data[i].couponBatch.range == 3) {
+                            out += '<p>适用范围：店铺专用</p> </li>';
+                        } else if (data[i].couponBatch.range != null && data[i].couponBatch.range == 4) {
+                            out += '<p>适用范围：单品专用</p> </li>';
+                        }
+                    }
+                   /* for (var i = 0; i < data.length; i++) {
                         out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
                                 + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';
-                    }
+                    }*/
                     $("#ul-list").html(out);
                 }
             },

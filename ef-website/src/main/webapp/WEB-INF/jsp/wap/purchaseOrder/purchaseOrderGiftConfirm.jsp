@@ -18,7 +18,7 @@
                 <div class="edit-txt1">点击此处即可编辑祝福语</div>
                 <!--//End-->
                 <div style="display: none" id="addMessage" class="add-cart">
-                    <textarea id="giftMessage" class="ae" maxlength="50"></textarea>
+                    <textarea id="giftMessage" class="ae" maxlength="50">猴年大吉！</textarea>
                     <span id="leaveword-num" class="leaveword-num1"><em>50</em>/50</span>
 
                     <div class="atext ae">
@@ -65,7 +65,7 @@
 
             <div class="btb"><h5>礼物详情</h5></div>
             <div class="chandise ae">
-                <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}"></div>
+                <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}" height="90px"></div>
                 <div class="cha-box">
                     <c:if test="${productModel.product.productModelList.size()==1}">
                         <strong>${productModel.name}</strong>
@@ -353,7 +353,6 @@
 
         });
     })
-
     function yhq() {
         var couponid = null;
         $("input:radio").each(function () {
@@ -391,7 +390,12 @@
         });
 
     }
-
+    $().ready(function () {
+        $(".edit-text").click(function () {
+            var t = $("#giftMessage").val();
+            $("#giftMessage").val("").focus().val(t);
+        })
+    })
 </script>
 </body>
 </html>
