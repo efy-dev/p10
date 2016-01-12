@@ -176,7 +176,9 @@ public class PurchaseOrderController {
             balanceRecord.setStatus("2");
             balanceRecord.setType("3");
             balanceRecord.setKey(balanceRecord1.getId());
-
+            baseManager.saveOrUpdate(BalanceRecord.class.getName(),balanceRecord);
+            consumer.setBalance(balance.add(balanceRecord1.getChangeBalance()));
+            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
 
         }
         return "redirect:/order/myEfeiyi/list.do";

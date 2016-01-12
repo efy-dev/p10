@@ -280,7 +280,9 @@
                                 <td align="center">
                                         ${model.marketPrice}
                                 </td>
-
+                                <td align="center">
+                                        ${model.weight}
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

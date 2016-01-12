@@ -210,12 +210,14 @@ public class BatchPrintReactor implements Runnable {
             // 开始打印
             Dispatch.callN(doc, "PrintOut", new Object[]{});
             wd.invoke("Quit", new Variant[]{});
+            deleteOldFile(docTarget);
         } catch (Exception e) {
+
+
             e.printStackTrace();
         } finally {
             // 始终释放资源
             ComThread.Release();
-            deleteOldFile(docTarget);
         }
     }
 

@@ -47,7 +47,7 @@ public class PurchaseOrderDaoHibernate extends BaseDaoSupport<PurchaseOrder> imp
                 "       os.username as 下单人, " +
                 "       case pc.status when 1 then '未使用' when 2 then '已使用' end as 优惠券,pc.serial as 优惠券号, " +
                 "       pcb.name as 优惠券名称,pcb.price as 优惠价格,pcb.price_limit as 优惠条件, " +
-                "       t.name as 店铺\n" +
+                "       t.name as 店铺,case po.order_type when 1 then '普通类型' when 2 then '秒杀类型' when 3 then '礼品卷类型' when 4 then '团购类型' when 5 then '企业礼品卡类型' end as 订单类型 " +
                 "  FROM purchase_order po  " +
                 "  left join purchase_order_product pop " +
                 "  on po.id = pop.purchase_order_id " +
