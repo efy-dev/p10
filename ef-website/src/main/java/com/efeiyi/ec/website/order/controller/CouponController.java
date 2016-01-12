@@ -455,7 +455,7 @@ public class CouponController {
                         coupon.setBindTime(date);
                         baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
                         model.addAttribute("yhq", coupon);
-                    } else if (result.size() > 0 || result != null) {
+                    } else if (result.size() > 0) {
                         coupon = (Coupon) result.get(0);
                         coupon.setConsumer(consumer);
                         coupon.setWhetherBind("2");
