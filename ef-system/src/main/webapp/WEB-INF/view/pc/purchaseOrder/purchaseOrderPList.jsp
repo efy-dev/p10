@@ -164,6 +164,7 @@
 
             <div class="am-u-sm-8" name="selectTenant" id="selectTenant" style="display: inline-block;padding: 0">
                 <select name="tenant3" id="tenant3" style="width:180px;float:left;">
+                    <option value="">请选择</option>
                     <c:forEach items="${tenantList}" var="tenant">
                     <option value="${tenant.id}">${tenant.name}</option>
                     </c:forEach>
