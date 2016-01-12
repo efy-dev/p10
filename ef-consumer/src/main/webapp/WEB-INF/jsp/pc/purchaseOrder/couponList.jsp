@@ -29,7 +29,7 @@
                                 </div>
                                 <p id="tx"></p>
                                 <i class="no"></i>
-                                <input class="btn"  onclick="exchangeCoupon()" value="马上领取">
+                                <input class="btn" type="button" onclick="exchangeCoupon()" value="马上领取">
                             </form>
                         </div>
                         <div class="bg"></div>
