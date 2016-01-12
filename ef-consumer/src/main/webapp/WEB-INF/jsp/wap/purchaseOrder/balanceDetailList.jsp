@@ -38,7 +38,9 @@
 					<td>购买商品使用</td>
 				</c:if>
 				<c:if test="${balanceDetailList.status==2}">
-					<td>${balanceDetailList.type}</td>
+					<td>
+						<ming800:status name="type" dataType="BalanceRecord.type" checkedValue="${balanceDetailList.type}" type="normal"/>
+					</td>
 				</c:if>
 
 			</tr>

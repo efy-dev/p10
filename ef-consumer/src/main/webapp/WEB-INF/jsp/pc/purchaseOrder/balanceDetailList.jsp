@@ -44,7 +44,7 @@
 								<td width="146">￥<span>${balanceDetailList.changeBalance}</span></td>
 							</c:if>
 							<c:if test="${balanceDetailList.status==2}">
-								<td width="357">${balanceDetailList.type}</td>
+								<td width="357"><ming800:status name="type" dataType="BalanceRecord.type" checkedValue="${balanceDetailList.type}" type="normal"/></td>
 							</c:if>
 							<c:if test="${balanceDetailList.status==3}">
 								<td width="357">购买商品使用</td>
