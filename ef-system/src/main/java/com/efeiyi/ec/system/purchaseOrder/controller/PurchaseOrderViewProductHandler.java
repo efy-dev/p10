@@ -3,6 +3,7 @@ package com.efeiyi.ec.system.purchaseOrder.controller;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.service.DoHandler;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.hibernate.Session;
@@ -67,6 +68,10 @@ public class PurchaseOrderViewProductHandler implements DoHandler {
                 modelMap.put("messageList",messageList);
             }
         }
+
+        XQuery xQuery = new XQuery("listTenant_product", request);
+        List<Object> tenantList = baseManager.listObject(xQuery);
+        modelMap.put("tenantList",tenantList);
         return modelMap;
     }
 }

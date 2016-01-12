@@ -90,7 +90,7 @@
                 <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织" target="_blank"></a><em class="line"></em><a class="icon3" title="中国非物质文化遗产保护协会"></a><em class="line"></em><a class="icon2" title="中国非物质文化遗产保护协会"></a>
                 </div>
              </div>
-                <div class="info">Copyright ? 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
+                <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
         </div>
         <!--<div class="copyright wh">
             <div class="phone">
