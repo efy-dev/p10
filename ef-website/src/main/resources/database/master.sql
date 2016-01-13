@@ -331,7 +331,13 @@ CREATE TABLE `balance_record` (
 `consumer_id`  char(16) NULL
 )
 ;
+/--balance_record添加id主键--/
+ALTER TABLE `balance_record`
+ADD PRIMARY KEY (`id`);
 /-------------consumer表增加余额字段----------------/
 ALTER TABLE `organization_consumer`
 ADD COLUMN `balance`  decimal(10,2) NULL AFTER `unionid`;
 
+/---------余额修改字段----------/
+ALTER TABLE `balance_record`
+CHANGE COLUMN `key` `balance_key`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `status`;

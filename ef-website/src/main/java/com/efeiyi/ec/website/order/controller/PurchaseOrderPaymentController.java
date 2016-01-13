@@ -193,6 +193,44 @@ public class PurchaseOrderPaymentController {
         return "/order/wxNative";
     }
 
+    @RequestMapping({"/pay/balance/{orderId}"})
+    public String balancePayNative(@PathVariable String orderId, Model model, HttpServletRequest request){
+        String purchaseOrderId = request.getParameter("purchaseOrderId");
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
+        if ("5".equals(purchaseOrderPaymentDetails.getPayWay())){
+//            String consumerId = AuthorizationUtil.getMyUser().getId();
+//            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+//            consumer.setBalance(consumer.getBalance().subtract(purchaseOrderPaymentDetails.getMoney()));
+
+            PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
+
+            // 修改订单状态
+            if (purchaseOrder.getSubPurchaseOrder() != null && purchaseOrder.getSubPurchaseOrder().size() > 0) {
+                //同时修改子订单状态
+                for (PurchaseOrder purchaseOrderTemp : purchaseOrder.getSubPurchaseOrder()) {
+                    purchaseOrderTemp.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE);
+                    baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
+                }
+            }
+            for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+                purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() - purchaseOrderProduct.getPurchaseAmount());
+                baseManager.saveOrUpdate(ProductModel.class.getName(), purchaseOrderProduct.getProductModel());
+            }
+            if("3".equals(purchaseOrder.getOrderType())){
+                purchaseOrder.setOrderStatus("6");
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+                model.addAttribute("order",purchaseOrder);
+                return "redirect:/giftReceive/"+purchaseOrderId;
+            }else {
+                purchaseOrder.setOrderStatus("5");
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+                model.addAttribute("order",purchaseOrder);
+                return "/purchaseOrder/paySuccess";
+            }
+        }else {
+            return "";
+        }
+    }
 
     @RequestMapping({"/pay/{orderId}"})
     public String orderPay(@PathVariable String orderId, HttpServletRequest request) {
