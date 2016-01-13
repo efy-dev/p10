@@ -541,7 +541,7 @@
                     var finalPrice = parseFloat(data["finalPrice"]);
                     if(finalPrice<parseFloat(${consumer.balance})){
                         $("#usefulBalance").html(finalPrice.toFixed(2));
-                        ${"#balance"}.html("0.00");
+                        $("#balance").html("0.00");
                     }
                 }
                 ajaxRequest("<c:url value="/order/getPurchaseOrderPrice.do"/>", param, success, function () {

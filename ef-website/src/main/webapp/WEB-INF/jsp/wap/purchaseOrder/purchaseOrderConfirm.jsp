@@ -740,7 +740,6 @@
         var totalPrice = $("#totalPrice").text();
         var couponPrice = $("#couponPrice").text();
         var balance = $("#usefulBalance").text();
-        alert(balance);
         if ($(element).is(':checked') == true){
             $("#balance").html(balance);
             $("#change").html((totalPrice-balance-couponPrice).toFixed(2));
