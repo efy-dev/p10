@@ -257,14 +257,7 @@
                 <form>
                     <div class="balance-titie">余额支付</div>
                     <div class="balance-text"><input type="checkbox" onclick="useBalance(this)">使用余额支付
-                        <span id="usefulBalance">
-                            <c:if test="${consumer.balance>purchaseOrder.total}">
-                                ${purchaseOrder.total}
-                            </c:if>
-                            <c:if test="${consumer.balance<=purchaseOrder.total}">
-                                ${consumer.balance}
-                            </c:if>
-                        </span>元</div>
+                        <span id="usefulBalance"><c:if test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元</div>
                 </form>
             </div>
         </c:if>
@@ -545,6 +538,11 @@
                     $("#totalPrice").html(data["totalPrice"]);
                     $("#couponPrice").html(data["couponPrice"]);
                     $("#finalPrice").html(data["finalPrice"]);
+                    var finalPrice = parseFloat(data["finalPrice"]);
+                    if(finalPrice<parseFloat(${consumer.balance})){
+                        $("#usefulBalance").html(finalPrice.toFixed(2));
+                        ${"#balance"}.html("0.00");
+                    }
                 }
                 ajaxRequest("<c:url value="/order/getPurchaseOrderPrice.do"/>", param, success, function () {
                 }, "post");
