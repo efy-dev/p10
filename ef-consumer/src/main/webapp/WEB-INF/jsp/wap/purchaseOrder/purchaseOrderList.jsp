@@ -25,6 +25,7 @@
 				<dt><img src="<c:url value="/scripts/images/yonghm.jpg"/>" alt="..." class="am-img-thumbnail"></dt>
 
 			</c:if>
+			<dd>账户余额：￥<em id="balance"></em></dd>
 			<c:set var="user">
 				<%= AuthorizationUtil.getMyUser().getUsername()%>
 			</c:set>
@@ -271,9 +272,9 @@
 			<a href="<c:url value="/myEfeiyi/personalInfo.do"/>"> 个人信息<i class="icon-sj"></i></a>
 		</div>
 		<!--账户余额-->
-		<%--<div class="Extras">--%>
-		<%--<a href="#"> 账户余额<i class="icon-sj"></i></a>--%>
-		<%--</div>--%>
+		<div class="Extras">
+		<a href="<c:url value="/myEfeiyi/getBalanceDetailsList.do"/>"> 账户余额<i class="icon-sj"></i></a>
+		</div>
 		<!--地址管理-->
 		<div class="Extras">
 			<a href="<c:url value="/myEfeiyi/address/list"/>"> 地址信息<i class="icon-sj"></i></a>
@@ -300,6 +301,17 @@
 	var  isWeiXinFlag = isWeiXin();
 
 	$().ready(function(){
+		$.ajax({
+			type:'post',
+			async:'false',
+			url:'<c:url value='/myEfeiyi/getBalance.do'/>',
+			dataType:'json',
+			success:function(data){
+				$("#balance").html(data);
+			}
+
+		})
+
 		$("a[name=payButton]").each(function(){
 			if(isWeiXinFlag){
 				$(this).attr("href",$(this).attr("href")+"?isWeiXin=true");
@@ -307,7 +319,12 @@
 				$(this).attr("href",$(this).attr("href")+"?isWeiXin=false");
 			}
 		});
+
+
+
 	})
+
+
 </script>
 </body>
 </html>

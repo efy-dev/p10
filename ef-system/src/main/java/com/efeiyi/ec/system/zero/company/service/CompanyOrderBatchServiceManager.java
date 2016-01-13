@@ -15,5 +15,5 @@ public interface CompanyOrderBatchServiceManager {
 
     List<PurchaseOrderGift> getOrderGiftList(CompanyOrderBatch companyOrderBatch)throws Exception;
 
-    void removeOrderGift(String giftId)throws Exception;
+    void cancelOrderGift(String giftId)throws Exception;
 }

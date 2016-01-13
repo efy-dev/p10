@@ -34,7 +34,8 @@ public class SigninController extends BaseController {
     @ResponseBody
     public Map login(HttpServletRequest request) {
         LogBean logBean = new LogBean();
-        Map<String, String> resultMap = new HashMap<String, String>();
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Map<String, Object> respInfo = new HashMap<String, Object>();
         TreeMap treeMap = new TreeMap();
         try {
             InputStream inputStream = request.getInputStream();
@@ -78,6 +79,8 @@ public class SigninController extends BaseController {
                     baseManager.saveOrUpdate(LogBean.class.getName(),logBean);
                     resultMap.put("resultCode", "0");
                     resultMap.put("msg", "成功");
+                    respInfo.put("user",user);
+                    resultMap.put("userInfo",respInfo);
                 }
             } catch (Exception e) {
                 logBean.setResultCode("10003");
@@ -102,7 +105,7 @@ public class SigninController extends BaseController {
     @ResponseBody
     public Map register(HttpServletRequest request) {
         LogBean logBean = new LogBean();
-        Map<String, String> resultMap = new HashMap<String, String>();
+        Map<String, Object> resultMap = new HashMap<String, Object>();
         TreeMap treeMap = new TreeMap();
         try {
             InputStream inputStream = request.getInputStream();
@@ -182,6 +185,7 @@ public class SigninController extends BaseController {
             resultMap.put("msg", "注册成功！");
             logBean.setResultCode("0");
             logBean.setMsg( "注册成功！");
+            resultMap.put("userInfo",myUser);//响应的用户信息
             baseManager.saveOrUpdate(LogBean.class.getName(),logBean);
         } catch (Exception e) {
             resultMap.put("resultCode", "10004");

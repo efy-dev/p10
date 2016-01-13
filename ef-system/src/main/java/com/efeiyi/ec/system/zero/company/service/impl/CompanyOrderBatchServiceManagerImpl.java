@@ -31,7 +31,7 @@ public class CompanyOrderBatchServiceManagerImpl implements CompanyOrderBatchSer
     }
 
     @Override
-    public void removeOrderGift(String giftId) throws Exception {
-        companyOrderBatchDao.removeOrderGift(giftId);
+    public void cancelOrderGift(String giftId) throws Exception {
+        companyOrderBatchDao.cancelOrderGift(giftId);
     }
 }

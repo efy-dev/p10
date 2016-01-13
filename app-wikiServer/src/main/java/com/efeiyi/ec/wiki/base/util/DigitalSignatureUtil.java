@@ -32,14 +32,12 @@ public class DigitalSignatureUtil {
       for(Iterator it = map.keySet().iterator();it.hasNext();){// ��������
           Object key = it.next();
           Object Value = map.get(key);
-          System.out.println(key+"-->"+Value);
           str.append(key).append("=").append(Value).append("&");
       }
       str.append("key=" + WikiConfig.appKey);
 
       String md5Value = MD5(str.toString());
-      System.out.println("before :"+str.toString());
-      System.out.println("signmsg :"+md5Value);
+
       if(md5Value.equals(signmsg)){
           flag = true;
       }
