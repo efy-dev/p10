@@ -50,6 +50,9 @@ public class InternalPromotionHandler implements DoHandler {
             for (PurchaseOrder purchaseOrder : purchaseOrderList) {
                 String sourceId = purchaseOrder.getSource().substring(5);
                 List<BigDecimal> valueList;
+                if(purchaseOrder.getSource().equals("user_if3r1tjdacyzjklu")){
+                    System.out.println();
+                }
                 if((valueList = orderMap.get(sourceId)) == null){
                     valueList = new ArrayList();
                     valueList.add(new BigDecimal(1));//下单数
@@ -59,7 +62,7 @@ public class InternalPromotionHandler implements DoHandler {
                 }else{
                     valueList.set(0,new BigDecimal(valueList.get(0).doubleValue() + 1));//下单数
                     valueList.set(1,valueList.get(1).add(purchaseOrder.getTotal()));//订单总额
-                    valueList.set(2,valueList.get(1).add(purchaseOrder.getRealPayMoney()));//支付总额
+                    valueList.set(2,valueList.get(2).add(purchaseOrder.getRealPayMoney()));//支付总额
                 }
             }
 
