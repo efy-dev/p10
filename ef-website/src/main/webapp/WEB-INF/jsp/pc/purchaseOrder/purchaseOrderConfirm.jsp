@@ -542,7 +542,7 @@
                     if(finalPrice<parseFloat(${consumer.balance})){
                         $("#usefulBalance").html(finalPrice.toFixed(2));
                         $("#balance").html("0.00");
-                        $("#usefulBalance").attr("checked",false);
+                        $("#usefulBalance").prop({checked:false});
                     }
                 }
                 ajaxRequest("<c:url value="/order/getPurchaseOrderPrice.do"/>", param, success, function () {
