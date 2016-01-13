@@ -256,7 +256,15 @@
             <div class="balance">
                 <form>
                     <div class="balance-titie">余额支付</div>
-                    <div class="balance-text"><input type="checkbox" onclick="useBalance(this)">使用余额支付<span>${consumer.balance}</span>元</div>
+                    <div class="balance-text"><input type="checkbox" onclick="useBalance(this)">使用余额支付
+                        <span id="usefulBalance">
+                            <c:if test="${consumer.balance>purchaseOrder.total}">
+                                ${purchaseOrder.total}
+                            </c:if>
+                            <c:if test="${consumer.balance<=purchaseOrder.total}">
+                                ${consumer.balance}
+                            </c:if>
+                        </span>元</div>
                 </form>
             </div>
         </c:if>
@@ -599,7 +607,7 @@
     function useBalance(element){
         var totalPrice = $("#totalPrice").text();
         var couponPrice = $("#couponPrice").text();
-        var balance = (${consumer.balance}).toFixed(2);
+        var balance = $("#usefulBalance").text();
         if ($(element).is(':checked') == true){
             $("#balance").html(balance);
             $("#finalPrice").html((totalPrice-balance-couponPrice).toFixed(2));

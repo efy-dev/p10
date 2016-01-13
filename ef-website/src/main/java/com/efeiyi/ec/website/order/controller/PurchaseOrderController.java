@@ -201,12 +201,21 @@ public class PurchaseOrderController extends BaseController {
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
         List addressList = baseManager.listObject(xQuery);
+
+        String consumerId = AuthorizationUtil.getMyUser().getId();
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+        if(null == consumer.getBalance()){
+            consumer.setBalance(new BigDecimal(0));
+            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+        }
+
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrderGift);
         model.addAttribute("productModel", productModel);
         model.addAttribute("purchaseOrderProduct", purchaseOrderProduct);
         model.addAttribute("amount", amount);
         model.addAttribute("request", "/giftBuy/**");
+        model.addAttribute("consumer",consumer);
         return "/purchaseOrder/purchaseOrderGiftConfirm";
     }
 
@@ -260,6 +269,10 @@ public class PurchaseOrderController extends BaseController {
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+        if(null == consumer.getBalance()){
+            consumer.setBalance(new BigDecimal(0));
+            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+        }
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
@@ -377,7 +390,6 @@ public class PurchaseOrderController extends BaseController {
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 
-
     @RequestMapping({"/getPurchaseOrderPrice.do"})
     @ResponseBody
     public String getPurchaseOrderPrice(HttpServletRequest request) {
@@ -410,15 +422,22 @@ public class PurchaseOrderController extends BaseController {
                 }
             }
         }
+        //判断余额是否足够，足够的话支付方式改为余额支付
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),orderId);
+        if (null != balance && Float.parseFloat(balance) > 0){
+            int r = new BigDecimal(balance).compareTo(purchaseOrder.getTotal());
+            if(r == 0){
+                payment = "5";
+            }
+        }
         //订单收货地址//初始化订单状态
         ConsumerAddress consumerAddress = null;
         if (addressId != null) {
             consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
         }
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder = purchaseOrderManager.confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payment);
         //生成支付记录以及支付详情
-        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder);
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder, balance);
 
         // 清除购物车
         XQuery xQuery = new XQuery("listCart_default", request);
@@ -443,6 +462,8 @@ public class PurchaseOrderController extends BaseController {
             } else {
                 resultPage = "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
             }
+        } else if (payment.equals("5")){
+            resultPage ="redirect:/order/pay/balance/" + purchaseOrderPaymentDetails.getId() + "?purchaseOrderId=" + purchaseOrder.getId();
         }
         return resultPage;
     }
