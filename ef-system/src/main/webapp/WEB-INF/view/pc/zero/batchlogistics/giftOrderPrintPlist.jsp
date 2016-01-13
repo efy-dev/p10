@@ -23,7 +23,7 @@
 
 <span style="text-align: left;margin-left: 10px;">
     <input onclick="window.location.href='<c:url
-            value="/batch/batchPrint.do?qm=listGiftBatchPrint_default&result=redirect:/basic/xm.do?qm=plistGiftBatchPrint_default"/>'"
+            value="/batch/batchPrint3.do?qm=listGiftBatchPrint_default&result=redirect:/basic/xm.do?qm=plistGiftBatchPrint_default"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="启动批量"/>
@@ -114,7 +114,7 @@
       }
     });
 
-    window.location.href="<c:url value='/batch/batchPrint2.do?idList='/>" + idList;
+    window.location.href="<c:url value='/batch/batchPrint4.do?idList='/>" + idList;
   }
 </script>
 </body>

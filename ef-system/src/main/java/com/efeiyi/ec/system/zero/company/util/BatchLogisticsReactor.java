@@ -165,6 +165,7 @@ public class BatchLogisticsReactor implements Runnable {
                     purchaseOrderDelivery.setStatus("1");//物流已发货
 //            purchaseOrderDelivery.setSerial("1234");
                     purchaseOrderDelivery.setLogisticsCompany("DEPPON");
+                    purchaseOrderDelivery.setBigPen((String)((Map)map.get("sortingParam")).get("bigPen"));
                     session.saveOrUpdate(purchaseOrderDelivery);
                     // 发短信
                     postSms(purchaseOrderDelivery);

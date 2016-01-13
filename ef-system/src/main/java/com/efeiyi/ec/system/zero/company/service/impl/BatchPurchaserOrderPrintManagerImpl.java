@@ -1,67 +1,105 @@
-package com.efeiyi.ec.system.zero.company.util;
+package com.efeiyi.ec.system.zero.company.service.impl;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
-import com.jacob.activeX.ActiveXComponent;
-import com.jacob.com.ComThread;
-import com.jacob.com.Dispatch;
-import com.jacob.com.Variant;
-import com.ming800.core.util.ApplicationContextUtil;
+import com.efeiyi.ec.system.zero.company.service.BatchPrintManager;
+import com.ming800.core.base.service.BaseManager;
 import net.sourceforge.rtf.RTFTemplate;
 import net.sourceforge.rtf.context.image.FormatBase;
 import net.sourceforge.rtf.context.image.ImageConstants;
 import net.sourceforge.rtf.helper.RTFTemplateBuilder;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.ByteArrayOutputStream;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.krysalis.barcode4j.impl.code39.Code39Bean;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
 import org.krysalis.barcode4j.tools.UnitConv;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
- * Created by Administrator on 2016/1/6.
+ * Created by Administrator on 2016/1/13.
  */
-@Deprecated
-public class BatchPrintReactor implements Runnable {
-    private SessionFactory sessionFactory = ((SessionFactory) ApplicationContextUtil.getApplicationContext().getBean("scheduleSessionFactory"));
-    private List<PurchaseOrderProduct> purchaseOrderProductList;
-    private Session session;
-    public static AtomicInteger runningFlag = new AtomicInteger(0);
-    public static final int idle = 0;
-    public static final int busy = 1;
-    private String path;//模板和输出打印文件的路径
+@Service
+public class BatchPurchaserOrderPrintManagerImpl implements BatchPrintManager {
 
-    public BatchPrintReactor(List<PurchaseOrderProduct> purchaseOrderProductList) {
-        this.purchaseOrderProductList = purchaseOrderProductList;
-        path = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-    }
+    @Autowired
+    private BaseManager baseManager;
+    private String path = Thread.currentThread().getContextClassLoader().getResource("").getPath();
 
+    /**
+     * 下载运单
+     * @param purchaseOrderProductList
+     * @return
+     * @throws Exception
+     */
     @Override
-    public void run() {
-        try {
-            session = sessionFactory.openSession();
-            for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrderProductList) {
-                purchaseOrderProduct = (PurchaseOrderProduct) session.get(PurchaseOrderProduct.class.getName(), purchaseOrderProduct.getId());
-                File docTarget = executeWrite(purchaseOrderProduct.getPurchaseOrder());
-                executePrint(docTarget);
-                purchaseOrderProduct.getPurchaseOrder().setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE);
-                session.saveOrUpdate(purchaseOrderProduct.getPurchaseOrder());
-                session.flush();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-            BatchPrintReactor.runningFlag.compareAndSet(busy, idle);
+    public File downloadFiles(List purchaseOrderProductList) throws Exception {
+
+        List<File> fileList = new ArrayList<>(purchaseOrderProductList.size());
+        for (Object object : purchaseOrderProductList) {
+
+            PurchaseOrderProduct purchaseOrderProduct = (PurchaseOrderProduct) object;
+            File docTarget = executeWrite(purchaseOrderProduct.getPurchaseOrder());
+            fileList.add(docTarget);
+            purchaseOrderProduct.getPurchaseOrder().setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderProduct.getPurchaseOrder());
         }
+
+        return zipFiles(fileList, new File(path + "/" + System.currentTimeMillis() + ".rar"));
     }
 
+    /**
+     * 压缩运单文件
+     *
+     * @param fileList
+     * @param zipFile
+     * @return
+     * @throws Exception
+     */
+    private File zipFiles(List<File> fileList, File zipFile) throws Exception {
+        ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFile));
+
+        FileInputStream inputStream = null;
+        BufferedInputStream bufferedInputStream = null;
+        for (File file : fileList) {
+            try {
+                inputStream = new FileInputStream(file);
+                bufferedInputStream = new BufferedInputStream(inputStream, 512);
+                //org.apache.tools.zip.ZipEntry
+                ZipEntry entry = new ZipEntry(file.getName());
+                zipOutputStream.putNextEntry(entry);
+                // 向压缩文件中输出数据
+                int nNumber;
+                byte[] buffer = new byte[512];
+                while ((nNumber = bufferedInputStream.read(buffer)) != -1) {
+                    zipOutputStream.write(buffer, 0, nNumber);
+                }
+            } catch (Exception e) {
+                throw e;
+            } finally {
+                // 关闭创建的流对象
+                bufferedInputStream.close();
+                inputStream.close();
+            }
+        }
+        zipOutputStream.close();
+        return zipFile;
+    }
+
+    /**
+     * RTF模板输出运单
+     *
+     * @param purchaseOrder
+     * @return
+     * @throws Exception
+     */
     private File executeWrite(PurchaseOrder purchaseOrder) throws Exception {
 
         File rtfSource = new File(path + "/wayBillTemplate.rtf");
@@ -72,37 +110,12 @@ public class BatchPrintReactor implements Runnable {
         rtfTemplate.put("receiverName", purchaseOrder.getReceiverName());//把rtfSource 文件中的"$apId"替换成"a"
         rtfTemplate.put("receiverPhone", purchaseOrder.getReceiverPhone());
         rtfTemplate.put("address", purchaseOrder.getPurchaseOrderAddress());
-        rtfTemplate.put("bigPen",purchaseOrder.getPurchaseOrderDeliveryList().get(0).getBigPen());
-        rtfTemplate.put("to",purchaseOrder.getCity().getName());
+        rtfTemplate.put("bigPen", purchaseOrder.getPurchaseOrderDeliveryList().get(0).getBigPen());
+        rtfTemplate.put("to", purchaseOrder.getCity().getName());
         rtfTemplate.put("barCode", generateBarCode(purchaseOrder.getPurchaseOrderDeliveryList().get(0).getSerial(), 1.8f));
         rtfTemplate.merge(docTarget);
         removeEscapeCharacter(docTarget);
         return docTarget;
-    }
-
-    /**
-     * 移除RTFTemplate输出图片时产生的转义字符\
-     *
-     * @param file
-     * @throws Exception
-     */
-    private void removeEscapeCharacter(File file) throws Exception {
-        FileInputStream fis = null;
-        FileOutputStream fos = null;
-        try {
-            fis = new FileInputStream(file);
-            byte[] b = new byte[(int) file.length()];
-            fis.read(b);
-            String content = new String(b);
-            content = content.replace("\\{", "{").replace("\\}", "}");
-            fos = new FileOutputStream(file);
-            fos.write(content.getBytes());
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            fis.close();
-            fos.close();
-        }
     }
 
     /**
@@ -191,43 +204,29 @@ public class BatchPrintReactor implements Runnable {
         return buf;
     }
 
-
     /**
-     * 打印
+     * 移除RTFTemplate输出图片时产生的转义字符\
+     *
+     * @param file
+     * @throws Exception
      */
-    private void executePrint(File docTarget) {
-        ComThread.InitSTA();
-        ActiveXComponent wd = new ActiveXComponent("Word.Application");
+    private void removeEscapeCharacter(File file) throws Exception {
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
         try {
-            // 不打开文档
-            Dispatch.put(wd, "Visible", new Variant(false));
-            Dispatch document = wd.getProperty("Documents").toDispatch();
-            // 打开文档
-            Dispatch doc = Dispatch.invoke(document, "Open", Dispatch.Method,
-                    new Object[] { docTarget.getAbsolutePath() }, new int[1]).toDispatch();
-            // 开始打印
-            Dispatch.callN(doc, "PrintOut", new Object[]{});
-            wd.invoke("Quit", new Variant[]{});
-            deleteOldFile(docTarget);
+            fis = new FileInputStream(file);
+            byte[] b = new byte[(int) file.length()];
+            fis.read(b);
+            String content = new String(b);
+            content = content.replace("\\{", "{").replace("\\}", "}");
+            fos = new FileOutputStream(file);
+            fos.write(content.getBytes());
         } catch (Exception e) {
-
-
-            e.printStackTrace();
+            throw e;
         } finally {
-            // 始终释放资源
-            ComThread.Release();
+            fis.close();
+            fos.close();
         }
-    }
-
-    /**
-     * 删除旧文件，重命名新文件，防止
-     * @param docTarget
-     */
-    private void deleteOldFile(File docTarget) {
-        File file = new File(docTarget.getAbsolutePath().substring(0, docTarget.getAbsolutePath().lastIndexOf(".")));
-        if(file.exists()){
-            file.delete();
-        }
-        docTarget.renameTo(file);
     }
 }
+
