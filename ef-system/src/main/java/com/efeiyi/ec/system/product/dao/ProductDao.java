@@ -10,4 +10,6 @@ public interface ProductDao {
 
     /**获取商品图片最大排序**/
     public Integer getProductPicture1(String productId);
+
+    List getAddedProduct();
 }

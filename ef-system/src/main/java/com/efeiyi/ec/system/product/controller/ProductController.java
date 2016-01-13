@@ -653,6 +653,13 @@ public class ProductController extends BaseController {
         return null;
     }
 
+    @RequestMapping("/createXML.do")
+    @ResponseBody
+    public void createXML(HttpServletRequest request){
+        String path = request.getServletContext().getRealPath("/productxml");
+        productManager.createXMLByAddedProduct(path);
+    }
+
 
     @RequestMapping("/updateShow.do")
     @ResponseBody
