@@ -91,7 +91,7 @@ public class ProductDaoHibernate implements ProductDao{
 
     @Override
     public List getAddedProduct() {
-        String sql = "select pm.id,pm.name,pm.product_model_url,pm.price from product p,product_model pm where p.id=pm.product_id and p.status=1 ";
+        String sql = "select pm.id,pm.name,pm.product_model_url,pm.price,pm.amount,po.name as projectname from product_model pm left join product p on p.id=pm.product_id left join project po on po.id=p.project_id where  p.status=1 ";
         List<Object[]> productList = this.getSession().createSQLQuery(sql).list();
         return productList;
     }
