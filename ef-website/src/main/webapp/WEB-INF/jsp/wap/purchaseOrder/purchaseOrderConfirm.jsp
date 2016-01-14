@@ -120,7 +120,7 @@
                                               placeholder="给卖家留言(如需开具发票，请在此输入开票信息)"></textarea></div>
             </div>
         </c:forEach>
-        <div class="balance"><input type="checkbox" onclick="useBalance(this);">使用余额支付<span id="usefulBalance"><c:if test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元</div>
+        <div class="balance"><input type="checkbox" id="banlanceCheckbox" onclick="useBalance(this);">使用余额支付<span id="usefulBalance"><c:if test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元</div>
         <!-- //End--order-list-->
         <div class="bd order-total">
             <c:if test="${empty purchaseOrder.callback}">
@@ -416,6 +416,7 @@
                         if(t_price<parseFloat(${consumer.balance})){
                             $("#usefulBalance").html(t_price.toFixed(2));
                             $("#balance").html("0.00");
+                            $("#banlanceCheckbox").attr("checked",false);
                         }
                     }
                 },
