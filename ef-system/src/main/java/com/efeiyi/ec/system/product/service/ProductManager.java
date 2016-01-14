@@ -28,4 +28,5 @@ public interface ProductManager {
     Integer productPictureSort1(String productId);
 
     public void changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort);
+    void createXMLByAddedProduct(String path);
 }

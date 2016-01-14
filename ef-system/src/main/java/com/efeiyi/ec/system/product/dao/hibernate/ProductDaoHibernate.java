@@ -1,6 +1,5 @@
 package com.efeiyi.ec.system.product.dao.hibernate;
 
-import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.system.product.dao.ProductDao;
 import com.ming800.core.base.dao.XdoDao;
 import org.hibernate.Session;
@@ -88,5 +87,12 @@ public class ProductDaoHibernate implements ProductDao{
         }else {
             return (Integer) objectList.get(0);
         }
+    }
+
+    @Override
+    public List getAddedProduct() {
+        String sql = "select pm.id,pm.name,pm.product_model_url,pm.price from product p,product_model pm where p.id=pm.product_id and p.status=1 ";
+        List<Object[]> productList = this.getSession().createSQLQuery(sql).list();
+        return productList;
     }
 }

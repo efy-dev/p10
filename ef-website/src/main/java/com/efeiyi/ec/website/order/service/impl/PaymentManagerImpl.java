@@ -217,7 +217,7 @@ public class PaymentManagerImpl implements PaymentManager {
             purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
             baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
         }
-        if(balance1>0){
+        if(null != balance1 && balance1>0){
             String consumerId = AuthorizationUtil.getMyUser().getId();
             Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
             BigDecimal currentBalance = consumer.getBalance();
@@ -256,9 +256,17 @@ public class PaymentManagerImpl implements PaymentManager {
         }
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
         if (purchaseOrder.getCoupon() != null) {
-            purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
+            if (balance1>0){
+                purchaseOrderPaymentDetails.setMoney((purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice()))).subtract(new BigDecimal(balance)));
+            }else {
+                purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
+            }
         } else {
-            purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal());
+            if(balance1>0){
+                purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(balance)));
+            }else {
+                purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal());
+            }
         }
         purchaseOrderPaymentDetails.setPayWay(purchaseOrder.getPayWay());
         purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);

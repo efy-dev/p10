@@ -19,6 +19,7 @@ public class PurchaseOrderDelivery {
     private String serial;
     private String status; // 1已发货 2未发货
     private String logisticsCompany;//物流公司
+    private String bigPen; //物流bigpen
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -87,4 +88,12 @@ public class PurchaseOrderDelivery {
         this.logisticsCompany = logisticsCompany;
     }
 
+    @Column(name = "big_pen")
+    public String getBigPen() {
+        return bigPen;
+    }
+
+    public void setBigPen(String bigPen) {
+        this.bigPen = bigPen;
+    }
 }

@@ -27,6 +27,7 @@
 <security:authorize ifAnyGranted="admin,operational,c_operational">
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&view=${view}&tenantId=${tenantId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
     <input onclick="outExcel();" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="生成excel" />
+    <input onclick="createXML();" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="生成xml" />
     <%--<a onclick="initSort(this)"  class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 135px;margin-left:2px;height: 35px;"  >初始化商品图片排序</a>--%>
     </security:authorize>
 </div>
@@ -249,6 +250,16 @@
 
             <%--}--%>
         <%--});--%>
+    }
+
+    function createXML(){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/product/createXML.do"/>',
+            dataType: "json",
+            success: function (data) {
+            }
+        });
     }
 </script>
 
