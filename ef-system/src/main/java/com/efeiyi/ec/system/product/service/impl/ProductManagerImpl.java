@@ -536,11 +536,19 @@ public class ProductManagerImpl implements ProductManager{
             Element fourth2Element = third2Element.addElement("price");
             Element fourth4Element = third2Element.addElement("pid");
             Element fourth5Element = third2Element.addElement("imgUrl");
+            Element fourth6Element = third2Element.addElement("inventoryNum");
+            Element fourth7Element = third2Element.addElement("cName");
 
             fourth1Element.setText(product[1].toString());
             fourth2Element.setText(product[3].toString());
             fourth4Element.setText(product[0].toString());
             fourth5Element.setText("http://pro.efeiyi.com"+product[2].toString());
+            if("0".equals(product[4].toString())){
+                fourth6Element.setText("0");
+            }else{
+                fourth6Element.setText("1");
+            }
+            fourth7Element.setText(product[5].toString());
 
             File downloadFile = new File(path);
 
