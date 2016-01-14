@@ -85,7 +85,7 @@
                         <i>X ${amount}</i>
                     </div>
                 </div>
-                <div class="balance add-balance"><input type="checkbox" onclick="useBalance(this);">使用余额支付
+                <div class="balance add-balance"><input type="checkbox" id="banlanceCheckbox" onclick="useBalance(this);">使用余额支付
                     <span id="usefulBalance"><c:if test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元</div>
                 <div class="bd order-total add-order-total">
                     <p id="btn-coupon"><strong>优惠券</strong><span id="yhq">0张券可用</span><a href="#arrow-right" class="arrow-right"></a></p>
@@ -394,6 +394,11 @@
                     $("#change").text(t_price);
                     $("#order-total").hide();
                     $("body").css("overflow","scroll")
+                    if(t_price<parseFloat(${consumer.balance})){
+                        $("#usefulBalance").html(t_price.toFixed(2));
+                        $("#balance").html("0.00");
+                        $("#banlanceCheckbox").attr("checked",false);
+                    }
                 }
             },
 
