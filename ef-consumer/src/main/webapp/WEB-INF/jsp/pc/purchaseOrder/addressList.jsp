@@ -217,7 +217,7 @@
             if(reg.test(phone)){
                 $("#addAddress").submit();
                 $("#pe").html("");
-                $("#hao").html("");
+                $("#hao").html("");e
             }else{
                 $("#pe").html("您的手机格式不正确");
                 $("#hao").html("");
@@ -228,9 +228,12 @@
     $(function () {
         $("#add").click(function () {
             $(this).siblings('.active-pop').show();
+            $(".header-new,.nav-new,.footernew").css("z-index","-1");
+            $(".my-order .pop-up").css({'margin-top':-157})
             province();
             $('.my-order .clase, .my-order .sh-bg').click(function () {
                 $(this).parents('.active-pop').hide();
+                $(".header-new,.nav-new,.footernew").css("z-index","")
             })
             return false;
         })
@@ -238,8 +241,11 @@
     $(function () {
         $(".hideDiv").click(function () {
             $(this).siblings('.active-pop').show();
+            $(".header-new,.nav-new,.footernew").css("z-index","-1");
+            $(".my-order .pop-up").css({'margin-top':-157})
             $('.my-order .clase, .my-order .sh-bg').click(function () {
                 $(this).parents('.active-pop').hide();
+                $(".header-new,.nav-new,.footernew").css("z-index","")
             })
             return false;
         });

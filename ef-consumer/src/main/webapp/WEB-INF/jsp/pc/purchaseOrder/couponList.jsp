@@ -294,9 +294,12 @@ function exchangeCoupon() {
 }
 
 $('#coupon-dialog').click(function(){
+    $(".header-new,.nav-new,.footernew").css("z-index","-1");
     $('.topbar,.header,.footer').css('z-index','-1');
     $('#tk').show();
+
     $('#tk').find('.no').click(function(){
+        $(".header-new,.nav-new,.footernew").css("z-index","");
         $('#tk').hide();
         $('.topbar,.header,.footer').css('z-index','');
     })

@@ -87,5 +87,16 @@
 <!--自定义js--Start-->
 <script src="../shop2015/js/system.js?v=20150831"></script>
 <!--自定义js--End-->
+<script type="text/javascript">
+  var _mvq = window._mvq || [];
+  window._mvq = _mvq;
+  _mvq.push(['$setAccount', 'm-197303-0']);
+  _mvq.push(['$setGeneral', 'goodsdetail', '', /*用户名*/ '', /*用户id*/ '']);
+  _mvq.push(['$logConversion']);
+
+  _mvq.push(['$addGoods', /*分类id*/ '', /*品牌id*/ '',/*商品名称*/ '${productModel.name}',/*商品ID*/ '${productModel.id}',/*商品售价*/ '${productModel.price}',
+    /*商品图片url*/ 'http://pro.efeiyi.com/${productModel.productModel_url}', /*分类名*/ '${productModel.product.project.name}', /*品牌名*/ '', /*商品库存状态1或是0*/ '${productModel.product.status}', /*网络价*/ '',/*收藏人数*/ '', /*商品下架时间*/ '']);
+  _mvq.push(['$logData']);
+</script>
 </body>
 </html>
