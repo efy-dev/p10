@@ -33,9 +33,9 @@
                  $("input[name='all']").prop("checked",$reply.length == $("input[name='reply'][flag='false']:checked").length ? true : false);
              });
          });
-
+         var ids = [];
         function reply(obj,flag){
-            var ids = [];
+            ids.splice(0,ids.length);
             var f = true;
             if(flag=="allReply"){
                 if($('input[name="reply"][flag="false"]:checked').length==0){
@@ -49,7 +49,9 @@
             }else{
                 ids.push($(obj).parents("tr").attr("id"))
             }
+
             if(f) {
+
                 $('#my-prompt').modal({
                     relatedTarget: this,
                     onConfirm: function (e) {
@@ -120,9 +122,9 @@
 </security:authorize>
                     <th class="table-title">订单编号</th>
                     <th class="table-title">用户名</th>
-                    <th class="table-title">昵称</th>
                     <th class="table-title">总额/实付金额(元)</th>
-                    <th class="table-title">产品</th>
+                    <th class="table-title">商品规格</th>
+                    <th class="table-title">星级</th>
                     <th class="table-title">评价内容</th>
                     <th class="table-title">评价时间</th>
                     <th class="table-title">回复内容</th>
@@ -171,7 +173,6 @@
                         </td>
 
                         <td class="am-hide-sm-only" width="10%">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.username}</td>
-                        <td class="am-hide-sm-only" width="6%">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.name}</td>
                         <td class="am-hide-sm-only" width="10%">
                             <fmt:formatNumber type="number" value="${purchaseOrderComment.purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/> <br>
                         </td>
@@ -181,7 +182,7 @@
                                          <img width="20px" src="http://pro.efeiyi.com/${purchaseOrderComment.purchaseOrderProduct.productModel.productModel_url}@!product-model" alt="产品图片">
                                 </p>
                         </td>
-
+                        <td class="am-hide-sm-only" width="6%">${purchaseOrderComment.starts}</td>
                         <td class="am-hide-sm-only" width="10%">${purchaseOrderComment.content}</td>
                         <td class="am-hide-sm-only" width="10%">
                             <fmt:formatDate value="${purchaseOrderComment.createDatetime}" type="both" pattern="yyyy-MM-dd HH:mm"/>
