@@ -1,19 +1,14 @@
 package com.efeiyi.ec.website.interceptor;
 
-import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.organization.model.User;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.util.CookieTool;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Calendar;
 import java.util.LinkedHashMap;
 
 /**
@@ -36,16 +31,6 @@ public class PromotionMarkInterceptor extends HandlerInterceptorAdapter {
 
                 //返利计划是有效的
                 if (promotionPlan != null && !"0".equals(promotionPlan.getStatus())) {
-//                    if (AuthorizationUtil.isAuthenticated()) {
-//                        MyUser user = (MyUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//                        user.setSource(promotionSource);
-//
-//                        //刷新营销返利链接有效期
-//                        Calendar calendar = Calendar.getInstance();
-//                        calendar.add(Calendar.DATE, promotionPlan.getRdDays());
-//                        user.setRdEndDay(calendar.getTime());
-//                        baseManager.saveOrUpdate(MyUser.class.getName(), user);
-//                    }
                     //只以最后一次点击的返利链接为准,存入Session和Cookie
                     CookieTool.addCookie(response, "source", promotionSource, promotionPlan.getRdDays() * 86400,"www.efeiyi.com");
                 }else{

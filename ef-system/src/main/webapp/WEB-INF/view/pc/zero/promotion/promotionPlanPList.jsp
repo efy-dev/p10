@@ -27,6 +27,7 @@
             <td>连接名称</td>
             <td>连接标识</td>
             <td>分享渠道</td>
+            <td>点击量</td>
             <td>注册量</td>
             <td>订单数</td>
             <td>订单总额</td>
@@ -56,6 +57,9 @@
                 <td>
                     <ming800:status name="name" dataType="PCPromotionPlan.name"
                                     checkedValue="${PPE.promotionPlan.name}" type="normal"/>
+                </td>
+                <td>
+                        ${PPE.promotionPlan.clickCount == null ? 0 : PPE.promotionPlan.clickCount}
                 </td>
                 <td>
                     <a href="<c:url value="/promotionPlan/getRegisterCountInfo.do?type=rebate&source=${PPE.promotionPlan.identifier}"/>">${PPE.registerCount}</a>
