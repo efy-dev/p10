@@ -158,7 +158,6 @@
                 });
             }
         }else{
-            alert($(obj).parents("tr").attr("id"));
             ids.push($(obj).parents("tr").attr("id"))
         }
         if(f) {
