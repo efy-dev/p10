@@ -107,11 +107,11 @@
                     <span>${address.district.name}</span>
                     <span>${address.details}</span>
                     <span>${address.phone}</span>
-                    <div class="jc-hc" style="display: none;height: 40px;">
-                        <a href="#">删除</a>
-                        <a href="#"  class="edit-act">编辑</a>
-                        <a href="#">设为默认地址</a>
-                    </div>
+                    <%--<div class="jc-hc" style="display: none;height: 40px;">--%>
+                        <%--<a href="#">删除</a>--%>
+                        <%--<a href="#"  class="edit-act">编辑</a>--%>
+                        <%--<a href="#">设为默认地址</a>--%>
+                    <%--</div>--%>
                 </div>
             </c:forEach>
             </div>
@@ -381,9 +381,11 @@
 
     $(function () {
         $('.clearing-site span a').click(function () {
+            $(".header-new,.topbar,.footernew").css("z-index","-1")
             $(this).siblings('.active-pop').show();
             $('.clase, .sh-bg').click(function () {
                 $(this).parents('.active-pop').hide();
+                $(".header-new,.topbar,.footernew").css("z-index","")
             })
             return false;
         })
