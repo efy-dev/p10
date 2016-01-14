@@ -107,11 +107,11 @@
                     <span>${address.district.name}</span>
                     <span>${address.details}</span>
                     <span>${address.phone}</span>
-                    <div class="jc-hc" style="display: none;height: 40px;">
-                        <a href="#">删除</a>
-                        <a href="#"  class="edit-act">编辑</a>
-                        <a href="#">设为默认地址</a>
-                    </div>
+                    <%--<div class="jc-hc" style="display: none;height: 40px;">--%>
+                        <%--<a href="#">删除</a>--%>
+                        <%--<a href="#"  class="edit-act">编辑</a>--%>
+                        <%--<a href="#">设为默认地址</a>--%>
+                    <%--</div>--%>
                 </div>
             </c:forEach>
             </div>
@@ -256,15 +256,8 @@
             <div class="balance">
                 <form>
                     <div class="balance-titie">余额支付</div>
-                    <div class="balance-text"><input type="checkbox" onclick="useBalance(this)">使用余额支付
-                        <span id="usefulBalance">
-                            <c:if test="${consumer.balance>purchaseOrder.total}">
-                                ${purchaseOrder.total}
-                            </c:if>
-                            <c:if test="${consumer.balance<=purchaseOrder.total}">
-                                ${consumer.balance}
-                            </c:if>
-                        </span>元</div>
+                    <div class="balance-text"><input type="checkbox" onclick="useBalance(this)" id="banlanceCheckbox">使用余额支付
+                        <span id="usefulBalance"><c:if test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元</div>
                 </form>
             </div>
         </c:if>
@@ -388,9 +381,11 @@
 
     $(function () {
         $('.clearing-site span a').click(function () {
+            $(".header-new,.topbar,.footernew").css("z-index","-1")
             $(this).siblings('.active-pop').show();
             $('.clase, .sh-bg').click(function () {
                 $(this).parents('.active-pop').hide();
+                $(".header-new,.topbar,.footernew").css("z-index","")
             })
             return false;
         })
@@ -545,6 +540,12 @@
                     $("#totalPrice").html(data["totalPrice"]);
                     $("#couponPrice").html(data["couponPrice"]);
                     $("#finalPrice").html(data["finalPrice"]);
+                    var finalPrice = parseFloat(data["finalPrice"]);
+                    if(finalPrice<parseFloat(${consumer.balance})){
+                        $("#usefulBalance").html(finalPrice.toFixed(2));
+                        $("#balance").html("0.00");
+                        $("#banlanceCheckbox").attr("checked",false);
+                    }
                 }
                 ajaxRequest("<c:url value="/order/getPurchaseOrderPrice.do"/>", param, success, function () {
                 }, "post");
