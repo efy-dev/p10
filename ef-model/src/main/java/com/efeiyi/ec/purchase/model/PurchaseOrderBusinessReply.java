@@ -3,6 +3,7 @@ package com.efeiyi.ec.purchase.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -14,6 +15,7 @@ public class PurchaseOrderBusinessReply{
     private String id;
     private String reply;
     private PurchaseOrderComment purchaseOrderComment;
+    private Date createDatetime;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -41,11 +43,14 @@ public class PurchaseOrderBusinessReply{
     public void setPurchaseOrderComment(PurchaseOrderComment purchaseOrderComment) {
         this.purchaseOrderComment = purchaseOrderComment;
     }
+    @Column(name = "create_datetime")
+    public Date getCreateDatetime() {
+        return createDatetime;
+    }
 
-
-
-
-
+    public void setCreateDatetime(Date createDatetime) {
+        this.createDatetime = createDatetime;
+    }
 }
 
 

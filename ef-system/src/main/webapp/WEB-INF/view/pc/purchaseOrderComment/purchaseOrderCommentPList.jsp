@@ -14,7 +14,83 @@
 <html>
 <head>
     <title></title>
+    <style>
+        .line{
+            height: 10px;
+            width: 1px;
+            background: #000;
+        }
+    </style>
     <script>
+         $(function(){
+             isDisabled();
+             $("input[name='all']").click(function() {
+                 $('input[name="reply"][flag="false"]').prop("checked",this.checked);
+             });
+
+             $("input[name='reply'][flag='false']").click(function(){
+                 var $reply = $("input[name='reply'][flag='false']");
+                 $("input[name='all']").prop("checked",$reply.length == $("input[name='reply'][flag='false']:checked").length ? true : false);
+             });
+         });
+
+        function reply(obj,flag){
+            var ids = [];
+            var f = true;
+            if(flag=="allReply"){
+                if($('input[name="reply"][flag="false"]:checked').length==0){
+                    alert("请选择要回复的评论!");
+                    f= false;
+                }else {
+                    $('input[name="reply"][flag="false"]:checked').each(function () {
+                        ids.push($(this).parents("tr").attr("id"));
+                    });
+                }
+            }else{
+                ids.push($(obj).parents("tr").attr("id"))
+            }
+            if(f) {
+                $('#my-prompt').modal({
+                    relatedTarget: this,
+                    onConfirm: function (e) {
+                        var reply = $("#replyText").val()
+                        $.ajax({
+                            type: "GET",
+                            url: '<c:url value="/PurchaseOrderComment/reply.do"/>',
+                            data: {ids: ids, reply: reply},
+                            dataType: "json",
+                            success: function (data) {
+                                for (var i = 0; i<ids.length; i++) {
+                                    $("tr[id='" + ids[i] + "'] td:eq(8)").text(reply);
+                                    $("tr[id='" + ids[i] + "'] td:eq(9)").text(data);
+                                    var check = $("tr[id='" + ids[i] + "'] input[name='reply']");
+                                    $(check).attr("flag","true");
+                                    $(check).prop("checked",false);
+                                    $(check).attr("disabled","disabled");
+                                    var a = $("tr[id='" + ids[i] + "'] td:eq(0) a:eq(0)");
+                                    $(a).text("已回复");
+                                    $(a).attr("disabled","disabled");
+
+
+                                }
+                                isDisabled();
+                            }
+                        });
+                        document.getElementById("replyText").value = "";
+                    },
+                    onCancel: function (e) {
+                        document.getElementById("replyText").value = "";
+                    }
+                });
+            }
+
+        }
+         function isDisabled(){
+             if($("input[name='reply'][flag='false']").length==0){
+                 $("input[name='all']").prop("checked",false);
+                 $("input[name='all']").prop("disabled","disabled");
+             }
+         }
         function removePurchaseOrderComment(divId) {
             jQuery.ajax({
                 type: "GET",
@@ -49,6 +125,8 @@
                     <th class="table-title">产品</th>
                     <th class="table-title">评价内容</th>
                     <th class="table-title">评价时间</th>
+                    <th class="table-title">回复内容</th>
+                    <th class="table-title">回复时间</th>
 
                 </tr>
                 </thead>
@@ -56,46 +134,74 @@
 
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrderComment">
-                    <tr id="${purchaseOrderComment.id}" width="12%">
+                    <tr id="${purchaseOrderComment.id}" width="10%">
                         <security:authorize ifAnyGranted="admin,operational,c_operational">
-                        <td width="12%">
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
+                        <td width="14%">
+
+                                  <span>
+                                      <c:if test="${empty purchaseOrderComment.purchaseOrderBusinessReply}">
+                                          <input flag="false" type="checkbox" name="reply" value="${purchaseOrderComment.id}" />
+                                      </c:if>
+                                      <c:if test="${not empty purchaseOrderComment.purchaseOrderBusinessReply}">
+                                            <input flag="true" type="checkbox" name="reply" value="${purchaseOrderComment.id}" disabled="disabled"/>
+                                      </c:if>
+                                  </span>
+                                  <span>
+                                       <c:if test="${empty purchaseOrderComment.purchaseOrderBusinessReply}">
+                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void (0);" onclick="reply(this,'reply');">
+                                          回复评论
+                                         </a>
+                                        </c:if>
+                                        <c:if test="${not empty purchaseOrderComment.purchaseOrderBusinessReply}">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" disabled="disabled" href="javascript:void (0);" onclick="reply(this,'reply');" >
+                                                已回复
+                                            </a>
+                                        </c:if>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void (0);" onclick="showConfirm('提示','是否删除',function(){removePurchaseOrderComment('${purchaseOrderComment.id}')})">
                                         删除
                                     </a>
-                                </div>
-                            </div>
+                                  </span>
+
                         </td>
                         </security:authorize>
-                        <td class="am-hide-sm-only" width="12%">
+                        <td class="am-hide-sm-only" width="10%">
                             <a
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=comment&id=${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.id}'/>">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.serial}
                             </a>
                         </td>
 
-                        <td class="am-hide-sm-only" width="12%">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.username}</td>
-                        <td class="am-hide-sm-only" width="12%">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.name}</td>
-                        <td class="am-hide-sm-only" width="12%">
+                        <td class="am-hide-sm-only" width="10%">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.username}</td>
+                        <td class="am-hide-sm-only" width="6%">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.name}</td>
+                        <td class="am-hide-sm-only" width="10%">
                             <fmt:formatNumber type="number" value="${purchaseOrderComment.purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/> <br>
                         </td>
-                        <td class="am-hide-sm-only" width="12%">
+                        <td class="am-hide-sm-only" width="10%">
                                 <p style="margin-left: 10px;">
                                          ${purchaseOrderComment.purchaseOrderProduct.productModel.name}
                                          <img width="20px" src="http://pro.efeiyi.com/${purchaseOrderComment.purchaseOrderProduct.productModel.productModel_url}@!product-model" alt="产品图片">
                                 </p>
                         </td>
 
-                        <td class="am-hide-sm-only" width="12%">${purchaseOrderComment.content}</td>
-                        <td class="am-hide-sm-only" width="12%"></td>
-                        <%--<td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both"--%>
-                                                                    <%--pattern="yyyy-MM-dd HH:mm"/></td>--%>
+                        <td class="am-hide-sm-only" width="10%">${purchaseOrderComment.content}</td>
+                        <td class="am-hide-sm-only" width="10%">
+                            <fmt:formatDate value="${purchaseOrderComment.createDatetime}" type="both" pattern="yyyy-MM-dd HH:mm"/>
+                        </td>
+                        <td class="am-hide-sm-only" width="10%">${purchaseOrderComment.purchaseOrderBusinessReply.reply}</td>
+                        <td class="am-hide-sm-only" width="14%">
+                            <fmt:formatDate value="${purchaseOrderComment.purchaseOrderBusinessReply.createDatetime}" type="both" pattern="yyyy-MM-dd HH:mm"/>
+                        </td>
                     </tr>
 
                 </c:forEach>
                 </tbody>
             </table>
         </div>
+        <div style="margin-left: 32px;">
+
+                <input type="checkbox"  name="all"  />&nbsp;全选
+                <a style="margin-left: 15px;" onclick="reply(this,'allReply')" href="javascript:void (0)">批量回复</a>
+        </div>
+
     </div>
     <div style="clear: both">
         <c:url value="/basic/xm.do" var="url"/>
@@ -105,7 +211,21 @@
         </ming800:pcPageList>
     </div>
 </div>
+<!-- 回复-->
+<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">评论回复</div>
+        <div class="am-modal-bd">
+            <textarea id="replyText" class="" rows="5" style="width: 470px;"></textarea>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+        </div>
+    </div>
+</div>
+<script>
 
-
+</script>
 </body>
 </html>
