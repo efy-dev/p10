@@ -21,6 +21,7 @@ public class PromotionPlan {
     private Date createDatetime;
     private String status;
     private Integer rdDays;
+    private Integer clickCount;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -103,5 +104,14 @@ public class PromotionPlan {
 
     public void setRdDays(Integer rdDays) {
         this.rdDays = rdDays;
+    }
+
+    @Column(name = "click_count")
+    public Integer getClickCount() {
+        return clickCount;
+    }
+
+    public void setClickCount(Integer clickCount) {
+        this.clickCount = clickCount;
     }
 }
