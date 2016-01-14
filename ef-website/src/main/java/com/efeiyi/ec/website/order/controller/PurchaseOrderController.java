@@ -425,9 +425,16 @@ public class PurchaseOrderController extends BaseController {
         //判断余额是否足够，足够的话支付方式改为余额支付
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),orderId);
         if (null != balance && Float.parseFloat(balance) > 0){
-            int r = new BigDecimal(balance).compareTo(purchaseOrder.getTotal());
-            if(r == 0){
-                payment = "5";
+            if (null != purchaseOrder.getCoupon()){
+                int r = new BigDecimal(balance).compareTo(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
+                if (r == 0){
+                    payment = "5";
+                }
+            }else {
+                int r = new BigDecimal(balance).compareTo(purchaseOrder.getTotal());
+                if(r == 0){
+                    payment = "5";
+                }
             }
         }
         //订单收货地址//初始化订单状态
