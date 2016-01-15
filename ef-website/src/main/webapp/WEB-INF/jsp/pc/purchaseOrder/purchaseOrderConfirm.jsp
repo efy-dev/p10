@@ -311,6 +311,7 @@
     function submitOrder(element, orderId) {
         var messageObject = new Object();
         var balance = $("#balance").text();
+        var finalPrice = $("#finalPrice").text();
         $("input[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
         })
@@ -357,12 +358,13 @@
                                     });
                                     ga('send', 'pageview');
 
-
-                                    showChooseConfirm("提示", "是否支付成功？", function () {
-                                        window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
-                                    }, function () {
-                                        window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
-                                    })
+                                    if(finalPrice!=0){
+                                        showChooseConfirm("提示", "是否支付成功？", function () {
+                                            window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
+                                        }, function () {
+                                            window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
+                                        })
+                                    }
                                 }else{
                                     showAlert("提示","抱歉，余额不足！")
                                 }
