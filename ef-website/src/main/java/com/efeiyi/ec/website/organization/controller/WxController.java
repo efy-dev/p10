@@ -124,11 +124,14 @@ public class WxController {
         System.out.println("2、get openid result：" + userInfo);
         JSONObject userJsonObject = JSONObject.fromObject(userInfo);
 
-
+        System.out.println(dataKey);
         String[] keyArray = dataKey.split(";");
+        System.out.println(keyArray.length);
         String data = "";
         for (String key : keyArray) {
+            System.out.println(key);
             String value = userJsonObject.getString(key);
+            System.out.println(value);
             value = URLEncoder.encode(value, "utf-8");
             if (callbackUrl.contains("?")) {
                 callbackUrl += "&" + key + "=" + value;
@@ -141,9 +144,10 @@ public class WxController {
                 data += value;
             }
         }
+        System.out.println("----------------------" + data);
         wxCalledRecord.setData(data);
         baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
-        System.out.println(callbackUrl);
+        System.out.println("---------" + callbackUrl);
         return "redirect:http://" + callbackUrl;
     }
 
