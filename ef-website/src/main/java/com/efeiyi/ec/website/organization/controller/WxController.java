@@ -122,9 +122,6 @@ public class WxController {
         String userInfo = HttpUtil.getHttpResponse(urlForOpenId, null);
         System.out.println("2、get openid result：" + userInfo);
         JSONObject userJsonObject = JSONObject.fromObject(userInfo);
-        if (userJsonObject.containsKey("errcode")) {
-            throw new RuntimeException("get userInfo error：" + result);
-        }
         String value = userJsonObject.getString(dataKey);
         wxCalledRecord.setData(value);
         System.out.println(value);
