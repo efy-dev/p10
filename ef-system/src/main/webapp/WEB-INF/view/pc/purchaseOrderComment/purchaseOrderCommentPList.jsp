@@ -60,6 +60,7 @@
                             type: "GET",
                             url: '<c:url value="/PurchaseOrderComment/reply.do"/>',
                             data: {ids: ids, reply: reply},
+                            contentType:"application/x-www-form-urlencoded:charset=UTF-8",
                             dataType: "json",
                             success: function (data) {
                                 for (var i = 0; i<ids.length; i++) {
