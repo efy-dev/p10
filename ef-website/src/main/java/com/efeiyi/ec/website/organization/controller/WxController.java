@@ -119,7 +119,7 @@ public class WxController {
         String callbackUrl = URLDecoder.decode(wxCalledRecord.getCallback(), "UTF-8");
 
         String urlForOpenId = "https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + openid + "&lang=zh_CN";
-        String userInfo = new String(HttpUtil.getHttpResponse(urlForOpenId, null).getBytes(), "utf-8");
+        String userInfo = new String(HttpUtil.getHttpResponse(urlForOpenId, null).getBytes("UTF-8"), "UTF-8");
         System.out.println("2、get openid result：" + userInfo);
         JSONObject userJsonObject = JSONObject.fromObject(userInfo);
         String value = userJsonObject.getString(dataKey);
