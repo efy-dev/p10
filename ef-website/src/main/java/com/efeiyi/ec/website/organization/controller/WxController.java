@@ -133,6 +133,7 @@ public class WxController {
         } else {
             callbackUrl += "?" + dataKey + "=" + value;
         }
+        System.out.println("====================="+callbackUrl+"-----------------------");
         return "redirect:http://" + callbackUrl;
     }
 
