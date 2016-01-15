@@ -1,22 +1,15 @@
 package com.efeiyi.ec.website.interceptor;
 
-import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
-import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.util.CookieTool;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.LinkedHashMap;
 
 /**
  * Created by Administrator on 2015/12/3.
@@ -38,13 +31,7 @@ public class PromotionPurchaseRecorderInterceptor extends HandlerInterceptorAdap
                 }
             }
             if (promotionSource != null) {
-//            LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-//            queryParamMap.put("identifier", promotionSource);
-//            PromotionPlan promotionPlan = (PromotionPlan) baseManager.getUniqueObjectByConditions("from PromotionPlan x where x.identifier=:identifier", queryParamMap);
-
                 //营销返利有效并且没有超出RD有效期，记录订单
-//            MyUser user = (MyUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//            if (!"0".equals(promotionPlan.getStatus()) /*&& user.getRdEndDay() != null && new Date().compareTo(user.getRdEndDay()) < 0*/) {
                 String path = request.getServletPath();
                 String orderId = path.substring(path.lastIndexOf("/") + 1);
                 PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
@@ -53,7 +40,6 @@ public class PromotionPurchaseRecorderInterceptor extends HandlerInterceptorAdap
                 PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails != null ? purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder() : (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
                 purchaseOrder.setSource(promotionSource);
                 baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-//            }
             }
         } catch (Exception e) {
             e.printStackTrace();

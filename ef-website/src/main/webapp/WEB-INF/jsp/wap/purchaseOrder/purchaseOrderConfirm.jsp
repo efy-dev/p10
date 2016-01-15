@@ -120,7 +120,7 @@
                                               placeholder="给卖家留言(如需开具发票，请在此输入开票信息)"></textarea></div>
             </div>
         </c:forEach>
-
+        <div class="balance"><input type="checkbox" id="banlanceCheckbox" onclick="useBalance(this);">使用余额支付<span id="usefulBalance"><c:if test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元</div>
         <!-- //End--order-list-->
         <div class="bd order-total">
             <c:if test="${empty purchaseOrder.callback}">
@@ -128,12 +128,12 @@
                                                                                          class="arrow-right"></a></p>
             </c:if>
 
-            <p><strong>商品金额</strong><span><em>￥</em>${purchaseOrder.total}</span></p>
+            <p><strong>商品金额</strong><span><em>￥</em><em id="totalPrice">${purchaseOrder.total}</em></span></p>
             <c:if test="${empty purchaseOrder.callback}">
                 <p><strong>优惠</strong><span><em>-￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span>
                 </p>
             </c:if>
-
+            <p><strong>余额</strong><span> <em>￥-</em><em id="balance">0.00</em></span></p>
             <p><strong>运费</strong><span><em>￥</em>0.00</span></p>
         </div>
         <!-- //End--order-total-->
@@ -411,8 +411,13 @@
                                 $("#couponPrice").html(chkobjs[i].value);
                             }
                         }
-                        $("#change").text(t_price);
+                        $("#change").html(t_price.toFixed(2));
                         $(".yhq").hide();
+                        if(t_price<parseFloat(${consumer.balance})){
+                            $("#usefulBalance").html(t_price.toFixed(2));
+                            $("#balance").html("0.00");
+                            $("#banlanceCheckbox").attr("checked",false);
+                        }
                     }
                 },
 
@@ -456,6 +461,7 @@
     }
     function submitOrder(orderId) {
         var messageObject = new Object();
+        var balance = $("#balance").text();
         $("textarea[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
         })
@@ -477,17 +483,30 @@
                     if (consumerAddress == "") {
                         showAlert("提示", "请选择一个收货地址！");
                     } else {
+                        $.ajax({
+                            type: 'post',
+                            async: false,
+                            url: '<c:url value="/order/checkBalance"/>'+'?balance='+balance,
+                            dataType: 'json',
+                            success: function (data1) {
+                                if(data1){
+                                    var isweixin = "";
 
-                        var isweixin = "";
+                                    if (isWeiXin()) {
+                                        isweixin = "&isWeiXin=1";
+                                        payment = "3"
+                                    }
 
-                        if (isWeiXin()) {
-                            isweixin = "&isWeiXin=1";
-                            payment = "3"
-                        }
+                                    var url = "<c:url value="/order/confirm/"/>";
+                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin +"&balance=" + balance;
+                                    window.location.href = url;
+                                }else{
+                                    showAlert("提示", "抱歉，余额不足！");
+                                }
+                            }
+                        });
 
-                        var url = "<c:url value="/order/confirm/"/>";
-                        url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin;
-                        window.location.href = url;
+
                     }
                 } else {
                     showAlert("提示", "抱歉，该商品已售罄！")
@@ -715,6 +734,20 @@
             $("#citys" + o).val(cityId);
         }
         provinceChange(element, o, callback);
+    }
+
+    //使用余额
+    function useBalance(element){
+        var totalPrice = $("#totalPrice").text();
+        var couponPrice = $("#couponPrice").text();
+        var balance = $("#usefulBalance").text();
+        if ($(element).is(':checked') == true){
+            $("#balance").html(balance);
+            $("#change").html((totalPrice-balance-couponPrice).toFixed(2));
+        }else if($(element).is(':checked') == false){
+            $("#balance").html("0.00");
+            $("#change").html((totalPrice-couponPrice).toFixed(2));
+        }
     }
 
     <c:forEach items="${addressList}" var="address">

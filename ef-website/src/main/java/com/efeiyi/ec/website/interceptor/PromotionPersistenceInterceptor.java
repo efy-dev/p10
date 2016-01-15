@@ -1,9 +1,7 @@
 package com.efeiyi.ec.website.interceptor;
 
 import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
-import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.efeiyi.ec.zero.promotion.model.PromotionUserRecord;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.util.CookieTool;
@@ -15,15 +13,12 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedHashMap;
 
 /**
  * 拦截登录，判断用户是否点击过营销返利链接，并记录
  * Created by Administrator on 2015/12/4.
  */
-//@Deprecated
 public class PromotionPersistenceInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private BaseManager baseManager;
@@ -40,22 +35,8 @@ public class PromotionPersistenceInterceptor extends HandlerInterceptorAdapter {
         }
         if (promotionSource != null) {
             if (AuthorizationUtil.isAuthenticated()) {
-//                LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-//                queryParamMap.put("identifier", promotionSource);
-//                PromotionPlan promotionPlan = (PromotionPlan) baseManager.getUniqueObjectByConditions("from PromotionPlan x where x.identifier=:identifier", queryParamMap);
-
                 //营销计划有效
-//                if (promotionPlan != null && !"0".equals(promotionPlan.getStatus())) {
                 MyUser user = (MyUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-                //和旧的返利标识不同时，记录
-//                    if(!promotionSource.equals(user.getSource())){
-//                        user.setSource(promotionSource);
-//                        //刷新营销返利链接有效期
-//                        Calendar calendar = Calendar.getInstance();
-//                        calendar.add(Calendar.DATE,promotionPlan.getRdDays());
-//                        user.setRdEndDay(calendar.getTime());
-//                        baseManager.saveOrUpdate(MyUser.class.getName(), user);
 
                 //生成一条返利有关的登录日志
                 PromotionUserRecord promotionUserRecord = new PromotionUserRecord();
@@ -64,9 +45,6 @@ public class PromotionPersistenceInterceptor extends HandlerInterceptorAdapter {
                 promotionUserRecord.setUser(user);
                 baseManager.saveOrUpdate(PromotionUserRecord.class.getName(), promotionUserRecord);
 
-//                request.getSession().removeAttribute("source");
-//                    }
-//                }
             }
         }
     }

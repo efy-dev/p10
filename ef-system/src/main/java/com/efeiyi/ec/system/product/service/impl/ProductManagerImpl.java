@@ -8,7 +8,6 @@ import com.efeiyi.ec.system.product.dao.ProductDao;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.tenant.model.BigTenant;
-import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.service.AutoSerialManager;
 import jxl.SheetSettings;
@@ -18,15 +17,20 @@ import jxl.format.Border;
 import jxl.format.BorderLineStyle;
 import jxl.format.VerticalAlignment;
 import jxl.write.*;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.XMLWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -515,5 +519,56 @@ public class ProductManagerImpl implements ProductManager{
         xdoDao.saveOrUpdateObject(source);
         xdoDao.saveOrUpdateObject(target);
 
+    }
+
+    @Override
+    public void createXMLByAddedProduct(String path) {
+        List<Object[]> productList = productDao.getAddedProduct();
+        Document document = DocumentHelper.createDocument();
+        Element rootElement = document.addElement("urlset");
+        for(int i = 0;i<productList.size();i++){
+            Object[] product =  productList.get(i);
+            Element secondElement = rootElement.addElement("url");
+            Element third1Element = secondElement.addElement("clickUrl");
+            third1Element.setText("http://www.efeiyi.com/product/productModel/"+product[0]);
+            Element third2Element = secondElement.addElement("data");
+            Element fourth1Element = third2Element.addElement("pName");
+            Element fourth2Element = third2Element.addElement("price");
+            Element fourth4Element = third2Element.addElement("pid");
+            Element fourth5Element = third2Element.addElement("imgUrl");
+            Element fourth6Element = third2Element.addElement("inventoryNum");
+            Element fourth7Element = third2Element.addElement("cName");
+
+            fourth1Element.setText(product[1].toString());
+            fourth2Element.setText(product[3].toString());
+            fourth4Element.setText(product[0].toString());
+            fourth5Element.setText("http://pro.efeiyi.com"+product[2].toString());
+            if("0".equals(product[4].toString())){
+                fourth6Element.setText("0");
+            }else{
+                fourth6Element.setText("1");
+            }
+            fourth7Element.setText(product[5].toString());
+
+            File downloadFile = new File(path);
+
+            if (!downloadFile.exists()) {
+                downloadFile.mkdir();
+            }
+
+            try {
+
+                OutputFormat format = OutputFormat.createPrettyPrint();
+                format.setEncoding("utf-8");//设置XML文件的编码格式,如果有中文可设置为GBK或UTF-8
+                FileOutputStream fileOutputStream = new FileOutputStream(path+"/productXMl.xml");
+                XMLWriter xmlWriter = new XMLWriter(fileOutputStream,format);
+                xmlWriter.write(document);
+                xmlWriter.flush();
+                xmlWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 }

@@ -1,38 +1,20 @@
 package com.efeiyi.ec.website.base.controller;
 
-import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
-import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.tenant.model.TenantProject;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
+import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
-import com.ming800.core.p.model.Banner;
 import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import com.ming800.core.util.CookieTool;
-import com.ming800.core.util.StringUtil;
-import com.sun.javafx.sg.prism.NGShape;
-import org.apache.solr.common.util.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -98,7 +80,7 @@ public class HomeController {
         //首页轮播图
         List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
         model.addAttribute("bannerList", bannerList);
-        model.addAttribute("bannerFlag","true");
+        model.addAttribute("bannerFlag", "true");
         //传承人
         List<Object> masterList = objectRecommendedManager.getRecommendedList("ec.masterRecommended");
         model.addAttribute("masterList", masterList);
@@ -203,14 +185,33 @@ public class HomeController {
     }
 
     @RequestMapping({"/toMobile.do"})
-    public String toMobileHandler(HttpServletRequest request,Model model) throws Exception{
+    public String toMobileHandler(HttpServletRequest request, Model model) throws Exception {
         String url = request.getParameter("mobileUrl");
-        url = URLDecoder.decode(url,"UTF-8");
-        model.addAttribute("url",url);
+        url = URLDecoder.decode(url, "UTF-8");
+        model.addAttribute("url", url);
         return "/toMobile";
 
     }
 
-
+    @RequestMapping({"/watchUrlSource.do"})
+    public String watchedUrl(HttpServletRequest request) throws Exception {
+        String currentUrl = request.getParameter("currentUrl");
+        if(currentUrl.contains("source")) {
+            String source = currentUrl.substring(currentUrl.indexOf("source"));
+            if (source.contains("&")) {
+                source = source.substring(source.indexOf("source"), source.indexOf("&"));
+            }
+            source = source.substring(source.indexOf("=") + 1);
+            LinkedHashMap queryParamMap = new LinkedHashMap();
+            queryParamMap.put("identifier", source);
+            PromotionPlan promotionPlan = (PromotionPlan) baseManager.getUniqueObjectByConditions("from PromotionPlan x where x.identifier=:identifier", queryParamMap);
+            if (promotionPlan != null && !"0".equals(promotionPlan.getStatus())) {
+                Integer clickCount = promotionPlan.getClickCount();
+                promotionPlan.setClickCount(clickCount == null ? 1 : clickCount + 1);
+                baseManager.saveOrUpdate(PromotionPlan.class.getName(), promotionPlan);
+            }
+        }
+        return "recorded";
+    }
 
 }

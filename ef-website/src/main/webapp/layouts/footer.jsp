@@ -211,6 +211,22 @@
     ga('create', 'UA-70772829-1', 'auto');
     ga('send', 'pageview');
 
+    //统计推广source点击量
+    var currentUrl = window.location.href;
+    if(currentUrl.indexOf("source") > 0){
+        $.ajax({
+            type: 'post',
+            url: '<c:url value="/watchUrlSource.do"/>',
+            dataType: 'json',
+            data: {
+                "currentUrl":currentUrl
+            },
+            success: function (data) {
+                console.log(data);
+            },
+
+        });
+    }
 </script>
 <script type="text/javascript">
     var _mvq = window._mvq || [];
@@ -225,7 +241,6 @@
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(mvl, s);
     })();
-
 </script>
 
 <!--//End--右侧返回顶部和在线客服-->
