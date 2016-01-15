@@ -3,13 +3,14 @@ package com.efeiyi.ec.organization.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2015/5/29.
  */
 @Entity
 @Table(name = "organization_consumer_address")
-public class ConsumerAddress {
+public class ConsumerAddress implements Serializable {
     private String id;
     private AddressProvince province;
     private AddressDistrict district;
@@ -89,7 +90,7 @@ public class ConsumerAddress {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="address_district_id")
+    @JoinColumn(name = "address_district_id")
     public AddressDistrict getDistrict() {
         return district;
     }

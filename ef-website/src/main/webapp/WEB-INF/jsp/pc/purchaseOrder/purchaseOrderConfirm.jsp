@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-<script src="/scripts/js/jquery-1.4.2.min.js"></script>
+<%--<script src="/scripts/js/jquery-1.4.2.min.js"></script>--%>
 <div class="wr wh">
     <!--结算-->
     <div class="my-clearing">
@@ -180,7 +180,7 @@
 
                                             <p><a href="/product/productModel/${product.productModel.id}"
                                                   target="_blank">${product.productModel.product.name}
-                                                <c:if test="${null!=product.productModel.name && ''!=product.productModel.name}">
+                                                <c:if test="${product.productModel.product.productModelList.size()>1}">
                                                     [${product.productModel.name}]
                                                 </c:if>
                                                     <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
@@ -543,9 +543,9 @@
                     var finalPrice = parseFloat(data["finalPrice"]);
                     if(finalPrice<parseFloat(${consumer.balance})){
                         $("#usefulBalance").html(finalPrice.toFixed(2));
-                        $("#balance").html("0.00");
-                        $("#banlanceCheckbox").attr("checked",false);
                     }
+                    $("#balance").html("0.00");
+                    $("#banlanceCheckbox").attr("checked",false);
                 }
                 ajaxRequest("<c:url value="/order/getPurchaseOrderPrice.do"/>", param, success, function () {
                 }, "post");
