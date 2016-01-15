@@ -124,6 +124,7 @@ public class WxController {
         JSONObject userJsonObject = JSONObject.fromObject(userInfo);
         String value = userJsonObject.getString(dataKey);
         wxCalledRecord.setData(value);
+        value = URLEncoder.encode(value, "UTF-8");
         System.out.println(value);
         baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
         if (callbackUrl.contains("?")) {
