@@ -51,7 +51,8 @@ public class WxController {
     public String getWxUserInfo(HttpServletRequest request) throws Exception {
         String callback = request.getParameter("callback");
         String dataKey = request.getParameter("dataKey");
-        String redirect_uri = "http://www.efeiyi.com/wx/fetchBaseUserInfo/" + dataKey + "/" + callback;
+        System.out.println(dataKey);
+        String redirect_uri = "http://www.efeiyi.com/wx/fetchBaseUserInfo.do?dataKey=" + dataKey + "&callback" + callback;
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
@@ -94,9 +95,11 @@ public class WxController {
     }
 
 
-    @RequestMapping({"/fetchBaseUserInfo/{dataKey}/{callback}"})
-    public String getUserBaseInfo(HttpServletRequest request, Model model, @PathVariable String dataKey, @PathVariable String callback) throws Exception {
+    @RequestMapping({"/fetchBaseUserInfo.do"})
+    public String getUserBaseInfo(HttpServletRequest request, Model model) throws Exception {
         String result = "";
+        String dataKey = request.getParameter("dataKey");
+        String callback = request.getParameter("callback");
         String code = request.getParameter("code");
         if (request.getSession().getAttribute(code) != null) {
             result = request.getSession().getAttribute(code).toString();
