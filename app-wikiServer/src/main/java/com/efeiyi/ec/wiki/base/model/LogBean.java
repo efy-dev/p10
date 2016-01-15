@@ -1,4 +1,4 @@
-package com.efeiyi.ec.wiki.model;
+package com.efeiyi.ec.wiki.base.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;

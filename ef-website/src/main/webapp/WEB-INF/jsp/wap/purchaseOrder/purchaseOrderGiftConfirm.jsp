@@ -396,9 +396,9 @@
                     $("body").css("overflow","scroll")
                     if(t_price<parseFloat(${consumer.balance})){
                         $("#usefulBalance").html(t_price.toFixed(2));
-                        $("#balance").html("0.00");
-                        $("#banlanceCheckbox").attr("checked",false);
                     }
+                    $("#balance").html("0.00");
+                    $("#banlanceCheckbox").attr("checked",false);
                 }
             },
 

@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-<script src="/scripts/js/jquery-1.4.2.min.js"></script>
+<%--<script src="/scripts/js/jquery-1.4.2.min.js"></script>--%>
 <div class="wr wh">
     <!--结算-->
     <div class="my-clearing">
@@ -543,9 +543,9 @@
                     var finalPrice = parseFloat(data["finalPrice"]);
                     if(finalPrice<parseFloat(${consumer.balance})){
                         $("#usefulBalance").html(finalPrice.toFixed(2));
-                        $("#balance").html("0.00");
-                        $("#banlanceCheckbox").attr("checked",false);
                     }
+                    $("#balance").html("0.00");
+                    $("#banlanceCheckbox").attr("checked",false);
                 }
                 ajaxRequest("<c:url value="/order/getPurchaseOrderPrice.do"/>", param, success, function () {
                 }, "post");
