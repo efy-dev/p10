@@ -1,4 +1,4 @@
-package com.efeiyi.ec.wiki.model;
+package com.efeiyi.ec.wiki.product.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
