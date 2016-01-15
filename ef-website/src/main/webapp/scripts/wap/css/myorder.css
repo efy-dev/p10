@@ -530,7 +530,7 @@ html, body {height:100%}
 .coupon-tab .c-page .box ul li .top p {font-size:10px;color:#000;text-align:left;-webkit-transform:scale(0.8);width:100%}
 .coupon-tab .c-page .box ul li .right {width:10%;line-height:16PX;float:left}
 .coupon-tab .c-page .box ul li .right a {font-size:14px;color:#000;padding:80% 0 0 25%;text-align:center;width:14px;height:100%;float:left}
-.coupon-tab .c-page .add ul li .right a {width:100%;text-align:center;padding:48% 10%}
+.coupon-tab .c-page .add ul li .right a {width:100%;text-align:center;padding:48% 25%}
 .coupon-tab .c-page .add .change {width:100%;float:left;padding:0 1.9rem}
 .coupon-tab .c-page .add .change .btn-change {width:100%;padding:0 10px;line-height:35px;float:left;margin-top:25px;border:1px solid #000;color:#000;font-size:14px;position:relative}
 .coupon-tab .c-page .add .change .btn-change:after {content:'';width:0.8rem;height:0.8rem;border-right:1px solid #000;border-bottom:1px solid #000;transfrom:rotate(-45deg);-webkit-transform:rotate(-45deg);position:absolute;top:50%;margin-top:-0.4rem;right:0.8rem}
@@ -1029,7 +1029,7 @@ html, body {height:100%}
 .win-add{border-bottom: 1px solid #000;padding-top: 0;}
 .win-add a{border: 6px solid #999;}
 .addtop{position: relative;height: 291px;}
-.addtop .add-new-btn{position: absolute;bottom: 20px;left: 0px;}
+.addtop .add-new-btn{position: absolute;bottom: 20px;left: 0px;padding: 0 19px;}
 .myorder .aq-btn a.new-aq-btn{background: #000;color: #fff;}
 .win-payment .winicon{background:url(../images/cart-icon.png) no-repeat -63px -146px;display:inline-block;background-size:106px auto;-webkit-background-size:106px auto;width:35px;height:35px;}
 /*余额功能*/

@@ -240,6 +240,7 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrder.setTenant(tenantList.get(0));
         purchaseOrder.setTotal(cart.getTotalPrice());
         purchaseOrder.setOriginalPrice(cart.getTotalPrice());
+        purchaseOrder.setOrderType("1");
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
@@ -281,6 +282,8 @@ public class PurchaseOrderController extends BaseController {
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
         Cart cart = cartManager.copyCart((Cart) request.getSession().getAttribute("cart"), cartManager.getCurrentCart(request));
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cart, model);
+        purchaseOrder.setOrderType("1");
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
         String callback = request.getParameter("callback");
         if (callback != null) {
             callback = URLDecoder.decode(callback, "UTF-8");

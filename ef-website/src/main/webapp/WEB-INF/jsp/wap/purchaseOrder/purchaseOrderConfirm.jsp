@@ -98,7 +98,7 @@
 
                             <div class="bd info">
                                 <p class="text">${product.productModel.product.name}
-                                    <c:if test="${null!=product.productModel.name && ''!=product.productModel.name}">
+                                    <c:if test="${product.productModel.product.productModelList.size()>1}">
                                         [${product.productModel.name}]
                                     </c:if>
                                         <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
