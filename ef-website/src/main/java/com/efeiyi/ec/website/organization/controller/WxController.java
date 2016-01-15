@@ -138,6 +138,8 @@ public class WxController {
             }
             if (!data.equals("")) {
                 data += ";" + value;
+            } else {
+                data += value;
             }
         }
         wxCalledRecord.setData(data);
