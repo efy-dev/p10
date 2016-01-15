@@ -1,4 +1,6 @@
-package com.efeiyi.ec.wiki.base.util;
+package com.efeiyi.ec.wiki.organization.util;
+
+import com.efeiyi.ec.wiki.base.util.WikiConfig;
 
 import java.util.Iterator;
 import java.util.Map;

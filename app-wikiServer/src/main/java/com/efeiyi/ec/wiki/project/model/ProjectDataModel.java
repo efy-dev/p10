@@ -1,4 +1,4 @@
-package com.efeiyi.ec.wiki.model;
+package com.efeiyi.ec.wiki.project.model;
 
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.product.model.Product;

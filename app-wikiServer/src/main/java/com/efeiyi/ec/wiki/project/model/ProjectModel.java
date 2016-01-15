@@ -1,4 +1,4 @@
-package com.efeiyi.ec.wiki.model;
+package com.efeiyi.ec.wiki.project.model;
 
 import java.io.Serializable;
 import java.util.Date;
