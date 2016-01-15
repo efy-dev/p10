@@ -143,6 +143,7 @@ public class WxController {
         }
         wxCalledRecord.setData(data);
         baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
+        System.out.println(callbackUrl);
         return "redirect:http://" + callbackUrl;
     }
 
