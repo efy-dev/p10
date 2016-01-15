@@ -552,14 +552,7 @@ public class ProductManagerImpl implements ProductManager {
                 }
                 fourth2Element.setText(pm.getPrice().toString());
                 fourth4Element.setText(pm.getId());
-                List<ProductPicture> pcList = product.getProductPictureList();
-                String imgUrl = "";
-                for (ProductPicture p : pcList) {
-                    if ("2".equals(p.getStatus())) {
-                        imgUrl = p.getPictureUrl();
-                    }
-                }
-                fourth5Element.setText("http://pro.efeiyi.com/" + imgUrl);
+                fourth5Element.setText("http://pro.efeiyi.com/" + pm.getProductModel_url());
                 if (pm.getAmount() == 0) {
                     fourth6Element.setText("0");
                 } else {
