@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -122,18 +123,25 @@ public class WxController {
         String userInfo = HttpUtil.getHttpResponse(urlForOpenId, null);
         System.out.println("2、get openid result：" + userInfo);
         JSONObject userJsonObject = JSONObject.fromObject(userInfo);
-        String value = userJsonObject.getString(dataKey);
-        wxCalledRecord.setData(value);
-        System.out.println(value);
-        value = URLEncoder.encode(value, "utf-8");
-        System.out.println(value);
-        baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
-        if (callbackUrl.contains("?")) {
-            callbackUrl += "&" + dataKey + "=" + value;
-        } else {
-            callbackUrl += "?" + dataKey + "=" + value;
+
+
+        String[] keyArray = dataKey.split(";");
+        String data = "";
+        for (String key : keyArray) {
+            String value = userJsonObject.getString(key);
+            wxCalledRecord.setData(value);
+            value = URLEncoder.encode(value, "utf-8");
+            if (callbackUrl.contains("?")) {
+                callbackUrl += "&" + key + "=" + value;
+            } else {
+                callbackUrl += "?" + key + "=" + value;
+            }
+            if (!data.equals("")) {
+                data += ";" + value;
+            }
         }
-        System.out.println("=====================" + callbackUrl + "-----------------------");
+        wxCalledRecord.setData(data);
+        baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
         return "redirect:http://" + callbackUrl;
     }
 
