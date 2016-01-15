@@ -118,22 +118,23 @@ public class WxController {
         wxCalledRecord.setAccessToken(access_token);
         String callbackUrl = URLDecoder.decode(wxCalledRecord.getCallback(), "UTF-8");
 
-        System.out.println("1、 page code value：" + code);
         String urlForOpenId = "https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + openid + "&lang=zh_CN";
         String userInfo = HttpUtil.getHttpResponse(urlForOpenId, null);
+        System.out.println("2、get openid result：" + userInfo);
         JSONObject userJsonObject = JSONObject.fromObject(userInfo);
         if (userJsonObject.containsKey("errcode")) {
             throw new RuntimeException("get userInfo error：" + result);
         }
         String value = userJsonObject.getString(dataKey);
         wxCalledRecord.setData(value);
+        System.out.println(value);
         baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
         if (callbackUrl.contains("?")) {
             callbackUrl += "&" + dataKey + "=" + value;
         } else {
             callbackUrl += "?" + dataKey + "=" + value;
         }
-        System.out.println("====================="+callbackUrl+"-----------------------");
+        System.out.println("=====================" + callbackUrl + "-----------------------");
         return "redirect:http://" + callbackUrl;
     }
 
@@ -208,7 +209,7 @@ public class WxController {
             ticket = ((WxCalledRecord) wxCallRecordList.get(0)).getData();
         }
         //生成signature
-        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + URLDecoder.decode(callUrl,"UTF-8");
+        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + URLDecoder.decode(callUrl, "UTF-8");
         System.out.println(signature);
         signature = StringUtil.encodePassword(signature, "SHA1");
         return signature;
