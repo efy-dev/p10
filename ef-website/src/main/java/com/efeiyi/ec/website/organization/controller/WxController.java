@@ -129,7 +129,6 @@ public class WxController {
         String data = "";
         for (String key : keyArray) {
             String value = userJsonObject.getString(key);
-            wxCalledRecord.setData(value);
             value = URLEncoder.encode(value, "utf-8");
             if (callbackUrl.contains("?")) {
                 callbackUrl += "&" + key + "=" + value;
