@@ -139,7 +139,7 @@ public class WxController {
 
     @RequestMapping({"/getInfo.do"})
     public String getWxInfo(HttpServletRequest request) {
-        String callback = request.getParameter("callback");
+        String callback = request.getParameter("callback"); //www.efeiyi.com   www.efeiyi.com?name=xxxx
         String dataKey = request.getParameter("dataKey");
         String requestSource = request.getParameter("source");
         String consumerId = request.getParameter("consumerId");
