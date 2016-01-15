@@ -52,7 +52,7 @@ public class WxController {
         String callback = request.getParameter("callback");
         String dataKey = request.getParameter("dataKey");
         System.out.println(dataKey);
-        String redirect_uri = "http://www.efeiyi.com/wx/fetchBaseUserInfo.do?dataKey=" + dataKey + "&callback" + callback;
+        String redirect_uri = "http://www.efeiyi.com/wx/fetchBaseUserInfo.do?dataKey=" + dataKey + "&callback=" + callback;
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
