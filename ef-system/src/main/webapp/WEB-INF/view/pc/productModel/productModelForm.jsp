@@ -132,7 +132,7 @@
                                         <input type="hidden" name="defaultStatus" value="3"/>
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                            href="javascript:void(0);">
-                                            <span class="am-icon-trash-o">无法删除</span>
+                                            <span class="am-icon-trash-o">删除</span>
                                         </a>
                                     </td>
                                     <td align="center">

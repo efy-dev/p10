@@ -583,4 +583,24 @@ public class ProductManagerImpl implements ProductManager {
         }
 
     }
+
+    @Override
+    public ProductPicture setModelPicture(String modelId, String pictureId,String oldModelId) throws  Exception{
+        ProductModel productModel = null;
+        ProductModel oldProductModel = null;
+        if(!oldModelId.equals("0")) {
+            oldProductModel = (ProductModel) xdoDao.getObject(ProductModel.class.getName(), oldModelId);
+            oldProductModel.setProductModel_url(null);
+            xdoDao.saveOrUpdateObject(oldProductModel);
+        }
+        if(!modelId.equals("0")) {
+            productModel = (ProductModel) xdoDao.getObject(ProductModel.class.getName(), modelId);
+        }
+        ProductPicture productPicture = (ProductPicture)xdoDao.getObject(ProductPicture.class.getName(),pictureId);
+        productPicture.setStatus("1");
+        productPicture.setProductModel(productModel);
+        xdoDao.saveOrUpdateObject(productPicture);
+        return productPicture;
+
+    }
 }
