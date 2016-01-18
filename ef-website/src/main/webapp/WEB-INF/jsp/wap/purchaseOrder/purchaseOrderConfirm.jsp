@@ -288,6 +288,7 @@
     <div class="bd add-new-btn">
         <a onclick="yhq();" class="cart-btn" id="yhq-btn" title="确定">确定</a>
     </div>
+    </div>
     <div class="overbg"></div>
 </div>
 
