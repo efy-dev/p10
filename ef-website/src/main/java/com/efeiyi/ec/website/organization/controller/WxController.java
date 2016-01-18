@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -50,7 +51,8 @@ public class WxController {
     public String getWxUserInfo(HttpServletRequest request) throws Exception {
         String callback = request.getParameter("callback");
         String dataKey = request.getParameter("dataKey");
-        String redirect_uri = "http://www.efeiyi.com/wx/fetchBaseUserInfo/" + dataKey + "/" + callback;
+        System.out.println(dataKey);
+        String redirect_uri = "http://www.efeiyi.com/wx/fetchBaseUserInfo.do?dataKey=" + dataKey + "&callback=" + callback;
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
@@ -93,9 +95,11 @@ public class WxController {
     }
 
 
-    @RequestMapping({"/fetchBaseUserInfo/{dataKey}/{callback}"})
-    public String getUserBaseInfo(HttpServletRequest request, Model model, @PathVariable String dataKey, @PathVariable String callback) throws Exception {
+    @RequestMapping({"/fetchBaseUserInfo.do"})
+    public String getUserBaseInfo(HttpServletRequest request, Model model) throws Exception {
         String result = "";
+        String dataKey = request.getParameter("dataKey");
+        String callback = request.getParameter("callback");
         String code = request.getParameter("code");
         if (request.getSession().getAttribute(code) != null) {
             result = request.getSession().getAttribute(code).toString();
@@ -118,28 +122,42 @@ public class WxController {
         wxCalledRecord.setAccessToken(access_token);
         String callbackUrl = URLDecoder.decode(wxCalledRecord.getCallback(), "UTF-8");
 
-        System.out.println("1、 page code value：" + code);
         String urlForOpenId = "https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + openid + "&lang=zh_CN";
         String userInfo = HttpUtil.getHttpResponse(urlForOpenId, null);
+        System.out.println("2、get openid result：" + userInfo);
         JSONObject userJsonObject = JSONObject.fromObject(userInfo);
-        if (userJsonObject.containsKey("errcode")) {
-            throw new RuntimeException("get userInfo error：" + result);
+
+        System.out.println(dataKey);
+        String[] keyArray = dataKey.split(";");
+        System.out.println(keyArray.length);
+        String data = "";
+        for (String key : keyArray) {
+            System.out.println(key);
+            String value = userJsonObject.getString(key);
+            System.out.println(value);
+            value = URLEncoder.encode(value, "utf-8");
+            if (callbackUrl.contains("?")) {
+                callbackUrl += "&" + key + "=" + value;
+            } else {
+                callbackUrl += "?" + key + "=" + value;
+            }
+            if (!data.equals("")) {
+                data += ";" + value;
+            } else {
+                data += value;
+            }
         }
-        String value = userJsonObject.getString(dataKey);
-        wxCalledRecord.setData(value);
+        System.out.println("----------------------" + data);
+        wxCalledRecord.setData(data);
         baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
-        if (callbackUrl.contains("?")) {
-            callbackUrl += "&" + dataKey + "=" + value;
-        } else {
-            callbackUrl += "?" + dataKey + "=" + value;
-        }
+        System.out.println("---------" + callbackUrl);
         return "redirect:http://" + callbackUrl;
     }
 
 
     @RequestMapping({"/getInfo.do"})
     public String getWxInfo(HttpServletRequest request) {
-        String callback = request.getParameter("callback");
+        String callback = request.getParameter("callback"); //www.efeiyi.com   www.efeiyi.com?name=xxxx
         String dataKey = request.getParameter("dataKey");
         String requestSource = request.getParameter("source");
         String consumerId = request.getParameter("consumerId");
@@ -207,7 +225,7 @@ public class WxController {
             ticket = ((WxCalledRecord) wxCallRecordList.get(0)).getData();
         }
         //生成signature
-        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + URLDecoder.decode(callUrl,"UTF-8");
+        String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + URLDecoder.decode(callUrl, "UTF-8");
         System.out.println(signature);
         signature = StringUtil.encodePassword(signature, "SHA1");
         return signature;

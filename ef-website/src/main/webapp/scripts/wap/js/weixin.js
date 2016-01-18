@@ -43,6 +43,9 @@ function initWx(initUrl) {
                 type: wx_share_type, // 分享类型,music、video或link，不填默认为link
                 dataUrl: wx_share_dataUrl, // 如果type是music或video，则要提供数据链接，默认为空
                 success: function () {
+                    ajaxRequest("http://www2.efeiyi.com/sharePage/resultProfits.do", {"userId": "${userId}"}, function (data) {
+                    }, function () {
+                    }, "get")
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
@@ -54,7 +57,9 @@ function initWx(initUrl) {
                 link: wx_share_link, // 分享链接
                 imgUrl: wx_share_imgUrl, // 分享图标
                 success: function () {
-                    // 用户确认分享后执行的回调函数
+                    ajaxRequest("http://www2.efeiyi.com/sharePage/resultProfits.do", {"userId": "${userId}"}, function (data) {
+                    }, function () {
+                    }, "get")
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
