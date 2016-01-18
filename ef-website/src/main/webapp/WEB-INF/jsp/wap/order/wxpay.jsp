@@ -61,7 +61,7 @@
                                 window.location.href = "${order.callback}";
                                 </c:if>
                                 <c:if test="${empty order.callback && order.orderType!='3'}">
-                                window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";
+                                window.location.href = "http://www2.efeiyi.com/sharePage/productShare/${orderId}";
                                 </c:if>
                             }
                         });
