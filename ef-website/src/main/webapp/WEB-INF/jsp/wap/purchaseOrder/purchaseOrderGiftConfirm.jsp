@@ -133,7 +133,7 @@
     </form>
 </div>
 <div id="order-total" class="alert-delete yhq" style="display:none;">
-    <div class="bd cart-coupons" style="position: fixed;">
+    <div class="bd cart-coupons addtop">
         <div class="title">
             <h2>优惠券</h2>
         </div>
@@ -141,7 +141,7 @@
         <ul class="ul-list" id="ul-list">
         </ul>
 
-        <div class="bd">
+        <div class="bd add-new-btn">
             <a onclick="yhq();" class="cart-btn" id="yhq-btn" title="确定">确定</a>
         </div>
     </div>
