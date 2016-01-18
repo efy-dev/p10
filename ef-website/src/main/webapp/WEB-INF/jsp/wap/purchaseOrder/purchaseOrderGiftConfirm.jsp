@@ -355,6 +355,7 @@
         });
     })
     function yhq() {
+        $("#order-total").hide();
         var couponid = null;
         $("input:radio").each(function () {
             if (this.checked) {
@@ -374,7 +375,6 @@
             },
             success: function (data) {
                 if (data == true) {
-                    $("#order-total").hide();
                     var t_price = parseFloat(totalPrice);
                     var chkobjs = document.getElementsByName("radio");
                     for (var i = 0; i < chkobjs.length; i++) {
