@@ -390,7 +390,7 @@
                         if (chkobjs[i].checked) {
                             t_price = t_price - parseFloat(chkobjs[i].value);
 //                            $("#couponPrice").html(chkobjs[i].value);
-                            $("#couponPrice").html("<em>-￥</em>" + chkobjs[i].value);
+                            $("#couponPrice").html(chkobjs[i].value);
                         }
                     }
                     $("#change").text(t_price);
