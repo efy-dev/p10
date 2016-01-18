@@ -352,11 +352,16 @@ public class PurchaseOrder {
     @Transient
     public BigDecimal getOrderPayMoney() {
         BigDecimal couponPrice = new BigDecimal(0);
+        BigDecimal spendBalance =new BigDecimal(0);
         if (this.getOrderStatus().equals("1") || this.getOrderStatus().equals("17")) {
             PurchaseOrderPayment purchaseOrderPaymentTemp = this.getPurchaseOrderPaymentList().get(0);
             for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
                 if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
                     couponPrice = couponPrice.add(BigDecimal.valueOf(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice()));
+
+                }
+                if(purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")){
+                  spendBalance = purchaseOrderPaymentDetailsTemp.getMoney();
 
                 }
             }
@@ -368,6 +373,11 @@ public class PurchaseOrder {
                             couponPrice = couponPrice.add(BigDecimal.valueOf(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice()));
 
                         }
+                        if(purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")){
+                            spendBalance = purchaseOrderPaymentDetailsTemp.getMoney();
+
+                        }
+
                     }
 
                 }
@@ -375,7 +385,10 @@ public class PurchaseOrder {
             }
         }
         couponPrice = couponPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
-        return couponPrice;
+         BigDecimal count=new BigDecimal(0);
+           count.add(couponPrice);
+           count.add(spendBalance);
+        return count;
 
     }
 
