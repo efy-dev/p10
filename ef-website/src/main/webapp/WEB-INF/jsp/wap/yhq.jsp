@@ -12,7 +12,7 @@
 <body>
 <header class="am-header custom-header">
   <div class="am-header-left am-header-nav">
-    <a href="#chevron-left" class="chevron-left"></a>
+    <a href="javascript:history.go(-1)" class="chevron-left"></a>
   </div>
   <!-- //End--chevron-left-->
   <h1 class="am-header-title">打开领券地址-立即领取</h1>
@@ -45,6 +45,6 @@
     </div>
   </div>
 </div>
-
+<script src="<c:url value="/scripts/wap/js/system.js?"/>"></script>
 </body>
 </html>
