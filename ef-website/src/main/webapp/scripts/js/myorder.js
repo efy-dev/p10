@@ -1,3 +1,17 @@
+//toggle plugin from caibaojian.com
+$.fn.toggler = function( fn, fn2 ) {
+    var args = arguments,guid = fn.guid || $.guid++,i=0,
+        toggler = function( event ) {
+            var lastToggle = ( $._data( this, "lastToggle" + fn.guid ) || 0 ) % i;
+            $._data( this, "lastToggle" + fn.guid, lastToggle + 1 );
+            event.preventDefault();
+            return args[ lastToggle ].apply( this, arguments ) || false;
+        };
+    toggler.guid = guid;
+    while ( i < args.length ) {
+        args[ i++ ].guid = guid;
+    }
+    return this.click( toggler ); };
 $(function(){
     (function(){
         $('#orderNum .item:last tr').css({'border':'0'});
@@ -29,12 +43,12 @@ $(function(){
         var lilist = $(".my-clearing .page-default").length;
         var liicon = '<span class="triangle-bg"></span>';
         var liicon2 = '<span class="triangle-bg2"></span>';
-        $(".my-clearing .page-clearing .dj-p a").toggle(function(){
+        $("#pg-box").toggler(function(){
             $(".my-clearing .page-box-m").stop().animate({height:liheg*lilist},1000);
-            $(this).html("收起地址"+liicon);
+            $(this).html("收起地址"+liicon2);
         },function(){
             $(".my-clearing .page-box-m").stop().animate({height:"40"},1000);
-            $(this).html("展开地址"+liicon2);
+            $(this).html("展开地址"+liicon);
         });
     })();
     //
