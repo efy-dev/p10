@@ -30,7 +30,7 @@
         <p class="text">没有找到该链接的活动</p>
         </c:if>
         <c:if test="${yhq=='used'}">
-          <p class="text">您已经领取过改优惠券了呦</p>
+          <p class="text">您已经领取过该优惠券了呦</p>
         </c:if>
         <div class="ae"><a href="http://www.efeiyi.com" class="but act">返回e飞蚁首页</a></div>
       </div>

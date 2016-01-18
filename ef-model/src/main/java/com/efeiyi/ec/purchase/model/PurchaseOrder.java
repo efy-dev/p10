@@ -23,6 +23,7 @@ public class PurchaseOrder {
     public static final String ORDER_STATUS_WPAY = "1";  //等待付款
     public static final String ORDER_STATUS_WAIT_GROUP = "3"; //等待成团
     public static final String ORDER_STATUS_WRECEIVE = "5"; //未发货
+    public static final String ORDER_STATUS_WPOST = "51"; //已确认 发货中
     public static final String ORDER_STATUS_WRGIFT = "6"; //待收礼
     public static final String ORDER_STATUS_POSTED = "7";  //已发货
     public static final String ORDER_STATUS_UNCOMMENT = "9"; //未评价
@@ -352,11 +353,16 @@ public class PurchaseOrder {
     @Transient
     public BigDecimal getOrderPayMoney() {
         BigDecimal couponPrice = new BigDecimal(0);
+        BigDecimal spendBalance = new BigDecimal(0);
         if (this.getOrderStatus().equals("1") || this.getOrderStatus().equals("17")) {
             PurchaseOrderPayment purchaseOrderPaymentTemp = this.getPurchaseOrderPaymentList().get(0);
             for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
                 if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
                     couponPrice = couponPrice.add(BigDecimal.valueOf(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice()));
+
+                }
+                if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")) {
+                    spendBalance = purchaseOrderPaymentDetailsTemp.getMoney();
 
                 }
             }
@@ -368,6 +374,11 @@ public class PurchaseOrder {
                             couponPrice = couponPrice.add(BigDecimal.valueOf(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice()));
 
                         }
+                        if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")) {
+                            spendBalance = purchaseOrderPaymentDetailsTemp.getMoney();
+
+                        }
+
                     }
 
                 }
@@ -375,7 +386,10 @@ public class PurchaseOrder {
             }
         }
         couponPrice = couponPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
-        return couponPrice;
+        BigDecimal count = new BigDecimal(0);
+        count.add(couponPrice);
+        count.add(spendBalance);
+        return count;
 
     }
 

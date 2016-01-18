@@ -16,6 +16,7 @@
                         <item label="未评价" value="9"/>
                         <item label="已完成" value="13"/>
                         <item label="订单已取消" value="17"/>
+                        <item label="已确认，发货中" value="51"/>
                     </statusType>
                 </field>
                 <field name="payWay" label="支付方式" inputType="text">

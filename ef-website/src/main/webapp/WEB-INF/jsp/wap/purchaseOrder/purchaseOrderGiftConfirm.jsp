@@ -131,7 +131,7 @@
     </form>
 </div>
 <div id="order-total" class="alert-delete yhq" style="display:none;">
-    <div class="bd cart-coupons" style="position: fixed;">
+    <div class="bd cart-coupons addtop">
         <div class="title">
             <h2>优惠券</h2>
         </div>
@@ -139,7 +139,7 @@
         <ul class="ul-list" id="ul-list">
         </ul>
 
-        <div class="bd">
+        <div class="bd add-new-btn">
             <a onclick="yhq();" class="cart-btn" id="yhq-btn" title="确定">确定</a>
         </div>
     </div>
@@ -253,7 +253,7 @@
     }
 
     function submitOrder(orderId) {
-        var balance = $("#balance").text();
+
         if (gaverNameStats == "0") {
             showAlert("提示", "请填写送礼人姓名！");
         } else {
@@ -364,6 +364,7 @@
         });
     })
     function yhq() {
+        $("#order-total").hide();
         var couponid = null;
         $("input:radio").each(function () {
             if (this.checked) {
@@ -388,6 +389,7 @@
                     for (var i = 0; i < chkobjs.length; i++) {
                         if (chkobjs[i].checked) {
                             t_price = t_price - parseFloat(chkobjs[i].value);
+//                            $("#couponPrice").html(chkobjs[i].value);
                             $("#couponPrice").html(chkobjs[i].value);
                         }
                     }
@@ -399,6 +401,7 @@
                     }
                     $("#balance").html("0.00");
                     $("#banlanceCheckbox").attr("checked",false);
+                    $("body").css("overflow", "scroll")
                 }
             },
 

@@ -107,11 +107,6 @@
                     <span>${address.district.name}</span>
                     <span>${address.details}</span>
                     <span>${address.phone}</span>
-                    <%--<div class="jc-hc" style="display: none;height: 40px;">--%>
-                        <%--<a href="#">删除</a>--%>
-                        <%--<a href="#"  class="edit-act">编辑</a>--%>
-                        <%--<a href="#">设为默认地址</a>--%>
-                    <%--</div>--%>
                 </div>
             </c:forEach>
             </div>

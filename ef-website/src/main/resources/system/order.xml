@@ -24,6 +24,13 @@
                 </field>
             </fields>
             <does>
+                <do name="listPurchaseOrder" access="" label="订单列表">
+                    <query name="default13" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="user.id" defaultValue="1" operation="eq"/>
+                        <condition name="orderStatus" defaultValue="13" operation="eq"/>
+                    </query>
+                 </do>
                 <do name="plistPurchaseOrder" access="" label="订单列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
@@ -345,6 +352,23 @@
             </does>
         </entity>
 
-
+        <entity name="CouponConsumer" label="用户评价状态" model="com.efeiyi.ec.purchase.model.Coupon">
+            <does>
+                <do name="listCouponConsumer" access="" label="修改状态值">
+                    <query name="default" label="默认" type="auto">
+                        <condition name="couponBatch.id" defaultValue="iilsik60373zsqx4" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="CouponConsumer" label="用户评价状态" model="com.efeiyi.ec.purchase.model.Coupon">
+            <does>
+                <do name="listCouponConsumer" access="" label="修改状态值">
+                    <query name="default" label="默认" type="auto">
+                        <condition name="couponBatch.id" defaultValue="iilsik60373zsqx4" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
     </entities>
 </module>
