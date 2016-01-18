@@ -125,7 +125,7 @@ public class ShareController {
      */
     @RequestMapping({"/sharePage/openShare/{purchaseOrderId}"})
     public String openPage(@PathVariable String purchaseOrderId,HttpServletRequest request,Model model) throws Exception{
-        String callback = URLEncoder.encode("http://www2.efeiyi.com/sharePage/saveWXInfo.do?purchaseOrderId="+purchaseOrderId,"UTF-8");
+        String callback = URLEncoder.encode("www2.efeiyi.com/sharePage/saveWXInfo.do?purchaseOrderId="+purchaseOrderId,"UTF-8");
         return "redirect:http://www.efeiyi.com/wx/getUserBaseInfo.do?dataKey=nickname;headimgurl"+"&callback="+callback;
     }
     /**分享后返利
