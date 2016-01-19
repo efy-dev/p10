@@ -39,7 +39,7 @@ public class GroupManagerImpl implements GroupManager {
     private PurchaseOrderGroupManager purchaseOrderGroupManager;
 
     @Override
-    public String createGroup(User user, String groupProductId, String groupId, String memberId) {
+    public String  createGroup(User user, String groupProductId, String groupId, String memberId) {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
         String callback = "";
         String url = "";
@@ -94,7 +94,7 @@ public class GroupManagerImpl implements GroupManager {
 
 
             //�ص���ַ
-            callback = "http://a.efeiyi.com/group/waitPay" + "?groupId=" + group.getId() + "&memberId=" + member.getId() + "&purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId;
+            callback = "a.efeiyi.com/group/waitPay" + "?groupId=" + group.getId() + "&memberId=" + member.getId() + "&purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId;
             purchaseOrder.setCallback(callback);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
             url = "http://www.efeiyi.com/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId();
