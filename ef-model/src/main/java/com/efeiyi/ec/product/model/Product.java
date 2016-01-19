@@ -271,4 +271,9 @@ public class Product implements Serializable{
     public void setShowDateTime(Date showDateTime) {
         this.showDateTime = showDateTime;
     }
+
+    @Override
+    public String toString(){
+        return  "Product{id = "+id+"}";
+    }
 }
