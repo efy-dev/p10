@@ -126,7 +126,9 @@
                         },//输入框的值传递到后台
                         url: "<c:url value="/purchaseOrder/refund.do"/>",
                         success: function (data) {
-                            window.location.reload();
+                            if(data){
+                                window.location.reload();
+                            }
                         }
                     });
                 }});
@@ -138,6 +140,19 @@
             var endTime = $("#endTime").val();
             var selectTenant = $("#tenant3").val();
             window.location.href = "<c:url value='/purchaseOrder/downloadOrders.do?startTime='/>"+startTime+"&endTime="+endTime+"&selectTenant="+selectTenant;
+        }
+
+        function confirmOrder(id){
+            jQuery.ajax({
+                type: "GET",
+                data: {id: id},
+                dataType: "json",
+                async:false,
+                url: '<c:url value="/purchaseOrder/confirmOrder.do"/>',
+                success: function (data) {
+                    window.location = window.location;
+                }
+            });
         }
     </script>
 </head>
@@ -268,7 +283,7 @@
                                 <c:if test="${purchaseOrder.orderStatus==3}">
                                     等待成团
                                 </c:if>
-                                <c:if test="${purchaseOrder.orderStatus==5}">
+                                <c:if test="${purchaseOrder.orderStatus==5 || purchaseOrder.orderStatus==51}">
                                     立即发货
                                 </c:if>
                                 <c:if test="${purchaseOrder.orderStatus==6}">
@@ -286,11 +301,18 @@
                             </span>
                                         </a>
 
-                                        <c:if test="${purchaseOrder.orderStatus==5 || purchaseOrder.orderStatus==6 || purchaseOrder.orderStatus==7 || purchaseOrder.orderStatus==9 || purchaseOrder.orderStatus==13}">
+                                        <c:if test="${purchaseOrder.orderStatus==5 || purchaseOrder.orderStatus==51 || purchaseOrder.orderStatus==6 || purchaseOrder.orderStatus==7 || purchaseOrder.orderStatus==9 || purchaseOrder.orderStatus==13}">
                                             <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
                                                style="color: red;" id="refund"
                                                onclick="refund(this,'${purchaseOrder.id}')">
                                                 <span class="am-icon-pencil-square-o">退款</span>
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${purchaseOrder.orderStatus==5}">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
+                                               style="color: red;" id="confirmOrder"
+                                               onclick="confirmOrder('${purchaseOrder.id}')">
+                                                <span class="am-icon-pencil-square-o">确认</span>
                                             </a>
                                         </c:if>
                                     </div>
