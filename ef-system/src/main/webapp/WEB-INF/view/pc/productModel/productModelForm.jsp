@@ -132,7 +132,7 @@
                                         <input type="hidden" name="defaultStatus" value="3"/>
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                            href="javascript:void(0);">
-                                            <span class="am-icon-trash-o">删除</span>
+                                            <span class="am-icon-trash-o">无法删除</span>
                                         </a>
                                     </td>
                                     <td align="center">
@@ -268,19 +268,19 @@
                     <%--</span>--%>
                     <span style="padding: 10px;">
                      <c:if test="${view == 'newProduct'}">
-                         <input type="button"
-                                onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_default&view=${view}')"
+                         <input type="button" isOnclick="0"
+                                onclick="toSubmit(this,'redirect:/basic/xm.do?qm=plistProduct_default&view=${view}')"
                                 class="am-btn am-btn-primary" value="保存"/>
                      </c:if>
                         <c:if test="${view == 'tenant'}">
-                            <input type="button"
-                                   onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')"
+                            <input type="button" isOnclick="0"
+                                   onclick="toSubmit(this,'redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')"
                                    class="am-btn am-btn-primary" value="完成"/>
                         </c:if>
                     </span>
                       <span style="padding: 10px;">
-                       <input type="button"
-                              onclick="toSubmit('redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')"
+                       <input type="button" isOnclick="0"
+                              onclick="toSubmit(this,'redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')"
                               class="am-btn am-btn-primary" value="保存,并查看商品详情"/>
                     </span>
                 </div>
@@ -344,24 +344,31 @@
     }
 
     //提交
-    function toSubmit(result) {
-        $("input[name='resultPage']").val(result);
-        var f = true;
-        $("tr[status!='0'] input[name*='eight']").each(function(){
-              if($(this).val()==""){
-                  f = false;
-                  return false;
-              }
-        });
-        if(f) {
-            if ($("#productModel tr[flag='default']").length == 1) {
-                $("form").submit();
+    function toSubmit(obj,result) {
+        var isClick = $(obj).attr("isOnclick");
+            $("input[name='resultPage']").val(result);
+            var f = true;
+            $("tr[status!='0'] input[name*='eight']").each(function () {
+                if ($(this).val() == "") {
+                    f = false;
+                    return false;
+                }
+            });
+            if (f) {
+                if ($("#productModel tr[flag='default']").length == 1) {
+                    if(isClick=="0") {
+                        $(obj).attr("isOnclick","1");
+                        $("form").submit();
+                    }else{
+                        alert("正在保存...");
+                    }
+                } else {
+                    alert("保存失败!");
+                }
             } else {
-                alert("保存失败!");
+                alert("请填写商品规格重量!");
             }
-        }else{
-            alert("请填写商品规格重量!");
-        }
+
 
     }
     /****属性 生成商品模型***/
