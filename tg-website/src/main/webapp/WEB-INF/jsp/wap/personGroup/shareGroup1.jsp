@@ -77,7 +77,7 @@
   <div class="had-product ae">
     <div class="had-pic"><a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${group.groupProduct.id}&groupId=${group.id}&memberId=${memberId}&show=1&purchaseOrderId=${purchaseOrderId}"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!group-share-product-view"></a></div>
     <div class="had-txt"><p>${group.groupProduct.productModel.product.name}
-        <c:if test="${group.groupProduct.productModel.product.productModelList.size()>1}">
+        <c:if test="${(group.groupProduct.productModel.product.productModelList.size()>1)&&(null!=group.groupProduct.productModel.name)&&(''!=group.groupProduct.productModel.name)}">
           [${group.groupProduct.productModel.name}]
         </c:if>
       </p><p>${group.groupProduct.memberAmount}人起成团/${group.groupProduct.groupPurchaseTime}天成团</p><p><strong>拼团价${group.groupProduct.groupPrice}</strong>（<s>原价${group.groupProduct.productModel.price}</s>）</p></div>

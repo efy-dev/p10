@@ -131,9 +131,9 @@ public class GroupController {
             xQuery.put("myGroup_id", groupId);
             xQuery.put("groupMember_id", memberId);
             List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
-            purchaseOrderId = list.get(0).getPurchaseOrder().getId();
-            PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
-            supMan = purchaseOrder.getReceiverName();
+//            purchaseOrderId = list.get(0).getPurchaseOrder().getId();
+//            PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+            supMan = list.get(0).getReceiverName();
         } else {
             PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
             supMan = purchaseOrder.getReceiverName();

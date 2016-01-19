@@ -68,7 +68,7 @@
         <ul class="am-slides" style="width: 1200%; transition-duration: 0.6s; transform: translate3d(-640px, 0px, 0px);">
           <li class="clone c-page" aria-hidden="true" style="width: 320px; float: left; display: block;">
             <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!wap-product-pic"><div class="c-page"><span>${groupProduct.productModel.product.name}
-              <c:if test="${groupProduct.productModel.product.productModelList.size()>1}">
+              <c:if test="${(groupProduct.productModel.product.productModelList.size()>1)&&(null!=groupProduct.productModel.name)&&(''!=groupProduct.productModel.name)}">
                 [${groupProduct.productModel.name}]
               </c:if>
               </span></div></div>
