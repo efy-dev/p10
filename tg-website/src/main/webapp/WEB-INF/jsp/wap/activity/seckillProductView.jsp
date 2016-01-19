@@ -53,7 +53,8 @@
     <!--//End--am-slider-->
     <div class="bd details seckill">
         <div class="bd des-title">
-            <strong class="bd txt">${seckillProduct.productModel.product.name}[${seckillProduct.productModel.name}]</strong>
+            <strong class="bd txt">${seckillProduct.productModel.product.name}
+                <c:if test="${not empty seckillProduct.productModel.name}">[${seckillProduct.productModel.name}]</c:if></strong>
             <a href="#分享" class="share" style="right: 0px;">
                 <i class="icon icon-share"></i>
 

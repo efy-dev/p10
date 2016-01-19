@@ -71,6 +71,7 @@ public class PurchaseOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_province_id")
+    @JsonIgnore
     public AddressProvince getProvince() {
         return province;
     }
@@ -81,6 +82,7 @@ public class PurchaseOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_city_id")
+    @JsonIgnore
     public AddressCity getCity() {
         return city;
     }
@@ -91,6 +93,7 @@ public class PurchaseOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_district_id")
+    @JsonIgnore
     public AddressDistrict getDistrict() {
         return district;
     }
