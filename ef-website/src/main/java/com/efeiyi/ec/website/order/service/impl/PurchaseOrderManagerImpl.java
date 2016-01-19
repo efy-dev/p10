@@ -74,6 +74,8 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         PurchaseOrder purchaseOrder = createNewPurchaseOrder(productModel, price, amount);
         LinkedHashSet<Tenant> tenantSet = new LinkedHashSet<>();
         tenantSet.add(productModel.getProduct().getTenant());
+        purchaseOrder.setTenant(productModel.getProduct().getTenant());
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         ArrayList<PurchaseOrderProduct> productModelArrayList = new ArrayList<>();
         productModelArrayList.add(purchaseOrder.getPurchaseOrderProductList().get(0));
         productMap.put(productModel.getProduct().getTenant().getId(), productModelArrayList);
@@ -90,9 +92,11 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         createNewPurchaseOrder(purchaseOrder);
         LinkedHashSet<Tenant> tenantSet = new LinkedHashSet<>();
         tenantSet.add(purchaseOrder.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getTenant());
+        purchaseOrder.setTenant(purchaseOrder.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getTenant());
         ArrayList<PurchaseOrderProduct> productModelArrayList = new ArrayList<>();
         productModelArrayList.add(purchaseOrder.getPurchaseOrderProductList().get(0));
         productMap.put(purchaseOrder.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getTenant().getId(), productModelArrayList);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         model.addAttribute("productMap", productMap);
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("tenantList", tenantSet);
