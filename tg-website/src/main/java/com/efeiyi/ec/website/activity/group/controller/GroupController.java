@@ -220,7 +220,7 @@ public class GroupController {
         String manUserName = "";
         List<PurchaseOrderGroup> purchaseOrderGroupList = baseManager.listObject(xQuery);
         if (purchaseOrderGroupList.size() > 0) {
-            manUserName = purchaseOrderGroupList.get(0).getPurchaseOrder().getReceiverName();
+            manUserName = purchaseOrderGroupList.get(0).getReceiverName();
         }
         model.addAttribute("manUserName", manUserName);
 
