@@ -28,35 +28,36 @@
                    <div class="enter-btn .wh"><a href="<c:url value="basic/xm.do?qm=viewTenant1&id=${TENANT.id}"/> ">完&nbsp;善&nbsp;信&nbsp;息</a></div>
                    <div class="enter-flow wh">入&nbsp;驻&nbsp;流&nbsp;程</div>
                    <div class="wh enter-wh">
-                       <div class="enter-list">
-                           <dl>
-                               <dt>完善信息<i class="enter-1"></i></dt>
-                               <dd>
-                                   <p>店铺信息<i class="txt-icon"></i></p>
-                                   <p>商户资质信息<i class="txt-icon"></i></p>
-                               </dd>
-                           </dl>
-                           <dl>
-                               <dt>提交审核<i class="enter-2"></i></dt>
-                               <dd>
-                                   <p>提交e飞蚁审核<i class="txt-icon"></i></p>
-                               </dd>
-                           </dl>
-                           <dl>
-                               <dt>e飞蚁审核<i class="enter-3"></i></dt>
-                               <dd>
-                                   <p>e飞蚁7个工作日内反馈审核结果<i class="txt-icon"></i></p>
-                               </dd>
-                           </dl>
-                           <dl class="noborder1">
-                               <dt>店&nbsp;铺&nbsp;开&nbsp;通<i class="enter-4"></i></dt>
-                               <dd>
-                                   <p>店铺开通<i class="txt-icon"></i></p>
-                                   <p>商家登录后台<i class="txt-icon"></i></p>
-                               </dd>
-                           </dl>
-                       </div>
-                   </div>
+                       <div  style="width: 100%;display: inline-block"><img src="<c:url value="/scripts/images/0309-pic.jpg"/>" style="width: 100%;float: left"> </div>
+                       <%--<div class="enter-list">--%>
+                           <%--<dl>--%>
+                               <%--<dt>完善信息<i class="enter-1"></i></dt>--%>
+                               <%--<dd>--%>
+                                   <%--<p>店铺信息<i class="txt-icon"></i></p>--%>
+                                   <%--<p>商户资质信息<i class="txt-icon"></i></p>--%>
+                               <%--</dd>--%>
+                           <%--</dl>--%>
+                           <%--<dl>--%>
+                               <%--<dt>提交审核<i class="enter-2"></i></dt>--%>
+                               <%--<dd>--%>
+                                   <%--<p>提交e飞蚁审核<i class="txt-icon"></i></p>--%>
+                               <%--</dd>--%>
+                           <%--</dl>--%>
+                           <%--<dl>--%>
+                               <%--<dt>e飞蚁审核<i class="enter-3"></i></dt>--%>
+                               <%--<dd>--%>
+                                   <%--<p>e飞蚁7个工作日内反馈审核结果<i class="txt-icon"></i></p>--%>
+                               <%--</dd>--%>
+                           <%--</dl>--%>
+                           <%--<dl class="noborder1">--%>
+                               <%--<dt>店&nbsp;铺&nbsp;开&nbsp;通<i class="enter-4"></i></dt>--%>
+                               <%--<dd>--%>
+                                   <%--<p>店铺开通<i class="txt-icon"></i></p>--%>
+                                   <%--<p>商家登录后台<i class="txt-icon"></i></p>--%>
+                               <%--</dd>--%>
+                           <%--</dl>--%>
+                       <%--</div>--%>
+                   <%--</div>--%>
                </div>
            </div>
    </c:if>
@@ -215,5 +216,8 @@
 
     </div>
 </c:if>
+<script>
+
+</script>
 </body>
 </html>

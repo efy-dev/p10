@@ -8,6 +8,7 @@ import com.efeiyi.ec.system.purchaseOrder.service.PurchaseOrderManager;
 import com.efeiyi.ec.system.purchaseOrder.service.SmsCheckManager;
 import com.efeiyi.ec.system.util.HTTPParam;
 import com.efeiyi.ec.system.util.HTTPSend;
+import com.efeiyi.ec.system.zero.virtual.model.task.PurchaseOrderTaskScheduler;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -80,7 +81,7 @@ public class PurchaseOrderController extends BaseController {
                     PurchaseOrder p1 = null;
                     for (int i = 0; i < subPurchaseOrderList.size(); i++) {
                         p1 = subPurchaseOrderList.get(i);
-                        if ("1".equals(p1.getOrderStatus()) || "5".equals(p1.getOrderStatus())) {
+                        if ("1".equals(p1.getOrderStatus()) || "5".equals(p1.getOrderStatus()) || "51".equals(p1.getOrderStatus())) {
                             p1.setOrderStatus("7");
                             purchaseOrderManager.updateOrderStatus(p1);
                         }
@@ -132,7 +133,7 @@ public class PurchaseOrderController extends BaseController {
                         }
                     }
 
-                    if ("1".equals(p.getOrderStatus()) || "5".equals(p.getOrderStatus())) {//如果有未发货的就修改自己 然后跳出循环
+                    if ("1".equals(p.getOrderStatus()) || "5".equals(p.getOrderStatus()) || "51".equals(p.getOrderStatus())) {//如果有未发货的就修改自己 然后跳出循环
 //                        if(i == subPurchaseOrderList.size()-1){//如果循环到了最后一个 并且最后一个不是自己并且前面没有未发货的
 //                            fPurchaseOrder.setOrderStatus("7");
 //                            purchaseOrderManager.updateOrderStatus(fPurchaseOrder);
@@ -262,6 +263,19 @@ public class PurchaseOrderController extends BaseController {
 
         baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
 
+
+    }
+
+    @RequestMapping("/confirmOrder.do")
+    @ResponseBody
+    public boolean confirmOrder(HttpServletRequest request){
+        String id = request.getParameter("id");
+
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),id);
+
+        purchaseOrder.setOrderStatus("51");
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+        return true;
 
     }
 

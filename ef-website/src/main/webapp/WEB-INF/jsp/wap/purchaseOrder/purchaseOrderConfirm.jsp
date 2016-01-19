@@ -379,7 +379,6 @@
             ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
             }, "post")
         }
-
     }
 
     function yhq() {
