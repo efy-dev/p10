@@ -253,7 +253,7 @@
     }
 
     function submitOrder(orderId) {
-
+        var balance = $("#balance").text();
         if (gaverNameStats == "0") {
             showAlert("提示", "请填写送礼人姓名！");
         } else {
