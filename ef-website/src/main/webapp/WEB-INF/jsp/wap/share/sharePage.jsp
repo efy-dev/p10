@@ -50,7 +50,7 @@
   <ul class="pac-text ae">
     <li>分&nbsp;享&nbsp;宝&nbsp;贝</li>
     <c:set var="shareUser">
-      ${purchaseOrder.getUser().getUsername()}
+      ${order.getUser().getUsername()}
     </c:set>
     <li>领&nbsp;取&nbsp;<em>5</em>&nbsp;元&nbsp;现&nbsp;金&nbsp;红&nbsp;包!</li>
   </ul>
