@@ -1,7 +1,22 @@
+//toggle plugin from caibaojian.com
+$.fn.toggler = function( fn, fn2 ) {
+    var args = arguments,guid = fn.guid || $.guid++,i=0,
+        toggler = function( event ) {
+            var lastToggle = ( $._data( this, "lastToggle" + fn.guid ) || 0 ) % i;
+            $._data( this, "lastToggle" + fn.guid, lastToggle + 1 );
+            event.preventDefault();
+            return args[ lastToggle ].apply( this, arguments ) || false;
+        };
+    toggler.guid = guid;
+    while ( i < args.length ) {
+        args[ i++ ].guid = guid;
+    }
+    return this.click( toggler ); };
 $(function(){
     (function(){
         $('#orderNum .item:last tr').css({'border':'0'});
         $('.clearing-site span .btn-cart-add').click(function(){
+            $('.header-new,.topbar,.nav-new-list,.footernew').css('z-index','-1');
             $(this).siblings('.active-pop').show();
             $('.clase, .sh-bg').click(function(){
                 $(this).parents('.active-pop').hide();
@@ -12,6 +27,7 @@ $(function(){
     //
     (function(){
         $('.my-order .extra-r>a').click(function(){
+            $('.header-new,.topbar,.nav-new-list,.footernew').css('z-index','-1');
             $('.header,.footer').css('z-index','-1');
             $(this).siblings('.active-pop').show();
             $('.my-order .clase, .my-order .sh-bg').click(function(){
@@ -19,6 +35,45 @@ $(function(){
                 $('.header,.footer').css('z-index','');
             })
             return false;
+        })
+    })();
+    //ç»“ç®—é¡µå±•å¼€æ”¶èµ·
+    (function(){
+        var liheg = $(".my-clearing .page-default").outerHeight(true);
+        var lilist = $(".my-clearing .page-default").length;
+        var liicon = '<span class="triangle-bg"></span>';
+        var liicon2 = '<span class="triangle-bg2"></span>';
+        $("#pg-box").toggler(function(){
+                $(".my-clearing .page-box-m").stop().animate({height:liheg*lilist},1000);
+                $(this).html("æ”¶èµ·åœ°å€"+liicon2);
+        },function(){
+                $(".my-clearing .page-box-m").stop().animate({height:"40"},1000);
+                $(this).html("å±•å¼€åœ°å€"+liicon);
+        });
+        //huadongxianshi
+        $('.my-clearing .page-default').mousemove(function(){
+            $(this).find('.jc-hc').show();
+            $(this).find('.jc-hc').css("z-index","9999")
+            $(".header,.footer,.am-sticky-placeholder,.topbar,.header-new,.nav-new,.footernew").css("z-index","-1")
+        })
+        $('.my-clearing .page-default').mouseleave(function(){
+            $(this).find('.jc-hc').hide();
+            $(this).find('.jc-hc').css("z-index","")
+            $(".header,.footer,.am-sticky-placeholder,.topbar,.header-new,.nav-new,.footernew").css("z-index","")
+        });
+        $('.edit-act').click(function(){
+            $('.apt').show();
+            $('.jc-hc').hide();
+            $('.my-clearing .page-default').unbind("mouseleave")
+        });
+        $(".my-clearing .clase,.my-clearing .sh-bg").click(function(){
+
+            $('.apt').hide()
+            $('.my-clearing .page-default').mouseleave(function(){
+                $(this).find('.jc-hc').hide();
+                $(this).find('.jc-hc').css("z-index","")
+                $(".header,.footer,.am-sticky-placeholder,.topbar,.header-new,.nav-new,.footernew").css("z-index","")
+            });
         })
     })();
     //
@@ -58,29 +113,20 @@ $(function(){
     $('.my-order .order-nav .layout-li li').click(function(){
         $(this).addClass('liul').siblings().removeClass('liul');
     })
-    //huadongxianshi
-    $('.my-clearing .page-default').mouseenter(function(){
-        $(this).find('.jc-hc').show();
-    })
-    $('.my-clearing .page-default').mouseleave(function(){
-        $(this).find('.jc-hc').hide();
-    });
-    //
-    $('.edit-act').click(function(){
-        $(this).parent().find('.apt').show();
 
-    });
+    //
+
     //
     $('.but-bil').click(function(){
         alert('sadasdsa')
         $(this).parent().find('.common-popup').show()
     })
-    //°ïÖúÖĞĞÄ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     $('.help-order .page .left dt').click(function(){
         $(this).toggleClass('active');
         $(this).siblings('dd').slideToggle('fast');
     })
-    //ÎÒµÄ¿¨È¯
+    //ï¿½ÒµÄ¿ï¿½È¯
     $('.my-kj .am-tabs-nav .ul-list li.items').click(function(){
         var amTabPanel=$(this).parents('.ul-list').siblings('.am-tabs-bd');
         var $index=$(this).index();
@@ -88,12 +134,12 @@ $(function(){
         amTabPanel.find('.am-tab-panel').eq($index).show().siblings('.am-tab-panel').hide();
         return false
     })
-    //ÎÒµÄÆÀ¼Ûµ¯³ö
+    //ï¿½Òµï¿½ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½
     $(".evaluation .addbtn").click(function(){
         $(this).parents(".data-list").siblings(".evaluation .addcon").show();
         $(".evaluation .addbtn").hide()
     })
-    //010213¿¨È¯µ¯³ö
+    //010213ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½
     $('#efeiyi-dh').click(function(){
         $(this).siblings('.ytacu').show();
         $('.ytacu .dh .no').click(function(){
@@ -101,7 +147,7 @@ $(function(){
         })
         return false
     })
-    //010213¿¨È¯µ¯³ö2
+    //010213ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½2
     $('#efeiyi-dh').click(function(){
         $(this).siblings('#ytacu2').show();
         $('.ytacu .cg .btn').click(function(){
@@ -117,12 +163,68 @@ $(function(){
        for(var i=0;i < GradList.length;i++){
         GradList[i].onmouseover = function(){
             for(var Qi=0;Qi<GradList.length;Qi++){
-                GradList[Qi].style.backgroundPosition = '-36px -21px';
+                GradList[Qi].class.backgroundPosition = '-36px -21px';
             }
             for(var Qii=0;Qii<this.name;Qii++){
                 GradList[Qii].style.backgroundPosition = '-5px -21px';
             }
         }
     }
+    $(function(){
+        var dlwidth = $(".recommend .carousel .car-content").outerWidth(true);
+        var dllist = $(".recommend .carousel dl").size();
+        var nuke = 0;
 
+        $("#a_car-right").click(function(){
+            $("#a_car-left").removeClass("hover")
+            if(nuke>dllist-5){
+                nuke=dllist-5;
+                $(this).addClass("hover")
+            }else{
+                nuke++;
+                $(".recommend .carousel .detall").stop().animate({"left":-nuke*dlwidth},500)
+            }
+        })
+        $("#a_car-left").click(function(){
+            $("#a_car-right").removeClass("hover")
+            if(nuke<=0){
+                nuke=0;
+                $(this).addClass("hover")
+            }else{
+                nuke--;
+                $(".recommend .carousel .detall").stop().animate({"left":-nuke*dlwidth},500)
+            }
+        })
+    })
+    //ï¿½Òµï¿½yifeiyiï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½Æ·ï¿½Õ²ï¿½
+    $(".efeiyi-collect .efeiyi-head .efeiyi-right li").click(function(){
+        var _myindex = $(this).index();
+        $(this).addClass("active").siblings().removeClass("active");
+        $(".efeiyi-col-box .efeiyi-col-tab").eq(_myindex).show().siblings().hide()
+    })
+    //ï¿½Òµï¿½yifeiyiï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½Æ·ï¿½Õ²Ø¶ï¿½ï¿½ï¿½1
+    var lilist = $(".efeiyi-col-box .add1-tab .efeiyi-col-tzoom .efeiyi-tzoom-list ul li").size()
+    var liwidth = $(".efeiyi-col-box .efeiyi-col-tab .efeiyi-col-tzoom .efeiyi-tzoom-list ul li").outerWidth(true);
+    var dhul = $(".efeiyi-col-box .efeiyi-col-tab .efeiyi-col-tzoom .efeiyi-tzoom-list ul")
+    var linull = 0;
+    $(".efeiyi-col-box .add-rigt").click(function(){
+        $(".efeiyi-col-box .add-left").removeClass("add")
+        if(linull>=lilist-4){
+            $(this).addClass("add")
+            linull=lilist-4;
+        }else{
+            linull++;
+            dhul.animate({"left":-linull*liwidth},500)
+        }
+    })
+    $(".efeiyi-col-box .add-left").click(function(){
+        $(".efeiyi-col-box .add-rigt").removeClass("add")
+        if(linull<=0){
+            $(this).addClass("add")
+            linull=0;
+        }else{
+            linull--;
+            dhul.animate({"left":-linull*liwidth},500)
+        }
+    })
 })
