@@ -72,7 +72,11 @@
       <ul class="am-viewport" style="overflow: hidden; position: relative;">
         <ul class="am-slides" style="width: 1200%; transition-duration: 0.6s; transform: translate3d(-640px, 0px, 0px);">
           <li class="clone c-page" aria-hidden="true" style="width: 320px; float: left; display: block;">
-            <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!wap-product-pic"><div class="c-page"><span>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</span></div></div></li>
+            <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!wap-product-pic"><div class="c-page"><span>${group.groupProduct.productModel.product.name}
+                <c:if test="${group.groupProduct.productModel.product.productModelList.size()>1}">
+                  [${group.groupProduct.productModel.name}]
+                </c:if>
+              </span></div></div></li>
           <c:forEach items="${group.groupProduct.productModel.product.productPictureList}" var="picture">
             <c:if test="${picture.status=='1'&&picture.productModel.id==group.groupProduct.productModel.id}">
               <li class="clone c-page" aria-hidden="true" style="width: 320px; float: left; display: block;"><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"><div class="c-page"><span>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</span></div></div></li>
