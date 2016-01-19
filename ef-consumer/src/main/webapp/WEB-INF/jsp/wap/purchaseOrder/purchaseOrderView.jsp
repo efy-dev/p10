@@ -15,7 +15,7 @@
 </head>
 <body>
 <!--//End--header-->
-<c:if test="${order.orderStatus == 3 or order.orderStatus == 1 or order.orderStatus == 17 or order.orderStatus == 5 or order.orderStatus == 9 or order.orderStatus == 13 or order.orderStatus==6}">
+<c:if test="${order.orderStatus == 3 or order.orderStatus == 1 or order.orderStatus == 17 or order.orderStatus == 5 or order.orderStatus == 9 or order.orderStatus == 13 or order.orderStatus==6 or order.orderStatus==51}">
     <div class="line-item">
         <c:if test="${order.orderType=='3'}">
             <div class="address">
