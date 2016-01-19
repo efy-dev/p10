@@ -44,12 +44,37 @@ $(function(){
         var liicon = '<span class="triangle-bg"></span>';
         var liicon2 = '<span class="triangle-bg2"></span>';
         $("#pg-box").toggler(function(){
-            $(".my-clearing .page-box-m").stop().animate({height:liheg*lilist},1000);
-            $(this).html("收起地址"+liicon2);
+                $(".my-clearing .page-box-m").stop().animate({height:liheg*lilist},1000);
+                $(this).html("收起地址"+liicon2);
         },function(){
-            $(".my-clearing .page-box-m").stop().animate({height:"40"},1000);
-            $(this).html("展开地址"+liicon);
+                $(".my-clearing .page-box-m").stop().animate({height:"40"},1000);
+                $(this).html("展开地址"+liicon);
         });
+        //huadongxianshi
+        $('.my-clearing .page-default').mousemove(function(){
+            $(this).find('.jc-hc').show();
+            $(this).find('.jc-hc').css("z-index","9999")
+            $(".header,.footer,.am-sticky-placeholder,.topbar,.header-new,.nav-new,.footernew").css("z-index","-1")
+        })
+        $('.my-clearing .page-default').mouseleave(function(){
+            $(this).find('.jc-hc').hide();
+            $(this).find('.jc-hc').css("z-index","")
+            $(".header,.footer,.am-sticky-placeholder,.topbar,.header-new,.nav-new,.footernew").css("z-index","")
+        });
+        $('.edit-act').click(function(){
+            $('.apt').show();
+            $('.jc-hc').hide();
+            $('.my-clearing .page-default').unbind("mouseleave")
+        });
+        $(".my-clearing .clase,.my-clearing .sh-bg").click(function(){
+
+            $('.apt').hide()
+            $('.my-clearing .page-default').mouseleave(function(){
+                $(this).find('.jc-hc').hide();
+                $(this).find('.jc-hc').css("z-index","")
+                $(".header,.footer,.am-sticky-placeholder,.topbar,.header-new,.nav-new,.footernew").css("z-index","")
+            });
+        })
     })();
     //
     (function(){
@@ -61,12 +86,12 @@ $(function(){
     })();
     //
     /*$('.my-order .extra-r>a').click(function(){
-     $(this).siblings('.active-pop').show();
-     $('.my-order .clase, .my-order .sh-bg').click(function(){
-     $(this).parents('.active-pop').hide();
-     })
-     return false;
-     });*/
+        $(this).siblings('.active-pop').show();
+        $('.my-order .clase, .my-order .sh-bg').click(function(){
+            $(this).parents('.active-pop').hide();
+        })
+        return false;
+    });*/
     //
     $('#act-q').click(function(){
         $(this).siblings('.list-express').slideToggle();
@@ -88,18 +113,9 @@ $(function(){
     $('.my-order .order-nav .layout-li li').click(function(){
         $(this).addClass('liul').siblings().removeClass('liul');
     })
-    //huadongxianshi
-    $('.my-clearing .page-default').mouseenter(function(){
-        $(this).find('.jc-hc').show();
-    })
-    $('.my-clearing .page-default').mouseleave(function(){
-        $(this).find('.jc-hc').hide();
-    });
-    //
-    $('.edit-act').click(function(){
-        $(this).parent().find('.apt').show();
 
-    });
+    //
+
     //
     $('.but-bil').click(function(){
         alert('sadasdsa')
@@ -142,9 +158,9 @@ $(function(){
     $('.my-kj .am-tabs-nav .ul-list li.items1').mouseenter(function(){
         $(this).addClass('active').siblings().removeClass('active')
     })
-    /*  var GradList = document.getElementById("quacorgrading").getElementsByTagName("input");*/
-    var GradList = $(".quacorgrading input");
-    for(var i=0;i < GradList.length;i++){
+  /*  var GradList = document.getElementById("quacorgrading").getElementsByTagName("input");*/
+      var GradList = $(".quacorgrading input");
+       for(var i=0;i < GradList.length;i++){
         GradList[i].onmouseover = function(){
             for(var Qi=0;Qi<GradList.length;Qi++){
                 GradList[Qi].class.backgroundPosition = '-36px -21px';
