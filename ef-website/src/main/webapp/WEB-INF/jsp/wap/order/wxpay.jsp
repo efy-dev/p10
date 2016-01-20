@@ -14,16 +14,16 @@
 <body style="z-index: -99999">
 <%--${redirect}--%>
 <%--<div class="packet ae">--%>
-    <%--<div class="efeiyi-lod ae">--%>
-        <%--<a class="efiyi-logo"></a>--%>
-        <%--<a class="eifyi-ld">--%>
-            <%--<div class="ld-img"><img src="<c:url value="/scripts/wap/images/jazq2.gif"/>"></div>--%>
-        <%--</a>--%>
-    <%--</div>--%>
+<%--<div class="efeiyi-lod ae">--%>
+<%--<a class="efiyi-logo"></a>--%>
+<%--<a class="eifyi-ld">--%>
+<%--<div class="ld-img"><img src="<c:url value="/scripts/wap/images/jazq2.gif"/>"></div>--%>
+<%--</a>--%>
+<%--</div>--%>
 <%--</div>--%>
 <%--<a id="showGiftCard" onclick="callpay();"--%>
-   <%--style=" width: 100%; float:left;text-align:center;margin-top: 10px;padding: 1rem 0.9rem;font-size: 1rem;border: 1px solid #ccc;background: #000;color: #fff;">--%>
-    <%--发起支付--%>
+<%--style=" width: 100%; float:left;text-align:center;margin-top: 10px;padding: 1rem 0.9rem;font-size: 1rem;border: 1px solid #ccc;background: #000;color: #fff;">--%>
+<%--发起支付--%>
 <%--</a>--%>
 
 <script>
@@ -58,7 +58,7 @@
                                 window.location.href = "http://www.efeiyi.com/giftReceive/${orderId}";
                                 </c:if>
                                 <c:if test="${not empty order.callback && order.orderType!='3'}">
-                                window.location.href = "${order.callback}";
+                                window.location.href = "http://${order.callback}";
                                 </c:if>
                                 <c:if test="${empty order.callback && order.orderType!='3'}">
                                 window.location.href = "http://www2.efeiyi.com/sharePage/productShare/${orderId}";
@@ -94,7 +94,7 @@
 
     _mvq.push(['$setGeneral', 'ordercreate', '', /*用户名*/ '', /*用户id*/ '']);
     _mvq.push(['$logConversion']);
-    _mvq.push(['$addOrder',/*订单号*/ '${order.serial}', /*订单金额*/ '${order.total-order.getOrderPayMoney()}']);
+    _mvq.push(['$addOrder', /*订单号*/ '${order.serial}', /*订单金额*/ '${order.total-order.getOrderPayMoney()}']);
     _mvq.push(['$addItem', /*订单号*/ '', /*商品id*/ '', /*商品名称*/ '', /*商品价格*/ '', /*商品数量*/ '', /*商品页url*/ '', /*商品页图片url*/ '']);
     _mvq.push(['$logData']);
 </script>
