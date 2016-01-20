@@ -54,6 +54,7 @@
       <c:if test="${not empty purchaseOrderGroupList&&fn:length(purchaseOrderGroupList)>0}">
       <ul class="product ae">
         <c:forEach items="${purchaseOrderGroupList}" var="purchaseOrderGroup">
+          <c:if test="${fn:length(purchaseOrderGroup.purchaseOrderProductList)>0}">
           <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup.myGroup.groupProduct.id}&groupId=${purchaseOrderGroup.myGroup.id}&memberId=${purchaseOrderGroup.groupMember.id}">
             <li>
               <div class="top">
@@ -115,6 +116,7 @@
               </div>
             </li>
           </a>
+          </c:if>
         </c:forEach>
       </ul>
       </c:if>
@@ -136,6 +138,7 @@
       <c:if test="${not empty purchaseOrderGroupList5&&fn:length(purchaseOrderGroupList5)>0}">
       <ul class="product ae">
           <c:forEach items="${purchaseOrderGroupList5}" var="purchaseOrderGroup5">
+            <c:if test="${fn:length(purchaseOrderGroup5.purchaseOrderProductList)>0}">
             <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup5.myGroup.groupProduct.id}&groupId=${purchaseOrderGroup5.myGroup.id}&memberId=${purchaseOrderGroup5.groupMember.id}">
               <li>
                 <div class="top">
@@ -164,6 +167,7 @@
                 </div>
               </li>
             </a>
+            </c:if>
           </c:forEach>
       </ul>
       </c:if>
@@ -184,6 +188,7 @@
       <c:if test="${not empty purchaseOrderGroupList7&&fn:length(purchaseOrderGroupList7)>0}">
       <ul class="product ae">
         <c:forEach items="${purchaseOrderGroupList7}" var="purchaseOrderGroup7">
+          <c:if test="${fn:length(purchaseOrderGroup7.purchaseOrderProductList)>0}">
           <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup7.myGroup.groupProduct.id}&groupId=${purchaseOrderGroup7.myGroup.id}&memberId=${purchaseOrderGroup7.groupMember.id}">
             <li>
               <div class="top">
@@ -217,6 +222,7 @@
               </div>
             </li>
           </a>
+          </c:if>
         </c:forEach>
         </c:if>
       </ul>
@@ -238,6 +244,7 @@
       <c:if test="${not empty purchaseOrderGroupList9&&fn:length(purchaseOrderGroupList9)>0}">
       <ul class="product ae">
         <c:forEach items="${purchaseOrderGroupList9}" var="purchaseOrderGroup9">
+          <c:if test="${fn:length(purchaseOrderGroup9.purchaseOrderProductList)>0}">
           <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup9.myGroup.groupProduct.id}&groupId=${purchaseOrderGroup9.myGroup.id}&memberId=${purchaseOrderGroup9.groupMember.id}">
             <li>
               <div class="top">
@@ -271,6 +278,7 @@
               </div>
             </li>
           </a>
+          </c:if>
         </c:forEach>
       </ul>
       </c:if>
