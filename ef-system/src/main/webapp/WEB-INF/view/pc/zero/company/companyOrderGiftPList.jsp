@@ -51,7 +51,7 @@
         <c:forEach items="${requestScope.pageInfo.list}" var="gift">
             <tr>
                 <td class="am-hide-sm-only"><a
-                        href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=${viewIdentify}&id=${gift.id}'/>">订单详情
+                        href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=${type}&id=${gift.id}'/>">订单详情
                 </a>
                     <br>
                     <%--<c:if test="${empty purchaseOrder.fatherPurchaseOrder}">--%>
