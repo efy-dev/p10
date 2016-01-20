@@ -110,7 +110,6 @@ public class GroupController {
             if (myGroup.getStatus().equals("1") && (list1.size() == myGroup.getGroupProduct().getMemberAmount())) {
                 myGroup.setStatus("4");
                 baseManager.saveOrUpdate(MyGroup.class.getName(), myGroup);
-                groupManager.sendSms(groupId, purchaseOrderId);
 
                 //成团，修改团购订单状态为待发货
                 XQuery xQuery = new XQuery("listPurchaseOrderGroup_default2", request);
@@ -120,7 +119,8 @@ public class GroupController {
                     purchaseOrderGroup.setOrderStatus("5");
                     baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(), purchaseOrderGroup);
                 }
-            }else if(myGroup.getStatus().equals("1") && (list1.size() > myGroup.getGroupProduct().getMemberAmount())){
+            }
+            if((myGroup.getStatus().equals("1")||myGroup.getStatus().equals("4")) && (list1.size() > 1)){
                 groupManager.sendSms(groupId, purchaseOrderId);
             }
         }

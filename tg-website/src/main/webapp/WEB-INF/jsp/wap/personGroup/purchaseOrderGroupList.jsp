@@ -57,7 +57,11 @@
           <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup.myGroup.groupProduct.id}&groupId=${purchaseOrderGroup.myGroup.id}&memberId=${purchaseOrderGroup.groupMember.id}">
             <li>
               <div class="top">
-                <span>${purchaseOrderGroup.purchaseOrderProductList.get(0).productModel.product.name}[${purchaseOrderGroup.purchaseOrderProductList.get(0).productModel.name}]</span>
+                <span>${purchaseOrderGroup.purchaseOrderProductList.get(0).productModel.product.name}
+                  <c:if test="${not empty purchaseOrderGroup.purchaseOrderProductList.get(0).productModel.name}">
+                    ${purchaseOrderGroup.purchaseOrderProductList.get(0).productModel.name}
+                  </c:if>
+                </span>
                 <i class=" pq"></i>
                 <c:if test="${purchaseOrderGroup.myGroup.status==1}">
                   <span>组团中</span>
@@ -135,7 +139,7 @@
             <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup5.myGroup.groupProduct.id}&groupId=${purchaseOrderGroup5.myGroup.id}&memberId=${purchaseOrderGroup5.groupMember.id}">
               <li>
                 <div class="top">
-                  <span>${purchaseOrderGroup5.purchaseOrderProductList.get(0).productModel.product.name}[${purchaseOrderGroup5.purchaseOrderProductList.get(0).productModel.name}]</span>
+                  <span>${purchaseOrderGroup5.purchaseOrderProductList.get(0).productModel.product.name}${purchaseOrderGroup5.purchaseOrderProductList.get(0).productModel.name}</span>
                   <i class=" pq"></i>
                   <span>待发货</span>
                 </div>
@@ -183,7 +187,7 @@
           <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup7.myGroup.groupProduct.id}&groupId=${purchaseOrderGroup7.myGroup.id}&memberId=${purchaseOrderGroup7.groupMember.id}">
             <li>
               <div class="top">
-                <span>${purchaseOrderGroup7.purchaseOrderProductList.get(0).productModel.product.name}[${purchaseOrderGroup7.purchaseOrderProductList.get(0).productModel.name}]</span>
+                <span>${purchaseOrderGroup7.purchaseOrderProductList.get(0).productModel.product.name}${purchaseOrderGroup7.purchaseOrderProductList.get(0).productModel.name}</span>
                 <i class=" pq"></i>
                 <span>待收货</span>
               </div>
@@ -237,7 +241,7 @@
           <a href="<c:url value='/group/joinGroup.do'/>?groupProductId=${purchaseOrderGroup9.myGroup.groupProduct.id}&groupId=${purchaseOrderGroup9.myGroup.id}&memberId=${purchaseOrderGroup9.groupMember.id}">
             <li>
               <div class="top">
-                <span>${purchaseOrderGroup9.purchaseOrderProductList.get(0).productModel.product.name}[${purchaseOrderGroup9.purchaseOrderProductList.get(0).productModel.name}]</span>
+                <span>${purchaseOrderGroup9.purchaseOrderProductList.get(0).productModel.product.name}${purchaseOrderGroup9.purchaseOrderProductList.get(0).productModel.name}</span>
                 <i class=" pq"></i>
                 <span>交易成功</span>
               </div>
