@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -39,7 +40,7 @@ public class PurchaseOrderCommentController extends BaseController {
                 PurchaseOrderComment purchaseOrderComment =(PurchaseOrderComment) baseManager.getObject(PurchaseOrderComment.class.getName(),ids[i]);
                 PurchaseOrderBusinessReply purchaseOrderBusinessReply = new PurchaseOrderBusinessReply();
 
-                purchaseOrderBusinessReply.setReply(reply);
+                purchaseOrderBusinessReply.setReply(URLDecoder.decode(reply, "UTF-8"));
                 purchaseOrderBusinessReply.setPurchaseOrderComment(purchaseOrderComment);
                 purchaseOrderBusinessReply.setCreateDatetime(format.parse(date));
                 baseManager.saveOrUpdate(PurchaseOrderBusinessReply.class.getName(),purchaseOrderBusinessReply);
