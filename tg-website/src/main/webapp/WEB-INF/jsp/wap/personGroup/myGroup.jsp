@@ -111,14 +111,9 @@
                 </c:if>
               </c:forEach>
               <p>团长:${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
-              <c:if test="${member.myGroup.status=='1'}">
+              <c:if test="${member.myGroup.status=='1'||member.myGroup.status=='4'}">
                <span>
                 进行中
-               </span>
-              </c:if>
-              <c:if test="${member.myGroup.status!='1'}">
-               <span>
-                拼团结束
                </span>
               </c:if>
             </li>
