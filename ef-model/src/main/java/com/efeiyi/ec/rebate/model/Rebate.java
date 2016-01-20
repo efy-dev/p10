@@ -16,6 +16,7 @@ public class Rebate {
     private String nickname;
     private String headurl;
     private Date createDateTime;
+    private String unionid;
     private String status;
 
     @Id
@@ -60,6 +61,14 @@ public class Rebate {
 
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
+    }
+    @Column(name = "unionid")
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
     }
 
     @Column(name = "status")
