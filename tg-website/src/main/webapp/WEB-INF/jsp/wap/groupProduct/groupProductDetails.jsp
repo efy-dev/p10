@@ -16,7 +16,11 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</title>
+  <title>${groupProduct.productModel.product.name}
+    <c:if test="${(groupProduct.productModel.product.productModelList.size()>1)&&(null!=groupProduct.productModel.name)&&(''!=groupProduct.productModel.name)}">
+      [${groupProduct.productModel.name}]
+    </c:if>
+  </title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -100,8 +104,12 @@
   <div class="iwill ae">
     <div class="page ae"><div class="left"><p>${groupProduct.memberAmount}人起成团</p></div><div class="right"><p>成团时间${groupProduct.groupPurchaseTime}天</p></div></div>
     <div class="txt3 ae"><span>开团后，该团若在规定时间内成功组团，就可以享受团购价，若组团失败，则系统将退还钱款。</span></div>
-    <a href="<c:url value="/group/groupBuy.do?groupProductId=${groupProduct.id}"/>" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
-
+    <c:if test="${groupProduct.status==1}">
+      <a href="<c:url value="/group/groupBuy.do?groupProductId=${groupProduct.id}"/>" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
+    </c:if>
+    <c:if test="${groupProduct.status==0}">
+      <a href="#" class="btn">该&nbsp;商&nbsp;品&nbsp;已&nbsp;下&nbsp;架</a>
+    </c:if>
   </div>
   <!--拼团玩法-->
   <div class="method addmethod ae">
