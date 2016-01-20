@@ -115,7 +115,12 @@
     function htmlGenerater(it /**/) {
         var out = '';
         for (var i = 0; i < it.length; i++) {
-            out += '<li class="ae"> <div class="colonel-pic ae"><a href="<c:url value="/product/groupProduct/"/>' + (it[i].id) + '"><img src="http://pro.efeiyi.com/' + (it[i].productModel.productModel_url) + '@!wap-product-pic"></a> <div class="c-page"><span><a href="javascript:void(0)">' +it[i].productName + '[' + (it[i].productModel.name) + ']' + '</a></span> </div> </div> <ul class="price ae"> <li><s>原价:' + (it[i].productModel.price) + '元</s></li> <li>团购价:' + (it[i].groupPrice) + '元</li> <li>' + (it[i].memberAmount) + '人成团</li> </ul></li>';
+            out += '<li class="ae"> <div class="colonel-pic ae"><a href="<c:url value="/product/groupProduct/"/>' + (it[i].id) + '"><img src="http://pro.efeiyi.com/' + (it[i].productModel.productModel_url) + '@!wap-product-pic"></a> <div class="c-page"><span><a href="javascript:void(0)">';
+            out += it[i].productName;
+            if (null != it[i].productModel.name && !""==it[i].productModel.name){
+                out += '[' + (it[i].productModel.name) + ']';
+            }
+            out += '</a></span> </div> </div> <ul class="price ae"> <li><s>原价:' + (it[i].productModel.price) + '元</s></li> <li>团购价:' + (it[i].groupPrice) + '元</li> <li>' + (it[i].memberAmount) + '人成团</li> </ul></li>';
         }
         return out;
     }
