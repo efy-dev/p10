@@ -72,14 +72,14 @@
           <li>
             <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!wap-product-pic"><div class="c-page"><span>${groupProduct.productModel.product.name}
               <c:if test="${(groupProduct.productModel.product.productModelList.size()>1)&&(null!=groupProduct.productModel.name)&&(''!=groupProduct.productModel.name)}">
-                [${groupProduct.productModel.name}]
+                ${groupProduct.productModel.name}
               </c:if>
               </span></div></div>
           </li>
           <c:forEach items="${groupProduct.productModel.product.productPictureList}" var="picture">
             <c:if test="${picture.status=='1'&&picture.productModel.id==groupProduct.productModel.id}">
                     <li >
-                      <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"><div class="c-page"><span>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</span></div></div>
+                      <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}</span></div></div>
                     </li>
             </c:if>
     </c:forEach>
@@ -151,7 +151,17 @@
     <div class="c-content ae">
       <div class="co-page">
         <div class="introduce ae">
-          ${groupProduct.productModel.product.productDescription.content}
+          <c:if test="${not empty groupProduct.productModel.product.productDescription.content}">
+            ${groupProduct.productModel.product.productDescription.content}
+          </c:if>
+          <c:if test="${not empty groupProduct.productModel.product.productPictureList&&fn:length(groupProduct.productModel.product.productPictureList)>0&&empty groupProduct.productModel.product.productDescription.content}">
+            <c:forEach items="${groupProduct.productModel.product.productPictureList}" var="productPicture">
+              <p>
+                <img style="margin:0" src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!pc-detail-view"/>
+              </p>
+            </c:forEach>
+
+          </c:if>
           <div class="button ae"><a href="http://www.efeiyi.com/product/productModel/${groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
         </div>
         <a class="efeiyi-btn" href="<c:url value="/group/protocol"/>">e飞蚁拼团协议<i class="efiyi"></i></a>

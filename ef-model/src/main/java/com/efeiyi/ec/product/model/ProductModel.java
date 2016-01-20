@@ -34,6 +34,7 @@ public class ProductModel implements Serializable {
     private Integer popularityAmount;
     private Integer saleAmount;
     private Double weight;
+    private String freeDelivery;//是否包邮 1:包邮 0:不包邮
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
     public List<ProductPicture> getProductPictureList() {
@@ -201,5 +202,14 @@ public class ProductModel implements Serializable {
 
     public void setWeight(Double weight) {
         this.weight = weight;
+    }
+
+    @Column(name = "free_delivery")
+    public String getFreeDelivery() {
+        return freeDelivery;
+    }
+
+    public void setFreeDelivery(String freeDelivery) {
+        this.freeDelivery = freeDelivery;
     }
 }

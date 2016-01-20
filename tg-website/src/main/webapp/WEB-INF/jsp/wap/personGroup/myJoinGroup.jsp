@@ -45,7 +45,7 @@
         <a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
             <li>
                 <c:if test="${fn:length(member.myGroup.groupProduct.productModel.product.productModelList)>1}">
-                    <p>${member.myGroup.groupProduct.productModel.product.name}[${member.myGroup.groupProduct.productModel.name}]</p>
+                    <p>${member.myGroup.groupProduct.productModel.product.name}${member.myGroup.groupProduct.productModel.name}</p>
                 </c:if>
                 <c:if test="${fn:length(member.myGroup.groupProduct.productModel.product.productModelList)<=1}">
                     <p>${member.myGroup.groupProduct.productModel.product.name}</p>
