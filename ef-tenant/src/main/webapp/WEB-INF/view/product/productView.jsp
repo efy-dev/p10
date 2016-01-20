@@ -233,13 +233,14 @@
                         <tbody>
                         <tr>
                             <th class="am-text-center" width="10%">预览</th>
-                            <th class="am-text-center" width="16%">规格编号</th>
-                            <th class="am-text-center" width="16%">规格名称</th>
+                            <th class="am-text-center" width="14%">规格编号</th>
+                            <th class="am-text-center" width="14%">规格名称</th>
                             <th class="am-text-center" width="15%">属性</th>
-                            <th class="am-text-center" width="11%">库存</th>
-                            <th class="am-text-center" width="11%">价格(元)</th>
-                            <th class="am-text-center" width="11%">市场价格(元)</th>
-                            <th class="am-text-center" width="10%">重量(kg)</th>
+                            <th class="am-text-center" width="7%">库存</th>
+                            <th class="am-text-center" width="9%">价格(元)</th>
+                            <th class="am-text-center" width="12%">市场价格(元)</th>
+                            <th class="am-text-center" width="9%">重量(kg)</th>
+                            <th class="am-text-center" width="10%">是否包邮</th>
                         </tr>
                         <c:forEach var="model" items="${object.productModelList}">
                             <tr>
@@ -283,6 +284,14 @@
                                 </td>
                                 <td align="center">
                                         ${model.weight}
+                                </td>
+                                <td align="center">
+                                    <c:if test="${model.freeDelivery=='1'}">
+                                        是
+                                    </c:if>
+                                    <c:if test="${model.freeDelivery=='0'}">
+                                        否
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>

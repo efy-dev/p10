@@ -32,7 +32,7 @@ public class PurchaseOrderCommentController extends BaseController {
     @RequestMapping("/reply.do")
     @ResponseBody
     public String reply(String reply,HttpServletRequest request){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String date = format.format(new Date());
         String [] ids = request.getParameterValues("ids[]");
         try {
