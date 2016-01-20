@@ -3,6 +3,7 @@ package com.efeiyi.ec.system.product.service;
 import com.efeiyi.ec.master.model.MasterWorkRecommended;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductDescription;
+import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 
 import java.util.List;
@@ -29,5 +30,7 @@ public interface ProductManager {
     Integer productPictureSort1(String productId);
 
     void changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort);
+
+    ProductPicture setModelPicture(String modelId, String pictureId,String oldModelId) throws  Exception;
 
 }

@@ -44,7 +44,12 @@
     <c:forEach items="${groupJoinList}" var="member" varStatus="rec">
         <a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
             <li>
-                <p>${member.myGroup.groupProduct.productModel.product.name}[${member.myGroup.groupProduct.productModel.name}]</p>
+                <c:if test="${fn:length(member.myGroup.groupProduct.productModel.product.productModelList)>1}">
+                    <p>${member.myGroup.groupProduct.productModel.product.name}[${member.myGroup.groupProduct.productModel.name}]</p>
+                </c:if>
+                <c:if test="${fn:length(member.myGroup.groupProduct.productModel.product.productModelList)<=1}">
+                    <p>${member.myGroup.groupProduct.productModel.product.name}</p>
+                </c:if>
                 <p>${member.myGroup.createDateTime}</p>
                 <c:if test="${member.myGroup.status=='1'}">
                     <p>${member.myGroup.groupMemberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>

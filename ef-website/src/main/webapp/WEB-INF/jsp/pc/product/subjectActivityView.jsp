@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>【 精选专题 】 -e飞蚁</title>
+    <title>${subject.name}</title>
     <meta name="description" content="">
 </head>
 <body>
@@ -41,12 +41,13 @@ ${subject.subjectDescription.content}
             });
         })();
 
-        var currentButton = "0"; //0代表立即购买   1代表送礼给他
+        var currentButton = "0";
 
         (function(){
-            $("title").html("“华韵礼遇·中国年”大礼包");$("meta[name=description]").attr("content","e飞蚁为中国传统文化打造系列礼物，为您送上原汁原味的节庆文化。");
+//            $("title").html("“华韵礼遇·中国年”大礼包");$("meta[name=description]").attr("content","e飞蚁为中国传统文化打造系列礼物，为您送上原汁原味的节庆文化。");
             $('#btn-buy').on('click',function(){
                 currentButton="0";
+                $(".dialog .con .title").html("请选择数量后点击确认按钮");
                 $('.dialog').each(function(){
                     $(this).show().addClass('dialog-buy');
                     $(this).find('.info').hide();
@@ -61,6 +62,7 @@ ${subject.subjectDescription.content}
             $('#btn-gift').on('click',function(){
                 currentButton="1";
                 $("#table").html("");
+                $(".dialog .con .title").html("请选择数量后扫码下单");
                 generateQrcode("http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/1");
                 $('.dialog').each(function(){
                     $(this).addClass('dialog-gift').show();
@@ -116,19 +118,7 @@ ${subject.subjectDescription.content}
             }
         })();
     });
-
 </script>
-<script src="http://www.efeiyi.com/resources/jquery/jquery.qrcode.min.js"></script>
-<script>
-    function generateQrcode(url){
-        $('#table').qrcode({
-            render: "div",
-            text: url,
-            foreground:'#ff0000'
-        });
-    }
-</script>
-
 
 
 </body>

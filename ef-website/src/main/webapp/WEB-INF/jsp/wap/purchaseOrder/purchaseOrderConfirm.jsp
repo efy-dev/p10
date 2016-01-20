@@ -98,15 +98,15 @@
 
                             <div class="bd info">
                                 <p class="text">${product.productModel.product.name}
-                                    <c:if test="${null!=product.productModel.name && ''!=product.productModel.name}">
+                                    <c:if test="${product.productModel.product.productModelList.size()>1}">
                                         [${product.productModel.name}]
                                     </c:if>
-                                        <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
+                                    <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
                                         <%--[--%>
                                         <%--<c:forEach items="${product.productModel.productPropertyValueList}"--%>
-                                        <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                                                   <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
                                         <%--]--%>
-                                        <%--</c:if>--%>
+                                    <%--</c:if>--%>
                                 </p>
 
                                 <p class="price"><em>￥</em><span>${product.purchasePrice}</span></p>
@@ -285,9 +285,9 @@
         <ul class="ul-list" id="ul-list">
         </ul>
 
-        <div class="bd">
-            <a onclick="yhq();" class="cart-btn" id="yhq-btn" title="确定">确定</a>
-        </div>
+    <div class="bd add-new-btn">
+        <a onclick="yhq();" class="cart-btn" id="yhq-btn" title="确定">确定</a>
+    </div>
     </div>
     <div class="overbg"></div>
 </div>
@@ -379,10 +379,10 @@
             ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
             }, "post")
         }
-
     }
 
     function yhq() {
+        $(".yhq").hide();
         var couponid = null;
         $("input:radio").each(function () {
             if (this.checked) {
@@ -415,9 +415,9 @@
                         $(".yhq").hide();
                         if(t_price<parseFloat(${consumer.balance})){
                             $("#usefulBalance").html(t_price.toFixed(2));
-                            $("#balance").html("0.00");
-                            $("#banlanceCheckbox").attr("checked",false);
                         }
+                        $("#balance").html("0.00");
+                        $("#banlanceCheckbox").attr("checked",false);
                     }
                 },
 

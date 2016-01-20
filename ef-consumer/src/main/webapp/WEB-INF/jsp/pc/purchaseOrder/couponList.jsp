@@ -294,7 +294,7 @@ function exchangeCoupon() {
 }
 
 $('#coupon-dialog').click(function(){
-    $('.topbar,.header,.footer,.nav-new').css('z-index','-1');
+    $('.topbar,.header,.footer').css('z-index','-1');
     $('#tk').show();
     $('#tk').find('.no').click(function(){
         $('#tk').hide();

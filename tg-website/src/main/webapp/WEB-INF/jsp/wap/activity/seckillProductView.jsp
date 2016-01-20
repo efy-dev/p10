@@ -53,7 +53,8 @@
     <!--//End--am-slider-->
     <div class="bd details seckill">
         <div class="bd des-title">
-            <strong class="bd txt">${seckillProduct.productModel.product.name}[${seckillProduct.productModel.name}]</strong>
+            <strong class="bd txt">${seckillProduct.productModel.product.name}
+                <c:if test="${not empty seckillProduct.productModel.name}">[${seckillProduct.productModel.name}]</c:if></strong>
             <a href="#分享" class="share" style="right: 0px;">
                 <i class="icon icon-share"></i>
 
@@ -126,7 +127,9 @@
 
             <div class="s s5"><span>秒杀规则：</span>每件商品限抢购一件，下单成功后请在15分钟内完成支付</div>
             <c:if test="${!empty seckillProduct.productModel.product.tenant}">
-                <div class="s s6"><span>服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：</span>由四川省渠县刘氏竹编工艺有限公司（四川成都）发货并提供服务
+                <div class="s s6">
+                    <span>服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：</span>由由 ${seckillProduct.productModel.product.bigTenant.name}[${seckillProduct.productModel.product.bigTenant.address}]
+                    发货并提供售后服务
                 </div>
             </c:if>
             <c:if test="${miaoStatus=='2'}">
@@ -256,11 +259,11 @@
         }, "post")
     }
 
-    function dateFormat(time){
+    function dateFormat(time) {
         var out = ""
-        if(time<10){
-            out = "0"+time;
-        }else{
+        if (time < 10) {
+            out = "0" + time;
+        } else {
             out = time;
         }
         return out;

@@ -275,14 +275,14 @@
                     <span style="padding: 10px;">
 
 
-                            <input type="button"
-                                   onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_default&view=${view}&tenantId=${object.tenant.id}')"
+                            <input type="button" isOnlick="0"
+                                   onclick="toSubmit(this,'redirect:/basic/xm.do?qm=plistProduct_default&view=${view}&tenantId=${object.tenant.id}')"
                                    class="am-btn am-btn-primary" value="完成,并返回列表"/>
 
                     </span>
                       <span style="padding: 10px;">
-                       <input type="button"
-                              onclick="toSubmit('redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')"
+                       <input type="button" isOnlick="0"
+                              onclick="toSubmit(this,'redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')"
                               class="am-btn am-btn-primary" value="保存,并查看商品详情"/>
                     </span>
                 </div>
@@ -346,7 +346,8 @@
     }
 
     //提交
-    function toSubmit(result) {
+    function toSubmit(obj,result) {
+        var isClick = $(obj).attr("isOnclick");
         $("input[name='resultPage']").val(result);
         var f = true;
         $("tr[status!='0'] input[name*='eight']").each(function(){
@@ -357,7 +358,12 @@
         });
         if(f) {
             if ($("#productModel tr[flag='default']").length == 1) {
-                $("form").submit();
+                if(isClick=="0") {
+                    $(obj).attr("isOnclick","1");
+                    $("form").submit();
+                }else{
+                    alert("正在保存...");
+                }
             } else {
                 alert("保存失败!");
             }

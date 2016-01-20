@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.log;
 
+import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.system.log.service.LogManager;
 import com.ming800.core.does.model.Do;
 import org.aspectj.lang.JoinPoint;
@@ -67,19 +68,23 @@ public class ServiceAspect {
     @AfterReturning("aspect()")
     public void afterReturn(JoinPoint joinPoint){
         String operation  =joinPoint.getSignature().getName();
-
-            String t = joinPoint.getArgs()[0].toString();
-            String targetName = t;
-            if (t != null) {
-                if (t.indexOf("Do@") != -1) {
-                    Do tempDo = (Do) joinPoint.getArgs()[0];
-                    t = tempDo.getXentity().getModel();
-                }
-                    if(t.indexOf("@")==-1){
-                        targetName = t.substring(t.lastIndexOf(".")+1);
-                    }else {
-                        targetName = t.substring(t.lastIndexOf(".") + 1, t.indexOf("@"));
-                }
+            String targetName = joinPoint.getArgs()[joinPoint.getArgs().length-1].toString();
+            String detail = "0";
+//            for(int i =0;i<joinPoint.getArgs().length;i++){
+//                Object o = joinPoint.getArgs()[i];
+//                System.out.println(o.toString());
+//            }
+//            String targetName = t;
+            if (targetName != null) {
+//                if (t.indexOf("Do@") != -1) {
+//                    Do tempDo = (Do) joinPoint.getArgs()[0];
+//                    t = tempDo.getXentity().getModel();
+//                }
+//                    if(t.indexOf("@")==-1){
+//                        targetName = t.substring(t.lastIndexOf(".")+1);
+//                    }else {
+//                        targetName = t.substring(t.lastIndexOf(".") + 1, t.indexOf("@"));
+//                }
                 try {
                     logManager.saveLog(targetName,operation);
                 }catch (ParseException pe){

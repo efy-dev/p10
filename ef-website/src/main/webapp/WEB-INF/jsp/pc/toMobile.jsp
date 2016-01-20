@@ -39,7 +39,6 @@
 <script>
 
     $('.codebg').qrcode({
-        render: "div",
         text: "${url}",
         width: "220",
         height: "220",

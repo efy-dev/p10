@@ -11,7 +11,8 @@
   <mapping path="/**" decorator="/layouts/mainTemplate.jsp"/>
   <mapping path="/subject/activity/**" decorator="/layouts/empty.jsp"/>
   <mapping path="/toMobile.do" decorator="/layouts/empty.jsp"/>
-
+  <mapping path="/yhq.do" decorator="/layouts/empty.jsp"/>
+  <mapping path="/getYhq.do" decorator="/layouts/empty.jsp"/>
   <mapping path="/filterSearch.do" decorator="/layouts/filterTemplate.jsp" /><!--检索使用请勿删除-->
   <mapping path="/AjaxSearch.do" exclue="true" /><!--检索使用请勿删除-->
 

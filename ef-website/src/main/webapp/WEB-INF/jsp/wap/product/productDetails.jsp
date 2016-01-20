@@ -162,7 +162,7 @@
 												${purchaseOrderProduct.purchaseOrder.user.getUsername()}
 											</c:set>
 											<p class="name">${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
-												<%--<p class="time">2015-10-12   16:16</p>--%>
+												<p class="time">${fn:substring(purchaseOrderProduct.purchaseOrderComment.createDatetime,0 ,11 )}   ${fn:substring(purchaseOrderProduct.purchaseOrderComment.createDatetime,11 ,19 )}</p>
 										</div>
 										<div class="seller">
 											<p class="ask">
@@ -171,6 +171,12 @@
 												</c:if>
 											</p>
 										</div>
+								    <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply}">
+										<div class="store">
+											<p class="s-title">店主回复</p>
+											<p class="s-info">${purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply.reply}</p>
+										</div>
+									</c:if>
 									</li>
 								</c:if>
 							</c:forEach>

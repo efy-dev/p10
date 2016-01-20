@@ -2,7 +2,6 @@ package com.efeiyi.ec.consumer.order.controller;
 
 import com.efeiyi.ec.activity.group.model.PurchaseOrderGroup;
 import com.efeiyi.ec.balance.model.BalanceRecord;
-import com.efeiyi.ec.consumer.organization.model.SendCode;
 import com.efeiyi.ec.consumer.organization.model.SmsProvider;
 import com.efeiyi.ec.consumer.organization.model.YunPianSmsProvider;
 import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;
@@ -12,22 +11,16 @@ import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.*;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
-import com.ming800.core.util.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.persistence.PreUpdate;
-import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +47,7 @@ public class PurchaseOrderController {
     public String listPruchaseOrder(HttpServletRequest request, Model model) throws Exception {
         String orderStatus = request.getParameter("status");
         model.addAttribute("status", orderStatus);
-        XQuery xQuery = null;
+        XQuery xQuery;
 
         if (orderStatus == null || orderStatus == "" || orderStatus == "0") {
             xQuery = new XQuery("plistPurchaseOrder_default", request, 10);
@@ -83,18 +76,23 @@ public class PurchaseOrderController {
      * @return
      */
     @RequestMapping({"/myEfeiyi/view/{orderId}"})
-    public String viewPurchaseOrder(Model model, @PathVariable String orderId, HttpServletRequest request) {
-        List dl = new ArrayList();
+    public String viewPurchaseOrder(Model model, @PathVariable String orderId) {
         double couponPrice = 0;
+        String spendBalance="0";
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
         model.addAttribute("coupon", "0");
+        model.addAttribute("balance","0");
         if (purchaseOrder.getOrderStatus().equals("1") || purchaseOrder.getOrderStatus().equals("17")) {
             PurchaseOrderPayment purchaseOrderPaymentTemp = purchaseOrder.getPurchaseOrderPaymentList().get(0);
             for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
                 if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
                     couponPrice += purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice();
                     model.addAttribute("coupon", "1");
+                }
+                if(purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")){
+                   spendBalance = purchaseOrderPaymentDetailsTemp.getMoney().toString();
+                    model.addAttribute("balance","1");
                 }
             }
         } else {
@@ -105,6 +103,11 @@ public class PurchaseOrderController {
                             couponPrice += purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice();
                             model.addAttribute("coupon", "1");
                         }
+                        if(purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")){
+                            spendBalance = purchaseOrderPaymentDetailsTemp.getMoney().toString();
+                            model.addAttribute("balance","1");
+
+                        }
                     }
 
                 }
@@ -112,6 +115,7 @@ public class PurchaseOrderController {
             }
         }
         model.addAttribute("couponPrice", couponPrice);
+        model.addAttribute("spendBalance", spendBalance);
 
         if (purchaseOrder.getPurchaseOrderDeliveryList() != null && !purchaseOrder.getPurchaseOrderDeliveryList().isEmpty()) {
 
@@ -181,6 +185,18 @@ public class PurchaseOrderController {
             baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
 
         }
+        //订单取消使用的卡券还原
+        PurchaseOrderPayment purchaseOrderPaymentTemp = purchaseOrder.getPurchaseOrderPaymentList().get(0);
+        for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
+            if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
+                Coupon coupon= purchaseOrderPaymentDetailsTemp.getCoupon();
+                coupon.setStatus("1");
+                baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
+            }
+
+        }
+
+
         return "redirect:/order/myEfeiyi/list.do";
     }
 

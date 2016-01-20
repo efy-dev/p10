@@ -288,6 +288,15 @@
                                         <div class="txt">
                                             <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
                                                 ${purchaseOrderProduct.purchaseOrderComment.content}
+                                                <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply}">
+                                                    <div class=" hotel ae">
+                                                        <p><strong>[店家回复]</strong>${purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply.reply}</p>
+                                                        <div class="time ae" >
+                                                            <span>${fn:substring(purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply.createDatetime,0 ,11 )}</span>
+                                                            <span>${fn:substring(purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply.createDatetime,11 ,19 )}</span>
+                                                        </div>
+                                                    </div>
+                                                </c:if>
                                             </c:if>
                                         </div>
                                         <div class="star">
@@ -485,7 +494,6 @@
         var url = "http://www.efeiyi.com/order/giftBuy/${productModel.id}/"+t;
         $("#native").html("");
         $('#native').qrcode({
-            render: "div",
             text: url,
 //            width: 172,
 //            height: 184

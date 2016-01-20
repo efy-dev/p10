@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-<script src="/scripts/js/jquery-1.4.2.min.js"></script>
+<%--<script src="/scripts/js/jquery-1.4.2.min.js"></script>--%>
 <div class="wr wh">
     <!--结算-->
     <div class="my-clearing">
@@ -107,11 +107,6 @@
                     <span>${address.district.name}</span>
                     <span>${address.details}</span>
                     <span>${address.phone}</span>
-                    <%--<div class="jc-hc" style="display: none;height: 40px;">--%>
-                        <%--<a href="#">删除</a>--%>
-                        <%--<a href="#"  class="edit-act">编辑</a>--%>
-                        <%--<a href="#">设为默认地址</a>--%>
-                    <%--</div>--%>
                 </div>
             </c:forEach>
             </div>
@@ -180,7 +175,7 @@
 
                                             <p><a href="/product/productModel/${product.productModel.id}"
                                                   target="_blank">${product.productModel.product.name}
-                                                <c:if test="${null!=product.productModel.name && ''!=product.productModel.name}">
+                                                <c:if test="${product.productModel.product.productModelList.size()>1}">
                                                     [${product.productModel.name}]
                                                 </c:if>
                                                     <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
@@ -311,6 +306,7 @@
     function submitOrder(element, orderId) {
         var messageObject = new Object();
         var balance = $("#balance").text();
+        var finalPrice = $("#finalPrice").text();
         $("input[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
         })
@@ -357,12 +353,13 @@
                                     });
                                     ga('send', 'pageview');
 
-
-                                    showChooseConfirm("提示", "是否支付成功？", function () {
-                                        window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
-                                    }, function () {
-                                        window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
-                                    })
+                                    if(finalPrice!=0){
+                                        showChooseConfirm("提示", "是否支付成功？", function () {
+                                            window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
+                                        }, function () {
+                                            window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
+                                        })
+                                    }
                                 }else{
                                     showAlert("提示","抱歉，余额不足！")
                                 }
@@ -543,9 +540,9 @@
                     var finalPrice = parseFloat(data["finalPrice"]);
                     if(finalPrice<parseFloat(${consumer.balance})){
                         $("#usefulBalance").html(finalPrice.toFixed(2));
-                        $("#balance").html("0.00");
-                        $("#banlanceCheckbox").attr("checked",false);
                     }
+                    $("#balance").html("0.00");
+                    $("#banlanceCheckbox").attr("checked",false);
                 }
                 ajaxRequest("<c:url value="/order/getPurchaseOrderPrice.do"/>", param, success, function () {
                 }, "post");

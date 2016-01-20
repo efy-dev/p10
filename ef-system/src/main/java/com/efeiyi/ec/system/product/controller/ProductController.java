@@ -380,6 +380,7 @@ public class ProductController extends BaseController {
 
 
         ProductModel tempProductModel = null;
+        String tempStatus = status;
         try {
 
             ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
@@ -395,7 +396,7 @@ public class ProductController extends BaseController {
             }else {
                 modelId = "0";
             }
-            if("2".equals(status)){
+            if("1".equals(status)){
 
                 tempProductModel.setProductModel_url(productPicture.getPictureUrl());
                 baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
@@ -409,14 +410,16 @@ public class ProductController extends BaseController {
                     picture.setStatus("1");
                     baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
                 }
-            }else if("1".equals(status)){
+                tempStatus = "2";
+            }else if("2".equals(status)){
                 tempProductModel.setProductModel_url(null);
                 baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
                 productPicture.setProductModel(tempProductModel);
+                tempStatus = "1";
             }
 
 
-            productPicture.setStatus(status);
+            productPicture.setStatus(tempStatus);
 
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
         } catch (Exception e) {
@@ -476,20 +479,21 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/setModelPicture.do")
     @ResponseBody
-    public String setModelPicture(String modelId, String pictureId, HttpServletRequest request) {
+    public String setModelPicture(String modelId, String pictureId,String oldModelId, HttpServletRequest request) {
 
         ProductPicture productPicture = null;
         try {
-            productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), pictureId);
-            if ("0".equals(modelId)) {
-//                productPicture.setProductModel(null);
-            } else {
-                ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
-    //            productModel.setProductModel_url(productPicture.getPictureUrl());
-    //            baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
-                productPicture.setProductModel(productModel);
-            }
-            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
+//            productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), pictureId);
+//            if ("0".equals(modelId)) {
+////                productPicture.setProductModel(null);
+//            } else {
+//                ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
+//    //            productModel.setProductModel_url(productPicture.getPictureUrl());
+//    //            baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
+//                productPicture.setProductModel(productModel);
+//            }
+//            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
+            productPicture = productManager.setModelPicture(modelId,pictureId,oldModelId);
         } catch (Exception e) {
             e.printStackTrace();
         }
