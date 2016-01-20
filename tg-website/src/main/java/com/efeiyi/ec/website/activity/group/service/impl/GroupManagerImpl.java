@@ -9,6 +9,7 @@ import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.activity.group.service.GroupManager;
 import com.efeiyi.ec.website.activity.group.service.PurchaseOrderGroupManager;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
+import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.PConst;
 import org.springframework.stereotype.Service;
 
@@ -131,14 +132,8 @@ public class GroupManagerImpl implements GroupManager {
                 groupMember.setCreateDateTime(new Date());
                 baseManager.saveOrUpdate(GroupMember.class.getName(), groupMember);
 
-                myGroup.getGroupMemberList().add(groupMember);
-            }
-
-            if (myGroup.getStatus().equals("1") && (myGroup.getGroupMemberList().size() == myGroup.getGroupProduct().getMemberAmount())) {
-                myGroup.setStatus("4");
-                baseManager.saveOrUpdate(MyGroup.class.getName(), myGroup);
                 return true;
-            } else {
+            }else {
                 return false;
             }
         } else {
@@ -165,15 +160,15 @@ public class GroupManagerImpl implements GroupManager {
         String left = "";
         String memberLeft = "";
         if (leftDay > 0) {
-            left = leftDay + "��" + leftHour + "ʱ" + leftMin + "��";
+            left = leftDay + "天" + leftHour + "时" + leftMin + "分";
         } else {
             if (leftHour > 0) {
-                left = leftHour + "ʱ" + leftMin + "��";
+                left = leftHour + "时" + leftMin + "分";
             } else {
                 if (leftMin > 0) {
-                    left = leftMin + "��";
+                    left = leftMin + "分";
                 } else {
-                    left = "0��";
+                    left = "0分";
                 }
 
             }

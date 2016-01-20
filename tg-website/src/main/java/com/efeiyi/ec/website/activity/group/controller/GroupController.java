@@ -99,17 +99,30 @@ public class GroupController {
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
         boolean flag = groupManager.updateGroup(groupId, memberId, purchaseOrderId);
+
+
         if (flag) {
-            //成团，修改团购订单状态为待发货
-            XQuery xQuery = new XQuery("listPurchaseOrderGroup_default2", request);
-            xQuery.put("myGroup_id", groupId);
-            List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
-            for (PurchaseOrderGroup purchaseOrderGroup : list) {
-                purchaseOrderGroup.setOrderStatus("5");
-                baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(), purchaseOrderGroup);
+            MyGroup myGroup = (MyGroup) baseManager.getObject(MyGroup.class.getName(),groupId);
+            //查看是否人数够
+            XQuery xQuery1 = new XQuery("listMember_default1", request);
+            xQuery1.put("myGroup_id", groupId);
+            List<GroupMember> list1 = baseManager.listObject(xQuery1);
+            if (myGroup.getStatus().equals("1") && (list1.size() == myGroup.getGroupProduct().getMemberAmount())) {
+                myGroup.setStatus("4");
+                baseManager.saveOrUpdate(MyGroup.class.getName(), myGroup);
+                groupManager.sendSms(groupId, purchaseOrderId);
+
+                //成团，修改团购订单状态为待发货
+                XQuery xQuery = new XQuery("listPurchaseOrderGroup_default2", request);
+                xQuery.put("myGroup_id", groupId);
+                List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
+                for (PurchaseOrderGroup purchaseOrderGroup : list) {
+                    purchaseOrderGroup.setOrderStatus("5");
+                    baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(), purchaseOrderGroup);
+                }
+            }else if(myGroup.getStatus().equals("1") && (list1.size() > myGroup.getGroupProduct().getMemberAmount())){
+                groupManager.sendSms(groupId, purchaseOrderId);
             }
-            //发送短信
-            groupManager.sendSms(groupId, purchaseOrderId);
         }
         String url = "?groupProductId=" + groupProductId + "&groupId=" + groupId + "&memberId=" + memberId + "&purchaseOrderId=" + purchaseOrderId;
         return "redirect:/group/shareGroup.do" + url;
