@@ -73,11 +73,6 @@
                 进行中
                </span>
                 </c:if>
-                <c:if test="${member.myGroup.status!='1'}">
-               <span>
-                拼团结束
-               </span>
-                </c:if>
             </li>
         </a>
     </c:forEach>

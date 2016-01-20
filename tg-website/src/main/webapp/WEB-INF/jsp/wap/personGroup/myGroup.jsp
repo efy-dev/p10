@@ -88,6 +88,7 @@
       <ul class="offered ae">
         <c:forEach items="${groupJoinList}" var="member" varStatus="rec">
           <a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
+            <c:if test="${empty member.myGroup.groupProduct.productModel.product.name}">
             <li>
               <p>${member.myGroup.groupProduct.productModel.product.name} ${member.myGroup.groupProduct.productModel.name}</p>
               <p>${fn:substring(member.myGroup.createDateTime,0 ,19 )}</p>
@@ -117,6 +118,7 @@
                </span>
               </c:if>
             </li>
+            </c:if>
           </a>
         </c:forEach>
       </ul>
