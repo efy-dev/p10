@@ -164,11 +164,12 @@
             $('#my-prompt').modal({
                 relatedTarget: this,
                 onConfirm: function (e) {
-                    var reply = $("#replyText").val()
+                    var reply = $("#replyText").val();
+                    var uriec = encodeURI(reply);
                     $.ajax({
                         type: "GET",
                         url: '<c:url value="/PurchaseOrderComment/reply.do"/>',
-                        data: {ids: ids, reply: reply},
+                        data: {ids: ids, reply: uriec},
                         dataType: "json",
                         success: function (data) {
                             for (var i = 0; i<ids.length; i++) {
