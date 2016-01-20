@@ -34,7 +34,8 @@
                         <condition name="myGroup.id" defaultValue="1" operation="eq"/>
                     </query>
                     <query name="default2" label="拼团中" type="auto" orderBy="id:desc">
-                        <condition name="status" defaultValue="3" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="orderStatus" defaultValue="3" operation="eq"/>
                         <condition name="myGroup.id" defaultValue="1" operation="eq"/>
                     </query>
                     <query name="default10" label="上级团员订单" type="auto" orderBy="id:desc">
