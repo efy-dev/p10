@@ -11,7 +11,9 @@
 
 <html>
 <head>
-
+    <style>
+        .active{color: #ff2222}
+        .hovercolor:hover{background:rgba(30,144,255,1);color: #fff; }</style>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -112,14 +114,24 @@
       <div class="am-form-group">
         <label name="serial" class="am-u-sm-3 am-form-label">关联商家</label>
 
-        <div class="am-u-sm-9" style="margin-top: 10px;">
-          <select name="tenantCheck" onchange="changeTenant(this)">
-            <option value="0">请选择</option>
-            <c:forEach var="tenant" items="${tenantList}">
-              <option value="${tenant.id}" <c:if test="${object.bigTenant.id == tenant.id}">selected="selected"</c:if> <c:if test="${tenantId == tenant.id}">selected="selected"</c:if> >${tenant.name}</option>
-            </c:forEach>
-          </select>
-          <!--<small>必填项*</small>-->
+        <div class="am-u-sm-9" style="margin-top: 10px;position:relative">
+
+          <%--<select id="tenantCheck" name="tenantCheck" onchange="changeTenant(this)" isClose="false">--%>
+            <%--&lt;%&ndash;<option value="0">请选择</option>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<c:forEach var="tenant" items="${tenantList}">&ndash;%&gt;--%>
+              <%--&lt;%&ndash;<option value="${tenant.id}" <c:if test="${object.bigTenant.id == tenant.id}">selected="selected"</c:if> <c:if test="${tenantId == tenant.id}">selected="selected"</c:if> >${tenant.name}</option>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
+          <%--</select>--%>
+
+            <input type="text" tenantId="${object.bigTenant.id}"  onkeydown="selectTenant(this)" onkeyup="selectTenant(this)" placeholder="请选择或输入"  id="txt" value="${object.bigTenant.name}" style="position:absolute; width:98%; height:39px; left:18px;top:0px;z-index:98; border:1px #ccc solid;outline: none" />
+              <%--<span><a id="Select_A" href="javascript:void (0);" style="position: absolute;right: 6px;top: 7px;z-index: 99"><img src="<c:url value="/scripts/image/down.png"/> "></a></span>--%>
+            <ul isClose="none" style="display:none;overflow-y: scroll;width: 98%;height: 200px;position: absolute;background: #fff;border:1px #ccc solid;z-index: 99;left: 18px;top: 38px;padding: 0">
+                <li class="hovercolor" val="请选择" value="0" style="display:block;list-style: none;font-size: 16px;width: 100%;cursor: pointer;padding-left: 12px;">请选择</li>
+              <c:forEach var="tenant" items="${tenantList}">
+                <li class="hovercolor" val="${tenant.name}" value="${tenant.id}" style="display:block;list-style: none;font-size: 16px;width: 100%;cursor: pointer;padding-left: 12px;">${tenant.name}</li>
+              </c:forEach>
+            </ul>
+            <!--<small>必填项*</small>-->
         </div>
       </div>
 
@@ -210,7 +222,21 @@
 <hr/>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>"></script>
 <script type="text/javascript">
-
+    //高亮显示
+  function highLight(txt,text){
+      var prev = txt.substring(0,txt.indexOf(text));
+      var next = txt.substring(txt.indexOf(text)+text.length,txt.length);
+      var html = prev+'<b style="color: HighlightText">'+text+'</b>'+next;
+      return html;
+  }
+  function clickFun(){
+      $("#txt").next("ul").css({"display":"block","height":"200"});
+      $("li",$("#txt").next("ul")).each(function(){
+          $(this).css({"display":"block"});
+              $(this).html($(this).attr("val"));
+      });
+      $("#txt").next("ul").attr("isClose","block");
+    }
   $(function(){
     //新建初始化
     var type = '${object.type}';
@@ -219,7 +245,56 @@
     if(${empty object.id}){
       var date = new Date();
     }
+      //关联商家选择事件
+      $("#Select_A").click(function(){
 
+      });
+      //关联上级焦点事件
+      $("#txt").focus(function(){
+          var text = $(this).val();
+          var display = $(this).next("ul").attr("isClose")=="none"?"block":"none";
+          $(this).next("ul").css({"display":display,"height":"200"});
+          $("li",$(this).next("ul")).each(function(){
+              $(this).css({"display":"block"});
+              if($(this).attr("val").indexOf(text)!=-1){
+                  var html = highLight($(this).attr("val"),text);
+                  $(this).html(html);
+              }else{
+                  $(this).html($(this).attr("val"));
+              }
+          });
+          $(this).next("ul").attr("isClose",display);
+      });
+      //关联上级失去焦点事件
+      $("#txt").blur(function(){
+          setTimeout(function(){
+              var value = $("#txt").val();
+              var li = $(".hovercolor[val='"+value+"']");
+              if($(li).length!=0) {
+                  $("#txt").attr("tenantId", $(li).attr("value"));
+              }else{
+                  $("#txt").attr("tenantId", "");
+              }
+              $("#txt").next().css({"display":"none"});
+              $("#txt").next().attr("isClose","none");
+              changeTenant($("#txt").attr("tenantId"));
+          },300);
+
+      });
+      //关联商家点击事件
+      $(".hovercolor").click(function(){
+          var id = $(this).attr("value");
+           var value = $(this).attr("val");
+          if(id=="0"){
+              value="";
+          }
+          $("#txt").val(value);
+          $("#txt").attr("tenantId",id);
+
+          $(this).parent("ul").css({"display":"none"});
+          $(this).parent("ul").attr("isClose","none");
+          changeTenant(id);
+      });
     <c:forEach var="tenantProject" items="${tenantProjectList}">
 
     var  pid = '${tenantProject.project.id}';
@@ -233,45 +308,77 @@
       $("#Project span[id='"+pid+"']").attr("flag","1");
     }
     </c:forEach>
-    var projectId = '${object.project.id}';
-    $("#"+projectId+" input[value='"+projectId+"']").attr("checked",true);
+      if(${not empty object.project}){
+         var projectId = '${object.project.id}';
+         $("#"+projectId+" input[value='"+projectId+"']").attr("checked",true);
+      }
   });
 
-  function changeTenant(obj){
-    var tenantId = $(obj).val();
-    $.ajax({
-      type: "get",
-      url: '<c:url value="/product/changeTenant.do"/>',
-      cache: false,
-      dataType: "json",
-      data:{tenantId:tenantId},
-      success: function (data) {
-        $("#master").text("");
-        $("#Project").text("");
-        $.each(data,function(k,v){
-          if(k=="masterList"){
-            for(var i=0;i<v.length;i++){
-              var span = '<span style="margin-left: 10px;">'+
-                      '     <input type="radio" value="'+v[i].master.id+'" onclick="changeMaster(this)" name="masterCheck"/>'+v[i].master.fullName+
-                      ' </span>';
-              $("#master").append(span);
-            }
-          }
-          if(k=="projectList"){
 
-            for(var i=0;i<v.length;i++){
-              var span = '<span style="margin-left: 10px;" flag="1" id="'+v[i].project.id+'">'+
-                      '     <input type="radio" value="'+v[i].project.id+'"  name="projectCheck"/>'+v[i].project.name+
-                      ' </span>';
-              $("#Project").append(span);
-            }
-          }
-        });
+  //关联商家输入事件
+  function selectTenant(obj){
+     var LiHeight = $(".hovercolor").height();
+     var value = $(obj).val();
+      var number = 0;
+      if(value==""){
+          clickFun();
+      }else{
+          $(obj).next().css({"display":"block"});
+          $(obj).next().attr("isClose","block");
+          $("li",$(obj).next()).each(function(){
+                var li_val = $(this).attr("val");
+             if(li_val.indexOf(value)!=-1){
+                 $(this).css({"display":"block"});
+                 var html = highLight(li_val,value);
+                 $(this).html(html);
+                 number++;
 
-
-
+             }else{
+                 $(this).css({"display":"none"});
+             }
+         });
+          $(obj).next().css({"height":number*LiHeight>200?200:number*LiHeight});
       }
-    });
+
+  }
+
+
+  function changeTenant(tenantId){
+      if(tenantId==""){
+          $("#master").text("");
+          $("#Project").text("");
+      }else {
+          $.ajax({
+              type: "get",
+              url: '<c:url value="/product/changeTenant.do"/>',
+              cache: false,
+              dataType: "json",
+              data: {tenantId: tenantId},
+              success: function (data) {
+                  $("#master").text("");
+                  $("#Project").text("");
+                  $.each(data, function (k, v) {
+                      if (k == "masterList") {
+                          for (var i = 0; i < v.length; i++) {
+                              var span = '<span style="margin-left: 10px;">' +
+                                      '     <input type="radio" value="' + v[i].master.id + '" onclick="changeMaster(this)" name="masterCheck"/>' + v[i].master.fullName +
+                                      ' </span>';
+                              $("#master").append(span);
+                          }
+                      }
+                      if (k == "projectList") {
+
+                          for (var i = 0; i < v.length; i++) {
+                              var span = '<span style="margin-left: 10px;" flag="1" id="' + v[i].project.id + '">' +
+                                      '     <input type="radio" value="' + v[i].project.id + '"  name="projectCheck"/>' + v[i].project.name +
+                                      ' </span>';
+                              $("#Project").append(span);
+                          }
+                      }
+                  });
+              }
+          });
+      }
   }
   function toSubmit(result){
     $("input[name='resultPage']").val(result);
@@ -279,6 +386,8 @@
     $("input[name='project.id']").val($("input[name='projectCheck']:checked").val());
     if($("#name").val()==""){
       alert("商品名称不能为空");
+    }else if( $("input[name='project.id']").val()==""){
+        alert("项目不能为空!");
     }
 //    else if($("#price").val()==""){
 //      alert("商品价格不能为空!");
@@ -287,12 +396,12 @@
 //    else if(!checkPrice($("#price").val())){
 //      alert("商品价格必须为数字!");
 //    }
-    else if($("select[name='tenantCheck']").val()=="0"){
+    else if($("#txt").attr("tenantId")==""){
       $("input[name='tenant.id']").val("");
-      $("form").submit();
+        alert("没有关联商家或该商家尚未入驻!");
     } else{
 
-      $("input[name='tenant.id']").val($("select[name='tenantCheck']").val());
+      $("input[name='tenant.id']").val($("#txt").attr("tenantId"));
       $("form").submit();
     }
 
