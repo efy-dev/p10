@@ -146,7 +146,9 @@ public class GroupController {
             List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
 //            purchaseOrderId = list.get(0).getPurchaseOrder().getId();
 //            PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
-            supMan = list.get(0).getReceiverName();
+            if(list.size()>0){
+                supMan = list.get(0).getReceiverName();
+            }
         } else {
             PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
             supMan = purchaseOrder.getReceiverName();
