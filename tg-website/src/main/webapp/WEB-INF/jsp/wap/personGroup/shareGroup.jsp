@@ -144,7 +144,17 @@
     <div class="c-content ae">
       <div class="co-page">
         <div class="introduce ae">
-          ${group.groupProduct.productModel.product.productDescription.content}
+          <c:if test="${not empty group.groupProduct.productModel.product.productDescription.content}">
+            ${group.groupProduct.productModel.product.productDescription.content}
+          </c:if>
+          <c:if test="${not empty group.groupProduct.productModel.product.productPictureList&&fn:length(group.groupProduct.productModel.product.productPictureList)>0&&empty group.groupProduct.productModel.product.productDescription.content}">
+            <c:forEach items="${group.groupProduct.productModel.product.productPictureList}" var="productPicture">
+              <p>
+                <img style="margin:0" src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!pc-detail-view"/>
+              </p>
+            </c:forEach>
+
+          </c:if>
           <div class="button ae"><a href="http://www.efeiyi.com/product/productModel/${group.groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
         </div>
         <%--<div class="tab-btn">--%>
