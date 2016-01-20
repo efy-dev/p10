@@ -131,7 +131,7 @@ public class GroupManagerImpl implements GroupManager {
                 groupMember.setCreateDateTime(new Date());
                 baseManager.saveOrUpdate(GroupMember.class.getName(), groupMember);
 
-                myGroup.getGroupMemberList().add(groupMember);
+               // myGroup.getGroupMemberList().add(groupMember);
             }
 
             if (myGroup.getStatus().equals("1") && (myGroup.getGroupMemberList().size() == myGroup.getGroupProduct().getMemberAmount())) {
@@ -165,15 +165,15 @@ public class GroupManagerImpl implements GroupManager {
         String left = "";
         String memberLeft = "";
         if (leftDay > 0) {
-            left = leftDay + "��" + leftHour + "ʱ" + leftMin + "��";
+            left = leftDay + "天" + leftHour + "时" + leftMin + "分";
         } else {
             if (leftHour > 0) {
-                left = leftHour + "ʱ" + leftMin + "��";
+                left = leftHour + "时" + leftMin + "分";
             } else {
                 if (leftMin > 0) {
-                    left = leftMin + "��";
+                    left = leftMin + "分";
                 } else {
-                    left = "0��";
+                    left = "0分";
                 }
 
             }
