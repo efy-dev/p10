@@ -43,6 +43,7 @@
 <ul class="offered ae" style="margin-bottom: 66px;">
     <c:forEach items="${groupJoinList}" var="member" varStatus="rec">
         <a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
+            <c:if test="${not empty member.myGroup.groupProduct.productModel.product.name}">
             <li>
                 <c:if test="${fn:length(member.myGroup.groupProduct.productModel.product.productModelList)>1}">
                     <p>${member.myGroup.groupProduct.productModel.product.name}${member.myGroup.groupProduct.productModel.name}</p>
@@ -50,7 +51,7 @@
                 <c:if test="${fn:length(member.myGroup.groupProduct.productModel.product.productModelList)<=1}">
                     <p>${member.myGroup.groupProduct.productModel.product.name}</p>
                 </c:if>
-                <p>${member.myGroup.createDateTime}</p>
+                <p>${fn:substring(member.myGroup.createDateTime,0 ,19)}</p>
                 <c:if test="${member.myGroup.status=='1'}">
                     <p>${member.myGroup.groupMemberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
                 </c:if>
@@ -69,11 +70,12 @@
                 </c:forEach>
                 <p>团长:${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
                 <c:if test="${member.myGroup.status=='1'||member.myGroup.status=='4'}">
-               <span>
+                <span>
                 进行中
-               </span>
+                </span>
                 </c:if>
             </li>
+            </c:if>
         </a>
     </c:forEach>
 </ul>
