@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -45,7 +46,7 @@
         <li>
         <a href="<c:url value='/group/shareGroup.do'/>?groupProductId=${member.myGroup.groupProduct.id}&groupId=${member.myGroup.id}&memberId=${member.id}">
             <p> ${member.myGroup.groupProduct.productModel.product.name} ${member.myGroup.groupProduct.productModel.name}</p>
-            <p>${member.myGroup.createDateTime}</p>
+            <p>${fn:substring(member.myGroup.createDateTime,0 ,19)}</p>
             <c:if test="${member.myGroup.status==1 || member.myGroup.status==4}">
                 <p>${member.myGroup.groupMemberList.size()}人/${member.myGroup.groupProduct.memberAmount}人成团</p>
                 <span>进行中</span>
