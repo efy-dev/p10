@@ -99,17 +99,30 @@ public class GroupController {
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
         boolean flag = groupManager.updateGroup(groupId, memberId, purchaseOrderId);
+
+
         if (flag) {
-            //成团，修改团购订单状态为待发货
-            XQuery xQuery = new XQuery("listPurchaseOrderGroup_default2", request);
-            xQuery.put("myGroup_id", groupId);
-            List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
-            for (PurchaseOrderGroup purchaseOrderGroup : list) {
-                purchaseOrderGroup.setOrderStatus("5");
-                baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(), purchaseOrderGroup);
+            MyGroup myGroup = (MyGroup) baseManager.getObject(MyGroup.class.getName(),groupId);
+            //查看是否人数够
+            XQuery xQuery1 = new XQuery("listMember_default1", request);
+            xQuery1.put("myGroup_id", groupId);
+            List<GroupMember> list1 = baseManager.listObject(xQuery1);
+            if (myGroup.getStatus().equals("1") && (list1.size() == myGroup.getGroupProduct().getMemberAmount())) {
+                myGroup.setStatus("4");
+                baseManager.saveOrUpdate(MyGroup.class.getName(), myGroup);
+
+                //成团，修改团购订单状态为待发货
+                XQuery xQuery = new XQuery("listPurchaseOrderGroup_default2", request);
+                xQuery.put("myGroup_id", groupId);
+                List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
+                for (PurchaseOrderGroup purchaseOrderGroup : list) {
+                    purchaseOrderGroup.setOrderStatus("5");
+                    baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(), purchaseOrderGroup);
+                }
             }
-            //发送短信
-            groupManager.sendSms(groupId, purchaseOrderId);
+            if((myGroup.getStatus().equals("1")||myGroup.getStatus().equals("4")) && (list1.size() > 1)){
+                groupManager.sendSms(groupId, purchaseOrderId);
+            }
         }
         String url = "?groupProductId=" + groupProductId + "&groupId=" + groupId + "&memberId=" + memberId + "&purchaseOrderId=" + purchaseOrderId;
         return "redirect:/group/shareGroup.do" + url;
@@ -131,9 +144,11 @@ public class GroupController {
             xQuery.put("myGroup_id", groupId);
             xQuery.put("groupMember_id", memberId);
             List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
-            purchaseOrderId = list.get(0).getPurchaseOrder().getId();
-            PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
-            supMan = purchaseOrder.getReceiverName();
+//            purchaseOrderId = list.get(0).getPurchaseOrder().getId();
+//            PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+            if(list.size()>0){
+                supMan = list.get(0).getReceiverName();
+            }
         } else {
             PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
             supMan = purchaseOrder.getReceiverName();
@@ -142,7 +157,7 @@ public class GroupController {
 
         String url = "?groupProductId=" + groupProductId + "&groupId=" + groupId + "&memberId=" + memberId;
         int flag = 0;//0未参团 1 团长 2 团员
-        if (user != null) {
+        if (user != null && group.getGroupMemberList().size()>0) {
             for (GroupMember member : group.getGroupMemberList()) {
                 if (member.getUser().getId().equals(user.getId()) && member.getStatus().equals("1")) {
                     if ("0".equals(member.getLevel())) {
@@ -220,7 +235,7 @@ public class GroupController {
         String manUserName = "";
         List<PurchaseOrderGroup> purchaseOrderGroupList = baseManager.listObject(xQuery);
         if (purchaseOrderGroupList.size() > 0) {
-            manUserName = purchaseOrderGroupList.get(0).getPurchaseOrder().getReceiverName();
+            manUserName = purchaseOrderGroupList.get(0).getReceiverName();
         }
         model.addAttribute("manUserName", manUserName);
 
@@ -258,6 +273,10 @@ public class GroupController {
         calendar.add(Calendar.DATE, limintDay);
         Date endTime = calendar.getTime();
 
+        String supMan = request.getParameter("supMan");
+        String number = request.getParameter("number");
+        model.addAttribute("title",supMan);
+        model.addAttribute("number",number);
 
         model.addAttribute("endTime", df.parse(df.format(endTime)).getTime());
         model.addAttribute("group", group);

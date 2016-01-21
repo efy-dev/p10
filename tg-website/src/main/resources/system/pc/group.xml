@@ -33,6 +33,9 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="user.id" defaultValue="1" operation="eq"/>
                     </query>
+                    <query name="default1" label="团中的团员" type="auto" orderBy="id:desc">
+                        <condition name="myGroup.id" defaultValue="1" operation="eq"/>
+                    </query>
                 </do>
             </does>
         </entity>

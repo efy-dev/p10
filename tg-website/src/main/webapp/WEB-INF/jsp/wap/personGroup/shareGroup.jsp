@@ -29,7 +29,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20150831"/>">
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
-  <style>.colonel-table .introduce img{width:100%!important;float:left;margin-bottom:1.7rem;height: 100%!important;}</style>
+  <style>.colonel-table .introduce img{width:100%!important;float:left;height: 100%!important;}</style>
 </head>
 <body>
 <header class="am-header custom-header">
@@ -72,7 +72,11 @@
       <ul class="am-viewport" style="overflow: hidden; position: relative;">
         <ul class="am-slides" style="width: 1200%; transition-duration: 0.6s; transform: translate3d(-640px, 0px, 0px);">
           <li class="clone c-page" aria-hidden="true" style="width: 320px; float: left; display: block;">
-            <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!wap-product-pic"><div class="c-page"><span>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</span></div></div></li>
+            <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!wap-product-pic"><div class="c-page"><span>${group.groupProduct.productModel.product.name}
+              <c:if test="${(group.groupProduct.productModel.product.productModelList.size()>1)&&(null!=group.groupProduct.productModel.name)&&(''!=group.groupProduct.productModel.name)}">
+                [${group.groupProduct.productModel.name}]
+              </c:if>
+              </span></div></div></li>
           <c:forEach items="${group.groupProduct.productModel.product.productPictureList}" var="picture">
             <c:if test="${picture.status=='1'&&picture.productModel.id==group.groupProduct.productModel.id}">
               <li class="clone c-page" aria-hidden="true" style="width: 320px; float: left; display: block;"><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"><div class="c-page"><span>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</span></div></div></li>
@@ -140,7 +144,17 @@
     <div class="c-content ae">
       <div class="co-page">
         <div class="introduce ae">
-          ${group.groupProduct.productModel.product.productDescription.content}
+          <c:if test="${not empty group.groupProduct.productModel.product.productDescription.content}">
+            ${group.groupProduct.productModel.product.productDescription.content}
+          </c:if>
+          <c:if test="${not empty group.groupProduct.productModel.product.productPictureList&&fn:length(group.groupProduct.productModel.product.productPictureList)>0&&empty group.groupProduct.productModel.product.productDescription.content}">
+            <c:forEach items="${group.groupProduct.productModel.product.productPictureList}" var="productPicture">
+              <p>
+                <img style="margin:0" src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!pc-detail-view"/>
+              </p>
+            </c:forEach>
+
+          </c:if>
           <div class="button ae"><a href="http://www.efeiyi.com/product/productModel/${group.groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
         </div>
         <%--<div class="tab-btn">--%>

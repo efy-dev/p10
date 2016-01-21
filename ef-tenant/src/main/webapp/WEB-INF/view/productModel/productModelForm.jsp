@@ -121,9 +121,10 @@
                                 <th class="am-text-center" width="15%">商品名称</th>
                                 <th class="am-text-center" width="15%">属性</th>
                                 <th class="am-text-center" width="10%">库存</th>
-                                <th class="am-text-center" width="15%">价格(元)</th>
-                                <th class="am-text-center" width="15%">市场价格(元)</th>
+                                <th class="am-text-center" width="10%">价格(元)</th>
+                                <th class="am-text-center" width="10%">市场价格(元)</th>
                                 <th class="am-text-center" width="10%">重量(kg)</th>
+                                <th class="am-text-center" width="10%">是否包邮</th>
                             </tr>
                             <c:set var="iscontain" value="false" />
                             <c:forEach var="item" items="${object.productModelList}">
@@ -164,6 +165,11 @@
                                         <input type="text" name="defaultWeight" style="width: 50%;height: 30px;"
                                                value="" required/>
                                     </td>
+                                    <td align="center">
+                                        <input type="hidden" name="defaultFreeDelivery" value="0"  />
+                                        <input type="checkbox" name="defaultDelivery" onclick="checkBoxClick(this)" style="width: 50%;height: 30px;"
+                                               value="1" />
+                                    </td>
                                 </tr>
                             </c:if>
                             <c:if test="${not empty object.productModelList}">
@@ -200,6 +206,18 @@
                                             <td align="center">
                                                 <input type="text" name="defaultWeight" style="width: 50%;height: 30px;"
                                                        value="${model.weight}" required/>
+                                            </td>
+                                            <td align="center">
+                                                <c:if test="${model.freeDelivery=='1'}">
+                                                    <input type="hidden" name="defaultFreeDelivery" value="1"  />
+                                                    <input type="checkbox" name="defaultDelivery" onclick="checkBoxClick(this)" style="width: 50%;height: 30px;"
+                                                           value="1" checked="checked" />
+                                                </c:if>
+                                                <c:if test="${model.freeDelivery!='1'}">
+                                                    <input type="hidden" name="defaultFreeDelivery" value="0"  />
+                                                    <input type="checkbox" name="defaultDelivery" onclick="checkBoxClick(this)" style="width: 50%;height: 30px;"
+                                                           value="1"  />
+                                                </c:if>
                                             </td>
                                         </tr>
                                     </c:if>
@@ -255,6 +273,18 @@
                                             <input type="text" name="weight" style="width: 50%;height: 30px;"
                                                    value="${model.weight}" required/>
                                         </td>
+                                        <td align="center">
+                                            <c:if test="${model.freeDelivery=='1'}">
+                                                <input type="hidden" name="freeDelivery" value="1"  />
+                                                <input type="checkbox" name="delivery" onclick="checkBoxClick(this)" style="width: 50%;height: 30px;"
+                                                       value="1" checked="checked" />
+                                            </c:if>
+                                            <c:if test="${model.freeDelivery!='1'}">
+                                                <input type="hidden" name="freeDelivery" value="0"  />
+                                                <input type="checkbox" onclick="checkBoxClick(this)" name="delivery" style="width: 50%;height: 30px;"
+                                                       value="1"  />
+                                            </c:if>
+                                        </td>
                                         </tr>
                                     </c:if>
                                 </c:forEach>
@@ -275,14 +305,14 @@
                     <span style="padding: 10px;">
 
 
-                            <input type="button"
-                                   onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_default&view=${view}&tenantId=${object.tenant.id}')"
+                            <input type="button" isOnclick="0"
+                                   onclick="toSubmit(this,'redirect:/basic/xm.do?qm=plistProduct_default&view=${view}&tenantId=${object.tenant.id}')"
                                    class="am-btn am-btn-primary" value="完成,并返回列表"/>
 
                     </span>
                       <span style="padding: 10px;">
-                       <input type="button"
-                              onclick="toSubmit('redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')"
+                       <input type="button" isOnclick="0"
+                              onclick="toSubmit(this,'redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')"
                               class="am-btn am-btn-primary" value="保存,并查看商品详情"/>
                     </span>
                 </div>
@@ -311,7 +341,10 @@
             $("input[name='modelProperty']", $(this)).val(id);
         });
     });
-
+    function checkBoxClick(obj){
+        var value = $(obj).prop("checked");
+        $(obj).prev().val(value?"1":"0");
+    }
     function addModel() {
         var tr = '<tr id="0" status="1" flag="custom">' +
                 '<td align="center">' +
@@ -341,28 +374,38 @@
                 '<td align="center">' +
                 ' <input type="text" name="weight" style="width: 50%;height: 30px;" value="" required/>' +
                 '</td>' +
+                '<td align="center">'+
+                ' <input type="hidden" name="freeDelivery" value="0"  />'+
+                ' <input type="checkbox" onclick="checkBoxClick(this)" name="delivery" style="width: 50%;height: 30px;"value="1"  />'+
+                '</td>'+
                 '</tr>';
         $("#productModel").append(tr);
     }
 
     //提交
-    function toSubmit(result) {
+    function toSubmit(obj,result) {
+        var isClick = $(obj).attr("isOnclick");
         $("input[name='resultPage']").val(result);
         var f = true;
         $("tr[status!='0'] input[name*='eight']").each(function(){
-            if($(this).val()==""){
+            if($(this).val()=="" && $(this).parent().next().find("input[type='hidden']").val()=="0"){
                 f = false;
                 return false;
             }
         });
         if(f) {
             if ($("#productModel tr[flag='default']").length == 1) {
-                $("form").submit();
+                if(isClick=="0") {
+                    $(obj).attr("isOnclick","1");
+                    $("form").submit();
+                }else{
+                    alert("正在保存...");
+                }
             } else {
                 alert("保存失败!");
             }
         }else{
-            alert("请填写商品规格重量!");
+            alert("请填写商品规格重量或选择包邮!");
         }
 
 
@@ -472,6 +515,10 @@
                     '<td align="center">' +
                     ' <input type="text" name="weight" style="width: 50%;height: 30px;" value="" required/>' +
                     '</td>' +
+                    '<td align="center">'+
+                    ' <input type="hidden" name="freeDelivery" value="0"  />'+
+                    ' <input type="checkbox" name="delivery" onclick="checkBoxClick(this)" style="width: 50%;height: 30px;"value="1"  />'+
+                    '</td>'+
                     '</tr>';
 
 

@@ -63,60 +63,6 @@ public class ShareController {
         return "/share/sharePage";
     }
 
-    public void createCouponBatch(){
-        CouponBatch couponBatch= new CouponBatch();
-        couponBatch.setAmount(Integer.parseInt(""));
-        couponBatch.setPrice(Float.parseFloat("5"));
-        couponBatch.setPriceLimit(Float.parseFloat(""));
-        couponBatch.setStatus("1");
-        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            couponBatch.setStartDate(sd.parse(""));
-            couponBatch.setEndDate(sd.parse(""));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        couponBatch.setIsCreatedCoupon(2);
-        baseManager.saveOrUpdate(CouponBatch.class.getName(), couponBatch);
-    }
-    /**输入手机号，将代金券存入账户
-     * @param request
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping({"/sharePage/saveCoupon.do"})
-    @ResponseBody
-    public boolean saveCoupon(HttpServletRequest request) throws Exception {
-        String phoneNumber = request.getParameter("number");
-        //从数据中检索用户是否存在
-        String queryHql = "from " + Consumer.class.getName() + " c where c.username ='"+phoneNumber+"' and c.status = 1 "+"order by c.id desc";
-        List<Consumer> list = baseManager.listObject(queryHql);
-        if(list!=null&&list.size()>0){
-            return false;
-        }
-        Consumer bigUser = new Consumer();
-        bigUser.setUsername(phoneNumber);
-        if (bigUser.getStatus() == null) {
-            bigUser.setStatus("1");
-        }
-        bigUser.setEnabled(false);
-        bigUser.setAccountExpired(false);
-        bigUser.setAccountLocked(false);
-        bigUser.setCredentialsExpired(false);
-        bigUser.setCreateDatetime(new Date());
-        baseManager.saveOrUpdate(Consumer.class.getName(), bigUser);
-        CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(),"iilsik60373zsqx4");
-        Date date = new Date();
-        Coupon coupon = new Coupon();
-        coupon.setConsumer(bigUser);
-        coupon.setStatus("1");
-        coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
-        coupon.setCouponBatch(couponBatch);
-        coupon.setWhetherBind("2");
-        coupon.setBindTime(date);
-        baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
-        return true;
-    }
 
     /**其他人打开页面
      * @param request
@@ -125,7 +71,7 @@ public class ShareController {
      */
     @RequestMapping({"/sharePage/openShare/{purchaseOrderId}"})
     public String openPage(@PathVariable String purchaseOrderId,HttpServletRequest request,Model model) throws Exception{
-        String callback = URLEncoder.encode("http://www2.efeiyi.com/sharePage/saveWXInfo.do?purchaseOrderId="+purchaseOrderId,"UTF-8");
+        String callback = URLEncoder.encode("www2.efeiyi.com/sharePage/saveWXInfo.do?purchaseOrderId="+purchaseOrderId,"UTF-8");
         return "redirect:http://www.efeiyi.com/wx/getUserBaseInfo.do?dataKey=nickname;headimgurl"+"&callback="+callback;
     }
     /**分享后返利

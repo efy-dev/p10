@@ -84,6 +84,7 @@
 
     <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data"
           id="form">
+        <input type="hidden" name="product.id" value="${object.id}">
         <fieldset>
             <legend>
                 <c:if test="${view == 'newProduct'}">
@@ -232,13 +233,14 @@
                         <tbody>
                         <tr>
                             <th class="am-text-center" width="10%">预览</th>
-                            <th class="am-text-center" width="16%">规格编号</th>
-                            <th class="am-text-center" width="16%">规格名称</th>
+                            <th class="am-text-center" width="14%">规格编号</th>
+                            <th class="am-text-center" width="14%">规格名称</th>
                             <th class="am-text-center" width="15%">属性</th>
-                            <th class="am-text-center" width="11%">库存</th>
-                            <th class="am-text-center" width="11%">价格(元)</th>
-                            <th class="am-text-center" width="11%">市场价格(元)</th>
-                            <th class="am-text-center" width="10%">重量(kg)</th>
+                            <th class="am-text-center" width="7%">库存</th>
+                            <th class="am-text-center" width="9%">价格(元)</th>
+                            <th class="am-text-center" width="12%">市场价格(元)</th>
+                            <th class="am-text-center" width="9%">重量(kg)</th>
+                            <th class="am-text-center" width="10%">是否包邮</th>
                         </tr>
                         <c:forEach var="model" items="${object.productModelList}">
                             <tr>
@@ -283,6 +285,14 @@
                                 <td align="center">
                                         ${model.weight}
                                 </td>
+                                <td align="center">
+                                    <c:if test="${model.freeDelivery=='1'}">
+                                        是
+                                    </c:if>
+                                    <c:if test="${model.freeDelivery=='0'}">
+                                        否
+                                    </c:if>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -324,17 +334,17 @@
                                                         <c:when test="${productPicture.status == '2'}">
                                                             <a href="javascript:void(0);"
                                                                modelId="${productPicture.productModel.id}" status="2"
-                                                               onclick="updatePictureStatus(this,'${productPicture.id}','1')">主图片</a>
+                                                               onclick="updatePictureStatus(this,'${productPicture.id}')">主图片</a>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <c:if test="${empty productPicture.productModel}">
                                                                 <a href="javascript:void(0);" status="1" modelId="0"
-                                                                   onclick="updatePictureStatus(this,'${productPicture.id}','2')">设为主图片</a>
+                                                                   onclick="updatePictureStatus(this,'${productPicture.id}')">设为主图片</a>
                                                             </c:if>
                                                             <c:if test="${not empty productPicture.productModel}">
                                                                 <a href="javascript:void(0);" status="1"
                                                                    modelId="${productPicture.productModel.id}"
-                                                                   onclick="updatePictureStatus(this,'${productPicture.id}','2')">设为主图片</a>
+                                                                   onclick="updatePictureStatus(this,'${productPicture.id}')">设为主图片</a>
                                                             </c:if>
 
                                                         </c:otherwise>
@@ -503,7 +513,7 @@
 <script type="text/javascript" src="<c:url value='/scripts/zclip/jquery.zclip.js'/>"></script>
 
 <script>
-    var selectVal;
+    var selectVal ;
     function temVal(obj) {
         selectVal = $(obj).val();
     }
@@ -530,21 +540,24 @@
     function setModelPic(obj, pictureId) {
         var modelId = $(obj).val();
         $(obj).parent().prev().find("a").attr("modelId", modelId);
-        if ($(obj).parent().prev().find("a").attr("status") == "2") {
-            alert("请先取消主图片!");
-            $("option[value='" + selectVal + "']", obj).attr("selected", "selected");
-        } else {
+        var a = $(obj).parent().prev().find("a:eq(0)");
+//        if ($(obj).parent().prev().find("a").attr("status") == "2") {
+//            alert("请先取消主图片!");
+//            $("option[value='" + selectVal + "']", obj).attr("selected", "selected");
+//        } else {
             $.ajax({
                 type: "get",
                 url: '<c:url value="/product/setModelPicture.do"/>',
                 cache: false,
                 dataType: "json",
-                data: {pictureId: pictureId.trim(), modelId: modelId},
+                data: {pictureId: pictureId.trim(), modelId: modelId,oldModelId:selectVal},
                 success: function (data) {
                     $(obj).parent().prev().find("a").attr("modelId", data);
+                    $(a).attr("status", "1");
+                    $(a).text("设为主图片");
                 }
             });
-        }
+//        }
 
 
     }
@@ -639,13 +652,13 @@
                         '   </a>' +
                         '  </dt>' +
                         '  <dd style="width: 100%;text-align:center" >' +
-                        '<a href="javascript:void(0);" status="1"  modelId="0" onclick="updatePictureStatus(this,\'' + pictureId + '\',\'2\')">' + '设为主图片' + '</a>' +
+                        '<a href="javascript:void(0);" status="1"  modelId="0" onclick="updatePictureStatus(this,\'' + pictureId + '\')">' + '设为主图片' + '</a>' +
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\'' + pictureId + '\')">' +
                         ' 删除' +
                         '</a>' +
                         '</dd>' +
                         '<dd style="width: 100%;text-align: center;" >' +
-                        '<select style="width: 85%;" onchange="setModelPic(this,\'' + pictureId + '\')">' +
+                        '<select style="width: 85%;" onclick="temVal(this)" onchange="setModelPic(this,\'' + pictureId + '\')">' +
                         '<option value="0">' + '设置商品规格图片' + '</option>';
                 for (var n = 0; n < modelIds.length; n++) {
 
@@ -785,7 +798,8 @@
     //    }
 
 
-    function updatePictureStatus(obj, id, status) {
+    function updatePictureStatus(obj, id) {
+        var status = $(obj).attr("status");
         var modelId = $(obj).parent().next().find("select").val();
         if (modelId == "0") {
             alert("请选择规格!");
@@ -800,14 +814,14 @@
                 dataType: "json",
                 data: {id: id.trim(), status: status, productId: productId, modelId: modelId},
                 success: function (data) {
-                    if (status == '2') {
+                    if (status == '1') {
                         if ($("a[status='2'][modelId='" + data + "']").length != 0) {
                             $("a[status='2'][modelId='" + data + "']").text("设为主图片");
-                            $("a[status='2'][modelId='" + data + "']").attr("onclick", "updatePictureStatus(this,'" + id + "','2')");
+//                            $("a[status='2'][modelId='" + data + "']").attr("onclick", "updatePictureStatus(this,'" + id + "')");
                             $("a[status='2'][modelId='" + data + "']").attr("status", "1");
                         }
 
-                        $(obj).attr("onclick", "updatePictureStatus(this,'" + id + "','1')");
+                        $(obj).attr("onclick", "updatePictureStatus(this,'" + id + "')");
                         $(obj).attr("status", "2");
                         $(obj).text("主图片");
 //                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'1\')">'+'主图片'+'</a>'+
@@ -817,8 +831,8 @@
 //                            ;
 //                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
                     }
-                    if (status == '1') {
-                        $(obj).attr("onclick", "updatePictureStatus(this,'" + id + "','2')");
+                    if (status == '2') {
+                        $(obj).attr("onclick", "updatePictureStatus(this,'" + id + "')");
                         $(obj).attr("status", "1");
                         $(obj).text("设为主图片");
 //                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
@@ -828,12 +842,12 @@
 //                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
                     }
                     if (status == '9') {
-                        $(obj).attr("onclick", "updatePictureStatus(this,'" + id + "','3')");
+                        $(obj).attr("onclick", "updatePictureStatus(this,'" + id + "')");
                         $(obj).attr("status", "3");
                         $(obj).text("推荐图片");
                     }
                     if (status == '3') {
-                        $(obj).attr("onclick", "updatePictureStatus(this,'" + id + "','9')");
+                        $(obj).attr("onclick", "updatePictureStatus(this,'" + id + "')");
                         $(obj).attr("status", "9");
                         $(obj).text("设为推荐图片");
                     }

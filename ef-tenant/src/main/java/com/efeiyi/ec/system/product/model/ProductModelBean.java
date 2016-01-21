@@ -17,6 +17,7 @@ public class ProductModelBean implements Serializable {
     private  String [] property;
     private  String [] marketPrice;
     private  Double [] weight;
+    private  String [] freeDelivery;
     private  String productId;
     private  String defaultId;
     private  String defaultStatus;
@@ -25,7 +26,7 @@ public class ProductModelBean implements Serializable {
     private  String defaultPrice;
     private  String defaultMarketPrice;
     private  Double defaultWeight;
-
+    private  String defaultFreeDelivery;
     public String getProductId() {
         return productId;
     }
@@ -161,5 +162,21 @@ public class ProductModelBean implements Serializable {
 
     public void setDefaultWeight(Double defaultWeight) {
         this.defaultWeight = defaultWeight;
+    }
+
+    public String[] getFreeDelivery() {
+        return freeDelivery;
+    }
+
+    public void setFreeDelivery(String[] freeDelivery) {
+        this.freeDelivery = freeDelivery;
+    }
+
+    public String getDefaultFreeDelivery() {
+        return defaultFreeDelivery;
+    }
+
+    public void setDefaultFreeDelivery(String defaultFreeDelivery) {
+        this.defaultFreeDelivery = defaultFreeDelivery;
     }
 }

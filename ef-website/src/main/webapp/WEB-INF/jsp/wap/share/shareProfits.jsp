@@ -124,13 +124,13 @@
   </ul>
   <div class="hader-list">${fn:substring(shareUser1, 0,3 )}****${fn:substring(shareUser1,7,11)}&nbsp;入&nbsp;手&nbsp;的&nbsp;宝&nbsp;贝&nbsp;清&nbsp;单</div>
   <ul class="cost-name ae">
-    <c:forEach items="${orderList}" var="order" varStatus="rec">
+    <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
     <li>
-      <div class="sit-pic"><a href="<c:url value="/product/productModel/${order.purchaseOrderProductList.get(0).productModel.id}"/>"><img src="http://pro.efeiyi.com/${order.purchaseOrderProductList.get(0).productModel.productModel_url}"></a></div>
+      <div class="sit-pic"><a href="<c:url value="/product/productModel/${purchaseOrderProduct.productModel.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}"></a></div>
       <div class="sit-txt">
-        <p>${order.purchaseOrderProductList.get(0).productModel.name}</p>
-        <p>${order.purchaseOrderProductList.get(0).productModel.price}元</p>
-        <a href="<c:url value="/product/productModel/${order.purchaseOrderProductList.get(0).productModel.id}"/>">查看商品</a>
+        <p>${purchaseOrderProduct.productModel.name}</p>
+        <p>${purchaseOrderProduct.productModel.price}元</p>
+        <a href="<c:url value="/product/productModel/${purchaseOrderProduct.productModel.id}"/>">查看商品</a>
       </div>
     </li>
    </c:forEach>

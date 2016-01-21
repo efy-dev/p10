@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -31,7 +32,7 @@ public class PurchaseOrderCommentController extends BaseController {
     @RequestMapping("/reply.do")
     @ResponseBody
     public String reply(String reply,HttpServletRequest request){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String date = format.format(new Date());
         String [] ids = request.getParameterValues("ids[]");
         try {
@@ -39,7 +40,7 @@ public class PurchaseOrderCommentController extends BaseController {
                 PurchaseOrderComment purchaseOrderComment =(PurchaseOrderComment) baseManager.getObject(PurchaseOrderComment.class.getName(),ids[i]);
                 PurchaseOrderBusinessReply purchaseOrderBusinessReply = new PurchaseOrderBusinessReply();
 
-                purchaseOrderBusinessReply.setReply(reply);
+                purchaseOrderBusinessReply.setReply(URLDecoder.decode(reply, "UTF-8"));
                 purchaseOrderBusinessReply.setPurchaseOrderComment(purchaseOrderComment);
                 purchaseOrderBusinessReply.setCreateDatetime(format.parse(date));
                 baseManager.saveOrUpdate(PurchaseOrderBusinessReply.class.getName(),purchaseOrderBusinessReply);

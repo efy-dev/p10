@@ -9,6 +9,7 @@ import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.activity.group.service.GroupManager;
 import com.efeiyi.ec.website.activity.group.service.PurchaseOrderGroupManager;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
+import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.PConst;
 import org.springframework.stereotype.Service;
 
@@ -39,50 +40,52 @@ public class GroupManagerImpl implements GroupManager {
     private PurchaseOrderGroupManager purchaseOrderGroupManager;
 
     @Override
-    public String createGroup(User user, String groupProductId, String groupId, String memberId) {
+    public String  createGroup(User user, String groupProductId, String groupId, String memberId) {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
         String callback = "";
         String url = "";
 
         if (groupId == null && memberId == null) {
 
-            //´´½¨ÍÅ
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             MyGroup group = new MyGroup();
             group.setManUser(user);
-            group.setStatus("2");//Î´¿ªÆô×´Ì¬
+            group.setStatus("2");//Î´ï¿½ï¿½ï¿½ï¿½×´Ì¬
             group.setCreateDateTime(new Date());
             group.setGroupProduct(groupProduct);
             baseManager.saveOrUpdate(MyGroup.class.getName(), group);
 
-            //´´½¨ÍÅÔ±ÐÅÏ¢
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢
             GroupMember member = new GroupMember();
-            member.setStatus("2");//Î´¿ªÆô×´Ì¬
+            member.setStatus("2");//Î´ï¿½ï¿½ï¿½ï¿½×´Ì¬
             member.setMyGroup(group);
             member.setLevel("0");
             member.setUser(user);
             baseManager.saveOrUpdate(GroupMember.class.getName(), member);
 
-            //Éú³ÉÍÅ¹º¶©µ¥Ïà¹Ø²Ù×÷
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Å¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½
             PurchaseOrder purchaseOrder = purchaseOrderGroupManager.createPurchaseOrder(groupProduct);
 
-            //»Øµ÷µØÖ·
+            //ï¿½Øµï¿½ï¿½ï¿½Ö·
             callback = "a.efeiyi.com/group/waitPay" + "?groupId=" + group.getId() + "&memberId=" + member.getId() + "&purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId;
-            url = "http://www.efeiyi.com/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId() + "&callback=" + callback;
+            purchaseOrder.setCallback(callback);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+            url = "http://www.efeiyi.com/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId();
             return "redirect:" + url;
         } else {
             MyGroup group = (MyGroup) baseManager.getObject(MyGroup.class.getName(), groupId);
             GroupMember supMember = (GroupMember) baseManager.getObject(GroupMember.class.getName(), memberId);
             String level = String.valueOf(Integer.parseInt(supMember.getLevel()) + 1);
-            //Éú³ÉÍÅ¹º¶©µ¥Ïà¹Ø²Ù×÷
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Å¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½
             PurchaseOrder purchaseOrder = purchaseOrderGroupManager.createPurchaseOrder(groupProduct);
-            //ÅÐ¶ÏÊÇ·ñÒÑ¾­²Î¼Ó¸ÃÍÅ¹º
+            //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½ï¿½Î¼Ó¸ï¿½ï¿½Å¹ï¿½
             for (GroupMember groupMember : group.getGroupMemberList()) {
                 if (user.getId().equals(groupMember.getUser().getId())) {
                     url = "?groupProductId=" + groupProductId + "&groupId=" + groupId + "&memberId=" + memberId + "&purchaseOrderId=" + purchaseOrder.getId();
                     return "redirect:/group/shareGroup.do" + url;
                 }
             }
-            //Éú³ÉÍÅÔ±ÐÅÏ¢
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢
             GroupMember member = new GroupMember();
             member.setUser(user);
             member.setLevel(level);
@@ -91,9 +94,11 @@ public class GroupManagerImpl implements GroupManager {
             baseManager.saveOrUpdate(GroupMember.class.getName(), member);
 
 
-            //»Øµ÷µØÖ·
-            callback = "http://a.efeiyi.com/group/waitPay" + "?groupId=" + group.getId() + "&memberId=" + member.getId() + "&purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId;
-            url = "http://www.efeiyi.com/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId() + "&callback=" + callback;
+            //ï¿½Øµï¿½ï¿½ï¿½Ö·
+            callback = "a.efeiyi.com/group/waitPay" + "?groupId=" + group.getId() + "&memberId=" + member.getId() + "&purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId;
+            purchaseOrder.setCallback(callback);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+            url = "http://www.efeiyi.com/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId();
             return "redirect:" + url;
         }
     }
@@ -105,7 +110,7 @@ public class GroupManagerImpl implements GroupManager {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
 
         if (purchaseOrder.getOrderStatus().equals("5")) {
-            //¸üÐÂÍÅ¹º¶©µ¥
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Å¹ï¿½ï¿½ï¿½ï¿½ï¿½
             PurchaseOrderGroup purchaseOrderGroup = (PurchaseOrderGroup) baseManager.getObject(PurchaseOrderGroup.class.getName(), purchaseOrderId);
             purchaseOrderGroup.setMyGroup(myGroup);
             purchaseOrderGroup.setGroupMember(groupMember);
@@ -114,27 +119,21 @@ public class GroupManagerImpl implements GroupManager {
             }
             baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(), purchaseOrderGroup);
 
-            //¸üÐÂÍÅÐÅÏ¢
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
             if (myGroup != null && "2".equals(myGroup.getStatus())) {
                 myGroup.setStatus("1");
                 baseManager.saveOrUpdate(MyGroup.class.getName(), myGroup);
             }
 
-            //¸üÐÂÍÅÔ±ÐÅÏ¢
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢
             if (groupMember != null && "2".equals(groupMember.getStatus())) {
                 groupMember.setStatus("1");
                 groupMember.setMyGroup(myGroup);
                 groupMember.setCreateDateTime(new Date());
                 baseManager.saveOrUpdate(GroupMember.class.getName(), groupMember);
 
-                myGroup.getGroupMemberList().add(groupMember);
-            }
-
-            if (myGroup.getStatus().equals("1") && (myGroup.getGroupMemberList().size() == myGroup.getGroupProduct().getMemberAmount())) {
-                myGroup.setStatus("4");
-                baseManager.saveOrUpdate(MyGroup.class.getName(), myGroup);
                 return true;
-            } else {
+            }else {
                 return false;
             }
         } else {
@@ -161,15 +160,15 @@ public class GroupManagerImpl implements GroupManager {
         String left = "";
         String memberLeft = "";
         if (leftDay > 0) {
-            left = leftDay + "Ìì" + leftHour + "Ê±" + leftMin + "·Ö";
+            left = leftDay + "å¤©" + leftHour + "æ—¶" + leftMin + "åˆ†";
         } else {
             if (leftHour > 0) {
-                left = leftHour + "Ê±" + leftMin + "·Ö";
+                left = leftHour + "æ—¶" + leftMin + "åˆ†";
             } else {
                 if (leftMin > 0) {
-                    left = leftMin + "·Ö";
+                    left = leftMin + "åˆ†";
                 } else {
-                    left = "0·Ö";
+                    left = "0åˆ†";
                 }
 
             }
@@ -223,15 +222,15 @@ public class GroupManagerImpl implements GroupManager {
         String left = "";
         String memberLeft = "";
         if(leftDay>0){
-            left = leftDay+"å¤?"+leftHour+"æ—?"+leftMin+"åˆ?";
+            left = leftDay+"ï¿½?"+leftHour+"ï¿½?"+leftMin+"ï¿½?";
         }else {
             if(leftHour>0){
-                left = leftHour+"æ—?"+leftMin+"åˆ?";
+                left = leftHour+"ï¿½?"+leftMin+"ï¿½?";
             }else {
                 if(leftMin>0){
-                    left = leftMin+"åˆ?";
+                    left = leftMin+"ï¿½?";
                 }else {
-                    left = "0åˆ?";
+                    left = "0ï¿½?";
                 }
 
             }

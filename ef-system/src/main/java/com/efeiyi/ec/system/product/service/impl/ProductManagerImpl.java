@@ -152,6 +152,7 @@ public class ProductManagerImpl implements ProductManager {
                             productModel.setMarketPrice(null);
                         }
                         productModel.setWeight(productModelBean.getWeight()[i]);
+                        productModel.setFreeDelivery(productModelBean.getFreeDelivery()[i]);
                         productModel.setProduct(product);
                         productModel.setSerial(autoSerialManager.nextSerial("productModel"));
                         productModel.setStatus(status[i]);
@@ -202,6 +203,7 @@ public class ProductManagerImpl implements ProductManager {
                                 productModel.setMarketPrice(null);
                             }
                             productModel.setWeight(productModelBean.getWeight()[i]);
+                            productModel.setFreeDelivery(productModelBean.getFreeDelivery()[i]);
                             //   productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
                             productModel.setName(productModelBean.getModelName()[i]);
                             //   productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
@@ -235,6 +237,7 @@ public class ProductManagerImpl implements ProductManager {
                                 productModel.setMarketPrice(null);
                             }
                             productModel.setWeight(productModelBean.getWeight()[i]);
+                            productModel.setFreeDelivery(productModelBean.getFreeDelivery()[i]);
                             //        productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
                             productModel.setName(productModelBean.getModelName()[i]);
                             //        productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
@@ -264,6 +267,7 @@ public class ProductManagerImpl implements ProductManager {
                 productModel.setMarketPrice(null);
             }
             productModel.setWeight(productModelBean.getDefaultWeight());
+            productModel.setFreeDelivery(productModelBean.getDefaultFreeDelivery());
             productModel.setProduct(product);
             productModel.setSerial(autoSerialManager.nextSerial("productModel"));
             productModel.setStatus(productModelBean.getDefaultStatus());
@@ -281,6 +285,7 @@ public class ProductManagerImpl implements ProductManager {
                 productModel.setMarketPrice(new BigDecimal(productModelBean.getDefaultMarketPrice()));
             }
             productModel.setWeight(productModelBean.getDefaultWeight());
+            productModel.setFreeDelivery(productModelBean.getDefaultFreeDelivery());
             //     productModel.setAmount(Integer.parseInt(productModelBean.getDefaultAmount()));
             productModel.setName(productModelBean.getDefaultName());
             //     productModel.setPrice(new BigDecimal(productModelBean.getDefaultPrice()));
@@ -581,6 +586,26 @@ public class ProductManagerImpl implements ProductManager {
 
             }
         }
+
+    }
+
+    @Override
+    public ProductPicture setModelPicture(String modelId, String pictureId,String oldModelId) throws  Exception{
+        ProductModel productModel = null;
+        ProductModel oldProductModel = null;
+        if(!oldModelId.equals("0")) {
+            oldProductModel = (ProductModel) xdoDao.getObject(ProductModel.class.getName(), oldModelId);
+            oldProductModel.setProductModel_url(null);
+            xdoDao.saveOrUpdateObject(oldProductModel);
+        }
+        if(!modelId.equals("0")) {
+            productModel = (ProductModel) xdoDao.getObject(ProductModel.class.getName(), modelId);
+        }
+        ProductPicture productPicture = (ProductPicture)xdoDao.getObject(ProductPicture.class.getName(),pictureId);
+        productPicture.setStatus("1");
+        productPicture.setProductModel(productModel);
+        xdoDao.saveOrUpdateObject(productPicture);
+        return productPicture;
 
     }
 }

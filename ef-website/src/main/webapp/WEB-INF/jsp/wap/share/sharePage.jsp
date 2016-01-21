@@ -50,7 +50,7 @@
   <ul class="pac-text ae">
     <li>分&nbsp;享&nbsp;宝&nbsp;贝</li>
     <c:set var="shareUser">
-      ${purchaseOrder.getUser().getUsername()}
+      ${order.getUser().getUsername()}
     </c:set>
     <li>领&nbsp;取&nbsp;<em>5</em>&nbsp;元&nbsp;现&nbsp;金&nbsp;红&nbsp;包!</li>
   </ul>
@@ -93,7 +93,7 @@
 <script>
   var wx_share_title = "${fn:substring(shareUser, 0,3 )}****${fn:substring(shareUser,7,11)}豪掷${order.getPurchaseOrderProductList().get(0).purchasePrice}入手了一批好宝贝"; //分享标题
   var wx_share_des = "${productModel.product.name}${productModel.name}";  //分享描述
-  var wx_share_link = "http://www2.efeiyi.com/sharePage/openShare/${purchaseOrderId}"; //分享的链接地址  //需要动态获取，而不是直接填写静态值
+  var wx_share_link = "http://www.efeiyi.com/sharePage/openShare/${purchaseOrderId}"; //分享的链接地址  //需要动态获取，而不是直接填写静态值
   var wx_share_imgUrl = "http://pro.efeiyi.com/${productModel.productModel_url}"; //分享图片的url
   var wx_share_type = '';   //分享的类型   分享类型,music、video或link，不填默认为link
   var wx_share_dataUrl = ""; // 如果type是music或video，则要提供数据链接，默认为空

@@ -253,7 +253,7 @@
     }
 
     function submitOrder(orderId) {
-
+        var balance = $("#balance").text();
         if (gaverNameStats == "0") {
             showAlert("提示", "请填写送礼人姓名！");
         } else {
@@ -390,7 +390,7 @@
                         if (chkobjs[i].checked) {
                             t_price = t_price - parseFloat(chkobjs[i].value);
 //                            $("#couponPrice").html(chkobjs[i].value);
-                            $("#couponPrice").html("<em>-￥</em>" + chkobjs[i].value);
+                            $("#couponPrice").html(chkobjs[i].value);
                         }
                     }
                     $("#change").text(t_price);
