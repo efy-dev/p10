@@ -59,4 +59,9 @@ public class SubjectProductModel {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "SubjectProductModel{id = " + id + "}";
+    }
 }

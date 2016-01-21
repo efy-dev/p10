@@ -49,4 +49,9 @@ public class AddressCity implements Serializable {
     public void setAddressProvince(AddressProvince addressProvince) {
         this.addressProvince = addressProvince;
     }
+
+    @Override
+    public String toString(){
+        return  "AddressCity{id = "+id+"}";
+    }
 }

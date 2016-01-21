@@ -75,5 +75,10 @@ public class ProjectCategoryProductModel implements Serializable{
     public void setSort(Integer sort) {
         this.sort = sort;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectCategoryProductModel{id = " + id + "}";
+    }
 }
 

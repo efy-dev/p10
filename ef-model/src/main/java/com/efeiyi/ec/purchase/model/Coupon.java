@@ -139,4 +139,10 @@ public class Coupon implements Serializable {
     public void setWhetherBind(String whetherBind) {
         this.whetherBind = whetherBind;
     }
+
+
+    @Override
+    public String toString() {
+        return "Coupon{id = " + id + "}";
+    }
 }

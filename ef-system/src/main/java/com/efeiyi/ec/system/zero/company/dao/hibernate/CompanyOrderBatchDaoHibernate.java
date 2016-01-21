@@ -57,7 +57,8 @@ public class CompanyOrderBatchDaoHibernate implements CompanyOrderBatchDao {
             purchaseOrderProduct.setPurchaseAmount(1);
 
             orderGift.setSerial(serial);
-            orderGift.setOrderType("3");// 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型 /*5.企业礼品卡类型--未使用，使用3礼品卷类型 修改时一并修改配置文件*/
+            /*现在使用5，如果再使用3礼品卷类型 修改时一并修改配置文件---以及 本类getOrderGiftList方法*/
+            orderGift.setOrderType("5");// 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型 5.企业礼品卡类型
             orderGift.setStatus("2");//0假删 1正常 2企业礼品卡  9虚拟订单
             orderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRGIFT);//订单状态6 待收礼;填写订单后为5未发货
             orderGift.setShowGiftNameStatus("1");//0不显示 1显示
@@ -90,7 +91,10 @@ public class CompanyOrderBatchDaoHibernate implements CompanyOrderBatchDao {
 
     @Override
     public List<PurchaseOrderGift> getOrderGiftList(CompanyOrderBatch companyOrderBatch) throws Exception {
-        String hql = "from PurchaseOrderGift as pog where pog.companyOrderBatch = :companyOrderBatch and pog.status != '0' and pog.orderType = '3'";
+        /*3.礼品卷类型*/
+        //String hql = "from PurchaseOrderGift as pog where pog.companyOrderBatch = :companyOrderBatch and pog.status != '0' and pog.orderType = '3'";
+        /*5.企业礼品卡类型*/
+        String hql = "from PurchaseOrderGift as pog where pog.companyOrderBatch = :companyOrderBatch and pog.status != '0' and pog.orderType = '5'";
         Query query = this.getSession().createQuery(hql).setParameter("companyOrderBatch", companyOrderBatch);
         return query.list();
     }

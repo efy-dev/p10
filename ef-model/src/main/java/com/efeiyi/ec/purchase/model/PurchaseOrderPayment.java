@@ -118,4 +118,9 @@ public class PurchaseOrderPayment {
     public void setPurchaseOrderPaymentDetailsList(List<PurchaseOrderPaymentDetails> purchaseOrderPaymentDetailsList) {
         this.purchaseOrderPaymentDetailsList = purchaseOrderPaymentDetailsList;
     }
+
+    @Override
+    public String toString() {
+        return "PurchaseOrderPayment{id = " + id + "}";
+    }
 }

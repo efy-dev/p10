@@ -88,4 +88,9 @@ public class MasterIntroductionAttachment {
     public void setMasterNews(MasterNews masterNews) {
         this.masterNews = masterNews;
     }
+
+    @Override
+    public String toString(){
+        return  "MasterIntroductionAttachment{id = "+id+"}";
+    }
 }

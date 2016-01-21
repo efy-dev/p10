@@ -224,4 +224,9 @@ public class MasterWork {
     public void setStoreAmount(Integer storeAmount) {
         this.storeAmount = storeAmount;
     }
+
+    @Override
+    public String toString(){
+        return  "MasterWork{id = "+id+"}";
+    }
 }

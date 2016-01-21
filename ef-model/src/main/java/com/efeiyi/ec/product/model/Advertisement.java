@@ -102,4 +102,9 @@ public class Advertisement {
     public void setWapRedirect(String wapRedirect) {
         this.wapRedirect = wapRedirect;
     }
+
+    @Override
+    public String toString() {
+        return "Advertisement{id = " + id + "}";
+    }
 }

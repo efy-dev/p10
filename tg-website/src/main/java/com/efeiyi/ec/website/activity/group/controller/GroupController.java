@@ -275,7 +275,7 @@ public class GroupController {
 
         String supMan = request.getParameter("supMan");
         String number = request.getParameter("number");
-        model.addAttribute("title",supMan);
+        model.addAttribute("supMan",supMan);
         model.addAttribute("number",number);
 
         model.addAttribute("endTime", df.parse(df.format(endTime)).getTime());

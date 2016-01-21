@@ -89,4 +89,9 @@ public class PurchaseOrderPaymentDetails {
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
     }
+
+    @Override
+    public String toString() {
+        return "PurchaseOrderPaymentDetails{id = " + id + "}";
+    }
 }

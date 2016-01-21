@@ -50,4 +50,9 @@ public class AddressDistrict implements Serializable {
     public void setAddressCity(AddressCity addressCity) {
         this.addressCity = addressCity;
     }
+
+    @Override
+    public String toString() {
+        return "AddressDistrict{id = " + id + "}";
+    }
 }

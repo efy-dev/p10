@@ -107,4 +107,9 @@ public class PurchaseOrderComment {
     public void setPurchaseOrderBusinessReply(PurchaseOrderBusinessReply purchaseOrderBusinessReply) {
         this.purchaseOrderBusinessReply = purchaseOrderBusinessReply;
     }
+
+    @Override
+    public String toString() {
+        return "PurchaseOrderComment{id = " + id + "}";
+    }
 }

@@ -95,4 +95,10 @@ public class MasterBanner {
     public void setMaster(Master master) {
         this.master = master;
     }
+
+
+    @Override
+    public String toString(){
+        return  "MasterBanner{id = "+id+"}";
+    }
 }
