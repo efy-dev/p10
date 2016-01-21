@@ -170,11 +170,11 @@ public class GroupController {
             }
         }
 
+        int number = 0;
         if (group.getGroupProduct().getMemberAmount() - group.getGroupMemberList().size() > 0) {
-            model.addAttribute("number", group.getGroupProduct().getMemberAmount() - group.getGroupMemberList().size());
-        } else {
-            model.addAttribute("number", 0);
+            number = group.getGroupProduct().getMemberAmount() - group.getGroupMemberList().size();
         }
+        model.addAttribute("number", number);
         model.addAttribute("memberId", memberId);
         model.addAttribute("group", group);
         model.addAttribute("url", url);
@@ -182,7 +182,7 @@ public class GroupController {
         model.addAttribute("supMan", supMan);
         model.addAttribute("purchaseOrderId", purchaseOrderId);
         if (show != null && show.equals("1")) {
-            return "forward:/group/joinGroup.do" + url + "&purchaseOrderId=" + purchaseOrderId;
+            return "forward:/group/joinGroup.do" + url + "&purchaseOrderId=" + purchaseOrderId + "&supMan=" + supMan + "&number=" + number;
         } else {
             return "/personGroup/shareGroup1";
         }
