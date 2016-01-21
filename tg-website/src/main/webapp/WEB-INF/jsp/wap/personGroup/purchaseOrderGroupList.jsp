@@ -67,6 +67,11 @@
                 <c:if test="${purchaseOrderGroup.myGroup.status==1}">
                   <span>组团中</span>
                 </c:if>
+                <c:if test="${purchaseOrderGroup.myGroup.status==4}">
+                  <c:if test="${purchaseOrderGroup.orderStatus==5}">
+                    <span>组团中-待发货</span>
+                  </c:if>
+                </c:if>
                 <c:if test="${purchaseOrderGroup.myGroup.status==3}">
                   <c:if test="${purchaseOrderGroup.orderStatus==1}">
                     <span>组团成功-等待付款</span>
