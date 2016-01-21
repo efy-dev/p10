@@ -109,4 +109,9 @@ public class BalanceRecord {
     public void setConsumer(Consumer consumer) {
         this.consumer = consumer;
     }
+
+    @Override
+    public String toString(){
+        return  "BalanceRecord{id = "+id+"}";
+    }
 }

@@ -69,4 +69,9 @@ public class MessageAttachment {
 	public void setMasterMessage(MasterMessage masterMessage) {
 		this.masterMessage = masterMessage;
 	}
+
+    @Override
+    public String toString(){
+        return  "MessageAttachment{id = "+id+"}";
+    }
 }

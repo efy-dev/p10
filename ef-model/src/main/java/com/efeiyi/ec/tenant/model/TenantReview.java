@@ -76,4 +76,9 @@ public class TenantReview implements Serializable {
     public void setTenant(BigTenant tenant) {
         this.tenant = tenant;
     }
+
+    @Override
+    public String toString() {
+        return "TenantReview{id = " + id + "}";
+    }
 }

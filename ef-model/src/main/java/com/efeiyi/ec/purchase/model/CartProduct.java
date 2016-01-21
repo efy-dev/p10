@@ -95,4 +95,9 @@ public class CartProduct implements Serializable {
     public void setIsChoose(String isChoose) {
         this.isChoose = isChoose;
     }
+
+    @Override
+    public String toString() {
+        return "CartProduct{id = " + id + "}";
+    }
 }

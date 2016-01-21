@@ -100,4 +100,8 @@ public class GroupProduct implements Serializable {
     public void setProductModel(ProductModel productModel) {
         this.productModel = productModel;
     }
+    @Override
+    public String toString(){
+        return  "GroupProduct{id = "+id+"}";
+    }
 }

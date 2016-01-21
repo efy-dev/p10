@@ -96,4 +96,10 @@ public class PurchaseOrderDelivery {
     public void setBigPen(String bigPen) {
         this.bigPen = bigPen;
     }
+
+
+    @Override
+    public String toString() {
+        return "PurchaseOrderDelivery{id = " + id + "}";
+    }
 }

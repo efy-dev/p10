@@ -158,4 +158,9 @@ public class Subject {
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
     }
+
+    @Override
+    public String toString() {
+        return "Subject{id = " + id + "}";
+    }
 }

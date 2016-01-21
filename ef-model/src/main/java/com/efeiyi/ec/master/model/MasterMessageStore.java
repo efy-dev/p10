@@ -72,4 +72,9 @@ public class MasterMessageStore implements Serializable {
 	public void setCreateDateTime(Date createDateTime) {
 		this.createDateTime = createDateTime;
 	}
+
+    @Override
+    public String toString(){
+        return  "MasterMessageStore{id = "+id+"}";
+    }
 }

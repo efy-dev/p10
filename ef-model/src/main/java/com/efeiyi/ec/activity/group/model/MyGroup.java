@@ -89,4 +89,8 @@ public class MyGroup {
     public void setPurchaseOrderGroupList(List<PurchaseOrderGroup> purchaseOrderGroupList) {
         this.purchaseOrderGroupList = purchaseOrderGroupList;
     }
+    @Override
+    public String toString(){
+        return  "MyGroup{id = "+id+"}";
+    }
 }

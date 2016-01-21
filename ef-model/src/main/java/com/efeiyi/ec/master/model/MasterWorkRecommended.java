@@ -69,4 +69,9 @@ public class MasterWorkRecommended implements Serializable {
     public void setMasterWork(MasterWork masterWork) {
         this.masterWork = masterWork;
     }
+
+    @Override
+    public String toString(){
+        return  "MasterWorkRecommended{id = "+id+"}";
+    }
 }

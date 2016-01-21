@@ -275,6 +275,9 @@ public class Project implements Serializable {
         this.picture_pc_url = picture_pc_url;
     }
 
-
+    @Override
+    public String toString() {
+        return "Project{id = " + id + "}";
+    }
 }
 

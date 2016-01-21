@@ -150,4 +150,9 @@ public class MasterComment implements Serializable {
 	public void setAuthor(User author) {
 		this.author = author;
 	}
+
+    @Override
+    public String toString(){
+        return  "MasterComment{id = "+id+"}";
+    }
 }

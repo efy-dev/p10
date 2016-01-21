@@ -62,5 +62,8 @@ public class Consumer extends BigUser {
     public void setProjectContents(List<ProjectContent> projectContents) {
         this.projectContents = projectContents;
     }*/
-
+   @Override
+   public String toString() {
+       return "Consumer{id = " + id + "}";
+   }
 }

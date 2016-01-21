@@ -69,5 +69,9 @@ public class MasterWorkStore implements Serializable {
 	public void setCreateDateTime(Date createDateTime) {
 		this.createDateTime = createDateTime;
 	}
+    @Override
+    public String toString(){
+        return  "MasterWorkStore{id = "+id+"}";
+    }
 
 }

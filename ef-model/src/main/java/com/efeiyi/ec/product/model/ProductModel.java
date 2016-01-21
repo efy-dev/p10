@@ -212,4 +212,9 @@ public class ProductModel implements Serializable {
     public void setFreeDelivery(String freeDelivery) {
         this.freeDelivery = freeDelivery;
     }
+
+    @Override
+    public String toString() {
+        return "ProductModel{id = " + id + "}";
+    }
 }

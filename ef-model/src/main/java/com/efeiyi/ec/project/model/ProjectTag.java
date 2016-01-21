@@ -71,4 +71,9 @@ public class ProjectTag {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectTag{id = " + id + "}";
+    }
 }

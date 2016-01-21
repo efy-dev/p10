@@ -86,4 +86,10 @@ public class MasterRecommended implements Serializable {
     public void setGroup(String group) {
         this.group = group;
     }
+
+
+    @Override
+    public String toString(){
+        return  "MasterRecommended{id = "+id+"}";
+    }
 }

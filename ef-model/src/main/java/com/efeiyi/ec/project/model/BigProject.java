@@ -273,5 +273,9 @@ public class BigProject implements Serializable {
         this.picture_pc_url = picture_pc_url;
     }
 
+    @Override
+    public String toString() {
+        return "BigProject{id = " + id + "}";
+    }
 
 }

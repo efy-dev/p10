@@ -126,4 +126,9 @@ public class ConsumerAddress implements Serializable {
     public void setConsignee(String consignee) {
         this.consignee = consignee;
     }
+
+    @Override
+    public String toString() {
+        return "ConsumerAddress{id = " + id + "}";
+    }
 }

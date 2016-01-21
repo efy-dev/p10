@@ -250,4 +250,9 @@ public class BigTenant implements Serializable,BaseTenant {
     public void setContractNumber(String contractNumber) {
         this.contractNumber = contractNumber;
     }
+
+    @Override
+    public String toString() {
+        return "BigTenant{id = " + id + "}";
+    }
 }

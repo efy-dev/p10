@@ -126,5 +126,10 @@ public class ProjectCategory implements Serializable{
     public void setContext(String context) {
         this.context = context;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectCategory{id = " + id + "}";
+    }
 }
 

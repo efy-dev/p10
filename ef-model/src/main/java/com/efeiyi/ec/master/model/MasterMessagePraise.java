@@ -83,4 +83,9 @@ public class MasterMessagePraise implements Serializable {
 	public void setCreateDateTime(Date createDateTime) {
 		this.createDateTime = createDateTime;
 	}
+
+    @Override
+    public String toString(){
+        return  "MasterMessagePraise{id = "+id+"}";
+    }
 }

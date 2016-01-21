@@ -108,4 +108,9 @@ public class PurchaseOrderProduct {
     public void setAverage(String average) {
         this.average = average;
     }
+
+    @Override
+    public String toString() {
+        return "PurchaseOrderProduct{id = " + id + "}";
+    }
 }

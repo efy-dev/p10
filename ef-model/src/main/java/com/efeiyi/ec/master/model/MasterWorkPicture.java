@@ -58,4 +58,9 @@ public class MasterWorkPicture {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString(){
+        return  "MasterWorkPicture{id = "+id+"}";
+    }
 }
