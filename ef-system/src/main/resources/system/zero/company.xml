@@ -41,11 +41,17 @@
                 <do name="plistPurchaseOrderGift" access="" label="企业礼品卡分页列表" result="/zero/company/companyOrderGiftPList"
                     execute="com.efeiyi.ec.system.zero.company.handler.PurchaseOrderGiftPListHandler">
                     <query name="companyDefault" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="orderType" defaultValue="3" operation="eq"/>
+                        <!--3.礼品卷类型-->
+                        <!--<condition name="orderType" defaultValue="3" operation="eq"/>-->
+                        <!--5.企业礼品卡类型-->
+                        <condition name="orderType" defaultValue="5" operation="eq"/>
                         <condition name="status" defaultValue="2" operation="eq"/>
                     </query>
                     <query name="companyOrderBatch" label="同批次礼品卡" type="auto" orderBy="id:desc">
-                        <condition name="orderType" defaultValue="3" operation="eq"/>
+                        <!--3.礼品卷类型-->
+                        <!--<condition name="orderType" defaultValue="3" operation="eq"/>-->
+                        <!--5.企业礼品卡类型-->
+                        <condition name="orderType" defaultValue="5" operation="eq"/>
                         <condition name="status" defaultValue="2" operation="eq"/>
                         <condition name="companyOrderBatch.id" defaultValue="" operation="eq"/>
                     </query>

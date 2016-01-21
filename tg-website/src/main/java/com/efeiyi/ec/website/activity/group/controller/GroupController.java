@@ -146,7 +146,9 @@ public class GroupController {
             List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
 //            purchaseOrderId = list.get(0).getPurchaseOrder().getId();
 //            PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
-            supMan = list.get(0).getReceiverName();
+            if(list.size()>0){
+                supMan = list.get(0).getReceiverName();
+            }
         } else {
             PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
             supMan = purchaseOrder.getReceiverName();
@@ -155,7 +157,7 @@ public class GroupController {
 
         String url = "?groupProductId=" + groupProductId + "&groupId=" + groupId + "&memberId=" + memberId;
         int flag = 0;//0未参团 1 团长 2 团员
-        if (user != null) {
+        if (user != null && group.getGroupMemberList().size()>0) {
             for (GroupMember member : group.getGroupMemberList()) {
                 if (member.getUser().getId().equals(user.getId()) && member.getStatus().equals("1")) {
                     if ("0".equals(member.getLevel())) {
@@ -271,6 +273,10 @@ public class GroupController {
         calendar.add(Calendar.DATE, limintDay);
         Date endTime = calendar.getTime();
 
+        String supMan = request.getParameter("supMan");
+        String number = request.getParameter("number");
+        model.addAttribute("supMan",supMan);
+        model.addAttribute("number",number);
 
         model.addAttribute("endTime", df.parse(df.format(endTime)).getTime());
         model.addAttribute("group", group);
