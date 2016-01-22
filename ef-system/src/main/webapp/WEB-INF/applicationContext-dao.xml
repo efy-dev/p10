@@ -80,4 +80,9 @@
 
     <!-- 获取序列号 -->
     <!--<bean id="autoSerialManager" class="com.efeiyi.jh.service.AutoSerialManagerImpl" />-->
+
+    <!-- 微信答题 排行榜使用 -->
+    <bean id="scoreboardManagerImpl" class="com.efeiyi.ec.system.yale.question.service.impl.ScoreboardManagerImpl"/>
+    <bean id="scoreboardDaoHibernate" class="com.efeiyi.ec.system.yale.question.dao.hibernate.ScoreboardDaoHibernate"/>
+
 </beans>

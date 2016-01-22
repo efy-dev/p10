@@ -28,6 +28,8 @@
         <autoserial group="purchaseOrder" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
         <autoserial group="virtualPlan" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
         <autoserial group="companyOrderBatch" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
+        <autoserial group="question" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1"/>
+        <autoserial group="examination" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1"/>
     </autoserials>
 
     <logisticsCompanys>

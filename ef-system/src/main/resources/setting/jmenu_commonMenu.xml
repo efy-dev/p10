@@ -76,6 +76,17 @@
                 <match url="/promotionPlan/getOrderCountInfo.do?type=user"/>
             </jnode>
         </jnode>
+        <jnode url="" id="questionManager" access="admin,manager" state="closed"  text_zh_CN="答题闯关活动">
+            <jnode url="/basic/xm.do?qm=plistQuestion_default"  access="admin,manager" text_zh_CN="题库管理">
+                <match url="/basic/xm.do?qm=formQuestion"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=listQuestionSetting_default"  access="admin,manager" text_zh_CN="答题设置"/>
+            <jnode url="/basic/xm.do?qm=plistExaminationEdition_default"  access="admin,manager" text_zh_CN="答题期次管理">
+                <match url="/basic/xm.do?qm=formExaminationEdition"/>
+                <match url="/basic/xm.do?qm=viewExaminationEdition"/>
+            </jnode>
+            <jnode url="/scoreboard/scoreboardPList.do"  access="admin,manager" text_zh_CN="答题排行"/>
+        </jnode>
     </jnode>
 
     <jnode id="efecOrderAndConsumer" access="admin,operational,o_operational,financial,product_manager,market" url="/main.do?jnodeId=efecOrderAndConsumer" text_zh_CN="订单与消费者">

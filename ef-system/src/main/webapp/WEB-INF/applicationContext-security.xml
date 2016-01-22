@@ -23,6 +23,10 @@
 
         <intercept-url pattern="/main.do" access="isAuthenticated()"/>
         <intercept-url pattern="/basic/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/company/**" access="isAuthenticated()"/><!--企业礼品卡-->
+        <intercept-url pattern="/promotionPlan/**" access="isAuthenticated()"/><!--返利链接-->
+        <intercept-url pattern="/virtualPlan/**" access="isAuthenticated()"/><!--虚拟计划-->
+        <intercept-url pattern="/scoreboard/**" access="isAuthenticated()"/><!--微信答题-->
         <anonymous key="cookie_key" username="ananoymous" granted-authority="anonymous,ROLE_ANONYMOUS"/>
         <form-login login-page="/pc/login.do" login-processing-url="/j_spring_security_check"
                     authentication-success-handler-ref="loginSuccessHandler"
