@@ -86,7 +86,8 @@ public class PurchaseOrderGiftController {
 
         try {
             PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), orderId);
-            if (purchaseOrderGift.getOrderType().equals("3") && purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRGIFT)) {
+            //企业礼品卡订单orderType改成5，加入判断
+            if ((purchaseOrderGift.getOrderType().equals("3") || purchaseOrderGift.getOrderType().equals("5")) && purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRGIFT)) {
                 //判断是否是礼品订单 且可以被收礼
                 model.addAttribute("purchaseOrder", purchaseOrderGift);
             }
