@@ -190,7 +190,7 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
                         <condition label="status" name="status" defaultValue="1"  operation="eq"/>
-                        <condition label="项目" name="project.status" defaultValue="1"  operation="eq"/>
+                        <condition label="项目" name="project.status" defaultValue="0"  operation="ne"/>
                     </query>
                     <query name="default1" label="默认" type="auto" orderBy="id:desc">
                         <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>

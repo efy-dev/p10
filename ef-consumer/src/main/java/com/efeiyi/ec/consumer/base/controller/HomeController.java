@@ -21,53 +21,9 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    @Autowired
-    private ObjectRecommendedManager objectRecommendedManager;
-
-    @Autowired
-    private BannerManager bannerManager;
 
     @Autowired
     private BaseManager baseManager;
-
-    @RequestMapping({"/home.do"})
-    public String home(HttpServletRequest request, Model model) throws Exception {
-
-        //判断是否有需要重定向的页面
-        String redirectUrl = request.getParameter("redirect");
-        if (redirectUrl!=null){
-            return "redirect:"+redirectUrl;
-        }
-
-
-        List<Object> projectList = objectRecommendedManager.getRecommendedList("categoryRecommended");
-        HashMap<String, List> map = new HashMap<>();
-        for (Object object : projectList) {
-            XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
-            xQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
-            map.put(((ProjectCategory) object).getId(), baseManager.listObject(xQuery));
-        }
-        model.addAttribute("recommendMap", map);
-        model.addAttribute("projectList", projectList);
-
-        //首页轮播图
-        List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
-        model.addAttribute("bannerList", bannerList);
-
-        //传承人
-        List<Object> masterList = objectRecommendedManager.getRecommendedList("ec.masterRecommended");
-        model.addAttribute("masterList", masterList);
-        model.addAttribute("sign", "000");
-
-        //品牌故事
-        XQuery subjectQuery = new XQuery("listSubject_default", request);
-        List<Object> subjectList = baseManager.listObject(subjectQuery);
-        if (subjectList != null && subjectList.size() > 0) {
-            model.addAttribute("subject", subjectList.get(0));
-        }
-
-        return "/home";
-    }
 
     @RequestMapping({"/productCategory.do"})
     public String listProductCategory(HttpServletRequest request, Model model) throws Exception {
@@ -106,32 +62,11 @@ public class HomeController {
     }
 
 
-//    @RequestMapping({"/test/404"})
-//    public String show404Test(){
-//        return "/common/test";
-//    }
-//
-//    @RequestMapping({"/test/500"})
-//    public String show5004Test(){
-//       throw new RuntimeException();
-//    }
-
     @RequestMapping("/401")
     public String show401(HttpServletResponse response) throws Exception {
         return "redirect:/";
     }
 
-    @RequestMapping("/401test")
-    public String show(HttpServletResponse response) throws Exception {
-        response.sendError(401, "测试");
-        return "/home";
-    }
-
-
-    @RequestMapping({"/test.do"})
-    public String test(){
-        return "/test";
-    }
 
 
 

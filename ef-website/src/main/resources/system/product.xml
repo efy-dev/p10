@@ -157,7 +157,7 @@
         <entity name="ProductPicture" label="商品描述"  model="com.efeiyi.ec.product.model.ProductPicture">
             <does>
                 <do name="listProductPicture" access="" label="商品图片列表">
-                    <query name="default" label="默认" type="auto" orderBy="sort:desc">
+                    <query name="default" label="默认" type="auto" orderBy="sort:asc">
                         <condition name="status" defaultValue="3,9" operation="in"/>
                         <condition name="product.id" defaultValue="1" operation="eq"/>
                     </query>

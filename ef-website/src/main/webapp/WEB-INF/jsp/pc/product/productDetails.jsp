@@ -360,6 +360,19 @@
 </div>
 <!--//End-/*够阿米送礼弹出框*/-->
 <script type="text/javascript">
+        $(function(){
+            $('#btn-gift').bind('click',function(){
+                var $div=$('.dialog-gift');
+                var $close=$div.find('.icon-close');
+                $div.show();
+                $(".nav-new,.header-new,.topbar,.footernew").css("z-index","-1")
+                $close.bind('click',function(){
+                    $div.hide();
+                    $(".nav-new,.header-new,.topbar,.footernew").css("z-index","")
+                });
+                return false;
+            });
+        })
 
     $().ready(function () {
         ajaxRequest("<c:url value="/product/favorite/productFavoriteStatus.do"/>", {"id": "${productModel.id}"}, function (data) {
