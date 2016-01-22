@@ -40,7 +40,6 @@ public class CouponController {
     @RequestMapping({"/listUserCoupon.do"})
     @ResponseBody
     public List<Object> listUserCoupon(HttpServletRequest request) throws Exception {
-        float price = Float.parseFloat(request.getParameter("price"));
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), request.getParameter("purchaseOrderId"));
         XQuery couponQuery = new XQuery("listCoupon_useful", request);
         couponQuery.put("couponBatch_startDate", new Date());

@@ -39,31 +39,34 @@ public class PurchaseOrder {
     public static final String YOUHUIQUAN = "4";    //优惠券
     public static final String YUE = "5";       //余额
 
+    //基本属性
     private String id;
     private String serial;          //订单号
-    private List<PurchaseOrderProduct> purchaseOrderProductList;
-    private List<PurchaseOrderDelivery> purchaseOrderDeliveryList;  //发货记录 订单配送
-    private List<PurchaseOrderPayment> purchaseOrderPaymentList;
     private Date createDatetime;       //下单时间
-    private User user;
-    private ConsumerAddress consumerAddress;  //收获地址
     private String status;//0假删 1正常 2企业礼品卡  9虚拟订单
+    private String orderStatus; //订单状态
     private BigDecimal total;  //订单总价
     private BigDecimal originalPrice; //订单原价
-    private String orderStatus; //订单状态
-    private Tenant tenant;
-    private BigTenant bigTenant;
-    private List<PurchaseOrder> subPurchaseOrder;
-    private PurchaseOrder fatherPurchaseOrder;
     private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信 4优惠券 5.余额
     private String message; //买家留言
-    private Coupon coupon; //优惠券
     private String purchaseOrderAddress;//收货人地址
     private String receiverName;//收货人姓名
     private String receiverPhone;//收货人联系方式
     private String callback; //回调
     private String orderType; // 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型 5.企业礼品卡类型
     private String source;//来源推广渠道
+    private User user;                                              //订单所属用户
+
+    //复杂属性
+    private List<PurchaseOrderProduct> purchaseOrderProductList;      //订单包含的商品
+    private List<PurchaseOrderDelivery> purchaseOrderDeliveryList;  //发货记录 订单配送
+    private List<PurchaseOrderPayment> purchaseOrderPaymentList;     //订单的支付记录
+    private ConsumerAddress consumerAddress;  //收获地址
+    private Tenant tenant;
+    private BigTenant bigTenant;
+    private List<PurchaseOrder> subPurchaseOrder;
+    private PurchaseOrder fatherPurchaseOrder;
+    private Coupon coupon; //优惠券
 
     private AddressProvince province;
     private AddressDistrict district;
