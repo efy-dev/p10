@@ -38,9 +38,8 @@ public class ActivityManagerImpl implements ActivityManager {
 
            if(myGroup.getPurchaseOrderGroupList()!=null){
                 for(PurchaseOrderGroup purchaseOrderGroup:myGroup.getPurchaseOrderGroupList()){
-                    PurchaseOrder purchaseOrder = purchaseOrderGroup.getPurchaseOrder();
-                    purchaseOrder.setOrderStatus("5");
-                    xdoDao.saveOrUpdateObject(purchaseOrder);
+                    purchaseOrderGroup.setOrderStatus("5");
+                    xdoDao.saveOrUpdateObject(purchaseOrderGroup);
                 }
            }
 
@@ -58,22 +57,20 @@ public class ActivityManagerImpl implements ActivityManager {
                groupMember.setStatus("1");
                groupMember.setUser(user);
                xdoDao.saveOrUpdateObject(groupMember);
-               PurchaseOrder purchaseOrder = new PurchaseOrder();
-               purchaseOrder.setStatus("1");
-               purchaseOrder.setUser(user);
-               purchaseOrder.setSerial(autoSerialManager.nextSerial("purchaseOrder"));
-               purchaseOrder.setOrderStatus("5");
-               xdoDao.saveOrUpdateObject(purchaseOrder);
+               PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
+               purchaseOrderGroup.setStatus("1");
+               purchaseOrderGroup.setUser(user);
+               purchaseOrderGroup.setSerial(autoSerialManager.nextSerial("purchaseOrder"));
+               purchaseOrderGroup.setOrderStatus("5");
+               purchaseOrderGroup.setMyGroup(myGroup);
+               purchaseOrderGroup.setGroupMember(groupMember);
+               xdoDao.saveOrUpdateObject(purchaseOrderGroup);
+               PurchaseOrder purchaseOrder = (PurchaseOrder) xdoDao.getObject(PurchaseOrder.class.getName(),purchaseOrderGroup.getId());
                PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
                purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
                purchaseOrderProduct.setProductModel(myGroup.getGroupProduct().getProductModel());
                xdoDao.saveOrUpdateObject(purchaseOrderProduct);
-               PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
-               purchaseOrderGroup.setMyGroup(myGroup);
-               purchaseOrderGroup.setStatus("1");
-               purchaseOrderGroup.setGroupMember(groupMember);
-               purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
-               xdoDao.saveOrUpdateObject(purchaseOrderGroup);
+
            }
         }
     }
