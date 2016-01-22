@@ -35,6 +35,6 @@ public class PurchaseOrderGroup extends PurchaseOrder{
     }
     @Override
     public String toString(){
-        return  "PurchaseOrderGroup{myGroupId = "+myGroup.getId()+";GroupMember = "+groupMember.getId()+"}";
+        return  "PurchaseOrderGroup{id="+this.getId()+"}";
     }
 }
