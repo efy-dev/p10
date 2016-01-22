@@ -39,15 +39,15 @@
 
     </http>
 
-    <b:bean id="casEntryPoint"  class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
-        <b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>
-        <!--<b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>-->
+    <b:bean id="casEntryPoint"  class="authentication.CasAuthenticationRedirect">
+        <!--<b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>-->
+        <b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>
         <b:property name="serviceProperties" ref="serviceProperties"/>
     </b:bean>
 
     <b:bean id="serviceProperties"  class="org.springframework.security.cas.ServiceProperties">
-        <!--<b:property name="service"  value="http://localhost:8080/j_spring_cas_security_check"/>-->
-        <b:property name="service"  value="http://www2.efeiyi.com/j_spring_cas_security_check"/>
+        <b:property name="service"  value="http://localhost:8080/j_spring_cas_security_check"/>
+        <!--<b:property name="service"  value="http://www.efeiyi.com/j_spring_cas_security_check"/>-->
         <b:property name="sendRenew" value="false"/>
     </b:bean>
 
@@ -73,8 +73,8 @@
         <b:property name="serviceProperties" ref="serviceProperties" />
         <b:property name="ticketValidator">
             <b:bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
-                <b:constructor-arg index="0" value="http://passport.efeiyi.com" />
-                <!--<b:constructor-arg index="0" value="http://192.168.1.57/cas" />-->
+                <!--<b:constructor-arg index="0" value="http://passport.efeiyi.com" />-->
+                <b:constructor-arg index="0" value="http://192.168.1.57/cas" />
             </b:bean>
         </b:property>
         <b:property name="key" value="an_id_for_this_auth_provider_only"/>
@@ -87,7 +87,7 @@
     <b:bean id="requestSingleLogoutFilter"
             class="org.springframework.security.web.authentication.logout.LogoutFilter">
         <b:constructor-arg
-                value="http://passport.efeiyi.com/logout?service=http://www2.efeiyi.com/logoutHandler" />
+                value="http://passport.efeiyi.com/logout?service=http://www.efeiyi.com/logoutHandler" />
         <b:constructor-arg>
             <b:bean
                     class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
