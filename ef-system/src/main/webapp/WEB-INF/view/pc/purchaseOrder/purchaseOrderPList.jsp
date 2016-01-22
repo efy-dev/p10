@@ -174,11 +174,11 @@
                    placeholder="下载日期止"  data-am-datepicker readonly>
         </div>
 
-        <div class="am-form-group" id="xztenant" style="width: 260px;float: left;text-align: center">
+        <div class="am-form-group" id="xztenant" style="float: left;text-align: center">
             <label class="am-u-sm-4 am-form-label" style="padding: 0;">选择商家</label>
 
             <div class="am-u-sm-8" name="selectTenant" id="selectTenant" style="display: inline-block;padding: 0">
-                <select name="tenant3" id="tenant3" style="width:180px;float:left;">
+                <select name="tenant3" id="tenant3"  data-am-selected="{searchBox: 1}" style="width:180px;float:left;">
                     <option value="">请选择</option>
                     <c:forEach items="${tenantList}" var="tenant">
                     <option value="${tenant.id}">${tenant.name}</option>
@@ -187,7 +187,7 @@
             </div>
         </div>
 
-        <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-u-sm-12 am-u-md-6" style="padding-left: 35px;">
             <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
                style="color: red;" id="downloadOrder" onclick="downloadOrder()"
                >
