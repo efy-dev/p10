@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>期次信息</title>
-    <script src="<c:url value='/DatePicker/WdatePicker.js'/>"></script>
+    <script src="<c:url value="/resources/plugins/My97DatePicker/WdatePicker.js"/>"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
