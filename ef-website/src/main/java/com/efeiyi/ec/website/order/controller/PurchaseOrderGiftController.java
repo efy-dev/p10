@@ -4,7 +4,6 @@ import com.aliyun.openservices.oss.OSSClient;
 import com.aliyun.openservices.oss.model.ObjectMetadata;
 import com.aliyun.openservices.oss.model.PutObjectResult;
 import com.efeiyi.ec.organization.model.AddressCity;
-import com.efeiyi.ec.organization.model.AddressDistrict;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
@@ -86,11 +85,7 @@ public class PurchaseOrderGiftController {
 
         try {
             PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), orderId);
-            //企业礼品卡订单orderType改成5，加入判断
-            if ((purchaseOrderGift.getOrderType().equals("3") || purchaseOrderGift.getOrderType().equals("5")) && purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRGIFT)) {
-                //判断是否是礼品订单 且可以被收礼
-                model.addAttribute("purchaseOrder", purchaseOrderGift);
-            }
+            model.addAttribute("purchaseOrder", purchaseOrderGift);
             String productName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getName();
             String projectName = purchaseOrderGift.getPurchaseOrderProductList().get(0).getProductModel().getProduct().getProject().getName();
             String giftMessage = purchaseOrderGift.getGiftMessage();
@@ -138,12 +133,10 @@ public class PurchaseOrderGiftController {
             }
             //优先判断是否是送礼人查看当前页面
             if (AuthorizationUtil.isAuthenticated() && AuthorizationUtil.getMyUser().getId().equals(purchaseOrderGift.getUser().getId())) {
-                model.addAttribute("order", purchaseOrderGift);
                 model.addAttribute("request", "/purchaseOrder/giftView");
                 return "/purchaseOrder/purchaseOrderGiftView";
             }
             if (!purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WPAY) && !purchaseOrderGift.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRGIFT)) {
-                model.addAttribute("purchaseOrder", purchaseOrderGift);
                 model.addAttribute("request", "/purchaseOrder/giftView");
                 return "/purchaseOrder/giftView";
             }
@@ -295,18 +288,20 @@ public class PurchaseOrderGiftController {
         }
         AddressProvince addressProvince = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), request.getParameter("province.id"));
         AddressCity addressCity = (AddressCity) baseManager.getObject(AddressCity.class.getName(), request.getParameter("city.id"));
-        AddressDistrict addressDistrict =  (AddressDistrict) baseManager.getObject(AddressDistrict.class.getName(), request.getParameter("district.id"));
         String detail = request.getParameter("receiveDetail");
-        String address = addressProvince.getName() + addressCity.getName() + addressDistrict.getName() + detail;
+        String address = addressProvince.getName() + addressCity.getName() + detail;
         String receiveName = request.getParameter("receiveName");
         String receivePhone = request.getParameter("receivePhone");
-        //by lylylyly
         purchaseOrderGift.setReceiverName(receiveName);
         purchaseOrderGift.setReceiverPhone(receivePhone);
         purchaseOrderGift.setPurchaseOrderAddress(address);
-        purchaseOrderGift.setProvince(addressProvince);
-        purchaseOrderGift.setCity(addressCity);
-        purchaseOrderGift.setDistrict(addressDistrict);
+
+        ConsumerAddress consumerAddress = new ConsumerAddress();
+        consumerAddress.setProvince(addressProvince);
+        consumerAddress.setCity(addressCity);
+        purchaseOrderGift.setConsumerAddress(consumerAddress);
+        consumerAddress.setConsignee(receiveName);
+        baseManager.saveOrUpdate(ConsumerAddress.class.getName(), consumerAddress);
 
         purchaseOrderGift.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //订单改为未发货状态
         baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
