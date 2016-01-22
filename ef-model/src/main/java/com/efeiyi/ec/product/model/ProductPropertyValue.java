@@ -68,4 +68,10 @@ public class ProductPropertyValue {
     public void setProjectPropertyValue(ProjectPropertyValue projectPropertyValue) {
         this.projectPropertyValue = projectPropertyValue;
     }
+
+
+    @Override
+    public String toString() {
+        return "ProductPropertyValue{id = " + id + "}";
+    }
 }

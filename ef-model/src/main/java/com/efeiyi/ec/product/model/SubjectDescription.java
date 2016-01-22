@@ -33,4 +33,9 @@ public class SubjectDescription {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "SubjectDescription{id = " + id + "}";
+    }
 }

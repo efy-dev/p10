@@ -55,13 +55,18 @@ public class HttpUtil {
 
 
     public static String getHttpResponse(String urlStr, String requestStr) throws Exception {
+
+        return getHttpResponse(urlStr,requestStr,"UTF-8","UTF-8");
+    }
+
+    public static String getHttpResponse(String urlStr, String requestStr, String srcCharset, String destCharset) throws Exception {
         URL url = new URL(urlStr);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         //PrintWriter writer =null;
         if (requestStr != null && !requestStr.equals("")) {
             connection.setDoOutput(true);
             OutputStream outputStream = connection.getOutputStream();
-            outputStream.write(requestStr.getBytes("UTF-8"));
+            outputStream.write(requestStr.getBytes(srcCharset));
             outputStream.flush();
             /*writer = new PrintWriter(connection.getOutputStream());
             writer.println(requestStr);
@@ -69,7 +74,7 @@ public class HttpUtil {
         }
 //        Scanner scanner = new Scanner(connection.getInputStream());
         InputStream inputStream = connection.getInputStream();
-        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, destCharset);
         BufferedReader in = new BufferedReader(inputStreamReader);
 
         String jsonUserStr = in.readLine().toString();
@@ -81,4 +86,30 @@ public class HttpUtil {
         return jsonUserStr;
     }
 
+    public static String getHttpResponse(String urlStr, String requestStr, String defaultCharset) throws Exception {
+        URL url = new URL(urlStr);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        //PrintWriter writer =null;
+        if (requestStr != null && !requestStr.equals("")) {
+            connection.setDoOutput(true);
+            OutputStream outputStream = connection.getOutputStream();
+            outputStream.write(requestStr.getBytes());
+            outputStream.flush();
+            /*writer = new PrintWriter(connection.getOutputStream());
+            writer.println(requestStr);
+            writer.flush();*/
+        }
+//        Scanner scanner = new Scanner(connection.getInputStream());
+        InputStream inputStream = connection.getInputStream();
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader in = new BufferedReader(inputStreamReader);
+
+        String jsonUserStr = in.readLine().toString();
+//        StringBuilder responseStr = new StringBuilder();
+//        while (scanner.hasNextLine()) {
+//            responseStr.append(scanner.nextLine());
+//        }
+
+        return jsonUserStr;
+    }
 }

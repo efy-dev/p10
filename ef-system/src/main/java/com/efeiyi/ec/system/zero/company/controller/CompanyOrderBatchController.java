@@ -30,7 +30,7 @@ public class CompanyOrderBatchController {
     @RequestMapping("/company/saveCompanyOrderGiftList.do")
     public ModelAndView saveOrderGiftList(HttpServletRequest request)throws Exception{
         String orderBatchId = request.getParameter("id");
-        if (orderBatchId.isEmpty() || orderBatchId.trim().equals("")){
+        if (orderBatchId == null || orderBatchId.trim().equals("")){
             throw new Exception("企业礼品卡批次Id不能为空");
         }
         CompanyOrderBatch companyOrderBatch = (CompanyOrderBatch) baseManager.getObject(CompanyOrderBatch.class.getName(), orderBatchId);
@@ -40,15 +40,14 @@ public class CompanyOrderBatchController {
     @RequestMapping("/company/downloadOrderGiftsTxt.do")
     public void downloadOrderGiftsTxt(HttpServletRequest request,HttpServletResponse response)throws Exception{
         String id = request.getParameter("id");
-        CompanyOrderBatch companyOrderBatch = new CompanyOrderBatch();
         List<PurchaseOrderGift> list;
         String filename;
-        if (id.isEmpty() || id.trim().equals("")){
+        if (id == null || id.trim().equals("")){
             XQuery xQuery = new XQuery("listPurchaseOrderGift_companyDefault", request);
             list = baseManager.listObject(xQuery);
             filename = "All.csv";
         }else {
-            companyOrderBatch = (CompanyOrderBatch) baseManager.getObject(CompanyOrderBatch.class.getName(), id);
+            CompanyOrderBatch companyOrderBatch = (CompanyOrderBatch) baseManager.getObject(CompanyOrderBatch.class.getName(), id);
             list = companyOrderBatchServiceManager.getOrderGiftList(companyOrderBatch);
             filename = companyOrderBatch.getSerial() + ".csv";
         }

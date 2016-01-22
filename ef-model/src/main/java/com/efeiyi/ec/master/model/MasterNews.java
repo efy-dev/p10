@@ -142,4 +142,8 @@ public class MasterNews {
     public void setMasterIntroductionAttachmentList(List<MasterIntroductionAttachment> masterIntroductionAttachmentList) {
         this.masterIntroductionAttachmentList = masterIntroductionAttachmentList;
     }
+    @Override
+    public String toString(){
+        return  "MasterNews{id = "+id+"}";
+    }
 }

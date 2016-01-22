@@ -87,4 +87,8 @@ public class MasterIntroduction {
     public void setAttachmentList(List<MasterIntroductionAttachment> attachmentList) {
         this.attachmentList = attachmentList;
     }
+    @Override
+    public String toString(){
+        return  "MasterIntroduction{id = "+id+"}";
+    }
 }

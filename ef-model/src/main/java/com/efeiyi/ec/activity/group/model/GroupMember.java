@@ -113,4 +113,9 @@ public class GroupMember implements Serializable {
     public void setRedPacket(BigDecimal redPacket) {
         this.redPacket = redPacket;
     }
+
+    @Override
+    public String toString(){
+        return  "GroupMember{id = "+id+"}";
+    }
 }

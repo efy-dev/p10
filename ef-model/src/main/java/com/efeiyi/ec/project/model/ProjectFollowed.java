@@ -68,4 +68,9 @@ public class ProjectFollowed implements Serializable {
     public void setCreateDatetime(Date createDatetime) {
         this.createDatetime = createDatetime;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectFollowed{id = " + id + "}";
+    }
 }

@@ -54,4 +54,9 @@ public class PurchaseOrderCommentPicture {
     public void setPurchaseOrderComment(PurchaseOrderComment purchaseOrderComment) {
         this.purchaseOrderComment = purchaseOrderComment;
     }
+
+    @Override
+    public String toString() {
+        return "PurchaseOrderCommentPicture{id = " + id + "}";
+    }
 }

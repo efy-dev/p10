@@ -78,4 +78,9 @@ public class ProjectProperty {
     public void setProjectPropertyValueList(List<ProjectPropertyValue> projectPropertyValueList) {
         this.projectPropertyValueList = projectPropertyValueList;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectProperty{id = " + id + "}";
+    }
 }

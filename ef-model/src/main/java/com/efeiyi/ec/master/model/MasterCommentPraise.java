@@ -89,4 +89,9 @@ public class MasterCommentPraise implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString(){
+        return  "MasterCommentPraise{id = "+id+"}";
+    }
 }

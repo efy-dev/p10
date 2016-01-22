@@ -63,4 +63,9 @@ public class TenantProject implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "TenantProject{id = " + id + "}";
+    }
 }

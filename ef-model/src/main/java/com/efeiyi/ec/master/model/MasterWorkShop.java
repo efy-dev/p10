@@ -95,4 +95,9 @@ public class MasterWorkShop {
     public void setShopIntroduction(String shopIntroduction) {
         this.shopIntroduction = shopIntroduction;
     }
+
+    @Override
+    public String toString(){
+        return  "MasterWorkShop{id = "+id+"}";
+    }
 }

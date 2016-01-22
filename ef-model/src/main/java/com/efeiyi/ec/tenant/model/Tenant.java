@@ -129,4 +129,9 @@ public class Tenant implements Serializable {
     public void setSerial(String serial) {
         this.serial = serial;
     }
+
+    @Override
+    public String toString() {
+        return "Tenant{id = " + id + "}";
+    }
 }

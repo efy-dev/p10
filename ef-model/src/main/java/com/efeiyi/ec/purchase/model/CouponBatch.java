@@ -285,4 +285,9 @@ public class CouponBatch implements Serializable {
     public void setDeliverType(String deliverType) {
         this.deliverType = deliverType;
     }
+
+    @Override
+    public String toString() {
+        return "CouponBatch{id = " + id + "}";
+    }
 }

@@ -79,4 +79,10 @@ public class ProductPicture {
     public void setSort(Integer sort) {
         this.sort = sort;
     }
+
+
+    @Override
+    public String toString() {
+        return "ProductPicture{id = " + id + "}";
+    }
 }

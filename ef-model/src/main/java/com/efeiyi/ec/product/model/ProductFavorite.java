@@ -74,4 +74,9 @@ public class ProductFavorite {
     public void setCreateDatetime(Date createDatetime) {
         this.createDatetime = createDatetime;
     }
+
+    @Override
+    public String toString() {
+        return "ProductFavorite{id = " + id + "}";
+    }
 }

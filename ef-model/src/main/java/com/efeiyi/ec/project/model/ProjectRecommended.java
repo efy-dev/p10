@@ -75,5 +75,10 @@ public class ProjectRecommended implements Serializable {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectRecommended{id = " + id + "}";
+    }
 }
 

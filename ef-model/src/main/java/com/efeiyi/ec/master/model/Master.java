@@ -278,7 +278,10 @@ public class Master implements Serializable {
         this.masterRecommendedList = masterRecommendedList;
     }
 
-
+    @Override
+    public String toString(){
+        return  "Master{id = "+id+"}";
+    }
 
 
 }

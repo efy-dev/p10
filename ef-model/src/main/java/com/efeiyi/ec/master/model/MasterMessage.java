@@ -242,4 +242,9 @@ public class MasterMessage implements Serializable {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+    @Override
+    public String toString(){
+        return  "MasterMessage{id = "+id+"}";
+    }
 }

@@ -51,6 +51,11 @@ public class PurchaseOrderBusinessReply{
     public void setCreateDatetime(Date createDatetime) {
         this.createDatetime = createDatetime;
     }
+
+    @Override
+    public String toString() {
+        return "PurchaseOrderBusinessReply{id = " + id + "}";
+    }
 }
 
 

@@ -144,4 +144,9 @@ public class SeckillProduct {
     public void setUsefulAmount(Integer usefulAmount) {
         this.usefulAmount = usefulAmount;
     }
+
+    @Override
+    public String toString(){
+        return  "SeckillProduct{id = "+id+"}";
+    }
 }
