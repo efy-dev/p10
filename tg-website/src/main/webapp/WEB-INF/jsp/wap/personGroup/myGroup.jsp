@@ -100,9 +100,13 @@
               </c:if>
               <c:if test="${member.status!=2&&member.myGroup.status=='3'}">
                 <p>组团成功</p>
+                 <span>
+                 拼团结束
+               </span>
               </c:if>
               <c:if test="${member.status!=2&&member.myGroup.status=='5'}">
                 <p>组团失败</p>
+                <span>拼团结束</span>
               </c:if>
               <c:forEach items="${member.myGroup.groupMemberList}" var="memberTemp" varStatus="rec">
                 <c:if test="${memberTemp.level==0}">

@@ -11,20 +11,8 @@ import javax.persistence.*;
 @Table(name = "activity_purchase_order_group")
 public class PurchaseOrderGroup extends PurchaseOrder{
 
-
-    private PurchaseOrder purchaseOrder;
     private MyGroup myGroup;
     private GroupMember groupMember;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "purchase_order_id")
-    public PurchaseOrder getPurchaseOrder() {
-        return purchaseOrder;
-    }
-
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
-    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
@@ -45,8 +33,8 @@ public class PurchaseOrderGroup extends PurchaseOrder{
     public void setGroupMember(GroupMember groupMember) {
         this.groupMember = groupMember;
     }
-    @Override
-    public String toString(){
-        return  "PurchaseOrderGroup{myGroupId = "+myGroup.getId()+";GroupMember = "+groupMember.getId()+"}";
-    }
+//    @Override
+//    public String toString(){
+//        return  "PurchaseOrderGroup{id="+this.getId()+"}";
+//    }
 }
