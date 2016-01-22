@@ -19,9 +19,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/**
- * Created by Administrator on 2015/8/17.
- */
 @Controller
 public class HomeController {
 
@@ -60,7 +57,6 @@ public class HomeController {
         //tenant_project
         HashMap<String, List> map = new HashMap<>();
         HashMap<String, List> projectMap = new HashMap<>();
-        HashMap<String, String> tenantMap = new HashMap<>();
         for (Object object : categoryList) {
             //取得推荐分类下面商品
             XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
@@ -72,7 +68,6 @@ public class HomeController {
             projectQuery.setSortHql("");
             projectQuery.updateHql();
             projectMap.put(((ProjectCategory) object).getId(), baseManager.listObject(projectQuery));
-
         }
         model.addAttribute("recommendMap", map);
         model.addAttribute("categoryList", categoryList);
@@ -110,41 +105,21 @@ public class HomeController {
 
     @RequestMapping({"/productCategory.do"})
     public String listProductCategory(HttpServletRequest request, Model model) throws Exception {
-        //首页轮播图
-        List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
-        model.addAttribute("bannerList", bannerList);
         //取得分类列表
-        XQuery projectCategoryxQuery = new XQuery("listProjectCategory_default", request);
-        projectCategoryxQuery.setSortHql("");
-        projectCategoryxQuery.updateHql();
-        List<Object> categoryList = baseManager.listObject(projectCategoryxQuery);
-        List<Object> recommendedCategoryList = objectRecommendedManager.getRecommendedList("categoryRecommended");
-        //店铺推荐
-        List<Object> recommendedTenantList = objectRecommendedManager.getRecommendedList("tenantRecommended");
-        //tenant_project
-        HashMap<String, List> map = new HashMap<>();
+        XQuery projectCategoryXQuery = new XQuery("listProjectCategory_default", request);
+        projectCategoryXQuery.setSortHql("");
+        projectCategoryXQuery.updateHql();
+        List<Object> categoryList = baseManager.listObject(projectCategoryXQuery);
         HashMap<String, List> projectMap = new HashMap<>();
-        HashMap<String, String> tenantMap = new HashMap<>();
         for (Object object : categoryList) {
-            //取得推荐分类下面商品
-            XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
-            xQuery.setSortHql("");
-            xQuery.updateHql();
-            xQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
-            map.put(((ProjectCategory) object).getId(), baseManager.listObject(xQuery));
-            //首页
             XQuery projectQuery = new XQuery("listProject_default", request);
             projectQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
             projectQuery.setSortHql("");
             projectQuery.updateHql();
             projectMap.put(((ProjectCategory) object).getId(), baseManager.listObject(projectQuery));
-
         }
-        model.addAttribute("recommendMap", map);
         model.addAttribute("categoryList", categoryList);
-        model.addAttribute("recommendedCategoryList", recommendedCategoryList);
         model.addAttribute("projectMap", projectMap);
-        model.addAttribute("recommendedTenantList", recommendedTenantList);
         return "/common/productCategory";
     }
 
@@ -161,7 +136,6 @@ public class HomeController {
             projectQuery.setSortHql("");
             projectQuery.updateHql();
             projectMap.put(((ProjectCategory) object).getId(), baseManager.listObject(projectQuery));
-
         }
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("projectMap", projectMap);
@@ -180,7 +154,7 @@ public class HomeController {
     }
 
     @RequestMapping("/401")
-    public String show401(HttpServletResponse response) throws Exception {
+    public String show401() throws Exception {
         return "redirect:/";
     }
 
@@ -196,13 +170,13 @@ public class HomeController {
     @RequestMapping({"/watchUrlSource.do"})
     public String watchedUrl(HttpServletRequest request) throws Exception {
         String currentUrl = request.getParameter("currentUrl");
-        if(currentUrl.contains("source")) {
+        if (currentUrl.contains("source")) {
             String source = currentUrl.substring(currentUrl.indexOf("source"));
             if (source.contains("&")) {
                 source = source.substring(source.indexOf("source"), source.indexOf("&"));
             }
             source = source.substring(source.indexOf("=") + 1);
-            LinkedHashMap queryParamMap = new LinkedHashMap();
+            LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
             queryParamMap.put("identifier", source);
             PromotionPlan promotionPlan = (PromotionPlan) baseManager.getUniqueObjectByConditions("from PromotionPlan x where x.identifier=:identifier", queryParamMap);
             if (promotionPlan != null && !"0".equals(promotionPlan.getStatus())) {
