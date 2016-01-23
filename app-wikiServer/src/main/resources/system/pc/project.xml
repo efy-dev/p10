@@ -82,7 +82,7 @@
                 </field>
             </fields>
             <does>
-                <do name="plistProject" access="" label="project列表" execute="com.efeiyi.ec.wiki.category.controller.ProjectCategoryHandler"
+                <do name="plistProject" access="" label="project列表" execute="com.efeiyi.ec.art.category.controller.ProjectCategoryHandler"
                     result="/classify/projectCategory">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <!--<condition name="fatherProject.fatherProjectId" defaultValue="" operation="eq" inputType="default"/>-->
@@ -335,7 +335,7 @@
 
         <entity name="ProductComment" label="ProductComment"
                 basic="simple" others=""
-                model="com.efeiyi.ec.wiki.model.ProductComment">
+                model="com.efeiyi.ec.art.model.ProductComment">
             <does>
                 <do name="plistProductComment" access="" label="ProductComment列表"
                     result="json">
@@ -355,7 +355,7 @@
 
         <entity name="Praise2Product" label="Praise2Product"
                 basic="simple" others=""
-                model="com.efeiyi.ec.wiki.model.ProductPraise">
+                model="com.efeiyi.ec.art.model.ProductPraise">
             <does>
                 <do name="plistPraise2Product" access="" label="Praise2Product列表"
                     result="json">

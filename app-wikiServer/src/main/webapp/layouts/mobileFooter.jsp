@@ -1,4 +1,4 @@
-<%@ page import="com.efeiyi.ec.wiki.organization.util.AuthorizationUtil" %>
+<%@ page import="com.efeiyi.ec.art.organization.util.AuthorizationUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="login-reg">
  <%--   <%

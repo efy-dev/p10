@@ -1,5 +1,5 @@
 <!doctype html>
-<%@ page import="com.efeiyi.ec.wiki.organization.util.AuthorizationUtil" %>
+<%@ page import="com.efeiyi.ec.art.organization.util.AuthorizationUtil" %>
 <%@ page import="com.ming800.core.util.HttpUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
