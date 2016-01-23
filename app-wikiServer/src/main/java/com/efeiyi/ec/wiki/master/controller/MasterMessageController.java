@@ -46,7 +46,7 @@ public class MasterMessageController extends BaseController {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         TreeMap treeMap = new TreeMap();
         try {
-            JSONObject jsonObj=new  JSONObject();
+            JSONObject jsonObj=new JSONObject();
             try {
                  jsonObj = JsonAcceptUtil.receiveJson(request);
             }catch (Exception e){
@@ -81,14 +81,14 @@ public class MasterMessageController extends BaseController {
             treeMap.put("index", index);//页码
 
             boolean verify = DigitalSignatureUtil.verify(treeMap, signmsg);
-          /*  if (verify != true) {
+            if (verify != true) {
                 logBean.setResultCode("10002");
                 logBean.setMsg("参数校验不合格，请仔细检查");
                 resultMap.put("resultCode", "10002");
                 resultMap.put("resultMsg", "参数校验不合格，请仔细检查");
                 baseManager.saveOrUpdate(LogBean.class.getName(),logBean);
                 return resultMap;
-            }*/
+            }
 
             LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
             map.put("username", jsonObj.getString("username"));
