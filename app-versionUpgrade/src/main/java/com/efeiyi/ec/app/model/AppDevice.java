@@ -18,7 +18,6 @@ public class AppDevice  implements Serializable{
     private String name;
     private String is_encryption;
     private String key;
-    private String image_size;
     private String create_time;
     private String update_time;
     private String status;
@@ -48,21 +47,13 @@ public class AppDevice  implements Serializable{
     public void setIs_encryption(String is_encryption) {
         this.is_encryption = is_encryption;
     }
-    @Column(name = "is_encryption")
+    @Column(name = "key")
     public String getKey() {
         return key;
     }
 
     public void setKey(String key) {
         this.key = key;
-    }
-    @Column(name = "image_size")
-    public String getImage_size() {
-        return image_size;
-    }
-
-    public void setImage_size(String image_size) {
-        this.image_size = image_size;
     }
     @Column(name = "create_time")
     public String getCreate_time() {
