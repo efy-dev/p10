@@ -2,7 +2,6 @@ package com.efeiyi.ec.wiki.organization.service.imp;
 
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.User;
-
 import com.efeiyi.ec.wiki.organization.OrganizationConst;
 import com.efeiyi.ec.wiki.organization.service.BranchManager;
 import com.ming800.core.base.dao.XdoDao;

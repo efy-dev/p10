@@ -4,7 +4,7 @@ package com.efeiyi.ec.wiki.product.controller;
 import com.efeiyi.ec.wiki.base.controller.WikibaseController;
 import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
 import com.efeiyi.ec.wiki.model.ProductComment;
-import com.efeiyi.ec.wiki.model.ProductCommentModel;
+import com.efeiyi.ec.wiki.product.model.ProductCommentModel;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -12,7 +12,6 @@ import com.ming800.core.does.model.XQuery;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 

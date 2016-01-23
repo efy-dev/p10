@@ -1,7 +1,6 @@
 package com.efeiyi.ec.wiki.organization.service.imp;
 
 import com.efeiyi.ec.organization.model.BigUser;
-
 import com.efeiyi.ec.wiki.organization.model.SendCode;
 import com.efeiyi.ec.wiki.organization.model.SmsProvider;
 import com.efeiyi.ec.wiki.organization.model.YunPianSmsProvider;

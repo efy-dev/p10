@@ -1,8 +1,6 @@
 package com.efeiyi.ec.wiki.product.model;
 
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
-import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.wiki.model.ProductComment;
 
 import java.io.Serializable;
