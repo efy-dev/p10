@@ -1,5 +1,6 @@
 package com.ming800.core.p.model;
 
+import com.google.common.base.Objects;
 import com.ming800.core.taglib.PageEntity;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Map;
  * Created by Administrator on 2015/11/17.
  */
 public class SearchParamBean {
+    private String id;
     private String q;
     private String query;
     private String facetFields;
@@ -161,5 +163,26 @@ public class SearchParamBean {
 
     public void setFq(String fq) {
         this.fq = fq;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SearchParamBean that = (SearchParamBean) o;
+        return Objects.equal(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

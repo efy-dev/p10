@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,9 @@ public class SearchController {
 
 
     @RequestMapping({"/search.do", "/AjaxSearch.do", "/filterSearch.do"})
-    public ModelAndView solrSearch(ModelMap modelMap,SearchParamBean searchParamBean) throws Exception {
+    public ModelAndView solrSearch(ModelMap modelMap,SearchParamBean searchParamBean,HttpServletRequest request) throws Exception {
+        //searchParamBean加入Id作为唯一标识，避免相同检索请求相互覆盖
+        searchParamBean.setId(request.getRequestedSessionId() + System.currentTimeMillis());
 
         if (searchParamBean.getQ() == null || "".equals(searchParamBean.getQ().trim())){
             searchParamBean.setQ("*");
