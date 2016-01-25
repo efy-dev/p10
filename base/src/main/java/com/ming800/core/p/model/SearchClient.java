@@ -63,8 +63,9 @@ public class SearchClient implements Runnable {
                     synchronized (searchParamBean) {
                         searchParamBean.notifyAll();
                     }
-                }catch (Exception e){
+                }catch (NullPointerException e){
                     //一般是NullPointerException可以忽略
+                }catch (Exception e){
                     e.printStackTrace();
                 }
             }
