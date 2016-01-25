@@ -1,7 +1,7 @@
 package com.efeiyi.ec.art.product.model;
 
 import com.efeiyi.ec.organization.model.User;
-import com.efeiyi.ec.art.model.ProductComment;
+import com.efeiyi.ec.wiki.model.ProductComment;
 
 import java.io.Serializable;
 import java.util.Date;

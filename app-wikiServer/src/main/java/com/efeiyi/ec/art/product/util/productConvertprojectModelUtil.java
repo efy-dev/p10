@@ -1,9 +1,9 @@
 package com.efeiyi.ec.art.product.util;
 
-import com.efeiyi.ec.art.model.ProductComment;
-import com.efeiyi.ec.art.model.ProductPraise;
 import com.efeiyi.ec.art.product.model.ProductCommentModel;
 import com.efeiyi.ec.art.product.model.ProductPraiseModel;
+import com.efeiyi.ec.wiki.model.ProductComment;
+import com.efeiyi.ec.wiki.model.ProductPraise;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
