@@ -12,8 +12,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>【${proName}】-e飞蚁</title>
-    <meta name="keywords" content="${proName}" />
+    <title>【${project.name}】-e飞蚁</title>
+    <meta name="keywords" content="${project.name}" />
     <meta name="description" content="${project.description}" />
 </head>
 <body>
@@ -23,7 +23,7 @@
   <div class="breadcrumb wh">
     <ol class="am-breadcrumb">
       <li><a href="/">首页</a></li>
-      <li class="am-active">${proName}</li>
+      <li class="am-active">${project.name}</li>
     </ol>
   </div>
  </div>

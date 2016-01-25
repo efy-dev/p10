@@ -34,7 +34,7 @@ public class TenantController {
 
     @RequestMapping({"/tenant/{tenantId}"})
     public String listProduct(@PathVariable String tenantId, HttpServletRequest request, Model model) throws Exception {
-        XQuery xQuery = new XQuery("plistProductModel_default1",request,12);
+        XQuery xQuery = new XQuery("plistProductModel_default1",request);
         xQuery.put("product_tenant_id",tenantId);
 
         String queryHql = "from "+TenantMaster.class.getName()+" t where t.tenant.id =:tenantId and t.status ='1' order by t.id desc";
