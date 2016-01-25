@@ -7,7 +7,7 @@
 <div class="wh">
   <div class="coupons">
     <div class="promptly">
-      <a href="<c:url value="/getYhq.do?couponBatchId=${couponBatchId}"/>" class="btn">立&nbsp;即&nbsp;领&nbsp;取</a>
+      <a href="<c:url value="/coupon/getCouponView.do?couponBatchId=${couponBatchId}"/>" class="btn">立&nbsp;即&nbsp;领&nbsp;取</a>
     </div>
   </div>
 </div>

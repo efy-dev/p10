@@ -418,15 +418,15 @@ public class CouponController {
 
     //------------------------------------------------------以下代码 待优化---------------------------------------------------
 
-    @RequestMapping("yhq.do")
-    public String yhq(HttpServletRequest request, Model model) {
+    @RequestMapping("/coupon/couponActivities.do")
+    public String couponActivities(HttpServletRequest request, Model model) {
         model.addAttribute("couponBatchId", request.getParameter("couponBatchId"));
         return "/yhq";
     }
 
-    @RequestMapping("/getYhq.do")
-    public String getYhq(HttpServletRequest request, Model model) throws Exception {
-        Coupon coupon = null;
+    @RequestMapping("/coupon/getCouponView.do")
+    public String getCouponView(HttpServletRequest request, Model model) throws Exception {
+        Coupon coupon;
         Date date = new Date();
         String couponBatchId = request.getParameter("couponBatchId");
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), AuthorizationUtil.getMyUser().getId());
@@ -473,5 +473,4 @@ public class CouponController {
         }
         return "/getYhq";
     }
-
 }
