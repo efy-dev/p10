@@ -226,10 +226,10 @@ public class BatchLogisticsReactor implements Runnable {
      */
     private void postSms(PurchaseOrderDelivery purchaseOrderDelivery){
         if("3".equals(purchaseOrderDelivery.getPurchaseOrder().getOrderType())){
-            this.smsCheckManager.send(purchaseOrderDelivery.getPurchaseOrder().getReceiverPhone(), "#LogisticsCompany#=debangwuliu&#serial#=" + purchaseOrderDelivery.getSerial(), "1184993", PConst.TIANYI);
+            this.smsCheckManager.send(purchaseOrderDelivery.getPurchaseOrder().getReceiverPhone(), "#LogisticsCompany#=DEPPON&#serial#=" + purchaseOrderDelivery.getSerial(), "1184993", PConst.TIANYI);
 
         }else{
-            this.smsCheckManager.send(purchaseOrderDelivery.getPurchaseOrder().getUser().getUsername(), "#purchaseOrderSerial#=" + purchaseOrderDelivery.getPurchaseOrder().getSerial() + "&#LogisticsCompany#=debangwuliu&#serial#=" + purchaseOrderDelivery.getSerial(), "1035759", PConst.TIANYI);
+            this.smsCheckManager.send(purchaseOrderDelivery.getPurchaseOrder().getUser().getUsername(), "#purchaseOrderSerial#=" + purchaseOrderDelivery.getPurchaseOrder().getSerial() + "&#LogisticsCompany#=DEPPON&#serial#=" + purchaseOrderDelivery.getSerial(), "1035759", PConst.TIANYI);
         }
         System.out.println(purchaseOrderDelivery.getSerial());
     }
