@@ -1,5 +1,8 @@
 package com.efeiyi.ec.system.zero.company.util;
 
+import com.efeiyi.ec.organization.model.AddressCity;
+import com.efeiyi.ec.organization.model.AddressDistrict;
+import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderDelivery;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
@@ -114,9 +117,18 @@ public class BatchLogisticsReactor implements Runnable {
                 Map receiverMap = new HashMap();
                 receiverMap.put("name", purchaseOrderProduct.getPurchaseOrder().getReceiverName());
                 receiverMap.put("mobile", purchaseOrderProduct.getPurchaseOrder().getReceiverPhone());
-                receiverMap.put("province", purchaseOrderProduct.getPurchaseOrder().getProvince().getName());
-                receiverMap.put("city", purchaseOrderProduct.getPurchaseOrder().getCity().getName());
-                receiverMap.put("county", purchaseOrderProduct.getPurchaseOrder().getDistrict() == null ? "" : purchaseOrderProduct.getPurchaseOrder().getDistrict().getName());
+//                receiverMap.put("province", purchaseOrderProduct.getPurchaseOrder().getProvince().getName());
+//                receiverMap.put("city", purchaseOrderProduct.getPurchaseOrder().getCity().getName());
+//                receiverMap.put("county", purchaseOrderProduct.getPurchaseOrder().getDistrict() == null ? "" : purchaseOrderProduct.getPurchaseOrder().getDistrict().getName());
+
+                AddressProvince province = purchaseOrderProduct.getPurchaseOrder().getProvince();
+                AddressCity city = purchaseOrderProduct.getPurchaseOrder().getCity();
+                AddressDistrict district = purchaseOrderProduct.getPurchaseOrder().getDistrict();
+
+                receiverMap.put("province", province != null ? province.getName() : purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getProvince().getName());
+                receiverMap.put("county", district != null ? district.getName() : purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getDistrict().getName());
+                receiverMap.put("city", city != null ? city.getName() : purchaseOrderProduct.getPurchaseOrder().getConsumerAddress().getCity().getName());
+
                 receiverMap.put("address", purchaseOrderProduct.getPurchaseOrder().getPurchaseOrderAddress());
 //                receiverMap.put("county",detailAddressMap.get("county"));
                 jsonMap.put("receiver", receiverMap);
