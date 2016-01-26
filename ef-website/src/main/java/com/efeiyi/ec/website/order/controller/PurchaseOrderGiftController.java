@@ -307,7 +307,8 @@ public class PurchaseOrderGiftController {
         baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
         SmsProvider smsProvider = new YunPianSmsProvider();
         String phoneNumber  =  purchaseOrderGift.getUser().getUsername();
-        smsProvider.post(phoneNumber,"","1185009");
+        HashMap<String,String> param = null;
+        smsProvider.post(phoneNumber,param,"1185009");
         model.addAttribute("purchaseOrder", purchaseOrderGift);
         model.addAttribute("request", "/purchaseOrder/giftView");
         return "/purchaseOrder/giftView";

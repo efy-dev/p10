@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -195,6 +196,10 @@ public class SigninController extends BaseController {
                     baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
                 }
             }
+            SmsProvider smsProvider = new YunPianSmsProvider();
+            String phoneNumber  =  consumer.getUsername();
+            HashMap map = null;
+            smsProvider.post(phoneNumber,map,"1186309");
         }
         return true;
     }

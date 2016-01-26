@@ -10,8 +10,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>【${proName}】-e飞蚁</title>
-    <meta name="keywords" content="${proName}" />
+    <title>【${project.name}】-e飞蚁</title>
+    <meta name="keywords" content="${project.name}" />
     <meta name="description" content="${project.description}" />
 </head>
 <body>

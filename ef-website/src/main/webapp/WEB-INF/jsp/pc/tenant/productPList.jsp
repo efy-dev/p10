@@ -60,11 +60,11 @@
     <dl class="link2">
       <dt class="">排&nbsp;&nbsp;序</dt>
       <dd style="display:none;">
-        <a href="<c:url value="/tenant/${tenantId}?sort=desc:price"/>" title="价格从高到低">价格从高到低</a>
-        <a href="<c:url value="/tenant/${tenantId}?sort=asc:price"/>" title="价格从低到高">价格从低到高</a>
-        <a href="" title="销量">销量</a>
-        <a href="<c:url value="/tenant/${tenantId}?sort=desc:product.createDateTime"/>" title="新品">新品</a>
-        <a href="" title="人气">人气</a>
+       <a href="<c:url value="/tenant/${tenantId}?sort=desc:price"/>" title="价格从高到低">价格从高到低</a>
+       <a href="<c:url value="/tenant/${tenantId}?sort=asc:price"/>" title="价格从低到高">价格从低到高</a>
+       <a href="<c:url value="/tenant/${tenantId}?sort=desc:saleAmount"/>" title="销量">销量</a>
+       <a href="<c:url value="/tenant/${tenantId}?sort=desc:product.createDateTime"/>" title="新品">新品</a>
+       <a href="<c:url value="/tenant/${tenantId}?sort=desc:popularityAmount"/>" title="人气">人气</a>
       </dd>
     </dl>
   </div>

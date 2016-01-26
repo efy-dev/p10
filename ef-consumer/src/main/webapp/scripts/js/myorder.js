@@ -114,18 +114,6 @@ $(function(){
     $('.my-kj .am-tabs-nav .ul-list li.items1').mouseenter(function(){
         $(this).addClass('active').siblings().removeClass('active')
     })
-    /*  var GradList = document.getElementById("quacorgrading").getElementsByTagName("input");*/
-    var GradList = $(".quacorgrading input");
-    for(var i=0;i < GradList.length;i++){
-        GradList[i].onmouseover = function(){
-            for(var Qi=0;Qi<GradList.length;Qi++){
-                GradList[Qi].class.backgroundPosition = '-36px -21px';
-            }
-            for(var Qii=0;Qii<this.name;Qii++){
-                GradList[Qii].style.backgroundPosition = '-5px -21px';
-            }
-        }
-    }
     $(function(){
         var dlwidth = $(".recommend .carousel .car-content").outerWidth(true);
         var dllist = $(".recommend .carousel dl").size();

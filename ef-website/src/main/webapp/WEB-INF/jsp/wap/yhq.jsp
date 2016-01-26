@@ -41,7 +41,7 @@
   <div class="cont">
     <div class="tc-txt">
 
-      <a href="<c:url value="/getYhq.do?couponBatchId=${couponBatchId}"/>" class="btn">立即领取</a>
+      <a href="<c:url value="/coupon/getCouponView.do?couponBatchId=${couponBatchId}"/>" class="btn">立即领取</a>
     </div>
   </div>
 </div>
