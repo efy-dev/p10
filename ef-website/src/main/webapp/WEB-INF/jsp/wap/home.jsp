@@ -81,7 +81,7 @@
                     <li>
                         <a href="${hotSale.redirect}">
                             <em>${hotSale.name}</em>
-                            <img src="http://pro.efeiyi.com/${hotSale.img}@!home-hot-pictue">
+                            <img src="http://pro.efeiyi.com/${hotSale.img}@!home-hot-picture">
                         </a>
                         <span class="price"><i>￥</i><strong>${hotSale.price}</strong></span>
                         <span class="heat"><font>热卖</font></span>
