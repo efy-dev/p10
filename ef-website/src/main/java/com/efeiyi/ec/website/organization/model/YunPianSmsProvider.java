@@ -13,6 +13,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -53,6 +54,68 @@ public class YunPianSmsProvider implements SmsProvider {
 
     final static String apikey = "b802cb40c7a0db20e787884bf29f1e6d";
 
+
+    /**
+     * 发送, 并返回结果
+     *
+     * @param phone
+     * @param param
+     * @return
+     */
+    @Override
+    public SendCode post(String phone, HashMap<String,String> param, String tpl_id) {
+
+        String content = "";
+        try {
+            if(param==null){
+                content = URLEncoder.encode("#null#="+content, ENCODING);
+            }else{
+                int i = 0;
+             for(Map.Entry<String,String> entry:param.entrySet()){
+                 if(i++==0){
+                      content = content + "#"+entry.getKey()+"#="+entry.getValue();
+                 }else{
+                      content = content + "&#"+entry.getKey()+"#="+entry.getValue();
+                 }
+             }
+                content = URLEncoder.encode(content, ENCODING);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String postData = "apikey=" + apikey + "&mobile=" + phone + "&tpl_id=" + tpl_id + "&tpl_value=" + content + "";
+
+
+        System.out.println(postData);
+
+
+        String data = null;
+
+        try {
+            URL dataUrl = new URL(URI_TPL_SEND_SMS);
+            HttpURLConnection con = (HttpURLConnection) dataUrl.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Proxy-Connection", "Keep-Alive");
+            con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            con.setDoOutput(true);
+            con.setDoInput(true);
+            con.setUseCaches(false);
+            OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream(), ENCODING);
+            out.write(postData);
+            out.flush();
+            out.close();
+            InputStream is = con.getInputStream();
+            DataInputStream dis = new DataInputStream(is);
+            byte[] d = new byte[dis.available()];
+            dis.read(d);
+            data = new String(d, ENCODING);
+            con.disconnect();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return conversion(data);
+    }
 
     /**
      * 发送, 并返回结果
@@ -102,7 +165,6 @@ public class YunPianSmsProvider implements SmsProvider {
         }
         return conversion(data);
     }
-
 
     /**
      * 返回结果
