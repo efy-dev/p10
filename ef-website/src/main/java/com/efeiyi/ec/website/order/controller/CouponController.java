@@ -59,22 +59,29 @@ public class CouponController {
     }
 
     //判断优惠券是否可以用（对于某个订单）
-    //优惠券的种类有三种，1全场通用 2店铺 3品类 4单品 都需要判断
-    //1全场通用 ： 如果是满减卷就只判断订单的价格，如果是低值卷，那么就不用判断了
-    //2店铺 ： 判断订单中是否有该店铺的商品，如果有就继续判断如果是满减，就判断订单价格，低值卷就不用判断了直接可用
-    //3品类 ： 判断订单中是否有该品类的商品，如果有就继续判断如果是满减，就判断订单价格，低值卷就不用判断了直接可用
-    //4单品 ： 判断订单中是否有该优惠券指定的商品，如果有就不用判断了直接可用
+    //优惠券的种类有四种，1全场通用 2店铺 3品类 4单品 都需要判断，每种还有两种不同类型的优惠券：满减券和现金券（抵值券）
+    //1全场通用 ： 如果是满减卷就只判断订单的价格，抵值卷判断是否小于合适商品的价格，小于可用，否则不可用
+    //2店铺 ： 判断订单中是否有该店铺的商品，如果有就继续判断如果是满减，就判断订单价格，抵值卷判断是否小于合适商品的价格，小于可用，否则不可用
+    //3品类 ： 判断订单中是否有该品类的商品，如果有就继续判断如果是满减，就判断订单价格，抵值卷判断是否小于合适商品的价格，小于可用，否则不可用
+    //4单品 ： 判断订单中是否有该优惠券指定的商品，如果有就继续判断如果是满减，就判断订单价格，抵值卷判断是否小于合适商品的价格，小于可用，否则不可用
     private boolean isUserful(PurchaseOrder purchaseOrder, Coupon coupon) {
         try {
             boolean isUseful = false;
             if (coupon.getCouponBatch().getRange().equals("1")) {
                 if (coupon.getCouponBatch().getType().equals("1")) {
+                    if(null != coupon.getCouponBatch().getPriceLimit())
                     if (purchaseOrder.getTotal().floatValue() >= coupon.getCouponBatch().getPriceLimit()) {
                         isUseful = true;
                     } else {
                         isUseful = false;
                     }
-                } else {
+                }else if(coupon.getCouponBatch().getType().equals("2")){
+                    if(purchaseOrder.getTotal().floatValue() >= coupon.getCouponBatch().getPrice()){
+                        isUseful = true;
+                    }else {
+                        isUseful = false;
+                    }
+                }else {
                     isUseful = true;
                 }
             } else if (coupon.getCouponBatch().getRange().equals("2")) {
@@ -93,7 +100,20 @@ public class CouponController {
                             } else {
                                 isUseful = false;
                             }
-                        } else {
+                        }else if(coupon.getCouponBatch().getType().equals("2")){
+                            BigDecimal totalPrice = new BigDecimal(0);
+                            for (PurchaseOrderProduct purchaseOrderProductTemp : purchaseOrder.getPurchaseOrderProductList()) {
+                                if (purchaseOrderProductTemp.getProductModel().getProduct().getProject().getId().equals(coupon.getCouponBatch().getProject().getId())) {
+                                    totalPrice = totalPrice.add(purchaseOrderProduct.getPurchasePrice());
+                                }
+                            }
+                            totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+                            if (Float.parseFloat(totalPrice.toString()) >= coupon.getCouponBatch().getPrice()) {
+                                isUseful = true;
+                            } else {
+                                isUseful = false;
+                            }
+                        }else {
                             isUseful = true;
                         }
                         if (isUseful) {
@@ -117,7 +137,20 @@ public class CouponController {
                             } else {
                                 isUseful = false;
                             }
-                        } else {
+                        } else if(coupon.getCouponBatch().getType().equals("2")){
+                            BigDecimal totalPrice = new BigDecimal(0);
+                            for (PurchaseOrderProduct purchaseOrderProductTemp : purchaseOrder.getPurchaseOrderProductList()) {
+                                if (purchaseOrderProductTemp.getProductModel().getProduct().getTenant().getId().equals(coupon.getCouponBatch().getTenant().getId())) {
+                                    totalPrice = totalPrice.add(purchaseOrderProduct.getPurchasePrice());
+                                }
+                            }
+                            totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+                            if (Float.parseFloat(totalPrice.toString()) >= coupon.getCouponBatch().getPrice()) {
+                                isUseful = true;
+                            } else {
+                                isUseful = false;
+                            }
+                        }else {
                             isUseful = true;
                         }
                         if (isUseful) {
@@ -130,8 +163,21 @@ public class CouponController {
             } else if (coupon.getCouponBatch().getRange().equals("4")) {
                 for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
                     if (purchaseOrderProduct.getProductModel().getProduct().getId().equals(coupon.getCouponBatch().getProduct().getId())) {
-                        isUseful = true;
-                        break;
+                        if(coupon.getCouponBatch().getType().equals("1")){
+                            if(Float.parseFloat(purchaseOrderProduct.getPurchasePrice().toString()) >= coupon.getCouponBatch().getPriceLimit()){
+                                isUseful = true;
+                                break;
+                            }else {
+                                isUseful = false;
+                            }
+                        }else if(coupon.getCouponBatch().getType().equals("2")){
+                            if(Float.parseFloat(purchaseOrderProduct.getPurchasePrice().toString()) >= coupon.getCouponBatch().getPrice()){
+                                isUseful = true;
+                                break;
+                            }else {
+                                isUseful = false;
+                            }
+                        }
                     } else {
                         isUseful = false;
                     }
