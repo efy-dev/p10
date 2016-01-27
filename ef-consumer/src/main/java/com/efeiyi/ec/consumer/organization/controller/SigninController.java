@@ -5,40 +5,26 @@ package com.efeiyi.ec.consumer.organization.controller;
  */
 
 import com.efeiyi.ec.consumer.organization.service.BranchManager;
-import com.efeiyi.ec.consumer.organization.service.RoleManager;
 import com.efeiyi.ec.consumer.organization.service.SmsCheckManager;
-import com.efeiyi.ec.consumer.organization.service.UserManager;
-import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.Consumer;
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
-import com.efeiyi.ec.purchase.model.Cart;
-
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AutoSerialManager;
-import com.ming800.core.util.HttpUtil;
-import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -180,11 +166,8 @@ public class SigninController extends BaseController {
     }
 
     @RequestMapping({"/register"})
-    public String register(HttpServletRequest request, Model model) {
-//        String error = request.getParameter("error");
-//        if (error!=null){
-//            model.addAttribute("error","true");
-//        }
+    public String register() {
+
         return "/register";
     }
 
