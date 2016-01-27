@@ -4,6 +4,7 @@ import com.aliyun.openservices.oss.OSSClient;
 import com.aliyun.openservices.oss.model.ObjectMetadata;
 import com.aliyun.openservices.oss.model.PutObjectResult;
 import com.efeiyi.ec.organization.model.AddressCity;
+import com.efeiyi.ec.organization.model.AddressDistrict;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
@@ -288,8 +289,9 @@ public class PurchaseOrderGiftController {
         }
         AddressProvince addressProvince = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), request.getParameter("province.id"));
         AddressCity addressCity = (AddressCity) baseManager.getObject(AddressCity.class.getName(), request.getParameter("city.id"));
+        AddressDistrict addressDistrict =  (AddressDistrict) baseManager.getObject(AddressDistrict.class.getName(), request.getParameter("district.id"));
         String detail = request.getParameter("receiveDetail");
-        String address = addressProvince.getName() + addressCity.getName() + detail;
+        String address = addressProvince.getName() + addressCity.getName() + addressDistrict.getName() + detail;
         String receiveName = request.getParameter("receiveName");
         String receivePhone = request.getParameter("receivePhone");
         purchaseOrderGift.setReceiverName(receiveName);
@@ -298,6 +300,8 @@ public class PurchaseOrderGiftController {
 
         ConsumerAddress consumerAddress = new ConsumerAddress();
         consumerAddress.setProvince(addressProvince);
+        consumerAddress.setDistrict(addressDistrict);
+        consumerAddress.setDetails(detail);
         consumerAddress.setCity(addressCity);
         purchaseOrderGift.setConsumerAddress(consumerAddress);
         consumerAddress.setConsignee(receiveName);

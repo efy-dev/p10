@@ -70,7 +70,7 @@
         <ul class="list-top">
             <c:if test="${not empty marketingActivityQueryList&&fn:length(marketingActivityQueryList)>0}">
                 <c:forEach items="${marketingActivityQueryList}" var="marketingActivity">
-                    <li><a href="${marketingActivity.redirect}"><img src="http://pro.efeiyi.com/${marketingActivity.img}"></a></li>
+                    <li><a href="${marketingActivity.redirect}"><img src="http://pro.efeiyi.com/${marketingActivity.img}@!home-activity-picture"></a></li>
                 </c:forEach>
             </c:if>
         </ul>
@@ -81,7 +81,7 @@
                     <li>
                         <a href="${hotSale.redirect}">
                             <em>${hotSale.name}</em>
-                            <img src="http://pro.efeiyi.com/${hotSale.img}">
+                            <img src="http://pro.efeiyi.com/${hotSale.img}@!home-hot-picture">
                         </a>
                         <span class="price"><i>￥</i><strong>${hotSale.price}</strong></span>
                         <span class="heat"><font>热卖</font></span>
@@ -106,7 +106,7 @@
                     <li>
                         <a href="<c:url value="/product/hot/${projectCategoryProductModel.productModel.id}"/>">
                             <em>${projectCategoryProductModel.productModel.product.name}</em>
-                            <img src="http://pro.efeiyi.com/${projectCategoryProductModel.productModel.product.getProductPicture().pictureUrl}">
+                            <img src="http://pro.efeiyi.com/${projectCategoryProductModel.productModel.product.getProductPicture().pictureUrl}@!home-project-picture">
                         </a>
                         <span class="price"><i>￥</i><strong>${projectCategoryProductModel.productModel.price.intValue()}</strong></span>
                     </li>

@@ -33,15 +33,15 @@
         <div class="pic-page ae">
             <div class="pic-img">
                 <c:if test="${purchaseOrder.showGiftNameStatus=='1'}">
-                   <a  href="<c:url value="/product/productModel/${purchaseOrder.purchaseOrderProductList.get(0).productModel.id}"/>">
-                     <img src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture" width="181">
+                    <a  href="<c:url value="/product/productModel/${purchaseOrder.purchaseOrderProductList.get(0).productModel.id}"/>">
+                        <img src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture" width="181">
                     </a>
-                    </c:if>
-                        <c:if test="${purchaseOrder.showGiftNameStatus=='0'}">
-                        <a>
-                            <img src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture" width="181">
-                        </a>
-                            </c:if>
+                </c:if>
+                <c:if test="${purchaseOrder.showGiftNameStatus=='0'}">
+                    <a>
+                        <img src="http://pro.efeiyi.com/${purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!gift-card-picture" width="181">
+                    </a>
+                </c:if>
             </div>
             <div class="pic-text">
                 <p>
@@ -51,11 +51,11 @@
                         </a>
                     </c:if>
 
-                        <c:if test="${purchaseOrder.showGiftNameStatus=='0'}">
+                    <c:if test="${purchaseOrder.showGiftNameStatus=='0'}">
                         <a  style="color: #000">
-                            ${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}
+                                ${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}
                         </a>
-                        </c:if>
+                    </c:if>
                 </p>
                 <p class="t2"><i></i><span>${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.project.name}</span><em></em></p>
                 <p class="t4">数量：<span>${purchaseOrder.purchaseOrderProductList.get(0).purchaseAmount}</span>个</p>
@@ -63,18 +63,18 @@
             </div>
         </div>
         <c:if test="${not empty purchaseOrder.giftGaverName}">
-        <div class="c-info ae" style="margin-top:0;">
-            <p>${purchaseOrder.giftMessage}</p>
-            <p>——${purchaseOrder.giftGaverName}</p>
-        </div>
+            <div class="c-info ae" style="margin-top:0;">
+                <p>${purchaseOrder.giftMessage}</p>
+                <p>——${purchaseOrder.giftGaverName}</p>
+            </div>
         </c:if>
     </div>
     <form action="<c:url value="/giftConfirm.do"/>" method="post" id="formId">
         <input name="purchaseOrderId" value="${purchaseOrder.id}" type="hidden">
         <div class="btb"><h5>
-        <c:if test="${empty purchaseOrder.giftGaverName}">
-            快填写您的收货信息吧！
-        </c:if>
+            <c:if test="${empty purchaseOrder.giftGaverName}">
+                快填写您的收货信息吧！
+            </c:if>
             <c:if test="${not empty purchaseOrder.giftGaverName}">
                 ${purchaseOrder.giftGaverName}送您礼物了，快填写您的收货信息吧！
             </c:if></h5></div>
@@ -93,8 +93,8 @@
                          id="province" onchange="provinceChange(this)">
                     <%--<option value="110000">北京市</option>--%>
                 </select>
-                <select  name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required="" id="city"><option value="">请选择</option></select>
-                <%--<select  name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required=""><option value="">请选择</option></select>--%>
+                <select  name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required="" id="city" onchange="cityChange(this)"><option value="">请选择</option></select>
+                <select  name="district.id" class="car1  am-selected am-dropdown am-selected-btn" required="" id="district"><option value="">请选择</option></select>
             </li>
             <li>
                 <strong>详细地址：</strong>
@@ -122,7 +122,7 @@
     function provinceChange(element) {
         var provinceId = $(element).val();
         ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>", {provinceId: provinceId}, function (data) {
-            var out = '<option value="">请选择所在区县</option>';
+            var out = '<option value="">请选择所在城市</option>';
             for (var i = 0; i < data.length; i++) {
                 out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
             }
@@ -130,12 +130,25 @@
         }, function () {
         }, "post")
     }
+    function cityChange(element) {
+        var cityId = $(element).val();
+        ajaxRequest("<c:url value="/myEfeiyi/address/listDistrict.do"/>", {cityId: cityId}, function (data) {
+            var out = '<option value="">请选择所在区县</option>';
+            for (var i = 0; i < data.length; i++) {
+                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+            }
+            $("#district").html(out);
+        }, function () {
+        }, "post")
+    }
+
     function check() {
         var name=$("#name").val();
         var phoneNumber=$("#phoneNumber").val();
         var addressDetail = $("#addressDetail").val();
         var province = $("#province").val();
         var city = $("#city").val();
+        var district = $("#district").val();
         var success = function (data) {
             if (!data) {
                 showAlert("提示", "非法输入");
@@ -143,7 +156,7 @@
                 $("#formId").submit();
             }
         }
-        if(name=="" || phoneNumber=="" || addressDetail==""||province==""||city==""){
+        if(name=="" || phoneNumber=="" || addressDetail==""||province==""||city==""||district==""){
             showAlert("提示", "您填写的信息不完整");
         }else{
             ajaxRequest("<c:url value="/giftReceive/checkAddress.do"/>", {
@@ -164,17 +177,17 @@
 
     }
 
-//        if(addressDetail==""){
-//            alert("您的信息不完整");
-////            $("#tj").html("您填写的信息不完整");
-//        }else{
-//            if(reg.test(addressDetail)){
-//
-//            }else{
-//                alert("非法字符");
-//            }
-//
-//        }
+    //        if(addressDetail==""){
+    //            alert("您的信息不完整");
+    ////            $("#tj").html("您填写的信息不完整");
+    //        }else{
+    //            if(reg.test(addressDetail)){
+    //
+    //            }else{
+    //                alert("非法字符");
+    //            }
+    //
+    //        }
 
 
 </script>
