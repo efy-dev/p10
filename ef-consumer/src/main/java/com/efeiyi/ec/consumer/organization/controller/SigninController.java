@@ -172,7 +172,7 @@ public class SigninController extends BaseController {
     }
 
     @RequestMapping({"/forgetPwd"})
-    public String forgetPwd(HttpServletRequest request) {
+    public String forgetPwd() {
 
         return "/forgetPassword";
 
