@@ -43,7 +43,7 @@
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
                             <button onclick="window.location.href='<c:url
-                                    value="/virtualPlan/getOrderProduct.do?id=${pop.id}&planId=${planId}"/>'"
+                                    value="/virtualPlan/getOrderProduct.do?virtual=virtual&id=${pop.id}&planId=${planId}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                     class="am-icon-edit"></span> 编辑
                             </button>

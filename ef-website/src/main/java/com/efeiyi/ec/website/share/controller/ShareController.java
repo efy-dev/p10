@@ -72,7 +72,7 @@ public class ShareController {
     @RequestMapping({"/sharePage/openShare/{purchaseOrderId}"})
     public String openPage(@PathVariable String purchaseOrderId,HttpServletRequest request,Model model) throws Exception{
         String callback = URLEncoder.encode("www2.efeiyi.com/sharePage/saveWXInfo.do?purchaseOrderId="+purchaseOrderId,"UTF-8");
-        return "redirect:http://www.efeiyi.com/wx/getUserBaseInfo.do?dataKey=nickname;headimgurl"+"&callback="+callback;
+        return "redirect:http://www.efeiyi.com/wx/getUserBaseInfo.do?dataKey=nickname;unionid;headimgurl"+"&callback="+callback;
     }
     /**分享后返利
      * @param request
@@ -118,12 +118,14 @@ public class ShareController {
         User sharerUser = (User) baseManager.getObject(User.class.getName(),userId);
         CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(),"iilsik60373zsqx4");
         String nickname = URLDecoder.decode(request.getParameter("nickname"),"UTF-8");
+        String unionid = URLDecoder.decode(request.getParameter("unionid"),"UTF-8");
         String headImgUrl = URLDecoder.decode(request.getParameter("headimgurl"),"UTF-8");
-        String queryHqlRebate = "from " + Rebate.class.getName() + " r where r.nickname ='"+nickname+"' and r.status = 1 ";
+        String queryHqlRebate = "from " + Rebate.class.getName() + " r where r.unionid ='"+unionid+"' and r.status = 1 ";
         List<Object> rebateList = baseManager.listObject(queryHqlRebate);
         if(rebateList==null||rebateList.size()==0){
         //从rebate表中判断是否领取优惠券
         rebate.setUserId(userId);
+        rebate.setUnionid(unionid);
         rebate.setNickname(nickname);
         rebate.setHeadurl(headImgUrl);
         rebate.setCreateDateTime(new Date());

@@ -14,6 +14,7 @@ public class Rebate {
     private String id;
     private String userId;
     private String nickname;
+    private String unionid;
     private String headurl;
     private Date createDateTime;
     private String status;
@@ -48,7 +49,14 @@ public class Rebate {
     public String getHeadurl() {
         return headurl;
     }
+    @Column(name = "unionid")
+    public String getUnionid() {
+        return unionid;
+    }
 
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
+    }
     public void setHeadurl(String headurl) {
         this.headurl = headurl;
     }

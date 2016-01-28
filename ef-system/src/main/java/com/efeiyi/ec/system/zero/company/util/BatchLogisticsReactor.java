@@ -176,7 +176,7 @@ public class BatchLogisticsReactor implements Runnable {
                     purchaseOrderDelivery.setSerial((String) map.get("mailNo"));//运单号
                     purchaseOrderDelivery.setStatus("1");//物流已发货
 //            purchaseOrderDelivery.setSerial("1234");
-                    purchaseOrderDelivery.setLogisticsCompany("DEPPON");
+                    purchaseOrderDelivery.setLogisticsCompany("debangwuliu");
                     purchaseOrderDelivery.setBigPen((String)((Map)map.get("sortingParam")).get("bigPen"));
                     session.saveOrUpdate(purchaseOrderDelivery);
                     // 发短信
@@ -238,10 +238,10 @@ public class BatchLogisticsReactor implements Runnable {
      */
     private void postSms(PurchaseOrderDelivery purchaseOrderDelivery){
         if("3".equals(purchaseOrderDelivery.getPurchaseOrder().getOrderType())){
-            this.smsCheckManager.send(purchaseOrderDelivery.getPurchaseOrder().getReceiverPhone(), "#LogisticsCompany#=DEPPON&#serial#=" + purchaseOrderDelivery.getSerial(), "1184993", PConst.TIANYI);
+            this.smsCheckManager.send(purchaseOrderDelivery.getPurchaseOrder().getReceiverPhone(), "#LogisticsCompany#=debangwuliu&#serial#=" + purchaseOrderDelivery.getSerial(), "1184993", PConst.TIANYI);
 
         }else{
-            this.smsCheckManager.send(purchaseOrderDelivery.getPurchaseOrder().getUser().getUsername(), "#purchaseOrderSerial#=" + purchaseOrderDelivery.getPurchaseOrder().getSerial() + "&#LogisticsCompany#=DEPPON&#serial#=" + purchaseOrderDelivery.getSerial(), "1035759", PConst.TIANYI);
+            this.smsCheckManager.send(purchaseOrderDelivery.getPurchaseOrder().getUser().getUsername(), "#purchaseOrderSerial#=" + purchaseOrderDelivery.getPurchaseOrder().getSerial() + "&#LogisticsCompany#=debangwuliu&#serial#=" + purchaseOrderDelivery.getSerial(), "1035759", PConst.TIANYI);
         }
         System.out.println(purchaseOrderDelivery.getSerial());
     }

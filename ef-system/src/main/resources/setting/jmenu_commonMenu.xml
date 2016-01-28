@@ -169,6 +169,7 @@
                 <match url="/basic/xm.do?qm=formVirtualPlan&amp;virtual=virtual"/>
                 <match url="/virtualPlan/getTypeObjectList.do?virtual=virtual"/>
                 <match url="/virtualPlan/getTypeObjectView.do?virtual=virtual"/>
+                <match url="/virtualPlan/getOrderProduct.do?virtual=virtual"/>
             </jnode>
         </jnode>
         <jnode url="" id="companyManager" access="admin,operational,c_operational,o_operational,product_manager" state="closed"  text_zh_CN="企业礼品卡管理">
