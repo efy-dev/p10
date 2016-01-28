@@ -39,7 +39,7 @@
         <%--</a>--%>
     <%--</div>--%>
     <div class="toolbar">
-        <a class="item asso" href="<c:url value="/productCategoryList.do"/> ">
+        <a class="item asso" href="<c:url value="/productCategory.do"/> ">
             <span><i class="newicon"></i></span>
             <span>分&nbsp;类</span>
         </a>
