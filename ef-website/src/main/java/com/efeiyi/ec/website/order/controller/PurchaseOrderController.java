@@ -496,6 +496,42 @@ public class PurchaseOrderController extends BaseController {
         return consumerAddress;
     }
 
+    @RequestMapping({"/updateAddress.do"})
+    @ResponseBody
+    public boolean updateAddress(HttpServletRequest request) throws Exception {
+        try {
+            XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
+            ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.saveOrUpdate(xSaveOrUpdate);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    @RequestMapping({"/removeAddress.do"})
+    @ResponseBody
+    public boolean removeAddress(HttpServletRequest request) throws Exception{
+        try{
+            String addressId = request.getParameter("addressId");
+            baseManager.remove(ConsumerAddress.class.getName(), addressId);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    @RequestMapping({"defaultAddress.do"})
+    @ResponseBody
+    public boolean defaultAddress(HttpServletRequest request) throws Exception {
+        String id = AuthorizationUtil.getMyUser().getId();
+        String sql = "update organization_consumer_address set status = '1'where status<>0 and consumer_id='" + id + "'";
+        baseManager.executeSql(null, sql, null);
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
+        xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
+        baseManager.saveOrUpdate(xSaveOrUpdate);
+        return true;
+
+    }
 
     @RequestMapping({"/orderCheck/{orderId}"})
     @ResponseBody

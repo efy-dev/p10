@@ -23,6 +23,7 @@
 </head>
 <body>
 <%--<script src="/scripts/js/jquery-1.4.2.min.js"></script>--%>
+<script src="http://malsup.github.io/jquery.form.js"></script>
 <div class="wr wh">
     <!--结算-->
     <div class="my-clearing">
@@ -42,7 +43,7 @@
                             <ul>
                                 <li>
                                     <label>收货人：</label>
-                                    <input type="text" name="consignee">
+                                    <input type="text" name="consignee" required>
                                 </li>
                                 <li>
                                     <label>所在地区：</label>
@@ -52,7 +53,8 @@
                                                 onchange="provinceChange(this)" required>
                                             <option value="请选择">请选择所在省</option>
                                         </select>
-                                        <select class="car1" id="city" name="city.id" onchange="cityChange(this)" required>
+                                        <select class="car1" id="city" name="city.id" onchange="cityChange(this)"
+                                                required>
                                             <option value="请选择">请选择所在市</option>
                                         </select>
                                         <select class="car1" id="district" name="district.id" required>
@@ -62,11 +64,11 @@
                                 </li>
                                 <li>
                                     <label>详细地址：</label>
-                                    <input style="width: 255px" type="text" name="details">
+                                    <input style="width: 255px" type="text" name="details" required>
                                 </li>
                                 <li>
                                     <label>手机号码：</label>
-                                    <input type="text" name="phone">
+                                    <input type="text" name="phone" required>
                                 </li>
                                 <li>
                                     <label></label>
@@ -85,45 +87,108 @@
         </div>
         <div class="page-clearing" id="address">
             <div class="page-box-m">
-            <c:forEach items="${addressList}" var="address">
+                <c:forEach items="${addressList}" var="address">
 
-                <div class="page-default" style="position:relative">
-            <span>
-                <c:if test="${address.status=='2'}">
-                <div id="${address.id}" class="default-text triangle activeFlag" name="addressItem"
-                     onclick="chooseAddress(this,'${address.id}')">
-                    </c:if>
-                    <c:if test="${address.status=='1'}">
-                    <div class="default-text" name="addressItem" onclick="chooseAddress(this,'${address.id}')">
-                        </c:if>
-                        <strong>${address.consignee} ${address.province.name}</strong>
-                            <%--<i class="triangle" style="display: block"></i>--%>
-                        </a>
+                    <div class="page-default" style="position:relative">
+                    <span>
+                        <c:if test="${address.status=='2'}">
+                        <div id="${address.id}" class="default-text triangle activeFlag" name="addressItem"
+                             onclick="chooseAddress(this,'${address.id}')">
+                            </c:if>
+                            <c:if test="${address.status=='1'}">
+                            <div class="default-text" name="addressItem" onclick="chooseAddress(this,'${address.id}')">
+                                </c:if>
+                                <strong>${address.consignee} ${address.province.name}</strong>
+                                    <%--<i class="triangle" style="display: block"></i>--%>
+                                </a>
+                            </div>
+                    </span>
+                        <span>${address.consignee}</span>
+                        <span>${address.province.name}</span>
+                        <span>${address.city.name}</span>
+                        <span>${address.district.name}</span>
+                        <span>${address.details}</span>
+                        <span>${address.phone}</span>
+
+                        <div class="jc-hc" style="display: none;height: 40px;">
+                            <a href="#" onclick="removeAddress('${address.id}');">删除</a>
+                            <a href="#" class="edit-act" onclick="openAddress('${address.id}','${address.consignee}','${address.province.name}','${address.province.id}','${address.city.name}','${address.city.id}','${address.district.name}','${address.district.id}','${address.details}','${address.phone}')">编辑</a>
+                            <a href="#" onclick="defaultAddress('${address.id}');">设为默认地址</a>
+                        </div>
                     </div>
-            </span>
-                    <span>${address.consignee}</span>
-                    <span>${address.province.name}</span>
-                    <span>${address.city.name}</span>
-                    <span>${address.district.name}</span>
-                    <span>${address.details}</span>
-                    <span>${address.phone}</span>
+                </c:forEach>
+                <div class="apt" style="display: none">
+                    <div class="pop-up">
+                        <div class="pop-h">编辑收货人信息
+                            <i class="clase" title="关闭"></i>
+                        </div>
+                        <div class="m-form">
+                            <form class="aaa" id="updateAddress"
+                                  action="<c:url value="/myEfeiyi/addAddress.do"/>"
+                                  method="post">
+                                <ul>
+                                    <li>
+                                        <label>收货人：</label>
+                                        <input type="text" name="consignee" id="consignee"
+                                               value="${address.consignee}" required>
+                                    </li>
+                                    <input type="hidden" name="id" id="addressId" value="${address.id}">
+                                    <li>
+                                        <label>所在地区：</label>
+
+                                        <form>
+                                            <select id="provinceVal" name="province.id"
+                                                    class="cars" onclick="provinceChange(this)"
+                                                    required>
+                                                <option value="${address.province.id}" id="provinceOption">${address.province.name}</option>
+                                            </select>
+                                            <select id="cityVal" name="city.id" class="car1"
+                                                    onclick="cityChange(this)" required>
+                                                <option value="${address.city.id}" id="cityOption">${address.city.name}</option>
+                                            </select>
+                                            <select id="districtVal" name="district.id"
+                                                    class="car1" required>
+                                                <option value="${address.district.id}" id="districtOption">${address.district.name}</option>
+                                            </select>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <label>详细地址：</label>
+                                        <input style="width: 255px;" type="text" name="details"
+                                               id="details" value="${address.details}"
+                                               required>
+                                    </li>
+                                    <li>
+                                        <label>手机号码：</label>
+                                        <input type="text" name="phone" id="phone"
+                                               value="${address.phone}" required>
+                                    </li>
+                                    <li>
+                                        <label></label>
+                                        <input type="button" onclick="submitForm('${address.id}');"
+                                               class="dj-btn" value="保存收货人信息">
+                                        <span id="ts_update" style="border: 0"></span>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                        <div class="sh-bg"></div>
+                    </div>
                 </div>
-            </c:forEach>
             </div>
-           <%-- <div class="dj-p">
+            <div class="dj-p">
                 <a href="#" id="pg-box">展开地址
                     <span class="triangle-bg"></span>
                 </a>
-
-            </div>--%>
-            <div class="dj-p">
-            <a href="#"  style="display: block">展开地址
-            <span class="triangle-bg2"></span>
-            </a>
-
             </div>
-
+            <%-- <div class="dj-p">
+             <a href="#"  style="display: block">展开地址
+             <span class="triangle-bg2"></span>
+             </a>
+             </div>--%>
         </div>
+
+
         <!--支付-->
 
         <div class="clearing-site divtop">
@@ -252,7 +317,10 @@
                 <form>
                     <div class="balance-titie">余额支付</div>
                     <div class="balance-text"><input type="checkbox" onclick="useBalance(this)" id="banlanceCheckbox">使用余额支付
-                        <span id="usefulBalance"><c:if test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元</div>
+                        <span id="usefulBalance"><c:if
+                                test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if
+                                test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元
+                    </div>
                 </form>
             </div>
         </c:if>
@@ -328,10 +396,10 @@
                         $.ajax({
                             type: 'post',
                             async: false,
-                            url: '<c:url value="/order/checkBalance"/>'+'?balance='+balance,
+                            url: '<c:url value="/order/checkBalance"/>' + '?balance=' + balance,
                             dataType: 'json',
                             success: function (data1) {
-                                if(data1){
+                                if (data1) {
                                     var url = "<c:url value="/order/confirm/"/>";
                                     url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + "&balance=" + balance;
                                     element.onclick = null;
@@ -353,15 +421,15 @@
                                     });
                                     ga('send', 'pageview');
 
-                                    if(finalPrice!=0){
+                                    if (finalPrice != 0) {
                                         showChooseConfirm("提示", "是否支付成功？", function () {
                                             window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
                                         }, function () {
                                             window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
                                         })
                                     }
-                                }else{
-                                    showAlert("提示","抱歉，余额不足！")
+                                } else {
+                                    showAlert("提示", "抱歉，余额不足！")
                                 }
                             }
                         });
@@ -378,11 +446,11 @@
 
     $(function () {
         $('.clearing-site span a').click(function () {
-            $(".header-new,.topbar,.footernew").css("z-index","-1")
+            $(".header-new,.topbar,.footernew").css("z-index", "-1")
             $(this).siblings('.active-pop').show();
             $('.clase, .sh-bg').click(function () {
                 $(this).parents('.active-pop').hide();
-                $(".header-new,.topbar,.footernew").css("z-index","")
+                $(".header-new,.topbar,.footernew").css("z-index", "")
             })
             return false;
         })
@@ -390,10 +458,13 @@
         //网页加载的时候把城市的数据取回来
         ajaxRequest("<c:url value="/myEfeiyi/address/listProvince.do"/>", {}, function (data) {
             var out = '<option value="">请选择所在省市</option>';
+            var out1 = "";
             for (var i = 0; i < data.length; i++) {
                 out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+                out1 += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
             }
             $("#province").html(out);
+            $("#provinceVal").html(out1);
         }, function () {
         }, "post")
 
@@ -407,6 +478,7 @@
                 out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
             }
             $("#city").html(out);
+            $("#cityVal").html(out);
         }, function () {
         }, "post")
     }
@@ -419,6 +491,7 @@
                 out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
             }
             $("#district").html(out);
+            $("#districtVal").html(out);
         }, function () {
         }, "post")
     }
@@ -449,6 +522,30 @@
             }, "post")
         }
 
+    }
+
+    function submitForm() {
+        var consignee = $("#consignee").val();
+        var provinceVal = $("#provinceVal").val();
+        var cityVal = $("#cityVal").val();
+        var districtVal = $("#districtVal").val();
+        var details = $("#details").val();
+        var phone = $("#phone").val();
+        if (consignee != "" && (typeof (consignee) != 'undefined') && provinceVal != "" && cityVal != "" && districtVal != "" && details != "" && typeof (details) != 'undefined' && phone != "" && (typeof (phone) != 'undefined')) {
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '<c:url value="/order/updateAddress.do"/>',
+                data: $('#updateAddress').serialize(),
+                success: function (data) {
+                    if (data) {
+                        window.location.reload();
+                    }
+                },
+            })
+        } else {
+            $("#ts_update").text("请完善信息");
+        }
     }
 
     function chooseAddress(element, addressId) {
@@ -538,11 +635,11 @@
                     $("#couponPrice").html(data["couponPrice"]);
                     $("#finalPrice").html(data["finalPrice"]);
                     var finalPrice = parseFloat(data["finalPrice"]);
-                    if(finalPrice<parseFloat(${consumer.balance})){
+                    if (finalPrice < parseFloat(${consumer.balance})) {
                         $("#usefulBalance").html(finalPrice.toFixed(2));
                     }
                     $("#balance").html("0.00");
-                    $("#banlanceCheckbox").attr("checked",false);
+                    $("#banlanceCheckbox").attr("checked", false);
                 }
                 ajaxRequest("<c:url value="/order/getPurchaseOrderPrice.do"/>", param, success, function () {
                 }, "post");
@@ -580,7 +677,7 @@
 
     });
 
-    function df(addressId,consumerId) {
+    function df(addressId, consumerId) {
         $.ajax({
             type: 'post',
             async: false,
@@ -589,7 +686,7 @@
             data: {
                 status: 2,
                 id: addressId,
-                consumerId:consumerId,
+                consumerId: consumerId,
 
             },
             success: function (data) {
@@ -602,17 +699,150 @@
     }
 
     //使用余额
-    function useBalance(element){
+    function useBalance(element) {
         var totalPrice = $("#totalPrice").text();
         var couponPrice = $("#couponPrice").text();
         var balance = $("#usefulBalance").text();
-        if ($(element).is(':checked') == true){
+        if ($(element).is(':checked') == true) {
             $("#balance").html(balance);
-            $("#finalPrice").html((totalPrice-balance-couponPrice).toFixed(2));
-        }else if($(element).is(':checked') == false){
+            $("#finalPrice").html((totalPrice - balance - couponPrice).toFixed(2));
+        } else if ($(element).is(':checked') == false) {
             $("#balance").html("0.00");
-            $("#finalPrice").html((totalPrice-couponPrice).toFixed(2));
+            $("#finalPrice").html((totalPrice - couponPrice).toFixed(2));
         }
+    }
+
+    function province(obj, addressId) {
+        var v = $(obj).val();
+
+        //alert(provinceId);
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/myEfeiyi/address/listProvince.do"/>',
+            dataType: 'json',
+            success: function (data) {
+                $("#provinceVal" + addressId).empty();
+                var obj = eval(data);
+                var rowHtml = "";
+                rowHtml += "<option value='请选择'>请选择所在省市</option>";
+                for (var i = 0; i < obj.length; i++) {
+                    rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
+
+                }
+                $("#provinceVal" + addressId).append(rowHtml);
+                $("#provinceVal" + addressId + " option[value='" + v + "']").attr("selected", "selected");
+                city(v, addressId);
+            },
+
+        });
+    }
+
+    function district(obj, addressId) {
+
+        var cityId = $("#cityVal" + addressId).val();
+        var v = $(obj).val();
+        $("#districtVal" + addressId).empty();
+
+        $.ajax({
+            type: 'post',
+            async: 'false',
+            url: '<c:url value="/myEfeiyi/address/listDistrict.do"/>',
+            dataType: 'json',
+            data: {
+                cityId: cityId
+            },
+            success: function (data) {
+                var obj = eval(data);
+                var rowHtml = "";
+                rowHtml += "<option value='请选择'>请选择所在地区</option>"
+                for (var i = 0; i < obj.length; i++) {
+                    rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
+                }
+                $("#districtVal" + addressId).append(rowHtml);
+                $("#distrtictVal" + addressId + " option[value='" + v + "']").attr("selected", "selected");
+            }
+
+        })
+
+    }
+    function city(obj, addressId) {
+        var pid = $("#provinceVal" + addressId).val();
+        var v = $(obj).val();
+        $("#cityVal" + addressId).empty();
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/myEfeiyi/address/listCity.do"/>',
+            dataType: 'json',
+            data: {
+                provinceId: pid
+            },
+            success: function (data) {
+                var obj = eval(data);
+                var rowHtml = "";
+                rowHtml += "<option value='请选择'>请选择所在区县</option>";
+                for (var i = 0; i < obj.length; i++) {
+                    rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
+                }
+                $("#cityVal" + addressId).append(rowHtml);
+                $("#cityVal" + addressId + " option[value='" + v + "']").attr("selected", "selected");
+                district(v, addressId);
+            },
+        });
+    }
+
+    //编辑收货地址
+    function openAddress(addressId,consignee,province,provinceId,city,cityId,district,districtId,details,phone) {
+        $("#consignee").val(consignee);
+        $("#provinceOption").text(province);
+        $("#provinceOption").val(provinceId);
+        $("#cityOption").val(cityId);
+        $("#cityOption").text(city);
+        $("#districtOption").text(district);
+        $("#districtOption").val(districtId);
+        $("#details").val(details);
+        $("#phone").val(phone);
+        $("#addressId").val(addressId);
+    }
+
+    //删除地址
+    function removeAddress(addressId){
+        showConfirm('提示','是否删除',function(){
+            $.ajax({
+                type: 'post',
+                async: false,
+                url: '<c:url value="/order/removeAddress.do?addressId="/>'+addressId,
+                dataType: 'json',
+                data: {},
+                success: function (data) {
+                    if(data){
+                        window.location.reload();
+                    }
+                },
+            });
+        })
+    }
+
+    //设置为默认地址
+    function defaultAddress(addressId,consumerId) {
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/order/defaultAddress.do"/>',
+            dataType: 'json',
+            data: {
+                status: 2,
+                id: addressId,
+
+            },
+            success: function (data) {
+                if (data == true) {
+                    window.location.reload();
+                }
+            },
+
+        });
     }
 </script>
 </body>

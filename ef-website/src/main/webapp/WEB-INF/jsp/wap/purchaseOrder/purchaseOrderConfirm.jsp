@@ -242,7 +242,7 @@
                         </div>
                         <div class="am-form-group">
                             <label>手机号</label>
-                            <input type="text" class="txt" name="phone" value="" size="11" maxlength="11">
+                            <input type="text" class="txt" name="phone" value="" size="11" maxlength="11" required>
                         </div>
                         <div class="am-form-group">
                             <label>所在地区</label>

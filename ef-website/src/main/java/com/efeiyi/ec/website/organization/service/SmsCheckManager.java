@@ -1,6 +1,8 @@
 package com.efeiyi.ec.website.organization.service;
 
 
+import java.util.HashMap;
+
 /**
  * Created with IntelliJ IDEA.
  * User: ming
@@ -23,6 +25,8 @@ public interface SmsCheckManager {
      * @return
      */
     public String send(String phone, String content, String tpl_id, Integer company);
+
+    public String send(String phone, HashMap<String,String> param, String tpl_id);
 
 //    public void send(String phone, String content, String branchName,String tpl_id) throws Exception;
 

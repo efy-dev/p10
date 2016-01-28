@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -58,6 +59,26 @@ public class SmsCheckManagerImpl implements SmsCheckManager {
                 System.out.println(sendCode.getMsg());
                 return sendCode.getMsg();
             }
+
+    }
+    @Override
+    public String send(String phone, HashMap<String,String> param, String tpl_id) {
+        SmsProvider smsProvider = null;
+
+        smsProvider = new YunPianSmsProvider();
+
+        //非营销短信
+        if(tpl_id.equals("3")){
+            SendCode sendCode = smsProvider.post(phone, param, tpl_id);
+
+            return sendCode.getMsg();
+        }else{
+            SendCode sendCode = smsProvider.post(phone, param, tpl_id);
+
+
+            System.out.println(sendCode.getMsg());
+            return sendCode.getMsg();
+        }
 
     }
 //

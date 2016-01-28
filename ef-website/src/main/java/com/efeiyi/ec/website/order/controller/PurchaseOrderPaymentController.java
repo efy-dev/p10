@@ -7,6 +7,8 @@ import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.*;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.service.WxPayConfig;
+import com.efeiyi.ec.website.organization.model.SmsProvider;
+import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -39,6 +41,8 @@ import java.util.List;
 @RequestMapping({"/order"})
 public class PurchaseOrderPaymentController {
 
+    @Autowired
+    private SmsCheckManager smsCheckManager;
 
     @Autowired
     private BaseManager baseManager;
@@ -178,6 +182,7 @@ public class PurchaseOrderPaymentController {
             model.addAttribute("nonceStr", jsonStr.getString("nonceStr"));
             model.addAttribute("orderId", purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getId());
             model.addAttribute("order", purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder());
+            model.addAttribute("purchaseOrderPaymentDetails", purchaseOrderPaymentDetails);
             return "/order/wxpay";
         } catch (Exception e) {
             return "redirect:http://i.efeiyi.com";
@@ -257,6 +262,53 @@ public class PurchaseOrderPaymentController {
     @RequestMapping({"/paysuccess/{orderId}"})
     public String paySuccess(@PathVariable String orderId, Model model) throws Exception {
         PurchaseOrderPaymentDetails purchaseOrder = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
+        String purchaseOrderSerial = "";
+        String productMassge = "";
+        String deliveryName = "";
+        String deliveryNum = "";
+        String deliveryAddress = "";
+        HashMap<String,String> map = new HashMap<String,String>();
+
+        //支付成功发送短信
+        PurchaseOrderPayment purchaseOrderPayment = purchaseOrder.getPurchaseOrderPayment();
+        if (purchaseOrderPayment == null){
+            PurchaseOrder purchaseOrder1 = ((PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrder.getPurchaseOrderPayment().getId())).getPurchaseOrder();
+            purchaseOrderSerial = purchaseOrder1.getId();
+            if (purchaseOrder1.getSubPurchaseOrder() != null && purchaseOrder1.getSubPurchaseOrder().size() > 0) {
+                //获取自订单信息
+                for (PurchaseOrder purchaseOrderTemp : purchaseOrder1.getSubPurchaseOrder()) {
+                    purchaseOrderSerial = purchaseOrderTemp.getId();
+                    for(PurchaseOrderProduct purchaseOrderProduct:purchaseOrderTemp.getPurchaseOrderProductList()){
+                        productMassge += purchaseOrderProduct.getProductModel().getProduct().getName()+"("+purchaseOrderProduct.getPurchaseAmount()+");";
+                    }
+                    deliveryName = purchaseOrderTemp.getReceiverName();
+                    deliveryNum = purchaseOrderTemp.getReceiverPhone();
+                    deliveryAddress = purchaseOrderTemp.getPurchaseOrderAddress();
+                    map.put("purchaseOrderSerial",purchaseOrderSerial);
+                    map.put("productMassge",productMassge);
+                    map.put("deliveryName",deliveryName);
+                    map.put("deliveryNum",deliveryNum);
+                    map.put("deliveryAddress",deliveryAddress);
+                    smsCheckManager.send(purchaseOrderTemp.getBigTenant().getPhone(),map,"1216591");
+                    smsCheckManager.send("13671386900",map,"1216591");
+                }
+            }else {
+                for(PurchaseOrderProduct purchaseOrderProduct1:purchaseOrder1.getPurchaseOrderProductList()){
+                    productMassge += purchaseOrderProduct1.getProductModel().getProduct().getName()+"("+purchaseOrderProduct1.getPurchaseAmount()+");";
+                }
+                deliveryName = purchaseOrder1.getReceiverName();
+                deliveryNum = purchaseOrder1.getReceiverPhone();
+                deliveryAddress = purchaseOrder1.getPurchaseOrderAddress();
+                map.put("purchaseOrderSerial",purchaseOrderSerial);
+                map.put("productMassge",productMassge);
+                map.put("deliveryName",deliveryName);
+                map.put("deliveryNum",deliveryNum);
+                map.put("deliveryAddress",deliveryAddress);
+                smsCheckManager.send(purchaseOrder1.getBigTenant().getPhone(),map,"1216591");
+                smsCheckManager.send("13671386900",map,"1216591");
+            }
+        }
+
         model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
         if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback() != null) {
             String redirect = URLDecoder.decode(purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback(), "UTF-8");
@@ -264,7 +316,11 @@ public class PurchaseOrderPaymentController {
         } else if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType() != null && purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType().equals("3")) {
             return "redirect:/giftReceive/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
         }
-        return "/purchaseOrder/paySuccess";
+        if ("3".equals(purchaseOrder.getPayWay())){
+            return "redirect:http://www2.efeiyi.com/sharePage/productShare/"+purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
+        }else {
+            return "/purchaseOrder/paySuccess";
+        }
     }
 
     @RequestMapping({"/checkInventory/{orderId}"})
