@@ -89,26 +89,26 @@
             <div class="page-box-m">
                 <c:forEach items="${addressList}" var="address">
 
-                    <div class="page-default" style="position:relative">
+                    <div id="address${address.id}" class="page-default" style="position:relative">
                     <span>
                         <c:if test="${address.status=='2'}">
                         <div id="${address.id}" class="default-text triangle activeFlag" name="addressItem"
                              onclick="chooseAddress(this,'${address.id}')">
                             </c:if>
                             <c:if test="${address.status=='1'}">
-                            <div class="default-text" name="addressItem" onclick="chooseAddress(this,'${address.id}')">
+                            <div id="${address.id}" class="default-text" name="addressItem" onclick="chooseAddress(this,'${address.id}')">
                                 </c:if>
-                                <strong>${address.consignee} ${address.province.name}</strong>
+                                <strong id="consigneeAndProvince${address.id}">${address.consignee} ${address.province.name}</strong>
                                     <%--<i class="triangle" style="display: block"></i>--%>
                                 </a>
                             </div>
                     </span>
-                        <span>${address.consignee}</span>
-                        <span>${address.province.name}</span>
-                        <span>${address.city.name}</span>
-                        <span>${address.district.name}</span>
-                        <span>${address.details}</span>
-                        <span>${address.phone}</span>
+                        <span id="resultConsignee${address.id}">${address.consignee}</span>
+                        <span id="resultProvince${address.id}">${address.province.name}</span>
+                        <span id="resultCity${address.id}">${address.city.name}</span>
+                        <span id="resultDistrict${address.id}">${address.district.name}</span>
+                        <span id="resultDetails${address.id}">${address.details}</span>
+                        <span id="resultPhone${address.id}">${address.phone}</span>
 
                         <div class="jc-hc" style="display: none;height: 40px;">
                             <a href="#" onclick="removeAddress('${address.id}');">删除</a>
@@ -165,7 +165,7 @@
                                     </li>
                                     <li>
                                         <label></label>
-                                        <input type="button" onclick="submitForm('${address.id}');"
+                                        <input type="button" onclick="submitForm();"
                                                class="dj-btn" value="保存收货人信息">
                                         <span id="ts_update" style="border: 0"></span>
                                     </li>
@@ -513,7 +513,8 @@
             var success = function (data) {
 //                window.location.href=window.location.href;
                 var html = newAddress(data);
-                $("#address").append(html);
+                $("#address").find(".page-box-m").append(html);
+                $(".page-box-m").css("position","relative")
                 $(".active-pop").hide();
                 $("#reset").click();
                 $("#" + data.id).click();
@@ -531,15 +532,30 @@
         var districtVal = $("#districtVal").val();
         var details = $("#details").val();
         var phone = $("#phone").val();
+        var addressId = $("#addressId").val();
         if (consignee != "" && (typeof (consignee) != 'undefined') && provinceVal != "" && cityVal != "" && districtVal != "" && details != "" && typeof (details) != 'undefined' && phone != "" && (typeof (phone) != 'undefined')) {
             $.ajax({
                 cache: true,
                 type: "POST",
+                dataType:"json",
                 url: '<c:url value="/order/updateAddress.do"/>',
                 data: $('#updateAddress').serialize(),
                 success: function (data) {
-                    if (data) {
-                        window.location.reload();
+                    if (data != null && data != "") {
+                        var data = JSON.parse(data);
+                        $("#consigneeAndProvince"+addressId).text(data["consignee"] + " " + data["province"]);
+                        $("#resultConsignee"+addressId).text(data["consignee"]);
+                        $("#resultProvince"+addressId).text(data["province"]);
+                        $("#resultCity"+addressId).text(data["city"]);
+                        $("#resultDistrict"+addressId).text(data["district"]);
+                        $("#resultDetails"+addressId).text(data["details"]);
+                        $("#resultPhone"+addressId).text(data["phone"]);
+                        $(".apt").hide();
+                        $('.my-clearing .page-default').mouseleave(function(){
+                            $(this).find('.jc-hc').hide();
+                            $(this).find('.jc-hc').css("z-index","")
+                            $(".header,.footer,.am-sticky-placeholder,.topbar,.header-new,.nav-new,.footernew").css("z-index","")
+                        });
                     }
                 },
             })
@@ -817,7 +833,8 @@
                 data: {},
                 success: function (data) {
                     if(data){
-                        window.location.reload();
+                        $("#address"+addressId).hide();
+
                     }
                 },
             });
@@ -825,7 +842,7 @@
     }
 
     //设置为默认地址
-    function defaultAddress(addressId,consumerId) {
+    function defaultAddress(addressId) {
         $.ajax({
             type: 'post',
             async: false,
@@ -838,7 +855,11 @@
             },
             success: function (data) {
                 if (data == true) {
-                    window.location.reload();
+                    consumerAddress = addressId;
+                    $("div[name=addressItem]").each(function () {
+                        $(this).attr("class", "default-text");
+                    })
+                    $("#"+consumerAddress).attr("class", "default-text triangle")
                 }
             },
 

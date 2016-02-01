@@ -498,14 +498,11 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/updateAddress.do"})
     @ResponseBody
-    public boolean updateAddress(HttpServletRequest request) throws Exception {
-        try {
-            XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
-            ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.saveOrUpdate(xSaveOrUpdate);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
+    public String updateAddress(HttpServletRequest request) throws Exception {
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
+        ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.saveOrUpdate(xSaveOrUpdate);
+        String result =  "{\"consignee\":\"" + consumerAddress.getConsignee() + "\",\"province\":\"" + (consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : 0) + "\",\"city\":\"" + (consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : 0) + "\",\"district\":\"" + (consumerAddress.getDistrict() != null ? consumerAddress.getDistrict().getName() : 0) + "\",\"details\":\"" + consumerAddress.getDetails() + "\",\"phone\":\"" + consumerAddress.getPhone() + "\"}";
+        return result;
     }
 
     @RequestMapping({"/removeAddress.do"})
