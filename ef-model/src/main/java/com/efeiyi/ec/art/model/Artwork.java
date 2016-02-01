@@ -14,7 +14,7 @@ import java.util.Date;
  *
  */
 @Entity
-@Table(name = "app_artwork")
+@Table(name = "app_art_work")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Artwork implements Serializable {
     private String id;
@@ -63,7 +63,7 @@ public class Artwork implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-    @Column(name = "investGoalMoney")
+    @Column(name = "invest_goal_money")
     public BigDecimal getInvestGoalMoney() {
         return investGoalMoney;
     }
@@ -71,7 +71,7 @@ public class Artwork implements Serializable {
     public void setInvestGoalMoney(BigDecimal investGoalMoney) {
         this.investGoalMoney = investGoalMoney;
     }
-    @Column(name = "investStartDatetime")
+    @Column(name = "invest_start_datetime")
     public Date getInvestStartDatetime() {
         return investStartDatetime;
     }
@@ -79,7 +79,7 @@ public class Artwork implements Serializable {
     public void setInvestStartDatetime(Date investStartDatetime) {
         this.investStartDatetime = investStartDatetime;
     }
-    @Column(name = "investEndDatetime")
+    @Column(name = "invest_end_datetime")
     public Date getInvestEndDatetime() {
         return investEndDatetime;
     }
@@ -87,7 +87,7 @@ public class Artwork implements Serializable {
     public void setInvestEndDatetime(Date investEndDatetime) {
         this.investEndDatetime = investEndDatetime;
     }
-    @Column(name = "auctionStartDatetime")
+    @Column(name = "auction_start_datetime")
     public Date getAuctionStartDatetime() {
         return auctionStartDatetime;
     }
@@ -112,7 +112,7 @@ public class Artwork implements Serializable {
     public void setAuthor(User author) {
         this.author = author;
     }
-    @Column(name = "createDatetime")
+    @Column(name = "create_datetime")
     public Date getCreateDatetime() {
         return createDatetime;
     }
