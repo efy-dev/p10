@@ -1,6 +1,5 @@
 package com.efeiyi.ec.website.organization.service.impl;
 
-import com.efeiyi.ec.website.organization.dao.UserDao;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.website.organization.service.UserManager;
 import com.ming800.core.base.service.BaseManager;
