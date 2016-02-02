@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.project.controller;
+package com.efeiyi.ec.website.product.controller;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
