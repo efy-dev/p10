@@ -93,9 +93,9 @@ public class WikiIndexController extends WikibaseController {
         }catch (Exception e){
 
         }
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),userDetails.getAuthorities());
-        authentication.setDetails(new WebAuthenticationDetails(request));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UsernamePasswordAuthenticationToken com.efeiyi.ec.website.authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),userDetails.getAuthorities());
+        com.efeiyi.ec.website.authentication.setDetails(new WebAuthenticationDetails(request));
+        SecurityContextHolder.getContext().setAuthentication(com.efeiyi.ec.website.authentication);
         HttpSession session = request.getSession(true);*/
        //欺诈结束
 

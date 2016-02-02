@@ -29,8 +29,8 @@
 //import com.ming800.core.util.VerificationCodeGenerator;
 //import net.sf.json.JSONObject;
 //import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.authentication.AuthenticationManager;
-//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+//import org.springframework.security.com.efeiyi.ec.website.authentication.AuthenticationManager;
+//import org.springframework.security.com.efeiyi.ec.website.authentication.UsernamePasswordAuthenticationToken;
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.core.AuthenticationException;
 //import org.springframework.security.core.GrantedAuthority;

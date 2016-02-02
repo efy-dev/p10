@@ -15,9 +15,4 @@ import java.util.List;
  */
 public interface UserManager {
 
-    public List<BigUser> listBigUser(String teachAreaId);
-
-    public void saveOrUpdateBigUser(BigUser bigUser);
-
-    public PageInfo pageBigUser(String teachAreaId, PageEntity pageEntity);
 }

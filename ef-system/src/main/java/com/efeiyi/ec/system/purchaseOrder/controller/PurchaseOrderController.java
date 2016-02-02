@@ -58,7 +58,7 @@ public class PurchaseOrderController extends BaseController {
 
     /**
      * ����
-     * ,PurchaseOrderDelivery purchaseOrderDelivery,Authentication authentication
+     * ,PurchaseOrderDelivery purchaseOrderDelivery,Authentication com.efeiyi.ec.website.authentication
      *
      * @param purchaseOrder
      * @return

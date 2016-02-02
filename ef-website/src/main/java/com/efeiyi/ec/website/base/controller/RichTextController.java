@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.tenant.controller;
+package com.efeiyi.ec.website.base.controller;
 
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
