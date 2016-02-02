@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  */
 @Entity
-@Table(name = "app_artwork_introduction")
+@Table(name = "app_art_work_introduction")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ArtworkIntroduction implements Serializable {
     private String id;
@@ -40,7 +40,7 @@ public class ArtworkIntroduction implements Serializable {
     }
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "artwork_id")
+    @JoinColumn(name = "art_work_id")
     public Artwork getArtwork() {
         return artwork;
     }

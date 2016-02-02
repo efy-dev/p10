@@ -14,7 +14,7 @@ import java.util.Date;
  *
  */
 @Entity
-@Table(name = "app_artwork_bidding")
+@Table(name = "app_art_work_bidding")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ArtworkBidding implements Serializable{
 
@@ -35,7 +35,7 @@ public class ArtworkBidding implements Serializable{
     public void setId(String id) {
         this.id = id;
     }
-    @Column(name = "createDatetime")
+    @Column(name = "create_datetime")
     public Date getCreateDatetime() {
         return createDatetime;
     }
@@ -69,7 +69,7 @@ public class ArtworkBidding implements Serializable{
         this.price = price;
     }
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "artwork_id")
+    @JoinColumn(name = "art_work_id")
     public Artwork getArtwork() {
         return artwork;
     }

@@ -14,7 +14,7 @@ import java.util.Date;
  *
  */
 @Entity
-@Table(name = "app_artwork_draw")
+@Table(name = "app_art_work_draw")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ArtworkDraw implements Serializable{
     private String id;
@@ -34,7 +34,7 @@ public class ArtworkDraw implements Serializable{
         this.id = id;
     }
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "artwork_id")
+    @JoinColumn(name = "art_work_id")
     public Artwork getArtwork() {
         return artwork;
     }
@@ -43,7 +43,7 @@ public class ArtworkDraw implements Serializable{
         this.artwork = artwork;
     }
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "luckyUser_id")
+    @JoinColumn(name = "lucky_user_id")
     public User getLuckyUser() {
         return luckyUser;
     }
@@ -51,7 +51,7 @@ public class ArtworkDraw implements Serializable{
     public void setLuckyUser(User luckyUser) {
         this.luckyUser = luckyUser;
     }
-    @Column(name = "createDatetime")
+    @Column(name = "create_datetime")
     public Date getCreateDatetime() {
         return createDatetime;
     }
@@ -60,7 +60,7 @@ public class ArtworkDraw implements Serializable{
         this.createDatetime = createDatetime;
     }
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "creator_id")
+    @JoinColumn(name = "creator_user_id")
     public User getCreator() {
         return creator;
     }

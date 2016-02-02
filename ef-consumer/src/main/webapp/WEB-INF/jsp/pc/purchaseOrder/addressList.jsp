@@ -39,6 +39,8 @@
                                         </select>
                                         <select id="cityVal" class="car1" name="city.id" onclick="city(this);" required>
                                         </select>
+                                        <select id="district12" class="car1" name="district.id"  required>
+                                        </select>
                                         <span class="active-d span2" id="hao" style="border: 0;color: #000"></span>
                                     </form>
 
@@ -87,7 +89,7 @@
                 <tr>
                     <td width="76" style="text-align: right;"><span>所在地区：</span></td>
                     <td width="600">
-                        <span>${address.province.name} ${address.city.name}</span>
+                        <span>${address.province.name} ${address.city.name} ${address.district.name}</span>
 
                     </td>
                     <td width="188" class="ae-rg1">
@@ -165,8 +167,11 @@
                                                           <option value="${pro.id}">${pro.name}</option>
                                                       </c:forEach>
                                                   </select>
-                                                  <select id="citys${address.id}" name="city.id" class="car1" required>
+                                                  <select id="citys${address.id}" name="city.id" class="car1"  onchange="cityChange(this , '${address.id}')"    required>
                                                   </select>
+                                                  <select id="districts${address.id}" name="district.id" class="car1" required>
+                                                  </select>
+
                                               </form>
                                           </li>
                                           <li>
@@ -228,12 +233,9 @@
     $(function () {
         $("#add").click(function () {
             $(this).siblings('.active-pop').show();
-            $(".header-new,.nav-new,.footernew").css("z-index","-1");
-            $(".my-order .pop-up").css({'margin-top':-157})
             province();
             $('.my-order .clase, .my-order .sh-bg').click(function () {
                 $(this).parents('.active-pop').hide();
-                $(".header-new,.nav-new,.footernew").css("z-index","")
             })
             return false;
         })
@@ -241,11 +243,10 @@
     $(function () {
         $(".hideDiv").click(function () {
             $(this).siblings('.active-pop').show();
-            $(".header-new,.nav-new,.footernew").css("z-index","-1");
-            $(".my-order .pop-up").css({'margin-top':-157})
+            $('.header-new,.topbar,.nav-new-list,.footernew').css('z-index','-1');
             $('.my-order .clase, .my-order .sh-bg').click(function () {
                 $(this).parents('.active-pop').hide();
-                $(".header-new,.nav-new,.footernew").css("z-index","")
+                $('.header,.footer').css('z-index','');
             })
             return false;
         });

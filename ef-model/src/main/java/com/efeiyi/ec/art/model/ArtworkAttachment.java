@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  */
 @Entity
-@Table(name = "app_artwork_attachment")
+@Table(name = "app_art_work_attachment")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ArtworkAttachment implements Serializable {
     private String id;
@@ -30,7 +30,7 @@ public class ArtworkAttachment implements Serializable {
         this.id = id;
     }
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "artwork_id")
+    @JoinColumn(name = "art_work_id")
     public Artwork getArtwork() {
         return artwork;
     }
@@ -38,7 +38,7 @@ public class ArtworkAttachment implements Serializable {
     public void setArtwork(Artwork artwork) {
         this.artwork = artwork;
     }
-    @Column(name = "fileType")
+    @Column(name = "file_type")
     public String getFileType() {
         return fileType;
     }
@@ -46,7 +46,7 @@ public class ArtworkAttachment implements Serializable {
     public void setFileType(String fileType) {
         this.fileType = fileType;
     }
-    @Column(name = "fileName")
+    @Column(name = "file_name")
     public String getFileName() {
         return fileName;
     }
