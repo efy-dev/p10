@@ -65,8 +65,7 @@
 
             <div class="btb"><h5>礼物详情</h5></div>
             <div class="chandise ae">
-                <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}" height="90px">
-                </div>
+                <div class="cha-pic"><img src="http://pro.efeiyi.com/${productModel.productModel_url}" height="90px"></div>
                 <div class="cha-box">
                     <c:if test="${productModel.product.productModelList.size()==1}">
                         <strong>${productModel.name}</strong>
@@ -86,18 +85,16 @@
                         <i>X ${amount}</i>
                     </div>
                 </div>
+                <div class="balance add-balance"><input type="checkbox" id="banlanceCheckbox" onclick="useBalance(this);">使用余额支付
+                    <span id="usefulBalance"><c:if test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元</div>
                 <div class="bd order-total add-order-total">
-                    <p id="btn-coupon"><strong>优惠券</strong><span id="yhq">0张券可用</span><a href="#arrow-right"
-                                                                                         class="arrow-right"></a></p>
-
-                    <p><strong>商品金额</strong><span><em>￥</em>${productModel.price*amount}</span></p>
-
-                    <p><strong>优惠</strong><span id="couponPrice"><em>-￥</em>0</span></p>
-
-                    <p><strong>运费</strong><span><em>￥</em>0</span></p>
+                    <p id="btn-coupon"><strong>优惠券</strong><span id="yhq">0张券可用</span><a href="#arrow-right" class="arrow-right"></a></p>
+                    <p><strong>商品金额</strong><span><em>￥</em><em id="totalPrice">${productModel.price*amount}</em></span></p>
+                    <p><strong>优惠</strong><span><em>￥-</em><em id="couponPrice">0.00</em></span></p>
+                    <p><strong>余额</strong><span> <em>￥-</em><em id="balance">0.00</em></span></p>
+                    <p><strong>运费</strong><span><em>￥</em>0.00</span></p>
                 </div>
             </div>
-
             <div class="bd cart-pay newcart-pay new-yierqiu">
                 <div class="btb"><h5>请选择支付方式</h5></div>
                 <ul class="ul-list ae">
@@ -256,7 +253,7 @@
     }
 
     function submitOrder(orderId) {
-
+        var balance = $("#balance").text();
         if (gaverNameStats == "0") {
             showAlert("提示", "请填写送礼人姓名！");
         } else {
@@ -273,16 +270,28 @@
                     dataType: 'json',
                     success: function (data) {
                         if (data) {
-                            var isweixin = "";
+                            $.ajax({
+                                type: 'post',
+                                async: false,
+                                url: '<c:url value="/order/checkBalance"/>'+'?balance='+balance,
+                                dataType: 'json',
+                                success: function (data1) {
+                                    if(data1){
+                                        var isweixin = "";
 
-                            if (isWeiXin()) {
-                                isweixin = "&isWeiXin=1";
-                                payment = "3"
-                            }
+                                        if (isWeiXin()) {
+                                            isweixin = "&isWeiXin=1";
+                                            payment = "3"
+                                        }
 
-                            var url = "<c:url value="/order/confirm/"/>";
-                            url += orderId + "?payment=" + payment + "&message=" + isweixin + "&imageUrl=" + getCurrentImg();
-                            window.location.href = url;
+                                        var url = "<c:url value="/order/confirm/"/>";
+                                        url += orderId + "?payment=" + payment + "&message=" + isweixin + "&imageUrl=" + getCurrentImg() +"&balance=" + balance;
+                                        window.location.href = url;
+                                    }else{
+                                        showAlert("提示", "抱歉，余额不足！");
+                                    }
+                                }
+                            });
                         } else {
                             showAlert("提示", "抱歉，该商品已售罄！")
                         }
@@ -380,10 +389,18 @@
                     for (var i = 0; i < chkobjs.length; i++) {
                         if (chkobjs[i].checked) {
                             t_price = t_price - parseFloat(chkobjs[i].value);
-                            $("#couponPrice").html("<em>-￥</em>" + chkobjs[i].value);
+//                            $("#couponPrice").html(chkobjs[i].value);
+                            $("#couponPrice").html(chkobjs[i].value);
                         }
                     }
                     $("#change").text(t_price);
+                    $("#order-total").hide();
+                    $("body").css("overflow","scroll")
+                    if(t_price<parseFloat(${consumer.balance})){
+                        $("#usefulBalance").html(t_price.toFixed(2));
+                    }
+                    $("#balance").html("0.00");
+                    $("#banlanceCheckbox").attr("checked",false);
                     $("body").css("overflow", "scroll")
                 }
             },
@@ -397,6 +414,20 @@
             $("#giftMessage").val("").focus().val(t);
         })
     })
+
+    //使用余额
+    function useBalance(element){
+        var totalPrice1 = $("#totalPrice").text();
+        var couponPrice = $("#couponPrice").text();
+        var balance = $("#usefulBalance").text();
+        if ($(element).is(':checked') == true){
+            $("#balance").html(balance);
+            $("#change").html((totalPrice1-balance-couponPrice).toFixed(2));
+        }else if($(element).is(':checked') == false){
+            $("#balance").html("0.00");
+            $("#change").html((totalPrice1-couponPrice).toFixed(2));
+        }
+    }
 </script>
 </body>
 </html>
