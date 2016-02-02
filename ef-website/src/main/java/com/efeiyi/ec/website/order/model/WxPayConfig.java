@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.order.service;
+package com.efeiyi.ec.website.order.model;
 
 /**
  * Created by Administrator on 2015/8/12.

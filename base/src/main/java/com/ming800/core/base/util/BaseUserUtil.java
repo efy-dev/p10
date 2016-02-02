@@ -19,7 +19,7 @@ public class BaseUserUtil {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         try {
-//            Object object = authentication.getPrincipal();
+//            Object object = com.efeiyi.ec.website.authentication.getPrincipal();
             return (BaseUser) authentication.getPrincipal();
         } catch (Exception e) {
             BaseUser myUser = new BaseUser(){

@@ -1,18 +1,13 @@
 package com.efeiyi.ec.website.order.controller;
 
 import com.efeiyi.ec.organization.model.Consumer;
-import com.efeiyi.ec.organization.model.ConsumerAddress;
-import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.*;
 import com.efeiyi.ec.website.order.service.PaymentManager;
-import com.efeiyi.ec.website.order.service.WxPayConfig;
-import com.efeiyi.ec.website.organization.model.SmsProvider;
+import com.efeiyi.ec.website.order.model.WxPayConfig;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.does.model.XQuery;
-import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.HttpUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +25,7 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/10/10 0010.

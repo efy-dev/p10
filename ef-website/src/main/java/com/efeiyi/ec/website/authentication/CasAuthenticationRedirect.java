@@ -1,11 +1,9 @@
-package authentication;
+package com.efeiyi.ec.website.authentication;
 
-import com.ming800.core.util.HttpUtil;
 import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.URLEncoder;
 
 /**
  * Created by Administrator on 2015/11/4.

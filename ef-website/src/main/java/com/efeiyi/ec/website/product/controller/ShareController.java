@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.share.controller;
+package com.efeiyi.ec.website.product.controller;
 
 import com.efeiyi.ec.balance.model.BalanceRecord;
 import com.efeiyi.ec.organization.model.BigUser;

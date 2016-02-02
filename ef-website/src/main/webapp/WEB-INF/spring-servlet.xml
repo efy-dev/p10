@@ -92,7 +92,7 @@
           p:prefix="/WEB-INF/jsp" p:suffix=".jsp"/>
     <context:annotation-config/>
     <context:component-scan base-package="com.**.**.controller"/>
-    <context:component-scan base-package="authentication.**"/>
+    <context:component-scan base-package="com.efeiyi.ec.website.authentication.**"/>
     <!--<context:component-scan base-package="com.efeiyi.ec.website.**.**.service"/>-->
 
 

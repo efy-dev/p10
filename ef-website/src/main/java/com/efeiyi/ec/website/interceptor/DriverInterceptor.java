@@ -1,14 +1,11 @@
 package com.efeiyi.ec.website.interceptor;
 
-import com.efeiyi.ec.website.order.service.WxPayConfig;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.util.HttpUtil;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.URLEncoder;
 
 /**
  * Created by Administrator on 2015/7/20.

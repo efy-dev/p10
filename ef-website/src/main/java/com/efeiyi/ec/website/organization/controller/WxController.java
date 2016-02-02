@@ -1,12 +1,11 @@
 package com.efeiyi.ec.website.organization.controller;
 
-import com.efeiyi.ec.website.order.service.WxPayConfig;
+import com.efeiyi.ec.website.order.model.WxPayConfig;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.model.WxCalledRecord;
 import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import net.sf.json.JSONObject;
-import org.omg.CORBA.Current;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -155,6 +153,11 @@ public class WxController {
     }
 
 
+    /**
+     * 获取微信用户的身份信息，该操作不用授权 （参数同获取基本信息的接口一样）
+     * @param request
+     * @return
+     */
     @RequestMapping({"/getInfo.do"})
     public String getWxInfo(HttpServletRequest request) {
         String callback = request.getParameter("callback"); //www.efeiyi.com   www.efeiyi.com?name=xxxx
@@ -172,12 +175,17 @@ public class WxController {
         return "redirect:" + redirect;
     }
 
+    /**
+     * 获取微信用户的基本信息（昵称头像之类的 需要用户授权给公众账号）
+     * @param request
+     * @return
+     */
     @RequestMapping({"/getUserBaseInfo.do"})
     public String getWxBaseInfo(HttpServletRequest request) {
-        String callback = request.getParameter("callback");
-        String dataKey = request.getParameter("dataKey");
-        String requestSource = request.getParameter("source");
-        String consumerId = request.getParameter("consumerId");
+        String callback = request.getParameter("callback"); //回掉接口，接口中直接获取需要的参数即可（注：不需要带http前缀；需要URLEncode一下）
+        String dataKey = request.getParameter("dataKey"); //需要从微信中获取的数据的key 例如 nickname
+        String requestSource = request.getParameter("source");  //请求来源（没有可以不传）
+        String consumerId = request.getParameter("consumerId"); //当前微信用户对应的efeiyi用户，如果没有可以不传
         WxCalledRecord wxCalledRecord = new WxCalledRecord();
         wxCalledRecord.setCallback(callback);
         wxCalledRecord.setDataKey(dataKey);
@@ -189,12 +197,19 @@ public class WxController {
         return "redirect:" + redirect;
     }
 
+
+    /**
+     * 初始化微信签名（jssdk）
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping({"/init.do"})
     @ResponseBody
     public String initWxConfig(HttpServletRequest request) throws Exception {
-        String timestamp = request.getParameter("timestamp");
-        String nonceStr = request.getParameter("nonceStr");
-        String callUrl = request.getParameter("callUrl");
+        String timestamp = request.getParameter("timestamp"); //时间戳
+        String nonceStr = request.getParameter("nonceStr");  //随机字符串
+        String callUrl = request.getParameter("callUrl");  //访问接口的当前页面请求路径
         String ticket;
 
         //获取当前的ticket

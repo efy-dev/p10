@@ -27,8 +27,7 @@ public class SmsCheckManagerImpl implements SmsCheckManager {
 
     @Autowired
     private XdoDao basicDao;
-//    @Autowired
-//    private BranchManager branchManager;
+
 
     @Autowired
     private BaseManager baseManager;

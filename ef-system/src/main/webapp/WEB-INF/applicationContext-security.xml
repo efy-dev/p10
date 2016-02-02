@@ -37,13 +37,13 @@
     </http>
     <b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.system.organization.LoginOutSuccessHandler"/>
 
-    <!--<authentication-manager>-->
-    <!--<authentication-provider>-->
+    <!--<com.efeiyi.ec.website.authentication-manager>-->
+    <!--<com.efeiyi.ec.website.authentication-provider>-->
     <!--<user-service>-->
     <!--<user name="admin" password="admin" authorities="ROLE_ADMIN"/>-->
     <!--</user-service>-->
-    <!--</authentication-provider>-->
-    <!--</authentication-manager>-->
+    <!--</com.efeiyi.ec.website.authentication-provider>-->
+    <!--</com.efeiyi.ec.website.authentication-manager>-->
 
     <authentication-manager>
         <authentication-provider user-service-ref="userManager">
