@@ -813,6 +813,8 @@
         $("#consignee").val(consignee);
         $("#provinceOption").text(province);
         $("#provinceOption").val(provinceId);
+        $("#provinceVal option:selected").removeAttr("selected");
+        $("#provinceVal" + " option[value='" + provinceId + "']").attr("selected", "selected");
         $("#cityOption").val(cityId);
         $("#cityOption").text(city);
         $("#districtOption").text(district);
