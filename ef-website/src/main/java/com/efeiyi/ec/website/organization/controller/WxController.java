@@ -1,12 +1,11 @@
 package com.efeiyi.ec.website.organization.controller;
 
-import com.efeiyi.ec.website.order.service.WxPayConfig;
+import com.efeiyi.ec.website.order.model.WxPayConfig;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.model.WxCalledRecord;
 import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import net.sf.json.JSONObject;
-import org.omg.CORBA.Current;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
