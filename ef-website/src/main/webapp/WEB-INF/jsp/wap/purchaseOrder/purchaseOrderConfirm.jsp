@@ -390,8 +390,23 @@
             }
         })
         if(couponid!=null){
-            var couponId = couponid.substring(4, couponid.length);
-            $.ajax({
+            //var couponId = couponid.substring(4, couponid.length);
+            var t_price = parseFloat(totalPrice);
+            var chkobjs = document.getElementsByName("radio");
+            for (var i = 0; i < chkobjs.length; i++) {
+                if (chkobjs[i].checked) {
+                    t_price = t_price - parseFloat(chkobjs[i].value);
+                    $("#couponPrice").html(chkobjs[i].value);
+                }
+            }
+            $("#change").html(t_price.toFixed(2));
+            $(".yhq").hide();
+            if(t_price<parseFloat(${consumer.balance})){
+                $("#usefulBalance").html(t_price.toFixed(2));
+            }
+            $("#balance").html("0.00");
+            $("#banlanceCheckbox").attr("checked",false);
+            /*$.ajax({
                 type: 'post',
                 async: false,
                 url: '<c:url value="/coupon/use.do"/>',
@@ -421,7 +436,7 @@
                     }
                 },
 
-            });
+            });*/
 
         }else{
             $(".yhq").hide();
@@ -462,6 +477,13 @@
     function submitOrder(orderId) {
         var messageObject = new Object();
         var balance = $("#balance").text();
+        var couponId = "";
+        $("input:radio").each(function () {
+            if (this.checked) {
+                var couponid = $(this).attr("id");
+                couponId = couponid.substring(4, couponid.length);
+            }
+        })
         $("textarea[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
         })
@@ -498,7 +520,7 @@
                                     }
 
                                     var url = "<c:url value="/order/confirm/"/>";
-                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin +"&balance=" + balance;
+                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin +"&balance=" + balance + "&couponId=" + couponId;
                                     window.location.href = url;
                                 }else{
                                     showAlert("提示", "抱歉，余额不足！");

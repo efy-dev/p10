@@ -415,6 +415,7 @@ public class PurchaseOrderController extends BaseController {
         String addressId = request.getParameter("address");
         String message = request.getParameter("message");
         String balance = request.getParameter("balance");
+        String couponId = request.getParameter("couponId");
         //买家留言
         HashMap<String, String> messageMap = new HashMap<>();
         if (message != null) {
@@ -428,8 +429,9 @@ public class PurchaseOrderController extends BaseController {
         //判断余额是否足够，足够的话支付方式改为余额支付
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),orderId);
         if (null != balance && Float.parseFloat(balance) > 0){
-            if (null != purchaseOrder.getCoupon()){
-                int r = new BigDecimal(balance).compareTo(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
+            if (null != couponId && !"".equals(couponId)){
+                Coupon coupon = (Coupon) baseManager.getObject(Coupon.class.getName(),couponId);
+                int r = new BigDecimal(balance).compareTo(purchaseOrder.getTotal().subtract(new BigDecimal(coupon.getCouponBatch().getPrice())));
                 if (r == 0){
                     payment = "5";
                 }
@@ -447,7 +449,7 @@ public class PurchaseOrderController extends BaseController {
         }
         purchaseOrder = purchaseOrderManager.confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payment);
         //生成支付记录以及支付详情
-        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder, balance);
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder, balance, couponId);
 
         // 清除购物车
         XQuery xQuery = new XQuery("listCart_default", request);

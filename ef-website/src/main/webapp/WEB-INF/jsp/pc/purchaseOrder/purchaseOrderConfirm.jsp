@@ -375,6 +375,12 @@
         var messageObject = new Object();
         var balance = $("#balance").text();
         var finalPrice = $("#finalPrice").text();
+        var couponId = "";
+        $("input[name=coupon]").each(function () {
+            if($(this).is(':checked') == true){
+                couponId = $(this).attr("id");
+            }
+        })
         $("input[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
         })
@@ -401,7 +407,7 @@
                             success: function (data1) {
                                 if (data1) {
                                     var url = "<c:url value="/order/confirm/"/>";
-                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + "&balance=" + balance;
+                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + "&balance=" + balance +"&couponId=" + couponId;
                                     element.onclick = null;
                                     $(element).attr("href", url);
                                     $(element).click();
@@ -550,12 +556,14 @@
                         $("#resultDistrict"+addressId).text(data["district"]);
                         $("#resultDetails"+addressId).text(data["details"]);
                         $("#resultPhone"+addressId).text(data["phone"]);
+
                         $(".apt").hide();
                         $('.my-clearing .page-default').mouseleave(function(){
                             $(this).find('.jc-hc').hide();
                             $(this).find('.jc-hc').css("z-index","")
                             $(".header,.footer,.am-sticky-placeholder,.topbar,.header-new,.nav-new,.footernew").css("z-index","")
                         });
+
                     }
                 },
             })
@@ -576,9 +584,9 @@
         var out = ' ';
         for (var i = 0; i < it.length; i++) {
             if (it[i]["couponBatch"]["type"] == "1") {
-                out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this)" name="coupon" id="' + it[i].id + '"> <span class="t1">满' + (it[i]["couponBatch"]["priceLimit"]) + '元立减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
+                out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this,'+it[i].couponBatch.price+')" name="coupon" id="' + it[i].id + '"> <span class="t1">满' + (it[i]["couponBatch"]["priceLimit"]) + '元立减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
             } else {
-                out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this)" name="coupon" id="' + it[i].id + '"> <span class="t1">减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
+                out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this,'+it[i].couponBatch.price+')" name="coupon" id="' + it[i].id + '"> <span class="t1">减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
             }
         }
         return out;
@@ -627,15 +635,25 @@
 
     }
 
-    function chooseUsefulCoupon(element) {
+    function chooseUsefulCoupon(element, price) {
         var status = "1";
+        var totalPrice = $("#totalPrice").text();
         console.log($(element).is(':checked'));
         if ($(element).is(':checked') == true) {
             status = "1";
+            $("#couponPrice").html(price.toFixed(2));
+            $("#finalPrice").html((totalPrice-price).toFixed(2));
+            var finalPrice = parseFloat(totalPrice-price);
+            if (finalPrice < parseFloat(${consumer.balance})) {
+                $("#usefulBalance").html(finalPrice.toFixed(2));
+            }
+            $("#balance").html("0.00");
+            $("#banlanceCheckbox").attr("checked", false);
         } else {
             status = "2";
         }
-        //选中优惠卷以后会发送一个请求就是把优惠券绑定到订单当中，绑定完成之后再发送一个请求来更新价格返回的是一个拼装好的json字符串
+
+       /* //选中优惠卷以后会发送一个请求就是把优惠券绑定到订单当中，绑定完成之后再发送一个请求来更新价格返回的是一个拼装好的json字符串
         var param = {"purchaseOrderId": "${purchaseOrder.id}", "couponId": $(element).attr("id"), "status": status};
         var success = function (data) {
             if (data) {
@@ -662,7 +680,7 @@
             }
         }
         ajaxRequest("<c:url value="/useCoupon.do"/>", param, success, function () {
-        }, "post");
+        }, "post");*/
     }
 
 

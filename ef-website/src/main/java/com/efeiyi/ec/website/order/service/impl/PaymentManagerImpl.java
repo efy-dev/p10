@@ -188,7 +188,7 @@ public class PaymentManagerImpl implements PaymentManager {
     }
 
     @Override
-    public PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder, String balance) {
+    public PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder, String balance, String couponId) {
         Float balance1 = Float.parseFloat(balance);
         PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
         purchaseOrderPayment.setStatus("1");
@@ -196,6 +196,10 @@ public class PaymentManagerImpl implements PaymentManager {
         purchaseOrderPayment.setPaymentAmount(purchaseOrder.getTotal());
         purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
         purchaseOrderPayment.setPayWay("1");
+        Coupon coupon = new Coupon();
+        if(null != couponId && !"".equals(couponId)){
+            coupon = (Coupon)baseManager.getObject(Coupon.class.getName(),couponId);
+        }
         try {
             purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("payment"));
         } catch (Exception e) {
@@ -206,8 +210,7 @@ public class PaymentManagerImpl implements PaymentManager {
         purchaseOrderPayment.setUser(user);
         baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
         //支付详情
-        if (purchaseOrder.getCoupon() != null) {
-            Coupon coupon = purchaseOrder.getCoupon();
+        if (null != couponId && !"".equals(couponId)) {
             coupon.setStatus("2");
             baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
             PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
@@ -241,8 +244,8 @@ public class PaymentManagerImpl implements PaymentManager {
             balanceRecord.setType("4");
             baseManager.saveOrUpdate(BalanceRecord.class.getName(),balanceRecord);
 
-            if(purchaseOrder.getCoupon() !=null){
-                int r = new BigDecimal(balance1).compareTo(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
+            if(null != couponId && !"".equals(couponId)){
+                int r = new BigDecimal(balance1).compareTo(purchaseOrder.getTotal().subtract(new BigDecimal(coupon.getCouponBatch().getPrice())));
                 if(r == 0){
                     return purchaseOrderPaymentDetails;
                 }
@@ -255,11 +258,11 @@ public class PaymentManagerImpl implements PaymentManager {
 
         }
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
-        if (purchaseOrder.getCoupon() != null) {
+        if (null != couponId && !"".equals(couponId)) {
             if (balance1>0){
-                purchaseOrderPaymentDetails.setMoney((purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice()))).subtract(new BigDecimal(balance)));
+                purchaseOrderPaymentDetails.setMoney((purchaseOrder.getTotal().subtract(new BigDecimal(coupon.getCouponBatch().getPrice()))).subtract(new BigDecimal(balance)));
             }else {
-                purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
+                purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(coupon.getCouponBatch().getPrice())));
             }
         } else {
             if(balance1>0){
