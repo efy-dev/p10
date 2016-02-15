@@ -77,19 +77,9 @@
             <div class="page"><p>满${couponBatch.priceLimit}元使用</p><p>全场通用</p><p>${fn:substring(couponBatch.startDate,0 ,11 )}至${fn:substring(couponBatch.endDate,0 ,11 )}</p></div>
           </div>
         </li>
-        <!-- 状态1-->
-        <%--<li>--%>
-          <%--<p class="state-1">请输入手机号，代金券将直接存入该账户。</p>--%>
-        <%--</li>--%>
         <li>
           <a href="http://www.efeiyi.com/yhq.do?couponBatchId=iilsik60373zsqx4"></a>
-          <%--<input type="text" placeholder="输入手机号" class="int-text" maxlength="11">--%>
-          <%--<input onclick="getCoupon()" class="int-btn" value="保&nbsp;存" >--%>
         </li>
-        <!-- 状态3-->
-        <%--<li >--%>
-          <%--<p class="state-3">当前手机号码<area style="display: none" id="numberId"><a href="#">[修改]</a></p>--%>
-        <%--</li>--%>
       </ul>
     </div>
     <div class="t-use-botton ae">
