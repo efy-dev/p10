@@ -41,15 +41,4 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
             return myUser;
         }
     }
-
-    //从所有机构中查找学员用户（学员用户在所有机构中都不能重复）
-    public UserDetails loadStudentUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
-        String queryStr = "SELECT u FROM StudentUser u WHERE u.theStatus!=0 AND u.username=:username";
-        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("username", username.split(",")[0]);
-
-//        StudentUser studentUser = studentUserDao.getUniqueStudentUserByConditions(username.split(",")[1], queryStr, queryParamMap);
-        return null;
-    }
-
 }
