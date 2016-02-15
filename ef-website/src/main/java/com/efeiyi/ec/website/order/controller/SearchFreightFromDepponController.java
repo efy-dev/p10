@@ -30,101 +30,85 @@ import java.util.Map.Entry;
 
 /**
  * Created by Administrator on 2015/12/15.
- *
  */
 @Controller
 @RequestMapping("/freight")
 public class SearchFreightFromDepponController {
 
-    @RequestMapping(value ="/searchPrice.do")//, method = RequestMethod.POST)
+    @RequestMapping(value = "/searchPrice.do")//, method = RequestMethod.POST)
     @ResponseBody
     public String submit2Deppon(HttpServletRequest request) throws Exception {
 
-            String  productCode = ((DepponProduct) ContextUtils.getBean("depponProduct")).getProductCode();
-            String cost="";
-            JSONObject jsonObj = (JSONObject)JSONObject.parse(request.getParameter("json").toString());
-            String jsonString = jsonObj.toJSONString();
-            String weight = request.getParameter("weight");
-            if(jsonString ==null && "".equals(jsonString)){
-                return "the args is necessary";
-            }
-            String apiKey = "301695b57488025761a85027704c22b5";
-            long timestamp = System.currentTimeMillis();
-            String digest = jsonString + apiKey + timestamp;
-            System.out.println("param+apikey+timestamp:  " + digest);
-            digest = md5(digest);
-            System.out.println("MD5(param+apikey+timestamp):  " + digest);
-            digest = new String(Base64.encodeBase64(digest.getBytes()));
-            System.out.println("base64(MD5(param+apikey+timestamp)):  " + digest);
+        String productCode = ((DepponProduct) ContextUtils.getBean("depponProduct")).getProductCode();
+        String cost = "";
+        JSONObject jsonObj = (JSONObject) JSONObject.parse(request.getParameter("json").toString());
+        String jsonString = jsonObj.toJSONString();
+        String weight = request.getParameter("weight");
+        if (jsonString == null && "".equals(jsonString)) {
+            return "the args is necessary";
+        }
+        String apiKey = "301695b57488025761a85027704c22b5";
+        long timestamp = System.currentTimeMillis();
+        String digest = jsonString + apiKey + timestamp;
+        digest = md5(digest);
+        digest = new String(Base64.encodeBase64(digest.getBytes()));
 
-            HttpClient httpClient = new DefaultHttpClient();
-            String url = "http://api.deppon.com/dop/order/queryPrice.action";
-            HttpPost httppost = new HttpPost(url);
-            StringEntity stringEntity = new StringEntity("companyCode=EWBHUAYUNN&params=" + jsonString + "&digest=" + digest+"&timestamp="+timestamp,"utf-8");
-            stringEntity.setContentType("application/x-www-form-urlencoded");
-            httppost.setEntity(stringEntity);
-            System.out.println("url:  " + url);
-            byte [] b = new byte[(int)stringEntity.getContentLength()];
-            stringEntity.getContent().read(b);
-            System.out.println("报文:" + new String(b,"utf-8"));
+        HttpClient httpClient = new DefaultHttpClient();
+        String url = "http://api.deppon.com/dop/order/queryPrice.action";
+        HttpPost httppost = new HttpPost(url);
+        StringEntity stringEntity = new StringEntity("companyCode=EWBHUAYUNN&params=" + jsonString + "&digest=" + digest + "&timestamp=" + timestamp, "utf-8");
+        stringEntity.setContentType("application/x-www-form-urlencoded");
+        httppost.setEntity(stringEntity);
+        byte[] b = new byte[(int) stringEntity.getContentLength()];
+        stringEntity.getContent().read(b);
 
-            HttpResponse response = httpClient.execute(httppost);
-            HttpEntity entity = response.getEntity();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    entity.getContent(), "UTF-8"));
+        HttpResponse response = httpClient.execute(httppost);
+        HttpEntity entity = response.getEntity();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(
+                entity.getContent(), "UTF-8"));
 
-            String line;
-            StringBuilder stringBuilder = new StringBuilder();
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-            System.out.println(stringBuilder.toString());
-            JSONObject jasonObject = (JSONObject) JSONObject.parse(stringBuilder.toString());
-            JSONObject jasonObject2 = jasonObject.getJSONObject("responseParam");
-            JSONArray jsonArray =  jasonObject2.getJSONArray("priceInfo");
+        String line;
+        StringBuilder stringBuilder = new StringBuilder();
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+        JSONObject jasonObject = (JSONObject) JSONObject.parse(stringBuilder.toString());
+        JSONObject jasonObject2 = jasonObject.getJSONObject("responseParam");
+        JSONArray jsonArray = jasonObject2.getJSONArray("priceInfo");
 
-            if (!jsonArray.isEmpty()){
-                for (int i=0;i<jsonArray.size();i++){
-                    if (productCode.equals(jsonArray.getJSONObject(i).getString("productCode"))){
-                        cost = calculateFreight(jsonArray.getJSONObject(i),weight);
-                        break;
-
-                    }
+        if (!jsonArray.isEmpty()) {
+            for (int i = 0; i < jsonArray.size(); i++) {
+                if (productCode.equals(jsonArray.getJSONObject(i).getString("productCode"))) {
+                    cost = calculateFreight(jsonArray.getJSONObject(i), weight);
+                    break;
 
                 }
-            }
 
-            return cost;
+            }
+        }
+
+        return cost;
 
 
     }
 
 
-    @RequestMapping(value ="/getAddress.do")
+    @RequestMapping(value = "/getAddress.do")
     @ResponseBody
     public Map getAddressFromIp(HttpServletRequest request) throws Exception {
         Map map = new LinkedHashMap<String, String>();
         String URI = FreightConstant.SERVER_LOCATION_API_URI;
         String ak = FreightConstant.SERVER_AK;
-        //String sn = getSignature();
-        //JSONObject json = readJsonFromUrl(URI+"?ak="+ak+"&sn="+sn+"&ip=124.127.112.226");
-        JSONObject json = readJsonFromUrl(URI+"?ak="+ak+"&coor=bd09ll");
-        System.out.println(json.toString());
-        System.out.println(((JSONObject) json.get("content")).get("address"));
-        map.put("province",((JSONObject)((JSONObject) json.get("content")).get("address_detail")).get("province"));
-        map.put("city",((JSONObject)((JSONObject) json.get("content")).get("address_detail")).get("city"));
+        JSONObject json = readJsonFromUrl(URI + "?ak=" + ak + "&coor=bd09ll");
+        map.put("province", ((JSONObject) ((JSONObject) json.get("content")).get("address_detail")).get("province"));
+        map.put("city", ((JSONObject) ((JSONObject) json.get("content")).get("address_detail")).get("city"));
         return map;
     }
 
 
-
-
-
-
-
     private static String md5(String s) throws Exception {
         MessageDigest md5 = MessageDigest.getInstance("MD5");
-        byte [] md5Bytes = md5.digest(s.getBytes("utf-8"));
+        byte[] md5Bytes = md5.digest(s.getBytes("utf-8"));
         StringBuffer hexValue = new StringBuffer();
         for (int i = 0; i < md5Bytes.length; i++) {
             int val = ((int) md5Bytes[i]) & 0xff;
@@ -133,11 +117,11 @@ public class SearchFreightFromDepponController {
             }
             hexValue.append(Integer.toHexString(val));
         }
-        return  hexValue.toString();
+        return hexValue.toString();
     }
 
-    private String calculateFreight(JSONObject jsonArray,String weight)throws Exception{
-        String freight="";
+    private String calculateFreight(JSONObject jsonArray, String weight) throws Exception {
+        String freight = "";
         Double wt = new Double(weight);
         BigDecimal groundPrice = new BigDecimal(jsonArray.getString("groundPrice"));
         Double upperGround = jsonArray.getDouble("upperGround");
@@ -151,19 +135,18 @@ public class SearchFreightFromDepponController {
         Double lowerOfStage2 = jsonArray.getDouble("lowerOfStage2");
         Double upperOfStage2 = jsonArray.getDouble("upperOfStage2");
 
-        if (lowerGround<=wt && wt<=upperGround){
+        if (lowerGround <= wt && wt <= upperGround) {
             freight = groundPrice.toString();
-        }else if (lowerOfStage1<wt && wt<=upperOfStage1){
-            freight = groundPrice.add(rateOfStage1.multiply(new BigDecimal(wt-lowerOfStage1))).toString();
-        }else if(lowerOfStage2<wt && wt<=upperOfStage2){
+        } else if (lowerOfStage1 < wt && wt <= upperOfStage1) {
+            freight = groundPrice.add(rateOfStage1.multiply(new BigDecimal(wt - lowerOfStage1))).toString();
+        } else if (lowerOfStage2 < wt && wt <= upperOfStage2) {
             freight = groundPrice.add(
-                    rateOfStage1.multiply(new BigDecimal(upperOfStage1-lowerOfStage1))
+                    rateOfStage1.multiply(new BigDecimal(upperOfStage1 - lowerOfStage1))
                             .add(rateOfStage2.multiply(new BigDecimal(wt - lowerOfStage2)))).toString();
         }
 
         return freight;
     }
-
 
 
     private static String readAll(Reader rd) throws IOException {
@@ -174,6 +157,7 @@ public class SearchFreightFromDepponController {
         }
         return sb.toString();
     }
+
     public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
         InputStream is = new URL(url).openStream();
         try {
@@ -187,7 +171,7 @@ public class SearchFreightFromDepponController {
     }
 
 
-    private static String getSignature() throws  Exception{
+    private static String getSignature() throws Exception {
         Map paramsMap = new LinkedHashMap<String, String>();
         paramsMap.put("ak", FreightConstant.SERVER_AK);
         String paramsStr = toQueryString(paramsMap);
@@ -198,6 +182,7 @@ public class SearchFreightFromDepponController {
         System.out.println(MD5(tempStr));
         return MD5(tempStr);
     }
+
     // 来自stackoverflow的MD5计算方法，调用了MessageDigest库函数，并把byte数组结果转换成16进制
     private static String MD5(String md5) {
         try {
@@ -214,6 +199,7 @@ public class SearchFreightFromDepponController {
         }
         return null;
     }
+
     // 对Map内所有value作utf8编码，拼接返回结果
     private static String toQueryString(Map<?, ?> data)
             throws UnsupportedEncodingException {

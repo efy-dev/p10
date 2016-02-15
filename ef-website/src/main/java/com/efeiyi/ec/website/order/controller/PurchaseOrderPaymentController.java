@@ -147,7 +147,6 @@ public class PurchaseOrderPaymentController {
     @RequestMapping({"/pay/wxParam/{orderId}"})
     public String getWxOpenId(HttpServletRequest request, Model model, @PathVariable String orderId) throws Exception {
         try {
-
             PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
             String result;
             //1、网页授权后获取传递的code，用于获取openId
@@ -155,12 +154,10 @@ public class PurchaseOrderPaymentController {
             if (request.getSession().getAttribute(code) != null) {
                 result = request.getSession().getAttribute(code).toString();
             } else {
-                System.out.println("1、 page code value：" + code);
                 String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
                 result = HttpUtil.getHttpResponse(urlForOpenId, null);
                 request.getSession().setAttribute(code, result);
             }
-            System.out.println("2、get openid result：" + result);
             JSONObject jsonObject = JSONObject.fromObject(result);
             if (jsonObject.containsKey("errcode")) {
                 throw new RuntimeException("get openId error：" + result);
@@ -192,16 +189,11 @@ public class PurchaseOrderPaymentController {
     }
 
     @RequestMapping({"/pay/balance/{orderId}"})
-    public String balancePayNative(@PathVariable String orderId, Model model, HttpServletRequest request){
+    public String balancePayNative(@PathVariable String orderId, Model model, HttpServletRequest request) {
         String purchaseOrderId = request.getParameter("purchaseOrderId");
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
-        if ("5".equals(purchaseOrderPaymentDetails.getPayWay())){
-//            String consumerId = AuthorizationUtil.getMyUser().getId();
-//            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
-//            consumer.setBalance(consumer.getBalance().subtract(purchaseOrderPaymentDetails.getMoney()));
-
-            PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
-
+        if ("5".equals(purchaseOrderPaymentDetails.getPayWay())) {
+            PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
             // 修改订单状态
             if (purchaseOrder.getSubPurchaseOrder() != null && purchaseOrder.getSubPurchaseOrder().size() > 0) {
                 //同时修改子订单状态
@@ -214,18 +206,18 @@ public class PurchaseOrderPaymentController {
                 purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() - purchaseOrderProduct.getPurchaseAmount());
                 baseManager.saveOrUpdate(ProductModel.class.getName(), purchaseOrderProduct.getProductModel());
             }
-            if("3".equals(purchaseOrder.getOrderType())){
+            if ("3".equals(purchaseOrder.getOrderType())) {
                 purchaseOrder.setOrderStatus("6");
-                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
-                model.addAttribute("order",purchaseOrder);
-                return "redirect:/giftReceive/"+purchaseOrderId;
-            }else {
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+                model.addAttribute("order", purchaseOrder);
+                return "redirect:/giftReceive/" + purchaseOrderId;
+            } else {
                 purchaseOrder.setOrderStatus("5");
-                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
-                model.addAttribute("order",purchaseOrder);
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+                model.addAttribute("order", purchaseOrder);
                 return "/purchaseOrder/paySuccess";
             }
-        }else {
+        } else {
             return "";
         }
     }
@@ -236,9 +228,7 @@ public class PurchaseOrderPaymentController {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         String isWeiXin = request.getParameter("isWeiXin");//移动网站页面用的
         String payment = purchaseOrder.getPayWay();
-
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder);
-
         if (payment.equals("1")) {//支付宝
             return "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
         } else if (payment.equals("3")) { //微信
@@ -255,50 +245,50 @@ public class PurchaseOrderPaymentController {
     @RequestMapping({"/paysuccess/{orderId}"})
     public String paySuccess(@PathVariable String orderId, Model model) throws Exception {
         PurchaseOrderPaymentDetails purchaseOrder = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
-        String purchaseOrderSerial = "";
+        String purchaseOrderSerial;
         String productMassge = "";
-        String deliveryName = "";
-        String deliveryNum = "";
-        String deliveryAddress = "";
-        HashMap<String,String> map = new HashMap<String,String>();
+        String deliveryName;
+        String deliveryNum;
+        String deliveryAddress;
+        HashMap<String, String> map = new HashMap<>();
 
         //支付成功发送短信
         PurchaseOrderPayment purchaseOrderPayment = purchaseOrder.getPurchaseOrderPayment();
-        if (purchaseOrderPayment == null){
+        if (purchaseOrderPayment == null) {
             PurchaseOrder purchaseOrder1 = ((PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrder.getPurchaseOrderPayment().getId())).getPurchaseOrder();
             purchaseOrderSerial = purchaseOrder1.getId();
             if (purchaseOrder1.getSubPurchaseOrder() != null && purchaseOrder1.getSubPurchaseOrder().size() > 0) {
                 //获取自订单信息
                 for (PurchaseOrder purchaseOrderTemp : purchaseOrder1.getSubPurchaseOrder()) {
                     purchaseOrderSerial = purchaseOrderTemp.getId();
-                    for(PurchaseOrderProduct purchaseOrderProduct:purchaseOrderTemp.getPurchaseOrderProductList()){
-                        productMassge += purchaseOrderProduct.getProductModel().getProduct().getName()+"("+purchaseOrderProduct.getPurchaseAmount()+");";
+                    for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrderTemp.getPurchaseOrderProductList()) {
+                        productMassge += purchaseOrderProduct.getProductModel().getProduct().getName() + "(" + purchaseOrderProduct.getPurchaseAmount() + ");";
                     }
                     deliveryName = purchaseOrderTemp.getReceiverName();
                     deliveryNum = purchaseOrderTemp.getReceiverPhone();
                     deliveryAddress = purchaseOrderTemp.getPurchaseOrderAddress();
-                    map.put("purchaseOrderSerial",purchaseOrderSerial);
-                    map.put("productMassge",productMassge);
-                    map.put("deliveryName",deliveryName);
-                    map.put("deliveryNum",deliveryNum);
-                    map.put("deliveryAddress",deliveryAddress);
-                    smsCheckManager.send(purchaseOrderTemp.getBigTenant().getPhone(),map,"1216591");
-                    smsCheckManager.send("13671386900",map,"1216591");
+                    map.put("purchaseOrderSerial", purchaseOrderSerial);
+                    map.put("productMassge", productMassge);
+                    map.put("deliveryName", deliveryName);
+                    map.put("deliveryNum", deliveryNum);
+                    map.put("deliveryAddress", deliveryAddress);
+                    smsCheckManager.send(purchaseOrderTemp.getBigTenant().getPhone(), map, "1216591");
+                    smsCheckManager.send("13671386900", map, "1216591");
                 }
-            }else {
-                for(PurchaseOrderProduct purchaseOrderProduct1:purchaseOrder1.getPurchaseOrderProductList()){
-                    productMassge += purchaseOrderProduct1.getProductModel().getProduct().getName()+"("+purchaseOrderProduct1.getPurchaseAmount()+");";
+            } else {
+                for (PurchaseOrderProduct purchaseOrderProduct1 : purchaseOrder1.getPurchaseOrderProductList()) {
+                    productMassge += purchaseOrderProduct1.getProductModel().getProduct().getName() + "(" + purchaseOrderProduct1.getPurchaseAmount() + ");";
                 }
                 deliveryName = purchaseOrder1.getReceiverName();
                 deliveryNum = purchaseOrder1.getReceiverPhone();
                 deliveryAddress = purchaseOrder1.getPurchaseOrderAddress();
-                map.put("purchaseOrderSerial",purchaseOrderSerial);
-                map.put("productMassge",productMassge);
-                map.put("deliveryName",deliveryName);
-                map.put("deliveryNum",deliveryNum);
-                map.put("deliveryAddress",deliveryAddress);
-                smsCheckManager.send(purchaseOrder1.getBigTenant().getPhone(),map,"1216591");
-                smsCheckManager.send("13671386900",map,"1216591");
+                map.put("purchaseOrderSerial", purchaseOrderSerial);
+                map.put("productMassge", productMassge);
+                map.put("deliveryName", deliveryName);
+                map.put("deliveryNum", deliveryNum);
+                map.put("deliveryAddress", deliveryAddress);
+                smsCheckManager.send(purchaseOrder1.getBigTenant().getPhone(), map, "1216591");
+                smsCheckManager.send("13671386900", map, "1216591");
             }
         }
 
@@ -309,9 +299,9 @@ public class PurchaseOrderPaymentController {
         } else if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType() != null && purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType().equals("3")) {
             return "redirect:/giftReceive/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
         }
-        if ("3".equals(purchaseOrder.getPayWay())){
-            return "redirect:http://www2.efeiyi.com/sharePage/productShare/"+purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
-        }else {
+        if ("3".equals(purchaseOrder.getPayWay())) {
+            return "redirect:http://www2.efeiyi.com/sharePage/productShare/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
+        } else {
             return "/purchaseOrder/paySuccess";
         }
     }
@@ -330,14 +320,14 @@ public class PurchaseOrderPaymentController {
 
     @RequestMapping({"/checkBalance"})
     @ResponseBody
-    public boolean checkBalance(HttpServletRequest request){
+    public boolean checkBalance(HttpServletRequest request) {
         BigDecimal balance = new BigDecimal(request.getParameter("balance"));
         String consumerId = AuthorizationUtil.getMyUser().getId();
-        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
         int result = balance.compareTo(consumer.getBalance());
-        if(result==1){
+        if (result == 1) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
