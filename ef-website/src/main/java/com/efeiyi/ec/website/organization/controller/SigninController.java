@@ -10,7 +10,7 @@ import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.efeiyi.ec.website.organization.model.SmsProvider;
 import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;

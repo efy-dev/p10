@@ -15,7 +15,7 @@ import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
 import com.efeiyi.ec.website.organization.model.SmsProvider;
 import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;

@@ -11,7 +11,7 @@ import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.order.service.CartManager;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;

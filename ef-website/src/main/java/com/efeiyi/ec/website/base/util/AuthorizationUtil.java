@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.organization.util;
+package com.efeiyi.ec.website.base.util;
 
 
 import com.efeiyi.ec.organization.model.MyUser;

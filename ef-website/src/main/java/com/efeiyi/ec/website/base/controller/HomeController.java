@@ -2,7 +2,7 @@ package com.efeiyi.ec.website.base.controller;
 
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.project.model.ProjectCategory;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;

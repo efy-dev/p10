@@ -2,16 +2,14 @@ package com.efeiyi.ec.website.order.service.impl;
 
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
-import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.order.service.CartManager;
 import com.efeiyi.ec.website.order.service.StockManager;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.does.model.XQuery;
 import com.ming800.core.util.CookieTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

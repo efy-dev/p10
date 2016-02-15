@@ -6,7 +6,7 @@ import com.efeiyi.ec.purchase.model.*;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.model.WxPayConfig;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.util.HttpUtil;
 import net.sf.json.JSONObject;

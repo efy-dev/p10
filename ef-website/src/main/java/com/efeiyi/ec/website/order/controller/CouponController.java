@@ -2,12 +2,10 @@ package com.efeiyi.ec.website.order.controller;
 
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.purchase.model.*;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
-import com.ming800.core.p.model.AutoSerial;
 import com.ming800.core.p.service.AutoSerialManager;
-import com.ming800.core.p.service.impl.AutoSerialManagerImpl;
 import com.ming800.core.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

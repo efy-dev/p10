@@ -1,29 +1,23 @@
 package com.efeiyi.ec.website.product.controller;
 
 import com.efeiyi.ec.balance.model.BalanceRecord;
-import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.rebate.model.Rebate;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.model.WxCalledRecord;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.JsonUtil;
-import com.ming800.core.util.StringUtil;
-import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
