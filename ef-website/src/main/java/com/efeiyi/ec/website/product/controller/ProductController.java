@@ -6,6 +6,7 @@ import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.efeiyi.ec.website.base.util.NormalUtil;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -32,8 +33,8 @@ public class ProductController {
 
     @Autowired
     private BaseManager baseManager;
-    //@Autowired
-    //private List<ProductModel> productModelListTmp;
+
+
     @RequestMapping(value = "/productList.do")
     public ModelAndView listProduct(HttpServletRequest request, ModelMap model) throws Exception{
         String id = request.getParameter("id");
@@ -81,23 +82,7 @@ public class ProductController {
         xQuery.addRequestParamToModel(model,request);
         List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
         Map<ProductModel,String> map = new HashMap<>();
-        if(productModelList!=null&&productModelList.size()>0){
-            for(ProductModel productModelTemp:productModelList){
-                StringBuilder s = new StringBuilder(productModelTemp.getProduct().getName());
-                if(productModelTemp.getProduct().getProductModelList().size()==1){
-                    map.put(productModelTemp,s.toString());
-                }else{
-                    s.append("[").append(productModelTemp.getName());
-                    if(s.toString().length()>14){
-                        s = new StringBuilder(s.substring(0,14));
-                        s.append("...").append("]");
-                    }else{
-                        s.append("]");
-                    }
-                    map.put(productModelTemp,s.toString());
-                }
-            }
-        }
+        NormalUtil.productNameFilter(productModelList,map);
         Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
         model.addAttribute("project",project);
         model.addAttribute("map",map);
@@ -147,23 +132,7 @@ public class ProductController {
         xQuery.put("product_project_id", project.getId());
         List<ProductModel> productModelList =  baseManager.listObject(xQuery);
         Map<ProductModel,String> map = new HashMap<>();
-        if(productModelList!=null&&productModelList.size()>0){
-            for(ProductModel productModelTemp:productModelList){
-                StringBuilder s = new StringBuilder(productModelTemp.getProduct().getName());
-                if(productModelTemp.getProduct().getProductModelList().size()==1){
-                    map.put(productModelTemp,s.toString());
-                }else{
-                    s.append("[").append(productModelTemp.getName());
-                    if(s.toString().length()>14){
-                        s = new StringBuilder(s.substring(0,14));
-                        s.append("...").append("]");
-                    }else{
-                        s.append("]");
-                    }
-                    map.put(productModelTemp,s.toString());
-                }
-            }
-        }
+        NormalUtil.productNameFilter(productModelList,map);
         model.addAttribute("productModelList", productModelList);
         model.addAttribute("productModel", productModel);
         model.addAttribute("map",map);

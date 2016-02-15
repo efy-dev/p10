@@ -35,7 +35,6 @@ public interface BaseManager {
 
     void remove(String model, String id);
 
-    @Deprecated
     List listObject(String queryHql, LinkedHashMap<String, Object> queryParamMap);
 
     @Deprecated
