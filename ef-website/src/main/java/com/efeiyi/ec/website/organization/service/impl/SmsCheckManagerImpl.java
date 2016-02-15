@@ -25,83 +25,32 @@ import java.util.List;
 @Service
 public class SmsCheckManagerImpl implements SmsCheckManager {
 
-    @Autowired
-    private XdoDao basicDao;
-
-
-    @Autowired
-    private BaseManager baseManager;
-
-    @Override
-    public String createCheckCode() {
-
-        return String.valueOf(Math.random()).substring(2, 8);
-    }
-
-
-
     @Override
     public String send(String phone, String content, String tpl_id, Integer company) {
-        SmsProvider smsProvider = null;
-
-            smsProvider = new YunPianSmsProvider();
-
-        //非营销短信
-        if(tpl_id.equals("3")){
+        SmsProvider smsProvider = new YunPianSmsProvider();
+        if (tpl_id.equals("3")) {
             SendCode sendCode = smsProvider.post(phone, content, tpl_id);
-
             return sendCode.getMsg();
-        }else{
-                SendCode sendCode = smsProvider.post(phone, content, tpl_id);
-
-
-                System.out.println(sendCode.getMsg());
-                return sendCode.getMsg();
-            }
-
+        } else {
+            SendCode sendCode = smsProvider.post(phone, content, tpl_id);
+            System.out.println(sendCode.getMsg());
+            return sendCode.getMsg();
+        }
     }
+
     @Override
-    public String send(String phone, HashMap<String,String> param, String tpl_id) {
-        SmsProvider smsProvider = null;
-
-        smsProvider = new YunPianSmsProvider();
-
-        //非营销短信
-        if(tpl_id.equals("3")){
+    public String send(String phone, HashMap<String, String> param, String tpl_id) {
+        SmsProvider smsProvider = new YunPianSmsProvider();
+        if (tpl_id.equals("3")) {
             SendCode sendCode = smsProvider.post(phone, param, tpl_id);
-
             return sendCode.getMsg();
-        }else{
+        } else {
             SendCode sendCode = smsProvider.post(phone, param, tpl_id);
-
-
             System.out.println(sendCode.getMsg());
             return sendCode.getMsg();
         }
 
     }
-//
-//    @Override
-//    public void send(String phone, String code, String branchName,String tpl_id) throws Exception {
-//        Branch branch = branchManager.getBranchByName(branchName);
-//        String name = branch.getName() + branch.getSerial();
-//        if (name.length() > 10) {
-//            name = name.substring(0, 10);
-//        }
-//        SmsProvider smsProvider = new TianXinBoYiSmsProvider(name, name);
-//        smsProvider.post(phone, "您的验证码：[" + code + "]请及时使用【明日科技】", null,tpl_id);
-//    }
 
-    @Override
-    public Boolean checkPhoneRegistered(String phone) {
-        String hql = "from BigUser b where b.username=:phone";
-        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("phone", phone);
-        List<BigUser> bigUserList = basicDao.getObjectList(hql, queryParamMap);
-        if (bigUserList.size() < 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 }

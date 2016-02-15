@@ -12,10 +12,6 @@ import java.util.HashMap;
  */
 public interface SmsCheckManager {
 
-    public String createCheckCode();
-
-  //  public Boolean validate(String phone, String code);
-
     /**
      *
      * @param phone 手机号
@@ -24,12 +20,9 @@ public interface SmsCheckManager {
      * @param company 1
      * @return
      */
-    public String send(String phone, String content, String tpl_id, Integer company);
+    String send(String phone, String content, String tpl_id, Integer company);
 
-    public String send(String phone, HashMap<String,String> param, String tpl_id);
+    String send(String phone, HashMap<String,String> param, String tpl_id);
 
-//    public void send(String phone, String content, String branchName,String tpl_id) throws Exception;
-
-    public Boolean checkPhoneRegistered(String phone);
 
 }
