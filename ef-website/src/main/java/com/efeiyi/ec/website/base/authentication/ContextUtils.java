@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.authentication;
+package com.efeiyi.ec.website.base.authentication;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;

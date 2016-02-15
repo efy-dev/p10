@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.interceptor;
+package com.efeiyi.ec.website.base.interceptor;
 
 import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.ming800.core.base.service.BaseManager;

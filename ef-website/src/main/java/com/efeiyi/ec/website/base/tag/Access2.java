@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.tag;
+package com.efeiyi.ec.website.base.tag;
 
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 
@@ -15,17 +15,35 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 
-public class Permission extends BodyTagSupport {
-    private String styleType;    //权限标签的类型   normal,view,edit,add,delete,back
+public class Access2 extends BodyTagSupport {
+    private String setting;      //例info
+    private String entity;       //例student
+    private String operations;   //例vm,new,em,dm,
     private String userId;  //当前记录负责人的用户ID
-    private String permission;  //所需权限  多个权限之间用逗号隔开
+    private String styleType;    //权限标签的类型   normal,view,edit,add,delete,back
 
-    public String getStyleType() {
-        return styleType;
+    public String getSetting() {
+        return setting;
     }
 
-    public void setStyleType(String styleType) {
-        this.styleType = styleType;
+    public void setSetting(String setting) {
+        this.setting = setting;
+    }
+
+    public String getEntity() {
+        return entity;
+    }
+
+    public void setEntity(String entity) {
+        this.entity = entity;
+    }
+
+    public String getOperations() {
+        return operations;
+    }
+
+    public void setOperations(String operations) {
+        this.operations = operations;
     }
 
     public String getUserId() {
@@ -36,17 +54,18 @@ public class Permission extends BodyTagSupport {
         this.userId = userId;
     }
 
-    public String getPermission() {
-        return permission;
+    public String getStyleType() {
+        return styleType;
     }
 
-    public void setPermission(String permission) {
-        this.permission = permission;
+    public void setStyleType(String styleType) {
+        this.styleType = styleType;
     }
+
 
     @Override
     public int doStartTag() throws JspException {
-        if (processSuper() || (processPermission() && processUser())) {
+        if (processSetting() && processPermission() && processUser()) {
             return EVAL_BODY_BUFFERED;
         } else {
             return TagSupport.SKIP_BODY;
@@ -94,25 +113,33 @@ public class Permission extends BodyTagSupport {
                     styleClass = " class=\"easyui-linkbutton\"  data-options=\"iconCls:'icon-back'\"";
                     break;
                 default:
-
+                    ;
             }
         }
         return styleClass;
     }
 
-    private Boolean processSuper() {
-        return true;//AuthorizationUtil.getMyUser().getRole().getBasicType().equals("admin");
-    }
+    private Boolean processSetting() {
 
-
-    private Boolean processPermission() {
-       /* Set<String> permissionSet = AuthorizationUtil.getMyUser().getPermissionSet();
-        for (String s : permission.split(",")) {
-            if (permissionSet.contains(s)) {
+        /*Role role = AuthorizationUtil.getMyUser().getRole();
+        Set<String> settingSet = role.getLisenceSet();
+        if(setting == null || setting.equals("")){
+            return true;
+        }
+        for(String s :this.setting.split(",")){
+            if(settingSet.contains(s)){
                 return true;
             }
+        }*/
+        return false;
+    }
+
+    private Boolean processPermission() {
+        String roleType = "";
+        if (!roleType.equals("system") && operations != null && operations.equals("system")) {
+            return false;
         }
-        return false;*/
+
         return true;
     }
 

@@ -27,7 +27,7 @@
             <mvc:mapping path="/"/>
             <mvc:mapping path="/**"/>
             <mvc:mapping path="**"/>
-            <bean class="com.efeiyi.ec.website.interceptor.DriverInterceptor"/>
+            <bean class="com.efeiyi.ec.website.base.interceptor.DriverInterceptor"/>
         </mvc:interceptor>
        <mvc:interceptor>
            <mvc:mapping path="/"/>
@@ -35,20 +35,20 @@
            <mvc:mapping path="**"/>
            <mvc:exclude-mapping path="/sso.do"/>
            <mvc:exclude-mapping path="/sso2.do"/>
-           <bean class="com.efeiyi.ec.website.interceptor.PromotionMarkInterceptor"/>
+           <bean class="com.efeiyi.ec.website.base.interceptor.PromotionMarkInterceptor"/>
        </mvc:interceptor>
        <mvc:interceptor>
            <mvc:mapping path="/sso.do"/>
            <mvc:mapping path="/sso2.do"/>
-           <bean class="com.efeiyi.ec.website.interceptor.PromotionPersistenceInterceptor"/>
+           <bean class="com.efeiyi.ec.website.base.interceptor.PromotionPersistenceInterceptor"/>
        </mvc:interceptor>
        <mvc:interceptor>
            <mvc:mapping path="/registerSuccess.do"/>
-           <bean class="com.efeiyi.ec.website.interceptor.PromotionRegisterSuccessPersistenceInterceptor"/>
+           <bean class="com.efeiyi.ec.website.base.interceptor.PromotionRegisterSuccessPersistenceInterceptor"/>
        </mvc:interceptor>
        <mvc:interceptor>
            <mvc:mapping path="/order/pay/**"/>
-           <bean class="com.efeiyi.ec.website.interceptor.PromotionPurchaseRecorderInterceptor"/>
+           <bean class="com.efeiyi.ec.website.base.interceptor.PromotionPurchaseRecorderInterceptor"/>
        </mvc:interceptor>
     </mvc:interceptors>
 
@@ -92,7 +92,7 @@
           p:prefix="/WEB-INF/jsp" p:suffix=".jsp"/>
     <context:annotation-config/>
     <context:component-scan base-package="com.**.**.controller"/>
-    <context:component-scan base-package="com.efeiyi.ec.website.authentication.**"/>
+    <context:component-scan base-package="com.efeiyi.ec.website.base.authentication.**"/>
     <!--<context:component-scan base-package="com.efeiyi.ec.website.**.**.service"/>-->
 
 

@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.tag;
+package com.efeiyi.ec.website.base.tag;
 
 import com.efeiyi.ec.organization.model.Permission;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;

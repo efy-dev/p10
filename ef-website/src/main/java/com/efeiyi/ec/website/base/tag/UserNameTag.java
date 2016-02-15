@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.tag;
+package com.efeiyi.ec.website.base.tag;
 
 import com.efeiyi.ec.organization.model.User;
 import com.ming800.core.base.service.BaseManager;

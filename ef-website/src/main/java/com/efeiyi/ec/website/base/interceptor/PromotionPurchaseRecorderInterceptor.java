@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.interceptor;
+package com.efeiyi.ec.website.base.interceptor;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails;

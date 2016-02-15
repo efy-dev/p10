@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.authentication;
+package com.efeiyi.ec.website.base.authentication;
 
 import org.apache.commons.lang.StringUtils;
 

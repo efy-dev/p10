@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.tag;
+package com.efeiyi.ec.website.base.tag;
 
 import com.efeiyi.ec.organization.model.BigUser;
 import com.ming800.core.taglib.ScopeTag;

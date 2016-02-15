@@ -33,7 +33,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         MyUser bigUser = AuthorizationUtil.getMyUser();
 //        if (request.getParameter("j_password") != null && !request.getParameter("j_password").equals("123456")) {
 //            SystemLog systemLog = new SystemLog();
-//            WebAuthenticationDetails webAuthenticationDetails = (WebAuthenticationDetails) com.efeiyi.ec.website.authentication.getDetails();
+//            WebAuthenticationDetails webAuthenticationDetails = (WebAuthenticationDetails) com.efeiyi.ec.website.base.authentication.getDetails();
 //            String ip = webAuthenticationDetails.getRemoteAddress();
 //            systemLog.setIp(ip);
 //            systemLog.setContent("登录成功");
