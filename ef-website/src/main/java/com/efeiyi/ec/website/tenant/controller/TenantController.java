@@ -45,7 +45,6 @@ public class TenantController {
         xQuery.addRequestParamToModel(model, request);
         List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
         Map<ProductModel, String> map = new HashMap<>();
-        NormalUtil.productNameFilter(productModelList,map);
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         model.addAttribute("productModelList", productModelList);
         model.addAttribute("tenantId", tenantId);
@@ -63,7 +62,6 @@ public class TenantController {
         xQuery.put("product_tenant_id", tenantId);
         List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
         Map<ProductModel, String> map = new HashMap<>();
-        NormalUtil.productNameFilter(productModelList,map);
         List list1 = baseManager.listObject(xQuery1);
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         model.addAttribute("productModelList", productModelList);

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -69,7 +70,15 @@
           <li>
             <a href="/product/productModel/${productModel.id}" style="color: #000">
             <img src="<c:url value="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model-wap-tenant"/>" alt="">
-            <p class="name"> ${map.get(productModel)}
+              <c:set var="name">
+                <c:if test="${fn:length(productModel.product.productModelList)==1}">
+                  ${productModel.product.name}
+                </c:if>
+                <c:if test="${fn:length(productModel.product.productModelList)>1}">
+                  ${productModel.product.name}[${productModel.name}]
+                </c:if>
+              </c:set>
+              <p class="name"> ${name}
             </p>
             <p class="price"><em>￥</em><span>${productModel.price}</span></p>
             </a>

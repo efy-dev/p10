@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -39,7 +40,15 @@
                         <li>
                             <a  href="<c:url value="/product/productModel/${productModel.id}"/>" style="color: #000">
                             <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model-wap-view" alt="">
-                            <p class="wh name">${map.get(productModel)}
+                                <c:set var="name">
+                                    <c:if test="${fn:length(productModel.product.productModelList)==1}">
+                                        ${productModel.product.name}
+                                    </c:if>
+                                    <c:if test="${fn:length(productModel.product.productModelList)>1}">
+                                        ${productModel.product.name}[${productModel.name}]
+                                    </c:if>
+                                </c:set>
+                                <p class="wh name">${name}
                             </p>
                             <p class="price"><em>￥</em><span>${productModel.price}</span></p>
                             </a>

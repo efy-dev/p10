@@ -80,7 +80,6 @@ public class ProductController {
         xQuery.addRequestParamToModel(model,request);
         List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
         Map<ProductModel,String> map = new HashMap<>();
-        NormalUtil.productNameFilter(productModelList,map);
         Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
         model.addAttribute("project",project);
         model.addAttribute("map",map);
@@ -130,7 +129,6 @@ public class ProductController {
         xQuery.put("product_project_id", project.getId());
         List<ProductModel> productModelList =  baseManager.listObject(xQuery);
         Map<ProductModel,String> map = new HashMap<>();
-        NormalUtil.productNameFilter(productModelList,map);
         model.addAttribute("productModelList", productModelList);
         model.addAttribute("productModel", productModel);
         model.addAttribute("map",map);

@@ -69,8 +69,16 @@
                             src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
                        </a>
                        <%--<%}%>--%>
+              <c:set var="name">
+                  <c:if test="${fn:length(productModel.product.productModelList)==1}">
+                  ${productModel.product.name}
+                  </c:if>
+                  <c:if test="${fn:length(productModel.product.productModelList)>1}">
+                  ${productModel.product.name}[${productModel.name}]
+                  </c:if>
+              </c:set>
                 <p class="wh name">
-                        ${map.get(productModel)}
+                    ${name}
                 </p>
               <p class="wh price">￥${productModel.price}</p>
             </a>
