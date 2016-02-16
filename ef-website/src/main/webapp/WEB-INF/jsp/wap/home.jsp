@@ -51,18 +51,6 @@
             <span><i class="newicon"></i></span>
             <span>礼&nbsp;品</span>
         </a>
-        <a class="item gift-bag" href="http://www.efeiyi.com/subject/iibegant1zwnlnby">
-            <span><i class="newicon"></i></span>
-            <span class="red-col">春节大礼包</span>
-        </a>
-        <!--<a class="item user" href="#user">-->
-        <!--<span><i class="newicon"></i></span>-->
-        <!--<span>大&nbsp;师</span>-->
-        <!--</a>-->
-        <!--<a class="item coupon" href="#coupon">-->
-        <!--<span><i class="newicon"></i></span>-->
-        <!--<span>工&nbsp;艺</span>-->
-        <!--</a>-->
     </div>
     <!--//End--toolbar-->
     <div class="deduce">
@@ -117,7 +105,11 @@
     <!--//End--一个max-cat-->
 </article>
 <!--//End--newcustom-->
-
+<style>
+    .newcustom .toolbar .item {
+        width: 36%;
+    }
+</style>
 </body>
 </html>
 </body>
