@@ -16,9 +16,9 @@ public interface PaymentManager {
 
     String wxNativePay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount);
 
-    PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder);
+    PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder) throws Exception ;
 
-    PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder, String balance, String couponId);
+    PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder, String balance, String couponId) throws Exception ;
 
     String alipayWap(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount);
 }

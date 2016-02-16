@@ -3,6 +3,7 @@ package com.efeiyi.ec.website.order.service;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.tenant.model.Tenant;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,6 +49,8 @@ public interface CartManager {
     Cart chooseAll(Cart cart, String chooseStatus);
 
     Cart copyCart(Cart sessionCart,Cart realCart);
+
+    void clearCart(HttpServletRequest request, PurchaseOrder purchaseOrder);
 
 
 }

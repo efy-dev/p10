@@ -14,6 +14,11 @@ import java.util.Date;
 @Entity
 @Table(name = "purchase_coupon")
 public class Coupon implements Serializable {
+
+    public static String COUPON_STATUS_UNUSE = "1";
+    public static String COUPON_STATUS_USED = "2";
+    public static String COUPON_STATUS_CLOSE = "3";
+
     private String id;
     private String serial;//优惠券的编号
     private CouponBatch couponBatch;//批次

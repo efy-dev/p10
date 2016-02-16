@@ -99,6 +99,7 @@ public class PurchaseOrderController extends BaseController {
             return false;
         }
     }
+
     @RequestMapping("/giftBuy/saveOrUpdateGiftMessage.do")
     @ResponseBody
     public String saveOrUpdateGiftMessage(HttpServletRequest request) {
@@ -157,10 +158,10 @@ public class PurchaseOrderController extends BaseController {
         List addressList = baseManager.listObject(xQuery);
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
-        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
-        if(null == consumer.getBalance()){
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
+        if (null == consumer.getBalance()) {
             consumer.setBalance(new BigDecimal(0));
-            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+            baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
         }
 
         model.addAttribute("addressList", addressList);
@@ -169,7 +170,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("purchaseOrderProduct", purchaseOrderProduct);
         model.addAttribute("amount", amount);
         model.addAttribute("request", "/giftBuy/**");
-        model.addAttribute("consumer",consumer);
+        model.addAttribute("consumer", consumer);
         return "/purchaseOrder/purchaseOrderGiftConfirm";
     }
 
@@ -223,10 +224,10 @@ public class PurchaseOrderController extends BaseController {
         List addressList = baseManager.listObject(xQuery);
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
-        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
-        if(null == consumer.getBalance()){
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
+        if (null == consumer.getBalance()) {
             consumer.setBalance(new BigDecimal(0));
-            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+            baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
         }
 
         model.addAttribute("addressList", addressList);
@@ -250,7 +251,7 @@ public class PurchaseOrderController extends BaseController {
         Cart cart = cartManager.copyCart((Cart) request.getSession().getAttribute("cart"), cartManager.getCurrentCart(request));
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cart, model);
         purchaseOrder.setOrderType("1");
-        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         String callback = request.getParameter("callback");
         if (callback != null) {
             callback = URLDecoder.decode(callback, "UTF-8");
@@ -268,10 +269,10 @@ public class PurchaseOrderController extends BaseController {
         List addressList = baseManager.listObject(xQuery);
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
-        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
-        if(null == consumer.getBalance()){
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
+        if (null == consumer.getBalance()) {
             consumer.setBalance(new BigDecimal(0));
-            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+            baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
         }
 
         model.addAttribute("addressList", addressList);
@@ -312,10 +313,10 @@ public class PurchaseOrderController extends BaseController {
         List addressList = baseManager.listObject(xQuery);
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
-        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
-        if(null == consumer.getBalance()){
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
+        if (null == consumer.getBalance()) {
             consumer.setBalance(new BigDecimal(0));
-            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+            baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
         }
 
         model.addAttribute("addressList", addressList);
@@ -334,10 +335,10 @@ public class PurchaseOrderController extends BaseController {
         List addressList = baseManager.listObject(xQuery);
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
-        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
-        if(null == consumer.getBalance()){
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
+        if (null == consumer.getBalance()) {
             consumer.setBalance(new BigDecimal(0));
-            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+            baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
         }
 
         model.addAttribute("addressList", addressList);
@@ -358,20 +359,7 @@ public class PurchaseOrderController extends BaseController {
     }
 
 
-    @RequestMapping({"/confirm/{orderId}"})
-    public String orderConfirm(@PathVariable String orderId, HttpServletRequest request) throws Exception {
-        //获取参数
-        if (request.getSession().getAttribute("cart") != null) {
-            request.getSession().removeAttribute("cart");
-        }
-        String payment = request.getParameter("payment");
-        String isWeiXin = request.getParameter("isWeiXin");//移动网站页面用的
-        String addressId = request.getParameter("address");
-        String message = request.getParameter("message");
-        String balance = request.getParameter("balance");
-        String couponId = request.getParameter("couponId");
-        //买家留言
-        HashMap<String, String> messageMap = new HashMap<>();
+    private void formatPurchaseOrderMessage(String message, HashMap<String, String> messageMap) {
         if (message != null) {
             for (String messageTemp : message.split(";")) {
                 if (messageTemp != null && !messageTemp.equals("")) {
@@ -380,18 +368,34 @@ public class PurchaseOrderController extends BaseController {
                 }
             }
         }
+    }
+
+    @RequestMapping({"/confirm/{orderId}"})
+    public String orderConfirm(@PathVariable String orderId, HttpServletRequest request) throws Exception {
+        //获取参数
+        request.getSession().removeAttribute("cart");
+        String payment = request.getParameter("payment");
+        String isWeiXin = request.getParameter("isWeiXin");//移动网站页面用的
+        String addressId = request.getParameter("address");
+        String message = request.getParameter("message");
+        String balance = request.getParameter("balance");
+        String couponId = request.getParameter("couponId");
+        HashMap<String, String> messageMap = new HashMap<>();
+        formatPurchaseOrderMessage(message, messageMap);
         //判断余额是否足够，足够的话支付方式改为余额支付
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),orderId);
-        if (null != balance && Float.parseFloat(balance) > 0){
-            if (null != couponId && !"".equals(couponId)){
-                Coupon coupon = (Coupon) baseManager.getObject(Coupon.class.getName(),couponId);
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        //这里首先余额是从客户端传递过来，需要跟数据库做对比，如果余额的数目不对，就会报错，ckeck的步骤可以放到Manager里做
+
+        if (null != balance && Float.parseFloat(balance) > 0) {
+            if (null != couponId && !"".equals(couponId)) {
+                Coupon coupon = (Coupon) baseManager.getObject(Coupon.class.getName(), couponId);
                 int r = new BigDecimal(balance).compareTo(purchaseOrder.getTotal().subtract(new BigDecimal(coupon.getCouponBatch().getPrice())));
-                if (r == 0){
-                    payment = "5";
+                if (r == 0) {
+                    payment = "5";  //支付方式
                 }
-            }else {
+            } else {
                 int r = new BigDecimal(balance).compareTo(purchaseOrder.getTotal());
-                if(r == 0){
+                if (r == 0) {
                     payment = "5";
                 }
             }
@@ -404,21 +408,7 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrder = purchaseOrderManager.confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payment);
         //生成支付记录以及支付详情
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder, balance, couponId);
-
-        // 清除购物车
-        XQuery xQuery = new XQuery("listCart_default", request);
-        List<Object> list = baseManager.listObject(xQuery);
-        Cart realCart = (Cart) list.get(0);
-        realCart.setTotalPrice(new BigDecimal(0));
-        baseManager.saveOrUpdate(Cart.class.getName(), realCart);
-        for (CartProduct cartProductTemp : realCart.getCartProductList()) {
-            for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
-                if (cartProductTemp.getProductModel().getId().equals(purchaseOrderProduct.getProductModel().getId())) {
-                    baseManager.remove(CartProduct.class.getName(), cartProductTemp.getId());
-                    break;
-                }
-            }
-        }
+        cartManager.clearCart(request, purchaseOrder);
         String resultPage = "";
         if (payment.equals("1")) {//支付宝
             resultPage = "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
@@ -428,8 +418,8 @@ public class PurchaseOrderController extends BaseController {
             } else {
                 resultPage = "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
             }
-        } else if (payment.equals("5")){
-            resultPage ="redirect:/order/pay/balance/" + purchaseOrderPaymentDetails.getId() + "?purchaseOrderId=" + purchaseOrder.getId();
+        } else if (payment.equals("5")) {
+            resultPage = "redirect:/order/pay/balance/" + purchaseOrderPaymentDetails.getId() + "?purchaseOrderId=" + purchaseOrder.getId();
         }
         return resultPage;
     }
@@ -457,18 +447,18 @@ public class PurchaseOrderController extends BaseController {
     public String updateAddress(HttpServletRequest request) throws Exception {
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
         ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.saveOrUpdate(xSaveOrUpdate);
-        String result =  "{\"consignee\":\"" + consumerAddress.getConsignee() + "\",\"province\":\"" + (consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : 0) + "\",\"city\":\"" + (consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : 0) + "\",\"district\":\"" + (consumerAddress.getDistrict() != null ? consumerAddress.getDistrict().getName() : 0) + "\",\"details\":\"" + consumerAddress.getDetails() + "\",\"phone\":\"" + consumerAddress.getPhone() + "\"}";
+        String result = "{\"consignee\":\"" + consumerAddress.getConsignee() + "\",\"province\":\"" + (consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : 0) + "\",\"city\":\"" + (consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : 0) + "\",\"district\":\"" + (consumerAddress.getDistrict() != null ? consumerAddress.getDistrict().getName() : 0) + "\",\"details\":\"" + consumerAddress.getDetails() + "\",\"phone\":\"" + consumerAddress.getPhone() + "\"}";
         return result;
     }
 
     @RequestMapping({"/removeAddress.do"})
     @ResponseBody
-    public boolean removeAddress(HttpServletRequest request) throws Exception{
-        try{
+    public boolean removeAddress(HttpServletRequest request) throws Exception {
+        try {
             String addressId = request.getParameter("addressId");
             baseManager.remove(ConsumerAddress.class.getName(), addressId);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

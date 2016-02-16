@@ -5,6 +5,8 @@ import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.order.service.CartManager;
 import com.efeiyi.ec.website.order.service.StockManager;
@@ -294,5 +296,20 @@ public class CartManagerImpl implements CartManager {
         updateTotalPrice(cart);
         baseManager.saveOrUpdate(Cart.class.getName(), cart);
         return cart;
+    }
+
+    @Override
+    public void clearCart(HttpServletRequest request, PurchaseOrder purchaseOrder) {
+        Cart cart = getCurrentCart(request);
+        cart.setTotalPrice(new BigDecimal(0));
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+                if (cartProductTemp.getProductModel().getId().equals(purchaseOrderProduct.getProductModel().getId())) {
+                    baseManager.remove(CartProduct.class.getName(), cartProductTemp.getId());
+                    break;
+                }
+            }
+        }
     }
 }

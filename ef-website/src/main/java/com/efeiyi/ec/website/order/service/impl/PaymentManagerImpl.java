@@ -12,6 +12,7 @@ import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails;
+import com.efeiyi.ec.website.order.service.CouponManager;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -35,14 +36,17 @@ public class PaymentManagerImpl implements PaymentManager {
     @Autowired
     private AutoSerialManager autoSerialManager;
 
+    @Autowired
+    private CouponManager couponManager;
+
     static {
         BeeCloud.registerApp("130498c1-8928-433b-a01d-c26420f41818", "49fc6d9c-fd5d-4e9c-9ff6-f2d5ef1a1a3e"); //正式环境
-  //      BeeCloud.registerApp("e7004ae3-5634-4b9f-998d-c4319fbea7b0", "24511f9a-0b63-4fa0-82c6-6a6ffe38371d");//测试环境
+        //      BeeCloud.registerApp("e7004ae3-5634-4b9f-998d-c4319fbea7b0", "24511f9a-0b63-4fa0-82c6-6a6ffe38371d");//测试环境
     }
 
     @Override
     public String alipay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
-        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
+        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue() * 100);
         BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.ALI_WEB, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
         param.setReturnUrl("http://www.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
 //        param.setBillTimeout(120);
@@ -51,7 +55,6 @@ public class PaymentManagerImpl implements PaymentManager {
         BCPayResult bcPayResult = BCPay.startBCPay(param);
 //        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, 1, purchaseOrderPaymentDetails.getId(), "非遗产品", null, "http://www2.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId(), null, null, null);
         if (bcPayResult.getType().ordinal() == 0) {
-            System.out.println(bcPayResult.getHtml());
             return bcPayResult.getHtml();
         } else {
             //handle the error message as you wish！
@@ -63,7 +66,7 @@ public class PaymentManagerImpl implements PaymentManager {
 
     @Override
     public String alipayWap(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
-        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
+        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue() * 100);
         BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.ALI_WAP, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
         param.setReturnUrl("http://www.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
 //        param.setBillTimeout(120);
@@ -72,7 +75,6 @@ public class PaymentManagerImpl implements PaymentManager {
         BCPayResult bcPayResult = BCPay.startBCPay(param);
 //        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, 1, purchaseOrderPaymentDetails.getId(), "非遗产品", null, "http://www2.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId(), null, null, null);
         if (bcPayResult.getType().ordinal() == 0) {
-            System.out.println(bcPayResult.getHtml());
             return bcPayResult.getHtml();
         } else {
             //handle the error message as you wish！
@@ -106,7 +108,7 @@ public class PaymentManagerImpl implements PaymentManager {
 
     @Override
     public Object wxpay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount, String openid) {
-        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
+        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue() * 100);
         BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.WX_JSAPI, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
         param.setOpenId(openid);
         BCPayResult bcPayResult = BCPay.startBCPay(param);
@@ -120,7 +122,7 @@ public class PaymentManagerImpl implements PaymentManager {
 
     @Override
     public String wxNativePay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
-        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
+        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue() * 100);
         BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.WX_NATIVE, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
         param.setBillTimeout(120);
         BCPayResult bcPayResult = BCPay.startBCPay(param);
@@ -132,45 +134,42 @@ public class PaymentManagerImpl implements PaymentManager {
         }
     }
 
-    private String getTitle(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails){
+    private String getTitle(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails) {
         String title = "";
-        if(purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().size()>1){
-            title = "e飞蚁-"+purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().get(0).getProductModel().getName()+" "+"等多件";
-        }else if(purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().size() == 1){
-            title = "e飞蚁-"+purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().get(0).getProductModel().getName();
+        if (purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().size() > 1) {
+            title = "e飞蚁-" + purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().get(0).getProductModel().getName() + " " + "等多件";
+        } else if (purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().size() == 1) {
+            title = "e飞蚁-" + purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().get(0).getProductModel().getName();
         }
-        if(title.length()>16){
-            title = title.substring(0,13)+"...";
+        if (title.length() > 16) {
+            title = title.substring(0, 13) + "...";
         }
         return title;
     }
 
     @Override
-    public PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder) {
+    public PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder) throws Exception {
         PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
         purchaseOrderPayment.setStatus("1");
         purchaseOrderPayment.setCreateDateTime(new Date());
         purchaseOrderPayment.setPaymentAmount(purchaseOrder.getTotal());
         purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
-        purchaseOrderPayment.setPayWay("1");
-        try {
-            purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("payment"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        purchaseOrderPayment.setPayWay(purchaseOrder.getPayWay());
+        purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("payment"));
         String userid = AuthorizationUtil.getMyUser().getId();
         User user = (User) baseManager.getObject(User.class.getName(), userid);
         purchaseOrderPayment.setUser(user);
         baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
         //支付详情
+        //判断优惠券
         if (purchaseOrder.getCoupon() != null) {
             Coupon coupon = purchaseOrder.getCoupon();
-            coupon.setStatus("2");
+            coupon.setStatus("2"); //设置优惠券已使用
             baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
             PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
             purchaseOrderPaymentDetails.setCoupon(coupon);
             purchaseOrderPaymentDetails.setMoney(new BigDecimal(coupon.getCouponBatch().getPrice()));
-            purchaseOrderPaymentDetails.setPayWay("4");
+            purchaseOrderPaymentDetails.setPayWay(PurchaseOrder.YOUHUIQUAN);
             purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
             baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
         }
@@ -186,51 +185,44 @@ public class PaymentManagerImpl implements PaymentManager {
         return purchaseOrderPaymentDetails;
     }
 
+    //初始化订单支付，包括支付记录，支付记录详情等
     @Override
-    public PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder, String balance, String couponId) {
+    public PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder, String balance, String couponId) throws Exception {
         Float balance1 = Float.parseFloat(balance);
         PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
         purchaseOrderPayment.setStatus("1");
         purchaseOrderPayment.setCreateDateTime(new Date());
         purchaseOrderPayment.setPaymentAmount(purchaseOrder.getTotal());
         purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
-        purchaseOrderPayment.setPayWay("1");
-        Coupon coupon = new Coupon();
-        if(null != couponId && !"".equals(couponId)){
-            coupon = (Coupon)baseManager.getObject(Coupon.class.getName(),couponId);
-        }
-        try {
-            purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("payment"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        purchaseOrderPayment.setPayWay(purchaseOrder.getPayWay());
+        purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("payment"));
         String userid = AuthorizationUtil.getMyUser().getId();
         User user = (User) baseManager.getObject(User.class.getName(), userid);
         purchaseOrderPayment.setUser(user);
         baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
         //支付详情
+        Coupon coupon = null;
         if (null != couponId && !"".equals(couponId)) {
-            coupon.setStatus("2");
-            baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+            coupon = couponManager.confirmCoupon(couponId);
             PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
             purchaseOrderPaymentDetails.setCoupon(coupon);
             purchaseOrderPaymentDetails.setMoney(new BigDecimal(coupon.getCouponBatch().getPrice()));
-            purchaseOrderPaymentDetails.setPayWay("4");
+            purchaseOrderPaymentDetails.setPayWay(PurchaseOrder.YOUHUIQUAN);
             purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
             baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
         }
-        if(null != balance1 && balance1>0){
+        if (null != balance1 && balance1 > 0) {
             String consumerId = AuthorizationUtil.getMyUser().getId();
-            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
+            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
             BigDecimal currentBalance = consumer.getBalance();
             consumer.setBalance(currentBalance.subtract(new BigDecimal(balance1)));
-            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+            baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
 
             PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
             purchaseOrderPaymentDetails.setPayWay("5");
             purchaseOrderPaymentDetails.setMoney(new BigDecimal(balance1));
             purchaseOrderPaymentDetails.setCreateDateTime(new Date());
-            baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(),purchaseOrderPaymentDetails);
+            baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
 
             BalanceRecord balanceRecord = new BalanceRecord();
             balanceRecord.setCreateDateTime(new Date());
@@ -241,32 +233,31 @@ public class PaymentManagerImpl implements PaymentManager {
             balanceRecord.setKey(purchaseOrder.getId());
             balanceRecord.setStatus("3");
             balanceRecord.setType("4");
-            baseManager.saveOrUpdate(BalanceRecord.class.getName(),balanceRecord);
+            baseManager.saveOrUpdate(BalanceRecord.class.getName(), balanceRecord);
 
-            if(null != couponId && !"".equals(couponId)){
+            if (null != couponId && !"".equals(couponId)) {
                 int r = new BigDecimal(balance1).compareTo(purchaseOrder.getTotal().subtract(new BigDecimal(coupon.getCouponBatch().getPrice())));
-                if(r == 0){
+                if (r == 0) {
                     return purchaseOrderPaymentDetails;
                 }
-            }else {
+            } else {
                 int r = new BigDecimal(balance1).compareTo(purchaseOrder.getTotal());
-                if(r == 0){
+                if (r == 0) {
                     return purchaseOrderPaymentDetails;
                 }
             }
-
         }
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
         if (null != couponId && !"".equals(couponId)) {
-            if (balance1>0){
+            if (balance1 > 0) {
                 purchaseOrderPaymentDetails.setMoney((purchaseOrder.getTotal().subtract(new BigDecimal(coupon.getCouponBatch().getPrice()))).subtract(new BigDecimal(balance)));
-            }else {
+            } else {
                 purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(coupon.getCouponBatch().getPrice())));
             }
         } else {
-            if(balance1>0){
+            if (balance1 > 0) {
                 purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(balance)));
-            }else {
+            } else {
                 purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal());
             }
         }

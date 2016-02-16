@@ -61,9 +61,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         model.addAttribute("productMap", productMap);
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("tenantList", tenantSet);
-
         return purchaseOrder;
-
     }
 
     @Override
@@ -209,7 +207,6 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
                     purchaseOrderTemp.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "");
                     purchaseOrderTemp.setReceiverPhone(consumerAddress.getPhone() != null ? consumerAddress.getPhone() : "");
                 }
-//                purchaseOrderTemp.setConsumerAddress(consumerAddress);
                 purchaseOrderTemp.setMessage(messageMap.get(purchaseOrderTemp.getTenant().getId() + "Message"));
                 purchaseOrderTemp.setPayWay(payWay);
                 baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
