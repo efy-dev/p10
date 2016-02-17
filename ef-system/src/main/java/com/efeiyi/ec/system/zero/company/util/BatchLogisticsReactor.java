@@ -20,12 +20,11 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
+import org.apache.http.util.EntityUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -155,13 +154,14 @@ public class BatchLogisticsReactor implements Runnable {
 
 
                 HttpEntity entity = response.getEntity();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        entity.getContent(), "UTF-8"));
-                StringBuilder result = new StringBuilder();
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    result.append(line.trim());
-                }
+//                BufferedReader reader = new BufferedReader(new InputStreamReader(
+//                        entity.getContent(), "UTF-8"));
+//                StringBuilder result = new StringBuilder();
+//                String line = "";
+//                while ((line = reader.readLine()) != null) {
+//                    result.append(line.trim());
+//                }
+                String result = EntityUtils.toString(entity);
                 System.out.println(result);
                 Map map = JsonUtil.parseJsonStringToMap(result.toString());
 
@@ -243,7 +243,7 @@ public class BatchLogisticsReactor implements Runnable {
         }else{
             this.smsCheckManager.send(purchaseOrderDelivery.getPurchaseOrder().getUser().getUsername(), "#purchaseOrderSerial#=" + purchaseOrderDelivery.getPurchaseOrder().getSerial() + "&#LogisticsCompany#=debangwuliu&#serial#=" + purchaseOrderDelivery.getSerial(), "1035759", PConst.TIANYI);
         }
-        System.out.println(purchaseOrderDelivery.getSerial());
+        System.out.println("企业订单发货短信：" + purchaseOrderDelivery.getSerial());
     }
 }
 
