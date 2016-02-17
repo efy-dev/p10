@@ -22,25 +22,18 @@ public class PurchaseCollectController {
 
     @RequestMapping("/collectList.do")
     public String purchaseCollect(HttpServletRequest request,Model model) throws Exception {
-
         XQuery xQuery=new XQuery("plistProductFavorite_default",request,8);
-
         xQuery.addRequestParamToModel(model, request);
-
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
-
         model.addAttribute("collectList",list);
         return "/purchaseOrder/purchaseCollect";
     }
+
     @RequestMapping("/wapCollectList.do")
     public String wapPurchaseCollect(HttpServletRequest request,Model model) throws Exception {
-
         XQuery xQuery=new XQuery("plistProductFavorite_default",request);
-
         xQuery.addRequestParamToModel(model, request);
-
         List<Object> list = baseManager.listObject(xQuery);
-
         model.addAttribute("collectList",list);
         return "/purchaseOrder/purchaseCollect";
     }
@@ -48,10 +41,7 @@ public class PurchaseCollectController {
 
     @RequestMapping({"/unfollow.do"})
     public String addProductFavorite(HttpServletRequest request) throws Exception{
-        String productModelId =request.getParameter("id");
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite" ,request);
-//        xSaveOrUpdate.getParamMap().put("user_id", AuthorizationUtil.getMyUser().getId());
-//        xSaveOrUpdate.getParamMap().put("productModel_id", productModelId);
         xSaveOrUpdate.getParamMap().put("status",2);
         baseManager.saveOrUpdate(xSaveOrUpdate);
         return "redirect:/purchaseCollect/collectList.do";

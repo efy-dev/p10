@@ -46,9 +46,7 @@ public class HomeController {
 
     @RequestMapping({"/news"})
     public String listNews(){
-
         return "/common/news";
-
     }
 
     @RequestMapping({"/500"})

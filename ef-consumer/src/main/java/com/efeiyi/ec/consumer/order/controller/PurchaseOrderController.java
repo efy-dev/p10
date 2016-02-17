@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -48,18 +49,14 @@ public class PurchaseOrderController {
         String orderStatus = request.getParameter("status");
         model.addAttribute("status", orderStatus);
         XQuery xQuery;
-
-        if (orderStatus == null || orderStatus .equals("") || orderStatus.equals("0")) {
+        if (orderStatus == null || orderStatus.equals("") || orderStatus.equals("0")) {
             xQuery = new XQuery("plistPurchaseOrder_default", request, 10);
         } else {
             xQuery = new XQuery("plistPurchaseOrder_default" + orderStatus + "", request, 10);
-
         }
         xQuery.addRequestParamToModel(model, request);
-
         xQuery.setQueryHql((xQuery.getQueryHql()) + " and s.fatherPurchaseOrder.id is null");
         xQuery.updateHql();
-
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         String userId = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), userId);
@@ -69,7 +66,7 @@ public class PurchaseOrderController {
     }
 
     /**
-     * 查看订单详情1    
+     * 查看订单详情1
      *
      * @param model
      * @param orderId
@@ -78,11 +75,11 @@ public class PurchaseOrderController {
     @RequestMapping({"/myEfeiyi/view/{orderId}"})
     public String viewPurchaseOrder(Model model, @PathVariable String orderId) {
         double couponPrice = 0;
-        String spendBalance="0";
+        String spendBalance = "0";
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
         model.addAttribute("coupon", "0");
-        model.addAttribute("balance","0");
+        model.addAttribute("balance", "0");
         if (purchaseOrder.getOrderStatus().equals("1") || purchaseOrder.getOrderStatus().equals("17")) {
             PurchaseOrderPayment purchaseOrderPaymentTemp = purchaseOrder.getPurchaseOrderPaymentList().get(0);
             for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
@@ -90,9 +87,9 @@ public class PurchaseOrderController {
                     couponPrice += purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice();
                     model.addAttribute("coupon", "1");
                 }
-                if(purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")){
-                   spendBalance = purchaseOrderPaymentDetailsTemp.getMoney().toString();
-                    model.addAttribute("balance","1");
+                if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")) {
+                    spendBalance = purchaseOrderPaymentDetailsTemp.getMoney().toString();
+                    model.addAttribute("balance", "1");
                 }
             }
         } else {
@@ -103,22 +100,17 @@ public class PurchaseOrderController {
                             couponPrice += purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice();
                             model.addAttribute("coupon", "1");
                         }
-                        if(purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")){
+                        if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")) {
                             spendBalance = purchaseOrderPaymentDetailsTemp.getMoney().toString();
-                            model.addAttribute("balance","1");
-
+                            model.addAttribute("balance", "1");
                         }
                     }
-
                 }
-
             }
         }
         model.addAttribute("couponPrice", couponPrice);
         model.addAttribute("spendBalance", spendBalance);
-
         if (purchaseOrder.getPurchaseOrderDeliveryList() != null && !purchaseOrder.getPurchaseOrderDeliveryList().isEmpty()) {
-
             PurchaseOrderDelivery purchaseOrderDelivery = purchaseOrder.getPurchaseOrderDeliveryList().get(0);
             if (!purchaseOrderDelivery.getStatus().equals("0")) {
                 String logisticsInfo = getLogistics(purchaseOrderDelivery.getSerial(), purchaseOrderDelivery.getLogisticsCompany());
@@ -127,12 +119,9 @@ public class PurchaseOrderController {
             } else {
                 model.addAttribute("pl", null);
             }
-
-
         } else {
             model.addAttribute("pl", null);
         }
-
         return "/purchaseOrder/purchaseOrderView";
     }
 
@@ -144,9 +133,9 @@ public class PurchaseOrderController {
      * @throws Exception
      */
     @RequestMapping({"/cancelOrder/{orderId}"})
-    public String cancelPurchaseOrder(HttpServletRequest request,@PathVariable String orderId) throws Exception {
+    public String cancelPurchaseOrder(HttpServletRequest request, @PathVariable String orderId) throws Exception {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
-        if("1".equals(purchaseOrder.getOrderStatus())){
+        if ("1".equals(purchaseOrder.getOrderStatus())) {
             for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
                 if (purchaseOrderProduct.getProductModel().getAmount() != null) {
                     purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() + purchaseOrderProduct.getPurchaseAmount());
@@ -159,19 +148,19 @@ public class PurchaseOrderController {
         }
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_CONSEL);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-       //订单取消回滚余额
-        String consumerId =AuthorizationUtil.getMyUser().getId();
-        XQuery xQuery=new XQuery("listBalanceRecord_default1",request);
-        xQuery.put("consumer_id",consumerId);
-        xQuery.put("key",orderId);
-        List balanceDetailList=baseManager.listObject(xQuery);
+        //订单取消回滚余额
+        String consumerId = AuthorizationUtil.getMyUser().getId();
+        XQuery xQuery = new XQuery("listBalanceRecord_default1", request);
+        xQuery.put("consumer_id", consumerId);
+        xQuery.put("key", orderId);
+        List balanceDetailList = baseManager.listObject(xQuery);
 
-       Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
-        BigDecimal balance =consumer.getBalance();
-        if(balanceDetailList.size()>0){
-            BalanceRecord balanceRecord1= (BalanceRecord) balanceDetailList.get(0);
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
+        BigDecimal balance = consumer.getBalance();
+        if (balanceDetailList.size() > 0) {
+            BalanceRecord balanceRecord1 = (BalanceRecord) balanceDetailList.get(0);
 
-            BalanceRecord balanceRecord=new BalanceRecord();
+            BalanceRecord balanceRecord = new BalanceRecord();
             balanceRecord.setConsumer(consumer);
             balanceRecord.setCurrentBalance(balance);
             balanceRecord.setChangeBalance(balanceRecord1.getChangeBalance());
@@ -180,23 +169,21 @@ public class PurchaseOrderController {
             balanceRecord.setStatus("2");
             balanceRecord.setType("3");
             balanceRecord.setKey(balanceRecord1.getId());
-            baseManager.saveOrUpdate(BalanceRecord.class.getName(),balanceRecord);
+            baseManager.saveOrUpdate(BalanceRecord.class.getName(), balanceRecord);
             consumer.setBalance(balance.add(balanceRecord1.getChangeBalance()));
-            baseManager.saveOrUpdate(Consumer.class.getName(),consumer);
+            baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
 
         }
         //订单取消使用的卡券还原
         PurchaseOrderPayment purchaseOrderPaymentTemp = purchaseOrder.getPurchaseOrderPaymentList().get(0);
         for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
             if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
-                Coupon coupon= purchaseOrderPaymentDetailsTemp.getCoupon();
+                Coupon coupon = purchaseOrderPaymentDetailsTemp.getCoupon();
                 coupon.setStatus("1");
-                baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
+                baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
             }
 
         }
-
-
         return "redirect:/order/myEfeiyi/list.do";
     }
 
@@ -227,10 +214,9 @@ public class PurchaseOrderController {
      */
     @RequestMapping({"/deleteOrder/{orderId}"})
     public String deleteOrder(@PathVariable String orderId) {
-       PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder.setStatus("0");
-        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
-
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         return "redirect:/order/myEfeiyi/list.do?status=17";
     }
 
@@ -243,9 +229,6 @@ public class PurchaseOrderController {
     @RequestMapping("/groupBuyView")
     public String getGroupBuy(HttpServletRequest request) throws Exception {
         String purchaseOrderId = request.getParameter("orderId");
-//        XQuery xQuery=new XQuery("PurchaseOrderGroup_default",request);
-//        xQuery.put("purchaseOrder_id",purchaseOrderId);
-//        PurchaseOrderGroup purchaseOrderGroup = (PurchaseOrderGroup) baseManager.listObject(xQuery).get(0);
         PurchaseOrderGroup purchaseOrderGroup = (PurchaseOrderGroup) baseManager.getObject(PurchaseOrderGroup.class.getName(), purchaseOrderId);
         String memberId = purchaseOrderGroup.getGroupMember().getId();
         String groupId = purchaseOrderGroup.getMyGroup().getId();
