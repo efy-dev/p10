@@ -42,8 +42,6 @@ import java.util.List;
 public class SigninController extends BaseController {
 
     @Autowired
-    private BranchManager branchManager;
-    @Autowired
     private BaseManager baseManager;
 
     @Autowired
@@ -52,25 +50,6 @@ public class SigninController extends BaseController {
     @Autowired
     private AutoSerialManager autoSerialManager;
 
-
-    /**
-     * 查看当前用户名是否存在
-     *
-     * @param username 用户名
-     * @return 是否存在
-     */
-    @RequestMapping(value = "/pc/checkUserName.do")
-    @ResponseBody
-    public Boolean checkUserName(String username) {
-
-        User user = branchManager.checkUsername(username);
-
-        if (user != null) {
-            return true;
-        }
-
-        return false;
-    }
 
 
     /*
