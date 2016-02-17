@@ -4,7 +4,6 @@ package com.efeiyi.ec.consumer.organization.controller;
  * Created by Administrator on 2014/11/13.
  */
 
-import com.efeiyi.ec.consumer.organization.service.BranchManager;
 import com.efeiyi.ec.consumer.organization.service.SmsCheckManager;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.Consumer;

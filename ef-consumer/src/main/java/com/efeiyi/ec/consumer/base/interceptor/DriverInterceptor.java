@@ -1,4 +1,4 @@
-package com.efeiyi.ec.consumer.interceptor;
+package com.efeiyi.ec.consumer.base.interceptor;
 
 import com.ming800.core.util.HttpUtil;
 import org.springframework.web.servlet.ModelAndView;

@@ -24,32 +24,8 @@ public class AuthorizationUtil {
             MyUser myUser = new MyUser();
             Role role = new Role();
             role.setBasicType("all");
-
             myUser.setRole(role);
             return myUser;
-
-
-        }
-    }
-
-
-    public static User getUser() {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
-        MyUser myUser = (MyUser) authentication.getPrincipal();
-        User user = new User();
-        user.setId(myUser.getId());
-        user.setName(myUser.getName());
-        user.setUsername(myUser.getUsername());
-        return user;
-    }
-
-    public static String getRoleType() {
-        MyUser myUser = getMyUser();
-        if (myUser != null && myUser.getId() != null) {
-            return myUser.getRole().getBasicType();
-        } else {
-            return "";
         }
     }
 
