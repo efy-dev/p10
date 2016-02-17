@@ -1,4 +1,4 @@
-package com.efeiyi.ec.consumer.order.controller;
+package com.efeiyi.ec.consumer.personal.controller;
 
 import com.efeiyi.ec.balance.model.BalanceRecord;
 import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;

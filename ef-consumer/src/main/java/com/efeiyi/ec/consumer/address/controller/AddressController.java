@@ -1,4 +1,4 @@
-package com.efeiyi.ec.consumer.order.controller;
+package com.efeiyi.ec.consumer.address.controller;
 
 import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
