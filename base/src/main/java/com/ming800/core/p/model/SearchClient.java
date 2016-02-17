@@ -28,6 +28,7 @@ public class SearchClient implements Runnable {
             commonSearch = commonManager.getSearchParam(group);
         }catch (Exception e){
             System.err.println("solr commonSearch exception!!!!!!!!!!");
+            e.printStackTrace();
         }
         solrClient = new HttpSolrClient(commonSearch.getSolrServerCoreUrl());
         DefaultHttpClient httpClient = (DefaultHttpClient) solrClient.getHttpClient();
@@ -57,6 +58,7 @@ public class SearchClient implements Runnable {
                 SolrReactor.getInstance().responseMap.put(searchParamBean, resultMap);
 
             } catch (Exception e) {
+                SolrReactor.getInstance().responseMap.put(searchParamBean, null);//检索失败时页面不返回异常
                 e.printStackTrace();
             } finally {
                 try {
