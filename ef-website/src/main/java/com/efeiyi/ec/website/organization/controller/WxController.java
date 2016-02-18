@@ -49,7 +49,6 @@ public class WxController {
     public String getWxUserInfo(HttpServletRequest request) throws Exception {
         String callback = request.getParameter("callback");
         String dataKey = request.getParameter("dataKey");
-        System.out.println(dataKey);
         String redirect_uri = "http://www.efeiyi.com/wx/fetchBaseUserInfo.do?dataKey=" + dataKey + "&callback=" + callback;
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
@@ -61,18 +60,15 @@ public class WxController {
 
     @RequestMapping({"/fetchUserInfo/{dataKey}/{callback}"})
     public String getUserInfo(HttpServletRequest request, Model model, @PathVariable String dataKey, @PathVariable String callback) throws Exception {
-//        String callbackUrl = URLDecoder.decode(callback, "UTF-8");
-        String result = "";
+        String result;
         String code = request.getParameter("code");
         if (request.getSession().getAttribute(code) != null) {
             result = request.getSession().getAttribute(code).toString();
         } else {
-            System.out.println("1、 page code value：" + code);
             String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
             result = HttpUtil.getHttpResponse(urlForOpenId, null);
             request.getSession().setAttribute(code, result);
         }
-        System.out.println("2、get openid result：" + result);
         JSONObject jsonObject = JSONObject.fromObject(result);
         if (jsonObject.containsKey("errcode")) {
             throw new RuntimeException("get openId error：" + result);
@@ -95,24 +91,21 @@ public class WxController {
 
     @RequestMapping({"/fetchBaseUserInfo.do"})
     public String getUserBaseInfo(HttpServletRequest request, Model model) throws Exception {
-        String result = "";
+        String result;
         String dataKey = request.getParameter("dataKey");
         String callback = request.getParameter("callback");
         String code = request.getParameter("code");
         if (request.getSession().getAttribute(code) != null) {
             result = request.getSession().getAttribute(code).toString();
         } else {
-            System.out.println("1、 page code value：" + code);
             String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
             result = HttpUtil.getHttpResponse(urlForOpenId, null);
             request.getSession().setAttribute(code, result);
         }
-        System.out.println("2、get openid result：" + result);
         JSONObject jsonObject = JSONObject.fromObject(result);
         if (jsonObject.containsKey("errcode")) {
             throw new RuntimeException("get openId error：" + result);
         }
-//        String value = jsonObject.getString(dataKey);
         String access_token = jsonObject.getString("access_token");
         String openid = jsonObject.getString("openid");
 
@@ -122,17 +115,12 @@ public class WxController {
 
         String urlForOpenId = "https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + openid + "&lang=zh_CN";
         String userInfo = HttpUtil.getHttpResponse(urlForOpenId, null);
-        System.out.println("2、get openid result：" + userInfo);
         JSONObject userJsonObject = JSONObject.fromObject(userInfo);
 
-        System.out.println(dataKey);
         String[] keyArray = dataKey.split(";");
-        System.out.println(keyArray.length);
         String data = "";
         for (String key : keyArray) {
-            System.out.println(key);
             String value = userJsonObject.getString(key);
-            System.out.println(value);
             value = URLEncoder.encode(value, "utf-8");
             if (callbackUrl.contains("?")) {
                 callbackUrl += "&" + key + "=" + value;
@@ -145,10 +133,8 @@ public class WxController {
                 data += value;
             }
         }
-        System.out.println("----------------------" + data);
         wxCalledRecord.setData(data);
         baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
-        System.out.println("---------" + callbackUrl);
         return "redirect:http://" + callbackUrl;
     }
 
@@ -241,7 +227,6 @@ public class WxController {
         }
         //生成signature
         String signature = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + URLDecoder.decode(callUrl, "UTF-8");
-        System.out.println(signature);
         signature = StringUtil.encodePassword(signature, "SHA1");
         return signature;
     }
