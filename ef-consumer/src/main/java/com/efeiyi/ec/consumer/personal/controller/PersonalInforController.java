@@ -1,4 +1,4 @@
-package com.efeiyi.ec.consumer.order.controller;
+package com.efeiyi.ec.consumer.personal.controller;
 
 import com.efeiyi.ec.balance.model.BalanceRecord;
 import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;
@@ -40,18 +40,17 @@ public class PersonalInforController {
     private AliOssUploadManager aliOssUploadManager;
 
     @RequestMapping({"updatePersonalInfo.do"})
-    public String  updatePersonalInfo(HttpServletRequest request)throws Exception{
-        XSaveOrUpdate xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateInfo",request);
+    public String updatePersonalInfo(HttpServletRequest request) throws Exception {
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateInfo", request);
         baseManager.saveOrUpdate(xSaveOrUpdate);
-
         return "redirect:/myEfeiyi/personalInfo.do";
-
     }
+
     /*
-    * 我的收藏
-    * */
+       我的收藏
+    */
     @RequestMapping({"listProductFavorite.do"})
-    public String  listProductFavorite(HttpServletRequest request,Model model)throws Exception{
+    public String listProductFavorite(HttpServletRequest request, Model model) throws Exception {
         MyUser currentUser = AuthorizationUtil.getMyUser();
         List<Object> list = null;
         if (currentUser.getId() != null) {
@@ -64,24 +63,24 @@ public class PersonalInforController {
     }
 
     @RequestMapping({"personalInfo.do"})
-    public String getPersonalInfo(ModelMap modelMap){
+    public String getPersonalInfo(ModelMap modelMap) {
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
-
         modelMap.addAttribute("user", user);
         return "/purchaseOrder/personalInfoView";
     }
 
     @RequestMapping({"personalInfoOfMobile.do"})
-    public String getPersonalInfoOfMobile(ModelMap modelMap){
+    public String getPersonalInfoOfMobile(ModelMap modelMap) {
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
-
         modelMap.addAttribute("user", user);
         return "/purchaseOrder/updateUser";
     }
+
     /**
      * 密码修改
+     *
      * @param request
      * @return
      * @throws Exception
@@ -90,12 +89,12 @@ public class PersonalInforController {
     @ResponseBody
     public String updatePassword(HttpServletRequest request) throws Exception {
         String contion = request.getParameter("pwd");
-        String password= StringUtil.encodePassword(contion, "SHA");
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePassword",request);
-        xSaveOrUpdate.getParamMap().put("password",password);
+        String password = StringUtil.encodePassword(contion, "SHA");
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePassword", request);
+        xSaveOrUpdate.getParamMap().put("password", password);
         baseManager.saveOrUpdate(xSaveOrUpdate);
         HttpSession session = request.getSession();
-        if(session != null){
+        if (session != null) {
             session.invalidate();
         }
         MyUser bigUser = AuthorizationUtil.getMyUser();
@@ -103,62 +102,57 @@ public class PersonalInforController {
         return password;
 
     }
-    @RequestMapping({"getPassword.do"})
-    public String getPassword(HttpServletRequest request,ModelMap modelMap){
 
+    @RequestMapping({"getPassword.do"})
+    public String getPassword(HttpServletRequest request, ModelMap modelMap) {
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
-
         modelMap.addAttribute("user", user);
         return "/purchaseOrder/securityAccount";
     }
 
     /**
      * 检查原有密码
+     *
      * @param request
      * @return
      */
     @RequestMapping({"checkPassword.do"})
     @ResponseBody
-    public boolean checkPassword(HttpServletRequest request){
-        String mm=request.getParameter("password");
-        String password= StringUtil.encodePassword(mm, "SHA");
+    public boolean checkPassword(HttpServletRequest request) {
+        String mm = request.getParameter("password");
+        String password = StringUtil.encodePassword(mm, "SHA");
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
-        if(password.equals(user.getPassword())){
+        if (password.equals(user.getPassword())) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
 
-
     @RequestMapping("/uploadIcon.do")
     @ResponseBody
-    public String uploadProductImg(HttpServletRequest request) throws Exception{
-        String data = "";
-        String id = request.getParameter("id");
-        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(),id);
+    public String uploadProductImg(HttpServletRequest request) throws Exception {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "" ;
-        for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
+        String url = "";
+        for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
             //上传文件
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
-            String hz = fileName.substring(fileName.indexOf("."),fileName.length());
+            String hz = fileName.substring(fileName.indexOf("."), fileName.length());
 
-            url = "user/"+fileName.substring(0,fileName.indexOf(hz))+identify+hz;
+            url = "user/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
-                XSaveOrUpdate xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateInfo",request);
-                xSaveOrUpdate.getParamMap().put("pictureUrl",url);
+                XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateInfo", request);
+                xSaveOrUpdate.getParamMap().put("pictureUrl", url);
                 baseManager.saveOrUpdate(xSaveOrUpdate);
-//                data = user.getId() + ":" + url;
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -167,65 +161,61 @@ public class PersonalInforController {
 
     /**
      * 用于模板取到用户头像
+     *
      * @return
      */
     @RequestMapping("/getUserAvatar.do")
     @ResponseBody
-    public String getUserAvatar(){
+    public String getUserAvatar() {
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
-        String avatar=user.getPictureUrl();
-        if(avatar==null||"".equals(avatar)){
+        String avatar = user.getPictureUrl();
+        if (avatar == null || "".equals(avatar)) {
             avatar = "false";
         }
-
-            return avatar;
-
-
+        return avatar;
     }
 
     /**
      * 用于个人中心菜单获取账户余额
+     *
      * @return
      */
     @RequestMapping("/getBalance.do")
     @ResponseBody
-    public String getBalance(){
-        String consumerId=AuthorizationUtil.getMyUser().getId();
-        Consumer consumer= (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
-        if(consumer.getBalance()!=null){
-            String  balance = consumer.getBalance().toString();
+    public String getBalance() {
+        String consumerId = AuthorizationUtil.getMyUser().getId();
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
+        if (consumer.getBalance() != null) {
+            String balance = consumer.getBalance().toString();
             return balance;
-        }else{
+        } else {
             return "0.00";
         }
-
-
     }
+
+
     /**
      * 获取余额明细
+     *
      * @param request
      * @param model
      * @return
      * @throws Exception
      */
     @RequestMapping("/getBalanceDetailsList.do")
-    public String getBalanceDetailList(HttpServletRequest request,Model model) throws Exception {
-
-        String consumerId=AuthorizationUtil.getMyUser().getId();
-        Consumer consumer= (Consumer) baseManager.getObject(Consumer.class.getName(),consumerId);
-        if(consumer.getBalance()==null){
-            model.addAttribute("balance","0.00");
-        }else {
-            model.addAttribute("balance",consumer.getBalance());
+    public String getBalanceDetailList(HttpServletRequest request, Model model) throws Exception {
+        String consumerId = AuthorizationUtil.getMyUser().getId();
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
+        if (consumer.getBalance() == null) {
+            model.addAttribute("balance", "0.00");
+        } else {
+            model.addAttribute("balance", consumer.getBalance());
         }
-
-
-        XQuery xQuery=new XQuery("listBalanceRecord_default",request);
-        xQuery.put("consumer_id",consumerId);
-       List balanceDetailList=baseManager.listObject(xQuery);
-
-        model.addAttribute("balanceDetailList",balanceDetailList);
+        XQuery xQuery = new XQuery("listBalanceRecord_default", request);
+        xQuery.put("consumer_id", consumerId);
+        List balanceDetailList = baseManager.listObject(xQuery);
+        model.addAttribute("balanceDetailList", balanceDetailList);
         return "/purchaseOrder/balanceDetailList";
 
     }

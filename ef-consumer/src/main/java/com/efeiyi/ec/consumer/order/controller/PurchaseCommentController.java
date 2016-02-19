@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,148 +37,134 @@ public class PurchaseCommentController {
 
     /**
      * PC端查看评�?
+     *
      * @param request
      * @param model
      * @return
      * @throws Exception
      */
     @RequestMapping("/finishOrderList.do")
-    public String finishOrder(HttpServletRequest request,Model model) throws Exception {
-
-        XQuery xQuery = new XQuery("plistPurchaseOrder_default9",request);
-
+    public String finishOrder(HttpServletRequest request, Model model) throws Exception {
+        XQuery xQuery = new XQuery("plistPurchaseOrder_default9", request);
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
-        model.addAttribute("finishList",list);
-
-    return "/purchaseOrder/purchaseComment";
+        model.addAttribute("finishList", list);
+        return "/purchaseOrder/purchaseComment";
     }
 
     /**
      * 移动端查看评�?
+     *
      * @param request
      * @param model
      * @return
      */
     @RequestMapping("/mobileFinishOrder.do")
-    public String mobileFinishOrder(HttpServletRequest request,Model model){
-        String orderId=request.getParameter("orderId");
-        PurchaseOrder purchaseOrder= (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
-        model.addAttribute("finishOrder",purchaseOrder);
+    public String mobileFinishOrder(HttpServletRequest request, Model model) {
+        String orderId = request.getParameter("orderId");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        model.addAttribute("finishOrder", purchaseOrder);
         return "/purchaseOrder/purchaseComment";
     }
 
     /**
      * 评价
+     *
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping("/saveComment.do")
     public String saveOrUpdateComment(HttpServletRequest request) throws Exception {
-        int count=0;
-        String id=request.getParameter("productId");
-        XSaveOrUpdate xUpdate =new XSaveOrUpdate("saveOrUpdateComment",request);
-        xUpdate.getParamMap().put("purchaseOrderProduct_id",id);
-        PurchaseOrderComment comment = (PurchaseOrderComment)baseManager.saveOrUpdate(xUpdate);
+        int count = 0;
+        String id = request.getParameter("productId");
+        XSaveOrUpdate xUpdate = new XSaveOrUpdate("saveOrUpdateComment", request);
+        xUpdate.getParamMap().put("purchaseOrderProduct_id", id);
+        PurchaseOrderComment comment = (PurchaseOrderComment) baseManager.saveOrUpdate(xUpdate);
+        String[] url = request.getParameterValues("url");
+        if (url != null) {
+            for (int i = 0; i < url.length; i++) {
+                XSaveOrUpdate commentPicture = new XSaveOrUpdate("saveOrUpdateCommentPicture", request);
+                commentPicture.getParamMap().put("pictureUrl", url[i]);
+                PurchaseOrderCommentPicture picture = (PurchaseOrderCommentPicture) baseManager.saveOrUpdate(commentPicture);
+                picture.setPurchaseOrderComment(comment);
+                baseManager.saveOrUpdate(PurchaseOrderCommentPicture.class.getName(), picture);
+            }
 
-        String[] url=request.getParameterValues("url");
-      if(url!=null){
-          for(int i=0;i<url.length;i++){
-
-              XSaveOrUpdate commentPicture=new XSaveOrUpdate("saveOrUpdateCommentPicture",request);
-              commentPicture.getParamMap().put("pictureUrl",url[i]);
-              PurchaseOrderCommentPicture picture= (PurchaseOrderCommentPicture) baseManager.saveOrUpdate(commentPicture);
-              picture.setPurchaseOrderComment(comment);
-              baseManager.saveOrUpdate(PurchaseOrderCommentPicture.class.getName(),picture);
-          }
-
-      }
-
-        PurchaseOrderProduct purchaseOrderProduct = (PurchaseOrderProduct)baseManager.getObject(PurchaseOrderProduct.class.getName(),id);
+        }
+        PurchaseOrderProduct purchaseOrderProduct = (PurchaseOrderProduct) baseManager.getObject(PurchaseOrderProduct.class.getName(), id);
         purchaseOrderProduct.setStatus("1");
         purchaseOrderProduct.setPurchaseOrderComment(comment);
         baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+        String productModelId = purchaseOrderProduct.getProductModel().getId();
+        XQuery productModel = new XQuery("listPurchaseOrderProduct_default", request);
+        productModel.put("productModel_id", productModelId);
+        List<Object> purchaseOrderProductList = baseManager.listObject(productModel);
+        if (purchaseOrderProductList.size() != 0) {
+            for (int i = 0; i < purchaseOrderProductList.size(); i++) {
+                PurchaseOrderProduct pop = (PurchaseOrderProduct) purchaseOrderProductList.get(i);
+                if (pop.getPurchaseOrderComment().getStarts() != null) {
+                    pop.getPurchaseOrderComment().getStarts();
+                    count += Integer.parseInt(pop.getPurchaseOrderComment().getStarts());
+                }
 
-        String productModelId=purchaseOrderProduct.getProductModel().getId();
-        XQuery productModel = new XQuery("listPurchaseOrderProduct_default",request);
-        productModel.put("productModel_id",productModelId);
-        List<Object> purchaseOrderProductList=baseManager.listObject(productModel);
-       if(purchaseOrderProductList.size()!=0){
-           for(int i=0;i<purchaseOrderProductList.size();i++){
-               PurchaseOrderProduct pop= (PurchaseOrderProduct) purchaseOrderProductList.get(i);
-               if(pop.getPurchaseOrderComment().getStarts()!=null){
-                   pop.getPurchaseOrderComment().getStarts();
-                   count+= Integer.parseInt(pop.getPurchaseOrderComment().getStarts());
-               }
-
-           }
-           Integer average=count/purchaseOrderProductList.size();
-           purchaseOrderProduct.setAverage(average+"");
-           baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
-       }
-
-
-
-        String orderId=request.getParameter("orderId");
-        PurchaseOrder purchaseOrder=(PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId);
+            }
+            Integer average = count / purchaseOrderProductList.size();
+            purchaseOrderProduct.setAverage(average + "");
+            baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+        }
+        String orderId = request.getParameter("orderId");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_FINISHED);
-        for(PurchaseOrderProduct purchaseOrderProductTemp:purchaseOrder.getPurchaseOrderProductList()){
-            String status=purchaseOrderProductTemp.getStatus();
-            if(!"1".equals(status)){
+        for (PurchaseOrderProduct purchaseOrderProductTemp : purchaseOrder.getPurchaseOrderProductList()) {
+            String status = purchaseOrderProductTemp.getStatus();
+            if (!"1".equals(status)) {
                 purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_UNCOMMENT);
                 break;
             }
         }
-
-        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
-
-        if(HttpUtil.isPhone(request)==true){
-
-            return"redirect:/order/myEfeiyi/list.do";
-
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        if (HttpUtil.isPhone(request) == true) {
+            return "redirect:/order/myEfeiyi/list.do";
         }
-        return"redirect:/comment/finishOrderList.do";
+        return "redirect:/comment/finishOrderList.do";
     }
 
     /**
      * 追加评价
+     *
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping("/addTOComment.do")
     public String addToComment(HttpServletRequest request) throws Exception {
-
-        String parentCommentId=request.getParameter("parentComment");
-        XSaveOrUpdate xUpdate =new XSaveOrUpdate("saveOrUpdateComment",request);
-        PurchaseOrderComment subComment = (PurchaseOrderComment)baseManager.saveOrUpdate(xUpdate);
-        PurchaseOrderComment comment= (PurchaseOrderComment) baseManager.getObject(PurchaseOrderComment.class.getName(),parentCommentId);
+        String parentCommentId = request.getParameter("parentComment");
+        XSaveOrUpdate xUpdate = new XSaveOrUpdate("saveOrUpdateComment", request);
+        PurchaseOrderComment subComment = (PurchaseOrderComment) baseManager.saveOrUpdate(xUpdate);
+        PurchaseOrderComment comment = (PurchaseOrderComment) baseManager.getObject(PurchaseOrderComment.class.getName(), parentCommentId);
         comment.setSubPurchaseOrderComment(subComment);
-        baseManager.saveOrUpdate(PurchaseOrderComment.class.getName(),comment);
+        baseManager.saveOrUpdate(PurchaseOrderComment.class.getName(), comment);
         return "redirect:/comment/finishOrderList.do";
-
     }
 
     @RequestMapping("/uploadSd.do")
     @ResponseBody
-    public String uploadProductImg(HttpServletRequest request) throws Exception{
-
+    public String uploadProductImg(HttpServletRequest request) throws Exception {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "" ;
-        for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
+        String url = "";
+        for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
             //上传文件
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
-            String hz = fileName.substring(fileName.indexOf("."),fileName.length());
-
-            url = "comment/"+fileName.substring(0,fileName.indexOf(hz))+identify+hz;
+            String hz = fileName.substring(fileName.indexOf("."), fileName.length());
+            url = "comment/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

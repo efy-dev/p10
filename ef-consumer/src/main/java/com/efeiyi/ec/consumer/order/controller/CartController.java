@@ -33,7 +33,7 @@ public class CartController {
     @ResponseBody
     public String getCartAmount(HttpServletRequest request) throws Exception {
         MyUser user = AuthorizationUtil.getMyUser();
-        Cart cart = null;
+        Cart cart ;
         if (user.getId() != null) {
             XQuery xQuery = new XQuery("listCart_default", request);
             List<Object> list = baseManager.listObject(xQuery);
@@ -56,7 +56,7 @@ public class CartController {
     @RequestMapping({"/cart/cartCheck.do"})
     @ResponseBody
     public boolean cartCheck(HttpServletRequest request) {
-        Cart cart = null;
+        Cart cart;
         if (AuthorizationUtil.getMyUser().getId() != null) {
             String cartId = request.getParameter("cartId");
             cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);

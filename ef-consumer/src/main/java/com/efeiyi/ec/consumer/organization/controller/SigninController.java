@@ -4,7 +4,6 @@ package com.efeiyi.ec.consumer.organization.controller;
  * Created by Administrator on 2014/11/13.
  */
 
-import com.efeiyi.ec.consumer.organization.service.BranchManager;
 import com.efeiyi.ec.consumer.organization.service.SmsCheckManager;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.Consumer;
@@ -43,8 +42,6 @@ import java.util.List;
 public class SigninController extends BaseController {
 
     @Autowired
-    private BranchManager branchManager;
-    @Autowired
     private BaseManager baseManager;
 
     @Autowired
@@ -53,25 +50,6 @@ public class SigninController extends BaseController {
     @Autowired
     private AutoSerialManager autoSerialManager;
 
-
-    /**
-     * 查看当前用户名是否存在
-     *
-     * @param username 用户名
-     * @return 是否存在
-     */
-    @RequestMapping(value = "/pc/checkUserName.do")
-    @ResponseBody
-    public Boolean checkUserName(String username) {
-
-        User user = branchManager.checkUsername(username);
-
-        if (user != null) {
-            return true;
-        }
-
-        return false;
-    }
 
 
     /*

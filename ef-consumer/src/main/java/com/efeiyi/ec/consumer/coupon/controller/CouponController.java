@@ -1,4 +1,4 @@
-package com.efeiyi.ec.consumer.order.controller;
+package com.efeiyi.ec.consumer.coupon.controller;
 
 
 import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;
@@ -32,56 +32,58 @@ public class CouponController {
 
     /**
      * 个人中心我的卡券列表
+     *
      * @param request
      * @param model
      * @return
      * @throws Exception
      */
     @RequestMapping({"/coupon/list"})
-    public String listCoupon(HttpServletRequest request , Model model) throws Exception{
-        String cf=request.getParameter("cf");
-        if(AuthorizationUtil.getMyUser().getId() != null){
-            if("1".equals(cf)  || cf==null){
+    public String listCoupon(HttpServletRequest request, Model model) throws Exception {
+        String cf = request.getParameter("cf");
+        if (AuthorizationUtil.getMyUser().getId() != null) {
+            if ("1".equals(cf) || cf == null) {
                 XQuery couponQuery = new XQuery("listCoupon_default", request);
                 List<Object> couponList = baseManager.listObject(couponQuery);
-                model.addAttribute("couponList",couponList);
-                model.addAttribute("employ","use");
-            }else if ("2".equals(cf)){
+                model.addAttribute("couponList", couponList);
+                model.addAttribute("employ", "use");
+            } else if ("2".equals(cf)) {
                 XQuery couponQuery = new XQuery("listCoupon_default", request);
                 List<Object> couponList = baseManager.listObject(couponQuery);
-                model.addAttribute("couponList",couponList);
-                model.addAttribute("employ","unUse");
+                model.addAttribute("couponList", couponList);
+                model.addAttribute("employ", "unUse");
 
-            }else if ("3".equals(cf)){
+            } else if ("3".equals(cf)) {
                 XQuery couponQuery = new XQuery("listCoupon_useful", request);
                 List<Object> couponList = baseManager.listObject(couponQuery);
-                model.addAttribute("couponList",couponList);
-                model.addAttribute("employ","ue");
+                model.addAttribute("couponList", couponList);
+                model.addAttribute("employ", "ue");
 
-            }else if("4".equals(cf)){
+            } else if ("4".equals(cf)) {
                 XQuery couponQuery = new XQuery("listCoupon_allList", request);
                 List<Object> couponList = baseManager.listObject(couponQuery);
-                model.addAttribute("allCouponList",couponList);
+                model.addAttribute("allCouponList", couponList);
 
             }
             return "/purchaseOrder/couponList";
-        }else {
+        } else {
             return "redirect:/sso.do";
         }
 
 
     }
+
     @RequestMapping("/remove/coupon.do")
-    public  String removeCoupon(HttpServletRequest request){
-        String cf=request.getParameter("cf");
-          String couponId=request.getParameter("couponId");
-        baseManager.remove(Coupon.class.getName(),couponId);
-        return  "redirect:/coupon/list?cf="+cf;
+    public String removeCoupon(HttpServletRequest request) {
+        String cf = request.getParameter("cf");
+        String couponId = request.getParameter("couponId");
+        baseManager.remove(Coupon.class.getName(), couponId);
+        return "redirect:/coupon/list?cf=" + cf;
     }
 
     @RequestMapping({"/coupon/exchangeCoupon.do"})
     @ResponseBody
-    public  Object exchangeCoupon(HttpServletRequest request) throws Exception {
+    public Object exchangeCoupon(HttpServletRequest request) throws Exception {
 
         synchronized (this) {
             Coupon coupon = null;
@@ -94,9 +96,6 @@ public class CouponController {
             List<Object> couponBatchList = baseManager.listObject(xQuery);
             if (couponBatchList != null && couponBatchList.size() > 0) {
                 CouponBatch currentCouponBatch = (CouponBatch) couponBatchList.get(0);
-//                if (currentCouponBatch.getAmount() <= currentCouponBatch.getCouponList().size()) {
-//                    return "null";
-//                }
 //            生成一张该批次的优惠券  这里使用的是通码
                 coupon = new Coupon();
                 coupon.setStatus("1");
@@ -141,15 +140,17 @@ public class CouponController {
             }
         }
     }
+
     @RequestMapping("/appExchange.do")
-    public String exchange(){
+    public String exchange() {
         return "/purchaseOrder/couponExchange";
     }
+
     @RequestMapping("/getAppCoupon.do")
-    public String getAppCoupon(HttpServletRequest request,Model model){
-      String couponId = request.getParameter("couponId");
-      Coupon coupon = (Coupon) baseManager.getObject(Coupon.class.getName(),couponId);
-        model.addAttribute("coupon",coupon);
+    public String getAppCoupon(HttpServletRequest request, Model model) {
+        String couponId = request.getParameter("couponId");
+        Coupon coupon = (Coupon) baseManager.getObject(Coupon.class.getName(), couponId);
+        model.addAttribute("coupon", coupon);
         return "/purchaseOrder/getCoupon";
 
     }

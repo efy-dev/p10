@@ -1,6 +1,5 @@
 package com.efeiyi.ec.consumer.organization.service.impl;
 
-import com.efeiyi.ec.consumer.organization.OrganizationConst;
 import com.efeiyi.ec.consumer.organization.dao.UserDao;
 import com.efeiyi.ec.consumer.organization.service.UserManager;
 import com.efeiyi.ec.organization.model.BigUser;
@@ -40,8 +39,7 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
 
     @Override
     public List<BigUser> listBigUser(String teachAreaId) {
-
-        String queryStr = "select u from BigUser u where u.teachArea.id=? and theStatus!=" + OrganizationConst.USER_THE_STATUS_DELETE;
+        String queryStr = "select u from BigUser u where u.teachArea.id=? and theStatus!=" + 0;
         Object[] params = new Object[]{teachAreaId};
         return userDao.getObjectList(queryStr, params);
     }

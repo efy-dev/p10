@@ -27,7 +27,7 @@
             <mvc:mapping path="/"/>
             <mvc:mapping path="/**"/>
             <mvc:mapping path="**"/>
-            <bean class="com.efeiyi.ec.consumer.interceptor.DriverInterceptor"/>
+            <bean class="com.efeiyi.ec.consumer.base.interceptor.DriverInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

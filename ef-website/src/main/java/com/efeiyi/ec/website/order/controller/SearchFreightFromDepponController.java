@@ -1,11 +1,13 @@
 package com.efeiyi.ec.website.order.controller;
 
+import com.efeiyi.ec.purchase.model.Freight;
 import com.efeiyi.ec.website.base.authentication.ContextUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.efeiyi.ec.website.order.model.DepponProduct;
 import com.efeiyi.ec.website.order.model.FreightConstant;
+import com.efeiyi.ec.website.order.service.FreightManager;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -13,6 +15,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,6 +37,8 @@ import java.util.Map.Entry;
 @Controller
 @RequestMapping("/freight")
 public class SearchFreightFromDepponController {
+    @Autowired
+    private FreightManager freightManager;
 
     @RequestMapping(value = "/searchPrice.do")//, method = RequestMethod.POST)
     @ResponseBody
@@ -57,6 +62,7 @@ public class SearchFreightFromDepponController {
         String url = "http://api.deppon.com/dop/order/queryPrice.action";
         HttpPost httppost = new HttpPost(url);
         StringEntity stringEntity = new StringEntity("companyCode=EWBHUAYUNN&params=" + jsonString + "&digest=" + digest + "&timestamp=" + timestamp, "utf-8");
+        System.out.println(stringEntity.getContent());
         stringEntity.setContentType("application/x-www-form-urlencoded");
         httppost.setEntity(stringEntity);
         byte[] b = new byte[(int) stringEntity.getContentLength()];
@@ -73,6 +79,7 @@ public class SearchFreightFromDepponController {
             stringBuilder.append(line);
         }
         JSONObject jasonObject = (JSONObject) JSONObject.parse(stringBuilder.toString());
+        System.out.println(stringBuilder.toString());
         JSONObject jasonObject2 = jasonObject.getJSONObject("responseParam");
         JSONArray jsonArray = jasonObject2.getJSONArray("priceInfo");
 
@@ -92,6 +99,36 @@ public class SearchFreightFromDepponController {
 
     }
 
+
+    /*
+    * 获取邮费
+    * */
+    @RequestMapping(value = "/searchPrice2.do")//, method = RequestMethod.POST)
+    @ResponseBody
+    public String searchPrice2(HttpServletRequest request) throws Exception {
+        JSONObject jsonObject = (JSONObject) JSONObject.parse(request.getParameter("json2").toString());
+        Freight freight = freightManager.getFreight(jsonObject);
+
+        DepponProduct depponProduct = (DepponProduct) ContextUtils.getBean("depponProduct");
+
+        double weight = Double.parseDouble(request.getParameter("weight"));
+        double standardYkg = Double.parseDouble(depponProduct.getStandardYkg());
+        double ykg360 = Double.parseDouble(depponProduct.getYkg360());
+
+        if(weight > ykg360){
+            return new BigDecimal(weight - ykg360).multiply(new BigDecimal(freight.getAkg360Money())).add(new BigDecimal(freight.getYkg360Money())).setScale(0,BigDecimal.ROUND_HALF_UP).toString();
+        }else if (weight == ykg360){
+            return freight.getYkg360Money();
+        }else if (weight < ykg360){
+            if (weight <= standardYkg){
+                return freight.getStandardYkgMoney();
+            }else if (weight > standardYkg){
+                return new BigDecimal(weight - standardYkg).multiply(new BigDecimal(freight.getStandardAkgMoney())).add(new BigDecimal(freight.getStandardYkgMoney())).setScale(0,BigDecimal.ROUND_HALF_UP).toString();
+            }
+        }
+        return null;
+
+    }
 
     @RequestMapping(value = "/getAddress.do")
     @ResponseBody
@@ -119,6 +156,8 @@ public class SearchFreightFromDepponController {
         }
         return hexValue.toString();
     }
+
+
 
     private String calculateFreight(JSONObject jsonArray, String weight) throws Exception {
         String freight = "";
