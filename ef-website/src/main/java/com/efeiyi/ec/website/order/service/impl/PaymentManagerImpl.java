@@ -12,6 +12,7 @@ import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails;
+import com.efeiyi.ec.website.order.service.BalanceManager;
 import com.efeiyi.ec.website.order.service.CouponManager;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
@@ -39,6 +40,8 @@ public class PaymentManagerImpl implements PaymentManager {
     @Autowired
     private CouponManager couponManager;
 
+    @Autowired
+    private BalanceManager balanceManager;
     static {
         BeeCloud.registerApp("130498c1-8928-433b-a01d-c26420f41818", "49fc6d9c-fd5d-4e9c-9ff6-f2d5ef1a1a3e"); //正式环境
         //      BeeCloud.registerApp("e7004ae3-5634-4b9f-998d-c4319fbea7b0", "24511f9a-0b63-4fa0-82c6-6a6ffe38371d");//测试环境
@@ -194,7 +197,7 @@ public class PaymentManagerImpl implements PaymentManager {
         purchaseOrderPayment.setCreateDateTime(new Date());
         purchaseOrderPayment.setPaymentAmount(purchaseOrder.getTotal());
         purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
-        purchaseOrderPayment.setPayWay(purchaseOrder.getPayWay());
+        //purchaseOrderPayment.setPayWay(purchaseOrder.getPayWay());
         purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("payment"));
         String userid = AuthorizationUtil.getMyUser().getId();
         User user = (User) baseManager.getObject(User.class.getName(), userid);
@@ -211,29 +214,17 @@ public class PaymentManagerImpl implements PaymentManager {
             purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
             baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
         }
-        if (null != balance1 && balance1 > 0) {
-            String consumerId = AuthorizationUtil.getMyUser().getId();
-            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
-            BigDecimal currentBalance = consumer.getBalance();
-            consumer.setBalance(currentBalance.subtract(new BigDecimal(balance1)));
-            baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
+        if (null != balance1 && balance1 > 0 && balanceManager.checkBalance(balance1)) {
+            BalanceRecord balanceRecord = balanceManager.useBalance(balance1);
+            balanceRecord.setKey(purchaseOrder.getId());
+            baseManager.saveOrUpdate(BalanceRecord.class.getName(), balanceRecord);
 
             PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
-            purchaseOrderPaymentDetails.setPayWay("5");
+            purchaseOrderPaymentDetails.setPayWay(PurchaseOrder.YUE);
             purchaseOrderPaymentDetails.setMoney(new BigDecimal(balance1));
             purchaseOrderPaymentDetails.setCreateDateTime(new Date());
+            purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
             baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
-
-            BalanceRecord balanceRecord = new BalanceRecord();
-            balanceRecord.setCreateDateTime(new Date());
-            balanceRecord.setChangeBalance(new BigDecimal(balance1));
-            balanceRecord.setCurrentBalance(currentBalance);
-            balanceRecord.setResultBalance(currentBalance.subtract(new BigDecimal(balance1)));
-            balanceRecord.setConsumer(consumer);
-            balanceRecord.setKey(purchaseOrder.getId());
-            balanceRecord.setStatus("3");
-            balanceRecord.setType("4");
-            baseManager.saveOrUpdate(BalanceRecord.class.getName(), balanceRecord);
 
             if (null != couponId && !"".equals(couponId)) {
                 int r = new BigDecimal(balance1).compareTo(purchaseOrder.getTotal().subtract(new BigDecimal(coupon.getCouponBatch().getPrice())));

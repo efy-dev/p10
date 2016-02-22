@@ -54,16 +54,17 @@
                             'eventValue': parseInt(${payAmount * 100}),
                             'hitCallback': function () {
 //                              //跳转到查看支付是否成功
-                                <c:if test="${order.orderType=='3'}">
+                                <%--<c:if test="${order.orderType=='3'}">
                                 window.location.href = "http://www.efeiyi.com/giftReceive/${orderId}";
                                 </c:if>
                                 <c:if test="${not empty order.callback && order.orderType!='3'}">
                                 window.location.href = "http://${order.callback}";
                                 </c:if>
                                 <c:if test="${empty order.callback && order.orderType!='3'}">
-                                <%--window.location.href = "http://www2.efeiyi.com/sharePage/productShare/${orderId}";--%>
+                                &lt;%&ndash;window.location.href = "http://www2.efeiyi.com/sharePage/productShare/${orderId}";&ndash;%&gt;
                                 window.location.href = "http://www.efeiyi.com/order/paysuccess/${purchaseOrderPaymentDetails.id}";
-                                </c:if>
+                                </c:if>--%>
+                                window.location.href = "http://www.efeiyi.com/order/paysuccess/${purchaseOrderPaymentDetails.id}";
                             }
                         });
                     }
