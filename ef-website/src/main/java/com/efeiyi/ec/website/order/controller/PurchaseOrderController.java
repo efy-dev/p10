@@ -253,16 +253,7 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrder.setOrderType("1");
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         String callback = request.getParameter("callback");
-        if (callback != null) {
-            callback = URLDecoder.decode(callback, "UTF-8");
-            if (callback.contains("?")) {
-                callback += "&purchaseOrderId=" + purchaseOrder.getId();
-            } else {
-                callback += "?purchaseOrderId=" + purchaseOrder.getId();
-            }
-            purchaseOrder.setCallback(callback);
-            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-        }
+        purchaseOrder.setCallback(callbackFilter(callback, purchaseOrder.getId()));
         //收货地址
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
@@ -284,6 +275,17 @@ public class PurchaseOrderController extends BaseController {
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 
+
+    private String callbackFilter(String callback, String id) throws Exception {
+        callback = URLDecoder.decode(callback, "UTF-8");
+        if (callback.contains("?")) {
+            callback += "&purchaseOrderId=" + id;
+        } else {
+            callback += "?purchaseOrderId=" + id;
+        }
+        return callback;
+    }
+
     @RequestMapping("/saveOrUpdateOrder2.do")
     public String saveOrUpdateOrder2(HttpServletRequest request, Model model) throws Exception {
         String productModelId = request.getParameter("productModelId");
@@ -294,16 +296,8 @@ public class PurchaseOrderController extends BaseController {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(productModel, price, Integer.parseInt(amount), model);
         String callback = request.getParameter("callback");
-        if (callback != null) {
-            callback = URLDecoder.decode(callback, "UTF-8");
-            if (callback.contains("?")) {
-                callback += "&purchaseOrderId=" + purchaseOrder.getId();
-            } else {
-                callback += "?purchaseOrderId=" + purchaseOrder.getId();
-            }
-            purchaseOrder.setCallback(callback);
-            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-        }
+        purchaseOrder.setCallback(callbackFilter(callback, purchaseOrder.getId()));
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         if (orderType != null) {
             purchaseOrder.setOrderType(orderType);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
@@ -318,7 +312,6 @@ public class PurchaseOrderController extends BaseController {
             consumer.setBalance(new BigDecimal(0));
             baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
         }
-
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("isEasyBuy", true);
