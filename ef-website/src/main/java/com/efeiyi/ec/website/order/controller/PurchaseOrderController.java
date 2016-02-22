@@ -8,6 +8,7 @@ import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.website.order.service.BalanceManager;
 import com.efeiyi.ec.website.order.service.CartManager;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
@@ -54,6 +55,8 @@ public class PurchaseOrderController extends BaseController {
     @Autowired
     private PaymentManager paymentManager;
 
+    @Autowired
+    private BalanceManager balanceManager;
 
     @RequestMapping("/giftBuy/showNameStatus.do")
     @ResponseBody
@@ -378,43 +381,36 @@ public class PurchaseOrderController extends BaseController {
         //判断余额是否足够，足够的话支付方式改为余额支付
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         //这里首先余额是从客户端传递过来，需要跟数据库做对比，如果余额的数目不对，就会报错，ckeck的步骤可以放到Manager里做
-
-        if (null != balance && Float.parseFloat(balance) > 0) {
-            if (null != couponId && !"".equals(couponId)) {
-                Coupon coupon = (Coupon) baseManager.getObject(Coupon.class.getName(), couponId);
-                int r = new BigDecimal(balance).compareTo(purchaseOrder.getTotal().subtract(new BigDecimal(coupon.getCouponBatch().getPrice())));
-                if (r == 0) {
-                    payment = "5";  //支付方式
-                }
-            } else {
-                int r = new BigDecimal(balance).compareTo(purchaseOrder.getTotal());
-                if (r == 0) {
-                    payment = "5";
-                }
+        if(balanceManager.checkBalance(Float.valueOf(balance))){
+            //订单收货地址//初始化订单状态
+            ConsumerAddress consumerAddress = null;
+            if (addressId != null) {
+                consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
             }
-        }
-        //订单收货地址//初始化订单状态
-        ConsumerAddress consumerAddress = null;
-        if (addressId != null) {
-            consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
-        }
-        purchaseOrder = purchaseOrderManager.confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payment);
-        //生成支付记录以及支付详情
-        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder, balance, couponId);
-        cartManager.clearCart(request, purchaseOrder);
-        String resultPage = "";
-        if (payment.equals("1")) {//支付宝
-            resultPage = "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
-        } else if (payment.equals("3")) { //微信
-            if (isWeiXin != null) {
-                resultPage = "redirect:/order/pay/weixin/" + purchaseOrderPaymentDetails.getId();
-            } else {
-                resultPage = "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
+            purchaseOrder = purchaseOrderManager.confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payment);
+            //生成支付记录以及支付详情
+            PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder, balance, couponId);
+            if(PurchaseOrder.YUE.equals(purchaseOrderPaymentDetails.getPayWay())){
+                purchaseOrder.setPayWay(PurchaseOrder.YUE);
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
             }
-        } else if (payment.equals("5")) {
-            resultPage = "redirect:/order/pay/balance/" + purchaseOrderPaymentDetails.getId() + "?purchaseOrderId=" + purchaseOrder.getId();
+            cartManager.clearCart(request, purchaseOrder);
+            String resultPage = "";
+            if (purchaseOrderPaymentDetails.getPayWay().equals("1")) {//支付宝
+                resultPage = "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
+            } else if (purchaseOrderPaymentDetails.getPayWay().equals("3")) { //微信
+                if (isWeiXin != null) {
+                    resultPage = "redirect:/order/pay/weixin/" + purchaseOrderPaymentDetails.getId();
+                } else {
+                    resultPage = "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
+                }
+            } else if (purchaseOrderPaymentDetails.getPayWay().equals("5")) {
+                resultPage = "redirect:/order/pay/balance/" + purchaseOrderPaymentDetails.getId() + "?purchaseOrderId=" + purchaseOrder.getId();
+            }
+            return resultPage;
+        }else {
+            return "";
         }
-        return resultPage;
     }
 
     @RequestMapping({"/addAddress.do"})
