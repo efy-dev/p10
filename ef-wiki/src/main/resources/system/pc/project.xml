@@ -98,7 +98,7 @@
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                     <query name="Category" label="查询" type="auto" orderBy="id:desc">
-                        <condition name="projectCategory.id" defaultValue="0" operation="ne"/>
+                        <condition name="projectCategory.id" defaultValue="0" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                     <query name="all" label="查询" type="auto" orderBy="level:desc">
