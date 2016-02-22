@@ -254,7 +254,6 @@ public class PurchaseOrderController extends BaseController {
         Cart cart = cartManager.copyCart((Cart) request.getSession().getAttribute("cart"), cartManager.getCurrentCart(request));
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cart, model);
         purchaseOrder.setOrderType("1");
-        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         String callback = request.getParameter("callback");
         purchaseOrder.setCallback(callbackFilter(callback, purchaseOrder.getId()));
         //收货地址
@@ -268,6 +267,7 @@ public class PurchaseOrderController extends BaseController {
             consumer.setBalance(new BigDecimal(0));
             baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
         }
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
@@ -381,7 +381,7 @@ public class PurchaseOrderController extends BaseController {
         //判断余额是否足够，足够的话支付方式改为余额支付
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         //这里首先余额是从客户端传递过来，需要跟数据库做对比，如果余额的数目不对，就会报错，ckeck的步骤可以放到Manager里做
-        if(balanceManager.checkBalance(Float.valueOf(balance))){
+        if (balanceManager.checkBalance(Float.valueOf(balance))) {
             //订单收货地址//初始化订单状态
             ConsumerAddress consumerAddress = null;
             if (addressId != null) {
@@ -390,9 +390,9 @@ public class PurchaseOrderController extends BaseController {
             purchaseOrder = purchaseOrderManager.confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payment);
             //生成支付记录以及支付详情
             PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder, balance, couponId);
-            if(PurchaseOrder.YUE.equals(purchaseOrderPaymentDetails.getPayWay())){
+            if (PurchaseOrder.YUE.equals(purchaseOrderPaymentDetails.getPayWay())) {
                 purchaseOrder.setPayWay(PurchaseOrder.YUE);
-                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
             }
             cartManager.clearCart(request, purchaseOrder);
             String resultPage = "";
@@ -408,7 +408,7 @@ public class PurchaseOrderController extends BaseController {
                 resultPage = "redirect:/order/pay/balance/" + purchaseOrderPaymentDetails.getId() + "?purchaseOrderId=" + purchaseOrder.getId();
             }
             return resultPage;
-        }else {
+        } else {
             return "";
         }
     }
