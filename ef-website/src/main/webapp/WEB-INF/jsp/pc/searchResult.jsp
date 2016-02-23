@@ -166,25 +166,36 @@
 </div>
 
 <script type="text/javascript">
+    //分页的get请求改成post
+    var ulTag = $("ul.am-pagination");
+    var liTags = ulTag.children();
+    var aTags = liTags.find("a");
+    for(var x = 0; x < aTags.length; x++){
+        var aUrl = aTags[x].href;
+        aUrl = aUrl.substring(aUrl.indexOf("/s"));
+        aTags[x].href = "#"
+        aTags[x].setAttribute("onclick","searchPostSubmit('" + aUrl + "')");
+    }
+
     var facets = "${searchParamBean.facetFieldJson}";
     function searchPostSubmit(fullUrl) {
         fullUrl = fullUrl.split("?");
         var myForm = document.createElement("form");
-        myForm.method = "get";
+        myForm.method = "post";
         myForm.action = fullUrl[0];
         var params = fullUrl[1].split("&");
         for ( var x = 0; x < params.length; x++) {
             var myInput = document.createElement("input");
             var paramEntry = params[x].split("=");
             myInput.name = paramEntry[0];
-            myInput.value = paramEntry[1];
+            myInput.value = decodeURI(paramEntry[1]);
             myForm.appendChild(myInput);
         }
         document.body.appendChild(myForm);
         myForm.submit();
     }
     function facetForward(url) {
-        //get莫名其妙不稳定400，只好改用Post
+        //get莫名其妙不稳定400，改用Post
         <%--window.location.href = url + "&facetFieldJson=" + facets + "&queryFacetJson=${searchParamBean.queryFacetJson}&group=efeiyi";--%>
         url = url + "&facetFieldJson=" + facets + "&queryFacetJson=${searchParamBean.queryFacetJson}&group=efeiyi";
         searchPostSubmit(url);
