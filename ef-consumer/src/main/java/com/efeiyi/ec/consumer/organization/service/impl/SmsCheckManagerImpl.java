@@ -25,52 +25,34 @@ public class SmsCheckManagerImpl implements SmsCheckManager {
 
     @Override
      public String send(String phone, Map<String,String> param, String tpl_id,String template) {
-        SmsProvider smsProvider=null;
+        SmsProvider smsProvider;
+         String msg="";
         switch (template){
             case "yp":
                 smsProvider = new YunPianSmsProvider();
+                SendCode sendCode = smsProvider.post(phone, param, tpl_id);
+                msg=sendCode.getMsg();
                 break;
         }
 
+        return msg;
 
-        //非营销短信
-        if(tpl_id.equals("3")){
-            SendCode sendCode = smsProvider.post(phone, param, tpl_id);
-
-            return sendCode.getMsg();
-        }else{
-            SendCode sendCode = smsProvider.post(phone, param, tpl_id);
-
-
-            System.out.println(sendCode.getMsg());
-            return sendCode.getMsg();
-        }
 
     }
     @Override
     public String send(String phone, Map<String,String> param, Map<String,String>templateMap) {
-        SmsProvider smsProvider=null;
+        SmsProvider smsProvider;
         String template=templateMap.get("template");
-        String tpl_id=templateMap.get("tpl_id");
+        String msg="";
         switch (template){
             case "yp":
                 smsProvider = new YunPianSmsProvider();
+                SendCode sendCode = smsProvider.post(phone, param, templateMap);
+                msg =sendCode.getMsg();
                 break;
         }
 
-
-        //非营销短信
-        if(tpl_id.equals("3")){
-            SendCode sendCode = smsProvider.post(phone, param, templateMap);
-
-            return sendCode.getMsg();
-        }else{
-            SendCode sendCode = smsProvider.post(phone, param, templateMap);
-
-
-            System.out.println(sendCode.getMsg());
-            return sendCode.getMsg();
-        }
+        return msg;
 
     }
 
