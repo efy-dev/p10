@@ -13,6 +13,6 @@ import java.util.Map;
 public interface SmsCheckManager {
 
     public String send(String phone, Map<String,String> param, String tpl_id, String template);
-    public String send(String phone, Map<String,String> param, Map<String,String> temlateMap);
+    public String send(String phone, Map<String,String> param, Map<String,String> templateMap);
 
 }
