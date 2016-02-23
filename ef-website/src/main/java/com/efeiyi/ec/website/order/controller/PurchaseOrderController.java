@@ -180,7 +180,7 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/easyBuy/{productModelId}"})
     public String buyImmediate(HttpServletRequest request, @PathVariable String productModelId, Model model) throws Exception {
-        cartManager.fetchCart();
+        /*cartManager.fetchCart();
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProductModel(productModel);
@@ -240,7 +240,12 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("isEasyBuy", true);
         model.addAttribute("consumer", consumer);
 
-        return "/purchaseOrder/purchaseOrderConfirm";
+        return "/purchaseOrder/purchaseOrderConfirm";*/
+        String amount = request.getParameter("amount");
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),productModelId);
+        String callback = "192.168.1.59:8080/cart/paySuccess.do";
+
+        return "redirect://localhost:8080/order/saveOrUpdateOrder2.do?productModelId="+productModelId+"&amount="+amount+"&price="+productModel.getPrice()+"&orderType=1&callback="+ URLEncoder.encode(callback, "UTF-8");
     }
 
 
