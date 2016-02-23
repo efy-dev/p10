@@ -33,8 +33,9 @@
                     <div class="look-body">
                         <c:forEach items="${searchParamBean.facetFieldsMap}" var="facetFields">
                             <c:forEach items="${facetFields.value}" var="facetEntry">
+                                <c:set var="key" value=":${facetEntry.key}" scope="page"/>
                                 <a href="javascript:void(0);"
-                                   class="<c:if test="${not empty searchParamBean.queryFacet && fn:contains(searchParamBean.queryFacet, facetEntry.key)}">active</c:if>"
+                                   class="<c:if test="${not empty searchParamBean.queryFacet && fn:contains(searchParamBean.queryFacet, key)}">active</c:if>"
                                    onclick="facetForward('<c:url value="/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=project_name:${facetEntry.key}&priceUD=0"/>')">
                                    ${facetEntry.key}
 
