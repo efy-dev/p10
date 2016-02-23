@@ -167,8 +167,27 @@
 
 <script type="text/javascript">
     var facets = "${searchParamBean.facetFieldJson}";
+    function searchPostSubmit(fullUrl) {
+        fullUrl = fullUrl.split("?");
+        var myForm = document.createElement("form");
+        myForm.method = "get";
+        myForm.action = fullUrl[0];
+        var params = fullUrl[1].split("&");
+        for ( var x = 0; x < params.length; x++) {
+            var myInput = document.createElement("input");
+            var paramEntry = params[x].split("=");
+            myInput.name = paramEntry[0];
+            myInput.value = paramEntry[1];
+            myForm.appendChild(myInput);
+        }
+        document.body.appendChild(myForm);
+        myForm.submit();
+    }
     function facetForward(url) {
-        window.location.href = url + "&facetFieldJson=" + facets + "&queryFacetJson=${searchParamBean.queryFacetJson}&group=efeiyi" ;
+        //get莫名其妙不稳定400，只好改用Post
+        <%--window.location.href = url + "&facetFieldJson=" + facets + "&queryFacetJson=${searchParamBean.queryFacetJson}&group=efeiyi";--%>
+        url = url + "&facetFieldJson=" + facets + "&queryFacetJson=${searchParamBean.queryFacetJson}&group=efeiyi";
+        searchPostSubmit(url);
     }
     function sortForward(sortField,sortOrder) {
         var url = "<c:url value='/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=${searchParamBean.queryFacet}&sortField='/>" + sortField + "&sortOrder=" + sortOrder +"&fq=${searchParamBean.fq}";
