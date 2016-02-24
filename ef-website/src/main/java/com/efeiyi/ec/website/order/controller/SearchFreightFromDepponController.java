@@ -1,10 +1,9 @@
 package com.efeiyi.ec.website.order.controller;
 
-import com.efeiyi.ec.purchase.model.Freight;
-import com.efeiyi.ec.website.base.authentication.ContextUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+import com.efeiyi.ec.website.base.authentication.ContextUtils;
 import com.efeiyi.ec.website.order.model.DepponProduct;
 import com.efeiyi.ec.website.order.model.FreightConstant;
 import com.efeiyi.ec.website.order.service.FreightManager;
@@ -95,34 +94,6 @@ public class SearchFreightFromDepponController {
         }
 
         return cost;
-
-
-    }
-
-
-    /*
-    * 获取邮费
-    * */
-    @RequestMapping(value = "/searchPrice2.do")//, method = RequestMethod.POST)
-    @ResponseBody
-    public String searchPrice2(HttpServletRequest request) throws Exception {
-
-        String startCity = request.getParameter("startCity");
-        String reachProvince = request.getParameter("reachProvince");
-        Freight freight = freightManager.getFreight(startCity,reachProvince);
-
-        if (null != freight){
-            DepponProduct depponProduct = (DepponProduct) ContextUtils.getBean("depponProduct");
-
-            double weight = Double.parseDouble(request.getParameter("weight"));
-            double standardYkg = Double.parseDouble(depponProduct.getStandardYkg());
-            double ykg360 = Double.parseDouble(depponProduct.getYkg360());
-
-            return freightManager.calculateFreight(weight,standardYkg,ykg360,freight);
-        }else {
-            return "false";
-        }
-
 
 
     }

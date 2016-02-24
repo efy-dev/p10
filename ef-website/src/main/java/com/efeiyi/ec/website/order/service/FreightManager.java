@@ -8,5 +8,5 @@ import com.efeiyi.ec.purchase.model.Freight;
  */
 public interface FreightManager {
     Freight getFreight(String startCity,String reachProvince);
-    String calculateFreight(double weight,double standardYkg,double ykg360,Freight freight);
+    String calculateFreight(double weight, String startCity,String reachProvince);
 }
