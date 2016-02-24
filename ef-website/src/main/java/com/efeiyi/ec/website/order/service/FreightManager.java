@@ -7,5 +7,6 @@ import com.efeiyi.ec.purchase.model.Freight;
  * Created by Administrator on 2016/2/18.
  */
 public interface FreightManager {
-    Freight getFreight(JSONObject jsonObject);
+    Freight getFreight(String startCity,String reachProvince);
+    String calculateFreight(double weight, String startCity,String reachProvince);
 }
