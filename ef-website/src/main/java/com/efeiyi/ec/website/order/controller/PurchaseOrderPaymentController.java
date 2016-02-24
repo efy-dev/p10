@@ -207,14 +207,15 @@ public class PurchaseOrderPaymentController {
         if ("3".equals(purchaseOrder.getOrderType())) {
             purchaseOrder.setOrderStatus("6");
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-            model.addAttribute("order", purchaseOrder);
-            return "redirect:/giftReceive/" + purchaseOrderId;
+            //model.addAttribute("order", purchaseOrder);
+            //return "redirect:/giftReceive/" + purchaseOrderId;
         } else {
             purchaseOrder.setOrderStatus("5");
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-            model.addAttribute("order", purchaseOrder);
-            return "/purchaseOrder/paySuccess";
+            //model.addAttribute("order", purchaseOrder);
+            //return "/purchaseOrder/paySuccess";
         }
+        return "redirect:/order/paysuccess/"+orderId;
     }
 
     @RequestMapping({"/pay/{orderId}"})
@@ -288,16 +289,19 @@ public class PurchaseOrderPaymentController {
         }
 
         model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
-        if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback() != null) {
-            String redirect = URLDecoder.decode(purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback(), "UTF-8");
-            return "redirect:http://" + redirect;
-        } else if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType() != null && purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType().equals("3")) {
-            return "redirect:/giftReceive/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
-        }
+
         if ("3".equals(purchaseOrder.getPayWay())) {
             return "redirect:http://www2.efeiyi.com/sharePage/productShare/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
         } else {
-            return "/purchaseOrder/paySuccess";
+            //return "/purchaseOrder/paySuccess";
+            if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback() != null) {
+                String redirect = URLDecoder.decode(purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback(), "UTF-8");
+                return "redirect:http://" + redirect;
+            } else if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType() != null && purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType().equals("3")) {
+                return "redirect:/giftReceive/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
+            }else {
+                return "/purchaseOrder/paySuccess";
+            }
         }
     }
 

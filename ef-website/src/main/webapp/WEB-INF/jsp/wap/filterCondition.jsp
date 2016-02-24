@@ -18,7 +18,8 @@
         <li <c:if test="${empty searchParamBean.queryFacet}">class="active"</c:if>><a href="javascript:void(0);" title="全 部" onclick="classify(this, '')">全 部</a></li>
         <c:forEach items="${searchParamBean.facetFieldsMap}" var="facetFields">
           <c:forEach items="${facetFields.value}" var="facetEntry">
-            <li <c:if test="${not empty searchParamBean.queryFacet && fn:contains(searchParamBean.queryFacet, facetEntry.key)}">class="active"</c:if>>
+            <c:set var="key" value=":${facetEntry.key}" scope="page"/>
+            <li <c:if test="${not empty searchParamBean.queryFacet && fn:contains(searchParamBean.queryFacet, key)}">class="active"</c:if>>
               <a href="javascript:void(0);" onclick="classify(this, '${facetEntry.key}')">${facetEntry.key}</a>
             </li>
           </c:forEach>

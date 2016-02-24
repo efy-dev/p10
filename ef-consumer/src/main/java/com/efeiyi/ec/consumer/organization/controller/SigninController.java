@@ -74,20 +74,20 @@ public class SigninController extends BaseController {
     /*
     发送手机验证码
      */
-    @RequestMapping({"/pc/verification/send.do"})
-    @ResponseBody
-    public boolean sendVerificationCode(HttpServletRequest request) throws IOException {
-        String cellPhoneNumber = request.getParameter("phone");
-        String verificationCode = VerificationCodeGenerator.createVerificationCode();
-        System.out.println(verificationCode);
-        request.getSession().setAttribute(cellPhoneNumber, verificationCode);
-        String massage = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1", PConst.TIANYI);
-        if (massage != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    @RequestMapping({"/pc/verification/send.do"})
+//    @ResponseBody
+//    public boolean sendVerificationCode(HttpServletRequest request) throws IOException {
+//        String cellPhoneNumber = request.getParameter("phone");
+//        String verificationCode = VerificationCodeGenerator.createVerificationCode();
+//        System.out.println(verificationCode);
+//        request.getSession().setAttribute(cellPhoneNumber, verificationCode);
+//        String massage = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1", PConst.TIANYI);
+//        if (massage != null) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
 
     /**

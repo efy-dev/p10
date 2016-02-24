@@ -5,6 +5,7 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.order.service.CartManager;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -240,5 +243,22 @@ public class CartController {
 
     }
 
+    @RequestMapping({"/cart/addCallBack.do"})
+    public String addCallBack(HttpServletRequest request) throws Exception {
+        String cartId = request.getParameter("cartId");
+        String couponId = request.getParameter("couponId");
+        //String callback = "www.efeiyi.com/cart/paySuccess.do";
+        String callback = "192.168.1.59:8080/cart/paySuccess.do";
+
+        return "redirect://localhost:8080/order/saveOrUpdateOrder.do?cartId="+cartId+"&couponId="+couponId+"&callback="+ URLEncoder.encode(callback, "UTF-8");
+    }
+
+    @RequestMapping({"/cart/paySuccess.do"})
+    public String paySuccess(HttpServletRequest request, Model model){
+        String orderId = request.getParameter("purchaseOrderId");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),orderId);
+        model.addAttribute("order",purchaseOrder);
+        return "/purchaseOrder/paySuccess";
+    }
 
 }

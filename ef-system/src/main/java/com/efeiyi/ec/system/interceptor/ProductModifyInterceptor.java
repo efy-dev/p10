@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.interceptor;
 
+import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.ming800.core.p.model.CommonSearch;
 import com.ming800.core.p.service.CommonManager;
 import org.apache.http.HttpEntity;
@@ -27,35 +28,30 @@ public class ProductModifyInterceptor extends HandlerInterceptorAdapter {
 
 
     /**
-    delta-import增量更新检索索引
+     * delta-import增量更新检索索引
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
+        if (AuthorizationUtil.isAuthenticated()) {
+            CommonSearch commonSearch = null;
+            try {
+                commonSearch = commonManager.getSearchParam("efeiyi");
+            } catch (Exception e) {
+                System.err.println("solr commonSearch exception!!!!!!!!!!");
+            }
 
-        CommonSearch commonSearch = null;
-        try {
-            commonSearch = commonManager.getSearchParam("efeiyi");
-        }catch (Exception e){
-            System.err.println("solr commonSearch exception!!!!!!!!!!");
-        }
-
-        try {
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            httpClient.getCredentialsProvider().setCredentials(
-                    new AuthScope(commonSearch.getSolrServerHost(), Integer.parseInt(commonSearch.getPort())),
-                    new UsernamePasswordCredentials(commonSearch.getUsername(), commonSearch.getPassword()));
-            HttpEntity entity = httpClient.execute(new HttpPost(commonSearch.getSolrServerCoreUrl())).getEntity();
-            String result = EntityUtils.toString(entity);
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(
-//                    entity.getContent(), "UTF-8"));
-//            StringBuilder result = new StringBuilder();
-//            while ((line = reader.readLine()) != null) {
-//                result.append(line.trim());
-//            }
-            System.out.println(result.toString());
-        }catch (Exception e){
-            System.err.println(e.getMessage());
+            try {
+                DefaultHttpClient httpClient = new DefaultHttpClient();
+                httpClient.getCredentialsProvider().setCredentials(
+                        new AuthScope(commonSearch.getSolrServerHost(), Integer.parseInt(commonSearch.getPort())),
+                        new UsernamePasswordCredentials(commonSearch.getUsername(), commonSearch.getPassword()));
+                HttpEntity entity = httpClient.execute(new HttpPost(commonSearch.getSolrServerCoreUrl())).getEntity();
+                String result = EntityUtils.toString(entity);
+                System.out.println(result.toString());
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
         }
         super.postHandle(request, response, handler, modelAndView);
     }

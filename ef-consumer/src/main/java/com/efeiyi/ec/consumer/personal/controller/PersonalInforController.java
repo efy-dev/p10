@@ -1,11 +1,10 @@
 package com.efeiyi.ec.consumer.personal.controller;
 
-import com.efeiyi.ec.balance.model.BalanceRecord;
+
 import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
-
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
@@ -22,7 +21,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -104,7 +102,7 @@ public class PersonalInforController {
     }
 
     @RequestMapping({"getPassword.do"})
-    public String getPassword(HttpServletRequest request, ModelMap modelMap) {
+    public String getPassword(ModelMap modelMap) {
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
         modelMap.addAttribute("user", user);
@@ -187,8 +185,8 @@ public class PersonalInforController {
         String consumerId = AuthorizationUtil.getMyUser().getId();
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
         if (consumer.getBalance() != null) {
-            String balance = consumer.getBalance().toString();
-            return balance;
+
+            return consumer.getBalance().toString();
         } else {
             return "0.00";
         }

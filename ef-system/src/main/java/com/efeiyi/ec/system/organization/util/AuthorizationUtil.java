@@ -55,5 +55,12 @@ public class AuthorizationUtil {
         }
     }
 
+    public static boolean isAuthenticated() {
+        try {
+            return getMyUser().getId()!=null;
+        }catch (Exception e){
+            return false;
+        }
+    }
 
 }

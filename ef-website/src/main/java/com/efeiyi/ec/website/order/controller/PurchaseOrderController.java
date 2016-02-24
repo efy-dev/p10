@@ -8,6 +8,7 @@ import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.website.order.service.BalanceManager;
 import com.efeiyi.ec.website.order.service.CartManager;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
@@ -54,6 +55,8 @@ public class PurchaseOrderController extends BaseController {
     @Autowired
     private PaymentManager paymentManager;
 
+    @Autowired
+    private BalanceManager balanceManager;
 
     @RequestMapping("/giftBuy/showNameStatus.do")
     @ResponseBody
@@ -177,7 +180,7 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/easyBuy/{productModelId}"})
     public String buyImmediate(HttpServletRequest request, @PathVariable String productModelId, Model model) throws Exception {
-        cartManager.fetchCart();
+        /*cartManager.fetchCart();
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProductModel(productModel);
@@ -237,7 +240,12 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("isEasyBuy", true);
         model.addAttribute("consumer", consumer);
 
-        return "/purchaseOrder/purchaseOrderConfirm";
+        return "/purchaseOrder/purchaseOrderConfirm";*/
+        String amount = request.getParameter("amount");
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),productModelId);
+        String callback = "192.168.1.59:8080/cart/paySuccess.do";
+
+        return "redirect://localhost:8080/order/saveOrUpdateOrder2.do?productModelId="+productModelId+"&amount="+amount+"&price="+productModel.getPrice()+"&orderType=1&callback="+ URLEncoder.encode(callback, "UTF-8");
     }
 
 
@@ -251,18 +259,8 @@ public class PurchaseOrderController extends BaseController {
         Cart cart = cartManager.copyCart((Cart) request.getSession().getAttribute("cart"), cartManager.getCurrentCart(request));
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cart, model);
         purchaseOrder.setOrderType("1");
-        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         String callback = request.getParameter("callback");
-        if (callback != null) {
-            callback = URLDecoder.decode(callback, "UTF-8");
-            if (callback.contains("?")) {
-                callback += "&purchaseOrderId=" + purchaseOrder.getId();
-            } else {
-                callback += "?purchaseOrderId=" + purchaseOrder.getId();
-            }
-            purchaseOrder.setCallback(callback);
-            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-        }
+        purchaseOrder.setCallback(callbackFilter(callback, purchaseOrder.getId()));
         //收货地址
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
@@ -274,6 +272,7 @@ public class PurchaseOrderController extends BaseController {
             consumer.setBalance(new BigDecimal(0));
             baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
         }
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
@@ -282,6 +281,17 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("consumer", consumer);
         request.getSession().removeAttribute("cart");
         return "/purchaseOrder/purchaseOrderConfirm";
+    }
+
+
+    private String callbackFilter(String callback, String id) throws Exception {
+        callback = URLDecoder.decode(callback, "UTF-8");
+        if (callback.contains("?")) {
+            callback += "&purchaseOrderId=" + id;
+        } else {
+            callback += "?purchaseOrderId=" + id;
+        }
+        return callback;
     }
 
     @RequestMapping("/saveOrUpdateOrder2.do")
@@ -294,16 +304,8 @@ public class PurchaseOrderController extends BaseController {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(productModel, price, Integer.parseInt(amount), model);
         String callback = request.getParameter("callback");
-        if (callback != null) {
-            callback = URLDecoder.decode(callback, "UTF-8");
-            if (callback.contains("?")) {
-                callback += "&purchaseOrderId=" + purchaseOrder.getId();
-            } else {
-                callback += "?purchaseOrderId=" + purchaseOrder.getId();
-            }
-            purchaseOrder.setCallback(callback);
-            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-        }
+        purchaseOrder.setCallback(callbackFilter(callback, purchaseOrder.getId()));
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         if (orderType != null) {
             purchaseOrder.setOrderType(orderType);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
@@ -318,7 +320,6 @@ public class PurchaseOrderController extends BaseController {
             consumer.setBalance(new BigDecimal(0));
             baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
         }
-
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("isEasyBuy", true);
@@ -385,43 +386,36 @@ public class PurchaseOrderController extends BaseController {
         //判断余额是否足够，足够的话支付方式改为余额支付
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         //这里首先余额是从客户端传递过来，需要跟数据库做对比，如果余额的数目不对，就会报错，ckeck的步骤可以放到Manager里做
-
-        if (null != balance && Float.parseFloat(balance) > 0) {
-            if (null != couponId && !"".equals(couponId)) {
-                Coupon coupon = (Coupon) baseManager.getObject(Coupon.class.getName(), couponId);
-                int r = new BigDecimal(balance).compareTo(purchaseOrder.getTotal().subtract(new BigDecimal(coupon.getCouponBatch().getPrice())));
-                if (r == 0) {
-                    payment = "5";  //支付方式
-                }
-            } else {
-                int r = new BigDecimal(balance).compareTo(purchaseOrder.getTotal());
-                if (r == 0) {
-                    payment = "5";
-                }
+        if (balanceManager.checkBalance(Float.valueOf(balance))) {
+            //订单收货地址//初始化订单状态
+            ConsumerAddress consumerAddress = null;
+            if (addressId != null) {
+                consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
             }
-        }
-        //订单收货地址//初始化订单状态
-        ConsumerAddress consumerAddress = null;
-        if (addressId != null) {
-            consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
-        }
-        purchaseOrder = purchaseOrderManager.confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payment);
-        //生成支付记录以及支付详情
-        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder, balance, couponId);
-        cartManager.clearCart(request, purchaseOrder);
-        String resultPage = "";
-        if (payment.equals("1")) {//支付宝
-            resultPage = "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
-        } else if (payment.equals("3")) { //微信
-            if (isWeiXin != null) {
-                resultPage = "redirect:/order/pay/weixin/" + purchaseOrderPaymentDetails.getId();
-            } else {
-                resultPage = "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
+            purchaseOrder = purchaseOrderManager.confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payment);
+            //生成支付记录以及支付详情
+            PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder, balance, couponId);
+            if (PurchaseOrder.YUE.equals(purchaseOrderPaymentDetails.getPayWay())) {
+                purchaseOrder.setPayWay(PurchaseOrder.YUE);
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
             }
-        } else if (payment.equals("5")) {
-            resultPage = "redirect:/order/pay/balance/" + purchaseOrderPaymentDetails.getId() + "?purchaseOrderId=" + purchaseOrder.getId();
+            cartManager.clearCart(request, purchaseOrder);
+            String resultPage = "";
+            if (purchaseOrderPaymentDetails.getPayWay().equals("1")) {//支付宝
+                resultPage = "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
+            } else if (purchaseOrderPaymentDetails.getPayWay().equals("3")) { //微信
+                if (isWeiXin != null) {
+                    resultPage = "redirect:/order/pay/weixin/" + purchaseOrderPaymentDetails.getId();
+                } else {
+                    resultPage = "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
+                }
+            } else if (purchaseOrderPaymentDetails.getPayWay().equals("5")) {
+                resultPage = "redirect:/order/pay/balance/" + purchaseOrderPaymentDetails.getId() + "?purchaseOrderId=" + purchaseOrder.getId();
+            }
+            return resultPage;
+        } else {
+            return "";
         }
-        return resultPage;
     }
 
     @RequestMapping({"/addAddress.do"})

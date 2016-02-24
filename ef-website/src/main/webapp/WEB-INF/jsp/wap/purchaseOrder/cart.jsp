@@ -120,7 +120,7 @@
 
         var success = function(data){
             if(data){
-                window.location.href = "<c:url value="/order/saveOrUpdateOrder.do?cartId=${cart.id}"/>"
+                window.location.href = "<c:url value="/cart/addCallBack.do?cartId=${cart.id}"/>"
             }else{
                showAlert("提示","请选中一件商品!");
             }
