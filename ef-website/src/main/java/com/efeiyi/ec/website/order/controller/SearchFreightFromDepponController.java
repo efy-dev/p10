@@ -106,27 +106,24 @@ public class SearchFreightFromDepponController {
     @RequestMapping(value = "/searchPrice2.do")//, method = RequestMethod.POST)
     @ResponseBody
     public String searchPrice2(HttpServletRequest request) throws Exception {
-        JSONObject jsonObject = (JSONObject) JSONObject.parse(request.getParameter("json2").toString());
-        Freight freight = freightManager.getFreight(jsonObject);
 
-        DepponProduct depponProduct = (DepponProduct) ContextUtils.getBean("depponProduct");
+        String startCity = request.getParameter("startCity");
+        String reachProvince = request.getParameter("reachProvince");
+        Freight freight = freightManager.getFreight(startCity,reachProvince);
 
-        double weight = Double.parseDouble(request.getParameter("weight"));
-        double standardYkg = Double.parseDouble(depponProduct.getStandardYkg());
-        double ykg360 = Double.parseDouble(depponProduct.getYkg360());
+        if (null != freight){
+            DepponProduct depponProduct = (DepponProduct) ContextUtils.getBean("depponProduct");
 
-        if(weight > ykg360){
-            return new BigDecimal(weight - ykg360).multiply(new BigDecimal(freight.getAkg360Money())).add(new BigDecimal(freight.getYkg360Money())).setScale(0,BigDecimal.ROUND_HALF_UP).toString();
-        }else if (weight == ykg360){
-            return freight.getYkg360Money();
-        }else if (weight < ykg360){
-            if (weight <= standardYkg){
-                return freight.getStandardYkgMoney();
-            }else if (weight > standardYkg){
-                return new BigDecimal(weight - standardYkg).multiply(new BigDecimal(freight.getStandardAkgMoney())).add(new BigDecimal(freight.getStandardYkgMoney())).setScale(0,BigDecimal.ROUND_HALF_UP).toString();
-            }
+            double weight = Double.parseDouble(request.getParameter("weight"));
+            double standardYkg = Double.parseDouble(depponProduct.getStandardYkg());
+            double ykg360 = Double.parseDouble(depponProduct.getYkg360());
+
+            return freightManager.calculateFreight(weight,standardYkg,ykg360,freight);
+        }else {
+            return "false";
         }
-        return null;
+
+
 
     }
 
