@@ -12,14 +12,6 @@ import java.util.Map;
 public interface SmsProvider {
 
 
-    /**
-     * 发送短信
-     *
-     * @param phone
-     * @return
-     */
-    SendCode post(String phone, Map<String, String> param, String tpl_id);
-
     SendCode post(String phone, Map<String, String> param, Map<String, String> templateMap);
 
 

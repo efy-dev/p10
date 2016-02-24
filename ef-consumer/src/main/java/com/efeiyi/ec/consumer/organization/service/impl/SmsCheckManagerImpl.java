@@ -23,22 +23,7 @@ public class SmsCheckManagerImpl implements SmsCheckManager {
     @Autowired
     private XdoDao basicDao;
 
-    @Override
-     public String send(String phone, Map<String,String> param, String tpl_id,String template) {
-        SmsProvider smsProvider;
-         String msg="";
-        switch (template){
-            case "yp":
-                smsProvider = new YunPianSmsProvider();
-                SendCode sendCode = smsProvider.post(phone, param, tpl_id);
-                msg=sendCode.getMsg();
-                break;
-        }
 
-        return msg;
-
-
-    }
     @Override
     public String send(String phone, Map<String,String> param, Map<String,String>templateMap) {
         SmsProvider smsProvider;

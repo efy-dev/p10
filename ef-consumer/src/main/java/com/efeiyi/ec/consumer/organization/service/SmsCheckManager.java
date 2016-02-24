@@ -12,7 +12,6 @@ import java.util.Map;
  */
 public interface SmsCheckManager {
 
-    String send(String phone, Map<String, String> param, String tpl_id, String template);
 
     String send(String phone, Map<String, String> param, Map<String, String> templateMap);
 
