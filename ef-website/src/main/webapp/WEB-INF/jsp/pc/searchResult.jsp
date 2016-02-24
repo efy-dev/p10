@@ -33,8 +33,9 @@
                     <div class="look-body">
                         <c:forEach items="${searchParamBean.facetFieldsMap}" var="facetFields">
                             <c:forEach items="${facetFields.value}" var="facetEntry">
+                                <c:set var="key" value=":${facetEntry.key}" scope="page"/>
                                 <a href="javascript:void(0);"
-                                   class="<c:if test="${not empty searchParamBean.queryFacet && fn:contains(searchParamBean.queryFacet, facetEntry.key)}">active</c:if>"
+                                   class="<c:if test="${not empty searchParamBean.queryFacet && fn:contains(searchParamBean.queryFacet, key)}">active</c:if>"
                                    onclick="facetForward('<c:url value="/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=project_name:${facetEntry.key}&priceUD=0"/>')">
                                    ${facetEntry.key}
 
@@ -165,9 +166,39 @@
 </div>
 
 <script type="text/javascript">
+    //分页的get请求改成post
+    var ulTag = $("ul.am-pagination");
+    var liTags = ulTag.children();
+    var aTags = liTags.find("a");
+    for(var x = 0; x < aTags.length; x++){
+        var aUrl = aTags[x].href;
+        aUrl = aUrl.substring(aUrl.indexOf("/s"));
+        aTags[x].href = "#"
+        aTags[x].setAttribute("onclick","searchPostSubmit('" + aUrl + "')");
+    }
+
     var facets = "${searchParamBean.facetFieldJson}";
+    function searchPostSubmit(fullUrl) {
+        fullUrl = fullUrl.split("?");
+        var myForm = document.createElement("form");
+        myForm.method = "post";
+        myForm.action = fullUrl[0];
+        var params = fullUrl[1].split("&");
+        for ( var x = 0; x < params.length; x++) {
+            var myInput = document.createElement("input");
+            var paramEntry = params[x].split("=");
+            myInput.name = paramEntry[0];
+            myInput.value = decodeURI(paramEntry[1]);
+            myForm.appendChild(myInput);
+        }
+        document.body.appendChild(myForm);
+        myForm.submit();
+    }
     function facetForward(url) {
-        window.location.href = url + "&facetFieldJson=" + facets + "&queryFacetJson=${searchParamBean.queryFacetJson}&group=efeiyi" ;
+        //get莫名其妙不稳定400，改用Post
+        <%--window.location.href = url + "&facetFieldJson=" + facets + "&queryFacetJson=${searchParamBean.queryFacetJson}&group=efeiyi";--%>
+        url = url + "&facetFieldJson=" + facets + "&queryFacetJson=${searchParamBean.queryFacetJson}&group=efeiyi";
+        searchPostSubmit(url);
     }
     function sortForward(sortField,sortOrder) {
         var url = "<c:url value='/search.do?q=${searchParamBean.q}&resultPage=${searchParamBean.resultPage}&queryFacet=${searchParamBean.queryFacet}&sortField='/>" + sortField + "&sortOrder=" + sortOrder +"&fq=${searchParamBean.fq}";
