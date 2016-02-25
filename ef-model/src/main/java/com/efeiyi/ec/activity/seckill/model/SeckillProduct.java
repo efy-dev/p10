@@ -13,11 +13,12 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "seckill_product")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class SeckillProduct {
 
-    public static final String SECKILL_WIL = "1"; //即将开始
-    public static final String SECKILL_ING = "2"; //秒杀进行中
-    public static final String SECKILL_END = "3"; //秒杀已经结束
+//    public static final String SECKILL_WIL = "1"; //即将开始
+//    public static final String SECKILL_ING = "2"; //秒杀进行中
+//    public static final String SECKILL_END = "3"; //秒杀已经结束
 
 
     private String id;
