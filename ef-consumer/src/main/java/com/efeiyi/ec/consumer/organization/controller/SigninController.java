@@ -45,16 +45,8 @@ public class SigninController extends BaseController {
     private BaseManager baseManager;
 
     @Autowired
-    private SmsCheckManager smsCheckManager;
-
-    @Autowired
     private AutoSerialManager autoSerialManager;
 
-
-
-    /*
-    认证手机验证码
-     */
     @RequestMapping({"/pc/verification/verify.do"})
     @ResponseBody
     public boolean checkVerificationCode(HttpServletRequest request) {
@@ -69,37 +61,6 @@ public class SigninController extends BaseController {
                 return false;
             }
         }
-    }
-
-    /*
-    发送手机验证码
-     */
-//    @RequestMapping({"/pc/verification/send.do"})
-//    @ResponseBody
-//    public boolean sendVerificationCode(HttpServletRequest request) throws IOException {
-//        String cellPhoneNumber = request.getParameter("phone");
-//        String verificationCode = VerificationCodeGenerator.createVerificationCode();
-//        System.out.println(verificationCode);
-//        request.getSession().setAttribute(cellPhoneNumber, verificationCode);
-//        String massage = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1", PConst.TIANYI);
-//        if (massage != null) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-
-
-    /**
-     * 跳转到注册页面的controller
-     */
-    @RequestMapping(value = {"/pc/enroll.do", "/pc/register"})
-    public String enroll(HttpServletRequest request, Model model) {
-        String source = request.getParameter("source");
-        if (source != null) {
-            model.addAttribute("source", source);
-        }
-        return "/register";
     }
 
     @RequestMapping("/sso.do")
@@ -133,41 +94,6 @@ public class SigninController extends BaseController {
     public void forward2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect(request.getContextPath() + "/");
     }
-
-    @RequestMapping({"/login"})
-    public String login(HttpServletRequest request, Model model) {
-        String error = request.getParameter("error");
-        if (error != null) {
-            model.addAttribute("error", "true");
-        }
-        return "/login";
-    }
-
-    @RequestMapping({"/register"})
-    public String register() {
-
-        return "/register";
-    }
-
-    @RequestMapping({"/forgetPwd"})
-    public String forgetPwd() {
-
-        return "/forgetPassword";
-
-    }
-
-    @RequestMapping({"/setPwd"})
-    public String setPwd(HttpServletRequest request, Model model) throws Exception {
-        String username = request.getParameter("username");
-        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("username", username);
-        String hql = "from BigUser s where s.username=:username";
-        BigUser biguser = (BigUser) baseManager.getUniqueObjectByConditions(hql, queryParamMap);
-        model.addAttribute("user", biguser);
-        return "/setPassword";
-
-    }
-
 
 }
 

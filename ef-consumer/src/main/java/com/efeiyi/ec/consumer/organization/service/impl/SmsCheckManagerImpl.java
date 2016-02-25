@@ -20,10 +20,6 @@ import java.util.Map;
 @Service
 public class SmsCheckManagerImpl implements SmsCheckManager {
 
-    @Autowired
-    private XdoDao basicDao;
-
-
     @Override
     public String send(String phone, Map<String,String> param, Map<String,String>templateMap) {
         SmsProvider smsProvider;
@@ -36,7 +32,6 @@ public class SmsCheckManagerImpl implements SmsCheckManager {
                 msg =sendCode.getMsg();
                 break;
         }
-
         return msg;
 
     }

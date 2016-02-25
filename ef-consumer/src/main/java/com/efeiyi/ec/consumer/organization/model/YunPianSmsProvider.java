@@ -41,14 +41,6 @@ public class YunPianSmsProvider implements SmsProvider {
 
     final static String apikey = "b802cb40c7a0db20e787884bf29f1e6d";
 
-
-    /**
-     * 发送, 并返回结果
-     *
-     * @param phone
-     * @return
-     */
-
     @Override
     public SendCode post(String phone, Map<String,String> param, Map<String,String>templateMap) {
         String content="";
@@ -66,18 +58,13 @@ public class YunPianSmsProvider implements SmsProvider {
                     }else{
                         content = content + "&#"+entry.getKey()+"#="+entry.getValue();
                     }
-
                 }
             }
-
             content = URLEncoder.encode(content, ENCODING);
             postData = "apikey=" + apikey + "&mobile=" + phone + "&tpl_id=" + tpl_id + "&tpl_value=" + content + "";
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return templatePost(postData);
     }
 
@@ -89,7 +76,6 @@ public class YunPianSmsProvider implements SmsProvider {
      * @return
      */
     public SendCode templatePost(String postData){
-
         String data = null;
         try {
             URL dataUrl = new URL(URI_TPL_SEND_SMS);

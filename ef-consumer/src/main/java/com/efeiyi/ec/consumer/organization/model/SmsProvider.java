@@ -11,8 +11,6 @@ import java.util.Map;
  */
 public interface SmsProvider {
 
-
     SendCode post(String phone, Map<String, String> param, Map<String, String> templateMap);
-
 
 }
