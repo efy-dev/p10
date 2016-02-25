@@ -71,6 +71,16 @@ public class PurchaseOrder {
     private AddressProvince province;
     private AddressDistrict district;
     private AddressCity city;
+    private BigDecimal freight;
+
+    @Column(name = "freight")
+    public BigDecimal getFreight() {
+        return freight;
+    }
+
+    public void setFreight(BigDecimal freight) {
+        this.freight = freight;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_province_id")
