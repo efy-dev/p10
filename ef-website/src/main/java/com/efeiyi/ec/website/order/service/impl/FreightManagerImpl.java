@@ -2,6 +2,8 @@ package com.efeiyi.ec.website.order.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.efeiyi.ec.purchase.model.Freight;
+import com.efeiyi.ec.website.base.authentication.ContextUtils;
+import com.efeiyi.ec.website.order.model.DepponProduct;
 import com.efeiyi.ec.website.order.service.FreightManager;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,18 +48,35 @@ public class FreightManagerImpl implements FreightManager{
     }
 
     @Override
-    public String calculateFreight(double weight, double standardYkg, double ykg360,Freight freight) {
-        if(weight > ykg360){
-            return new BigDecimal(weight - ykg360).multiply(new BigDecimal(freight.getAkg360Money())).add(new BigDecimal(freight.getYkg360Money())).setScale(0,BigDecimal.ROUND_HALF_UP).toString();
-        }else if (weight == ykg360){
-            return freight.getYkg360Money();
-        }else if (weight < ykg360){
-            if (weight <= standardYkg){
-                return freight.getStandardYkgMoney();
-            }else if (weight > standardYkg){
-                return new BigDecimal(weight - standardYkg).multiply(new BigDecimal(freight.getStandardAkgMoney())).add(new BigDecimal(freight.getStandardYkgMoney())).setScale(0,BigDecimal.ROUND_HALF_UP).toString();
-            }
+    public String calculateFreight(double weight, String startCity,String reachProvince) {
+
+        Freight freight = getFreight(startCity, reachProvince);
+
+        if (freight == null){
+            return "false";
         }
-        return null;
+
+        DepponProduct depponProduct = null;
+        try {
+            depponProduct = (DepponProduct) ContextUtils.getBean("depponProduct");
+            double standardYkg = Double.parseDouble(depponProduct.getStandardYkg());
+            double ykg360 = Double.parseDouble(depponProduct.getYkg360());
+
+            if(weight > ykg360){
+                return new BigDecimal(weight - ykg360).multiply(new BigDecimal(freight.getAkg360Money())).add(new BigDecimal(freight.getYkg360Money())).setScale(0,BigDecimal.ROUND_HALF_UP).toString();
+            }else if (weight == ykg360){
+                return freight.getYkg360Money();
+            }else if (weight < ykg360){
+                if (weight <= standardYkg){
+                    return freight.getStandardYkgMoney();
+                }else if (weight > standardYkg){
+                    return new BigDecimal(weight - standardYkg).multiply(new BigDecimal(freight.getStandardAkgMoney())).add(new BigDecimal(freight.getStandardYkgMoney())).setScale(0,BigDecimal.ROUND_HALF_UP).toString();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "error";
     }
 }

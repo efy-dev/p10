@@ -23,7 +23,9 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/10/12.
@@ -202,7 +204,11 @@ public class PurchaseOrderController {
         String phone = purchaseOrder.getBigTenant().getPhone();
         String purchaseOrderSerial = purchaseOrder.getSerial();
         SmsProvider smsProvider = new YunPianSmsProvider();
-        smsProvider.post(phone, purchaseOrderSerial, "1125941");
+        Map<String,String> purchaseOrderSerialMap = new HashMap<String,String>();
+        purchaseOrderSerialMap.put("purchaseOrderSerial",purchaseOrderSerial);
+        Map<String,String> templateMap = new HashMap<String,String>();
+        templateMap.put("tpl_id","1125941");
+        smsProvider.post(phone, purchaseOrderSerialMap, templateMap);
         return "redirect:/order/myEfeiyi/list.do";
     }
 
