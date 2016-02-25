@@ -10,7 +10,13 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public interface SmsProvider {
-
+    /**
+     *
+     * @param phone 发送短信的手机号
+     * @param param 所发短信内容 #key#=value&#key2#=value2
+     * @param templateMap 模板所用的参数
+     * @return
+     */
     SendCode post(String phone, Map<String, String> param, Map<String, String> templateMap);
 
 }

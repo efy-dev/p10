@@ -12,7 +12,13 @@ import java.util.Map;
  */
 public interface SmsCheckManager {
 
-
+    /**
+     *
+     * @param phone 发送短信的手机号
+     * @param param 短信内容匹配 #key#=value&#key2#=value2
+     * @param templateMap 短信模板所需参数
+     * @return
+     */
     String send(String phone, Map<String, String> param, Map<String, String> templateMap);
 
 }
