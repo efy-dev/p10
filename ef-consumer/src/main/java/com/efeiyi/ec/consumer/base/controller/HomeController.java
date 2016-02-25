@@ -61,7 +61,7 @@ public class HomeController {
 
 
     @RequestMapping("/401")
-    public String show401(HttpServletResponse response) throws Exception {
+    public String show401() throws Exception {
         return "redirect:/";
     }
 
