@@ -45,28 +45,25 @@ public class HomeController {
     }
 
     @RequestMapping({"/news"})
-    public String listNews(){
+    public String listNews() {
         return "/common/news";
     }
 
     @RequestMapping({"/500"})
-    public String show500(){
+    public String show500() {
         return "/common/500";
     }
 
     @RequestMapping({"/404"})
-    public String show404(){
+    public String show404() {
         return "/common/404";
     }
 
 
     @RequestMapping("/401")
-    public String show401(HttpServletResponse response) throws Exception {
+    public String show401() throws Exception {
         return "redirect:/";
     }
-
-
-
 
 
 }

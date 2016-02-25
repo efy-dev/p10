@@ -278,7 +278,7 @@
             <does>
                 <do name="plistProjectRecommended" access="" label="ProjectRecommended列表"
                     result="json">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default" label="默认" type="auto" orderBy="sort:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="groupName" defaultValue="ProjectRecommended" operation="eq"/>
                     </query>
@@ -286,7 +286,7 @@
                 </do>
                 <do name="listProjectRecommended" access="" label="ProjectRecommended列表"
                     result="json">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default" label="默认" type="auto" orderBy="sort:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="groupName" defaultValue="ProjectRecommended" operation="eq"/>
                     </query>

@@ -55,7 +55,7 @@
                                 ${model.serial}
                         </td>
                         <td class="am-text-center" width="33%">
-                                ${model.name}
+                            ${model.product.name}-${model.name}
                         </td>
 
                     </tr>
