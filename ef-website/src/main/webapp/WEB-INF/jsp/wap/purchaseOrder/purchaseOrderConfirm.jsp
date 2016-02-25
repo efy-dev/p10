@@ -120,21 +120,23 @@
                                               placeholder="给卖家留言(如需开具发票，请在此输入开票信息)"></textarea></div>
             </div>
         </c:forEach>
-        <div class="balance"><input type="checkbox" id="banlanceCheckbox" onclick="useBalance(this);">使用余额支付<span id="usefulBalance"><c:if test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元</div>
+        <c:if test="${null != consumer.balance && 0<consumer.balance}">
+            <div class="balance"><input type="checkbox" id="balanceCheckbox" onclick="useBalance(this);">使用余额支付<span id="usefulBalance"><c:if test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元</div>
+        </c:if>
         <!-- //End--order-list-->
         <div class="bd order-total">
-            <c:if test="${empty purchaseOrder.callback}">
+            <%--<c:if test="${empty purchaseOrder.callback}">--%>
                 <p><strong>优惠券</strong><span class="btn-coupons" id="yhq">0张券可用</span><a href="#arrow-right"
                                                                                          class="arrow-right"></a></p>
-            </c:if>
+            <%--</c:if>--%>
 
             <p><strong>商品金额</strong><span><em>￥</em><em id="totalPrice">${purchaseOrder.total}</em></span></p>
-            <c:if test="${empty purchaseOrder.callback}">
+            <%--<c:if test="${empty purchaseOrder.callback}">--%>
                 <p><strong>优惠</strong><span><em>-￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span>
                 </p>
-            </c:if>
-            <p><strong>余额</strong><span> <em>￥-</em><em id="balance">0.00</em></span></p>
-            <p><strong>运费</strong><span><em>￥</em>0.00</span></p>
+            <%--</c:if>--%>
+            <p><strong>余额</strong><span> <em>-￥</em><em id="balance">0.00</em></span></p>
+            <p><strong>运费</strong><span><em>￥</em><em id="freight">${freight}</em></span></p>
         </div>
         <!-- //End--order-total-->
         <%--<div class="bd cart-pay">--%>
@@ -188,7 +190,7 @@
             </ul>
         </div>
         <div class="bd payment-total-bar newpayment-total-bar">
-            <span class="txt" >总金额<span id="change">${purchaseOrder.total}</span>元</span>
+            <span class="txt" >总金额<span id="change">${purchaseOrder.total+freight}</span>元</span>
             <a href="#btn-right" class="btn-right btn-red" onclick="submitOrder('${purchaseOrder.id}')">结&nbsp;算</a>
         </div>
 
@@ -295,7 +297,7 @@
 <script>
     var payment = "1";
     var consumerAddress = $("#hiddenId").text();
-    var totalPrice = $("#change").text();
+    var totalPrice = $("#totalPrice").text();
     var orderId = "${purchaseOrder.id}";
 
     $(function () {
@@ -384,6 +386,7 @@
     function yhq() {
         $(".yhq").hide();
         var couponid = null;
+        var freight = $("#freight").text();
         $("input:radio").each(function () {
             if (this.checked) {
                 couponid = $(this).attr("id");
@@ -396,16 +399,20 @@
             for (var i = 0; i < chkobjs.length; i++) {
                 if (chkobjs[i].checked) {
                     t_price = t_price - parseFloat(chkobjs[i].value);
-                    $("#couponPrice").html(chkobjs[i].value);
+                    var couponPrice = parseFloat(chkobjs[i].value);
+                    $("#couponPrice").html(couponPrice.toFixed(2));
                 }
             }
-            $("#change").html(t_price.toFixed(2));
+            var change = parseFloat(t_price)+parseFloat(freight);
+            $("#change").html(change.toFixed(2));
             $(".yhq").hide();
-            if(t_price<parseFloat(${consumer.balance})){
-                $("#usefulBalance").html(t_price.toFixed(2));
+            if(change<parseFloat(${consumer.balance})){
+                $("#usefulBalance").html(change.toFixed(2));
+            }else{
+                $("#usefulBalance").html((${consumer.balance}).toFixed(2));
             }
             $("#balance").html("0.00");
-            $("#banlanceCheckbox").attr("checked",false);
+            $("#balanceCheckbox").attr("checked",false);
             /*$.ajax({
                 type: 'post',
                 async: false,
@@ -432,7 +439,7 @@
                             $("#usefulBalance").html(t_price.toFixed(2));
                         }
                         $("#balance").html("0.00");
-                        $("#banlanceCheckbox").attr("checked",false);
+                        $("#balanceCheckbox").attr("checked",false);
                     }
                 },
 
@@ -478,6 +485,7 @@
         var messageObject = new Object();
         var balance = $("#balance").text();
         var couponId = "";
+        var freight = $("#freight").text();
         $("input:radio").each(function () {
             if (this.checked) {
                 var couponid = $(this).attr("id");
@@ -520,7 +528,7 @@
                                     }
 
                                     var url = "<c:url value="/order/confirm/"/>";
-                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin +"&balance=" + balance + "&couponId=" + couponId;
+                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin +"&balance=" + balance + "&couponId=" + couponId + "&freight=" + freight;
                                     window.location.href = url;
                                 }else{
                                     showAlert("提示", "抱歉，余额不足！");
@@ -606,6 +614,46 @@
         $("#span1").text(conConsignee);
         $("#span2").text(conPhone);
         $("#txt").text(conProvince + conCity + conDistrict + conDetails);
+
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/order/getFreight.do"/>',
+            dataType: 'json',
+            data: {
+                addressId: addressId,
+                purchaseOrderId: orderId,
+
+            },
+            success: function (data) {
+                $("#freight").text(data);
+                var couponPrice = $("#couponPrice").text();
+                var totalPrice = $("#totalPrice").text();
+                var finalPrice = parseFloat(totalPrice-couponPrice)+parseFloat(data);
+                //$("#change").html(finalPrice.toFixed(2));
+                if (finalPrice < parseFloat(${consumer.balance})) {
+                    $("#usefulBalance").html(finalPrice.toFixed(2));
+                    if ($("#balanceCheckbox").is(':checked') == true){
+                        $("#balance").html(finalPrice.toFixed(2));
+                        $("#change").html("0.00");
+                    }else{
+                        $("#balance").html("0.00");
+                        $("#change").html(finalPrice.toFixed(2));
+                    }
+                }else{
+                    $("#usefulBalance").html((${consumer.balance}).toFixed(2));
+                    if ($("#balanceCheckbox").is(':checked') == true){
+                        $("#balance").html((${consumer.balance}).toFixed(2));
+                        var finalPrice1 = finalPrice - ${consumer.balance};
+                        $("#change").html(finalPrice1.toFixed(2));
+                    }else{
+                        $("#balance").html("0.00");
+                        $("#change").html(finalPrice.toFixed(2));
+                    }
+                }
+            },
+
+        });
 
     }
 
@@ -763,12 +811,15 @@
         var totalPrice = $("#totalPrice").text();
         var couponPrice = $("#couponPrice").text();
         var balance = $("#usefulBalance").text();
+        var freight = $("#freight").text();
         if ($(element).is(':checked') == true){
             $("#balance").html(balance);
-            $("#change").html((totalPrice-balance-couponPrice).toFixed(2));
+            var change = parseFloat(totalPrice-balance-couponPrice)+parseFloat(freight);
+            $("#change").html(change.toFixed(2));
         }else if($(element).is(':checked') == false){
             $("#balance").html("0.00");
-            $("#change").html((totalPrice-couponPrice).toFixed(2));
+            var change = parseFloat(totalPrice-couponPrice)+parseFloat(freight);
+            $("#change").html(change.toFixed(2));
         }
     }
 

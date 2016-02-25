@@ -8,10 +8,7 @@ import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.website.order.service.BalanceManager;
-import com.efeiyi.ec.website.order.service.CartManager;
-import com.efeiyi.ec.website.order.service.PaymentManager;
-import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
+import com.efeiyi.ec.website.order.service.*;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
@@ -57,6 +54,9 @@ public class PurchaseOrderController extends BaseController {
 
     @Autowired
     private BalanceManager balanceManager;
+
+    @Autowired
+    private PostageManager postageManager;
 
     @RequestMapping("/giftBuy/showNameStatus.do")
     @ResponseBody
@@ -264,7 +264,12 @@ public class PurchaseOrderController extends BaseController {
         //收货地址
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
-        List addressList = baseManager.listObject(xQuery);
+        List<ConsumerAddress> addressList = baseManager.listObject(xQuery);
+        for(ConsumerAddress consumerAddress:addressList){
+            if(consumerAddress.getStatus().equals("2")){
+                model.addAttribute("freight",postageManager.getFreight(purchaseOrder,consumerAddress));
+            }
+        }
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
@@ -312,7 +317,12 @@ public class PurchaseOrderController extends BaseController {
         }
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
-        List addressList = baseManager.listObject(xQuery);
+        List<ConsumerAddress> addressList = baseManager.listObject(xQuery);
+        for(ConsumerAddress consumerAddress:addressList){
+            if(consumerAddress.getStatus().equals("2")){
+                model.addAttribute("freight",postageManager.getFreight(purchaseOrder,consumerAddress));
+            }
+        }
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
@@ -333,7 +343,12 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(purchaseOrder, model);
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
-        List addressList = baseManager.listObject(xQuery);
+        List<ConsumerAddress> addressList = baseManager.listObject(xQuery);
+        for(ConsumerAddress consumerAddress:addressList){
+            if(consumerAddress.getStatus().equals("2")){
+                model.addAttribute("freight",postageManager.getFreight(purchaseOrder,consumerAddress));
+            }
+        }
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
@@ -381,10 +396,20 @@ public class PurchaseOrderController extends BaseController {
         String message = request.getParameter("message");
         String balance = request.getParameter("balance");
         String couponId = request.getParameter("couponId");
+        String freight = request.getParameter("freight");
         HashMap<String, String> messageMap = new HashMap<>();
         formatPurchaseOrderMessage(message, messageMap);
-        //判断余额是否足够，足够的话支付方式改为余额支付
+
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        //校验运费是否正确
+        if(addressId != null && freight != null){
+            BigDecimal returnFreight = postageManager.getFreight((PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId),(ConsumerAddress)baseManager.getObject(ConsumerAddress.class.getName(),addressId));
+            if(postageManager.fetchFreight(freight,returnFreight)){
+                purchaseOrder.setFreight(new BigDecimal(freight));
+                purchaseOrder.setTotal(purchaseOrder.getTotal().add(new BigDecimal(freight)));
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+            }
+        }
         //这里首先余额是从客户端传递过来，需要跟数据库做对比，如果余额的数目不对，就会报错，ckeck的步骤可以放到Manager里做
         if (balanceManager.checkBalance(Float.valueOf(balance))) {
             //订单收货地址//初始化订单状态
@@ -503,6 +528,16 @@ public class PurchaseOrderController extends BaseController {
         } else {
             return "";
         }
+    }
+
+    @RequestMapping({"/getFreight.do"})
+    @ResponseBody
+    public String getFreight(HttpServletRequest request){
+        String purchaseOrderId = request.getParameter("purchaseOrderId");
+        String addressId = request.getParameter("addressId");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
+        ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(),addressId);
+        return postageManager.getFreight(purchaseOrder,consumerAddress).toString();
     }
 
 }

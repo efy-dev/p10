@@ -755,3 +755,6 @@ CREATE TABLE `tenant_review` (
 PRIMARY KEY (`id`)
 )
 ;
+------------订单增加运费字段-----------------
+ALTER TABLE `purchase_order`
+ADD COLUMN `freight`  decimal(10,2) NULL AFTER `address_city_id`;
