@@ -69,14 +69,14 @@
       <c:if test="${!empty projectCategory}">
         <c:forEach items="${projectCategory}" var="pc" varStatus="status">
           <div class="craft-content ae">
-            <h4>${pc[0].projectCategory.name}</h4>
+            <h4>${pc[0].project.projectCategory.name}</h4>
             <a href="#" class="left-icon"></a>
             <div class="commodity-list ae">
               <ul>
 
 
-                <c:if test="${!empty pc1}">
-                  <c:forEach items="${pc1}" var="projectR" varStatus="status">
+                <c:if test="${!empty pc}">
+                  <c:forEach items="${pc}" var="projectR" varStatus="status">
                     <li>
                       <div class="commodity-img">
                         <a href="<c:url value='/project/brifProject/${projectR.project.id}'/>"><img src="http://pro.efeiyi.com/${projectR.project.picture_pc_url}@!pc-project-list"></a>
