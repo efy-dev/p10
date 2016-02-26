@@ -316,10 +316,10 @@
             <div class="balance">
                 <form>
                     <div class="balance-titie">余额支付</div>
-                    <div class="balance-text"><input type="checkbox" onclick="useBalance(this)" id="banlanceCheckbox">使用余额支付
+                    <div class="balance-text"><input type="checkbox" onclick="useBalance(this)" id="balanceCheckbox">使用余额支付
                         <span id="usefulBalance"><c:if
-                                test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if
-                                test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元
+                                test="${consumer.balance>purchaseOrder.total+freight}">${purchaseOrder.total+freight}</c:if><c:if
+                                test="${consumer.balance<=purchaseOrder.total+freight}">${consumer.balance}</c:if></span>元
                     </div>
                 </form>
             </div>
@@ -333,7 +333,8 @@
                 <p class="price1">总金额：<em id="totalPrice">${purchaseOrder.total}</em> 元</p>
                 <p class="price2">优惠：-<em id="couponPrice">0.00</em>元</p>
                 <p class="price2">余额：-<em id="balance">0.00</em>元</p>
-                <p class="price3">应付金额：<strong id="finalPrice">${purchaseOrder.total}</strong> 元</p>
+                <p class="price4">运费：<em id="freight">${freight}</em>元</p>
+                <p class="price3">应付金额：<strong id="finalPrice">${purchaseOrder.total+freight}</strong> 元</p>
             </span>
             </div>
         </div>
@@ -348,6 +349,7 @@
 
     var payment = "1";
     var consumerAddress = "";
+    var purchaseOrderId = "${purchaseOrder.id}";
     if (typeof $(".activeFlag").attr("id") != "undefined") {
         consumerAddress = $(".activeFlag").attr("id");
     }
@@ -375,6 +377,7 @@
         var messageObject = new Object();
         var balance = $("#balance").text();
         var finalPrice = $("#finalPrice").text();
+        var freight = $("#freight").text();
         var couponId = "";
         $("input[name=coupon]").each(function () {
             if($(this).is(':checked') == true){
@@ -407,7 +410,7 @@
                             success: function (data1) {
                                 if (data1) {
                                     var url = "<c:url value="/order/confirm/"/>";
-                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + "&balance=" + balance +"&couponId=" + couponId;
+                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + "&balance=" + balance +"&couponId=" + couponId + "&freight=" + freight;
                                     element.onclick = null;
                                     $(element).attr("href", url);
                                     $(element).click();
@@ -578,6 +581,46 @@
             $(this).attr("class", "default-text");
         })
         $(element).attr("class", "default-text triangle")
+
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/order/getFreight.do"/>',
+            dataType: 'json',
+            data: {
+                addressId: addressId,
+                purchaseOrderId: purchaseOrderId,
+
+            },
+            success: function (data) {
+                $("#freight").text(data);
+                var couponPrice = $("#couponPrice").text();
+                var totalPrice = $("#totalPrice").text();
+                var finalPrice = parseFloat(totalPrice-couponPrice)+parseFloat(data);
+                //$("#finalPrice").html(finalPrice.toFixed(2));
+                if (finalPrice < parseFloat(${consumer.balance})) {
+                    $("#usefulBalance").html(finalPrice.toFixed(2));
+                    if ($("#balanceCheckbox").is(':checked') == true){
+                        $("#balance").html(finalPrice.toFixed(2));
+                        $("#finalPrice").html("0.00");
+                    }else{
+                        $("#balance").html("0.00");
+                        $("#finalPrice").html(finalPrice.toFixed(2));
+                    }
+                }else{
+                    $("#usefulBalance").html((${consumer.balance}).toFixed(2));
+                    if ($("#balanceCheckbox").is(':checked') == true){
+                        $("#balance").html((${consumer.balance}).toFixed(2));
+                        var finalPrice1 = finalPrice - ${consumer.balance};
+                        $("#finalPrice").html(finalPrice1.toFixed(2));
+                    }else{
+                        $("#balance").html("0.00");
+                        $("#finalPrice").html(finalPrice.toFixed(2));
+                    }
+                }
+            },
+
+        });
     }
 
     function couponListHtml(it /**/) {
@@ -638,17 +681,20 @@
     function chooseUsefulCoupon(element, price) {
         var status = "1";
         var totalPrice = $("#totalPrice").text();
+        var freight = $("#freight").text();
         console.log($(element).is(':checked'));
         if ($(element).is(':checked') == true) {
             status = "1";
+            var finalPrice = parseFloat(totalPrice-price)+parseFloat(freight);
             $("#couponPrice").html(price.toFixed(2));
-            $("#finalPrice").html((totalPrice-price).toFixed(2));
-            var finalPrice = parseFloat(totalPrice-price);
+            $("#finalPrice").html((finalPrice).toFixed(2));
             if (finalPrice < parseFloat(${consumer.balance})) {
                 $("#usefulBalance").html(finalPrice.toFixed(2));
+            }else{
+                $("#usefulBalance").html((${consumer.balance}).toFixed(2));
             }
             $("#balance").html("0.00");
-            $("#banlanceCheckbox").attr("checked", false);
+            $("#balanceCheckbox").attr("checked", false);
         } else {
             status = "2";
         }
@@ -737,12 +783,13 @@
         var totalPrice = $("#totalPrice").text();
         var couponPrice = $("#couponPrice").text();
         var balance = $("#usefulBalance").text();
+        var freight = $("#freight").text();
         if ($(element).is(':checked') == true) {
             $("#balance").html(balance);
-            $("#finalPrice").html((totalPrice - balance - couponPrice).toFixed(2));
+            $("#finalPrice").html((totalPrice - balance - couponPrice + freight*1).toFixed(2));
         } else if ($(element).is(':checked') == false) {
             $("#balance").html("0.00");
-            $("#finalPrice").html((totalPrice - couponPrice).toFixed(2));
+            $("#finalPrice").html((totalPrice - couponPrice + freight*1).toFixed(2));
         }
     }
 

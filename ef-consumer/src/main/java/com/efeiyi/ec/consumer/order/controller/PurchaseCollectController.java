@@ -21,36 +21,36 @@ public class PurchaseCollectController {
     private BaseManager baseManager;
 
     @RequestMapping("/collectList.do")
-    public String purchaseCollect(HttpServletRequest request,Model model) throws Exception {
-        XQuery xQuery=new XQuery("plistProductFavorite_default",request,8);
+    public String purchaseCollect(HttpServletRequest request, Model model) throws Exception {
+        XQuery xQuery = new XQuery("plistProductFavorite_default", request, 8);
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
-        model.addAttribute("collectList",list);
+        model.addAttribute("collectList", list);
         return "/purchaseOrder/purchaseCollect";
     }
 
     @RequestMapping("/wapCollectList.do")
-    public String wapPurchaseCollect(HttpServletRequest request,Model model) throws Exception {
-        XQuery xQuery=new XQuery("plistProductFavorite_default",request);
+    public String wapPurchaseCollect(HttpServletRequest request, Model model) throws Exception {
+        XQuery xQuery = new XQuery("plistProductFavorite_default", request);
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listObject(xQuery);
-        model.addAttribute("collectList",list);
+        model.addAttribute("collectList", list);
         return "/purchaseOrder/purchaseCollect";
     }
 
 
     @RequestMapping({"/unfollow.do"})
-    public String addProductFavorite(HttpServletRequest request) throws Exception{
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite" ,request);
-        xSaveOrUpdate.getParamMap().put("status",2);
+    public String addProductFavorite(HttpServletRequest request) throws Exception {
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite", request);
+        xSaveOrUpdate.getParamMap().put("status", 2);
         baseManager.saveOrUpdate(xSaveOrUpdate);
         return "redirect:/purchaseCollect/collectList.do";
     }
 
     @RequestMapping({"/wapUnfollow.do"})
-    public String wapAddProductFavorite(HttpServletRequest request) throws Exception{
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite" ,request);
-        xSaveOrUpdate.getParamMap().put("status",2);
+    public String wapAddProductFavorite(HttpServletRequest request) throws Exception {
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite", request);
+        xSaveOrUpdate.getParamMap().put("status", 2);
         baseManager.saveOrUpdate(xSaveOrUpdate);
         return "redirect:/purchaseCollect/wapCollectList.do";
     }
