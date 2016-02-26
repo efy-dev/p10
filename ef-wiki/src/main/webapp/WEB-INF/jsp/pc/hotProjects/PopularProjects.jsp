@@ -26,14 +26,14 @@
   <div class="nav-bars ae">
     <ul class="bars">
       <li class="active"><a href="/pc/index.do">热&nbsp;门</a></li>
-      <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
+     <%-- <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
       <li><a href="<c:url value='/pc/beforeAttention.do'/>">关注</a></li>
       <%}%>
       <%
         if(AuthorizationUtil.getMyUser().getId()!=null && "ok".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){
       %>
       <li><a href="<c:url value='/pc/afterAttention.do'/>">关注</a></li>
-      <%}%>
+      <%}%>--%>
 
       <li><a href="<c:url value='/pc/category'/>">发&nbsp;现</a></li>
     </ul>
