@@ -221,6 +221,13 @@ public class PurchaseOrderController {
     @RequestMapping({"/deleteOrder/{orderId}"})
     public String deleteOrder(@PathVariable String orderId) {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        if(purchaseOrder.getSubPurchaseOrder()!=null){
+            for(PurchaseOrder subPurchaseOrder: purchaseOrder.getSubPurchaseOrder()){
+                subPurchaseOrder.setStatus("0");
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(), subPurchaseOrder);
+                System.out.println(subPurchaseOrder.getSerial());
+            }
+        }
         purchaseOrder.setStatus("0");
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         return "redirect:/order/myEfeiyi/list.do?status=17";
