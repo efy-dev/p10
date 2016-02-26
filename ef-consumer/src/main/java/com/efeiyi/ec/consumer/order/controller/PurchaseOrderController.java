@@ -225,7 +225,6 @@ public class PurchaseOrderController {
             for(PurchaseOrder subPurchaseOrder: purchaseOrder.getSubPurchaseOrder()){
                 subPurchaseOrder.setStatus("0");
                 baseManager.saveOrUpdate(PurchaseOrder.class.getName(), subPurchaseOrder);
-                System.out.println(subPurchaseOrder.getSerial());
             }
         }
         purchaseOrder.setStatus("0");
