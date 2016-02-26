@@ -69,8 +69,19 @@ public class WikiAttentionController extends WikibaseController {
 
         }*/
         List<List<Project>> pc = new ArrayList<List<Project>>();
+        List<List<ProjectRecommended>> pc1 = new ArrayList<List<ProjectRecommended>>();
         Session session = xdoDao.getSession();
+       /******zzc***********/
+        XQuery xQuery = new XQuery("listProjectCategoryRecommended_default",request);
+        List<ProjectCategoryRecommended> projectCategoryRecommendedList = (List<ProjectCategoryRecommended>)baseManager.listObject(xQuery);
+        for (ProjectCategoryRecommended projectCategoryRecommended : projectCategoryRecommendedList){
+            xQuery = new XQuery("listProjectRecommended_default1",request);
+            xQuery.put("project_projectCategory_id",projectCategoryRecommended.getProjectCategory().getId());
+            pc1.add((List<ProjectRecommended>)baseManager.listObject(xQuery));
+        }
 
+
+        /*****************/
         List<ProjectCategoryRecommended> projectCategoryRecommendeds = session.createSQLQuery(
                 "SELECT * FROM base_recommended a \n" +
                 "      where  a.group_name=\"wiki.categoryRecommended\" \n" +
