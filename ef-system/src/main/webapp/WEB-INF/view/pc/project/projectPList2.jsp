@@ -29,7 +29,7 @@
     <tr style="text-align: left">
         <td  width="20%">操作</td>
         <td  width="20%">项目名称</td>
-        <td  width="5%">项目级别</td>
+        <td  width="15%">项目级别</td>
         <td  width="15%">项目类别</td>
         <td  width="15%">城市</td>
         <td  width="15%">创建日期</td>
@@ -117,7 +117,7 @@
                        ${project.projectCategory.name}
 
             </td>
-            <td width="20%">
+            <td width="15%">
                     ${project.addressDistrict.addressCity.name} ${project.addressDistrict.name}
             </td>
             <td width="15%">
