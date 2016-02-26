@@ -400,6 +400,26 @@
                 <!--<match url="/basic/xm.do?qm=formDocument&amp;groupName=master"/>-->
             <!--</jnode>-->
         <!--</jnode>-->
+        <jnode url="" id="CategoryManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="非遗项目与类别">
+            <jnode url="/basic/xm.do?qm=plistProject2_default" access="admin,operational,c_operational,product_manager" text_zh_CN="项目列表">
+                <match url="/basic/xm.do?qm=plistProject2_default"/>
+
+                <match url="/basic/xm.do?qm=viewProjectwiki&amp;param=project"/>
+                <match url="/basic/xm.do?qm=formProjectWiki&amp;param=formProject"/>
+                <match url="/basic/xm.do?qm=formProjectWiki&amp;param=project"/>
+                <match url="/basic/xm.do?qm=formProjectTag&amp;param=project"/>
+                <match url="/basic/xm.do?qm=formProjectProperty2&amp;param=project"/>
+                <match url="/basic/xm.do?qm=formProjectPropertyValue"/>
+
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistProjectCategory2_default" access="admin,operational,c_operational,product_manager" text_zh_CN="类别列表">
+                <match url="/basic/xm.do?qm=plistProjectCategory2_default"/>
+                <match url="/basic/xm.do?qm=plistProjectCategory2_default&amp;view=plist"/>
+                <match url="/basic/xm.do?qm=formProjectCategory2&amp;param=JiChu"/>
+                <match url="/basic/xm.do?qm=viewProjectCategory2&amp;view=plist"/>
+
+            </jnode>
+        </jnode>
         <jnode url="" id="WikiCategoryManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="工艺管理">
             <jnode url="/basic/xm.do?qm=plistProject2_default" access="admin,operational,c_operational,product_manager" text_zh_CN="工艺项目列表">
                 <match url="/basic/xm.do?qm=plistProjectWiki_default"/>
@@ -430,6 +450,8 @@
             </jnode>
 
         </jnode>
+
+
     </jnode>
 
     <jnode id="baseManager" access="admin,operational,c_operational,product_manager" url="/main.do?jnodeId=baseManager" text_zh_CN="基础管理">
