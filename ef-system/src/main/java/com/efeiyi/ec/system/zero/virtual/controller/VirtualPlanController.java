@@ -1,6 +1,7 @@
 package com.efeiyi.ec.system.zero.virtual.controller;
 
 import com.efeiyi.ec.product.model.ProductModel;
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderComment;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.system.zero.virtual.model.task.CoreTaskScheduler;
@@ -229,6 +230,20 @@ public class VirtualPlanController {
         }
         vpmService.removeVirtualPlan(id);
         return new ModelAndView("redirect:/basic/xm.do?qm=plistVirtualPlan_default");
+    }
+
+    @RequestMapping("/removeVirtualOrder.do")
+    public ModelAndView removeVirtualOrder(HttpServletRequest request)throws Exception{
+        String popId = request.getParameter("id");
+        String planId = request.getParameter("planId");
+        if (popId == null || popId.trim().equals("")){
+            throw new Exception("获取订单商品对象失败:id为空");
+        }
+        PurchaseOrderProduct pop = (PurchaseOrderProduct) baseManager.getObject(PurchaseOrderProduct.class.getName(), popId);
+        PurchaseOrder order = pop.getPurchaseOrder();
+        order.setStatus("0");
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), order);
+        return new ModelAndView("redirect:/virtualPlan/getTypeObjectList.do?virtual=virtual&id="+planId+"&type=order");
     }
 
     private ModelAndView virtualOrderList(ModelMap modelMap) throws Exception {

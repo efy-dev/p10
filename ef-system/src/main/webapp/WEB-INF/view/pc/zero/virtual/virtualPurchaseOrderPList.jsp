@@ -48,7 +48,7 @@
                                     class="am-icon-edit"></span> 编辑
                             </button>
                             <button onclick="window.location.href='<c:url
-                                    value=""/>'"
+                                    value="/virtualPlan/removeVirtualOrder.do?virtual=virtual&id=${pop.id}&planId=${planId}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                     class="am-icon-trash-o"></span> 删除
                             </button>
