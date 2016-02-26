@@ -73,7 +73,7 @@ public class WikiAttentionController extends WikibaseController {
 
         List<ProjectCategoryRecommended> projectCategoryRecommendeds = session.createSQLQuery(
                 "SELECT * FROM base_recommended a \n" +
-                "      where  a.group_name=\"categoryRecommended\" \n" +
+                "      where  a.group_name=\"wiki.categoryRecommended\" \n" +
                 "      and a.status=\"1\"")
                 .addEntity(ProjectCategoryRecommended.class).list();
 
@@ -82,13 +82,13 @@ public class WikiAttentionController extends WikibaseController {
             String id = projectCategoryRecommended.getProjectCategory().getId();
             List<Project> projects =session.createSQLQuery("SELECT * from project p WHERE  EXISTS(\n" +
                     "      SELECT 1 FROM base_recommended a \n" +
-                    "      where  a.group_name=\"projectRecommended\" \n" +
+                    "      where  a.group_name=\"wiki.projectRecommended\" \n" +
                     "      and a.status=\"1\"\n" +
                     "      and a.recommend_id = p.id\n" +
                     "\n" +
                     ") AND EXISTS(\n" +
                     "      SELECT 1 FROM base_recommended a \n" +
-                    "      where  a.group_name=\"categoryRecommended\" \n" +
+                    "      where  a.group_name=\"wiki.categoryRecommended\" \n" +
                     "      and a.status=\"1\"\n" +
                     "      and a.recommend_id = p.category_id AND  a.recommend_id=" +"'"+id+"'"+
                     ")   ").addEntity(Project.class).list();

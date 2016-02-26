@@ -172,7 +172,7 @@
                    "<div class='text5'>"+data[i].description+"</div> " +
                    "<div class=\"text3\"><a href=\"<c:url value='/project/listProduct/'/>"+data[i].projectId+"\"><span>"+data[i].works+" 件作品</span></a>" +
                    "<span><a href=\"<c:url value='/project/brifMaster/'/>"+data[i].projectId+"\">"+data[i].masters+"位大师</span></a></div> " +
-                   "<a href=\"javascript:void(0);\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'></a> " +
+                   "" +
                    "</dd> </dl> </li> ");
 
            /* var box = $("<li> <dl> <dt><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-classify-left\"></a> " +

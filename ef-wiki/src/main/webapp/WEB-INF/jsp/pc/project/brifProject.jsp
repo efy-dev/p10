@@ -40,7 +40,7 @@
         </c:otherwise>
       </c:choose>
       <div class="max-atten ae">
-        <div class="attention">
+       <%-- <div class="attention">
           <a href="#" id="${project.id}" class="cgz-r-1" onclick="saveProjectFllow('${project.id}')">
             <c:if test="${flag ==true}">
               <input id="saveProjectFllow" type="hidden" value="0">
@@ -53,10 +53,10 @@
             </c:if>
 
           </a>
-        </div>
-        <div class="attention-page">
+        </div>--%>
+        <%--<div class="attention-page">
           <span>已经被 <em id="gzNum">${project.fsAmount}</em> 个景泰蓝爱好者关注</span>
-        </div>
+        </div>--%>
       </div>
     </div>
   </div>
