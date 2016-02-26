@@ -75,25 +75,25 @@
               <ul>
 
 
-                <c:if test="${!empty pc}">
-                  <c:forEach items="${pc}" var="project" varStatus="status">
+                <c:if test="${!empty pc1}">
+                  <c:forEach items="${pc1}" var="projectR" varStatus="status">
                     <li>
                       <div class="commodity-img">
-                        <a href="<c:url value='/project/brifProject/${project.id}'/>"><img src="http://pro.efeiyi.com/${project.picture_pc_url}@!pc-project-list"></a>
+                        <a href="<c:url value='/project/brifProject/${projectR.project.id}'/>"><img src="http://pro.efeiyi.com/${projectR.project.picture_pc_url}@!pc-project-list"></a>
                         <a href="#">
                           <div class="list-moods">
                             <i class="img-icon"></i>
-                            <em>${project.fsAmount}</em>
+                            <em>${projectR.project.fsAmount}</em>
                           </div>
                         </a>
                       </div>
                       <div class="commodity-txt">
                         <h4><a href="#">${project.name}</a></h4></p>
-                        <p>${project.addressDistrict.addressCity.addressProvince.name}</p>
+                        <p>${projectR.project.addressDistrict.addressCity.addressProvince.name}</p>
 
-                        <p>${fn:length(project.productList)}件作品</p>
+                        <p>${fn:length(projectR.project.productList)}件作品</p>
 
-                        <p>${fn:length(project.masterProjects)}位大师</p>
+                        <p>${fn:length(projectR.project.masterProjects)}位大师</p>
                       </div>
                     </li>
                   </c:forEach>
