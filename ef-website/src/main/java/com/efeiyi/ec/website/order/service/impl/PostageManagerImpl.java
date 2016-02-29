@@ -55,6 +55,8 @@ public class PostageManagerImpl implements PostageManager{
         returnFreight = freightManager.calculateFreight(weight,startCity,reachProvince);
         if((!"error".equals(returnFreight))&&(!"false".equals(returnFreight))){
             freight = (freight.add(new BigDecimal(returnFreight))).setScale(2,BigDecimal.ROUND_HALF_UP);
+        }else {
+            freight = new BigDecimal(10.00);
         }
         return freight;
     }
