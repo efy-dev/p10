@@ -58,7 +58,7 @@ function saveRecommended(obj,groupName,td,saveUrl){
                 $(obj).parent().prev("a").attr("recommend", "0");
                 $(obj).parent().prev("a").attr("id", data);
                 $(obj).parent().prev("a").find("span").text("取消推荐");
-                $("table tr[id='" + recommendId + "'] td:eq(" + td + ")").append("<span  id=" + data + " style=\"margin-left: 5px;color: red;\" >推荐" + "</span>");
+                $("table tr[id='" + recommendId + "'] td:eq(" + td + ")").append("<span  id=" + data + " style=\"margin-left: 5px;color: red;\" >推荐(" + sort+")</span>");
             }
         });
     }

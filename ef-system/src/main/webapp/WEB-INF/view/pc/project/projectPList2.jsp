@@ -38,7 +38,7 @@
 
     <c:forEach items="${requestScope.pageInfo.list}" var="project">
        <%int i = 0;%>
-        <tr style="text-align: left">
+        <tr style="text-align: left" id="${project.id}">
             <td width="25%">
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
@@ -105,6 +105,11 @@
                       ${project.name}
                     </a>
                 <%--</c:if>--%>
+                    <c:forEach var="recommended" items="${project.projectRecommendeds}">
+                        <c:if test="${recommended.project.id == project.id}">
+                            <span id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐(${recommended.sort})</span>
+                        </c:if>
+                    </c:forEach>
             </td>
             <td width="15%">
                     <%--<c:if test="${project.level == 1}">--%>

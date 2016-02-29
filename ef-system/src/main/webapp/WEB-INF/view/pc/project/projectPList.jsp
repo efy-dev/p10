@@ -119,7 +119,7 @@
 
                 <c:forEach var="recommended" items="${project.projectRecommendeds}">
                     <c:if test="${recommended.project.id == project.id}">
-                        <span id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
+                        <span id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐(${recommended.sort})</span>
                     </c:if>
                 </c:forEach>
             </td>
