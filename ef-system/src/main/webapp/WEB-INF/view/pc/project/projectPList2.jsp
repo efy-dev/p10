@@ -86,25 +86,26 @@
                 </div>
             </td>
             <td width="20%">
-                <c:if test="${project.level == 1}">
+                <%--<c:if test="${project.level == 1}">--%>
                     <a href="<c:url value="/basic/xm.do?qm=viewProjectwiki&param=project&conditions=project.id:${project.id}&id=${project.id}"/>" >
                       ${project.name}
                     </a>
-                </c:if>
+                <%--</c:if>--%>
             </td>
             <td width="15%">
-                    <c:if test="${project.level == 1}">
-                         国家级
-                     </c:if>
-                     <c:if test="${project.level == 2}">
-                         省级
-                     </c:if>
-                    <c:if test="${project.level == 3}">
-                         市级
-                    </c:if>
-                   <c:if test="${project.level == 4}">
-                    县级
-                    </c:if>
+                    <%--<c:if test="${project.level == 1}">--%>
+                         <%--国家级--%>
+                     <%--</c:if>--%>
+                     <%--<c:if test="${project.level == 2}">--%>
+                         <%--省级--%>
+                     <%--</c:if>--%>
+                    <%--<c:if test="${project.level == 3}">--%>
+                         <%--市级--%>
+                    <%--</c:if>--%>
+                   <%--<c:if test="${project.level == 4}">--%>
+                    <%--县级--%>
+                    <%--</c:if>--%>
+                   <ming800:status name="level" dataType="Project.level" checkedValue="${project.level}" type="normal"/>
 
             </td>
             <td width="15%">
@@ -118,7 +119,7 @@
 
             </td>
             <td width="15%">
-                    ${project.addressDistrict.addressCity.name} ${project.addressDistrict.name}
+                    ${project.addressDistrict.addressCity.name}
             </td>
             <td width="15%">
                         <p><fmt:formatDate value="${project.createDateTime}" pattern="yyyy/MM/dd HH:MM:SS" /></p>

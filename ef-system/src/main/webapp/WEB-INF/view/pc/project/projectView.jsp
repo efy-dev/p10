@@ -31,20 +31,20 @@
                 <td class="am-primary am-u-md-3">项目编号</td>
                 <td class="am-u-md-3">${object.serial}</td>
             </tr>
-            <tr>
-                <td class="am-primary am-u-md-3">父类别</td>
-                <td class="am-u-md-3">
-                    <c:if test="${not empty object.projectCategory.id}">
-                       ${object.projectCategory.name}
-                    </c:if>
-                </td>
-                <td class="am-primary am-u-md-3">父项目</td>
-                <td class="am-u-md-3">
-                    <c:if test="${not empty object.fatherProject.id}">
-                       ${object.fatherProject.name}
-                    </c:if>
-                </td>
-            </tr>
+            <%--<tr>--%>
+                <%--<td class="am-primary am-u-md-3">父类别</td>--%>
+                <%--<td class="am-u-md-3">--%>
+                    <%--<c:if test="${not empty object.projectCategory.id}">--%>
+                       <%--${object.projectCategory.name}--%>
+                    <%--</c:if>--%>
+                <%--</td>--%>
+                <%--<td class="am-primary am-u-md-3">父项目</td>--%>
+                <%--<td class="am-u-md-3">--%>
+                    <%--<c:if test="${not empty object.fatherProject.id}">--%>
+                       <%--${object.fatherProject.name}--%>
+                    <%--</c:if>--%>
+                <%--</td>--%>
+            <%--</tr>--%>
             <tr>
                 <td class="am-primary am-u-md-3">项目图片(PC)</td>
                 <td class="am-u-md-3">

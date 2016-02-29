@@ -30,12 +30,12 @@
         <input type="hidden" name="fatherProject.id" value="${fatherId}">
         <input type="hidden" id="createDateTime" name="createDateTime" value="${createDateTime}">
 
-        <c:if test="${empty fatherId}">
-            <input type="hidden" name="level" value="1" />
-        </c:if>
-        <c:if test="${not empty fatherId}">
-            <input type="hidden" name="level" value="${object.level}" />
-        </c:if>
+        <%--<c:if test="${empty fatherId}">--%>
+            <%--<input type="hidden" name="level" value="1" />--%>
+        <%--</c:if>--%>
+        <%--<c:if test="${not empty fatherId}">--%>
+            <%--<input type="hidden" name="level" value="${object.level}" />--%>
+        <%--</c:if>--%>
 
         <div class="am-form-group">
             <label name="name" for="user-name" class="am-u-sm-3 am-form-label">项目名称 <small>*</small></label>
@@ -47,6 +47,12 @@
             <label name="serial" for="serial" class="am-u-sm-3 am-form-label">项目编号 <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="serial" id="serial" placeholder="项目编号" value="${object.serial}">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="level" for="serial" class="am-u-sm-3 am-form-label">项目级别 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <ming800:status name="level" dataType="Project.level" checkedValue="${object.level}" type="select"/>
             </div>
         </div>
         <div id="pcdDiv">

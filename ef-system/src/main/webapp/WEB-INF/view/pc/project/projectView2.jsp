@@ -31,20 +31,20 @@
                 <td class="am-primary am-u-md-3">项目编号</td>
                 <td class="am-u-md-3">${object.serial}</td>
             </tr>
-            <tr>
-                <td class="am-primary am-u-md-3">父类别</td>
-                <td class="am-u-md-3">
-                    <c:if test="${not empty object.projectCategory.id}">
-                       ${object.projectCategory.name}
-                    </c:if>
-                </td>
-                <td class="am-primary am-u-md-3">父项目</td>
-                <td class="am-u-md-3">
-                    <c:if test="${not empty object.fatherProject.id}">
-                       ${object.fatherProject.name}
-                    </c:if>
-                </td>
-            </tr>
+            <%--<tr>--%>
+                <%--<td class="am-primary am-u-md-3">父类别</td>--%>
+                <%--<td class="am-u-md-3">--%>
+                    <%--<c:if test="${not empty object.projectCategory.id}">--%>
+                       <%--${object.projectCategory.name}--%>
+                    <%--</c:if>--%>
+                <%--</td>--%>
+                <%--<td class="am-primary am-u-md-3">父项目</td>--%>
+                <%--<td class="am-u-md-3">--%>
+                    <%--<c:if test="${not empty object.fatherProject.id}">--%>
+                       <%--${object.fatherProject.name}--%>
+                    <%--</c:if>--%>
+                <%--</td>--%>
+            <%--</tr>--%>
             <tr>
                 <td class="am-primary am-u-md-3">项目图片(PC)</td>
                 <td class="am-u-md-3">
@@ -112,59 +112,59 @@
     </c:forEach>
 </table>
 </div>
-<div class="am-u-sm-12">
-    <div style="text-align: left;" >
-        <label>项目内容</label>
-<security:authorize ifAnyGranted="admin,operational,c_operational">
-        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent&projectid=${object.id}&objectName=${object.name}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目内容" />
-       <%-- <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目内容" />--%>
-</security:authorize>
-    </div>
-    <table class="am-table am-table-bordered am-table-radius am-table-striped" >
-        <tr style="text-align: left">
-<security:authorize ifAnyGranted="admin,operational,c_operational">
-            <td  width="10%">操作</td>
-</security:authorize>
-            <td  width="10%">内容类型</td>
-            <td  width="80%">项目内容</td>
-        </tr>
+<%--<div class="am-u-sm-12">--%>
+    <%--<div style="text-align: left;" >--%>
+        <%--<label>项目内容</label>--%>
+<%--<security:authorize ifAnyGranted="admin,operational,c_operational">--%>
+        <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent&projectid=${object.id}&objectName=${object.name}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目内容" />--%>
+       <%--&lt;%&ndash; <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目内容" />&ndash;%&gt;--%>
+<%--</security:authorize>--%>
+    <%--</div>--%>
+    <%--<table class="am-table am-table-bordered am-table-radius am-table-striped" >--%>
+        <%--<tr style="text-align: left">--%>
+<%--<security:authorize ifAnyGranted="admin,operational,c_operational">--%>
+            <%--<td  width="10%">操作</td>--%>
+<%--</security:authorize>--%>
+            <%--<td  width="10%">内容类型</td>--%>
+            <%--<td  width="80%">项目内容</td>--%>
+        <%--</tr>--%>
 
-        <c:forEach items="${projectContentList}" var="ProjectContent">
+        <%--<c:forEach items="${projectContentList}" var="ProjectContent">--%>
 
-            <tr style="text-align: left">
-                <security:authorize ifAnyGranted="admin,operational,c_operational">
-                <td>
-                    <div class="am-btn-toolbar">
-                        <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent&id=${ProjectContent.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑内容</button>
-                        </div>
-                    </div>
-                </td>
-                </security:authorize>
-                <td>
-                    <div class="am-btn-toolbar">
-                        <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                            <c:choose>
-                                <c:when test="${ProjectContent.type == 1}">
-                                    内容类型
-                                </c:when>
-                                <c:when test="${ProjectContent.type == 2}">
-                                    固定类型
-                                </c:when>
-                                <c:otherwise/>
-                            </c:choose>
-                        </div>
-                    </div>
-                </td>
-                <td width="80%">
-                        ${ProjectContent.content}
-                </td>
+            <%--<tr style="text-align: left">--%>
+                <%--<security:authorize ifAnyGranted="admin,operational,c_operational">--%>
+                <%--<td>--%>
+                    <%--<div class="am-btn-toolbar">--%>
+                        <%--<div class="am-btn-group am-btn-group-xs" style="width: 100%;" >--%>
+                            <%--<button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent&id=${ProjectContent.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑内容</button>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</td>--%>
+                <%--</security:authorize>--%>
+                <%--<td>--%>
+                    <%--<div class="am-btn-toolbar">--%>
+                        <%--<div class="am-btn-group am-btn-group-xs" style="width: 100%;" >--%>
+                            <%--<c:choose>--%>
+                                <%--<c:when test="${ProjectContent.type == 1}">--%>
+                                    <%--内容类型--%>
+                                <%--</c:when>--%>
+                                <%--<c:when test="${ProjectContent.type == 2}">--%>
+                                    <%--固定类型--%>
+                                <%--</c:when>--%>
+                                <%--<c:otherwise/>--%>
+                            <%--</c:choose>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</td>--%>
+                <%--<td width="80%">--%>
+                        <%--${ProjectContent.content}--%>
+                <%--</td>--%>
 
-            </tr>
+            <%--</tr>--%>
 
-        </c:forEach>
-    </table>
-</div>
+        <%--</c:forEach>--%>
+    <%--</table>--%>
+<%--</div>--%>
 
 
     <%--<div style="text-align: left;" >--%>

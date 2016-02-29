@@ -99,6 +99,15 @@
                         <item label="非遗美术" value="2"/>
                     </statusType>
                 </field>
+                <field name="level" label="项目类型" inputType="text">
+                    <statusType fieldName="level">
+                        <item label="世界级" value="1"/>
+                        <item label="国家级" value="2"/>
+                        <item label="省级" value="3"/>
+                        <item label="市级" value="4"/>
+                        <item label="县级" value="5"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
                 <do name="plistProject" access="" label="project列表"
@@ -122,7 +131,7 @@
                         <condition name="fatherProject.fatherProjectId" defaultValue="" operation="eq"
                                    inputType="default"/>
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
-                        <condition name="level" defaultValue="1" operation="eq" inputType="default"/>
+                        <!--<condition name="level" defaultValue="1" operation="eq" inputType="default"/>-->
                     </query>
 
                     <query name="default1" label="快速查询" type="auto" orderBy="id:desc">

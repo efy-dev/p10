@@ -420,36 +420,36 @@
 
             </jnode>
         </jnode>
-        <jnode url="" id="WikiCategoryManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="工艺管理">
-            <jnode url="/basic/xm.do?qm=plistProject2_default" access="admin,operational,c_operational,product_manager" text_zh_CN="工艺项目列表">
-                <match url="/basic/xm.do?qm=plistProjectWiki_default"/>
-                <match url="/basic/xm.do?qm=formProjectContent"/>
-                <match url="/basic/xm.do?qm=formProjectWiki&amp;param=formProject"/>
-                <match url="/basic/xm.do?qm=formProjectContent&amp;param=formProjectContent"/>
-                <match url="/basic/xm.do?qm=listMasterProject2Master_default2"/>
-                <match url="/basic/xm.do?qm=plistMasterWorkwiki_getProduct2"/>
-                <match url="/basic/xm.do?qm=plistMasterWorkwiki_byProject"/>
-                <match url="/basic/xm.do?qm=plistProjectFollowed_default"/>
-                <match url="/basic/xm.do?qm=viewProjectwiki&amp;param=project"/>
-                <match url="/basic/xm.do?qm=formProjectProperty2&amp;param=project"/>
-                <match url="/basic/xm.do?qm=formMasterWork"/>
-                <match url="/basic/xm.do?qm=formwikiMasterWork"/>
-                <match url="/basic/xm.do?qm=viewMasterwiki"/>
-                <match url="/basic/xm.do?qm=plistProductwiki_getProduct2"/>
-                <match url="/basic/xm.do?qm=plistProduct_defalut&amp;view=wikiProduct"/>
-                <match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=wikiProduct"/>
-                <match url="/basic/xm.do?qm=viewProduct&amp;view=wikiProduct"/>
-                <match url="/basic/xm.do?qm=formProduct&amp;view=wikiProduct"/>
-                <match url="/basic/xm.do?qm=formProduct_Description&amp;view=wikiProduct"/>
-                <match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=wikiProduct"/>
-                <match url="/product/saveNewProduct.do?view=wikiProduct"/>
-                <match url="/basic/xm.do?qm=plistTenantProduct_default&amp;view=wikiProduct"/>
-                <match url="/basic/xm.do?view=wikiProduct"/>
-                <match url="/product/saveNewProduct.do?view=wikiProduct"/>
-                <match url="/basic/xm.do?qm=plistProduct_default1&amp;view=wikiProduct"/>
-            </jnode>
+        <!--<jnode url="" id="WikiCategoryManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="工艺管理">-->
+            <!--<jnode url="/basic/xm.do?qm=plistProject2_default" access="admin,operational,c_operational,product_manager" text_zh_CN="工艺项目列表">-->
+                <!--<match url="/basic/xm.do?qm=plistProjectWiki_default"/>-->
+                <!--<match url="/basic/xm.do?qm=formProjectContent"/>-->
+                <!--<match url="/basic/xm.do?qm=formProjectWiki&amp;param=formProject"/>-->
+                <!--<match url="/basic/xm.do?qm=formProjectContent&amp;param=formProjectContent"/>-->
+                <!--<match url="/basic/xm.do?qm=listMasterProject2Master_default2"/>-->
+                <!--<match url="/basic/xm.do?qm=plistMasterWorkwiki_getProduct2"/>-->
+                <!--<match url="/basic/xm.do?qm=plistMasterWorkwiki_byProject"/>-->
+                <!--<match url="/basic/xm.do?qm=plistProjectFollowed_default"/>-->
+                <!--<match url="/basic/xm.do?qm=viewProjectwiki&amp;param=project"/>-->
+                <!--<match url="/basic/xm.do?qm=formProjectProperty2&amp;param=project"/>-->
+                <!--<match url="/basic/xm.do?qm=formMasterWork"/>-->
+                <!--<match url="/basic/xm.do?qm=formwikiMasterWork"/>-->
+                <!--<match url="/basic/xm.do?qm=viewMasterwiki"/>-->
+                <!--<match url="/basic/xm.do?qm=plistProductwiki_getProduct2"/>-->
+                <!--<match url="/basic/xm.do?qm=plistProduct_defalut&amp;view=wikiProduct"/>-->
+                <!--<match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=wikiProduct"/>-->
+                <!--<match url="/basic/xm.do?qm=viewProduct&amp;view=wikiProduct"/>-->
+                <!--<match url="/basic/xm.do?qm=formProduct&amp;view=wikiProduct"/>-->
+                <!--<match url="/basic/xm.do?qm=formProduct_Description&amp;view=wikiProduct"/>-->
+                <!--<match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=wikiProduct"/>-->
+                <!--<match url="/product/saveNewProduct.do?view=wikiProduct"/>-->
+                <!--<match url="/basic/xm.do?qm=plistTenantProduct_default&amp;view=wikiProduct"/>-->
+                <!--<match url="/basic/xm.do?view=wikiProduct"/>-->
+                <!--<match url="/product/saveNewProduct.do?view=wikiProduct"/>-->
+                <!--<match url="/basic/xm.do?qm=plistProduct_default1&amp;view=wikiProduct"/>-->
+            <!--</jnode>-->
 
-        </jnode>
+        <!--</jnode>-->
 
 
     </jnode>
