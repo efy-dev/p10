@@ -101,24 +101,24 @@
                 </field>
                 <field name="level" label="项目类型" inputType="text">
                     <statusType fieldName="level">
-                        <item label="世界级" value="1"/>
-                        <item label="国家级" value="2"/>
-                        <item label="省级" value="3"/>
-                        <item label="市级" value="4"/>
-                        <item label="县级" value="5"/>
+                        <item label="世界级" value="9"/>
+                        <item label="国家级" value="1"/>
+                        <item label="省级" value="2"/>
+                        <item label="市级" value="3"/>
+                        <item label="县级" value="4"/>
                     </statusType>
                 </field>
             </fields>
             <does>
                 <do name="plistProject" access="" label="project列表"
                     result="/project/projectPList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default" label="默认" type="auto" orderBy="serial:desc">
                         <!--<condition name="fatherProject.fatherProjectId" defaultValue="" operation="eq" inputType="default"/>-->
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
 
                     </query>
 
-                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                    <query name="default1" label="快速查询" type="auto" orderBy="serial:desc">
                         <condition name="name" operation="like" label="项目名称" inputType="text"/>
                         <condition name="serial" operation="like" label="项目编号" inputType="text"/>
                         <condition name="projectCategory.name" operation="like" label="类别名称" inputType="text"/>
@@ -127,16 +127,19 @@
                 </do>
                 <do name="plistProject2" access="" label="project列表"
                     result="/project/projectPList2">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default" label="默认" type="auto" orderBy="serial:desc">
                         <condition name="fatherProject.fatherProjectId" defaultValue="" operation="eq"
                                    inputType="default"/>
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+
                         <!--<condition name="level" defaultValue="1" operation="eq" inputType="default"/>-->
                     </query>
 
-                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                    <query name="default1" label="快速查询" type="auto" orderBy="serial:desc">
                         <condition name="name" operation="like" label="项目名称" inputType="text"/>
                         <condition name="serial" operation="like" label="项目编号" inputType="text"/>
+                        <condition name="level" operation="eq" label="项目级别" inputType="select_status"
+                                   key="Project.level"/>
                     </query>
                 </do>
                 <do name="plistTProject" access="" label="project列表"
