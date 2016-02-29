@@ -68,7 +68,6 @@ public class WikiAttentionController extends WikibaseController {
             }
 
         }*/
-        List<List<Project>> pc = new ArrayList<List<Project>>();
         List<List<ProjectRecommended>> pc1 = new ArrayList<List<ProjectRecommended>>();
         Session session = xdoDao.getSession();
        /******zzc***********/
@@ -77,11 +76,13 @@ public class WikiAttentionController extends WikibaseController {
         for (ProjectCategoryRecommended projectCategoryRecommended : projectCategoryRecommendedList){
             xQuery = new XQuery("listProjectRecommended_default1",request);
             xQuery.put("project_projectCategory_id",projectCategoryRecommended.getProjectCategory().getId());
-            pc1.add((List<ProjectRecommended>)baseManager.listObject(xQuery));
+            List<ProjectRecommended> projectRecommendeds = (List<ProjectRecommended>)baseManager.listObject(xQuery);
+            if(!projectRecommendeds.isEmpty())
+             pc1.add(projectRecommendeds);
         }
-
-
         /*****************/
+
+       /* List<List<Project>> pc = new ArrayList<List<Project>>();
         List<ProjectCategoryRecommended> projectCategoryRecommendeds = session.createSQLQuery(
                 "SELECT * FROM base_recommended a \n" +
                 "      where  a.group_name=\"wiki.categoryRecommended\" \n" +
@@ -107,11 +108,10 @@ public class WikiAttentionController extends WikibaseController {
                 pc.add(projects);
             }
 
-        }
+        }*/
 
 
-
-        model.addAttribute("projectCategory", pc);
+        model.addAttribute("projectCategory", pc1);
        //关注前or关注后
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query3 = new XQuery("listProjectFollowed_isShow", request);

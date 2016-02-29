@@ -93,7 +93,7 @@
       </ul>
     </div>
 
-    <div class="l-f-right">
+   <%-- <div class="l-f-right">
       <div class="f-right-gy ae">
         <div class="h4"><span>热门工艺</span></div>
         <ul class="gy-grounp ae" id="hot">
@@ -107,7 +107,7 @@
 
         </ul>
       </div>
-    </div>
+    </div>--%>
   </div>
 </div>
 
@@ -118,8 +118,8 @@
 
   $(document).ready(function(){
     getData(object,"<c:url value='/pc/projectClassifyj.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index='/>");
-    getData2("<c:url value='/pc/projectClassifyj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=6&pageEntity.index='/>");
-    getData3("<c:url value='/pc/projectClassifyj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=6&pageEntity.index='/>");
+    //getData2("<c:url value='/pc/projectClassifyj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=6&pageEntity.index='/>");
+    //getData3("<c:url value='/pc/projectClassifyj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=6&pageEntity.index='/>");
   });
 
   function getData(e,url){
@@ -170,8 +170,8 @@
                    "<em>"+data[i].fsAmount+"</em> </div></dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
                    "<div class=\"text2\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><span>"+data[i].projectName+"</span></a></div>  <p>"+levelName+"</p> " +
                    "<div class='text5'>"+data[i].description+"</div> " +
-                   "<div class=\"text3\"><a href=\"<c:url value='/project/listProduct/'/>"+data[i].projectId+"\"><span>"+data[i].works+" 件作品</span></a>" +
-                   "<span><a href=\"<c:url value='/project/brifMaster/'/>"+data[i].projectId+"\">"+data[i].masters+"位大师</span></a></div> " +
+                   "" +
+                   "</div> " +
                    "" +
                    "</dd> </dl> </li> ");
 
