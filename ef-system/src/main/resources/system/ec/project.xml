@@ -130,12 +130,13 @@
                     <query name="default" label="默认" type="auto" orderBy="serial:desc">
                         <condition name="fatherProject.fatherProjectId" defaultValue="" operation="eq"
                                    inputType="default"/>
-                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
 
                         <!--<condition name="level" defaultValue="1" operation="eq" inputType="default"/>-->
                     </query>
 
                     <query name="default1" label="快速查询" type="auto" orderBy="serial:desc">
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
                         <condition name="name" operation="like" label="项目名称" inputType="text"/>
                         <condition name="serial" operation="like" label="项目编号" inputType="text"/>
                         <condition name="level" operation="eq" label="项目级别" inputType="select_status"
