@@ -27,10 +27,11 @@
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <table class="am-table am-table-bordered am-table-radius am-table-striped" >
     <tr style="text-align: left">
-        <td  width="25%">操作</td>
-        <td  width="25%">项目名称</td>
+        <td  width="20%">操作</td>
+        <td  width="20%">项目名称</td>
+        <td  width="15%">项目级别</td>
         <td  width="15%">项目类别</td>
-        <td  width="20%">城市</td>
+        <td  width="15%">城市</td>
         <td  width="15%">创建日期</td>
     </tr>
 
@@ -76,7 +77,7 @@
                          <span style="display: none;float: left;padding-left: 10px;">
                                                 <input type="text" name="sort" style="width: 35px;" value=""/>
                                                 <a class=" am-btn-primary"
-                                                   onclick="saveRecommended(this,'projectRecommended',1,'<c:url
+                                                   onclick="saveRecommended(this,'wiki.projectRecommended',1,'<c:url
                                                            value="/Recommended/saveObjectRecommended.do"/>')"
                                                    style="padding: 0px 10px 5px 10px"> 保存</a>
                                        </span>
@@ -92,6 +93,21 @@
                 </c:if>
             </td>
             <td width="15%">
+                    <c:if test="${project.level == 1}">
+                         国家级
+                     </c:if>
+                     <c:if test="${project.level == 2}">
+                         省级
+                     </c:if>
+                    <c:if test="${project.level == 3}">
+                         市级
+                    </c:if>
+                   <c:if test="${project.level == 4}">
+                    县级
+                    </c:if>
+
+            </td>
+            <td width="15%">
                <%-- <c:if test="${project.type == 1}">
                     美术
                 </c:if>
@@ -101,7 +117,7 @@
                        ${project.projectCategory.name}
 
             </td>
-            <td width="20%">
+            <td width="15%">
                     ${project.addressDistrict.addressCity.name} ${project.addressDistrict.name}
             </td>
             <td width="15%">

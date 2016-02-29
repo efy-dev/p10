@@ -26,14 +26,14 @@
   <div class="nav-bars ae">
     <ul class="bars">
       <li class="active"><a href="/pc/index.do">热&nbsp;门</a></li>
-      <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
+     <%-- <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
       <li><a href="<c:url value='/pc/beforeAttention.do'/>">关注</a></li>
       <%}%>
       <%
         if(AuthorizationUtil.getMyUser().getId()!=null && "ok".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){
       %>
       <li><a href="<c:url value='/pc/afterAttention.do'/>">关注</a></li>
-      <%}%>
+      <%}%>--%>
 
       <li><a href="<c:url value='/pc/category'/>">发&nbsp;现</a></li>
     </ul>
@@ -69,31 +69,31 @@
       <c:if test="${!empty projectCategory}">
         <c:forEach items="${projectCategory}" var="pc" varStatus="status">
           <div class="craft-content ae">
-            <h4>${pc[0].projectCategory.name}</h4>
+            <h4>${pc[0].project.projectCategory.name}</h4>
             <a href="#" class="left-icon"></a>
             <div class="commodity-list ae">
               <ul>
 
 
                 <c:if test="${!empty pc}">
-                  <c:forEach items="${pc}" var="project" varStatus="status">
+                  <c:forEach items="${pc}" var="projectR" varStatus="status">
                     <li>
                       <div class="commodity-img">
-                        <a href="<c:url value='/project/brifProject/${project.id}'/>"><img src="http://pro.efeiyi.com/${project.picture_pc_url}@!pc-project-list"></a>
+                        <a href="<c:url value='/project/brifProject/${projectR.project.id}'/>"><img src="http://pro.efeiyi.com/${projectR.project.picture_pc_url}@!pc-project-list"></a>
                         <a href="#">
                           <div class="list-moods">
                             <i class="img-icon"></i>
-                            <em>${project.fsAmount}</em>
+                            <em>${projectR.project.fsAmount}</em>
                           </div>
                         </a>
                       </div>
                       <div class="commodity-txt">
                         <h4><a href="#">${project.name}</a></h4></p>
-                        <p>${project.addressDistrict.addressCity.addressProvince.name}</p>
+                        <p>${projectR.project.addressDistrict.addressCity.addressProvince.name}</p>
 
-                        <p>${fn:length(project.productList)}件作品</p>
+                        <p>${fn:length(projectR.project.productList)}件作品</p>
 
-                        <p>${fn:length(project.masterProjects)}位大师</p>
+                        <p>${fn:length(projectR.project.masterProjects)}位大师</p>
                       </div>
                     </li>
                   </c:forEach>

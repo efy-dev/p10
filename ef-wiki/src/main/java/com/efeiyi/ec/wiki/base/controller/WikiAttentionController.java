@@ -1,18 +1,20 @@
 package com.efeiyi.ec.wiki.base.controller;
 
-import com.efeiyi.ec.project.model.Project;
-import com.efeiyi.ec.project.model.ProjectCategory;
-import com.efeiyi.ec.project.model.ProjectFollowed;
-import com.efeiyi.ec.project.model.ProjectRecommended;
+import com.efeiyi.ec.project.model.*;
 import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
 import com.efeiyi.ec.wiki.model.ProjectDataModel;
 import com.efeiyi.ec.wiki.model.ProjectModel;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
+import com.ming800.core.base.dao.XdoDao;
+import com.ming800.core.base.dao.hibernate.XdoDaoSupport;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.model.ObjectRecommended;
 import com.ming800.core.p.service.BannerManager;
+import com.ming800.core.p.service.ObjectRecommendedManager;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +37,14 @@ public class WikiAttentionController extends WikibaseController {
     @Autowired
     BaseManager baseManager;
     @Autowired
+    private XdoDaoSupport xdoDao;
+    @Autowired
     private BannerManager bannerManager;
+    @Autowired
+    private ObjectRecommendedManager objectRecommendedManager;
+
+
+
     @RequestMapping("/index.do")
     public ModelAndView getHotProjects(HttpServletRequest request, Model model) throws Exception {
         //轮播图
@@ -43,7 +52,7 @@ public class WikiAttentionController extends WikibaseController {
         model.addAttribute("bannerList", bannerList);
         //通过类别查询所有的工艺
         //1.获取所有的类别
-
+/*
         XQuery query = new XQuery("listProjectCategory_default", request);
         List<ProjectCategory> list = baseManager.listObject(query);
         //一步加载
@@ -58,8 +67,51 @@ public class WikiAttentionController extends WikibaseController {
                 pc.add(listp);
             }
 
+        }*/
+        List<List<ProjectRecommended>> pc1 = new ArrayList<List<ProjectRecommended>>();
+        Session session = xdoDao.getSession();
+       /******zzc***********/
+        XQuery xQuery = new XQuery("listProjectCategoryRecommended_default",request);
+        List<ProjectCategoryRecommended> projectCategoryRecommendedList = (List<ProjectCategoryRecommended>)baseManager.listObject(xQuery);
+        for (ProjectCategoryRecommended projectCategoryRecommended : projectCategoryRecommendedList){
+            xQuery = new XQuery("listProjectRecommended_default1",request);
+            xQuery.put("project_projectCategory_id",projectCategoryRecommended.getProjectCategory().getId());
+            List<ProjectRecommended> projectRecommendeds = (List<ProjectRecommended>)baseManager.listObject(xQuery);
+            if(!projectRecommendeds.isEmpty())
+             pc1.add(projectRecommendeds);
         }
-        model.addAttribute("projectCategory", pc);
+        /*****************/
+
+       /* List<List<Project>> pc = new ArrayList<List<Project>>();
+        List<ProjectCategoryRecommended> projectCategoryRecommendeds = session.createSQLQuery(
+                "SELECT * FROM base_recommended a \n" +
+                "      where  a.group_name=\"wiki.categoryRecommended\" \n" +
+                "      and a.status=\"1\"")
+                .addEntity(ProjectCategoryRecommended.class).list();
+
+
+        for (ProjectCategoryRecommended projectCategoryRecommended :projectCategoryRecommendeds){
+            String id = projectCategoryRecommended.getProjectCategory().getId();
+            List<Project> projects =session.createSQLQuery("SELECT * from project p WHERE  EXISTS(\n" +
+                    "      SELECT 1 FROM base_recommended a \n" +
+                    "      where  a.group_name=\"wiki.projectRecommended\" \n" +
+                    "      and a.status=\"1\"\n" +
+                    "      and a.recommend_id = p.id\n" +
+                    "\n" +
+                    ") AND EXISTS(\n" +
+                    "      SELECT 1 FROM base_recommended a \n" +
+                    "      where  a.group_name=\"wiki.categoryRecommended\" \n" +
+                    "      and a.status=\"1\"\n" +
+                    "      and a.recommend_id = p.category_id AND  a.recommend_id=" +"'"+id+"'"+
+                    ")   ").addEntity(Project.class).list();
+            if(projects !=null &&!projects.isEmpty()){
+                pc.add(projects);
+            }
+
+        }*/
+
+
+        model.addAttribute("projectCategory", pc1);
        //关注前or关注后
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query3 = new XQuery("listProjectFollowed_isShow", request);

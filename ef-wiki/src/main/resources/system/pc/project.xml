@@ -292,6 +292,13 @@
                     </query>
 
                 </do>
+                <do name="listProjectRecommended" label="ProjectRecommended列表" access="" result="/masterProject/masterProjectList">
+                    <query name="default1" label="默认" type="auto" orderBy="sort:desc">
+                        <condition name="groupName" defaultValue="wiki.projectRecommended" operation="eq"/>
+                        <condition name="project.projectCategory.id" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
             </does>
         </entity>
         <entity name="projectFollowed" label="projectFollowed"
@@ -365,6 +372,24 @@
                         <condition name="watch" defaultValue="0" operation="eq"/>
                     </query>
                 </do>
+            </does>
+        </entity>
+
+
+
+
+        <entity name="ProjectCategoryRecommended" label="ProjectCategoryRecommended"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.ProjectCategoryRecommended">
+            <does>
+
+                <do name="listProjectCategoryRecommended" label="ProjectCategoryRecommended列表" access="" result="/masterProject/masterProjectList">
+                    <query name="default" label="默认" type="auto" orderBy="sort:desc">
+                        <condition name="group" defaultValue="wiki.categoryRecommended" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
             </does>
         </entity>
     </entities>

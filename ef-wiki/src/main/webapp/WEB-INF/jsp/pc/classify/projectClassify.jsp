@@ -24,14 +24,14 @@
   <div class="nav-bars ae">
     <ul class="bars">
       <li ><a href="<c:url value='/pc/index.do'/>">热&nbsp;门</a></li>
-      <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
+   <%--   <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
       <li><a href="<c:url value='/pc/beforeAttention.do'/>">关注</a></li>
       <%}%>
       <%
         if(AuthorizationUtil.getMyUser().getId()!=null && "ok".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){
       %>
       <li ><a href="<c:url value='/pc/afterAttention.do'/>">关注</a></li>
-      <%}%>
+      <%}%>--%>
 
       <li class="active"><a href="<c:url value='/pc/category'/>">发&nbsp;现</a></li>
     </ul>
@@ -63,6 +63,26 @@
 
         </c:if>
       </ul>
+
+      <div class="f-select-group">
+        <div class="select-head">
+          <span>分类：</span>
+          <strong><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_allDirt&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
+        </div>
+      <ul class="select-list">
+
+        <c:if test="${!empty AddressProvinceList}">
+          <c:forEach var="AddressProvince" items="${AddressProvinceList}" varStatus="status">
+            <c:if test="${status.index==0}">
+              <li><a href="javascript:void(0);" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Dirt&conditions=addressDistrict.addressCity.addressProvince.id:${AddressProvince.id}&pageEntity.size=10&pageEntity.index='/>')">${AddressProvince.name}</a></li>
+        </c:if>
+            <c:if test="${status.index!=0}">
+              <li><a href="javascript:void(0);" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Dirt&conditions=addressDistrict.addressCity.addressProvince.id:${AddressProvince.id}&pageEntity.size=10&pageEntity.index='/>')">${AddressProvince.name}</a></li>
+            </c:if>
+          </c:forEach>
+
+        </c:if>
+      </ul>
     </div>
 
   </div>
@@ -73,7 +93,7 @@
       </ul>
     </div>
 
-    <div class="l-f-right">
+   <%-- <div class="l-f-right">
       <div class="f-right-gy ae">
         <div class="h4"><span>热门工艺</span></div>
         <ul class="gy-grounp ae" id="hot">
@@ -87,7 +107,7 @@
 
         </ul>
       </div>
-    </div>
+    </div>--%>
   </div>
 </div>
 
@@ -98,8 +118,8 @@
 
   $(document).ready(function(){
     getData(object,"<c:url value='/pc/projectClassifyj.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index='/>");
-    getData2("<c:url value='/pc/projectClassifyj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=6&pageEntity.index='/>");
-    getData3("<c:url value='/pc/projectClassifyj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=6&pageEntity.index='/>");
+    //getData2("<c:url value='/pc/projectClassifyj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=6&pageEntity.index='/>");
+    //getData3("<c:url value='/pc/projectClassifyj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=6&pageEntity.index='/>");
   });
 
   function getData(e,url){
@@ -150,10 +170,20 @@
                    "<em>"+data[i].fsAmount+"</em> </div></dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
                    "<div class=\"text2\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><span>"+data[i].projectName+"</span></a></div>  <p>"+levelName+"</p> " +
                    "<div class='text5'>"+data[i].description+"</div> " +
-                   "<div class=\"text3\"><a href=\"<c:url value='/project/listProduct/'/>"+data[i].projectId+"\"><span>"+data[i].works+" 件作品</span></a>" +
-                   "<span><a href=\"<c:url value='/project/brifMaster/'/>"+data[i].projectId+"\">"+data[i].masters+"位大师</span></a></div> " +
-                   "<a href=\"javascript:void(0);\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'><em about='"+opertation1+"' id='"+data[i].projectId+"'>"+word+"</em></a> " +
+                   "" +
+                   "</div> " +
+                   "" +
                    "</dd> </dl> </li> ");
+
+           /* var box = $("<li> <dl> <dt><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-classify-left\"></a> " +
+                    "<div class=\"list-moods\"> <a href=\"#\"><i class=\"img-icon\"></i></a> " +
+                    "<em>"+data[i].fsAmount+"</em> </div></dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
+                    "<div class=\"text2\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><span>"+data[i].projectName+"</span></a></div>  <p>"+levelName+"</p> " +
+                    "<div class='text5'>"+data[i].description+"</div> " +
+                    "<div class=\"text3\"><a href=\"<c:url value='/project/listProduct/'/>"+data[i].projectId+"\"><span>"+data[i].works+" 件作品</span></a>" +
+                    "<span><a href=\"<c:url value='/project/brifMaster/'/>"+data[i].projectId+"\">"+data[i].masters+"位大师</span></a></div> " +
+                    "<a href=\"javascript:void(0);\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'><em about='"+opertation1+"' id='"+data[i].projectId+"'>"+word+"</em></a> " +
+                    "</dd> </dl> </li> ");*/    //去掉关注
             pubu.append(box);
             //PBL("#beforeAttention",".before",2);
           }
@@ -212,6 +242,19 @@
 
             if(word=="2"){
               var box = $("<li> <div class=\"text\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><p class=\"p1\">"+data[i].projectName+"</p></a> <p class=\"p2\">"+levelName+"</p> </div> " +
+                      " "
+                      +" <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
+                      "<img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");
+            }else{
+              var box = $("<li> <div class=\"text\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><p class=\"p1\">"+data[i].projectName+"</p></a> <p class=\"p2\">"+levelName+"</p> </div> " +
+                      " "
+                      +"   </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
+                      "<img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");
+            }
+
+          //去掉关注
+          /*  if(word=="2"){
+              var box = $("<li> <div class=\"text\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><p class=\"p1\">"+data[i].projectName+"</p></a> <p class=\"p2\">"+levelName+"</p> </div> " +
                       "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> "
                       +" <em about=\"add\" id=\""+data[i].projectId+"\">已关注</em></a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
                       "<img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");
@@ -220,7 +263,8 @@
                       "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> "
                       +" <i class=\"gz-icon\"></i> <em about=\"add\" id=\""+data[i].projectId+"\">关注</em> </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
                       "<img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");
-            }
+            }*/
+
 
             pubu.append(box);
 
@@ -277,9 +321,18 @@
             }
 
             var box = $("<li> <div class=\"text\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"> <p class=\"p1\">"+data[i].projectName+"</p> </a><p class=\"p2\">"+levelName+"</p> </div> " +
+
+                    "  <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
+                    "<img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");
+
+           //去掉关注
+           /* var box = $("<li> <div class=\"text\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"> <p class=\"p1\">"+data[i].projectName+"</p> </a><p class=\"p2\">"+levelName+"</p> </div> " +
                     "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +insert+
                     " </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
-                    "<img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");
+                    "<img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-find-recommend\"></a> </div>");*/
+
+
+
             pubu.append(box);
 
             //PBL("#beforeAttention",".before",2);

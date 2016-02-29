@@ -124,7 +124,14 @@
 
                 <p>配送方式：<span>普通快递</span></p>
 
-                <p>运费：<span>免运费</span></p>
+                <p>运费：<span>
+                    <c:if test="${empty order.freight}">
+                        免运费
+                    </c:if>
+                    <c:if test="${!empty order.freight}">
+                          ${order.freight}
+                    </c:if>
+                </span></p>
             </dd>
         </dl>
     </div>

@@ -40,7 +40,7 @@
         </c:otherwise>
       </c:choose>
       <div class="max-atten ae">
-        <div class="attention">
+       <%-- <div class="attention">
           <a href="#" id="${project.id}" class="cgz-r-1" onclick="saveProjectFllow('${project.id}')">
             <c:if test="${flag ==true}">
               <input id="saveProjectFllow" type="hidden" value="0">
@@ -53,18 +53,18 @@
             </c:if>
 
           </a>
-        </div>
-        <div class="attention-page">
+        </div>--%>
+        <%--<div class="attention-page">
           <span>已经被 <em id="gzNum">${project.fsAmount}</em> 个景泰蓝爱好者关注</span>
-        </div>
+        </div>--%>
       </div>
     </div>
   </div>
   <div class="ae">
     <ul class="craft-nav">
       <li class="active"><a href="<c:url value='/project/brifProject/${project.id}'/>">介&nbsp;绍</a></li>
-      <li><a href="<c:url value='/project/brifMaster/${project.id}'/>">大&nbsp;师</a></li>
-      <li><a href="<c:url value='/project/listProduct/${project.id}'/>">作&nbsp;品</a></li>
+     <%-- <li><a href="<c:url value='/project/brifMaster/${project.id}'/>">大&nbsp;师</a></li>
+      <li><a href="<c:url value='/project/listProduct/${project.id}'/>">作&nbsp;品</a></li>--%>
     </ul>
     <div class="craft-max ae">
       <div class="craft-introduce1 ae" style="display: block">
