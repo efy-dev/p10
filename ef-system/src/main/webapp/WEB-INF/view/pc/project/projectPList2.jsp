@@ -27,8 +27,8 @@
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <table class="am-table am-table-bordered am-table-radius am-table-striped" >
     <tr style="text-align: left">
-        <td  width="20%">操作</td>
-        <td  width="20%">项目名称</td>
+        <td  width="25%">操作</td>
+        <td  width="15%">项目名称</td>
         <td  width="15%">项目级别</td>
         <td  width="15%">项目类别</td>
         <td  width="15%">城市</td>
@@ -39,7 +39,7 @@
     <c:forEach items="${requestScope.pageInfo.list}" var="project">
        <%int i = 0;%>
         <tr style="text-align: left">
-            <td>
+            <td width="25%">
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
 
@@ -48,6 +48,20 @@
                         <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProductwiki_getProduct2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看作品</button>
                         <%--<button onclick="window.location.href='<c:url value="/basic/xm.do?qm=listMasterProject2Master_default2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search-plus"></span> 查看大师</button>--%>
                         <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProjectFollowed_default&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看关注</button>
+                            <c:if test="${project.status == '1'}">
+                                <button onclick="changeStatus(this,'${project.id}')" status="2"
+                                        class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                        class="am-icon-trash-o">隐藏</span>
+
+                                </button>
+                            </c:if>
+                            <c:if test="${project.status == '2'}">
+                                <button onclick="changeStatus(this,'${project.id}')" status="1"
+                                        class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                        class="am-icon-trash-o">显示</span>
+
+                                </button>
+                            </c:if>
                             <security:authorize ifAnyGranted="admin,operational,c_operational">
                             <c:if test="${empty project.projectRecommendeds}">
                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -85,7 +99,7 @@
                     </div>
                 </div>
             </td>
-            <td width="20%">
+            <td width="15%">
                 <%--<c:if test="${project.level == 1}">--%>
                     <a href="<c:url value="/basic/xm.do?qm=viewProjectwiki&param=project&conditions=project.id:${project.id}&id=${project.id}"/>" >
                       ${project.name}
@@ -144,6 +158,28 @@
         %>
         alert("<%=request.getParameter("message")%>");
         <% } %>
+    }
+
+    function changeStatus(obj,id){
+        var status = $(obj).attr("status");
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/product/project/updateStatus.do"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:id,status:status},
+            success: function (data) {
+                $(obj).attr("status",data);
+                if(status=="1"){
+                    $(obj).find("span").text("隐藏");
+                    $(obj).attr("status","2");
+                }
+                if(status=="2"){
+                    $(obj).find("span").text("显示");
+                    $(obj).attr("status","1");
+                }
+            }
+        });
     }
 
 </script>
