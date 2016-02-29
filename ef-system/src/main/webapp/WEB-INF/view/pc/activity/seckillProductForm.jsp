@@ -69,6 +69,9 @@
     <form action="<c:url value="/basic/xm.do"/>" method="post" class="am-form am-form-horizontal" >
       <input type="hidden" name="id" value="${object.id}">
       <input type="hidden" name="qm" value="saveOrUpdateSeckillProduct">
+        <input type="hidden" name="unusefulAmount" value="0">
+        <input type="hidden" name="orderAmount" value="0">
+        <input type="hidden" name="usefulAmount" value="0">
         <c:if test="${empty object.id}">
             <input type="hidden" name="status" value="1">
         </c:if>
@@ -102,7 +105,7 @@
             <label for="limitAmount" class="am-u-sm-3 am-form-label">限购数量</label>
 
             <div class="am-u-sm-9">
-                <input type="text" name="limitAmount" id="limitAmount" placeholder="" value="${object.limitAmount}" >
+                <input type="text" name="limitAmount"  id="limitAmount" placeholder="" value="${object.limitAmount}" >
             </div>
 
         </div>
@@ -110,7 +113,7 @@
             <label for="amount" class="am-u-sm-3 am-form-label">库存</label>
 
             <div class="am-u-sm-9">
-                <input type="text" name="amount" id="amount" placeholder="" value="${object.amount}" >
+                <input type="text" name="amount" onkeyup="setUsefulAmount(this)" onkeydown="setUsefulAmount(this)" id="amount" placeholder="" value="${object.amount}" >
             </div>
 
         </div>
@@ -175,6 +178,9 @@
         }
 
     });
+    function setUsefulAmount(obj){
+        $("input[name='usefulAmount']").val($(obj).val());
+    }
    function selModel(obj){
 
        var v = $("input[name='sel']").val();
@@ -194,6 +200,7 @@
            });
        }
    }
+
     function selectModel(id,name){
         $("#productModelId").val(id);
         $("#productModelName").val(name);
