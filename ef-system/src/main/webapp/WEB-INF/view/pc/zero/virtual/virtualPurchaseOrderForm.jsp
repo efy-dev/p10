@@ -88,6 +88,20 @@
     </div>
 
     <div class="am-form-group">
+      <label for="starts" class="am-u-sm-3 am-form-label">评价星级<small>*</small></label>
+        <div class="am-u-sm-9">
+          <select id="starts" name="starts" required>
+            <option value="1" <c:if test="${object.purchaseOrderComment.starts == 1}">selected</c:if>>一星评价</option>
+            <option value="2" <c:if test="${object.purchaseOrderComment.starts == 2}">selected</c:if>>二星评价</option>
+            <option value="3" <c:if test="${object.purchaseOrderComment.starts == 3}">selected</c:if>>三星评价</option>
+            <option value="4" <c:if test="${object.purchaseOrderComment.starts == 4}">selected</c:if>>四星评价</option>
+            <option value="5" <c:if test="${empty object.purchaseOrderComment.starts ||
+                                            object.purchaseOrderComment.starts == 5}">selected</c:if>>五星评价</option>
+          </select>
+      </div>
+    </div>
+
+    <div class="am-form-group">
       <div class="am-u-sm-9 am-u-sm-push-3">
         <input type="submit" class="am-btn am-btn-primary" value="保存"/>
       </div>

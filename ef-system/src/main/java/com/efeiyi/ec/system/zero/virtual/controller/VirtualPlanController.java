@@ -205,6 +205,7 @@ public class VirtualPlanController {
         String popId = request.getParameter("id");
         String planId = request.getParameter("planId");
         String content = request.getParameter("content");
+        String stars = request.getParameter("starts");//评价星级
         if (popId == null || popId.trim().equals("")){
             throw new Exception("获取订单商品对象失败:id为空");
         }
@@ -212,6 +213,7 @@ public class VirtualPlanController {
         PurchaseOrderComment poc = new PurchaseOrderComment();
         poc.setContent(content);
         poc.setPurchaseOrderProduct(pop);
+        poc.setStarts(stars);//评价星级、默认是五星
         poc.setStatus("1");
         poc.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(poc.getClass().getName(), poc);
