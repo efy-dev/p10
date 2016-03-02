@@ -7,6 +7,9 @@ import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.personal.AuthorizationUtil;
 import com.efeiyi.ec.personal.ConvertMasterModelUtil;
 import com.efeiyi.ec.personal.master.model.MasterModel;
+import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.project.model.ProjectCategory;
+import com.efeiyi.ec.project.model.ProjectCategoryRecommended;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
@@ -21,10 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by AC丶man on 2015/9/21.
@@ -40,19 +40,59 @@ public class MasterMessageController {
 
     @RequestMapping("/index.do")
     public String mainPage(HttpServletRequest request, Model model) throws Exception {
-        MyUser user = AuthorizationUtil.getMyUser();
-        if (user != null && user.getId() != null) {
-            XQuery xQuery = new XQuery("listMasterFollow_default", request);
-            xQuery.put("user_id", user.getId());
-            List<MasterFollowed> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() > 0) {
-                model.addAttribute("result", "show");
-            } else {
-                model.addAttribute("result", "hide");
-            }
-        } else {
-            model.addAttribute("result", "hide");
+//        MyUser user = AuthorizationUtil.getMyUser();
+//        if (user != null && user.getId() != null) {
+//            XQuery xQuery = new XQuery("listMasterFollow_default", request);
+//            xQuery.put("user_id", user.getId());
+//            List<MasterFollowed> list = baseManager.listObject(xQuery);
+//            if (list != null && list.size() > 0) {
+//                model.addAttribute("result", "show");
+//            } else {
+//                model.addAttribute("result", "hide");
+//            }
+//        } else {
+//            model.addAttribute("result", "hide")
+//        }
+
+        XQuery xQuery = new XQuery("listProjectCategoryRecommended_default", request);
+        List<ProjectCategoryRecommended> projectCategoryRecommendeds = baseManager.listObject(xQuery);//所有推荐类别
+        List<ProjectCategory> list = new ArrayList<ProjectCategory>();
+        for (ProjectCategoryRecommended projectCategoryRecommended : projectCategoryRecommendeds) {
+            list.add(projectCategoryRecommended.getProjectCategory());
         }
+
+
+        XQuery query = new XQuery("listMasterRecommended_byMaster", request);
+        List<MasterRecommended> masterRecommendeds = baseManager.listObject(query);
+        List<Master> masters = new ArrayList<Master>();//所有推荐大师
+        for (MasterRecommended masterRecommended : masterRecommendeds) {
+            masters.add(masterRecommended.getMaster());
+        }
+
+        Map<List<Master>, ProjectCategory> masterRecommends = new HashMap<List<Master>, ProjectCategory>();
+
+
+        if (list != null && !list.isEmpty()) {
+            for (ProjectCategory projectCategory : list) {
+                List<Master> masterList = new ArrayList<Master>();
+                for (Master master : masters) {
+                    List<MasterProject> masterProjects = master.getMasterProjectList();
+                    for (MasterProject masterProject : masterProjects) {
+                        if (masterProject.getProject().getProjectCategory().getId() != null
+                                && masterProject.getProject().getProjectCategory().getId().equals(projectCategory.getId())) {
+                            masterList.add(master);
+                            break;
+                        }
+                    }
+                }
+                masterRecommends.put(masterList, projectCategory);
+            }
+        }
+
+
+        model.addAttribute("masters", masterRecommends);
+
+
         return "/masterMessage/masterMessageList";
     }
 
@@ -72,14 +112,14 @@ public class MasterMessageController {
         List<MasterModel> msgList = new ArrayList<>();
         if (messageList != null && messageList.size() > 0) {
             for (MasterMessage message : messageList) {
-                if (user == null || user.getId() == null){
+                if (user == null || user.getId() == null) {
                     message.getMaster().setFollowStatus("关注");
                     message.setPraiseStatus("赞");
                     message.setStoreStatus("收藏");
-                }else{
+                } else {
                     message.getMaster().setFollowStatus(getFollowStatus(message.getMaster(), (User) baseManager.getObject(User.class.getName(), user.getId())));
                     message.setPraiseStatus(getPraiseStatus(message, (User) baseManager.getObject(User.class.getName(), user.getId())));
-                    message.setStoreStatus(getStorePraiseStatus(message,(User) baseManager.getObject(User.class.getName(), user.getId())));
+                    message.setStoreStatus(getStorePraiseStatus(message, (User) baseManager.getObject(User.class.getName(), user.getId())));
                 }
                 message.setFollowStatus(message.getMaster().getFollowStatus());
                 message.setMasterId(message.getMaster().getId());
@@ -133,7 +173,7 @@ public class MasterMessageController {
         return message.getPraiseStatus();
     }
 
-    public String getStorePraiseStatus(MasterMessage message, User user){
+    public String getStorePraiseStatus(MasterMessage message, User user) {
         String queryHql = "from MasterMessageStore p where p.masterMessage.id=:messageId and p.user.id=:userId";
         LinkedHashMap<String, Object> queryMap = new LinkedHashMap<>();
         queryMap.put("messageId", message.getId());
@@ -151,13 +191,13 @@ public class MasterMessageController {
     public String forwardDetails(HttpServletRequest request, Model model) throws Exception {
         String masterId = request.getParameter("masterId");
         Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
-        XQuery xQuery = new XQuery("listMasterIntroduction_default",request);
-        xQuery.put("master_id",masterId);
+        XQuery xQuery = new XQuery("listMasterIntroduction_default", request);
+        xQuery.put("master_id", masterId);
         List<MasterIntroduction> list = baseManager.listObject(xQuery);
-        if (!StringTools.isEmpty(list)){
-            for (MasterIntroduction intro : list){
-                if ("1".equals(intro.getType())){
-                    model.addAttribute("baseBrief",intro.getContent());
+        if (!StringTools.isEmpty(list)) {
+            for (MasterIntroduction intro : list) {
+                if ("1".equals(intro.getType())) {
+                    model.addAttribute("baseBrief", intro.getContent());
                 }
             }
         }
@@ -370,40 +410,40 @@ public class MasterMessageController {
     @RequestMapping("/userComments/{qm}/{size}/{index}")
     public List getUserComments(HttpServletRequest request, @PathVariable String qm, @PathVariable String size, @PathVariable String index) throws Exception {
         MyUser user = AuthorizationUtil.getMyUser();
-        XQuery xQuery = new XQuery(qm,request);
-        xQuery.put("author_id",user.getId());
+        XQuery xQuery = new XQuery(qm, request);
+        xQuery.put("author_id", user.getId());
         PageEntity entity = new PageEntity();
-        if (!StringTools.isEmpty(index)){
+        if (!StringTools.isEmpty(index)) {
             entity.setIndex(Integer.parseInt(index));
             entity.setSize(Integer.parseInt(size));
         }
         xQuery.setPageEntity(entity);
         PageInfo info = baseManager.listPageInfo(xQuery);
         List<MasterComment> list = info.getList();
-        if (!StringTools.isEmpty(list) && list.size() > 0){
+        if (!StringTools.isEmpty(list) && list.size() > 0) {
             return list;
-        }else{
+        } else {
             return new ArrayList();
         }
     }
 
     @ResponseBody
     @RequestMapping("/userPraises/{qm}/{size}/{index}")
-    public List getUserPraises(HttpServletRequest request, @PathVariable String qm, @PathVariable String size, @PathVariable String index)throws Exception{
+    public List getUserPraises(HttpServletRequest request, @PathVariable String qm, @PathVariable String size, @PathVariable String index) throws Exception {
         MyUser user = AuthorizationUtil.getMyUser();
-        XQuery xQuery = new XQuery(qm,request);
-        xQuery.put("author_id",user.getId());
+        XQuery xQuery = new XQuery(qm, request);
+        xQuery.put("author_id", user.getId());
         PageEntity entity = new PageEntity();
-        if (!StringTools.isEmpty(index)){
+        if (!StringTools.isEmpty(index)) {
             entity.setIndex(Integer.parseInt(index));
             entity.setSize(Integer.parseInt(size));
         }
         xQuery.setPageEntity(entity);
         PageInfo info = baseManager.listPageInfo(xQuery);
         List<MasterCommentPraise> list = info.getList();
-        if (!StringTools.isEmpty(list) && list.size() > 0){
+        if (!StringTools.isEmpty(list) && list.size() > 0) {
             return list;
-        }else{
+        } else {
             return new ArrayList();
         }
     }
@@ -713,13 +753,13 @@ public class MasterMessageController {
             for (MasterIntroduction intro : list) {
                 if ("1".equals(intro.getType())) {
                     model.addAttribute("baseIntro", intro);
-                }else if("2".equals(intro.getType())){
-                    if (!StringTools.isEmpty(intro.getAttachmentList()) && intro.getAttachmentList().size() > 0){
-                        model.addAttribute("publications",intro.getAttachmentList());
+                } else if ("2".equals(intro.getType())) {
+                    if (!StringTools.isEmpty(intro.getAttachmentList()) && intro.getAttachmentList().size() > 0) {
+                        model.addAttribute("publications", intro.getAttachmentList());
                     }
-                }else if("3".equals(intro.getType())){
-                    if (!StringTools.isEmpty(intro.getAttachmentList()) && intro.getAttachmentList().size() > 0){
-                        model.addAttribute("honors",intro.getAttachmentList());
+                } else if ("3".equals(intro.getType())) {
+                    if (!StringTools.isEmpty(intro.getAttachmentList()) && intro.getAttachmentList().size() > 0) {
+                        model.addAttribute("honors", intro.getAttachmentList());
                     }
                 }
             }
@@ -888,9 +928,9 @@ public class MasterMessageController {
         } else {
             work.setStoreStatus("收藏");
         }
-        if(user != null && user.getId() != null){
+        if (user != null && user.getId() != null) {
             work.getMaster().setFollowStatus(getFollowStatus(work.getMaster(), (User) baseManager.getObject(User.class.getName(), user.getId())));
-        }else{
+        } else {
             work.getMaster().setFollowStatus("关注");
         }
         MasterModel workModel = ConvertMasterModelUtil.convertWork(work);

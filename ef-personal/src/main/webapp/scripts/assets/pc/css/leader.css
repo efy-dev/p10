@@ -12,13 +12,12 @@ a{outline: none}
 .c2{height: 200px;background: #000;}
 /*通用头1样式*/
 .nav-bars{background:#3b3b3b;height:32px; }
-.nav-bars .bars{margin: 0 auto;width: 527px;}
-.nav-bars .bars li{margin:0 49px;float: left;height: 32px;line-height: 32px;display: block;padding: 0 21px;}
+.nav-bars .bars{margin: 0 auto;width: 527px;height:32px;text-align:center}
+.nav-bars .bars li{margin:0 49px;height: 32px;line-height: 32px;display:inline-block;padding: 0 21px;}
 .nav-bars .bars li a{font-size: 14px;color: #fff;text-decoration: none;outline: none;}
 .nav-bars .bars .active{border-bottom: 3px solid #fff;}
 /*公共样式组建*/
 /*110110-110113通用头样式*/
-.pc-dynamic .p-dy-left .list-dynamic  li .one-state .state .pos .line.noline{border-left: 0;}
 .great-master{width: 1000px;height: 381px;margin: 0 auto;padding-top: 40px;text-align: center}
 .great-master .master-pic{width: 103px;height: 103px;margin: 0 auto 24px;}
 .great-master .master-pic img{width: 100%}
@@ -37,7 +36,7 @@ a{outline: none}
 
 .great-nav{width: 1000px;margin: 0 auto;height: 32px;}
 
-/*关注*/
+    /*关注*/
 .pc-gz .bt-gz .gz-icon{width: 10px;height: 10px;margin-top: 5px;margin-right: 3px;background:url('../images/cyclopedia.png') no-repeat 0px 0;float: left}
 .pc-gz .bt-gz em{font-size: 12px;float: left}
 .pc-gz  a{font-size: 12px;color: #000;outline: none;}
@@ -59,16 +58,18 @@ a{outline: none}
 .pc-dynamic{width: 1000px;margin: 0 auto;}
 .pc-dynamic .p-dy-left{float: left;width: 683px;margin-top: 20px;}
 .pc-dynamic .p-dy-left .list-dynamic  li{width: 100%;float: left;border-bottom: 2px solid #000;border-top: 2px solid #000;margin-top: -2px;}
-.pc-dy-txt{padding-bottom: 20px;}
 .pc-dy-txt .pc-dy-pic{width: 117px;float: left;}
+.pc-dy-txt{padding-bottom: 20px;}
 .pc-dy-txt .pc-dy-pic .pc-d-pic{width: 80px;height: 80px;margin: 20px 0 14px 20px;}
 .pc-dy-txt .pc-dy-pic .pc-d-pic img{width: 100%;height: 100%}
 .pc-dy-txt .pc-dy-pic  .act-1{margin-left: 34px;padding: 5px 8px;width: 55px;height: 31px;}
+
 .pc-dy-txt .pc-dy-box{width: 566px;float: left;}
 .pc-dy-txt .pc-dy-box h5{font-size: 14px;margin: 27px 0 15px 0;font-weight: 100;}
 .pc-dy-txt .pc-dy-box p{font-size: 12px;color: #999;}
 .pc-dy-txt .pc-dy-box .pc-dy-content{width: 100%;}
 .pc-dy-txt .pc-dy-box .pc-dy-content p{font-size: 14px!important;color: #000!important;margin: 14px 38px  14px 0!important;float:left;width: 100%}
+
 .pc-dy-txt .pc-dy-box .pc-dy-content .one-pic{width: 155px;margin-bottom: 15px;}
 .pc-dy-txt .pc-dy-box .pc-dy-content .one-pic img{width: 100%;}
 .pc-dy-txt .pc-dy-box .pc-dy-content .one-tiem{width: 100%;height: 27px;float: left}
@@ -80,7 +81,7 @@ a{outline: none}
 .pc-dynamic .p-dy-left .list-dynamic  li .one-state .state li a{display: block;text-align: center;font-size: 14px;color: #000;text-decoration: none;outline: none;}
 .pc-dynamic .p-dy-left .list-dynamic  li .one-state .state .pos{display: block;margin-left: 0px;}
 .pc-dynamic .p-dy-left .list-dynamic  li .one-state .state .pos .line{display: block;width: 100%;height: 34px;line-height: 34px;margin: 5px 0;border-left:1px solid #ebebeb; }
-
+.pc-dynamic .p-dy-left .list-dynamic  li .one-state .state .pos .line.noline{border-left: 0;}
 .dnc-icon{width: 14px;height: 14px;background:url('../images/cyclopedia.png') no-repeat -49px -2px;}
 .dnc-icon-2{width: 16px;height: 14px;background:url('../images/cyclopedia.png') no-repeat -82px -4px;}
 .dnc-icon-3{width: 18px;height: 14px;background:url('../images/cyclopedia.png') no-repeat -48px -29px;}
@@ -109,7 +110,7 @@ a{outline: none}
 .pc-dynamic .p-dy-right .f-right-gy .gy-grounp li .bt-gz {width: 53px;padding: 5px 7px;float: left;border: 1px solid #ccc;position: absolute;top:8px;right: 14px;}
 .pc-dynamic .p-dy-right .f-right-gy .gy-grounp li a{color: #000;outline: none;}
 .pc-dynamic .p-dy-right .f-right-gy .gy-grounp li .img-q{width: 50px;height: 50px;left: 9px;top:9px;position: absolute}
-.pc-dynamic .p-dy-right .f-right-gy .gy-grounp li .img-q img{width: 100%;height: 100%;}
+.pc-dynamic .p-dy-right .f-right-gy .gy-grounp li .img-q img{width: 100%;}
 .pc-dynamic .p-dy-right  .f-r-gd{width: 100%;height: 40px;border-right: 1px solid #e5e5e5;border-left:1px solid #e5e5e5;border-top: 3px solid #e5e5e5;border-bottom: 3px solid #e5e5e5;line-height: 35px;text-align: center;margin-top: -1px;font-size: 12px;position: relative}
 .pc-dynamic .p-dy-right  .f-r-gd a{color: #000;text-decoration: none;font-weight: bold}
 .craft-content .commodity-list .commodity-img{width: 180px;height: 180px;position: relative;}
@@ -297,7 +298,7 @@ a{outline: none}
 .details .detaile-right .h4{width: 100%;height: 38px;background: #000;padding: 8px 0 0 9px;font-size: 14px;color: #999}
 .detaile-right .craft-master2 ul{width: 100%}
 .detaile-right .craft-master2{padding:0; }
-.detaile-right .craft-master2 ul li{width: 100%;float: right;margin: -1px 0 0 0;min-height: 154px;}
+.detaile-right .craft-master2 ul li{width: 100%;margin: 0;float: right;margin-top: -1px;}
 .detaile-right .craft-master2 .gz-icon{background: url('../images/cyclopedia.png') no-repeat 0 0px}
 /*end//110209工艺详情页-作品简介*/
 /*--大师--110208工艺详情页-大师*/
@@ -305,7 +306,7 @@ a{outline: none}
 .craft-master2 ul{margin-left: -20px;width: 1020px;}
 .craft-master2 ul li{width: 321px;border: 1px solid #e5e5e5;float: left;padding: 20px;position: relative;margin: 0 0 35px 19px;}
 .craft-master2 ul li .text{padding-left: 127px;width: 100%;float: left;}
-.craft-master2 ul li .text h4{font-size: 12px;color: #000;margin-bottom: 5px;}
+.craft-master2 ul li .text h4{font-size: 14px;color: #000;margin-bottom: 5px;}
 .craft-master2 ul li .text p{font-size: 12px;color: #262626;margin-bottom: 5px;}
 .craft-master2 ul li .text p span{color:#999!important;}
 .craft-master2 ul li .text .btn-guan{width: 51px;height:31px;padding:5px 6px;border: 1px solid #ccc;display:inline-block}
@@ -446,16 +447,61 @@ a{outline: none}
     width: 165px;
     height: auto;
 }
-
-
 /*！--end--！--作品模块--110208工艺详情页-作品*/
-
-
 .content-master .master-bnner .focus .slider-main li img{width: 1000px;}
-
-
-
 .add-obtain{position: relative;float:left;margin: 0;}
 .obtain{width: 100%;float:left}
 .no-list{width: 682px;height: 440px;border: 1px solid #000;float: left;margin-bottom: 37px;}
 .no-list .no-icon{width: 51px;height: 234px;background: url("../images/cyclopedia.png") 0  -180px;display: inline-block;margin: 107px 0 0 316px;}
+/*大师详情*/
+.particulars{margin: 20px auto 0;width:1000px;}
+.particulars .p-left{float:left;width:265px;margin-bottom:30px;}
+.particulars .p-left img{width:200px;height:200px;}
+.particulars .p-left h5{font-size:20px;color:#000;line-height:20px;margin:28px 0 18px 0}
+.particulars .p-left h6{font-size:14px;color:#333;line-height:20px;margin-bottom:25px;}
+.particulars .p-left p{font-size:14px;color:#000;margin-bottom:25px;font-weight:bold}
+.particulars .p-right{float:right;width:702px;border-top:1px solid #000;border-bottom:1px solid #000;padding:18px 0}
+/*尾部*/
+.footernew {border-top:2px solid #e5e5e5}
+.footernew .publ-top {text-align:center;padding:26px 0 18px}
+.footernew .publ-top .city {display:inline-block;margin:0 35px;text-align:center}
+.footernew .publ-top .city dt {width:60px;font-size:36px;border:4px solid #a0a0a0;border-radius:50% 50%;text-align:center;color:#000;height:60px;line-height:48px;display:inline-block}
+.footernew .publ-top .city dd {font-size:14px;color:#000;font-weight:bold;text-align:center;width:120px}
+.footernew .publ-top .city dd p {line-height:17px}
+.footernew .servicenew {background-color:#000;}
+.footernew .servicenew .wechatnew {width:175px;height:130px;float:left;margin-top:6px;margin-left:38px;position:relative}
+.footernew .servicenew .wechatnew .inro-icon0 {background:url(../images/footernew-icon.jpg) no-repeat 0 0;width:175px;height:160px;position:absolute;left:0;top:0px}
+.footernew .servicenew .wechatnew .inro-icon {width:141px;height:143px;background:url(../images/frlinksimg.png) no-repeat 0 -308px;display:block;position:absolute;left:-1px;top:161px}
+.footernew .servicenew .tct {text-align:center}
+.footernew .servicenew .foremax {display:inline-block;margin-left:80px}
+.footernew .servicenew .fore {margin-top:22px;width:131px;float:left;text-align:center}
+.footernew .servicenew .fore dt {font-size:14px;color:#fff;margin-bottom:20px;width:100%}
+.footernew .servicenew .fore dd {line-height:17px;color:#999;font-size:14px}
+.footernew .servicenew .fore dd a {color:#999;font-size:14px;outline:none}
+.footernew .max-links {background:#0c0c0c;border-top:2px solid #161616;z-index:0}
+.footernew .links {background:#000;height:16px;line-height:16px;text-align:center;padding:15px 0;box-sizing:content-box}
+.footernew .links a {margin:0 10px;display:inline-block;box-sizing:content-box;font-size:12px;color:#ccc;font-weight:bold}
+.footernew .links a.line {width:1px;height:10px;background:url(../images/footernew-icon.png) no-repeat 0 -200px;top:2px;position:relative}
+.footernew .links a:hover {color:#f00;text-decoration:underline}
+.footernew .copyright {background:#000;padding:0 0 10px 0;text-align:center}
+.footernew .copyright .phone strong, .footernew .copyright .phone em {font-weight:bold;letter-spacing:5px;font-size:12px;color:#666}
+.footernew .copyright .phone em {font-size:18px}
+.footernew .copyright .frlinks {margin:10px 0}
+.footernew .copyright .frlinks a {color:#666;margin:0 5px;display:inline-block;font-size:12px}
+.footernew .copyright .frlinks span, .footernew .copyright .info {color:#333;font-size:12px;font-weight:bold}
+.footernew .authentication {background:#000;text-align:center;padding-bottom:20px;}
+.footernew .authentication a {display:inline-block;margin:0 20px}
+.footernew .frlinksimg strong {width: 100%;font-size:16px;color:#434242;font-weight:bolder;float: left;margin-bottom: 6px;}
+.footernew .frlinksimg a {width:142px;height:90px;background:url(../images/frlinksimg.png) no-repeat;display:inline-block}
+.footernew .frlinksimg a.icon1 {background-position:0 0}
+.footernew .frlinksimg a.icon2 {background-position:0 -90px;cursor:text}
+.footernew .frlinksimg a.icon3 {background-position:0 -210px;cursor:text}
+.footernew .frlinksimg .line {width:2px;height:40px;display:inline-block;position:relative;top:-36px;background:#434343}
+.footer .frlinksimg {padding:20px 0 30px 0}
+.footer .frlinksimg strong {font-size:14px;color:#666;font-weight:bolder;display:inline-block;position:relative;top:-45px}
+.footer .frlinksimg a {width:142px;height:90px;background:url(../images/frlinksimg.png) no-repeat;display:inline-block}
+.footer .frlinksimg a.icon1 {background-position:0 0}
+.footer .frlinksimg a.icon2 {background-position:0 -90px;cursor:text}
+.footer .frlinksimg a.icon3 {background-position:0 -210px;cursor:text}
+.footer .frlinksimg .line {width:2px;height:40px;display:inline-block;margin:0 20px;position:relative;top:-36px;background:#434343}
+/*--//ENd--footernew--*/
