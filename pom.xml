@@ -21,6 +21,7 @@
         <module>ef-consumer</module>
         <module>tg-website</module>
         <module>app-wikiServer</module>
+        <module>ef-user</module>
     </modules>
 
     <repositories>
