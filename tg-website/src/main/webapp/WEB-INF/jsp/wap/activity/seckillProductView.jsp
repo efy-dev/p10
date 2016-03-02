@@ -61,6 +61,7 @@
         }
 
     </style>
+    <script src="<c:url value="/scripts/wap/js/alert.js"/>"></script>
 </head>
 <body>
 <header class="am-header custom-header">
@@ -446,6 +447,11 @@
         show_time();
         </c:if>
         ChooseCountComponent();
+
+        <c:if test="${not empty stockAlert }">
+            showAlert("提示","库存不足");
+        </c:if>
+
     })
 
 </script>

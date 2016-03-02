@@ -122,7 +122,10 @@ public class SeckillController {
         List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
         Collections.reverse(purchaseOrderProductList);
 
-        //需要判断当前的秒杀是否是再24消失内
+        String stockAlert = request.getParameter("stock");
+        model.addAttribute("stockAlert",stockAlert);
+
+        //需要判断当前的秒杀是否是再24小时内
         //获得当前秒杀的状态 通过时间
         String status = "1";
         String recordStatus = "1";
@@ -202,8 +205,8 @@ public class SeckillController {
                 return "redirect:/miao/" + productId;
             }
             Date currentDate = new Date();
-            if (seckillProduct.getUsefulAmount() <= 0) {
-                return "redirect:/miao/" + productId;
+            if (seckillProduct.getUsefulAmount() < Integer.parseInt(amount)) {
+                return "redirect:/miao/" + productId+"?stock=false";
             }
             if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
                 //秒杀正在进行中
