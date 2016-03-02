@@ -1,0 +1,43 @@
+.addsub .opt a {
+    width: 23px;
+    height: 23px;
+    border: 1px #000 solid;
+    float: left;
+    position: relative;
+}
+
+.addsub .opt a:before {
+    content: '';
+    width: 12px;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -6px;
+    background: #000;
+}
+
+.addsub .opt a.add:after {
+    content: '';
+    width: 1px;
+    height: 13px;
+    position: absolute;
+    top: 50%;
+    margin-top: -6px;
+    left: 50%;
+    margin-left: -1px;
+    background: #000;
+}
+
+.addsub .opt .ipt-txt {
+    width: 30px;
+    height: 23px;
+    padding: 0 5px;
+    text-align: center;
+    line-height: 23px;
+    float: left;
+    border: 0;
+    border-bottom: 1px #000 solid;
+    border-top: 1px #000 solid;
+    font-size: 11px;
+}
