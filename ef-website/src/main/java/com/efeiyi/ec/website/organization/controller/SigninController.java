@@ -5,18 +5,24 @@ package com.efeiyi.ec.website.organization.controller;
  */
 
 import com.efeiyi.ec.organization.model.Consumer;
+import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
+import com.efeiyi.ec.website.base.authentication.ContextUtils;
 import com.efeiyi.ec.website.organization.model.SmsProvider;
 import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
+import com.efeiyi.ec.website.organization.service.AddressManager;
+import com.efeiyi.ec.website.organization.service.UserManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.CookieTool;
+import com.test.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +36,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 
@@ -47,6 +54,22 @@ public class SigninController extends BaseController {
     private BaseManager baseManager;
     @Autowired
     private AutoSerialManager autoSerialManager;
+
+    @RequestMapping({"userServiceTest.do"})
+    @ResponseBody
+    public String userServiceTest() throws Exception {
+        UserManager userManager = (UserManager) ContextUtils.getBean("userServiceProxy");
+        MyUser myUser = userManager.getUserByUserId(AuthorizationUtil.getMyUser().getId());
+        return myUser.getUsername();
+    }
+
+    @RequestMapping({"addressServiceTest.do"})
+    @ResponseBody
+    public List<ConsumerAddress> addressServiceTest() throws Exception {
+        AddressManager addressManager = (AddressManager) ContextUtils.getBean("addressServiceProxy");
+        List<ConsumerAddress> consumerAddressList = addressManager.listConsumerAddressByUserId(AuthorizationUtil.getMyUser().getId());
+        return consumerAddressList;
+    }
 
 
     @RequestMapping("/sso.do")
@@ -99,9 +122,9 @@ public class SigninController extends BaseController {
                 }
             }
             SmsProvider smsProvider = new YunPianSmsProvider();
-            String phoneNumber  =  consumer.getUsername();
+            String phoneNumber = consumer.getUsername();
             HashMap map = null;
-            smsProvider.post(phoneNumber,map,"1186309");
+            smsProvider.post(phoneNumber, map, "1186309");
         }
         return true;
     }

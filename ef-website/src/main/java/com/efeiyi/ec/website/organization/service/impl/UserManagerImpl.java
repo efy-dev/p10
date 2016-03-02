@@ -23,7 +23,7 @@ import java.util.LinkedHashMap;
 
 @Service
 @Transactional
-public class UserManagerImpl implements UserManager, UserDetailsService {
+public class UserManagerImpl implements  UserDetailsService {
 
     @Autowired
     private BaseManager baseManager;

@@ -14,6 +14,54 @@
 <html class="no-js">
 <head>
     <title>秒杀-详情页-已开始</title>
+    <style>
+
+        .addsub .opt a {
+            width: 23px;
+            height: 23px;
+            border: 1px #000 solid;
+            float: left;
+            position: relative;
+        }
+
+        .addsub .opt a:before {
+            content: '';
+            width: 12px;
+            height: 1px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -6px;
+            background: #000;
+        }
+
+        .addsub .opt a.add:after {
+            content: '';
+            width: 1px;
+            height: 13px;
+            position: absolute;
+            top: 50%;
+            margin-top: -6px;
+            left: 50%;
+            margin-left: -1px;
+            background: #000;
+        }
+
+        .addsub .opt .ipt-txt {
+            width: 30px;
+            height: 23px;
+            padding: 0 5px;
+            text-align: center;
+            line-height: 23px;
+            float: left;
+            border: 0;
+            border-bottom: 1px #000 solid;
+            border-top: 1px #000 solid;
+            font-size: 11px;
+        }
+
+    </style>
+    <script src="<c:url value="/scripts/wap/js/alert.js"/>"></script>
 </head>
 <body>
 <header class="am-header custom-header">
@@ -111,6 +159,13 @@
                 <div class="s s3">
                     <div class="status1">剩余库存量<strong id="amount">${seckillProduct.usefulAmount}</strong>件</div>
                 </div>
+
+                <div class="s sadd">
+                    <span>数     量：</span>
+                    <div class="addsub" data-option='{"upLimit":"${seckillProduct.limitAmount}","inputName":"amount"}'
+                         style="float: right;"></div>
+                </div>
+
                 <div class="s s4">
                     <strong>秒杀记录：</strong>
 
@@ -125,7 +180,7 @@
                 </div>
             </c:if>
 
-            <div class="s s5"><span>秒杀规则：</span>每件商品限抢购一件，下单成功后请在15分钟内完成支付</div>
+            <div class="s s5"><span>秒杀规则：</span>每件商品限抢购${seckillProduct.limitAmount}件，下单成功后请在15分钟内完成支付</div>
             <c:if test="${!empty seckillProduct.productModel.product.tenant}">
                 <div class="s s6">
                     <span>服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：</span>由由 ${seckillProduct.productModel.product.bigTenant.name}[${seckillProduct.productModel.product.bigTenant.address}]
@@ -133,15 +188,12 @@
                 </div>
             </c:if>
             <c:if test="${miaoStatus=='2'}">
-                <c:if test="${recordStatus=='1'}">
-                    <div class="bd btn-bg" id="miaoBuy"><a
-                            href="<c:url value="/miao/buy/${seckillProduct.id}/1"/>"
-                            title="立即抢购">立即抢购</a>
-                    </div>
-                </c:if>
-                <c:if test="${recordStatus=='0'}">
-                    <div class="bd btn-bg-no">您已参与秒杀</div>
-                </c:if>
+                <%--<c:if test="${recordStatus=='1'}">--%>
+                    <div class="bd btn-bg" id="miaoBuy"><a onclick="submitMiaoBuy()" title="立即抢购">立即抢购</a></div>
+                <%--</c:if>--%>
+                <%--<c:if test="${recordStatus=='0'}">--%>
+                    <%--<div class="bd btn-bg-no">您已参与秒杀</div>--%>
+                <%--</c:if>--%>
             </c:if>
             <c:if test="${miaoStatus=='3'}">
                 <div class="bd btn-bg-no">秒杀结束</div>
@@ -228,6 +280,12 @@
 
 <script>
 
+    function submitMiaoBuy() {
+        var submitInterface = "<c:url value="/miao/buy/${seckillProduct.id}/"/>" + $("input[name=amount]").val();
+        ;
+        window.location.href = submitInterface;
+    }
+
     function getProductAmount() {
         ajaxRequest("<c:url value="/miao/amount.do"/>", {"productId": "${seckillProduct.id}"}, function (data) {
             $("#amount").html(data);
@@ -272,14 +330,6 @@
     setTimeout("getProductOrder()", 1000);
     setTimeout("getProductAmount()", 1500);
 
-    $().ready(function () {
-        $("img").each(function () {
-            $(this).css("width", "100%")
-        })
-        <c:if test="${miaoStatus=='1'}">
-        show_time();
-        </c:if>
-    })
 
     function timeEnd() {
         // $("#miaoStatus").html("本场秒杀正火热进行中...");
@@ -291,13 +341,8 @@
 
     function show_time() {
         var time_start = new Date().getTime(); //设定当前时间
-        <%--<c:if test="${miaoStatus=='2'}">--%>
-        <%--var time_end = new Date("<fmt:formatDate value="${seckillProduct.endDatetime}" pattern="20YY/MM/dd HH:mm:ss"/>").getTime(); //设定目标时间--%>
-        <%--</c:if>--%>
-        <%--<c:if test="${miaoStatus!='2'}">--%>
         var time_end = new Date("<fmt:formatDate value="${seckillProduct.startDatetime}"
                                              pattern="20YY/MM/dd HH:mm:ss"/>").getTime(); //设定目标时间
-        <%--</c:if>--%>
         // 计算时间差
         var time_distance = time_end - time_start;
 
@@ -330,6 +375,85 @@
             setTimeout("show_time()", 1000);
         }
     }
+
+    //选择数量组建 有个三个可选部分，1 加号 2减号 3.输入框
+    //加号减号分别有可选状态和不可选状态，代表着组建value的上下限
+    //输入框有两种状态 1.可以输入 2.不可以输入 同样也共有上限下限
+    //加减号的组件一版作为表单的一项 还有就是加号减号都有一些毁掉函数
+    //js组件 通过js调用 确定组件再页面中的位置  需要父节点
+    var ChooseCountComponent = function () {
+        var parentDiv = $(".addsub");
+        var options = new Object();
+        options["upLimit"] = 100; //默认上限  当数值达到上限的时候 加号不可点
+        options["downLimit"] = 0; //默认下限   当数值达到下限的时候 减号不可点
+        options["inputStatus"] = 0; //0为不可输入  1为可输入
+        options["defaultValue"] = 1;
+        options["inputName"] = "";
+        var componentOption = parentDiv.attr("data-option"); //json字符串
+        if (typeof componentOption != "undefined") {
+            componentOption = JSON.parse(componentOption);
+
+            if (typeof componentOption["defaultValue"] == "string") {
+                options["defaultValue"] = Number(componentOption["defaultValue"]);
+            }
+            if (typeof componentOption["upLimit"] == "string") {
+                options["upLimit"] = Number(componentOption["upLimit"]);
+            }
+            if (typeof componentOption["downLimit"] == "string") {
+                options["downLimit"] = Number(componentOption["downLimit"]);
+            }
+            if (typeof componentOption["inputStatus"] == "string") {
+                options["inputStatus"] = Number(componentOption["inputStatus"]);
+            }
+            if (typeof componentOption["inputName"] == "string") {
+                options["inputName"] = componentOption["inputName"];
+            }
+        }
+        var html = '<div class="opt"><a class="sub" title="减" ></a><input name="' + options["inputName"] + '" class="ipt-txt" type="text" value="' + options["defaultValue"] + '" /><a class="add" title="加" ></a></div>'
+        //加号的事件
+        var addAction = function (e) {
+            var inputElement = $(e.target).parent().find(".ipt-txt");
+            var actionOptions = options;
+            var currentValue = Number(inputElement.val());
+            if (Number(currentValue) < actionOptions["upLimit"]) {
+                currentValue += 1;
+                inputElement.val(currentValue);
+            }
+        }
+        var subAction = function (e) {
+            var inputElement = $(e.target).parent().find(".ipt-txt");
+            var actionOptions = options;
+            var currentValue = Number(inputElement.val());
+            if (Number(currentValue) > actionOptions["downLimit"]) {
+                currentValue -= 1;
+                inputElement.val(currentValue);
+            }
+        }
+        parentDiv.on("click", ".add", addAction);
+        parentDiv.on("click", ".sub", subAction);
+        parentDiv.html(html);
+    }
+
+
+    //    $().ready(function(){
+    //    });
+
+
+    $().ready(function () {
+        $("img").each(function () {
+            $(this).css("width", "100%")
+        })
+        <c:if test="${miaoStatus=='1'}">
+        show_time();
+        </c:if>
+        ChooseCountComponent();
+
+        <c:if test="${not empty stockAlert }">
+            showAlert("提示","库存不足");
+        </c:if>
+
+    })
+
 </script>
 
 </body>
