@@ -8,6 +8,7 @@ import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.util.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,17 @@ public class SeckillController {
      */
     @RequestMapping("/miao")
     public String listSeckillProduct(HttpServletRequest request, Model model) throws Exception {
+        String requestUrl = request.getRequestURL().toString();
+        String requestParam = request.getQueryString();
+        try {
+            if (!HttpUtil.isPhone(request)) {
+                String url = requestUrl + "?" + requestParam;
+                url = URLEncoder.encode(url, "UTF-8");
+                return "redirect:/toMobile.do?mobileUrl=" + url;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         XQuery seckillQuery = new XQuery("plistSeckillProduct_default", request, 4);
         PageInfo pageInfo = baseManager.listPageInfo(seckillQuery);
         Date currentDate = new Date();
