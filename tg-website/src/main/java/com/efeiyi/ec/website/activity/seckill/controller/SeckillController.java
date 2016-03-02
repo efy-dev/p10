@@ -3,6 +3,7 @@ package com.efeiyi.ec.website.activity.seckill.controller;
 import com.efeiyi.ec.activity.seckill.model.SeckillProduct;
 import com.efeiyi.ec.activity.seckill.model.SeckillRecord;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -38,7 +39,7 @@ public class SeckillController {
      */
     @RequestMapping("/miao")
     public String listSeckillProduct(HttpServletRequest request, Model model) throws Exception {
-        XQuery seckillQuery = new XQuery("plistSeckillProduct_default", request,4);
+        XQuery seckillQuery = new XQuery("plistSeckillProduct_default", request, 4);
         PageInfo pageInfo = baseManager.listPageInfo(seckillQuery);
         Date currentDate = new Date();
         if (pageInfo != null && pageInfo.getList() != null && !pageInfo.getList().isEmpty()) {
@@ -182,9 +183,8 @@ public class SeckillController {
 
 
     @RequestMapping({"/miao/buy/{productId}/{amount}"})
-    public String miaoBuy(@PathVariable String productId, @PathVariable String amount,HttpServletRequest request) throws Exception {
+    public String miaoBuy(@PathVariable String productId, @PathVariable String amount, HttpServletRequest request) throws Exception {
         synchronized (this) {
-
             SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
             String status = "1";
             String recordStatus = "1";
@@ -198,7 +198,7 @@ public class SeckillController {
                     recordStatus = "0";
                 }
             }
-            if (recordStatus.equals("0")){
+            if (recordStatus.equals("0")) {
                 return "redirect:/miao/" + productId;
             }
             Date currentDate = new Date();
@@ -210,7 +210,7 @@ public class SeckillController {
                 status = "2";
                 //再这里减秒杀库存 减去可用库存
                 seckillProduct.setUsefulAmount(seckillProduct.getUsefulAmount() - Integer.parseInt(amount));
-                seckillProduct.setOrderAmount((seckillProduct.getOrderAmount() != null ? seckillProduct.getOrderAmount() : 0) + 1);
+                seckillProduct.setOrderAmount((seckillProduct.getOrderAmount() != null ? seckillProduct.getOrderAmount() : 0) + Integer.parseInt(amount));
                 baseManager.saveOrUpdate(SeckillProduct.class.getName(), seckillProduct);
                 String callback = "a.efeiyi.com/miao/wait/" + seckillProduct.getId() + "?userId=" + AuthorizationUtil.getMyUser().getId();
                 callback = URLEncoder.encode(callback, "UTF-8");
@@ -235,9 +235,9 @@ public class SeckillController {
         String purchaseOrderId = request.getParameter("purchaseOrderId");
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
         if (purchaseOrder.getOrderStatus() == PurchaseOrder.ORDER_STATUS_WRECEIVE) {
-            return "redirect:/miao/share/" + productId + "?userId=" + (request.getParameter("userId") != null ? request.getParameter("userId") : "");
+            return "redirect:/miao/share/" + productId + "?purchaseOrderId=" + purchaseOrderId + "&userId=" + (request.getParameter("userId") != null ? request.getParameter("userId") : "");
         } else {
-            model.addAttribute("redirect", "/miao/share/" + productId + "?userId=" + (request.getParameter("userId") != null ? request.getParameter("userId") : ""));
+            model.addAttribute("redirect", "/miao/share/" + productId + "?purchaseOrderId=" + purchaseOrderId + "&userId=" + (request.getParameter("userId") != null ? request.getParameter("userId") : ""));
             model.addAttribute("productId", productId);
             model.addAttribute("purchaseOrderId", purchaseOrderId);
             return "/activity/orderDeal";
@@ -259,6 +259,15 @@ public class SeckillController {
     public String share(@PathVariable String productId, HttpServletRequest request, Model model) {
         //支付成功的时候需要 +不可用库存 -订单库存
         String currentUserId = request.getParameter("userId");
+        String purchaseOrderId = request.getParameter("purchaseOrderId");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+        int amount = 0;
+        List<PurchaseOrderProduct> purchaseOrderProducts = purchaseOrder.getPurchaseOrderProductList();
+        if (purchaseOrderProducts != null && !purchaseOrderProducts.isEmpty()) {
+            PurchaseOrderProduct purchaseOrderProduct = purchaseOrderProducts.get(0);
+            amount = purchaseOrderProduct.getPurchaseAmount();
+        }
+
         SeckillProduct seckillProduct = (SeckillProduct) baseManager.getObject(SeckillProduct.class.getName(), productId);
         if (AuthorizationUtil.isAuthenticated() && currentUserId.equals(AuthorizationUtil.getUser().getId())) {
             //创建秒杀记录 证明当前用户已经参与过该次秒杀
@@ -268,8 +277,8 @@ public class SeckillController {
             seckillRecord.setSeckillProductId(seckillProduct.getId());
             baseManager.saveOrUpdate(SeckillRecord.class.getName(), seckillRecord);
             model.addAttribute("product", seckillProduct);
-            seckillProduct.setUnusefulAmount((seckillProduct.getUnusefulAmount() != null ? seckillProduct.getUnusefulAmount() : 0) + 1);
-            seckillProduct.setOrderAmount(seckillProduct.getOrderAmount() - 1);
+            seckillProduct.setUnusefulAmount((seckillProduct.getUnusefulAmount() != null ? seckillProduct.getUnusefulAmount() : 0) + amount);
+            seckillProduct.setOrderAmount(seckillProduct.getOrderAmount() - amount);
             baseManager.saveOrUpdate(SeckillProduct.class.getName(), seckillProduct);
             return "/activity/seckillShare";
         } else {

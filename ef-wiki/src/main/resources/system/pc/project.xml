@@ -297,6 +297,7 @@
                         <condition name="groupName" defaultValue="wiki.projectRecommended" operation="eq"/>
                         <condition name="project.projectCategory.id" defaultValue="1" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="project.status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
             </does>
@@ -387,6 +388,7 @@
                     <query name="default" label="默认" type="auto" orderBy="sort:desc">
                         <condition name="group" defaultValue="wiki.categoryRecommended" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="projectCategory.status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
 

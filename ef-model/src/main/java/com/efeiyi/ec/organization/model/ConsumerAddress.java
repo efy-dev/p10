@@ -33,7 +33,7 @@ public class ConsumerAddress implements Serializable {
         this.id = id;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="address_province_id")
     public AddressProvince getProvince() {
         return province;
@@ -43,7 +43,7 @@ public class ConsumerAddress implements Serializable {
         this.province = province;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="address_city_id")
     public AddressCity getCity() {
         return city;
@@ -89,7 +89,7 @@ public class ConsumerAddress implements Serializable {
         this.email = email;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "address_district_id")
     public AddressDistrict getDistrict() {
         return district;
@@ -99,7 +99,7 @@ public class ConsumerAddress implements Serializable {
         this.district = district;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "consumer_id")
     public MyUser getConsumer() {
         return consumer;
