@@ -67,13 +67,13 @@
 <div class="hd" style="width: 1000px;">
 <div class="nav-bars ae">
   <ul class="bars">
-    <li><a href="<c:url value='/masterMessage/index.do'/>">动&nbsp;态</a></li>
-    <c:if test="${result == 'show'}">
-      <li><a href="<c:url value='/masterMessage/forwardUrl'/>">关注</a></li>
-    </c:if>
-    <c:if test="${result == 'hide'}">
-      <li><a href="<c:url value='/masterMessage/getFollowBeforeList'/>">关注</a></li>
-    </c:if>
+    <li><a href="<c:url value='/masterMessage/index.do'/>">推&nbsp;荐</a></li>
+    <%--<c:if test="${result == 'show'}">--%>
+      <%--<li><a href="<c:url value='/masterMessage/forwardUrl'/>">关注</a></li>--%>
+    <%--</c:if>--%>
+    <%--<c:if test="${result == 'hide'}">--%>
+      <%--<li><a href="<c:url value='/masterMessage/getFollowBeforeList'/>">关注</a></li>--%>
+    <%--</c:if>--%>
     <li class="active"><a href="<c:url value='/masterMessage/classify'/>">发&nbsp;现</a></li>
   </ul>
 </div>
@@ -92,7 +92,7 @@
       <ul class="select-list" id="projectClassify">
         <c:if test="${!empty categoryList}">
           <c:forEach items="${categoryList}" var="cate" varStatus="cat">
-              <li><a about="0" onclick="getData(this,'<c:url value="/masterCategory/getClassifyData.do?qm=plistMasterProject_default&conditions=project.id:${cate.project.id};&pageEntity.size=6&pageEntity.index="/>');">${cate.project.name}</a></li>
+              <li><a about="0" onclick="getData(this,'<c:url value="/masterCategory/getClassifyData.do?qm=plistMasterProject_default&conditions=project.id:${cate.id};&pageEntity.size=6&pageEntity.index="/>');">${cate.name}</a></li>
           </c:forEach>
         </c:if>
       </ul>
@@ -109,19 +109,19 @@
         <%--<li><a onclick="getData(this,'<c:url value="/masterCategory/getClassifyData.do?qm=plistMaster_byLevel&conditions=level:4;&pageEntity.size=6&pageEntity.index="/>');" about="0" class="">县级</a></li>--%>
       <%--</ul>--%>
     <%--</div>--%>
-    <%--<div class="f-select-group cl-act">--%>
-      <%--<div class="select-head">--%>
-        <%--<span>地区：</span>--%>
-        <%--<strong><a about="0" onclick="getData(this,'<c:url value="/masterCategory/getClassifyData.do?qm=plistMaster_all&pageEntity.size=6&pageEntity.index="/>')">全部</a></strong>--%>
-      <%--</div>--%>
-      <%--<ul class="select-list" id="cityClassify">--%>
-        <%--<c:if test="${!empty cityList}">--%>
-          <%--<c:forEach items="${cityList}" var="city">--%>
-            <%--<li><a about="0" onclick="getData(this,'<c:url value='/masterCategory/getClassifyData.do?qm=plistMaster_byCity&conditions=originProvince.id:${city.id};&pageEntity.size=6&pageEntity.index='/>')">${city.name}</a></li>--%>
-          <%--</c:forEach>--%>
-        <%--</c:if>--%>
-      <%--</ul>--%>
-    <%--</div>--%>
+    <div class="f-select-group cl-act">
+      <div class="select-head">
+        <span>地区：</span>
+        <strong><a about="0" onclick="getData(this,'<c:url value="/masterCategory/getClassifyData.do?qm=plistMaster_all&pageEntity.size=6&pageEntity.index="/>')">全部</a></strong>
+      </div>
+      <ul class="select-list" id="cityClassify">
+        <c:if test="${!empty cityList}">
+          <c:forEach items="${cityList}" var="city">
+            <li><a about="0" onclick="getData(this,'<c:url value='/masterCategory/getClassifyData.do?qm=plistMaster_byCity&conditions=originProvince.id:${city.id};&pageEntity.size=6&pageEntity.index='/>')">${city.name}</a></li>
+          </c:forEach>
+        </c:if>
+      </ul>
+    </div>
   </div>
   <div class="ae">
     <div class="pc-dynamic" style="margin: 36px auto 0">
