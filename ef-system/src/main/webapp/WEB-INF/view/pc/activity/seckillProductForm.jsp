@@ -71,7 +71,7 @@
       <input type="hidden" name="qm" value="saveOrUpdateSeckillProduct">
         <input type="hidden" name="unusefulAmount" value="0">
         <input type="hidden" name="orderAmount" value="0">
-        <input type="hidden" name="usefulAmount" value="0">
+        <input type="hidden" name="usefulAmount" value="${object.amount}">
         <c:if test="${empty object.id}">
             <input type="hidden" name="status" value="1">
         </c:if>

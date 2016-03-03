@@ -127,7 +127,7 @@ a{outline: none}
 .craft-content .commodity-list .commodity-img img{width: 100%;height: 100%;}
 .craft-content .commodity-list .commodity-txt{width: 180px;text-align: right;}
 .craft-content .commodity-list .commodity-txt p{font-size: 12px;color: #999;text-align: right;}
-.craft-content .commodity-list .commodity-txt h4,.craft-content .commodity-list .commodity-txt h4 a{padding: 14px 0;font-size: 16px;color: #000;text-decoration: none;}
+.craft-content .commodity-list .commodity-txt h4,.craft-content .commodity-list .commodity-txt h4 a{padding: 5px 0;font-size: 14px;color: #000;text-decoration: none;}
 .craft-content .left-icon,
 .craft-content .right-icon {width: 18px;height: 27px;background: url("../images/cyclopedia.png") no-repeat; width:18px;height: 27px;display:block;position: absolute;top:180px;}
 .craft-content .left-icon{background-position: -1px -35px;left: -40px;}
@@ -209,7 +209,8 @@ a{outline: none}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd{width: 272px;float: right;border-left:1px solid #e5e5e5;padding-left: 46px;height: 365px;margin: 0}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd .text1{color: #000;font-size: 12px;padding: 10px 0 20px 0;}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd .text2{font-size: 18px;color: #000;margin-bottom: 10px;}
-.list-find .list-f-content .l-f-left .grounp-f li dl dd .text5{height: 112px;overflow: hidden;font-size: 12px;color: #000;margin-bottom: 10px;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd .text5{font-size: 12px;color: #000;margin-bottom: 10px;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd .newtxt a{float: right;font-size: 12px;}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd p{font-size: 12px;color: #000;margin-bottom: 10px;}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd .text3{margin-right: 25px;font-size: 12px;color: #999;margin-bottom: 42px;}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd .text4{padding: 10px 24px;border: 1px solid #000;color: #000;font-size: 12px;text-decoration: none;outline: none}
@@ -366,21 +367,21 @@ a{outline: none}
 .no-list{width: 682px;height: 440px;border: 1px solid #000;float: left;margin-bottom: 37px;}
 .no-list .no-icon{width: 51px;height: 234px;background: url("../images/cyclopedia.png") 0  -180px;display: inline-block;margin: 107px 0 0 316px;}
 
-/*工艺详情*/
-.particulars{margin: 20px auto 0;width:1000px;background:#fbfbfb}
-.particulars .p-left{float:left;width:265px;margin-bottom:30px;}
-.particulars .p-left img{width:200px;height:200px;}
-.particulars .p-left h5{font-size:20px;color:#000;line-height:20px;margin:28px 0 18px 0}
-.particulars .p-left h6{font-size:14px;color:#666;line-height:20px;margin-bottom:25px;}
-.particulars .p-left p{font-size:14px;color:#000;margin-bottom:25px;font-weight:bold}
-.particulars .p-right{float:right;width:702px;border-top:1px solid #000;border-bottom:1px solid #000;padding:18px 0;background:#fff}
-.particulars .recommend h5{font-size:18px;color:#666;margin:45px 0 25px 20px;width:100%;float:left;}
+/*宸ヨ壓璇︽儏*/
+.particulars{margin: 0 auto;width:1000px;background:#fbfbfb}
+.particulars .title{padding-left: 28px;}
+.particulars .title h2{color: #000;font-size: 30px;margin: 28px 0;}
+.particulars .title .label{color: #000;font-size: 16px;margin-bottom: 30px}
+.particulars .title .label span{margin-right:30px;}
+.particulars .p-right{width:100%;border-top:1px solid #000;border-bottom:1px solid #000;padding:18px 0;background:#fff;float: left;margin-bottom: 102px}
+.particulars .recommend h5{font-size:18px;color:#333;margin:25px 0 25px 28px;width:100%;float:left;}
+.particulars .recommend{border-top: 1px solid #000;margin-top: 18px}
 .particulars .recommend .rec-pic{}
-.particulars .recommend .rec-pic li{float:left;width:150px;margin-left:20px}
-.particulars .recommend .rec-pic li img{width:150px;height:120px;}
-.particulars .recommend .rec-pic li p{margin-top:8px;font-size:14px;color:#333;text-align:left}
+.particulars .recommend .rec-pic li{float:left;width:214px;margin-left:28px}
+.particulars .recommend .rec-pic li img{width:214px;height:170px;}
+.particulars .recommend .rec-pic li p{margin-top:8px;font-size:14px;color:#333;text-align:left;font-weight: bold}
 
-/*尾部*/
+/*灏鹃儴*/
 .footernew {border-top:2px solid #e5e5e5}
 .footernew .publ-top {text-align:center;padding:26px 0 18px}
 .footernew .publ-top .city {display:inline-block;margin:0 35px;text-align:center}

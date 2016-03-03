@@ -113,7 +113,6 @@
 
 
 
-
 <script>
 
   $(document).ready(function(){
@@ -166,14 +165,16 @@
                     "<div class='gz-q'> <i class='gz-icon'></i> <em about='add' id='"+data[i].projectId+"'>"+word+"</em> </div> " +
                     "</a> </div> </li>");*/
            var box = $("<li> <dl> <dt><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-classify-left\"></a> " +
-                   "<div class=\"list-moods\"> <a href=\"#\"><i class=\"img-icon\"></i></a> " +
-                   "<em>"+data[i].fsAmount+"</em> </div></dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
+                   "" +
+                   " </dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
                    "<div class=\"text2\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><span>"+data[i].projectName+"</span></a></div>  <p>"+levelName+"</p> " +
                    "<div class='text5' id='Reimg'>"+data[i].description+"</div> " +
                    "" +
                    "</div> " +
+                   "<div class='newtxt ae'>"+"<a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">"+"更多"+"</a>"+"</div>"+
                    "" +
                    "</dd> </dl> </li> ");
+
 
            /* var box = $("<li> <dl> <dt><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-classify-left\"></a> " +
                     "<div class=\"list-moods\"> <a href=\"#\"><i class=\"img-icon\"></i></a> " +
@@ -187,6 +188,11 @@
             pubu.append(box);
             //PBL("#beforeAttention",".before",2);
             $("#classify").children("#Reimg").children("img").remove();
+            var txt = $(".list-find .list-f-content .l-f-left .grounp-f li dl dd .text5");
+            var txt_length = txt.text().length;
+            if(txt_length>200){
+              txt.text(txt.text().substr(0,100)).append("...")
+            }
           }
 
         }else{
@@ -580,7 +586,9 @@
 
   }
 
+
 </script>
+
 <!-- //End--footer-->
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 </body>

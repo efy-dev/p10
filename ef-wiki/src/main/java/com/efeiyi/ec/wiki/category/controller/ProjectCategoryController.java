@@ -112,7 +112,7 @@ public class ProjectCategoryController extends BaseController {
 
     @RequestMapping("/pc/category")
     public ModelAndView getProjectCategoryList2(HttpServletRequest request, Model model)throws Exception{
-        XQuery xQuery = new XQuery("plistProjectCategory_byType",request);
+        XQuery xQuery = new XQuery("listProjectCategory_byType",request);
         List<ProjectCategory> list = baseManager.listObject(xQuery);
         model.addAttribute("ProjectCategoryList",list);
         XQuery xQuery2 = new XQuery("listAddressProvince_default",request);
