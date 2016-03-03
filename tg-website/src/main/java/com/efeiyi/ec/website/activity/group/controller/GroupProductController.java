@@ -9,6 +9,7 @@ import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.taglib.PageEntity;
+import com.ming800.core.util.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
@@ -37,6 +39,17 @@ public class GroupProductController {
 
     @RequestMapping({"/tuan", "/tuan.do"})
     public String listProduct1(HttpServletRequest request, Model model) throws Exception {
+        String requestUrl = request.getRequestURL().toString();
+        String requestParam = request.getQueryString();
+        try {
+            if (!HttpUtil.isPhone(request)) {
+                String url = requestUrl + "?" + requestParam;
+                url = URLEncoder.encode(url, "UTF-8");
+                return "redirect:/toMobile.do?mobileUrl=" + url;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "/groupProduct/groupProductList";
     }
 

@@ -1,0 +1,427 @@
+@charset "utf-8";
+h1,h2,h3,h4,h5,h6{padding:0;margin: 0;list-style: none;}
+/*常用公共样式*/
+.ae{width: 100%;float: left}
+.rf{width: 100%;float: right}
+.pr{border-bottom: 0!important;margin-bottom: 102px;}
+a{outline: none}
+/*end常用公共样式*/
+/*110208工艺详情页-作品*/
+/*--nav头部--*/
+.craft-details{width: 1000px;margin: 0 auto;}
+.craft-details .craft-banner{width: 100%;height: 200px;position: relative;float: left}
+.craft-details .craft-banner img{width: 100%;height: 100%}
+.craft-details .cart-b-page{position: absolute;left: 20px;top:52px;width: 100%;overflow: hidden}
+.craft-details .cart-b-page h5{font-size: 24px;color: #fff;margin-bottom: 20px;font-weight: 100;}
+.craft-details .cart-b-page p{font-size: 14px;color: #fff;margin-bottom: 12px;}
+.craft-details .max-atten{font-size: 12px;}
+.craft-details .max-atten .attention{padding: 6px 10px;background: #fff;border: 1px solid #ccc;float: left;}
+.craft-details .max-atten .attention em{float: left;padding-left: 3px;color: #000;}
+.craft-details .max-atten .atten-icon{width: 10px;height: 10px;background: url(../images/cyclopedia.png) no-repeat;float: left;margin-top: 4px;}
+.craft-details .max-atten .attention-page{padding: 7px 14px;background: #4c4c4c;float: left;color: #ccc;}
+.craft-details .craft-nav{background:#3B3B3B;height: 33px;}
+.craft-details .craft-nav {width: 100%;float: left;height: 33px;padding:0 228px;ine-height: 34px; }
+.craft-details .craft-nav  li{margin:0 51px;float: left;height:33px;line-height: 34px;}
+.craft-details .craft-nav  li a{font-size: 14px;color: #ccc;text-decoration: none;padding: 0 22px;outline: none}
+.craft-details .craft-nav  li a:hover{color: #fff;}
+.craft-details .craft-nav  .active{border-bottom: 4px solid #fff;}
+.craft-details .craft-nav  .active a{color: #fff!important;}
+.nav-bars{background:#3b3b3b;height:32px; }
+.nav-bars .bars{margin: 0 auto;width: 527px;height:32px;text-align:center}
+.nav-bars .bars li{margin:0 49px;height: 32px;line-height: 32px;display:inline-block;padding: 0 21px;}
+.nav-bars .bars li a{font-size: 14px;color: #fff;text-decoration: none;outline: none;}
+.nav-bars .bars .active{border-bottom: 3px solid #fff;}
+/*！--end--！--nav头部--*/
+/*--作品模块--110208工艺详情页-作品*/
+.craft-max{}
+.craft-work3{padding-top: 35px;}
+/*--标签--110208工艺详情页-作品*/
+.craft-work3 .library{padding-bottom: 35px;}
+.craft-work3 .library li{float: left;margin-right: 20px;}
+.craft-work3 .library a{padding:10px 40px;display: block;font-size: 16px;color: #000;border: 1px solid #505050;text-decoration: none;}
+.craft-work3 .library a:hover,.craft-work3 .library .active a{background: #505050;color: #fff;}
+.craft-work3 .list-box{padding-top: 10px;}
+.craft-work3 .list-box .box-l{float: left;}
+.craft-work3 .list-box .box-l a{padding: 7px 34px;border: 1px solid #000;background: #fff;color: #000;font-size: 14px;margin-right: 10px;}
+.craft-work3 .list-box .box-l a:hover{background: #000;color: #fff;}
+/*--作品瀑布流--110208工艺详情页-作品*/
+#pubu{position: relative}
+.craft-work3 .river ul{padding-bottom: 102px;}
+.craft-work3 .craft-page{width: 235px;float: left;border: 1px solid #e5e5e5;margin-right: 20px;margin-bottom: 20px;}
+.craft-work3 .craft-page img{width: 100%;height: 100%;float: left;}
+.craft-work3 .craft-page h4{padding: 16px 0 16px 10px;font-size: 14px;float: left;color: #000;}
+.craft-work3 .craft-page .function-page{padding:0 10px 16px 10px;}
+.craft-work3 .craft-page .function-page .d-left{float: left;}
+.craft-work3 .craft-page .function-page .d-left .h-i-con{width: 10px;height: 10px;float: left;background: url(../images/cyclopedia.png) no-repeat 0 -17px;margin-top: 2px;}
+.craft-work3 .craft-page .function-page .d-left span{font-size: 10px;color: #000;float: left;margin-left: 5px;}
+.craft-work3 .craft-page .function-page .d-right{float: right}
+.craft-work3 .craft-page .function-page .d-right .right1{float: left;}
+.craft-work3 .craft-page .function-page .d-left .h-i-con{width: 10px;height: 10px;float: left;background: url(../images/cyclopedia.png) no-repeat 0 -17px;margin-top: 2px;}
+.craft-work3 .craft-page .function-page .d-left span{font-size: 10px;color: #000;float: left;margin-left: 5px;}
+.craft-work3 .craft-page .function-page .d-right .right2{float: right;margin-left: 20px;}
+.craft-work3 .craft-page .function-page .d-right .right1 .h-i-con2{width: 10px;height: 10px;float: left;background: url(../images/cyclopedia.png) no-repeat -19px 0px;margin-top: 2px;}
+.craft-work3 .craft-page .function-page .d-right .right1 span{font-size: 10px;color: #000;float: left;margin-left: 5px;}
+.craft-work3 .craft-page .function-page .d-right .right2 .h-i-con3{width: 11px;height: 10px;float: left;background: url(../images/cyclopedia.png) no-repeat -19px -15px;margin-top: 2px;}
+.box {
+    padding: 15px 0 0 15px;
+    float: left;
+}
+
+.pic {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #ccc;
+}
+
+.pic img {
+    width: 165px;
+    height: auto;
+}
+
+/*！--end--！--作品模块--110208工艺详情页-作品*/
+/*，end，110208工艺详情页-作品*/
+/*--介绍--110208工艺详情页-介绍*/
+.craft-introduce1{width: 680px;margin: 0 160px;float: left;padding-bottom: 72px;}
+.craft-introduce1 h4{font-size: 18px;color: #000;font-weight: 100;padding-top:34px;}
+.craft-introduce1 p{font-size: 14px;color: #000;padding-top: 22px;}
+.craft-introduce1 img{margin: 35px 0;width: 100%;}
+.craft-introduce1 .fgx{margin: 0;border-top: 2px solid #000;}
+/*，end，110208工艺详情页-介绍*/
+/*--大师--110208工艺详情页-大师*/
+.craft-master2{padding-top: 35px;padding-bottom: 67px;}
+.craft-master2 ul{margin-left: -20px;width: 1020px;}
+.craft-master2 ul li{width: 321px;border: 1px solid #e5e5e5;float: left;padding: 20px;position: relative;margin: 0 0 35px 19px;}
+.craft-master2 ul li .text{padding-left: 127px;width: 100%;float: left;}
+.craft-master2 ul li .text h4{font-size: 14px;color: #000;margin-bottom: 5px;}
+.craft-master2 ul li .text p{font-size: 12px;color: #262626;margin-bottom: 5px;height: 20px;overflow: hidden}
+.craft-master2 ul li .text p span{color:#999!important;}
+.craft-master2 ul li .text .btn-guan{width: 53px;height:31px;padding:5px 7px;border: 1px solid #ccc;display:inline-block;cursor: pointer}
+.craft-master2 .gz-icon{background:url('../images/cyclopedia.png') no-repeat -34px 0px;width: 10px;height: 10px;float: left;margin-top: 4px;margin-right: 3px;}
+.craft-master2 ul li .text .btn-guan em{float: left;font-size: 12px;color: #000;}
+.craft-master2 ul li .img{position: absolute;left: 20px;top: 20px;width: 108px;height: 108px;}
+.craft-master2 ul li .img img{width: 100%;height: 100%}
+/*，end，110208工艺详情页-大师*/
+/*110201工艺首页-动态*/
+.home-craft .max-banner{height: 300px;left: 0;top: 0;z-index: 1;position: relative}
+.home-craft .max-banner .content-lbt-img li{width: 100%;height: 100%;position: absolute;left: 0;top: 0;}
+.home-craft .max-banner .content-lbt-img li img{width: 100%;height: 100%;}
+.home-craft .content-umn{position: absolute;z-index:100;top:277px;left: 481px;width: 96px;height: 10px;}
+.home-craft .content-umn li{width:10px!important;height: 10px!important;border-radius: 50%;  float:left;cursor: pointer;margin-right:10px;background: #fff;}
+.home-craft .content-umn .active{background: #666666;}
+/*-----------banner-----------*/
+.craft-content{border-bottom: 2px solid #000;
+    position: relative;}
+.craft-content h4{font-size: 24px;color: #000;padding: 35px 0;font-weight: 100;}
+.craft-content .commodity-list{width:1000px;height:310px;position: relative;
+    overflow: hidden}
+.craft-content .commodity-list ul {
+    float: left;
+}
+.craft-content .commodity-list li{margin-bottom: 30px;margin-right: 25px;float: left;}
+
+.craft-content .commodity-list .commodity-img{width: 180px;height: 180px;position: relative;}
+.craft-content .commodity-list .commodity-img .list-moods{position: absolute;right: 2px;top:2px;padding: 3px 4px;display: block;background: #fff;border-radius:10%; }
+.craft-content .commodity-list .commodity-img .img-icon{margin-top: 4px;margin-right: 5px;background: url("../images/cyclopedia.png") no-repeat 0 -16px;display:block;width: 10px;height: 10px;float: left;}
+.craft-content .commodity-list .commodity-img em{font-size:10px;color: #000;float: left}
+.craft-content .commodity-list .commodity-img img{width: 100%;height: 100%;}
+.craft-content .commodity-list .commodity-txt{width: 180px;text-align: right;}
+.craft-content .commodity-list .commodity-txt p{font-size: 12px;color: #999;text-align: right;}
+.craft-content .commodity-list .commodity-txt h4,.craft-content .commodity-list .commodity-txt h4 a{padding: 14px 0;font-size: 16px;color: #000;text-decoration: none;}
+.craft-content .left-icon,
+.craft-content .right-icon {width: 18px;height: 27px;background: url("../images/cyclopedia.png") no-repeat; width:18px;height: 27px;display:block;position: absolute;top:180px;}
+.craft-content .left-icon{background-position: -1px -35px;left: -40px;}
+.craft-content .right-icon{background-position: -20px -35px;;right: -66px;}
+/*edn//110201工艺首页-动态*/
+/*110202工艺首页-关注*/
+.craft-gz{margin-bottom: 62px;}
+.craft-gz .craft-wz{padding: 17px 0;border-bottom: 2px solid #000;font-size: 24px;color: #999;}
+.craft-gz .craft-ts{padding: 35px 0;font-size: 14px;color: #999;text-align: center}
+.craft-gz .craft-list .craft-l-page{margin-left:-40px;width: 1040px;}
+.craft-gz .craft-list .craft-l-page li{padding: 20px;margin-left: 40px;position: relative;border: 1px solid #a0a0a0;width: 480px;float: left;margin-bottom: 40px;height: 222px;}
+.craft-gz .craft-list .craft-l-page li .etext{padding-left: 198px;height: 180px;}
+.craft-gz .craft-list .craft-l-page li .etext .dz{font-size: 12px;color: #000;margin-bottom: 12px;}
+.craft-gz .craft-list .craft-l-page li .etext h5{font-size: 18px;color: #000;margin-bottom: 5px;font-weight: 100;}
+.craft-gz .craft-list .craft-l-page li .etext p{font-size: 12px;color: #000;margin-bottom: 10px;}
+.craft-gz .craft-list .craft-l-page li .etext p strong{color: #999;margin-right: 24px;}
+.craft-gz .craft-list .craft-l-page li .etext .gz-q .gz-icon{width: 10px;height: 10px;margin-top: 5px;margin-right: 3px;background:url('../images/cyclopedia.png') no-repeat -34px 0;float: left}
+.craft-gz .craft-list .craft-l-page li .etext .gz-q em{font-size: 12px;float: left}
+.craft-gz .craft-list .craft-l-page li .etext a{font-size: 12px;color: #000}
+.craft-gz .craft-list .craft-l-page li .etext .gz-q{width: 51px;height:31px;padding: 5px 6px;float: left;border: 1px solid #ccc;}
+.craft-gz .craft-list .craft-l-page li .eimg{position: absolute;left: 20px;top:20px;width: 180px;height: 180px;}
+.craft-gz .craft-list .craft-l-page li .eimg img{width: 100%;height: 100%;}
+.craft-master2 ul li .text .gz-icon{width: 10px;height: 10px;margin-top: 5px;margin-right: 3px;background:url('../images/cyclopedia.png') no-repeat -34px 0;float: left}
+
+
+
+
+
+.loding{text-align: center;width:100%;float: left;margin-bottom: 200px;}
+/*edn//110202工艺首页-关注*/
+/*110202工艺首页-关注后*/
+.craft-l-content{padding: 35px 0;border-bottom: 2px solid #000;}
+.craft-l-content .craft-dt{width: 363px!important;position: relative;}
+.craft-l-content .craft-dt .img-dt{width: 160px;height: 160px;position: absolute;left: 0;top:0;}
+.craft-l-content .craft-dt .img-dt img{width: 100%;height: 100%;}
+.craft-l-content .craft-dt .img-txt{padding-left: 177px;width: 100%;height: 180px;padding-top:10px;}
+.craft-l-content .craft-dt .img-txt p{font-size: 18px;color: #000;float: left}
+.craft-l-content .craft-dd{width: 637px!important;float: right!important;height: 382px;overflow: hidden;}
+.craft-l-content .craft-dt .img-dt .list-moods{position: absolute;right: 2px;top:2px;padding: 3px 4px;display: block;background: #fff;border-radius:10%; }
+.craft-l-content .craft-dt .img-dt .img-icon{margin-top: 4px;margin-right: 5px;background: url("../images/cyclopedia.png") no-repeat 0 -16px;display:block;width: 10px;height: 10px;float: left;}
+.craft-l-content .craft-dt .img-dt em{font-size:10px;color: #000;float: left}
+.craft-l-content .craft-dt .img-dt img{width: 100%;height: 100%;}
+.craft-l-content .craft-dt .img-txt .xz-max{width: 100%;float: left}
+.craft-l-content .craft-dt .img-txt .xz-max .xz-left{font-size: 60px;color: #000;float: left;padding-right: 6px;}
+.craft-l-content .craft-dt .img-txt .xz-max .xz-right{float: left;padding-top: 20px;font-size: 16px;color: #666;}
+.craft-l-content .craft-dt .img-txt .p1{font-size: 12px;color: #666;}
+.craft-l-content .craft-dt .img-txt .p1 span{color: #000;font-size: 18px;}
+.craft-l-content .craft-dd ul{margin-left: -9px;width: 646px;}
+.craft-l-content .craft-dd ul li{margin-left: 9px;margin-bottom: 35px;width: 120px;float: left}
+.craft-l-content .craft-dd ul li img{width: 120px;height: 120px;}
+.craft-l-content .craft-dd ul li p a{font-size: 12px;color: #000;text-align: right;padding: 14px 0;float: right;text-decoration: none;}
+/*edn//110202工艺首页-关注后*/
+/*110204工艺首页-列表*/
+.list-find{width: 1000px;margin: 0 auto;}
+.list-find .list-f-title{width: 100%;float: left;padding: 20px 0;}
+.list-find .list-f-title p{font-size: 14px;color: #ccc;}
+.list-find .list-f-title p a{font-size: 14px;color: #ccc;float: left}
+.list-find .list-f-title  .fu-icon{width: 12px;height: 12px;background: url("../images/cyclopedia.png") no-repeat -37px -59px;float: left;margin: 4px 5px;}
+.list-find .list-f-title span{color: #000!important;float: left}
+.list-find .list-f-select{width: 100%;float: left;border: 1px solid #e5e5e5;padding:0 20px}
+.list-find .list-f-select .f-select-group{border-bottom: 1px solid #e5e5e5;padding: 20px 0;width: 100%;float: left;position: relative}
+.list-find .list-f-select .f-select-group .select-list{padding-left: 138px;width: 100%;float: left;}
+.list-find .list-f-select .f-select-group .select-list li{float: left;font-size: 14px;color: #000;margin: 0 36px 20px 0;}
+.list-find .list-f-select .f-select-group .select-list li a{color: #000;text-decoration: none;outline: none;}
+.list-find .list-f-select .f-select-group .select-head{position: absolute;left: 0;top: 20px;font-size: 14px;color: #000;}
+.list-find .list-f-select .f-select-group .select-head span{float: left;width:74px;}
+.list-find .list-f-select .f-select-group .select-head strong{float: left;width: 64px;}
+.list-find .list-f-select .f-select-group .select-head strong a{color: #000;text-decoration: none;outline: none;}
+.list-find .list-f-select .f-select-group .active{color:#ff0000!important;}
+.list-find .list-f-select .cl-act{border-bottom:0; }
+.list-find .list-f-content{width: 100%;float: left;padding-bottom: 102px;margin-top: 35px;}
+.list-find .list-f-content .l-f-left{width: 683px;float: left;}
+.list-find .list-f-content .l-f-right{width: 272px;float: right;}
+.list-find .list-f-content .l-f-left .grounp-f{width: 100%;float: left;}
+.list-find .list-f-content .l-f-left .grounp-f li{width: 683px;border-top: 2px solid #000;border-bottom: 2px solid #000;padding: 35px 0;float: left;margin-top: -2px;}
+.list-find .list-f-content .l-f-left .grounp-f li dl{width: 100%;float: left;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dt{position: relative;float: left;width: 365px;height: 365px;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dt img{width: 100%;height: 100%;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd{width: 272px;float: right;border-left:1px solid #e5e5e5;padding-left: 46px;height: 365px;margin: 0}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd .text1{color: #000;font-size: 12px;padding: 10px 0 20px 0;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd .text2{font-size: 18px;color: #000;margin-bottom: 10px;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd .text5{font-size: 12px;color: #000;margin-bottom: 10px;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd .newtxt a{float: right;font-size: 12px;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd p{font-size: 12px;color: #000;margin-bottom: 10px;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd .text3{margin-right: 25px;font-size: 12px;color: #999;margin-bottom: 42px;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd .text4{padding: 10px 24px;border: 1px solid #000;color: #000;font-size: 12px;text-decoration: none;outline: none}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd .text4:hover{background: #000;color: #fff;}
+.list-find .list-f-content .l-f-right .f-right-gy{margin-bottom: 20px;}
+.list-find .list-f-content .l-f-right .h4{width: 100%;height: 38px;background: #000;padding: 8px 0 0 9px;font-size: 14px;color: #999}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li{width: 100%;height: 70px;border: 1px solid #e5e5e5;padding: 9px;position: relative;margin-top: -1px;}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .text{padding-left: 60px;}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .text .p1{font-size: 14px;color: #000;padding-bottom: 5px;}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .text .p2{font-size: 12px;color: #999;}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .bt-img{width: 50px;height: 50px;}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .bt-gz .gz-icon{width: 10px;height: 10px;margin-top: 5px;margin-right: 3px;background:url('../images/cyclopedia.png') no-repeat 0px 0;float: left}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .bt-gz em{font-size: 12px;float: left}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .etext a{font-size: 12px;color: #000}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .bt-gz {width: 53px;height:31px;padding: 5px 7px;float: left;border: 1px solid #ccc;position: absolute;top:8px;right: 14px;}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li a{color: #000;}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .img-q{width: 50px;height: 50px;left: 9px;top:9px;position: absolute}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .img-q img{width: 100%;height: 100%;}
+.list-find .list-f-content .l-f-right .f-r-gd{width: 100%;height: 40px;border-top: 3px solid #e5e5e5;border-bottom: 3px solid #e5e5e5;line-height: 35px;text-align: center;margin-top: -1px;font-size: 12px;position: relative}
+.list-find .list-f-content .l-f-right .f-r-gd a{color: #000;text-decoration: none;}
+.craft-content .commodity-list .commodity-img{width: 180px;height: 180px;position: relative;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dt .list-moods{position: absolute;right: 2px;top:2px;padding: 3px 4px;display: block;background: #fff;border-radius:10%; }
+.list-find .list-f-content .l-f-left .grounp-f li dl dt .img-icon{margin-top: 4px;margin-right: 5px;background: url("../images/cyclopedia.png") no-repeat 0 -16px;display:block;width: 10px;height: 10px;float: left;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dt em{font-size:10px;color: #000;float: left}
+.list-find .list-f-content .l-f-left .grounp-f li dl dt img{width: 100%;height: 100%;}
+.list-find .list-f-content .l-f-right .f-r-gd .f-r-gd{width: 5px;height: 5px;background:url('../images/cyclopedia.png') no-repeat -38px -30px;position: absolute;top:14px;left: 167px;}
+/*end//110204工艺首页-列表*/
+/*110209工艺详情页-作品简介*/
+.details{padding-bottom: 82px;}
+.details .detaile-left{width: 683px;float: left;}
+.details .detaile-left .detaile-img{width: 100%;height: 384px;}
+.details .detaile-left .detaile-img img{width: 100%;height: 100%;}
+.details .detaile-left .detaile-share{width: 100%;z-index: 100;}
+.details .detaile-left .detaile-share .jiathis_style {width:222px;padding-top:23px;padding-bottom:37px;padding-left:50px;float:left;box-sizing:content-box}
+.details .detaile-left .detaile-share .jiathis_style .jiathis_txt {color:#666}
+.details .detaile-left .detaile-share .jiathis_style .jtico {background:url(../images/icon-share.png) no-repeat;width:21px;height:21px!important;margin-left:5px;opacity:1;filter:alpha(opacity=100);-webkit-transition:all 0.4s;-moz-transition:all 0.4s;transition:all 0.4s}
+.details .detaile-left .detaile-share .jiathis_style .jtico:hover {opacity:0.4;filter:alpha(opacity=40)}
+.details .detaile-left .detaile-share .jiathis_style .jtico_weixin {background-position:0 0}
+.details .detaile-left .detaile-share .jiathis_style .jtico_tqq {background-position:-21px 0;width:22px}
+.details .detaile-left .detaile-share .jiathis_style .jtico_tsina {background-position:-43px 0}
+.details .detaile-left .detaile-share .jiathis_style .jtico_cqq {background-position:-65px 0;width:22px}
+.details .detaile-left .detaile-share {width:100%;height:44px;line-height:44px;padding-left:170px;position:relative;z-index:999}
+.details .detaile-left .detaile-share .jiathis_style {background:#7f7f7f;height:44px;float:left;padding:0 13px;position:absolute;top:-1px;left:-1px;border-right:1px #000 solid}
+.details .detaile-left .detaile-share .jiathis_style .jtico {background:url(../images/icon-share.png) no-repeat;width:21px;height:21px!important;margin-left:5px;margin-top:10px}
+.details .detaile-left .detaile-share .jiathis_style .jiathis_txt {line-height:44px!important;color:#fff}
+.details .detaile-left .detaile-share .jiathis_style .jtico_weixin {background-position:0 -21px}
+.details .detaile-left .detaile-share .jiathis_style .jtico_tqq {background-position:-21px -21px;width:22px}
+.details .detaile-left .detaile-share .jiathis_style .jtico_tsina {background-position:-43px -21px;width:22px}
+.details .detaile-left .detaile-share .jiathis_style .jtico_cqq {background-position:-65px -21px;width:22px}
+.details .detaile-left .detaile-share .jiathis_style a:hover .jtico_weixin {background-position:0 0}
+.details .detaile-left .detaile-share .jiathis_style a:hover .jtico_tqq {background-position:-21px 0;width:22px}
+.details .detaile-left .detaile-share .jiathis_style a:hover .jtico_tsina {background-position:-43px 0}
+.details .detaile-left .detaile-share .jiathis_style a:hover .jtico_cqq {background-position:-65px 0;width:22px}
+.details .detaile-left .detaile-share .thumb-up{width: 305px;float: right;padding: 30px 0}
+/*.details .detaile-left .detaile-share .thumb-up .thump-assist{float: left;margin-right: 30px;}*/
+.details .detaile-left .detaile-share .thumb-up .thump-assist .z-icon{width: 18px;height: 16px;background:url('../images/cyclopedia.png') no-repeat -49px -2px;float: left;margin-top: 13px;margin-right: 10px;}
+.details .detaile-left .detaile-share .thumb-up .thump-assist em{float: left;font-size: 14px;color: #000;}
+.details .detaile-left .detaile-share .thumb-up .thump-assist a{color: #000;text-decoration: none;outline: none;}
+.details .detaile-left .detaile-share .thumb-up .thump-collect .s-icon{width: 18px;height: 16px;background:url('../images/cyclopedia.png') no-repeat -49px -28px;float: left;margin-top: 14px;margin-right: 10px;}
+
+
+.details .detaile-left .detaile-share .thumb-up .thump-collect .s-icon1{width: 18px;height: 16px;background:url('../images/cyclopedia.png') no-repeat -139px -42px;float: left;margin-top: 14px;margin-right: 10px;}
+
+
+.commentP{width: 100%;float: left}
+/*无询价状态*/
+.details .detaile-left .detaile-share .thumb-up .thump-collect{float: right}
+.details .detaile-left .detaile-share .thumb-up .thump-assist{float: right;margin-left: 30px;}
+
+
+
+.details .detaile-left .detaile-share .thumb-up .thump-collect em{float: left;font-size: 14px;color: #000;}
+.details .detaile-left .detaile-share .thumb-up .thump-collect a{color: #000;text-decoration: none;outline: none;}
+.details .detaile-left .detaile-share .thumb-up .thump-enquiry{float: right;margin-top: 8px;}
+.details .detaile-left .detaile-share .thumb-up .thump-enquiry a{width: 100px;height: 25px;line-height: 25px;text-align: center;font-size: 12px;color: #000;display: block;border: 1px solid #000;text-decoration: none;}
+.details .detaile-left .detaile-share .thumb-up .thump-enquiry a:hover{color: #fff;background: #000;}
+.details .detaile-left .detaile-intro .intro-matter li{padding: 6px 20px;float: left;margin-right: 1px;font-size: 14px;color: #000;border: 1px solid #000;cursor: pointer}
+.details .detaile-left .detaile-intro .intro-matter .active{color: #fff;background: #000;}
+.details .detaile-left .detaile-content{border-top: 2px solid #000;border-bottom: 2px solid #000;padding: 35px;float: left;width: 100%;margin-top: -1px;}
+.details .detaile-left .detaile-content .intro{font-size: 14px;color: #000;}
+.details .detaile-left .detaile-content .intro img{width: 100%;}
+.details .detaile-left .detaile-comment{padding: 0 20px;}
+.details .detaile-left .detaile-comment h4{padding: 20px 20px 20px 0;font-size: 14px;color: #000;}
+.details .detaile-left .detaile-comment .comment li{position: relative;padding-left: 55px;border-bottom: 1px solid #ebebeb;margin-bottom: 20px;}
+.details .detaile-left .detaile-comment .comment li a{outline: none;}
+.details .detaile-left .detaile-comment .comment li .img{width: 35px;height: 35px;position: absolute;left: 0;top: 0;}
+.details .detaile-left .detaile-comment .comment li .img img{width: 100%;height: 100%;}
+.details .detaile-left .detaile-comment .comment li .text{font-size: 12px;color: #000;}
+.details .detaile-left .detaile-comment .comment li .text a{color: #003366;text-decoration: none;}
+.details .detaile-left .detaile-comment .comment li .status{width: 100%;margin-top: 15px;padding-bottom: 20px;}
+.details .detaile-left .detaile-comment .comment li .status .status-left{float: left;font-size: 12px;color: #999;}
+.details .detaile-left .detaile-comment .comment li .status .status-right{float: right;}
+.details .detaile-left .detaile-comment .comment li .status .status-right .zan{float: right;}
+.details .detaile-left .detaile-comment .comment li .status .status-right .hf{font-size:12px;color:#000;float: right;text-align: right;width:47px;border-left:1px solid #ebebeb;}
+.details .detaile-left .detaile-comment .comment li .status .status-right .ef{font-size:12px;color:#000;float: right;text-align: right;width:47px;border-left:1px solid #ebebeb;}
+.details .detaile-left .detaile-comment .comment li .status .status-right .zan .icon{margin-right: 10px;float: left;width: 18px;height: 16px;background:url('../images/cyclopedia.png') no-repeat -49px -2px;}
+.details .detaile-left .detaile-comment .comment li .status .status-right .zan em{float: right;font-size: 14px;color: #000;margin-right: 19px;}
+.details .detaile-left .detaile-comment .comment li .status .status-right .hf a{font-size:12px;color:#000;text-decoration: none;}
+/*.details .detaile-left .detaile-share .jiathis_style {width:222px;padding-top:23px;padding-bottom:37px;padding-left:50px;float:left;border-bottom:1px #000 solid;box-sizing:content-box}*/
+/*.details .detaile-left .detaile-share .jiathis_style .jiathis_txt {color:#666}*/
+/*.details .detaile-left .detaile-share .jiathis_style .jtico {background:url(../images/icon-share.png) no-repeat;width:21px;height:21px!important;margin-left:5px;opacity:1;filter:alpha(opacity=100);-webkit-transition:all 0.4s;-moz-transition:all 0.4s;transition:all 0.4s}*/
+/*.details .detaile-left .detaile-share .jiathis_style .jtico:hover {opacity:0.4;filter:alpha(opacity=40)}*/
+/*.details .detaile-left .detaile-share .jtico_weixin {background-position:0 0}*/
+/*.details .detaile-left .detaile-share .jtico_tqq {background-position:-21px 0;width:22px}*/
+/*.details .detaile-left .detaile-share .jtico_tsina {background-position:-43px 0}*/
+/*.details .detaile-left .detaile-share .jtico_cqq {background-position:-65px 0;width:22px}*/
+/*评论回复*/
+.review textarea{width: 100%;outline: none;resize:none;height: 100px;border:1px solid #e5e5e5;font-size: 14px;color: #000;margin-bottom: 20px;}
+.review .btn{padding:6px 35px;color: #fff;font-size: 14px;outline: none;background: #000;float: right}
+.review .btn1{margin-bottom: 20px;}
+.review .btn1 a{font-size: 14px;color: #999;float: right;margin-right: 30px;outline: none;margin-top: 5px;text-decoration: none;}
+/*评论回复*/
+.review-sr textarea{width: 100%;outline: none;resize:none;height: 100px;border:1px solid #e5e5e5;font-size: 14px;color: #000;margin-bottom: 20px;}
+.review-sr .btn{padding:6px 35px;color: #fff;font-size: 14px;outline: none;background: #000;float: right}
+.review-sr .btn1{margin-bottom: 20px;}
+.review-sr .btn1 a{font-size: 14px;color: #999;float: right;margin-right: 30px;outline: none;margin-top: 5px;text-decoration: none;}
+/*end评论回复*/
+.details .detaile-right{float: right;width: 272px;}
+.details .detaile-right .h4{width: 100%;height: 38px;background: #000;padding: 8px 0 0 9px;font-size: 14px;color: #999}
+.detaile-right .craft-master2 ul{width: 100%}
+.detaile-right .craft-master2{padding:0; }
+.detaile-right .craft-master2 ul li{width: 100%;margin: 0;float: right;margin-top: -1px;}
+.detaile-right .craft-master2 .gz-icon{background: url('../images/cyclopedia.png') no-repeat 0 0px}
+/*end//110209工艺详情页-作品简介*/
+/*工艺详情页-作品规格*/
+.norms{margin-bottom: -20px;}
+.norms p{margin-bottom: 20px;font-size: 12px;color: #000;}
+/*end//工艺详情页-作品规格*/
+/*弹出框*/
+.word{}
+.word .leave{width: 452px;height: 528px;background: #fff;position: absolute;top: 263px;z-index: 401;left: 50%;margin-left: -224px;padding:35px 35px 0 35px;}
+.word .leave .pic1{width: 100%;height:214px;float: left;}
+.word .leave .pic1 img{width: 100%;height: 100%;}
+.word .leave .name{padding: 35px 0;width: 100%;float: left}
+.word .leave .name dt{float: left;width: 50px;height: 50px;margin-right: 15px;}
+.word .leave .name dt img{width: 100%;height: 100%;}
+.word .leave .name dd{float: left;margin: 0;}
+.word .leave .name dd h4{color: #000;font-size: 14px;margin-bottom: 4px;}
+.word .leave .name dd p{font-size: 12px;color: #999;}
+.word .leave .word-note{width: 100%;float: left;margin-bottom: 25px;}
+.word .leave .word-note .content-pg{width: 100%;float: left;margin-bottom:25px;}
+.word .leave .word-note .content-pg label{width: 54px;float: left;font-size: 18px;color: #000;}
+.word .leave .word-note .content-pg textarea{float: left;width: 328px;resize: none;}
+.word .leave .word-note .content-pg .worde-r{padding: 10px 14px;height: 70px;border: 1px solid #999;font-size: 14px;color: #000;outline: none;}
+.word .leave .word-note .content-pg .btn{outline: none;width: 328px;height: 30px;border: 1px solid #000;background: #fff;color: #000;font-size: 14px;transition: all 0.5s;}
+.word .leave .word-note .content-pg .btn:hover{color: #fff;background: #000;}
+.word .leave .close .shut{width: 15px;height: 15px;position: absolute;right: -25px;top: -25px;background: url("../images/cyclopedia.png") no-repeat -139px -13px; cursor: pointer}
+.word .leave .close{position: relative;}
+.word .leave-bg{position: fixed;background: #000;opacity:0.5;z-index: 400;right: 0;left: 0;top:0;bottom: 0;}
+.details .detaile-left .detaile-comment .comment li .status .status-right .ef a{}
+.add-obtain{position: relative;float:left;margin: 0;}
+.obtain{width: 100%;float:left}
+/*110111*/
+.no-list{width: 682px;height: 440px;border: 1px solid #000;float: left;margin-bottom: 37px;}
+.no-list .no-icon{width: 51px;height: 234px;background: url("../images/cyclopedia.png") 0  -180px;display: inline-block;margin: 107px 0 0 316px;}
+
+/*工艺详情*/
+.particulars{margin: 0 auto;width:1000px;background:#fbfbfb}
+.particulars .title{padding-left: 28px;}
+.particulars .title h2{color: #000;font-size: 30px;margin: 28px 0;}
+.particulars .title .label{color: #000;font-size: 16px;margin-bottom: 30px}
+.particulars .title .label span{margin-right:30px;}
+.particulars .p-right{width:100%;border-top:1px solid #000;border-bottom:1px solid #000;padding:18px 0;background:#fff;float: left;margin-bottom: 102px}
+.particulars .recommend h5{font-size:18px;color:#333;margin:25px 0 25px 28px;width:100%;float:left;}
+.particulars .recommend{border-top: 1px solid #000}
+.particulars .recommend .rec-pic{}
+.particulars .recommend .rec-pic li{float:left;width:214px;margin-left:28px}
+.particulars .recommend .rec-pic li img{width:214px;height:170px;}
+.particulars .recommend .rec-pic li p{margin-top:8px;font-size:14px;color:#333;text-align:left;font-weight: bold}
+
+/*尾部*/
+.footernew {border-top:2px solid #e5e5e5}
+.footernew .publ-top {text-align:center;padding:26px 0 18px}
+.footernew .publ-top .city {display:inline-block;margin:0 35px;text-align:center}
+.footernew .publ-top .city dt {width:60px;font-size:36px;border:4px solid #a0a0a0;border-radius:50% 50%;text-align:center;color:#000;height:60px;line-height:48px;display:inline-block}
+.footernew .publ-top .city dd {font-size:14px;color:#000;font-weight:bold;text-align:center;width:120px}
+.footernew .publ-top .city dd p {line-height:17px}
+.footernew .servicenew {background-color:#000;}
+.footernew .servicenew .wechatnew {width:175px;height:130px;float:left;margin-top:6px;margin-left:38px;position:relative}
+.footernew .servicenew .wechatnew .inro-icon0 {background:url(../images/footernew-icon.jpg) no-repeat 0 0;width:175px;height:160px;position:absolute;left:0;top:0px}
+.footernew .servicenew .wechatnew .inro-icon {width:141px;height:143px;background:url(../images/frlinksimg.png) no-repeat 0 -308px;display:block;position:absolute;left:-1px;top:161px}
+.footernew .servicenew .tct {text-align:center}
+.footernew .servicenew .foremax {display:inline-block;margin-left:80px}
+.footernew .servicenew .fore {margin-top:22px;width:131px;float:left;text-align:center}
+.footernew .servicenew .fore dt {font-size:14px;color:#fff;margin-bottom:20px;width:100%}
+.footernew .servicenew .fore dd {line-height:17px;color:#999;font-size:14px}
+.footernew .servicenew .fore dd a {color:#999;font-size:14px;outline:none}
+.footernew .max-links {background:#0c0c0c;border-top:2px solid #161616;z-index:0}
+.footernew .links {background:#000;height:16px;line-height:16px;text-align:center;padding:15px 0;box-sizing:content-box}
+.footernew .links a {margin:0 10px;display:inline-block;box-sizing:content-box;font-size:12px;color:#ccc;font-weight:bold}
+.footernew .links a.line {width:1px;height:10px;background:url(../images/footernew-icon.png) no-repeat 0 -200px;top:2px;position:relative}
+.footernew .links a:hover {color:#f00;text-decoration:underline}
+.footernew .copyright {background:#000;padding:0 0 10px 0;text-align:center}
+.footernew .copyright .phone strong, .footernew .copyright .phone em {font-weight:bold;letter-spacing:5px;font-size:12px;color:#666}
+.footernew .copyright .phone em {font-size:18px}
+.footernew .copyright .frlinks {margin:10px 0}
+.footernew .copyright .frlinks a {color:#666;margin:0 5px;display:inline-block;font-size:12px}
+.footernew .copyright .frlinks span, .footernew .copyright .info {color:#333;font-size:12px;font-weight:bold}
+.footernew .authentication {background:#000;text-align:center;padding-bottom:20px;}
+.footernew .authentication a {display:inline-block;margin:0 20px}
+.footernew .frlinksimg strong {width: 100%;font-size:16px;color:#434242;font-weight:bolder;float: left;margin-bottom: 6px;}
+.footernew .frlinksimg a {width:142px;height:90px;background:url(../images/frlinksimg.png) no-repeat;display:inline-block}
+.footernew .frlinksimg a.icon1 {background-position:0 0}
+.footernew .frlinksimg a.icon2 {background-position:0 -90px;cursor:text}
+.footernew .frlinksimg a.icon3 {background-position:0 -210px;cursor:text}
+.footernew .frlinksimg .line {width:2px;height:40px;display:inline-block;position:relative;top:-36px;background:#434343}
+.footer .frlinksimg {padding:20px 0 30px 0}
+.footer .frlinksimg strong {font-size:14px;color:#666;font-weight:bolder;display:inline-block;position:relative;top:-45px}
+.footer .frlinksimg a {width:142px;height:90px;background:url(../images/frlinksimg.png) no-repeat;display:inline-block}
+.footer .frlinksimg a.icon1 {background-position:0 0}
+.footer .frlinksimg a.icon2 {background-position:0 -90px;cursor:text}
+.footer .frlinksimg a.icon3 {background-position:0 -210px;cursor:text}
+.footer .frlinksimg .line {width:2px;height:40px;display:inline-block;margin:0 20px;position:relative;top:-36px;background:#434343}
+/*--//ENd--footernew--*/

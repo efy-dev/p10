@@ -30,6 +30,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 
@@ -47,6 +48,22 @@ public class SigninController extends BaseController {
     private BaseManager baseManager;
     @Autowired
     private AutoSerialManager autoSerialManager;
+
+//    @RequestMapping({"userServiceTest.do"})
+//    @ResponseBody
+//    public String userServiceTest() throws Exception {
+//        UserManager userManager = (UserManager) ContextUtils.getBean("userServiceProxy");
+//        MyUser myUser = userManager.getUserByUserId(AuthorizationUtil.getMyUser().getId());
+//        return myUser.getUsername();
+//    }
+//
+//    @RequestMapping({"addressServiceTest.do"})
+//    @ResponseBody
+//    public List<ConsumerAddress> addressServiceTest() throws Exception {
+//        AddressManager addressManager = (AddressManager) ContextUtils.getBean("addressServiceProxy");
+//        List<ConsumerAddress> consumerAddressList = addressManager.listConsumerAddressByUserId(AuthorizationUtil.getMyUser().getId());
+//        return consumerAddressList;
+//    }
 
 
     @RequestMapping("/sso.do")
@@ -99,9 +116,9 @@ public class SigninController extends BaseController {
                 }
             }
             SmsProvider smsProvider = new YunPianSmsProvider();
-            String phoneNumber  =  consumer.getUsername();
+            String phoneNumber = consumer.getUsername();
             HashMap map = null;
-            smsProvider.post(phoneNumber,map,"1186309");
+            smsProvider.post(phoneNumber, map, "1186309");
         }
         return true;
     }

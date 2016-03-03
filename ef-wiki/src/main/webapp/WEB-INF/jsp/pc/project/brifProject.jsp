@@ -20,7 +20,7 @@
 <body>
 
 <!-- //End--header-->
-<div class="craft-details">
+<%--<div class="craft-details">//20160302日修改
   <div class="craft-banner">
     <img src="http://pro.efeiyi.com/${project.picture_pc_url}@!pc-project-header">
     <div class="cart-b-page">
@@ -40,7 +40,7 @@
         </c:otherwise>
       </c:choose>
       <div class="max-atten ae">
-       <%-- <div class="attention">
+       &lt;%&ndash; <div class="attention">
           <a href="#" id="${project.id}" class="cgz-r-1" onclick="saveProjectFllow('${project.id}')">
             <c:if test="${flag ==true}">
               <input id="saveProjectFllow" type="hidden" value="0">
@@ -53,18 +53,18 @@
             </c:if>
 
           </a>
-        </div>--%>
-        <%--<div class="attention-page">
+        </div>&ndash;%&gt;
+        &lt;%&ndash;<div class="attention-page">
           <span>已经被 <em id="gzNum">${project.fsAmount}</em> 个景泰蓝爱好者关注</span>
-        </div>--%>
+        </div>&ndash;%&gt;
       </div>
     </div>
   </div>
   <div class="ae">
     <ul class="craft-nav">
       <li class="active"><a href="<c:url value='/project/brifProject/${project.id}'/>">介&nbsp;绍</a></li>
-     <%-- <li><a href="<c:url value='/project/brifMaster/${project.id}'/>">大&nbsp;师</a></li>
-      <li><a href="<c:url value='/project/listProduct/${project.id}'/>">作&nbsp;品</a></li>--%>
+     &lt;%&ndash; <li><a href="<c:url value='/project/brifMaster/${project.id}'/>">大&nbsp;师</a></li>
+      <li><a href="<c:url value='/project/listProduct/${project.id}'/>">作&nbsp;品</a></li>&ndash;%&gt;
     </ul>
     <div class="craft-max ae">
       <div class="craft-introduce1 ae" style="display: block">
@@ -142,7 +142,94 @@
 
 
 </script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>--%>
+
+
+<div class="ae">
+  <div class="particulars">
+    <div class="title ae">
+      <h2>${project.name}</h2>
+      <div class="label"><span>地区：<strong>${project.addressDistrict.addressCity.addressProvince.name}</strong></span><span>级别：
+        <strong><c:choose>
+          <c:when test="${project.level  eq '1'}">国家级非物质文化遗产</c:when>
+          <c:when test="${project.level  eq '2'}">省级非物质文化遗产</c:when>
+          <c:when test="${project.level  eq '3'}">市级非物质文化遗产</c:when>
+          <c:otherwise>县级非物质文化遗产</c:otherwise>
+        </c:choose></strong></span></div>
+    </div>
+    <div class="p-right">
+      <div class="ae">${project.description}</div>
+      <div class="recommend ae">
+        <h5>您可能会喜欢的作品</h5>
+        <ul class="rec-pic ae" id="tuijian">
+          <%--<li>
+            <a href="#">
+              <img src="http://pro.efeiyi.com/product/zhutu120151111155544.jpg@!product-detail-pc-view" alt=""/>
+              <p>喜庆富贵瓶</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="http://pro.efeiyi.com/product/zhutu520151111155615.jpg@!product-detail-pc-view" alt=""/>
+              <p>福禄寿喜财尊</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="http://pro.efeiyi.com/product/zhutu320151111155556.jpg@!product-detail-pc-view" alt=""/>
+              <p>景泰蓝吉福垒</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="http://pro.efeiyi.com/product/zhutu620151111155624.jpg@!product-detail-pc-view" alt=""/>
+              <p>富贵百龄瓶</p>
+            </a>
+          </li>--%>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="application/javascript">
+  (function($){
+    $.ajax({
+      type:"get",
+      url:"<c:url value='http://192.168.1.38:8080/product/recommend/listProductModel.do?projectId=${project.id}'/>",
+      data:"",
+      dataType:"jsonp",
+      jsonp:"jsonpcallback",
+      success:function(data){
+        if(data){
+        if(  data.length>=1&& data.length<5){
+        var tuijian = $("#tuijian");
+          for(i in data){
+            var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/${project.id}\">" +
+                    "<img src=\"http://pro.efeiyi.com/"+data[i].productModel_url+"\" alt=''>" +
+                    "<p>"+data[i].name+"</p> </a> </li>");
+            tuijian.append(li);
+          }
+        }else{
+          var tuijian = $("#tuijian");
+          for(i in data){
+            if(i>=4){break;};
+            var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/${project.id}\"> " +
+                    "<img src='http://pro.efeiyi.com/"+data[i].productModel_url+"' alt=''>" +
+                    "<p>"+data[i].name+"</p> </a> </li>");
+            tuijian.append(li);
+          }
+        }
+        }
+      },
+      error:function(){
+        console.log("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+      }
+    });
+  })(jQuery);
+</script>
 </body>
 </html>
 

@@ -173,8 +173,8 @@
     for(var x = 0; x < aTags.length; x++){
         var aUrl = aTags[x].href;
         aUrl = aUrl.substring(aUrl.indexOf("/s"));
-        aTags[x].href = "#"
-        aTags[x].setAttribute("onclick","searchPostSubmit('" + aUrl + "')");
+        aTags[x].href = "javascript:void(0);";
+        aTags[x].setAttribute("onclick",'searchPostSubmit("' + aUrl + '")');
     }
 
     var facets = "${searchParamBean.facetFieldJson}";

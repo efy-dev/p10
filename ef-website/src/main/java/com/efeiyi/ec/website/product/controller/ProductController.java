@@ -247,4 +247,19 @@ public class ProductController {
         }
         return flag;
     }
+    /**
+     * 根据projectId取推荐商品
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping({"/recommend/listProductModel.do"})
+    @ResponseBody
+    public List<Object> listProjectProduct(HttpServletRequest request) throws Exception{
+        String projectId = request.getParameter("projectId");
+        XQuery xQuery = new XQuery("listProductModel_projectIdRecommend",request);
+        xQuery.put("product_project_id",projectId);
+        List<Object> productModelList = baseManager.listObject(xQuery);
+        return productModelList;
+    }
 }
