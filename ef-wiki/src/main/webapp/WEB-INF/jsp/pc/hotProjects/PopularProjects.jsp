@@ -48,10 +48,10 @@
         <c:if test="${! empty bannerList}">
           <c:forEach var="banner" items="${bannerList}" varStatus="status">
           <c:if test="${status.index==0}">
-          <li style="display: block;"><a href="#"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
+          <li style="display: block;"><a href="${banner.directUrl}"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
             </c:if>
             <c:if test="${status.index!=0}">
-              <li><a href="#"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
+              <li><a href="${banner.directUrl}"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
             </c:if>
           </c:forEach>
 
