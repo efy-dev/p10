@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        .addsub .opt a {
+            width: 23px;
+            height: 23px;
+            border: 1px #000 solid;
+            float: left;
+            position: relative;
+        }
+
+        .addsub .opt a:before {
+            content: '';
+            width: 12px;
+            height: 1px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -6px;
+            background: #000;
+        }
+
+        .addsub .opt a.add:after {
+            content: '';
+            width: 1px;
+            height: 13px;
+            position: absolute;
+            top: 50%;
+            margin-top: -6px;
+            left: 50%;
+            margin-left: -1px;
+            background: #000;
+        }
+
+        .addsub .opt .ipt-txt {
+            width: 30px;
+            height: 23px;
+            padding: 0 5px;
+            text-align: center;
+            line-height: 23px;
+            float: left;
+            border: 0;
+            border-bottom: 1px #000 solid;
+            border-top: 1px #000 solid;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="addsub" data-option='{"upLimit":"10"}'></div>
+
+<script>
+    var ChooseCountComponent = function () {
+        var parentDiv = $(".addsub");
+        var options = new Object();
+        options["upLimit"] = 100; //默认上限  当数值达到上限的时候 加号不可点
+        options["downLimit"] = 1; //默认下限   当数值达到下限的时候 减号不可点
+        options["inputStatus"] = 0; //0为不可输入  1为可输入
+        options["defaultValue"] = 1;
+        options["inputName"] = "";
+        var componentOption = parentDiv.attr("data-option"); //json字符串
+        if (typeof componentOption != "undefined") {
+            componentOption = JSON.parse(componentOption);
+
+            if (typeof componentOption["defaultValue"] == "string") {
+                options["defaultValue"] = Number(componentOption["defaultValue"]);
+            }
+            if (typeof componentOption["upLimit"] == "string") {
+                options["upLimit"] = Number(componentOption["upLimit"]);
+            }
+            if (typeof componentOption["downLimit"] == "string") {
+                options["downLimit"] = Number(componentOption["downLimit"]);
+            }
+            if (typeof componentOption["inputStatus"] == "string") {
+                options["inputStatus"] = Number(componentOption["inputStatus"]);
+            }
+            if (typeof componentOption["inputName"] == "string") {
+                options["inputName"] = componentOption["inputName"];
+            }
+        }
+        var disabled = "";
+        if (options["inputStatus"] == 1) {
+            disabled = "disabled";
+        }
+        var html = '<div class="opt"><a class="sub" title="减" ></a><input name="' + options["inputName"] + '" ' + disabled + ' class="ipt-txt" type="text" value="' + options["defaultValue"] + '" /><a class="add" title="加" ></a></div>'
+        //加号的事件
+        var addAction = function (e) {
+            var inputElement = $(e.target).parent().find(".ipt-txt");
+            var actionOptions = options;
+            var currentValue = Number(inputElement.val());
+            if (Number(currentValue) < actionOptions["upLimit"]) {
+                currentValue += 1;
+                inputElement.val(currentValue);
+            }
+        }
+        var subAction = function (e) {
+            var inputElement = $(e.target).parent().find(".ipt-txt");
+            var actionOptions = options;
+            var currentValue = Number(inputElement.val());
+            if (Number(currentValue) > actionOptions["downLimit"]) {
+                currentValue -= 1;
+                inputElement.val(currentValue);
+            }
+        }
+        parentDiv.on("click", ".add", addAction);
+        parentDiv.on("click", ".sub", subAction);
+        parentDiv.html(html);
+    }
+</script>
+</body>
+</html>
