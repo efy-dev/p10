@@ -83,20 +83,12 @@
                                                 class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                                 class="am-icon-trash-o"></span> 删除
                                         </button>
-                                        <c:if test="${empty projectCategory.projectCategoryRecommendeds}">
-                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                               onclick="recommended(this,1,'<c:url
-                                                       value="/Recommended/deleteObjectRecommended.do"/>')"
-                                               href="#" recommend="1" recommendedId="${projectCategory.id}" id="">
-                                                <span class="am-icon-heart"> 推荐</span>
-                                            </a>
-
-
-                                        </c:if>
+                                        <c:set value="0" var="isOk"/>
                                         <c:if test="${not empty projectCategory.projectCategoryRecommendeds}">
                                             <c:forEach var="recommended"
                                                        items="${projectCategory.projectCategoryRecommendeds}">
-                                                <c:if test="${recommended.projectCategory.id == projectCategory.id}">
+                                                <c:if test="${recommended.projectCategory.id == projectCategory.id && recommended.group == 'wiki.categoryRecommended'}">
+                                                    <c:set value="1" var="isOk"/>
                                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                                        href="#" onclick="recommended(this,1,'<c:url
                                                             value="/Recommended/deleteObjectRecommended.do"/>')"
@@ -108,6 +100,17 @@
                                             </c:forEach>
 
                                         </c:if>
+                                        <c:if test="${isOk=='0'}">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                               onclick="recommended(this,1,'<c:url
+                                                       value="/Recommended/deleteObjectRecommended.do"/>')"
+                                               href="#" recommend="1" recommendedId="${projectCategory.id}" id="">
+                                                <span class="am-icon-heart"> 推荐</span>
+                                            </a>
+
+
+                                        </c:if>
+
                                     <span style="display: none;float: left;padding-left: 10px;">
                                                 <input type="text" name="sort" style="width: 35px;" value=""/>
                                                 <a class=" am-btn-primary"
@@ -124,8 +127,8 @@
                                         ${projectCategory.name}
                                 </a>
                                 <c:forEach var="recommended" items="${projectCategory.projectCategoryRecommendeds}">
-                                    <c:if test="${recommended.projectCategory.id == projectCategory.id}">
-                                        <span id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
+                                    <c:if test="${recommended.projectCategory.id == projectCategory.id && recommended.group == 'wiki.categoryRecommended'}">
+                                        <span id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐(${recommended.sort})</span>
                                     </c:if>
                                 </c:forEach>
                             </td>
