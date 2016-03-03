@@ -177,7 +177,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
         purchaseOrder.setCreateDatetime(new Date());
         purchaseOrder.setStatus("0");
-        purchaseOrder.setOrderType(PurchaseOrder.ORDER_STATUS_WPAY);
+        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WPAY);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         return purchaseOrder;
     }

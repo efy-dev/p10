@@ -42,27 +42,27 @@
 <!--nav-bars-->
 <div class="home-craft">
   <div class="craft-details">
-    <div class="focus wh">
-      <!--轮播图-->
-      <ul class="slider-main">
-        <c:if test="${! empty bannerList}">
-          <c:forEach var="banner" items="${bannerList}" varStatus="status">
-          <c:if test="${status.index==0}">
-          <li style="display: block;"><a href="#"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
-            </c:if>
-            <c:if test="${status.index!=0}">
-              <li><a href="#"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
-            </c:if>
-          </c:forEach>
+    <%--<div class="focus wh">
+     <!--轮播图-->
+    <ul class="slider-main">
+       <c:if test="${! empty bannerList}">
+         <c:forEach var="banner" items="${bannerList}" varStatus="status">
+         <c:if test="${status.index==0}">
+         <li style="display: block;"><a href="${banner.directUrl}"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
+           </c:if>
+           <c:if test="${status.index!=0}">
+             <li><a href="${banner.directUrl}"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
+           </c:if>
+         </c:forEach>
 
-        </c:if>
-      </ul>
+       </c:if>
+     </ul>
       <ul class="slider-nav">
         <li class="active"></li>
         <li></li>
         <li></li>
       </ul>
-    </div>
+    </div>--%>
     <!-- //End--nav-->
     <div class="cart-tabe">
       <div class="craft-zy" style="display: block">

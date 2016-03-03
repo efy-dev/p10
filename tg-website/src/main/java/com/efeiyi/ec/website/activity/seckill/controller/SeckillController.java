@@ -213,9 +213,9 @@ public class SeckillController {
                     recordStatus = "0";
                 }
             }
-            if (recordStatus.equals("0")) {
-                return "redirect:/miao/" + productId;
-            }
+//            if (recordStatus.equals("0")) {
+//                return "redirect:/miao/" + productId;
+//            }
             Date currentDate = new Date();
             if (seckillProduct.getUsefulAmount() < Integer.parseInt(amount)) {
                 return "redirect:/miao/" + productId+"?stock=false";
