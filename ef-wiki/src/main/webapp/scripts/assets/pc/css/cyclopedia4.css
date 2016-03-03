@@ -367,7 +367,7 @@ a{outline: none}
 .no-list{width: 682px;height: 440px;border: 1px solid #000;float: left;margin-bottom: 37px;}
 .no-list .no-icon{width: 51px;height: 234px;background: url("../images/cyclopedia.png") 0  -180px;display: inline-block;margin: 107px 0 0 316px;}
 
-/*宸ヨ壓璇︽儏*/
+/*工艺详情*/
 .particulars{margin: 0 auto;width:1000px;background:#fbfbfb}
 .particulars .title{padding-left: 28px;}
 .particulars .title h2{color: #000;font-size: 30px;margin: 28px 0;}
@@ -381,7 +381,7 @@ a{outline: none}
 .particulars .recommend .rec-pic li img{width:214px;height:170px;}
 .particulars .recommend .rec-pic li p{margin-top:8px;font-size:14px;color:#333;text-align:left;font-weight: bold}
 
-/*灏鹃儴*/
+/*尾部*/
 .footernew {border-top:2px solid #e5e5e5}
 .footernew .publ-top {text-align:center;padding:26px 0 18px}
 .footernew .publ-top .city {display:inline-block;margin:0 35px;text-align:center}
