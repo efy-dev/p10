@@ -25,6 +25,7 @@
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/amazeui.min.css?v=20150831'/>">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/app.css?v=20150831'/>">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia.css?v=20150831'/>">
+<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia3.css?v=20150831'/>">
 <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value='/resources/assets/js/jquery.min.js?v=20150831'/>"></script>

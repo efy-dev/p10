@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,6 +31,14 @@ public class HomeController {
     @RequestMapping({"/404"})
     public String show404(){
         return "/common/404";
+    }
+
+    @RequestMapping({"/toMobile.do"})
+    public String toMobileHandler(HttpServletRequest request, Model model) throws Exception {
+        String url = request.getParameter("mobileUrl");
+        url = URLDecoder.decode(url, "UTF-8");
+        model.addAttribute("url", url);
+        return "/toMobile";
     }
 
 }

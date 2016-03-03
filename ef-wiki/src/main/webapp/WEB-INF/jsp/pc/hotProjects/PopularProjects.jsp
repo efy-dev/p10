@@ -42,27 +42,27 @@
 <!--nav-bars-->
 <div class="home-craft">
   <div class="craft-details">
-    <div class="focus wh">
-      <!--轮播图-->
-      <ul class="slider-main">
-        <c:if test="${! empty bannerList}">
-          <c:forEach var="banner" items="${bannerList}" varStatus="status">
-          <c:if test="${status.index==0}">
-          <li style="display: block;"><a href="#"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
-            </c:if>
-            <c:if test="${status.index!=0}">
-              <li><a href="#"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
-            </c:if>
-          </c:forEach>
+    <%--<div class="focus wh">
+     <!--轮播图-->
+    <ul class="slider-main">
+       <c:if test="${! empty bannerList}">
+         <c:forEach var="banner" items="${bannerList}" varStatus="status">
+         <c:if test="${status.index==0}">
+         <li style="display: block;"><a href="${banner.directUrl}"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
+           </c:if>
+           <c:if test="${status.index!=0}">
+             <li><a href="${banner.directUrl}"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
+           </c:if>
+         </c:forEach>
 
-        </c:if>
-      </ul>
+       </c:if>
+     </ul>
       <ul class="slider-nav">
         <li class="active"></li>
         <li></li>
         <li></li>
       </ul>
-    </div>
+    </div>--%>
     <!-- //End--nav-->
     <div class="cart-tabe">
       <div class="craft-zy" style="display: block">
@@ -80,20 +80,28 @@
                     <li>
                       <div class="commodity-img">
                         <a href="<c:url value='/project/brifProject/${projectR.project.id}'/>"><img src="http://pro.efeiyi.com/${projectR.project.picture_pc_url}@!pc-project-list"></a>
-                        <a href="#">
+                        <%--<a href="#">
                           <div class="list-moods">
                             <i class="img-icon"></i>
                             <em>${projectR.project.fsAmount}</em>
                           </div>
-                        </a>
+                        </a>--%>
                       </div>
                       <div class="commodity-txt">
-                        <h4><a href="#">${project.name}</a></h4></p>
+                        <h4><a href="<c:url value='/project/brifProject/${projectR.project.id}'/>">${projectR.project.name}</a></h4></p>
+
+                        <p>
+                          <c:choose>
+                            <c:when test="${projectR.project.level  eq '1'}">国家级非物质文化遗产</c:when>
+                            <c:when test="${projectR.project.level  eq '2'}">省级非物质文化遗产</c:when>
+                            <c:when test="${projectR.project.level  eq '3'}">市级非物质文化遗产</c:when>
+                            <c:otherwise>县级非物质文化遗产</c:otherwise>
+                          </c:choose></p>
                         <p>${projectR.project.addressDistrict.addressCity.addressProvince.name}</p>
 
-                        <p>${fn:length(projectR.project.productList)}件作品</p>
+                      <%--  <p>${fn:length(projectR.project.productList)}件作品</p>
 
-                        <p>${fn:length(projectR.project.masterProjects)}位大师</p>
+                        <p>${fn:length(projectR.project.masterProjects)}位大师</p>--%>
                       </div>
                     </li>
                   </c:forEach>

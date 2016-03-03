@@ -8,6 +8,7 @@ import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.util.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,17 @@ public class SeckillController {
      */
     @RequestMapping("/miao")
     public String listSeckillProduct(HttpServletRequest request, Model model) throws Exception {
+        String requestUrl = request.getRequestURL().toString();
+        String requestParam = request.getQueryString();
+        try {
+            if (!HttpUtil.isPhone(request)) {
+                String url = requestUrl + "?" + requestParam;
+                url = URLEncoder.encode(url, "UTF-8");
+                return "redirect:/toMobile.do?mobileUrl=" + url;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         XQuery seckillQuery = new XQuery("plistSeckillProduct_default", request, 4);
         PageInfo pageInfo = baseManager.listPageInfo(seckillQuery);
         Date currentDate = new Date();
@@ -122,7 +134,10 @@ public class SeckillController {
         List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
         Collections.reverse(purchaseOrderProductList);
 
-        //需要判断当前的秒杀是否是再24消失内
+        String stockAlert = request.getParameter("stock");
+        model.addAttribute("stockAlert",stockAlert);
+
+        //需要判断当前的秒杀是否是再24小时内
         //获得当前秒杀的状态 通过时间
         String status = "1";
         String recordStatus = "1";
@@ -198,12 +213,12 @@ public class SeckillController {
                     recordStatus = "0";
                 }
             }
-            if (recordStatus.equals("0")) {
-                return "redirect:/miao/" + productId;
-            }
+//            if (recordStatus.equals("0")) {
+//                return "redirect:/miao/" + productId;
+//            }
             Date currentDate = new Date();
-            if (seckillProduct.getUsefulAmount() <= 0) {
-                return "redirect:/miao/" + productId;
+            if (seckillProduct.getUsefulAmount() < Integer.parseInt(amount)) {
+                return "redirect:/miao/" + productId+"?stock=false";
             }
             if (currentDate.getTime() < seckillProduct.getEndDatetime().getTime() && currentDate.getTime() > seckillProduct.getStartDatetime().getTime()) {
                 //秒杀正在进行中

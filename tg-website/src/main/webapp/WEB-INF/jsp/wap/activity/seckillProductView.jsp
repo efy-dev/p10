@@ -61,6 +61,7 @@
         }
 
     </style>
+    <script src="<c:url value="/scripts/wap/js/alert.js"/>"></script>
 </head>
 <body>
 <header class="am-header custom-header">
@@ -408,7 +409,7 @@
                 options["inputName"] = componentOption["inputName"];
             }
         }
-        var html = '<div class="opt"><a class="sub" title="减" ></a><input name="' + options["inputName"] + '" class="ipt-txt" type="text" value="' + options["defaultValue"] + '" /><a class="add" title="加" ></a></div>'
+        var html = '<div class="opt"><a class="sub" title="减" ></a><input name="' + options["inputName"] + '" class="ipt-txt" disabled type="text" value="' + options["defaultValue"] + '" /><a class="add" title="加" ></a></div>'
         //加号的事件
         var addAction = function (e) {
             var inputElement = $(e.target).parent().find(".ipt-txt");
@@ -446,6 +447,11 @@
         show_time();
         </c:if>
         ChooseCountComponent();
+
+        <c:if test="${not empty stockAlert }">
+            showAlert("提示","库存不足");
+        </c:if>
+
     })
 
 </script>
