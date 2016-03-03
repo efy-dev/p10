@@ -63,7 +63,23 @@
                                 </button>
                             </c:if>
                             <security:authorize ifAnyGranted="admin,operational,c_operational">
-                            <c:if test="${empty project.projectRecommendeds}">
+                                <c:set value="0" var="isOk"/>
+                                <c:if test="${not empty project.projectRecommendeds}">
+                                    <c:forEach var="recommended"
+                                               items="${project.projectRecommendeds}">
+                                        <c:if test="${recommended.project.id == project.id && recommended.groupName == 'wiki.projectRecommended'}">
+                                            <c:set value="1" var="isOk"/>
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                               href="#" onclick="recommended(this,1,'<c:url
+                                                    value="/Recommended/deleteObjectRecommended.do"/>')"
+                                               recommendedId="${project.id}" id="${recommended.id}"
+                                               recommend="0">
+                                                <span class="am-icon-heart">取消推荐 </span>
+                                            </a>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${isOk=='0'}">
                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                    onclick="recommended(this,1,'<c:url
                                            value="/Recommended/deleteObjectRecommended.do"/>')"
@@ -71,23 +87,8 @@
                                     <span class="am-icon-heart"> 推荐</span>
                                 </a>
 
-
                             </c:if>
-                            <c:if test="${not empty project.projectRecommendeds}">
-                                <c:forEach var="recommended"
-                                           items="${project.projectRecommendeds}">
-                                    <c:if test="${recommended.project.id == project.id}">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           href="#" onclick="recommended(this,1,'<c:url
-                                                value="/Recommended/deleteObjectRecommended.do"/>')"
-                                           recommendedId="${project.id}" id="${recommended.id}"
-                                           recommend="0">
-                                            <span class="am-icon-heart">取消推荐 </span>
-                                        </a>
-                                    </c:if>
-                                </c:forEach>
 
-                            </c:if>
                          <span style="display: none;float: left;padding-left: 10px;">
                                                 <input type="text" name="sort" style="width: 35px;" value=""/>
                                                 <a class=" am-btn-primary"
@@ -106,7 +107,7 @@
                     </a>
                 <%--</c:if>--%>
                     <c:forEach var="recommended" items="${project.projectRecommendeds}">
-                        <c:if test="${recommended.project.id == project.id}">
+                        <c:if test="${recommended.project.id == project.id && recommended.groupName == 'wiki.projectRecommended'}">
                             <span id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐(${recommended.sort})</span>
                         </c:if>
                     </c:forEach>
