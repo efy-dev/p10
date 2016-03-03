@@ -165,8 +165,8 @@
                     "<div class='gz-q'> <i class='gz-icon'></i> <em about='add' id='"+data[i].projectId+"'>"+word+"</em> </div> " +
                     "</a> </div> </li>");*/
            var box = $("<li> <dl> <dt><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src=\"http://pro.efeiyi.com/"+data[i].picture_pc_url+"@!pc-classify-left\"></a> " +
-                   "<div class=\"list-moods\"> <a href=\"#\"><i class=\"img-icon\"></i></a> " +
-                   "<em>"+data[i].fsAmount+"</em> </div></dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
+                   "" +
+                   " </dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
                    "<div class=\"text2\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><span>"+data[i].projectName+"</span></a></div>  <p>"+levelName+"</p> " +
                    "<div class='text5' id='Reimg'>"+data[i].description+"</div> " +
                    "" +

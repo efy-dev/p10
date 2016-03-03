@@ -80,20 +80,28 @@
                     <li>
                       <div class="commodity-img">
                         <a href="<c:url value='/project/brifProject/${projectR.project.id}'/>"><img src="http://pro.efeiyi.com/${projectR.project.picture_pc_url}@!pc-project-list"></a>
-                        <a href="#">
+                        <%--<a href="#">
                           <div class="list-moods">
                             <i class="img-icon"></i>
                             <em>${projectR.project.fsAmount}</em>
                           </div>
-                        </a>
+                        </a>--%>
                       </div>
                       <div class="commodity-txt">
-                        <h4><a href="#">${project.name}</a></h4></p>
+                        <h4><a href="<c:url value='/project/brifProject/${projectR.project.id}'/>">${projectR.project.name}</a></h4></p>
+
+                        <p>
+                          <c:choose>
+                            <c:when test="${projectR.project.level  eq '1'}">国家级非物质文化遗产</c:when>
+                            <c:when test="${projectR.project.level  eq '2'}">省级非物质文化遗产</c:when>
+                            <c:when test="${projectR.project.level  eq '3'}">市级非物质文化遗产</c:when>
+                            <c:otherwise>县级非物质文化遗产</c:otherwise>
+                          </c:choose></p>
                         <p>${projectR.project.addressDistrict.addressCity.addressProvince.name}</p>
 
-                        <p>${fn:length(projectR.project.productList)}件作品</p>
+                      <%--  <p>${fn:length(projectR.project.productList)}件作品</p>
 
-                        <p>${fn:length(projectR.project.masterProjects)}位大师</p>
+                        <p>${fn:length(projectR.project.masterProjects)}位大师</p>--%>
                       </div>
                     </li>
                   </c:forEach>
