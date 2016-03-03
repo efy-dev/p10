@@ -25,6 +25,7 @@ public class PurchaseOrderGroupManagerImpl implements PurchaseOrderGroupManager 
         PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
         purchaseOrderGroup.setTotal(groupProduct.getGroupPrice());
         purchaseOrderGroup.setTenant(groupProduct.getProductModel().getProduct().getTenant());
+        purchaseOrderGroup.setOrderType("4");
         baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(), purchaseOrderGroup);
 
         //生成订单商品
