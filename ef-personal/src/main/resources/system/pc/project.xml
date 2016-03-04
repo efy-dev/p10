@@ -23,5 +23,14 @@
                 </do>
             </does>
         </entity>
+        <entity name="ProjectCategory" label="品类"  model="com.efeiyi.ec.project.model.ProjectCategory">
+            <does>
+                <do name="listProjectCategory" access="" label="品类推荐列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
     </entities>
 </module>

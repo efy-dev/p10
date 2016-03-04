@@ -470,8 +470,8 @@ a{outline: none}
 .footernew .publ-top .city dd p {line-height:17px}
 .footernew .servicenew {background-color:#000;}
 .footernew .servicenew .wechatnew {width:175px;height:130px;float:left;margin-top:6px;margin-left:38px;position:relative}
-.footernew .servicenew .wechatnew .inro-icon0 {background:url(../images/footernew-icon.jpg) no-repeat 0 0;width:175px;height:160px;position:absolute;left:0;top:0px}
-.footernew .servicenew .wechatnew .inro-icon {width:141px;height:143px;background:url(../images/frlinksimg.png) no-repeat 0 -308px;display:block;position:absolute;left:-1px;top:161px}
+.footernew .servicenew .wechatnew .inro-icon0 {background:url(../../images/footernew-icon.jpg) no-repeat 0 0;width:175px;height:160px;position:absolute;left:0;top:0px}
+.footernew .servicenew .wechatnew .inro-icon {width:141px;height:143px;background:url(../../images/frlinksimg.png) no-repeat 0 -308px;display:block;position:absolute;left:-1px;top:161px}
 .footernew .servicenew .tct {text-align:center}
 .footernew .servicenew .foremax {display:inline-block;margin-left:80px}
 .footernew .servicenew .fore {margin-top:22px;width:131px;float:left;text-align:center}
@@ -481,7 +481,7 @@ a{outline: none}
 .footernew .max-links {background:#0c0c0c;border-top:2px solid #161616;z-index:0}
 .footernew .links {background:#000;height:16px;line-height:16px;text-align:center;padding:15px 0;box-sizing:content-box}
 .footernew .links a {margin:0 10px;display:inline-block;box-sizing:content-box;font-size:12px;color:#ccc;font-weight:bold}
-.footernew .links a.line {width:1px;height:10px;background:url(../images/footernew-icon.png) no-repeat 0 -200px;top:2px;position:relative}
+.footernew .links a.line {width:1px;height:10px;background:url(../../images/footernew-icon.png) no-repeat 0 -200px;top:2px;position:relative}
 .footernew .links a:hover {color:#f00;text-decoration:underline}
 .footernew .copyright {background:#000;padding:0 0 10px 0;text-align:center}
 .footernew .copyright .phone strong, .footernew .copyright .phone em {font-weight:bold;letter-spacing:5px;font-size:12px;color:#666}
@@ -492,14 +492,14 @@ a{outline: none}
 .footernew .authentication {background:#000;text-align:center;padding-bottom:20px;}
 .footernew .authentication a {display:inline-block;margin:0 20px}
 .footernew .frlinksimg strong {width: 100%;font-size:16px;color:#434242;font-weight:bolder;float: left;margin-bottom: 6px;}
-.footernew .frlinksimg a {width:142px;height:90px;background:url(../images/frlinksimg.png) no-repeat;display:inline-block}
+.footernew .frlinksimg a {width:142px;height:90px;background:url(../../images/frlinksimg.png) no-repeat;display:inline-block}
 .footernew .frlinksimg a.icon1 {background-position:0 0}
 .footernew .frlinksimg a.icon2 {background-position:0 -90px;cursor:text}
 .footernew .frlinksimg a.icon3 {background-position:0 -210px;cursor:text}
 .footernew .frlinksimg .line {width:2px;height:40px;display:inline-block;position:relative;top:-36px;background:#434343}
 .footer .frlinksimg {padding:20px 0 30px 0}
 .footer .frlinksimg strong {font-size:14px;color:#666;font-weight:bolder;display:inline-block;position:relative;top:-45px}
-.footer .frlinksimg a {width:142px;height:90px;background:url(../images/frlinksimg.png) no-repeat;display:inline-block}
+.footer .frlinksimg a {width:142px;height:90px;background:url(../../images/frlinksimg.png) no-repeat;display:inline-block}
 .footer .frlinksimg a.icon1 {background-position:0 0}
 .footer .frlinksimg a.icon2 {background-position:0 -90px;cursor:text}
 .footer .frlinksimg a.icon3 {background-position:0 -210px;cursor:text}

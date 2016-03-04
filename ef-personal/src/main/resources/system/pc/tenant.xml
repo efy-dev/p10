@@ -213,10 +213,10 @@
                     </query>
                 </do>
                 <do name="listMasterRecommended" access="" label="关注">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default" label="默认" type="auto" orderBy="sort:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
-                    <query name="byMaster" label="默认" type="auto" orderBy="id:desc">
+                    <query name="byMaster" label="默认" type="auto" orderBy="sort:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="group" defaultValue="ec.masterRecommended" operation="eq"/>
                     </query>
