@@ -55,7 +55,7 @@
                         <condition name="name"  operation="eq" label="类别名称" inputType="text"/>
                         <condition name="serial"  operation="eq" label="类别编号" inputType="text"/>
                     </query>
-                    <query name="byType" label="查询" type="auto" orderBy="name:desc">
+                    <query name="byType" label="查询" type="auto" orderBy="serial:asc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
