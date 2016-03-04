@@ -34,7 +34,7 @@
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
-                <do name="listProjectCategory" access="" label="ProjectCategory列表"
+                <do name="listProjectCategory2" access="" label="ProjectCategory列表"
                     result="/projectCategory/projectCategoryPList" execute="com.efeiyi.ec.system.project.controller.ProjectCategoryHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="fatherCategory.id" defaultValue="" operation="eq" inputType="default"/>
