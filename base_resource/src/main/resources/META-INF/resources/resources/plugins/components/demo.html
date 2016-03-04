@@ -137,10 +137,12 @@
         //组建元素列表
         //联动的层级数量是通过配置文件配置而来的
         var parentDiv = $(".selectGroup");
-        var options = new Object();
-        options["groupSize"] = 3;
-        var itemList = new Array();
-        var componentOption = parentDiv.attr("data-option"); //json字符串
+        var selectItems = parentDiv.find(".selectItem");
+        var groupSize = selectItems.length;
+        for(var i = 0; i<groupSize ; i++){
+            var selectItem = selectItems[i];
+            var dataFrom = selectItem.attr("dataFrom");
+        }
     }
 
 </script>
