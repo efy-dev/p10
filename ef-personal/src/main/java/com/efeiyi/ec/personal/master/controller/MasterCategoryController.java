@@ -207,7 +207,7 @@ public class MasterCategoryController {
             pageEntity.setIndex(Integer.parseInt(pageIndex));
             pageEntity.setSize(Integer.parseInt(pageSize));
         }
-        Set<Master> masterSet = new HashSet<Master>();
+        Set<Master> masterSet = new TreeSet<Master>();
         if ("plistMaster_all".equals(qm)) {
             XQuery xQuery = new XQuery("listProjectCategory_default", request);
             List<ProjectCategory> categoryList = baseManager.listObject(xQuery);
@@ -253,7 +253,7 @@ public class MasterCategoryController {
 //                master.setCityName(province.getName());
                             masterSet.add(masterProject.getMaster());
                         }
-                    };
+                    }
                 }
             }
         } else if ("plistMaster_byLevel".equals(qm)) {

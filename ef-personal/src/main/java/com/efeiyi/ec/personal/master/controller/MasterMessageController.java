@@ -69,7 +69,7 @@ public class MasterMessageController {
         }
         Map<String, List<Master>> masterRecommends = new HashMap<String, List<Master>>();
 
-        if (list != null && !list.isEmpty()) {
+        if (!list.isEmpty()) {
             for (ProjectCategory projectCategory : list) {
                 System.out.println("###############################" + projectCategory.getName());
                 List<Master> masterList = new ArrayList<Master>();

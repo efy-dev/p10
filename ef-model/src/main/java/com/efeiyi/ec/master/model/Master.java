@@ -23,7 +23,7 @@ import java.util.List;
 @Entity
 @Table(name = "master")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class Master implements Serializable {
+public class Master implements Serializable,Comparable {
 
     private String id;
     private String name;//名称标识
@@ -294,4 +294,21 @@ public class Master implements Serializable {
     }
 
 
+    @Override
+    public int compareTo(Object o) {
+        if(o==null){
+          return -1;
+         }
+        if (!(o instanceof Master)){
+            return -1;
+        }
+        if (o.hashCode()!=this.hashCode()){
+            return -1;
+        }
+        if (this.getId().equals(((Master) o).getId())
+                && this.fullName.equals(((Master) o).getFullName())){
+            return 0;
+        }
+      return  -1;
+    }
 }
