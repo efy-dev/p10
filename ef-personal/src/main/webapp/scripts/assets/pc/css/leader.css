@@ -56,17 +56,17 @@ a{outline: none}
 .jiathis_style .jtico_cqq {background:url('../images/icon-share.png') no-repeat -65px 0;width:22px}
 /*110101大师首页动态分享*/
 .pc-dynamic{width: 1000px;margin: 0 auto;}
-.pc-dynamic .p-dy-left{float: left;width: 683px;margin-top: 20px;}
+.pc-dynamic .p-dy-left{float: left;width: 100%;margin-top: 20px;}
 .pc-dynamic .p-dy-left .list-dynamic  li{width: 100%;float: left;border-bottom: 2px solid #000;border-top: 2px solid #000;margin-top: -2px;}
-.pc-dy-txt .pc-dy-pic{width: 117px;float: left;}
+.pc-dy-txt .pc-dy-pic{float: left;}
 .pc-dy-txt{padding-bottom: 20px;}
-.pc-dy-txt .pc-dy-pic .pc-d-pic{width: 80px;height: 80px;margin: 20px 0 14px 20px;}
+.pc-dy-txt .pc-dy-pic .pc-d-pic{width: 160px;height: 160px;margin: 20px 14px 14px 20px;}
 .pc-dy-txt .pc-dy-pic .pc-d-pic img{width: 100%;height: 100%}
 .pc-dy-txt .pc-dy-pic  .act-1{margin-left: 34px;padding: 5px 8px;width: 55px;height: 31px;}
 
 .pc-dy-txt .pc-dy-box{width: 566px;float: left;}
 .pc-dy-txt .pc-dy-box h5{font-size: 14px;margin: 27px 0 15px 0;font-weight: 100;}
-.pc-dy-txt .pc-dy-box p{font-size: 12px;color: #999;}
+.pc-dy-txt .pc-dy-box p{font-size: 14px;color: #999;}
 .pc-dy-txt .pc-dy-box .pc-dy-content{width: 100%;}
 .pc-dy-txt .pc-dy-box .pc-dy-content p{font-size: 14px!important;color: #000!important;margin: 14px 38px  14px 0!important;float:left;width: 100%}
 
@@ -319,9 +319,9 @@ a{outline: none}
 .norms{margin-bottom: -20px;}
 .norms p{margin-bottom: 20px;font-size: 12px;color: #000;}
 /*end//110103大师首页-单图*/
-.master-list {margin-bottom: 20px;}
-.master-list .pc-dy-box h6{margin: 32px 0 15px 0;font-size: 14px;color: #000;}
-.master-list .pc-dy-box h6 span{margin-left: 16px;font-size: 12px;color: #000;}
+.master-list {height: 215px;}
+.master-list .pc-dy-box h6{margin: 17px 0 15px 0;font-size: 16px;color: #000;}
+.master-list .pc-dy-box h6 span{margin-left: 16px;font-size: 14px;color: #000;}
 .master-list .pc-dy-box p{margin-top: 6px;}
 .master-list .pc-dy-box p span{color: #000;}
 .master-list .pc-dy-box .pc-dy-content{margin-top: 20px;}

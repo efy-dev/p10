@@ -67,7 +67,7 @@ public class MasterMessageController {
         for (MasterRecommended masterRecommended : masterRecommendeds) {
             masters.add(masterRecommended.getMaster());
         }
-        Map<String , List<Master>> masterRecommends = new HashMap<String , List<Master>>();
+        Map<String, List<Master>> masterRecommends = new HashMap<String, List<Master>>();
 
         if (list != null && !list.isEmpty()) {
             for (ProjectCategory projectCategory : list) {
@@ -83,8 +83,8 @@ public class MasterMessageController {
                         }
                     }
                 }
-                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+projectCategory.getId());
-                masterRecommends.put(projectCategory.getName() , masterList);
+                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + projectCategory.getId());
+                masterRecommends.put(projectCategory.getName(), masterList);
             }
         }
         model.addAttribute("masters", masterRecommends);
@@ -93,9 +93,11 @@ public class MasterMessageController {
 
 
     @RequestMapping("/masterDetails/{id}")
-    public String viewMasterDetails(@PathVariable String id, Model model, HttpServletRequest request) throws Exception {
+    public String viewMasterDetails(@PathVariable String id, Model model) throws Exception {
         Master master = (Master) baseManager.getObject(Master.class.getName(), id);
         master.setProjectName(mainMasterProject(master.getMasterProjectList()));
+        ProjectCategory category = mainProject(master.getMasterProjectList()).getProjectCategory();
+        model.addAttribute("category",category);
         model.addAttribute("object", master);
         return "/masterMessage/masterDetails";
     }
@@ -251,6 +253,23 @@ public class MasterMessageController {
         }
         return models;
     }
+
+    public Project mainProject(List<MasterProject> masterProjects) {
+
+        Project project = null;
+
+        if (masterProjects != null && masterProjects.size() > 0) {
+            for (MasterProject masterProjectTemp : masterProjects) {
+                if (masterProjectTemp.getStatus().equals("1")) {
+                    project = masterProjectTemp.getProject();
+                }
+            }
+            return project;
+        } else {
+            return null;
+        }
+    }
+
 
     public String mainMasterProject(List<MasterProject> masterProjects) {
 

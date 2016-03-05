@@ -78,25 +78,7 @@
       <h5>${object.fullName}</h5>
       <h6>${object.brief}</h6>
       <p>技艺名称：<span>${object.projectName}</span></p>
-      <p>技艺类别：
-        <span>
-          <c:choose>
-            <c:when test="${object.level == '1'}">
-              国家级
-            </c:when>
-            <c:when test="${object.level == '2'}">
-              省级
-            </c:when>
-            <c:when test="${object.level == '3'}">
-              市级
-            </c:when>
-            <c:otherwise>
-              县级
-            </c:otherwise>
-          </c:choose>
-          非物质文化遗产
-        </span>
-      </p>
+      <p>技艺类别：<span>${category.name}</span></p>
     </div>
     <div class="p-right">
       ${object.content}
