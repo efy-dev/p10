@@ -25,7 +25,7 @@
                 if (AuthorizationUtil.getMyUser().getId() == null) {
             %>
             <li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>
-            <li><a href="http://passport.efeiyi.com/register?service=http://http://master.efeiyi.com/ef-wiki//sso.do" title="快速注册">快速注册</a></li>
+            <li><a href="http://passport.efeiyi.com/register?service=http://http://craft.efeiyi.com/ef-wiki" title="快速注册">快速注册</a></li>
             <%
                 }
             %>
