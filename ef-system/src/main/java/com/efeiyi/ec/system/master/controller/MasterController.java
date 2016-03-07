@@ -51,7 +51,7 @@ public class MasterController {
 
     @RequestMapping({"/masterNews/pictureUpload.do"})
     @ResponseBody
-    public String uploadMasterNewsPicture(MultipartRequest multipartRequest, HttpServletRequest request) throws Exception {
+    public String uploadMasterNewsPicture(MultipartRequest multipartRequest) throws Exception {
 
         MultipartFile multipartFile = multipartRequest.getFile("newsPicture");
         String url = "news/" + multipartFile.getOriginalFilename();
