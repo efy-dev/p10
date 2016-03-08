@@ -31,12 +31,13 @@
     <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
         <form action="<c:url value="/basic/xmm.do"/>" method="post" class="am-form am-form-horizontal"
               enctype="multipart/form-data">
-            <c:if test="${'master' == param.param}">
-                <input type="hidden" value="saveOrUpdateMaster" name="qm">
-            </c:if>
-            <c:if test="${'EcMaster' == param.param}">
-                <input type="hidden" value="saveOrUpdateEcMaster" name="qm">
-            </c:if>
+            <input type="hidden" value="saveOrUpdateMaster" name="qm">
+            <%--<c:if test="${'master' == param.param}">--%>
+                <%--<input type="hidden" value="saveOrUpdateMaster" name="qm">--%>
+            <%--</c:if>--%>
+            <%--<c:if test="${'EcMaster' == param.param}">--%>
+                <%--<input type="hidden" value="saveOrUpdateEcMaster" name="qm">--%>
+            <%--</c:if>--%>
 
             <input type="hidden" name="id" value="${object.id}">
             <%--<input type="hidden" name="status" value="1"/> --%>
