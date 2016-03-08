@@ -142,10 +142,10 @@
 
 
     function saveModel(obj){
-        var  typeRecommended = $(obj).parent().find("select").val();
-        if(typeRecommended == "ec.masterRecommended"){
+        var  typeRecommended = "ec.masterRecommended";
+        /*if(typeRecommended == "ec.masterRecommended"){
             alert("请选择推荐类型!");
-        }else if($(obj).prev("input").val()==""){
+        }else */if($(obj).prev("input").val()==""){
             alert("请输入序号!");
         }else {
             saveRecommended(obj, typeRecommended, 1, '<c:url value="/Recommended/saveObjectRecommended.do" />');
