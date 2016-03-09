@@ -76,7 +76,18 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only" width="20%">${group.manUser.name}</td>
+                        <td class="am-hide-sm-only" width="20%">
+                            <c:forEach var="member" items="${group.groupMemberList}">
+                                <c:if test="${member.level=='0'}">
+                                    <c:forEach items="${group.purchaseOrderGroupList}" var="purchaseOrder">
+                                        <c:if test="${member.id==purchaseOrder.groupMember.id}">
+                                            ${purchaseOrder.receiverName}
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                            </c:forEach>
+                          ${group.manUser.name}
+                        </td>
                         <td class="am-hide-sm-only" width="20%">
                                 ${group.groupProduct.productModel.name}
                         </td>
