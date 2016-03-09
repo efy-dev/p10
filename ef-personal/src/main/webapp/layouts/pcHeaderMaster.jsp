@@ -30,7 +30,7 @@
         <div class="nav">
             <ul>
                 <li><a href="http://www2.efeiyi.com" title="首页">首页</a></li>
-                <li><a href="http://master.efeiyi.com/ef-wiki/pc/index.do" title="工艺">工艺</a></li>
+                <li><a href="http://craft.efeiyi.com/ef-wiki/pc/index.do" title="工艺">工艺</a></li>
                 <li><a href="<c:url value='/masterMessage/index.do'/>" title="传承人">大师</a></li>
             </ul>
         </div>

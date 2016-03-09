@@ -61,19 +61,17 @@ public class MasterMessageController {
             list.add(projectCategoryRecommended.getProjectCategory());
         }
 
-
         XQuery query = new XQuery("listMasterRecommended_byMaster", request);
         List<MasterRecommended> masterRecommendeds = baseManager.listObject(query);
         List<Master> masters = new ArrayList<Master>();//所有推荐大师
         for (MasterRecommended masterRecommended : masterRecommendeds) {
             masters.add(masterRecommended.getMaster());
         }
+        Map<String, List<Master>> masterRecommends = new HashMap<String, List<Master>>();
 
-        Map<List<Master>, ProjectCategory> masterRecommends = new HashMap<List<Master>, ProjectCategory>();
-
-
-        if (list != null && !list.isEmpty()) {
+        if (!list.isEmpty()) {
             for (ProjectCategory projectCategory : list) {
+                System.out.println("###############################" + projectCategory.getName());
                 List<Master> masterList = new ArrayList<Master>();
                 for (Master master : masters) {
                     List<MasterProject> masterProjects = master.getMasterProjectList();
@@ -85,15 +83,23 @@ public class MasterMessageController {
                         }
                     }
                 }
-                masterRecommends.put(masterList, projectCategory);
+                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + projectCategory.getId());
+                masterRecommends.put(projectCategory.getName(), masterList);
             }
         }
-
-
         model.addAttribute("masters", masterRecommends);
-
-
         return "/masterMessage/masterMessageList";
+    }
+
+
+    @RequestMapping("/masterDetails/{id}")
+    public String viewMasterDetails(@PathVariable String id, Model model) throws Exception {
+        Master master = (Master) baseManager.getObject(Master.class.getName(), id);
+        master.setProjectName(mainMasterProject(master.getMasterProjectList()));
+        ProjectCategory category = mainProject(master.getMasterProjectList()).getProjectCategory();
+        model.addAttribute("category",category);
+        model.addAttribute("object", master);
+        return "/masterMessage/masterDetails";
     }
 
     @ResponseBody
@@ -247,6 +253,23 @@ public class MasterMessageController {
         }
         return models;
     }
+
+    public Project mainProject(List<MasterProject> masterProjects) {
+
+        Project project = null;
+
+        if (masterProjects != null && masterProjects.size() > 0) {
+            for (MasterProject masterProjectTemp : masterProjects) {
+                if (masterProjectTemp.getStatus().equals("1")) {
+                    project = masterProjectTemp.getProject();
+                }
+            }
+            return project;
+        } else {
+            return null;
+        }
+    }
+
 
     public String mainMasterProject(List<MasterProject> masterProjects) {
 
@@ -785,8 +808,8 @@ public class MasterMessageController {
         } else {
             model.addAttribute("result", "hide");
         }
-        XQuery xQuery = new XQuery("listMasterProject_default", request);
-        List<MasterProject> list = baseManager.listObject(xQuery);
+        XQuery xQuery = new XQuery("listProjectCategory_default", request);
+        List<ProjectCategory> list = baseManager.listObject(xQuery);
         XQuery xQuery2 = new XQuery("listAddressProvince_asc", request);
         List<AddressProvince> list2 = baseManager.listObject(xQuery2);
         model.addAttribute("categoryList", list);
