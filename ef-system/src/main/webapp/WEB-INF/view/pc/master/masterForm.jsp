@@ -158,8 +158,7 @@
                 <label for="content" class="am-u-sm-3 am-form-label">介绍 / Content</label>
 
                 <div class="am-u-sm-9">
-                        <textarea id="content" name="content" class="ckeditor" placeholder="输入简介"
-                                  value="${object.content}" required>${object.content}</textarea>
+                        <textarea id="content" name="content" class="ckeditor" placeholder="输入简介" required>${object.content}</textarea>
                 </div>
                 <br>
             </div>
