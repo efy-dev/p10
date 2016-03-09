@@ -19,6 +19,7 @@
 
 </head>
 <body>
+<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
@@ -54,18 +55,18 @@
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
                                     </security:authorize>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=plistMasterMessage_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span
-                                            class="am-icon-trash-o"></span> 最新动态
-                                    </a>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                        href="<c:url value="/basic/xm.do?qm=plistMasterFollowed_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span
-                                            class="am-icon-trash-o"></span> 查看粉丝
-                                    </a>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=plistMasterWork_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span
-                                            class="am-icon-trash-o"></span> 查看作品
-                                    </a>
+                                    <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
+                                       <%--href="<c:url value="/basic/xm.do?qm=plistMasterMessage_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span--%>
+                                            <%--class="am-icon-trash-o"></span> 最新动态--%>
+                                    <%--</a>--%>
+                                    <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
+                                        <%--href="<c:url value="/basic/xm.do?qm=plistMasterFollowed_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span--%>
+                                            <%--class="am-icon-trash-o"></span> 查看粉丝--%>
+                                    <%--</a>--%>
+                                    <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
+                                       <%--href="<c:url value="/basic/xm.do?qm=plistMasterWork_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span--%>
+                                            <%--class="am-icon-trash-o"></span> 查看作品--%>
+                                    <%--</a>--%>
                                     <security:authorize ifAnyGranted="admin,operational,c_operational">
                                     <c:set value="0" var="isOk"/>
                                     <c:if test="${not empty master.masterRecommendedList}">
@@ -89,11 +90,11 @@
                                     </c:if>
 
                                        <span style="display: none;float: left;padding-left: 10px;">
-                                            <select id="type" name="type" style="width: 90px;display: inline-block;">
-                                                <option value="ec.masterRecommended">请选择</option>
-                                                <option value="masterSkillRecommended">传统技艺</option>
-                                                <option value="masterArtRecommended">传统美术</option>
-                                            </select>
+                                            <%--<select id="type" name="type" style="width: 90px;display: inline-block;">--%>
+                                                <%--<option value="ec.masterRecommended">请选择</option>--%>
+                                                <%--<option value="masterSkillRecommended">传统技艺</option>--%>
+                                                <%--<option value="masterArtRecommended">传统美术</option>--%>
+                                            <%--</select>--%>
                                                 <input type="text" name="sort" style="width: 35px;" value="" />
                                                 <a class=" am-btn-primary" href="javascript:void (0);" onclick="saveModel(this)" style="padding: 0px 10px 5px 10px" > 保存</a>
 
@@ -141,10 +142,10 @@
 
 
     function saveModel(obj){
-        var  typeRecommended = $(obj).parent().find("select").val();
-        if(typeRecommended == "ec.masterRecommended"){
+        var  typeRecommended = "ec.masterRecommended";
+        /*if(typeRecommended == "ec.masterRecommended"){
             alert("请选择推荐类型!");
-        }else if($(obj).prev("input").val()==""){
+        }else */if($(obj).prev("input").val()==""){
             alert("请输入序号!");
         }else {
             saveRecommended(obj, typeRecommended, 1, '<c:url value="/Recommended/saveObjectRecommended.do" />');

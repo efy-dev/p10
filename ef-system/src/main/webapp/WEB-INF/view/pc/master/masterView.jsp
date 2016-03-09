@@ -77,28 +77,28 @@
 </div>
 </div>
 
-<div class="am-g">
-    <div class="am-u-md-12">
-        <h2>传承人的项目</h2>
-        <div class="am-btn-toolbar">
-            <div class="am-btn-group am-btn-group-xs">
-<security:authorize ifAnyGranted="admin,operational,c_operational">
-                <a type="button" class="am-btn am-btn-default"
-                   href="<c:url value="/basic/xm.do?qm=listProject_default&masterId=${object.id}&master=1"/>"><span
-                        class="am-icon-plus"></span> 新建为主项目</a>
-                <a type="button" class="am-btn am-btn-default"
-                   href="<c:url value="/basic/xm.do?qm=listProject_default&masterId=${object.id}"/>"><span
-                        class="am-icon-plus"></span> 新建项目</a>
-</security:authorize>
-            </div>
-        </div>
-    </div>
+<%--<div class="am-g">--%>
+    <%--<div class="am-u-md-12">--%>
+        <%--<h2>传承人的项目</h2>--%>
+        <%--<div class="am-btn-toolbar">--%>
+            <%--<div class="am-btn-group am-btn-group-xs">--%>
+<%--<security:authorize ifAnyGranted="admin,operational,c_operational">--%>
+                <%--<a type="button" class="am-btn am-btn-default"--%>
+                   <%--href="<c:url value="/basic/xm.do?qm=listProject_default&masterId=${object.id}&master=1"/>"><span--%>
+                        <%--class="am-icon-plus"></span> 新建为主项目</a>--%>
+                <%--<a type="button" class="am-btn am-btn-default"--%>
+                   <%--href="<c:url value="/basic/xm.do?qm=listProject_default&masterId=${object.id}"/>"><span--%>
+                        <%--class="am-icon-plus"></span> 新建项目</a>--%>
+<%--</security:authorize>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
 
-    <div class="am-u-md-12">
-        <jsp:include flush="true"
-                     page="/basic/xm.do?qm=listMasterProject_include&conditions=master.id:${object.id}"/>
-    </div>
-</div>
+    <%--<div class="am-u-md-12">--%>
+        <%--<jsp:include flush="true"--%>
+                     <%--page="/basic/xm.do?qm=listMasterProject_include&conditions=master.id:${object.id}"/>--%>
+    <%--</div>--%>
+<%--</div>--%>
 <div class="am-g">
     <div class="am-u-md-12">
         <h2>推荐作品</h2>
@@ -133,26 +133,26 @@
 </div>
 
 
-<div class="am-g">
-    <div class="am-u-md-12">
-        <h2>传承人介绍</h2>
+<%--<div class="am-g">--%>
+    <%--<div class="am-u-md-12">--%>
+        <%--<h2>传承人介绍</h2>--%>
 
-        <div class="am-btn-toolbar">
-            <div class="am-btn-group am-btn-group-xs">
-<security:authorize ifAnyGranted="admin,operational,c_operational">
-                <a type="button" class="am-btn am-btn-default"
-                   href="<c:url value="/basic/xm.do?qm=formMasterIntroduction&masterId=${object.id}"/>"><span
-                        class="am-icon-plus"></span> 新建传承人介绍</a>
-</security:authorize>
-            </div>
-        </div>
-    </div>
+        <%--<div class="am-btn-toolbar">--%>
+            <%--<div class="am-btn-group am-btn-group-xs">--%>
+<%--<security:authorize ifAnyGranted="admin,operational,c_operational">--%>
+                <%--<a type="button" class="am-btn am-btn-default"--%>
+                   <%--href="<c:url value="/basic/xm.do?qm=formMasterIntroduction&masterId=${object.id}"/>"><span--%>
+                        <%--class="am-icon-plus"></span> 新建传承人介绍</a>--%>
+<%--</security:authorize>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
 
-    <div class="am-u-md-12">
-        <jsp:include flush="true"
-                     page="/basic/xm.do?qm=listMasterIntroduction_include&conditions=master.id:${object.id}&master.id=${object.id}"/>
-    </div>
-</div>
+    <%--<div class="am-u-md-12">--%>
+        <%--<jsp:include flush="true"--%>
+                     <%--page="/basic/xm.do?qm=listMasterIntroduction_include&conditions=master.id:${object.id}&master.id=${object.id}"/>--%>
+    <%--</div>--%>
+<%--</div>--%>
 <div class="am-g">
     <div class="am-u-md-12">
         <h2>大师作品</h2>

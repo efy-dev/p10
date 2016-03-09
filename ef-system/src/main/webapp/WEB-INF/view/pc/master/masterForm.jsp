@@ -8,15 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title></title>
     <script src="<c:url value="/scripts/PCDSelect.js" />"></script>
-    <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>" ></script>
+    <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>"></script>
 </head>
 <body>
-<script >
-    $(function(){
+<script>
+    $(function () {
         console.log('${param.param}');
     })
 </script>
@@ -30,12 +31,13 @@
     <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
         <form action="<c:url value="/basic/xmm.do"/>" method="post" class="am-form am-form-horizontal"
               enctype="multipart/form-data">
-            <c:if test="${'master' == param.param}">
-                <input type="hidden" value="saveOrUpdateMaster" name="qm">
-            </c:if>
-            <c:if test="${'EcMaster' == param.param}">
-                <input type="hidden" value="saveOrUpdateEcMaster" name="qm">
-            </c:if>
+            <input type="hidden" value="saveOrUpdateMaster" name="qm">
+            <%--<c:if test="${'master' == param.param}">--%>
+                <%--<input type="hidden" value="saveOrUpdateMaster" name="qm">--%>
+            <%--</c:if>--%>
+            <%--<c:if test="${'EcMaster' == param.param}">--%>
+                <%--<input type="hidden" value="saveOrUpdateEcMaster" name="qm">--%>
+            <%--</c:if>--%>
 
             <input type="hidden" name="id" value="${object.id}">
             <%--<input type="hidden" name="status" value="1"/> --%>
@@ -43,7 +45,8 @@
                 <label for="name" class="am-u-sm-3 am-form-label">姓名拼音</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYi" value="${object.name}" required>
+                    <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYin" value="${object.name}"
+                           required>
                 </div>
             </div>
             <div class="am-form-group">
@@ -57,10 +60,8 @@
 
             <div class="am-form-group">
                 <label class="am-u-sm-3 am-form-label">等级 / Level</label>
-
                 <div class="am-u-sm-9">
                     <ming800:status name="level" dataType="Master.level" checkedValue="${object.level}" type="select"/>
-
                 </div>
             </div>
 
@@ -78,7 +79,10 @@
             </div>
             <div id="pcdDiv">
                 <div class="am-form-group">
-                    <label name="province" for="originProvince.id" class="am-u-sm-3 am-form-label">省份 <small></small></label>
+                    <label name="province" for="originProvince.id" class="am-u-sm-3 am-form-label">省份
+                        <small></small>
+                    </label>
+
                     <div class="am-u-sm-9">
                         <select name="originProvince.id" class="addressProvince" id="originProvince.id"></select>
                     </div>
@@ -98,7 +102,8 @@
                 <label for="sex" class="am-u-sm-3 am-form-label">性别</label>
 
                 <div class="am-u-sm-9">
-                    <ming800:status name="sex" dataType="Master.sex" checkedValue="${object.sex}" type="select" required="true"/>
+                    <ming800:status name="sex" dataType="Master.sex" checkedValue="${object.sex}" type="select"
+                                    required="true"/>
                 </div>
             </div>
 
@@ -141,12 +146,23 @@
 
 
             <div class="am-form-group">
-                <label for="user-intro" class="am-u-sm-3 am-form-label">短简介</label>
+                <label for="user-intro" class="am-u-sm-3 am-form-label">简介 / Brief</label>
 
                 <div class="am-u-sm-9" style="text-align: left;">
-                    <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介,限30字以内">${object.brief}</textarea>
+                    <textarea class="" cols="6" name="brief" rows="2" id="user-intro"
+                              placeholder="输入短简介,限30字以内">${object.brief}</textarea>
                     <small>输入短简介,限30字以内</small>
                 </div>
+            </div>
+
+            <div class="am-form-group">
+                <label for="content" class="am-u-sm-3 am-form-label">介绍 / Content</label>
+
+                <div class="am-u-sm-9">
+                        <textarea id="content" name="content" class="ckeditor" placeholder="输入简介"
+                                  value="${object.content}" required>${object.content}</textarea>
+                </div>
+                <br>
             </div>
 
             <div class="am-form-group">
@@ -155,10 +171,35 @@
                 </div>
             </div>
         </form>
+
+        <c:if test="${!empty object.id}">
+            <div class="am-g">
+                <div class="am-u-md-12">
+                    <h2>大师的项目</h2>
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <security:authorize ifAnyGranted="admin,operational,c_operational">
+                                <a type="button" class="am-btn am-btn-default"
+                                   href="<c:url value="/basic/xm.do?qm=listProject_default&masterId=${object.id}&master=1"/>"><span
+                                        class="am-icon-plus"></span> 新建为主项目</a>
+                                <a type="button" class="am-btn am-btn-default"
+                                   href="<c:url value="/basic/xm.do?qm=listProject_default&masterId=${object.id}"/>"><span
+                                        class="am-icon-plus"></span> 新建项目</a>
+                            </security:authorize>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="am-u-md-12">
+                    <jsp:include flush="true"
+                                 page="/basic/xm.do?qm=listMasterProject_include&conditions=master.id:${object.id}"/>
+                </div>
+            </div>
+        </c:if>
     </div>
 </div>
 <script type="text/javascript">
-    $(function(){
+    $(function () {
         $("#pcdDiv").pcdSelect(
                 "<c:url value='/pj/address/provinceList.do'/>",
                 "",
@@ -166,7 +207,6 @@
                 "${object.originProvince.id}",
                 "",
                 ""
-
         )
     });
 </script>
