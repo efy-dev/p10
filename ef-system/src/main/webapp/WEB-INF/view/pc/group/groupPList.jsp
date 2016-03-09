@@ -68,9 +68,11 @@
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=viewGroup&id=${group.id}"/>">
                                         查看详情
                                     </a>
+                                    <c:if test="${group.status=='1'}">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void (0);" onclick="addGroup('${group.id}',${group.groupProduct.memberAmount},${fn:length(group.groupMemberList)});">
                                         凑团
                                     </a>
+                                    </c:if>
                                 </div>
                             </div>
                         </td>
