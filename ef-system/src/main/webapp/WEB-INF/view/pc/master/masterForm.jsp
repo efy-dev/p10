@@ -45,8 +45,7 @@
                 <label for="name" class="am-u-sm-3 am-form-label">姓名拼音</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYin" value="${object.name}"
-                           required>
+                    <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYin" value="${object.name}">
                 </div>
             </div>
             <div class="am-form-group">
