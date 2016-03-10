@@ -68,13 +68,26 @@
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=viewGroup&id=${group.id}"/>">
                                         查看详情
                                     </a>
+                                    <c:if test="${group.status=='1'}">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void (0);" onclick="addGroup('${group.id}',${group.groupProduct.memberAmount},${fn:length(group.groupMemberList)});">
                                         凑团
                                     </a>
+                                    </c:if>
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only" width="20%">${group.manUser.name}</td>
+                        <td class="am-hide-sm-only" width="20%">
+                            <c:forEach var="member" items="${group.groupMemberList}">
+                                <c:if test="${member.level=='0'}">
+                                    <c:forEach items="${group.purchaseOrderGroupList}" var="purchaseOrder">
+                                        <c:if test="${member.id==purchaseOrder.groupMember.id}">
+                                            ${purchaseOrder.receiverName}
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                            </c:forEach>
+                          <%--${group.manUser.name}--%>
+                        </td>
                         <td class="am-hide-sm-only" width="20%">
                                 ${group.groupProduct.productModel.name}
                         </td>

@@ -83,7 +83,7 @@
                 <c:forEach var="po" items="${object.purchaseOrderGroupList}">
                     <tr>
                         <td>
-                                ${po.purchaseOrder.serial}
+                                ${po.serial}
                         </td>
                         <td>
                             ${po.groupMember.user.username}
