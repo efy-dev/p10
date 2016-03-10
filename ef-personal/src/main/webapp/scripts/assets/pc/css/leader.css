@@ -322,7 +322,7 @@ a{outline: none}
 .master-list {height: 215px;}
 .master-list .pc-dy-box h6{margin: 17px 0 15px 0;font-size: 16px;color: #000;}
 .master-list .pc-dy-box h6 span{margin-left: 16px;font-size: 14px;color: #000;}
-.master-list .pc-dy-box p{margin-top: 6px;}
+.master-list .pc-dy-box p{margin:6px 0 4px 0}
 .master-list .pc-dy-box p span{color: #000;}
 .master-list .pc-dy-box .pc-dy-content{margin-top: 20px;}
 .master-list .pc-dy-box .pc-dy-content .list-pic{width: 100%;float: left}

@@ -71,7 +71,7 @@
                                     <c:set value="0" var="isOk"/>
                                     <c:if test="${not empty master.masterRecommendedList}">
                                         <c:forEach var="recommended" items="${master.masterRecommendedList}">
-                                            <c:if test="${recommended.master.id == master.id && (recommended.group == 'masterSkillRecommended'||recommended.group=='masterArtRecommended')}">
+                                            <c:if test="${recommended.master.id == master.id}">
                                                 <c:set value="1" var="isOk"/>
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                                    href="javascript:void(0);"  onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')" recommendedId = "${master.id}"  id="${recommended.id}" recommend="0">
@@ -108,8 +108,8 @@
                               ${master.fullName}
                             </a>
                             <c:forEach var="recommended" items="${master.masterRecommendedList}">
-                                <c:if test="${recommended.master.id == master.id && (recommended.group == 'masterSkillRecommended'||recommended.group=='masterArtRecommended')}" >
-                                    <span  id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
+                                <c:if test="${recommended.master.id == master.id}" >
+                                    <span  id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐(${recommended.sort})</span>
                                 </c:if>
                             </c:forEach>
                         </td>
