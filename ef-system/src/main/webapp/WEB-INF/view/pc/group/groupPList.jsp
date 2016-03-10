@@ -86,7 +86,7 @@
                                     </c:forEach>
                                 </c:if>
                             </c:forEach>
-                          ${group.manUser.name}
+                          <%--${group.manUser.name}--%>
                         </td>
                         <td class="am-hide-sm-only" width="20%">
                                 ${group.groupProduct.productModel.name}
