@@ -245,7 +245,7 @@ public class PurchaseOrderController {
         String memberId = purchaseOrderGroup.getGroupMember().getId();
         String groupId = purchaseOrderGroup.getMyGroup().getId();
         String groupProductId = purchaseOrderGroup.getMyGroup().getGroupProduct().getId();
-        return "redirect:Http://a.efeiyi.com/group/shareGroup?memberId=" + memberId + "&groupId=" + groupId + "&groupProductId=" + groupProductId + "&purchaseOrderId=" + purchaseOrderId + "";
+        return "redirect:Http://a.efeiyi.com/group/shareGroup.do?memberId=" + memberId + "&groupId=" + groupId + "&groupProductId=" + groupProductId + "&purchaseOrderId=" + purchaseOrderId + "";
     }
 
     /**
