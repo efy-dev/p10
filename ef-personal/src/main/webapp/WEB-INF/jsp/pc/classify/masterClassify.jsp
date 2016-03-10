@@ -244,22 +244,18 @@
                                 "<p><span>" + levelName + "</span></p>";
                         var contentDate = data[i].content;
                         if (contentDate != null && contentDate != "") {
-                            if(contentDate.length <= 103){
-                                box += "<div id='Reimg' class='txt5'>" + contentDate + "</div>";
-                            }else{
-                                box += "<div id='Reimg' class='txt5'>" + contentDate + "</div><div class='ae'><a href=\"<c:url value='/masterMessage/masterDetails/'/>"+data[i].id+"\" style='float: right'>更多</a></div>"
-                            }
+                            box += "<div id='"+data[i].id+"' class='txt5'><a href=\"<c:url value='/masterMessage/masterDetails/'/>"+data[i].id+"\">" + contentDate + "</a></div><div class='ae'><a href=\"<c:url value='/masterMessage/masterDetails/'/>"+data[i].id+"\" style='float: right;font-size:14px;'>更多</a></div>";
                         }
                         box += "</div></div></li>";
-                        $("#pubu").children("#Reimg").children("img").remove();
-                        var txt = $(".pc-dy-txt .pc-dy-box .txt5");
-
-                        var txt_length = txt.text().length;
-
-                        if (txt_length > 103) {
-                            txt.text(txt.text().substr(0, 100)).append("...")
-                        }
                         pubu.append(box);
+                        $("#pubu").children("#"+data[i].id).children("img").remove();
+                        var txt = $("#"+data[i].id);
+                        txt.find("p").css({fontSize:'14px',color:'#999'});
+                        txt.css({fontSize:'14px',color:'#999'});
+                        var txt_length = txt.text().length;
+                        if (txt_length > 103) {
+                            txt.text(txt.text().substr(0, 100)).append("...");
+                        }
                     }
                 } else {
                     flag = true;
