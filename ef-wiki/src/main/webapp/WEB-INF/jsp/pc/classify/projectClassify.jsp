@@ -168,7 +168,7 @@
                    "" +
                    " </dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
                    "<div class=\"text2\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><span>"+data[i].projectName+"</span></a></div>  <p>"+levelName+"</p> " +
-                   "<div class='text5' id='Reimg'>"+data[i].description+"</div> " +
+                   "<div class='text5' id='"+data[i].projectId+"'>"+data[i].description+"</div> " +
                    "" +
                    "</div> " +
                    "<div class='newtxt ae'>"+"<a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">"+"更多"+"</a>"+"</div>"+
@@ -187,8 +187,9 @@
                     "</dd> </dl> </li> ");*/    //去掉关注
             pubu.append(box);
             //PBL("#beforeAttention",".before",2);
-            $("#classify").children("#Reimg").children("img").remove();
-            var txt = $(".list-find .list-f-content .l-f-left .grounp-f li dl dd .text5");
+            $("#classify").children("#"+data[i].projectId).children("img").remove();
+
+            var txt = $("#"+data[i].projectId);
             var txt_length = txt.text().length;
             if(txt_length>200){
               txt.text(txt.text().substr(0,100)).append("...")

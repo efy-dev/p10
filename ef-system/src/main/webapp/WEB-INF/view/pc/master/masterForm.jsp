@@ -45,8 +45,7 @@
                 <label for="name" class="am-u-sm-3 am-form-label">姓名拼音</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYin" value="${object.name}"
-                           required>
+                    <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYin" value="${object.name}">
                 </div>
             </div>
             <div class="am-form-group">
@@ -159,8 +158,7 @@
                 <label for="content" class="am-u-sm-3 am-form-label">介绍 / Content</label>
 
                 <div class="am-u-sm-9">
-                        <textarea id="content" name="content" class="ckeditor" placeholder="输入简介"
-                                  value="${object.content}" required>${object.content}</textarea>
+                        <textarea id="content" name="content" class="ckeditor" placeholder="输入简介" required>${object.content}</textarea>
                 </div>
                 <br>
             </div>

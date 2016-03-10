@@ -42,7 +42,10 @@
             <td width="25%">
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-
+                        <button onclick="showConfirm('提示','删除项目同时也会解除该项目与大师，商家的关联，确定删除吗',function(){removeProject('${project.id}')})"
+                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                class="am-icon-trash-o"></span> 删除
+                        </button>
                         <%--<button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProjectWiki_default3&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 内容管理</button>--%>
                         <%--<button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistMasterWorkwiki_getProduct2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看作品</button>--%>
                         <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProductwiki_getProduct2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看作品</button>
@@ -165,7 +168,19 @@
         alert("<%=request.getParameter("message")%>");
         <% } %>
     }
-
+    function removeProject(id){
+        $.ajax({
+            type: "post",
+            url: '<c:url value="/product/project/removeProject.do"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:id},
+            success: function (data) {
+                console.log(data);
+                $("#"+data).remove();
+            }
+        });
+    }
     function changeStatus(obj,id){
         var status = $(obj).attr("status");
         $.ajax({

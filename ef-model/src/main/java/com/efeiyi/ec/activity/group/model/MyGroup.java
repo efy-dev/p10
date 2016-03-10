@@ -81,7 +81,6 @@ public class MyGroup {
     }
 
     @OneToMany(fetch = FetchType.LAZY ,mappedBy = "myGroup")
-    @Where(clause = "status=1")
     public List<PurchaseOrderGroup> getPurchaseOrderGroupList() {
         return purchaseOrderGroupList;
     }
