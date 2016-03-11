@@ -135,7 +135,7 @@
                         <!--<condition name="level" defaultValue="1" operation="eq" inputType="default"/>-->
                     </query>
 
-                    <query name="default1" label="快速查询" type="auto" orderBy="serial:desc">
+                    <query name="default1" label="快速查询" type="auto" orderBy="name:desc">
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
                         <condition name="name" operation="like" label="项目名称" inputType="text"/>
                         <condition name="serial" operation="like" label="项目编号" inputType="text"/>
