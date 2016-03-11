@@ -31,9 +31,9 @@ public class ActivityManagerImpl implements ActivityManager {
     private AutoSerialManager autoSerialManager;
 
     @Override
-    public void addGroup(String groupId,Integer amount,Integer length) throws Exception{
+    public void addGroup(String groupId) throws Exception{
         MyGroup myGroup = (MyGroup)xdoDao.getObject(MyGroup.class.getName(),groupId);
-        myGroup.setStatus("3");
+        myGroup.setStatus("4");
         xdoDao.saveOrUpdateObject(myGroup);
 
            if(myGroup.getPurchaseOrderGroupList()!=null){
@@ -42,8 +42,8 @@ public class ActivityManagerImpl implements ActivityManager {
                     xdoDao.saveOrUpdateObject(purchaseOrderGroup);
                 }
            }
-
-
+       Integer length = myGroup.getGroupMemberList().size();
+        Integer amount = myGroup.getGroupProduct().getMemberAmount();
 
         if(amount>length){
             List<String> list = getUserList(amount - length);
@@ -64,6 +64,7 @@ public class ActivityManagerImpl implements ActivityManager {
                purchaseOrderGroup.setOrderStatus("5");
                purchaseOrderGroup.setMyGroup(myGroup);
                purchaseOrderGroup.setGroupMember(groupMember);
+               purchaseOrderGroup.setCreateDatetime(new Date());
                xdoDao.saveOrUpdateObject(purchaseOrderGroup);
                PurchaseOrder purchaseOrder = (PurchaseOrder) xdoDao.getObject(PurchaseOrder.class.getName(),purchaseOrderGroup.getId());
                PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();

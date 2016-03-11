@@ -9,6 +9,6 @@ package com.efeiyi.ec.system.Activity.service;
  */
 public interface ActivityManager {
 
-    void addGroup(String groupId,Integer amount,Integer length) throws Exception;
+    void addGroup(String groupId) throws Exception;
 
 }

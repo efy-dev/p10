@@ -69,7 +69,7 @@
                                         查看详情
                                     </a>
                                     <c:if test="${group.status=='1'}">
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void (0);" onclick="addGroup('${group.id}',${group.groupProduct.memberAmount},${fn:length(group.groupMemberList)});">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void (0);" onclick="addGroup('${group.id}');">
                                         凑团
                                     </a>
                                     </c:if>
@@ -137,7 +137,7 @@
         });
     }
 
- function addGroup(groupId,amount,length){
+ function addGroup(groupId,amount){
      if(amount<=length){
          alert("已成团!");
      }else {
@@ -146,7 +146,7 @@
              url: '<c:url value="/tuan/addGroup.do"/>',
              cache: false,
              dataType: "json",
-             data: {groupId: groupId, amount: amount, length: length},
+             data: {groupId: groupId},
              success: function (data) {
                  if (data == "1") {
                      alert("凑团成功!");
