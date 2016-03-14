@@ -56,6 +56,7 @@ public class ActivityManagerImpl implements ActivityManager {
                groupMember.setMyGroup(myGroup);
                groupMember.setStatus("1");
                groupMember.setUser(user);
+               groupMember.setCreateDateTime(new Date());
                xdoDao.saveOrUpdateObject(groupMember);
                PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
                purchaseOrderGroup.setStatus("1");
