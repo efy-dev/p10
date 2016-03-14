@@ -52,5 +52,24 @@
 
             </does>
         </entity>
+
+        <entity name="ActivityGroupProduct" label="团购商品列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.activity.group.model.GroupProduct">
+            <does>
+                <do name="plistGroupProduct" access="" label="团购商品列表"
+                    result="/groupProduct/groupProductPList" >
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                    </query>
+                </do>
+                <do name="formGroupProduct" label="保存团购商品" access="" result="/groupProduct/groupProductForm"
+                    execute="com.efeiyi.ec.system.Activity.controller.toFormSeckillProductHandler"
+                />
+                <do name="removeGroupProduct" label="removeGroupProduct" access="" result="json"/>
+                <do name="saveOrUpdateGroupProduct" label="保存团购商品" access="" result="/groupProduct/groupProductSaveSuccess"
+                />
+            </does>
+        </entity>
     </entities>
 </module>
