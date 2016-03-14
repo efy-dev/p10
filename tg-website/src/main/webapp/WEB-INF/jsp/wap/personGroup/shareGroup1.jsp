@@ -10,7 +10,14 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>【团】${supMan}参加了团购，还差${number}人成团，快来参团吧~</title>
+  <title>
+    <c:if test="${number==0 || '0'.equals(number)}">
+      【团】${supMan}参加了${group.groupProduct.productModel.product.name}团购，快来参团吧~
+    </c:if>
+    <c:if test="${number!=0 && !'0'.equals(number)}">
+      【团】${supMan}参加了${group.groupProduct.productModel.product.name}团购，还差${number}人成团，快来参团吧~
+    </c:if>
+  </title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
