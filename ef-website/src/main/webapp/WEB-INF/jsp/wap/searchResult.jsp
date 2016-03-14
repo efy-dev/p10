@@ -51,6 +51,25 @@
     var facets = "${searchParamBean.facetFieldJson}";
     function facetForward(url) {
         window.location.href = url + "&facetFieldJson=" + facets + "&queryFacetJson=${searchParamBean.queryFacetJson}&group=efeiyi" ;
+        url = url + "&facetFieldJson=" + facets + "&queryFacetJson=${searchParamBean.queryFacetJson}&group=efeiyi" ;
+        searchPostSubmit(url);
+    }
+
+    function searchPostSubmit(fullUrl) {
+        fullUrl = fullUrl.split("?");
+        var myForm = document.createElement("form");
+        myForm.method = "post";
+        myForm.action = fullUrl[0];
+        var params = fullUrl[1].split("&");
+        for ( var x = 0; x < params.length; x++) {
+            var myInput = document.createElement("input");
+            var paramEntry = params[x].split("=");
+            myInput.name = paramEntry[0];
+            myInput.value = decodeURI(paramEntry[1]);
+            myForm.appendChild(myInput);
+        }
+        document.body.appendChild(myForm);
+        myForm.submit();
     }
 
     var priceUD = ${searchParamBean.priceUD};

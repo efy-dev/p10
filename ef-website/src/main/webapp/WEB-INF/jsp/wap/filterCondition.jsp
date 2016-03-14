@@ -1,4 +1,3 @@
-<%@ page import="com.efeiyi.ec.website.base.util.AuthorizationUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
@@ -42,7 +41,7 @@
           <a href="javascript:void(0);" onclick="price(this, '[1000 TO 5000]')" title="1000~5000">1000~5000</a>
         </li>
         <li <c:if test="${searchParamBean.fq == 'product_model_price:[5000 TO 10000]'}">class="active"</c:if>>
-          <a href="javascript:void(0);" onclick="price('[5000 TO 10000]')" title="5000~1万">5000~1万</a>
+          <a href="javascript:void(0);" onclick="price(this, '[5000 TO 10000]')" title="5000~1万">5000~1万</a>
         </li>
         <li <c:if test="${searchParamBean.fq == 'product_model_price:[10000 TO 100000]'}">class="active"</c:if>>
           <a href="javascript:void(0);" onclick="price(this, '[10000 TO 100000]')" title="1万~10万">1万~10万</a>
@@ -104,7 +103,25 @@
             "&queryFacet="+queryFacet+"&facetFieldJson="+facetFieldJson+
             "&queryFacetJson="+queryFacetJson+"&sortField="+sortField+
             "&sortOrder="+sortOrder+"&group="+group+"&priceUD="+priceUD+"&fq="+fq;
-    window.location.href = url;
+//    window.location.href = url;
+    searchPostSubmit(url);
+  }
+
+  function searchPostSubmit(fullUrl) {
+    fullUrl = fullUrl.split("?");
+    var myForm = document.createElement("form");
+    myForm.method = "post";
+    myForm.action = fullUrl[0];
+    var params = fullUrl[1].split("&");
+    for ( var x = 0; x < params.length; x++) {
+      var myInput = document.createElement("input");
+      var paramEntry = params[x].split("=");
+      myInput.name = paramEntry[0];
+      myInput.value = decodeURI(paramEntry[1]);
+      myForm.appendChild(myInput);
+    }
+    document.body.appendChild(myForm);
+    myForm.submit();
   }
 </script>
 
