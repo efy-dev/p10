@@ -18,6 +18,10 @@
                  <match url="/basic/xm.do?qm=plistPurchaseOrderProductMiao_default"/>
                  <match url="/basic/xm.do?qm=plistPurchaseOrderProductMiao_default1"/>
              </jnode>
+             <jnode url="/basic/xm.do?qm=plistGroupProduct_default" access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="团购商品">
+                 <match url="/basic/xm.do?qm=plistGroupProduct_default"/>
+                 <match url="/basic/xm.do?qm=formGroupProduct"/>
+             </jnode>
          </jnode>
         <jnode id="contentManager" url="" text_zh_CN="内容管理" access="admin,operational,c_operational,o_operational,product_manager" state="closed">
             <jnode url="/basic/xm.do?qm=plistEcBanner_tenant&amp;groupName=ec.home.banner" access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="电商网站轮播图">

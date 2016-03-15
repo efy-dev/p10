@@ -61,10 +61,10 @@ public class ActivityController {
 
     @RequestMapping("/addGroup.do")
     @ResponseBody
-    public String addGroup(String groupId,Integer amount,Integer length,HttpServletRequest request){
+    public String addGroup(String groupId,HttpServletRequest request){
         String f = "1";
         try {
-            activityManager.addGroup(groupId,amount,length);
+            activityManager.addGroup(groupId);
         }catch (Exception e){
             f="0";
         }

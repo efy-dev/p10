@@ -65,7 +65,7 @@ public class CouponController {
                 model.addAttribute("allCouponList", couponList);
 
             }
-            return "/purchaseOrder/couponList";
+            return "/personalCoupon/couponList";
         } else {
             return "redirect:/sso.do";
         }
@@ -143,7 +143,7 @@ public class CouponController {
 
     @RequestMapping("/appExchange.do")
     public String exchange() {
-        return "/purchaseOrder/couponExchange";
+        return "/personalCoupon/couponExchange";
     }
 
     @RequestMapping("/getAppCoupon.do")
@@ -151,7 +151,7 @@ public class CouponController {
         String couponId = request.getParameter("couponId");
         Coupon coupon = (Coupon) baseManager.getObject(Coupon.class.getName(), couponId);
         model.addAttribute("coupon", coupon);
-        return "/purchaseOrder/getCoupon";
+        return "/personalCoupon/getCoupon";
 
     }
 

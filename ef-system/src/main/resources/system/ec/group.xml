@@ -10,7 +10,8 @@
                         <item label="已取消" value="0"/>
                         <item label="进行中" value="1"/>
                         <item label="未开团" value="2"/>
-                        <item label="组团成功" value="3"/>
+                        <item label="组团成功(已关闭)" value="3"/>
+                        <item label="组团成功(未关闭)" value="4"/>
                         <item label="组团失败" value="5"/>
                     </statusType>
                 </field>

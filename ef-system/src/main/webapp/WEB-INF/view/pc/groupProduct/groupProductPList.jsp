@@ -34,10 +34,10 @@
 
 
 <div style="text-align: left" >
-    <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
-    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="toSendPacket('<c:url value="/tuan/sendRedPacket.do"/>');"
-       href="javascript:void(0)"><span
-            class="am-icon-pencil-square-o">发放成团红包</span>
+<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
+    <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
+       href="<c:url value="/basic/xm.do?qm=formGroupProduct" />"><span
+            class="am-icon-pencil-square-o">新建团购商品</span>
     </a>
     </security:authorize>
 </div>
@@ -50,52 +50,50 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
+<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
                     <th class="table-set" >操作</th>
-                    <th class="table-title">团长</th>
+</security:authorize>
                     <th class="table-title">团购商品</th>
-                    <th class="table-title">状态</th>
+                    <th class="table-title">团购价格</th>
+                    <th class="table-title">成团人数</th>
+                    <th class="table-title">成团天数</th>
                     <th class="table-title">创建时间</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <c:forEach items="${requestScope.pageInfo.list}" var="group">
-                    <tr id="${group.id}">
-                        <td width="20%">
+                <c:forEach items="${requestScope.pageInfo.list}" var="groupProduct">
+                    <tr id="${groupProduct.id}">
+                        <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
+                        <td width="16%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formGroupProduct&id=${groupProduct.id}"/>">
+                                        编辑
+                                    </a>
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" href="javascript:void (0);" onclick="showConfirm('提示','是否删除',function(){removeGroupProduct('${groupProduct.id}')})">
+                                        删除
+                                    </a>
 
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=viewGroup&id=${group.id}"/>">
-                                        查看详情
-                                    </a>
-                                    <c:if test="${group.status=='1'}">
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void (0);" onclick="addGroup(this,'${group.id}');">
-                                        凑团
-                                    </a>
-                                    </c:if>
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only" width="20%">
-                            <c:forEach var="member" items="${group.groupMemberList}">
-                                <c:if test="${member.level=='0'}">
-                                    <c:forEach items="${group.purchaseOrderGroupList}" var="purchaseOrder">
-                                        <c:if test="${member.id==purchaseOrder.groupMember.id}">
-                                            ${purchaseOrder.receiverName}
-                                        </c:if>
-                                    </c:forEach>
-                                </c:if>
-                            </c:forEach>
-                          <%--${group.manUser.name}--%>
+                        </security:authorize>
+                        <td class="am-hide-sm-only" width="16%">
+                            ${groupProduct.productModel.name}
                         </td>
-                        <td class="am-hide-sm-only" width="20%">
-                                ${group.groupProduct.productModel.name}
+                        <td class="am-hide-sm-only" width="16%">
+                                ${groupProduct.groupPrice}
                         </td>
-                        <td class="am-hide-sm-only" width="20%">
-                            <ming800:status name="showStatus" dataType="Group.showStatus" checkedValue="${group.status}" type="normal"/>
+                        <td class="am-hide-sm-only" width="16%">
+                                ${groupProduct.memberAmount}
                         </td>
+                        <td class="am-hide-sm-only" width="16%">
+                                ${groupProduct.groupPurchaseTime}
+                        </td>
+
                         <td class="am-hide-sm-only" width="20%">
-                           <fmt:formatDate value="${group.createDateTime}" pattern="yyyy-MM-dd HH:mm:ss" type="both"/>
+                           <fmt:formatDate value="${groupProduct.createDateTime}" pattern="yyyy-MM-dd HH:mm:ss" type="both"/>
                         </td>
                     </tr>
                 </c:forEach>
@@ -124,10 +122,10 @@
             }
         });
     }
-    function removeAds(divId){
+    function removeGroupProduct(divId){
         $.ajax({
             type: "get",
-            url: '<c:url value="/basic/xmj.do?qm=removeAdvertisement"/>',
+            url: '<c:url value="/basic/xmj.do?qm=removeGroupProduct"/>',
             cache: false,
             dataType: "json",
             data:{id:divId},
@@ -137,27 +135,7 @@
         });
     }
 
- function addGroup(obj,groupId){
 
-         $.ajax({
-             type: "get",
-             url: '<c:url value="/tuan/addGroup.do"/>',
-             cache: false,
-             dataType: "json",
-             data: {groupId: groupId},
-             success: function (data) {
-                 if (data == "1") {
-                     alert("凑团成功!");
-                     $(obj).remove();
-                     $("#" + groupId + " td:eq(3)").text("组团成功(未关闭)");
-                 }
-                 if (data == "0") {
-                     alert("凑团失败!");
-                 }
-             }
-         });
-
- }
 </script>
 
 </body>

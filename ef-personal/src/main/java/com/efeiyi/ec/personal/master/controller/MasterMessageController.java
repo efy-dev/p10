@@ -71,19 +71,21 @@ public class MasterMessageController {
 
         if (!list.isEmpty()) {
             for (ProjectCategory projectCategory : list) {
-                System.out.println("###############################" + projectCategory.getName());
                 List<Master> masterList = new ArrayList<Master>();
                 for (Master master : masters) {
                     List<MasterProject> masterProjects = master.getMasterProjectList();
-                    for (MasterProject masterProject : masterProjects) {
-                        if (masterProject.getProject().getProjectCategory().getId() != null
-                                && masterProject.getProject().getProjectCategory().getId().equals(projectCategory.getId())) {
-                            masterList.add(master);
-                            break;
+                    if (master.getMasterProjectList() != null && !master.getMasterProjectList().isEmpty()){
+                        for (MasterProject masterProject : masterProjects) {
+                            ProjectCategory category = masterProject.getProject().getProjectCategory();
+                            if (category != null && category.getId() != null){
+                                if (category.getId().equals(projectCategory.getId())) {
+                                    masterList.add(master);
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
-                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + projectCategory.getId());
                 masterRecommends.put(projectCategory.getName(), masterList);
             }
         }
