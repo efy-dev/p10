@@ -13,7 +13,9 @@
 <html class="no-js">
 <head>
 
-  <title>e飞蚁工艺秀</title>
+  <title>【工艺与大师】-最新最全的非物质文化遗产信息查询平台</title>
+  <meta name="keywords" content="e飞蚁,非物质文化遗产,中国非物质文化遗产,非物质文化遗产名录,非遗博览园,非遗节,非遗产品,非遗大师,非遗技艺，传统文化，传统美术" />
+  <meta name="description" content="最新最全的非物质文化遗产信息查询，有国家级文化遗产、省级文化遗产、市级文化遗产和世界文化遗产包括对应非遗传承人介绍" />
 
 </head>
 <body>
