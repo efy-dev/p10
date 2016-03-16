@@ -14,8 +14,9 @@
 <html class="no-js">
 <head>
 
-  <title>e飞蚁工艺</title>
-
+  <title>【${project.name}】${project.name}-${project.addressDistrict.addressCity.addressProvince.name}-e飞蚁</title>
+  <meta name="keywords" content="${project.name},${project.name}大全,中国${project.name},${project.name}教程,${project.name}艺术" />
+  <meta name="description" content="${project.description}" />
 </head>
 <body>
 

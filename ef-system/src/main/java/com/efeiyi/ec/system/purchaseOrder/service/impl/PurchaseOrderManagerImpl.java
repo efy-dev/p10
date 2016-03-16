@@ -128,7 +128,13 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
                         } else {
                             sheet1.addCell(new Label(j, i + 1, sdf1.format(o[j]), wcf_left));
                         }
-                    } else {
+                    }else if (j == 19){
+                        if (null == o[j] || "".equals(o[j])) {
+                            sheet1.addCell(new Label(j, i + 1, "", wcf_left));
+                        } else {
+                            sheet1.addCell(new Label(j, i + 1, "http://pro.efeiyi.com/"+o[j].toString(), wcf_left));
+                        }
+                    }else {
                         if (null == o[j] || "".equals(o[j])) {
                             sheet1.addCell(new Label(j, i + 1, "", wcf_left));
                         } else {

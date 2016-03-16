@@ -61,7 +61,7 @@ public class AddressController {
         xQuery = new XQuery("listAddressProvince_default", request);
         List<Object> objectList = baseManager.listObject(xQuery);
         model.addAttribute("province", objectList);
-        return "/purchaseOrder/addressList";
+        return "/personalInfo/addressList";
     }
 
     @RequestMapping({"/addAddressOfMobile.do"})
@@ -71,11 +71,11 @@ public class AddressController {
         List<Object> objectList = baseManager.listObject(xQuery);
         model.addAttribute("province", objectList);
         if (addressId.equals("null")) {
-            return "/purchaseOrder/addAddress";
+            return "/personalInfo/addAddress";
         } else {
             ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
             model.addAttribute("address", consumerAddress);
-            return "/purchaseOrder/updateAddress";
+            return "/personalInfo/updateAddress";
         }
     }
 
