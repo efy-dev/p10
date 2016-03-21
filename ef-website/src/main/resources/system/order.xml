@@ -5,6 +5,8 @@
     <entities>
         <entity name="PurchaseOrder" label="商品列表" model="com.efeiyi.ec.purchase.model.PurchaseOrder">
             <fields>
+                <field name="user" label="订单所属用户" inputType="remoteObject"
+                       source="com.efeiyi.ec.website.base.model.UserServiceHandler"/>
                 <field name="orderStatus" label="订单状态" inputType="text">
                     <statusType fieldName="orderStatus">
                         <item label="等待付款" value="1"/>
@@ -30,7 +32,10 @@
                         <condition name="user.id" defaultValue="1" operation="eq"/>
                         <condition name="orderStatus" defaultValue="13" operation="eq"/>
                     </query>
-                 </do>
+                    <query name="byUser" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="user.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
                 <do name="plistPurchaseOrder" access="" label="订单列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>

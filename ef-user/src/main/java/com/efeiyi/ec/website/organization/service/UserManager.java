@@ -1,9 +1,7 @@
 package com.efeiyi.ec.website.organization.service;
 
-import com.efeiyi.ec.organization.model.BigUser;
-import com.efeiyi.ec.organization.model.Consumer;
-import com.efeiyi.ec.organization.model.ConsumerAddress;
-import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.*;
+import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.taglib.PageEntity;
 
@@ -19,15 +17,17 @@ import java.util.List;
  */
 public interface UserManager {
 
-    MyUser getUserByUsername(String username);
 
-    MyUser getUserByUserId(String userId);
+    User getUserByUserId(String userId);
+
+
+    MyUser queryMyUser(String hql, LinkedHashMap<String, Object> param);
+
+    MyUser getMyUserByUserId(String userId);
 
     Consumer getConsumerByUserId(String userId);
 
     BigUser getBigUserByUserId(String userId);
-
-    List<ConsumerAddress> listConsumerAddressByUserId(String userId);
 
     void saveOrUpdateConsumer(Consumer consumer);
 
@@ -37,8 +37,8 @@ public interface UserManager {
 
     List<Consumer> listConsumer(String hql, LinkedHashMap<String, Object> param);
 
-    List<Consumer> plistConsumer(String queryHql, PageEntity pageEntity, LinkedHashMap<String, Object> queryParamMap);
+    PageInfo plistConsumer(String queryHql, PageEntity pageEntity, LinkedHashMap<String, Object> queryParamMap);
 
-    List<Consumer> plistConsumer(XQuery xQuery);
+    PageInfo plistConsumer(XQuery xQuery);
 
 }

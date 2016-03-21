@@ -7,11 +7,11 @@
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
     <!-- 配置不过滤的资源（静态资源及登录相关） -->
-    <http pattern="/**/*.css" security="none"/>
-    <http pattern="/**/*.jpg" security="none"/>
+    <http pattern="/scripts/wap/css/signon.css" security="none"/>
+    <http pattern="/scripts/wap/upload/gift-1.jpg" security="none"/>
     <http pattern="/**/*.jpeg" security="none"/>
-    <http pattern="/**/*.gif" security="none"/>
-    <http pattern="/**/*.png" security="none"/>
+    <http pattern="/scripts/images/jazq2.gif" security="none"/>
+    <http pattern="/scripts/images/frlinksimg.png" security="none"/>
     <http pattern="/js/*.js" security="none"/>
     <!--<http auto-config="true">-->
     <!--<intercept-url pattern="/app.jsp" access="ROLE_SERVICE"/>-->

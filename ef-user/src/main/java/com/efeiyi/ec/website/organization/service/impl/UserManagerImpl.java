@@ -1,11 +1,9 @@
 package com.efeiyi.ec.website.organization.service.impl;
 
-import com.efeiyi.ec.organization.model.BigUser;
-import com.efeiyi.ec.organization.model.Consumer;
-import com.efeiyi.ec.organization.model.ConsumerAddress;
-import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.website.organization.service.UserManager;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/2/29 0029.
  */
-public class UserManagerImpl implements UserManager ,UserDetailsService {
+public class UserManagerImpl implements UserManager, UserDetailsService {
 
     @Autowired
     private BaseManager baseManager;
@@ -29,60 +27,64 @@ public class UserManagerImpl implements UserManager ,UserDetailsService {
         return null;
     }
 
+
     @Override
-    public MyUser getUserByUsername(String username) {
-        return null;
+    public User getUserByUserId(String userId) {
+        User myUser = (User) baseManager.getObject(User.class.getName(), userId);
+        return myUser;
+    }
+
+
+    @Override
+    public MyUser queryMyUser(String hql, LinkedHashMap<String, Object> param) {
+        Object object = baseManager.getUniqueObjectByConditions(hql, param);
+        return (MyUser) object;
     }
 
     @Override
-    public MyUser getUserByUserId(String userId) {
-        MyUser myUser = (MyUser) baseManager.getObject(MyUser.class.getName(), userId);
-        return myUser;
+    public MyUser getMyUserByUserId(String userId) {
+        return (MyUser) baseManager.getObject(MyUser.class.getName(), userId);
     }
 
     @Override
     public Consumer getConsumerByUserId(String userId) {
-        return null;
+        return (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
     }
 
     @Override
     public BigUser getBigUserByUserId(String userId) {
-        return null;
+        return (BigUser) baseManager.getObject(BigUser.class.getName(), userId);
     }
 
-    @Override
-    public List<ConsumerAddress> listConsumerAddressByUserId(String userId) {
-        return null;
-    }
 
     @Override
     public void saveOrUpdateConsumer(Consumer consumer) {
-
+        baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
     }
 
     @Override
     public void removeUser(String userId) {
-
+        baseManager.remove(User.class.getName(), userId);
     }
 
     @Override
     public List<Consumer> listConsumer(XQuery xQuery) {
-        return null;
+        return baseManager.listObject(xQuery);
     }
 
     @Override
     public List<Consumer> listConsumer(String hql, LinkedHashMap<String, Object> param) {
-        return null;
+        return baseManager.listObject(hql, param);
     }
 
     @Override
-    public List<Consumer> plistConsumer(String queryHql, PageEntity pageEntity, LinkedHashMap<String, Object> queryParamMap) {
-        return null;
+    public PageInfo plistConsumer(String queryHql, PageEntity pageEntity, LinkedHashMap<String, Object> queryParamMap) {
+        return baseManager.listPageInfo(queryHql, pageEntity, queryParamMap);
     }
 
     @Override
-    public List<Consumer> plistConsumer(XQuery xQuery) {
-        return null;
+    public PageInfo plistConsumer(XQuery xQuery) {
+        return baseManager.listPageInfo(xQuery);
     }
 
 }

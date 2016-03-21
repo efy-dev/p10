@@ -8,6 +8,7 @@ import com.ming800.core.does.model.*;
 import com.ming800.core.does.model.Page;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.does.service.ModuleManager;
+import com.ming800.core.does.service.impl.WebServiceHandlerManagerImpl;
 import com.ming800.core.taglib.PageEntity;
 
 import com.ming800.core.base.service.XdoManager;
@@ -33,8 +34,8 @@ public class XdoManagerImpl implements XdoManager {
     private DoManager doManager;
     @Autowired
     private ModuleManager moduleManager;
-   // @Autowired
-  //  private DictionaryDataManager dictionaryDataManager;
+    // @Autowired
+    //  private DictionaryDataManager dictionaryDataManager;
 /*    @Autowired
     private PermissionManager permissionManager;*/
 
@@ -110,32 +111,47 @@ public class XdoManagerImpl implements XdoManager {
     /*分页列表*/
     @Override
     public PageInfo listPage(Do tempDo, DoQuery tempDoQuery, String tempConditions, PageEntity pageEntity) throws Exception {
-        XQuery xQuery = new XQuery(tempDo,tempDoQuery,pageEntity,tempConditions);
+        XQuery xQuery = new XQuery(tempDo, tempDoQuery, pageEntity, tempConditions);
 
         if (tempDoQuery.getQueryExecute() != null && !tempDoQuery.getQueryExecute().equals("")) {
             xQuery = XDoUtil.executeXQueryHandler(xQuery, tempDoQuery);
         }
 
-        return xdoDao.getPageByConditions(pageEntity, xQuery.getHql(), xQuery.getQueryParamMap());  //To change body of implemented methods use File | Settings | File Templates.
+        PageInfo pageInfo = xdoDao.getPageByConditions(pageEntity, xQuery.getHql(), xQuery.getQueryParamMap());
+        List objectList = pageInfo.getList();
+        try {
+            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return pageInfo;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     /*普通列表, 参数有tempDo*/
     @Override
     public Object list(Do tempDo, DoQuery tempDoQuery, String tempConditions) throws Exception {
-        XQuery xQuery = new XQuery(tempDo,tempDoQuery,null,tempConditions);
+        XQuery xQuery = new XQuery(tempDo, tempDoQuery, null, tempConditions);
 
         if (tempDoQuery.getQueryExecute() != null && !tempDoQuery.getQueryExecute().equals("")) {
             xQuery = XDoUtil.executeXQueryHandler(xQuery, tempDoQuery);
         }
 
-        return xdoDao.getObjectList(xQuery.getHql(), xQuery.getQueryParamMap());  //To change body of implemented methods use File | Settings | File Templates.
+        List objectList = xdoDao.getObjectList(xQuery.getHql(), xQuery.getQueryParamMap());
+        try {
+            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return objectList;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     /*统计收费总额, */
     @Override
-    public String generateTotalMoney(Do tempDo, DoQuery tempDoQuery, String tempConditions, String countField) throws Exception{
+    public String generateTotalMoney(Do tempDo, DoQuery tempDoQuery, String tempConditions, String countField) throws Exception {
 
-        XQuery xQuery = new XQuery(tempDo,tempDoQuery,null,tempConditions);
+        XQuery xQuery = new XQuery(tempDo, tempDoQuery, null, tempConditions);
 
         String queryStr = xQuery.getHql();
         queryStr = queryStr.substring(queryStr.indexOf("from"), queryStr.length());
@@ -155,9 +171,16 @@ public class XdoManagerImpl implements XdoManager {
 
         Do tempDo = doManager.getDoByQueryModel(queryModel.split("_")[0]);
         DoQuery tempDoQuery = tempDo.getDoQueryByName(queryModel.split("_")[1]);
-        XQuery xQuery = new XQuery(tempDo,tempDoQuery,null,tempConditions);
+        XQuery xQuery = new XQuery(tempDo, tempDoQuery, null, tempConditions);
 
-        return xdoDao.getObjectList(xQuery.getHql(), xQuery.getQueryParamMap());  //To change body of implemented methods use File | Settings | File Templates.
+        List objectList = xdoDao.getObjectList(xQuery.getHql(), xQuery.getQueryParamMap());
+        try {
+            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return objectList;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     /*获取对象，  form  view页面*/
@@ -210,6 +233,11 @@ public class XdoManagerImpl implements XdoManager {
                 }
             }*/
         }
+        try {
+            WebServiceHandlerManagerImpl.dealObject(object);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return object;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -232,9 +260,6 @@ public class XdoManagerImpl implements XdoManager {
         queryParamMap.put("ids", ids.split(","));
         return xdoDao.execteBulk(queryStrBuilder.toString(), queryParamMap);
     }
-
-
-
 
 
 }
