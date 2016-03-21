@@ -101,13 +101,8 @@
     </bean>
 
     <bean id="userServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-        <property name="serviceUrl" value="http://192.168.227.130:8080/service/userService"/>
+        <property name="serviceUrl" value="http://192.168.227.129:8080/ef-user/service/userService"/>
         <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.UserManager"/>
-    </bean>
-
-    <bean id="addressServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-        <property name="serviceUrl" value="http://192.168.227.130:8080/service/addressService"/>
-        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.AddressManager"/>
     </bean>
 
     <mvc:default-servlet-handler/>

@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.organization.service.impl;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.website.base.authentication.ContextUtils;
 import com.efeiyi.ec.website.organization.service.UserManager;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import java.util.LinkedHashMap;
 
 @Service
 @Transactional
-public class UserManagerImpl implements  UserDetailsService {
+public class UserManagerImpl implements UserDetailsService {
 
     @Autowired
     private BaseManager baseManager;
@@ -34,11 +35,18 @@ public class UserManagerImpl implements  UserDetailsService {
         String queryStr = "SELECT u FROM MyUser u WHERE u.username=:username AND u.status != 0";
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("username", username);
-        MyUser myUser = (MyUser) baseManager.getUniqueObjectByConditions(queryStr, queryParamMap);
-        if (myUser == null) {
+        try {
+            UserManager userManager = (UserManager) ContextUtils.getBean("userServiceProxy");
+            MyUser myUser = userManager.queryMyUser(queryStr, queryParamMap);
+            if (myUser == null) {
+                throw new UsernameNotFoundException("user '" + username + "' not found...");
+            } else {
+                return myUser;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             throw new UsernameNotFoundException("user '" + username + "' not found...");
-        } else {
-            return myUser;
         }
+
     }
 }
