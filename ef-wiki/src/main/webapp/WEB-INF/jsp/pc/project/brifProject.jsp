@@ -196,7 +196,7 @@
   (function($){
     $.ajax({
       type:"get",
-      url:"<c:url value='http://192.168.1.38:8080/product/recommend/listProductModel.do?projectId=${project.id}'/>",
+      url:"<c:url value='http://www.efeiyi.com/product/recommend/listProductModel.do?projectId=${project.id}'/>",
       data:"",
       dataType:"jsonp",
       jsonp:"jsonpcallback",
