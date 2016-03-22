@@ -16,7 +16,7 @@
 
   <title>【${project.name}】${project.name}-${project.addressDistrict.addressCity.addressProvince.name}-e飞蚁</title>
   <meta name="keywords" content="${project.name},${project.name}大全,中国${project.name},${project.name}教程,${project.name}艺术" />
-  <meta name="description" content="${project.description}" />
+  <meta name="description" content="${project.name}" />
 </head>
 <body>
 
@@ -205,7 +205,7 @@
         if(  data.length>=1&& data.length<5){
         var tuijian = $("#tuijian");
           for(i in data){
-            var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/${project.id}\">" +
+            var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/"+data[i].id+"\">" +
                     "<img src=\"http://pro.efeiyi.com/"+data[i].productModel_url+"\" alt=''>" +
                     "<p>"+data[i].name+"</p> </a> </li>");
             tuijian.append(li);
@@ -214,7 +214,7 @@
           var tuijian = $("#tuijian");
           for(i in data){
             if(i>=4){break;};
-            var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/${project.id}\"> " +
+            var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/"+data[i].id+"\"> " +
                     "<img src='http://pro.efeiyi.com/"+data[i].productModel_url+"' alt=''>" +
                     "<p>"+data[i].name+"</p> </a> </li>");
             tuijian.append(li);
