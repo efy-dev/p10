@@ -65,7 +65,7 @@ public class PersonalInforController {
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
         modelMap.addAttribute("user", user);
-        return "/purchaseOrder/personalInfoView";
+        return "/personalInfo/personalInfoView";
     }
 
     @RequestMapping({"personalInfoOfMobile.do"})
@@ -73,7 +73,7 @@ public class PersonalInforController {
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
         modelMap.addAttribute("user", user);
-        return "/purchaseOrder/updateUser";
+        return "/personalInfo/updateUser";
     }
 
     /**
@@ -106,7 +106,7 @@ public class PersonalInforController {
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
         modelMap.addAttribute("user", user);
-        return "/purchaseOrder/securityAccount";
+        return "/personalInfo/securityAccount";
     }
 
     /**
@@ -214,7 +214,7 @@ public class PersonalInforController {
         xQuery.put("consumer_id", consumerId);
         List balanceDetailList = baseManager.listObject(xQuery);
         model.addAttribute("balanceDetailList", balanceDetailList);
-        return "/purchaseOrder/balanceDetailList";
+        return "/personalBalance/balanceDetailList";
 
     }
 

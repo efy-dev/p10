@@ -378,7 +378,7 @@ public class PurchaseOrderController extends BaseController {
         String startTime = request.getParameter("startTime");
         String endTime = request.getParameter("endTime");
         String selectTenant = request.getParameter("selectTenant");
-        String[] homes ={"订单号","支付方式","订单总价","订单状态","订单原价","收货人地址","收货人姓名","收货人联系方式","下单时间","商品名称","商品编号","下单人","优惠券","优惠券编号","优惠券名称","优惠价格","优惠条件","店铺","订单类型"};
+        String[] homes ={"订单号","支付方式","订单总价","订单状态","订单原价","收货人地址","收货人姓名","收货人联系方式","下单时间","商品名称","商品编号","下单人","优惠券","优惠券编号","优惠券名称","优惠价格","优惠条件","店铺","订单类型","商品链接"};
 
         String path = this.getClass().getResource("/").getPath().toString() + "com/efeiyi/ec/system/download";
 

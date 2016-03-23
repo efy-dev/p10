@@ -240,8 +240,14 @@
                                 "  <div class=\"pc-d-pic\"><a href=\"<c:url value='/masterMessage/masterDetails/'/>" +
                                 data[i].id + "\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/" + data[i].favicon + "\"></a></div>" +
                                 "</div><div class=\"pc-dy-box \">" +
-                                "<h6>" + data[i].fullName + "<span>" + data[i].provinceName + "</span></h6>" +
-                                "<p><span>" + levelName + "</span></p>";
+                                "<h6>" + data[i].fullName + "<span>";
+                        var cityName;
+                        if(data[i].provinceName != null){
+                            cityName = data[i].provinceName;
+                        }else{
+                            cityName = "";
+                        }
+                        box += cityName + "</span></h6><p><span>" + levelName + "</span></p>";
                         var contentDate = data[i].content;
                         if (contentDate != null && contentDate != "") {
                             box += "<div id='"+data[i].id+"' class='txt5'><a href=\"<c:url value='/masterMessage/masterDetails/'/>"+data[i].id+"\">" + contentDate + "</a></div><div class='ae'><a href=\"<c:url value='/masterMessage/masterDetails/'/>"+data[i].id+"\" style='float: right;font-size:14px;'>更多</a></div>";

@@ -47,23 +47,23 @@
 
     </http>
 
-    <!--<b:bean id="casEntryPoint"  class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
-        <b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>
-        &lt;!&ndash;<b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>&ndash;&gt;
-        <b:property name="serviceProperties" ref="serviceProperties"/>
-    </b:bean>-->
-    <b:bean id="casEntryPoint"  class="org.springframework.security.web.authentication.CasAuthenticationRedirect">
+    <b:bean id="casEntryPoint"  class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
         <b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>
         <!--<b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>-->
         <b:property name="serviceProperties" ref="serviceProperties"/>
     </b:bean>
+  <!--  <b:bean id="casEntryPoint"  class="org.springframework.security.web.authentication.CasAuthenticationRedirect">
+        <b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>
+        &lt;!&ndash;<b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>&ndash;&gt;
+        <b:property name="serviceProperties" ref="serviceProperties"/>
+    </b:bean>-->
     <b:bean id="authenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
         <b:property name="alwaysUseDefaultTargetUrl" value="false"/>
         <b:property name="defaultTargetUrl"  value="/"/>
     </b:bean>
 
     <b:bean id="serviceProperties"  class="org.springframework.security.cas.ServiceProperties">
-        <b:property name="service"  value="http://craft2.efeiyi.com/j_spring_cas_security_check"/>
+        <b:property name="service"  value="http://craft.efeiyi.com/ef-wiki/j_spring_cas_security_check"/>
         <!--<b:property name="service"  value="http://192.168.1.61:8082/j_spring_cas_security_check"/>-->
         <b:property name="sendRenew" value="false"/>
     </b:bean>
@@ -104,7 +104,7 @@
     <b:bean id="requestSingleLogoutFilter"
             class="org.springframework.security.web.authentication.logout.LogoutFilter">
         <b:constructor-arg
-        value="http://passport.efeiyi.com/logout?service=http://craft2.efeiyi.com" />
+        value="http://passport.efeiyi.com/logout?service=http://craft.efeiyi.com/ef-wiki" />
        <!-- value="http://192.168.1.57/cas/logout?service=http://192.168.1.61:8082" />-->
 
 

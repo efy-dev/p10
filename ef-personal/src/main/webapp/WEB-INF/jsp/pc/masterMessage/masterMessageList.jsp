@@ -101,7 +101,7 @@
 </div>
 <script>
     $(document).ready(function(){
-        $("#pages").html("推荐大师 - e飞蚁");
+        $("#pages").html("最新最全的非物质文化遗产信息查询展示平台");
     })
 </script>
 <!--nav-bars-->

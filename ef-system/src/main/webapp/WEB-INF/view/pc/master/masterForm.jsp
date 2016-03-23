@@ -98,6 +98,14 @@
                 </div>
             </div>
             <div class="am-form-group">
+                <label for="presentAddress" class="am-u-sm-3 am-form-label">籍贯</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="provinceName" name="provinceName" placeholder="籍贯/ ProvinceName"
+                           value="${object.provinceName}">
+                </div>
+            </div>
+            <div class="am-form-group">
                 <label for="sex" class="am-u-sm-3 am-form-label">性别</label>
 
                 <div class="am-u-sm-9">

@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -33,6 +34,15 @@ public class XQuery {
     private Boolean flag;
     private PageEntity pageEntity;//分页信息
     private LinkedHashMap<String, Object> queryParamMap; //查询参数
+    private List<String> remoteConfig;
+
+    public List<String> getRemoteConfig() {
+        return remoteConfig;
+    }
+
+    public void setRemoteConfig(List<String> remoteConfig) {
+        this.remoteConfig = remoteConfig;
+    }
 
     private DoManager doManager = (DoManager) ApplicationContextUtil.getApplicationContext().getBean("doManagerImpl");
 
@@ -40,6 +50,7 @@ public class XQuery {
     //初始化查询对象
     public XQuery(String doQueryName, HttpServletRequest request) throws Exception {
         Do tempDo = doManager.getDoByQueryModel(doQueryName.split("_")[0]);
+        getRemoteConfig(tempDo);
         //判断是否是分页查询
         if (doQueryName.startsWith("plist")) {
             this.setPageEntity(XDoUtil.getPageEntity(request));
@@ -61,8 +72,27 @@ public class XQuery {
         }
     }
 
+
+    private void getRemoteConfig(Do tempDo) {
+
+        Xentity xentity = tempDo.getXentity();
+        LinkedHashMap<String, Field> fieldMap = xentity.getFieldMap();
+        Set<String> keySet = fieldMap.keySet();
+        for (String key : keySet) {
+            Field field = fieldMap.get(key);
+            if (field != null && field.getInputType().equals("remoteObject")) {
+                //远程对象调用
+                if (remoteConfig == null) {
+                    remoteConfig = new ArrayList<>();
+                }
+                remoteConfig.add(field.getName() + ":" + field.getSource());
+            }
+        }
+    }
+
     public XQuery(String doQueryName, HttpServletRequest request, Integer psize) throws Exception {
         Do tempDo = doManager.getDoByQueryModel(doQueryName.split("_")[0]);
+        getRemoteConfig(tempDo);
         //判断是否是分页查询
         if (doQueryName.startsWith("plist")) {
             this.setPageEntity(XDoUtil.getPageEntity(request, psize));
@@ -87,6 +117,7 @@ public class XQuery {
     //只能用于List操作
     public XQuery(String doQueryName, String conditions, String sort, HttpServletRequest request) throws Exception {
         Do tempDo = doManager.getDoByQueryModel(doQueryName.split("_")[0]);
+        getRemoteConfig(tempDo);
         //判断是否是分页查询
         if (request != null) {
             this.setPageEntity(XDoUtil.getPageEntity(request));
@@ -110,6 +141,7 @@ public class XQuery {
 
 
     public XQuery(Do tempDo, DoQuery tempDoQuery, PageEntity pageEntity, String tempConditions) throws Exception {
+        getRemoteConfig(tempDo);
         //判断是否是分页查询
         if (pageEntity != null) {
             this.setPageEntity(pageEntity);

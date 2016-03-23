@@ -34,6 +34,7 @@
                 <thead>
                 <tr>
                     <th class="table-set">操作</th>
+                    <th class="table-title">技艺</th>
                     <th class="table-title">中文姓名</th>
                     <th class="table-title">性别</th>
                     <th class="table-title">等级</th>
@@ -42,7 +43,7 @@
                 <tbody>
                 <c:forEach items="${requestScope.pageInfo.list}" var="master">
                     <tr id="${master.id}">
-                        <td width="50%">
+                        <td width="20%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <security:authorize ifAnyGranted="admin,operational,c_operational">
@@ -102,6 +103,13 @@
                                     </security:authorize>
                                 </div>
                             </div>
+                        </td>
+                        <td class="am-hide-sm-only" width="30%">
+                            <c:if test="${!empty master.masterProjectList}">
+                                <c:forEach items="${master.masterProjectList}" var="mp">
+                                    [${mp.project.name}]
+                                </c:forEach>
+                            </c:if>
                         </td>
                         <td class="am-hide-sm-only" width="20%">
                             <a href="<c:url value="/basic/xm.do?qm=viewMaster&view=master&id=${master.id}"/>">

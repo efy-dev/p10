@@ -91,7 +91,7 @@
 <%--<script src="../shop2015/js/jquery.min.js"></script>--%>
 <script>
   $(function(){
-    $("#pages").html("大师详情 - e飞蚁");
+    $("#pages").html("【${object.fullName}】 - e飞蚁");
     var txtL = $("#txt").text().length;
     if(txtL>30){
       $("#txt").text($("#txt").text().substr(0,50)).append("...")

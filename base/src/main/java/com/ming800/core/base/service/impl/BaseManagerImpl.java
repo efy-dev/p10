@@ -7,6 +7,7 @@ import com.ming800.core.does.service.impl.ModuleManagerImpl;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.service.ModuleManager;
+import com.ming800.core.does.service.impl.WebServiceHandlerManagerImpl;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.does.model.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,13 @@ public class BaseManagerImpl implements BaseManager {
 
     @Override
     public Object getObject(String model, String id) {
-        return xdoDao.getObject(model, id);
+        Object object = xdoDao.getObject(model, id);
+        try {
+            WebServiceHandlerManagerImpl.dealObject(object);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return object;
     }
 
     /**
@@ -44,14 +51,17 @@ public class BaseManagerImpl implements BaseManager {
     public void saveOrUpdate(String model, Object object) {
         xdoDao.saveOrUpdateObject(model, object);
     }
+
     /***
      * 临时添加测试使用
+     *
      * @param object
      */
     @Override
     public void saveOrUpdateObject(Object object) {
         xdoDao.saveOrUpdateObject(object);
     }
+
     /**
      * 保存
      */
@@ -130,12 +140,24 @@ public class BaseManagerImpl implements BaseManager {
      */
     @Override
     public List listObject(String queryHql, LinkedHashMap<String, Object> queryParamMap) {
+        List objectList = xdoDao.getObjectList(queryHql, queryParamMap);
+        try {
+            WebServiceHandlerManagerImpl.dealList(objectList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return xdoDao.getObjectList(queryHql, queryParamMap);
     }
 
     @Override
     public List listObject(String queryHql, Object... params) {
-        return xdoDao.getObjectList(queryHql, params);
+        List objectList = xdoDao.getObjectList(queryHql, params);
+        try {
+            WebServiceHandlerManagerImpl.dealList(objectList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return objectList;
     }
 
     /*
@@ -143,23 +165,51 @@ public class BaseManagerImpl implements BaseManager {
      */
     @Override
     public List listObject(XQuery xQuery) {
-        return xdoDao.getObjectList(xQuery.getHql(), xQuery.getQueryParamMap());
+        List objectList = xdoDao.getObjectList(xQuery.getHql(), xQuery.getQueryParamMap());
+        try {
+            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return objectList;
     }
 
     @Override
     public PageInfo listPageInfo(XQuery xQuery) {
-        return xdoDao.getPageByConditions(xQuery.getPageEntity(), xQuery.getHql(), xQuery.getQueryParamMap());  //To change body of implemented methods use File | Settings | File Templates.
+        PageInfo pageInfo = xdoDao.getPageByConditions(xQuery.getPageEntity(), xQuery.getHql(), xQuery.getQueryParamMap());
+        List objectList = pageInfo.getList();
+        try {
+            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pageInfo;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
 
     @Override
     public PageInfo listPageInfo(String queryHql, PageEntity pageEntity, LinkedHashMap<String, Object> queryParamMap) {
-        return xdoDao.getPageByConditions(pageEntity, queryHql, queryParamMap);  //To change body of implemented methods use File | Settings | File Templates.
+
+        PageInfo pageInfo = xdoDao.getPageByConditions(pageEntity, queryHql, queryParamMap);
+        List objectList = pageInfo.getList();
+        try {
+            WebServiceHandlerManagerImpl.dealList(objectList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pageInfo;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public Object getUniqueObjectByConditions(String queryHql, LinkedHashMap<String, Object> queryParamMap) {
-        return xdoDao.getUniqueObjectByConditions(queryHql, queryParamMap);
+
+        Object object = xdoDao.getUniqueObjectByConditions(queryHql, queryParamMap);
+        try {
+            WebServiceHandlerManagerImpl.dealObject(object);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return object;
     }
 
 

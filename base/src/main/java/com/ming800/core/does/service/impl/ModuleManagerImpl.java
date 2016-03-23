@@ -1,4 +1,5 @@
 package com.ming800.core.does.service.impl;
+
 import com.ming800.core.does.model.*;
 import com.ming800.core.does.service.ModuleManager;
 import org.apache.log4j.Logger;
@@ -35,7 +36,7 @@ public class ModuleManagerImpl implements ModuleManager {
             Resource[] xmlFiles = resolver.getResources("/system/**/*.xml");
             if (xmlFiles != null) {
                 for (Resource resource : xmlFiles) {
-                    logger.info("开始解析文件："+resource.getURL());
+                    logger.info("开始解析文件：" + resource.getURL());
                     initXmlFiles(new SAXReader().read(resource.getInputStream()));
                 }
             }
@@ -375,6 +376,7 @@ public class ModuleManagerImpl implements ModuleManager {
                 String formType = fieldNode.selectSingleNode("@formType") == null ? "" : fieldNode.selectSingleNode("@formType").getText();
 
                 String reference = fieldNode.selectSingleNode("@reference") == null ? "" : fieldNode.selectSingleNode("@reference").getText();
+                String source = fieldNode.selectSingleNode("@source") == null ? "" : fieldNode.selectSingleNode("@source").getText();
 
 
                 /*dictionaryField*/
@@ -437,6 +439,7 @@ public class ModuleManagerImpl implements ModuleManager {
                     field.setFieldType("auto");
 
                     field.setReference(reference);
+                    field.setSource(source);
 
                     fieldMap.put(field.getName(), field);
                 }

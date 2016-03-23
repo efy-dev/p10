@@ -8,12 +8,14 @@ import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.organization.model.SmsProvider;
 import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.does.model.Xentity;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.CookieTool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +66,22 @@ public class SigninController extends BaseController {
 //        List<ConsumerAddress> consumerAddressList = addressManager.listConsumerAddressByUserId(AuthorizationUtil.getMyUser().getId());
 //        return consumerAddressList;
 //    }
+
+    @RequestMapping({"testAspect.do"})
+    @ResponseBody
+    public String testAspect(HttpServletRequest request) throws Exception {
+        String order = "ie86ug7qxnujeidw";
+        String userName = "ih33g5t18ge151fg";
+//        String hql = "select obj from " + PurchaseOrder.class.getName() + " obj where obj.user.id=:username";
+//        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+//        param.put("username", userName);
+//        baseManager.listObject(hql, param);
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), order);
+        XQuery xQuery = new XQuery("listPurchaseOrder_byUser", request);
+        xQuery.put("user_id", userName);
+        baseManager.listObject(xQuery);
+        return "";
+    }
 
 
     @RequestMapping("/sso.do")
