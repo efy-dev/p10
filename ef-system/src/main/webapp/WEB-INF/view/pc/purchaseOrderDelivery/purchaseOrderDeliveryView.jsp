@@ -78,7 +78,7 @@
             <tr>
                 <td class="am-primary am-u-md-3">订单状态</td>
                 <td class="am-u-md-3">
-                    <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
+                    <ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus"
                                     checkedValue="${object.purchaseOrder.orderStatus}"
                                     type="normal"/>
                 </td>

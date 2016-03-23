@@ -92,7 +92,7 @@
                                 ${group.groupProduct.productModel.name}
                         </td>
                         <td class="am-hide-sm-only" width="20%">
-                            <ming800:status name="showStatus" dataType="Group.showStatus" checkedValue="${group.status}" type="normal"/>
+                            <ming800:status name="showStatus" dataType="MyGroup.showStatus" checkedValue="${group.status}" type="normal"/>
                         </td>
                         <td class="am-hide-sm-only" width="20%">
                            <fmt:formatDate value="${group.createDateTime}" pattern="yyyy-MM-dd HH:mm:ss" type="both"/>

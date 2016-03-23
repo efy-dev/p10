@@ -62,7 +62,24 @@
 
                 </do>
 
-
+                <do name="plistTenantBanner" access="" label="商家轮播图分页列表"
+                    result="/tenantBanner/tenantBannerPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="group" defaultValue="efec" operation="eq"/>
+                    </query>
+                </do>
+                <do name="formTenantBanner" label="保存传承人轮播图" access="" result="/tenantBanner/tenantBannerForm" execute="com.efeiyi.ec.system.tenant.controller.ToTenantBannerFormHandler"/>
+                <do name="viewTenantBanner" label="查看传承人轮播图" access="" result="/tenantBanner/tenantBannerView"/>
+                <do name="saveOrUpdateTenantBanner" label="保存传承人轮播图" access="" execute="com.efeiyi.ec.system.tenant.controller.TenantBannerHandler">
+                </do>
+                <do name="removeTenantBanner" label="删除传承人轮播图" access="" result="json"/>
+                <do name="listTenantBanner" label="传承人轮播图列表" access="" result="/tenantBanner/tenantBannerList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
+                        <condition label="状态" name="tenant.id"  operation="eq"/>
+                    </query>
+                </do>
 
                 <do name="removeBanner" label="删除banner" access="" result="json"/>
                 <do name="formBanner" label="保存banner" access=""
@@ -83,7 +100,7 @@
 
             </does>
         </entity>
-        <entity name="simpleMenu" label="菜单"
+        <entity name="SimpleMenu" label="菜单"
                 basic="simple" others=""
                 model="com.efeiyi.ec.basic.model.SimpleMenu">
             <does>
@@ -105,7 +122,7 @@
 
             </does>
         </entity>
-        <entity name="simpleMenuItem" label="菜单项"
+        <entity name="SimpleMenuItem" label="菜单项"
                 basic="simple" others=""
                 model="com.efeiyi.ec.basic.model.SimpleMenuItem">
             <does>

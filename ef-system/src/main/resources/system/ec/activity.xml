@@ -53,7 +53,7 @@
             </does>
         </entity>
 
-        <entity name="ActivityGroupProduct" label="团购商品列表"
+        <entity name="GroupProduct" label="团购商品列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.activity.group.model.GroupProduct">
             <does>

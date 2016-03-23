@@ -24,7 +24,7 @@
             <tr>
                 <td class="am-primary am-u-md-3">状态</td>
                 <td class="am-u-md-3">
-                    <ming800:status name="showStatus" dataType="Group.showStatus" checkedValue="${object.status}" type="normal"/>
+                    <ming800:status name="showStatus" dataType="MyGroup.showStatus" checkedValue="${object.status}" type="normal"/>
                 </td>
                 <td class="am-primary am-u-md-3">创建时间</td>
                 <td class="am-u-md-3" >

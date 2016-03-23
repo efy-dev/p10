@@ -175,7 +175,7 @@
                 <td class="am-u-md-3">${consumer.username}</td>
                 <td class="am-primary am-u-md-3">性别</td>
                 <td class="am-u-md-3">
-                    <ming800:status name="sex" dataType="consumer.sex" checkedValue="${consumer.sex}" type="normal"/>
+                    <ming800:status name="sex" dataType="Consumer.sex" checkedValue="${consumer.sex}" type="normal"/>
                 </td>
             </tr>
             <tr>
@@ -272,7 +272,7 @@
                 <tr>
                 <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderPayment.paymentAmount}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 <td class="am-hide-sm-only">
-                    <ming800:status name="status" dataType="purchaseOrderPayment.status"
+                    <ming800:status name="status" dataType="PurchaseOrderPayment.status"
                                     checkedValue="${purchaseOrderPayment.status}"
                                     type="normal"/>
                 </td>
@@ -280,7 +280,7 @@
                 <c:forEach items="${purchaseOrderPayment.purchaseOrderPaymentDetailsList}"
                            var="purchaseOrderPaymentDetails">
 
-                            <ming800:status name="payWay" dataType="purchaseOrderPaymentDetails.payWay"
+                            <ming800:status name="payWay" dataType="PurchaseOrderPaymentDetails.payWay"
                                             checkedValue="${purchaseOrderPaymentDetails.payWay}"
                                             type="normal"/> : <fmt:formatNumber type="number" value="${purchaseOrderPaymentDetails.money}" maxFractionDigits="2" minFractionDigits="2"/>
                         <br>
@@ -364,12 +364,12 @@
 
                     <td class="am-hide-sm-only">${purchaseOrderDelivery.serial}</td>
                     <td class="am-hide-sm-only">
-                        <ming800:status name="status" dataType="purchaseOrderDelivery.status"
+                        <ming800:status name="status" dataType="PurchaseOrderDelivery.status"
                                         checkedValue="${purchaseOrderDelivery.status}"
                                         type="normal"/>
                     </td>
                     <td class="am-hide-sm-only">
-                        <ming800:status name="logisticsCompany" dataType="purchaseOrderDelivery.logisticsCompany"
+                        <ming800:status name="logisticsCompany" dataType="PurchaseOrderDelivery.logisticsCompany"
                                         checkedValue="${purchaseOrderDelivery.logisticsCompany}"
                                         type="normal"/>
                     </td>

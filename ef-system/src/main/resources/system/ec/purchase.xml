@@ -4,7 +4,7 @@
 <module name="purchase" label="purchase" version="" package="com.efeiyi.ec.purchase" path="">
 
     <entities>
-        <entity name="cart" label="cart"
+        <entity name="Cart" label="cart"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.Cart">
             <does>
@@ -26,7 +26,7 @@
 
             </does>
         </entity>
-        <entity name="cartProduct" label="cartProduct"
+        <entity name="CartProduct" label="cartProduct"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.CartProduct">
             <does>
@@ -49,7 +49,7 @@
 
             </does>
         </entity>
-        <entity name="purchaseOrder" label="purchaseOrder"
+        <entity name="PurchaseOrder" label="purchaseOrder"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.PurchaseOrder">
             <fields>
@@ -97,9 +97,9 @@
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
                         <condition name="orderStatus" operation="eq" label="订单状态" inputType="select_status"
-                                   key="purchaseOrder.orderStatus"/>
+                                   key="PurchaseOrder.orderStatus"/>
                         <condition name="orderType" operation="eq" label="订单类型" inputType="select_status"
-                                   key="purchaseOrder.orderType"/>
+                                   key="PurchaseOrder.orderType"/>
                         <condition name="serial" operation="like" label="订单号" inputType="text"/>
                         <condition name="user.username" operation="eq" label="下单人" inputType="text"/>
                         <condition name="bigTenant.contractNumber" operation="eq" label="商家编号" inputType="text"/>
@@ -126,7 +126,7 @@
 
             </does>
         </entity>
-        <entity name="coupon" label="优惠券"
+        <entity name="Coupon" label="优惠券"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.Coupon"
 
@@ -172,9 +172,9 @@
 
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="优惠券状态" inputType="select_status"
-                                   key="coupon.status"/>
+                                   key="Coupon.status"/>
                         <condition name="whetherBind" operation="eq" label="是否绑定" inputType="select_status"
-                                   key="coupon.whetherBind"/>
+                                   key="Coupon.whetherBind"/>
                         <condition name="serial" operation="like" label="优惠券序列号" inputType="text"/>
                         <condition name="couponBatch.name" operation="like" label="优惠券批次名" inputType="text"/>
                         <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date"
@@ -191,7 +191,7 @@
                     </query>
                     <query name="consumer" label="分类查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="优惠券状态" inputType="select_status"
-                                   key="coupon.status"/>
+                                   key="Coupon.status"/>
                         <condition name="serial" operation="eq" label="优惠券序列号" inputType="text"/>
                         <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date"
                                    dataType="date"/>
@@ -210,7 +210,7 @@
                     result="/purchaseOrder/purchaseOrderSaveSuccess"/>
             </does>
         </entity>
-        <entity name="couponBatch" label="优惠券批次"
+        <entity name="CouponBatch" label="优惠券批次"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.CouponBatch"
                 >
@@ -260,7 +260,7 @@
                 </do>
             </does>
         </entity>
-        <entity name="purchaseOrderDelivery" label="purchaseOrderDelivery"
+        <entity name="PurchaseOrderDelivery" label="purchaseOrderDelivery"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.PurchaseOrderDelivery">
 
@@ -299,8 +299,8 @@
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="发货状态" inputType="select_status"
-                                   key="purchaseOrderDelivery.status"/>
-                        <condition name="logisticsCompany" operation="eq" label="物流公司" inputType="select_status" key="purchaseOrderDelivery.logisticsCompany"/>
+                                   key="PurchaseOrderDelivery.status"/>
+                        <condition name="logisticsCompany" operation="eq" label="物流公司" inputType="select_status" key="PurchaseOrderDelivery.logisticsCompany"/>
                         <condition name="serial" operation="like" label="发货记录编号" inputType="text"/>
                         <condition name="purchaseOrder.serial" operation="like" label="订单号" inputType="text"/>
                         <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
@@ -326,7 +326,7 @@
 
             </does>
         </entity>
-        <entity name="purchaseOrderPayment" label="purchaseOrderPayment"
+        <entity name="PurchaseOrderPayment" label="purchaseOrderPayment"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.PurchaseOrderPayment">
             <fields>
@@ -355,7 +355,7 @@
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="支付状态" inputType="select_status"
-                                   key="purchaseOrderPayment.status"/>
+                                   key="PurchaseOrderPayment.status"/>
                         <condition name="serial" operation="like" label="支付记录编号" inputType="text"/>
                         <condition name="purchaseOrder.serial" operation="like" label="订单号" inputType="text"/>
                         <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
@@ -381,7 +381,7 @@
 
             </does>
         </entity>
-        <entity name="purchaseOrderPaymentDetails" label="purchaseOrderPaymentDetails"
+        <entity name="PurchaseOrderPaymentDetails" label="purchaseOrderPaymentDetails"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails">
             <fields>
@@ -402,7 +402,7 @@
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="payWay" operation="eq" label="支付方式" inputType="select_status"
-                                   key="purchaseOrderPaymentDetails.payWay"/>
+                                   key="PurchaseOrderPaymentDetails.payWay"/>
                         <condition name="purchaseOrderPayment.serial" operation="like" label="支付记录编号" inputType="text"/>
                         <condition name="transactionNumber" operation="eq" label="交易号" inputType="text"/>
                         <condition name="purchaseOrderPayment.purchaseOrder.serial" operation="like" label="订单号"
@@ -413,7 +413,7 @@
                 </do>
             </does>
         </entity>
-        <entity name="purchaseOrderProduct" label="purchaseOrderProduct"
+        <entity name="PurchaseOrderProduct" label="purchaseOrderProduct"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.PurchaseOrderProduct">
             <does>
@@ -460,7 +460,7 @@
         </entity>
 
 
-        <entity name="cartProduct" label="cartProduct"
+        <entity name="CartProduct" label="cartProduct"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.CartProduct">
             <does>

@@ -87,7 +87,7 @@
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewConsumer&viewConsumer=consumer&id=${consumer.id}'/>">${consumer.username}</a></td>
                         <td class="am-hide-sm-only">${consumer.phone}</td>
                         <td class="am-hide-sm-only">
-                                <ming800:status name="sex" dataType="consumer.sex"
+                                <ming800:status name="sex" dataType="Consumer.sex"
                                                 checkedValue="${consumer.sex}"
                                                 type="normal"/>
                         </td>

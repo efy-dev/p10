@@ -43,7 +43,7 @@
                             没有关联订单
                         </c:when>
                         <c:otherwise>
-                            <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
+                            <ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus"
                                             checkedValue="${purchaseOrder.orderStatus}"
                                             type="normal"/>
                         </c:otherwise>

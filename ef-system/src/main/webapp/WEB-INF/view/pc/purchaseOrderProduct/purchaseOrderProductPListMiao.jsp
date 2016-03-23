@@ -55,12 +55,12 @@
                             </c:if>
                         </td>
                         <td class="am-hide-sm-only">
-                            <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
+                            <ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus"
                                             checkedValue="${purchaseOrderProduct.purchaseOrder.orderStatus}"
                                             type="normal"/>
                         </td>
                         <td class="am-hide-sm-only">
-                            <ming800:status name="orderType" dataType="purchaseOrder.orderType"
+                            <ming800:status name="orderType" dataType="PurchaseOrder.orderType"
                                             checkedValue="${purchaseOrderProduct.purchaseOrder.orderType}"
                                             type="normal"/>
                         </td>
