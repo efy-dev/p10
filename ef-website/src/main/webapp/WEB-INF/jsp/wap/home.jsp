@@ -57,8 +57,8 @@
         <!-- 营销活动 -->
         <ul class="list-top">
             <c:if test="${not empty marketingActivityQueryList&&fn:length(marketingActivityQueryList)>0}">
-                <c:forEach items="${marketingActivityQueryList}" var="marketingActivity">
-                    <li><a href="${marketingActivity.redirect}"><img src="http://pro.efeiyi.com/${marketingActivity.img}@!home-activity-picture"></a></li>
+                <c:forEach items="${marketingActivityQueryList}" var="marketingActivity" >
+                    <li style="width: 100%;;"><a href="${marketingActivity.redirect}"><img src="http://pro.efeiyi.com/${marketingActivity.img}@!pc-home-marketing-activity"></a></li>
                 </c:forEach>
             </c:if>
         </ul>
