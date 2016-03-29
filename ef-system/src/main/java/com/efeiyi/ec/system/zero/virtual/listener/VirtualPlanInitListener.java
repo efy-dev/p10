@@ -66,11 +66,14 @@ public class VirtualPlanInitListener implements ServletContextListener {
         Session session = sessionFactory.openSession();
         Query listQuery = session.createQuery("from VirtualPlan where status = " + VirtualPlanConstant.planStatusStarted);
         List<VirtualPlan> virtualPlanList = listQuery.list();
-        for (VirtualPlan virtualPlan : virtualPlanList) {
-            virtualPlan.setStatus(VirtualPlanConstant.planStatusInit);
-            session.saveOrUpdate(virtualPlan);
+        //强化虚拟计划在初始化时，可能为null导致的不正确
+        if(virtualPlanList != null) {
+            for (VirtualPlan virtualPlan : virtualPlanList) {
+                virtualPlan.setStatus(VirtualPlanConstant.planStatusInit);
+                session.saveOrUpdate(virtualPlan);
+            }
+            session.flush();
         }
-        session.flush();
         session.close();
     }
 }
