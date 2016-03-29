@@ -196,30 +196,48 @@
   (function($){
     $.ajax({
       type:"get",
-      url:"<c:url value='http://www.efeiyi.com/product/recommend/listProductModel.do?projectId=${project.id}'/>",
+      url:"<c:url value='/recommend/getRecommendProductList/'>"+${project.projectCategory.id},
+      data:"",
+      dataType:"json",
+      success:function(data){
+        if(data){
+
+        }
+      },
+      error:function(){
+        console.log("出错了，请联系管理员！！！");
+        return false;
+      }
+    });
+  })(jQuery);
+
+  var  getRecommendProduct = function(projectId){
+    $.ajax({
+      type:"get",
+      url:"http://www.efeiyi.com/product/recommend/listProductModel.do?projectId="+projectId,
       data:"",
       dataType:"jsonp",
       jsonp:"jsonpcallback",
       success:function(data){
         if(data){
-        if(  data.length>=1&& data.length<5){
-        var tuijian = $("#tuijian");
-          for(i in data){
-            var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/"+data[i].id+"\">" +
-                    "<img src=\"http://pro.efeiyi.com/"+data[i].productModel_url+"\" alt=''>" +
-                    "<p>"+data[i].name+"</p> </a> </li>");
-            tuijian.append(li);
+          if(  data.length>=1&& data.length<5){
+            var tuijian = $("#tuijian");
+            for(i in data){
+              var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/"+data[i].id+"\">" +
+                      "<img src=\"http://pro.efeiyi.com/"+data[i].productModel_url+"\" alt=''>" +
+                      "<p>"+data[i].name+"</p> </a> </li>");
+              tuijian.append(li);
+            }
+          }else{
+            var tuijian = $("#tuijian");
+            for(i in data){
+              if(i>=4){break;};
+              var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/"+data[i].id+"\"> " +
+                      "<img src='http://pro.efeiyi.com/"+data[i].productModel_url+"' alt=''>" +
+                      "<p>"+data[i].name+"</p> </a> </li>");
+              tuijian.append(li);
+            }
           }
-        }else{
-          var tuijian = $("#tuijian");
-          for(i in data){
-            if(i>=4){break;};
-            var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/"+data[i].id+"\"> " +
-                    "<img src='http://pro.efeiyi.com/"+data[i].productModel_url+"' alt=''>" +
-                    "<p>"+data[i].name+"</p> </a> </li>");
-            tuijian.append(li);
-          }
-        }
         }
       },
       error:function(){
@@ -229,7 +247,8 @@
       complete:function(){
       }
     });
-  })(jQuery);
+  }
+
 </script>
 </body>
 </html>
