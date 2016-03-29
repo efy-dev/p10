@@ -96,7 +96,7 @@
                         <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${coupon.couponBatch.price}" maxFractionDigits="2" minFractionDigits="2"/></td>
                         <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${coupon.couponBatch.priceLimit}" maxFractionDigits="2" minFractionDigits="2"/></td>
                         <td class="am-hide-sm-only">
-                            <ming800:status name="status" dataType="coupon.status"
+                            <ming800:status name="status" dataType="Coupon.status"
                                             checkedValue="${coupon.status}"
                                             type="normal"/>
 

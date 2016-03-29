@@ -68,7 +68,7 @@
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewPaymentOrder=order&viewIdentify=orderPayment&id=${purchaseOrderPayment.purchaseOrder.id}'/>">${purchaseOrderPayment.purchaseOrder.serial}</a></td>
                         <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderPayment.paymentAmount}" maxFractionDigits="2" minFractionDigits="2"/></td>
                         <td class="am-hide-sm-only">
-                            <ming800:status name="status" dataType="purchaseOrderPayment.status"
+                            <ming800:status name="status" dataType="PurchaseOrderPayment.status"
                                             checkedValue="${purchaseOrderPayment.status}"
                                             type="normal"/>
                         </td>

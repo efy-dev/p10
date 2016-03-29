@@ -58,12 +58,35 @@
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
                     </query>
                 </do>
-
+                <do name="plistEcMaster" access="" label="传承人分页列表"
+                    result="/ecMaster/ecMasterPList">
+                    <query name="index" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="sex" operation="eq" inputType="select_status" label="性别" key="Master.sex"/>
+                        <condition name="level" operation="eq" inputType="select_status" label="等级" key="Master.level"/>
+                        <condition name="fullName" operation="likes" inputType="text" label="传承人名字"/>
+                    </query>
+                </do>
                 <do name="formMaster" label="保存大师页" access="" result="/master/masterForm" execute="com.efeiyi.ec.system.master.controller.MasterFormHandler"/>
                 <do name="viewMaster" label="查看大师页" access="" result="/master/masterView"/>
+                <do name="viewEcMaster" label="查看大师页" access="" result="/ecMaster/ecMasterView"/>
                 <do name="viewMasterwiki" label="查看大师页" access="" result="/master/masterViewwiki"/>
                 <do name="saveOrUpdateMaster" label="保存大师" access=""
                     result="redirect:/basic/xm.do?qm=plistMaster_default"
+                    execute="com.efeiyi.ec.system.master.controller.MasterHandler">
+                    <page>
+                        <fields>
+                            <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}"
+                                   inputType="default"/>
+                            <field name="status" label="创建时间" defaultValue="1" inputType="default"/>
+                        </fields>
+                    </page>
+                </do>
+                <do name="saveOrUpdateEcMaster" label="保存大师" access=""
+                    result="redirect:/basic/xm.do?qm=plistMaster_default&amp;param=EcMaster"
                     execute="com.efeiyi.ec.system.master.controller.MasterHandler">
                     <page>
                         <fields>
@@ -87,61 +110,80 @@
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
-            </does>
-        </entity>
 
-        <entity name="EcMaster" label="首页推荐传承人列表"
-                basic="simple" others=""
-                model="com.efeiyi.ec.master.model.Master">
-            <fields>
-                <field name="id" label="传承人" inputType="text"/>
-                <field name="name" label="传承人名字" inputType="text"/>
-                <field name="sex" label="性别" inputType="text">
-                    <statusType fieldName="sex">
-                        <item label="男" value="1"/>
-                        <item label="女" value="2"/>
-                    </statusType>
-                </field>
-                <field name="level" label="等级" inputType="text">
-                    <statusType fieldName="level">
-                        <item label="国家级" value="1"/>
-                        <item label="省级" value="2"/>
-                        <item label="市级" value="3"/>
-                        <item label="县级" value="4"/>
-                    </statusType>
-                </field>
-            </fields>
-            <does>
-                <do name="plistEcMaster" access="" label="传承人分页列表"
-                    result="/ecMaster/ecMasterPList">
-                    <query name="index" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
-                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
-                    </query>
-                    <query name="search" label="查询" type="auto" orderBy="id:desc">
-                        <condition name="sex" operation="eq" inputType="select_status" label="性别" key="EcMaster.sex"/>
-                        <condition name="level" operation="eq" inputType="select_status" label="等级" key="EcMaster.level"/>
-                        <condition name="fullName" operation="likes" inputType="text" label="传承人名字"/>
+                <do name="plistBusiness" access="" label="传承人分页列表"
+                    result="/master/masterPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
 
-                <do name="viewEcMaster" label="查看大师页" access="" result="/ecMaster/ecMasterView"/>
-
-                <!-- 做下面这个只是为了 首页推荐传承人中新建传承人保存的时候 菜单的选中问题-->
-                <do name="saveOrUpdateEcMaster" label="保存大师" access=""
-                    result="redirect:/basic/xm.do?qm=plistMaster_default&amp;param=EcMaster"
-                    execute="com.efeiyi.ec.system.master.controller.MasterHandler">
-                    <page>
-                        <fields>
-                            <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}"
-                                   inputType="default"/>
-                            <field name="status" label="创建时间" defaultValue="1" inputType="default"/>
-                        </fields>
-                    </page>
+                <do name="formBusiness" label="保存大师页" access="" result="/master/masterForm"/>
+                <do name="saveOrUpdateBusiness" label="保存大师" access="" result="/master/masterSaveSuccess">
                 </do>
-
+                <do name="removeBusiness" label="删除大师" access="" result="json"/>
+                <do name="listBusiness" label="传承人列表" access="" result="/master/masterList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <!--<condition label="产品主键" name="id" defaultValue="1"o peration="eq"/>-->
+                        <condition label="产品名称" name="name" defaultValue="1" operation="eq"/>
+                        <!--<condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>-->
+                    </query>
+                </do>
             </does>
         </entity>
+
+        <!--<entity name="EcMaster" label="首页推荐传承人列表"-->
+                <!--basic="simple" others=""-->
+                <!--model="com.efeiyi.ec.master.model.Master">-->
+            <!--<fields>-->
+                <!--<field name="id" label="传承人" inputType="text"/>-->
+                <!--<field name="name" label="传承人名字" inputType="text"/>-->
+                <!--<field name="sex" label="性别" inputType="text">-->
+                    <!--<statusType fieldName="sex">-->
+                        <!--<item label="男" value="1"/>-->
+                        <!--<item label="女" value="2"/>-->
+                    <!--</statusType>-->
+                <!--</field>-->
+                <!--<field name="level" label="等级" inputType="text">-->
+                    <!--<statusType fieldName="level">-->
+                        <!--<item label="国家级" value="1"/>-->
+                        <!--<item label="省级" value="2"/>-->
+                        <!--<item label="市级" value="3"/>-->
+                        <!--<item label="县级" value="4"/>-->
+                    <!--</statusType>-->
+                <!--</field>-->
+            <!--</fields>-->
+            <!--<does>-->
+                <!--<do name="plistEcMaster" access="" label="传承人分页列表"-->
+                    <!--result="/ecMaster/ecMasterPList">-->
+                    <!--<query name="index" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="id" defaultValue="0" operation="ne" inputType="default"/>-->
+                        <!--<condition name="status" defaultValue="1" operation="eq" inputType="default"/>-->
+                    <!--</query>-->
+                    <!--<query name="search" label="查询" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="sex" operation="eq" inputType="select_status" label="性别" key="EcMaster.sex"/>-->
+                        <!--<condition name="level" operation="eq" inputType="select_status" label="等级" key="EcMaster.level"/>-->
+                        <!--<condition name="fullName" operation="likes" inputType="text" label="传承人名字"/>-->
+                    <!--</query>-->
+                <!--</do>-->
+
+                <!--<do name="viewEcMaster" label="查看大师页" access="" result="/ecMaster/ecMasterView"/>-->
+
+                <!--&lt;!&ndash; 做下面这个只是为了 首页推荐传承人中新建传承人保存的时候 菜单的选中问题&ndash;&gt;-->
+                <!--<do name="saveOrUpdateEcMaster" label="保存大师" access=""-->
+                    <!--result="redirect:/basic/xm.do?qm=plistMaster_default&amp;param=EcMaster"-->
+                    <!--execute="com.efeiyi.ec.system.master.controller.MasterHandler">-->
+                    <!--<page>-->
+                        <!--<fields>-->
+                            <!--<field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}"-->
+                                   <!--inputType="default"/>-->
+                            <!--<field name="status" label="创建时间" defaultValue="1" inputType="default"/>-->
+                        <!--</fields>-->
+                    <!--</page>-->
+                <!--</do>-->
+
+            <!--</does>-->
+        <!--</entity>-->
 
         <entity name="MasterBanner" label="传承人轮播图列表"
                 basic="simple" others=""
@@ -171,31 +213,31 @@
 
             </does>
         </entity>
-        <entity name="Business" label="商家列表"
-                basic="simple" others=""
-                model="com.efeiyi.ec.master.model.Master">
-            <does>
-                <do name="plistBusiness" access="" label="传承人分页列表"
-                    result="/master/masterPList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
-                    </query>
-                </do>
+        <!--<entity name="Business" label="商家列表"-->
+                <!--basic="simple" others=""-->
+                <!--model="com.efeiyi.ec.master.model.Master">-->
+            <!--<does>-->
+                <!--<do name="plistBusiness" access="" label="传承人分页列表"-->
+                    <!--result="/master/masterPList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+                    <!--</query>-->
+                <!--</do>-->
 
-                <do name="formBusiness" label="保存大师页" access="" result="/master/masterForm"/>
-                <do name="saveOrUpdateBusiness" label="保存大师" access="" result="/master/masterSaveSuccess">
-                </do>
-                <do name="removeBusiness" label="删除大师" access="" result="json"/>
-                <do name="listBusiness" label="传承人列表" access="" result="/master/masterList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <!--<condition label="产品主键" name="id" defaultValue="1"o peration="eq"/>-->
-                        <condition label="产品名称" name="name" defaultValue="1" operation="eq"/>
-                        <!--<condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>-->
-                    </query>
-                </do>
+                <!--<do name="formBusiness" label="保存大师页" access="" result="/master/masterForm"/>-->
+                <!--<do name="saveOrUpdateBusiness" label="保存大师" access="" result="/master/masterSaveSuccess">-->
+                <!--</do>-->
+                <!--<do name="removeBusiness" label="删除大师" access="" result="json"/>-->
+                <!--<do name="listBusiness" label="传承人列表" access="" result="/master/masterList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--&lt;!&ndash;<condition label="产品主键" name="id" defaultValue="1"o peration="eq"/>&ndash;&gt;-->
+                        <!--<condition label="产品名称" name="name" defaultValue="1" operation="eq"/>-->
+                        <!--&lt;!&ndash;<condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>&ndash;&gt;-->
+                    <!--</query>-->
+                <!--</do>-->
 
-            </does>
-        </entity>
+            <!--</does>-->
+        <!--</entity>-->
         <entity name="MasterWorkShop" label="传承人工作坊列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.master.model.MasterWorkShop">
@@ -298,7 +340,7 @@
             </does>
         </entity>
 
-        <entity name="MasterAttachment" label="传承人介绍附件"
+        <entity name="MasterIntroductionAttachment" label="传承人介绍附件"
                 basic="simple" others=""
                 model="com.efeiyi.ec.master.model.MasterIntroductionAttachment">
             <does>
@@ -374,7 +416,7 @@
         </entity>
 
 
-        <entity name="WordValue" label="传承人新闻列表"
+        <entity name="Tag" label="传承人新闻列表"
                 basic="simple" others=""
                 model="com.ming800.core.p.model.Tag">
             <does>
@@ -452,7 +494,7 @@
                     <page>
                         <fields>
                             <field name="status" label="状态" defaultValue="1"
-                                   inputType="default"></field>
+                                   inputType="default"/>
                         </fields>
                     </page>
                 </do>
@@ -462,7 +504,7 @@
                     <page>
                         <fields>
                             <field name="status" label="状态" defaultValue="1"
-                                   inputType="default"></field>
+                                   inputType="default"/>
                         </fields>
                     </page>
                 </do>
@@ -593,7 +635,7 @@
         </entity>
 
 
-        <entity name="ProductPicture" label="传承人作品展示图片"
+        <entity name="MasterWorkPicture" label="传承人作品展示图片"
                 basic="simple" others=""
                 model="com.efeiyi.ec.master.model.MasterWorkPicture">
             <does>

@@ -5,7 +5,7 @@
 <module name="tenant" label="系统-商家" version="" package="com.efeiyi.ec.tenant" path="">
 
     <entities>
-        <entity name="Tenant" label="商家列表"
+        <entity name="BigTenant" label="商家列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.BigTenant">
             <does>
@@ -41,7 +41,7 @@
                 </do>
             </does>
         </entity>
-        <entity name="Tenant1" label="商家列表"
+        <entity name="Tenant" label="商家列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.Tenant">
             <does>
@@ -50,7 +50,7 @@
 
             </does>
         </entity>
-        <entity name="personalTenant" label="个人商家列表"
+        <entity name="PersonalTenant" label="个人商家列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.PersonalTenant">
             <does>
@@ -70,7 +70,7 @@
                 <do name="removePersonalTenant" label="删除个人商家" access="" result="json"/>
             </does>
         </entity>
-        <entity name="privateTenant" label="个体商家列表"
+        <entity name="PrivateTenant" label="个体商家列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.PrivateTenant">
             <does>
@@ -89,7 +89,7 @@
                 <do name="removePersonalTenant" label="删除个体商家" access="" result="json"/>
             </does>
         </entity>
-        <entity name="enterpriseTenant" label="企业商家列表"
+        <entity name="EnterpriseTenant" label="企业商家列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.EnterpriseTenant">
             <does>
@@ -108,31 +108,31 @@
                 <do name="removePersonalTenant" label="删除个人商家" access="" result="json"/>
             </does>
         </entity>
-        <entity name="TenantBanner" label="商家轮播图列表"
-                basic="simple" others=""
-                model="com.ming800.core.p.model">
-            <does>
-                <do name="plistTenantBanner" access="" label="商家轮播图分页列表"
-                    result="/tenantBanner/tenantBannerPList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
-                        <condition name="group" defaultValue="efec" operation="eq"/>
-                    </query>
-                </do>
-                <do name="formTenantBanner" label="保存传承人轮播图" access="" result="/tenantBanner/tenantBannerForm" execute="com.efeiyi.ec.system.tenant.controller.ToTenantBannerFormHandler"/>
-                <do name="viewTenantBanner" label="查看传承人轮播图" access="" result="/tenantBanner/tenantBannerView"/>
-                <do name="saveOrUpdateTenantBanner" label="保存传承人轮播图" access="" execute="com.efeiyi.ec.system.tenant.controller.TenantBannerHandler">
-                </do>
-                <do name="removeTenantBanner" label="删除传承人轮播图" access="" result="json"/>
-                <do name="listTenantBanner" label="传承人轮播图列表" access="" result="/tenantBanner/tenantBannerList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
-                        <condition label="状态" name="tenant.id"  operation="eq"/>
-                    </query>
-                </do>
+        <!--<entity name="TenantBanner" label="商家轮播图列表"-->
+                <!--basic="simple" others=""-->
+                <!--model="com.ming800.core.p.model.Banner">-->
+            <!--<does>-->
+                <!--<do name="plistTenantBanner" access="" label="商家轮播图分页列表"-->
+                    <!--result="/tenantBanner/tenantBannerPList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+                        <!--<condition name="group" defaultValue="efec" operation="eq"/>-->
+                    <!--</query>-->
+                <!--</do>-->
+                <!--<do name="formTenantBanner" label="保存传承人轮播图" access="" result="/tenantBanner/tenantBannerForm" execute="com.efeiyi.ec.system.tenant.controller.ToTenantBannerFormHandler"/>-->
+                <!--<do name="viewTenantBanner" label="查看传承人轮播图" access="" result="/tenantBanner/tenantBannerView"/>-->
+                <!--<do name="saveOrUpdateTenantBanner" label="保存传承人轮播图" access="" execute="com.efeiyi.ec.system.tenant.controller.TenantBannerHandler">-->
+                <!--</do>-->
+                <!--<do name="removeTenantBanner" label="删除传承人轮播图" access="" result="json"/>-->
+                <!--<do name="listTenantBanner" label="传承人轮播图列表" access="" result="/tenantBanner/tenantBannerList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition label="状态" name="status" defaultValue="1" operation="eq"/>-->
+                        <!--<condition label="状态" name="tenant.id"  operation="eq"/>-->
+                    <!--</query>-->
+                <!--</do>-->
 
-            </does>
-        </entity>
+            <!--</does>-->
+        <!--</entity>-->
 
 
         <entity name="TenantMaster" label="商家大师"

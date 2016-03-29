@@ -91,6 +91,30 @@
                     <condition name="project.id" operation="eq" defaultValue="0" label="项目"/>
                 </query>
                 </do>
+
+
+                <do name="plistProductTest" access="" label="产品分页列表"
+                    result="/test/generateTap" execute="com.efeiyi.ec.system.product.controller.listProductHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
+                    </query>
+                    <query name="default1" label="产品名称" type="auto" orderBy="id:desc">
+                        <condition name="name"  operation="eq" label="产品名称" inputType="text"/>
+                        <condition name="serial"  operation="eq" label="产品编号" inputType="text"/>
+                        <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
+                    </query>
+                    <query name="tenant" label="商家商品列表" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id"  operation="eq" label="商家id" defaultValue="0" inputType="default"/>
+                        <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
+                    </query>
+
+                    <!--<query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendedIndex:desc">-->
+                    <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+                    <!--</query>-->
+                </do>
+
+
                 <do name="removeProduct" label="删除产品" access="" result="json"/>
                 <do name="formProduct" label="保存产品页" access="" result="/product/productForm" execute="com.efeiyi.ec.system.product.controller.toFormProductHandler"/>
                 <do name="formProduct_Description" label="保存产品页" access="" result="/productDescription/productDescriptionForm" />
@@ -123,33 +147,33 @@
 
             </does>
         </entity>
-        <entity name="ProductTest" label="产品列表"
-                basic="simple" others=""
-                model="com.efeiyi.ec.product.model.Product">
-            <does>
-                <do name="plistProductTest" access="" label="产品分页列表"
-                    result="/test/generateTap" execute="com.efeiyi.ec.system.product.controller.listProductHandler">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
-                        <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
-                    </query>
-                    <query name="default1" label="产品名称" type="auto" orderBy="id:desc">
-                        <condition name="name"  operation="eq" label="产品名称" inputType="text"/>
-                        <condition name="serial"  operation="eq" label="产品编号" inputType="text"/>
-                        <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
-                    </query>
-                    <query name="tenant" label="商家商品列表" type="auto" orderBy="id:desc">
-                        <condition name="tenant.id"  operation="eq" label="商家id" defaultValue="0" inputType="default"/>
-                        <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
-                    </query>
-
-                    <!--<query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendedIndex:desc">-->
-                    <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+        <!--<entity name="ProductTest" label="产品列表"-->
+                <!--basic="simple" others=""-->
+                <!--model="com.efeiyi.ec.product.model.Product">-->
+            <!--<does>-->
+                <!--<do name="plistProductTest" access="" label="产品分页列表"-->
+                    <!--result="/test/generateTap" execute="com.efeiyi.ec.system.product.controller.listProductHandler">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>-->
+                        <!--&lt;!&ndash;<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>&ndash;&gt;-->
                     <!--</query>-->
-                </do>
+                    <!--<query name="default1" label="产品名称" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="name"  operation="eq" label="产品名称" inputType="text"/>-->
+                        <!--<condition name="serial"  operation="eq" label="产品编号" inputType="text"/>-->
+                        <!--<condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>-->
+                    <!--</query>-->
+                    <!--<query name="tenant" label="商家商品列表" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="tenant.id"  operation="eq" label="商家id" defaultValue="0" inputType="default"/>-->
+                        <!--<condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>-->
+                    <!--</query>-->
 
-            </does>
-        </entity>
+                    <!--&lt;!&ndash;<query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendedIndex:desc">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<condition name="id" defaultValue="0" operation="ne"/>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</query>&ndash;&gt;-->
+                <!--</do>-->
+
+            <!--</does>-->
+        <!--</entity>-->
 
         <entity name="ProductModel" label="产品列表"
                 basic="simple" others=""

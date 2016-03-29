@@ -65,7 +65,7 @@
         <c:forEach items="${object.purchaseOrderPaymentDetailsList}" var="purchaseOrderPaymentDetails" >
             <tr>
                 <td class="am-hide-sm-only">
-                    <ming800:status name="payWay" dataType="purchaseOrderPaymentDetails.payWay"
+                    <ming800:status name="payWay" dataType="PurchaseOrderPaymentDetails.payWay"
                                     checkedValue="${purchaseOrderPaymentDetails.payWay}"
                                     type="normal"/>
                 </td>
