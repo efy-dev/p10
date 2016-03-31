@@ -3,7 +3,7 @@
 <module name="Address" label="省市县" version="" package="com.efeiyi.ec.organization.model" path="">
 
     <entities>
-        <entity name="PCAddressProvince" label="省"  model="com.efeiyi.ec.organization.model.AddressProvince">
+        <entity name="AddressProvince" label="省"  model="com.efeiyi.ec.organization.model.AddressProvince">
             <does>
                 <do name="listAddressProvince" access="" label="省份列表">
                     <query name="default" label="全部省份" type="auto" orderBy="id:asc">
@@ -13,7 +13,7 @@
             </does>
         </entity>
 
-        <entity name="PCAddressCity" label="市"  model="com.efeiyi.ec.organization.model.AddressCity">
+        <entity name="AddressCity" label="市"  model="com.efeiyi.ec.organization.model.AddressCity">
             <does>
                 <do name="listAddressCity" access="" label="市列表">
                     <query name="default" label="全部市" type="auto" orderBy="id:asc">
@@ -26,7 +26,7 @@
             </does>
         </entity>
 
-        <entity name="PCAddressDistrict" label="区县"  model="com.efeiyi.ec.organization.model.AddressDistrict">
+        <entity name="AddressDistrict" label="区县"  model="com.efeiyi.ec.organization.model.AddressDistrict">
             <does>
                 <do name="listAddressDistrict2" access="" label="区县">
                   <!--  <query name="defaultqqqqqq" label="全部区县" type="auto" orderBy="id:asc">

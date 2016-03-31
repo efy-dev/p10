@@ -16,7 +16,7 @@
 
   <title>【${project.name}】${project.name}-${project.addressDistrict.addressCity.addressProvince.name}-e飞蚁</title>
   <meta name="keywords" content="${project.name},${project.name}大全,中国${project.name},${project.name}教程,${project.name}艺术" />
-  <meta name="description" content="${project.description}" />
+  <meta name="description" content="${project.name}" />
 </head>
 <body>
 
@@ -196,30 +196,48 @@
   (function($){
     $.ajax({
       type:"get",
-      url:"<c:url value='http://192.168.1.38:8080/product/recommend/listProductModel.do?projectId=${project.id}'/>",
+      url:"<c:url value='/recommend/getRecommendProductList/'>"+${project.projectCategory.id},
+      data:"",
+      dataType:"json",
+      success:function(data){
+        if(data){
+
+        }
+      },
+      error:function(){
+        console.log("出错了，请联系管理员！！！");
+        return false;
+      }
+    });
+  })(jQuery);
+
+  var  getRecommendProduct = function(projectId){
+    $.ajax({
+      type:"get",
+      url:"http://www.efeiyi.com/product/recommend/listProductModel.do?projectId="+projectId,
       data:"",
       dataType:"jsonp",
       jsonp:"jsonpcallback",
       success:function(data){
         if(data){
-        if(  data.length>=1&& data.length<5){
-        var tuijian = $("#tuijian");
-          for(i in data){
-            var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/${project.id}\">" +
-                    "<img src=\"http://pro.efeiyi.com/"+data[i].productModel_url+"\" alt=''>" +
-                    "<p>"+data[i].name+"</p> </a> </li>");
-            tuijian.append(li);
+          if(  data.length>=1&& data.length<5){
+            var tuijian = $("#tuijian");
+            for(i in data){
+              var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/"+data[i].id+"\">" +
+                      "<img src=\"http://pro.efeiyi.com/"+data[i].productModel_url+"\" alt=''>" +
+                      "<p>"+data[i].name+"</p> </a> </li>");
+              tuijian.append(li);
+            }
+          }else{
+            var tuijian = $("#tuijian");
+            for(i in data){
+              if(i>=4){break;};
+              var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/"+data[i].id+"\"> " +
+                      "<img src='http://pro.efeiyi.com/"+data[i].productModel_url+"' alt=''>" +
+                      "<p>"+data[i].name+"</p> </a> </li>");
+              tuijian.append(li);
+            }
           }
-        }else{
-          var tuijian = $("#tuijian");
-          for(i in data){
-            if(i>=4){break;};
-            var li = $("<li> <a href=\"http://www.efeiyi.com/product/productModel/${project.id}\"> " +
-                    "<img src='http://pro.efeiyi.com/"+data[i].productModel_url+"' alt=''>" +
-                    "<p>"+data[i].name+"</p> </a> </li>");
-            tuijian.append(li);
-          }
-        }
         }
       },
       error:function(){
@@ -229,7 +247,8 @@
       complete:function(){
       }
     });
-  })(jQuery);
+  }
+
 </script>
 </body>
 </html>

@@ -68,7 +68,7 @@
                         <td class="am-hide-sm-only">${coupon.couponBatch.price}</td>
                         <td class="am-hide-sm-only">${coupon.couponBatch.priceLimit}</td>
                         <td class="am-hide-sm-only">
-                            <ming800:status name="status" dataType="coupon.status"
+                            <ming800:status name="status" dataType="Coupon.status"
                                             checkedValue="${coupon.status}"
                                             type="normal"/>
 

@@ -58,7 +58,7 @@
             </does>
         </entity>
 
-        <entity name="projectNewsList" label="百科新闻"
+        <entity name="ProjectNews" label="百科新闻"
                 basic="simple" others=""
                 model="com.efeiyi.ec.wiki.model.ProjectNews">
             <fields>

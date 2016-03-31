@@ -105,5 +105,20 @@
         <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.UserManager"/>
     </bean>
 
+    <bean id="consumerServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="http://192.168.227.129:8080/ef-user/service/consumerManager"/>
+        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.ConsumerManager"/>
+    </bean>
+
+    <bean id="managerServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="http://192.168.227.129:8080/ef-user/service/adminManager"/>
+        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.AdminManager"/>
+    </bean>
+
+    <bean id="professionalServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="http://192.168.227.129:8080/ef-user/service/professionalManager"/>
+        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.ProfessionalManager"/>
+    </bean>
+
     <mvc:default-servlet-handler/>
 </beans>

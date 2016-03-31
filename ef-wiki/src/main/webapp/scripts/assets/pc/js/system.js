@@ -19,6 +19,20 @@ $(function(){
             $('article').css({'padding-bottom':'50px'})
         }
     })();
+    (function(){
+        $('.btn-top-wechat').hover(function(){
+            $(this).find('.top-wechat').stop(true).slideDown('fast');
+        },function(){
+            $(this).find('.top-wechat').stop(true).slideUp('fast');
+        });
+        //footer二维码
+        $('.footer .service .wechat').hover(function(){
+            $(this).find('.icon').fadeIn('100');
+        },function(){
+            $(this).find('.icon').delay(2000).fadeOut();
+        })
+    })();
+
     //020102分类导航
     (function(){
         $('.box-hd .ul-index-list>li .item').click(function(){
@@ -42,27 +56,7 @@ $(function(){
             $('footer').css({'padding-bottom':'50px'})
         };
     })();
-    //订单
-    (function(){
-        $('.btn-coupons').click(function(){
-            $('body,document').css('overflow','hidden');
-            $('#order-total').show().css({'top':($('.order-total').position().top-120)+'px'});
-            $('.cart-btn').click(function(){
-                $(this).parents('.alert-delete').hide();
-                $('body,document').css('overflow','visible');
-            })
-        });
 
-        $('.btn-edit-addres').click(function(){
-            $('body,document').css('overflow','hidden');
-            $('#order-address').show();
-            $('.cart-btn').click(function(){
-                $(this).parents('#order-address').hide();
-                $('body,document').css('overflow','visible');
-            })
-            return false;
-        })
-    })();
 
 
 
@@ -135,18 +129,5 @@ $(function(){
 
 
 });
-(function(){
-    $('.btn-top-wechat').hover(function(){
-        $(this).find('.top-wechat').stop(true).slideDown('fast');
-    },function(){
-        $(this).find('.top-wechat').stop(true).slideUp('fast');
-    });
-    //footer二维码
-    $('.footer .service .wechat').hover(function(){
-        $(this).find('.icon').fadeIn('100');
-    },function(){
-        $(this).find('.icon').delay(2000).fadeOut();
-    })
-})();
 
 

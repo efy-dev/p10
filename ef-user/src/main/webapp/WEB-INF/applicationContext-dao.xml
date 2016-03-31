@@ -40,6 +40,9 @@
     </bean>
 
     <bean id="userManager" class="com.efeiyi.ec.website.organization.service.impl.UserManagerImpl"/>
+    <bean id="consumerManager" class="com.efeiyi.ec.website.organization.service.impl.ConsumerManagerImpl"/>
+    <bean id="adminManager" class="com.efeiyi.ec.website.organization.service.impl.AdminManagerImpl"/>
+    <bean id="professionalManager" class="com.efeiyi.ec.website.organization.service.impl.ProfessionalManagerImpl"/>
     <bean id="addressManager" class="com.efeiyi.ec.website.organization.service.impl.AddressManagerImpl"/>
 
     <bean id="commonManager" class="com.ming800.core.p.service.impl.CommonManagerImpl"/>
@@ -58,6 +61,21 @@
     <bean name="userService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
         <property name="service" ref="userManager"/>
         <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.UserManager"/>
+    </bean>
+
+    <bean name="consumerService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="consumerManager"/>
+        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.ConsumerManager"/>
+    </bean>
+
+    <bean name="adminService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="adminManager"/>
+        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.AdminManager"/>
+    </bean>
+
+    <bean name="professionalService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="professionalManager"/>
+        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.ProfessionalManager"/>
     </bean>
 
     <bean name="addressService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">

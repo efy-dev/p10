@@ -45,12 +45,12 @@
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=delivery&viewIdentify=orderDelivery&id=${purchaseOrderDelivery.purchaseOrder.id}'/>">${purchaseOrderDelivery.purchaseOrder.serial}</a>
                         </td>
                         <td class="am-hide-sm-only">
-                            <ming800:status name="logisticsCompany" dataType="purchaseOrderDelivery.logisticsCompany"
+                            <ming800:status name="logisticsCompany" dataType="PurchaseOrderDelivery.logisticsCompany"
                                             checkedValue="${purchaseOrderDelivery.logisticsCompany}"
                                             type="normal"/>
                         </td>
                         <td>
-                            <ming800:status name="status" dataType="purchaseOrderDelivery.status"
+                            <ming800:status name="status" dataType="PurchaseOrderDelivery.status"
                                             checkedValue="${purchaseOrderDelivery.status}"
                                             type="normal"/>
                         </td>
