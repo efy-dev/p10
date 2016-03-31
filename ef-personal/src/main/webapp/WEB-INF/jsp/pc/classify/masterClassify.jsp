@@ -156,42 +156,42 @@
 <script>
 
     //判断:当前元素是否是被筛选元素的子元素
-    $.fn.isChildOf = function (b) {
-        return (this.parents(b).length > 0);
-    };
+//    $.fn.isChildOf = function (b) {
+//        return (this.parents(b).length > 0);
+//    };
     //判断:当前元素是否是被筛选元素的子元素或者本身
-    $.fn.isChildAndSelfOf = function (b) {
-        return (this.closest(b).length > 0);
-    };
+//    $.fn.isChildAndSelfOf = function (b) {
+//        return (this.closest(b).length > 0);
+//    };
 
     // 判断是否属于统一标签
-    function judgeStartNum(o, url) {
-        if ($(o).isChildAndSelfOf(object)) {
-
-        } else {
-            ajaxKey = true;
-            BaseUrl = url;
-            $("#pubu").empty();
-            StartMasterNum = 1;
-            $(object).attr("about", "0");
-            $(object).attr("class", "");
-            $(o).attr("about", "1");
-            $(o).attr("class", "active");
-            object = o;
-        }
-    }
+//    function judgeStartNum(o, url) {
+//        if ($(o).isChildAndSelfOf(object)) {
+//
+//        } else {
+//            ajaxKey = true;
+//            BaseUrl = url;
+//            $("#pubu").empty();
+//            StartMasterNum = 1;
+//            $(object).attr("about", "0");
+//            $(object).attr("class", "");
+//            $(o).attr("about", "1");
+//            $(o).attr("class", "active");
+//            object = o;
+//        }
+//    }
 
     $(document).ready(function () {
         $("#pages").html("发现大师 - e飞蚁");
-        getData(object, "<c:url value="/masterCategory/getClassifyData.do?qm=plistMaster_all&pageEntity.size=6&pageEntity.index="/>");
+        getData(object, "<c:url value="/masterCategory/getClassifyData.do?qm=plistMaster_all"/>");
         <%--getData2("<c:url value='/masterMessage/subMaster/plistMaster_default/6/'/>");--%>
         <%--getData3("<c:url value='/masterMessage/hotMaster/plistMasterRecommend_group/6/'/>");--%>
     })
     //  var StartMessageNum = 1;
     var StartMasterNum = 1;
     <%--var StartRecommendNum = 1;--%>
-    var ajaxKey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关
-    var BaseUrl = "<c:url value="/masterCategory/getClassifyData.do?qm=plistMaster_all&pageEntity.size=6&pageEntity.index="/>";
+//    var ajaxKey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关
+    var BaseUrl = "<c:url value="/masterCategory/getClassifyData.do?qm=plistMaster_all"/>";
     var object = $("a[about='1']");
 //    $(window).load(function () {
 //        var winH = $(window).height(); //页面可视区域高度
@@ -207,19 +207,19 @@
 //        });
 //    });
     function getData(e, url) {
-        judgeStartNum(e, url);
+//        judgeStartNum(e, url);
         var flag = false;
         $.ajax({
             type: "get",//设置get请求方式
-            url: url + StartMasterNum,//设置请求的脚本地址
+            url: url,//设置请求的脚本地址
             data: "",//设置请求的数据
             async: true,
             dataType: "json",//设置请求返回的数据格式
             success: function (data) {
-                StartMasterNum = StartMasterNum + 1;
+//                StartMasterNum = StartMasterNum + 1;
                 var pubu = $("#pubu");
                 if (data != null && data.length > 0) {
-//          pubu.empty();
+                    pubu.empty();
                     for (var i in data) {
                         var levelName = "";
                         switch (data[i].level) {
@@ -263,15 +263,15 @@
                             txt.text(txt.text().substr(0, 100)).append("...");
                         }
                     }
-                } else {
+                }/* else {
                     flag = true;
-                }
-            },
-            complete: function () {
-                if (flag == true) {
-                    ajaxKey = false;
-                }
+                }*/
             }
+//            complete: function () {
+//                if (flag == true) {
+//                    ajaxKey = false;
+//                }
+//            }
         })
     }
 

@@ -200,14 +200,15 @@ public class MasterCategoryController {
     @RequestMapping("/getClassifyData.do")
     public Set getDataByClassify(HttpServletRequest request) throws Exception {
         String qm = request.getParameter("qm");
-        String pageIndex = request.getParameter("pageEntity.index");
-        String pageSize = request.getParameter("pageEntity.size");
-        PageEntity pageEntity = new PageEntity();
-        if (pageIndex != null) {
-            pageEntity.setIndex(Integer.parseInt(pageIndex));
-            pageEntity.setSize(Integer.parseInt(pageSize));
-        }
+//        String pageIndex = request.getParameter("pageEntity.index");
+//        String pageSize = request.getParameter("pageEntity.size");
+//        PageEntity pageEntity = new PageEntity();
+//        if (pageIndex != null) {
+//            pageEntity.setIndex(Integer.parseInt(pageIndex));
+//            pageEntity.setSize(Integer.parseInt(pageSize));
+//        }
         Set<Master> masterSet = new TreeSet<Master>();
+        List<Master> setList;
         if ("plistMaster_all".equals(qm)) {
             XQuery xQuery = new XQuery("listProjectCategory_default", request);
             List<ProjectCategory> categoryList = baseManager.listObject(xQuery);
@@ -217,21 +218,12 @@ public class MasterCategoryController {
                     xQuery1.put("projectCategory_id", category.getId());
                     List<Project> projects = baseManager.listObject(xQuery1);
                     if (projects != null && !projects.isEmpty()) {
-//                        for (Project project : projects) {
-//                            XQuery query = new XQuery("listMasterProject_byProject", request);
-//                            query.put("project_id", project.getId());
-//                            List<MasterProject> masterProjects = baseManager.listObject(query);
-//                            if (masterProjects != null && !masterProjects.isEmpty()) {
-//                                for (MasterProject masterProject : masterProjects) {
-//                                    Master master = masterProject.getMaster();
-//                                    master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-////                AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(),master.getOriginProvince().getId());
-////                master.setCityName(province.getName());
-//                                    masterSet.add(masterProject.getMaster());
-//                                }
-//                            }
-//                        }
-                        masterSet = putMaster(request,projects);
+                        setList = putMasterList(request,projects);
+                        if (!setList.isEmpty()){
+                            for (Master master : setList){
+                                masterSet.add(master);
+                            }
+                        }
                     }
                 }
             }
@@ -242,61 +234,55 @@ public class MasterCategoryController {
             xQuery.put("projectCategory_id", categoryId);
             List<Project> projectList = baseManager.listObject(xQuery);
             if (projectList != null && !projectList.isEmpty()) {
-//                for (Project project : projectList) {
-//                    XQuery query = new XQuery("listMasterProject_byProject", request);
-//                    query.put("project_id", project.getId());
-//                    List<MasterProject> masterProjects = baseManager.listObject(query);
-//                    if (masterProjects != null && !masterProjects.isEmpty()) {
-//                        for (MasterProject masterProject : masterProjects) {
-//                            Master master = masterProject.getMaster();
-//                            master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-////                AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(),master.getOriginProvince().getId());
-////                master.setCityName(province.getName());
-//                            masterSet.add(masterProject.getMaster());
-//                        }
-//                    }
-//                }
-                masterSet = putMaster(request,projectList);
+                setList = putMasterList(request,projectList);
+                masterSet = pushSet(setList);
             }
         } else if ("plistMaster_byLevel".equals(qm)) {
-            String conditions = request.getParameter("conditions");
-            String level = conditions.split(":")[1].substring(0, conditions.split(":")[1].length() - 1);
-            XQuery xQuery = new XQuery(qm, request);
-            xQuery.put("level", level);
-            xQuery.setPageEntity(pageEntity);
-            PageInfo pageInfo = baseManager.listPageInfo(xQuery);
-            List<Master> masters = pageInfo.getList();
-            if (masters != null && masters.size() > 0) {
-                for (Master master : masters) {
-                    master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-//                    AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(),master.getOriginProvince().getId());
-//                    master.setCityName(province.getName());
-                    masterSet.add(master);
-                }
-            }
+//            String conditions = request.getParameter("conditions");
+//            String level = conditions.split(":")[1].substring(0, conditions.split(":")[1].length() - 1);
+//            XQuery xQuery = new XQuery(qm, request);
+//            xQuery.put("level", level);
+//            xQuery.setPageEntity(pageEntity);
+//            PageInfo pageInfo = baseManager.listPageInfo(xQuery);
+//            List<Master> masters = pageInfo.getList();
+//            if (masters != null && masters.size() > 0) {
+//                for (Master master : masters) {
+//                    master.setProjectName(mainMasterProject(master.getMasterProjectList()));
+////                    AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(),master.getOriginProvince().getId());
+////                    master.setCityName(province.getName());
+//                    masterSet.add(master);
+//                }
+//            }
         } else if ("plistMaster_byCity".equals(qm)) {
-            String conditions = request.getParameter("conditions");
-            String cityId = conditions.split(":")[1].substring(0, conditions.split(":")[1].length() - 1);
-            XQuery xQuery = new XQuery(qm, request);
-            xQuery.put("originProvince_id", cityId);
-            xQuery.setPageEntity(pageEntity);
-            PageInfo pageInfo = baseManager.listPageInfo(xQuery);
-            List<Master> masters = pageInfo.getList();
-            if (masters != null && masters.size() > 0) {
-                for (Master master : masters) {
-                    master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-//                    AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(),master.getOriginProvince().getId());
-//                    master.setCityName(province.getName());
-                    masterSet.add(master);
-                }
-            }
+//            String conditions = request.getParameter("conditions");
+//            String cityId = conditions.split(":")[1].substring(0, conditions.split(":")[1].length() - 1);
+//            XQuery xQuery = new XQuery(qm, request);
+//            xQuery.put("originProvince_id", cityId);
+//            xQuery.setPageEntity(pageEntity);
+//            PageInfo pageInfo = baseManager.listPageInfo(xQuery);
+//            List<Master> masters = pageInfo.getList();
+//            if (masters != null && masters.size() > 0) {
+//                for (Master master : masters) {
+//                    master.setProjectName(mainMasterProject(master.getMasterProjectList()));
+////                    AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(),master.getOriginProvince().getId());
+////                    master.setCityName(province.getName());
+//                    masterSet.add(master);
+//                }
+//            }
         }
         return masterSet;
     }
 
+    public Set<Master> pushSet(List<Master> masterList){
+        Set<Master> setList = new HashSet<>();
+        for (Master master : masterList){
+            setList.add(master);
+        }
+        return setList;
+    }
 
-    public Set<Master> putMaster(HttpServletRequest request, List<Project> projects) throws Exception {
-        Set<Master> masterSet = new HashSet<>();
+    public List<Master> putMasterList(HttpServletRequest request, List<Project> projects) throws Exception {
+        List<Master> masterSet = new ArrayList<>();
         if (projects != null && !projects.isEmpty()) {
             for (Project project : projects) {
                 XQuery query = new XQuery("listMasterProject_byProject", request);
@@ -319,6 +305,32 @@ public class MasterCategoryController {
         }
         return masterSet;
     }
+
+
+//    public Set<Master> putMaster(HttpServletRequest request, List<Project> projects) throws Exception {
+//        Set<Master> masterSet = new HashSet<>();
+//        if (projects != null && !projects.isEmpty()) {
+//            for (Project project : projects) {
+//                XQuery query = new XQuery("listMasterProject_byProject", request);
+//                query.put("project_id", project.getId());
+//                List<MasterProject> masterProjects = baseManager.listObject(query);
+//                if (masterProjects != null && !masterProjects.isEmpty()) {
+//                    for (MasterProject masterProject : masterProjects) {
+//                        Master master = masterProject.getMaster();
+//                        master.setProjectName(mainMasterProject(master.getMasterProjectList()));
+//                        if (master.getOriginProvince() != null && master.getOriginProvince().getId() != null){
+//                            AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), master.getOriginProvince().getId());
+//                            master.setCityName(province.getName());
+//                        }else{
+//                            master.setCityName("");
+//                        }
+//                        masterSet.add(masterProject.getMaster());
+//                    }
+//                }
+//            }
+//        }
+//        return masterSet;
+//    }
 
 //    public MasterModel convert(Master master) {
 //
