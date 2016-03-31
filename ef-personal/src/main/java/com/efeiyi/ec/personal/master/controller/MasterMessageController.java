@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -37,6 +38,29 @@ public class MasterMessageController {
 
     @Autowired
     private BaseManager baseManager;
+
+    @RequestMapping("/home.do")
+    public ModelAndView getTenant(HttpServletRequest request  , Model model)throws Exception{
+        Master master = getMasterfromDomain(request);
+        if (master==null){
+            return new ModelAndView("redirect:/masterMessage/index.do");
+        }
+        model.addAttribute("object",master);
+        return new ModelAndView("/masterMessage/masterDetails");
+    }
+
+    public Master getMasterfromDomain(HttpServletRequest request)throws Exception{
+        Master masterTemp = null;
+        String subDommainName = (String)request.getAttribute("domainName");
+        if(!"master".equalsIgnoreCase(subDommainName)){
+            LinkedHashMap<String,Object> map = new LinkedHashMap<>();
+            String queryHql ="from Master t where t.name=:name and t.status=:status";
+            map.put("name",subDommainName);
+            map.put("status","1");
+            masterTemp =(Master) baseManager.getUniqueObjectByConditions(queryHql,map);
+        }
+        return masterTemp;
+    }
 
     @RequestMapping("/index.do")
     public String mainPage(HttpServletRequest request, Model model) throws Exception {

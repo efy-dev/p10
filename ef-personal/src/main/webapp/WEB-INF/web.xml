@@ -96,6 +96,6 @@
     </filter-mapping>
 
     <welcome-file-list>
-        <welcome-file>/masterMessage/index.do</welcome-file>
+        <welcome-file>/masterMessage/home.do</welcome-file>
     </welcome-file-list>
 </web-app>
