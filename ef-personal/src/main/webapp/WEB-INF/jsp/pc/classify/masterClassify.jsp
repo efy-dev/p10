@@ -237,8 +237,8 @@
                         }
                         var box = "<li><div class=\"pc-dy-txt ae master-list\">" +
                                 "  <div class=\"pc-dy-pic \">" +
-                                "  <div class=\"pc-d-pic\"><a href=\"<c:url value='/masterMessage/masterDetails/'/>" +
-                                data[i].id + "\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/" + data[i].favicon + "\"></a></div>" +
+                                "  <div class=\"pc-d-pic\"><a href=\"http://"+data[i].name+".efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}/masterMessage/masterDetails/"+data[i].id+"\">" +
+                                "<img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/" + data[i].favicon + "\"></a></div>" +
                                 "</div><div class=\"pc-dy-box \">" +
                                 "<h6>" + data[i].fullName + "<span>";
                         var cityName;
@@ -250,7 +250,7 @@
                         box += cityName + "</span></h6><p><span>" + levelName + "</span></p>";
                         var contentDate = data[i].content;
                         if (contentDate != null && contentDate != "") {
-                            box += "<div id='"+data[i].id+"' class='txt5'><a href=\"<c:url value='/masterMessage/masterDetails/'/>"+data[i].id+"\">" + contentDate + "</a></div><div class='ae'><a href=\"<c:url value='/masterMessage/masterDetails/'/>"+data[i].id+"\" style='float: right;font-size:14px;'>更多</a></div>";
+                            box += "<div id='"+data[i].id+"' class='txt5'><a href=\"http://"+data[i].name+".efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}/masterMessage/masterDetails/"+data[i].id+"\">" + contentDate + "</a></div><div class='ae'><a href=\"<c:url value='/masterMessage/masterDetails/'/>"+data[i].id+"\" style='float: right;font-size:14px;'>更多</a></div>";
                         }
                         box += "</div></div></li>";
                         pubu.append(box);
