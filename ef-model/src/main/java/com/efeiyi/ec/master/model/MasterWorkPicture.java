@@ -17,6 +17,7 @@ public class MasterWorkPicture {
     private String pictureUrl;
     private String status;
     private MasterWork masterWork;
+    private Integer sort;//排序
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -57,6 +58,15 @@ public class MasterWorkPicture {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "sort")
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     @Override
