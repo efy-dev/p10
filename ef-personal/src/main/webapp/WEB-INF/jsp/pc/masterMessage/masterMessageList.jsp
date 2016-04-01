@@ -30,7 +30,7 @@
 <div class="hd" style="width: 1000px;">
     <div class="nav-bars ae">
         <ul class="bars">
-            <li class="active"><a href="<c:url value='/masterMessage/index.do'/>">推&nbsp;荐</a></li>
+            <li class="active"><a href="http://master.efeiyi.com">推&nbsp;荐</a></li>
             <%--<li class="active"><a href="#">动&nbsp;态</a></li>--%>
             <%--<c:if test="${result == 'show'}">--%>
             <%--<li><a href="<c:url value='/masterMessage/forwardUrl'/>">关注</a></li>--%>
@@ -38,7 +38,7 @@
             <%--<c:if test="${result == 'hide'}">--%>
             <%--<li><a href="<c:url value='/masterMessage/getFollowBeforeList'/>">关注</a></li>--%>
             <%--</c:if>--%>
-            <li><a href="<c:url value='/masterMessage/classify'/>">发&nbsp;现</a></li>
+            <li><a href="http://master.efeiyi.com/masterMessage/classify">发&nbsp;现</a></li>
         </ul>
     </div>
 </div>
@@ -57,13 +57,8 @@
                                         <c:forEach items="${pc.value}" var="master" varStatus="status">
                                             <li>
                                                 <div class="commodity-img">
-                                                    <a href="<c:url value='/masterMessage/masterDetails/${master.id}'/>"><img
-                                                            src="http://tenant.efeiyi.com/${master.favicon}"></a>
-                                                    <a href="#">
-                                                        <div class="list-moods">
-                                                            <i class="img-icon"></i>
-                                                            <%--<em>${master.fullName}</em>--%>
-                                                        </div>
+                                                    <a href="http://${master.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}"><img
+                                                            src="http://tenant.efeiyi.com/${master.favicon}">
                                                     </a>
                                                 </div>
                                                 <div class="commodity-txt">
@@ -100,7 +95,7 @@
     </div>
 </div>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $("#pages").html("最新最全的非物质文化遗产信息查询展示平台");
     })
 </script>
@@ -132,403 +127,403 @@
 <%--</div>--%>
 <%--</div>--%>
 <%--<script>--%>
-    <%--//存储开始请求数据条数的位置--%>
-    <%--var StartMessageNum = 1;--%>
-    <%--var StartMasterNum = 1;--%>
-    <%--var StartRecommendNum = 1;--%>
-    <%--var ajaxKey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关--%>
-    <%--$(document).ready(function () {--%>
-        <%--$("#pages").html("大师动态 - e飞蚁");--%>
-        <%--getData("<c:url value='/masterMessage/mainData/plistMasterMessage_default/0/4/'/>");--%>
-        <%--getData2("<c:url value='/masterMessage/subMaster/plistMaster_default/6/'/>");--%>
-        <%--getData3("<c:url value='/masterMessage/hotMaster/plistMasterRecommend_group/6/'/>");--%>
-    <%--});--%>
+<%--//存储开始请求数据条数的位置--%>
+<%--var StartMessageNum = 1;--%>
+<%--var StartMasterNum = 1;--%>
+<%--var StartRecommendNum = 1;--%>
+<%--var ajaxKey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关--%>
+<%--$(document).ready(function () {--%>
+<%--$("#pages").html("大师动态 - e飞蚁");--%>
+<%--getData("<c:url value='/masterMessage/mainData/plistMasterMessage_default/0/4/'/>");--%>
+<%--getData2("<c:url value='/masterMessage/subMaster/plistMaster_default/6/'/>");--%>
+<%--getData3("<c:url value='/masterMessage/hotMaster/plistMasterRecommend_group/6/'/>");--%>
+<%--});--%>
 
-    <%--$(window).load(function () {--%>
-        <%--var winH = $(window).height(); //页面可视区域高度--%>
-        <%--$(window).scroll(function () {--%>
-            <%--var pageH = $(document).height();--%>
-            <%--var scrollT = $(window).scrollTop(); //滚动条top--%>
-            <%--var aa = (pageH - winH - scrollT) / winH;--%>
-            <%--if (aa < 0.02) {--%>
-                <%--if (ajaxKey) {--%>
-                    <%--getData("<c:url value='/masterMessage/mainData/plistMasterMessage_default/0/4/'/>");--%>
-                <%--}--%>
-            <%--}--%>
-        <%--});--%>
-    <%--});--%>
-    <%--function transdate(endTime) {--%>
-        <%--var timestamp = Date.parse(new Date());--%>
-        <%--var oldTime = parseInt(endTime);--%>
-        <%--var intervalTime = (timestamp - oldTime) / 1000 / 60;--%>
-        <%--var showTime = "";--%>
-        <%--if (intervalTime <= 59) {--%>
-            <%--showTime = intervalTime.toFixed(0) + "分钟前";--%>
-        <%--} else if (1 <= (intervalTime / 60) && (intervalTime / 60) < 24) {--%>
-            <%--showTime = (intervalTime / 60).toFixed(0) + "小时前";--%>
-        <%--} else if (1 <= (intervalTime / 60 / 24) && (intervalTime / 60 / 24) <= 30) {--%>
-            <%--showTime = (intervalTime / 60 / 24).toFixed(0) + "天前";--%>
-        <%--} else {--%>
-            <%--showTime = new Date(oldTime).toLocaleString().replace(/:\d{1,2}$/, ' ');--%>
-        <%--}--%>
-        <%--return showTime;--%>
-    <%--}--%>
-    <%--function getData(url) {--%>
-        <%--var flag = false;--%>
-        <%--$.ajax({--%>
-            <%--type: "get",//设置get请求方式--%>
-            <%--url: url + StartMessageNum,//设置请求的脚本地址--%>
-            <%--data: "",//设置请求的数据--%>
-            <%--dataType: "json",//设置请求返回的数据格式--%>
-            <%--success: function (data) {--%>
-                <%--StartMessageNum = StartMessageNum + 1;--%>
-                <%--var pubu = $("#pubu");--%>
-                <%--console.log(data);--%>
-                <%--if (data != null && data.length > 0) {--%>
-                    <%--for (var i in data) {--%>
-                        <%--var cTime = transdate(data[i].createDateTime);--%>
-                        <%--var levelName = "";--%>
-                        <%--if (data[i].level == "1") {--%>
-                            <%--levelName = "国际级";--%>
-                        <%--} else if (data[i].level == "2") {--%>
-                            <%--levelName = "国家级";--%>
-                        <%--} else if (data[i].level == "3") {--%>
-                            <%--levelName = "省级";--%>
-                        <%--} else if (data[i].level == "4") {--%>
-                            <%--levelName = "市级";--%>
-                        <%--} else if (data[i].level == "5") {--%>
-                            <%--levelName = "县级";--%>
-                        <%--}--%>
+<%--$(window).load(function () {--%>
+<%--var winH = $(window).height(); //页面可视区域高度--%>
+<%--$(window).scroll(function () {--%>
+<%--var pageH = $(document).height();--%>
+<%--var scrollT = $(window).scrollTop(); //滚动条top--%>
+<%--var aa = (pageH - winH - scrollT) / winH;--%>
+<%--if (aa < 0.02) {--%>
+<%--if (ajaxKey) {--%>
+<%--getData("<c:url value='/masterMessage/mainData/plistMasterMessage_default/0/4/'/>");--%>
+<%--}--%>
+<%--}--%>
+<%--});--%>
+<%--});--%>
+<%--function transdate(endTime) {--%>
+<%--var timestamp = Date.parse(new Date());--%>
+<%--var oldTime = parseInt(endTime);--%>
+<%--var intervalTime = (timestamp - oldTime) / 1000 / 60;--%>
+<%--var showTime = "";--%>
+<%--if (intervalTime <= 59) {--%>
+<%--showTime = intervalTime.toFixed(0) + "分钟前";--%>
+<%--} else if (1 <= (intervalTime / 60) && (intervalTime / 60) < 24) {--%>
+<%--showTime = (intervalTime / 60).toFixed(0) + "小时前";--%>
+<%--} else if (1 <= (intervalTime / 60 / 24) && (intervalTime / 60 / 24) <= 30) {--%>
+<%--showTime = (intervalTime / 60 / 24).toFixed(0) + "天前";--%>
+<%--} else {--%>
+<%--showTime = new Date(oldTime).toLocaleString().replace(/:\d{1,2}$/, ' ');--%>
+<%--}--%>
+<%--return showTime;--%>
+<%--}--%>
+<%--function getData(url) {--%>
+<%--var flag = false;--%>
+<%--$.ajax({--%>
+<%--type: "get",//设置get请求方式--%>
+<%--url: url + StartMessageNum,//设置请求的脚本地址--%>
+<%--data: "",//设置请求的数据--%>
+<%--dataType: "json",//设置请求返回的数据格式--%>
+<%--success: function (data) {--%>
+<%--StartMessageNum = StartMessageNum + 1;--%>
+<%--var pubu = $("#pubu");--%>
+<%--console.log(data);--%>
+<%--if (data != null && data.length > 0) {--%>
+<%--for (var i in data) {--%>
+<%--var cTime = transdate(data[i].createDateTime);--%>
+<%--var levelName = "";--%>
+<%--if (data[i].level == "1") {--%>
+<%--levelName = "国际级";--%>
+<%--} else if (data[i].level == "2") {--%>
+<%--levelName = "国家级";--%>
+<%--} else if (data[i].level == "3") {--%>
+<%--levelName = "省级";--%>
+<%--} else if (data[i].level == "4") {--%>
+<%--levelName = "市级";--%>
+<%--} else if (data[i].level == "5") {--%>
+<%--levelName = "县级";--%>
+<%--}--%>
 
-                        <%--if (data[i].projectName != null) {--%>
-                            <%--var projectName = "<p>" + data[i].projectName + "</p>";--%>
-                        <%--} else {--%>
-                            <%--var projectName = "";--%>
-                        <%--}--%>
-                        <%--var sub = "<li>" +--%>
-                                <%--"                    <div class=\"pc-dy-txt ae\">" +--%>
-                                <%--"                        <div class=\"pc-dy-pic \">" +--%>
-                                <%--"                            <div class=\"pc-d-pic\"><a href=\"<c:url value='/masterMessage/masterView/'/>" + data[i].masterId + "\"><img  class=\"am-circle\"  src=\"http://tenant.efeiyi.com/" + data[i].favicon + "@!tenant-mobile-view-icon\"></a></div>" +--%>
-                                <%--"                            <div class=\"pc-gz gz-pc\">" +--%>
-                                <%--"                                <div class=\"bt-gz act-1\">" +--%>
-                                <%--"                                    <a class=\"btn-guan\" name=\"masterFollow" + data[i].masterId + "\" onclick=\"followMaster('" + data[i].masterId + "');\">" +--%>
-                                <%--"                                        <div class=\"gz-q\">";--%>
-                        <%--if (data[i].followStatus == "已关注") {--%>
-                            <%--sub += "<i class=\"gz-icon\" style='display: none'></i>";--%>
-                        <%--} else {--%>
-                            <%--sub += "<i class=\"gz-icon\"></i>";--%>
-                        <%--}--%>
-                        <%--sub += "                                      <em>" + data[i].followStatus + "</em>" +--%>
-                                <%--"                                        </div>" +--%>
-                                <%--"                                    </a>" +--%>
-                                <%--"                                </div>" +--%>
-                                <%--"                            </div>" +--%>
-                                <%--"                        </div>" +--%>
-                                <%--"                        <div class=\"pc-dy-box\">" +--%>
-                                <%--"                            <h5><a href=\"<c:url value='/masterMessage/masterView/'/>" + data[i].masterId + "\">" + data[i].masterName + "</a></h5>" +--%>
-                                <%--"                            <p>" + projectName + "</p>" +--%>
-                                <%--"                            <p>" + levelName + "非遗传承人</p>" +--%>
-                                <%--"                            <div class=\"pc-dy-content\">" +--%>
-                                <%--"                                <a href=\"<c:url value='/masterMessage/getMessageView/'/>" + data[i].id + "\"><p>" + data[i].remark + "</p></a>";--%>
-                        <%--var attr = data[i].messageAttachmentLists;--%>
-                        <%--if (attr != null && attr.length == 1) {--%>
-                            <%--sub += "<div class=\"one-pic\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>" + data[i].id + "\"><img src=\"http://tenant.efeiyi.com/" + attr.pictureUrl + "@!master-message-little-more\"></a></div>";--%>
-                        <%--} else if (attr != null && attr.length > 1) {--%>
-                            <%--if (attr.length < 5) {--%>
-                                <%--sub += "<div class=\"two-pic w-active\"><ul class=\"sudoku\">";--%>
-                            <%--} else {--%>
-                                <%--sub += "<div class=\"two-pic\"><ul class=\"sudoku\">";--%>
-                            <%--}--%>
-                            <%--for (var j in attr) {--%>
-                                <%--sub += "<li><a href=\"<c:url value='/masterMessage/getMessageView/'/>" + data[i].id + "\"><img src=\"http://tenant.efeiyi.com/" + attr[j].pictureUrl + "@!master-message-little-more\"></a></li>";--%>
-                            <%--}--%>
-                            <%--sub += "</ul></div>";--%>
-                        <%--}--%>
-                        <%--sub += "                                <div class=\"one-tiem\"><span>" + cTime + "</span><span>来自&nbsp;" + data[i].dataSource + "</span></div>" +--%>
-                                <%--"                            </div>" +--%>
-                                <%--"                        </div>" +--%>
-                                <%--"                    </div>" +--%>
-                                <%--"                    <div class=\"one-state\">" +--%>
-                                <%--"                        <ul class=\"state\" >" +--%>
-                                <%--"                            <li>" +--%>
-                                <%--"                                <a onclick=\"praiseMessage(this,'" + data[i].id + "');\">" +--%>
-                                <%--"                                    <span class=\"pos\">" +--%>
-                                <%--"                                        <span class=\"line noline\">" +--%>
-                                <%--"                                            <i class=\"dnc-icon zq\"></i>" +--%>
-                                <%--"                                            <em>赞" + data[i].praiseNum + "</em>" +--%>
-                                <%--"                                        </span>" +--%>
-                                <%--"                                    </span>" +--%>
-                                <%--"                                </a>" +--%>
-                                <%--"                            </li>" +--%>
-                                <%--"                            <li>" +--%>
-                                <%--"                                <a href=\"<c:url value='/masterMessage/getMessageView/'/>" + data[i].id + "\">" +--%>
-                                <%--"                                    <span class=\"pos\">" +--%>
-                                <%--"                                        <span class=\"line\">" +--%>
-                                <%--"                                            <i class=\"dnc-icon-2 zq\"></i>" +--%>
-                                <%--"                                            <em>评论" + data[i].amount + "</em>" +--%>
-                                <%--"                                        </span>" +--%>
-                                <%--"                                    </span>" +--%>
-                                <%--"                                </a>" +--%>
-                                <%--"                            </li>" +--%>
-                                <%--"                            <li>" +--%>
-                                <%--"                                <a name='store" + data[i].id + "' onclick=\"storeMessage(this,'" + data[i].id + "');\">" +--%>
-                                <%--"                                    <span class=\"pos\">" +--%>
-                                <%--"                                        <span class=\"line\">" +--%>
-                                <%--"                                            <i class=\"dnc-icon-3 zq\"></i>" +--%>
-                                <%--"                                            <em>" + data[i].storeStatus + "</em>" +--%>
-                                <%--"                                        </span>" +--%>
-                                <%--"                                    </span>" +--%>
-                                <%--"                                </a>" +--%>
-                                <%--"                            </li>" +--%>
-                                <%--"                            <li style=\"position: relative\">" +--%>
-                                <%--"                                <a onclick=\"showJiathis(this);\">" +--%>
-                                <%--"                                    <span class=\"pos\">" +--%>
-                                <%--"                                        <span class=\"line\">" +--%>
-                                <%--"                                            <i class=\"dnc-icon-4 zq\"></i>" +--%>
-                                <%--"                                            <em>分享</em>" +--%>
-                                <%--"                                        </span>" +--%>
-                                <%--"                                    </span>" +--%>
-                                <%--"                                </a>" +--%>
-                                <%--"                                <div style='display: none;' class=\"nr-share\">" +--%>
-                                <%--"                                    <div class=\"nr-bg\">" +--%>
-                                <%--"                                        <div class=\"jiathis_style\">" +--%>
-                                <%--"                                            <a class=\"jiathis_button_weixin\"></a>" +--%>
-                                <%--"                                            <a class=\"jiathis_button_tqq\"></a>" +--%>
-                                <%--"                                            <a class=\"jiathis_button_tsina\"></a>" +--%>
-                                <%--"                                            <a class=\"jiathis_button_cqq\"></a>" +--%>
-                                <%--"                                        </div>" +--%>
-                                <%--"                                    </div>" +--%>
-                                <%--"                                </div><script type=\"text/javascript\" src=\"http://v3.jiathis.com/code/jia.js\" charset=\"utf-8\"/>" +--%>
-                                <%--"                            </li>" +--%>
-                                <%--"                        </ul>" +--%>
-                                <%--"                    </div>" +--%>
-                                <%--"                </li>";--%>
-                        <%--pubu.append(sub);--%>
-                    <%--}--%>
-                <%--} else {--%>
-                    <%--flag = true;--%>
-                <%--}--%>
-            <%--},--%>
-            <%--complete: function () {--%>
-                <%--$("#loding").hide();--%>
-                <%--if (flag == true) {--%>
-                    <%--ajaxKey = false;--%>
-                <%--}--%>
-            <%--}, beforeSend: function () {--%>
-                <%--$("#loding").show();--%>
-            <%--}--%>
-        <%--})--%>
-    <%--}--%>
-    <%--function showJiathis(o) {--%>
-        <%--var next = $(o).parent().find(".nr-share");--%>
-        <%--if ($(next).is(":hidden")) {--%>
+<%--if (data[i].projectName != null) {--%>
+<%--var projectName = "<p>" + data[i].projectName + "</p>";--%>
+<%--} else {--%>
+<%--var projectName = "";--%>
+<%--}--%>
+<%--var sub = "<li>" +--%>
+<%--"                    <div class=\"pc-dy-txt ae\">" +--%>
+<%--"                        <div class=\"pc-dy-pic \">" +--%>
+<%--"                            <div class=\"pc-d-pic\"><a href=\"<c:url value='/masterMessage/masterView/'/>" + data[i].masterId + "\"><img  class=\"am-circle\"  src=\"http://tenant.efeiyi.com/" + data[i].favicon + "@!tenant-mobile-view-icon\"></a></div>" +--%>
+<%--"                            <div class=\"pc-gz gz-pc\">" +--%>
+<%--"                                <div class=\"bt-gz act-1\">" +--%>
+<%--"                                    <a class=\"btn-guan\" name=\"masterFollow" + data[i].masterId + "\" onclick=\"followMaster('" + data[i].masterId + "');\">" +--%>
+<%--"                                        <div class=\"gz-q\">";--%>
+<%--if (data[i].followStatus == "已关注") {--%>
+<%--sub += "<i class=\"gz-icon\" style='display: none'></i>";--%>
+<%--} else {--%>
+<%--sub += "<i class=\"gz-icon\"></i>";--%>
+<%--}--%>
+<%--sub += "                                      <em>" + data[i].followStatus + "</em>" +--%>
+<%--"                                        </div>" +--%>
+<%--"                                    </a>" +--%>
+<%--"                                </div>" +--%>
+<%--"                            </div>" +--%>
+<%--"                        </div>" +--%>
+<%--"                        <div class=\"pc-dy-box\">" +--%>
+<%--"                            <h5><a href=\"<c:url value='/masterMessage/masterView/'/>" + data[i].masterId + "\">" + data[i].masterName + "</a></h5>" +--%>
+<%--"                            <p>" + projectName + "</p>" +--%>
+<%--"                            <p>" + levelName + "非遗传承人</p>" +--%>
+<%--"                            <div class=\"pc-dy-content\">" +--%>
+<%--"                                <a href=\"<c:url value='/masterMessage/getMessageView/'/>" + data[i].id + "\"><p>" + data[i].remark + "</p></a>";--%>
+<%--var attr = data[i].messageAttachmentLists;--%>
+<%--if (attr != null && attr.length == 1) {--%>
+<%--sub += "<div class=\"one-pic\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>" + data[i].id + "\"><img src=\"http://tenant.efeiyi.com/" + attr.pictureUrl + "@!master-message-little-more\"></a></div>";--%>
+<%--} else if (attr != null && attr.length > 1) {--%>
+<%--if (attr.length < 5) {--%>
+<%--sub += "<div class=\"two-pic w-active\"><ul class=\"sudoku\">";--%>
+<%--} else {--%>
+<%--sub += "<div class=\"two-pic\"><ul class=\"sudoku\">";--%>
+<%--}--%>
+<%--for (var j in attr) {--%>
+<%--sub += "<li><a href=\"<c:url value='/masterMessage/getMessageView/'/>" + data[i].id + "\"><img src=\"http://tenant.efeiyi.com/" + attr[j].pictureUrl + "@!master-message-little-more\"></a></li>";--%>
+<%--}--%>
+<%--sub += "</ul></div>";--%>
+<%--}--%>
+<%--sub += "                                <div class=\"one-tiem\"><span>" + cTime + "</span><span>来自&nbsp;" + data[i].dataSource + "</span></div>" +--%>
+<%--"                            </div>" +--%>
+<%--"                        </div>" +--%>
+<%--"                    </div>" +--%>
+<%--"                    <div class=\"one-state\">" +--%>
+<%--"                        <ul class=\"state\" >" +--%>
+<%--"                            <li>" +--%>
+<%--"                                <a onclick=\"praiseMessage(this,'" + data[i].id + "');\">" +--%>
+<%--"                                    <span class=\"pos\">" +--%>
+<%--"                                        <span class=\"line noline\">" +--%>
+<%--"                                            <i class=\"dnc-icon zq\"></i>" +--%>
+<%--"                                            <em>赞" + data[i].praiseNum + "</em>" +--%>
+<%--"                                        </span>" +--%>
+<%--"                                    </span>" +--%>
+<%--"                                </a>" +--%>
+<%--"                            </li>" +--%>
+<%--"                            <li>" +--%>
+<%--"                                <a href=\"<c:url value='/masterMessage/getMessageView/'/>" + data[i].id + "\">" +--%>
+<%--"                                    <span class=\"pos\">" +--%>
+<%--"                                        <span class=\"line\">" +--%>
+<%--"                                            <i class=\"dnc-icon-2 zq\"></i>" +--%>
+<%--"                                            <em>评论" + data[i].amount + "</em>" +--%>
+<%--"                                        </span>" +--%>
+<%--"                                    </span>" +--%>
+<%--"                                </a>" +--%>
+<%--"                            </li>" +--%>
+<%--"                            <li>" +--%>
+<%--"                                <a name='store" + data[i].id + "' onclick=\"storeMessage(this,'" + data[i].id + "');\">" +--%>
+<%--"                                    <span class=\"pos\">" +--%>
+<%--"                                        <span class=\"line\">" +--%>
+<%--"                                            <i class=\"dnc-icon-3 zq\"></i>" +--%>
+<%--"                                            <em>" + data[i].storeStatus + "</em>" +--%>
+<%--"                                        </span>" +--%>
+<%--"                                    </span>" +--%>
+<%--"                                </a>" +--%>
+<%--"                            </li>" +--%>
+<%--"                            <li style=\"position: relative\">" +--%>
+<%--"                                <a onclick=\"showJiathis(this);\">" +--%>
+<%--"                                    <span class=\"pos\">" +--%>
+<%--"                                        <span class=\"line\">" +--%>
+<%--"                                            <i class=\"dnc-icon-4 zq\"></i>" +--%>
+<%--"                                            <em>分享</em>" +--%>
+<%--"                                        </span>" +--%>
+<%--"                                    </span>" +--%>
+<%--"                                </a>" +--%>
+<%--"                                <div style='display: none;' class=\"nr-share\">" +--%>
+<%--"                                    <div class=\"nr-bg\">" +--%>
+<%--"                                        <div class=\"jiathis_style\">" +--%>
+<%--"                                            <a class=\"jiathis_button_weixin\"></a>" +--%>
+<%--"                                            <a class=\"jiathis_button_tqq\"></a>" +--%>
+<%--"                                            <a class=\"jiathis_button_tsina\"></a>" +--%>
+<%--"                                            <a class=\"jiathis_button_cqq\"></a>" +--%>
+<%--"                                        </div>" +--%>
+<%--"                                    </div>" +--%>
+<%--"                                </div><script type=\"text/javascript\" src=\"http://v3.jiathis.com/code/jia.js\" charset=\"utf-8\"/>" +--%>
+<%--"                            </li>" +--%>
+<%--"                        </ul>" +--%>
+<%--"                    </div>" +--%>
+<%--"                </li>";--%>
+<%--pubu.append(sub);--%>
+<%--}--%>
+<%--} else {--%>
+<%--flag = true;--%>
+<%--}--%>
+<%--},--%>
+<%--complete: function () {--%>
+<%--$("#loding").hide();--%>
+<%--if (flag == true) {--%>
+<%--ajaxKey = false;--%>
+<%--}--%>
+<%--}, beforeSend: function () {--%>
+<%--$("#loding").show();--%>
+<%--}--%>
+<%--})--%>
+<%--}--%>
+<%--function showJiathis(o) {--%>
+<%--var next = $(o).parent().find(".nr-share");--%>
+<%--if ($(next).is(":hidden")) {--%>
 <%--//          $(next).attr("style","display:block");--%>
-            <%--$(next).show();--%>
-        <%--} else {--%>
+<%--$(next).show();--%>
+<%--} else {--%>
 <%--//          $(next).attr("style","display:none");--%>
-            <%--$(next).hide();--%>
-        <%--}--%>
-    <%--}--%>
+<%--$(next).hide();--%>
+<%--}--%>
+<%--}--%>
 
-    <%--function getData2(url) {--%>
-        <%--var flag = false;--%>
-        <%--$.ajax({--%>
-            <%--type: "get",//设置get请求方式--%>
-            <%--url: url + StartMasterNum,//设置请求的脚本地址--%>
-            <%--data: "",//设置请求的数据--%>
-            <%--async: true,--%>
-            <%--dataType: "json",//设置请求返回的数据格式--%>
-            <%--success: function (data) {--%>
-                <%--StartMasterNum = StartMasterNum + 1;--%>
-                <%--var rightUp = $("#newInsert");--%>
-                <%--if (data != null && data.length > 0) {--%>
-                    <%--for (var i in data) {--%>
-                        <%--var levelName = "";--%>
-                        <%--if (data[i].level == "1") {--%>
-                            <%--levelName = "国家级";--%>
-                        <%--} else if (data[i].level == "2") {--%>
-                            <%--levelName = "省级";--%>
-                        <%--} else if (data[i].level == "3") {--%>
-                            <%--levelName = "市级";--%>
-                        <%--} else if (data[i].level == "4") {--%>
-                            <%--levelName = "县级";--%>
-                        <%--}--%>
-                        <%--var box = "<li>" +--%>
-                                <%--"            <div class=\"text\">" +--%>
-                                <%--"              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>" + data[i].id + "\">" + data[i].masterName + "</a></p>" +--%>
-                                <%--"              <p class=\"p2\">" + data[i].projectName + "</p>" +--%>
-                                <%--"              <p class=\"p2\">" + levelName + "非遗传承人</p>" +--%>
-                                <%--"            </div>" +--%>
-                                <%--"            <div class=\"bt-gz\">" +--%>
-                                <%--"              <a class=\"btn-guan\" name=\"masterFollow" + data[i].id + "\" onclick=\"followMaster('" + data[i].id + "');\">" +--%>
-                                <%--"                <div class=\"gz-q\">";--%>
-                        <%--if (data[i].followStatus == "已关注") {--%>
-                            <%--box += "<i class=\"gz-icon\" style='display: none'></i>";--%>
-                        <%--} else {--%>
-                            <%--box += "<i class=\"gz-icon\"></i>";--%>
-                        <%--}--%>
-                        <%--box += "<em>" + data[i].followStatus + "</em>" +--%>
-                                <%--"                </div>" +--%>
-                                <%--"              </a>" +--%>
-                                <%--"            </div>" +--%>
-                                <%--"            <div class=\"img-q\">" +--%>
-                                <%--"              <a href=\"<c:url value='/masterMessage/introView/'/>" + data[i].id + "\"><img src=\"http://tenant.efeiyi.com/" + data[i].favicon + "@!tenant-mobile-tenant-list\"></a>" +--%>
-                                <%--"            </div>" +--%>
-                                <%--"          </li>";--%>
-                        <%--rightUp.append(box);--%>
-                    <%--}--%>
-                <%--} else {--%>
-                    <%--flag = true;--%>
-                <%--}--%>
-            <%--},--%>
-            <%--complete: function () {--%>
-                <%--if (flag == true) {--%>
-                    <%--ajaxkey = false;--%>
-                <%--}--%>
-            <%--}--%>
-        <%--})--%>
-    <%--}--%>
-    <%--function moreMaster() {--%>
-        <%--var url = "<c:url value='/masterMessage/subMaster/plistMaster_default/6/'/>";--%>
-        <%--getData2(url);--%>
-    <%--}--%>
+<%--function getData2(url) {--%>
+<%--var flag = false;--%>
+<%--$.ajax({--%>
+<%--type: "get",//设置get请求方式--%>
+<%--url: url + StartMasterNum,//设置请求的脚本地址--%>
+<%--data: "",//设置请求的数据--%>
+<%--async: true,--%>
+<%--dataType: "json",//设置请求返回的数据格式--%>
+<%--success: function (data) {--%>
+<%--StartMasterNum = StartMasterNum + 1;--%>
+<%--var rightUp = $("#newInsert");--%>
+<%--if (data != null && data.length > 0) {--%>
+<%--for (var i in data) {--%>
+<%--var levelName = "";--%>
+<%--if (data[i].level == "1") {--%>
+<%--levelName = "国家级";--%>
+<%--} else if (data[i].level == "2") {--%>
+<%--levelName = "省级";--%>
+<%--} else if (data[i].level == "3") {--%>
+<%--levelName = "市级";--%>
+<%--} else if (data[i].level == "4") {--%>
+<%--levelName = "县级";--%>
+<%--}--%>
+<%--var box = "<li>" +--%>
+<%--"            <div class=\"text\">" +--%>
+<%--"              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>" + data[i].id + "\">" + data[i].masterName + "</a></p>" +--%>
+<%--"              <p class=\"p2\">" + data[i].projectName + "</p>" +--%>
+<%--"              <p class=\"p2\">" + levelName + "非遗传承人</p>" +--%>
+<%--"            </div>" +--%>
+<%--"            <div class=\"bt-gz\">" +--%>
+<%--"              <a class=\"btn-guan\" name=\"masterFollow" + data[i].id + "\" onclick=\"followMaster('" + data[i].id + "');\">" +--%>
+<%--"                <div class=\"gz-q\">";--%>
+<%--if (data[i].followStatus == "已关注") {--%>
+<%--box += "<i class=\"gz-icon\" style='display: none'></i>";--%>
+<%--} else {--%>
+<%--box += "<i class=\"gz-icon\"></i>";--%>
+<%--}--%>
+<%--box += "<em>" + data[i].followStatus + "</em>" +--%>
+<%--"                </div>" +--%>
+<%--"              </a>" +--%>
+<%--"            </div>" +--%>
+<%--"            <div class=\"img-q\">" +--%>
+<%--"              <a href=\"<c:url value='/masterMessage/introView/'/>" + data[i].id + "\"><img src=\"http://tenant.efeiyi.com/" + data[i].favicon + "@!tenant-mobile-tenant-list\"></a>" +--%>
+<%--"            </div>" +--%>
+<%--"          </li>";--%>
+<%--rightUp.append(box);--%>
+<%--}--%>
+<%--} else {--%>
+<%--flag = true;--%>
+<%--}--%>
+<%--},--%>
+<%--complete: function () {--%>
+<%--if (flag == true) {--%>
+<%--ajaxkey = false;--%>
+<%--}--%>
+<%--}--%>
+<%--})--%>
+<%--}--%>
+<%--function moreMaster() {--%>
+<%--var url = "<c:url value='/masterMessage/subMaster/plistMaster_default/6/'/>";--%>
+<%--getData2(url);--%>
+<%--}--%>
 
-    <%--function getData3(url) {--%>
-        <%--var flag = false;--%>
-        <%--$.ajax({--%>
-            <%--type: "get",//设置get请求方式--%>
-            <%--url: url + StartRecommendNum,//设置请求的脚本地址--%>
-            <%--data: "",//设置请求的数据--%>
-            <%--async: true,--%>
-            <%--dataType: "json",//设置请求返回的数据格式--%>
-            <%--success: function (data) {--%>
-                <%--StartRecommendNum = StartRecommendNum + 1;--%>
-                <%--var rightDown = $("#hotMaster");--%>
-                <%--if (data != null && data.length > 0) {--%>
-                    <%--for (var i in data) {--%>
-                        <%--var levelName = "";--%>
-                        <%--if (data[i].level == "1") {--%>
-                            <%--levelName = "国家级";--%>
-                        <%--} else if (data[i].level == "2") {--%>
-                            <%--levelName = "省级";--%>
-                        <%--} else if (data[i].level == "3") {--%>
-                            <%--levelName = "市级";--%>
-                        <%--} else if (data[i].level == "4") {--%>
-                            <%--levelName = "县级";--%>
-                        <%--}--%>
-                        <%--var box = "<li>" +--%>
-                                <%--"            <div class=\"text\">" +--%>
-                                <%--"              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>" + data[i].id + "\">" + data[i].masterName + "</a></p>" +--%>
-                                <%--"              <p class=\"p2\">" + data[i].projectName + "</p>" +--%>
-                                <%--"              <p class=\"p2\">" + levelName + "非遗传承人</p>" +--%>
-                                <%--"            </div>" +--%>
-                                <%--"            <div class=\"bt-gz\">" +--%>
-                                <%--"              <a class=\"btn-guan\" name=\"masterFollow" + data[i].id + "\" onclick=\"followMaster('" + data[i].id + "');\">" +--%>
-                                <%--"                <div class=\"gz-q\">";--%>
-                        <%--if (data[i].followStatus == "已关注") {--%>
-                            <%--box += "<i class=\"gz-icon\" style='display: none'></i>";--%>
-                        <%--} else {--%>
-                            <%--box += "<i class=\"gz-icon\"></i>";--%>
-                        <%--}--%>
-                        <%--box += "<em>" + data[i].followStatus + "</em>" +--%>
-                                <%--"                </div>" +--%>
-                                <%--"              </a>" +--%>
-                                <%--"            </div>" +--%>
-                                <%--"            <div class=\"img-q\">" +--%>
-                                <%--"              <a href=\"<c:url value='/masterMessage/introView/'/>" + data[i].id + "\"><img src=\"http://tenant.efeiyi.com/" + data[i].favicon + "@!tenant-mobile-tenant-list\"></a>" +--%>
-                                <%--"            </div>" +--%>
-                                <%--"          </li>";--%>
-                        <%--rightDown.append(box);--%>
-                    <%--}--%>
-                <%--} else {--%>
-                    <%--flag = true;--%>
-                <%--}--%>
-            <%--},--%>
-            <%--complete: function () {--%>
-                <%--if (flag == true) {--%>
-                    <%--ajaxkey = false;--%>
-                <%--}--%>
-            <%--}--%>
-        <%--})--%>
-    <%--}--%>
-    <%--function moreHotMaster() {--%>
-        <%--var url = "<c:url value='/masterMessage/hotMaster/plistMasterRecommend_group/6/'/>";--%>
-        <%--getData3(url);--%>
-    <%--}--%>
+<%--function getData3(url) {--%>
+<%--var flag = false;--%>
+<%--$.ajax({--%>
+<%--type: "get",//设置get请求方式--%>
+<%--url: url + StartRecommendNum,//设置请求的脚本地址--%>
+<%--data: "",//设置请求的数据--%>
+<%--async: true,--%>
+<%--dataType: "json",//设置请求返回的数据格式--%>
+<%--success: function (data) {--%>
+<%--StartRecommendNum = StartRecommendNum + 1;--%>
+<%--var rightDown = $("#hotMaster");--%>
+<%--if (data != null && data.length > 0) {--%>
+<%--for (var i in data) {--%>
+<%--var levelName = "";--%>
+<%--if (data[i].level == "1") {--%>
+<%--levelName = "国家级";--%>
+<%--} else if (data[i].level == "2") {--%>
+<%--levelName = "省级";--%>
+<%--} else if (data[i].level == "3") {--%>
+<%--levelName = "市级";--%>
+<%--} else if (data[i].level == "4") {--%>
+<%--levelName = "县级";--%>
+<%--}--%>
+<%--var box = "<li>" +--%>
+<%--"            <div class=\"text\">" +--%>
+<%--"              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>" + data[i].id + "\">" + data[i].masterName + "</a></p>" +--%>
+<%--"              <p class=\"p2\">" + data[i].projectName + "</p>" +--%>
+<%--"              <p class=\"p2\">" + levelName + "非遗传承人</p>" +--%>
+<%--"            </div>" +--%>
+<%--"            <div class=\"bt-gz\">" +--%>
+<%--"              <a class=\"btn-guan\" name=\"masterFollow" + data[i].id + "\" onclick=\"followMaster('" + data[i].id + "');\">" +--%>
+<%--"                <div class=\"gz-q\">";--%>
+<%--if (data[i].followStatus == "已关注") {--%>
+<%--box += "<i class=\"gz-icon\" style='display: none'></i>";--%>
+<%--} else {--%>
+<%--box += "<i class=\"gz-icon\"></i>";--%>
+<%--}--%>
+<%--box += "<em>" + data[i].followStatus + "</em>" +--%>
+<%--"                </div>" +--%>
+<%--"              </a>" +--%>
+<%--"            </div>" +--%>
+<%--"            <div class=\"img-q\">" +--%>
+<%--"              <a href=\"<c:url value='/masterMessage/introView/'/>" + data[i].id + "\"><img src=\"http://tenant.efeiyi.com/" + data[i].favicon + "@!tenant-mobile-tenant-list\"></a>" +--%>
+<%--"            </div>" +--%>
+<%--"          </li>";--%>
+<%--rightDown.append(box);--%>
+<%--}--%>
+<%--} else {--%>
+<%--flag = true;--%>
+<%--}--%>
+<%--},--%>
+<%--complete: function () {--%>
+<%--if (flag == true) {--%>
+<%--ajaxkey = false;--%>
+<%--}--%>
+<%--}--%>
+<%--})--%>
+<%--}--%>
+<%--function moreHotMaster() {--%>
+<%--var url = "<c:url value='/masterMessage/hotMaster/plistMasterRecommend_group/6/'/>";--%>
+<%--getData3(url);--%>
+<%--}--%>
 
-    <%--function followMaster(masterId) {--%>
-        <%--var str;--%>
-        <%--$.ajax({--%>
-            <%--type: "post",//设置get请求方式--%>
-            <%--url: "<c:url value='/masterMessage/followMaster.do'/>",//设置请求的脚本地址--%>
-            <%--data: "masterId=" + masterId,//设置请求的数据--%>
-            <%--async: true,--%>
-            <%--dataType: "json",//设置请求返回的数据格式--%>
-            <%--success: function (data) {--%>
-                <%--if (data == "noRole") {--%>
-                    <%--alert("您还未登录,请登录后操作!");--%>
-                <%--} else if (data == "add") {--%>
-                    <%--str = "已关注";--%>
-                    <%--//$(this).find('.gz-icon').hide();--%>
-                    <%--changeFollowStatus(masterId, str);--%>
-                <%--} else if (data == "del") {--%>
-                    <%--str = "关注";--%>
-                    <%--changeFollowStatus(masterId, str);--%>
-                <%--}--%>
-            <%--}--%>
-        <%--})--%>
-    <%--}--%>
-    <%--function changeFollowStatus(masterId, str) {--%>
-        <%--$("a[name='masterFollow" + masterId + "']").each(function () {--%>
-            <%--$(this).find("em").html(str);--%>
-            <%--if (str == "关注") {--%>
-                <%--$(this).find('.gz-icon').show();--%>
-            <%--} else if (str == "已关注") {--%>
-                <%--$(this).find('.gz-icon').hide();--%>
-            <%--}--%>
-        <%--})--%>
-    <%--}--%>
+<%--function followMaster(masterId) {--%>
+<%--var str;--%>
+<%--$.ajax({--%>
+<%--type: "post",//设置get请求方式--%>
+<%--url: "<c:url value='/masterMessage/followMaster.do'/>",//设置请求的脚本地址--%>
+<%--data: "masterId=" + masterId,//设置请求的数据--%>
+<%--async: true,--%>
+<%--dataType: "json",//设置请求返回的数据格式--%>
+<%--success: function (data) {--%>
+<%--if (data == "noRole") {--%>
+<%--alert("您还未登录,请登录后操作!");--%>
+<%--} else if (data == "add") {--%>
+<%--str = "已关注";--%>
+<%--//$(this).find('.gz-icon').hide();--%>
+<%--changeFollowStatus(masterId, str);--%>
+<%--} else if (data == "del") {--%>
+<%--str = "关注";--%>
+<%--changeFollowStatus(masterId, str);--%>
+<%--}--%>
+<%--}--%>
+<%--})--%>
+<%--}--%>
+<%--function changeFollowStatus(masterId, str) {--%>
+<%--$("a[name='masterFollow" + masterId + "']").each(function () {--%>
+<%--$(this).find("em").html(str);--%>
+<%--if (str == "关注") {--%>
+<%--$(this).find('.gz-icon').show();--%>
+<%--} else if (str == "已关注") {--%>
+<%--$(this).find('.gz-icon').hide();--%>
+<%--}--%>
+<%--})--%>
+<%--}--%>
 
-    <%--function praiseMessage(o, msgId) {--%>
-        <%--$.ajax({--%>
-            <%--type: "get",//设置get请求方式--%>
-            <%--url: "<c:url value='/masterMessage/praiseMessage.do'/>",//设置请求的脚本地址--%>
-            <%--data: "msgId=" + msgId,//设置请求的数据--%>
-            <%--async: true,--%>
-            <%--dataType: "json",//设置请求返回的数据格式--%>
-            <%--success: function (data) {--%>
-                <%--var next = $(o).find("em");--%>
-                <%--var amount = parseInt(next.html().substring(1, next.html().length));--%>
-                <%--console.log(next.html() + "----" + amount);--%>
-                <%--if (data == "noRole") {--%>
-                    <%--alert("您还没有登录,请登录后操作!");--%>
-                <%--} else if (data == "add") {--%>
-                    <%--next.html("赞" + (amount + 1));--%>
-                <%--} else if (data == "del") {--%>
-                    <%--next.html("赞" + (amount - 1));--%>
-                <%--}--%>
-            <%--}--%>
-        <%--})--%>
-    <%--}--%>
+<%--function praiseMessage(o, msgId) {--%>
+<%--$.ajax({--%>
+<%--type: "get",//设置get请求方式--%>
+<%--url: "<c:url value='/masterMessage/praiseMessage.do'/>",//设置请求的脚本地址--%>
+<%--data: "msgId=" + msgId,//设置请求的数据--%>
+<%--async: true,--%>
+<%--dataType: "json",//设置请求返回的数据格式--%>
+<%--success: function (data) {--%>
+<%--var next = $(o).find("em");--%>
+<%--var amount = parseInt(next.html().substring(1, next.html().length));--%>
+<%--console.log(next.html() + "----" + amount);--%>
+<%--if (data == "noRole") {--%>
+<%--alert("您还没有登录,请登录后操作!");--%>
+<%--} else if (data == "add") {--%>
+<%--next.html("赞" + (amount + 1));--%>
+<%--} else if (data == "del") {--%>
+<%--next.html("赞" + (amount - 1));--%>
+<%--}--%>
+<%--}--%>
+<%--})--%>
+<%--}--%>
 
-    <%--function storeMessage(o, msgId) {--%>
-        <%--$.ajax({--%>
-            <%--type: "get",//设置get请求方式--%>
-            <%--url: "<c:url value='/masterMessage/storeMessage.do'/>",//设置请求的脚本地址--%>
-            <%--data: "msgId=" + msgId,//设置请求的数据--%>
-            <%--async: true,--%>
-            <%--dataType: "json",//设置请求返回的数据格式--%>
-            <%--success: function (data) {--%>
-                <%--if (data == "noRole") {--%>
-                    <%--alert("您还没有登录,请登录后操作!");--%>
-                <%--} else if (data == "add") {--%>
-                    <%--$(o).find("em").html("已收藏");--%>
-                <%--} else if (data == "del") {--%>
-                    <%--$(o).find("em").html("收藏");--%>
-                <%--}--%>
-            <%--}--%>
-        <%--})--%>
-    <%--}--%>
+<%--function storeMessage(o, msgId) {--%>
+<%--$.ajax({--%>
+<%--type: "get",//设置get请求方式--%>
+<%--url: "<c:url value='/masterMessage/storeMessage.do'/>",//设置请求的脚本地址--%>
+<%--data: "msgId=" + msgId,//设置请求的数据--%>
+<%--async: true,--%>
+<%--dataType: "json",//设置请求返回的数据格式--%>
+<%--success: function (data) {--%>
+<%--if (data == "noRole") {--%>
+<%--alert("您还没有登录,请登录后操作!");--%>
+<%--} else if (data == "add") {--%>
+<%--$(o).find("em").html("已收藏");--%>
+<%--} else if (data == "del") {--%>
+<%--$(o).find("em").html("收藏");--%>
+<%--}--%>
+<%--}--%>
+<%--})--%>
+<%--}--%>
 
 <%--</script>--%>
 

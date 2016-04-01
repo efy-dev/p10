@@ -156,42 +156,42 @@
 <script>
 
     //判断:当前元素是否是被筛选元素的子元素
-    $.fn.isChildOf = function (b) {
-        return (this.parents(b).length > 0);
-    };
+//    $.fn.isChildOf = function (b) {
+//        return (this.parents(b).length > 0);
+//    };
     //判断:当前元素是否是被筛选元素的子元素或者本身
-    $.fn.isChildAndSelfOf = function (b) {
-        return (this.closest(b).length > 0);
-    };
+//    $.fn.isChildAndSelfOf = function (b) {
+//        return (this.closest(b).length > 0);
+//    };
 
     // 判断是否属于统一标签
-    function judgeStartNum(o, url) {
-        if ($(o).isChildAndSelfOf(object)) {
-
-        } else {
-            ajaxKey = true;
-            BaseUrl = url;
-            $("#pubu").empty();
-            StartMasterNum = 1;
-            $(object).attr("about", "0");
-            $(object).attr("class", "");
-            $(o).attr("about", "1");
-            $(o).attr("class", "active");
-            object = o;
-        }
-    }
+//    function judgeStartNum(o, url) {
+//        if ($(o).isChildAndSelfOf(object)) {
+//
+//        } else {
+//            ajaxKey = true;
+//            BaseUrl = url;
+//            $("#pubu").empty();
+//            StartMasterNum = 1;
+//            $(object).attr("about", "0");
+//            $(object).attr("class", "");
+//            $(o).attr("about", "1");
+//            $(o).attr("class", "active");
+//            object = o;
+//        }
+//    }
 
     $(document).ready(function () {
         $("#pages").html("发现大师 - e飞蚁");
-        getData(object, "<c:url value="/masterCategory/getClassifyData.do?qm=plistMaster_all&pageEntity.size=6&pageEntity.index="/>");
+        getData(object, "<c:url value="/masterCategory/getClassifyData.do?qm=plistMaster_all"/>");
         <%--getData2("<c:url value='/masterMessage/subMaster/plistMaster_default/6/'/>");--%>
         <%--getData3("<c:url value='/masterMessage/hotMaster/plistMasterRecommend_group/6/'/>");--%>
     })
     //  var StartMessageNum = 1;
     var StartMasterNum = 1;
     <%--var StartRecommendNum = 1;--%>
-    var ajaxKey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关
-    var BaseUrl = "<c:url value="/masterCategory/getClassifyData.do?qm=plistMaster_all&pageEntity.size=6&pageEntity.index="/>";
+//    var ajaxKey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关
+    var BaseUrl = "<c:url value="/masterCategory/getClassifyData.do?qm=plistMaster_all"/>";
     var object = $("a[about='1']");
 //    $(window).load(function () {
 //        var winH = $(window).height(); //页面可视区域高度
@@ -207,19 +207,19 @@
 //        });
 //    });
     function getData(e, url) {
-        judgeStartNum(e, url);
+//        judgeStartNum(e, url);
         var flag = false;
         $.ajax({
             type: "get",//设置get请求方式
-            url: url + StartMasterNum,//设置请求的脚本地址
+            url: url,//设置请求的脚本地址
             data: "",//设置请求的数据
             async: true,
             dataType: "json",//设置请求返回的数据格式
             success: function (data) {
-                StartMasterNum = StartMasterNum + 1;
+//                StartMasterNum = StartMasterNum + 1;
                 var pubu = $("#pubu");
                 if (data != null && data.length > 0) {
-//          pubu.empty();
+                    pubu.empty();
                     for (var i in data) {
                         var levelName = "";
                         switch (data[i].level) {
@@ -237,8 +237,8 @@
                         }
                         var box = "<li><div class=\"pc-dy-txt ae master-list\">" +
                                 "  <div class=\"pc-dy-pic \">" +
-                                "  <div class=\"pc-d-pic\"><a href=\"<c:url value='/masterMessage/masterDetails/'/>" +
-                                data[i].id + "\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/" + data[i].favicon + "\"></a></div>" +
+                                "  <div class=\"pc-d-pic\"><a href=\"http://"+data[i].name+".efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}\">" +
+                                "<img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/" + data[i].favicon + "\"></a></div>" +
                                 "</div><div class=\"pc-dy-box \">" +
                                 "<h6>" + data[i].fullName + "<span>";
                         var cityName;
@@ -250,7 +250,8 @@
                         box += cityName + "</span></h6><p><span>" + levelName + "</span></p>";
                         var contentDate = data[i].content;
                         if (contentDate != null && contentDate != "") {
-                            box += "<div id='"+data[i].id+"' class='txt5'><a href=\"<c:url value='/masterMessage/masterDetails/'/>"+data[i].id+"\">" + contentDate + "</a></div><div class='ae'><a href=\"<c:url value='/masterMessage/masterDetails/'/>"+data[i].id+"\" style='float: right;font-size:14px;'>更多</a></div>";
+                            box += "<div id='"+data[i].id+"' class='txt5'><a href=\"http://"+data[i].name+".efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}\">" + contentDate + "</a></div>" +
+                                    "<div class='ae'><a href=\"http://"+data[i].name+".efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}\" style='float: right;font-size:14px;'>更多</a></div>";
                         }
                         box += "</div></div></li>";
                         pubu.append(box);
@@ -263,15 +264,15 @@
                             txt.text(txt.text().substr(0, 100)).append("...");
                         }
                     }
-                } else {
+                }/* else {
                     flag = true;
-                }
-            },
-            complete: function () {
-                if (flag == true) {
-                    ajaxKey = false;
-                }
+                }*/
             }
+//            complete: function () {
+//                if (flag == true) {
+//                    ajaxKey = false;
+//                }
+//            }
         })
     }
 

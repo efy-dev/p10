@@ -64,7 +64,7 @@
     </bean>
 
     <bean name="consumerService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-        <property name="service" ref="consumerService"/>
+        <property name="service" ref="consumerManager"/>
         <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.ConsumerManager"/>
     </bean>
 

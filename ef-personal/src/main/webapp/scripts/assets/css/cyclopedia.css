@@ -175,8 +175,8 @@
 .pops-up .am-tabs-default .am-tabs-nav a{background: #fff;color: #000;font-size: 1.2rem;position: relative;border-top: 1px solid #000;border-bottom: 1px solid #000;}
 /*弹出口*/
 /*120115大师-简介-大师荣誉-出版著作-艺术年表-工作坊*/
-.synopsis{padding:1.4rem 1.9rem;width:100%;float: left;}
-.synopsis .texp{height: 4.7rem;width: 100%;font-size: 1.2rem;color: #000;overflow: hidden;margin-bottom: 2.3rem;}
+.synopsis{padding:1.4rem 1.9rem;width:100%;float: left;font-size: 14px;color: #000}
+.synopsis .texp{width: 100%;font-size: 1.2rem;color: #000;overflow: hidden;margin-bottom: 2.3rem;}
 .synopsis .unwind{font-size: 1.2rem;color: #666;text-align: right;width: 100%;float: right;position: relative}
 .synopsis .unwind span{padding-right:1.9rem; }
 .synopsis .texp-active{width: 10px;transform:rotate(45deg);height: 10px;border-right: 1px solid #666;border-bottom: 1px solid #666;position: absolute;right: 0;top: 0.1rem;}
