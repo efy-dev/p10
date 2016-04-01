@@ -229,7 +229,7 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
     float: left;
     position: relative;
 }
-.master-works .user {width:100%;
+.master-works .user {width:100%;height:240px;
     float: left;
     position: relative;}
 .master-works .user .icon {
