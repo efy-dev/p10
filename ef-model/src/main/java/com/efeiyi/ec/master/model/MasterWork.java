@@ -40,6 +40,11 @@ public class MasterWork {
     private Integer amount;
     private Integer fsAmount;
     private Integer storeAmount;
+    private String size;//尺寸 规格
+    private String site;//馆藏地
+    private String material;//材质
+    private String description;//介绍
+    private String audio;//语音
 
     @Transient
     public String getPraiseStatus() {
@@ -130,6 +135,7 @@ public class MasterWork {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "masterWork")
     @Where(clause = "status=1")
+    @OrderBy("sort asc")
     public List<MasterWorkPicture> getMasterWorkPictureList() {
         return masterWorkPictureList;
     }
@@ -223,6 +229,48 @@ public class MasterWork {
 
     public void setStoreAmount(Integer storeAmount) {
         this.storeAmount = storeAmount;
+    }
+
+    @Column(name = "size")
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+    @Column(name = "site")
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+    @Column(name = "material")
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Column(name = "audio")
+    public String getAudio() {
+        return audio;
+    }
+
+    public void setAudio(String audio) {
+        this.audio = audio;
     }
 
     @Override
