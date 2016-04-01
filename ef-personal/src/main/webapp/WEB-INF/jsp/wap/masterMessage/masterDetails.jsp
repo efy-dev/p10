@@ -122,7 +122,7 @@
         $("#userNav li").each(function () {
             if ($(this).attr("class") == "active") {
                 var masterId = "${object.id}";
-                var content = '${object.content}';
+                var content = "${object.content}";
                 if ($(this).attr("title") == "2") {
                     var brief = $("#baseBrief").val();
                     getIntroduction(content, brief);
@@ -136,7 +136,7 @@
     }
     $(document).ready(function () {
         refreshPage();
-        var content = '${object.content}';
+        var content = "${object.content}";
         $("#userNav li").each(function () {
             if ($(this).attr("title") == "2") {
                 var brief = $("#baseBrief").val();
