@@ -80,7 +80,7 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .great .suit-st-img1 .suit-st-img1-list li img{width: 100%;height: 100%;}
 /*------------*/
 .great .state-order{width: 48px;height: 48px;background-size:contain; background:url(../images/bk-icon.png) no-repeat -130px -180px;display:inline-block ;}
-.great .am-header-right1{top: 17%!important;line-height: 0;margin-top: -6px;}
+.great .am-header-right1{line-height: 0;margin-top: -6px;}
 .great .custom-header .icon-user{margin-top: 10px;}
 .great .suit{width: 100%;float: left;}
 
@@ -289,7 +289,7 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
     z-index: 2;
 }
 .master-works .user .user-nav li {
-    width:33%;
+    width:49%;
     line-height:36px;
     text-align: center;
     float: left;
@@ -319,9 +319,9 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
     margin-left:5px;
     top:1px;
 }
-.master-works .user .user-nav li:nth-child(2) {width:34%}
+.master-works .user .user-nav li:nth-child(2) {width:50%}
 .master-works .user .user-nav li:nth-child(2):before,
-.master-works .user .user-nav li:nth-child(2):after {
+.master-works .user .user-nav li:nth-child(3):after {
     content: '';
     width: 1px;
     height:16px;

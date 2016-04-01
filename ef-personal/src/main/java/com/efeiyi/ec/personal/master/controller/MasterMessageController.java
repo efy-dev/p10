@@ -14,6 +14,7 @@ import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.taglib.PageEntity;
+import com.ming800.core.util.HttpUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.envers.internal.tools.StringTools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,59 +65,60 @@ public class MasterMessageController {
 
     @RequestMapping("/index.do")
     public String mainPage(HttpServletRequest request, Model model) throws Exception {
-//        MyUser user = AuthorizationUtil.getMyUser();
-//        if (user != null && user.getId() != null) {
-//            XQuery xQuery = new XQuery("listMasterFollow_default", request);
-//            xQuery.put("user_id", user.getId());
-//            List<MasterFollowed> list = baseManager.listObject(xQuery);
-//            if (list != null && list.size() > 0) {
-//                model.addAttribute("result", "show");
-//            } else {
-//                model.addAttribute("result", "hide");
-//            }
-//        } else {
-//            model.addAttribute("result", "hide")
-//        }
+        if (HttpUtil.isPhone(request.getHeader("User-Agent"))){
+            XQuery xQuery = new XQuery("plistMaster_all",request);
+            List<Master> masterList = baseManager.listObject(xQuery);
+            if (!masterList.isEmpty()){
+                for (Master master : masterList){
+                    Project project = mainProject(master.getMasterProjectList());
+                    if (project != null && project.getId() != null){
+                        master.setProjectName(project.getName());
+                    }else{
+                        master.setProjectName("");
+                    }
+                }
+            }
+            model.addAttribute("masters", masterList);
+        }else{
+            XQuery xQuery = new XQuery("listProjectCategoryRecommended_default", request);
+            List<ProjectCategoryRecommended> projectCategoryRecommendeds = baseManager.listObject(xQuery);//所有推荐类别
+            List<ProjectCategory> list = new ArrayList<ProjectCategory>();
+            for (ProjectCategoryRecommended projectCategoryRecommended : projectCategoryRecommendeds) {
+                list.add(projectCategoryRecommended.getProjectCategory());
+            }
 
-        XQuery xQuery = new XQuery("listProjectCategoryRecommended_default", request);
-        List<ProjectCategoryRecommended> projectCategoryRecommendeds = baseManager.listObject(xQuery);//所有推荐类别
-        List<ProjectCategory> list = new ArrayList<ProjectCategory>();
-        for (ProjectCategoryRecommended projectCategoryRecommended : projectCategoryRecommendeds) {
-            list.add(projectCategoryRecommended.getProjectCategory());
-        }
+            XQuery query = new XQuery("listMasterRecommended_byMaster", request);
+            List<MasterRecommended> masterRecommendeds = baseManager.listObject(query);
+            List<Master> masters = new ArrayList<Master>();//所有推荐大师
+            for (MasterRecommended masterRecommended : masterRecommendeds) {
+                masters.add(masterRecommended.getMaster());
+            }
+            Map<String, List<Master>> masterRecommends = new HashMap<String, List<Master>>();
 
-        XQuery query = new XQuery("listMasterRecommended_byMaster", request);
-        List<MasterRecommended> masterRecommendeds = baseManager.listObject(query);
-        List<Master> masters = new ArrayList<Master>();//所有推荐大师
-        for (MasterRecommended masterRecommended : masterRecommendeds) {
-            masters.add(masterRecommended.getMaster());
-        }
-        Map<String, List<Master>> masterRecommends = new HashMap<String, List<Master>>();
-
-        if (!list.isEmpty()) {
-            for (ProjectCategory projectCategory : list) {
-                List<Master> masterList = new ArrayList<Master>();
-                for (Master master : masters) {
-                    List<MasterProject> masterProjects = master.getMasterProjectList();
-                    if (master.getMasterProjectList() != null && !master.getMasterProjectList().isEmpty()){
-                        for (MasterProject masterProject : masterProjects) {
-                            ProjectCategory category = masterProject.getProject().getProjectCategory();
-                            if (category != null && category.getId() != null){
-                                if (category.getId().equals(projectCategory.getId())) {
-                                    masterList.add(master);
-                                    break;
+            if (!list.isEmpty()) {
+                for (ProjectCategory projectCategory : list) {
+                    List<Master> masterList = new ArrayList<Master>();
+                    for (Master master : masters) {
+                        List<MasterProject> masterProjects = master.getMasterProjectList();
+                        if (master.getMasterProjectList() != null && !master.getMasterProjectList().isEmpty()){
+                            for (MasterProject masterProject : masterProjects) {
+                                ProjectCategory category = masterProject.getProject().getProjectCategory();
+                                if (category != null && category.getId() != null){
+                                    if (category.getId().equals(projectCategory.getId())) {
+                                        masterList.add(master);
+                                        break;
+                                    }
                                 }
                             }
                         }
                     }
+                    masterRecommends.put(projectCategory.getName(), masterList);
                 }
-                masterRecommends.put(projectCategory.getName(), masterList);
             }
+            model.addAttribute("masters", masterRecommends);
         }
-        model.addAttribute("masters", masterRecommends);
         return "/masterMessage/masterMessageList";
     }
-
 
     @RequestMapping("/masterDetails/{id}")
     public String viewMasterDetails(@PathVariable String id, Model model) throws Exception {
@@ -223,16 +225,16 @@ public class MasterMessageController {
     public String forwardDetails(HttpServletRequest request, Model model) throws Exception {
         String masterId = request.getParameter("masterId");
         Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
-        XQuery xQuery = new XQuery("listMasterIntroduction_default", request);
-        xQuery.put("master_id", masterId);
-        List<MasterIntroduction> list = baseManager.listObject(xQuery);
-        if (!StringTools.isEmpty(list)) {
-            for (MasterIntroduction intro : list) {
-                if ("1".equals(intro.getType())) {
-                    model.addAttribute("baseBrief", intro.getContent());
-                }
-            }
-        }
+//        XQuery xQuery = new XQuery("listMasterIntroduction_default", request);
+//        xQuery.put("master_id", masterId);
+//        List<MasterIntroduction> list = baseManager.listObject(xQuery);
+//        if (!StringTools.isEmpty(list)) {
+//            for (MasterIntroduction intro : list) {
+//                if ("1".equals(intro.getType())) {
+//                    model.addAttribute("baseBrief", intro.getContent());
+//                }
+//            }
+//        }
         model.addAttribute("object", master);
 
         return "/masterMessage/masterMessageDetails";

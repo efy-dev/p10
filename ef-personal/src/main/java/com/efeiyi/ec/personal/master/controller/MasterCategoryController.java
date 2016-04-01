@@ -180,12 +180,12 @@ public class MasterCategoryController {
         }
         xQuery.setPageEntity(entity);
         PageInfo pageInfo = baseManager.listPageInfo(xQuery);
-        MyUser user = AuthorizationUtil.getMyUser();
+//        MyUser user = AuthorizationUtil.getMyUser();
         List<Master> list = pageInfo.getList();
         if (list != null && list.size() > 0) {
-            for (Master master : list) {
+//            for (Master master : list) {
 //                getMasterFollowedStatus(master, user);
-            }
+//            }
             return list;
         } else {
             return new ArrayList();
