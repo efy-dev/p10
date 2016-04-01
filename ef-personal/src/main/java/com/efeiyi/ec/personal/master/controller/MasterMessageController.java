@@ -46,6 +46,9 @@ public class MasterMessageController {
         if (master==null){
             return new ModelAndView("redirect:/masterMessage/index.do");
         }
+        master.setProjectName(mainMasterProject(master.getMasterProjectList()));
+        ProjectCategory category = mainProject(master.getMasterProjectList()).getProjectCategory();
+        model.addAttribute("category",category);
         model.addAttribute("object",master);
         return new ModelAndView("/masterMessage/masterDetails");
     }

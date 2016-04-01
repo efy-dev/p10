@@ -30,7 +30,7 @@
 <div class="hd" style="width: 1000px;">
     <div class="nav-bars ae">
         <ul class="bars">
-            <li class="active"><a href="<c:url value='/masterMessage/index.do'/>">推&nbsp;荐</a></li>
+            <li class="active"><a href="http://master.efeiyi.com">推&nbsp;荐</a></li>
             <%--<li class="active"><a href="#">动&nbsp;态</a></li>--%>
             <%--<c:if test="${result == 'show'}">--%>
             <%--<li><a href="<c:url value='/masterMessage/forwardUrl'/>">关注</a></li>--%>
@@ -38,7 +38,7 @@
             <%--<c:if test="${result == 'hide'}">--%>
             <%--<li><a href="<c:url value='/masterMessage/getFollowBeforeList'/>">关注</a></li>--%>
             <%--</c:if>--%>
-            <li><a href="<c:url value='/masterMessage/classify'/>">发&nbsp;现</a></li>
+            <li><a href="http://master.efeiyi.com/masterMessage/classify">发&nbsp;现</a></li>
         </ul>
     </div>
 </div>
@@ -57,13 +57,8 @@
                                         <c:forEach items="${pc.value}" var="master" varStatus="status">
                                             <li>
                                                 <div class="commodity-img">
-                                                    <a href="http://${master.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}/masterMessage/masterDetails/${master.id}"><img
-                                                            src="http://tenant.efeiyi.com/${master.favicon}"></a>
-                                                    <a href="#">
-                                                        <div class="list-moods">
-                                                            <i class="img-icon"></i>
-                                                                <%--<em>${master.fullName}</em>--%>
-                                                        </div>
+                                                    <a href="http://${master.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}"><img
+                                                            src="http://tenant.efeiyi.com/${master.favicon}">
                                                     </a>
                                                 </div>
                                                 <div class="commodity-txt">
