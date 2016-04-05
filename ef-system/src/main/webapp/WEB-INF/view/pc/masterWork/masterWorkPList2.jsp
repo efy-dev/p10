@@ -25,7 +25,7 @@
         <div class="am-btn-toolbar">
             <div class="am-btn-group am-btn-group-xs">
                 <a type="button" class="am-btn am-btn-default"
-                   href="<c:url value="/basic/xm.do?qm=formMasterWork2&view=master"/>"><span
+                   href="<c:url value="/basic/xm.do?qm=formWork2&view=master"/>"><span
                         class="am-icon-plus"></span>新建作品</a>
                 <a type="button" class="am-btn am-btn-default" id="dddd"
                    href="javascript:void (0);" onclick="getPinyin()"><span class="am-icon-plus"></span>初始化作者</a>
@@ -57,7 +57,7 @@
                             <td width="22%">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formMasterWork2&view=master&id=${masterWork.id}"/>"><span
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formWork2&view=master&id=${masterWork.id}"/>"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </a>
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeMasterWork('${masterWork.id}')})" href="#"><span
