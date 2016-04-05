@@ -18,16 +18,6 @@ import java.util.List;
 public interface UserManager {
 
 
-    User getUserByUsername(String username);
-
-    MyUser getMyUserByUsername(String username);
-
-    List<ConsumerAddress> listConsumerAddressByUserId(String userId);
-
-    void saveOrUpdateConsumer(BigUser bigUser);
-
-    void saveOrUpdateMyUser(MyUser myUser);
-
     User getUserByUserId(String userId);
 
     MyUser queryMyUser(String hql, LinkedHashMap<String, Object> param);
