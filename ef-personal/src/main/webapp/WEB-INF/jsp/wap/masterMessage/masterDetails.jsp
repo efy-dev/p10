@@ -122,13 +122,13 @@
         $("#userNav li").each(function () {
             if ($(this).attr("class") == "active") {
                 var masterId = "${object.id}";
-                var content = '${object.content}';
+                var content = "${object.content}";
                 if ($(this).attr("title") == "2") {
                     var brief = $("#baseBrief").val();
                     getIntroduction(content, brief);
                 }
                 if ($(this).attr("title") == "3") {
-                    getMasterProjectList(masterId);
+                    //getMasterProjectList(masterId);
                     getAllMasterWork(masterId);
                 }
             }
@@ -136,7 +136,7 @@
     }
     $(document).ready(function () {
         refreshPage();
-        var content = '${object.content}';
+        var content = "${object.content}";
         $("#userNav li").each(function () {
             if ($(this).attr("title") == "2") {
                 var brief = $("#baseBrief").val();
@@ -147,32 +147,32 @@
     function refreshPage(){
         window.history.go(1);
     }
-    function getMasterProjectList(masterId) {
-        $.ajax({
-            type: "POST",
-            url: "<c:url value='/masterBrief/getMasterProjectList.do'/>",
-            async: false,
-            data: "masterId=" + masterId,
-            dataType: "json",
-            error: function () {
-                alert('出错了,请联系系统管理员!');
-            },
-            success: function (data) {
-                var box = $("#changeType");
-                box.removeClass();
-                box.addClass("works-list");
-                box.empty();
-                if (data != null && data.length > 0) {
-                    var sub = "<ul class=\"list-nav\" id=\"allProducts\" title=\"" + masterId + "\"><li title='0' class=\"active\">全部</li>";
-                    for (var i = 0; i < data.length; i++) {
-                        sub += "<li title=\"" + data[i].project.id + "\">" + data[i].project.name + "</li>";
-                    }
-                    sub += "</ul>";
-                    box.append(sub);
-                }
-            }
-        })
-    }
+    <%--function getMasterProjectList(masterId) {--%>
+        <%--$.ajax({--%>
+            <%--type: "POST",--%>
+            <%--url: "<c:url value='/masterBrief/getMasterProjectList.do'/>",--%>
+            <%--async: false,--%>
+            <%--data: "masterId=" + masterId,--%>
+            <%--dataType: "json",--%>
+            <%--error: function () {--%>
+                <%--alert('出错了,请联系系统管理员!');--%>
+            <%--},--%>
+            <%--success: function (data) {--%>
+                <%--var box = $("#changeType");--%>
+                <%--box.removeClass();--%>
+                <%--box.addClass("works-list");--%>
+                <%--box.empty();--%>
+                <%--if (data != null && data.length > 0) {--%>
+                    <%--var sub = "<ul class=\"list-nav\" id=\"allProducts\" title=\"" + masterId + "\"><li title='0' class=\"active\">全部</li>";--%>
+                    <%--for (var i = 0; i < data.length; i++) {--%>
+                        <%--sub += "<li title=\"" + data[i].project.id + "\">" + data[i].project.name + "</li>";--%>
+                    <%--}--%>
+                    <%--sub += "</ul>";--%>
+                    <%--box.append(sub);--%>
+                <%--}--%>
+            <%--}--%>
+        <%--})--%>
+    <%--}--%>
     function getAllMasterWork(masterId) {
         $.ajax({
             type: "POST",
@@ -185,11 +185,12 @@
             },
             success: function (data) {
                 var box = $("#changeType");
-                var sub = "<ul class=\"list-con\" style=\"padding: 0\" id=\"worksList\" title=\"" + masterId + "\">";
+                box.empty();
+                var sub = "<ul class=\"list-con bd\" style=\"padding: 0\" id=\"worksList\" title=\"" + masterId + "\">";
                 if (data != null && data.length > 0) {
                     for (var i = 0; i < data.length; i++) {
-                        sub += "<li class=\"item\" title=\"" + data[i].project.id + "\">" + data[i].project.name +
-                                "<img src=\"http://tenant.efeiyi.com/" + data[i].pictureUrl + "@!master-intro-product\">" +
+                        sub += "<li class=\"bd mt\" title=\"" + data[i].project.id + "\">" +
+                                "<img class=\"bd\" src=\"http://tenant.efeiyi.com/" + data[i].pictureUrl + "@!master-intro-product\">" +
                                 "<div class=\"txt\"><div class=\"name\">" + data[i].name + "</div><div class=\"txt-info\">" +
                                 "</div></div></li>";
                     }
@@ -200,32 +201,32 @@
         })
     }
 
-    function getMasterWorkListByProjectName(projectId, masterId) {
-        $.ajax({
-            type: "POST",
-            url: "<c:url value='/masterBrief/getMasterWorkList.do'/>",
-            async: false,
-            data: "masterId=" + masterId + "&projectId=" + projectId,
-            dataType: "json",
-            error: function () {
-                alert('出错了,请联系系统管理员!');
-            },
-            success: function (data) {
-                var box = $("#worksList");
-                box.empty();
-                if (data != null && data.length > 0) {
-                    var sub = "";
-                    for (var i = 0; i < data.length; i++) {
-                        sub += "<li class=\"item\" title=\"" + data[i].project.id + "\">" + data[i].project.name +
-                                "<img src=\"http://tenant.efeiyi.com/" + data[i].pictureUrl + "@!master-intro-product\">" +
-                                "<div class=\"txt\"><div class=\"name\">" + data[i].name + "</div><div class=\"txt-info\">" +
-                                "</div></div></li>";
-                    }
-                    box.append(sub);
-                }
-            }
-        })
-    }
+    <%--function getMasterWorkListByProjectName(projectId, masterId) {--%>
+        <%--$.ajax({--%>
+            <%--type: "POST",--%>
+            <%--url: "<c:url value='/masterBrief/getMasterWorkList.do'/>",--%>
+            <%--async: false,--%>
+            <%--data: "masterId=" + masterId + "&projectId=" + projectId,--%>
+            <%--dataType: "json",--%>
+            <%--error: function () {--%>
+                <%--alert('出错了,请联系系统管理员!');--%>
+            <%--},--%>
+            <%--success: function (data) {--%>
+                <%--var box = $("#worksList");--%>
+                <%--box.empty();--%>
+                <%--if (data != null && data.length > 0) {--%>
+                    <%--var sub = "";--%>
+                    <%--for (var i = 0; i < data.length; i++) {--%>
+                        <%--sub += "<li class=\"item\" title=\"" + data[i].project.id + "\">" + data[i].project.name +--%>
+                                <%--"<img src=\"http://tenant.efeiyi.com/" + data[i].pictureUrl + "@!master-intro-product\">" +--%>
+                                <%--"<div class=\"txt\"><div class=\"name\">" + data[i].name + "</div><div class=\"txt-info\">" +--%>
+                                <%--"</div></div></li>";--%>
+                    <%--}--%>
+                    <%--box.append(sub);--%>
+                <%--}--%>
+            <%--}--%>
+        <%--})--%>
+    <%--}--%>
     //  function getPraises(url){
     //    $.ajax({
     //      type: "POST",
