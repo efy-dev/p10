@@ -60,7 +60,7 @@
                                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formMasterWork2&view=master&id=${masterWork.id}"/>"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </a>
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removeMasterWork('${masterWork.id}')" href="#"><span
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeMasterWork('${masterWork.id}')})" href="#"><span
                                                 class="am-icon-trash-o"></span> 删除
                                         </a>
                                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formMasterWork2&id=${masterWork.id}"/>"><span
@@ -73,7 +73,7 @@
                                 </div>
                             </td>
                             <td class="am-hide-sm-only" width="12%">
-                                 <a href="<c:url value="/basic/xm.do?qm=viewMasterWork4&view=masterWork&id=${masterWork.id}"/>">
+                                 <a href="<c:url value="/basic/xm.do?qm=viewWork&view=masterWork&id=${masterWork.id}"/>">
                                     ${masterWork.name}
                                  </a>
                             </td>
