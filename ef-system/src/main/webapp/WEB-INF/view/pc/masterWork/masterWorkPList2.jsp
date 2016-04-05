@@ -41,7 +41,7 @@
                     <tr>
                         <th class="table-set">操作</th>
                         <th class="table-title">作品名称</th>
-                        <th class="table-title">类别</th>
+                        <th class="table-title">项目</th>
                         <th class="table-title">作者</th>
                         <th class="table-title">作品封面</th>
                         <%--<th class="table-title">简介</th>--%>
@@ -78,7 +78,7 @@
                                  </a>
                             </td>
                             <td class="am-hide-sm-only" width="12%">
-                                        ${masterWork.category.name}
+                                        ${masterWork.project.name}
                             </td>
                             <td class="am-hide-sm-only" width="10%">
                                ${masterWork.master.fullName}

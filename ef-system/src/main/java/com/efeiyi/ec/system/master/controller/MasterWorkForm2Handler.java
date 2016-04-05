@@ -1,6 +1,7 @@
 package com.efeiyi.ec.system.master.controller;
 
 import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -25,9 +26,9 @@ public class MasterWorkForm2Handler implements DoHandler {
         XQuery xQuery = new XQuery("listMaster3_default",request);
         List<Master> masterList =(List<Master>)baseManager.listObject(xQuery);
         modelMap.put("masterList",masterList);
-        xQuery = new XQuery("listProjectCategory2_default",request);
-        List<ProjectCategory> projectCategoryList =(List<ProjectCategory>)baseManager.listObject(xQuery);
-        modelMap.put("projectCategoryList",projectCategoryList);
+        xQuery = new XQuery("listProject4_default",request);
+        List<Project> projectList =(List<Project>)baseManager.listObject(xQuery);
+        modelMap.put("projectList",projectList);
 
         return modelMap;
     }
