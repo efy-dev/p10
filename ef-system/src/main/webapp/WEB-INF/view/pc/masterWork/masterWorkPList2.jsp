@@ -54,7 +54,7 @@
 
                     <c:forEach items="${requestScope.pageInfo.list}" var="masterWork">
                         <tr id="${masterWork.id}">
-                            <td width="26%">
+                            <td width="25%">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formWork2&view=master&id=${masterWork.id}"/>"><span
@@ -66,24 +66,24 @@
                                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formMasterWork2&id=${masterWork.id}"/>"><span
                                                 class="am-icon-pencil-square-o"></span> 链接
                                         </a>
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formMasterWork2&id=${masterWork.id}"/>"><span
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void (0)" onclick="GetCode('${masterWork.id}')"><span
                                                 class="am-icon-pencil-square-o"></span> 生成二维码
                                         </a>
                                     </div>
                                 </div>
                             </td>
-                            <td class="am-hide-sm-only" width="12%">
+                            <td class="am-hide-sm-only" width="10%">
                                  <a href="<c:url value="/basic/xm.do?qm=viewWork&view=masterWork&id=${masterWork.id}"/>">
                                     ${masterWork.name}
                                  </a>
                             </td>
-                            <td class="am-hide-sm-only" width="12%">
+                            <td class="am-hide-sm-only" width="10%">
                                         ${masterWork.project.name}
                             </td>
                             <td class="am-hide-sm-only" width="10%">
                                ${masterWork.master.fullName}
                             </td>
-                            <td class="am-hide-sm-only" width="12%">
+                            <td class="am-hide-sm-only" width="10%">
                                 <a href="/Img/imgUrl.do?imgUrl=http://tenant.efeiyi.com/${masterWork.pictureUrl}">
                                   <img  width="10%"  src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-manage-banner" >
                                 </a>
@@ -91,13 +91,13 @@
                             <%--<td class="am-hide-sm-only">--%>
                                    <%--${masterWork.brief}--%>
                             <%--</td>--%>
-                            <td class="am-hide-sm-only" width="14%">
+                            <td class="am-hide-sm-only" width="12%">
                                     ${masterWork.size}
                             </td>
-                            <td class="am-hide-sm-only" width="14%">
+                            <td class="am-hide-sm-only" width="12%">
                                     ${masterWork.material}
                             </td>
-                            <td class="am-hide-sm-only" width="12%">
+                            <td class="am-hide-sm-only" width="13%">
                                     ${masterWork.site}
                             </td>
                         </tr>
@@ -134,6 +134,21 @@
                 $("#dddd").text("初始化作者");
                 $("#dddd").removeAttr("disabled");
             }
+        });
+    }
+
+    function GetCode(id){
+
+        $.ajax({
+            type: "post",
+            url: "<c:url value="/masterWork/getCode.do" />",
+            cache: false,
+            dataType: "json",
+            data:{"id":id},
+            success: function (data) {
+                alert(data);
+            }
+
         });
     }
 
