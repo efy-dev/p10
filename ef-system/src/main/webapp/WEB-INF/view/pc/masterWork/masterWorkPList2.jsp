@@ -54,7 +54,7 @@
 
                     <c:forEach items="${requestScope.pageInfo.list}" var="masterWork">
                         <tr id="${masterWork.id}">
-                            <td width="22%">
+                            <td width="26%">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formWork2&view=master&id=${masterWork.id}"/>"><span
@@ -91,10 +91,10 @@
                             <%--<td class="am-hide-sm-only">--%>
                                    <%--${masterWork.brief}--%>
                             <%--</td>--%>
-                            <td class="am-hide-sm-only" width="10%">
+                            <td class="am-hide-sm-only" width="14%">
                                     ${masterWork.size}
                             </td>
-                            <td class="am-hide-sm-only" width="10%">
+                            <td class="am-hide-sm-only" width="14%">
                                     ${masterWork.material}
                             </td>
                             <td class="am-hide-sm-only" width="12%">
