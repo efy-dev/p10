@@ -27,7 +27,7 @@
         <h5 class="fz14 color3">${work.masterFullName}大师作品：${work.name}</h5>
         <span class="measure fz12 color6 bd">${work.size}  ${work.material}</span>
         <div class="audio bd">
-          <audio style="width:100%;float:left;" controls="controls" src="<c:url value='/scripts/assets/upload/audio.mp3'/>" id="audio"></audio>
+          <audio style="width:100%;float:left;" controls="controls" src="http://pro.efeiyi.com/${work.audio}" id="audio"></audio>
         </div>
         <p class="content color9 fz11 bd">${work.description}</p>
         <p class="site bd color9 fz11 ">馆藏地：${work.site}</p>
@@ -62,6 +62,14 @@
     <div class="title fz14 black txt-c bd">相关作品</div>
     <div class="ul-col2 bd">
       <ul>
+        <%--<c:forEach items="${work.workList}" var="works" begin="0" end="3">--%>
+          <%--<li>--%>
+            <%--<a href="" title="">--%>
+              <%--<img src="http://pro.efeiyi.com/${works.pictureUrl}" alt="">--%>
+              <%--<span class="fz11 black omitted">${works.name}</span>--%>
+            <%--</a>--%>
+          <%--</li>--%>
+        <%--</c:forEach>--%>
         <li>
           <a href="" title="">
             <img src="<c:url value='/scripts/assets/upload/user-img.jpg'/>" alt="">
@@ -95,13 +103,9 @@
   </div>
   <!--//End-- 相关作品 -->
 </div>
-
-
-
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>
 <!--<![endif]-->
-
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
