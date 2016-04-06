@@ -21,6 +21,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -123,9 +124,10 @@ public class MasterWorkController {
             jsonObject.put("action_info", scene);
         }
 
-    @RequestMapping(value = "/masterWork")
+    @RequestMapping(value = "/masterWork",method = RequestMethod.GET)
       public  void  contact(HttpServletRequest request, HttpServletResponse response) throws IOException {
           String s = request.getParameter("echostr");
+          System.out.print("echostr ----->"+s);
           response.getWriter().write(s);
       }
 
@@ -203,7 +205,7 @@ public class MasterWorkController {
         }
 
         private void getPic(String ticket,String root) throws IOException {
-            File file = new File(root);
+            File file = new File(File.separator+"image");
             HttpMethod method = new GetMethod("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + ticket);
             httpClient.executeMethod(method);
             InputStream is = method.getResponseBodyAsStream();
