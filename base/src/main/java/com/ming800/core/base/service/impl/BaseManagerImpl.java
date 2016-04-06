@@ -36,11 +36,11 @@ public class BaseManagerImpl implements BaseManager {
     @Override
     public Object getObject(String model, String id) {
         Object object = xdoDao.getObject(model, id);
-        try {
-            WebServiceHandlerManagerImpl.dealObject(object);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            WebServiceHandlerManagerImpl.dealObject(object);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return object;
     }
 
@@ -140,23 +140,23 @@ public class BaseManagerImpl implements BaseManager {
      */
     @Override
     public List listObject(String queryHql, LinkedHashMap<String, Object> queryParamMap) {
-        List objectList = xdoDao.getObjectList(queryHql, queryParamMap);
-        try {
-            WebServiceHandlerManagerImpl.dealList(objectList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        List objectList = xdoDao.getObjectList(queryHql, queryParamMap);
+//        try {
+//            WebServiceHandlerManagerImpl.dealList(objectList);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return xdoDao.getObjectList(queryHql, queryParamMap);
     }
 
     @Override
     public List listObject(String queryHql, Object... params) {
         List objectList = xdoDao.getObjectList(queryHql, params);
-        try {
-            WebServiceHandlerManagerImpl.dealList(objectList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            WebServiceHandlerManagerImpl.dealList(objectList);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return objectList;
     }
 
@@ -166,23 +166,23 @@ public class BaseManagerImpl implements BaseManager {
     @Override
     public List listObject(XQuery xQuery) {
         List objectList = xdoDao.getObjectList(xQuery.getHql(), xQuery.getQueryParamMap());
-        try {
-            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return objectList;
     }
 
     @Override
     public PageInfo listPageInfo(XQuery xQuery) {
         PageInfo pageInfo = xdoDao.getPageByConditions(xQuery.getPageEntity(), xQuery.getHql(), xQuery.getQueryParamMap());
-        List objectList = pageInfo.getList();
-        try {
-            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        List objectList = pageInfo.getList();
+//        try {
+//            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return pageInfo;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -191,12 +191,12 @@ public class BaseManagerImpl implements BaseManager {
     public PageInfo listPageInfo(String queryHql, PageEntity pageEntity, LinkedHashMap<String, Object> queryParamMap) {
 
         PageInfo pageInfo = xdoDao.getPageByConditions(pageEntity, queryHql, queryParamMap);
-        List objectList = pageInfo.getList();
-        try {
-            WebServiceHandlerManagerImpl.dealList(objectList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        List objectList = pageInfo.getList();
+//        try {
+//            WebServiceHandlerManagerImpl.dealList(objectList);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return pageInfo;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

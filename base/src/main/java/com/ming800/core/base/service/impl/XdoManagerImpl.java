@@ -118,12 +118,12 @@ public class XdoManagerImpl implements XdoManager {
         }
 
         PageInfo pageInfo = xdoDao.getPageByConditions(pageEntity, xQuery.getHql(), xQuery.getQueryParamMap());
-        List objectList = pageInfo.getList();
-        try {
-            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        List objectList = pageInfo.getList();
+//        try {
+//            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         return pageInfo;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -138,11 +138,11 @@ public class XdoManagerImpl implements XdoManager {
         }
 
         List objectList = xdoDao.getObjectList(xQuery.getHql(), xQuery.getQueryParamMap());
-        try {
-            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         return objectList;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -174,11 +174,11 @@ public class XdoManagerImpl implements XdoManager {
         XQuery xQuery = new XQuery(tempDo, tempDoQuery, null, tempConditions);
 
         List objectList = xdoDao.getObjectList(xQuery.getHql(), xQuery.getQueryParamMap());
-        try {
-            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            WebServiceHandlerManagerImpl.dealList(objectList, xQuery.getRemoteConfig());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         return objectList;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -233,11 +233,11 @@ public class XdoManagerImpl implements XdoManager {
                 }
             }*/
         }
-        try {
-            WebServiceHandlerManagerImpl.dealObject(object);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            WebServiceHandlerManagerImpl.dealObject(object);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return object;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
