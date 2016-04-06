@@ -48,11 +48,11 @@
                 </div>
             </div>
             <div class="am-form-group">
-                <label name="name" class="am-u-sm-3 am-form-label">类别</label>
+                <label name="name" class="am-u-sm-3 am-form-label">项目</label>
 
                 <div class="am-u-sm-9">
-                    <input type="hidden" name="category.id" id="projectCategoryId" placeholder="" value="${object.category.id}" >
-                    <input type="text" name="category.name" id="projectCategoryName" placeholder="" data-am-modal="{target: '#my-popup'}" value="${object.category.name}" required>
+                    <input type="hidden" name="project.id" id="projectId" placeholder="" value="${object.project.id}" >
+                    <input type="text" name="project.name" id="projectName" placeholder="" data-am-modal="{target: '#my-popup'}" value="${object.project.name}" required>
                 </div>
             </div>
             <div class="am-form-group">
@@ -142,23 +142,23 @@
                 <tbody>
                 <tr>
                     <th class="am-text-center" width="14%">操作</th>
-                    <th class="am-text-center" width="17%">类别编号</th>
-                    <th class="am-text-center" width="17%">类别名称</th>
+                    <th class="am-text-center" width="17%">项目编号</th>
+                    <th class="am-text-center" width="17%">项目名称</th>
                 </tr>
-                <c:forEach var="category" items="${projectCategoryList}">
-                    <tr name="${category.name}" serial="${category.serial}">
+                <c:forEach var="project" items="${projectList}">
+                    <tr name="${project.name}" serial="${project.serial}">
                         <td align="center" width="33%">
                             <a style="width: 10%;"
                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                               href="javascript:void(0);" onclick="selectObj('${category.id}','${category.name}','my-popup','projectCategory')">
+                               href="javascript:void(0);" onclick="selectObj('${project.id}','${project.name}','my-popup','project')">
                                 选择
                             </a>
                         </td>
                         <td class="am-text-center" width="33%">
-                                ${category.serial}
+                                ${project.serial}
                         </td>
                         <td class="am-text-center" width="33%">
-                                ${category.name}
+                                ${project.name}
                         </td>
 
                     </tr>

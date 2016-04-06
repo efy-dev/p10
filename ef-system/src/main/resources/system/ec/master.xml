@@ -507,7 +507,7 @@
                 <do name="viewMasterWorkImg" label="查看传承人产品页" access="" result="/masterWork/imgView"/>
                 <do name="formMasterWork" label="保存传承人产品页" access="" result="/masterWork/masterWorkForm"
                     execute="com.efeiyi.ec.system.master.controller.MasterWorkHandler"/>
-                <do name="formMasterWork2" label="工艺与大师" access="" result="/masterWork/masterWorkForm2"
+                <do name="formWork2" label="工艺与大师" access="" result="/masterWork/masterWorkForm2"
                     execute="com.efeiyi.ec.system.master.controller.MasterWorkForm2Handler"/>
                 <do name="formwikiMasterWork" label="保存传承人产品页" access="" result="/masterWork/masterWorkFormwiki"
                     execute="com.efeiyi.ec.system.master.controller.MasterWorkHandler"/>
