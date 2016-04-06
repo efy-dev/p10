@@ -238,20 +238,20 @@
 												window.location.href='<c:url value="/order/confirmGet/${spList.id}"/>';
 												})">确定收货</a>
 									</c:when>
-									<c:when test="${purchaseOrder.orderStatus == '13'}">
+									<c:when test="${spList.orderStatus == '13'}">
 										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看详情</a>
 										<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
 												window.location.href='<c:url value="/order/cancelOrder/${spList.id}"/>';
 												})">删除订单</a>
 									</c:when>
-									<c:when test="${purchaseOrder.orderStatus == '9'}">
+									<c:when test="${spList.orderStatus == '9'}">
 										<a href="<c:url value="/order/myEfeiyi/view/${spList.id}"/>">查看详情</a>
 										<a href="<c:url value="/comment/mobileFinishOrder.do?orderId=${spList.id}"/>">去评价</a>
 										<a href="#" onclick="showConfirm('提示','是否确定删除',function(){
 												window.location.href='<c:url value="/order/cancelOrder/${spList.id}"/>';
 												})">删除订单</a>
 									</c:when>
-									<c:when test="${purchaseOrder.orderStatus == '51'}">
+									<c:when test="${spList.orderStatus == '51'}">
 										<a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a>
 									</c:when>
 								</c:choose>
