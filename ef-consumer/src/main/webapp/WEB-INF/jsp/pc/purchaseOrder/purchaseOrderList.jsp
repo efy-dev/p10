@@ -352,7 +352,7 @@
                               })">删除订单</a></p>
                     </td>
                   </c:if>
-                  <c:if test="${order.orderStatus == 51}">
+                  <c:if test="${spList.orderStatus == 51}">
                     <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                       <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
                     </td>
