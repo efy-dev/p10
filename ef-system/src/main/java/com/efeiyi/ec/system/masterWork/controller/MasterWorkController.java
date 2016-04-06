@@ -11,12 +11,10 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -24,13 +22,11 @@ import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,7 +56,7 @@ public class MasterWorkController {
 
     @RequestMapping(value = "/masterWork/gg.do")
     @ResponseBody
-    public void getCode(HttpServletRequest request) throws Exception {
+    public void getCode(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
 
             String serial = request.getParameter("serial");
@@ -75,8 +71,14 @@ public class MasterWorkController {
                 prepareTempJsonObject();
             }
            String ticket = getTicket(serial,token);
-           String root = getClass().getResource("/").getFile().toString()+File.separator+"image";
-           getPic(ticket,root);
+           String root = "D:\\Images";
+        response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "No-cache");
+        response.setDateHeader("Expires", 0);
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; fileName=" + serial + System.currentTimeMillis() + ".jpg");
+        response.getOutputStream().write(getPic(ticket,root));
+//        return  "";
         }
 
      private String getAccessToken(String apiurl, String appid, String secret){
@@ -232,18 +234,24 @@ public class MasterWorkController {
     }
 }
 
-        private void getPic(String ticket,String root) throws IOException {
+        private byte[] getPic(String ticket,String root) throws IOException {
             File file = new File(root);
             HttpMethod method = new GetMethod("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + ticket);
             httpClient.executeMethod(method);
-            InputStream is = method.getResponseBodyAsStream();
-            OutputStream os = new FileOutputStream(file);
-            byte[] b = new byte[1];
-            while (is.read(b) != -1) {
-                os.write(b);
-            }
-            os.flush();
-            os.close();
+//            InputStream is = method.getResponseBodyAsStream();
+//            method.getResponseBody()
+            byte[] b = method.getResponseBody();
+//            BufferedImage bufferedImage = new BufferedImage(is)
+//            ImageIO imageIO = new ImageIO()
+//            OutputStream os = new ByteArrayOutputStream(b.length);
+//            byte[] b = new byte[1];
+//            while (is.read(b) != -1) {
+//                os.write(b);
+//            }
+//            os.write(b);
+//            os.flush();
+//            os.close();
+            return b;
         }
     @RequestMapping(value = "/masterWork/getCode.do")
     public String viewMasterWork(HttpServletRequest request,HttpServletResponse response) throws Exception {

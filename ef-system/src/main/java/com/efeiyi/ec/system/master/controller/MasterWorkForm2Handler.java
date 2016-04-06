@@ -7,6 +7,7 @@ import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.Xentity;
 import com.ming800.core.does.service.DoHandler;
+import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -20,6 +21,7 @@ import java.util.List;
 public class MasterWorkForm2Handler implements DoHandler {
 
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
+    private AutoSerialManager autoSerialManager = (AutoSerialManager) ApplicationContextUtil.getApplicationContext().getBean("autoSerialManagerImpl");
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
@@ -29,6 +31,10 @@ public class MasterWorkForm2Handler implements DoHandler {
         xQuery = new XQuery("listProject4_default",request);
         List<Project> projectList =(List<Project>)baseManager.listObject(xQuery);
         modelMap.put("projectList",projectList);
+        System.out.print(request.getParameter("id"));
+        if("".equals(request.getParameter("id"))||request.getParameter("id")==null){
+            modelMap.put("serial" ,autoSerialManager.nextSerial("MasterWork"));
+        }
 
         return modelMap;
     }

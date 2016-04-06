@@ -66,7 +66,7 @@
                                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formMasterWork2&id=${masterWork.id}"/>"><span
                                                 class="am-icon-pencil-square-o"></span> 链接
                                         </a>
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void (0)" onclick="GetCode('${masterWork.serial}')"><span
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/masterWork/gg.do?serial=${masterWork.serial}"/>" ><span
                                                 class="am-icon-pencil-square-o"></span> 生成二维码
                                         </a>
                                     </div>
