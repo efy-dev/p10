@@ -261,6 +261,7 @@ public class MasterWorkController {
         byte[] b = new byte[request.getContentLength()];
         is.read(b);
         String inxml = new String(b);
+        System.out.print(inxml);
         String serial = treatWeixinMsg(request,inxml);
         XQuery xQuery = new XQuery("listMasterWorkCode_default",request);
         xQuery.put("serial",serial);
@@ -285,6 +286,7 @@ public class MasterWorkController {
         }
         Element root = document.getRootElement();
         String  serial = root.element("EventKey").getText();
+        System.out.print(serial);
         if(serial==null){
             serial = "";
         }
