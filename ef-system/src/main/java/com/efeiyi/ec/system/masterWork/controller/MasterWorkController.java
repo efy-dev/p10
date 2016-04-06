@@ -15,6 +15,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,8 +50,8 @@ public class MasterWorkController {
 //    private boolean runningModel = false;
     private boolean runningModel = false;
 
-    @RequestMapping(value = "/masterWork/getCode.do")
-    @ResponseBody
+//    @RequestMapping(value = "/masterWork/getCode.do")
+//    @ResponseBody
     public void getCode(HttpServletRequest request) throws Exception {
 
 
@@ -127,31 +129,11 @@ public class MasterWorkController {
       public  String  contact(HttpServletRequest request, HttpServletResponse response) throws IOException {
           String s = request.getParameter("echostr");
           System.out.print("echostr ----->"+s);
-          response.getWriter().write(s);
+//          response.getWriter().write(s);
           return s;
       }
 
-//        private String getAccessToken() {
-//
-////诚品宝服务号
-////            HttpMethod method = new GetMethod("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx2db1e25ab3dac836&secret=a39099dfb48bb588c1fc7b0d538d3a2b");
-//            //电商服务号
-////        HttpMethod method = new GetMethod("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx7f6aa253b75466dd&secret=04928de13ab23dca159d235ba6dc19ea");
-//            //订阅号没法生成带参二维码，坑了几个小时
-////        HttpMethod method = new GetMethod("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxa58e5140a4bdb7d2&secret=4d9dc76cda0c35255dcbcf4490e41135");
-//
-//            try {
-//                httpclient.executeMethod(method);
-//                String accessToken = method.getResponseBodyAsString();
-//                System.out.println(method.getResponseBodyAsString());
-//                method.releaseConnection();
-//                Map<?, ?> ipAddressMap = JsonUtil.parseJsonStringToMap(accessToken);
-//                return (String) ipAddressMap.get("access_token");
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            return "";
-//        }
+
 
         private String getTicket(String code,String token) throws IOException {
             String ticket="";
@@ -255,6 +237,23 @@ public class MasterWorkController {
             os.flush();
             os.close();
         }
+//    @RequestMapping(value = "/masterWork/getCode.do")
+//    public String viewMasterWork(HttpServletRequest request,HttpServletResponse response) throws Exception {
+//
+//       InputStream is = request.getInputStream();
+//        byte[] b = new byte[request.getContentLength()];
+//        is.read(b);
+//        String inxml = new String(b);
+////        String outXml =
+//        PrintWriter pw = response.getWriter();
+//        pw.write(outXml);
+//
+//    }
 
+//    public String treatWeixinMsg(HttpServletRequest request,String inxml){
+//        Document document = null;
+//        document = DocumentHelper.parseText(inxml);
+//
+//    }
 
 }
