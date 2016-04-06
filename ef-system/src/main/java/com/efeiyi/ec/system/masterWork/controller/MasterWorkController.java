@@ -48,8 +48,8 @@ public class MasterWorkController {
 //    private boolean runningModel = false;
     private boolean runningModel = false;
 
-//    @RequestMapping(value = "/masterWork/getCode.do")
-//    @ResponseBody
+    @RequestMapping(value = "/masterWork/getCode.do")
+    @ResponseBody
     public void getCode(HttpServletRequest request) throws Exception {
 
 
@@ -124,10 +124,11 @@ public class MasterWorkController {
         }
 
       @RequestMapping(value = "/masterWork/getCode.do",method = RequestMethod.GET)
-      public  void  contact(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      public  String  contact(HttpServletRequest request, HttpServletResponse response) throws IOException {
           String s = request.getParameter("echostr");
           System.out.print("echostr ----->"+s);
           response.getWriter().write(s);
+          return s;
       }
 
 //        private String getAccessToken() {
