@@ -15,6 +15,17 @@
             </does>
         </entity>
         <entity name="Project" label="品类"  model="com.efeiyi.ec.project.model.Project">
+            <fields>
+                <field name="level" label="项目类型" inputType="text">
+                    <statusType fieldName="level">
+                        <item label="世界级" value="9"/>
+                        <item label="国家级" value="1"/>
+                        <item label="省级" value="2"/>
+                        <item label="市级" value="3"/>
+                        <item label="县级" value="4"/>
+                    </statusType>
+                </field>
+            </fields>
             <does>
                 <do name="listProject" access="" label="品类推荐列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">

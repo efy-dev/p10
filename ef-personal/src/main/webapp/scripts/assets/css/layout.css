@@ -1,0 +1,75 @@
+*{-webkit-box-sizing:border-box;box-sizing:border-box;}
+body,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd,img,input,a,p,strong,em,i{margin:0;padding:0;font-family:NotoSansSChinese,Microsoft YaHei,AkkuratProRegular,Helvetica Neue,Helvetica,Arial,sans-serif;}
+strong,b,em{font-weight:normal;font-style:normal;}
+img{border:0;}
+ul,dl{list-style:none;}
+body{background:#f7f7f7;max-width:640px;margin:0 auto}
+/*--//End--*/
+.bd{width:100%;float: left;}
+.bgfff{background:#fff;}
+.fz11{font-size:11px;line-height:10px;}
+.fz12{font-size:12px;line-height:11px;}
+.fz14{font-size:14px;line-height:13px;}
+.black{color:#000;}
+.color3{color:#333;}
+.color6{color:#666;}
+.color9{color:#999;}
+.mt10{margin-top:10px;}
+.mb10{margin-bottom:10px;}
+.mt15{margin-top:15px;}
+.mt20{margin-top: 20px;}
+.mb20{margin-bottom: 20px;}
+.pt10{padding-top:10px;}
+.pt15{padding-top:15px;}
+.pt20{padding-top:20px;}
+.pb15{padding-bottom:15px;}
+.pb20{padding-bottom: 20px;}
+.txt-c{text-align:center;}
+.omitted {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+/*--//End--*/
+.master_img{width:100%;text-align:center;}
+.master_img img{width:60px;height:60px;-webkit-border-radius:60px;border-radius:60px;}
+.master_text{padding:0 16px;line-height:18px;}
+/*--//End--大师详情--*/
+.craft{}
+/*--//End--工艺详情--*/
+.works-box {padding:0 16px;}
+.works-box .title {padding:18px 0;}
+.works-slider {margin-bottom:0;box-shadow:0 0 0 rgba(0,0,0,.0)}
+.works-slider .am-control-nav {margin-bottom: 22px;}
+.am-slider-a4 .am-control-nav li a {background: #fff;}
+.am-slider-a4 .am-control-nav li a.am-active {background: #f16c39;}
+.works-page{border-bottom: 1px solid #e6e6e6;padding: 18px 0;}
+.works-page h5{margin-bottom: 9px;}
+.works-page .measure{margin-bottom: 16px;}
+.works-page .audio{margin-bottom: 14px;}
+.works-page .audio .audio-page{width: 130px;display: inline-block;}
+.works-page .audio .btn{width: 26px;height: 27px;float: left;border: 1px solid #ededed;border-right-width: 0;outline: none}
+.works-page .audio .btn.play{background: url(../images/icon.png)  6px 4px no-repeat;background-size: 50% auto;}
+.works-page .audio .btn.pause{background: url(../images/iconplay.gif)   no-repeat;background-size: 100% auto;}
+.works-page .audio .time{font-size: 9px;color: #808080;text-align:center;width: 104px;height: 27px;float: left;line-height: 27px;border:1px solid #ededed}
+.works-page .content{margin-bottom: 14px;line-height: 18px;}
+.works-page2 {border-bottom:1px solid #ededed;padding-bottom: 18px;}
+.works-page3 {font-size: 12px;border-bottom:1px solid #ededed;padding-bottom: 18px;}
+.works-page3 li {width:100%;min-height:20px;line-height:20px;float: left;position: relative;}
+.works-page3 li strong {color: #999;position: absolute;top:0;left:0;}
+.works-page3 li span {color: #333;padding-left:60px;float: left;}
+.works-page3 .link {width:90px; line-height:27px;border:2px solid #f16c39; display: inline-block; color: #f16c39; -webkit-border-radius:3px; border-radius:3px; margin-top:16px;}
+
+.works-list .title {
+    line-height:57px;border-bottom:1px solid #ededed;}
+.works-list .ul-col2 {padding:10px;}
+/*--//End--大师作品详情--*/
+.tabs{margin:0;}
+.tabs .nav{display:-webkit-flex;display:flex;border-top:1px solid#e6e6e6;border-bottom:1px solid#e6e6e6;}
+.tabs .nav li{flex:1;height:45px;line-height:45px;position:relative;padding:0 16px;overflow:hidden;}
+.tabs .nav li a{color:#333;font-size:14px;}
+.tabs .nav li.am-active:after{content:'';width:100%;height:2px;background:#f16c39;position:relative;top:-28px;left:0;display:inline-block;line-height:2px;}
+.tabs .items{border:0;background:#f7f7f7;font-size:12px;line-height:16px;}
+
+.ul-col2 li{width:48%;padding-bottom:5px;margin-bottom:10px;border:1px solid#d9d9d9;background:#fff;}
+.ul-col2 li img{width:100%;float:left;}
+.ul-col2 li span{width:100%;float:left;padding:10px;}
+.ul-col2 li:nth-child(odd){float:left;}
+.ul-col2 li:nth-child(even){float:right;}
+.ul-col2 .more{padding:8px 10px;border:2px solid #f16c39; display: inline-block; color: #f16c39; -webkit-border-radius:3px; border-radius:3px; margin-top: 6px;font-size:11px;}
