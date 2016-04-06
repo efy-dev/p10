@@ -39,7 +39,7 @@ public class MasterWorkController {
     @Autowired
     protected BaseManager baseManager;
     HttpClient httpClient = new HttpClient();
-    DefaultHttpClient client = new DefaultHttpClient();
+
 //    static transient String accessToken;
     HttpPost method;
     JSONObject jsonObject = new JSONObject();
@@ -83,6 +83,7 @@ public class MasterWorkController {
 
      private String getAccessToken(String apiurl, String appid, String secret){
 //         method = new HttpPost(GET_TOKEN_URL+"?grant_type=client_credential&appid=" + appid+"&secret="+secret);
+         DefaultHttpClient client = new DefaultHttpClient();
          String turl = String.format("%s?grant_type=client_credential&appid=%s&secret=%s", apiurl,
                                appid, secret);
          HttpGet get = new HttpGet(turl);
@@ -179,32 +180,32 @@ public class MasterWorkController {
             return ticket;
         }
 
-        private String getTicketUrl(String code) throws UnsupportedEncodingException {
-
-            if (runningModel) {
-                ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_str", code);
-            } else {
-                ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_id", 123);
-            }
-            stringEntity = new StringEntity(jsonObject.toJSONString(), "utf-8");
-            stringEntity.setContentType("application/json");
-            method.setEntity(stringEntity);
-            String url = "";
-            try {
-                response = client.execute(method);
-                String json = EntityUtils.toString(response.getEntity());
-                url = (String) JSONObject.parseObject(json).get("url");
-//            url = "*******************";
-                if (url == null) {
-                    url = getTicketUrl(code);
-                }
-            } catch (Throwable e) {
-                e.printStackTrace();
-                System.out.println("重试...................");
-                url = getTicketUrl(code);
-            }
-            return url;
-        }
+//        private String getTicketUrl(String code) throws UnsupportedEncodingException {
+//
+//            if (runningModel) {
+//                ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_str", code);
+//            } else {
+//                ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_id", 123);
+//            }
+//            stringEntity = new StringEntity(jsonObject.toJSONString(), "utf-8");
+//            stringEntity.setContentType("application/json");
+//            method.setEntity(stringEntity);
+//            String url = "";
+//            try {
+//                response = client.execute(method);
+//                String json = EntityUtils.toString(response.getEntity());
+//                url = (String) JSONObject.parseObject(json).get("url");
+////            url = "*******************";
+//                if (url == null) {
+//                    url = getTicketUrl(code);
+//                }
+//            } catch (Throwable e) {
+//                e.printStackTrace();
+//                System.out.println("重试...................");
+//                url = getTicketUrl(code);
+//            }
+//            return url;
+//        }
 
         private  void  downPic(String url){
             try {
