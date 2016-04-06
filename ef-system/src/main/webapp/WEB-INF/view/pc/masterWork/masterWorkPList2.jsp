@@ -66,7 +66,7 @@
                                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formMasterWork2&id=${masterWork.id}"/>"><span
                                                 class="am-icon-pencil-square-o"></span> 链接
                                         </a>
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void (0)" onclick="GetCode('${masterWork.id}')"><span
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void (0)" onclick="GetCode('${masterWork.serial}')"><span
                                                 class="am-icon-pencil-square-o"></span> 生成二维码
                                         </a>
                                     </div>
@@ -137,14 +137,14 @@
         });
     }
 
-    function GetCode(id){
+    function GetCode(serial){
 
         $.ajax({
             type: "post",
-            url: "<c:url value="/masterWork/getCode.do" />",
+            url: "<c:url value="/masterWork/gg.do" />",
             cache: false,
             dataType: "json",
-            data:{"id":id},
+            data:{"serial":serial},
             success: function (data) {
                 alert(data);
             }

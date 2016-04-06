@@ -2,6 +2,9 @@ package com.efeiyi.ec.system.masterWork.controller;
 
 import com.alibaba.fastjson.JSONObject;
 
+import com.efeiyi.ec.master.model.MasterWork;
+import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.XQuery;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
@@ -17,6 +20,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,6 +39,9 @@ import java.util.List;
 @Controller("/")
 public class MasterWorkController {
 
+
+    @Autowired
+    protected BaseManager baseManager;
     HttpClient httpClient = new HttpClient();
     DefaultHttpClient client = new DefaultHttpClient();
 //    static transient String accessToken;
@@ -50,12 +58,12 @@ public class MasterWorkController {
 //    private boolean runningModel = false;
     private boolean runningModel = false;
 
-//    @RequestMapping(value = "/masterWork/getCode.do")
-//    @ResponseBody
+    @RequestMapping(value = "/masterWork/gg.do")
+    @ResponseBody
     public void getCode(HttpServletRequest request) throws Exception {
 
 
-            String id = request.getParameter("id");
+            String serial = request.getParameter("serial");
             String  token = getAccessToken(GET_TOKEN_URL,APP_ID,SECRET);
 
             //永久/临时二维码
@@ -66,7 +74,7 @@ public class MasterWorkController {
                 //临时
                 prepareTempJsonObject();
             }
-           String ticket = getTicket(id,token);
+           String ticket = getTicket(serial,token);
            String root = getClass().getResource("/").getFile().toString()+File.separator+"image";
            getPic(ticket,root);
         }
@@ -125,13 +133,13 @@ public class MasterWorkController {
             jsonObject.put("action_info", scene);
         }
 
-      @RequestMapping(value = "/masterWork/getCode.do",method = RequestMethod.GET)
-      public  String  contact(HttpServletRequest request, HttpServletResponse response) throws IOException {
-          String s = request.getParameter("echostr");
-          System.out.print("echostr ----->"+s);
-//          response.getWriter().write(s);
-          return s;
-      }
+//      @RequestMapping(value = "/masterWork/getCode.do",method = RequestMethod.GET)
+//      public  String  contact(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//          String s = request.getParameter("echostr");
+//          System.out.print("echostr ----->"+s);
+////          response.getWriter().write(s);
+//          return s;
+//      }
 
 
 
@@ -147,7 +155,7 @@ public class MasterWorkController {
                 ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_str", code);
             } else {
                 //临时
-                ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_id", code);
+                ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_id", Integer.parseInt(code));
             }
           try {
               stringEntity = new StringEntity(jsonObject.toJSONString(), "utf-8");
@@ -237,23 +245,41 @@ public class MasterWorkController {
             os.flush();
             os.close();
         }
-//    @RequestMapping(value = "/masterWork/getCode.do")
-//    public String viewMasterWork(HttpServletRequest request,HttpServletResponse response) throws Exception {
-//
-//       InputStream is = request.getInputStream();
-//        byte[] b = new byte[request.getContentLength()];
-//        is.read(b);
-//        String inxml = new String(b);
-////        String outXml =
-//        PrintWriter pw = response.getWriter();
-//        pw.write(outXml);
-//
-//    }
+    @RequestMapping(value = "/masterWork/getCode.do")
+    public String viewMasterWork(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
-//    public String treatWeixinMsg(HttpServletRequest request,String inxml){
-//        Document document = null;
-//        document = DocumentHelper.parseText(inxml);
-//
-//    }
+       InputStream is = request.getInputStream();
+        byte[] b = new byte[request.getContentLength()];
+        is.read(b);
+        String inxml = new String(b);
+        String serial = treatWeixinMsg(request,inxml);
+        XQuery xQuery = new XQuery("listMasterWorkCode_default",request);
+        xQuery.put("serial",serial);
+        List<MasterWork> masterWorkList = baseManager.listObject(xQuery);
+        String id = "";
+        if(masterWorkList!=null){
+            if(masterWorkList.size()>0){
+               id = masterWorkList.get(0).getId();
+            }
+        }
+       return  "redirect:http://master.efeiyi.com/masterBrief/masterWork/"+id;
+
+    }
+
+    public String treatWeixinMsg(HttpServletRequest request,String inxml){
+        Document document = null;
+        try {
+            document = DocumentHelper.parseText(inxml);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        Element root = document.getRootElement();
+        String  serial = root.element("EventKey").getText();
+        if(serial==null){
+            serial = "";
+        }
+        return  serial;
+    }
 
 }
