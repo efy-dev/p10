@@ -261,7 +261,7 @@ public class MasterWorkController {
         String toUserName = jsonObject.get("toUserName").toString();
         String fromUserName = jsonObject.get("fromUserName").toString();
         XQuery xQuery = new XQuery("listMasterWorkCode_default",request);
-        xQuery.put("serial",serial);
+        xQuery.put("serial",serial.split("_")[1]);
         List<MasterWork> masterWorkList = baseManager.listObject(xQuery);
 
         if(masterWorkList!=null){
@@ -313,7 +313,7 @@ public class MasterWorkController {
         if(FromUserName!=null&&!"".equals(FromUserName)){
             jsonObject.put("fromUserName",FromUserName);
         }
-        System.out.print(serial);
+        System.out.print(serial.split("_")[1]);
         return  jsonObject;
     }
 
