@@ -258,7 +258,7 @@ public class MasterWorkController {
         System.out.println(inxml);
         JSONObject jsonObject = treatWeixinMsg(request,inxml);
         String serial = jsonObject.get("serial").toString();
-        if("SCAN".equals(jsonObject.get("event").toString())){
+        if("subscribe".equals(jsonObject.get("event").toString())){
             serial = serial.split("_")[1];
         }
 //        else if("subscribe".equals(jsonObject.get("event").toString())){
