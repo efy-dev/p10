@@ -255,13 +255,19 @@ public class MasterWorkController {
         byte[] b = new byte[request.getContentLength()];
         is.read(b);
         String inxml = new String(b);
-        System.out.print(inxml);
+        System.out.println(inxml);
         JSONObject jsonObject = treatWeixinMsg(request,inxml);
         String serial = jsonObject.get("serial").toString();
+        if("SCAN".equals(jsonObject.get("event").toString())){
+            serial = serial.split("_")[1];
+        }
+//        else if("subscribe".equals(jsonObject.get("event").toString())){
+//
+//        }
         String toUserName = jsonObject.get("toUserName").toString();
         String fromUserName = jsonObject.get("fromUserName").toString();
         XQuery xQuery = new XQuery("listMasterWorkCode_default",request);
-        xQuery.put("serial",serial.split("_")[1]);
+        xQuery.put("serial",serial);
         List<MasterWork> masterWorkList = baseManager.listObject(xQuery);
 
         if(masterWorkList!=null){
@@ -306,6 +312,7 @@ public class MasterWorkController {
         String  serial = root.element("EventKey").getText();
         String  ToUserName = root.element("ToUserName").getText();
         String  FromUserName = root.element("FromUserName").getText();
+        String  event = root.element("Event").getText();
         if(ToUserName!=null&&!"".equals(ToUserName)){
             jsonObject.put("toUserName",ToUserName);
         }
@@ -315,7 +322,10 @@ public class MasterWorkController {
         if(FromUserName!=null&&!"".equals(FromUserName)){
             jsonObject.put("fromUserName",FromUserName);
         }
-        System.out.print(serial.split("_")[1]);
+        if(event!=null&&!"".equals(event)){
+            jsonObject.put("event",event);
+        }
+        System.out.println(serial);
         return  jsonObject;
     }
 
@@ -332,7 +342,7 @@ public class MasterWorkController {
      */
     private  String sendPic(String toUserName,String fromUserName,String title,String content,String imageUrl,String url){
         Document document = DocumentHelper.createDocument();
-        document.setXMLEncoding("utf-8");
+//        document.setXMLEncoding("utf-8");
         Element root = document.addElement("xml");
 
         root.addElement("ToUserName").setText(toUserName);//接收方账号(OpenI)
