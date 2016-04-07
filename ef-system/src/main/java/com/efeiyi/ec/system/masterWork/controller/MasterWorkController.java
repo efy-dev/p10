@@ -49,11 +49,18 @@ public class MasterWorkController {
     public static final String APP_ID = "wx7f6aa253b75466dd";
     public static final String SECRET = "04928de13ab23dca159d235ba6dc19ea";
     public static final String GET_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token";// 获取access
+    public static final String TEMPLATE_ID = "apxbSZVG5NLigbuL_DbXzwo77OgdOuSJ-G2JkLtkT1s";
 
     //true:永久二维码模式；false：临时二维码模式
 //    private boolean runningModel = false;
     private boolean runningModel = false;
 
+    /**
+     * 生成二维码
+     * @param request
+     * @param response
+     * @throws Exception
+     */
     @RequestMapping(value = "/masterWork/gg.do")
     @ResponseBody
     public void getCode(HttpServletRequest request,HttpServletResponse response) throws Exception {
@@ -81,6 +88,14 @@ public class MasterWorkController {
 //        return  "";
         }
 
+
+    /**
+     * 获取token
+     * @param apiurl
+     * @param appid
+     * @param secret
+     * @return
+     */
      private String getAccessToken(String apiurl, String appid, String secret){
 //         method = new HttpPost(GET_TOKEN_URL+"?grant_type=client_credential&appid=" + appid+"&secret="+secret);
          DefaultHttpClient client = new DefaultHttpClient();
@@ -118,6 +133,10 @@ public class MasterWorkController {
                          return result;
                   }
      }
+
+    /**
+     * 临时二维码
+     */
         private void prepareTempJsonObject() {
             jsonObject.put("expire_seconds", "3000");
             jsonObject.put("action_name", "QR_SCENE");
@@ -128,6 +147,9 @@ public class MasterWorkController {
             jsonObject.put("action_info", scene);
         }
 
+    /**
+     * 永久二维码
+     */
         private void preparePermanentJsonObject() {
             jsonObject.put("action_name", "QR_LIMIT_STR_SCENE");
             JSONObject sceneId = new JSONObject();
@@ -145,7 +167,13 @@ public class MasterWorkController {
 //      }
 
 
-
+    /**
+     * 获取ticket
+     * @param code
+     * @param token
+     * @return
+     * @throws IOException
+     */
         private String getTicket(String code,String token) throws IOException {
             String ticket="";
             DefaultHttpClient client1 = new DefaultHttpClient();
@@ -180,61 +208,14 @@ public class MasterWorkController {
             return ticket;
         }
 
-//        private String getTicketUrl(String code) throws UnsupportedEncodingException {
-//
-//            if (runningModel) {
-//                ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_str", code);
-//            } else {
-//                ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_id", 123);
-//            }
-//            stringEntity = new StringEntity(jsonObject.toJSONString(), "utf-8");
-//            stringEntity.setContentType("application/json");
-//            method.setEntity(stringEntity);
-//            String url = "";
-//            try {
-//                response = client.execute(method);
-//                String json = EntityUtils.toString(response.getEntity());
-//                url = (String) JSONObject.parseObject(json).get("url");
-////            url = "*******************";
-//                if (url == null) {
-//                    url = getTicketUrl(code);
-//                }
-//            } catch (Throwable e) {
-//                e.printStackTrace();
-//                System.out.println("重试...................");
-//                url = getTicketUrl(code);
-//            }
-//            return url;
-//        }
 
-        private  void  downPic(String url){
-            try {
-
-            // 创建流
-            BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
-
-            // 生成图片名
-            int index = url.lastIndexOf("/");
-            String sName = url.substring(index+1, url.length());
-            System.out.println(sName);
-            // 存放地址
-            File img = new File("c:"+File.separator+"image");
-            // 生成图片
-            BufferedOutputStream out = new BufferedOutputStream(
-                    new FileOutputStream(img));
-            byte[] buf = new byte[2048];
-            int length = in.read(buf);
-            while (length != -1) {
-                out.write(buf, 0, length);
-                length = in.read(buf);
-            }
-            in.close();
-            out.close();
-        } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-
+    /**
+     * 获取二维码图片
+     * @param ticket
+     * @param root
+     * @return
+     * @throws IOException
+     */
         private byte[] getPic(String ticket,String root) throws IOException {
             File file = new File(root);
             HttpMethod method = new GetMethod("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + ticket);
@@ -254,29 +235,64 @@ public class MasterWorkController {
 //            os.close();
             return b;
         }
-    @RequestMapping(value = "/masterWork/getCode.do")
-    public String viewMasterWork(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
-       InputStream is = request.getInputStream();
+    /**
+     * 服务器url
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/masterWork/getCode.do")
+    public void viewMasterWork(HttpServletRequest request,HttpServletResponse response) throws Exception {
+        String id = "";
+        MasterWork masterWork;
+        String imageUrl = "";
+        String url = "";
+        String xml = "";
+
+        InputStream is = request.getInputStream();
         byte[] b = new byte[request.getContentLength()];
         is.read(b);
         String inxml = new String(b);
         System.out.print(inxml);
-        String serial = treatWeixinMsg(request,inxml);
+        JSONObject jsonObject = treatWeixinMsg(request,inxml);
+        String serial = jsonObject.get("serial").toString();
+        String toUserName = jsonObject.get("toUserName").toString();
+        String fromUserName = jsonObject.get("fromUserName").toString();
         XQuery xQuery = new XQuery("listMasterWorkCode_default",request);
         xQuery.put("serial",serial);
         List<MasterWork> masterWorkList = baseManager.listObject(xQuery);
-        String id = "";
+
         if(masterWorkList!=null){
             if(masterWorkList.size()>0){
                id = masterWorkList.get(0).getId();
+                url = "http://master.efeiyi.com/masterBrief/masterWork/"+id;
+                try {
+                    masterWork = masterWorkList.get(0);
+                    if(masterWork.getPictureUrl()!=null&&!"".equals(masterWork.getPictureUrl())){
+                         imageUrl = "http://pro.efeiyi.com/"+masterWork.getPictureUrl();
+                    }
+                    xml = sendPic(toUserName,fromUserName,masterWork.getName(),masterWork.getDescription(),imageUrl,url);
+                    PrintWriter pw = response.getWriter();
+                    pw.write(xml);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
         }
-       return  "redirect:http://master.efeiyi.com/masterBrief/masterWork/"+id;
-
     }
 
-    public String treatWeixinMsg(HttpServletRequest request,String inxml){
+    /**
+     * 获取code(scene_id)
+     * @param request
+     * @param inxml
+     * @return
+     */
+    public JSONObject treatWeixinMsg(HttpServletRequest request,String inxml){
+        JSONObject jsonObject = new JSONObject();
         Document document = null;
         try {
             document = DocumentHelper.parseText(inxml);
@@ -286,11 +302,48 @@ public class MasterWorkController {
         }
         Element root = document.getRootElement();
         String  serial = root.element("EventKey").getText();
-        System.out.print(serial);
-        if(serial==null){
-            serial = "";
+        String  ToUserName = root.element("ToUserName").getText();
+        String  FromUserName = root.element("FromUserName").getText();
+        if(ToUserName!=null&&!"".equals(ToUserName)){
+            jsonObject.put("toUserName",ToUserName);
         }
-        return  serial;
+        if(serial!=null&&!"".equals(serial)){
+            jsonObject.put("serial",serial);
+        }
+        if(FromUserName!=null&&!"".equals(FromUserName)){
+            jsonObject.put("fromUserName",FromUserName);
+        }
+        System.out.print(serial);
+        return  jsonObject;
+    }
+
+
+    /**
+     * 推送图文信息
+     * @param toUserName
+     * @param fromUserName
+     * @param title
+     * @param content
+     * @param imageUrl
+     * @param url
+     * @return
+     */
+    private  String sendPic(String toUserName,String fromUserName,String title,String content,String imageUrl,String url){
+        Document document = DocumentHelper.createDocument();
+        document.setXMLEncoding("utf-8");
+        Element root = document.addElement("xml");
+
+        root.addElement("ToUserName").setText(toUserName);//接收方账号(OpenI)
+        root.addElement("FromUserName").setText(fromUserName);//开发者微信号
+        root.addElement("CreateTime").setText(Long.toString(System.currentTimeMillis()));//时间
+        root.addElement("MsgType").setText("news");//类型
+        root.addElement("ArticleCount").setText("1");//图文个数
+        Element item = root.addElement("Articles").addElement("item");//第一个为大图
+        item.addElement("Title").add(DocumentHelper.createCDATA(title));
+        item.addElement("Description").add(DocumentHelper.createCDATA(content));
+        item.addElement("PicUrl").add(DocumentHelper.createCDATA(imageUrl));//图片链接
+        item.addElement("Url").add(DocumentHelper.createCDATA(url));//跳转链接
+        return  document.asXML();
     }
 
 }
