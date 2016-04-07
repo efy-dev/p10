@@ -346,8 +346,8 @@ public class MasterWorkController {
         document.setXMLEncoding("utf-8");
         Element root = document.addElement("xml");
 
-        root.addElement("ToUserName").add(DocumentHelper.createCDATA(toUserName));//接收方账号(OpenI)
-        root.addElement("FromUserName").add(DocumentHelper.createCDATA(fromUserName));//开发者微信号
+        root.addElement("ToUserName").setText(fromUserName);//接收方账号(OpenI)
+        root.addElement("FromUserName").setText(toUserName);//开发者微信号
         root.addElement("CreateTime").setText(Long.toString(System.currentTimeMillis()));//时间
         root.addElement("MsgType").add(DocumentHelper.createCDATA("news"));//类型
         root.addElement("ArticleCount").setText("1");//图文个数
