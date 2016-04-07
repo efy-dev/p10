@@ -22,6 +22,7 @@ import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -243,7 +244,7 @@ public class MasterWorkController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/masterWork/getCode.do")
+    @RequestMapping(value = "/masterWork/getCode.do",method = RequestMethod.POST)
     public void viewMasterWork(HttpServletRequest request,HttpServletResponse response) throws Exception {
         String id = "";
         MasterWork masterWork;
@@ -342,7 +343,7 @@ public class MasterWorkController {
      */
     private  String sendPic(String toUserName,String fromUserName,String title,String content,String imageUrl,String url){
         Document document = DocumentHelper.createDocument();
-//        document.setXMLEncoding("utf-8");
+        document.setXMLEncoding("utf-8");
         Element root = document.addElement("xml");
 
         root.addElement("ToUserName").add(DocumentHelper.createCDATA(toUserName));//接收方账号(OpenI)
