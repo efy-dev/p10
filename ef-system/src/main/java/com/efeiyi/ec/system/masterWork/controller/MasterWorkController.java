@@ -270,10 +270,12 @@ public class MasterWorkController {
                 url = "http://master.efeiyi.com/masterBrief/masterWork/"+id;
                 try {
                     masterWork = masterWorkList.get(0);
+                    System.out.println(masterWork.getPictureUrl()+"----"+masterWork.getId()+"---"+masterWork.getName()+"----"+toUserName+"---"+fromUserName);
                     if(masterWork.getPictureUrl()!=null&&!"".equals(masterWork.getPictureUrl())){
                          imageUrl = "http://pro.efeiyi.com/"+masterWork.getPictureUrl();
                     }
                     xml = sendPic(toUserName,fromUserName,masterWork.getName(),masterWork.getDescription(),imageUrl,url);
+                    System.out.println(xml);
                     PrintWriter pw = response.getWriter();
                     pw.write(xml);
 
