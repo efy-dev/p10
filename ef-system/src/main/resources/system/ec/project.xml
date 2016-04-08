@@ -179,7 +179,7 @@
                     execute="com.efeiyi.ec.system.project.controller.ProjectListHandler">
                     <query name="default" label="默认" type="auto" orderBy="serial:asc">
                         <condition label="project主键" name="status" defaultValue="0" operation="ne"/>
-                        <!--<condition label="project类别主键" name="projectCategory.id" defaultValue="0" operation="eq"/>-->
+                        <condition label="project类别主键" name="projectCategory.id" defaultValue="0" operation="eq"/>
                     </query>
                     <query name="default1" label="快速查询" type="auto" orderBy="serial:desc">
                         <condition name="name" operation="like" label="项目名称" inputType="text"/>
