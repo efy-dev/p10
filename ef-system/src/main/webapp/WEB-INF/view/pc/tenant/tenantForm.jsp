@@ -50,14 +50,24 @@
                 </div>
             </div>
 
-        <%--<div class="am-form-group">--%>
-                <%--<label for="fullName" class="am-u-sm-3 am-form-label">中文姓名</label>--%>
+            <div class="am-form-group">
+                <label for="epositBank" class="am-u-sm-3 am-form-label">开户行</label>
 
-                <%--<div class="am-u-sm-9">--%>
-                    <%--<input type="text" id="fullName" name="fullName" placeholder="中文姓名 / FullName"--%>
-                           <%--value="${object.fullName}" required>--%>
-                <%--</div>--%>
-            <%--</div>--%>
+                <div class="am-u-sm-9">
+                    <input type="text" pattern="^\d{0,20}$" id="epositBank" name="epositBank" placeholder="开户行(请填写数字格式)"
+                           value="${object.epositBank}" maxlength="20">
+                </div>
+            </div>
+
+
+            <div class="am-form-group">
+                <label for="account" class="am-u-sm-3 am-form-label">账号</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" pattern="^\d{0,20}$" id="account" name="account" placeholder="账号(请填写数字格式)"
+                           value="${object.account}" maxlength="20">
+                </div>
+            </div>
 
             <%--<div class="am-form-group">--%>
                 <%--<label for="background" class="am-u-sm-3 am-form-label">背景图片(移动网站背景图片)</label>--%>
