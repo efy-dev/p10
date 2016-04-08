@@ -1,7 +1,9 @@
 package com.efeiyi.ec.personal.master.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.efeiyi.ec.master.model.*;
+import com.efeiyi.ec.master.model.MasterIntroduction;
+import com.efeiyi.ec.master.model.MasterProject;
+import com.efeiyi.ec.master.model.MasterWork;
+import com.efeiyi.ec.master.model.MasterWorkPraise;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.personal.AuthorizationUtil;
@@ -9,10 +11,6 @@ import com.efeiyi.ec.personal.master.model.MasterWorkModel;
 import com.efeiyi.ec.personal.master.utils.ConvertWorkModel;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.hibernate.envers.internal.tools.StringTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -122,15 +119,4 @@ public class MasterBriefController {
         return work.getPraiseStatus();
     }
 
-	@ResponseBody
-	@RequestMapping("/wx")
-	public String weixin(HttpServletRequest request) throws IOException {
-        String json = "{\"expire_seconds\":604800,\"action_name\":\"QR_SCENE\",\"action_info\": {\"scene\": {\"scene_id\": 1234}}}";
-        JSONObject TOKENPOST = (JSONObject) JSONObject.parse(json);
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpPost post = new HttpPost("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token="+TOKENPOST.toJSONString());
-        HttpResponse response = httpClient.execute(post);
-
-		return null;
-	}
 }
