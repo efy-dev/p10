@@ -36,6 +36,8 @@ public class BigTenant implements Serializable,BaseTenant {
     private String status;
     private String serial;//商家编号
     private String contractNumber;//商家合同号
+    private String epositBank;//开户行
+    private String account;//账号
     //个人信息
     private String identity; // 身份证号
     private String frontPhotoUrl;//正面照片
@@ -249,6 +251,23 @@ public class BigTenant implements Serializable,BaseTenant {
 
     public void setContractNumber(String contractNumber) {
         this.contractNumber = contractNumber;
+    }
+
+    @Column(name = "eposit_bank")
+    public String getEpositBank() {
+        return epositBank;
+    }
+
+    public void setEpositBank(String epositBank) {
+        this.epositBank = epositBank;
+    }
+    @Column(name = "account")
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     @Override

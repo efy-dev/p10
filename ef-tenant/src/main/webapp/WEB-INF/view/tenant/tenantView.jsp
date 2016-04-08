@@ -38,6 +38,12 @@
                 </td>
             </tr>
             <tr>
+                <td class="am-primary am-u-md-3">开行户</td>
+                <td class="am-u-md-3">${object.epositBank}</td>
+                <td class="am-primary am-u-md-3">账号</td>
+                <td class="am-u-md-3" colspan="3">${object.account}</td>
+            </tr>
+            <tr>
                 <td class="am-primary am-u-md-3" width="25%">商家地址</td>
                 <td class="am-u-md-3" width="25%">${object.address}</td>
             </tr>
@@ -46,6 +52,7 @@
                 <td class="am-u-md-3" colspan="3">${object.content}</td>
 
             </tr>
+
             </tbody>
         </table>
 

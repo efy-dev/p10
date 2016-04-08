@@ -40,6 +40,12 @@
                 <td class="am-primary am-u-md-3">商家合同号</td>
                 <td class="am-u-md-3" colspan="3">${object.contractNumber}</td>
             </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">开行户</td>
+                <td class="am-u-md-3">${object.epositBank}</td>
+                <td class="am-primary am-u-md-3">账号</td>
+                <td class="am-u-md-3" colspan="3">${object.account}</td>
+            </tr>
             </tbody>
         </table>
 
