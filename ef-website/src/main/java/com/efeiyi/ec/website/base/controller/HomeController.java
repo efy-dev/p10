@@ -1,7 +1,10 @@
 package com.efeiyi.ec.website.base.controller;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.project.model.ProjectCategory;
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.ming800.core.base.service.BaseManager;
@@ -26,10 +29,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -215,6 +217,51 @@ public class HomeController {
             }
         }
         return "recorded";
+    }
+    @RequestMapping({"/count.do"})
+    public String count(HttpServletRequest request,HttpServletResponse response,Model model) throws ParseException {
+        Date dateNow = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd");
+        String dateStr = formatter.format(dateNow);
+        String dateParam = dateStr+"%";
+        Date date = formatter.parse(dateStr);
+        List<PurchaseOrder> purchaseOrderList = getPurchaseOrderList(dateParam);
+        List<PurchaseOrderPayment> purchaseOrderPaymentList = getPurchaseOrderPaymentList(dateParam);
+        List<User> userList = getRegisterList(dateParam);
+        model.addAttribute("registerCount", userList.size());
+        model.addAttribute("purchaseOrderCount",purchaseOrderList.size());
+        model.addAttribute("purchaserPaymentCount",purchaseOrderPaymentList.size());
+        model.addAttribute("date",dateStr);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        Date yesterday = calendar.getTime();
+        dateStr = formatter.format(yesterday);
+        dateParam = dateStr+"%";
+        purchaseOrderList = getPurchaseOrderList(dateParam);
+        purchaseOrderPaymentList = getPurchaseOrderPaymentList(dateParam);
+        userList = getRegisterList(dateParam);
+        model.addAttribute("yesterday",dateStr);
+        model.addAttribute("yesterdayRegisterCount",userList.size());
+        model.addAttribute("yesterdayPurchaseOrderCount",purchaseOrderList.size());
+        model.addAttribute("yesterdayPurchasePaymentCount",purchaseOrderPaymentList.size());
+        return "/count";
+    }
+    private  List getPurchaseOrderList(String str){
+        String query = "FROM PurchaseOrder p WHERE p.createDatetime like '"+str+"' AND p.status != 0";
+        List<PurchaseOrder> purchaseOrderList = baseManager.listObject(query);
+        return purchaseOrderList;
+    }
+    private List getRegisterList(String str){
+        String query = "FROM User u WHERE u.createDatetime like '"+str+"' AND u.status != 0";
+        List<User> userList = baseManager.listObject(query);
+        return userList;
+    }
+    private List getPurchaseOrderPaymentList(String str){
+        String query = "FROM PurchaseOrderPayment p WHERE p.createDateTime like '"+str+"' AND p.status = 2";
+        List<PurchaseOrderPayment> list = baseManager.listObject(query);
+        return list;
+
     }
 
 }
