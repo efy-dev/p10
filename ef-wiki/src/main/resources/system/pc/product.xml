@@ -124,6 +124,13 @@
                                    inputType="dialog_pop" key="category"/>
                     </query>
                 </do>
+                <do name="listProductModel" label="商品列表" model="com.efeiyi.ec.product.model.ProductModel">
+                    <query name="default" label="推荐商品列表" type="auto" >
+                            <condition name="status" defaultValue="0" operation="ne"/>
+                            <condition name="product.status" defaultValue="1" operation="eq"/>
+                            <condition name="product.project.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
                 <do name="plistTProductModel" access="" label="产品分页列表"
                     result="/product/subjectProductModelPList"
                     execute="com.efeiyi.ec.system.product.controller.PListTProductModelHandler">
@@ -152,17 +159,17 @@
                     </query>
                 </do>
                 <do name="removeProductModel" label="删除产品" access="" result="json"/>
-                <do name="listProductModel" label="产品列表" access="" result="/productModel/productModelList">
-                    <query name="default4" label="默认规格" type="auto" orderBy="id:desc">
-                        <condition name="product.id" defaultValue="0" operation="eq"/>
-                        <condition name="status" defaultValue="3" operation="eq"/>
-                    </query>
-                </do>
-                <do name="listProductModel" label="产品列表" access="" result="/productModel/productModelList">
-                    <query name="default5" label="默认规格" type="auto" orderBy="id:desc">
-                        <condition name="product.id" defaultValue="0" operation="eq"/>
-                    </query>
-                </do>
+                <!--<do name="listProductModel" label="产品列表" access="" result="/productModel/productModelList">-->
+                    <!--<query name="default4" label="默认规格" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="product.id" defaultValue="0" operation="eq"/>-->
+                        <!--<condition name="status" defaultValue="3" operation="eq"/>-->
+                    <!--</query>-->
+                <!--</do>-->
+                <!--<do name="listProductModel" label="产品列表" access="" result="/productModel/productModelList">-->
+                    <!--<query name="default5" label="默认规格" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="product.id" defaultValue="0" operation="eq"/>-->
+                    <!--</query>-->
+                <!--</do>-->
             </does>
         </entity>
         <entity name="ProductRecommended" label="推荐产品列表"

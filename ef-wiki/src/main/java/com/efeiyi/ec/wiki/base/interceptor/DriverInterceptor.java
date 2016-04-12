@@ -1,4 +1,4 @@
-package com.efeiyi.ec.wiki.interceptor;
+package com.efeiyi.ec.wiki.base.interceptor;
 
 import com.ming800.core.util.HttpUtil;
 import org.springframework.web.servlet.ModelAndView;
@@ -8,10 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by Administrator on 2015/7/20.
+ * Created by Administrator on 2016/4/12.
  */
 public class DriverInterceptor extends HandlerInterceptorAdapter {
-
     public void postHandle(HttpServletRequest request,
                            HttpServletResponse response, Object o, ModelAndView mav)
             throws Exception {
@@ -35,6 +34,4 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
 
         return true;
     }
-
-
 }

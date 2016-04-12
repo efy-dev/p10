@@ -282,17 +282,23 @@
                         <condition name="project.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
+                <do name="listMasterProject" access="" label="MasterProject列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="project.id" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
 
                 <do name="removeMasterProject" label="删除MasterProject" access="" result="json"/>
                 <do name="formMasterProject" label="保存MasterProject" access="" result="/masterProject/masterProjectForm"/>
                 <do name="saveOrUpdateMasterProject" label="保存MasterProject" access="" result="/masterProject/masterProjectSaveSuccess"/>
-                <do name="listMasterProject" label="MasterProject列表" access="" result="/masterProject/masterProjectList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="master.id" defaultValue="1" operation="eq"/>
-                    </query>
-                </do>
+                <!--<do name="listMasterProject" label="MasterProject列表" access="" result="/masterProject/masterProjectList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="id" defaultValue="" operation="eq"/>-->
+                        <!--<condition name="status" defaultValue="1" operation="eq"/>-->
+                        <!--<condition name="master.id" defaultValue="1" operation="eq"/>-->
+                    <!--</query>-->
+                <!--</do>-->
 
             </does>
         </entity>
