@@ -84,9 +84,7 @@
                                ${masterWork.master.fullName}
                             </td>
                             <td class="am-hide-sm-only" width="10%">
-                                <a href="/Img/imgUrl.do?imgUrl=http://tenant.efeiyi.com/${masterWork.pictureUrl}">
-                                  <img  width="10%"  src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-manage-banner" >
-                                </a>
+                                  <img  width="50%"  src="http://pro.efeiyi.com/${masterWork.pictureUrl}@!product-model" >
                             </td>
                             <%--<td class="am-hide-sm-only">--%>
                                    <%--${masterWork.brief}--%>
