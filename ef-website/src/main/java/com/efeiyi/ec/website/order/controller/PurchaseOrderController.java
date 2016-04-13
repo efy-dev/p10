@@ -250,9 +250,11 @@ public class PurchaseOrderController extends BaseController {
 
 
     /**
-     * 生成订单
      *
+     * @param request
+     * @param model
      * @return
+     * @throws Exception
      */
     @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {

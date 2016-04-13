@@ -1,37 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="<c:url value='/resources/js/alert.js'/>"></script>
+<script src="<c:url value="/resources/assets/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/js/ef.util.js"/>"></script>
+<script src="<c:url value="/scripts/js/myorder.js?v=929"/>"></script>
 <script src="<c:url value="/scripts/js/system.js?v=929"/>"></script>
 <div class="footernew wh">
-    <div class="publ-top hd">
-        <dl class="city">
-            <dt>正</dt>
-            <dd>
-                <p>诚&nbsp;品&nbsp;保&nbsp;真</p>
-                <p>非&nbsp;遗&nbsp;佳&nbsp;作</p>
-            </dd>
-        </dl>
-        <dl class="city">
-            <dt>七</dt>
-            <dd>
-                <p>无&nbsp;忧&nbsp;售&nbsp;后</p>
-                <p>七&nbsp;天&nbsp;退&nbsp;换</p>
-            </dd>
-        </dl>
-        <dl class="city">
-            <dt>专</dt>
-            <dd>
-                <p>文&nbsp;化&nbsp;垂&nbsp;直</p>
-                <p>专&nbsp;注&nbsp;非&nbsp;遗</p>
-            </dd>
-        </dl>
-        <dl class="city">
-            <dt>省</dt>
-            <dd>
-                <p>省&nbsp;时&nbsp;省&nbsp;力</p>
-                <p>省&nbsp;钱&nbsp;省&nbsp;心</p>
-            </dd>
-        </dl>
-    </div>
     <div class="servicenew wh">
         <div class="hd tct">
             <div class=" foremax">
