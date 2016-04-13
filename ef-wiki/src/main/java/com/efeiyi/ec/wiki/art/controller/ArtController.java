@@ -5,14 +5,13 @@ import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
-import com.efeiyi.ec.project.model.ProjectRecommended;
-import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
-import com.efeiyi.ec.wiki.model.ProjectModel;
+import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +24,8 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/4/12.
  */
-public class ProjectCategoryController {
+
+public class ArtController extends BaseController {
 
     @Autowired
     BaseManager baseManager;
