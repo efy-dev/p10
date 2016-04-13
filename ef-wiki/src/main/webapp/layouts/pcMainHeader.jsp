@@ -20,10 +20,10 @@
 <!-- Tile icon for Win8 (144x144 + tile color) -->
 <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
 <meta name="msapplication-TileColor" content="#0e90d2">
-<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/amazeui.min.css?v=20150831'/>">
-<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/app.css?v=20150831'/>">
-<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia.css?v=20150831'/>">
-<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia3.css?v=20150831'/>">
+<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/amazeui.min.css?v=20150831'/>">
+<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/app.css?v=20150831'/>">
+<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/craft.css?v=20150831'/>">
+<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/craft.scss?v=20150831'/>">
 <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value='/resources/assets/js/jquery.min.js?v=20150831'/>"></script>
@@ -35,5 +35,6 @@
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <!--自定义js--Start-->
-<script src="<c:url value='/scripts/assets/pc/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/pc/js/cyclopedia.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/js/jquery.min.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/js/amazeui.min.js?v=20150831'/>"></script>
