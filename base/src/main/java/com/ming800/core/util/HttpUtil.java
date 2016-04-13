@@ -1,13 +1,19 @@
 package com.ming800.core.util;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.concurrent.FutureCallback;
+import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
+import org.apache.http.impl.nio.client.HttpAsyncClients;
+import sun.net.www.http.HttpClient;
+
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+import java.util.concurrent.Future;
 
 /**
  * Created by Administrator on 2015/1/28.
@@ -111,5 +117,26 @@ public class HttpUtil {
 //        }
 
         return jsonUserStr;
+    }
+
+    public static void getHttpResponseByAsynchronous(String urlStr){
+        CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault();
+//        Httpclient httpclient = new HttpClient();
+        try {
+            httpclient.start();
+            HttpPost request = new HttpPost(urlStr);
+            Future<HttpResponse> future = httpclient.execute(request, null);
+            HttpResponse response = future.get();
+            System.out.println("Response: " + response.getStatusLine());
+            System.out.println("Shutting down");
+        }catch (Exception e){
+
+        } finally {
+            try {
+                httpclient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

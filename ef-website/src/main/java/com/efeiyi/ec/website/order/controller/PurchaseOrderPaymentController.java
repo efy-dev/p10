@@ -8,6 +8,7 @@ import com.efeiyi.ec.website.order.model.WxPayConfig;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.p.PConst;
 import com.ming800.core.util.HttpUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +88,8 @@ public class PurchaseOrderPaymentController {
                 if (purchaseOrder.getOrderType() != null && purchaseOrder.getOrderType().equals("3")) {  //礼品卷
                     orderStatus = PurchaseOrder.ORDER_STATUS_WRGIFT;
                 } else if (purchaseOrder.getOrderType() != null && purchaseOrder.getOrderType().equals("4")) {  //团购
-                    orderStatus = PurchaseOrder.ORDER_STATUS_WAIT_GROUP;
+                    orderStatus = PurchaseOrder.ORDER_STATUS_WRECEIVE;
+                    HttpUtil.getHttpResponseByAsynchronous(purchaseOrder.getCallbackBussiness());
                 } else {
                     orderStatus = PurchaseOrder.ORDER_STATUS_WRECEIVE;
                 }
@@ -100,6 +102,9 @@ public class PurchaseOrderPaymentController {
                     if (purchaseOrder == null) {
                         purchaseOrder = ((PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrderPaymentDetails.getPurchaseOrderPayment().getId())).getPurchaseOrder();
                     }
+                    purchaseOrder.setOrderStatus(orderStatus); //改变订单状态为待收货状态
+                    baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+
                     if (purchaseOrder.getSubPurchaseOrder() != null && purchaseOrder.getSubPurchaseOrder().size() > 0) {
                         //同时修改子订单状态
                         for (PurchaseOrder purchaseOrderTemp : purchaseOrder.getSubPurchaseOrder()) {
@@ -111,9 +116,7 @@ public class PurchaseOrderPaymentController {
                         purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() - purchaseOrderProduct.getPurchaseAmount());
                         baseManager.saveOrUpdate(ProductModel.class.getName(), purchaseOrderProduct.getProductModel());
                     }
-                    purchaseOrder.setOrderStatus(orderStatus); //改变订单状态为待收货状态
                     baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
-                    baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
                 }
             }
         } catch (Exception e) {
@@ -134,7 +137,7 @@ public class PurchaseOrderPaymentController {
     @RequestMapping({"/pay/weixin/{orderId}"})
     public String wxPay(HttpServletRequest request, @PathVariable String orderId) throws Exception {
         //@TODO 添加订单数据部分
-        String redirect_uri = "http://www.efeiyi.com/order/pay/wxParam/" + orderId;
+        String redirect_uri = PConst.WEBURL + "/order/pay/wxParam/" + orderId;
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
@@ -175,7 +178,7 @@ public class PurchaseOrderPaymentController {
             model.addAttribute("purchaseOrderPaymentDetails", purchaseOrderPaymentDetails);
             return "/order/wxpay";
         } catch (Exception e) {
-            return "redirect:http://i.efeiyi.com";
+            return "redirect:" + PConst.PERSONALURL;
         }
     }
 
@@ -291,7 +294,7 @@ public class PurchaseOrderPaymentController {
         model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
 
         if ("3".equals(purchaseOrder.getPayWay())) {
-            return "redirect:http://www2.efeiyi.com/sharePage/productShare/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
+            return "redirect:"+ PConst.WEBURL +"/sharePage/productShare/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
         } else {
             //return "/purchaseOrder/paySuccess";
             if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback() != null) {

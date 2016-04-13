@@ -53,6 +53,7 @@ public class PurchaseOrder {
     private String receiverName;//收货人姓名
     private String receiverPhone;//收货人联系方式
     private String callback; //回调
+    private String callbackBussiness;//业务层回调地址
     private String orderType; // 1.普通类型 2.秒杀类型 3.礼品卷类型 4.团购类型 5.企业礼品卡类型
     private String source;//来源推广渠道
     private User user;                                              //订单所属用户
@@ -123,6 +124,15 @@ public class PurchaseOrder {
 
     public void setCallback(String callback) {
         this.callback = callback;
+    }
+
+    @Column(name = "callback_bussiness")
+    public String getCallbackBussiness() {
+        return callbackBussiness;
+    }
+
+    public void setCallbackBussiness(String callbackBussiness) {
+        this.callbackBussiness = callbackBussiness;
     }
 
     @Column(name = "purchase_order_address")

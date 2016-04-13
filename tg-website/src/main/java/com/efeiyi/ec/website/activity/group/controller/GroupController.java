@@ -14,6 +14,9 @@ import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.PConst;
+import com.ming800.core.util.HttpUtil;
+import org.apache.http.HttpResponse;
+import org.apache.http.concurrent.FutureCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,8 +57,10 @@ public class GroupController {
     @ResponseBody
     public boolean checkOrder(HttpServletRequest request) {
         String purchaseOrderId = request.getParameter("purchaseOrderId");
+        String groupMemberId = request.getParameter("groupMemberId");
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
-        if (purchaseOrder.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRECEIVE)) {
+        GroupMember groupMember = (GroupMember) baseManager.getObject(GroupMember.class.getName(), groupMemberId);
+        if (purchaseOrder.getOrderStatus().equals(PurchaseOrder.ORDER_STATUS_WRECEIVE) && groupMember.getStatus().equals("1") && groupMember.getMyGroup() != null) {
             return true;
         } else {
             return false;
@@ -98,7 +103,7 @@ public class GroupController {
         String groupProductId = request.getParameter("groupProductId");
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
-        boolean flag = groupManager.updateGroup(groupId, memberId, purchaseOrderId);
+        /*boolean flag = groupManager.updateGroup(groupId, memberId, purchaseOrderId);
 
 
         if (flag) {
@@ -123,7 +128,7 @@ public class GroupController {
             if((myGroup.getStatus().equals("1")||myGroup.getStatus().equals("4")) && (list1.size() > 1)){
                 groupManager.sendSms(groupId, purchaseOrderId);
             }
-        }
+        }*/
         String url = "?groupProductId=" + groupProductId + "&groupId=" + groupId + "&memberId=" + memberId + "&purchaseOrderId=" + purchaseOrderId;
         return "redirect:/group/shareGroup.do" + url;
     }
@@ -312,5 +317,41 @@ public class GroupController {
         }
     }
 
+    //入团操作
+    @RequestMapping(value = "/updateGroup")
+    @ResponseBody
+    public String updateGroup(HttpServletRequest request) throws Exception {
+        String purchaseOrderId = request.getParameter("purchaseOrderId");
+        String groupProductId = request.getParameter("groupProductId");
+        String groupId = request.getParameter("groupId");
+        String memberId = request.getParameter("memberId");
+        boolean flag = groupManager.updateGroup(groupId, memberId, purchaseOrderId);
+
+
+        if (flag) {
+            MyGroup myGroup = (MyGroup) baseManager.getObject(MyGroup.class.getName(),groupId);
+            //查看是否人数够
+            XQuery xQuery1 = new XQuery("listMember_default1", request);
+            xQuery1.put("myGroup_id", groupId);
+            List<GroupMember> list1 = baseManager.listObject(xQuery1);
+            if (myGroup.getStatus().equals("1") && (list1.size() == myGroup.getGroupProduct().getMemberAmount())) {
+                myGroup.setStatus("4");
+                baseManager.saveOrUpdate(MyGroup.class.getName(), myGroup);
+
+                //成团，修改团购订单状态为待发货
+                XQuery xQuery = new XQuery("listPurchaseOrderGroup_default2", request);
+                xQuery.put("myGroup_id", groupId);
+                List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
+                for (PurchaseOrderGroup purchaseOrderGroup : list) {
+                    purchaseOrderGroup.setOrderStatus("5");
+                    baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(), purchaseOrderGroup);
+                }
+            }
+            if((myGroup.getStatus().equals("1")||myGroup.getStatus().equals("4")) && (list1.size() > 1)){
+                groupManager.sendSms(groupId, purchaseOrderId);
+            }
+        }
+        return "";
+    }
 
 }

@@ -45,7 +45,7 @@
         $.ajax({
             type: "get",//设置get请求方式
             url: "<c:url value="/group/checkOrder.do"/>",//设置请求的脚本地址
-            data: {"purchaseOrderId":"${purchaseOrderId}"},//设置请求的数据
+            data: {"purchaseOrderId":"${purchaseOrderId}","groupMemberId":"${memberId}"},//设置请求的数据
             async: true,
             dataType: "json",//设置请求返回的数据格式
             success: function (data) {

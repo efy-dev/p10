@@ -86,7 +86,7 @@
         display: none;
     }
     .MEIQIA-ICON {
-        background:url(http://j.efeiyi.com/tg-website/scripts/wap/images/qq.png) no-repeat -176px -143px;
+        background:url(http://a.efeiyi.com/scripts/wap/images/qq.png) no-repeat -176px -143px;
     }
     #MEIQIA-BTN-ICON {
         width: 23px;

@@ -758,3 +758,9 @@ PRIMARY KEY (`id`)
 ------------订单增加运费字段-----------------
 ALTER TABLE `purchase_order`
 ADD COLUMN `freight`  decimal(10,2) NULL AFTER `address_city_id`;
+
+------------订单增加业务回调字段----------------
+ALTER TABLE `purchase_order`
+ADD COLUMN `callback_bussiness`  varchar(255) NULL AFTER `freight`;
+
+

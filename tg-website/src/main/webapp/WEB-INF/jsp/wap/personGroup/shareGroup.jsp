@@ -86,7 +86,11 @@
               </span></div></div></li>
           <c:forEach items="${group.groupProduct.productModel.product.productPictureList}" var="picture">
             <c:if test="${picture.status=='1'&&picture.productModel.id==group.groupProduct.productModel.id}">
-              <li class="clone c-page" aria-hidden="true" style="width: 320px; float: left; display: block;"><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"><div class="c-page"><span>${group.groupProduct.productModel.product.name}[${group.groupProduct.productModel.name}]</span></div></div></li>
+              <li class="clone c-page" aria-hidden="true" style="width: 320px; float: left; display: block;"><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"><div class="c-page"><span>${group.groupProduct.productModel.product.name}
+                <c:if test="${(group.groupProduct.productModel.product.productModelList.size()>1)&&(null!=group.groupProduct.productModel.name)&&(''!=group.groupProduct.productModel.name)}">
+                  [${group.groupProduct.productModel.name}]
+                </c:if>
+              </span></div></div></li>
             </c:if>
           </c:forEach>
         </ul>
