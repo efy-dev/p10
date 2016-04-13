@@ -30,7 +30,7 @@
   <!-- //End--breadcrumb-->
     <div class="explain" height="22px">
         <div class="title">
-            <img src="http://pro.efeiyi.com/${project.picture_url}@!project-pc-view" alt=""/>
+            <img src="http://wiki-oss.efeiyi.com/${project.picture_url}@!project-pc-view" alt=""/>
         </div>
         <div class="info">
             <%--<c:if test="${fn:length(project.description)>186}">${fn:substring(project.description,0 ,186 )}......</c:if><c:if test="${fn:length(project.description)<=186}">${project.description}</c:if>--%>
