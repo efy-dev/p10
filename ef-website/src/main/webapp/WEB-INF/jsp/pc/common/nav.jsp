@@ -51,8 +51,8 @@
 </div>
 
 <div class="nav2016">
-    <div class="hd">
-        <div id="cate" class="cate">
+    <div class="hd" id="cate">
+        <div class="cate" >
             <div class="dt"><span href="" title="非遗">全部商品<i class="icon2016 icon-arrow"></i></span></div>
             <jsp:include page="/productCategory.do" flush="true"/>
         </div>
