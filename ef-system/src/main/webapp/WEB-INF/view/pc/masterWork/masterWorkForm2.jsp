@@ -272,7 +272,7 @@
             ],
 
             upload:{
-                url:"<c:url value="/task/img.do" />",
+                url:"<c:url value="/task/img.do?project=garden" />",
                 params:""
             },
             pasteImage:true,

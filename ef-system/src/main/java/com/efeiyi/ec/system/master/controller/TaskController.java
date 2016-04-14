@@ -36,7 +36,6 @@ public class TaskController extends BaseController {
 
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-        // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
         String url = "";
@@ -47,17 +46,23 @@ public class TaskController extends BaseController {
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
             if(fileName.indexOf(".")==-1){
-                url = "taskPicture/jietu"+identify+".jpg";
+                url = "masterWork/jietu"+identify+".jpg";
             }else {
                 String hz = fileName.substring(fileName.indexOf("."), fileName.length());
                 String imgName = fileName.substring(0, fileName.indexOf(hz));
-                url = "taskPicture/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
+                url = "masterWork/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
             }
 
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
-//                 data += "\"name\":\""+imgName+"\",\"originalName\",\""+fileName+"\",\"size\":"+mf.getSize()+",\"status\":\"SUCCESS\",\"type\":\""+hz+"\",\"url\":\""+url+"\"}";
-                data = "{\"success\":\"" + true + "\",\"file_path\":\"http://pro.efeiyi.com/" +url + "\"}";
+                System.out.println(request.getParameter("project"));
+                if(request.getParameter("project").equals("craft")){
+                    data = "{\"success\":\"" + true + "\",\"file_path\":\"wiki-oss.efeiyi.com/" +url + "\"}";
+                }else {
+                    data = "{\"success\":\"" + true + "\",\"file_path\":\"http://pro.efeiyi.com/" +url + "\"}";
+                }
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
