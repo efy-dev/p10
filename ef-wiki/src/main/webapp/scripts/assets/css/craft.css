@@ -4,11 +4,11 @@
  *time:2016-04-13
  *
 */
-.fl, .min-logo, .topic, .topic .bd-list, .topic .topic-txt, .craft-list2016 .craft-list, .craft-list2016 .craft-list .list, .craft-list2016 .craft-list .list li, .craft-list2016 .craft-list .list li a .list-content, .craft-list2016 .craft-list .list li a .list-content .name, .craft-list2016 .craft-list .list li a .list-content .title, .craft-list2016 .craft-list .list li a img, .craft-particulars2016, .craft-particulars2016 .craft-crumbs, .craft-particulars2016 .craft-crumbs .particulars .crumbs, .craft-particulars2016 .user, .craft-particulars2016 .user .skill .page, .craft-particulars2016 .user .skill .page .txt-page, .craft-particulars2016 .user .skill .page .txt-page .name, .craft-particulars2016 .user .skill .page .txt-page .rank, .craft-particulars2016 .user .skill .page .txt-page .area, .craft-particulars2016 .user .skill .page .pic-page .user-pic, .craft-particulars2016 .user .skill .page .pic-page .user-pic a img, .craft-particulars2016 .user .skill .page .pic-page .user-pic a .user-txt, .craft-particulars2016 .user .skill .page .pic-page .wechat img, .craft-particulars2016 .user .skill .page .pic-page .wechat .user-wechat, .craft-particulars2016 .introduce, .craft-particulars2016 .introduce .craft-introduce .txt {
+.fl, .min-logo, .footer2016, .topic, .topic .bd-list, .topic .topic-txt, .craft-list2016 .craft-list, .craft-list2016 .craft-list .list, .craft-list2016 .craft-list .list li, .craft-list2016 .craft-list .list li a .list-content, .craft-list2016 .craft-list .list li a .list-content .name, .craft-list2016 .craft-list .list li a .list-content .title, .craft-list2016 .craft-list .list li a img, .craft-particulars2016, .craft-particulars2016 .craft-crumbs, .craft-particulars2016 .craft-crumbs .particulars .crumbs, .craft-particulars2016 .user, .craft-particulars2016 .user .skill .page, .craft-particulars2016 .user .skill .page .txt-page, .craft-particulars2016 .user .skill .page .txt-page .name, .craft-particulars2016 .user .skill .page .txt-page .rank, .craft-particulars2016 .user .skill .page .txt-page .area, .craft-particulars2016 .user .skill .page .pic-page .user-pic, .craft-particulars2016 .user .skill .page .pic-page .user-pic a img, .craft-particulars2016 .user .skill .page .pic-page .user-pic a .user-txt, .craft-particulars2016 .user .skill .page .pic-page .wechat img, .craft-particulars2016 .user .skill .page .pic-page .wechat .user-wechat, .craft-particulars2016 .introduce, .craft-particulars2016 .introduce .craft-introduce .txt {
   float: left;
 }
 
-.wb, .topic, .craft-list2016 .craft-list, .craft-list2016 .craft-list .list li a .list-content, .craft-list2016 .craft-list .list li a .list-content .name, .craft-list2016 .craft-list .list li a .list-content .title, .craft-list2016 .craft-list .list li a img, .craft-particulars2016, .craft-particulars2016 .craft-crumbs, .craft-particulars2016 .craft-crumbs .particulars .crumbs, .craft-particulars2016 .user, .craft-particulars2016 .user .skill .page, .craft-particulars2016 .user .skill .page .txt-page, .craft-particulars2016 .user .skill .page .txt-page .name, .craft-particulars2016 .user .skill .page .txt-page .rank, .craft-particulars2016 .user .skill .page .txt-page .area, .craft-particulars2016 .user .skill .page .pic-page .user-pic a img, .craft-particulars2016 .user .skill .page .pic-page .user-pic a .user-txt, .craft-particulars2016 .user .skill .page .pic-page .user-pic a .user-txt p, .craft-particulars2016 .user .skill .page .pic-page .wechat img, .craft-particulars2016 .user .skill .page .pic-page .wechat .user-wechat, .craft-particulars2016 .introduce, .craft-particulars2016 .introduce .craft-introduce .txt {
+.wb, .footer2016, .topic, .craft-list2016 .craft-list, .craft-list2016 .craft-list .list li a .list-content, .craft-list2016 .craft-list .list li a .list-content .name, .craft-list2016 .craft-list .list li a .list-content .title, .craft-list2016 .craft-list .list li a img, .craft-particulars2016, .craft-particulars2016 .craft-crumbs, .craft-particulars2016 .craft-crumbs .particulars .crumbs, .craft-particulars2016 .user, .craft-particulars2016 .user .skill .page, .craft-particulars2016 .user .skill .page .txt-page, .craft-particulars2016 .user .skill .page .txt-page .name, .craft-particulars2016 .user .skill .page .txt-page .rank, .craft-particulars2016 .user .skill .page .txt-page .area, .craft-particulars2016 .user .skill .page .pic-page .user-pic a img, .craft-particulars2016 .user .skill .page .pic-page .user-pic a .user-txt, .craft-particulars2016 .user .skill .page .pic-page .user-pic a .user-txt p, .craft-particulars2016 .user .skill .page .pic-page .wechat img, .craft-particulars2016 .user .skill .page .pic-page .wechat .user-wechat, .craft-particulars2016 .introduce, .craft-particulars2016 .introduce .craft-introduce .txt {
   width: 100%;
 }
 
@@ -43,6 +43,16 @@
   background: #fafafa;
   border-top-width: 0;
   border-bottom-width: 0;
+}
+
+/*
+ *name:工艺通用底部
+ *time:2016-04-13
+ *
+*/
+.footer2016 {
+  margin-top: 30px;
+  border-top: 3px solid #cdcdcd;
 }
 
 /*

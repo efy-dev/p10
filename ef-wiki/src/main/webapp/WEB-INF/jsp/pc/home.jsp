@@ -19,46 +19,26 @@
   <title>工艺首页</title>
 </head>
 <body>
-  <c:if test="${not empty pcBannerList}">
-  <div id="slide2016" class="slide2016">
+<div id="slide2016" class="slide2016">
   <div class="img">
+    <div class="click prev"></div>
     <ul>
       <c:forEach items="${pcBannerList}" var="banner" varStatus="status">
         <li><a href="<c:url value="${banner.directUrl}"/>" title=""><img  src="http://wiki-oss.efeiyi.com/${banner.imageUrl}@!wiki-pc-banner" alt=""></a></li>
       </c:forEach>
     </ul>
+    <div class="click next"></div>
   </div>
   <div class="num">
     <ul>
-      <c:forEach items="${pcbannerList}" var="banner" varStatus="status">
-      <li class=""></li>
-      </c:forEach>
+      <li class="active"></li>
+      <li></li>
+      <li></li>
     </ul>
   </div>
 </div>
-  </c:if>
 <!--//End--slide2016-->
 <div class="craft-list2016">
-  <div class="craft-list">
-    <div class="topic">
-      <div class="bd-list"></div>
-      <div class="topic-txt"><span>传统技艺</span></div>
-      <div class="bd-list"></div>
-    </div>
-    <ul class="list">
-      <c:forEach items="${craftList}" var="craft">
-      <li>
-        <a href="<c:url value="/project/${craft.project.id}"/>">
-          <img src="http://wiki-oss.efeiyi.com/${craft.project.picture_pc_url}@!wiki-home-project-picture" alt="">
-          <div class="list-content">
-            <p class="name">${craft.project.name}</p>
-            <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${craft.getProject().getLevel()}" type="normal"/>非遗项目</p>
-          </div>
-        </a>
-      </li>
-      </c:forEach>
-    </ul>
-  </div>
   <div class="craft-list">
     <div class="topic">
       <div class="bd-list"></div>
@@ -76,6 +56,26 @@
             </div>
           </a>
         </li>
+      </c:forEach>
+    </ul>
+  </div>
+  <div class="craft-list">
+    <div class="topic">
+      <div class="bd-list"></div>
+      <div class="topic-txt"><span>传统技艺</span></div>
+      <div class="bd-list"></div>
+    </div>
+    <ul class="list">
+      <c:forEach items="${craftList}" var="craft">
+      <li>
+        <a href="<c:url value="/project/${craft.project.id}"/>">
+          <img src="http://wiki-oss.efeiyi.com/${craft.project.picture_pc_url}@!wiki-home-project-picture" alt="">
+          <div class="list-content">
+            <p class="name">${craft.project.name}</p>
+            <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${craft.getProject().getLevel()}" type="normal"/>非遗项目</p>
+          </div>
+        </a>
+      </li>
       </c:forEach>
     </ul>
   </div>

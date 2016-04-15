@@ -61,7 +61,7 @@ public class ArtController extends BaseController {
     public String getProjectDetail(HttpServletRequest request,Model model,@PathVariable String projectId) throws Exception {
         Project project = (Project) baseManager.getObject(Project.class.getName(),projectId);
         //相关大师
-        XQuery xquery = new XQuery("listMasterProject_default",request);
+        XQuery xquery = new XQuery("listMasterProject_byProject",request);
         xquery.put("project_id",projectId);
         List<MasterProject> masterProjectList = baseManager.listObject(xquery);
         //相关作品

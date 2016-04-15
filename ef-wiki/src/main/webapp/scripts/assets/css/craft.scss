@@ -60,7 +60,7 @@
  *time:2016-04-13
  *
 */
-//工艺pc头部
+//工艺pc头部改通用样式
 .min-logo{
   @include WH(30px,31px);
   background: url("../images/craft/logo.png");
@@ -78,14 +78,21 @@
   border-bottom-width: 0;
 
 }
-//
+/*
+ *name:工艺通用底部
+ *time:2016-04-13
+ *
+*/
+.footer2016{
+  @include WF();
+  margin-top: 30px;//一会要去掉
+  border-top: 3px solid #cdcdcd;
+}
 /*
  *name:工艺首页
  *time:2016-04-13
  *
 */
-//工艺首页列表
-
 //通用标题
 .topic {
   @include WF();
@@ -108,7 +115,7 @@
     }
   }
 }
-
+//工艺首页列表
 .craft-list2016 {
   @extend .wm;
   //每一个列表
@@ -155,7 +162,6 @@
     }
   }
 }
-
 /*
  *name:工艺详情
  *time:2016-04-13
