@@ -37,9 +37,9 @@ public class HomeController {
         XQuery query = new XQuery("plistProjectRecommended_default", request);
         List<Object> projectRecommendedList = baseManager.listObject(query);
         query.put("project_type","1");
-        List<Object> craftList = baseManager.listObject(query);
-        query.put("project_type","2");
         List<Object> artList = baseManager.listObject(query);
+        query.put("project_type","2");
+        List<Object> craftList = baseManager.listObject(query);
         model.addAttribute("projectRecommendedList",projectRecommendedList);
         model.addAttribute("artList",artList);
         model.addAttribute("craftList",craftList);
@@ -49,6 +49,6 @@ public class HomeController {
         List<Object> wapBannerList = bannerManager.getBannerList("wiki.wap.dynamic");
         model.addAttribute("pcBannerList",pcBannerList);
         model.addAttribute("wapBannerList",wapBannerList);
-        return "";
+        return "/home";
     }
 }

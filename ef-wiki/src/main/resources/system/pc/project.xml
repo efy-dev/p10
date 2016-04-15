@@ -87,6 +87,9 @@
 
             </does>
         </entity>
+
+
+
         <entity name="Project" label="Project"
                 basic="simple" others=""
                 model="com.efeiyi.ec.project.model.Project">
@@ -431,5 +434,30 @@
 
             </does>
         </entity>
+
+
+        <entity name="Project" label="Project"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.Project">
+            <fields>
+                <field name="type" label="项目类型" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="非遗技艺" value="1"/>
+                        <item label="非遗美术" value="2"/>
+                    </statusType>
+                </field>
+                <field name="level" label="等级" inputType="text">
+                    <statusType fieldName="level">
+                        <item label="国家级" value="1"/>
+                        <item label="省级" value="2"/>
+                        <item label="市级" value="3"/>
+                        <item label="县级" value="4"/>
+                    </statusType>
+                </field>
+            </fields>
+
+
+        </entity>
+
     </entities>
 </module>

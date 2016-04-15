@@ -1,6 +1,7 @@
 package com.efeiyi.ec.wiki.art.controller;
 
 import com.efeiyi.ec.master.model.MasterProject;
+import com.efeiyi.ec.master.model.MasterWork;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
@@ -19,12 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/4/12.
  */
-
+@Controller
 public class ArtController extends BaseController {
 
     @Autowired
@@ -63,13 +65,12 @@ public class ArtController extends BaseController {
         xquery.put("project_id",projectId);
         List<MasterProject> masterProjectList = baseManager.listObject(xquery);
         //相关作品
-        XQuery worksxQuery = new XQuery("listProductModel_default",request);
-        worksxQuery.put("product_project_id",projectId);
-        List<ProductModel> productModelList = baseManager.listObject(worksxQuery);
+        String query = "FROM MasterWork mw WHERE mw.project.id = '"+projectId+"' AND mw.status != 0";
+        List<MasterWork> masterWorkList = baseManager.listObject(query);
         model.addAttribute("masterProjectList",masterProjectList);
-        model.addAttribute("productModelList",productModelList);
+        model.addAttribute("masterWorkList",masterWorkList);
         model.addAttribute("project",project);
-        return "";
+        return "/project/craftDescription";
     }
 
     /**

@@ -21,8 +21,7 @@
 <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
 <meta name="msapplication-TileColor" content="#0e90d2">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/amazeui.min.css?v=20150831'/>">
-<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/app.css?v=20150831'/>">
-<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/cyclopedia.css?v=20150831'/>">
+<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/craft.css'/>">
 
 <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -34,8 +33,8 @@
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <!--自定义js--Start-->
-<script src="<c:url value='/resources/assets/js/amazeui.min.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>
+<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/system.js'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/amazeui.min.js'/>"></script>
 <!--自定义js--End-->
 <script src="<c:url value='/resources/js/alert.js'/>"></script>

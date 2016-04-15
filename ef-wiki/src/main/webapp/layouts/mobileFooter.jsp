@@ -1,45 +1,45 @@
 <%@ page import="com.efeiyi.ec.wiki.organization.util.AuthorizationUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="login-reg">
- <%--   <%
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-    %>
+<%--<div class="login-reg">--%>
+ <%--&lt;%&ndash;   <%--%>
+        <%--if (AuthorizationUtil.getMyUser().getId() != null) {--%>
+    <%--%>--%>
 
-    <%
-        }
-    %>
+    <%--<%--%>
+        <%--}--%>
+    <%--%>--%>
 
-    <%
-        if (AuthorizationUtil.getMyUser().getId() == null) {
-    %>
-    <a href="<c:url value="/home.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-    <a id="signin" href="<c:url value="/register"/>" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
-    <%
-        }
-    %>--%>
-     <div class="login-reg">
-         <%if(AuthorizationUtil.getMyUser()!=null && AuthorizationUtil.getMyUser().getId() != null){ %>
-         <div class="bd logined"><%=AuthorizationUtil.getMyUser().getUsername()%><a class="btn-exit" href="<c:url value='/j_spring_cas_security_logout'/>">退出</a></div>
-         <% } %>
-         <%if(AuthorizationUtil.getMyUser()==null || AuthorizationUtil.getMyUser().getId() == null){ %>
-         <a href="<c:url value='/sso.do'/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-         <a href="http://passport.efeiyi.com/register?service=http://http://master.efeiyi.com/ef-wiki/sso.do" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
-         <% } %>
+    <%--<%--%>
+        <%--if (AuthorizationUtil.getMyUser().getId() == null) {--%>
+    <%--%>--%>
+    <%--<a href="<c:url value="/home.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>--%>
+    <%--<a id="signin" href="<c:url value="/register"/>" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>--%>
+    <%--<%--%>
+        <%--}--%>
+    <%--%>&ndash;%&gt;--%>
+     <%--<div class="login-reg">--%>
+         <%--<%if(AuthorizationUtil.getMyUser()!=null && AuthorizationUtil.getMyUser().getId() != null){ %>--%>
+         <%--<div class="bd logined"><%=AuthorizationUtil.getMyUser().getUsername()%><a class="btn-exit" href="<c:url value='/j_spring_cas_security_logout'/>">退出</a></div>--%>
+         <%--<% } %>--%>
+         <%--<%if(AuthorizationUtil.getMyUser()==null || AuthorizationUtil.getMyUser().getId() == null){ %>--%>
+         <%--<a href="<c:url value='/sso.do'/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>--%>
+         <%--<a href="http://passport.efeiyi.com/register?service=http://http://master.efeiyi.com/ef-wiki/sso.do" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>--%>
+         <%--<% } %>--%>
 
-     </div>
-</div>
-<footer class="bd footer">
-    <div class="bd info">
-        <a class="icon"></a>
+     <%--</div>--%>
+<%--</div>--%>
+<%--<footer class="bd footer">--%>
+    <%--<div class="bd info">--%>
+        <%--<a class="icon"></a>--%>
 
-        <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台
-        </div>
-        <div class="wechat"></div>
-        <div class="txt">关注微信公众号</div>
-        <div class="txt">领取好礼</div>
-    </div>
-    <div class="bd copyright">京ICP备15032511号-1</div>
-</footer>
+        <%--<div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台--%>
+        <%--</div>--%>
+        <%--<div class="wechat"></div>--%>
+        <%--<div class="txt">关注微信公众号</div>--%>
+        <%--<div class="txt">领取好礼</div>--%>
+    <%--</div>--%>
+    <%--<div class="bd copyright">京ICP备15032511号-1</div>--%>
+<%--</footer>--%>
 <%--<!--[if (gte IE 9)|!(IE)]><!-->
 
 <!--<![endif]-->
