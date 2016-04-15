@@ -65,10 +65,10 @@ public class MasterWorkController {
             Integer index = 0;
             String hz = fileName.substring(fileName.indexOf("."),fileName.length());
             String imgName = fileName.substring(0, fileName.indexOf(hz));
-            url = "masterWork/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
+            url = "work/" +  masterWork.getId()+"/"+fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
 
                 try {
-                    aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
+                    aliOssUploadManager.uploadFile(mf, "tenant", url);
                    if("img".equals(flag)) {
                        XQuery xQuery = new XQuery("listMasterWorkPicture_default", request);
                        xQuery.put("masterWork_id", masterWork.getId());

@@ -46,20 +46,21 @@ public class TaskController extends BaseController {
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
             if(fileName.indexOf(".")==-1){
-                url = "masterWork/jietu"+identify+".jpg";
+                url = "Work/jietu"+identify+".jpg";
             }else {
                 String hz = fileName.substring(fileName.indexOf("."), fileName.length());
                 String imgName = fileName.substring(0, fileName.indexOf(hz));
-                url = "masterWork/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
+                url = "Work/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
             }
 
             try {
-                aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
-                System.out.println(request.getParameter("project"));
+
                 if(request.getParameter("project").equals("craft")){
+                    aliOssUploadManager.uploadFile(mf, "ef-wiki", url);
                     data = "{\"success\":\"" + true + "\",\"file_path\":\"wiki-oss.efeiyi.com/" +url + "\"}";
                 }else {
-                    data = "{\"success\":\"" + true + "\",\"file_path\":\"http://pro.efeiyi.com/" +url + "\"}";
+                    aliOssUploadManager.uploadFile(mf, "tenant", url);
+                    data = "{\"success\":\"" + true + "\",\"file_path\":\"http://tenant.efeiyi.com/" +url + "\"}";
                 }
 
 
