@@ -3,6 +3,7 @@ package com.efeiyi.ec.wiki.art.controller;
 import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.master.model.MasterWork;
 import com.efeiyi.ec.organization.model.AddressProvince;
+import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
@@ -60,13 +61,16 @@ public class ArtController extends BaseController {
     @RequestMapping("/project/{projectId}")
     public String getProjectDetail(HttpServletRequest request,Model model,@PathVariable String projectId) throws Exception {
         Project project = (Project) baseManager.getObject(Project.class.getName(),projectId);
+        project.setVisits(project.getVisits()==null?1:project.getVisits()+1);
+        baseManager.saveOrUpdate(Project.class.getName(),project);
         //相关大师
         XQuery xquery = new XQuery("listMasterProject_byProject",request);
         xquery.put("project_id",projectId);
         List<MasterProject> masterProjectList = baseManager.listObject(xquery);
+        XQuery mwXQuery = new XQuery("listMasterWork_default", request);
         //相关作品
-        String query = "FROM MasterWork mw WHERE mw.project.id = '"+projectId+"' AND mw.status != 0";
-        List<MasterWork> masterWorkList = baseManager.listObject(query);
+        mwXQuery.put("project_id",projectId);
+        List<MasterWork> masterWorkList = baseManager.listObject(mwXQuery);
         model.addAttribute("masterProjectList",masterProjectList);
         model.addAttribute("masterWorkList",masterWorkList);
         model.addAttribute("project",project);

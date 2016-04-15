@@ -22,21 +22,42 @@
 <div id="slide2016" class="slide2016">
   <div class="img">
     <div class="click prev"></div>
-    <ul>
+    <ul style="text-align: center">
       <c:forEach items="${pcBannerList}" var="banner" varStatus="status">
-        <li><a href="<c:url value="${banner.directUrl}"/>" title=""><img  src="http://wiki-oss.efeiyi.com/${banner.imageUrl}@!wiki-pc-banner" alt=""></a></li>
+        <li>
+          <a href="<c:url value="${banner.directUrl}"/> " target="_blank" title="非遗轮播图"><img
+                  src="http://pro.efeiyi.com/${banner.imageUrl}" width="1280" height="481"
+                  alt="${banner.title}"/></a></li>
       </c:forEach>
+      <div class="click next"></div>
     </ul>
-    <div class="click next"></div>
   </div>
   <div class="num">
     <ul>
-      <li class="active"></li>
-      <li></li>
-      <li></li>
+      <c:forEach items="${pcBannerList}" var="banner" varStatus="status">
+        <li class=""></li>
+      </c:forEach>
     </ul>
   </div>
 </div>
+<%--<div id="slide2016" class="slide2016">--%>
+  <%--<div class="img">--%>
+    <%--<div class="click prev"></div>--%>
+    <%--<ul>--%>
+      <%--<c:forEach items="${pcBannerList}" var="banner" varStatus="status">--%>
+        <%--<li><a href="<c:url value="${banner.directUrl}"/>" title=""><img  src="http://pro.efeiyi.com/${banner.imageUrl}" width="1280" height="481" alt=""></a></li>--%>
+      <%--</c:forEach>--%>
+    <%--</ul>--%>
+    <%--<div class="click next"></div>--%>
+  <%--</div>--%>
+  <%--<div class="num">--%>
+    <%--<ul>--%>
+      <%--<li class="active"></li>--%>
+      <%--<li></li>--%>
+      <%--<li></li>--%>
+    <%--</ul>--%>
+  <%--</div>--%>
+<%--</div>--%>
 <!--//End--slide2016-->
 <div class="craft-list2016">
   <div class="craft-list">
@@ -46,13 +67,13 @@
       <div class="bd-list"></div>
     </div>
     <ul class="list">
-      <c:forEach items="${artList}" var="art">
+      <c:forEach items="${artList}" var="art" begin="0" end="7">
         <li>
-          <a href="<c:url value="/project/${art.project.id}"/>">
-            <img src="http://wiki-oss.efeiyi.com/${art.project.picture_pc_url}@!wiki-home-project-picture" alt="">
+          <a href="<c:url value="/project/${art.id}"/>">
+            <img src="http://wiki-oss.efeiyi.com/${art.picture_pc_url}@!wiki-home-project-picture" alt="">
             <div class="list-content">
-              <p class="name">${art.project.name}</p>
-              <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${art.getProject().getLevel()}" type="normal"/>非遗项目</p>
+              <p class="name">${art.name}</p>
+              <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${art.getLevel()}" type="normal"/>非遗项目</p>
             </div>
           </a>
         </li>
@@ -66,13 +87,13 @@
       <div class="bd-list"></div>
     </div>
     <ul class="list">
-      <c:forEach items="${craftList}" var="craft">
+      <c:forEach items="${craftList}" var="craft" begin="0" end="7">
       <li>
-        <a href="<c:url value="/project/${craft.project.id}"/>">
-          <img src="http://wiki-oss.efeiyi.com/${craft.project.picture_pc_url}@!wiki-home-project-picture" alt="">
+        <a href="<c:url value="/project/${craft.id}"/>">
+          <img src="http://wiki-oss.efeiyi.com/${craft.picture_pc_url}@!wiki-home-project-picture" alt="">
           <div class="list-content">
-            <p class="name">${craft.project.name}</p>
-            <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${craft.getProject().getLevel()}" type="normal"/>非遗项目</p>
+            <p class="name">${craft.name}</p>
+            <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${craft.getLevel()}" type="normal"/>非遗项目</p>
           </div>
         </a>
       </li>

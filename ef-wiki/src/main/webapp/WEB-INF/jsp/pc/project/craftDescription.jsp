@@ -67,7 +67,7 @@
 </div>
 <script type="text/javascript">
   $().ready(function () {
-    var url = "http://www.efeiyi.com/order/giftBuy/idwzxnzw21dlh6bi/";
+    var url = "http://wiki.efeiyi.com/project/"+${project.id};
     $('#native').qrcode({
       text: url,
             width: 160,

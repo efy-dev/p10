@@ -36,10 +36,14 @@ public class HomeController {
     public String home(HttpServletRequest request,Model model) throws Exception {
         XQuery query = new XQuery("plistProjectRecommended_default", request);
         List<Object> projectRecommendedList = baseManager.listObject(query);
-        query.put("project_type","1");
-        List<Object> artList = baseManager.listObject(query);
-        query.put("project_type","2");
-        List<Object> craftList = baseManager.listObject(query);
+//        query.put("project_type","1");
+//        List<Object> artList = baseManager.listObject(query);
+//        query.put("project_type","2");
+//        List<Object> craftList = baseManager.listObject(query);
+        String craftQuery = "FROM Project p WHERE p.type = 2 AND p.status != 0";
+        List<Project> craftList = baseManager.listObject(craftQuery);
+        String artQuery = "FROM Project p WHERE p.type = 1 AND p.status != 0";
+        List<Project> artList = baseManager.listObject(artQuery);
         model.addAttribute("projectRecommendedList",projectRecommendedList);
         model.addAttribute("artList",artList);
         model.addAttribute("craftList",craftList);
