@@ -1,7 +1,7 @@
 package com.efeiyi.ec.gift.base.interceptor;
 
+import com.efeiyi.ec.gift.base.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.zero.promotion.model.PromotionUserRecord;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.util.CookieTool;

@@ -1,6 +1,7 @@
 package com.efeiyi.ec.gift.base.tag;
 
-import com.efeiyi.ec.website.base.util.AuthorizationUtil;
+
+import com.efeiyi.ec.gift.base.util.AuthorizationUtil;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;

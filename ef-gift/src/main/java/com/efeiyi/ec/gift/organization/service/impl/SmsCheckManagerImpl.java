@@ -1,9 +1,9 @@
 package com.efeiyi.ec.gift.organization.service.impl;
 
-import com.efeiyi.ec.website.organization.model.SendCode;
-import com.efeiyi.ec.website.organization.model.SmsProvider;
-import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
-import com.efeiyi.ec.website.organization.service.SmsCheckManager;
+import com.efeiyi.ec.gift.organization.model.SendCode;
+import com.efeiyi.ec.gift.organization.model.SmsProvider;
+import com.efeiyi.ec.gift.organization.model.YunPianSmsProvider;
+import com.efeiyi.ec.gift.organization.service.SmsCheckManager;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

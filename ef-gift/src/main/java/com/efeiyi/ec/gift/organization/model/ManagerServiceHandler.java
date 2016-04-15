@@ -1,8 +1,8 @@
 package com.efeiyi.ec.gift.organization.model;
 
+import com.efeiyi.ec.gift.base.authentication.ContextUtils;
+import com.efeiyi.ec.gift.organization.service.AdminManager;
 import com.efeiyi.ec.organization.model.Manager;
-import com.efeiyi.ec.website.base.authentication.ContextUtils;
-import com.efeiyi.ec.website.organization.service.AdminManager;
 import com.ming800.core.base.util.ReflectUtil;
 import com.ming800.core.does.model.WebServiceHandler;
 

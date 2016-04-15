@@ -5,7 +5,7 @@
 
 package com.efeiyi.ec.gift.base.tag;
 
-import com.efeiyi.ec.website.base.util.AuthorizationUtil;
+import com.efeiyi.ec.gift.base.util.AuthorizationUtil;
 import com.ming800.core.p.PConst;
 
 import javax.servlet.jsp.JspWriter;

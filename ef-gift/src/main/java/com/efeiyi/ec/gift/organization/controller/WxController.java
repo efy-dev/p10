@@ -1,3 +1,4 @@
+/*
 package com.efeiyi.ec.gift.organization.controller;
 
 import com.efeiyi.ec.website.order.model.WxPayConfig;
@@ -20,9 +21,12 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+*/
 /**
  * Created by Administrator on 2015/11/25 0025.
- */
+*//*
+
+
 @Controller
 @RequestMapping({"/wx"})
 public class WxController {
@@ -139,11 +143,14 @@ public class WxController {
     }
 
 
-    /**
+    */
+/**
      * 获取微信用户的身份信息，该操作不用授权 （参数同获取基本信息的接口一样）
      * @param request
      * @return
-     */
+     *//*
+
+
     @RequestMapping({"/getInfo.do"})
     public String getWxInfo(HttpServletRequest request) {
         String callback = request.getParameter("callback"); //www.efeiyi.com   www.efeiyi.com?name=xxxx
@@ -161,11 +168,15 @@ public class WxController {
         return "redirect:" + redirect;
     }
 
-    /**
+    */
+/**
      * 获取微信用户的基本信息（昵称头像之类的 需要用户授权给公众账号）
      * @param request
      * @return
-     */
+     *//*
+
+
+
     @RequestMapping({"/getUserBaseInfo.do"})
     public String getWxBaseInfo(HttpServletRequest request) {
         String callback = request.getParameter("callback"); //回掉接口，接口中直接获取需要的参数即可（注：不需要带http前缀；需要URLEncode一下）
@@ -184,12 +195,15 @@ public class WxController {
     }
 
 
-    /**
+    */
+/**
      * 初始化微信签名（jssdk）
      * @param request
      * @return
      * @throws Exception
-     */
+     *//*
+
+
     @RequestMapping({"/init.do"})
     @ResponseBody
     public String initWxConfig(HttpServletRequest request) throws Exception {
@@ -238,3 +252,4 @@ public class WxController {
 
 
 }
+*/

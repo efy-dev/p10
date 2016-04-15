@@ -1,0 +1,20 @@
+*{box-sizing:border-box;-webkit-box-sizing:border-box;}
+.wf{width: 100%;float: left}
+.wd{width: 100%;display: inline-block;}
+.box{width: 100%;float: left;padding: 0 16px;}
+/*------/End----公共-----------*/
+.works-page{border-bottom: 1px solid #e6e6e6;padding: 18px 0;text-align: center;}
+.works-page h5{margin-bottom: 9px;}
+.works-page .measure{margin-bottom: 16px;}
+.works-page .audio{margin-bottom: 14px;}
+.works-page .audio .audio-page{width: 130px;display: inline-block;}
+.works-page .audio .btn{width: 26px;height: 27px;float: left;border: 1px solid #ededed;border-right-width: 0;outline: none}
+.works-page .audio .btn.play{background: url(../images/icon.png)  6px 4px no-repeat;background-size: 50% auto;}
+.works-page .audio .btn.pause{background: url(../images/iconplay.gif)   no-repeat;background-size: 100% auto;}
+.works-page .audio .time{font-size: 9px;color: #808080;text-align:center;width: 104px;height: 27px;float: left;line-height: 27px;border:1px solid #ededed}
+.works-page .content{margin-bottom: 14px;line-height: 18px;}
+
+/*------/End----大师作品详情-----------*/
+
+
+
