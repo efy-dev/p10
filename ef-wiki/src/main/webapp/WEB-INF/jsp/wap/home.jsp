@@ -34,7 +34,7 @@
     <ul class="ul-col-2">
       <c:forEach items="${artList}" var="art">
       <li>
-        <a href="" title="">
+        <a href="<c:url value="/project/${art.project.id}"/>" title="">
           <img src="http://wiki-oss.efeiyi.com/${art.project.picture_pc_url}@!wiki-project-picture" alt="">
                     <span class="txt">
                         <p>${art.project.name}</p>
@@ -51,7 +51,7 @@
     <ul class="ul-col-2">
       <c:forEach items="${craftList}" var="craft">
       <li>
-        <a href="" title="">
+        <a href="<c:url value="/project/${craft.project.id}"/>" title="">
           <img src="http://wiki-oss.efeiyi.com/${craft.project.picture_pc_url}@!wiki-work-picture"  alt="">
                     <span class="txt">
                         <p>${craft.project.name}</p>

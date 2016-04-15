@@ -35,9 +35,9 @@
             %>
             <li><a href="http://www.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
             <li><a href="" title="">手机e飞蚁</a></li>
-            <li class="cart">
-                <a href="" title=""><i class="icon2016 icon-cart"></i><em class="icon-num">5</em></a>
-            </li>
+            <%--<li class="cart">--%>
+                <%--<a href="http://www.efeiyi.com/cart/view" title=""><i class="icon2016 icon-cart"></i><em class="icon-num">0</em></a>--%>
+            <%--</li>--%>
         </ul>
     </div>
 </div>
@@ -49,7 +49,6 @@
                 <li><a href="/" title="">首页</a></li>
                 <li><a href="" title="">大师精品</a></li>
                 <li><a href="" title="">飞蚁工坊</a></li>
-                <li><a href="" title="">礼品专区</a></li>
             </ul>
         </div>
         <!--//End--导航-->
@@ -63,62 +62,6 @@
     </div>
 </div>
 <!--//End--nav2016-->
-<%--<div class="topbar wh">--%>
-    <%--<div class="hd">--%>
-        <%--<ul class="ul-item">--%>
-            <%--&lt;%&ndash;<li><a href="" title="商家入驻">商家入驻</a></li>&ndash;%&gt;--%>
-            <%--<%--%>
-                <%--if (AuthorizationUtil.getMyUser().getId() != null) {--%>
-            <%--%>--%>
-            <%--<li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>--%>
-            <%--<li><a href="<c:url value='/j_spring_cas_security_logout'/>" title="退出">退出</a></li>--%>
-            <%--<%--%>
-                <%--}--%>
-            <%--%>--%>
-
-            <%--<%--%>
-                <%--if (AuthorizationUtil.getMyUser().getId() == null) {--%>
-            <%--%>--%>
-            <%--<li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>--%>
-            <%--<li><a href="http://passport.efeiyi.com/register?service=http://http://craft.efeiyi.com/ef-wiki" title="快速注册">快速注册</a></li>--%>
-            <%--<%--%>
-                <%--}--%>
-            <%--%>--%>
-            <%--&lt;%&ndash;<li><a href="" title="商家入驻">商家入驻</a></li>&ndash;%&gt;--%>
-            <%--<li class="btn-top-wechat">--%>
-                <%--<a title="手机e飞蚁">手机e飞蚁</a>--%>
-                <%--<span class="top-wechat"></span>--%>
-            <%--</li>--%>
-           <%--&lt;%&ndash; <li class="cart">--%>
-                <%--<a href="<c:url value="/cart/view"/> " title="购物车"><i class="icon"></i>购物车</a>--%>
-                <%--<span class="tips"><em id="cartAmount">0</em></span>--%>
-            <%--</li>&ndash;%&gt;--%>
-        <%--</ul>--%>
-    <%--</div>--%>
-<%--</div>--%>
-<!-- //End--topbar-->
-<%--<div class="header wh">--%>
-    <%--<div class="hd">--%>
-        <%--<div class="logo"><a class="icon" href="http://www.efeiyi.com" title="e飞蚁-爱非遗"></a></div>--%>
-        <%--<div class="nav">--%>
-            <%--<ul>--%>
-                <%--<c:forEach items="${jnode.children}" var="child">--%>
-                    <%--<li>--%>
-                        <%--<c:if test="${!child.getState().equals('productCategory')}">--%>
-                            <%--<a class="${child.jnodeMatch("cur",currentJnode)}" href="<c:url value="${child.url}"/>"--%>
-                               <%--title="${child.text_zh_CN}">${child.text_zh_CN}</a>--%>
-                        <%--</c:if>--%>
-                        <%--<c:if test="${child.getState().equals('productCategory')}">--%>
-                            <%--<a class="${child.jnodeMatch("cur",currentJnode)}"--%>
-                               <%--title="${child.text_zh_CN}">${child.text_zh_CN}</a>--%>
-                            <%--&lt;%&ndash;<jsp:include page="/productCategory.do" flush="true"/>&ndash;%&gt;--%>
-                        <%--</c:if>--%>
-                    <%--</li>--%>
-                <%--</c:forEach>--%>
-            <%--</ul>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
 <script>
 
    /* $().ready(function () {

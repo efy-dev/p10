@@ -19,8 +19,8 @@
   <title>工艺首页</title>
 </head>
 <body>
-
-<div id="slide2016" class="slide2016">
+  <c:if test="${not empty pcBannerList}">
+  <div id="slide2016" class="slide2016">
   <div class="img">
     <ul>
       <c:forEach items="${pcBannerList}" var="banner" varStatus="status">
@@ -36,6 +36,7 @@
     </ul>
   </div>
 </div>
+  </c:if>
 <!--//End--slide2016-->
 <div class="craft-list2016">
   <div class="craft-list">
