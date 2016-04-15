@@ -14,7 +14,14 @@
 <head>
     <title></title>
     <script src="<c:url value='/scripts/PCDSelect.js'/>"></script>
-    <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>" ></script>
+    <%--<script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>" ></script>--%>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/scripts/simditor/font-awesome-4.5.0/css/font-awesome.css"/>">
+
+    <link rel="stylesheet" type="text/css" href="<c:url value="/scripts/simditor/styles/simditor.css"/>">
+    <script type="text/javascript" src="<c:url value="/scripts/simditor/scripts/module.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/scripts/simditor/simpleHotkeys/lib/hotkeys.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/scripts/simditor/scripts/uploader.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/scripts/simditor/scripts/simditor.js"/>"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -130,12 +137,13 @@
         </div>
 
         <div class="am-form-group">
-            <label name="type" for="description" class="am-u-sm-3 am-form-label">项目描述 <small>*</small></label>
+            <label name="type" for="editor" class="am-u-sm-3 am-form-label">项目描述 <small>*</small></label>
             <div class="am-u-sm-9" style="margin-top: 10px">
                 <%--<textarea id="content" name="content"  style="overflow-y: scroll"><c:if test="${!empty projectContent.content}">${projectContent.content}</c:if></textarea>--%>
-                  <textarea id="description" name="description" class="ckeditor" placeholder="项目内容"  >
-                      ${object.description}
-                  </textarea>
+                  <%--<textarea id="description" name="description" class="ckeditor" placeholder="项目内容"  >--%>
+                      <%--${object.description}--%>
+                  <%--</textarea>--%>
+                    <textarea id="editor" name="description" placeholder="这里输入内容" value="${object.description}" autofocus>${object.description}</textarea>
             </div>
         </div>
         <div class="am-form-group">
@@ -158,6 +166,36 @@
                 "${object.addressDistrict.addressCity.id}",
                 "${object.addressDistrict.id}"
         )
+        var  editor = new Simditor({
+            textarea:$("#editor"),
+            toolbar:[
+                'title',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'fontScale',
+                'color',
+                'ol',
+                'ul',
+                'blockquote',
+                'code',
+                'table',
+                'link',
+                'image',
+                'hr',
+                'indent',
+                'outdent',
+                'alignment'
+            ],
+
+            upload:{
+                url:"<c:url value="/task/img.do?project=craft" />",
+                params:""
+            },
+            pasteImage:true,
+
+        });
     });
 </script>
 </body>
