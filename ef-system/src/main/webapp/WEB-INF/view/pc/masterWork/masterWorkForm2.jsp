@@ -42,6 +42,13 @@
         <form action="<c:url value="/basic/xm.do"/>" method="post" class="am-form am-form-horizontal"
               enctype="multipart/form-data">
             <input type="hidden" value="saveOrUpdateMasterWork2" name="qm">
+            <c:if test="${empty object.id}">
+                <input type="hidden" name="serial" value="${serial}">
+            </c:if>
+            <c:if test="${not empty object.id}">
+                <input type="hidden" name="serial" value="${object.serial}">
+            </c:if>
+
             <input type="hidden" name="id" value="${object.id}">
             <input type="hidden" name="resultPage"
                    value="redirect:/basic/xm.do?qm=plistMasterWork2_default"/>
