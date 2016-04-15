@@ -42,7 +42,7 @@
           <c:forEach items="${masterWorkList}" var="masterWork">
           <li>
             <a href="<c:url value="/masterWork/${masterWork.id}"/>" title="">
-              <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}" alt="">
+              <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!wiki-work-picture" alt="">
                             <span class="txt">
                                 <p>${productModel.product.name}${productModel.name}</p>
                                 <p>${masterWork.name}</p>
@@ -58,9 +58,9 @@
           <c:forEach items="${masterProjectList}" var="masterProject">
           <li>
             <a href="" title="">
-              <img src="http://tenant.efeiyi.com/${masterProject.master.favicon}" alt="">
+              <img src="http://tenant.efeiyi.com/${masterProject.master.favicon}@!wiki-tenant-picture" alt="">
                             <span class="txt">
-                                <p>${masterProject.master.name}</p>
+                                <p>${masterProject.master.fullName}</p>
                                 <p>${masterProject.project.name}</p>
                                 <p<ming800:status name="level" dataType="Project.level" checkedValue="${masterProject.project.level}" type="normal"/>传承人</p>
                             </span>

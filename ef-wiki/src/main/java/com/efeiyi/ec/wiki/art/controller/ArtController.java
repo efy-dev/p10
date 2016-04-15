@@ -72,42 +72,4 @@ public class ArtController extends BaseController {
         model.addAttribute("project",project);
         return "/project/craftDescription";
     }
-
-    /**
-     * 列出category和address
-     * @param request
-     * @param model
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("/listProjectCategoryAndAddress")
-    public String  listCategoryAndAddress(HttpServletRequest request,Model model) throws Exception {
-        XQuery xQuery = new XQuery("plistProjectCategory_byType",request);
-        List<ProjectCategory> projectCategoryList = baseManager.listObject(xQuery);
-        model.addAttribute("projectCategoryList",projectCategoryList);
-        XQuery addressXQuery = new XQuery("listAddressProvince_default",request);
-        List<AddressProvince> addressProvinceList = baseManager.listObject(addressXQuery);
-        model.addAttribute("addressProvinceList",addressProvinceList);
-        return "";
-    }
-
-    /**
-     * 检索条件查询包括projectCategoryId和addressId
-     * @param request
-     * @param model
-     * @return
-     * @TODO
-     */
-    @RequestMapping("/listArtWorks.do")
-    @ResponseBody
-    public List listArtWorks(HttpServletRequest request,Model model) throws Exception {
-        String queryParam = request.getParameter("queryParam");
-        if (queryParam ==null || "".equalsIgnoreCase(queryParam)){
-            queryParam = "plistProject_all";
-        }
-        XQuery query = new XQuery(queryParam, request);
-        PageInfo pageInfo = baseManager.listPageInfo(query);
-        List<Project> projectList = pageInfo.getList();
-        return projectList;
-    }
 }

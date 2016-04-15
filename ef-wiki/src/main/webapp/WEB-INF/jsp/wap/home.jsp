@@ -23,7 +23,7 @@
     <ul class="am-slides">
       <c:forEach items="${wapBannerList}" var="banner">
       <li>
-        <a href="<c:url value="${banner.directUrl}"/>" title=""><img src="http://wiki-oss.efeiyi.com/${banner.imageUrl}" alt=""></a>
+        <a href="<c:url value="${banner.directUrl}"/>" title=""><img src="http://wiki-oss.efeiyi.com/${banner.imageUrl}@!wiki-wap-banner" alt=""></a>
       </li>
       </c:forEach>
     </ul>
@@ -35,7 +35,7 @@
       <c:forEach items="${artList}" var="art">
       <li>
         <a href="" title="">
-          <img src="http://wiki-oss.efeiyi.com/${art.project.picture_pc_url}" alt="">
+          <img src="http://wiki-oss.efeiyi.com/${art.project.picture_pc_url}@!wiki-project-picture" alt="">
                     <span class="txt">
                         <p>${art.project.name}</p>
                         <p><ming800:status name="level" dataType="Project.level" checkedValue="${art.getProject().getLevel()}" type="normal"/>非遗项目</p>
@@ -52,7 +52,7 @@
       <c:forEach items="${craftList}" var="craft">
       <li>
         <a href="" title="">
-          <img src="http://wiki-oss.efeiyi.com/${craft.project.picture_pc_url}" alt="" alt="">
+          <img src="http://wiki-oss.efeiyi.com/${craft.project.picture_pc_url}@!wiki-work-picture"  alt="">
                     <span class="txt">
                         <p>${craft.project.name}</p>
                         <p><ming800:status name="level" dataType="Project.level" checkedValue="${craft.getProject().getLevel()}" type="normal"/>非遗项目</p>

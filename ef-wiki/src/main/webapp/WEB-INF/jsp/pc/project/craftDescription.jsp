@@ -32,9 +32,9 @@
           <c:if test="${not empty masterProjectList&&fn:length(masterProjectList)>0}">
           <div class="user-pic">
             <a href="">
-              <img src="<c:url value="http://tenant.efeiyi.com/${masterProjectList.get(0).getMaster().getFavicon()}"/>" alt="">
+              <img src="<c:url value="http://tenant.efeiyi.com/${masterProjectList.get(0).getMaster().getFavicon()}@!wiki-pc-master-picture"/>" alt="">
               <div class="user-txt">
-                <p class="name">${masterProjectList.get(0).getMaster().getName()}</p>
+                <p class="name">${masterProjectList.get(0).getMaster().getFullName()}</p>
                 <p class="craft">${masterProjectList.get(0).getProject().getName()}</p>
                 <p class="rank"><ming800:status name="level" dataType="Project.level" checkedValue="${masterProjectList.get(0).getProject().getLevel()}" type="normal"/>传承人</p>
               </div>
