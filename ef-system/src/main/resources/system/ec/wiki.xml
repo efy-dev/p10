@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-
 <module name="wiki" label="系统-百科内容" version="" package="com.efeiyi.ec.wiki" path="">
 
     <entities>
@@ -30,13 +29,17 @@
                     </query>
 
                     <query name="default1" label="查询" type="auto" orderBy="id:desc">
-                        <condition name="project.name"  operation="eq" label="项目名称" inputType="text"/>
-                        <condition name="type"  operation="eq" label="项目类型" defaultValue="1" inputType="text"/>
+                        <condition name="project.name" operation="eq" label="项目名称" inputType="text"/>
+                        <condition name="type" operation="eq" label="项目类型" defaultValue="1" inputType="text"/>
                     </query>
                 </do>
 
-                <do name="formProjectContent" label="保存ProjectContent" access="" execute="com.efeiyi.ec.system.project.controller.ProjectContentHandler" result="/projectContent/projectContentForm"/>
-                <do name="saveOrUpdateProjectContent" label="保存ProjectContent" access="" result="redirect:/basic/xm.do?qm=plistProjectWiki_default" execute="com.efeiyi.ec.system.project.controller.ProjectContentFormHandler"/>
+                <do name="formProjectContent" label="保存ProjectContent" access=""
+                    execute="com.efeiyi.ec.system.project.controller.ProjectContentHandler"
+                    result="/projectContent/projectContentForm"/>
+                <do name="saveOrUpdateProjectContent" label="保存ProjectContent" access=""
+                    result="redirect:/basic/xm.do?qm=plistProjectWiki_default"
+                    execute="com.efeiyi.ec.system.project.controller.ProjectContentFormHandler"/>
             </does>
         </entity>
 
@@ -57,7 +60,8 @@
 
                 <do name="removeProjectNews" label="删除百科内容" access="" result="json"/>
                 <do name="formProjectNews" label="保存百科内容" access="" result="/ProjectNews/projectNewsForm"/>
-                <do name="saveOrUpdateProjectNews" label="保存百科内容" access="" result="/ProjectNews/projectNewsSaveSuccess"/>
+                <do name="saveOrUpdateProjectNews" label="保存百科内容" access=""
+                    result="/ProjectNews/projectNewsSaveSuccess"/>
                 <do name="listProjectNews" label="百科内容列表" access="" result="/ProjectNews/projectNewsList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="百科内容主键" name="id" defaultValue="1" operation="eq"/>
@@ -73,24 +77,28 @@
                 <do name="plistProjectFollowed" access="" label="projectFollowed列表"
                     result="/projectContent/attentionPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition  name="project.id" defaultValue="0" operation="eq" />
+                        <condition name="project.id" defaultValue="0" operation="eq"/>
                     </query>
                 </do>
             </does>
         </entity>
-        <entity name="ProjectWiki" label="工艺项目"  model="com.efeiyi.ec.wiki.model.ProjectWiki">
+        <entity name="ProjectWiki" label="工艺项目" model="com.efeiyi.ec.wiki.model.ProjectWiki">
             <does>
                 <do name="plistProjectWiki" access="" label="工艺项目列表" result="/wikiProject/wikiProjectList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition  name="status" defaultValue="0" operation="ne" />
+                        <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
 
                 </do>
+
+
+                <do name="viewProjectWiki" access="" label="工艺详情" result="/wikiProject/wikiProjectView"/>
                 <do name="saveOrUpdateProjectWiki" label="保存项目列表" access=""
                     result="redirect:/basic/xm.do?qm=plistProjectWiki_default">
 
                 </do>
-                <do name="formWiki" label="保存工艺项目" access="" result="/wikiProject/editWiki"  execute="com.efeiyi.ec.system.master.controller.MasterWorkForm2Handler"/>
+                <do name="formWiki" label="保存工艺项目" access="" result="/wikiProject/editWiki"
+                    execute="com.efeiyi.ec.system.master.controller.MasterWorkForm2Handler"/>
             </does>
         </entity>
     </entities>

@@ -23,6 +23,19 @@ public class ProjectWiki {
     private Project project;
     private ProjectDescription projectDescription;
     private List<ProjectPicture> projectPictureList;
+
+
+    @Transient
+    public ProjectPicture getMainPicture() {
+        List<ProjectPicture> projectPictures = getProjectPictureList();
+        for (ProjectPicture projectPicture : projectPictures) {
+            if (projectPicture.getStatus().equals("1")) {
+                return projectPicture;
+            }
+        }
+        return null;
+    }
+
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
