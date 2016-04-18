@@ -7,6 +7,8 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
+import com.efeiyi.ec.wiki.model.ProjectContent;
+import com.efeiyi.ec.wiki.model.ProjectWiki;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -43,10 +45,10 @@ public class ArtController extends BaseController {
      */
     @RequestMapping("/listProjectCategory.do")
     public String listProjectCategory(HttpServletRequest request,Model model){
-        String craftQuery = "FROM Project p WHERE p.type = 2 AND p.status != 0";
-        List<Project> craftList = baseManager.listObject(craftQuery);
-        String artQuery = "FROM Project p WHERE p.type = 1 AND p.status != 0";
-        List<Project> artList = baseManager.listObject(artQuery);
+        String craftQuery = "FROM ProjectWiki p WHERE p.type = 2 AND p.status != 0";
+        List<ProjectContent> craftList = baseManager.listObject(craftQuery);
+        String artQuery = "FROM ProjectWiki p WHERE p.type = 1 AND p.status != 0";
+        List<ProjectContent> artList = baseManager.listObject(artQuery);
         model.addAttribute("artList",artList);
         model.addAttribute("craftList",craftList);
         return "";
@@ -54,15 +56,21 @@ public class ArtController extends BaseController {
     /**
      * 工艺详情:description技艺描述；level判断级别;addressDistrict判断省市；
      * 相关大师，在MasterProject中取；相关作品取project下面的ProductModel推荐；
-     * @param projectId
+     * @param projectWikiId
      * @param request
      * @param model
      */
-    @RequestMapping("/project/{projectId}")
-    public String getProjectDetail(HttpServletRequest request,Model model,@PathVariable String projectId) throws Exception {
-        Project project = (Project) baseManager.getObject(Project.class.getName(),projectId);
-        project.setVisits(project.getVisits()==null?1:project.getVisits()+1);
-        baseManager.saveOrUpdate(Project.class.getName(),project);
+    @RequestMapping("/project/{projectWikiId}")
+    public String getProjectDetail(HttpServletRequest request,Model model,@PathVariable String projectWikiId) throws Exception {
+        ProjectWiki projectWiki = (ProjectWiki) baseManager.getObject(ProjectWiki.class.getName(),projectWikiId);
+//        project.setVisits(project.getVisits()==null?1:project.getVisits()+1);
+//        baseManager.saveOrUpdate(Project.class.getName(),project);
+        String projectId = null;
+        try {
+            projectId = projectWiki.getProject().getId();
+        }catch (Exception e){
+            projectId = null;
+        }
         //相关大师
         XQuery xquery = new XQuery("listMasterProject_byProject",request);
         xquery.put("project_id",projectId);
@@ -73,7 +81,7 @@ public class ArtController extends BaseController {
         List<MasterWork> masterWorkList = baseManager.listObject(mwXQuery);
         model.addAttribute("masterProjectList",masterProjectList);
         model.addAttribute("masterWorkList",masterWorkList);
-        model.addAttribute("project",project);
+        model.addAttribute("projectWiki",projectWiki);
         return "/project/craftDescription";
     }
 }

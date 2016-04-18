@@ -21,9 +21,9 @@
 <body>
 <div class="craft">
   <div class="dt">
-    <h1>${project.name}</h1>
-    <p>[<ming800:status name="level" dataType="Project.level" checkedValue="${project.getLevel()}" type="normal"/>]非物质文化遗产传承项目</p>
-    <p>${project.addressDistrict.name}</p>
+    <h1>${projectWiki.project.name}</h1>
+    <p>[<ming800:status name="level" dataType="Project.level" checkedValue="${projectWiki.project.getLevel()}" type="normal"/>]非物质文化遗产传承项目</p>
+    <p>${projectWiki.project.addressDistrict.name}</p>
   </div>
   <!--//End--传统技艺-->
   <div data-am-widget="tabs" class="am-tabs tabs">
@@ -34,7 +34,7 @@
     </ul>
     <div class="am-tabs-bd items">
       <div data-tab-panel-0 class="am-tab-panel am-active">
-       ${project.description}
+       ${projectWiki.projectDescription.description}
       </div>
       <!--//End--技艺介绍-->
       <div data-tab-panel-2 class="am-tab-panel">

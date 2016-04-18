@@ -35,10 +35,10 @@
       <c:forEach items="${artList}" var="art" begin="0" end="7">
       <li>
         <a href="<c:url value="/project/${art.id}"/>" title="">
-          <img src="http://wiki-oss.efeiyi.com/${art.picture_pc_url}@!wiki-project-picture" alt="">
+          <img src="http://wiki-oss.efeiyi.com/${art.project.picture_pc_url}@!wiki-project-picture" alt="">
                     <span class="txt">
-                        <p>${art.name}</p>
-                        <p><ming800:status name="level" dataType="Project.level" checkedValue="${art.getLevel()}" type="normal"/>非遗项目</p>
+                        <p>${art.project.name}</p>
+                        <p><ming800:status name="level" dataType="Project.level" checkedValue="${art.project.getLevel()}" type="normal"/>非遗项目</p>
                     </span>
         </a>
       </li>
@@ -52,10 +52,10 @@
       <c:forEach items="${craftList}" var="craft" begin="0" end="7">
       <li>
         <a href="<c:url value="/project/${craft.id}"/>" title="">
-          <img src="http://wiki-oss.efeiyi.com/${craft.picture_pc_url}@!wiki-work-picture"  alt="">
+          <img src="http://wiki-oss.efeiyi.com/${craft.project.picture_pc_url}@!wiki-work-picture"  alt="">
                     <span class="txt">
-                        <p>${craft.name}</p>
-                        <p><ming800:status name="level" dataType="Project.level" checkedValue="${craft.getLevel()}" type="normal"/>非遗项目</p>
+                        <p>${craft.project.name}</p>
+                        <p><ming800:status name="level" dataType="Project.level" checkedValue="${craft.project.getLevel()}" type="normal"/>非遗项目</p>
                     </span>
         </a>
       </li>
