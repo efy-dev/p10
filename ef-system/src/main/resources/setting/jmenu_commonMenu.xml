@@ -329,7 +329,7 @@
         <!--</jnode>-->
     </jnode>
 
-    <jnode id="ttManager" access="admin,operational,c_operational,product_manager" url="/main.do?jnodeId=ttManager" text_zh_CN="工艺与大师">
+    <jnode id="ttManager" access="admin,operational,c_operational,product_manager,offline_manager" url="/main.do?jnodeId=ttManager" text_zh_CN="工艺与大师">
         <jnode url="" id="tenantManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="大师管理">
             <jnode url="/basic/xm.do?qm=plistMaster_default" id="masterList" access="admin,operational,c_operational,product_manager" text_zh_CN="大师列表">
                 <match url="/basic/xm.do?qm=plistMaster_default"/>
@@ -392,18 +392,6 @@
             <!--<match url="viewTenantWorkShop"/>-->
             <!--</jnode>-->
         </jnode>
-        <!--<jnode id="contentManager" access="admin,operational,c_operational,product_manager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">-->
-            <!--<jnode url="/basic/xm.do?groupName=master.homePage&amp;qm=plistBanner_master.homePage"-->
-                   <!--access="admin,operational,c_operational,product_manager" text_zh_CN="首页轮播图">-->
-                <!--<match url="/basic/xm.do?groupName=master.homePage&amp;qm=plistBanner_master.homePage"/>-->
-                <!--<match url="/basic/xm.do?qm=formBanner&amp;groupName=master.homePage"/>-->
-            <!--</jnode>-->
-            <!--<jnode url="/basic/xm.do?qm=plistDocument_master&amp;groupName=master" access="admin,operational,c_operational,product_manager" text_zh_CN="大师网站文档">-->
-                <!--<match url="/basic/xm.do?qm=plistDocument_master&amp;groupName=master"/>-->
-                <!--<match url="/basic/xm.do?qm=viewDocument&amp;groupName=master"/>-->
-                <!--<match url="/basic/xm.do?qm=formDocument&amp;groupName=master"/>-->
-            <!--</jnode>-->
-        <!--</jnode>-->
         <jnode url="" id="CategoryManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="非遗项目与类别">
             <jnode url="/basic/xm.do?qm=plistProject2_default" access="admin,operational,c_operational,product_manager" text_zh_CN="项目列表">
                 <match url="/basic/xm.do?qm=plistProject2_default"/>
@@ -425,8 +413,8 @@
             </jnode>
 
         </jnode>
-        <jnode url="" id="CategoryManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="作品管理">
-            <jnode url="/basic/xm.do?qm=plistMasterWork2_default" access="admin,operational,c_operational,product_manager" text_zh_CN="作品列表">
+        <jnode url="" id="CategoryManager" access="admin,operational,c_operational,product_manager,offline_manager" state="closed" text_zh_CN="作品管理">
+            <jnode url="/basic/xm.do?qm=plistMasterWork2_default" access="admin,operational,c_operational,product_manager,offline_manager" text_zh_CN="作品列表">
                 <match url="/basic/xm.do?qm=plistMasterWork2_default"/>
                 <match url="/basic/xm.do?qm=formWork2&amp;view=master"/>
                 <match url="/basic/xm.do?qm=viewWork&amp;view=masterWork"/>
