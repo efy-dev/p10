@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by Administrator on 2016/4/18.
  */
 @Entity
-@Table(name = "project_picture")
+@Table(name = "wiki_project_picture")
 public class ProjectPicture {
     private String id;
     private String pictureUrl;
