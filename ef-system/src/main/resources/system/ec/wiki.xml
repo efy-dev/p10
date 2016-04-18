@@ -88,12 +88,7 @@
                 </do>
                 <do name="saveOrUpdateProjectWiki" label="保存项目列表" access=""
                     result="redirect:/basic/xm.do?qm=plistProjectWiki_default">
-                    <page>
-                        <fields>
-                            <field name="status" label="状态" defaultValue="1"
-                                   inputType="default"/>
-                        </fields>
-                    </page>
+
                 </do>
                 <do name="formWiki" label="保存工艺项目" access="" result="/wikiProject/editWiki"  execute="com.efeiyi.ec.system.master.controller.MasterWorkForm2Handler"/>
             </does>

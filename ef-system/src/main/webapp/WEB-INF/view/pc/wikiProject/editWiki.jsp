@@ -27,8 +27,7 @@
   </div>
 
   <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-    <form action="<c:url value="/basic/xm.do"/>" method="post" class="am-form am-form-horizontal"
-          >
+    <form action="<c:url value="/basic/xm.do"/>" method="post" class="am-form am-form-horizontal">
       <input type="hidden" value="saveOrUpdateProjectWiki" name="qm">
 
       <input type="hidden" value="1" name="status">
