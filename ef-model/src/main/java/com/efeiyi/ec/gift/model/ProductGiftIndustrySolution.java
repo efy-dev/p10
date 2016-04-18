@@ -7,7 +7,7 @@ import javax.persistence.*;
  * Created by Administrator on 2016/4/14 0014.
  */
 @Entity
-@Table(name = "gift_industry_solution")
+@Table(name = "product_gift_industry_solution")
 public class ProductGiftIndustrySolution {
 
     private String id;

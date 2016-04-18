@@ -39,7 +39,7 @@ public class ProductGiftTag {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_gift_tag_value")
+    @JoinColumn(name = "product_gift_tag_value_id")
     public ProductGiftTagValue getProductGiftTagValue() {
         return productGiftTagValue;
     }
