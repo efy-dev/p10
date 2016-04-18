@@ -101,7 +101,6 @@
 					</div>
 				</div>
 			</c:if>
-
 			<c:if test="${purchaseOrder.orderStatus!=1}">
 				<c:if test="${purchaseOrder.subPurchaseOrder==null || purchaseOrder.subPurchaseOrder.size()==0}">
 					<div class="order-section ae">
