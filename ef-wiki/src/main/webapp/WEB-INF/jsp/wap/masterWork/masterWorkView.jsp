@@ -55,7 +55,7 @@
           <li><strong>技艺简介：</strong><span>${work.projectDescription}</span></li>
         </ul>
         <div class="bd txt-c">
-          <a href="http://wiki.efeiyi.com/project/${work.projectId}" class="link" title="查看详情">查看详情</a>
+          <a href="<c:url value="/project/${projectWiki.id}"/>" class="link" title="查看详情">查看详情</a>
         </div>
       </div>
       <!--//End-- 关于技艺 -->

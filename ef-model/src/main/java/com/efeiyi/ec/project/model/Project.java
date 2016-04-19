@@ -5,6 +5,7 @@ import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressDistrict;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.wiki.model.ProjectContent;
+import com.efeiyi.ec.wiki.model.ProjectWiki;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
@@ -50,6 +51,7 @@ public class Project implements Serializable {
     private List<ProjectRecommended> projectRecommendeds;
     private Long fsAmount;
     private List<MasterProject> masterProjects;
+    private ProjectWiki projectWiki;
 
     @Column(name="picture_wap_url")
     public String getPicture_wap_url() {
@@ -277,6 +279,15 @@ public class Project implements Serializable {
     @Override
     public String toString() {
         return "Project{id = " + id + "}";
+    }
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "project")
+    public ProjectWiki getProjectWiki() {
+        return projectWiki;
+    }
+
+    public void setProjectWiki(ProjectWiki projectWiki) {
+        this.projectWiki = projectWiki;
     }
 }
 

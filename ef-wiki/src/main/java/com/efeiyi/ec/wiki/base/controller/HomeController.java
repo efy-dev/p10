@@ -1,6 +1,7 @@
 package com.efeiyi.ec.wiki.base.controller;
 
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.wiki.model.ProjectWiki;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.BannerManager;
@@ -37,9 +38,9 @@ public class HomeController {
         XQuery query = new XQuery("plistProjectRecommended_default", request);
         List<Object> projectRecommendedList = baseManager.listObject(query);
         String craftQuery = "FROM ProjectWiki p WHERE p.type = 2 AND p.project.status != 0";
-        List<Project> craftList = baseManager.listObject(craftQuery);
+        List<ProjectWiki> craftList = baseManager.listObject(craftQuery);
         String artQuery = "FROM ProjectWiki p WHERE p.type = 1 AND p.project.status != 0";
-        List<Project> artList = baseManager.listObject(artQuery);
+        List<ProjectWiki> artList = baseManager.listObject(artQuery);
         model.addAttribute("projectRecommendedList",projectRecommendedList);
         model.addAttribute("artList",artList);
         model.addAttribute("craftList",craftList);
