@@ -32,9 +32,9 @@
   <div class="list bd">
     <div class="title">传统美术</div>
     <ul class="ul-col-2">
-      <c:forEach items="${artList}" var="art" begin="0" end="7">
+      <c:forEach items="${artRecommendList}" var="art" begin="0" end="7">
       <li>
-        <a href="<c:url value="/project/${art.id}"/>" title="">
+        <a href="<c:url value="/project/${art.project.projectWiki.id}"/>" title="">
           <img src="http://wiki-oss.efeiyi.com/${art.project.picture_pc_url}@!wiki-project-picture" alt="">
                     <span class="txt">
                         <p>${art.project.name}</p>
@@ -49,9 +49,9 @@
   <div class="list bd">
     <div class="title">传统技艺</div>
     <ul class="ul-col-2">
-      <c:forEach items="${craftList}" var="craft" begin="0" end="7">
+      <c:forEach items="${craftRecommendList}" var="craft" begin="0" end="7">
       <li>
-        <a href="<c:url value="/project/${craft.id}"/>" title="">
+        <a href="<c:url value="/project/${craft.project.projectWiki.id}"/>" title="">
           <img src="http://wiki-oss.efeiyi.com/${craft.project.picture_pc_url}@!wiki-work-picture"  alt="">
                     <span class="txt">
                         <p>${craft.project.name}</p>
