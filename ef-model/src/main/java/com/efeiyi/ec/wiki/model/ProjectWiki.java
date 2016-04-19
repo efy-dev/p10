@@ -71,7 +71,7 @@ public class ProjectWiki {
         this.type = type;
     }
 
-    @OneToOne(fetch = FetchType.LAZY,optional = false)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="project_id")
     @JsonIgnore
     public Project getProject() {
