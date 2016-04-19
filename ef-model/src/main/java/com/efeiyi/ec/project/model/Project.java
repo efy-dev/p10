@@ -26,7 +26,7 @@ import java.util.List;
 public class Project implements Serializable {
     private String id;
     private String serial;//项目编号
-    private String name;//项目名称
+    private String name;//项目名称-
     private String status;//状态
     private String level;//级别
     private String type; //类别 1.美术 2.技艺
@@ -50,7 +50,6 @@ public class Project implements Serializable {
     private List<ProjectRecommended> projectRecommendeds;
     private Long fsAmount;
     private List<MasterProject> masterProjects;
-    private Integer visits;
 
     @Column(name="picture_wap_url")
     public String getPicture_wap_url() {
@@ -278,15 +277,6 @@ public class Project implements Serializable {
     @Override
     public String toString() {
         return "Project{id = " + id + "}";
-    }
-
-    @Column(name = "visits")
-    public Integer getVisits() {
-        return visits;
-    }
-
-    public void setVisits(Integer visits) {
-        this.visits = visits;
     }
 }
 
