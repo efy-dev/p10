@@ -1,7 +1,6 @@
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -31,13 +30,10 @@
       <input type="hidden" value="saveOrUpdateProjectWiki" name="qm">
 
       <input type="hidden" value="1" name="status">
-      <div class="am-form-group"></div>
-      <div class="am-form-group"></div>
       <div class="am-form-group">
-        <label for="size" class="am-u-sm-3 am-form-label">项目类型</label>
-
+        <label name="type"  class="am-u-sm-3 am-form-label">项目类型 <small>*</small></label>
         <div class="am-u-sm-9">
-          <input type="text" id="size" name="type" placeholder="项目类型" value="${object.type}" required>
+          <ming800:status name="type" dataType="Project.type" checkedValue="${object.type}" type="select"/>
         </div>
       </div>
       <div class="am-form-group">

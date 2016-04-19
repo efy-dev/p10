@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,8 +34,9 @@ public class ProjectWikiController {
 
         ProjectWiki projectWiki = (ProjectWiki) baseManager.getObject(ProjectWiki.class.getName(), request.getParameter("projectWikiId"));
         //得到上传的图片文件并且上传到aliyun 并且保存ProjectPictrue对象
-        MultipartFile multipartFile = multipartRequest.getFile("projectWikiMainPicture");
-        if (multipartFile != null) {
+        CommonsMultipartFile multipartFile = (CommonsMultipartFile) multipartRequest.getFile("projectWikiMainPicture");
+        long size = multipartFile.getFileItem().getSize();
+        if (multipartFile.getFileItem().getSize() > 0) {
             if (projectWiki.getMainPicture() != null) {
                 ProjectPicture projectPicture2 = projectWiki.getMainPicture();
                 projectPicture2.setStatus("2");
@@ -42,12 +44,14 @@ public class ProjectWikiController {
             }
             String url = "wikiproject/" + multipartFile.getOriginalFilename();
             boolean result = aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
-            ProjectPicture projectPicture = new ProjectPicture();
-            projectPicture.setStatus("1");
-            projectPicture.setPictureUrl(url);
-            projectPicture.setProjectWiki(projectWiki);
-            projectPicture.setSort(0);
-            baseManager.saveOrUpdate(ProjectPicture.class.getName(), projectPicture);
+            if (result) {
+                ProjectPicture projectPicture = new ProjectPicture();
+                projectPicture.setStatus("1");
+                projectPicture.setPictureUrl(url);
+                projectPicture.setProjectWiki(projectWiki);
+                projectPicture.setSort(0);
+                baseManager.saveOrUpdate(ProjectPicture.class.getName(), projectPicture);
+            }
         }
 
         //得到工艺描述的数据并且创建ProjectDescription对象
