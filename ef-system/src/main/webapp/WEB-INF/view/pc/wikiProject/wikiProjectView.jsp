@@ -19,6 +19,7 @@
     <script type="text/javascript" src="<c:url value="/scripts/simditor/simpleHotkeys/lib/hotkeys.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/scripts/simditor/scripts/uploader.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/scripts/simditor/scripts/simditor.js"/>"></script>
+    <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 
 </head>
 <body>
@@ -37,7 +38,9 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">工艺类型</td>
-                <td class="am-u-md-3">${object.type}</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="type" dataType="ProjectWiki.type" checkedValue="${object.type}" type="normal"/>
+                </td>
             </tr>
             </tbody>
         </table>
