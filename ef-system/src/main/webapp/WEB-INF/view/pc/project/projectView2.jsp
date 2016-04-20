@@ -48,11 +48,11 @@
             <tr>
                 <td class="am-primary am-u-md-3">项目图片(PC)</td>
                 <td class="am-u-md-3">
-                    <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${object.picture_url}@!product-model"/>" alt=""/>
+                    <img width="35px;" src="<c:url value="http://wiki-oss.efeiyi.com/${object.picture_url}"/>" alt=""/>
                 </td>
                 <td class="am-primary am-u-md-3">项目图片(WAP)</td>
                 <td class="am-u-md-3">
-                    <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${object.picture_wap_url}@!product-model"/>" alt=""/>
+                    <img width="35px;" src="<c:url value="http://wiki-oss.efeiyi.com/${object.picture_wap_url}"/>" alt=""/>
                 </td>
             </tr>
             <tr>
