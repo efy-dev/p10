@@ -35,15 +35,13 @@ public class HomeController {
      */
     @RequestMapping({"/home.do"})
     public String home(HttpServletRequest request,Model model) throws Exception {
-        XQuery query = new XQuery("plistProjectRecommended_default", request);
-        List<Object> projectRecommendedList = baseManager.listObject(query);
-        String craftQuery = "FROM ProjectWiki p WHERE p.type = 2 AND p.project.status != 0";
-        List<ProjectWiki> craftList = baseManager.listObject(craftQuery);
-        String artQuery = "FROM ProjectWiki p WHERE p.type = 1 AND p.project.status != 0";
-        List<ProjectWiki> artList = baseManager.listObject(artQuery);
-        model.addAttribute("projectRecommendedList",projectRecommendedList);
-        model.addAttribute("artList",artList);
-        model.addAttribute("craftList",craftList);
+        XQuery query = new XQuery("listProjectRecommended_default", request);
+        query.put("project_type","1");
+        List<Object> artRecommendList = baseManager.listObject(query);
+        query.put("project_type","2");
+        List<Object> craftRecommendList = baseManager.listObject(query);
+        model.addAttribute("artRecommendList",artRecommendList);
+        model.addAttribute("craftRecommendList",craftRecommendList);
         //@TODO PC轮播图groupname待定
         List<Object> pcBannerList = bannerManager.getBannerList("wiki.pc.dynamic");
         //@TODO wap轮播图groupname待定
