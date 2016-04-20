@@ -12,7 +12,14 @@
 
 <div class="top2016">
     <div class="hd">
-        <div class="tips fl">欢迎使用e飞蚁-中国最具权威的非遗平台</div>
+
+        <c:if test="${homepage}">
+            <div class="tips fl">欢迎使用e飞蚁-中国最具权威的非遗平台</div>
+        </c:if>
+        <c:if test="${empty homepage}">
+            <div class="tips fl"><i class="min-logo"></i>汇聚东方工艺精粹</div>
+        </c:if>
+
         <ul class="fr">
             <li><a href="http://www.efeiyi.com" title="e飞蚁">e飞蚁商城</a></li>
             <li><a href="http://wiki.efeiyi.com" title="">工 艺</a></li>
@@ -46,13 +53,14 @@
     </div>
 </div>
 
-<div class="logo2016">
-    <div class="hd"><a href="" title=""><img src="/scripts/images/logo2016.png" alt=""></a></div>
-</div>
-
+<c:if test="${homepage}">
+    <div class="logo2016">
+        <div class="hd"><a href="" title=""><img src="/scripts/images/logo2016.png" alt=""></a></div>
+    </div>
+</c:if>
 <div class="nav2016">
     <div class="hd" id="cate">
-        <div class="cate" >
+        <div class="cate">
             <div class="dt"><span href="" title="非遗">全部商品<i class="icon2016 icon-arrow"></i></span></div>
             <jsp:include page="/productCategory.do" flush="true"/>
         </div>
