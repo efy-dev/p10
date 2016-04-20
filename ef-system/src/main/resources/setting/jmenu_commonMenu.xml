@@ -404,6 +404,11 @@
                 <match url="/basic/xm.do?qm=formProjectPropertyValue"/>
 
             </jnode>
+            <jnode url="/basic/xm.do?qm=plistProjectWiki_default" access="admin,operational,c_operational,product_manager" text_zh_CN="工艺项目列表">
+                <match url="/basic/xm.do?qm=plistProjectWiki_default"/>
+                <match url="/basic/xm.do?qm=formWiki&amp;view=wiki"/>
+                <match url="/basic/xm.do?qm=viewProjectWiki&amp;view=masterWork"/>
+            </jnode>
             <jnode url="/basic/xm.do?qm=plistProjectCategory2_default" access="admin,operational,c_operational,product_manager" text_zh_CN="类别列表">
                 <match url="/basic/xm.do?qm=plistProjectCategory2_default"/>
                 <match url="/basic/xm.do?qm=plistProjectCategory2_default&amp;view=plist"/>

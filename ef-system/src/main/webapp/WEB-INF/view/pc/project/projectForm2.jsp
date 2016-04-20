@@ -100,7 +100,7 @@
             <div class="am-u-sm-9">
                 <span style="padding: 10px;">
                        <c:if test="${!empty object.picture_url}">
-                           <img width="7%" src="http://pro.efeiyi.com/${object.picture_url}@!product-model">
+                           <img width="7%" src="http://wiki-oss.efeiyi.com/${object.picture_url}">
                        </c:if>
                 </span>
                 <input type="file" id="picture_url" name="picture_url" placeholder="picture_url"
@@ -113,7 +113,7 @@
             <div class="am-u-sm-9">
                 <span style="padding: 10px;">
                        <c:if test="${!empty object.picture_pc_url}">
-                           <img width="7%" src="http://pro.efeiyi.com/${object.picture_pc_url}@!product-model">
+                           <img width="7%" src="http://wiki-oss.efeiyi.com/${object.picture_pc_url}">
                        </c:if>
                 </span>
                 <input type="file" id="picture_pc_url" name="picture_pc_url" placeholder="picture_pc_url"
@@ -127,7 +127,7 @@
             <div class="am-u-sm-9">
                 <span style="padding: 10px;">
                        <c:if test="${!empty object.picture_wap_url}">
-                           <img width="7%" src="http://pro.efeiyi.com/${object.picture_wap_url}@!product-model">
+                           <img width="7%" src="http://wiki-oss.efeiyi.com/${object.picture_wap_url}">
                        </c:if>
                 </span>
                 <input type="file" id="picture_wap_url" name="picture_wap_url" placeholder="picture_wap_url"

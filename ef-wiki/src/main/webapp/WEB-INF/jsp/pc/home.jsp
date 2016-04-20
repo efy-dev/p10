@@ -67,13 +67,13 @@
       <div class="bd-list"></div>
     </div>
     <ul class="list">
-      <c:forEach items="${artList}" var="art" begin="0" end="7">
+      <c:forEach items="${artRecommendList}" var="art" begin="0" end="7">
         <li>
-          <a href="<c:url value="/project/${art.id}"/>">
-            <img src="http://wiki-oss.efeiyi.com/${art.picture_pc_url}@!wiki-home-project-picture" alt="">
+          <a href="<c:url value="/project/${art.project.projectWiki.id}"/>">
+            <img src="http://wiki-oss.efeiyi.com/${art.project.picture_pc_url}@!wiki-home-project-picture" alt="">
             <div class="list-content">
-              <p class="name">${art.name}</p>
-              <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${art.getLevel()}" type="normal"/>非遗项目</p>
+              <p class="name">${art.project.name}</p>
+              <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${art.project.getLevel()}" type="normal"/>非遗项目</p>
             </div>
           </a>
         </li>
@@ -87,13 +87,13 @@
       <div class="bd-list"></div>
     </div>
     <ul class="list">
-      <c:forEach items="${craftList}" var="craft" begin="0" end="7">
+      <c:forEach items="${craftRecommendList}" var="craft" begin="0" end="7">
       <li>
-        <a href="<c:url value="/project/${craft.id}"/>">
-          <img src="http://wiki-oss.efeiyi.com/${craft.picture_pc_url}@!wiki-home-project-picture" alt="">
+        <a href="<c:url value="/project/${craft.project.projectWiki.id}"/>">
+          <img src="http://wiki-oss.efeiyi.com/${craft.project.picture_pc_url}@!wiki-home-project-picture" alt="">
           <div class="list-content">
-            <p class="name">${craft.name}</p>
-            <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${craft.getLevel()}" type="normal"/>非遗项目</p>
+            <p class="name">${craft.project.name}</p>
+            <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${craft.project.getLevel()}" type="normal"/>非遗项目</p>
           </div>
         </a>
       </li>

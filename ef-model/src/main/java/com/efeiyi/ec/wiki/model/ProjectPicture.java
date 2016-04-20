@@ -42,7 +42,7 @@ public class ProjectPicture {
         this.pictureUrl = pictureUrl;
     }
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "wiki_art_project")
+    @JoinColumn(name = "wiki_art_project_id")
     public ProjectWiki getProjectWiki() {
         return projectWiki;
     }

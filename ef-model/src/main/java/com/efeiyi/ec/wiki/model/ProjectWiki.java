@@ -2,6 +2,7 @@ package com.efeiyi.ec.wiki.model;
 
 import com.efeiyi.ec.project.model.Project;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by Administrator on 2016/4/18.
  */
 @Entity
-
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 @Table(name = "wiki_art_project")
 public class ProjectWiki {
     private String id ;
@@ -22,6 +23,19 @@ public class ProjectWiki {
     private Project project;
     private ProjectDescription projectDescription;
     private List<ProjectPicture> projectPictureList;
+
+
+    @Transient
+    public ProjectPicture getMainPicture() {
+        List<ProjectPicture> projectPictures = getProjectPictureList();
+        for (ProjectPicture projectPicture : projectPictures) {
+            if (projectPicture.getStatus().equals("1")) {
+                return projectPicture;
+            }
+        }
+        return null;
+    }
+
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -57,7 +71,7 @@ public class ProjectWiki {
         this.type = type;
     }
 
-    @OneToOne(fetch = FetchType.LAZY,optional = false)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="project_id")
     @JsonIgnore
     public Project getProject() {
@@ -67,7 +81,7 @@ public class ProjectWiki {
     public void setProject(Project project) {
         this.project = project;
     }
-    @OneToOne(fetch = FetchType.LAZY,optional = false)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="wiki_project_description_id")
     @JsonIgnore
     public ProjectDescription getProjectDescription() {

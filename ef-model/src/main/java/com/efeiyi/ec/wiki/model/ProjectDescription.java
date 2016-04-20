@@ -22,7 +22,9 @@ public class ProjectDescription {
     public void setId(String id) {
         this.id = id;
     }
-    @Column(name = "wiki_project_description_id")
+
+
+    @Column(name = "wiki_project_description")
     public String getDescription() {
         return description;
     }
