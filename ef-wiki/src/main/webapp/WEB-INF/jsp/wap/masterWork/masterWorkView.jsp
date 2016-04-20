@@ -76,7 +76,7 @@
         <c:forEach items="${work.workList}" var="works">
           <li>
             <a href="" title="">
-              <img src="<c:url value='http://tenant.efeiyi.com/'/>${works.pictureUrl}" alt="">
+              <img src="<c:url value='http://tenant.efeiyi.com/'/>${works.pictureUrl}@!wiki-masterworks-picture" alt="">
               <span class="fz11 black omitted">${works.name}</span>
             </a>
           </li>
