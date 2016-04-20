@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Table(name = "wiki_artistry_description")
 public class ArtistryDescription {
     private String id;
-    private String description;
+    private String descriptionPC;
+    private String descriptionWap;
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -24,15 +25,22 @@ public class ArtistryDescription {
     }
 
 
-    @Column(name = "description")
-    public String getDescription() {
-        return description;
+    @Column(name = "description_pc")
+    public String getDescriptionPC() {
+        return descriptionPC;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptionPC(String descriptionPC) {
+        this.descriptionPC = descriptionPC;
+    }
+    @Column(name = "description_wap")
+    public String getDescriptionWap() {
+        return descriptionWap;
     }
 
+    public void setDescriptionWap(String descriptionWap) {
+        this.descriptionWap = descriptionWap;
+    }
 
 
 
