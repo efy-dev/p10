@@ -1,4 +1,4 @@
-CREATE TABLE `custom_gift_message` (
+CREATE TABLE `gift_industry_solution_request` (
 `id`  char(16) NOT NULL ,
 `username`  varchar(16) NULL ,
 `tel`  varchar(16) NULL ,
@@ -18,7 +18,7 @@ PRIMARY KEY (`id`)
 )
 ;
 
-CREATE TABLE `product_gift` (
+CREATE TABLE `gift_product_gift` (
 `id`  char(16) NOT NULL ,
 `name`  varchar(16) NULL ,
 `product_id`  char(16) NULL ,
@@ -29,7 +29,7 @@ PRIMARY KEY (`id`)
 )
 ;
 
-CREATE TABLE `product_gift_industry_solution` (
+CREATE TABLE `gift_product_gift_industry_solution` (
 `id`  char(16) NOT NULL ,
 `industry_solution_id`  char(16) NULL ,
 `product_gift_id`  char(16) NULL ,
@@ -38,7 +38,7 @@ PRIMARY KEY (`id`)
 )
 ;
 
-CREATE TABLE `product_gift_tag` (
+CREATE TABLE `gift_product_gift_tag` (
 `id`  char(16) NOT NULL ,
 `product_gift_id`  char(16) NULL ,
 `product_gift_tag_value_id`  char(16) NULL ,
@@ -47,7 +47,7 @@ PRIMARY KEY (`id`)
 )
 ;
 
-CREATE TABLE `product_gift_tag_value` (
+CREATE TABLE `gift_product_gift_tag_value` (
 `id`  char(16) NOT NULL ,
 `type`  varchar(4) NULL ,
 `group`  varchar(4) NULL ,
@@ -56,6 +56,13 @@ CREATE TABLE `product_gift_tag_value` (
 PRIMARY KEY (`id`)
 )
 ;
+
+ALTER TABLE `gift_industry_solution_request`
+CHANGE COLUMN `username` `industry_name`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `id`,
+MODIFY COLUMN `tel`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `industry_name`,
+MODIFY COLUMN `description`  char(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `tel`,
+MODIFY COLUMN `number`  int(11) NOT NULL AFTER `description`,
+MODIFY COLUMN `status`  char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `number`;
 
 
 

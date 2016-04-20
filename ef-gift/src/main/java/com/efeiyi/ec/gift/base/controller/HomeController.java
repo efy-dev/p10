@@ -1,6 +1,7 @@
 package com.efeiyi.ec.gift.base.controller;
 
 import com.efeiyi.ec.gift.base.util.AuthorizationUtil;
+import com.efeiyi.ec.gift.model.ProductGiftTagValue;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.project.model.ProjectCategory;
@@ -90,7 +91,15 @@ public class HomeController {
     @RequestMapping({"/home.do"})
     public String home1(HttpServletRequest request, Model model) throws Exception {
 
-        //判断是否有需要重定向的页面
+        XQuery productGiftTagValueQuery1 = new XQuery("listProductGiftTagValue_default1", request);//场合标签组
+        XQuery productGiftTagValueQuery2 = new XQuery("listProductGiftTagValue_default2", request);//对象标签组
+        XQuery productGiftTagValueQuery3 = new XQuery("listProductGiftTagValue_default3", request);//价格标签组
+
+        List<ProductGiftTagValue> list1 = baseManager.listObject(productGiftTagValueQuery1);
+        List<ProductGiftTagValue> list2 = baseManager.listObject(productGiftTagValueQuery2);
+        List<ProductGiftTagValue> list3 = baseManager.listObject(productGiftTagValueQuery3);
+
+        /*//判断是否有需要重定向的页面
         String redirectUrl = request.getParameter("redirect");
         if (redirectUrl != null) {
             return "redirect:" + redirectUrl;
@@ -105,8 +114,8 @@ public class HomeController {
         List<Object> recommendedTenantList = objectRecommendedManager.getRecommendedList("tenantRecommended");
         //tenant_project
         HashMap<String, List> map = new HashMap<>();
-        HashMap<String, List> projectMap = new HashMap<>();
-        for (Object object : categoryList) {
+        HashMap<String, List> projectMap = new HashMap<>();*/
+/*        for (Object object : categoryList) {
             //取得推荐分类下面商品
             XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
             xQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
@@ -147,7 +156,7 @@ public class HomeController {
             model.addAttribute("bannerActivityList", bannerActivityList);
         }
         model.addAttribute("projectMap", projectMap);
-        model.addAttribute("recommendedTenantList", recommendedTenantList);
+        model.addAttribute("recommendedTenantList", recommendedTenantList);*/
         return "/home";
     }
 

@@ -1,6 +1,5 @@
 package com.efeiyi.ec.system.project.controller;
 
-import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.wiki.model.ProjectDescription;
 import com.efeiyi.ec.wiki.model.ProjectPicture;
 import com.efeiyi.ec.wiki.model.ProjectWiki;
@@ -9,7 +8,6 @@ import com.ming800.core.p.service.AliOssUploadManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -55,12 +53,19 @@ public class ProjectWikiController {
         }
 
         //得到工艺描述的数据并且创建ProjectDescription对象
+        //得到当前工艺的描述，如果有描述对象就用之前的，如果没有就新建一个新的
         String content = request.getParameter("description");
-        ProjectDescription projectDescription = new ProjectDescription();
-        projectDescription.setDescription(content);
-        baseManager.saveOrUpdate(ProjectDescription.class.getName(), projectDescription);
-        projectWiki.setProjectDescription(projectDescription);
-        baseManager.saveOrUpdate(ProjectWiki.class.getName(), projectWiki);
+        if (projectWiki.getProjectDescription() != null) {
+            ProjectDescription projectDescription = projectWiki.getProjectDescription();
+            projectDescription.setDescription(content);
+            baseManager.saveOrUpdate(ProjectDescription.class.getName(), projectDescription);
+        } else {
+            ProjectDescription projectDescription = new ProjectDescription();
+            projectDescription.setDescription(content);
+            baseManager.saveOrUpdate(ProjectDescription.class.getName(), projectDescription);
+            projectWiki.setProjectDescription(projectDescription);
+            baseManager.saveOrUpdate(ProjectWiki.class.getName(), projectWiki);
+        }
 
         //返回工艺详情页面
         return "redirect:/basic/xm.do?qm=viewProjectWiki&id=" + projectWiki.getId();

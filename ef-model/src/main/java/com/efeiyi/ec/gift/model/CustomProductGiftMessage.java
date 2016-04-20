@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by Administrator on 2016/4/18.
  */
 @Entity
-@Table(name = "custom_gift_message")
+@Table(name = "gift_industry_solution_request")
 public class CustomProductGiftMessage {
     private String id;
     private String userName;//定制请求人姓名

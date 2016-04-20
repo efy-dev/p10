@@ -28,10 +28,10 @@
 </head>
 <body>
 
-<%
+<%--<%
     if (HttpUtil.isPhone(request)) {
 %>
-<%--导航--%>
+&lt;%&ndash;导航&ndash;%&gt;
 <jsp:include flush="true"
              page="/getMenu.do?jmenuId=nav&jnodeId=nav&resultPage=/common/nav&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
 
@@ -44,7 +44,7 @@
 
 <%
     }
-%>
+%>--%>
 
 <%
     if (HttpUtil.isPhone(request)) {
