@@ -44,5 +44,15 @@
                 highLightFields="product_name,specification" highLightSimplePre="&lt;font color='red'&gt;" highLightSimplePost="&lt;/font&gt;"
                 defType="edismax" qf="product_name^5 sub_name^3 specification^3 project_name^4 master_name^2" solrClientCount="5"
                 solrServerCoreUrl="http://101.200.182.7/solr/product" solrServerHost="101.200.182.7" username="efy" password="helloword" port="80"/>
+        <search group="gift"
+                recommendedModel="com.ming800.core.p.model.CommonSearch" rows="12" defaultQ="value:"
+                highLight="true"
+                highLightFields="product_name,specification" highLightSimplePre="&lt;font color='red'&gt;"
+                highLightSimplePost="&lt;/font&gt;"
+                qf=""
+                defType="edismax"
+                solrClientCount="5"
+                solrServerCoreUrl="http://192.168.1.57/solr/product2" solrServerHost="192.168.1.57" username="Tomcat"
+                password="Tomcat" port="80"/>
     </searchs>
 </common>

@@ -8,11 +8,11 @@ import javax.persistence.*;
  * Created by Administrator on 2016/4/14 0014.
  */
 @Entity
-@Table(name = "product_gift_tag_value")
+@Table(name = "gift_product_gift_tag_value")
 public class ProductGiftTagValue {
 
     private String id;
-    private String type; //标签的类型
+    private String type; //标签的类型   1、场合  2、对象  3、价格
     private String group; //标签分组
     private String value; //标签值
     private String status; //标签值状态

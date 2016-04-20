@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module name="gift" label="礼品" version="" package="com.efeiyi.ec.gift.model" path="">
+    <entities>
+        <entity name="ProductGiftTagValue" label="标签列表" model="com.efeiyi.ec.gift.model.ProductGiftTagValue">
+            <does>
+                <do name="listProductGiftTagValue" access="" label="标签列表">
+                    <query name="default1" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="type" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="default1" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="type" defaultValue="2" operation="eq"/>
+                    </query>
+                    <query name="default1" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="type" defaultValue="3" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+    </entities>
+</module>

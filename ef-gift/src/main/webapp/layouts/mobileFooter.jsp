@@ -1,4 +1,4 @@
-<%@ page import="com.efeiyi.ec.website.base.util.AuthorizationUtil" %>
+<%@ page import="com.efeiyi.ec.gift.base.util.AuthorizationUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     if (AuthorizationUtil.getMyUser().getId() != null) {

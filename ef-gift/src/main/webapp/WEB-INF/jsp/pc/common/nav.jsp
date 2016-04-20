@@ -1,4 +1,4 @@
-<%@ page import="com.efeiyi.ec.website.base.util.AuthorizationUtil" %>
+<%@ page import="com.efeiyi.ec.gift.base.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.

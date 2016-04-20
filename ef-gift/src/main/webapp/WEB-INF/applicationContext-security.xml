@@ -39,7 +39,7 @@
 
     </http>
 
-    <b:bean id="casEntryPoint"  class="com.efeiyi.ec.website.base.authentication.CasAuthenticationRedirect">
+    <b:bean id="casEntryPoint"  class="com.efeiyi.ec.gift.base.authentication.CasAuthenticationRedirect">
         <!--<b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>-->
         <b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>
         <b:property name="serviceProperties" ref="serviceProperties"/>
