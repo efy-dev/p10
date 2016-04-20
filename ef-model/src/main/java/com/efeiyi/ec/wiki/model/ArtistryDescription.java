@@ -8,8 +8,8 @@ import javax.persistence.*;
  * Created by Administrator on 2016/4/18.
  */
 @Entity
-@Table(name = "wiki_project_description")
-public class ProjectDescription {
+@Table(name = "wiki_artistry_description")
+public class ArtistryDescription {
     private String id;
     private String description;
     @Id
@@ -24,7 +24,7 @@ public class ProjectDescription {
     }
 
 
-    @Column(name = "wiki_project_description")
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }

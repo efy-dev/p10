@@ -14,23 +14,23 @@ import java.util.List;
  */
 @Entity
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-@Table(name = "wiki_art_project")
-public class ProjectWiki {
+@Table(name = "wiki_artistry")
+public class Artistry {
     private String id ;
     private String status;
     private Date createDatetime;
     private String type;
     private Project project;
-    private ProjectDescription projectDescription;
-    private List<ProjectPicture> projectPictureList;
+    private ArtistryDescription artistryDescription;
+    private List<ArtistryPicture> artistryPictureList;
 
 
     @Transient
-    public ProjectPicture getMainPicture() {
-        List<ProjectPicture> projectPictures = getProjectPictureList();
-        for (ProjectPicture projectPicture : projectPictures) {
-            if (projectPicture.getStatus().equals("1")) {
-                return projectPicture;
+    public ArtistryPicture getMainPicture() {
+        List<ArtistryPicture> artistryPictures = getArtistryPictureList();
+        for (ArtistryPicture artistryPicture : artistryPictures) {
+            if (artistryPicture.getStatus().equals("1")) {
+                return artistryPicture;
             }
         }
         return null;
@@ -82,22 +82,22 @@ public class ProjectWiki {
         this.project = project;
     }
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="wiki_project_description_id")
+    @JoinColumn(name="wiki_artistry_description_id")
     @JsonIgnore
-    public ProjectDescription getProjectDescription() {
-        return projectDescription;
+    public ArtistryDescription getArtistryDescription() {
+        return artistryDescription;
     }
 
-    public void setProjectDescription(ProjectDescription projectDescription) {
-        this.projectDescription = projectDescription;
+    public void setArtistryDescription(ArtistryDescription artistryDescription) {
+        this.artistryDescription = artistryDescription;
     }
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectWiki")
-    public List<ProjectPicture> getProjectPictureList() {
-        return projectPictureList;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "artistry")
+    public List<ArtistryPicture> getArtistryPictureList() {
+        return artistryPictureList;
     }
 
-    public void setProjectPictureList(List<ProjectPicture> projectPictureList) {
-        this.projectPictureList = projectPictureList;
+    public void setArtistryPictureList(List<ArtistryPicture> artistryPictureList) {
+        this.artistryPictureList = artistryPictureList;
     }
 }
