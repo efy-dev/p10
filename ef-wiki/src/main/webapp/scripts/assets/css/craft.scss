@@ -60,7 +60,7 @@
  *time:2016-04-13
  *
 */
-//工艺pc头部
+//工艺pc头部改通用样式
 .min-logo{
   @include WH(30px,31px);
   background: url("../images/craft/logo.png");
@@ -78,12 +78,43 @@
   border-bottom-width: 0;
 
 }
-//
+/*
+ *name:工艺通用底部
+ *time:2016-04-13
+ *
+*/
+.footer2016{
+  @include WF();
+  margin-top: 30px;//一会要去掉
+  border-top: 3px solid #cdcdcd;
+}
 /*
  *name:工艺首页
  *time:2016-04-13
  *
 */
+//通用标题
+.topic {
+  @include WF();
+  .bd-list {
+    @extend .fl;
+    width: 495px;
+    height: 1px;
+    background: #ebebeb;
+    margin: 64px 0;
+  }
+  .topic-txt {
+    @extend .fl;
+    width: 210px;
+    text-align: center;
+    span {
+      font-size: 30px;
+      color: #999;
+      display: inline-block;
+      @include heightCT(129px);
+    }
+  }
+}
 //工艺首页列表
 .craft-list2016 {
   @extend .wm;
@@ -91,27 +122,6 @@
   .craft-list {
     @include WF();
     padding-bottom: 50px;
-    .topic {
-      @include WF();
-      .bd-list {
-        @extend .fl;
-        width: 495px;
-        height: 1px;
-        background: #ebebeb;
-        margin: 64px 0;
-      }
-      .topic-txt {
-        @extend .fl;
-        width: 210px;
-        text-align: center;
-        span {
-          font-size: 30px;
-          color: #999;
-          display: inline-block;
-          @include heightCT(129px);
-        }
-      }
-    }
     .list {
       @extend .fl;
       width: 1225px;
@@ -150,10 +160,8 @@
         }
       }
     }
-
   }
 }
-
 /*
  *name:工艺详情
  *time:2016-04-13
@@ -194,22 +202,26 @@
         position: relative;
         .txt-page{
           @include WF();
-          .name{
-            @include txtLh(30px,#333);
-            @include WF();
-            margin-bottom: 30px;
-            em{
+            .name{
               @include txtLh(30px,#333);
+              @include WF();
+              margin-bottom: 30px;
+              em{
+                @include txtLh(30px,#333);
+              }
+              a{ @include txtLh(30px,#333);}
             }
-          }
-          .rank,.area{
-            @include txtLh(26px,#333);
-            @include WF();
-            margin-bottom: 30px;
-            em{
+            .rank,.area{
               @include txtLh(26px,#333);
+              @include WF();
+              margin-bottom: 30px;
+              em{
+                @include txtLh(26px,#333);
+              }
+              a{
+                @include txtLh(26px,#333);
+              }
             }
-          }
         }
         .pic-page{
           position: absolute;
@@ -243,7 +255,38 @@
                 }
               }
             }
+            .wechat{
+              float: right;
+              width: 160px;
+              img{
+                @include WF();
+                height: 160px;
+              }
+              .user-wechat{
+                border: 1px solid #ccc;
+                border-top-width: 0;
+                @include WF();
+                height: 90px;
+                text-align: center;
+                padding-top: 22px;
+                p{
+                  display: inline-block;
+                  @include txtLh(16px,#999);
+                  padding: 5px 0;
+                }
+              }
+            }
         }
+      }
+    }
+  }
+  .introduce{
+    @include WF();
+    .craft-introduce{
+      @extend .wm;
+      .txt{
+        @include WF();
+        padding-bottom: 80px;
       }
     }
   }

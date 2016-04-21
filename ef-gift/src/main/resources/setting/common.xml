@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<common>
+    <!-- 字典-->
+    <wordValues>
+        <wordValue group=""  note=""/>
+    </wordValues>
+    <!-- 轮播图 -->
+    <banners>
+        <banner group="master.index" note="传承人首页轮播图" />
+        <banner group="ec.home.banner" note="电商轮播图" />
+        <banner group="ec.home.banner.tysz" note="陶冶烧造" />
+        <banner group="ec.home.banner.ctms" note="传统美术" />
+        <banner group="ec.home.banner.zryx" note="织染印绣" />
+        <banner group="ec.home.banner.mpjn" note="茗品佳酿" />
+        <banner group="ec.home.banner.ttmc" note="饕餮美食" />
+        <banner group="ec.home.banner.zycq" note="琢玉成器" />
+        <banner group="ec.home.banner.jszd" note="金石錾锻" />
+        <banner group="ec.home.banner.rjsq" note="如胶似漆" />
+        <banner group="ec.home.banner.mzpz" note="木作编扎" />
+        <banner group="ec.home.banner.yyys" note="医药养生" />
+        <banner group="ec.home.banner.wfsb" note="文房四宝" />
+        <banner group="ec.home.banner.cysh" note="创意生活" />
+    </banners>
+    <!-- 文档 -->
+    <documents>
+        <document group="" template=".jsp" note="" />
+    </documents>
+    <!-- 推荐 -->
+    <recommends>
+        <recommend group="productRecommended" recommendedModel="com.efeiyi.ec.product.model.Product" note="商品推荐" amount="5" />
+        <recommend group="categoryRecommended" recommendedModel="com.efeiyi.ec.project.model.ProjectCategory" note="推荐分类" amount="5" />
+        <recommend group="productModelRecommended" recommendedModel="com.efeiyi.ec.product.model.ProductModel" note="推荐分类" amount="5" />
+        <recommend group="tenantRecommended" recommendedModel="com.efeiyi.ec.tenant.model.Tenant" note="推荐分类" amount="5" />
+        <recommend group="ec.masterRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="推荐分类" amount="6" />
+    </recommends>
+    <autoserials>
+        <autoserial group="orderSerial" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
+        <autoserial group="payment" autoserialModel="com.ming800.core.p.model.AutoSerial" note="支付记录序列号" prefix="" length="10" cacheSize="10" step="1" />
+    </autoserials>
+
+    <searchs>
+        <search group="efeiyi" recommendedModel="com.ming800.core.p.model.CommonSearch" rows="12" defaultQ="all_name:" highLight="true"
+                highLightFields="product_name,specification" highLightSimplePre="&lt;font color='red'&gt;" highLightSimplePost="&lt;/font&gt;"
+                defType="edismax" qf="product_name^5 sub_name^3 specification^3 project_name^4 master_name^2" solrClientCount="5"
+                solrServerCoreUrl="http://101.200.182.7/solr/product" solrServerHost="101.200.182.7" username="efy" password="helloword" port="80"/>
+        <search group="gift"
+                recommendedModel="com.ming800.core.p.model.CommonSearch" rows="12" defaultQ="value:"
+                highLight="true"
+                highLightFields="product_name,specification" highLightSimplePre="&lt;font color='red'&gt;"
+                highLightSimplePost="&lt;/font&gt;"
+                qf=""
+                defType="edismax"
+                solrClientCount="5"
+                solrServerCoreUrl="http://192.168.1.57/solr/product2" solrServerHost="192.168.1.57" username="Tomcat"
+                password="Tomcat" port="80"/>
+    </searchs>
+</common>

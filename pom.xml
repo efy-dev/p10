@@ -22,6 +22,7 @@
         <module>tg-website</module>
         <module>app-wikiServer</module>
         <module>ef-user</module>
+        <module>ef-gift</module>
     </modules>
 
     <repositories>
@@ -386,11 +387,11 @@
             <version>5.3.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.3.2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpclient</artifactId>-->
+            <!--<version>4.3.2</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -438,7 +439,7 @@
             <properties>
                 <db-driver>com.mysql.jdbc.Driver</db-driver>
                 <db-password>sl7BbVfIumw5V/irhnO9FA==</db-password>
-                <db-url>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/dev-efc?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
+                <db-url>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/efc-temp?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
                 <db-username>efy</db-username>
                 <db-level>DEBUG</db-level>
                 <dbpath>/tmp/logs/</dbpath>

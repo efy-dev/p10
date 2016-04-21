@@ -13,7 +13,14 @@
 <html>
 <head>
     <title></title>
-    <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>" ></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/scripts/simditor/font-awesome-4.5.0/css/font-awesome.css"/>">
+
+    <link rel="stylesheet" type="text/css" href="<c:url value="/scripts/simditor/styles/simditor.css"/>">
+    <script type="text/javascript" src="<c:url value="/scripts/simditor/scripts/module.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/scripts/simditor/simpleHotkeys/lib/hotkeys.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/scripts/simditor/scripts/uploader.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/scripts/simditor/scripts/simditor.js"/>"></script>
+
 </head>
 <body>
 
@@ -41,9 +48,10 @@
             <c:if test="${not empty object.id}">
                 <input type="hidden" name="serial" value="${object.serial}">
             </c:if>
+
             <input type="hidden" name="id" value="${object.id}">
             <input type="hidden" name="resultPage"
-                    value="redirect:/basic/xm.do?qm=plistMasterWork2_default"/>
+                   value="redirect:/basic/xm.do?qm=plistMasterWork2_default"/>
             <input type="hidden" value="1" name="status">
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">作品名称</label>
@@ -70,11 +78,11 @@
                 </div>
             </div>
             <div class="am-form-group">
-                <label for="productDescription" class="am-u-sm-3 am-form-label">简介</label>
+                <label for="editor" class="am-u-sm-3 am-form-label">简介</label>
 
                 <div class="am-u-sm-9">
-                        <textarea id="productDescription" name="description" class="ckeditor" placeholder="介绍" required
-                                  value="${object.description}">${object.description}</textarea>
+
+                    <textarea id="editor" name="description" placeholder="这里输入内容" value="${object.description}" autofocus>${object.description}</textarea>
                 </div>
                 <br>
             </div>
@@ -99,18 +107,18 @@
                     <input type="text" id="site" name="site" placeholder="馆藏地" value="${object.site}" required>
                 </div>
             </div>
-          <c:if test="${not empty object.id}">
-            <div class="am-form-group">
+            <c:if test="${not empty object.id}">
+                <div class="am-form-group">
 
-                <label  class="am-u-sm-3 am-form-label">创建时间</label>
+                    <label  class="am-u-sm-3 am-form-label">创建时间</label>
 
-                <div class="am-u-sm-9">
-                    <input name="createDateTime" value="${object.createDateTime}" type="hidden">
-                   <fmt:formatDate value="${object.createDateTime}" pattern="yyyy-MM-dd hh:mm:ss" />
-                    <%--<small>选择你要保存的轮播图</small>--%>
+                    <div class="am-u-sm-9">
+                        <input name="createDateTime" value="${object.createDateTime}" type="hidden">
+                        <fmt:formatDate value="${object.createDateTime}" pattern="yyyy-MM-dd hh:mm:ss" />
+                            <%--<small>选择你要保存的轮播图</small>--%>
+                    </div>
                 </div>
-            </div>
-         </c:if>
+            </c:if>
             <c:if test="${empty objext.id}">
                 <%
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -245,30 +253,44 @@
         $("#"+select+"Name").val(name);
         $("#"+popup).modal('close');
     }
-    <%--function getMasterProjectTag() {--%>
-        <%--$.ajax({--%>
-            <%--type: "get",--%>
-            <%--url: '<c:url value="/basic/xmj.do?qm=listProjectTag_default&conditions=project.id:${projectId}"/>',--%>
-            <%--cache: false,--%>
-            <%--dataType: "json",--%>
-            <%--success: function (data) {--%>
-                <%--$("#tagGroup").append(generateTagSelect(data));--%>
-            <%--}--%>
-        <%--});--%>
-    <%--}--%>
 
-//    function generateTagSelect(data) {
-//        var html = "    <div class=\"am-form-group\"><label  class=\"am-u-sm-3 am-form-label\">作品标签</label><div class=\"am-u-sm-9\">"
-//        for (var i = 0; i < data.length; i++) {
-//            html += "<label class=\"am-checkbox-inline\"><input type=\"checkbox\" name=\"tag" + i + "\" value=\"" + data[i].id + "\" > " + data[i].value + "</label>"
-//        }
-//        html += "</div></div>"
-//        return html;
-//    }
-//
-//    $().ready(function () {
-//        getMasterProjectTag();
-//    });
+    $(function(){
+        var  editor = new Simditor({
+            textarea:$("#editor"),
+            toolbar:[
+                'title',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'fontScale',
+                'color',
+                'ol',
+                'ul',
+                'blockquote',
+                'code',
+                'table',
+                'link',
+                'image',
+                'hr',
+                'indent',
+                'outdent',
+                'alignment'
+            ],
+
+            upload:{
+                url:"<c:url value="/task/img.do?project=garden" />",
+                params:""
+            },
+            pasteImage:true,
+
+        });
+
+
+
+
+
+    });
 
 </script>
 

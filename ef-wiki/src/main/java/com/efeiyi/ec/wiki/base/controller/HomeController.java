@@ -1,6 +1,5 @@
 package com.efeiyi.ec.wiki.base.controller;
 
-import com.efeiyi.ec.project.model.Project;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.BannerManager;
@@ -34,21 +33,19 @@ public class HomeController {
      */
     @RequestMapping({"/home.do"})
     public String home(HttpServletRequest request,Model model) throws Exception {
-        XQuery query = new XQuery("plistProjectRecommended_default", request);
-        List<Object> projectRecommendedList = baseManager.listObject(query);
+        XQuery query = new XQuery("listProjectRecommended_default", request);
         query.put("project_type","1");
-        List<Object> craftList = baseManager.listObject(query);
+        List<Object> artRecommendList = baseManager.listObject(query);
         query.put("project_type","2");
-        List<Object> artList = baseManager.listObject(query);
-        model.addAttribute("projectRecommendedList",projectRecommendedList);
-        model.addAttribute("artList",artList);
-        model.addAttribute("craftList",craftList);
+        List<Object> craftRecommendList = baseManager.listObject(query);
+        model.addAttribute("artRecommendList",artRecommendList);
+        model.addAttribute("craftRecommendList",craftRecommendList);
         //@TODO PC轮播图groupname待定
         List<Object> pcBannerList = bannerManager.getBannerList("wiki.pc.dynamic");
         //@TODO wap轮播图groupname待定
         List<Object> wapBannerList = bannerManager.getBannerList("wiki.wap.dynamic");
         model.addAttribute("pcBannerList",pcBannerList);
         model.addAttribute("wapBannerList",wapBannerList);
-        return "";
+        return "/home";
     }
 }
