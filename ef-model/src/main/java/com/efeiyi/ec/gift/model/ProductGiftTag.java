@@ -14,7 +14,7 @@ public class ProductGiftTag {
     private String id;
     private ProductGift productGift; //标签对应的礼品
     private ProductGiftTagValue productGiftTagValue; //标签对应的标签值
-    private String statue; //标签的状态 0删除 1正常
+    private String status; //标签的状态 0删除 1正常
 
 
     @Id
@@ -48,12 +48,15 @@ public class ProductGiftTag {
         this.productGiftTagValue = productGiftTagValue;
     }
 
+
+
     @Column(name = "status")
-    public String getStatue() {
-        return statue;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatue(String statue) {
-        this.statue = statue;
+    public void setStatus(String status) {
+        this.status = status;
     }
+
 }

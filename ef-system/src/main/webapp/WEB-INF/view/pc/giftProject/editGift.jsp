@@ -75,8 +75,8 @@
         <tbody>
         <tr>
           <th class="am-text-center" width="14%">操作</th>
-          <th class="am-text-center" width="17%">项目编号</th>
-          <th class="am-text-center" width="17%">项目名称</th>
+          <th class="am-text-center" width="17%">商品编号</th>
+          <th class="am-text-center" width="17%">商品名称</th>
         </tr>
         <c:forEach var="product" items="${productList}">
           <tr name="${product.name}" serial="${product.serial}">
@@ -125,7 +125,6 @@
   }
 
   function selectObj(id,name,popup,select,projectId){
-    alert(projectId);
     $("#"+select+"Id").val(id);
     $("#"+select+"Name").val(name);
     $("#"+popup).modal('close');

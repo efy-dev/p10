@@ -40,7 +40,7 @@
       <div class="am-form-group">
         <label name="type"  class="am-u-sm-3 am-form-label">标签组 <small>*</small></label>
         <div class="am-u-sm-9">
-          <input type="text" name="group" id="group" placeholder="标签值" value="${object.group}">
+          <input type="text" name="group" id="group" placeholder="标签组" value="${object.group}">
         </div>
       </div>
       <div class="am-form-group">
