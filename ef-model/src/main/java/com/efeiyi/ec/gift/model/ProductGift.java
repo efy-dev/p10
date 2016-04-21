@@ -6,6 +6,7 @@ import com.efeiyi.ec.project.model.ProjectCategory;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2016/4/14 0014.
@@ -20,6 +21,7 @@ public class ProductGift {
     private Project project; //礼品对应的非遗项目
     private ProjectCategory projectCategory; //礼品对应的项目分类
     private String status; //礼品的状态 0删除 1正常
+    private Date createDatetime;//创建时间
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -80,5 +82,14 @@ public class ProductGift {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "create_datetime")
+    public Date getCreateDatetime() {
+        return createDatetime;
+    }
+
+    public void setCreateDatetime(Date createDatetime) {
+        this.createDatetime = createDatetime;
     }
 }

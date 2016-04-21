@@ -22,6 +22,12 @@
                 </field>
             </fields>
             <does>
+                <do name="plistGiftProduct" access="" label="产品分页列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                    </query>
+
+                </do>
                 <do name="plistProduct" access="" label="产品分页列表"
                     result="/product/productPList" execute="com.efeiyi.ec.system.product.controller.listProductHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
