@@ -14,6 +14,8 @@
         <div class="tips fl"><i class="min-logo"></i>汇聚东方工艺精粹</div>
         <ul class="fr">
             <li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>
+            <li><a href="http://wiki.efeiyi.com" title="">工 艺</a></li>
+            <li><a href="http://master.efeiyi.com" title="">大 师</a></li>
             <%
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
@@ -32,7 +34,6 @@
                 }
             %>
             <li><a href="http://www.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
-            <li><a href="" title="">手机e飞蚁</a></li>
         </ul>
     </div>
 </div>

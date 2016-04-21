@@ -7,30 +7,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<header id="header" class="am-header custom-header index-header newheader">
+    <div class="logo"><a class="icon" href="" title="e飞蚁"></a></div>
+    <!-- //End--logo-->
+    <div class="am-header-right am-header-nav">
+        <a href="http://i.efeiyi.com/order/myEfeiyi/list.do" class="icon icon-user"></a>
+    </div>
+</header>
 
-
-    <%--<div class="topbar wh" id="hnav" >--%>
-              <%--<div data-am-widget="tabs"--%>
-                 <%--class="am-tabs am-tabs-default">--%>
-                <%--<ul class="am-tabs-nav am-cf">--%>
-                    <%--<li><a class="am-active" href="<c:url value=""/>" title="热门">热门</a></li>--%>
-                    <%--<li><a href="<c:url value=""/>" title="关注">关注</a></li>--%>
-                    <%--<li><a href='<c:url value="/category.do" />' id="fenlei" title="分类">分类</a></li>--%>
-                <%--</ul>--%>
-                <%--</div>--%>
-
-  <%--</div>--%>
-
-<%--<script>
-    $(document).ready(function () {
-        $('#fenlei').on('click', function () {
-            $("#hnav").hide();
-            //$("#hnav").style=("display:none");
-
-            //document.getElementById("hnav").style.display="none";
-        });
-    });
-</script>--%>
-<!-- //End--topbar-->
 
 

@@ -8,7 +8,6 @@
   <meta charset="UTF-8">
   <title>内容频道-${work.name}详情</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/layout.css'/>">
 </head>
 <body>
 <div class="worksView">
@@ -102,8 +101,8 @@
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 <script src="<c:url value='/scripts/assets/wap/js/amazeui.min.js'/>"></script>
 <!--自定义js--Start-->
+<script src="<c:url value='/scripts/assets/wap/js/jquery.min.js'/>"></script>
 <script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>
 
 <!--自定义js--End-->
 </body>

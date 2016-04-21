@@ -83,7 +83,7 @@
   <div class="craft-list">
     <div class="topic">
       <div class="bd-list"></div>
-      <div class="topic-txt"><span>传统技艺</span></div>
+      <div class="topic-txt"><span>非遗技艺</span></div>
       <div class="bd-list"></div>
     </div>
     <ul class="list">

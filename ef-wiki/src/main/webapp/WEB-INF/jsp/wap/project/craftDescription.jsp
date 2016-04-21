@@ -15,13 +15,12 @@
   <meta charset="UTF-8">
   <title>内容频道-工艺详情</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="<c:url value="/scripts/assets/wap/css/amazeui.min.css"/>">
-  <link rel="stylesheet" href="<c:url value="/scripts/assets/wap/css/craft.css"/>">
+
 </head>
 <body>
 <div class="craft">
   <div class="dt">
-    <h1>${projectWiki.project.name}</h1>
+    <h1>${artistry.project.name}</h1>
     <p>[<ming800:status name="level" dataType="Project.level" checkedValue="${artistry.project.getLevel()}" type="normal"/>]非物质文化遗产传承项目</p>
     <p>${artistry.project.addressDistrict.name}</p>
   </div>
@@ -34,7 +33,7 @@
     </ul>
     <div class="am-tabs-bd items">
       <div data-tab-panel-0 class="am-tab-panel am-active">
-       ${artistry.artistryDescription.description}
+       ${artistry.artistryDescription.descriptionWap}
       </div>
       <!--//End--技艺介绍-->
       <div data-tab-panel-2 class="am-tab-panel">
@@ -44,7 +43,6 @@
             <a href="<c:url value="/masterWork/${masterWork.id}"/>" title="">
               <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!wiki-work-picture" alt="">
                             <span class="txt">
-                                <p>${productModel.product.name}${productModel.name}</p>
                                 <p>${masterWork.name}</p>
                             </span>
             </a>

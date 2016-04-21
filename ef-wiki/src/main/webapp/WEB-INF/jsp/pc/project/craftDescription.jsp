@@ -17,7 +17,7 @@
 <div class="craft-particulars2016">
   <div class="craft-crumbs">
     <div class="particulars">
-      <div class="crumbs"><a href="/" >首页</a><em class="">></em><a href="" class="">工艺</a><a href="" class="present"><em class="present">></em>${projectWiki.project.name}</a></div>
+      <div class="crumbs"><a href="/" >首页</a><em class="">></em><a href="" class=""><ming800:status name="type" dataType="Project.type" checkedValue="${artistry.getType()}" type="normal"/></a><a href="" class="present"><em class="present">></em>${artistry.project.name}</a></div>
     </div>
   </div>
   <div class="user">
@@ -31,7 +31,7 @@
         <div class="pic-page">
           <c:if test="${not empty masterProjectList&&fn:length(masterProjectList)>0}">
           <div class="user-pic">
-            <a href="">
+            <a href="http://${masterProjectList.get(0).getMaster().name}.efeiyi.com/">
               <img src="<c:url value="http://tenant.efeiyi.com/${masterProjectList.get(0).getMaster().getFavicon()}@!wiki-pc-master-picture"/>" alt="">
               <div class="user-txt">
                 <p class="name">${masterProjectList.get(0).getMaster().getFullName()}</p>
@@ -61,7 +61,7 @@
       </div>
       <div class="txt">
         <c:if test="${not empty artistry.artistryDescription}">
-        ${artistry.artistryDescription.description}
+        ${artistry.artistryDescription.descriptionPC}
         </c:if>
       </div>
     </div>
