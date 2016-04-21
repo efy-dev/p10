@@ -136,6 +136,6 @@
     </filter-mapping>
 
     <welcome-file-list>
-        <welcome-file>/master/addWork.do</welcome-file>
+        <welcome-file>/pc/login.do</welcome-file>
     </welcome-file-list>
 </web-app>
