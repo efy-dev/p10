@@ -31,7 +31,7 @@
   <div class="menu-list">
     <ul class="bd">
       <li><a href="/" title="首页">首页</a></li>
-      <li><a href="http:www.efeiyi.com/> " title="购物车">非遗商城</a></li>
+      <li><a href="http://www.efeiyi.com" title="购物车">非遗商城</a></li>
       <li><a href="http://master.efeiyi.com" title="个人中心">非遗大师</a></li>
     </ul>
   </div>
