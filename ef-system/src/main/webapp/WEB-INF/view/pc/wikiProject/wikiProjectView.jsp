@@ -77,7 +77,7 @@
                     <%--${object.description}--%>
                     <%--</textarea>--%>
                     <textarea id="editor" name="description"
-                              placeholder="这里输入内容">${object.projectDescription.description}</textarea>
+                              placeholder="这里输入内容">${object.artistryDescription.descriptionPC}</textarea>
                     <a class="am-btn am-btn-primary" onclick="textFilter()">过滤a标签</a>
                 </div>
             </div>

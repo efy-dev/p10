@@ -366,6 +366,7 @@
             <jnode url="/basic/xm.do?qm=plistGiftProject_default" access="admin,operational,c_operational,product_manager,offline_manager" text_zh_CN="礼品列表">
                 <match url="/basic/xm.do?qm=plistGiftProject_default"/>
                 <match url="/basic/xm.do?qm=formGift&amp;view=gift"/>
+                <match url="/basic/xm.do?qm=formProjectGift&amp;view=Gift"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistGiftLabel_default" access="admin,operational,c_operational,product_manager,offline_manager" text_zh_CN="标签列表">
                 <match url="/basic/xm.do?qm=plistGiftLabel_default"/>

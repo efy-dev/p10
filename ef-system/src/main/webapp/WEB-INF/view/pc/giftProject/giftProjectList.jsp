@@ -60,7 +60,7 @@
               </div>
             </td>
             <td class="am-hide-sm-only" width="10%">
-              <a href="<c:url value="/basic/xm.do?qm=viewProjectWiki&view=masterWork&id=${giftList.id}"/>">
+              <a href="<c:url value="/basic/xm.do?qm=formProjectGift&view=Gift&id=${giftList.id}"/>">
                   ${giftList.name}
               </a>
             </td>
