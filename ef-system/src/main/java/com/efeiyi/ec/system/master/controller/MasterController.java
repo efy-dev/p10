@@ -1,25 +1,35 @@
 package com.efeiyi.ec.system.master.controller;
 
-import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.master.model.MasterProject;
+import com.efeiyi.ec.master.model.*;
 import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductPicture;
+import com.efeiyi.ec.project.model.ProjectTag;
 import com.efeiyi.ec.system.master.dao.MasterDao;
 import com.efeiyi.ec.system.master.service.MasterManager;
+import com.efeiyi.ec.system.master.service.MasterWorkManager;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AliOssUploadManager;
+import com.ming800.core.p.service.AutoSerialManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/7/20.
@@ -39,6 +49,9 @@ public class MasterController {
 
     @Autowired
     private MasterManager masterManager;
+    @Autowired
+    private MasterWorkManager masterWorkManager;
+
 
     @RequestMapping({"/master/list/json"})
     @ResponseBody
@@ -136,6 +149,100 @@ public class MasterController {
 
         }
         return  id;
+    }
+
+
+    @RequestMapping("/master/addWork.do")
+    public String addWork(String name, HttpServletRequest request, ModelMap modelMap){
+        try {
+            XQuery xQuery = new XQuery("listMasterTemp_default",request);
+            xQuery.put("name",name);
+            List<Master> masterList =  baseManager.listObject(xQuery);
+            if(masterList!=null){
+                modelMap.put("id",masterList.get(0).getId());
+                xQuery = new XQuery("listMasterBanner_default",request);
+                xQuery.put("master_id",masterList.get(0).getId());
+                modelMap.put("masterBannerList",baseManager.listObject(xQuery));
+                return  "/masterWork";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  "";
+    }
+
+    @RequestMapping("/master/uploadify.do")
+    @ResponseBody
+    public String uploadProductImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String data = "";
+        Master master = null;
+        if(!StringUtils.isEmpty(request.getParameter("id"))) {
+            master = (Master)baseManager.getObject(Master.class.getName(),request.getParameter("id"));
+        }
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String identify = sdf.format(new Date());
+        String url = "";
+        Integer sort = 0;
+        for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
+            //上传文件
+            MultipartFile mf = entry.getValue();
+            String fileName = mf.getOriginalFilename();//获取原文件名
+            Integer index = 0;
+            String hz = fileName.substring(fileName.indexOf("."),fileName.length());
+            String imgName = fileName.substring(0, fileName.indexOf(hz));
+            url = "banner/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
+            MasterBanner masterBanner = new MasterBanner();
+                try {
+                    masterBanner.setImageUrl(url);
+                    masterBanner.setMaster(master);
+                    masterBanner.setStatus("1");
+                    masterBanner.setGroup("tenant");
+                    masterBanner.setTitle(imgName);
+                    aliOssUploadManager.uploadFile(mf, "tenant", url);
+                    baseManager.saveOrUpdate(MasterBanner.class.getName(),masterBanner);
+
+                    data = masterBanner.getId() + ":" + url + ":" + imgName+hz+":"+sort;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        System.out.print(url);
+        return data;
+
+
+    }
+
+    @RequestMapping("/master/removeMasterBannerPicture.do")
+    @ResponseBody
+    public boolean removeMasterBannerPicture(String id){
+
+        try {
+            baseManager.remove(MasterBanner.class.getName(),id);
+            return  true;
+        }catch (Exception e){
+            e.printStackTrace();
+
+            return false;
+        }
+
+    }
+
+    @RequestMapping("/master/saveMasterWork.do")
+    @ResponseBody
+    public boolean saveMasterWork(HttpServletRequest request,MultipartRequest multipartRequest){
+
+        try {
+            return masterWorkManager.saveMasterWork(request,multipartRequest);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+
+
+        }
+
     }
 
 }
