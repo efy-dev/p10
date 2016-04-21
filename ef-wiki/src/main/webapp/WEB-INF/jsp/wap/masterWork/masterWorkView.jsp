@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.wiki.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,6 +11,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
+<header id="header" class="am-header custom-header newheader">
+  <div class="logo"><a class="icon" href="" title="e飞蚁"></a></div>
+  <!-- //End--logo-->
+  <!-- //End--chevron-left-->
+  <div class="am-header-right am-header-nav">
+    <a href="#chevron-right" class="chevron-right" id="menu">
+      <i class="line"></i>
+    </a>
+  </div>
+  <div class="menu-list">
+    <ul class="bd">
+      <li><a href="/" title="首页">首页</a></li>
+      <li><a href="http:www.efeiyi.com/> " title="购物车">非遗商城</a></li>
+      <li><a href="http://master.efeiyi.com" title="个人中心">非遗大师</a></li>
+    </ul>
+  </div>
+</header>
 <div class="worksView">
   <div class="workds-top bd bgfff">
     <div data-am-widget="slider" class="am-slider am-slider-a4 works-slider" data-am-slider='{&quot;directionNav&quot;:false}' >
@@ -90,20 +108,5 @@
   </div>
   <!--//End-- 相关作品 -->
 </div>
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value='/scripts/assets/wap/js/jquery.min.js'/>"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
-<![endif]-->
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-<script src="<c:url value='/scripts/assets/wap/js/amazeui.min.js'/>"></script>
-<!--自定义js--Start-->
-<script src="<c:url value='/scripts/assets/wap/js/jquery.min.js'/>"></script>
-<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>
-
-<!--自定义js--End-->
 </body>
 </html>
