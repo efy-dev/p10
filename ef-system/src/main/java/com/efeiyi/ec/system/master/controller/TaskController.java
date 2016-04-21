@@ -1,8 +1,8 @@
 package com.efeiyi.ec.system.master.controller;
 
 
-import com.efeiyi.ec.wiki.model.ProjectPicture;
-import com.efeiyi.ec.wiki.model.ProjectWiki;
+import com.efeiyi.ec.wiki.model.ArtistryPicture;
+import com.efeiyi.ec.wiki.model.Artistry;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 
@@ -102,12 +102,12 @@ public class TaskController extends BaseController {
             try {
                 //获取objectid 新建一个projectPicture
                 String wikiProjectId = request.getParameter("projectWikiId");
-                ProjectPicture projectPicture = new ProjectPicture();
+                ArtistryPicture projectPicture = new ArtistryPicture();
                 projectPicture.setPictureUrl(url);
-                projectPicture.setProjectWiki((ProjectWiki) (baseManager.getObject(ProjectWiki.class.getName(), wikiProjectId)));
+                projectPicture.setArtistry((Artistry) (baseManager.getObject(Artistry.class.getName(), wikiProjectId)));
                 projectPicture.setSort(0);
                 projectPicture.setStatus("2");
-                baseManager.saveOrUpdate(ProjectPicture.class.getName(), projectPicture);
+                baseManager.saveOrUpdate(ArtistryPicture.class.getName(), projectPicture);
                 aliOssUploadManager.uploadFile(mf, "ef-wiki", url);
                 data = "{\"success\":\"" + true + "\",\"file_path\":\"wiki-oss.efeiyi.com/" + url + "\"}";
             } catch (Exception e) {
