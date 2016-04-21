@@ -51,157 +51,20 @@
     </footer>
 </c:if>
 <!--[if (gte IE 9)|!(IE)]><!-->
+<script src="<c:url value="/resources/jquery/jquery.min.js"/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="<c:url value="/resources/assets/js/amazeui.min.js"/>"></script>
 <!--自定义js--Start-->
-<script src="<c:url value="/scripts/assets/js/system.js?"/>"></script>
+<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/system.js'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/amazeui.min.js'/>"></script>
+<!--自定义js--End-->
+<script src="<c:url value='/resources/js/alert.js'/>"></script>
 <!--自定义js--End-->
 
-<div style="display: none">
 
-    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
-</div>
-<%--<div class="scroll-bar">--%>
-    <%--<div class="scroll-bar-top" style="display: block;">--%>
-        <%--<span class="btn"><i class="icon1"></i></span>--%>
-    <%--</div>--%>
-    <%--<!-- //End--返回顶部-->--%>
-<%--</div>--%>
-
-<%--<style type="text/css">--%>
-    <%--#MEIQIA-BTN-HOLDER {--%>
-        <%--right: 0;--%>
-        <%--bottom: 145px;--%>
-    <%--}--%>
-
-    <%--#MEIQIA-BTN {--%>
-        <%--background: #000;--%>
-        <%--width: 33px;--%>
-        <%--height: 53px;--%>
-        <%---webkit-border-radius: 5px;--%>
-        <%---moz-border-radius: 5px;--%>
-        <%--border-radius: 5px;--%>
-    <%--}--%>
-
-    <%--#MEIQIA-BTN-LINE {--%>
-        <%--display: none;--%>
-    <%--}--%>
-
-    <%--#MEIQIA-BTN-TEXT {--%>
-        <%--width: 48px;--%>
-        <%--font-size: 12px;--%>
-        <%--position: absolute;--%>
-        <%--left: -28px;--%>
-        <%--top: 20px;,--%>
-    <%--display : none;--%>
-    <%--}--%>
-
-    <%--.MEIQIA-ICON {--%>
-        <%--background: url("http://www.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;--%>
-        <%--background-size: auto auto;--%>
-    <%--}--%>
-
-    <%--#MEIQIA-BTN-ICON {--%>
-        <%--width: 23px;--%>
-        <%--height: 28px;--%>
-        <%--margin: 0;--%>
-        <%--float: left;--%>
-        <%--margin-left: 5px;--%>
-        <%--margin-top: 6px;--%>
-    <%--}--%>
-<%--</style>--%>
-
-<script>
-    function isWeiXin() {
-        var ua = window.navigator.userAgent.toLowerCase();
-        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    var registerWx = "<c:url value="/wx/userInfo"/>";
-
-    var register = "http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do";
-
-    if (isWeiXin()) {
-//        alert("not weixin");
-        $("#signin").attr("href", registerWx);
-
-    } else {
-        $("#wechat").hide();
-        $("#wechatStr1").hide();
-        $("#wechatStr2").hide();
-    }
-</script>
-
-<%--<script>--%>
-    <%--(function (i, s, o, g, r, a, m) {--%>
-        <%--i['GoogleAnalyticsObject'] = r;--%>
-        <%--i[r] = i[r] || function () {--%>
-                    <%--(i[r].q = i[r].q || []).push(arguments)--%>
-                <%--}, i[r].l = 1 * new Date();--%>
-        <%--a = s.createElement(o), m = s.getElementsByTagName(o)[0];--%>
-        <%--a.async = 1;--%>
-        <%--a.src = g;--%>
-        <%--m.parentNode.insertBefore(a, m)--%>
-    <%--})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');--%>
-    <%--ga('create', 'UA-69796169-1', 'auto');--%>
-    <%--ga('send', 'pageview');--%>
-
-    <%--//统计推广source点击量--%>
-    <%--var currentUrl = window.location.href;--%>
-    <%--if(currentUrl.indexOf("source") > 0){--%>
-        <%--$.ajax({--%>
-            <%--type: 'post',--%>
-            <%--url: '<c:url value="/watchUrlSource.do"/>',--%>
-            <%--dataType: 'json',--%>
-            <%--data: {--%>
-                <%--"currentUrl":currentUrl--%>
-            <%--},--%>
-            <%--success: function (data) {--%>
-                <%--console.log(data);--%>
-            <%--},--%>
-
-        <%--});--%>
-    <%--}--%>
-<%--</script>--%>
-<%--<script>--%>
-
-    <%--var _hmt = _hmt || [];--%>
-
-    <%--(function () {--%>
-
-        <%--var hm = document.createElement("script");--%>
-
-        <%--hm.src = "//hm.baidu.com/hm.js?15b49366788c12ff091a0f6b23c8835f";--%>
-
-        <%--var s = document.getElementsByTagName("script")[0];--%>
-
-        <%--s.parentNode.insertBefore(hm, s);--%>
-
-    <%--})();--%>
-
-<%--</script>--%>
-
-<%--<script type="text/javascript">--%>
-    <%--var _mvq = window._mvq || [];--%>
-    <%--window._mvq = _mvq;--%>
-    <%--_mvq.push(['$setAccount', 'm-197303-0']);--%>
-
-    <%--_mvq.push(['$logConversion']);--%>
-    <%--(function() {--%>
-        <%--var mvl = document.createElement('script');--%>
-        <%--mvl.type = 'text/javascript'; mvl.async = true;--%>
-        <%--mvl.src = ('https:' == document.location.protocol ? 'https://static-ssl.mediav.com/mvl.js' : 'http://static.mediav.com/mvl.js');--%>
-        <%--var s = document.getElementsByTagName('script')[0];--%>
-        <%--s.parentNode.insertBefore(mvl, s);--%>
-    <%--})();--%>
-<%--</script>--%>
 

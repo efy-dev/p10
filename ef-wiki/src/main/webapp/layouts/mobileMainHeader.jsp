@@ -26,19 +26,3 @@
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/layout.css'/>">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/craft.css'/>">
 
-<script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value="/resources/jquery/jquery.min.js"/>"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-<!--自定义js--Start-->
-<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
-<script src="<c:url value='/scripts/assets/wap/js/system.js'/>"></script>
-<script src="<c:url value='/scripts/assets/wap/js/amazeui.min.js'/>"></script>
-<script src="<c:url value='/scripts/assets/wap/js/jquery.min.js'/>"></script>
-<!--自定义js--End-->
-<script src="<c:url value='/resources/js/alert.js'/>"></script>
