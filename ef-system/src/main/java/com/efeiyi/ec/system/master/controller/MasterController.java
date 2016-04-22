@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -163,12 +164,13 @@ public class MasterController {
                 xQuery = new XQuery("listMasterBanner_default",request);
                 xQuery.put("master_id",masterList.get(0).getId());
                 modelMap.put("masterBannerList",baseManager.listObject(xQuery));
+                modelMap.put("name",name);
                 return  "/masterWork";
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return  "";
+        return  "/errorMasterWork";
     }
 
     @RequestMapping("/master/uploadify.do")
@@ -231,17 +233,19 @@ public class MasterController {
     }
 
     @RequestMapping("/master/saveMasterWork.do")
-    @ResponseBody
-    public boolean saveMasterWork(HttpServletRequest request,MultipartRequest multipartRequest){
-
+    public String saveMasterWork(HttpServletRequest request,MultipartRequest multipartRequest,ModelMap modelMap){
+        modelMap.put("result","false");
+        modelMap.put("name",request.getParameter("name"));
         try {
-            return masterWorkManager.saveMasterWork(request,multipartRequest);
+            if(masterWorkManager.saveMasterWork(request,multipartRequest))
+                modelMap.put("result","true");
+
         }catch (Exception e){
             e.printStackTrace();
-            return false;
 
 
         }
+        return  "/masterWorkSaveSuccess";
 
     }
 

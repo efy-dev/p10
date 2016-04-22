@@ -44,7 +44,7 @@
         <form action="<c:url value="/master/saveMasterWork.do"/>" method="post" class="am-form am-form-horizontal"
               enctype="multipart/form-data">
             <input type="hidden" name="master.id" value="${id}">
-
+            <input type="hidden" name="name" value="${name}">
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">作品名称</label>
 
@@ -80,7 +80,7 @@
             </div>
             <div class="am-form-group">
                 <div class="am-u-sm-9 am-u-sm-push-3">
-                    <button type="submit" class="am-btn am-btn-primary">保存</button>
+                    <button type="button" onclick="toSub()" class="am-btn am-btn-primary">保存</button>
                 </div>
             </div>
         </form>
@@ -142,28 +142,32 @@
 <script>
 
 
+    var  option = {
+        type:"post",
+        clearForm:true,
+        dataType:"json",
+        success:function(data){
+            var json = parseJSON(data);
+            if(json.result=="true"){
+                alert("保存成功!");
+            }
+        }
+    };
 
-
+    function  toSub(){
+        var f = confirm("保存成功后将不允许修改，若需修改请联系客服!");
+        if(f) {
+            $("form").submit();
+        }
+    }
     $(function(){
 
-        var  option = {
-            type:"post",
-            clearForm:true,
-            dataType:"json",
-            success:function(data){
-               if(data){
-                   alert("保存成功!");
-               }
-            }
-        };
 
-        $("form").submit(function(){
 
-            var f = confirm("保存成功后将不允许修改，若需修改请联系客服!");
-            if(f) {
-                $(this).ajaxSubmit(option);
-            }
-        });
+//        $("form").submit(function(){
+//
+//
+//        });
 
         $('#btn_upload').uploadify({
             uploader: '<c:url value="/master/uploadify.do?id=${id}"/>',            // 服务器处理地址
