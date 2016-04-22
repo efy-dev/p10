@@ -156,16 +156,18 @@ public class MasterController {
     @RequestMapping("/master/addWork.do")
     public String addWork(String name, HttpServletRequest request, ModelMap modelMap){
         try {
-            XQuery xQuery = new XQuery("listMasterTemp_default",request);
-            xQuery.put("name",name);
-            List<Master> masterList =  baseManager.listObject(xQuery);
-            if(masterList!=null){
-                modelMap.put("id",masterList.get(0).getId());
-                xQuery = new XQuery("listMasterBanner_default",request);
-                xQuery.put("master_id",masterList.get(0).getId());
-                modelMap.put("masterBannerList",baseManager.listObject(xQuery));
-                modelMap.put("name",name);
-                return  "/masterWork";
+            if(!StringUtils.isEmpty(name)) {
+                XQuery xQuery = new XQuery("listMasterTemp_default", request);
+                xQuery.put("name", name);
+                List<Master> masterList = baseManager.listObject(xQuery);
+                if (masterList != null) {
+                    modelMap.put("id", masterList.get(0).getId());
+                    xQuery = new XQuery("listMasterBanner_default", request);
+                    xQuery.put("master_id", masterList.get(0).getId());
+                    modelMap.put("masterBannerList", baseManager.listObject(xQuery));
+                    modelMap.put("name", name);
+                    return "/masterWork";
+                }
             }
         }catch (Exception e){
             e.printStackTrace();
