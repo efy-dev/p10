@@ -1,7 +1,5 @@
 package com.efeiyi.ec.wiki.base.controller;
 
-import com.efeiyi.ec.project.model.Project;
-import com.efeiyi.ec.wiki.model.ProjectWiki;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.BannerManager;

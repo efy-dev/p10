@@ -8,12 +8,12 @@ import javax.persistence.*;
  * Created by Administrator on 2016/4/18.
  */
 @Entity
-@Table(name = "wiki_project_picture")
-public class ProjectPicture {
+@Table(name = "wiki_artistry_picture")
+public class ArtistryPicture {
     private String id;
     private String pictureUrl;
     private String status;//1:工艺图片 2工艺详情页的图片
-    private ProjectWiki projectWiki;//工艺项目
+    private Artistry artistry;//工艺项目
     private Integer sort;
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -42,13 +42,13 @@ public class ProjectPicture {
         this.pictureUrl = pictureUrl;
     }
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "wiki_art_project_id")
-    public ProjectWiki getProjectWiki() {
-        return projectWiki;
+    @JoinColumn(name = "wiki_artistry_id")
+    public Artistry getArtistry() {
+        return artistry;
     }
 
-    public void setProjectWiki(ProjectWiki projectWiki) {
-        this.projectWiki = projectWiki;
+    public void setArtistry(Artistry artistry) {
+        this.artistry = artistry;
     }
     @Column(name = "sort")
     public Integer getSort() {

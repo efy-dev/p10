@@ -1,8 +1,8 @@
 package com.efeiyi.ec.system.project.controller;
 
-import com.efeiyi.ec.wiki.model.ProjectDescription;
-import com.efeiyi.ec.wiki.model.ProjectPicture;
-import com.efeiyi.ec.wiki.model.ProjectWiki;
+import com.efeiyi.ec.wiki.model.ArtistryDescription;
+import com.efeiyi.ec.wiki.model.ArtistryPicture;
+import com.efeiyi.ec.wiki.model.Artistry;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.service.AliOssUploadManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,41 +30,44 @@ public class ProjectWikiController {
     @RequestMapping({"update.do"})
     public String updateDescriptionAndMainPictureOfProjectWiki(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
 
-        ProjectWiki projectWiki = (ProjectWiki) baseManager.getObject(ProjectWiki.class.getName(), request.getParameter("projectWikiId"));
+        Artistry projectWiki = (Artistry) baseManager.getObject(Artistry.class.getName(), request.getParameter("projectWikiId"));
         //得到上传的图片文件并且上传到aliyun 并且保存ProjectPictrue对象
         CommonsMultipartFile multipartFile = (CommonsMultipartFile) multipartRequest.getFile("projectWikiMainPicture");
         long size = multipartFile.getFileItem().getSize();
         if (multipartFile.getFileItem().getSize() > 0) {
             if (projectWiki.getMainPicture() != null) {
-                ProjectPicture projectPicture2 = projectWiki.getMainPicture();
+                ArtistryPicture projectPicture2 = projectWiki.getMainPicture();
                 projectPicture2.setStatus("2");
-                baseManager.saveOrUpdate(ProjectPicture.class.getName(), projectPicture2);
+                baseManager.saveOrUpdate(ArtistryPicture.class.getName(), projectPicture2);
             }
             String url = "wikiproject/" + multipartFile.getOriginalFilename();
             boolean result = aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
             if (result) {
-                ProjectPicture projectPicture = new ProjectPicture();
+                ArtistryPicture projectPicture = new ArtistryPicture();
                 projectPicture.setStatus("1");
                 projectPicture.setPictureUrl(url);
-                projectPicture.setProjectWiki(projectWiki);
+                projectPicture.setArtistry(projectWiki);
                 projectPicture.setSort(0);
-                baseManager.saveOrUpdate(ProjectPicture.class.getName(), projectPicture);
+                baseManager.saveOrUpdate(ArtistryPicture.class.getName(), projectPicture);
             }
         }
 
         //得到工艺描述的数据并且创建ProjectDescription对象
         //得到当前工艺的描述，如果有描述对象就用之前的，如果没有就新建一个新的
-        String content = request.getParameter("description");
-        if (projectWiki.getProjectDescription() != null) {
-            ProjectDescription projectDescription = projectWiki.getProjectDescription();
-            projectDescription.setDescription(content);
-            baseManager.saveOrUpdate(ProjectDescription.class.getName(), projectDescription);
+        String contentPc = request.getParameter("descriptionPC");
+        String contentWap = request.getParameter("descriptionWap");
+        if (projectWiki.getArtistryDescription() != null) {
+            ArtistryDescription projectDescription = projectWiki.getArtistryDescription();
+            projectDescription.setDescriptionPC(contentPc);
+            projectDescription.setDescriptionWap(contentWap);
+            baseManager.saveOrUpdate(ArtistryDescription.class.getName(), projectDescription);
         } else {
-            ProjectDescription projectDescription = new ProjectDescription();
-            projectDescription.setDescription(content);
-            baseManager.saveOrUpdate(ProjectDescription.class.getName(), projectDescription);
-            projectWiki.setProjectDescription(projectDescription);
-            baseManager.saveOrUpdate(ProjectWiki.class.getName(), projectWiki);
+            ArtistryDescription projectDescription = new ArtistryDescription();
+            projectDescription.setDescriptionPC(contentPc);
+            projectDescription.setDescriptionWap(contentWap);
+            baseManager.saveOrUpdate(ArtistryDescription.class.getName(), projectDescription);
+            projectWiki.setArtistryDescription(projectDescription);
+            baseManager.saveOrUpdate(Artistry.class.getName(), projectWiki);
         }
 
         //返回工艺详情页面

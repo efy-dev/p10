@@ -69,7 +69,7 @@
     <ul class="list">
       <c:forEach items="${artRecommendList}" var="art" begin="0" end="7">
         <li>
-          <a href="<c:url value="/project/${art.project.projectWiki.id}"/>">
+          <a href="<c:url value="/project/${art.project.artistry.id}"/>">
             <img src="http://wiki-oss.efeiyi.com/${art.project.picture_pc_url}@!wiki-home-project-picture" alt="">
             <div class="list-content">
               <p class="name">${art.project.name}</p>
@@ -83,13 +83,13 @@
   <div class="craft-list">
     <div class="topic">
       <div class="bd-list"></div>
-      <div class="topic-txt"><span>传统技艺</span></div>
+      <div class="topic-txt"><span>非遗技艺</span></div>
       <div class="bd-list"></div>
     </div>
     <ul class="list">
       <c:forEach items="${craftRecommendList}" var="craft" begin="0" end="7">
       <li>
-        <a href="<c:url value="/project/${craft.project.projectWiki.id}"/>">
+        <a href="<c:url value="/project/${craft.project.artistry.id}"/>">
           <img src="http://wiki-oss.efeiyi.com/${craft.project.picture_pc_url}@!wiki-home-project-picture" alt="">
           <div class="list-content">
             <p class="name">${craft.project.name}</p>

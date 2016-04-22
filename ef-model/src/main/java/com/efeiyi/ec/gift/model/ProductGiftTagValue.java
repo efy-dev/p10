@@ -3,6 +3,7 @@ package com.efeiyi.ec.gift.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2016/4/14 0014.
@@ -16,6 +17,8 @@ public class ProductGiftTagValue {
     private String group; //标签分组
     private String value; //标签值
     private String status; //标签值状态
+    private Date createDatetime;//创建时间
+
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -62,5 +65,14 @@ public class ProductGiftTagValue {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "create_datetime")
+    public Date getCreateDatetime() {
+        return createDatetime;
+    }
+
+    public void setCreateDatetime(Date createDatetime) {
+        this.createDatetime = createDatetime;
     }
 }

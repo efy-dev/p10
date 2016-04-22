@@ -2,8 +2,7 @@ package com.efeiyi.ec.wiki.art.controller;
 
 import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.master.model.MasterWork;
-import com.efeiyi.ec.wiki.model.ProjectContent;
-import com.efeiyi.ec.wiki.model.ProjectWiki;
+import com.efeiyi.ec.wiki.model.Artistry;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -37,10 +36,10 @@ public class ArtController extends BaseController {
      */
     @RequestMapping("/project/{projectWikiId}")
     public String getProjectDetail(HttpServletRequest request,Model model,@PathVariable String projectWikiId) throws Exception {
-        ProjectWiki projectWiki = (ProjectWiki) baseManager.getObject(ProjectWiki.class.getName(),projectWikiId);
+        Artistry artistry = (Artistry) baseManager.getObject(Artistry.class.getName(),projectWikiId);
         String projectId = null;
         try {
-            projectId = projectWiki.getProject().getId();
+            projectId = artistry.getProject().getId();
         }catch (Exception e){
             projectId = null;
         }
@@ -54,7 +53,7 @@ public class ArtController extends BaseController {
         List<MasterWork> masterWorkList = baseManager.listObject(mwXQuery);
         model.addAttribute("masterProjectList",masterProjectList);
         model.addAttribute("masterWorkList",masterWorkList);
-        model.addAttribute("projectWiki",projectWiki);
+        model.addAttribute("artistry",artistry);
         return "/project/craftDescription";
     }
 }

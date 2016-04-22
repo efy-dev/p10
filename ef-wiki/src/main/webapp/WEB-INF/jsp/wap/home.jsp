@@ -14,10 +14,20 @@
   <meta charset="UTF-8">
   <title>工艺</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="<c:url value="/scripts/assets/wap/css/amazeui.min.css?t=20160413"/>">
-  <link rel="stylesheet" href="<c:url value="/scripts/assets/wap/css/craft.css?t=20160413"/>">
+  <%--<link rel="stylesheet" href="<c:url value="/scripts/assets/wap/css/amazeui.min.css?t=20160413"/>">--%>
+  <%--<link rel="stylesheet" href="<c:url value="/scripts/assets/wap/css/craft.css?t=20160413"/>">--%>
+
 </head>
+
+
 <body>
+<header id="header" class="am-header custom-header index-header newheader">
+  <div class="logo"><a class="icon" href="" title="e飞蚁"></a></div>
+  <!-- //End--logo-->
+  <div class="am-header-right am-header-nav">
+    <a href="http://i.efeiyi.com/order/myEfeiyi/list.do" class="icon icon-user"></a>
+  </div>
+</header>
 <div class="craft">
   <div data-am-widget="slider" class="am-slider am-slider-a4 img-slider" data-am-slider='{&quot;directionNav&quot;:false}' >
     <ul class="am-slides">
@@ -34,7 +44,7 @@
     <ul class="ul-col-2">
       <c:forEach items="${artRecommendList}" var="art" begin="0" end="7">
       <li>
-        <a href="<c:url value="/project/${art.project.projectWiki.id}"/>" title="">
+        <a href="<c:url value="/project/${art.project.artistry.id}"/>" title="">
           <img src="http://wiki-oss.efeiyi.com/${art.project.picture_pc_url}@!wiki-project-picture" alt="">
                     <span class="txt">
                         <p>${art.project.name}</p>
@@ -51,7 +61,7 @@
     <ul class="ul-col-2">
       <c:forEach items="${craftRecommendList}" var="craft" begin="0" end="7">
       <li>
-        <a href="<c:url value="/project/${craft.project.projectWiki.id}"/>" title="">
+        <a href="<c:url value="/project/${craft.project.artistry.id}"/>" title="">
           <img src="http://wiki-oss.efeiyi.com/${craft.project.picture_pc_url}@!wiki-work-picture"  alt="">
                     <span class="txt">
                         <p>${craft.project.name}</p>
