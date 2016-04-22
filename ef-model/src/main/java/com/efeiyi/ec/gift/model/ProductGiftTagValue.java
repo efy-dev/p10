@@ -37,7 +37,7 @@ public class ProductGiftTagValue {
         this.type = type;
     }
 
-    @Column(name = "group")
+    @Column(name = "tag_group")
     public String getGroup() {
         return group;
     }
