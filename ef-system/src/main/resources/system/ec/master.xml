@@ -134,6 +134,14 @@
                         <!--<condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>-->
                     </query>
                 </do>
+
+                <do name="listMasterTemp" label="传承人列表" access="" result="/master/masterList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="状态" name="status" defaultValue="0" operation="ne"/>
+                        <condition label="大师名称" name="name" defaultValue="1" operation="eq"/>
+                        <!--<condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>-->
+                    </query>
+                </do>
             </does>
         </entity>
 
@@ -212,7 +220,7 @@
                 <do name="listMasterBanner" label="传承人轮播图列表" access="" result="/masterBanner/masterBannerList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
-                        <condition label="状态" name="master.id" operation="eq"/>
+                        <condition label="状态" name="master.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 

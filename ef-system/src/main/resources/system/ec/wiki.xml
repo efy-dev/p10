@@ -82,7 +82,7 @@
                 </do>
             </does>
         </entity>
-        <entity name="ProjectWiki" label="工艺项目" model="com.efeiyi.ec.wiki.model.ProjectWiki">
+        <entity name="ProjectWiki" label="工艺项目" model="com.efeiyi.ec.wiki.model.Artistry">
             <fields>
                 <field name="type" label="项目类型" inputType="text">
                     <statusType fieldName="type">

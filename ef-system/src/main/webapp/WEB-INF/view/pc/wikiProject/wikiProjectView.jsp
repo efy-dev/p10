@@ -68,16 +68,23 @@
             </div>
 
             <div class="am-form-group">
-                <label name="type" for="editor" class="am-u-sm-3 am-form-label">工艺描述
+                <label name="type" for="editor" class="am-u-sm-3 am-form-label">工艺描述PC
                     <small>*</small>
                 </label>
                 <div class="am-u-sm-9" style="margin-top: 10px">
-                    <%--<textarea id="content" name="content"  style="overflow-y: scroll"><c:if test="${!empty projectContent.content}">${projectContent.content}</c:if></textarea>--%>
-                    <%--<textarea id="description" name="description" class="ckeditor" placeholder="项目内容"  >--%>
-                    <%--${object.description}--%>
-                    <%--</textarea>--%>
-                    <textarea id="editor" name="description"
-                              placeholder="这里输入内容">${object.projectDescription.description}</textarea>
+
+                    <textarea id="editor" name="descriptionPC"
+                              placeholder="这里输入内容">${object.artistryDescription.descriptionPC}</textarea>
+                    <a class="am-btn am-btn-primary" onclick="textFilter()">过滤a标签</a>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label name="type" for="editor1" class="am-u-sm-3 am-form-label">工艺描述Wap
+                    <small>*</small>
+                </label>
+                <div class="am-u-sm-9" style="margin-top: 10px">
+                    <textarea id="editor1" name="descriptionWap"
+                              placeholder="这里输入内容">${object.artistryDescription.descriptionWap}</textarea>
                     <a class="am-btn am-btn-primary" onclick="textFilter()">过滤a标签</a>
                 </div>
             </div>
@@ -94,6 +101,36 @@
     $(function () {
         var editor = new Simditor({
             textarea: $("#editor"),
+            toolbar: [
+                'title',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'fontScale',
+                'color',
+                'ol',
+                'ul',
+                'blockquote',
+                'code',
+                'table',
+                'link',
+                'image',
+                'hr',
+                'indent',
+                'outdent',
+                'alignment'
+            ],
+
+            upload: {
+                url: "<c:url value="/task/img.do?projectWikiId=${object.id}" />",
+                params: ""
+            },
+            pasteImage: true,
+
+        });
+        var editor1 = new Simditor({
+            textarea: $("#editor1"),
             toolbar: [
                 'title',
                 'bold',
