@@ -26,21 +26,35 @@
         <div class="txt-page">
           <p class="name">技艺名称：<a>${artistry.project.name}</a></p>
           <p class="rank">技艺级别：<em><ming800:status name="level" dataType="Project.level" checkedValue="${artistry.project.getLevel()}" type="normal"/></em></p>
-          <p class="area">所属地区：<em>${artistry.project.addressDistrict.addressCity.addressProvince.name}${artistry.project.addressDistrict.addressCity.name}${artistry.project.addressDistrict.name}</em></p>
+          <c:if test="${not empty artistry.project.addressDistrict}">
+              <p class="area">所属地区：<em>${artistry.project.addressDistrict.addressCity.addressProvince.name}${artistry.project.addressDistrict.addressCity.name}${artistry.project.addressDistrict.name}</em></p>
+          </c:if>
         </div>
         <div class="pic-page">
-          <c:if test="${not empty masterProjectList&&fn:length(masterProjectList)>0}">
+
           <div class="user-pic">
-            <a href="http://${masterProjectList.get(0).getMaster().name}.efeiyi.com/">
-              <img src="<c:url value="http://tenant.efeiyi.com/${masterProjectList.get(0).getMaster().getFavicon()}@!wiki-pc-master-picture"/>" alt="">
-              <div class="user-txt">
-                <p class="name">${masterProjectList.get(0).getMaster().getFullName()}</p>
-                <p class="craft">${masterProjectList.get(0).getProject().getName()}</p>
-                <p class="rank"><ming800:status name="level" dataType="Project.level" checkedValue="${masterProjectList.get(0).getProject().getLevel()}" type="normal"/>传承人</p>
-              </div>
-            </a>
+              <c:if test="${not empty masterProjectList&&fn:length(masterProjectList)>0}">
+              <a href="http://${masterProjectList.get(0).getMaster().name}.efeiyi.com/">
+                <img src="<c:url value="http://tenant.efeiyi.com/${masterProjectList.get(0).getMaster().getFavicon()}@!wiki-pc-master-picture"/>" alt="">
+                <div class="user-txt">
+                  <p class="name">${masterProjectList.get(0).getMaster().getFullName()}</p>
+                  <p class="craft">${masterProjectList.get(0).getProject().getName()}</p>
+                  <p class="rank"><ming800:status name="level" dataType="Project.level" checkedValue="${masterProjectList.get(0).getProject().getLevel()}" type="normal"/>传承人</p>
+                </div>
+                </a>
+                </c:if>
+              <c:if test="${empty masterProjectList}">
+               <a>
+                <img src="" alt="">
+                <div class="user-txt">
+                  <p class="name"></p>
+                  <p class="craft"></p>
+                  <p class="rank"></p>
+                </div>
+               </a>
+            </c:if>
           </div>
-          </c:if>
+
           <div class="wechat" >
             <img id="native" src="<c:url value="/scripts/assets/images/craft/wechat.jpg"/>" alt="">
             <div class="user-wechat">
