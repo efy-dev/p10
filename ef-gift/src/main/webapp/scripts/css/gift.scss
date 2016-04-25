@@ -1,0 +1,632 @@
+@charset "UTF-8";
+//继承 @extend
+.fl{
+  float: left
+}
+.fr{
+  float:right;
+}
+.wb{
+  width: 100%
+}
+.opacityG{
+  opacity: 0.5;
+}
+.wm{
+  width: 1200px;
+  margin:  0 auto;
+}
+
+//高度垂直方法 @mixin @include heightCT($height)
+@mixin heightCT($height){
+  height:$height ;
+  line-height: $height;
+}
+//文字行高字号颜色 @include txtLh($txt,$color)
+@mixin txtLh($txt,$color){
+  font-size: $txt;
+  line-height: $txt;
+  color: $color;
+}
+//高度&&宽度的方法 @include WH($wd,$hg)
+@mixin WH($wd,$hg){
+  width: $wd ;
+  height: $hg;
+}
+//宽100%;float:left @include WF()
+@mixin WF(){
+  @extend .fl;
+  @extend .wb;
+}
+//宽100%；flaot:left;变量height @include WFG($Bheight)
+@mixin WFG($Bheight){
+  @extend .fl;
+  @extend .wb;
+  height:$Bheight;
+}
+//过渡动画 @include tst($transit)
+@mixin tst($transit){
+  transition: all $transit;
+  -webkit-transition: all $transit;
+  -ms-transition: all $transit;
+  -o-transition: all $transit;
+  -moz-transition: all $transit;
+}
+//定制按钮 宽，高，字颜色，背景，边框，边框颜色 @include cstBtn($width,$height,$color,$bg)
+@mixin cstBtn($width,$height,$color,$bg,$fz){
+  width: $width;
+  height: $height;
+  color: $color;
+  background: $bg;
+  text-align: center;
+  line-height: $height;
+  font-size: $fz;
+}
+/*//礼品页头部改*/
+.top2016{
+  .search-gift{
+    @extend .fr;
+    width: 480px;
+    margin-bottom: 25px;
+    .icon2016-gift{
+      background-image: url(../images/gift/giftIcon.png);
+    }
+    form{
+      margin-top: 17px;
+      @include WF();
+      .ipt{
+        @include WH(440px,33px);
+        border: 1px solid #ebebeb;
+        border-right-width: 0px;
+        padding: 5px;
+        @extend .fl;
+      }
+      .btn{
+        @include WH(40px,33px);
+        @extend .fl;
+        background-position: 0 0 ;
+        background-color: #fff;
+      }
+    }
+    .gift-link{
+      @include WF();
+      line-height: 34px;
+      padding: 10px 0 10px 11px;
+      a{
+        @include txtLh(14px,#666);
+        @include tst(0.5s);
+        @extend .fl;
+      }
+      a:hover{
+        color: #000;
+      }
+      span{
+        @include WH(1px,10px);
+        @extend .fl;
+        margin: 2px 6px;
+        background: #d9d9d9;
+      }
+    }
+
+
+  }
+  .min-logo{
+    @include WH(30px,31px);
+    background: url("../images/craft/logo.png");
+    margin: 8px 8px 0 0;
+    @extend .fl;
+  }
+}
+.nav2016{
+  .bgf{
+    background: #fff;
+    height: 48px;
+    border: 1px solid #ececec;
+  }
+  .bgc{
+    background: #fafafa;
+    border-top-width: 0 ;
+    border-bottom-width: 0;
+
+  }
+}
+.min-logo{
+  @include WH(30px,31px);
+  background: url("../images/craft/logo.png");
+  margin: 8px 8px 0 0;
+  @extend .fl;
+}
+.bgf{
+  background: #fff !important;
+  height: 48px;
+  border: 1px solid #ececec;
+}
+.bgc{
+  background: #fafafa;
+  border-top-width: 0 ;
+  border-bottom-width: 0;
+
+}
+/*//礼品首页*/
+.gift2016{
+  @include WF();
+  background: #fafafa;
+  .gift-home{
+    @extend .wm;
+    //推荐
+    .recommend{
+    @include WF();
+    padding-top: 30px;
+      .title-txt{
+        @include WF();
+        @include txtLh(24px,#333);
+        font-weight: 500;
+        margin-bottom: 21px;
+      }
+    }
+    //banner
+    .banner{
+      @include WFG(240px);
+      a{
+        @include WF();
+        img{
+          @include WF();
+        }
+      }
+    }
+    //攻略
+    .strategy{
+      @include WF();
+      padding-bottom: 70px;
+    }
+  }
+  .strategy-list{
+    width: 1224px;
+    margin-left: -24px;
+    @extend .fl;
+    padding-top: 40px;
+    li{
+      width: 588px;
+      @extend .fl;
+      margin: 0 0 20px 24px;
+      a{
+        @include tst(0.5s);
+        img{
+          @include tst(0.5s);
+          @include WF();
+        }
+        .list-content{
+          background: #fff;
+          @include WFG(167px);
+          border: 1px solid #f0f0f0;
+          .name{
+            @include WF();
+            @include txtLh(18px,#000);
+            padding:  19px 0 19px 7px;
+          }
+          .content{
+            padding: 0 10px;
+            color: #666;
+            font-size: 14px;
+            line-height: 24px;
+          }
+        }
+      }
+      a:hover{
+
+        img{
+          @extend  .opacityG;
+
+        }
+        .content{
+          color: #333;
+        }
+      }
+    }
+  }
+}
+/*//企业礼品*/
+.company{
+  //方案列表
+  .customization2016{
+    @include WF();
+    padding-bottom: 50px;
+  }
+  //定制流程介绍
+  .flow{
+    @include WF();
+    padding-bottom: 100px;
+    h5{
+      @include WF();
+      @include txtLh(24px,#333);
+      font-weight: 100;
+      margin-bottom: 22px;
+    }
+    .flow-pic{
+      @include WF();
+      border: 1px solid #f0f0f0;
+      background: #fff;
+      img{
+        @include WF();
+      }
+      .flow-content{
+        @include WF();
+        padding-bottom: 56px;
+        text-align: center;
+        .consult{
+          @include WF();
+          margin-bottom: 22px;
+          a.z-btn{
+            display: inline-block;
+            @include cstBtn(230px,57px,#fff,#0ea0c5,24px);
+            @include tst(0.5s);
+          }
+          a.z-btn:hover{
+
+            opacity: 0.8;
+          }
+        }
+        p.phone{
+          @include txtLh(18px,#666)
+        }
+      }
+    }
+
+  }
+  //企业礼品定制列表
+  .customization-list{
+    @include WF();
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    margin-top: 30px;
+    //标题
+    .title{
+      @include WF();
+      h5{
+        text-align: center;
+        @include txtLh(24px,#000);
+        font-weight: 100;
+        padding-top: 41px;
+      }
+      p.organization{
+        text-align: center;
+        @include txtLh(16px,#666);
+        padding: 10px 0 40px 0;
+      }
+
+    }
+    //列表改
+    .list.delete-mg{
+      padding: 0 19px;
+      width: 1220px;
+      margin-left: -20px;
+      li{
+        width: 274px;
+        margin: 0 0 0px 20px;
+        .name{
+          @include txtLh(16px,#000)
+        }
+        .title{
+          @include txtLh(14px,#808080)
+        }
+      }
+    }
+    .list-content.delete-pd{
+      padding: 0 0;
+      border: 0;
+    }
+  }
+  //定制&&咨询按钮
+  .btn{
+    @include WF();
+    text-align: center;
+    padding: 28px 0 50px 0;
+    .scheme{
+      @include cstBtn(230px,57px,#fff,#0ea0c5,24px);
+      display: inline-block;
+      border: 0;
+      @include tst(0.5s)
+    }
+    .scheme:hover,.scheme:active{
+      opacity: 0.8;
+    }
+  }
+}
+/*//方案咨询*/
+.scheme{
+  .min-nav{
+    @include WF();
+    padding: 15px 0  20px 0;
+    p{
+    @include txtLh(16px,#4c4c4c);
+      a,i{
+        @include txtLh(16px,#4c4c4c);
+      }
+      a.pitch-on{
+        @include txtLh(16px,#808080);
+      }
+    }
+  }
+  .demand{
+    margin-bottom: 100px;
+    @include WF();
+    border: 1px solid #f0f0f0;
+    background: #fff;
+    form{
+      @include WF();
+      text-align: center;
+      .title{
+        @include WF();
+        padding: 50px 0;
+        text-align: center;
+        h5{
+          @include txtLh(24px,#000);
+          font-weight: 200;
+          margin-bottom: 18px;
+        }
+        .phone{
+          @include txtLh(20px,#808080);
+        }
+      }
+      .option{
+        width: 677px;
+        display: inline-block;
+        .option-list{
+          @include WF();
+          margin-bottom: 20px;
+          .name{
+            @extend .fl;
+            @include txtLh(16px,#000);
+            @include WH(70px,40px);
+            line-height: 40px;
+          }
+          .option-content{
+            @extend .fr;
+            width: 600px;
+            .txt{
+              @include WH(600px,40px);
+              border: 1px solid #f0f0f0;
+              background: #f5f5f5;
+              padding: 10px;
+              @include txtLh(14px,#000)
+            }
+            .more-txt{
+              @include WFG(268px);
+              border: 1px solid #f0f0f0;
+              background: #f5f5f5;
+              padding: 10px;
+              outline: none;
+              resize: none;
+              @include txtLh(14px,#000)
+            }
+          }
+        }
+        .option-btn{
+          margin-bottom: 80px;
+          padding: 30px 0;
+          text-align: center;
+          .affirm{
+            display: inline-block;
+            @include WH(200px,50px);
+            background: #0ea0c5;
+            color: #fff;
+            margin: 0 10px;
+            font-size: 18px;
+          }
+          .cancel{
+            display: inline-block;
+            @include WH(200px,50px);
+            background: #f5f5f5;
+            color: #808080;
+            margin: 0 10px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 18px;
+            border: 0;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}
+/*//礼品筛选*/
+.screen{
+  @extend .wm;
+  .min-nav{
+    @include WF();
+    padding: 15px 0  20px 0;
+    p{
+      @include txtLh(16px,#4c4c4c);
+      a,i{
+        @include txtLh(16px,#4c4c4c);
+      }
+      a.pitch-on{
+        @include txtLh(16px,#808080);
+      }
+    }
+  }
+  .gift-screen{
+    @include WF();
+    border-top: 1px solid #d0d6d9;
+    border-bottom: 1px solid  #d0d6d9;
+    padding-left: 21px;
+    margin-top: -1px;
+    .list-group{
+      @include WF();
+      border-top: 1px solid #edf1f2;
+      position: relative;
+      .head{
+      position: absolute;
+      left: 0;
+      width: 70px;
+      @include heightCT(46px);
+      }
+      .body{
+        padding-left: 70px;
+        @include WF();
+        li{
+          float: left;
+          height: 46px;
+          line-height: 46px;
+          text-align: center;
+          padding: 0 10px;
+
+          a{
+            padding: 4px 12px;
+            display: inline-block;
+            @include txtLh(14px,#808080);
+            border: 1px solid rgba(0,0,0,0);
+          }
+        }
+        li.active{
+          a{
+            border: 1px solid #0ea0c5;
+            color: #0ea0c5;
+            border-radius: 14px;
+          }
+        }
+      }
+    }
+  }
+  .gift-sort{
+    @include WF();
+    height: 40px;
+    background: #f5f5f5;
+    padding-left: 21px;
+    .rank{
+      float: left;
+      li{
+        float: left;
+        margin-right: 42px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        a{
+          display: inline-block;
+          @include tst(0.5s);
+          .icon{
+            @include WH(10px,6px);
+            background: url(../images/gift/giftIcon.png) 12px -15px ;
+            display: inline-block;
+            margin-left: 6px;
+           margin-bottom: 2px;
+          }
+        }
+        a.tall{
+          color: #0ea0c5;
+          .icon{
+            transform: rotateZ(180deg)
+          }
+
+        }
+        a:hover{
+         color: #0ea0c5;
+        }
+      }
+    }
+    .select{
+      @extend .fr;
+      height: 40px;
+      line-height: 40px;
+      .s-list{
+        @extend .fl;
+        height: 40px;
+        line-height: 40px;
+        margin-right: 20px;
+        span{
+          @include txtLh(14px,#787d82);
+          margin: 0 5px;
+        }
+        a{
+          @include txtLh(14px,#b2b2b2)
+        }
+        a.active{
+          @include txtLh(14px,#666666)
+        }
+      }
+    }
+  }
+  .gs-list{
+    @include WF();
+    text-align: right;
+
+    .more{
+      @include WF();
+      padding: 20px 0;
+      @include txtLh(14px,#808080);
+      a{
+        display: inline-block;
+        @include txtLh(14px,#0ea0c5);
+      }
+    }
+  }
+  .pg-number{
+    @include WF();
+    text-align: center;
+    margin-bottom: 25px;
+    li{
+      display: inline-block;
+      .number{
+        width: 30px;
+        text-align: center;
+        @include heightCT(30px);
+       font-size: 14px;
+        color: #666;
+        display: inline-block;
+        background: rgba(0,0,0,0);
+      }
+    }
+    li.active{
+      .number{
+        background: #0ea0c5;
+        color: #fff;
+      }
+    }
+    li.first,li.prev,li.next,li.trail{
+      margin-right: 10px;
+      a{
+        font-size: 14px;
+        color: #666;
+      }
+      a.true{
+        color: #c6c8ca;
+      }
+    }
+
+  }
+  .gift-red{
+    width: 1225px ;
+    float: left;
+    margin: 0 -25px 60px 0;
+    li{
+      width: 280px;
+      height: 180px;
+      float: left;
+      position: relative;
+      margin-right: 25px;
+      cursor: pointer;
+
+      a{
+        width: 95px;
+        height: 34px;
+        text-align: center;
+        line-height: 34px;
+        background: #ffc600;
+        color: #fff;
+        position: absolute;
+        left: 50%;
+        margin-left: -51px;
+        bottom: 16px;
+        border-radius: 5px;
+        @include tst(0.5s);
+      }
+
+    }
+    li:hover{
+      a{
+        background: #facd2f;
+      }
+    }
+  }
+}

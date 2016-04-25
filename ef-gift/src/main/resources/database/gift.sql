@@ -50,7 +50,7 @@ PRIMARY KEY (`id`)
 CREATE TABLE `gift_product_gift_tag_value` (
 `id`  char(16) NOT NULL ,
 `type`  varchar(4) NULL ,
-`group`  varchar(4) NULL ,
+`tag_group`  varchar(4) NULL ,
 `value`  varchar(32) NULL ,
 `status`  varchar(1) NULL ,
 PRIMARY KEY (`id`)

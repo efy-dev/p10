@@ -54,14 +54,17 @@ public class ProjectWikiController {
 
         //得到工艺描述的数据并且创建ProjectDescription对象
         //得到当前工艺的描述，如果有描述对象就用之前的，如果没有就新建一个新的
-        String content = request.getParameter("description");
+        String contentPc = request.getParameter("descriptionPC");
+        String contentWap = request.getParameter("descriptionWap");
         if (projectWiki.getArtistryDescription() != null) {
             ArtistryDescription projectDescription = projectWiki.getArtistryDescription();
-            projectDescription.setDescriptionPC(content);
+            projectDescription.setDescriptionPC(contentPc);
+            projectDescription.setDescriptionWap(contentWap);
             baseManager.saveOrUpdate(ArtistryDescription.class.getName(), projectDescription);
         } else {
             ArtistryDescription projectDescription = new ArtistryDescription();
-            projectDescription.setDescriptionPC(content);
+            projectDescription.setDescriptionPC(contentPc);
+            projectDescription.setDescriptionWap(contentWap);
             baseManager.saveOrUpdate(ArtistryDescription.class.getName(), projectDescription);
             projectWiki.setArtistryDescription(projectDescription);
             baseManager.saveOrUpdate(Artistry.class.getName(), projectWiki);
