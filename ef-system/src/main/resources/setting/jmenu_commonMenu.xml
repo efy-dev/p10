@@ -41,7 +41,7 @@
         </jnode>
         <jnode url="" id="recommendManager" text_zh_CN="推荐管理" access="admin,operational,c_operational,o_operational,product_manager"  state="closed">
             <jnode url="/basic/xm.do?qm=plistSubject_default" access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="首页推荐专题">
-                <match url="/basic/xm.do?qm=formSubject"/>
+                <match url="/basic/xm.do?qm=formSubject&amp;type=home"/>
                 <match url="/basic/xm.do?qm=plistSubject_default1"/>
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>
                 <match url="/basic/xm.do?qm=viewSubject"/>
@@ -372,6 +372,12 @@
                 <match url="/basic/xm.do?qm=plistGiftLabel_default"/>
                 <match url="/basic/xm.do?qm=formGiftLabel&amp;view=label"/>
                 <match url="/basic/xm.do?qm=formGiftLabel&amp;view=editLabel"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistGiftSubject_default" access="admin,operational,c_operational,product_manager,offline_manager" text_zh_CN="礼品专题">
+                <match url="/basic/xm.do?qm=plistGiftLabel_default"/>
+                <match url="/basic/xm.do?qm=formSubject&amp;type=gift"/>
+                <match url="/basic/xm.do?qm=formGiftLabel&amp;view=editLabel"/>
+                <match url="/basic/xm.do?qm=viewGiftSubject"/>
             </jnode>
         </jnode>
 
