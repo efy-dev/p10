@@ -77,19 +77,36 @@
 </div>
 <div class="am-g">
   <div class="am-u-md-12">
-    <h2>关联产品</h2>
+    <h2 id="bt">专题推荐</h2>
   </div>
 
   <div class="am-u-md-12">
-    <jsp:include flush="true"
-                 page="/basic/xm.do?qm=listSubjectProductModel_default&conditions=subject.id:${object.id}"/>
+    <select style="width: 40%;height: 30px" id="groupName" onchange="showConfirm('提示','是否确定推荐',function(){
+            saveGroupName('${object.id}')
+            })">
+      <option value="groupName1">组名一</option>
+      <option value="groupName2">组名二</option>
+      <option value="groupName3">组名三</option>
+      <option value="groupName4">组名四</option>
+    </select>
   </div>
 </div>
 <script>
-  function openUrl(id){
-    var   url = "http://www2.efeiyi.com/subject/"+id;
-    window.open(url);
+  function saveGroupName(subjectId){
+    var groupName=$("#groupName").val();
+
+    $.ajax({
+      type: "get",
+      url:'<c:url value="/Recommended/saveObjectRecommended.do"/>',
+      dataType: "json",
+      data: {groupName: groupName, recommendId: subjectId, status: "1", sort: 1},
+      success: function (data) {
+
+      }
+    });
+
   }
+
 </script>
 
 </body>
