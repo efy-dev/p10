@@ -41,7 +41,12 @@
                         <%--<small>输入你要保存的类型</small>--%>
                     </div>
                 </div>
-
+                <div class="am-form-group">
+                    <label for="dataSource" class="am-u-sm-3 am-form-label">来源</label>
+                    <div class="am-u-sm-9">
+                        <input type="text" id="dataSource" name="dataSource" placeholder="资讯来源" value="${object.dataSource}" >
+                    </div>
+                </div>
                 <div class="am-form-group">
                     <label for="brief" class="am-u-sm-3 am-form-label">简介</label>
                     <div class="am-u-sm-9">
