@@ -5,7 +5,6 @@ import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectRecommended;
 import com.efeiyi.ec.wiki.model.*;
-import com.efeiyi.ec.wiki.product.model.ProductCommentModel;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -87,26 +86,26 @@ public class projectConvertprojectModelUtil {
         return list;
     }
 
-    public static List<ProductCommentModel> getProductCommentModel(List<ProductComment> productComments) {
-        List<ProductCommentModel> list = new ArrayList<ProductCommentModel>();
-        if (productComments != null && productComments.size() >= 1) {
-            for (ProductComment productComment : productComments) {
-                ProductCommentModel productCommentModel = new ProductCommentModel();
-                productCommentModel.setModerator(productComment.getModerator() == null ? null : productComment.getModerator());
-                productCommentModel.setStatus(productComment.getStatus() == null ? "" : productComment.getStatus());
-                productCommentModel.setWatch(productComment.getWatch() == null ? "" : productComment.getWatch());
-                productCommentModel.setUser(productComment.getUser() == null ? null : productComment.getUser());
-                productCommentModel.setProduct(productComment.getProduct() == null ? null : productComment.getProduct().getId());
-                productCommentModel.setContent(productComment.getContent() == null ? "" : productComment.getContent());
-                productCommentModel.setCreateDateTime(productComment.getCreateDateTime() == null ? new Date() : productComment.getCreateDateTime());
-                productCommentModel.setFatherComment(productComment);
-                productCommentModel.setId(productComment.getId());
-                productCommentModel.setSubComment(productComment.getSubComment() == null ? null : productComment.getSubComment());
-                list.add(productCommentModel);
-            }
-        }
-        return list;
-    }
+//    public static List<ProductCommentModel> getProductCommentModel(List<ProductComment> productComments) {
+//        List<ProductCommentModel> list = new ArrayList<ProductCommentModel>();
+//        if (productComments != null && productComments.size() >= 1) {
+//            for (ProductComment productComment : productComments) {
+//                ProductCommentModel productCommentModel = new ProductCommentModel();
+//                productCommentModel.setModerator(productComment.getModerator() == null ? null : productComment.getModerator());
+//                productCommentModel.setStatus(productComment.getStatus() == null ? "" : productComment.getStatus());
+//                productCommentModel.setWatch(productComment.getWatch() == null ? "" : productComment.getWatch());
+//                productCommentModel.setUser(productComment.getUser() == null ? null : productComment.getUser());
+//                productCommentModel.setProduct(productComment.getProduct() == null ? null : productComment.getProduct().getId());
+//                productCommentModel.setContent(productComment.getContent() == null ? "" : productComment.getContent());
+//                productCommentModel.setCreateDateTime(productComment.getCreateDateTime() == null ? new Date() : productComment.getCreateDateTime());
+//                productCommentModel.setFatherComment(productComment);
+//                productCommentModel.setId(productComment.getId());
+//                productCommentModel.setSubComment(productComment.getSubComment() == null ? null : productComment.getSubComment());
+//                list.add(productCommentModel);
+//            }
+//        }
+//        return list;
+//    }
 
     public static List<ProductPraiseModel> getpraise2ProductModel(List<ProductPraise> productPraises) {
         List<ProductPraiseModel> list = new ArrayList<ProductPraiseModel>();

@@ -22,6 +22,12 @@
                 </field>
             </fields>
             <does>
+                <do name="plistGiftProduct" access="" label="产品分页列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                    </query>
+
+                </do>
                 <do name="plistProduct" access="" label="产品分页列表"
                     result="/product/productPList" execute="com.efeiyi.ec.system.product.controller.listProductHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
@@ -377,7 +383,16 @@
                         <condition name="template" operation="eq" label="模板" inputType="select_status" key="Subject.template"/>
                     </query>
                 </do>
+                <do name="plistGiftSubject" access="" label="专题分页列表"
+                    result="/giftProject/giftSubjectPList">
+                    <query name="default" label="默认" type="auto" orderBy="subjectIndex:desc">
+                        <condition defaultValue="0" name="status" operation="ne" inputType="default"/>
+                        <condition defaultValue="lp" name="type" operation="eq" inputType="default"/>
+                    </query>
+
+                </do>
                 <do name="viewSubject" label="查看专题" access="" result="/subject/subjectView"/>
+                <do name="viewGiftSubject" label="查看专题" access="" result="/giftProject/giftSubjectView"/>
                 <do name="removeSubject" label="删除产品图片" access="" result="json"/>
                 <do name="formSubject" label="保存产品描述页" access="" result="/subject/subjectForm" />
                 <do name="formSubject_Description" label="保存产品描述页" access="" result="/subject/subjectDescriptionForm" />

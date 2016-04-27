@@ -13,8 +13,8 @@
 <html class="no-js">
 <head>
     <title>e飞蚁-领先的非物质文化遗产电商平台</title>
-    <meta name="keywords" content="e飞蚁,非物质文化遗产,中国非物质文化遗产,非物质文化遗产网,非遗博览园,非遗节,非遗产品,非遗大师,传统工艺" />
-    <meta name="description" content="e飞蚁，中国领先的非物质文化遗产电商与交流平台，汇聚诸多传承人和各类传统工艺" />
+    <meta name="keywords" content="e飞蚁,非物质文化遗产,中国非物质文化遗产,非物质文化遗产网,非遗博览园,非遗节,非遗产品,非遗大师,传统工艺"/>
+    <meta name="description" content="e飞蚁，中国领先的非物质文化遗产电商与交流平台，汇聚诸多传承人和各类传统工艺"/>
 </head>
 <body>
 
@@ -22,58 +22,86 @@
 <!-- //End--topbar-->
 
 <!--//End--focus-new-->
-<div class="wh focus-new">
-    <div class="hd">
-        <ul class="slider-main">
+<%--<div class="wh focus-new">--%>
+<%--<div class="hd">--%>
+<%--<ul class="slider-main">--%>
+<%--<c:forEach items="${bannerList}" var="banner" varStatus="status">--%>
+<%--<c:if test="${status.index==0}">--%>
+<%--<li style="display: block;">--%>
+<%--</c:if>--%>
+<%--<c:if test="${status.index!=0}">--%>
+<%--<li>--%>
+<%--</c:if>--%>
+<%--<a href="<c:url value="${banner.directUrl}"/> " target="_blank"><img--%>
+<%--src="http://pro.efeiyi.com/${banner.imageUrl}" width="1280" height="481"--%>
+<%--alt=""/></a></li>--%>
+<%--</c:forEach>--%>
+<%--</ul>--%>
+<%--<ul class="slider-nav">--%>
+<%--<li class="active"></li>--%>
+<%--<c:forEach items="${bannerList}" var="banner" begin="1">--%>
+<%--<li></li>--%>
+<%--</c:forEach>--%>
+<%--</ul>--%>
+<%--<div class="btn btn-prev" title="上一页"></div>--%>
+<%--<div class="btn btn-next" title="下一页"></div>--%>
+<%--</div>--%>
+<%--</div>--%>
+
+
+<div id="slide2016" class="slide2016">
+    <div class="img">
+        <ul style="text-align: center">
             <c:forEach items="${bannerList}" var="banner" varStatus="status">
-                <c:if test="${status.index==0}">
-                    <li style="display: block;">
-                </c:if>
-                <c:if test="${status.index!=0}">
-                    <li>
-                </c:if>
-                <a href="<c:url value="${banner.directUrl}"/> " target="_blank"><img
-                        src="http://pro.efeiyi.com/${banner.imageUrl}" width="1280" height="481"
-                        alt=""/></a></li>
+                <li>
+                    <a href="<c:url value="${banner.directUrl}"/> " target="_blank" title="非遗轮播图"><img
+                            src="http://pro.efeiyi.com/${banner.imageUrl}" width="1280" height="481"
+                            alt="${banner.title}"/></a></li>
+            </c:forEach>
+            <%--<li><a href="" title=""><img src="/scripts/upload/slide2016-1.jpg" alt=""></a></li>--%>
+            <%--<li><a href="" title=""><img src="/scripts/upload/slide2016-2.jpg" alt=""></a></li>--%>
+            <%--<li><a href="" title=""><img src="/scripts/upload/slide2016-3.jpg" alt=""></a></li>--%>
+        </ul>
+    </div>
+    <div class="num">
+        <ul>
+            <c:forEach items="${bannerList}" var="banner" varStatus="status">
+                <li class=""></li>
             </c:forEach>
         </ul>
-        <ul class="slider-nav">
-            <li class="active"></li>
-            <c:forEach items="${bannerList}" var="banner" begin="1">
-                <li></li>
-            </c:forEach>
-        </ul>
-        <div class="btn btn-prev" title="上一页"></div>
-        <div class="btn btn-next" title="下一页"></div>
     </div>
 </div>
+
+
 <div class="homenew hd">
     <div class="deduce ae">
-        <ul class="list-top ae">
+        <ul class="list-top">
             <c:if test="${not empty marketingActivityQueryList&&fn:length(marketingActivityQueryList)>0}">
-                <c:forEach items="${marketingActivityQueryList}" var="marketingActivity">
-                    <li><a href="${marketingActivity.redirect}" target="_blank"><img class="imgfilter" src="http://pro.efeiyi.com/${marketingActivity.img}@!pc-home-marketing-activity"></a></li>
+                <c:forEach items="${marketingActivityQueryList}" var="marketingActivity" begin="0" end="3">
+                    <li><a href="${marketingActivity.redirect}" target="_blank"><img class="imgfilter"
+                                                                                     src="http://pro.efeiyi.com/${marketingActivity.img}@!pc-home-marketing-activity"></a>
+                    </li>
                 </c:forEach>
             </c:if>
         </ul>
         <ul class="list-bottom ae">
             <c:if test="${not empty hotSaleList&&fn:length(hotSaleList)>0}">
-            <c:forEach items="${hotSaleList}" var="hotSale" begin="0" end="9">
-            <li>
-            <a href="${hotSale.redirect}" target="_blank">
-            <strong>${hotSale.name}</strong>
-            <img class="imgfilter" src="http://pro.efeiyi.com/${hotSale.img}@!pc-home-hot-sale">
-            </a>
-            <span class="money"><em>￥</em><font>${hotSale.price}</font></span>
-            <span class="fiery">热卖</span>
-            </li>
-            </c:forEach>
+                <c:forEach items="${hotSaleList}" var="hotSale" begin="0" end="7">
+                    <li>
+                        <a href="${hotSale.redirect}" target="_blank">
+                            <strong>${hotSale.name}</strong>
+                            <span class="mask"></span>
+                            <img class="imgfilter" src="http://pro.efeiyi.com/${hotSale.img}">
+                        </a>
+                        <span class="money"><em>￥</em><font>${hotSale.price}</font></span>
+                    </li>
+                </c:forEach>
             </c:if>
-
         </ul>
     </div>
     <!-- 放banner-->
-    <div><a href="${bannerActivityList[0].redirect}" target="_blank"><img src="http://pro.efeiyi.com/${bannerActivityList[0].img}@!pc-banner-advertisement"/></a></div>
+    <div><a href="${bannerActivityList[0].redirect}" target="_blank"><img
+            src="http://pro.efeiyi.com/${bannerActivityList[0].img}@!pc-banner-advertisement"/></a></div>
     <div class="max-cat ae">
         <!--一个类别-->
         <c:forEach items="${recommendedCategoryList}" var="projectCategory">
@@ -89,15 +117,18 @@
                     </div>
                 </div>
                 <ul class="cat-right">
-                        <c:forEach items="${recommendMap.get(projectCategory.id)}" var="projectCategoryProductModel" varStatus="status">
-                    <li>
-                        <a href="<c:url value="/product/hot/${projectCategoryProductModel.productModel.id}"/>" target="_blank">
-                            <strong>${projectCategoryProductModel.productModel.product.name}</strong>
-                            <img class="imgfilter" src="http://pro.efeiyi.com/${projectCategoryProductModel.productModel.product.getProductPicture().pictureUrl}@!pc-recommend-list">
-                        </a>
-                        <span class="cat-money"><em>￥</em><font>${projectCategoryProductModel.productModel.price.intValue()}</font></span>
-                    </li>
-                        </c:forEach>
+                    <c:forEach items="${recommendMap.get(projectCategory.id)}" var="projectCategoryProductModel"
+                               varStatus="status">
+                        <li>
+                            <a href="<c:url value="/product/hot/${projectCategoryProductModel.productModel.id}"/>"
+                               target="_blank">
+                                <strong>${projectCategoryProductModel.productModel.product.name}</strong>
+                                <img class="imgfilter"
+                                     src="http://pro.efeiyi.com/${projectCategoryProductModel.productModel.product.getProductPicture().pictureUrl}@!pc-recommend-list">
+                            </a>
+                            <span class="cat-money"><em>￥</em><font>${projectCategoryProductModel.productModel.price.intValue()}</font></span>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
         </c:forEach>
@@ -107,10 +138,10 @@
 <!--//End--homenew-->
 </div>
 <script type="text/javascript">
-    $().ready(function(){;
+    $().ready(function () {
+        ;
         $(".allsort").show()
         $(".cate").removeAttr("id");
-
     })
 </script>
 </body>

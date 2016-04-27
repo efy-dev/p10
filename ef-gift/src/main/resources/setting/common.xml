@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<common>
+    <!-- 字典-->
+    <wordValues>
+        <wordValue group=""  note=""/>
+    </wordValues>
+    <!-- 轮播图 -->
+    <banners>
+        <banner group="homeProductGift" note="首页轮播图"/>
+        <banner group="industrySolutionList" note="企业礼品方案轮播图"/>
+        <banner group="productGiftList" note="礼品频道也轮播图" />
+    </banners>
+    <!-- 文档 -->
+    <documents>
+        <document group="" template=".jsp" note="" />
+    </documents>
+    <!-- 推荐 -->
+    <recommends>
+        <recommend group="productGiftRecommended" recommendedModel="com.efeiyi.ec.product.model.Subject" note="专题推荐礼品频道" amount="8" />
+        <recommend group="productGiftRecommended1" recommendedModel="com.efeiyi.ec.product.model.Subject" note="专题推荐礼品频道下端" amount="4" />
+        <recommend group="industrySolutionRecommended" recommendedModel="com.efeiyi.ec.product.model.Subject" note="行业礼品方案频道" amount="2" />
+    </recommends>
+    <autoserials>
+        <autoserial group="orderSerial" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
+        <autoserial group="payment" autoserialModel="com.ming800.core.p.model.AutoSerial" note="支付记录序列号" prefix="" length="10" cacheSize="10" step="1" />
+    </autoserials>
+
+    <searchs>
+        <search group="efeiyi" recommendedModel="com.ming800.core.p.model.CommonSearch" rows="12" defaultQ="all_name:" highLight="true"
+                highLightFields="product_name,specification" highLightSimplePre="&lt;font color='red'&gt;" highLightSimplePost="&lt;/font&gt;"
+                defType="edismax" qf="product_name^5 sub_name^3 specification^3 project_name^4 master_name^2" solrClientCount="5"
+                solrServerCoreUrl="http://101.200.182.7/solr/product" solrServerHost="101.200.182.7" username="efy" password="helloword" port="80"/>
+        <search group="gift"
+                recommendedModel="com.ming800.core.p.model.CommonSearch" rows="12" defaultQ="value:"
+                highLight="true"
+                highLightFields="product_name,specification" highLightSimplePre="&lt;font color='red'&gt;"
+                highLightSimplePost="&lt;/font&gt;"
+                qf=""
+                defType="edismax"
+                solrClientCount="5"
+                solrServerCoreUrl="http://192.168.1.57/solr/product2" solrServerHost="192.168.1.57" username="Tomcat"
+                password="Tomcat" port="80"/>
+    </searchs>
+</common>

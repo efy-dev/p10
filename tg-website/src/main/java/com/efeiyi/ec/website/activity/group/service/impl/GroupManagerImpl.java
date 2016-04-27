@@ -43,6 +43,7 @@ public class GroupManagerImpl implements GroupManager {
     public String  createGroup(User user, String groupProductId, String groupId, String memberId) {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
         String callback = "";
+        String callback_business = "";
         String url = "";
 
         if (groupId == null && memberId == null) {
@@ -67,10 +68,12 @@ public class GroupManagerImpl implements GroupManager {
             PurchaseOrder purchaseOrder = purchaseOrderGroupManager.createPurchaseOrder(groupProduct);
 
             //�ص���ַ
-            callback = "a.efeiyi.com/group/waitPay" + "?groupId=" + group.getId() + "&memberId=" + member.getId() + "&purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId;
+            callback = PConst.TUANURL + "/group/waitPay" + "?groupId=" + group.getId() + "&memberId=" + member.getId() + "&purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId;
+            callback_business = PConst.TUANURL + "/group/updateGroup" + "?groupId=" + group.getId() + "&memberId=" + member.getId() + "&purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId;
             purchaseOrder.setCallback(callback);
+            purchaseOrder.setCallbackBussiness(callback_business);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
-            url = "http://www.efeiyi.com/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId();
+            url = PConst.WEBURL + "/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId();
             return "redirect:" + url;
         } else {
             MyGroup group = (MyGroup) baseManager.getObject(MyGroup.class.getName(), groupId);
@@ -95,10 +98,12 @@ public class GroupManagerImpl implements GroupManager {
 
 
             //�ص���ַ
-            callback = "a.efeiyi.com/group/waitPay" + "?groupId=" + group.getId() + "&memberId=" + member.getId() + "&purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId;
+            callback = PConst.TUANURL + "/group/waitPay" + "?groupId=" + group.getId() + "&memberId=" + member.getId() + "&purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId;
+            callback_business = PConst.TUANURL + "/group/updateGroup" + "?groupId=" + group.getId() + "&memberId=" + member.getId() + "&purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId;
             purchaseOrder.setCallback(callback);
+            purchaseOrder.setCallbackBussiness(callback_business);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
-            url = "http://www.efeiyi.com/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId();
+            url = PConst.WEBURL + "/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId();
             return "redirect:" + url;
         }
     }
@@ -109,36 +114,36 @@ public class GroupManagerImpl implements GroupManager {
         GroupMember groupMember = (GroupMember) baseManager.getObject(GroupMember.class.getName(), memberId);
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
 
-        if (purchaseOrder.getOrderStatus().equals("5")) {
+        //if (purchaseOrder.getOrderStatus().equals("5")) {
             //�����Ź�����
-            PurchaseOrderGroup purchaseOrderGroup = (PurchaseOrderGroup) baseManager.getObject(PurchaseOrderGroup.class.getName(), purchaseOrderId);
-            purchaseOrderGroup.setMyGroup(myGroup);
-            purchaseOrderGroup.setGroupMember(groupMember);
-            if (myGroup.getStatus().equals("2") || myGroup.getStatus().equals("1")) {
-                purchaseOrderGroup.setOrderStatus("3");
-            }
-            baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(), purchaseOrderGroup);
+        PurchaseOrderGroup purchaseOrderGroup = (PurchaseOrderGroup) baseManager.getObject(PurchaseOrderGroup.class.getName(), purchaseOrderId);
+        purchaseOrderGroup.setMyGroup(myGroup);
+        purchaseOrderGroup.setGroupMember(groupMember);
+        if (myGroup.getStatus().equals("2") || myGroup.getStatus().equals("1")) {
+            purchaseOrderGroup.setOrderStatus("3");
+        }
+        baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(), purchaseOrderGroup);
 
-            //��������Ϣ
-            if (myGroup != null && "2".equals(myGroup.getStatus())) {
-                myGroup.setStatus("1");
-                baseManager.saveOrUpdate(MyGroup.class.getName(), myGroup);
-            }
+        //��������Ϣ
+        if (myGroup != null && "2".equals(myGroup.getStatus())) {
+            myGroup.setStatus("1");
+            baseManager.saveOrUpdate(MyGroup.class.getName(), myGroup);
+        }
 
-            //������Ա��Ϣ
-            if (groupMember != null && "2".equals(groupMember.getStatus())) {
-                groupMember.setStatus("1");
-                groupMember.setMyGroup(myGroup);
-                groupMember.setCreateDateTime(new Date());
-                baseManager.saveOrUpdate(GroupMember.class.getName(), groupMember);
+        //������Ա��Ϣ
+        if (groupMember != null && "2".equals(groupMember.getStatus())) {
+            groupMember.setStatus("1");
+            groupMember.setMyGroup(myGroup);
+            groupMember.setCreateDateTime(new Date());
+            baseManager.saveOrUpdate(GroupMember.class.getName(), groupMember);
 
-                return true;
-            }else {
-                return false;
-            }
-        } else {
+            return true;
+        }else {
             return false;
         }
+       /* } else {
+            return false;
+        }*/
     }
 
     @Override

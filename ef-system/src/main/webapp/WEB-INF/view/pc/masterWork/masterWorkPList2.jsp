@@ -27,8 +27,8 @@
                 <a type="button" class="am-btn am-btn-default"
                    href="<c:url value="/basic/xm.do?qm=formWork2&view=master"/>"><span
                         class="am-icon-plus"></span>新建作品</a>
-                <a type="button" class="am-btn am-btn-default" id="dddd"
-                   href="javascript:void (0);" onclick="getPinyin()"><span class="am-icon-plus"></span>初始化作者</a>
+                <%--<a type="button" class="am-btn am-btn-default" id="dddd"--%>
+                   <%--href="javascript:void (0);" onclick="getPinyin()"><span class="am-icon-plus"></span>初始化作者</a>--%>
             </div>
         </div>
     </div>
@@ -63,9 +63,9 @@
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeMasterWork('${masterWork.id}')})" href="#"><span
                                                 class="am-icon-trash-o"></span> 删除
                                         </a>
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formMasterWork2&id=${masterWork.id}"/>"><span
-                                                class="am-icon-pencil-square-o"></span> 链接
-                                        </a>
+                                        <%--<a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formMasterWork2&id=${masterWork.id}"/>"><span--%>
+                                                <%--class="am-icon-pencil-square-o"></span> 链接--%>
+                                        <%--</a>--%>
                                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/masterWork/gg.do?serial=${masterWork.serial}"/>" ><span
                                                 class="am-icon-pencil-square-o"></span> 生成二维码
                                         </a>
@@ -84,9 +84,7 @@
                                ${masterWork.master.fullName}
                             </td>
                             <td class="am-hide-sm-only" width="10%">
-                                <a href="/Img/imgUrl.do?imgUrl=http://tenant.efeiyi.com/${masterWork.pictureUrl}">
-                                  <img  width="10%"  src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-manage-banner" >
-                                </a>
+                                  <img  width="50%"  src="http://tenant.efeiyi.com/${masterWork.pictureUrl}" >
                             </td>
                             <%--<td class="am-hide-sm-only">--%>
                                    <%--${masterWork.brief}--%>

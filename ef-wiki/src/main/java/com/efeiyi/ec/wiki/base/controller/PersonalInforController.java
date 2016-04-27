@@ -8,6 +8,7 @@ import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.StringUtil;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

@@ -199,8 +199,12 @@
                     </span>
                     <span style="padding: 10px;">
 
-
-                      <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=plistSubject_default')"  class="am-btn am-btn-primary" value="保存"/>
+                        <c:if test="${param.type=='home'}">
+                            <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=plistSubject_default')"  class="am-btn am-btn-primary" value="保存"/>
+                        </c:if>
+                             <c:if test="${param.type=='gift'}">
+                                 <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=plistGiftSubject_default')"  class="am-btn am-btn-primary" value="保存"/>
+                             </c:if>
 
 
                          <%--<input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=formSubject_Description')"  class="am-btn am-btn-primary" value="下一步"/>--%>

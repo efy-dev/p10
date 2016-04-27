@@ -41,7 +41,7 @@
         </jnode>
         <jnode url="" id="recommendManager" text_zh_CN="推荐管理" access="admin,operational,c_operational,o_operational,product_manager"  state="closed">
             <jnode url="/basic/xm.do?qm=plistSubject_default" access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="首页推荐专题">
-                <match url="/basic/xm.do?qm=formSubject"/>
+                <match url="/basic/xm.do?qm=formSubject&amp;type=home"/>
                 <match url="/basic/xm.do?qm=plistSubject_default1"/>
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>
                 <match url="/basic/xm.do?qm=viewSubject"/>
@@ -164,10 +164,6 @@
                 <match url="/basic/xm.do?qm=plistCoupon_used"/>
             </jnode>
         </jnode>
-        <!--<jnode url="" id="consumer" access="admin" state="closed" text_zh_CN="营销活动">-->
-            <!--<jnode url="/basic/xm.do?qm=formActivity" access="admin,manager" text_zh_CN="我的团长我的团">-->
-            <!--</jnode>-->
-        <!--</jnode>-->
         <jnode url="" id="checkManager" access="admin,operational,c_operational,o_operational,product_manager" state="closed"  text_zh_CN="虚拟数据系统">
             <jnode url="/basic/xm.do?qm=plistVirtualPlan_default"  access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="虚拟数据列表">
                 <match url="/basic/xm.do?qm=formVirtualPlan&amp;virtual=virtual"/>
@@ -273,63 +269,9 @@
             </jnode>
         </jnode>
 
-        <!--<jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">-->
-            <!--<jnode url="/basic/xm.do?qm=plistEcBanner_tenant&amp;groupName=ec.home.banner" access="admin,manager" text_zh_CN="电商网站轮播图">-->
-                <!--<match url="/basic/xm.do?qm=plistEcBanner_tenant"/>-->
-                <!--<match url="/basic/xm.do?qm=formBanner&amp;groupName=ec.home.banner"/>-->
-                <!--<match url="/basic/xm.do?qm=plistEcBanner_search"/>-->
-
-            <!--</jnode>-->
-            <!--<jnode url="/basic/xm.do?qm=plistDocument_tenant&amp;groupName=ec" access="admin,manager" text_zh_CN="电商网站文档">-->
-                <!--<match url="/basic/xm.do?qm=plistDocument_tenant&amp;groupName=tenant"/>-->
-                <!--<match url="/basic/xm.do?qm=formDocument&amp;groupName=ec"/>-->
-                <!--<match url="/basic/xm.do?qm=viewDocument&amp;groupName=ec"/>-->
-                <!--<match url="/document/saveDocument.do&amp;groupName=ec"/>-->
-                <!--<match url="/basic/xm.do?qm=plistDocument_search"/>-->
-
-            <!--</jnode>-->
-            <!--<jnode url="/basic/xm.do?qm=plistSubject_default" access="admin,manager" text_zh_CN="首页推荐专题">-->
-                <!--<match url="/basic/xm.do?qm=formSubject"/>-->
-                <!--<match url="/basic/xm.do?qm=plistSubject_default1"/>-->
-                <!--<match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>-->
-                <!--<match url="/basic/xm.do?qm=viewSubject"/>-->
-                <!--<match url="/basic/xm.do?qm=plistTProductModel_default"/>-->
-                <!--<match url="/basic/xm.do?qm=formEcProjectCategory&amp;param=tenant"/>-->
-
-            <!--</jnode>-->
-            <!--<jnode url="/basic/xm.do?qm=plistECMaster_default" access="admin,manager" text_zh_CN="首页大师推荐">-->
-                <!--<match url="/basic/xm.do?qm=plistECMaster_default"/>-->
-
-
-            <!--</jnode>-->
-            <!--<jnode url="/basic/xm.do?qm=plistEcProjectCategory_default" access="admin,manager" text_zh_CN="首页推荐类别">-->
-                <!--<match url="/basic/xm.do?qm=plistEcProjectCategory_default"/>-->
-                <!--<match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>-->
-                <!--<match url="/basic/xm.do?qm=formEcProjectCategory&amp;param=tenant"/>-->
-                <!--<match url="/basic/xm.do?qm=formProjectCategory&amp;param=tenant"/>-->
-                <!--<match url="/basic/xm.do?qm=viewEcProjectCategory"/>-->
-                <!--<match url="/basic/xm.do?qm=plistPCProductModel_default"/>-->
-
-            <!--</jnode>-->
-            <!--&lt;!&ndash;<jnode url="/basic/xm.do?qm=plistProductModel_index" access="admin,manager" text_zh_CN="首页推荐产品">&ndash;&gt;-->
-                <!--&lt;!&ndash;<match url="/basic/xm.do?qm=viewProduct&amp;view=index"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<match url="/basic/xm.do?qm=plistProductModel_index"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=index"/>&ndash;&gt;-->
-            <!--&lt;!&ndash;</jnode>&ndash;&gt;-->
-            <!--&lt;!&ndash;<jnode url="/basic/xm.do?qm=plistEcMaster_index" access="admin,manager" text_zh_CN="首页推荐传承人">&ndash;&gt;-->
-                <!--&lt;!&ndash;<match url="/basic/xm.do?qm=viewEcMaster&amp;view=recommend"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<match url="/basic/xm.do?qm=formMaster&amp;form=recommend"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<match url="/basic/xm.do?qm=plistEcMaster_index"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<match url="/basic/xm.do?qm=plistMaster_default&amp;param=EcMaster"/>&ndash;&gt;-->
-            <!--&lt;!&ndash;</jnode>&ndash;&gt;-->
-            <!--<jnode url="/basic/xm.do?qm=plistAdvertisement_default" access="admin,manager" text_zh_CN="首页推荐广告">-->
-                <!--<match url="/basic/xm.do?qm=plistAdvertisement_default"/>-->
-                <!--<match url="/basic/xm.do?qm=formAdvertisement"/>-->
-            <!--</jnode>-->
-        <!--</jnode>-->
     </jnode>
 
-    <jnode id="ttManager" access="admin,operational,c_operational,product_manager" url="/main.do?jnodeId=ttManager" text_zh_CN="工艺与大师">
+    <jnode id="ttManager" access="admin,operational,c_operational,product_manager,offline_manager" url="/main.do?jnodeId=ttManager" text_zh_CN="工艺与大师">
         <jnode url="" id="tenantManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="大师管理">
             <jnode url="/basic/xm.do?qm=plistMaster_default" id="masterList" access="admin,operational,c_operational,product_manager" text_zh_CN="大师列表">
                 <match url="/basic/xm.do?qm=plistMaster_default"/>
@@ -357,53 +299,7 @@
 
             </jnode>
 
-            <!--<jnode url="/basic/xm.do?qm=plistMasterRecommended_default" access="admin,operational,c_operational,product_manager" text_zh_CN="大师推荐">-->
-                <!--<match url="/basic/xm.do?qm=plistMasterRecommended_default"/>-->
-                <!--<match url="/basic/xm.do?qm=plistMaster_default&amp;list=master"/>-->
-                <!--<match url="/basic/xm.do?qm=formMaster&amp;from=recommendMaster"/>-->
-                <!--<match url="/basic/xm.do?qm=viewMaster&amp;view=recommendMaster"/>-->
-            <!--</jnode>-->
-
-
-            <!--     <jnode url="/Recommended/listRecommended.do?qm=recommened&amp;groupName=masterRecommended&amp;resultPage=masterRecommended/masterRecommendedList"  access="admin,manager" text_zh_CN="传承人推荐">
-                        <match url="recommened" />
-                 </jnode> -->
-            <!--<jnode url="/basic/xm.do?qm=plistTenantIntroduction_default" id="tenantIntroductionManager" access="admin" text_zh_CN="传承人介绍管理">-->
-            <!--<match url="plistTenantIntroduction_default"/>-->
-            <!--<match url="removeTenantIntroduction"/>-->
-            <!--<match url="formTenantIntroduction"/>-->
-            <!--<match url="viewTenantIntroduction"/>-->
-            <!--</jnode>-->
-            <!--<jnode url="/basic/xm.do?qm=plistTenantWork_default" id="tenantWorkManager"  access="admin,manager" text_zh_CN="传承人作品管理">-->
-            <!--<match url="plistTenantWork_default"/>-->
-            <!--<match url="viewTenantWork"/>-->
-            <!--<match url="formTenantWork"/>-->
-            <!--<match url="plistTenantWork_byProject"/>-->
-            <!--<match url="listProject_default"/>-->
-            <!--</jnode>-->
-            <!--<jnode url="/basic/xm.do?qm=plistTenantNews_default" id="tenantNewsManager"  access="admin,manager" text_zh_CN="传承人资讯管理">-->
-            <!--<match url="plistTenantNews_default"/>-->
-            <!--<match url="formTenantNews"/>-->
-            <!--<match url="viewTenantNews"/>-->
-            <!--</jnode>-->
-            <!--<jnode url="/basic/xm.do?qm=plistTenantWorkShop_default" id="tenantWorkShopManager" access="admin,manager" text_zh_CN="传承人工作坊管理">-->
-            <!--<match url="plistTenantWorkShop_default"/>-->
-            <!--<match url="formTenantWorkShop"/>-->
-            <!--<match url="viewTenantWorkShop"/>-->
-            <!--</jnode>-->
         </jnode>
-        <!--<jnode id="contentManager" access="admin,operational,c_operational,product_manager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">-->
-            <!--<jnode url="/basic/xm.do?groupName=master.homePage&amp;qm=plistBanner_master.homePage"-->
-                   <!--access="admin,operational,c_operational,product_manager" text_zh_CN="首页轮播图">-->
-                <!--<match url="/basic/xm.do?groupName=master.homePage&amp;qm=plistBanner_master.homePage"/>-->
-                <!--<match url="/basic/xm.do?qm=formBanner&amp;groupName=master.homePage"/>-->
-            <!--</jnode>-->
-            <!--<jnode url="/basic/xm.do?qm=plistDocument_master&amp;groupName=master" access="admin,operational,c_operational,product_manager" text_zh_CN="大师网站文档">-->
-                <!--<match url="/basic/xm.do?qm=plistDocument_master&amp;groupName=master"/>-->
-                <!--<match url="/basic/xm.do?qm=viewDocument&amp;groupName=master"/>-->
-                <!--<match url="/basic/xm.do?qm=formDocument&amp;groupName=master"/>-->
-            <!--</jnode>-->
-        <!--</jnode>-->
         <jnode url="" id="CategoryManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="非遗项目与类别">
             <jnode url="/basic/xm.do?qm=plistProject2_default" access="admin,operational,c_operational,product_manager" text_zh_CN="项目列表">
                 <match url="/basic/xm.do?qm=plistProject2_default"/>
@@ -416,6 +312,11 @@
                 <match url="/basic/xm.do?qm=formProjectPropertyValue"/>
 
             </jnode>
+            <jnode url="/basic/xm.do?qm=plistProjectWiki_default" access="admin,operational,c_operational,product_manager" text_zh_CN="工艺项目列表">
+                <match url="/basic/xm.do?qm=plistProjectWiki_default"/>
+                <match url="/basic/xm.do?qm=formWiki&amp;view=wiki"/>
+                <match url="/basic/xm.do?qm=viewProjectWiki&amp;view=masterWork"/>
+            </jnode>
             <jnode url="/basic/xm.do?qm=plistProjectCategory2_default" access="admin,operational,c_operational,product_manager" text_zh_CN="类别列表">
                 <match url="/basic/xm.do?qm=plistProjectCategory2_default"/>
                 <match url="/basic/xm.do?qm=plistProjectCategory2_default&amp;view=plist"/>
@@ -425,43 +326,14 @@
             </jnode>
 
         </jnode>
-        <jnode url="" id="CategoryManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="作品管理">
-            <jnode url="/basic/xm.do?qm=plistMasterWork2_default" access="admin,operational,c_operational,product_manager" text_zh_CN="作品列表">
+        <jnode url="" id="CategoryManager" access="admin,operational,c_operational,product_manager,offline_manager" state="closed" text_zh_CN="作品管理">
+            <jnode url="/basic/xm.do?qm=plistMasterWork2_default" access="admin,operational,c_operational,product_manager,offline_manager" text_zh_CN="作品列表">
                 <match url="/basic/xm.do?qm=plistMasterWork2_default"/>
                 <match url="/basic/xm.do?qm=formWork2&amp;view=master"/>
                 <match url="/basic/xm.do?qm=viewWork&amp;view=masterWork"/>
             </jnode>
         </jnode>
-        <!--<jnode url="" id="WikiCategoryManager" access="admin,operational,c_operational,product_manager" state="closed" text_zh_CN="工艺管理">-->
-            <!--<jnode url="/basic/xm.do?qm=plistProject2_default" access="admin,operational,c_operational,product_manager" text_zh_CN="工艺项目列表">-->
-                <!--<match url="/basic/xm.do?qm=plistProjectWiki_default"/>-->
-                <!--<match url="/basic/xm.do?qm=formProjectContent"/>-->
-                <!--<match url="/basic/xm.do?qm=formProjectWiki&amp;param=formProject"/>-->
-                <!--<match url="/basic/xm.do?qm=formProjectContent&amp;param=formProjectContent"/>-->
-                <!--<match url="/basic/xm.do?qm=listMasterProject2Master_default2"/>-->
-                <!--<match url="/basic/xm.do?qm=plistMasterWorkwiki_getProduct2"/>-->
-                <!--<match url="/basic/xm.do?qm=plistMasterWorkwiki_byProject"/>-->
-                <!--<match url="/basic/xm.do?qm=plistProjectFollowed_default"/>-->
-                <!--<match url="/basic/xm.do?qm=viewProjectwiki&amp;param=project"/>-->
-                <!--<match url="/basic/xm.do?qm=formProjectProperty2&amp;param=project"/>-->
-                <!--<match url="/basic/xm.do?qm=formMasterWork"/>-->
-                <!--<match url="/basic/xm.do?qm=formwikiMasterWork"/>-->
-                <!--<match url="/basic/xm.do?qm=viewMasterwiki"/>-->
-                <!--<match url="/basic/xm.do?qm=plistProductwiki_getProduct2"/>-->
-                <!--<match url="/basic/xm.do?qm=plistProduct_defalut&amp;view=wikiProduct"/>-->
-                <!--<match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=wikiProduct"/>-->
-                <!--<match url="/basic/xm.do?qm=viewProduct&amp;view=wikiProduct"/>-->
-                <!--<match url="/basic/xm.do?qm=formProduct&amp;view=wikiProduct"/>-->
-                <!--<match url="/basic/xm.do?qm=formProduct_Description&amp;view=wikiProduct"/>-->
-                <!--<match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=wikiProduct"/>-->
-                <!--<match url="/product/saveNewProduct.do?view=wikiProduct"/>-->
-                <!--<match url="/basic/xm.do?qm=plistTenantProduct_default&amp;view=wikiProduct"/>-->
-                <!--<match url="/basic/xm.do?view=wikiProduct"/>-->
-                <!--<match url="/product/saveNewProduct.do?view=wikiProduct"/>-->
-                <!--<match url="/basic/xm.do?qm=plistProduct_default1&amp;view=wikiProduct"/>-->
-            <!--</jnode>-->
 
-        <!--</jnode>-->
 
 
     </jnode>
@@ -487,6 +359,28 @@
 
             </jnode>
         </jnode>
+    </jnode>
+    <jnode id="lpManager" access="admin,operational,c_operational,product_manager,offline_manager" url="/main.do?jnodeId=lpManager" text_zh_CN="礼品管理">
+
+        <jnode url="" id="GiftManager" access="admin,operational,c_operational,product_manager,offline_manager" state="closed" text_zh_CN="礼品管理">
+            <jnode url="/basic/xm.do?qm=plistGiftProject_default" access="admin,operational,c_operational,product_manager,offline_manager" text_zh_CN="礼品列表">
+                <match url="/basic/xm.do?qm=plistGiftProject_default"/>
+                <match url="/basic/xm.do?qm=formGift&amp;view=gift"/>
+                <match url="/basic/xm.do?qm=formProjectGift&amp;view=Gift"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistGiftLabel_default" access="admin,operational,c_operational,product_manager,offline_manager" text_zh_CN="标签列表">
+                <match url="/basic/xm.do?qm=plistGiftLabel_default"/>
+                <match url="/basic/xm.do?qm=formGiftLabel&amp;view=label"/>
+                <match url="/basic/xm.do?qm=formGiftLabel&amp;view=editLabel"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistGiftSubject_default" access="admin,operational,c_operational,product_manager,offline_manager" text_zh_CN="礼品专题">
+                <match url="/basic/xm.do?qm=plistGiftLabel_default"/>
+                <match url="/basic/xm.do?qm=formSubject&amp;type=gift"/>
+                <match url="/basic/xm.do?qm=formGiftLabel&amp;view=editLabel"/>
+                <match url="/basic/xm.do?qm=viewGiftSubject"/>
+            </jnode>
+        </jnode>
+
     </jnode>
 
 

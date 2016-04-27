@@ -33,8 +33,6 @@ public class MasterWork {
     private Project project;  //类别
     private Date createDateTime;
     private  List<MasterWorkRecommended> masterWorkRecommendedList;//推荐
-    // /   private  MasterWorkRecommended recommended;//推荐作品
-//    private List<ProjectTag> projectTagList;
     private String praiseStatus;
     private String storeStatus;
     private Integer amount;

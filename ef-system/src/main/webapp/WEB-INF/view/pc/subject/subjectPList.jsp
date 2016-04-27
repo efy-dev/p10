@@ -50,7 +50,7 @@
 
 <div style="text-align: left">
 <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formSubject"/>'" type="button"
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formSubject&type=home"/>'" type="button"
            class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建专题"/>
     </security:authorize>

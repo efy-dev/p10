@@ -12,7 +12,6 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <script src="<c:url value="/resources/jquery/jquery.qrcode.min.js"/>"></script>
     <title>【${product.name} ${productModel.name}】${product.subName} -e飞蚁</title>
     <c:if test="${product.master!=null}">
         <c:set var="master">
@@ -23,6 +22,7 @@
           content="${product.project.name},${master},${product.name},${product.subName}, ${productModel.name},${product.bigTenant.name}"/>
     <meta name="description"
           content="${product.name},${productModel.name},${product.subName},${product.project.description}"/>
+
 </head>
 <body>
 <script>
@@ -359,6 +359,7 @@
     <div class="overbg"></div>
 </div>
 <!--//End-/*够阿米送礼弹出框*/-->
+<script src="<c:url value="/resources/jquery/jquery.qrcode.min.js"/>"></script>
 <script type="text/javascript">
         $(function(){
             $('#btn-gift').bind('click',function(){

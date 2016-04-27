@@ -61,7 +61,7 @@
    <fieldset>
        <legend></legend>
        <a id="btn_upload1"></a>
-       <audio src="http://pro.efeiyi.com/${object.audio}" controls="controls" id="audio" style="margin-left: 25px"></audio>
+       <audio src="http://tenant.efeiyi.com/${object.audio}" controls="controls" id="audio" style="margin-left: 25px"></audio>
    </fieldset>
     <fieldset>
         <legend>
@@ -84,9 +84,9 @@
                                         <dl style="margin-top: 6px;">
                                             <dt style="width: 100%">
                                                 <a title="点击查看原图" href="javascript:void (0);"
-                                                   onclick="tc1('http://pro.efeiyi.com/${masterWorkPicture.pictureUrl}@!water-mask')">
+                                                   onclick="tc1('http://tenant.efeiyi.com/${masterWorkPicture.pictureUrl}@!water-mask')">
                                                     <img width="100%" name=""
-                                                         src="http://pro.efeiyi.com/${masterWorkPicture.pictureUrl}@!product-model"
+                                                         src="http://tenant.efeiyi.com/${masterWorkPicture.pictureUrl}"
                                                          alt="作品图片"/>
                                                 </a>
                                             </dt>
@@ -159,8 +159,8 @@
             var imgUrl = data.split(":")[1];
             var imgName = data.split(":")[2];
             var sort = data.split(":")[3];
-            var url = "http://pro.efeiyi.com/" + imgUrl + "@!product-model";
-            var trueUrl = "http://pro.efeiyi.com/" + imgUrl + "@!water-mask";
+            var url = "http://tenant.efeiyi.com/" + imgUrl + "@!product-model";
+            var trueUrl = "http://tenant.efeiyi.com/" + imgUrl + "@!water-mask";
             var u= '<c:url value="/masterWork/changePictureSort.do" />';
             ///显示图片
             var img = '<li style="float: left;margin-right: 10px;width:200px;" sort="'+sort+'" name="' + pictureId + '">' +
@@ -212,7 +212,7 @@
         formData: {"imgType": "normal"}, //提交给服务器端的参数
         onUploadSuccess: function (file, data, response) {   //一个文件上传成功后的响应事件处理
             data = data.substring(1, data.length - 1);
-            var url = "http://pro.efeiyi.com/" + data ;
+            var url = "http://tenant.efeiyi.com/" + data ;
             $("audio").attr("src",url);
         }
     });

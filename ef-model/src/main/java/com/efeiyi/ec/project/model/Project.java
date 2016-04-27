@@ -1,17 +1,16 @@
 package com.efeiyi.ec.project.model;
 
 import com.efeiyi.ec.master.model.MasterProject;
-import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressDistrict;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.wiki.model.ProjectContent;
+import com.efeiyi.ec.wiki.model.Artistry;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import javax.persistence.criteria.Fetch;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +25,7 @@ import java.util.List;
 public class Project implements Serializable {
     private String id;
     private String serial;//项目编号
-    private String name;//项目名称
+    private String name;//项目名称-
     private String status;//状态
     private String level;//级别
     private String type; //类别 1.美术 2.技艺
@@ -50,7 +49,7 @@ public class Project implements Serializable {
     private List<ProjectRecommended> projectRecommendeds;
     private Long fsAmount;
     private List<MasterProject> masterProjects;
-
+    private Artistry artistry;
 
     @Column(name="picture_wap_url")
     public String getPicture_wap_url() {
@@ -278,6 +277,15 @@ public class Project implements Serializable {
     @Override
     public String toString() {
         return "Project{id = " + id + "}";
+    }
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "project")
+    public Artistry getArtistry() {
+        return artistry;
+    }
+
+    public void setArtistry(Artistry artistry) {
+        this.artistry = artistry;
     }
 }
 

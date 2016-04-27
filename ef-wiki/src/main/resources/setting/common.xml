@@ -9,6 +9,7 @@
     <banners>
         <banner group="master.index" note="传承人首页轮播图" />
         <banner group="wiki.pc.dynamic" note="wiki动态轮播图" />
+        <banner group="wiki.wap.dynamic" note="wiki动态轮播图" />
     </banners>
     <!-- 文档 -->
     <documents>

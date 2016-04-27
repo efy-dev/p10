@@ -8,10 +8,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="topbar wh">
+
+<div class="top2016">
     <div class="hd">
-        <ul class="ul-item">
-            <%--<li><a href="" title="商家入驻">商家入驻</a></li>--%>
+        <div class="tips fl"><i class="min-logo"></i>汇聚东方工艺精粹</div>
+        <ul class="fr">
+            <li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>
+            <li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>
+            <li><a href="http://master.efeiyi.com" title="">大 师</a></li>
             <%
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
@@ -25,45 +29,35 @@
                 if (AuthorizationUtil.getMyUser().getId() == null) {
             %>
             <li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>
-            <li><a href="http://passport.efeiyi.com/register?service=http://http://craft.efeiyi.com/ef-wiki" title="快速注册">快速注册</a></li>
+            <li><a href="http://passport.efeiyi.com/register?service=http://wiki.efeiyi.com" title="快速注册">快速注册</a></li>
             <%
                 }
             %>
-            <%--<li><a href="" title="商家入驻">商家入驻</a></li>--%>
-            <li class="btn-top-wechat">
-                <a title="手机e飞蚁">手机e飞蚁</a>
-                <span class="top-wechat"></span>
-            </li>
-           <%-- <li class="cart">
-                <a href="<c:url value="/cart/view"/> " title="购物车"><i class="icon"></i>购物车</a>
-                <span class="tips"><em id="cartAmount">0</em></span>
-            </li>--%>
+            <li><a href="http://www.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
         </ul>
     </div>
 </div>
-<!-- //End--topbar-->
-<div class="header wh">
-    <div class="hd">
-        <div class="logo"><a class="icon" href="http://www.efeiyi.com" title="e飞蚁-爱非遗"></a></div>
-        <div class="nav">
+<!--//End--topbar-->
+<div class="nav2016 bgc">
+    <div class="hd bgf">
+        <div class="navitems">
             <ul>
-                <c:forEach items="${jnode.children}" var="child">
-                    <li>
-                        <c:if test="${!child.getState().equals('productCategory')}">
-                            <a class="${child.jnodeMatch("cur",currentJnode)}" href="<c:url value="${child.url}"/>"
-                               title="${child.text_zh_CN}">${child.text_zh_CN}</a>
-                        </c:if>
-                        <c:if test="${child.getState().equals('productCategory')}">
-                            <a class="${child.jnodeMatch("cur",currentJnode)}"
-                               title="${child.text_zh_CN}">${child.text_zh_CN}</a>
-                            <%--<jsp:include page="/productCategory.do" flush="true"/>--%>
-                        </c:if>
-                    </li>
-                </c:forEach>
+                <li><a href="/" title="">首页</a></li>
+                <li><a href="" title="">大师精品</a></li>
+                <li><a href="" title="">飞蚁工坊</a></li>
             </ul>
         </div>
+        <!--//End--导航-->
+        <%--<div class="search">--%>
+        <%--<form action="">--%>
+        <%--<input type="text" value="" placeholder="搜索" class="ipt">--%>
+        <%--<input type="submit" value="" class="icon2016 btn">--%>
+        <%--</form>--%>
+        <%--</div>--%>
+        <%--<!--//End--搜索-->--%>
     </div>
 </div>
+<!--//End--nav2016-->
 <script>
 
    /* $().ready(function () {

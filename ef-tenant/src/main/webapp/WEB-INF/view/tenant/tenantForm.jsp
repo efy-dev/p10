@@ -55,7 +55,7 @@
                 <label for="epositBank" class="am-u-sm-3 am-form-label">开户行</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" pattern="^\d{0,20}$" id="epositBank" name="epositBank" placeholder="开户行(请填写数字格式)"
+                    <input type="text"  id="epositBank" name="epositBank" placeholder="开户行"
                            value="${object.epositBank}" maxlength="20">
                 </div>
             </div>
@@ -65,7 +65,7 @@
                 <label for="account" class="am-u-sm-3 am-form-label">账号</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" pattern="^\d{0,20}$" id="account" name="account" placeholder="账号(请填写数字格式)"
+                    <input type="text"  id="account" name="account" placeholder="账号"
                            value="${object.account}" maxlength="20">
                 </div>
             </div>

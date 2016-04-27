@@ -22,6 +22,7 @@
         <module>tg-website</module>
         <module>app-wikiServer</module>
         <module>ef-user</module>
+        <module>ef-gift</module>
     </modules>
 
     <repositories>
@@ -159,6 +160,12 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-infinispan</artifactId>
             <version>4.3.5.Final</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-codec</artifactId>
+                    <groupId>commons-codec</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -385,6 +392,24 @@
             <artifactId>solr-solrj</artifactId>
             <version>5.3.1</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpclient</artifactId>-->
+            <!--<version>4.3.2</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpclient</artifactId>-->
+            <!--<version>4.5.2</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpasyncclient</artifactId>
+            <version>4.1.1</version>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -420,7 +445,7 @@
             <properties>
                 <db-driver>com.mysql.jdbc.Driver</db-driver>
                 <db-password>sl7BbVfIumw5V/irhnO9FA==</db-password>
-                <db-url>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/dev-efc?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
+                <db-url>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/efc-temp?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
                 <db-username>efy</db-username>
                 <db-level>DEBUG</db-level>
                 <dbpath>/tmp/logs/</dbpath>
