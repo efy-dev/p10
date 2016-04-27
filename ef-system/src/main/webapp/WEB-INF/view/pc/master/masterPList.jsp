@@ -105,11 +105,11 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only" width="30%">
-                            <c:if test="${!empty master.masterProjectList}">
-                                <c:forEach items="${master.masterProjectList}" var="mp">
-                                    [${mp.project.name}]
-                                </c:forEach>
-                            </c:if>
+                            <%--<c:if test="${!empty master.masterProjectList}">--%>
+                                <%--<c:forEach items="${master.masterProjectList}" var="mp">--%>
+                                    <%--[${mp.project.name}]--%>
+                                <%--</c:forEach>--%>
+                            <%--</c:if>--%>
                         </td>
                         <td class="am-hide-sm-only" width="20%">
                             <a href="<c:url value="/basic/xm.do?qm=viewMaster&view=master&id=${master.id}"/>">

@@ -1,6 +1,7 @@
 package com.efeiyi.ec.personal.master.controller;
 
 import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterProject;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,5 +35,27 @@ public class HomeController {
         model.addAttribute("skillList",skillList);
         model.addAttribute("artList",artList);
         return "/tenant/tenantList";
+    }
+
+    public String mainMasterProject(List<MasterProject> masterProjects) {
+
+        MasterProject masterProject = null;
+
+        if (masterProjects != null && masterProjects.size() > 0) {
+
+            for (MasterProject masterProjectTemp : masterProjects) {
+                if (masterProjectTemp.getStatus().equals("1")) {
+                    masterProject = masterProjectTemp;
+                }
+            }
+            if (masterProject == null) {
+                masterProject = masterProjects.get(0);
+            }
+
+            return masterProject.getProject().getName();
+        } else {
+
+            return "";
+        }
     }
 }

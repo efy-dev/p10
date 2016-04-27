@@ -657,7 +657,7 @@
                         <condition label="大师" name="project.id" defaultValue="1" operation="eq"/>
                     </query>
                     <query name="include" label="嵌入" type="auto" orderBy="id:desc">
-                        <condition label="状态" name="status" defaultValue="0" operation="ne"/>
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
                         <condition label="传承人Id" name="master.id" operation="eq"/>
                     </query>
                 </do>
