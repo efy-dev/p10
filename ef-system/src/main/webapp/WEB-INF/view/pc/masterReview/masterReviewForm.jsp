@@ -69,7 +69,7 @@
                 dataType: "json",
                 data: {masterId: masterId, content: content, review: review},
                 success: function (data) {
-                    window.location.href = "<c:url value="/basic/xm.do?qm=formMasterReview&id=" />" + masterId ;
+                    window.location.href = "<c:url value="/basic/xm.do?qm=formMasterReview&masterId=" />" + masterId +"&review=" + data;
 
                 }
             });
