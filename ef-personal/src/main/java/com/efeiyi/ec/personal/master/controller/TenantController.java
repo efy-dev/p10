@@ -1,9 +1,6 @@
 package com.efeiyi.ec.personal.master.controller;
 
-import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.master.model.MasterBanner;
-import com.efeiyi.ec.master.model.MasterUser;
-import com.efeiyi.ec.master.model.MasterWork;
+import com.efeiyi.ec.master.model.*;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.personal.AuthorizationUtil;
 import com.efeiyi.ec.personal.master.service.MasterWorkManager;
@@ -239,6 +236,25 @@ public class TenantController extends BaseMasterController {
             }
         }
         return data;
+    }
+
+
+    @RequestMapping("/onMasterNews.do")
+    public String onMasterNews(Model model) {
+        Master master = findMaster();
+        model.addAttribute("master",master);
+        return "/master/masterNewsForm";
+    }
+
+    @RequestMapping("/saveMasterNews.do")
+    public String saveMasterNews(String masterId ,MasterNews news, Model model) {
+        Master master = (Master) baseManager.getObject(Master.class.getName(),masterId);
+        news.setMaster(master);
+        news.setStatus("1");
+        baseManager.saveOrUpdate(MasterNews.class.getName(),news);
+        model.addAttribute("masterId",master.getId());
+        model.addAttribute("object",news);
+        return "/master/masterNewsView";
     }
 
 }

@@ -10,8 +10,8 @@
             <jnode id="" url="/onMasterWork.do" state="closed" extend="" access="" text_zh_CN="上传作品">
                 <match url="/onMasterWork.do"/>
             </jnode>
-            <jnode id="" url="/onMasterWork.do" state="closed" extend="" access="" text_zh_CN="上传作品">
-                <match url="/onMasterWork.do"/>
+            <jnode id="" url="/onMasterNews.do" state="closed" extend="" access="" text_zh_CN="上传资讯">
+                <match url="/onMasterNews.do"/>
             </jnode>
         </jnode>
         <jnode id="accountManager" url="" text_zh_CN="账号管理"><!--系统管理-->
