@@ -50,16 +50,19 @@
 <script>
 
     function removeMasterNews(divId){
-        $.ajax({
-            type: "get",
-            url: '<c:url value="/basic/xmj.do?qm=removeMasterNews"/>',
-            cache: false,
-            dataType: "json",
-            data:{id:divId},
-            success: function (data) {
-                $("#"+divId).remove();
-            }
-        });
+        var f = confirm("确认删除?");
+        if(f) {
+            $.ajax({
+                type: "get",
+                url: '<c:url value="/basic/xmj.do?qm=removeMasterNews"/>',
+                cache: false,
+                dataType: "json",
+                data: {id: divId},
+                success: function (data) {
+                    $("#" + divId).remove();
+                }
+            });
+        }
     }
 
 </script>

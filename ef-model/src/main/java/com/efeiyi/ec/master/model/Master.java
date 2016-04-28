@@ -50,6 +50,7 @@ public class Master implements Serializable,Comparable {
     private Long fsAmount;
     private String cityName;
     private String followStatus;
+    private  String review;//审核 1:未审核 2:正在审核 3:审核失败 4:审核成功
 
     @Transient
     public String getFollowStatus() {
@@ -310,5 +311,14 @@ public class Master implements Serializable,Comparable {
             return 0;
         }
       return  -1;
+    }
+
+    @Column(name = "review_status")
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
     }
 }

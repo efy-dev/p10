@@ -1,0 +1,542 @@
+@charset "utf-8";
+body, h1, h2, h3, h4, h5, h6, ul, li, dl, dt, dd, img, input, a, p, strong, em, i {margin:0;padding:0;border:0;list-style:none;font-family:"Microsoft YaHei"}
+strong, b, em {font-weight:normal;font-style:normal}
+img {border:0}
+ul, dl {list-style:none}
+a {color:#000;outline:none;cursor:pointer}
+a:hover {color:#f00;text-decoration:underline}
+/*--reset--*/
+.icon {background:url(../images/icon.png) no-repeat}
+.hd {width:1200px;margin:0 auto}
+.wh {width:100%;float:left}
+/*--//End--common*/
+.topbar {min-width:1200px;height:31px;background:#000;position:relative;z-index:999}
+.topbar .ul-item {float:right}
+.topbar .ul-item li {float:left;position:relative}
+.topbar .ul-item li strong {line-height:31px;float:left;font-size:12px;color:#999;cursor:pointer}
+.topbar .ul-item li a {line-height:31px;font-size:12px;color:#999;padding:0 20px;float:left}
+.topbar .ul-item li:hover a {background:#333;text-decoration:none}
+.topbar .ul-item li.cart {padding:0 38px;background:#333;position:relative}
+.topbar .ul-item li.cart .icon {background-position:0 -50px;width:17px;height:13px;float:left;margin-top:8px;margin-right:10px}
+.topbar .ul-item li.cart .tips {background:#900;height:16px;height:14px\9;padding:2px 8px;-webkit-border-radius:6px;position:absolute;top:0;left:116px;color:#fff;font-size:10px;-webkit-transform:scale(0.8);-moz-transform:scale(0.8);transform:scale(0.8)}
+.topbar .ul-item li.cart .tips em {height:12px;float:left;margin-top:-3px;margin-left:-1px}
+.topbar .ul-item li.cart:hover {background:#fff}
+.topbar .ul-item li.cart:hover a {color:#333;background:transparent;text-decoration:none}
+.topbar .ul-item li.cart:hover .icon {background-position:0 -63px}
+.topbar .ul-item .ul-details {width:103px;position:absolute;top:34px;display:none;box-shadow:7px 6px 39px -12px #000}
+.topbar .ul-item .btn-top-nav .ul-details a {font-size:12px;color:#000;display:inline-block;line-height:30px;padding:0 25px;width:103px;background:#fff;border:1px solid #000;margin-top:-1px}
+.topbar .ul-item .btn-top-nav .ul-details a:hover {background:#000;color:#fff}
+.topbar .top-wechat {background:url(../images/top-wechat.png) no-repeat;width:200px;height:246px;position:absolute;top:31px;left:50%;margin-left:-92px;display:none}
+/*--//End--topbar--*/
+.header {min-width:1200px;padding:15px 0;line-height:50px;border-bottom:3px #000 solid;background:#fff;-webkit-box-sizing: content-box;box-sizing: content-box;}
+.header .logo {float:left}
+.header .logo a {background-position:0 0;width:157px;height:50px;float:left}
+.header h1{
+    float: left;
+    margin-left: 56px;
+    font-size: 24px;
+    font-weight: normal;
+}
+.header h2 {
+    font-size: 20px;
+    float: left;
+    margin-left: 20px;
+    font-weight: normal;
+}
+.header span {font-size: 20px;
+    float: right;}
+.header strong {
+    font-size: 30px;
+    font-family: Times New Roman;
+    font-style: italic;
+    position: relative;
+    top:3px;
+}
+/*--//ENd--*/
+.login-form {
+    width: 370px;
+    padding: 34px;
+    border: 1px #ccc solid;
+    float: left;
+    margin:70px 415px;
+}
+.login-form .mt {
+    margin-bottom: 30px;
+}
+.login-form h3 {
+    font-size: 18px;
+    float: left;
+}
+.login-form .link {
+    float: right;
+    margin-top: 5px;
+    font-size: 12px;
+}
+.login-form .link a {
+    color: #003366;
+    text-decoration: underline;
+}
+
+.login-form .am-form-group {width:100%;float:left;margin-bottom:20px;position:relative}
+.login-form .am-form-group .icon {height:18px;position:absolute;top:50%;margin-top:-9px;left:10px}
+.login-form .am-form-group .name {
+    background-position: -68px -50px;
+    width: 18px;
+}
+.login-form .am-form-group .pwd {
+    background-position: -87px -50px;
+    width: 14px;
+    left: 12px;
+    margin-top:-11px;
+}
+.login-form .am-form-group .txt-yzm {width:156px;float:left;margin-right:16px}
+.login-form .am-form-group .btn-yzm {width:112px;height:36px;line-height:36px;text-align:center;border:1px #ccc solid;float:left;text-decoration:none;font-family:KaiTi}
+
+
+.login-form .text1 {
+    width: 100%;
+    font-size: 12px;
+    padding: 9px 0 9px 35px;
+    border: 1px solid #000;
+}
+.login-form label {
+    width: 100%;
+    float: left;
+    color: #7b7b7b;
+    font-weight: normal;
+    font-size: 12px;
+}
+.login-form label input {
+    float: left;
+    margin-top:3px;
+    margin-right: 6px;
+}
+.login-form label a {
+    float: right;
+    color: #036;
+}
+.login-form .btn-submit {
+    background: #000;
+    color: #fff;
+    width: 100%;
+    line-height: 43px;
+    float: left;
+    font-size: 16px;
+}
+
+
+.reg-box {
+    width: 302px;
+    float: left;
+    margin:52px 449px;
+}
+
+.reg-box .title {
+    width: 100%;
+    float: left;
+    margin-top:52px;
+    text-align: center;
+    font-size: 12px;
+    color:#999;
+}
+.reg-box .title strong {
+    font-size: 14px;
+    color: #000;
+}
+.reg-box .radio {
+    width: 100%;
+    float: left;
+    margin-top: 35px;
+    margin-bottom: 23px;
+    font-size: 12px;
+    text-align: center;
+}
+.reg-box .radio span.t1 {
+    float: left;
+}
+.reg-box .radio span.t2 {
+    display: inline-block;
+}
+.reg-box .radio span.t3 {
+    float: right;
+}
+.reg-box .radio input {
+    display: inline-block;
+    position: relative;
+    top:2px;
+    margin-right: 3px;
+}
+.reg-box form {
+    width: 100%;
+    float: left;
+}
+.reg-box form .items {
+    width: 100%;
+    height: 37px;
+    line-height: 37px;
+    float: left;
+    margin-bottom: 23px;
+    font-size: 12px;
+    position: relative;
+}
+.reg-box form .items p {
+    width:50px;
+    text-align: right;
+    position: absolute;
+    top: 0;
+    left:-60px;
+}
+.reg-box form .items .ipt {
+    width:280px;
+    height: 27px;
+    line-height:27px;
+    padding: 5px 10px;
+    float: left;
+    border: 1px solid #ccc;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.reg-box form .items-agree {
+    height: 20px;
+    line-height: 20px;
+}
+.reg-box form .items-agree .checkbox {
+    display: inline-block;
+    position: relative;
+top:2px;}
+.reg-box form .items-agree .agree {
+    color: #666;
+    font-weight: normal;
+    text-decoration: none;
+}
+.reg-box form .items .btn-reg {
+    width: 100%;
+    line-height: 43px;
+    float: left;
+    text-align: center;
+    border: 1px solid #000;
+    background: #fff;
+    font-size: 16px;
+    transition:all 0.3s;
+}
+.reg-box form .items .btn-reg:hover {
+    background: #000;
+    color: #fff;
+}
+.reg-box form .items-go .go-reg {
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    float: left;
+    text-align: center;
+    color: #999;
+}
+
+
+
+.footernew {border-top: 1px solid #000;}
+.footernew .publ-top{text-align: center;padding: 26px 0 18px;}
+.footernew .publ-top .city{display: inline-block;margin:0 35px;text-align: center}
+.footernew .publ-top .city dt{width: 60px;font-size: 36px;border:4px solid #a0a0a0;border-radius: 50% 50%;text-align: center;color: #000;height: 60px;line-height: 48px;display: inline-block}
+.footernew .publ-top .city dd{font-size: 14px;color: #000;font-weight: bold;text-align: center;width:120px }
+.footernew .publ-top .city dd p{line-height: 17px;}
+.footernew .servicenew{background-color: #000;height: 211px;}
+.footernew .servicenew .wechatnew{width: 175px;height: 200px;float:left;background: url(../images/footernew-icon.png) no-repeat 0 0;margin-top: 6px;margin-left: 38px;position: relative}
+.footernew .servicenew .wechatnew .inro-icon{width:141px;height: 143px; background:url(../images/frlinksimg.png) no-repeat 0 -308px;display: block;position: absolute;left: -1px;top:161px;}
+.footernew .servicenew .tct{text-align: center;}
+.footernew .servicenew .foremax{display: inline-block;margin-left: 80px;}
+.footernew .servicenew .fore{margin-top: 22px;width: 131px;float:left;text-align:center}
+.footernew .servicenew .fore dt{font-size: 14px;color: #fff;margin-bottom: 20px;width: 100%;}
+.footernew .servicenew .fore dd{line-height: 17px;color: #999;font-size: 14px;}
+.footernew .servicenew .fore dd a{color: #999;font-size: 14px;outline: none;}
+.footernew .max-links{background: #0c0c0c;border-top:2px solid #161616;z-index: 0; }
+.footernew .links {background:#000;height:16px;line-height:16px;text-align:center;padding:15px 0;box-sizing: content-box}
+.footernew .links a {margin:0 10px;display:inline-block;box-sizing:content-box;font-size: 12px;color: #ccc;font-weight: bold;}
+.footernew .links a.line {width:1px;height:10px;background: url(../images/footernew-icon.png) no-repeat 0 -160px;top:2px;position:relative}
+.footernew .links a:hover {color:#f00;text-decoration:underline}
+.footernew .copyright {background:#000;padding:15px 0;text-align:center}
+.footernew .copyright .phone strong, .footernew .copyright .phone em{font-weight:bold;letter-spacing:5px;font-size:12px;color:#666}
+.footernew .copyright .phone em {font-size:18px}
+.footernew .copyright .frlinks {margin:10px 0}
+.footernew .copyright .frlinks a {color:#666;margin:0 5px;display:inline-block;font-size:12px;}
+.footernew .copyright .frlinks span, .footernew .copyright .info {color:#666;font-size:12px;font-weight: bold}
+.footernew .authentication {background: #000;text-align: center;padding:20px 0}
+.footernew .authentication a {display: inline-block;margin:0 20px}
+.footernew .frlinksimg {
+    padding:20px 0 30px 0;
+}
+.footernew .frlinksimg strong {
+    font-size: 14px;
+    color: #666;
+    font-weight: bolder;
+    display: inline-block;
+    position: relative;
+    top:-45px
+}
+.footernew .frlinksimg a {
+    width: 142px;
+    height:90px;
+    background:url(../images/frlinksimg.png) no-repeat;
+    display: inline-block;
+
+}
+.footernew .frlinksimg a.icon1 {
+    background-position: 0 0;
+}
+.footernew .frlinksimg a.icon2 {
+    background-position: 0 -90px;
+    cursor: text;
+}
+.footernew .frlinksimg a.icon3 {
+    background-position: 0 -210px;
+    cursor: text;
+}
+.footernew .frlinksimg .line {
+    width: 2px;
+    height:40px;
+    display: inline-block;
+    position: relative;
+    top:-36px;
+    background: #434343;
+}
+/*--//End--*/
+.thickframe {position:fixed;top:0;left:0;z-index:100;width:100%;height:100%;border:0;display:none}
+.thickframe .thickdiv {position:fixed;top:0;left:0;z-index:101;width:100%;height:100%;background:#000;border:0;filter:alpha(opacity =60);opacity:.6}
+.thickframe .thickbox {width:1000px;height:500px;position:fixed;top:50%;margin-top:-250px;left:50%;margin-left:-500px;z-index:102;overflow:hidden;padding:0;border:4px solid rgba(0, 0, 0, 0.1);border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;background:#fff}
+.thickframe .thicktitle {height:27px;padding:0 10px;border:solid #C4C4C4;border-width:1px 1px 0;background:#F3F3F3;line-height:27px;font-family:arial, "\5b8b\4f53";font-size:14px;font-weight:bold;color:#333}
+.thickframe .thickcon {overflow:auto;background:#fff;border:solid #C4C4C4;border-width:1px;padding:10px}
+.thickframe #protocol-con{height:356px;overflow:auto;padding:10px 20px 0 10px;font-size:12px}
+.thickframe #protocol-con h3 {font-size:14px;line-height:40px}
+.thickframe #protocol-con h4 {line-height:30px}
+.thickframe #protocol-con p {line-height:20px}
+.thickframe .thickcon .btnt{width:322px;margin:20px auto 0}
+.thickframe .thickcon .btnt .btn-img{width:322px;height:34px;line-heiht:34px;background:#e4393c;color:#FFF;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;font-family:"微锟斤拷锟脚猴拷";font-size:16px;font-weight:800}
+.thickframe .thickclose:link {display:block;position:absolute;z-index:100000;top:7px;right:12px;overflow:hidden;width:15px;height:15px;background-position:-276px -50px;font-size:0;line-height:100px}
+/*--//End--*/
+.audit {
+    width:100%;
+
+    padding-left: 260px;
+    float: left;
+    margin-left: -260px;
+
+   /* position: relative;*/
+    z-index: -1;
+}
+.audit .step{
+    text-align: center;
+    margin-top: 52px;
+    margin-bottom: 40px;
+}
+.audit .step1 {
+    background:url(../images/audit-icon.png) no-repeat 0 0;
+    width: 708px;
+    height: 31px;
+    display: inline-block;
+}
+.audit .step2 {
+    background:url(../images/audit-icon.png) no-repeat 0 -31px;
+    width: 708px;
+    height: 31px;
+    display: inline-block;
+}
+.audit .tips strong{
+    width: 80%;
+    line-height: 30px;
+    float: left;
+    margin: 0 10%;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    border-bottom: 1px solid #ccc;
+}
+.audit .info .btns {
+    width: 70%;
+    float: left;
+    margin:11px 15% 7px 15%;
+    text-align: right;
+}
+.audit .info .btns a {
+    width: 91px;
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    border: 1px solid #999;
+}
+.audit .info .table {
+    width: 70%;
+    float: left;
+    margin:0 15%;
+}
+.audit .info .table h1{
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    float: left;
+    margin-bottom: 40px;
+}
+.audit .info .table .tc {text-align: center;}
+.audit .info .table th {
+    height: 50px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: normal;
+    border: 1px solid #000;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+}
+.audit .info .table td {
+    font-size: 12px;
+    border: 1px solid #000;
+    height: 80px;
+}
+.audit .info .table td p {
+    width: 100%;
+    line-height: 20px;
+    float: left;
+}
+.audit .info .table td span {
+    width: 106px;
+    text-align: center;
+    float: left;
+}
+.audit .info .table td .btn-txt {
+    color: #ff9900;
+    text-decoration: underline;
+    float: left;
+    margin-left:20px;
+}
+.audit .info .table td .btn-link {
+    width: 114px;
+    line-height: 27px;
+    background: #f90;
+    color: #fff;
+    text-align: center;
+    float: left;
+    margin-left:20px;
+}
+.audit .info .table td.tl {
+    padding-left: 20px;
+}
+
+.audit .info .table .enter-btn{
+    padding: 22px 0 60px;
+}
+.audit .info .table .enter-btn a{
+    width: 302px;
+    height: 43px;
+    border: 1px solid #000;
+    line-height: 43px;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    font-size: 16px;
+    color: #000;
+}
+.audit .info .table .enter-flow{
+    text-align: center;
+    line-height: normal;
+    font-size: 14px;
+    color: #000;
+    line-height: 14px;
+    text-align: center;
+    margin: 0 auto 41px;
+    font-weight: bold;
+}
+.audit .info .table  .enter-list{
+    display: inline-block;
+    margin: 0 auto;
+    width: 951px;
+    border: 1px solid #000;
+    padding: 2px 0;
+}
+.audit .info .table  .enter-list dl{
+    float: left;
+    border-right: 1px solid #000;
+    width: 237px;
+    height: 276px;
+}
+.audit .info .table  .enter-list dl dt{
+    margin-top: 57px;
+    position: relative;
+    font-size: 16px;
+    padding-left: 43px;
+    line-height: 16px;
+    text-align: left;
+}
+.enter-wh{
+    text-align: center;
+}
+.audit .info .table .enter-list dl.noborder1{
+    border-right-width: 0px;
+}
+.audit .info .table  .enter-list dl dt i{
+    background: url("../images/icon.png");
+    width: 70px;
+    height: 65px;
+    position: absolute;
+    left: 14px;
+    top: -52px;
+}
+.audit .info .table  .enter-list dl dt i.enter-1{
+    background-position: 0  -224px;
+}
+.audit .info .table  .enter-list dl dt i.enter-2{
+    background-position: -83px  -224px;
+}
+.audit .info .table  .enter-list dl dt i.enter-3{
+    background-position: -168px  -224px;
+}
+.audit .info .table  .enter-list dl dt i.enter-4{
+    background-position: -238px  -224px;
+}
+.audit .info .table  .enter-list dl dd{
+    padding: 50px 0 26px 31px;
+    font-size: 12px;
+    color: #666;
+}
+.audit .info .table  .enter-list dl dd p{
+    padding-left:12px;
+    line-height: 17px;
+    margin-bottom: 20px;
+    position: relative;
+    text-align: left;
+    width: 154px;
+}
+.audit .info .table  .enter-list dl dd p .txt-icon{
+    background: url("../images/icon.png") 105px -126px;
+    position: absolute;
+    left: 0;
+    top:3px;
+    width: 7px;
+    height: 7px;
+}
+.admin-main{background: #fff;}
+.admin-content{background: none;overflow: inherit}
+
+.audit .success h2 {
+    font-size: 18px;
+    font-weight: normal;
+    text-align: center;
+    margin:70px 0;
+}
+.audit .success .brid {
+    width: 80%;
+    min-width:850px;
+    margin: 0 auto;
+    font-size: 12px;
+}
+.audit .success .brid ul{
+    width: 100%;
+    float: left;
+    padding:20px 25px;
+    border: 1px solid #000;
+}
+.audit .success .brid li {
+    width: 100%;
+    float: left;
+    margin-bottom: 24px;
+}

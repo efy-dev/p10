@@ -43,7 +43,7 @@
                 <tbody>
                 <c:forEach items="${requestScope.pageInfo.list}" var="master">
                     <tr id="${master.id}">
-                        <td width="20%">
+                        <td width="30*%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <security:authorize ifAnyGranted="admin,operational,c_operational">
@@ -56,18 +56,30 @@
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
                                     </security:authorize>
-                                    <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
-                                       <%--href="<c:url value="/basic/xm.do?qm=plistMasterMessage_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span--%>
-                                            <%--class="am-icon-trash-o"></span> 最新动态--%>
-                                    <%--</a>--%>
-                                    <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
-                                        <%--href="<c:url value="/basic/xm.do?qm=plistMasterFollowed_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span--%>
-                                            <%--class="am-icon-trash-o"></span> 查看粉丝--%>
-                                    <%--</a>--%>
-                                    <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
-                                       <%--href="<c:url value="/basic/xm.do?qm=plistMasterWork_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span--%>
-                                            <%--class="am-icon-trash-o"></span> 查看作品--%>
-                                    <%--</a>--%>
+                                    <c:if test="${master.review=='4'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=formMasterReview&id=${master.id}"/>"  >
+                                            <span class="am-icon-heart">审核成功</span>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${master.review=='1' || empty master.review}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=formMasterReview&id=${master.id}"/>" >
+                                            <span class="am-icon-heart">未审核</span>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${master.review=='2'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=formMasterReview&id=${master.id}"/>" >
+                                            <span class="am-icon-heart">正在审核</span>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${master.review=='3'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=formMasterReview&id=${master.id}"/>" >
+                                            <span class="am-icon-heart">审核失败</span>
+                                        </a>
+                                    </c:if>
                                     <security:authorize ifAnyGranted="admin,operational,c_operational">
                                     <c:set value="0" var="isOk"/>
                                     <c:if test="${not empty master.masterRecommendedList}">
@@ -104,7 +116,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only" width="30%">
+                        <td class="am-hide-sm-only" width="20%">
                             <c:if test="${!empty master.masterProjectList}">
                                 <c:forEach items="${master.masterProjectList}" var="mp">
                                     [${mp.project.name}]

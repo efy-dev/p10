@@ -7,8 +7,10 @@ import com.efeiyi.ec.project.model.ProjectTag;
 import com.efeiyi.ec.system.master.dao.MasterDao;
 import com.efeiyi.ec.system.master.service.MasterManager;
 import com.efeiyi.ec.system.master.service.MasterWorkManager;
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
+import com.efeiyi.ec.tenant.model.TenantReview;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AliOssUploadManager;
@@ -250,5 +252,30 @@ public class MasterController {
         return  "/masterWorkSaveSuccess";
 
     }
+
+
+    /**
+     * 大师审核
+     * @param masterReview
+     * @param masterId
+     * @return
+     */
+    @RequestMapping("/master/toSubmitReview.do")
+    @ResponseBody
+    public String toSubmitReview(MasterReview masterReview, String masterId){
+        try {
+            Master master = (Master) baseManager.getObject(Master.class.getName(),masterId);
+            masterReview.setCreateDateTime(new Date());
+            masterReview.setMaster(master);
+            baseManager.saveOrUpdate(MasterReview.class.getName(),masterReview);
+            master.setReview(masterReview.getReview());
+            baseManager.saveOrUpdate(Master.class.getName(),master);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  masterReview.getReview();
+    }
+
 
 }

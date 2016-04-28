@@ -50,7 +50,7 @@
 
 <div style="text-align: left">
 <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formSubject&type=home"/>'" type="button"
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formSubject&type=gift"/>'" type="button"
            class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建专题"/>
     </security:authorize>
@@ -71,8 +71,6 @@
                     <th class="table-title" width="15%">专题类别</th>
                     <th class="table-title" width="15%">模板</th>
                     <th class="table-title" width="10%">序号</th>
-                    <th class="table-title" width="10%">状态</th>
-                    <%--<th class="table-title">产品价格</th>--%>
 
                 </tr>
                 </thead>
@@ -86,11 +84,8 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
 
-                                        <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&view=${view}&id=${product.id}&tenantId=${tenantId}&masterId=${masterId}"/>">--%>
-                                        <%--修改信息--%>
-                                        <%--</a>--%>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=formSubject&view=${view}&id=${subject.id}"/>">
+                                       href="<c:url value="/basic/xm.do?qm=formSubject&view=gift&id=${subject.id}"/>">
                                         编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -98,32 +93,14 @@
                                        onclick="showConfirm('提示','是否删除',function(){removeSubject('${subject.id}')})">
                                         删除
                                     </a>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       onclick="recommendSubject('${subject.id}')" href="javascript:void (0);">
-                                        推荐
-                                    </a>
-                                     <c:if test="${subject.subjectShow == '1'}">
-                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" subId="${subject.id}"
-                                                   onclick="updateShow(this)" show="0" href="javascript:void (0);">
-                                                    下架
-                                          </a>
-                                    </c:if>
-                                    <c:if test="${subject.subjectShow == '0'}">
-                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" subId="${subject.id}"
-                                                   onclick="updateShow(this)" show="1" href="javascript:void (0);">
-                                                    上架
-                                         </a>
-                                     </c:if>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only copy"
-                                       url="http://www.efeiyi.com/subject/${subject.id}" href="javascript:void (0);">
-                                        拷贝网址
-                                    </a>
+
+
                                 </div>
                             </div>
                         </td>
                         </security:authorize>
                         <td class="am-hide-sm-only"><a
-                                href="<c:url value='/basic/xm.do?qm=viewSubject&id=${subject.id}'/>">${subject.name}</a>
+                                href="<c:url value='/basic/xm.do?qm=viewGiftSubject&id=${subject.id}'/>">${subject.name}</a>
                         </td>
 
                         <td class="am-hide-sm-only">
@@ -135,22 +112,7 @@
                         <td class="am-hide-sm-only">
                             ${subject.subjectIndex}
                         </td>
-                        <%--<td class="am-hide-sm-only">--%>
-                            <%--<fmt:formatDate value="${subject.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm"/>--%>
-                        <%--</td>--%>
-                        <td class="am-hide-sm-only">
-                            <c:if test="${subject.subjectShow == '0'}">
-                                   <span>
-                                      下架
-                                   </span>
-                            </c:if>
-                            <c:if test="${subject.subjectShow == '1'}">
-                                <span style="color: red">
-                                    上架
-                                </span>
-                            </c:if>
-                        </td>
-                            <%--<td class="am-hide-sm-only">${product.price}</td>--%>
+
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -166,26 +128,7 @@
     </div>
 </div>
 <script>
-    $(function () {
 
-        $(".copy").each(function () {
-            $(this).zclip({
-                path: "<c:url value="/scripts/zclip/ZeroClipboard.swf" />",
-                copy: function () {
-                    return $(this).attr("url");
-                },
-                beforeCopy: function () {/* 按住鼠标时的操作 */
-                    $(this).css("color", "orange");
-                },
-                afterCopy: function () {/* 复制成功后的操作 */
-                    var $copysuc = $("<div class='copy-tips'><div class='copy-tips-wrap'>☺ 复制成功</div></div>");
-                    $("body").find(".copy-tips").remove().end().append($copysuc);
-                    $(".copy-tips").fadeOut(3000);
-                }
-            });
-        });
-
-    });
     function removeSubject(divId) {
         $.ajax({
             type: "get",

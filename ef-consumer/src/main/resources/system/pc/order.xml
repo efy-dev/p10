@@ -254,6 +254,7 @@
                         <item label="EMS" value="ems"/>
                         <item label="汇通快运" value="huitongkuaidi"/>
                         <item label="天天快递" value="tiantian"/>
+                        <item label="全峰快递" value="quanfengkuaidi"/>
                     </statusType>
                 </field>
             </fields>
