@@ -17,7 +17,7 @@
     </div>
     <div class="wh info">
         <div class="table">
-            <div class="enter-btn .wh"><a href="<c:url value="basic/xm.do?qm=viewTenant1&id=${master.id}"/> ">完&nbsp;善&nbsp;信&nbsp;息</a>
+            <div class="enter-btn .wh"><a href="<c:url value="basic/xm.do?qm=viewMaster&id=${master.id}"/> ">完&nbsp;善&nbsp;信&nbsp;息</a>
         </div>
         <div class="enter-flow wh">入&nbsp;驻&nbsp;流&nbsp;程</div>
         <div class="wh enter-wh">
@@ -35,7 +35,7 @@
         <div class="wh info">
             <div class="btns">
                 <%--<a href="<c:url value="basic/xm.do?qm=viewTenant1&id=${master.id}"/>" class="btn-link">店铺信息</a>--%>
-                <a href="<c:url value="basic/xm.do?qm=viewTenant1&id=${master.id}"/>" class="btn-link">入驻信息</a>
+                <a href="<c:url value="basic/xm.do?qm=viewMaster&id=${master.id}"/>" class="btn-link">入驻信息</a>
             </div>
             <div class="table">
                 <h1>审核日志</h1>
@@ -79,8 +79,8 @@
         <div class="wh tips"><strong>e飞蚁会在7个工作日内反馈审核结果，您可登陆查看审核状态，也可通过拨打400-876-8766</strong></div>
         <div class="wh info">
             <div class="btns">
-                <a href="<c:url value="basic/xm.do?qm=viewTenant1&id=${master.id}"/>" class="btn-link">店铺信息</a>
-                <a href="<c:url value="basic/xm.do?qm=viewTenant1&id=${master.id}"/>" class="btn-link">入驻信息</a>
+                <a href="<c:url value="basic/xm.do?qm=viewMaster&id=${master.id}"/>" class="btn-link">店铺信息</a>
+                <a href="<c:url value="basic/xm.do?qm=viewMaster&id=${master.id}"/>" class="btn-link">入驻信息</a>
             </div>
             <div class="table">
                 <h1>审核日志</h1>
@@ -108,7 +108,7 @@
                                 <p>
                                     <span>${masterReview.content}</span>
                                     <a class="btn-link"
-                                       href="<c:url value="basic/xm.do?qm=viewTenant1&id=${master.id}"/>">修 改</a>
+                                       href="<c:url value="basic/xm.do?qm=viewMaster&id=${master.id}"/>">修 改</a>
 
                                 </p>
                             </td>
@@ -122,17 +122,17 @@
     <c:if test="${review=='4'}">
     <div class="audit">
         <div class="success">
-            <h2>恭喜您审核通过，欢迎入驻e飞蚁商户后台！</h2>
+            <h2>恭喜您审核通过，欢迎入驻e飞蚁大师后台！</h2>
             <div class="brid">
                 <ul>
                     <li>请仔细阅读以下内容：</li>
                     <li>使用流程：</li>
-                    <li><img src="<c:url value="/scripts/images/audit1.jpg"/>" alt=""/></li>
-                    <li>1、查看店铺基本信息，关联大师与项目。其中，关联项目为必填项。</li>
-                    <li>2、上传商品，按照要求填写商品基本信息，上传商品图片。</li>
-                    <li>3、到“商品列表”页面点击“上架”，完成该商品的上架出售。</li>
-                    <li>4、发货，用户可在“订单管理”页面查看并处理订单，并在“发货记录管理”中查看发货状态。</li>
-                    <li>具体使用说明详见<a style="color:#f90" target="_blank" href="<c:url value="/help.do"/>">《商户后台使用手册》</a>
+                    <%--<li><img src="<c:url value="/scripts/images/audit1.jpg"/>" alt=""/></li>--%>
+                    <li>1、查看大师基本信息。</li>
+                    <li>2、上传作品，按照要求填写作品基本信息，上传作品图片。</li>
+                    <%--<li>3、到“商品列表”页面点击“上架”，完成该商品的上架出售。</li>--%>
+                    <%--<li>4、发货，用户可在“订单管理”页面查看并处理订单，并在“发货记录管理”中查看发货状态。</li>--%>
+                    <%--<li>具体使用说明详见<a style="color:#f90" target="_blank" href="<c:url value="/help.do"/>">《商户后台使用手册》</a>--%>
                     </li>
                 </ul>
             </div>

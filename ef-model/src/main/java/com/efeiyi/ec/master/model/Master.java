@@ -51,6 +51,8 @@ public class Master implements Serializable,Comparable {
     private String cityName;
     private String followStatus;
     private  String review;//审核 1:未审核 2:正在审核 3:审核失败 4:审核成功
+    private String identityCard;
+    private String identityPicture;
 
     @Transient
     public String getFollowStatus() {
@@ -320,5 +322,23 @@ public class Master implements Serializable,Comparable {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    @Column(name = "identity_card")
+    public String getIdentityCard() {
+        return identityCard;
+    }
+
+    public void setIdentityCard(String identityCard) {
+        this.identityCard = identityCard;
+    }
+
+    @Column(name = "identity_pic")
+    public String getIdentityPicture() {
+        return identityPicture;
+    }
+
+    public void setIdentityPicture(String identityPicture) {
+        this.identityPicture = identityPicture;
     }
 }

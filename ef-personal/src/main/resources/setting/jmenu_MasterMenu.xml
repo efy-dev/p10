@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmenu id="tenantMenu">
+    <jnode id="" url="" text_zh_CN="">
+        <jnode id="helpDocument" url="" state="" text_zh_CN="首页"><!--系统管理-->
+            <jnode id="" url="/main.do" state="closed" extend="" access="" text_zh_CN="使用流程">
+                <match url="/main.do"/>
+            </jnode>
+        </jnode>
+        <jnode id="serviceManager" url="" state="" text_zh_CN="业务管理"><!--系统管理-->
+            <jnode id="" url="/onMasterWork.do" state="closed" extend="" access="" text_zh_CN="上传作品">
+                <match url="/onMasterWork.do"/>
+            </jnode>
+            <jnode id="" url="/onMasterWork.do" state="closed" extend="" access="" text_zh_CN="上传作品">
+                <match url="/onMasterWork.do"/>
+            </jnode>
+        </jnode>
+        <jnode id="accountManager" url="" text_zh_CN="账号管理"><!--系统管理-->
+            <jnode id="" url="/onMaster.do" state="" extend="" access="" text_zh_CN="个人信息">
+                <match url="/onMaster.do"/>
+            </jnode>
+            <jnode id="" url="/j_spring_security_logout" state="" extend="" access="" text_zh_CN="安全退出">
+                <match url="viewIndex_default"/>
+            </jnode>
+        </jnode>
+        <jnode id="accountManager2" url="" text_zh_CN="入驻审核管理"><!--系统管理-->
+            <jnode id="" url="/main.do" state="" extend="" access="" text_zh_CN="入驻流程">
+                <match url="/main.do"/>
+            </jnode>
+            <jnode id="" url="/onlyMaster.do" state="" extend="" access="" text_zh_CN="入驻审核">
+                <match url="/onlyMaster.do"/>
+            </jnode>
+
+            <!--<jnode id="" url="/sign/toChangePassword.do" state="" extend="" access="" text_zh_CN="修改密码">-->
+                <!--<match url=""/>-->
+            <!--</jnode>-->
+            <jnode id="" url="/j_spring_security_logout" state="" extend="" access="" text_zh_CN="安全退出">
+                <match url="viewIndex_default"/>
+            </jnode>
+        </jnode>
+    </jnode>
+</jmenu>
+
+
+
+
+
+

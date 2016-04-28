@@ -44,19 +44,13 @@
         <form action="<c:url value="/master/saveMasterWork.do"/>" method="post" class="am-form am-form-horizontal"
               enctype="multipart/form-data">
             <input type="hidden" name="master.id" value="${id}">
-            <input type="hidden" name="name" value="${name}">
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">作品名称</label>
 
                 <div class="am-u-sm-9">
                     <input type="text" id="name" name="name" placeholder="作品名称" value="${object.name}" required>
-                    <%--<small>输入你要保存的类型</small>--%>
                 </div>
             </div>
-
-
-
-
             <div class="am-form-group">
                 <label for="description" class="am-u-sm-3 am-form-label">作品介绍</label>
 
@@ -67,7 +61,6 @@
                 <br>
             </div>
             <div class="am-form-group">
-
                 <label for="picurl" class="am-u-sm-3 am-form-label">新图片</label>
 
                 <div class="am-u-sm-9"  style="margin-top: 9px;">
@@ -153,6 +146,7 @@
             }
         }
     };
+
     function  toSub(){
         var f = confirm("保存成功后将不允许修改，若需修改请联系客服!");
         if(f) {

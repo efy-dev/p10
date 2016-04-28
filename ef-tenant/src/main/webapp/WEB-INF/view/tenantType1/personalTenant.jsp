@@ -152,19 +152,6 @@
         }
         provinceChange(element, o,callback);
     }
-
-    <%--$.post("<c:url value="/address/listProvince.do"/>",--%>
-            <%--function (data) {--%>
-                <%--var obj = eval(data);--%>
-                <%--var out = '<option value="">请选择</option>';--%>
-                <%--for (var i = 0; i < obj.length; i++) {--%>
-                    <%--out += '<option value="' + obj[i]["id"] + '">' + obj[i]["name"] + '</option>';--%>
-                <%--}--%>
-                <%--$("#${object.id}").append(out);--%>
-                <%--chooseCity($("#${object.id}") , "${object.addressProvince.id}","${object.addressCity.id}","${object.id}");--%>
-            <%--}--%>
-    <%--)--%>
-
     function provinceChange(element, o, callback) {
         $("#citys" + o).empty();
         var provinceId = $(element).val();

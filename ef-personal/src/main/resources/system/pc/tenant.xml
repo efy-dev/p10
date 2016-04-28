@@ -245,6 +245,7 @@
                         <condition name="level" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
+                <do name="viewMaster" label="查看商家" access="" result="/master/masterView"/>
             </does>
         </entity>
 

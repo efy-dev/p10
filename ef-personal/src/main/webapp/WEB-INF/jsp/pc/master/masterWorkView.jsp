@@ -44,12 +44,11 @@
         <form action="<c:url value="/master/saveMasterWork.do"/>" method="post" class="am-form am-form-horizontal"
               enctype="multipart/form-data">
             <input type="hidden" name="master.id" value="${id}">
-            <input type="hidden" name="name" value="${name}">
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">作品名称</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="name" name="name" placeholder="作品名称" value="${object.name}" required>
+                    <input type="text" id="name" name="name" disabled="disabled" placeholder="作品名称" value="${object.name}" required>
                     <%--<small>输入你要保存的类型</small>--%>
                 </div>
             </div>
@@ -61,8 +60,8 @@
                 <label for="description" class="am-u-sm-3 am-form-label">作品介绍</label>
 
                 <div class="am-u-sm-9">
-                        <textarea id="description" name="description" class="ckeditor" placeholder="作品介绍" required
-                                  value=""></textarea>
+                        <textarea id="description" disabled="disabled" name="description" class="ckeditor" placeholder="作品介绍" required
+                                  value="">${object.description}</textarea>
                 </div>
                 <br>
             </div>
@@ -71,7 +70,7 @@
                 <label for="picurl" class="am-u-sm-3 am-form-label">新图片</label>
 
                 <div class="am-u-sm-9"  style="margin-top: 9px;">
-                    <input type="file" id="picurl" name="picurl" placeholder="附件" value="">
+                    <input type="file" id="picurl" name="picurl" placeholder="附件" value="${object.pictureUrl}"/>
                 </div>
             </div>
 
@@ -80,7 +79,7 @@
             </div>
             <div class="am-form-group">
                 <div class="am-u-sm-9 am-u-sm-push-3">
-                    <button type="button" onclick="toSub()" class="am-btn am-btn-primary">保存</button>
+                    <button disabled="disabled" type="button" onclick="toSub()" class="am-btn am-btn-primary">保存</button>
                 </div>
             </div>
         </form>
@@ -108,17 +107,12 @@
                                                    </a>
                                                </dt>
                                                    <dd style="width: 100%;text-align: center;">
-
                                                        <a href="javascript:void(0);"
                                                           onclick="deleteBannerPicture(this,'${masterBanner.id}')">删除</a>
                                                    </dd>
-
-
                                                <dd style="width: 100%;text-align: center;">
                                                    ${masterBanner.title}
                                                </dd>
-
-
                                            </dl>
                                        </li>
                                    </c:forEach>
@@ -153,6 +147,7 @@
             }
         }
     };
+
     function  toSub(){
         var f = confirm("保存成功后将不允许修改，若需修改请联系客服!");
         if(f) {

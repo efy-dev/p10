@@ -7,7 +7,9 @@
     <!--<mapping path="/work/list**" decorator="/layouts/main.jsp"/>-->
     <!--<mapping path="/work/**" decorator="/layouts/templateWithoutNavAndFooter.jsp"/>-->
     <!--<mapping path="/masterMessage/index.do" decorator="/layouts/mainTemplate.jsp"/>-->
-    <mapping path="/" decorator="/layouts/mainTemplate.jsp"/>
-    <mapping path="/masterMessage/**" decorator="/layouts/mainTemplate.jsp"/>
+    <mapping path="/" decorator="/layouts/mainTemp.jsp"/>
+    <mapping path="/login.do" decorator="/layouts/temp.jsp"/>
+    <mapping path="/toRegister.do" decorator="/layouts/temp.jsp"/>
+    <!--<mapping path="/masterMessage/**" decorator="/layouts/mainTemplate.jsp"/>-->
     <!--<mapping path="/index.do" decorator="/layouts/mainTemplate.jsp"/>-->
 </sitemesh>
