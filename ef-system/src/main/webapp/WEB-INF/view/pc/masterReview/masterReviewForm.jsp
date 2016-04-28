@@ -50,7 +50,7 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="/basic/xm.do?qm=listMasterReview_default&conditions=master.id:${object.id}"/>
+                     page="/master/masterReviewList.do?masterId=${object.id}"/>
     </div>
 </div>
 <script>

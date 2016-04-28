@@ -278,4 +278,21 @@ public class MasterController {
     }
 
 
+    @RequestMapping("/master/masterReviewList.do")
+    public String masterReviewList(HttpServletRequest request,ModelMap modelMap){
+
+        try {
+            XQuery xQuery = new XQuery("",request);
+            xQuery.put("master_id",request.getParameter("masterId"));
+             modelMap.put("objectList",(List<MasterReview>)baseManager.listObject(xQuery));
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+
+        }
+        return  "/masterReview/masterReviewList";
+
+    }
+
 }
