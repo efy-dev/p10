@@ -282,7 +282,7 @@ public class MasterController {
     public String masterReviewList(HttpServletRequest request,ModelMap modelMap){
 
         try {
-            XQuery xQuery = new XQuery("",request);
+            XQuery xQuery = new XQuery("listMasterReview_default",request);
             xQuery.put("master_id",request.getParameter("masterId"));
              modelMap.put("objectList",(List<MasterReview>)baseManager.listObject(xQuery));
 

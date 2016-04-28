@@ -19,7 +19,7 @@
     </div>
 </div>
 <hr/>
-<c:if test="${object.review=='2' || object.review=='3'}">
+<c:if test="${review=='2' || review=='3'}">
 <div class="am-g">
 
 
@@ -31,7 +31,7 @@
                 <label for="content" class="am-u-sm-3 am-form-label">审核意见</label>
 
                 <div class="am-u-sm-9">
-                    <textarea id="content" name="content" rows="4" cols="5" placeholder="审核意见,用冒号分开" >${object.content}</textarea>
+                    <textarea id="content" name="content" rows="4" cols="5" placeholder="审核意见,用冒号分开" ></textarea>
                     <%--<input type="text" id="content" name="content" placeholder="企业商家简介" value="${object.content}" required>--%>
                 </div>
             </div>
@@ -50,12 +50,14 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="/master/masterReviewList.do?masterId=${object.id}"/>
+                     page="/master/masterReviewList.do">
+            <jsp:param name="masterId" value="${masterId}" />
+        </jsp:include>
     </div>
 </div>
 <script>
     function toSubmitReview(review){
-        var masterId = '${object.id}';
+        var masterId = '${masterId}';
         var content = $("#content").val();
         if(content==""){
             alert("请填写审核意见!");

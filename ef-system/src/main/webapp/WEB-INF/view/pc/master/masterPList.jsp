@@ -58,25 +58,25 @@
                                     </security:authorize>
                                     <c:if test="${master.review=='4'}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           href="<c:url value="/basic/xm.do?qm=formMasterReview&id=${master.id}"/>"  >
+                                           href="<c:url value="/basic/xm.do?qm=formMasterReview&masterId=${master.id}&review=${master.review}"/>"  >
                                             <span class="am-icon-heart">审核成功</span>
                                         </a>
                                     </c:if>
                                     <c:if test="${master.review=='1' || empty master.review}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           href="<c:url value="/basic/xm.do?qm=formMasterReview&id=${master.id}"/>" >
+                                           href="<c:url value="/basic/xm.do?qm=formMasterReview&masterId=${master.id}&review=${master.review}"/>" >
                                             <span class="am-icon-heart">未审核</span>
                                         </a>
                                     </c:if>
                                     <c:if test="${master.review=='2'}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           href="<c:url value="/basic/xm.do?qm=formMasterReview&id=${master.id}"/>" >
+                                           href="<c:url value="/basic/xm.do?qm=formMasterReview&masterId=${master.id}&review=${master.review}"/>" >
                                             <span class="am-icon-heart">正在审核</span>
                                         </a>
                                     </c:if>
                                     <c:if test="${master.review=='3'}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           href="<c:url value="/basic/xm.do?qm=formMasterReview&id=${master.id}"/>" >
+                                           href="<c:url value="/basic/xm.do?qm=formMasterReview&masterId=${master.id}&review=${master.review}"/>" >
                                             <span class="am-icon-heart">审核失败</span>
                                         </a>
                                     </c:if>

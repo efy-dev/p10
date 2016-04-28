@@ -811,6 +811,7 @@
             <does>
 
                 <do name="formMasterReview" label="" access=""
+                    execute="com.efeiyi.ec.system.master.controller.MasterReviewHandler"
                     result="/masterReview/masterReviewForm"/>
 
                 <do name="listMasterReview" label="大师审核动态" access=""
