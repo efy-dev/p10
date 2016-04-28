@@ -378,6 +378,7 @@
                 <match url="/basic/xm.do?qm=formSubject&amp;type=gift"/>
                 <match url="/basic/xm.do?qm=formGiftLabel&amp;view=editLabel"/>
                 <match url="/basic/xm.do?qm=viewGiftSubject"/>
+                <match url="/basic/xm.do?qm=formSubject&amp;view=gift"/>
             </jnode>
         </jnode>
 

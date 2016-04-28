@@ -28,6 +28,7 @@ public class Subject {
     private Date startDateTime;
     private Date endDateTime;
     private Date createDateTime;
+    private String content;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -162,5 +163,13 @@ public class Subject {
     @Override
     public String toString() {
         return "Subject{id = " + id + "}";
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

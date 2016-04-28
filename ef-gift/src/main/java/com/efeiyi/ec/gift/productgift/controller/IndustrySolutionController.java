@@ -33,7 +33,7 @@ public class IndustrySolutionController {
     @Autowired
     private BaseManager baseManager;
 
-    @RequestMapping({"/industrySolution.do"})
+    @RequestMapping({"/industrySolution"})
     public String industrySolution(HttpServletRequest request, Model model) throws Exception{
         Map<String, List<ProductGiftTagValue>> map = new HashMap<>();
         Map<IndustrySolution, List<ProductGiftIndustrySolution>> industrySolutionMap = new HashMap<>();
@@ -74,15 +74,15 @@ public class IndustrySolutionController {
         return "/gift/industrySolutionList";
     }
 
-    @RequestMapping({"/industrySolutionRequest.do"})
+    @RequestMapping({"/industrySolutionRequest"})
     public String IndustrySolutionRequest(HttpServletRequest request, Model model) throws Exception{
         return "/gift/industrySolutionRequest";
     }
 
-    @RequestMapping({"/submitIndustrySolutionRequest.do"})
+    @RequestMapping({"/submitIndustrySolutionRequest"})
     public String SubmitIndustrySolutionRequest(HttpServletRequest request, Model model) throws Exception{
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateCustomProductGiftMessage", request);
         baseManager.saveOrUpdate(xSaveOrUpdate);
-        return "redirect:/industrySolution.do";
+        return "redirect:/industrySolution";
     }
 }

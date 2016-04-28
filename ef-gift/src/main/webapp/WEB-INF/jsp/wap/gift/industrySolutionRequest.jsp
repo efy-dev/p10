@@ -3,16 +3,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>礼品频道-方案咨询</title>
-  <link rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css"/>">
-  <link rel="stylesheet" href="<c:url value="/scripts/wap/css/layout.css"/>">
-  <link rel="stylesheet" href="<c:url value="/scripts/wap/css/gift.css"/>">
 </head>
 <body>
 <div class="gift gift-ask">
-  <form action="<c:url value="/submitIndustrySolutionRequest.do"/>" method="post">
+  <form action="<c:url value="/submitIndustrySolutionRequest"/>" method="post">
     <div class="area">
       <div class="bd title">您的姓名</div>
       <input type="text" class="txt" name="name">
@@ -38,10 +33,5 @@
     <div class="tels">咨询热线：4008768766</div>
   </form>
 </div>
-
-
-<script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/scripts/wap/js/amazeui.min.js"/>"></script>
-<script src="<c:url value="/scripts/wap/js/system.js"/>"></script>
 </body>
 </html>

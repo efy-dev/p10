@@ -85,7 +85,7 @@
                                 <div class="am-btn-group am-btn-group-xs">
 
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=formSubject&view=${view}&id=${subject.id}"/>">
+                                       href="<c:url value="/basic/xm.do?qm=formSubject&view=gift&id=${subject.id}"/>">
                                         编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
