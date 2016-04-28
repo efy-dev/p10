@@ -31,6 +31,7 @@ public class ProductGiftController {
         //获取页头轮播图
         List<Banner> bannerList = bannerManager.getBannerList("productGiftList");
         //获取礼品频道推荐专题
+        //@TODO groupName命名
         List<Subject> subjectList = objectRecommendedManager.getRecommendedList("productGiftRecommended");
         List<Subject> subjectList1 = objectRecommendedManager.getRecommendedList("productGiftRecommended1");
         model.addAttribute("bannerList", bannerList);
