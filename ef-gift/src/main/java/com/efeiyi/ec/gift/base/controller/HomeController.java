@@ -110,8 +110,8 @@ public class HomeController {
                 }
             }
         }catch (Exception e){}
-        List<Subject> subjectList = objectRecommendedManager.getRecommendedList("productGiftRecommended");
-        List<Subject> subjectList1 = objectRecommendedManager.getRecommendedList("productGiftRecommended1");
+        List<Subject> subjectList = objectRecommendedManager.getRecommendedList("productGiftRecommendedUp");
+        List<Subject> subjectList1 = objectRecommendedManager.getRecommendedList("productGiftRecommendedDown");
 
         model.addAttribute("map",map);
         model.addAttribute("bannerList", bannerList);

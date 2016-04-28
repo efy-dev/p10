@@ -3,12 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>礼品频道</title>
-  <link rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css"/>">
-  <link rel="stylesheet" href="<c:url value="/scripts/wap/css/layout.css"/>">
-  <link rel="stylesheet" href="<c:url value="/scripts/wap/css/gift.css"/>">
 </head>
 <body>
 <div class="gift gift-asp">
@@ -28,7 +23,7 @@
         <div class="title">
           <h3>${subject.name}</h3>
           <h4>适合银行、证券、基金等金融机构</h4>
-          <a class="btn-link" href="<c:url value="/industrySolutionRequest.do"/>" title="方案定制">方案定制</a>
+          <a class="btn-link" href="<c:url value="/industrySolutionRequest"/>" title="方案定制">方案定制</a>
         </div>
         <div class="bd list">
           <ul class="ul-col-2">
@@ -52,10 +47,5 @@
   <!--//ENd--定制流程-->
 
 </div>
-
-
-<script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/scripts/wap/js/amazeui.min.js"/>"></script>
-<script src="<c:url value="/scripts/wap/js/system.js"/>"></script>
 </body>
 </html>

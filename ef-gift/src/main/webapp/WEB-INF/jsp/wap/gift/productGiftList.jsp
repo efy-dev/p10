@@ -3,12 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>礼品频道</title>
-  <link rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?t=20160413"/>">
-  <link rel="stylesheet" href="<c:url value="/scripts/wap/css/layout.css?t=20160413"/>">
-  <link rel="stylesheet" href="<c:url value="/scripts/wap/css/gift.css?t=20160413"/>">
 </head>
 <body>
 <div class="gift gift-home">
@@ -29,7 +24,7 @@
       <li><a href=""><i class="icon icon-sljg"></i><p>送礼价格</p></a></li>
     </ul>
     <ul>
-      <li><a href="<c:url value="/industrySolution.do"/>"><i class="icon icon-qylp"></i><p>企业礼品</p></a></li>
+      <li><a href="<c:url value="/industrySolution"/>"><i class="icon icon-qylp"></i><p>企业礼品</p></a></li>
       <li><a href=""><i class="icon icon-glys"></i><p>国礼轶事</p></a></li>
       <li><a href=""><i class="icon icon-lswl"></i><p>礼尚往来</p></a></li>
     </ul>
@@ -69,11 +64,5 @@
   </div>
 </div>
 
-
-<script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/scripts/wap/js/amazeui.min.js"/>"></script>
-
-
-<script src="<c:url value="/scripts/wap/js/system.js"/>"></script>
 </body>
 </html>
