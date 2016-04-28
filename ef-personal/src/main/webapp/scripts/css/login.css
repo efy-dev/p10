@@ -180,11 +180,11 @@ a:hover {color:#f00;text-decoration:underline}
     position: relative;
 }
 .reg-box form .items p {
-    width:50px;
+    width:60px;
     text-align: right;
     position: absolute;
     top: 0;
-    left:-60px;
+    left:-80px;
 }
 .reg-box form .items .ipt {
     width:280px;
