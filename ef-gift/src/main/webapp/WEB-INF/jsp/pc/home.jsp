@@ -52,7 +52,7 @@
                                 <img src="http://wiki-oss.efeiyi.com/${subject1.pictureUrl}" alt="">
                                 <div class="list-content">
                                     <p class="name">${subject1.name}</p>
-                                    <p class="content">${subject1.subjectDescription}</p>
+                                    <p class="content">${subject1.content}</p>
                                 </div>
                             </a>
                         </li>
