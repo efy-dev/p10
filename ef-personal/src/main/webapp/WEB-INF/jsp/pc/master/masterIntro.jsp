@@ -104,7 +104,7 @@
                                     <dl style="margin-top: 6px;">
                                         <dt style="width: 50%">
                                             <img width="100%" name="identityPicture"
-                                                 src="http://pro.efeiyi.com/${object.identityPicture}@!product-model"
+                                                 src="http://tenant.efeiyi.com/${object.identityPicture}@!tenant-manage-work-view"
                                                  alt="商品图片"/>
                                         </dt>
                                     </dl>
@@ -145,7 +145,7 @@
                         console.log(data);
                         data = data.substring(1, data.length - 1)
 
-                        var url = "http://pro.efeiyi.com/" + data + "@!product-model";
+                        var url = "http://tenant.efeiyi.com/" + data + "@!tenant-manage-work-view";
                         ///显示图片
                         var img = '<li style="float: left;margin-right: 10px;">' +
                                 '<dl style="margin-top: 6px;" >' +

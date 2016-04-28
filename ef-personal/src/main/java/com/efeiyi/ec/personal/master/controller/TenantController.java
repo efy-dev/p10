@@ -98,7 +98,7 @@ public class TenantController extends BaseMasterController {
             String fileName = mf.getOriginalFilename();//获取原文件名
             url = "tenant/" + identify + fileName;
             try {
-                aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
+                aliOssUploadManager.uploadFile(mf, "tenant", url);
                 data = url;
             } catch (Exception e) {
                 e.printStackTrace();

@@ -79,7 +79,7 @@
         <div class="wh tips"><strong>e飞蚁会在7个工作日内反馈审核结果，您可登陆查看审核状态，也可通过拨打400-876-8766</strong></div>
         <div class="wh info">
             <div class="btns">
-                <a href="<c:url value="basic/xm.do?qm=viewMaster&id=${master.id}"/>" class="btn-link">店铺信息</a>
+                <%--<a href="<c:url value="basic/xm.do?qm=viewMaster&id=${master.id}"/>" class="btn-link">店铺信息</a>--%>
                 <a href="<c:url value="basic/xm.do?qm=viewMaster&id=${master.id}"/>" class="btn-link">入驻信息</a>
             </div>
             <div class="table">
