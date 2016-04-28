@@ -17,8 +17,8 @@
     </documents>
     <!-- 推荐 -->
     <recommends>
-        <recommend group="productGiftRecommended" recommendedModel="com.efeiyi.ec.product.model.Subject" note="专题推荐礼品频道" amount="8" />
-        <recommend group="productGiftRecommended1" recommendedModel="com.efeiyi.ec.product.model.Subject" note="专题推荐礼品频道下端" amount="4" />
+        <recommend group="productGiftRecommendedUp" recommendedModel="com.efeiyi.ec.product.model.Subject" note="专题推荐礼品频道" amount="8" />
+        <recommend group="productGiftRecommendedDown" recommendedModel="com.efeiyi.ec.product.model.Subject" note="专题推荐礼品频道下端" amount="4" />
         <recommend group="industrySolutionRecommended" recommendedModel="com.efeiyi.ec.product.model.Subject" note="行业礼品方案频道" amount="2" />
     </recommends>
     <autoserials>

@@ -26,30 +26,30 @@ public class ProductGiftController {
     @Autowired
     private BaseManager baseManager;
 
-    @RequestMapping({"/getProductGiftList.do"})
+    @RequestMapping({"/getProductGiftList"})
     public String testAspect(HttpServletRequest request, Model model) throws Exception{
         //获取页头轮播图
         List<Banner> bannerList = bannerManager.getBannerList("productGiftList");
         //获取礼品频道推荐专题
-        List<Subject> subjectList = objectRecommendedManager.getRecommendedList("productGiftRecommended");
-        List<Subject> subjectList1 = objectRecommendedManager.getRecommendedList("productGiftRecommended1");
+        List<Subject> subjectList = objectRecommendedManager.getRecommendedList("productGiftRecommendedUp");
+        List<Subject> subjectList1 = objectRecommendedManager.getRecommendedList("productGiftRecommendedDown");
         model.addAttribute("bannerList", bannerList);
         model.addAttribute("subjectList", subjectList);
         model.addAttribute("subjectList1", subjectList1);
         return "/gift/productGiftList";
     }
 
-    @RequestMapping({"/toGlys.do/{subjectId}"})
-         public String toGuoliyishi(@PathVariable String subjectId, Model model) throws Exception{
+    @RequestMapping({"/viewSubject/{subjectId}"})
+         public String viewSubject(@PathVariable String subjectId, Model model) throws Exception{
         Subject subject = (Subject) baseManager.getObject(Subject.class.getName(),subjectId);
         model.addAttribute("subject", subject);
-        return "/guoliyishiView";
+        if (subjectId.equals("")){
+            return "/guoliyishiView";
+        }else if (subjectId.equals("1")){
+            return "/lishangwanglaiView";
+        }else {
+            return "";
+        }
     }
 
-    @RequestMapping({"/toLswl.do/{subjectId}"})
-    public String toLishangwanglai(@PathVariable String subjectId, Model model) throws Exception{
-        Subject subject = (Subject) baseManager.getObject(Subject.class.getName(),subjectId);
-        model.addAttribute("subject", subject);
-        return "/lishangwanglaiView";
-    }
 }
