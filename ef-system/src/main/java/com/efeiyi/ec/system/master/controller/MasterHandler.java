@@ -47,6 +47,11 @@ public class MasterHandler implements MultipartHandler {
             paramMap.put("logoUrl", "logo/" + multipartRequest.getFile("logo").getOriginalFilename());
         }
 
+        if (!multipartRequest.getFile("identityPicture").getOriginalFilename().equals("")) {
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("identityPicture"), "tenant", "identityPicture/" + multipartRequest.getFile("identityPicture").getOriginalFilename());
+            paramMap.put("identityPicture", "identityPicture/" + multipartRequest.getFile("identityPicture").getOriginalFilename());
+        }
+
         //������� start
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
         //������� end
