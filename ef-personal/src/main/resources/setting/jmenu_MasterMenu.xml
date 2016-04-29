@@ -36,6 +36,8 @@
         <jnode id="accountManager" url="" text_zh_CN="账号管理"><!--系统管理-->
             <jnode id="" url="/onMaster.do" state="" extend="" access="" text_zh_CN="个人信息">
                 <match url="/onMaster.do"/>
+                <match url="/basic/xm.do?qm=viewMaster"/>
+
             </jnode>
             <jnode id="" url="/j_spring_security_logout" state="" extend="" access="" text_zh_CN="安全退出">
                 <match url="viewIndex_default"/>
