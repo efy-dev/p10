@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-
 <module name="basic" label="basic" version="" package="com.efeiyi.ec.basic" path="">
 
     <entities>
@@ -23,12 +22,14 @@
                         <item label="木作编扎" value="ec.home.banner.mzpz"/>
                         <item label="医药养生" value="ec.home.banner.yyys"/>
                         <item label="文房四宝" value="ec.home.banner.wfsb"/>
-                        <item label="创意生活" value="ec.home.banner.cysh"/>
+                        <item label="百科移动" value="wiki.pc.dynamic"/>
+                        <item label="创意生活" value="wiki.wap.dynamic"/>
                     </statusType>
                 </field>
             </fields>
             <does>
-                <do name="plistEcBanner" label="电商网站轮播图列表" execute="com.efeiyi.ec.system.basic.controller.commonHandler" result="/banner/ecBannerPList">
+                <do name="plistEcBanner" label="电商网站轮播图列表" execute="com.efeiyi.ec.system.basic.controller.commonHandler"
+                    result="/banner/ecBannerPList">
                     <query name="tenant" label="默认" type="auto" orderBy="bannerOrder:desc">
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
                         <condition name="group" defaultValue="ec.home.banner" operation="like" inputType="default"/>
@@ -41,23 +42,23 @@
                 </do>
                 <do name="plistBanner" access="" label="轮播图列表"
                     execute="com.efeiyi.ec.system.basic.controller.commonHandler"
-                     result="/banner/bannerPList" >
+                    result="/banner/bannerPList">
                     <query name="default" label="默认" type="auto" orderBy="bannerOrder:desc">
                         <condition name="id" defaultValue="1" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq" />
+                        <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                     <query name="master" label="传承人轮播图" type="auto" orderBy="bannerOrder:desc">
-                      <condition name="group" defaultValue="master" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq" />
+                        <condition name="group" defaultValue="master" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
 
                     <query name="master.homePage" label="首页轮播图" type="auto" orderBy="bannerOrder:desc">
                         <condition name="group" defaultValue="master.homePage" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq" />
+                        <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                     <query name="tenant" label="电商网站轮播图" type="auto" orderBy="bannerOrder:desc">
                         <condition name="group" defaultValue="tenant" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq" />
+                        <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
 
                 </do>
@@ -69,29 +70,32 @@
                         <condition name="group" defaultValue="efec" operation="eq"/>
                     </query>
                 </do>
-                <do name="formTenantBanner" label="保存传承人轮播图" access="" result="/tenantBanner/tenantBannerForm" execute="com.efeiyi.ec.system.tenant.controller.ToTenantBannerFormHandler"/>
+                <do name="formTenantBanner" label="保存传承人轮播图" access="" result="/tenantBanner/tenantBannerForm"
+                    execute="com.efeiyi.ec.system.tenant.controller.ToTenantBannerFormHandler"/>
                 <do name="viewTenantBanner" label="查看传承人轮播图" access="" result="/tenantBanner/tenantBannerView"/>
-                <do name="saveOrUpdateTenantBanner" label="保存传承人轮播图" access="" execute="com.efeiyi.ec.system.tenant.controller.TenantBannerHandler">
+                <do name="saveOrUpdateTenantBanner" label="保存传承人轮播图" access=""
+                    execute="com.efeiyi.ec.system.tenant.controller.TenantBannerHandler">
                 </do>
                 <do name="removeTenantBanner" label="删除传承人轮播图" access="" result="json"/>
                 <do name="listTenantBanner" label="传承人轮播图列表" access="" result="/tenantBanner/tenantBannerList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
-                        <condition label="状态" name="tenant.id"  operation="eq"/>
+                        <condition label="状态" name="tenant.id" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeBanner" label="删除banner" access="" result="json"/>
                 <do name="formBanner" label="保存banner" access=""
-                       execute="com.efeiyi.ec.system.basic.controller.ToBasicBannerFormHandler"  result="/banner/bannerForm"/>
+                    execute="com.efeiyi.ec.system.basic.controller.ToBasicBannerFormHandler"
+                    result="/banner/bannerForm"/>
                 <do name="saveOrUpdateBanner" label="保存banner" access=""
                     execute="com.efeiyi.ec.system.basic.controller.BasicBannerFormHandler"
                     result="redirect:/basic/xm.do?groupName=master.homePage&amp;qm=plistBanner_master.homePage"
-                    />
+                />
                 <do name="saveOrUpdateEcBanner" label="保存电商网站轮播图" access=""
                     execute="com.efeiyi.ec.system.basic.controller.BasicBannerFormHandler"
                     result="redirect:/basic/xm.do?qm=plistEcBanner_tenant&amp;groupName=ec.home.banner"
-                        />
+                />
                 <do name="listBanner" label="banner列表" access="" result="/banner/bannerList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="banner主键" name="id" defaultValue="1" operation="eq"/>
@@ -135,7 +139,8 @@
 
                 <do name="removeSimpleMenuItem" label="删除菜单项" access="" result="json"/>
                 <do name="formSimpleMenuItem" label="保存菜单项" access="" result="/simpleMenuItem/simpleMenuItemForm"/>
-                <do name="saveOrUpdateSimpleMenuItem" label="保存菜单项" access="" result="/simpleMenuItem/simpleMenuItemSaveSuccess"/>
+                <do name="saveOrUpdateSimpleMenuItem" label="保存菜单项" access=""
+                    result="/simpleMenuItem/simpleMenuItemSaveSuccess"/>
                 <do name="listSimpleMenuItem" label="菜单项列表" access="" result="/simpleMenuItem/simpleMenuItemList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="菜单项主键" name="id" defaultValue="1" operation="eq"/>

@@ -90,6 +90,31 @@
         </entity>
         <entity name="masterWorkShop" label="工作坊"  model="com.efeiyi.ec.master.model.MasterWorkShop">
             <does>
+                <do name="plistMasterWorkShop" access="" label="传承人工作坊分页列表"
+                    result="/masterWorkShop/masterWorkShopPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="master.id" defaultValue="${MASTER}" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="formMasterWorkShop" label="保存工作坊页" access="" result="/masterWorkShop/masterWorkShopForm"
+                   />
+                <do name="viewMasterWorkShop" label="查看工作坊" access=""
+                    result="/masterWorkShop/masterWorkShopView"/>
+                <do name="saveOrUpdateMasterWorkShop" label="保存工作坊著作" access=""
+                    result="/masterWorkShop/masterWorkShopSaveSuccess"
+                    execute="com.efeiyi.ec.personal.master.controller.MasterWorkShopHandler">
+                    <page>
+                        <fields>
+                            <field name="status" label="状态" defaultValue="1"
+                                   inputType="default"/>
+                            <field name="createDateTime" label="状态" defaultValue="${CURRENT_DATETIME}"
+                                   inputType="default"/>
+                        </fields>
+                    </page>
+                </do>
+                <do name="removeMasterWorkShop" label="删除工作坊著作" access="" result="json"/>
                 <do name="listMasterWorkShop" access="" label="工作坊">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="master.id" defaultValue="1" operation="eq"/>
@@ -244,6 +269,12 @@
 
         <entity name="Master" label="关注前"  model="com.efeiyi.ec.master.model.Master">
             <fields>
+                <field name="sex" label="性别" inputType="text">
+                    <statusType fieldName="sex">
+                        <item label="男" value="1"/>
+                        <item label="女" value="2"/>
+                    </statusType>
+                </field>
                 <field name="level" label="等级" inputType="text">
                     <statusType fieldName="level">
                         <item label="国家级" value="1"/>

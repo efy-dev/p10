@@ -68,18 +68,18 @@
                                 </div>
                             </div>
 
-                            <%--<div class="am-form-group">--%>
-                                <%--<label for="birthday" class="am-u-sm-3 am-form-label">出生日期</label>--%>
+                            <div class="am-form-group">
+                                <label for="birthday" class="am-u-sm-3 am-form-label">出生日期</label>
 
-                                <%--<div class="am-u-sm-9">--%>
-                                    <%--<div class="am-form-group am-form-icon">--%>
-                                        <%--<i class="am-icon-calendar"></i>--%>
-                                        <%--<input type="text" id="birthday" name="birthday"--%>
-                                               <%--class="am-form-field am-input-sm"--%>
-                                               <%--placeholder="出生日期" value="${object.birthday}">--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
+                                <div class="am-u-sm-9">
+                                    <div class="am-form-group am-form-icon">
+                                        <i class="am-icon-calendar"></i>
+                                        <input type="text" id="birthday" name="birthday"
+                                               class="am-form-field am-input-sm"
+                                               placeholder="出生日期(yyyy-MM-dd)" value="${object.birthday}">
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="am-form-group">
                                 <label for="presentAddress" class="am-u-sm-3 am-form-label">现居地</label>
@@ -101,15 +101,15 @@
                                 </div>
                             </div>
 
-                            <%--<div class="am-form-group">--%>
-                                <%--<label for="sex" class="am-u-sm-3 am-form-label">性别</label>--%>
+                            <div class="am-form-group">
+                                <label for="sex" class="am-u-sm-3 am-form-label">性别</label>
 
-                                <%--<div class="am-u-sm-9">--%>
-                                    <%--<ming800:status name="sex" dataType="Master.sex" checkedValue="${object.sex}"--%>
-                                                    <%--type="select"--%>
-                                                    <%--required="true"/>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
+                                <div class="am-u-sm-9">
+                                    <ming800:status name="sex" dataType="Master.sex" checkedValue="${object.sex}"
+                                                    type="select"
+                                                    required="true"/>
+                                </div>
+                            </div>
 
                             <%--<div class="am-form-group">--%>
                                 <%--<label for="favicon" class="am-u-sm-3 am-form-label">头像(传承人列表页面的封面)</label>--%>
@@ -156,7 +156,7 @@
                                     <div class="am-u-md-13">
                                         <div class="am-panel am-panel-default">
                                             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-14'}">
-                                                <strong>背景图片</strong>
+                                                <strong>LOGO</strong>
                                                 <input type="hidden" name="logoUrl" value="${object.logoUrl}"  placeholder="背景图片">
                                                 <span class="am-icon-chevron-down am-fr"></span></div>
                                             <div class="am-panel-bd am-collapse am-in" id="collapse-panel-14" style="height: auto;overflow: hidden">
