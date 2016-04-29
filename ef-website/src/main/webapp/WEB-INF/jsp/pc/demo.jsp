@@ -163,7 +163,6 @@
         var parentDiv = $(".selectGroup");
         var selectItems = parentDiv.find(".selectItem");
         var groupSize = selectItems.length;
-        //在代码中需要体现上一级和下一级的概念
         //第一步 绘制下拉菜单
         for (var i = 0; i < groupSize; i++) {
             var selectItem = selectItems[i];
@@ -195,7 +194,6 @@
             }
             parentDiv.html(result);
         })
-
         //选择当前级别的select之后出发下一级的数据获取，数据获取是通过当前级别所选戳来的选项去获取下一级数据
         var onChangeAction = function (e) {
             //可以得到当前级别选中的值（value）
@@ -205,6 +203,7 @@
             var nextSelect = $currentElement.next();
             var nextSelectNeededParamName = nextSelect.attr("paramName");
             var nextSelectDataFrom = nextSelect.attr("dataFrom");
+            //@TODO 待验证
             ajaxRequest(nextSelectDataFrom, {nextSelectNeededParamName: $currentElement.val()}, function (data) {
                 var out = "";
                 for (var i = 0; i < data.length; i++) {
@@ -218,14 +217,10 @@
                 var nextNextSelect = nextSelect.next();
                 var nextNextFirstOption = nextNextSelect.children()[0];
                 nextNextSelect.html(nextNextFirstOption.outerHTML);
-//                $("#mySelect option:first").prop("selected", 'selected');
                 nextNextSelect.child("option:first").prop("selected", 'selected')
             });
-
         }
-
         parentDiv.on("change", "[isChange=true]", onChangeAction);
-
     }
 
     $().ready(function () {
