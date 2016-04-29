@@ -3,6 +3,8 @@ package com.efeiyi.ec.master.model;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ming800.core.base.model.BaseMaster;
+import com.ming800.core.base.model.BaseMasterUser;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -23,7 +25,7 @@ import java.util.List;
 @Entity
 @Table(name = "master")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class Master implements Serializable,Comparable {
+public class Master implements Serializable,Comparable,BaseMaster {
 
     private String id;
     private String name;//名称标识

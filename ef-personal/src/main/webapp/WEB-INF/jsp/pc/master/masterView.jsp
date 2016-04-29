@@ -142,16 +142,16 @@
                                 <label  class="am-u-sm-3 am-form-label">LOGO</label>
                                 <fieldset>
                                     <legend>
-                                        <a id="btn_upload0"></a>
+                                        <a id="btn_upload4"></a>
                                     </legend>
 
                                     <div class="am-u-md-13">
                                         <div class="am-panel am-panel-default">
-                                            <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-11'}">
+                                            <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-14'}">
                                                 <strong>背景图片</strong>
                                                 <input type="hidden" name="logoUrl" value="${object.logoUrl}"  placeholder="背景图片">
                                                 <span class="am-icon-chevron-down am-fr"></span></div>
-                                            <div class="am-panel-bd am-collapse am-in" id="collapse-panel-10" style="height: auto;overflow: hidden">
+                                            <div class="am-panel-bd am-collapse am-in" id="collapse-panel-14" style="height: auto;overflow: hidden">
                                                 <ul style="width: 100%"  style="list-style:none">
                                                     <c:if test="${!empty object.logoUrl}">
                                                         <li style="float: left;margin-right: 10px;"  name="${object.id}">
@@ -333,14 +333,14 @@
                     }
                 });
             }
-            $("#btn_upload0").ready(fileUploads(0, "logoUrl"));
+            $("#btn_upload4").ready(fileUploads(4, "logoUrl"));
             $("#btn_upload1").ready(fileUploads(1, "backgroundUrl"));
             $("#btn_upload2").ready(fileUploads(2, "favicon"));
 //            $("#btn_upload-button").css({"padding": "0em 0em", "text-align": "center"});
-            $("#btn_upload0-button").css({"padding": "0em 0em", "text-align": "center"});
+            $("#btn_upload4-button").css({"padding": "0em 0em", "text-align": "center"});
             $("#btn_upload1-button").css({"padding": "0em 0em", "text-align": "center"});
             $("#btn_upload2-button").css({"padding": "0em 0em", "text-align": "center"});
-            $("#SWFUpload_0").css({left:"5"});
+            $("#SWFUpload_4").css({left:"5"});
             $("#SWFUpload_1").css({left:"5"});
             $("#SWFUpload_2").css({left:"5"});
 

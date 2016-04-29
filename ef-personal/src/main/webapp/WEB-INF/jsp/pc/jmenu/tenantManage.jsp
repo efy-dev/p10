@@ -1,4 +1,7 @@
 <%@ page import="com.efeiyi.ec.personal.AuthorizationUtil" %>
+<%@ page import="com.efeiyi.ec.master.model.Master" %>
+<%@ page import="com.efeiyi.ec.personal.master.controller.TenantController" %>
+<%@ page import="com.efeiyi.ec.personal.master.MasterUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -8,7 +11,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<input type="hidden" id="review" name="review">
+<%
+    if(MasterUtil.findMaster()!=null){
+%>
+   <c:set var="review" value="<%=MasterUtil.findMaster().getReview()%>"/>
+<%
+    }
+%>
 <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
     <div class="am-offcanvas-bar admin-offcanvas-bar admin-sidebar-panel">
         <ul class="am-list admin-sidebar-list">
@@ -68,15 +77,15 @@
     </div>
 </div>
 <script >
-    $.ajax({
-        type: "post",
-        url: '<c:url value="/getMasterUser.do"/>',
-        cache: false,
-        dataType: "json",
-        sync: false,
-        success: function (data) {
-            console.log(data);
-            $("#review").val(data);
-        }
-    })
+    <%--$.ajax({--%>
+        <%--type: "post",--%>
+        <%--url: '<c:url value="/getMasterUser.do"/>',--%>
+        <%--cache: false,--%>
+        <%--dataType: "json",--%>
+        <%--sync: false,--%>
+        <%--success: function (data) {--%>
+            <%--console.log(data);--%>
+            <%--$("#review").val(data);--%>
+        <%--}--%>
+    <%--})--%>
 </script>

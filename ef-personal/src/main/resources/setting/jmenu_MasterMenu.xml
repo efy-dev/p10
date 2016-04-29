@@ -7,11 +7,20 @@
             </jnode>
         </jnode>
         <jnode id="serviceManager" url="" state="" text_zh_CN="业务管理"><!--系统管理-->
-            <jnode id="" url="/onMasterWork.do" state="closed" extend="" access="" text_zh_CN="上传作品">
+            <!--<jnode id="" url="/onMasterWork.do" state="closed" extend="" access="" text_zh_CN="上传作品">-->
+                <!--<match url="/onMasterWork.do"/>-->
+            <!--</jnode>-->
+            <jnode id="" url="/basic/xm.do?qm=plistMasterWork_default1" state="closed" extend="" access="" text_zh_CN="上传作品">
+                <match url="/basic/xm.do?qm=plistMasterWork_default1"/>
                 <match url="/onMasterWork.do"/>
             </jnode>
-            <jnode id="" url="/onMasterNews.do" state="closed" extend="" access="" text_zh_CN="上传资讯">
+            <!--<jnode id="" url="/onMasterNews.do" state="closed" extend="" access="" text_zh_CN="上传资讯">-->
+                <!--<match url="/onMasterNews.do"/>-->
+            <!--</jnode>-->
+            <jnode id="" url="/basic/xm.do?qm=plistMasterNews_default" state="closed" extend="" access="" text_zh_CN="上传资讯">
                 <match url="/onMasterNews.do"/>
+                <match url="/basic/xm.do?qm=plistMasterNews_default"/>
+                <match url="/basic/xm.do?qm=viewMasterNews"/>
             </jnode>
         </jnode>
         <jnode id="accountManager" url="" text_zh_CN="账号管理"><!--系统管理-->

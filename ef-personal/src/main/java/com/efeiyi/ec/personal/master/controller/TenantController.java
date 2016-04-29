@@ -3,6 +3,7 @@ package com.efeiyi.ec.personal.master.controller;
 import com.efeiyi.ec.master.model.*;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.personal.AuthorizationUtil;
+import com.efeiyi.ec.personal.master.MasterUtil;
 import com.efeiyi.ec.personal.master.service.MasterWorkManager;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
@@ -118,23 +119,23 @@ public class TenantController extends BaseMasterController {
     @ResponseBody
     @RequestMapping("/getMaster.do")
     public String getOnlyMaster() {
-        Master master = findMaster();
+        Master master = MasterUtil.findMaster();
         return master.getFullName();
     }
 
-    public Master findMaster() {
-        String hql = "from MasterUser m where m.user.id =:userId and m.status = '1'";
-        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-        map.put("userId", AuthorizationUtil.getMyUser().getId());
-        List<MasterUser> list = baseManager.listObject(hql, map);
-        Master master = list.get(0).getMaster();
-        return master;
-    }
+//    public Master findMaster() {
+//        String hql = "from MasterUser m where m.user.id =:userId and m.status = '1'";
+//        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+//        map.put("userId", AuthorizationUtil.getMyUser().getId());
+//        List<MasterUser> list = baseManager.listObject(hql, map);
+//        Master master = list.get(0).getMaster();
+//        return master;
+//    }
 
 
     @RequestMapping("/onlyMaster.do")
     public String OnlyMaster() {
-        Master master = findMaster();
+        Master master = MasterUtil.findMaster();
         return "redirect:/basic/xm.do?qm=viewMaster&id=" + master.getId();
     }
 
@@ -142,27 +143,27 @@ public class TenantController extends BaseMasterController {
     @ResponseBody
     @RequestMapping("/getMasterUser.do")
     public String getOyMaster() {
-        Master master = findMaster();
+        Master master = MasterUtil.findMaster();
         return master.getReview();
     }
 
 
     @RequestMapping("/onMaster.do")
     public String onMaster() {
-        Master master = findMaster();
+        Master master = MasterUtil.findMaster();
         return "redirect:/basic/xm.do?qm=viewMaster&id=" + master.getId();
     }
 
     @RequestMapping("/onMasterWork.do")
     public String onMasterWork(Model model) {
-        Master master = findMaster();
+        Master master = MasterUtil.findMaster();
         model.addAttribute("id", master.getId());
         return "/master/masterWork";
     }
 
     @RequestMapping("/onWork.do")
     public String onWork(Model model, String workId , HttpServletRequest request) throws Exception {
-        Master master = findMaster();
+        Master master = MasterUtil.findMaster();
         MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
         XQuery xQuery = new XQuery("listMasterBanner_default", request);
         xQuery.put("master_id", master.getId());
@@ -197,7 +198,7 @@ public class TenantController extends BaseMasterController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/master/masterWorkSaveSuccess";
+        return "redirect:/basic/xm.do?qm=plistMasterWork_default1";
     }
 
     @RequestMapping("/master/uploadify.do")
@@ -241,10 +242,11 @@ public class TenantController extends BaseMasterController {
 
     @RequestMapping("/onMasterNews.do")
     public String onMasterNews(Model model) {
-        Master master = findMaster();
+        Master master = MasterUtil.findMaster();
         model.addAttribute("master",master);
         return "/master/masterNewsForm";
     }
+
 
     @RequestMapping("/saveMasterNews.do")
     public String saveMasterNews(String masterId ,MasterNews news, Model model) {
@@ -254,7 +256,7 @@ public class TenantController extends BaseMasterController {
         baseManager.saveOrUpdate(MasterNews.class.getName(),news);
         model.addAttribute("masterId",master.getId());
         model.addAttribute("object",news);
-        return "/master/masterNewsView";
+        return "redirect:/basic/xm.do?qm=plistMasterNews_default";
     }
 
 }

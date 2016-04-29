@@ -3,11 +3,14 @@
     <entities>
         <entity name="masterInfo" label="传承人资讯"  model="com.efeiyi.ec.master.model.MasterNews">
             <does>
-                <do name="plistMasterNews" access="" label="传承人资讯列表">
+                <do name="plistMasterNews" access="" label="传承人资讯列表" result="/master/masterNewsPList1">
                     <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
-                        <condition name="master.id" defaultValue="1" operation="eq"/>
+                        <condition name="master.id" defaultValue="${MASTER}" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
+                </do>
+                <do name="viewMasterNews" access="" label="传承人资讯列表" result="/master/viewMasterNews">
+
                 </do>
             </does>
         </entity>
@@ -47,13 +50,26 @@
             <do name="plistMasterWork" access="" label="传承人作品">
                 <query name="default" label="默认" type="auto" orderBy="id:desc">
                     <condition name="master.id" defaultValue="1" operation="eq"/>
-                    <condition name="status" defaultValue="1" operation="eq"/>
+                    <condition name="status" defaultValue="0" operation="ne"/>
                 </query>
                 <query name="part" label="默认" type="auto" orderBy="id:desc">
                     <condition name="master.id" defaultValue="1" operation="eq"/>
                     <condition name="status" defaultValue="1" operation="eq"/>
                 </query>
             </do>
+
+            <do name="plistMasterWork" access="" label="传承人作品" result="/master/masterWorkPList1">
+                <query name="default1" label="默认" type="auto" orderBy="createDateTime:desc">
+                    <condition name="master.id" defaultValue="${MASTER}" operation="eq"/>
+                    <condition name="status" defaultValue="0" operation="ne"/>
+                </query>
+                <!--<query name="default2" label="快速查询" type="auto" orderBy="createDateTime:desc">-->
+                    <!--<condition name="master.id" defaultValue="${MASTER}" operation="eq" inputType="default"/>-->
+                    <!--<condition name="status" defaultValue="0" operation="ne" inputType="default"/>-->
+                    <!--<condition name="name" defaultValue="0" operation="like" label="作品名称" inputType="text"/>-->
+                <!--</query>-->
+            </do>
+
             <do name="listMasterWork" access="" label="作品">
                 <query name="default" label="默认" type="auto" orderBy="id:desc">
                     <condition name="project.id" defaultValue="1" operation="eq"/>

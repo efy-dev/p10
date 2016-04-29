@@ -2,16 +2,18 @@ package com.efeiyi.ec.master.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ming800.core.base.model.BaseMasterUser;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2016/4/27.
  */
 @Entity
 @Table(name = "master_user")
-public class MasterUser {
+public class MasterUser implements Serializable, BaseMasterUser{
     private String id;
     private Master master;
     private MyUser user;
