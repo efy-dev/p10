@@ -51,6 +51,14 @@
                                            value="${object.fullName}" required>
                                 </div>
                             </div>
+                            <%--<div class="am-form-group">--%>
+                                <%--<label for="projectName" class="am-u-sm-3 am-form-label">项目</label>--%>
+
+                                <%--<div class="am-u-sm-9">--%>
+                                    <%--<input type="text" id="projectName" name="projectName" placeholder="项目 / project"--%>
+                                           <%--value="${object.projectName}" >--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label">等级 / Level</label>
@@ -252,7 +260,7 @@
                                 <br>
                             </div>
                             <span style="margin-left: 92%">
-                            <a href="javascript:void (0);" onclick="nextGo('t1','t2');" class="am-btn am-btn-primary am-btn-xs">下一步</a>
+                             <a href="javascript:void (0);" onclick="nextGo('t1','t2');" class="am-btn am-btn-primary am-btn-xs">下一步</a>
                        </span>
                         </div>
                     </div>
@@ -295,6 +303,7 @@
 
     }
     $(function(){
+
         if('${object.review}'=='1' ||'${object.review}'=='3' ) {
             var fileUploads = function (o, dataType) {
                 $('#btn_upload' + o).uploadify({

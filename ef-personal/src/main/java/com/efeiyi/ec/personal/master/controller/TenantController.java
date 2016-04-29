@@ -5,6 +5,7 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.personal.AuthorizationUtil;
 import com.efeiyi.ec.personal.master.MasterUtil;
 import com.efeiyi.ec.personal.master.service.MasterWorkManager;
+import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -257,6 +258,34 @@ public class TenantController extends BaseMasterController {
         model.addAttribute("masterId",master.getId());
         model.addAttribute("object",news);
         return "redirect:/basic/xm.do?qm=plistMasterNews_default";
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/master/linkProject.do")
+    public boolean linkProject(HttpServletRequest request) {
+        try {
+            XQuery xQuery = new XQuery("listMasterProject_byAll",request);
+            xQuery.put("master_id",MasterUtil.findMaster().getId());
+            xQuery.put("project_id",request.getParameter("id"));
+            List<MasterProject> masterProjects = baseManager.listObject(xQuery);
+            if(masterProjects!=null && masterProjects.size()>0){
+                return  true;
+            }else {
+                MasterProject masterProject = new MasterProject();
+                masterProject.setMaster(MasterUtil.findMaster());
+                masterProject.setStatus("1");
+                masterProject.setProject((Project)baseManager.getObject(Project.class.getName(),request.getParameter("id")));
+                baseManager.saveOrUpdate(MasterProject.class.getName(),masterProject);
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return  false;
+
+        }
+
+        return true;
     }
 
 }

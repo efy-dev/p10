@@ -22,6 +22,11 @@
                 <match url="/basic/xm.do?qm=plistMasterNews_default"/>
                 <match url="/basic/xm.do?qm=viewMasterNews"/>
             </jnode>
+            <jnode id="" url="/basic/xm.do?qm=plistMasterProject_default" state="closed" extend="" access="" text_zh_CN="关联项目">
+                <match url="/basic/xm.do?qm=plistMasterProject_default"/>
+                <match url="/basic/xm.do?qm=plistProject_default"/>
+
+            </jnode>
         </jnode>
         <jnode id="accountManager" url="" text_zh_CN="账号管理"><!--系统管理-->
             <jnode id="" url="/onMaster.do" state="" extend="" access="" text_zh_CN="个人信息">
