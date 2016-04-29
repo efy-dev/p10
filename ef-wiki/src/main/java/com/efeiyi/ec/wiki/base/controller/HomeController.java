@@ -33,10 +33,10 @@ public class HomeController {
      */
     @RequestMapping({"/home.do"})
     public String home(HttpServletRequest request,Model model) throws Exception {
-        XQuery query = new XQuery("listProjectRecommended_default", request);
-        query.put("project_artistry_type","1");
+        XQuery query = new XQuery("listArtistryRecommended_default", request);
+        query.put("artistry_type","1");
         List<Object> artRecommendList = baseManager.listObject(query);
-        query.put("project_artistry_type","2");
+        query.put("artistry_type","2");
         List<Object> craftRecommendList = baseManager.listObject(query);
         model.addAttribute("artRecommendList",artRecommendList);
         model.addAttribute("craftRecommendList",craftRecommendList);
