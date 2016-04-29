@@ -11,7 +11,7 @@
 
 <div class="top2016">
     <div class="hd">
-        <div class="tips fl"><i class="min-logo"></i>汇聚东方工艺精粹</div>
+        <div class="tips fl"><a class="logo"></a></div>
         <ul class="fr">
             <li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>
             <li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>
@@ -38,6 +38,15 @@
     </div>
 </div>
 <!--//End--topbar-->
+
+<div class="topv2" style="padding-top: 0;">
+    <div class="hd">
+        <div class="tips fl"><a class="logo"></a></div>
+
+    </div>
+</div>
+
+
 <div class="nav2016 bgc">
     <div class="hd bgf">
         <div class="navitems">

@@ -11,6 +11,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html class="no-js">
 <head>
+  <script src="<c:url value="/resources/jquery/jquery.qrcode.min.js"/>"></script>
     <title></title>
 </head>
 <body>
