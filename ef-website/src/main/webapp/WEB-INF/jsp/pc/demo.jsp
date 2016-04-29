@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,12 +55,15 @@
 <body>
 
 
-<select>
-    <option></option>
-</select>
+<div class="selectGroup">
+    <div class="selectItem" dataFrom="http://localhost/datafrom1.do" initValue="请选择省"></div>
+    <div class="selectItem" dataFrom="http://localhost/datafrom1.do" initValue="请选择市"></div>
+    <div class="selectItem" dataFrom="http://localhost/datafrom1.do" initValue="请选择区"></div>
+</div>
 
-<div class="addsub" data-option='{"upLimit":"10"}'></div>
-<script src="js/jquery-1.11.1.min.js"></script>
+
+<%--<script src="/scripts/js/jquery.min.js"></script>--%>
+<script src="/resources/jquery/jquery-1.11.1.min.js"></script>
 <script>
     var ChooseCountComponent = function () {
         var parentDiv = $(".addsub");
@@ -162,25 +167,27 @@
         //第一步 绘制下拉菜单
         for (var i = 0; i < groupSize; i++) {
             var selectItem = selectItems[i];
+            selectItem = $(selectItem);
+            console.log(selectItem);
             var selectTemp = new select(selectItem.attr("class"), selectItem.attr("name"), selectItem.attr("dataFrom"), selectItem.attr("id"), selectItem.attr("initValue"), i, selectItem.attr("paramName"));
             var html = "";
-            if (0 <= i < groupSize - 1) {
-                html += '<select isChange="true"'
+            if (i >= 0 && i < (groupSize - 1)) {
+                html += '<select isChange="true"';
             } else {
                 html += '<select ';
             }
-            html += ' paramName="' + selectTemp.paramName + '" dataFrom="' + selectTemp.dataFrom + '" grade="' + selectTemp.grade + '" class="' + selectTemp.clazz + '" id="' + selectTemp.id + '" name="' + selectTemp.name + '"><option>' + selectTemp.initValue + '</option></> '
+            html += ' paramName="' + selectTemp.paramName + '" dataFrom="' + selectTemp.dataFrom + '" grade="' + selectTemp.grade + '" class="' + selectTemp.clazz + '" id="' + selectTemp.id + '" name="' + selectTemp.name + '"><option>' + selectTemp.initValue + '</option></select> '
             selectTemp.html = html;
-            selectMap.put(i, selectTemp);
+            selectMap[i] = selectTemp;
         }
         //获得第一级的数据
-        var first = selectMap.get(0);
+        var first = selectMap["0"];
         ajaxRequest(first.dataFrom, {}, function (data) {
-            var out = "";
+            var out = '<option>' + first.initValue + '</option>';
             for (var i = 0; i < data.length; i++) {
-                out += '<option>' + first.initValue + '</option><option value="' + data[i].id + '">' + data[i].name + '</option>'
+                out += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
             }
-            first.html = '<select paramName="' + first.paramName + '" dataFrom="' + first.dataFrom + '" grade="' + first.grade + '" class="' + first.clazz + '" id="' + first.id + '" name="' + first.name + '">' + out + '</select>'
+            first.html = '<select isChange="true" paramName="' + first.paramName + '" dataFrom="' + first.dataFrom + '" grade="' + first.grade + '" class="' + first.clazz + '" id="' + first.id + '" name="' + first.name + '">' + out + '</select>';
             selectMap["0"] = first;
             var result = "";
             for (var key in selectMap) {
@@ -193,8 +200,9 @@
         var onChangeAction = function (e) {
             //可以得到当前级别选中的值（value）
             //问题如何得到下一级别的select .next("select")
+            //选择的时候所以的低级节点都需要重置
             var $currentElement = $(e.target);
-            var nextSelect = $currentElement.next("select");
+            var nextSelect = $currentElement.next();
             var nextSelectNeededParamName = nextSelect.attr("paramName");
             var nextSelectDataFrom = nextSelect.attr("dataFrom");
             ajaxRequest(nextSelectDataFrom, {nextSelectNeededParamName: $currentElement.val()}, function (data) {
@@ -202,7 +210,16 @@
                 for (var i = 0; i < data.length; i++) {
                     out += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
                 }
-                nextSelect.append(out);
+                //@TODO 待优化
+                var nextFirstOption = nextSelect.children()[0];
+                console.log(nextFirstOption)
+                out = nextFirstOption.outerHTML + out;
+                nextSelect.html(out);
+                var nextNextSelect = nextSelect.next();
+                var nextNextFirstOption = nextNextSelect.children()[0];
+                nextNextSelect.html(nextNextFirstOption.outerHTML);
+//                $("#mySelect option:first").prop("selected", 'selected');
+                nextNextSelect.child("option:first").prop("selected", 'selected')
             });
 
         }
@@ -211,8 +228,9 @@
 
     }
 
-
-
+    $().ready(function () {
+        SelectGroupComponent();
+    });
 
 </script>
 </body>
