@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.wiki.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
@@ -25,7 +26,11 @@
   <div class="logo"><a class="icon" href="" title="e飞蚁"></a></div>
   <!-- //End--logo-->
   <div class="am-header-right am-header-nav">
-    <a href="http://wiki.efeiyi.com/" class="icon icon-user"></a>
+    <% if (AuthorizationUtil.getMyUser().getId() == null) {%>
+    <a href="http://i.efeiyi.com/order/myEfeiyi/list.do" class="icon icon-user"></a>
+    <%} else {%>
+    <a href="<c:url value="/sso.do"/>" class="icon icon-user"></a>
+    <%}%>
   </div>
 </header>
 <div class="craft">

@@ -18,7 +18,7 @@
 <div class="craft-particulars2016">
   <div class="craft-crumbs">
     <div class="particulars">
-      <div class="crumbs"><a href="/" >首页</a><em class="">></em><a href="" class=""><ming800:status name="type" dataType="Project.type" checkedValue="${artistry.getType()}" type="normal"/></a><a href="" class="present"><em class="present">></em>${artistry.project.name}</a></div>
+      <div class="crumbs"><a href="http://j.efeiyi.com/ef-wiki/" >首页</a><em class="">></em><a href="" class=""><ming800:status name="type" dataType="Project.type" checkedValue="${artistry.getType()}" type="normal"/></a><a href="" class="present"><em class="present">></em>${artistry.project.name}</a></div>
     </div>
   </div>
   <div class="user">
@@ -84,7 +84,7 @@
 </div>
 <script type="text/javascript">
   $().ready(function () {
-    var url = "http://wiki.efeiyi.com/project/"+${project.id};
+    var url = "http://wiki.efeiyi.com/project/"+${artistry.project.id};
     $('#native').qrcode({
       text: url,
             width: 160,
