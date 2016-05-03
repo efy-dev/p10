@@ -57,7 +57,7 @@
           </div>
 
           <div class="wechat" >
-            <img id="native" src="<c:url value="/scripts/assets/images/craft/wechat.jpg"/>" alt="">
+            <div id="native"></div>
             <div class="user-wechat">
               <p>扫描二维码</p>
               <p>到手机查看</p>
@@ -84,14 +84,14 @@
 </div>
 <script type="text/javascript">
   $().ready(function () {
-    var url = "http://wiki.efeiyi.com/project/"+${artistry.project.id};
+    var url = "http://j.efeiyi.com/ef-wiki/project/${artistry.id}";
     $('#native').qrcode({
       text: url,
             width: 160,
             height: 160
     });
   })
-  $("#native").html("");
+
 </script>
 </body>
 </html>

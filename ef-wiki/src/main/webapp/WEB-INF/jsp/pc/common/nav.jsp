@@ -42,7 +42,36 @@
 <div class="topv2" style="padding-top: 0;">
     <div class="hd">
         <div class="tips fl"><a class="logo"></a></div>
-
+        <div class="fr">
+            <form action="http://www.efeiyi.com/search.do" method="get">
+                <input type="text" value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>" name="q"
+                       id="q" placeholder="搜索" class="txt">
+                <input type="submit" value="" class="icon-new btn">
+                <input type="hidden" id="resultPage" name="resultPage" value="/searchResult"/>
+                <input type="hidden" id="facetFields" name="facetFields" value="project_name"/>
+                <input type="hidden" id="group" name="group" value="efeiyi"/>
+                <input type="hidden" id="priceUD" name="priceUD" value="0"/>
+            </form>
+            <%--<form method="">--%>
+                <%--<input type="text" class="txt" placeholder="" value="">--%>
+                <%--<input type="submit" class="icon-new btn" value=" ">--%>
+            <%--</form>--%>
+            <%--<ul class="keys">--%>
+                <%--<li><a href="" title="">剪纸</a></li>--%>
+                <%--<li class="line"></li>--%>
+                <%--<li><a href="" title="">景泰蓝</a></li>--%>
+                <%--<li class="line"></li>--%>
+                <%--<li><a href="" title="">湘绣</a></li>--%>
+                <%--<li class="line"></li>--%>
+                <%--<li><a href="" title="">苏绣</a></li>--%>
+                <%--<li class="line"></li>--%>
+                <%--<li><a href="" title="">铜雕</a></li>--%>
+                <%--<li class="line"></li>--%>
+                <%--<li><a href="" title="">鼻烟壶</a></li>--%>
+                <%--<li class="line"></li>--%>
+                <%--<li><a href="" title="">金银丝镶嵌</a></li>--%>
+            <%--</ul>--%>
+        </div>
     </div>
 </div>
 

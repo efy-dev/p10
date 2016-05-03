@@ -30,4 +30,11 @@
         <autoserial group="product" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
         <autoserial group="productModel" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
     </autoserials>
+    <searchs>
+        <search group="efeiyi" recommendedModel="com.ming800.core.p.model.CommonSearch" rows="12" defaultQ="all_name:" highLight="true"
+                highLightFields="product_name,specification" highLightSimplePre="&lt;font color='red'&gt;" highLightSimplePost="&lt;/font&gt;"
+                defType="edismax" qf="" solrClientCount="5"
+                solrServerCoreUrl="http://101.200.182.7/solr/product" solrServerHost="101.200.182.7" username="efy" password="helloword" port="80"/>
+    </searchs>
+
 </common>
