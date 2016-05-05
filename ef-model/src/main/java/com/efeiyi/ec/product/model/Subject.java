@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "subject")
 public class Subject {
 
-    private String id ;
+    private String id;
     private String pictureUrl;
     private String name;
     private SubjectDescription subjectDescription;
@@ -29,6 +29,16 @@ public class Subject {
     private Date endDateTime;
     private Date createDateTime;
     private String content;
+    private List<SubjectRecommend> subjectRecommendList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
+    public List<SubjectRecommend> getSubjectRecommendList() {
+        return subjectRecommendList;
+    }
+
+    public void setSubjectRecommendList(List<SubjectRecommend> subjectRecommendList) {
+        this.subjectRecommendList = subjectRecommendList;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -59,7 +69,7 @@ public class Subject {
         this.pictureUrl = pictureUrl;
     }
 
-    @Column(name="name")
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -124,6 +134,7 @@ public class Subject {
     public void setType(String type) {
         this.type = type;
     }
+
     @Column(name = "subject_show")
     public String getSubjectShow() {
         return subjectShow;

@@ -16,6 +16,17 @@ public class IndustrySolution {
     private String solutionName; //解决方案的名称
     private String introduction; //解决方案的介绍
     private String status;
+    private List<IndustrySolutionRecommend> industrySolutionRecommendList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "industrySolution")
+    public List<IndustrySolutionRecommend> getIndustrySolutionRecommendList() {
+        return industrySolutionRecommendList;
+    }
+
+    public void setIndustrySolutionRecommendList(List<IndustrySolutionRecommend> industrySolutionRecommendList) {
+        this.industrySolutionRecommendList = industrySolutionRecommendList;
+    }
+
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
