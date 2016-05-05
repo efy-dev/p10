@@ -80,7 +80,7 @@
     <div class="hd bgf">
         <div class="navitems">
             <ul>
-                <li><a href="/" title="">首页</a></li>
+                <li><a href="<c:url value="/"/>" title="">首页</a></li>
                 <li><a href="" title="">大师精品</a></li>
                 <li><a href="" title="">飞蚁工坊</a></li>
             </ul>
