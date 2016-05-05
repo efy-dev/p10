@@ -7,7 +7,7 @@
         <ul>
             <c:if test="${bannerList != null && bannerList != ''}">
                 <c:forEach items="${bannerList}" var="banner">
-                    <li><a href="" title=""><img src="http://wiki-oss.efeiyi.com${banner.imageUrl}" alt=""></a></li>
+                    <li><a href="" title=""><img src="http://gift-oss.efeiyi.com${banner.imageUrl}" alt=""></a></li>
                 </c:forEach>
             </c:if>
         </ul>
@@ -31,7 +31,7 @@
                     <c:forEach items="${subjectList}" var="subject">
                         <li>
                             <a href="">
-                                <img src="http://wiki-oss.efeiyi.com/${subject.pictureUrl}" alt="">
+                                <img src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt="">
                                 <div class="list-content">
                                     <p class="name">${subject.name}</p>
                                     <p class="title">国家级非遗项目</p>
@@ -49,7 +49,7 @@
                     <c:forEach items="${subjectList1}" var="subject1">
                         <li>
                             <a href="">
-                                <img src="http://wiki-oss.efeiyi.com/${subject1.pictureUrl}" alt="">
+                                <img src="http://gift-oss.efeiyi.com/${subject1.pictureUrl}" alt="">
                                 <div class="list-content">
                                     <p class="name">${subject1.name}</p>
                                     <p class="content">${subject1.content}</p>

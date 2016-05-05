@@ -29,7 +29,7 @@ public class MasterWorkShopHandler implements MultipartHandler {
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(), request);
         HashMap<String, Object> paramMap = xSaveOrUpdate.getParamMap();
 
-        MultipartFile multipartFile = multipartRequest.getFile("picture_url");
+        MultipartFile multipartFile = multipartRequest.getFile("picture_url1");
         if (!multipartFile.getOriginalFilename().equals("")) {
             String url = "work/" + masterId + "/" + multipartFile.getOriginalFilename();
             aliOssUploadManager.uploadFile(multipartFile, "tenant", url);
@@ -37,7 +37,7 @@ public class MasterWorkShopHandler implements MultipartHandler {
         }
 
 
-        MultipartFile multipartFile1 = multipartRequest.getFile("videoPath");
+        MultipartFile multipartFile1 = multipartRequest.getFile("videoPath1");
         if (!multipartFile1.getOriginalFilename().equals("")) {
             String url1 = "work/" + masterId + "/" + multipartFile1.getOriginalFilename();
             aliOssUploadManager.uploadFile(multipartFile1, "tenant", url1);

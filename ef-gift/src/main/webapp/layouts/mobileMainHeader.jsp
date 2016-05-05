@@ -4,3 +4,4 @@
 <link rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?t=20160413"/>">
 <link rel="stylesheet" href="<c:url value="/scripts/wap/css/layout.css?t=20160413"/>">
 <link rel="stylesheet" href="<c:url value="/scripts/wap/css/gift.css?t=20160413"/>">
+<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css"/>">

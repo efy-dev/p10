@@ -11,7 +11,7 @@
     <ul class="am-slides">
       <c:if test="${bannerList != null && bannerList != ''}">
         <c:forEach items="${bannerList}" var="banner">
-          <li><img src="http://wiki-oss.efeiyi.com/${banner.wapUrl}"></li>
+          <li><img src="http://gift-oss.efeiyi.com/${banner.wapUrl}"></li>
         </c:forEach>
       </c:if>
     </ul>
@@ -28,7 +28,7 @@
         <div class="bd list">
           <ul class="ul-col-2">
             <c:forEach items="${subject.subjectProductList}" var="subjectProduct">
-            <li><a href="" title=""><img src="http://wiki-oss.efeiyi.com/${subjectProduct.product.picture_url}" alt=""><span class="txt-abs"><em>${subjectProduct.product.name}</em></span></a></li>
+            <li><a href="" title=""><img src="http://gift-oss.efeiyi.com/${subjectProduct.product.picture_url}" alt=""><span class="txt-abs"><em>${subjectProduct.product.name}</em></span></a></li>
             </c:forEach>
           </ul>
         </div>

@@ -16,23 +16,23 @@ import java.util.List;
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 @Table(name = "wiki_artistry")
 public class Artistry {
-    private String id ;
+    private String id;
     private String status;
     private Date createDatetime;
     private String type;
     private Project project;
     private ArtistryDescription artistryDescription;
     private List<ArtistryPicture> artistryPictureList;
-    private List<ArtistryRecommend> artistryRecommendList;
+    private List<ArtistryRecommended> artistryRecommendList;
 
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "artistry")
-    public List<ArtistryRecommend> getArtistryRecommendList() {
+    public List<ArtistryRecommended> getArtistryRecommendList() {
         return artistryRecommendList;
     }
 
-    public void setArtistryRecommendList(List<ArtistryRecommend> artistryRecommendList) {
+    public void setArtistryRecommendList(List<ArtistryRecommended> artistryRecommendList) {
         this.artistryRecommendList = artistryRecommendList;
     }
 
@@ -58,7 +58,8 @@ public class Artistry {
     public void setId(String id) {
         this.id = id;
     }
-    @Column(name="create_datetime")
+
+    @Column(name = "create_datetime")
     public Date getCreateDatetime() {
         return createDatetime;
     }
@@ -66,6 +67,7 @@ public class Artistry {
     public void setCreateDatetime(Date createDatetime) {
         this.createDatetime = createDatetime;
     }
+
     @Column(name = "status")
     public String getStatus() {
         return status;
@@ -74,6 +76,7 @@ public class Artistry {
     public void setStatus(String status) {
         this.status = status;
     }
+
     @Column(name = "type")
     public String getType() {
         return type;
@@ -84,7 +87,7 @@ public class Artistry {
     }
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="project_id")
+    @JoinColumn(name = "project_id")
     @JsonIgnore
     public Project getProject() {
         return project;
@@ -93,8 +96,9 @@ public class Artistry {
     public void setProject(Project project) {
         this.project = project;
     }
+
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="wiki_artistry_description_id")
+    @JoinColumn(name = "wiki_artistry_description_id")
     @JsonIgnore
     public ArtistryDescription getArtistryDescription() {
         return artistryDescription;
@@ -103,6 +107,7 @@ public class Artistry {
     public void setArtistryDescription(ArtistryDescription artistryDescription) {
         this.artistryDescription = artistryDescription;
     }
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "artistry")
     public List<ArtistryPicture> getArtistryPictureList() {

@@ -37,7 +37,7 @@
                 <c:forEach items="${subjectList}" var="subject">
                     <li>
                         <a href="" title="">
-                            <img src="http://pro.efeiyi.com/${subject.pictureUrl}" alt="">
+                            <img src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt="">
                         <span class="txt">
                             <p>${subject.name}</p>
                             <p>全网独家·匠心好礼</p>
@@ -55,7 +55,7 @@
     <div class="bd">
         <c:if test="${subjectList1 != null && subjectList1 != ''}">
             <c:forEach items="${subjectList1}" var="subject1">
-                <a href=""><img class="bd" src="http://pro.efeiyi.com/${subject1.pictureUrl}" alt=""></a>
+                <a href=""><img class="bd" src="http://gift-oss.efeiyi.com/${subject1.pictureUrl}" alt=""></a>
             </c:forEach>
         </c:if>
     </div>

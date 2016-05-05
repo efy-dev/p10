@@ -1,18 +1,26 @@
 package com.efeiyi.ec.gift.productgift.controller;
 
+import com.efeiyi.ec.gift.model.ProductGift;
+import com.efeiyi.ec.gift.model.ProductGiftTag;
+import com.efeiyi.ec.gift.model.ProductGiftTagValue;
 import com.efeiyi.ec.product.model.Subject;
+import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.model.Banner;
 import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
+import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * Created by Administrator on 2016/4/19.
@@ -26,17 +34,71 @@ public class ProductGiftController {
     @Autowired
     private BaseManager baseManager;
 
-    @RequestMapping({"/getProductGiftList"})
-    public String testAspect(HttpServletRequest request, Model model) throws Exception{
+    @RequestMapping({"/getProductGiftpList"})
+    public String getProductGiftpList(HttpServletRequest request, Model model) throws Exception{
+                /*String page = request.getParameter("page");
+        String minPrice = request.getParameter("minPrice");
+        String value = request.getParameter("value");
+        String maxPrice = request.getParameter("maxPrice");*/
+        String page = "1";
+        String minPrice = request.getParameter("minPrice");
+        String maxPrice = request.getParameter("maxPrice");
+        String value = request.getParameter("value");
+        Map<String, List<ProductGiftTagValue>> map = new HashMap<>();
+        Map<String, List<ProductGiftTagValue>> map1 = new HashMap<>();
+        XQuery xQuery = new XQuery("listProductGiftTagValue_default", request);
         //获取页头轮播图
         List<Banner> bannerList = bannerManager.getBannerList("productGiftList");
         //获取礼品频道推荐专题
         List<Subject> subjectList = objectRecommendedManager.getRecommendedList("productGiftRecommendedUp");
         List<Subject> subjectList1 = objectRecommendedManager.getRecommendedList("productGiftRecommendedDown");
+        List<ProductGiftTagValue> list = baseManager.listObject(xQuery);
+        try {
+            for(ProductGiftTagValue productGiftTagValue:list){
+                String group = productGiftTagValue.getGroup();
+                String type = productGiftTagValue.getType();
+                if (map.containsKey(group)){
+                    map.get(group).add(productGiftTagValue);
+                }else {
+                    List<ProductGiftTagValue> productGiftTagValueList = new ArrayList<>();
+                    productGiftTagValueList.add(productGiftTagValue);
+                    map.put(group,productGiftTagValueList);
+                }
+                if (map1.containsKey(type)){
+                    map1.get(type).add(productGiftTagValue);
+                }else {
+                    List<ProductGiftTagValue> productGiftTagValueList = new ArrayList<>();
+                    productGiftTagValueList.add(productGiftTagValue);
+                    map1.put(type,productGiftTagValueList);
+                }
+            }
+        }catch (Exception e){}
+
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        PageEntity pageEntity = getPageEntity(request);
+        String hql = "from ProductGiftTag p where 1=1";
+        if(value != null && value != ""){
+            queryParamMap.put("value", value);
+            hql+=" and p.productGiftTagValue.value=:value";
+        }
+        if(minPrice != null && minPrice != ""){
+            queryParamMap.put("minPrice", new BigDecimal(minPrice));
+            hql+=" and p.productGift.productModel.product.price>=:minPrice";
+        }
+        if(maxPrice != null && maxPrice != ""){
+            queryParamMap.put("maxPrice", new BigDecimal(maxPrice));
+            hql+=" and p.productGift.productModel.product.price<=:maxPrice";
+        }
+        List<ProductGiftTag> productGiftTaglist = baseManager.listPageInfo(hql, pageEntity, queryParamMap).getList();
         model.addAttribute("bannerList", bannerList);
         model.addAttribute("subjectList", subjectList);
         model.addAttribute("subjectList1", subjectList1);
-        return "/gift/productGiftList";
+        model.addAttribute("map", map);
+        model.addAttribute("map1", map1);
+        model.addAttribute("productGiftTagList", productGiftTaglist);
+        model.addAttribute("pageInfo", baseManager.listPageInfo(hql,pageEntity,queryParamMap));
+        model.addAttribute("pageEntity", pageEntity);
+        return "/gift/productGiftpList";
     }
 
     @RequestMapping({"/viewSubject/{subjectId}"})
@@ -44,12 +106,59 @@ public class ProductGiftController {
         Subject subject = (Subject) baseManager.getObject(Subject.class.getName(),subjectId);
         model.addAttribute("subject", subject);
         if (subjectId.equals("")){
-            return "/guoliyishiView";
+            return "/gift/guoliyishiView";
         }else if (subjectId.equals("1")){
-            return "/lishangwanglaiView";
+            return "/gift/lishangwanglaiView";
         }else {
             return "";
         }
+    }
+
+    @RequestMapping({"/searchProductGift"})
+    public String searchProductGift(HttpServletRequest request, Model model) throws Exception{
+        XQuery xQuery = new XQuery("listProductGiftTagValue_default", request);
+        List productGiftTagValuelist = baseManager.listObject(xQuery);
+        model.addAttribute("productGiftTagValuelist",productGiftTagValuelist);
+        return "/gift/searchProductGift";
+    }
+
+    @RequestMapping({"/searchProductGiftList"})
+    public String searchProductGiftList(HttpServletRequest request, Model model) throws Exception{
+        String value = request.getParameter("value");
+        String minPrice = request.getParameter("minPrice");
+        String maxPrice = request.getParameter("maxPrice");
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        String hql = "from ProductGiftTag p where 1=1";
+        if(value != null && value != ""){
+            queryParamMap.put("value", value);
+            hql+=" and p.productGiftTagValue.value=:value";
+        }
+        if(minPrice != null && minPrice != ""){
+            queryParamMap.put("minPrice", new BigDecimal(minPrice));
+            hql+=" and p.productGift.productModel.product.price>=:minPrice";
+        }
+        if(maxPrice != null && maxPrice != ""){
+            queryParamMap.put("maxPrice", new BigDecimal(maxPrice));
+            hql+=" and p.productGift.productModel.product.price<=:maxPrice";
+        }
+        List<ProductGiftTag> productGiftTaglist = baseManager.listObject(hql,queryParamMap);
+        model.addAttribute("productGiftTaglist", productGiftTaglist);
+        return "/gift/searchProductGiftList";
+    }
+
+    protected PageEntity getPageEntity(HttpServletRequest request) {
+        String index = request.getParameter(PageEntity.PARAM_NAME_PAGEINDEX);
+        String size = request.getParameter(PageEntity.PARAM_NAME_PAGERECORDS);
+        PageEntity pageEntity = new PageEntity();
+        pageEntity.setIndex(1);
+        pageEntity.setSize(4);
+        if (index != null && !index.equals("")) {
+            pageEntity.setIndex(Integer.parseInt(index));
+        }
+        if (size != null && !size.equals("")) {
+            pageEntity.setSize(Integer.parseInt(size));
+        }
+        return pageEntity;
     }
 
 }

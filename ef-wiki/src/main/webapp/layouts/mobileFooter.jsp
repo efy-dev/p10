@@ -4,15 +4,13 @@
 <%
     if (AuthorizationUtil.getMyUser().getId() == null) {
 %>
-<c:if test="${request!='/purchaseOrder/receiveGift'&&request!='/purchaseOrder/giftView'}">
     <div class="login-reg">
         <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
         <a id="signin"
-           href="http://passport.efeiyi.com/register?service=http://j.efeiyi.com/ef-wiki/"
+           href="http://passport.efeiyi.com/register?service=http://j.efeiyi.com/ef-wiki/sso.do?registeSuccess=/pc/saveEnrollUser.do"
            class="btn-reg"
            >注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
     </div>
-</c:if>
 <%
     }
 %>

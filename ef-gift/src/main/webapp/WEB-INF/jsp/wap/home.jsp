@@ -11,7 +11,7 @@
         <ul class="am-slides">
             <c:if test="${bannerList != null && bannerList != ''}">
                 <c:forEach items="${bannerList}" var="banner">
-                    <li><img src="http://wiki-oss.efeiyi.com/${banner.wapUrl}"></li>
+                    <li><img src="http://gift-oss.efeiyi.com/${banner.wapUrl}"></li>
                 </c:forEach>
             </c:if>
         </ul>
@@ -19,9 +19,9 @@
     <!--//End--轮播图-->
     <div class="menu">
         <ul>
-            <li><a href=""><i class="icon icon-slch"></i><p>送礼场合</p></a></li>
-            <li><a href=""><i class="icon icon-sldx"></i><p>送礼对象</p></a></li>
-            <li><a href=""><i class="icon icon-sljg"></i><p>送礼价格</p></a></li>
+            <li><a href="<c:url value="/searchProductGift"/>"><i class="icon icon-slch"></i><p>送礼场合</p></a></li>
+            <li><a href="<c:url value="/searchProductGift"/>"><i class="icon icon-sldx"></i><p>送礼对象</p></a></li>
+            <li><a href="<c:url value="/searchProductGift"/>"><i class="icon icon-sljg"></i><p>送礼价格</p></a></li>
         </ul>
         <ul>
             <li><a href="<c:url value="/industrySolution"/>"><i class="icon icon-qylp"></i><p>企业礼品</p></a></li>
@@ -37,7 +37,7 @@
                     <c:forEach items="${subjectList}" var="subject">
                         <li>
                             <a href="" title="">
-                                <img src="http://wiki-oss.efeiyi.com/${subject.pictureUrl}" alt="">
+                                <img src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt="">
                         <span class="txt">
                             <p>${subject.name}</p>
                             <p>全网独家·匠心好礼</p>
@@ -55,7 +55,7 @@
         <div class="bd">
             <c:if test="${subjectList1 != null && subjectList1 != ''}">
                 <c:forEach items="${subjectList1}" var="subject1">
-                    <a href=""><img class="bd" src="http://wiki-oss.efeiyi.com/${subject1.pictureUrl}" alt=""></a>
+                    <a href=""><img class="bd" src="http://gift-oss.efeiyi.com/${subject1.pictureUrl}" alt=""></a>
                 </c:forEach>
             </c:if>
         </div>

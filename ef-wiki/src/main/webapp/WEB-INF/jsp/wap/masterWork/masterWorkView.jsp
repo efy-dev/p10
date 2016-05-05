@@ -22,7 +22,7 @@
   </div>
   <div class="menu-list">
     <ul class="bd">
-      <li><a href="/" title="首页">首页</a></li>
+      <li><a href="<c:url value="/">" title="首页">首页</a></li>
       <li><a href="http://www.efeiyi.com/" title="购物车">非遗商城</a></li>
       <li><a href="http://master.efeiyi.com" title="个人中心">非遗大师</a></li>
     </ul>
@@ -68,7 +68,9 @@
         <ul class="bd">
           <li><strong>技艺名称：</strong><span>${work.projectName}</span></li>
           <li><strong>技艺级别：</strong><span><ming800:status name='level' dataType='Project.level' checkedValue='${work.projectLevel}' type='normal'/></span></li>
+          <c:if test="${not empty work.projectCityName}">
           <li><strong>所属地区：</strong><span>${work.projectCityName}</span></li>
+          </c:if>
           <li><strong>技艺简介：</strong><span>${work.projectDescription}</span></li>
         </ul>
         <div class="bd txt-c">
@@ -92,7 +94,7 @@
       <%--</c:forEach>--%>
         <c:forEach items="${work.workList}" var="works">
           <li>
-            <a href="" title="">
+            <a href="<c:url value="/masterWork/${works.id}"/>" title="">
               <img src="<c:url value='http://tenant.efeiyi.com/'/>${works.pictureUrl}@!wiki-masterworks-picture" alt="">
               <span class="fz11 black omitted">${works.name}</span>
             </a>
