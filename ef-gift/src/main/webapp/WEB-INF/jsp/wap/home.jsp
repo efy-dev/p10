@@ -33,15 +33,15 @@
     <div class="bd ht">
         <div class="bd list">
             <ul class="ul-col-2">
-                <c:if test="${subjectList != null && subjectList != ''}">
-                    <c:forEach items="${subjectList}" var="subject">
+                <c:if test="${advertisementList != null && advertisementList != ''}">
+                    <c:forEach items="${advertisementList}" var="advertisement">
                         <li>
                             <a href="" title="">
-                                <img src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt="">
-                        <span class="txt">
+                                <img src="http://gift-oss.efeiyi.com/${advertisementList.img}" alt="">
+                       <%-- <span class="txt">
                             <p>${subject.name}</p>
                             <p>全网独家·匠心好礼</p>
-                        </span>
+                        </span>--%>
                             </a>
                         </li>
                     </c:forEach>
@@ -53,9 +53,9 @@
     <!--//ENd--ht-->
     <div class="bd ht reco">
         <div class="bd">
-            <c:if test="${subjectList1 != null && subjectList1 != ''}">
-                <c:forEach items="${subjectList1}" var="subject1">
-                    <a href=""><img class="bd" src="http://gift-oss.efeiyi.com/${subject1.pictureUrl}" alt=""></a>
+            <c:if test="${subjectList != null && subjectList != ''}">
+                <c:forEach items="${subjectList}" var="subject">
+                    <a href=""><img class="bd" src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt=""></a>
                 </c:forEach>
             </c:if>
         </div>

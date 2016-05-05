@@ -94,7 +94,7 @@ public class HomeController {
     public String home1(HttpServletRequest request, Model model) throws Exception {
         Map<String, List<ProductGiftTagValue>> map = new HashMap<>();
         //获取首页轮播图
-        List<Banner> bannerList = bannerManager.getBannerList("homeProductGift");
+        List<Banner> bannerList = bannerManager.getBannerList("gift.homeProductGift");
         XQuery productGiftTagValueQuery = new XQuery("listProductGiftTagValue_default", request);//场合标签组
 
         List<ProductGiftTagValue> list = baseManager.listObject(productGiftTagValueQuery);
@@ -110,13 +110,14 @@ public class HomeController {
                 }
             }
         }catch (Exception e){}
-        List<Subject> subjectList = objectRecommendedManager.getRecommendedList("productGiftRecommendedUp");
-        List<Subject> subjectList1 = objectRecommendedManager.getRecommendedList("productGiftRecommendedDown");
+        XQuery xQuery = new XQuery("listAdvertisement_default", request);
+        List advertisementList = baseManager.listObject(xQuery);
+        List<Subject> subjectList = objectRecommendedManager.getRecommendedList("gift.productGiftRecommended");
 
         model.addAttribute("map",map);
         model.addAttribute("bannerList", bannerList);
+        model.addAttribute("advertisementList", advertisementList);
         model.addAttribute("subjectList", subjectList);
-        model.addAttribute("subjectList1", subjectList1);
         return "/home";
     }
 

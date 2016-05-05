@@ -82,10 +82,10 @@
 <%--
               <img src="http://gift-oss.efeiyi.com/${productGift.product.picture_url}" alt="">
 --%>
-              <img src="http://pro.efeiyi.com/${productGiftTag.productGift.productModel.product.picture_url}" alt="">
+              <img src="http://pro.efeiyi.com/${productGiftTag.productGift.productModel.productModel_url}" alt="">
               <div class="list-content">
-                <p class="name">${productGiftTag.productGift.productModel.product.name}</p>
-                <p class="title">￥<em>${productGiftTag.productGift.productModel.product.price}</em></p>
+                <p class="name">${productGiftTag.productGift.productModel.name}</p>
+                <p class="title">￥<em>${productGiftTag.productGift.productModel.price}</em></p>
               </div>
             </a>
           </li>

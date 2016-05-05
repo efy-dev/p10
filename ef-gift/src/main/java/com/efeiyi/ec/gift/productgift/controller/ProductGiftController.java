@@ -47,11 +47,11 @@ public class ProductGiftController {
         Map<String, List<ProductGiftTagValue>> map = new HashMap<>();
         Map<String, List<ProductGiftTagValue>> map1 = new HashMap<>();
         XQuery xQuery = new XQuery("listProductGiftTagValue_default", request);
-        //获取页头轮播图
+        /*//获取页头轮播图
         List<Banner> bannerList = bannerManager.getBannerList("productGiftList");
         //获取礼品频道推荐专题
         List<Subject> subjectList = objectRecommendedManager.getRecommendedList("productGiftRecommendedUp");
-        List<Subject> subjectList1 = objectRecommendedManager.getRecommendedList("productGiftRecommendedDown");
+        List<Subject> subjectList1 = objectRecommendedManager.getRecommendedList("productGiftRecommendedDown");*/
         List<ProductGiftTagValue> list = baseManager.listObject(xQuery);
         try {
             for(ProductGiftTagValue productGiftTagValue:list){
@@ -83,16 +83,16 @@ public class ProductGiftController {
         }
         if(minPrice != null && minPrice != ""){
             queryParamMap.put("minPrice", new BigDecimal(minPrice));
-            hql+=" and p.productGift.productModel.product.price>=:minPrice";
+            hql+=" and p.productGift.productModel.price>=:minPrice";
         }
         if(maxPrice != null && maxPrice != ""){
             queryParamMap.put("maxPrice", new BigDecimal(maxPrice));
-            hql+=" and p.productGift.productModel.product.price<=:maxPrice";
+            hql+=" and p.productGift.productModel.price<=:maxPrice";
         }
         List<ProductGiftTag> productGiftTaglist = baseManager.listPageInfo(hql, pageEntity, queryParamMap).getList();
-        model.addAttribute("bannerList", bannerList);
+        /*model.addAttribute("bannerList", bannerList);
         model.addAttribute("subjectList", subjectList);
-        model.addAttribute("subjectList1", subjectList1);
+        model.addAttribute("subjectList1", subjectList1);*/
         model.addAttribute("map", map);
         model.addAttribute("map1", map1);
         model.addAttribute("productGiftTagList", productGiftTaglist);
@@ -135,11 +135,11 @@ public class ProductGiftController {
         }
         if(minPrice != null && minPrice != ""){
             queryParamMap.put("minPrice", new BigDecimal(minPrice));
-            hql+=" and p.productGift.productModel.product.price>=:minPrice";
+            hql+=" and p.productGift.productModel.price>=:minPrice";
         }
         if(maxPrice != null && maxPrice != ""){
             queryParamMap.put("maxPrice", new BigDecimal(maxPrice));
-            hql+=" and p.productGift.productModel.product.price<=:maxPrice";
+            hql+=" and p.productGift.productModel.price<=:maxPrice";
         }
         List<ProductGiftTag> productGiftTaglist = baseManager.listObject(hql,queryParamMap);
         model.addAttribute("productGiftTaglist", productGiftTaglist);

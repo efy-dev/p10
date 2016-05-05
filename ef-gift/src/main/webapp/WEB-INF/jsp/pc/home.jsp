@@ -27,15 +27,15 @@
         <div class="recommend">
             <div class="title-txt">推荐好礼</div>
             <ul class="list">
-                <c:if test="${subjectList != null && subjectList != ''}">
-                    <c:forEach items="${subjectList}" var="subject">
+                <c:if test="${advertisementList != null && advertisementList != ''}">
+                    <c:forEach items="${advertisementList}" var="advertisement">
                         <li>
                             <a href="">
-                                <img src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt="">
-                                <div class="list-content">
+                                <img src="http://gift-oss.efeiyi.com/${advertisement.img}" alt="">
+                                <%--<div class="list-content">
                                     <p class="name">${subject.name}</p>
                                     <p class="title">国家级非遗项目</p>
-                                </div>
+                                </div>--%>
                             </a>
                         </li>
                     </c:forEach>
@@ -45,14 +45,14 @@
         <div class="banner"><a href=""><img src="<c:url value="/scripts/upload/banner-gift.png"/>" alt=""></a></div>
         <div class="strategy">
             <ul class="strategy-list">
-                <c:if test="${subjectList1 != null && subjectList1 != ''}">
-                    <c:forEach items="${subjectList1}" var="subject1">
+                <c:if test="${subjectList != null && subjectList != ''}">
+                    <c:forEach items="${subjectList}" var="subject">
                         <li>
                             <a href="">
-                                <img src="http://gift-oss.efeiyi.com/${subject1.pictureUrl}" alt="">
+                                <img src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt="">
                                 <div class="list-content">
-                                    <p class="name">${subject1.name}</p>
-                                    <p class="content">${subject1.content}</p>
+                                    <p class="name">${subject.name}</p>
+                                    <p class="content">${subject.content}</p>
                                 </div>
                             </a>
                         </li>
