@@ -39,15 +39,15 @@ public class IndustrySolutionController {
         Map<IndustrySolution, List<ProductGiftIndustrySolution>> industrySolutionMap = new HashMap<>();
 
         //获取轮播图
-        List<Banner> bannerList = bannerManager.getBannerList("industrySolutionList");
+        List<Banner> bannerList = bannerManager.getBannerList("gift.industrySolutionList");
         //获取推荐专题
-        List<Subject> subjectList = objectRecommendedManager.getRecommendedList("industrySolutionRecommended");
+        List<Subject> subjectList = objectRecommendedManager.getRecommendedList("gift.industrySolutionRecommended");
         //获取方案列表
         XQuery industrySolutionXQuery = new XQuery("listIndustrySolution_default", request);
         List<IndustrySolution> industrySolutionList = baseManager.listObject(industrySolutionXQuery);
         for(IndustrySolution industrySolution:industrySolutionList){
             XQuery xQuery = new XQuery("listProductGiftIndustrySolution_default", request);
-            xQuery.put("industry_solution_id", industrySolution.getId());
+            xQuery.put("industrySolution_id", industrySolution.getId());
             List<ProductGiftIndustrySolution> productGiftIndustrySolutionList = baseManager.listObject(xQuery);
             industrySolutionMap.put(industrySolution, productGiftIndustrySolutionList);
         }

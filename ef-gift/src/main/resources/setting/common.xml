@@ -7,9 +7,9 @@
     </wordValues>
     <!-- 轮播图 -->
     <banners>
-        <banner group="homeProductGift" note="首页轮播图"/>
-        <banner group="industrySolutionList" note="企业礼品方案轮播图"/>
-        <banner group="productGiftList" note="礼品频道也轮播图" />
+        <banner group="gift.homeProductGift" note="首页轮播图"/>
+        <banner group="gift.industrySolutionList" note="企业礼品方案轮播图"/>
+        <banner group="gift.productGiftList" note="礼品频道也轮播图" />
     </banners>
     <!-- 文档 -->
     <documents>
@@ -17,9 +17,11 @@
     </documents>
     <!-- 推荐 -->
     <recommends>
-        <recommend group="productGiftRecommendedUp" recommendedModel="com.efeiyi.ec.product.model.Subject" note="专题推荐礼品频道" amount="8" />
-        <recommend group="productGiftRecommendedDown" recommendedModel="com.efeiyi.ec.product.model.Subject" note="专题推荐礼品频道下端" amount="4" />
-        <recommend group="industrySolutionRecommended" recommendedModel="com.efeiyi.ec.product.model.Subject" note="行业礼品方案频道" amount="2" />
+<!--
+        <recommend group="gift.productGiftRecommendedUp" recommendedModel="com.efeiyi.ec.product.model.Subject" note="专题推荐礼品频道" amount="8" />
+-->
+        <recommend group="gift.productGiftRecommended" recommendedModel="com.efeiyi.ec.product.model.Subject" note="专题推荐礼品频道下端" amount="4" />
+        <recommend group="gift.industrySolutionRecommended" recommendedModel="com.efeiyi.ec.product.model.Subject" note="行业礼品方案频道" amount="2" />
     </recommends>
     <autoserials>
         <autoserial group="orderSerial" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />

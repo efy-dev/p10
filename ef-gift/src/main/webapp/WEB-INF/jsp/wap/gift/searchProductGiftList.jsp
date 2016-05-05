@@ -23,7 +23,6 @@
     <ul class="bd tnav">
       <li>
         <a href="javascript:void(0);"
-           onclick="facetForward('/search.do?q=*&resultPage=/searchResult&queryFacet=&priceUD=0&fq=')"
            title="综 合">综 合</a>
       </li>
       <li>
@@ -42,9 +41,9 @@
       <c:forEach items="${productGiftTaglist}" var="productGiftTag">
         <li>
           <a href="" title="">
-            <img src="http://pro.efeiyi.com/${productGiftTag.productGift.productModel.product.picture_url}@!pc-project-list" alt="">
-            <p class="name">${productGiftTag.productGift.productModel.product.name}</p>
-            <p class="price"><em>￥</em>${productGiftTag.productGift.productModel.product.price}</p>
+            <img src="http://pro.efeiyi.com/${productGiftTag.productGift.productModel.productModel_url}@!pc-project-list" alt="">
+            <p class="name">${productGiftTag.productGift.productModel.name}</p>
+            <p class="price"><em>￥</em>${productGiftTag.productGift.productModel.price}</p>
           </a>
         </li>
       </c:forEach>
