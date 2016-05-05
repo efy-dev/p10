@@ -184,7 +184,7 @@
         ajaxRequest(first.dataFrom, {}, function (data) {
             var out = '<option>' + first.initValue + '</option>';
             for (var i = 0; i < data.length; i++) {
-                out += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                out += '<option value="' + data[i][0] + '">' + data[i][1] + '</option>';
             }
             first.html = '<select isChange="true" paramName="' + first.paramName + '" dataFrom="' + first.dataFrom + '" grade="' + first.grade + '" class="' + first.clazz + '" id="' + first.id + '" name="' + first.name + '">' + out + '</select>';
             selectMap["0"] = first;
@@ -207,7 +207,7 @@
             ajaxRequest(nextSelectDataFrom, {nextSelectNeededParamName: $currentElement.val()}, function (data) {
                 var out = "";
                 for (var i = 0; i < data.length; i++) {
-                    out += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+                    out += '<option value="' + data[i][0] + '">' + data[i][1] + '</option>'
                 }
                 //@TODO 待优化
                 var nextFirstOption = nextSelect.children()[0];
