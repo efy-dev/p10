@@ -12,6 +12,7 @@
                 <do name="viewMasterNews" access="" label="传承人资讯列表" result="/master/masterNewsForm"/>
                 <do name="formMasterNews" label="保存工作坊页" access="" result="/master/masterNewsForm"
                     execute="com.efeiyi.ec.personal.master.controller.MasterNewsHandler"/>
+                <do name="removeMasterNews" label="删除" access="" result="json"/>
             </does>
         </entity>
         <entity name="masterBanner" label="传承人资讯"  model="com.efeiyi.ec.master.model.MasterBanner">
