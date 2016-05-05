@@ -39,7 +39,7 @@
                 <table class="am-table am-table-striped am-table-hover table-main">
                     <thead>
                     <tr>
-                        <%--<th class="table-set">操作</th>--%>
+                        <th class="table-set">操作</th>
                          <th class="table-title">作品名称</th>
                          <th class="table-title">作品介绍</th>
                         <%--<th class="table-title">项目</th>--%>
@@ -55,26 +55,26 @@
 
                     <c:forEach items="${requestScope.pageInfo.list}" var="masterWork">
                         <tr id="${masterWork.id}">
-                            <%--<td width="25%">--%>
-                                <%--<div class="am-btn-toolbar">--%>
-                                    <%--<div class="am-btn-group am-btn-group-xs">--%>
-                                        <%--<a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/onMasterWork.do?id=${masterWork.id}"/>"><span--%>
-                                                <%--class="am-icon-pencil-square-o"></span> 编辑--%>
-                                        <%--</a>--%>
-                                        <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeMasterWork('${masterWork.id}')})" href="#"><span--%>
-                                                <%--class="am-icon-trash-o"></span> 删除--%>
-                                        <%--</a>--%>
+                            <td width="15%">
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/onMasterWork.do?id=${masterWork.id}"/>"><span
+                                                class="am-icon-pencil-square-o"></span> 编辑
+                                        </a>
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeMasterWork('${masterWork.id}')})" href="#"><span
+                                                class="am-icon-trash-o"></span> 删除
+                                        </a>
 
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                            <%--</td>--%>
-                            <td class="am-hide-sm-only" width="20%">
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="am-hide-sm-only" width="15%">
                                  <%--<a href="<c:url value="/basic/xm.do?qm=viewWork&view=masterWork&id=${masterWork.id}"/>">--%>
                                     ${masterWork.name}
                                  <%--</a>--%>
                             </td>
 
-                            <td class="am-hide-sm-only" width="60%">
+                            <td class="am-hide-sm-only" width="35%">
                                         <%--<a href="<c:url value="/basic/xm.do?qm=viewWork&view=masterWork&id=${masterWork.id}"/>">--%>
                                         ${masterWork.description}
                                         <%--</a>--%>
@@ -85,7 +85,7 @@
                             <%--<td class="am-hide-sm-only" width="10%">--%>
                                <%--${masterWork.master.fullName}--%>
                             <%--</td>--%>
-                            <td class="am-hide-sm-only" width="60%">
+                            <td class="am-hide-sm-only" width="35%">
                                   <img  width="50%"  src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-manage-work-view" >
                             </td>
                             <%--<td class="am-hide-sm-only">--%>

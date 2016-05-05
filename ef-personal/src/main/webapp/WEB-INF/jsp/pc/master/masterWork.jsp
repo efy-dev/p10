@@ -44,6 +44,7 @@
         <form action="<c:url value="/master/saveMasterWork.do"/>" method="post" class="am-form am-form-horizontal"
               enctype="multipart/form-data">
             <input type="hidden" name="master.id" value="${id}">
+            <input type="hidden" name="id" value="${object.id}">
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">作品名称</label>
 
