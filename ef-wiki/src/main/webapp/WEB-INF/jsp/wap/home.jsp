@@ -26,7 +26,7 @@
   <div class="logo"><a class="icon" href="" title="e飞蚁"></a></div>
   <!-- //End--logo-->
   <div class="am-header-right am-header-nav">
-    <% if (AuthorizationUtil.getMyUser().getId() == null) {%>
+    <% if (AuthorizationUtil.getMyUser().getId() != null) {%>
     <a href="http://i.efeiyi.com/order/myEfeiyi/list.do" class="icon icon-user"></a>
     <%} else {%>
     <a href="<c:url value="/sso.do"/>" class="icon icon-user"></a>
