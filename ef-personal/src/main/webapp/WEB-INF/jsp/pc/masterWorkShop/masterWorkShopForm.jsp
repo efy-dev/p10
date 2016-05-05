@@ -69,7 +69,13 @@
                     <label for="picture_url" class="am-u-sm-3 am-form-label">封面</label>
 
                     <div class="am-u-sm-9">
-                        <input type="file" id="picture_url" name="picture_url" placeholder="封面">
+                        <c:if test="${!empty object.id}">
+                            <input type="hidden" name="picture_url" value="${object.picture_url}"/>
+                            <img width="10%"
+                                 src="<c:url value="http://tenant.efeiyi.com/${object.picture_url}@!tenant-manage-banner"/>"
+                                 alt=""/>
+                        </c:if>
+                        <input type="file" id="picture_url" name="picture_url1" value="${object.picture_url}" placeholder="封面">
                         <%--<small>选择你要保存的轮播图</small>--%>
                     </div>
                 </div>
@@ -77,8 +83,13 @@
                 <div class="am-form-group">
                     <label for="videoPath" class="am-u-sm-3 am-form-label">video</label>
 
+
                     <div class="am-u-sm-9">
-                        <input type="file" id="videoPath" name="videoPath" placeholder="video">
+                        <c:if test="${!empty object.id}">
+                            <input type="hidden" name="videoPath" value="${object.videoPath}"/>
+                            <video src="http://tenant.oss-cn-beijing.aliyuncs.com/${object.videoPath}" controls="controls"  width="500" height="250"></video>
+                        </c:if>
+                        <input type="file" id="videoPath"  name="videoPath1"  placeholder="video">
                         <small>选择你要保存的视频</small>
                     </div>
                 </div>

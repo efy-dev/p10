@@ -44,8 +44,15 @@
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
+                           href="<c:url value="/basic/xm.do?qm=formMasterWorkShop&id=${masterWorkShop.id}"/>"><span
+                                class="am-icon-pencil-square-o">编辑</span>
+                        </a>
+                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
                            href="<c:url value="/basic/xm.do?qm=viewMasterWorkShop&id=${masterWorkShop.id}"/>"><span
                                 class="am-icon-pencil-square-o">详情</span>
+                        </a>
+                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeMasterWorkShop('${masterWorkShop.id}')})" href="#"><span
+                                class="am-icon-trash-o"></span> 删除
                         </a>
                     </div>
                 </div>
@@ -70,6 +77,19 @@
         <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
     </ming800:pcPageList>
 </div>
-
+<script>
+    function removeMasterWorkShop(divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeMasterWorkShop"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId,masterWorkId:divId},
+            success: function (data) {
+                $("#"+divId).remove();
+            }
+        });
+    }
+</script>
 </body>
 </html>
