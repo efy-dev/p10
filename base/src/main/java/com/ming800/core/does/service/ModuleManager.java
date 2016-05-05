@@ -32,4 +32,6 @@ public interface ModuleManager {
 
     List<StatusTypeItem> listStatusTypeItem(String key);
 
+    List<StatusType> listStatusType(String key);
+
 }

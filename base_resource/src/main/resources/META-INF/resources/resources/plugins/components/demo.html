@@ -117,6 +117,10 @@
         parentDiv.html(html);
     }
 
+    $().ready(function () {
+        ChooseCountComponent();
+    })
+
 
     //联动选择组件 例如先选择省再选城市再选择区域
     //组件之中的元素可分为  item1 item2 item3 .... itemN
@@ -210,8 +214,6 @@
         parentDiv.on("change", "[isChange=true]", onChangeAction);
 
     }
-
-
 
 
 </script>

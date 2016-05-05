@@ -9,7 +9,7 @@
                 model="com.ming800.core.p.model.Banner">
             <fields>
                 <field name="group" label="分组" inputType="text">
-                    <statusType fieldName="group">
+                    <statusType fieldName="ef-website" label="电商平台" data="ec-efeiy">
                         <item label="电商首页" value="ec.home.banner"/>
                         <item label="陶冶烧造" value="ec.home.banner.tysz"/>
                         <item label="传统美术" value="ec.home.banner.ctms"/>
@@ -22,9 +22,22 @@
                         <item label="木作编扎" value="ec.home.banner.mzpz"/>
                         <item label="医药养生" value="ec.home.banner.yyys"/>
                         <item label="文房四宝" value="ec.home.banner.wfsb"/>
-                        <item label="百科移动" value="wiki.pc.dynamic"/>
-                        <item label="创意生活" value="wiki.wap.dynamic"/>
+                        <item label="创意生活" value="ec.home.banner.cysh"/>
+                        <!--<item label="百科pc" value="wiki.pc.dynamic"/>-->
+                        <!--<item label="百科wap" value="wiki.wap.dynamic"/>-->
                     </statusType>
+                    <statusType fieldName="ef-wiki" label="非遗百科" data="ef-wiki">
+                        <item label="百科首页pc" value="wiki.pc.dynamic"/>
+                        <item label="百科首页wap" value="wiki.wap.dynamic"/>
+                    </statusType>
+                    <statusType fieldName="ef-master" label="非遗大师">
+                        <item label="电商首页" value="ec.home.banner"/>
+                    </statusType>
+                </field>
+                <field name="bucket" label="阿里云图片组" inputType="text">
+                    <statusType fieldName="ec" label="电商平台" data="ec-efeiyi"/>
+                    <statusType fieldName="wiki" label="非遗百科" data="ef-wiki"/>
+                    <statusType fieldName="gift" label="非遗礼品" data="ef-gift"/>
                 </field>
             </fields>
             <does>
@@ -42,9 +55,9 @@
                 </do>
                 <do name="plistBanner" access="" label="轮播图列表"
                     execute="com.efeiyi.ec.system.basic.controller.commonHandler"
-                    result="/banner/bannerPList">
+                    result="/banner/ecBannerPList">
                     <query name="default" label="默认" type="auto" orderBy="bannerOrder:desc">
-                        <condition name="id" defaultValue="1" operation="eq"/>
+                        <!--<condition name="id" defaultValue="1" operation="eq"/>-->
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                     <query name="master" label="传承人轮播图" type="auto" orderBy="bannerOrder:desc">
@@ -90,7 +103,7 @@
                     result="/banner/bannerForm"/>
                 <do name="saveOrUpdateBanner" label="保存banner" access=""
                     execute="com.efeiyi.ec.system.basic.controller.BasicBannerFormHandler"
-                    result="redirect:/basic/xm.do?groupName=master.homePage&amp;qm=plistBanner_master.homePage"
+                    result="redirect:/basic/xm.do?qm=plistBanner_default"
                 />
                 <do name="saveOrUpdateEcBanner" label="保存电商网站轮播图" access=""
                     execute="com.efeiyi.ec.system.basic.controller.BasicBannerFormHandler"

@@ -165,6 +165,7 @@ public class Subject {
         return "Subject{id = " + id + "}";
     }
 
+
     public String getContent() {
         return content;
     }
