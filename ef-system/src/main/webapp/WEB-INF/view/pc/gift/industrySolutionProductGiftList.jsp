@@ -50,7 +50,7 @@
 <body>
 
 
-<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
+<%--<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>--%>
 <div>
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">

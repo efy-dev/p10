@@ -61,15 +61,15 @@ public class MasterWorkManagerImpl implements MasterWorkManager {
                     String url = "banner/" + identify + multipartRequest.getFile("picurl").getOriginalFilename();
                     if (aliOssUploadManager.uploadFile(multipartRequest.getFile("picurl"), "tenant", url)) {
                         masterWork.setPictureUrl(url);
-                        masterWork.setMaster(master);
-                        masterWork.setStatus("1");
-                        masterWork.setName(request.getParameter("name"));
-                        masterWork.setCreateDateTime(new Date());
-                        masterWork.setDescription(request.getParameter("description"));
                     }
                 }else{
                     masterWork.setPictureUrl(request.getParameter("picPath"));
                 }
+                masterWork.setMaster(master);
+                masterWork.setStatus("1");
+                masterWork.setName(request.getParameter("name"));
+                masterWork.setCreateDateTime(new Date());
+                masterWork.setDescription(request.getParameter("description"));
                 xdoDao.saveOrUpdateObject(masterWork);
             }
         } catch (Exception e) {
