@@ -65,6 +65,12 @@ MODIFY COLUMN `number`  int(11) NOT NULL AFTER `description`,
 MODIFY COLUMN `status`  char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `number`;
 
 
+ALTER TABLE `gift_product_gift`
+CHANGE COLUMN `product_id` `productModel_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `name`;
+
+
+
+
 
 
 

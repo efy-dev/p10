@@ -54,7 +54,7 @@
                 <li><a href="<c:url value="/industrySolution"/>" title="">企业礼品</a></li>
                 <li><a href="<c:url value="/viewSubject/{}"/>" title="">国礼轶事</a></li>
                 <li><a href="<c:url value="/viewSubject/{}"/>" title="">礼尚往来</a></li>
-                <li><a href="<c:url value="/getProductGiftList"/>" title="">礼品专区</a></li>
+                <li><a href="<c:url value="/getProductGiftpList?value=&minPrice=&maxPrice="/>" title="">礼品专区</a></li>
             </ul>
         </div>
         <!--//End--导航-->

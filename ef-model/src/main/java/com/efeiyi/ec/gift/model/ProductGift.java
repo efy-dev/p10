@@ -1,6 +1,7 @@
 package com.efeiyi.ec.gift.model;
 
 import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import org.hibernate.annotations.GenericGenerator;
@@ -17,7 +18,7 @@ public class ProductGift {
 
     private String id;
     private String name; //礼品名称
-    private Product product; //礼品对应的商品
+    private ProductModel productModel; //礼品对应的商品
     private Project project; //礼品对应的非遗项目
     private ProjectCategory projectCategory; //礼品对应的项目分类
     private String status; //礼品的状态 0删除 1正常
@@ -45,13 +46,13 @@ public class ProductGift {
 
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    public Product getProduct() {
-        return product;
+    @JoinColumn(name = "productModel_id")
+    public ProductModel getProductModel() {
+        return productModel;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductModel(ProductModel productModel) {
+        this.productModel = productModel;
     }
 
 
