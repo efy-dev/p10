@@ -27,9 +27,9 @@ public class MasterNewsHandler implements DoHandler {
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String newsId = request.getParameter("id");
         MasterNews news = (MasterNews) baseManager.getObject(MasterNews.class.getName(),newsId);
-        Master master = (Master) baseManager.getObject(Master.class.getName(),request.getParameter("masterId"));
+//        Master master = (Master) baseManager.getObject(Master.class.getName(),request.getParameter("masterId"));
         modelMap.put("object", news);
-        modelMap.put("master", master);
+//        modelMap.put("master", master);
         return modelMap;
     }
 }

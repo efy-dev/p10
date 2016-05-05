@@ -260,15 +260,17 @@ public class TenantController extends BaseMasterController {
 
 
     @RequestMapping("/saveMasterNews.do")
-    public String saveMasterNews(String id, String masterId ,MasterNews news, Model model) {
-        Master master = (Master) baseManager.getObject(Master.class.getName(),masterId);
+    public String saveMasterNews(String id,MasterNews news, Model model) {
+        Master master = MasterUtil.findMaster();
         news.setMaster(master);
         if (id == null || "".equals(id)){
             news.setStatus("1");
+            news.setId(null);
             baseManager.saveOrUpdate(MasterNews.class.getName(),news);
             model.addAttribute("object",news);
         }else{
             MasterNews masterNews = (MasterNews) baseManager.getObject(MasterNews.class.getName(),id);
+            masterNews.setTitle(news.getTitle());
             masterNews.setStatus("1");
             masterNews.setMaster(master);
             masterNews.setCreateDateTime(new Date());
@@ -281,6 +283,16 @@ public class TenantController extends BaseMasterController {
         model.addAttribute("masterId",master.getId());
         return "redirect:/basic/xm.do?qm=plistMasterNews_default";
     }
+
+//    @RequestMapping("/updateMasterNews.do")
+//    public String updateMasterNews(Model model) {
+//        Master master = MasterUtil.findMaster();
+//        String newsId = request.getParameter("id");
+//        MasterNews news = (MasterNews) baseManager.getObject(MasterNews.class.getName(),newsId);
+//        model.addAttribute("object", news);
+//        model.addAttribute("master",master);
+//        return "/master/masterNewsForm";
+//    }
 
 
     @ResponseBody
