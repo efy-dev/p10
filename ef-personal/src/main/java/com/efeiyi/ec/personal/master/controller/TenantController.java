@@ -188,6 +188,16 @@ public class TenantController extends BaseMasterController {
 
     }
 
+    @RequestMapping("/onLineWork.do")
+    public String onWork(String id , Model model) {
+        Master master = MasterUtil.findMaster();
+        MasterWork mw = (MasterWork) baseManager.getObject(MasterWork.class.getName(),id);
+        model.addAttribute("object",mw);
+        model.addAttribute("id", master.getId());
+        return "/master/masterWork";
+    }
+
+
     @RequestMapping("/master/saveMasterWork.do")
     public String saveMasterWork(HttpServletRequest request, MultipartRequest multipartRequest, ModelMap modelMap) {
         modelMap.put("result", "false");
@@ -250,15 +260,39 @@ public class TenantController extends BaseMasterController {
 
 
     @RequestMapping("/saveMasterNews.do")
-    public String saveMasterNews(String masterId ,MasterNews news, Model model) {
-        Master master = (Master) baseManager.getObject(Master.class.getName(),masterId);
+    public String saveMasterNews(String id,MasterNews news, Model model) {
+        Master master = MasterUtil.findMaster();
         news.setMaster(master);
-        news.setStatus("1");
-        baseManager.saveOrUpdate(MasterNews.class.getName(),news);
+        if (id == null || "".equals(id)){
+            news.setStatus("1");
+            news.setId(null);
+            baseManager.saveOrUpdate(MasterNews.class.getName(),news);
+            model.addAttribute("object",news);
+        }else{
+            MasterNews masterNews = (MasterNews) baseManager.getObject(MasterNews.class.getName(),id);
+            masterNews.setTitle(news.getTitle());
+            masterNews.setStatus("1");
+            masterNews.setMaster(master);
+            masterNews.setCreateDateTime(new Date());
+            masterNews.setBrief(news.getBrief());
+            masterNews.setContent(news.getContent());
+            masterNews.setDataSource(news.getDataSource());
+            baseManager.saveOrUpdate(MasterNews.class.getName(),masterNews);
+            model.addAttribute("object",masterNews);
+        }
         model.addAttribute("masterId",master.getId());
-        model.addAttribute("object",news);
         return "redirect:/basic/xm.do?qm=plistMasterNews_default";
     }
+
+//    @RequestMapping("/updateMasterNews.do")
+//    public String updateMasterNews(Model model) {
+//        Master master = MasterUtil.findMaster();
+//        String newsId = request.getParameter("id");
+//        MasterNews news = (MasterNews) baseManager.getObject(MasterNews.class.getName(),newsId);
+//        model.addAttribute("object", news);
+//        model.addAttribute("master",master);
+//        return "/master/masterNewsForm";
+//    }
 
 
     @ResponseBody

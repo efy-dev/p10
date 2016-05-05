@@ -58,7 +58,7 @@
                             <td width="15%">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/onMasterWork.do?id=${masterWork.id}"/>"><span
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/onLineWork.do?id=${masterWork.id}"/>"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </a>
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeMasterWork('${masterWork.id}')})" href="#"><span

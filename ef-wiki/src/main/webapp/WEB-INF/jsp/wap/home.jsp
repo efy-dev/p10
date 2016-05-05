@@ -38,7 +38,7 @@
     <ul class="am-slides">
       <c:forEach items="${wapBannerList}" var="banner">
       <li>
-        <a href="<c:url value="${banner.directUrl}"/>" title=""><img src="http://pro.efeiyi.com/${banner.imageUrl}@!home1-banner" alt=""></a>
+        <a href="<c:url value="${banner.directUrl}"/>" title=""><img src="http://wiki-oss.efeiyi.com/${banner.imageUrl}@!wap-home-banner" alt=""></a>
       </li>
       </c:forEach>
     </ul>
@@ -82,7 +82,6 @@
 </div>
 
 <script src="<c:url value="/scripts/assets/wap/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/scripts/assets/wap/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/assets/wap/js/system.js"/>"></script>
 </body>
 </html>

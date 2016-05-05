@@ -26,7 +26,7 @@
       <c:forEach items="${pcBannerList}" var="banner" varStatus="status">
         <li>
           <a href="<c:url value="${banner.directUrl}"/> " target="_blank" title="非遗轮播图"><img
-                  src="http://pro.efeiyi.com/${banner.imageUrl}" width="1920" height=""
+                  src="http://wiki-oss.efeiyi.com/${banner.imageUrl}" width="1920" height=""
                   alt="${banner.title}"/></a></li>
       </c:forEach>
       <div class="click next"></div>

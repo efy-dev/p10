@@ -449,6 +449,23 @@
             </jnode>
         </jnode>
 
+        <jnode url="" id="industryManager" access="admin,operational,c_operational,product_manager,offline_manager"
+               state="closed" text_zh_CN="行业解决方案">
+            <jnode url="/basic/xm.do?qm=plistIndustrySolution_default"
+                   access="admin,operational,c_operational,product_manager,offline_manager" text_zh_CN="解决方案列表">
+                <match url="/basic/xm.do?qm=viewIndustrySolution"/>
+                <match url="/basic/xm.do?qm=plistProductGift_industry"/>
+                <!--<match url="/basic/xm.do?qm=formProjectGift&amp;view=Gift"/>-->
+            </jnode>
+            <jnode url="/basic/xm.do?qm=formIndustrySolution"
+                   access="admin,operational,c_operational,product_manager,offline_manager" text_zh_CN="新建一个解决方案">
+                <!--<match url="/basic/xm.do?qm=plistGiftLabel_default"/>-->
+                <!--<match url="/basic/xm.do?qm=formGiftLabel&amp;view=label"/>-->
+                <!--<match url="/basic/xm.do?qm=formGiftLabel&amp;view=editLabel"/>-->
+            </jnode>
+        </jnode>
+
+
     </jnode>
 
 
@@ -476,9 +493,3 @@
         </jnode>
     </jnode>
 </jmenu>
-
-
-
-
-
-
