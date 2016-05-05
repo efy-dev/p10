@@ -112,29 +112,29 @@ $(function(){
         });
         //收藏
         var oBiao=$('.preview .collect .biao');
-        oBiao.hover(function(){
-            var $span=$(this).siblings('span');
-            $span.text('添加收藏');
-            if($span.is('.active')){
-                $span.text('取消收藏');
-            }
-            if($span.is('.hover')){
-                $span.text('添加收藏');
-            }
-        })
-
-        oBiao.find('.icon').toggle(
-            function(){
-                var $span=$(this).parents('.biao').siblings('span');
-                $(this).addClass('icon-active');
-                $span.attr('class','txt active').text('取消收藏');
-            },
-            function(){
-                var $span=$(this).parents('.biao').siblings('span');
-                $(this).removeClass('icon-active');
-                $span.attr('class','txt hover').text('添加收藏');
-            }
-        );
+        //oBiao.hover(function(){
+        //    var $span=$(this).siblings('span');
+        //    $span.text('添加收藏');
+        //    if($span.is('.active')){
+        //        $span.text('取消收藏');
+        //    }
+        //    if($span.is('.hover')){
+        //        $span.text('添加收藏');
+        //    }
+        //})
+        //
+        //oBiao.find('.icon').toggle(
+        //    function(){
+        //        var $span=$(this).parents('.biao').siblings('span');
+        //        $(this).addClass('icon-active');
+        //        $span.attr('class','txt active').text('取消收藏');
+        //    },
+        //    function(){
+        //        var $span=$(this).parents('.biao').siblings('span');
+        //        $(this).removeClass('icon-active');
+        //        $span.attr('class','txt hover').text('添加收藏');
+        //    }
+        //);
         //
         $(window).scroll(function(){
             var d=$(document).scrollTop();

@@ -89,7 +89,7 @@ public class PurchaseOrderPaymentController {
                     orderStatus = PurchaseOrder.ORDER_STATUS_WRGIFT;
                 } else if (purchaseOrder.getOrderType() != null && purchaseOrder.getOrderType().equals("4")) {  //团购
                     orderStatus = PurchaseOrder.ORDER_STATUS_WRECEIVE;
-                    HttpUtil.getHttpResponseByAsynchronous(purchaseOrder.getCallbackBussiness());
+//                    HttpUtil.getHttpResponseByAsynchronous(purchaseOrder.getCallbackBussiness());
                 } else {
                     orderStatus = PurchaseOrder.ORDER_STATUS_WRECEIVE;
                 }

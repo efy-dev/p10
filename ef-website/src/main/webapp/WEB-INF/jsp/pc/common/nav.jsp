@@ -22,7 +22,7 @@
 
         <ul class="fr">
             <li><a href="http://www.efeiyi.com" title="e飞蚁">e飞蚁商城</a></li>
-            <li><a href="http://wiki.efeiyi.com" title="">工 艺</a></li>
+            <li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>
             <li><a href="http://master.efeiyi.com" title="">大 师</a></li>
             <li>
 
