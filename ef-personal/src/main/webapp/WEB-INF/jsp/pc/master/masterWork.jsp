@@ -65,8 +65,8 @@
                 <label for="picurl" class="am-u-sm-3 am-form-label">新图片</label>
 
                 <div class="am-u-sm-9"  style="margin-top: 9px;">
-                    <input type="file" id="picurl" name="picurl" placeholder="附件" value=""/>
-                    <input type="text" readonly="readonly" style="" value="${object.pictureUrl}">
+                    <input type="file" id="picurl" name="picurl" placeholder="附件" value="${object.pictureUrl}"/>
+                    <input type="text" readonly="readonly" name="picPath" style="" value="${object.pictureUrl}">
                 </div>
             </div>
 
