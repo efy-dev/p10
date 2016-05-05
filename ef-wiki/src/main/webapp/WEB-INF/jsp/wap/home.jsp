@@ -82,7 +82,6 @@
 </div>
 
 <script src="<c:url value="/scripts/assets/wap/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/scripts/assets/wap/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/assets/wap/js/system.js"/>"></script>
 </body>
 </html>
