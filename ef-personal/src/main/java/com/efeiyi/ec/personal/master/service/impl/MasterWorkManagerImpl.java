@@ -32,9 +32,6 @@ public class MasterWorkManagerImpl implements MasterWorkManager {
     @Autowired
     private AliOssUploadManager aliOssUploadManager;
 
-    @Autowired
-    private AutoSerialManager autoSerialManager;
-
     @Override
     public void changePictureSort(String sourceId, String sourceSort, String targetId, String targetSort) {
         MasterWorkPicture source = (MasterWorkPicture) xdoDao.getObject(MasterWorkPicture.class.getName(), sourceId);
@@ -47,9 +44,9 @@ public class MasterWorkManagerImpl implements MasterWorkManager {
 
     @Override
     public String saveMasterWork(HttpServletRequest request, MultipartRequest multipartRequest) {
-
         Master master;
         MasterWork masterWork = null;
+        String id = request.getParameter("id");
         try {
             if (!StringUtils.isEmpty(request.getParameter("master.id"))) {
                 master = (Master) xdoDao.getObject(Master.class.getName(), request.getParameter("master.id"));
@@ -58,7 +55,11 @@ public class MasterWorkManagerImpl implements MasterWorkManager {
                     String identify = sdf.format(new Date());
                     String url = "banner/" + identify + multipartRequest.getFile("picurl").getOriginalFilename();
                     if (aliOssUploadManager.uploadFile(multipartRequest.getFile("picurl"), "tenant", url)) {
-                        masterWork = new MasterWork();
+                        if (id == null || "".equals(id)){
+                            masterWork = new MasterWork();
+                        }else{
+                            masterWork = (MasterWork) xdoDao.getObject(MasterWork.class.getName(),id);
+                        }
                         masterWork.setPictureUrl(url);
                         masterWork.setMaster(master);
                         masterWork.setStatus("1");

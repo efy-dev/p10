@@ -41,6 +41,7 @@
     <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
         <form action="<c:url value="/saveMasterNews.do"/>" method="post" class="am-form am-form-horizontal">
             <input type="hidden" name="masterId" value="${master.id}">
+            <input type="hidden" id="id" name="id" value="${object.id}"/>
             <div class="am-form-group">
                 <label for="title" class="am-u-sm-3 am-form-label" >标题</label>
 

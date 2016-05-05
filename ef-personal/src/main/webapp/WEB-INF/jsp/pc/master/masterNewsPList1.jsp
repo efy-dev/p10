@@ -58,10 +58,12 @@
                             <td width="20%">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formMasterNews&id=${masterNews.id}"/>"><span
+                                                class="am-icon-pencil-square-o">编辑</span>
+                                        </a>
                                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=viewMasterNews&id=${masterNews.id}"/>"><span
                                                 class="am-icon-pencil-square-o">详情</span>
                                         </a>
-
                                     </div>
                                 </div>
                             </td>

@@ -57,7 +57,7 @@
 
                 <div class="am-u-sm-9">
                         <textarea id="description" name="description" class="ckeditor" placeholder="作品介绍" required
-                                  value=""></textarea>
+                                  value="">${object.description}</textarea>
                 </div>
                 <br>
             </div>
@@ -65,7 +65,8 @@
                 <label for="picurl" class="am-u-sm-3 am-form-label">新图片</label>
 
                 <div class="am-u-sm-9"  style="margin-top: 9px;">
-                    <input type="file" id="picurl" name="picurl" placeholder="附件" value="">
+                    <input type="file" id="picurl" name="picurl" placeholder="附件" value=""/>
+                    <input type="text" readonly="readonly" style="" value="${object.pictureUrl}">
                 </div>
             </div>
 
