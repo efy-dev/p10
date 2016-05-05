@@ -44,19 +44,20 @@
         }
     </style>
     <script type="text/javascript" src="<c:url value='/scripts/zclip/jquery.zclip.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/scripts/recommended.js'/>"></script>
 </head>
 <body>
 
 
 <div style="text-align: left">
-<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formSubject&type=gift"/>'" type="button"
-           class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建专题"/>
+    <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
+        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formSubject&type=gift"/>'" type="button"
+               class="am-btn am-btn-default am-btn-xs"
+               style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建专题"/>
     </security:authorize>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
-<div >
+<div>
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
         </div>
@@ -64,9 +65,9 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
-<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
-                    <th class="table-set" width="30%">操作</th>
-</security:authorize>
+                    <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
+                        <th class="table-set" width="30%">操作</th>
+                    </security:authorize>
                     <th class="table-title" width=20%">专题名称</th>
                     <th class="table-title" width="15%">专题类别</th>
                     <th class="table-title" width="15%">模板</th>
@@ -80,37 +81,104 @@
                 <c:forEach items="${requestScope.pageInfo.list}" var="subject">
                     <tr id="${subject.id}">
                         <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
-                        <td>
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
 
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=formSubject&view=gift&id=${subject.id}"/>">
-                                        编辑
-                                    </a>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="javascript:void (0);"
-                                       onclick="showConfirm('提示','是否删除',function(){removeSubject('${subject.id}')})">
-                                        删除
-                                    </a>
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=formSubject&view=gift&id=${subject.id}"/>">
+                                            编辑
+                                        </a>
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="javascript:void (0);"
+                                           onclick="showConfirm('提示','是否删除',function(){removeSubject('${subject.id}')})">
+                                            删除
+                                        </a>
+                                        <c:set value="0" var="isOk"/>
+                                        <c:if test="${not empty subject.getSubjectRecommendList()}">
+                                            <c:forEach var="recommended"
+                                                       items="${subject.getSubjectRecommendList()}">
+                                                <c:if test="${recommended.subject.id== subject.id && recommended.groupName == 'gift.productGiftRecommendedUp'}">
+                                                    <c:set value="1" var="isOk"/>
+                                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                       href="#" onclick="recommended(this,1,'<c:url
+                                                            value="/Recommended/deleteObjectRecommended.do"/>')"
+                                                       recommendedId="${subject.id}" id="${recommended.id}"
+                                                       recommend="0">
+                                                        <span class="am-icon-heart">取消推荐上部 </span>
+                                                    </a>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${isOk=='0'}">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                               onclick="recommended(this)"
+                                               href="#" recommend="1" recommendedId="${subject.id}" id="">
+                                                <span class="am-icon-heart"> 推荐首页上部分</span>
+                                            </a>
+
+                                        </c:if>
+
+                                        <span style="display: none;float: left;padding-left: 10px;">
+                                            <input type="text" name="sort" style="width: 35px;" value=""/>
+                                            <a class=" am-btn-primary"
+                                               onclick="saveRecommended(this,'gift.productGiftRecommendedUp',1,'<c:url
+                                                       value="/Recommended/saveObjectRecommended.do"/>')"
+                                               style="padding: 0px 10px 5px 10px"> 保存</a>
+                                        </span>
 
 
+                                        <c:set value="0" var="isOk"/>
+                                        <c:if test="${not empty subject.getSubjectRecommendList()}">
+                                            <c:forEach var="recommended"
+                                                       items="${subject.getSubjectRecommendList()}">
+                                                <c:if test="${recommended.subject.id== subject.id && recommended.groupName == 'gift.productGiftRecommendedDown'}">
+                                                    <c:set value="1" var="isOk"/>
+                                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                       href="#" onclick="recommended(this,1,'<c:url
+                                                            value="/Recommended/deleteObjectRecommended.do"/>')"
+                                                       recommendedId="${subject.id}" id="${recommended.id}"
+                                                       recommend="0">
+                                                        <span class="am-icon-heart">取消推荐下部 </span>
+                                                    </a>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${isOk=='0'}">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                               onclick="recommended(this)"
+                                               href="#" recommend="1" recommendedId="${subject.id}" id="">
+                                                <span class="am-icon-heart"> 推荐首页下部分</span>
+                                            </a>
+
+                                        </c:if>
+
+                                        <span style="display: none;float: left;padding-left: 10px;">
+                                            <input type="text" name="sort" style="width: 35px;" value=""/>
+                                            <a class=" am-btn-primary"
+                                               onclick="saveRecommended(this,'gift.productGiftRecommendedDown',1,'<c:url
+                                                       value="/Recommended/saveObjectRecommended.do"/>')"
+                                               style="padding: 0px 10px 5px 10px"> 保存</a>
+                                        </span>
+
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
                         </security:authorize>
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewGiftSubject&id=${subject.id}'/>">${subject.name}</a>
                         </td>
 
                         <td class="am-hide-sm-only">
-                               <ming800:status name="type" dataType="Subject.type" checkedValue="${subject.type}" type="normal" />
+                            <ming800:status name="type" dataType="Subject.type" checkedValue="${subject.type}"
+                                            type="normal"/>
                         </td>
                         <td class="am-hide-sm-only">
-                            <ming800:status name="template" dataType="Subject.template" checkedValue="${subject.template}" type="normal" />
+                            <ming800:status name="template" dataType="Subject.template"
+                                            checkedValue="${subject.template}" type="normal"/>
                         </td>
                         <td class="am-hide-sm-only">
-                            ${subject.subjectIndex}
+                                ${subject.subjectIndex}
                         </td>
 
                     </tr>
@@ -150,19 +218,19 @@
             url: '<c:url value="/product/updateShow.do"/>',
             cache: false,
             dataType: "json",
-            data: {subjectId: id,show:show},
+            data: {subjectId: id, show: show},
             success: function (data) {
-                if(show =="1"){
+                if (show == "1") {
                     $(obj).text("下架");
-                    $(obj).attr("show","0");
-                    var span =  '<span style="color: red">上架 </span>';
-                    $("#"+data+" td:eq(5)").html(span);
+                    $(obj).attr("show", "0");
+                    var span = '<span style="color: red">上架 </span>';
+                    $("#" + data + " td:eq(5)").html(span);
                 }
-                if(show =="0"){
+                if (show == "0") {
                     $(obj).text("上架");
-                    $(obj).attr("show","1");
-                    var span =  '<span>下架 </span>';
-                    $("#"+data+" td:eq(5)").html(span);
+                    $(obj).attr("show", "1");
+                    var span = '<span>下架 </span>';
+                    $("#" + data + " td:eq(5)").html(span);
                 }
             }
         });
