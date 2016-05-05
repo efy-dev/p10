@@ -40,5 +40,16 @@
                 </do>
             </does>
         </entity>
+        <entity name="ProductGiftTag" label="礼品标签列表" model="com.efeiyi.ec.gift.model.ProductGiftTag">
+            <does>
+                <do name="listProductGiftTag" access="" label="礼品标签列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="productGift.product.price" defaultValue="0" operation="gt"/>
+                        <condition name="productGift.product.price" defaultValue="99999999" operation="lt"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
     </entities>
 </module>

@@ -7,7 +7,7 @@
     <ul>
       <c:if test="${bannerList != null && bannerList != ''}">
         <c:forEach items="${bannerList}" var="banner">
-          <li><a href="" title=""><img src="http://wiki-oss.efeiyi.com/${banner.imageUrl}" alt=""></a></li>
+          <li><a href="" title=""><img src="http://gift-oss.efeiyi.com/${banner.imageUrl}" alt=""></a></li>
         </c:forEach>
       </c:if>
     </ul>
@@ -36,10 +36,10 @@
               <c:forEach items="${industrySolution.value}" var="productGiftIndustrySolution">
                 <li>
                   <a href="">
-                    <img src="http://wiki-oss.efeiyi.com/${productGiftIndustrySolution.productGift.product.picture_url}" alt="">
+                    <img src="http://gift-oss.efeiyi.com/${productGiftIndustrySolution.productGift.productModel.product.picture_url}" alt="">
                     <div class="list-content delete-pd">
-                      <p class="name">${productGiftIndustrySolution.productGift.product.name}</p>
-                      <p class="title">${productGiftIndustrySolution.productGift.product.subName}</p>
+                      <p class="name">${productGiftIndustrySolution.productGift.productModel.product.name}</p>
+                      <p class="title">${productGiftIndustrySolution.productGift.productModel.product.subName}</p>
                     </div>
                   </a>
                 </li>
