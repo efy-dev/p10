@@ -25,7 +25,7 @@
                     </query>
                 </do>
 
-                 <!--wiki  -->
+                <!--wiki  -->
                 <do name="plistProjectCategory2" access="" label="ProjectCategory列表"
                     result="/projectCategory/projectCategoryPList2"
                     execute="com.efeiyi.ec.system.project.controller.ProjectCategoryHandler">
@@ -100,8 +100,8 @@
             <fields>
                 <field name="type" label="项目类型" inputType="text">
                     <statusType fieldName="type">
-                        <item label="非遗技艺" value="1"/>
-                        <item label="非遗美术" value="2"/>
+                        <item label="传统美术" value="1"/>
+                        <item label="传统技艺" value="2"/>
                     </statusType>
                 </field>
                 <field name="level" label="项目类型" inputType="text">
@@ -200,7 +200,8 @@
                 <do name="listProject3" label="project列表" access="" result="/projectCategory/projectIncludeList">
                     <query name="default" label="默认" type="auto" orderBy="serial:asc">
                         <condition label="project主键" name="status" defaultValue="0" operation="ne" inputType="default"/>
-                        <condition label="类别id" name="projectCategory.id" defaultValue="0" operation="eq" inputType="default"/>
+                        <condition label="类别id" name="projectCategory.id" defaultValue="0" operation="eq"
+                                   inputType="default"/>
                     </query>
 
                 </do>
@@ -210,7 +211,9 @@
                     </query>
 
                 </do>
-                <do name="viewProjectwiki" label="查看" access="" execute="com.efeiyi.ec.system.project.controller.MasterProjectHander" result="/project/projectView2"   />
+                <do name="viewProjectwiki" label="查看" access=""
+                    execute="com.efeiyi.ec.system.project.controller.MasterProjectHander"
+                    result="/project/projectView2"/>
             </does>
         </entity>
         <entity name="ProjectProperty" label="ProjectProperty"
@@ -239,7 +242,8 @@
                         <condition name="project.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
-                <do name="formProjectProperty2" label="保存ProjectProperty" access="" execute="com.efeiyi.ec.system.project.controller.ProjectPropertyHandler"
+                <do name="formProjectProperty2" label="保存ProjectProperty" access=""
+                    execute="com.efeiyi.ec.system.project.controller.ProjectPropertyHandler"
                     result="/projectProperty/projectPropertyForm2"/>
             </does>
         </entity>

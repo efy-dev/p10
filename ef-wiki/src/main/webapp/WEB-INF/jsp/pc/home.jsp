@@ -70,7 +70,7 @@
       <c:forEach items="${artRecommendList}" var="art" begin="0" end="7">
         <li>
           <a href="<c:url value="/project/${art.artistry.id}"/>">
-            <img src="http://wiki-oss.efeiyi.com/${art.artistry.project.picture_pc_url}@!wiki-home-project-picture" alt="">
+            <img src="http://wiki-oss.efeiyi.com/${art.artistry.getMainPicture().pictureUrl}@!wiki-home-project-picture" alt="">
             <div class="list-content">
               <p class="name">${art.artistry.project.name}</p>
               <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${art.artistry.project.getLevel()}" type="normal"/>非遗项目</p>
@@ -90,7 +90,7 @@
       <c:forEach items="${craftRecommendList}" var="craft" begin="0" end="7">
       <li>
         <a href="<c:url value="/project/${craft.artistry.id}"/>">
-          <img src="http://wiki-oss.efeiyi.com/${craft.artistry.project.picture_pc_url}@!wiki-home-project-picture" alt="">
+          <img src="http://wiki-oss.efeiyi.com/${craft.artistry.getMainPicture().pictureUrl}@!wiki-home-project-picture" alt="">
           <div class="list-content">
             <p class="name">${craft.artistry.project.name}</p>
             <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${craft.artistry.project.getLevel()}" type="normal"/>非遗项目</p>

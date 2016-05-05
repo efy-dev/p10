@@ -460,6 +460,8 @@ public class ModuleManagerImpl implements ModuleManager {
 
             String fieldName = statusTypeNode.selectSingleNode("@fieldName").getText();
             String fieldRequired = statusTypeNode.selectSingleNode("@required") == null ? "" : statusTypeNode.selectSingleNode("@required").getText();
+            String fieldLabel = statusTypeNode.selectSingleNode("@label") == null ? "" : statusTypeNode.selectSingleNode("@label").getText();
+            String fieldData = statusTypeNode.selectSingleNode("@data") == null ? "" : statusTypeNode.selectSingleNode("@data").getText();
 
             List<Node> nodes = statusTypeNode.selectNodes("item");
             List<StatusTypeItem> statusTypeItemList = null;
@@ -474,8 +476,10 @@ public class ModuleManagerImpl implements ModuleManager {
                     }
                 }
             }
+            statusType.setData(fieldData);
             statusType.setFieldName(fieldName);
             statusType.setRequired(fieldRequired);
+            statusType.setLabel(fieldLabel);
             statusType.setStatusTypeItemList(statusTypeItemList);
 
 
@@ -605,6 +609,14 @@ public class ModuleManagerImpl implements ModuleManager {
 
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    public List<StatusType> listStatusType(String key) {
+        String[] keys = key.split("\\.");
+        Xentity xentity = entityMap.get(keys[0]);
+        StatusTypeField statusTypeField = (StatusTypeField) xentity.getFieldMap().get(keys[1]);
+        return statusTypeField.getStatusTypeList();
+    }
+
 
 
 }

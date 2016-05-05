@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 public class StatusTypeItem {
+
     @JsonProperty(value = "text")
     private String label;
     @JsonProperty(value = "id")

@@ -1,5 +1,7 @@
 package com.ming800.core.does.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.List;
 
 /**
@@ -11,12 +13,38 @@ import java.util.List;
  */
 public class StatusType {
 
-    private String fieldName;
+    private String fieldName; //名称
     private String required;
-
+    private String label;  //标题
     private StatusTypeField statusTypeField;
-
     private List<StatusTypeItem> statusTypeItemList;
+    private String data; //额外的数据
+
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    @JsonIgnore
+    public StatusTypeField getStatusTypeField() {
+        return statusTypeField;
+    }
+
+    public void setStatusTypeField(StatusTypeField statusTypeField) {
+        this.statusTypeField = statusTypeField;
+    }
 
     public String getFieldName() {
         return fieldName;

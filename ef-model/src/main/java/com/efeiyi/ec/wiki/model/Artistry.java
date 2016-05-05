@@ -23,6 +23,18 @@ public class Artistry {
     private Project project;
     private ArtistryDescription artistryDescription;
     private List<ArtistryPicture> artistryPictureList;
+    private List<ArtistryRecommend> artistryRecommendList;
+
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "artistry")
+    public List<ArtistryRecommend> getArtistryRecommendList() {
+        return artistryRecommendList;
+    }
+
+    public void setArtistryRecommendList(List<ArtistryRecommend> artistryRecommendList) {
+        this.artistryRecommendList = artistryRecommendList;
+    }
 
 
     @Transient
