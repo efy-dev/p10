@@ -344,11 +344,9 @@ public class ProductManagerImpl implements ProductManager {
                 subjectPicture1.setSubject(subject);
                 subjectPicture1.setPictureUrl(subjectPicture[i]);
                 xdoDao.saveOrUpdateObject(subjectPicture1);
-
             } else {
                 if ("-1".equals(flag[i])) {
                     xdoDao.deleteObject(SubjectPicture.class.getName(), spId[i]);
-
                 }
             }
         }

@@ -8,25 +8,26 @@ import java.io.Serializable;
 
 public class ProductModelBean implements Serializable {
 
-    private  String [] modelId;
-    private  String [] modelName;
-    private  String [] modelAmount;
-    private  String [] modelPrice;
-    private  String [] modelStatus;
-    private  String [] modelProperty;
-    private  String [] property;
-    private  String [] marketPrice;
-    private  Double [] weight;
-    private  String [] freeDelivery;
-    private  String productId;
-    private  String defaultId;
-    private  String defaultStatus;
-    private  String defaultName;
-    private  String defaultAmount;
-    private  String defaultPrice;
-    private  String defaultMarketPrice;
-    private  Double defaultWeight;
-    private  String defaultFreeDelivery;
+    private String[] modelId;
+    private String[] modelName;
+    private String[] modelAmount;
+    private String[] modelPrice;
+    private String[] modelStatus;
+    private String[] modelProperty;
+    private String[] property;
+    private String[] marketPrice;
+    private Double[] weight;
+    private String[] freeDelivery;
+    private String productId;
+    private String defaultId;
+    private String defaultStatus;
+    private String defaultName;
+    private String defaultAmount;
+    private String defaultPrice;
+    private String defaultMarketPrice;
+    private Double defaultWeight;
+    private String defaultFreeDelivery;
+
     public String getProductId() {
         return productId;
     }

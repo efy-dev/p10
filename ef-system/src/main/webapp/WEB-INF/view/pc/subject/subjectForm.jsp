@@ -51,36 +51,21 @@
 <div class="am-g">
 
     <form action="<c:url value="/product/saveSubject.do"/>" method="post" class="am-form am-form-horizontal">
-        <%--<form action="<c:url value="/basic/xm.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">--%>
         <input type="hidden" name="id" value="${object.id}">
-        <input type="hidden" name="qm" value="saveOrUpdateSubject">
         <input type="hidden" name="resultPage" value="0"/>
         <input type="hidden" name="step" value="subject">
+        <%--上下架--%>
         <input type="hidden" name="subjectShow" value="${object.subjectShow}">
-        <c:if test="${empty object.subjectIndex}">
-            <input type="hidden" name="subjectIndex" value="1">
-        </c:if>
-        <c:if test="${not empty object.subjectIndex}">
-            <input type="hidden" name="subjectIndex" value="${object.subjectIndex}">
-        </c:if>
-        <%--<input type="hidden" name="newUrl" value="">--%>
         <input type="hidden" name="pictureUrl" value="${object.pictureUrl}">
         <input type="hidden" name="subjectDescription.id" value="${object.subjectDescription.id}">
-
-        <%--<input type="hidden" name="view" value="${view}">--%>
-
         <div class="am-form-group">
             <label name="name" class="am-u-sm-3 am-form-label">专题名称</label>
-
             <div class="am-u-sm-9">
-
                 <input type="text" name="name" id="name" placeholder="" value="${object.name}">
-
             </div>
         </div>
         <div class="am-form-group">
             <label name="template" class="am-u-sm-3 am-form-label">专题模板</label>
-
             <div class="am-u-sm-9">
                 <ming800:status name="template" dataType="Subject.template" checkedValue="${object.template}"
                                 type="select" onchange="changeTemplate(this)"/>
@@ -88,11 +73,11 @@
         </div>
         <div class="am-form-group">
             <label name="template" class="am-u-sm-3 am-form-label">专题类别</label>
-
             <div class="am-u-sm-9">
                 <ming800:status name="type" dataType="Subject.type" checkedValue="${object.type}" type="select"/>
             </div>
         </div>
+
         <c:if test="${object.template=='2'}">
             <c:set value="block" var="dis"/>
         </c:if>
@@ -100,12 +85,9 @@
             <c:set value="none" var="dis"/>
         </c:if>
         <div class="am-form-group" style="display: ${dis};" id="display">
-
             <label name="createDate" class="am-u-sm-3 am-form-label">活动时间</label>
-
             <div class="am-u-sm-9">
                 <div style="margin-top: 9px;">
-
                     起始:
                     <input style="width: 30%" value="" type="text" id="startDateTime"
                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'endDateTime\')}',minDate:'%y-%M-%d %H:%m:%s'})"
@@ -115,29 +97,25 @@
                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'startDateTime\')}'})"
                            name="endDateTime"/>
                     <%--<fmt:formatDate value="${object.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm"/>--%>
-
                 </div>
                 <!-- <small>必填项*</small>-->
             </div>
         </div>
         <div class="am-form-group">
-
-
             <label class="am-u-sm-3 am-form-label">专题描述</label>
             <div class="am-u-sm-9" style="margin-top: 10px;">
-                            <textarea name="subjectDescription.content" class="ckeditor" id="content"
-                                      placeholder="商品描述" required>
-                                ${object.subjectDescription.content}
-                            </textarea>
+                <textarea name="subjectDescription.content" class="ckeditor" id="content"
+                          placeholder="商品描述" required>
+                    ${object.subjectDescription.content}
+                </textarea>
             </div>
-
             <br>
         </div>
 
 
+        <%-------------------------------------------封面-------------------------------------------------------%>
         <div class="am-form-group">
             <label name="serial" class="am-u-sm-3 am-form-label">封面</label>
-
             <div class="am-u-sm-9" style="margin-top: 10px;">
                 <ul style="list-style:none">
                     <li>
@@ -152,6 +130,7 @@
 
             </div>
         </div>
+        <%--------------------------------------------------------------附件--------------------------------------------------------%>
         <div class="am-form-group">
             <label name="serial" class="am-u-sm-3 am-form-label">附件图片</label>
 
@@ -160,56 +139,40 @@
                 <a id="btn_upload3"></a>
             </div>
         </div>
-        <c:if test="${not empty object.id}">
-            <div class="am-form-group">
-                <label name="createDate" class="am-u-sm-3 am-form-label">创建时间</label>
 
-                <div class="am-u-sm-9">
-                    <div style="margin-top: 9px;">
-                        <input value="${object.createDateTime}" type="hidden" name="createDateTime"/>
-                        <fmt:formatDate value="${object.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm:ss"/>
-                    </div>
-                    <!-- <small>必填项*</small>-->
-                </div>
-            </div>
-        </c:if>
         <div class="am-u-md-13">
             <div class="am-panel am-panel-default">
                 <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">
                     <strong> 附件图片</strong>
                     <span class="am-icon-chevron-down am-fr"></span></div>
                 <div class="am-panel-bd am-collapse am-in" id="collapse-panel-3" style="height: auto;overflow: hidden">
-
                     <ul style="width: 100%" style="list-style:none" id="subjectPicture">
-                        <c:if test="${!empty object.subjectPictureList}">
-                            <c:forEach var="subjectPicture" items="${object.subjectPictureList}">
+                        <c:forEach var="subjectPicture" items="${object.subjectPictureList}">
+                            <li style="float: left;margin-right: 10px; width: 200px;" name="${subjectPicture.id}">
+                                <dl style="margin-top: 6px;">
+                                    <dt style="width: 100%">
+                                        <img width="100%" name=""
+                                             src="http://pro.efeiyi.com/${subjectPicture.pictureUrl}@!product-model"
+                                             alt="附件图片"/>
+                                        <input type="hidden" name="subjectPicture"
+                                               value="${subjectPicture.pictureUrl}">
+                                        <input type="hidden" name="flag" value="0">
+                                        <%--附件图片的id--%>
+                                        <input type="hidden" name="spId" value="${subjectPicture.id}">
+                                    </dt>
 
-                                <li style="float: left;margin-right: 10px; width: 200px;" name="${subjectPicture.id}">
-                                    <dl style="margin-top: 6px;">
-                                        <dt style="width: 100%">
-                                            <img width="100%" name=""
-                                                 src="http://pro.efeiyi.com/${subjectPicture.pictureUrl}@!product-model"
-                                                 alt="附件图片"/>
-                                            <input type="hidden" name="subjectPicture"
-                                                   value="${subjectPicture.pictureUrl}">
-                                            <input type="hidden" name="flag" value="0">
-                                            <input type="hidden" name="spId" value="${subjectPicture.id}">
-                                        </dt>
+                                    <dd style="width: 100%;text-align: center;">、
+                                        <a href="javascript:void(0);" onclick="deletePicture1(this)">删除</a>
+                                    </dd>
 
-                                        <dd style="width: 100%;text-align: center;">
+                                    <dd style="width: 100%;text-align: center;">
+                                        <a href="javascript:void(0);" class="copy"
+                                           url="http://pro.efeiyi.com/${subjectPicture.pictureUrl}">复制图片地址</a>
+                                    </dd>
+                                </dl>
+                            </li>
 
-                                            <a href="javascript:void(0);" onclick="deletePicture1(this)">删除</a>
-                                        </dd>
-
-                                        <dd style="width: 100%;text-align: center;">
-                                            <a href="javascript:void(0);" class="copy"
-                                               url="http://pro.efeiyi.com/${subjectPicture.pictureUrl}">复制图片地址</a>
-                                        </dd>
-                                    </dl>
-                                </li>
-
-                            </c:forEach>
-                        </c:if>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>

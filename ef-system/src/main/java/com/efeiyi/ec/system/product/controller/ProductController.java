@@ -8,6 +8,7 @@ import com.efeiyi.ec.project.model.ProjectCategoryProductModel;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.system.product.service.ProductModelManager;
+import com.efeiyi.ec.system.tenant.controller.SysTenantCategoryHandler;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
@@ -110,7 +111,7 @@ public class ProductController extends BaseController {
         String data = "";
         String productId = "";
         Product product = null;
-        if(request.getParameter("trueUrl")==null||"".equals(request.getParameter("trueUrl"))) {
+        if (request.getParameter("trueUrl") == null || "".equals(request.getParameter("trueUrl"))) {
             productId = request.getParameter("productId");
             product = (Product) baseManager.getObject(Product.class.getTypeName(), productId);
         }
@@ -127,28 +128,28 @@ public class ProductController extends BaseController {
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
             Integer index = 0;
-            String hz = fileName.substring(fileName.indexOf("."),fileName.length());
+            String hz = fileName.substring(fileName.indexOf("."), fileName.length());
             String imgName = fileName.substring(0, fileName.indexOf(hz));
             url = "product/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
-            if(request.getParameter("trueUrl")!=null&&!"".equals(request.getParameter("trueUrl"))){
+            if (request.getParameter("trueUrl") != null && !"".equals(request.getParameter("trueUrl"))) {
                 url = request.getParameter("trueUrl");
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
-            }else {
+            } else {
                 try {
                     aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
                     productPicture.setPictureUrl(url);
-                    if(request.getParameter("status").equals("3")){
-                        sort = productManager.productPictureSort(product.getId())+1;
-                       productPicture.setSort(sort);
+                    if (request.getParameter("status").equals("3")) {
+                        sort = productManager.productPictureSort(product.getId()) + 1;
+                        productPicture.setSort(sort);
                     }
-                    if(request.getParameter("status").equals("1")){
-                        sort = productManager.productPictureSort1(product.getId())+1;
+                    if (request.getParameter("status").equals("1")) {
+                        sort = productManager.productPictureSort1(product.getId()) + 1;
                         productPicture.setSort(sort);
                     }
                     productPicture.setStatus(request.getParameter("status"));
                     productPicture.setProduct(product);
                     baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
-                    data = productPicture.getId() + ":" + url + ":" + imgName+hz+":"+sort;
+                    data = productPicture.getId() + ":" + url + ":" + imgName + hz + ":" + sort;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -163,7 +164,7 @@ public class ProductController extends BaseController {
 
 
     @RequestMapping({"/changeImg.do"})
-    public String uploadMasterNewsPicture(MultipartRequest multipartRequest,String trueUrl,String changeImgUrl, HttpServletRequest request) throws Exception {
+    public String uploadMasterNewsPicture(MultipartRequest multipartRequest, String trueUrl, String changeImgUrl, HttpServletRequest request) throws Exception {
 
         MultipartFile multipartFile = multipartRequest.getFile("changeFile");
 
@@ -181,8 +182,8 @@ public class ProductController extends BaseController {
 
         String subjectId = request.getParameter("subjectId");
         Subject subject = null;
-        if(!"".equals(subjectId)){
-                subject = (Subject) baseManager.getObject(Subject.class.getTypeName(), subjectId);
+        if (!"".equals(subjectId)) {
+            subject = (Subject) baseManager.getObject(Subject.class.getTypeName(), subjectId);
         }
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
@@ -196,8 +197,7 @@ public class ProductController extends BaseController {
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
 
-                url = "subject/" + fileName;
-
+            url = "subject/" + fileName;
 
 
             try {
@@ -269,22 +269,13 @@ public class ProductController extends BaseController {
                                  MultipartRequest multipartRequest,
                                  String resultPage, Model model, String step) {
 
-        model.addAttribute("view",request.getParameter("view"));
-
-
+        model.addAttribute("view", request.getParameter("view"));
         if ("product".equals(step)) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
             String identify = sdf.format(new Date());
-            String url = "";
+            String url;
             try {
-
-//            try {
-//                Product product1 =        productManager.saveProduct(product);
-//                System.out.print(product1.getMaster().getName());
-//            }catch (Exception e){
-//
-//            }
-                if(multipartRequest.getFile("picture_url1")!=null&&!"".equals(multipartRequest.getFile("picture_url1"))) {
+                if (multipartRequest.getFile("picture_url1") != null && !"".equals(multipartRequest.getFile("picture_url1"))) {
                     if (!multipartRequest.getFile("picture_url1").getOriginalFilename().equals("")) {
                         url = "product/" + identify + multipartRequest.getFile("picture_url1").getOriginalFilename();
                         product.setPicture_url(url);
@@ -292,7 +283,6 @@ public class ProductController extends BaseController {
                     }
                 }
                 Product temProduct = productManager.saveProduct(product);
-                //  &tenantId=${tenantId}&masterId=${masterId}&id=
                 String tenantId = "0";
                 String masterId = "0";
                 if (temProduct.getTenant() != null) {
@@ -302,16 +292,11 @@ public class ProductController extends BaseController {
                     masterId = temProduct.getMaster().getId();
                 }
 
-                resultPage = resultPage + "&tenantId="+tenantId+"&masterId="+masterId+"&id="+temProduct.getId();
+                resultPage = resultPage + "&tenantId=" + tenantId + "&masterId=" + masterId + "&id=" + temProduct.getId();
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            //  model.addAttribute("object",productManager.saveProduct(product));
-
-
-
         } else if ("description".equals(step)) {
 
             model.addAttribute("object", productManager.saveProductDescription(productDescription));
@@ -331,20 +316,11 @@ public class ProductController extends BaseController {
     }
 
     @RequestMapping("/saveSubject.do")
-    public String saveNewProduct(Subject subject, String[] flag,String[] spId,String[] subjectPicture,
+    public String saveNewProduct(Subject subject, String[] flag, String[] spId, String[] subjectPicture,
                                  HttpServletRequest request,
                                  String resultPage) {
 
-                try {
-                   productManager.saveSubject(subject,flag,spId,subjectPicture);
-
-                }catch (Exception e){
-                   e.printStackTrace();
-                }
-
-
-
-
+        productManager.saveSubject(subject, flag, spId, subjectPicture);
         return resultPage;
     }
 
@@ -361,22 +337,23 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/removeProduct.do")
     @ResponseBody
-    public String removeProduct(String id,HttpServletRequest request) {
+    public String removeProduct(String id, HttpServletRequest request) {
         try {
             baseManager.remove(Product.class.getName(), id);
-            XQuery xQuery = new XQuery("listProductModel_default5",request);
-            xQuery.put("product_id",id);
-            for(ProductModel productModel : (List<ProductModel>)baseManager.listObject(xQuery)){
-                baseManager.remove(ProductModel.class.getName(),productModel.getId());
+            XQuery xQuery = new XQuery("listProductModel_default5", request);
+            xQuery.put("product_id", id);
+            for (ProductModel productModel : (List<ProductModel>) baseManager.listObject(xQuery)) {
+                baseManager.remove(ProductModel.class.getName(), productModel.getId());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return id;
     }
+
     @RequestMapping("/updatePicture.do")
     @ResponseBody
-    public String updateModelPicture(String id, String status,String productId,String modelId,HttpServletRequest request) {
+    public String updateModelPicture(String id, String status, String productId, String modelId, HttpServletRequest request) {
 
 
         ProductModel tempProductModel = null;
@@ -384,36 +361,36 @@ public class ProductController extends BaseController {
         try {
 
             ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
-            if("0".equals(modelId)){
-                XQuery productModelXQuery = new XQuery("listProductModel_default4",request);
-                productModelXQuery.put("product_id",productId);
-                tempProductModel = (ProductModel)baseManager.listObject(productModelXQuery).get(0);
+            if ("0".equals(modelId)) {
+                XQuery productModelXQuery = new XQuery("listProductModel_default4", request);
+                productModelXQuery.put("product_id", productId);
+                tempProductModel = (ProductModel) baseManager.listObject(productModelXQuery).get(0);
 
 
-            }else if(modelId!=null){
-                tempProductModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),modelId);
+            } else if (modelId != null) {
+                tempProductModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
 
-            }else {
+            } else {
                 modelId = "0";
             }
-            if("1".equals(status)){
+            if ("1".equals(status)) {
 
                 tempProductModel.setProductModel_url(productPicture.getPictureUrl());
-                baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                baseManager.saveOrUpdate(ProductModel.class.getName(), tempProductModel);
                 productPicture.setProductModel(tempProductModel);
-                XQuery xQuery = new XQuery("listProductPicture_default2",request);
-                xQuery.put("product_id",productId);
-                xQuery.put("productModel_id",tempProductModel.getId());
+                XQuery xQuery = new XQuery("listProductPicture_default2", request);
+                xQuery.put("product_id", productId);
+                xQuery.put("productModel_id", tempProductModel.getId());
                 List<ProductPicture> pictures = baseManager.listObject(xQuery);
-                if(pictures.size()!=0){
+                if (pictures.size() != 0) {
                     ProductPicture picture = pictures.get(0);
                     picture.setStatus("1");
-                    baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
+                    baseManager.saveOrUpdate(ProductPicture.class.getName(), picture);
                 }
                 tempStatus = "2";
-            }else if("2".equals(status)){
+            } else if ("2".equals(status)) {
                 tempProductModel.setProductModel_url(null);
-                baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                baseManager.saveOrUpdate(ProductModel.class.getName(), tempProductModel);
                 productPicture.setProductModel(tempProductModel);
                 tempStatus = "1";
             }
@@ -479,7 +456,7 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/setModelPicture.do")
     @ResponseBody
-    public String setModelPicture(String modelId, String pictureId,String oldModelId, HttpServletRequest request) {
+    public String setModelPicture(String modelId, String pictureId, String oldModelId, HttpServletRequest request) {
 
         ProductPicture productPicture = null;
         try {
@@ -493,7 +470,7 @@ public class ProductController extends BaseController {
 //                productPicture.setProductModel(productModel);
 //            }
 //            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
-            productPicture = productManager.setModelPicture(modelId,pictureId,oldModelId);
+            productPicture = productManager.setModelPicture(modelId, pictureId, oldModelId);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -503,23 +480,23 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/linkSubject.do")
     @ResponseBody
-    public String linkSubject(String subjectId, String productModelId,String subjectProductModelId,String status, HttpServletRequest request) {
+    public String linkSubject(String subjectId, String productModelId, String subjectProductModelId, String status, HttpServletRequest request) {
 
         try {
-            if("0".equals(status)){
-                SubjectProductModel subjectProductModel = (SubjectProductModel)baseManager.getObject(SubjectProductModel.class.getName(),subjectProductModelId);
+            if ("0".equals(status)) {
+                SubjectProductModel subjectProductModel = (SubjectProductModel) baseManager.getObject(SubjectProductModel.class.getName(), subjectProductModelId);
                 subjectProductModel.setStatus(status);
-                baseManager.saveOrUpdate(SubjectProductModel.class.getName(),subjectProductModel);
+                baseManager.saveOrUpdate(SubjectProductModel.class.getName(), subjectProductModel);
 
-            }else {
+            } else {
                 SubjectProductModel subjectProductModel = null;
-                if("0".equals(subjectProductModelId)){
+                if ("0".equals(subjectProductModelId)) {
                     subjectProductModel = new SubjectProductModel();
-                }else {
-                    subjectProductModel = (SubjectProductModel)baseManager.getObject(SubjectProductModel.class.getName(),subjectProductModelId);
+                } else {
+                    subjectProductModel = (SubjectProductModel) baseManager.getObject(SubjectProductModel.class.getName(), subjectProductModelId);
                 }
                 subjectProductModel.setStatus(status);
-                subjectProductModel.setSubject((Subject)baseManager.getObject(Subject.class.getName(),subjectId));
+                subjectProductModel.setSubject((Subject) baseManager.getObject(Subject.class.getName(), subjectId));
                 subjectProductModel.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId));
                 baseManager.saveOrUpdate(SubjectProductModel.class.getName(), subjectProductModel);
                 subjectProductModelId = subjectProductModel.getId();
@@ -536,9 +513,9 @@ public class ProductController extends BaseController {
     public String updateSubjectIndex(String subjectId, HttpServletRequest request) {
 
         try {
-           Subject subject = (Subject)baseManager.getObject(Subject.class.getName(),subjectId);
+            Subject subject = (Subject) baseManager.getObject(Subject.class.getName(), subjectId);
             subject.setSubjectIndex(subject.getSubjectIndex() + 1);
-            baseManager.saveOrUpdate(Subject.class.getName(),subject);
+            baseManager.saveOrUpdate(Subject.class.getName(), subject);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -547,21 +524,21 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/linkProjectCategory.do")
     @ResponseBody
-    public String linkProjectCategory(String projectCategoryId, String productModelId,String projectCategoryProductModelId,String status, HttpServletRequest request) {
+    public String linkProjectCategory(String projectCategoryId, String productModelId, String projectCategoryProductModelId, String status, HttpServletRequest request) {
 
         try {
-            if("0".equals(status)){
-                ProjectCategoryProductModel projectCategoryProductModel = (ProjectCategoryProductModel)baseManager.getObject(ProjectCategoryProductModel.class.getName(),projectCategoryProductModelId);
+            if ("0".equals(status)) {
+                ProjectCategoryProductModel projectCategoryProductModel = (ProjectCategoryProductModel) baseManager.getObject(ProjectCategoryProductModel.class.getName(), projectCategoryProductModelId);
                 projectCategoryProductModel.setStatus(status);
                 projectCategoryProductModel.setSort(0);
-                baseManager.saveOrUpdate(ProjectCategoryProductModel.class.getName(),projectCategoryProductModel);
+                baseManager.saveOrUpdate(ProjectCategoryProductModel.class.getName(), projectCategoryProductModel);
 
-            }else {
+            } else {
                 ProjectCategoryProductModel projectCategoryProductModel = null;
-                if("0".equals(projectCategoryProductModelId)){
+                if ("0".equals(projectCategoryProductModelId)) {
                     projectCategoryProductModel = new ProjectCategoryProductModel();
-                }else {
-                    projectCategoryProductModel = (ProjectCategoryProductModel)baseManager.getObject(ProjectCategoryProductModel.class.getName(),projectCategoryProductModelId);
+                } else {
+                    projectCategoryProductModel = (ProjectCategoryProductModel) baseManager.getObject(ProjectCategoryProductModel.class.getName(), projectCategoryProductModelId);
                 }
                 projectCategoryProductModel.setSort(0);
                 projectCategoryProductModel.setStatus(status);
@@ -583,13 +560,13 @@ public class ProductController extends BaseController {
 
         try {
             ProjectCategoryProductModel projectCategoryProductModel
-                     = (ProjectCategoryProductModel)baseManager.getObject(ProjectCategoryProductModel.class.getName(),id);
-            if("".equals(sort)||sort==null){
+                    = (ProjectCategoryProductModel) baseManager.getObject(ProjectCategoryProductModel.class.getName(), id);
+            if ("".equals(sort) || sort == null) {
                 projectCategoryProductModel.setSort(0);
-            }else {
+            } else {
                 projectCategoryProductModel.setSort(Integer.parseInt(sort));
             }
-          baseManager.saveOrUpdate(ProjectCategoryProductModel.class.getName(),projectCategoryProductModel);
+            baseManager.saveOrUpdate(ProjectCategoryProductModel.class.getName(), projectCategoryProductModel);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -602,11 +579,11 @@ public class ProductController extends BaseController {
     @ResponseBody
     public String setProductStatus(String id, String status, HttpServletRequest request) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-         String data = id;
+        String data = id;
         try {
-          Product product =  productManager.setProductStatus(status, id);
-            if(status.equals("1"))
-            data = sdf.format(product.getShowDateTime());
+            Product product = productManager.setProductStatus(status, id);
+            if (status.equals("1"))
+                data = sdf.format(product.getShowDateTime());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -616,10 +593,10 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/updateAmount.do")
     @ResponseBody
-    public String updateAmount(String id, Integer amount,String creator, HttpServletRequest request) {
-         String tempAmount = null;
+    public String updateAmount(String id, Integer amount, String creator, HttpServletRequest request) {
+        String tempAmount = null;
         try {
-            tempAmount = productModelManager.updateAmount(id,amount,creator).toString();
+            tempAmount = productModelManager.updateAmount(id, amount, creator).toString();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -629,11 +606,11 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/outExcel.do")
     @ResponseBody
-    public String outExcel2(HttpServletRequest request,String home,String on ,String down,HttpServletResponse response) {
-        String [] homes = home.split(",");
+    public String outExcel2(HttpServletRequest request, String home, String on, String down, HttpServletResponse response) {
+        String[] homes = home.split(",");
         try {
 
-            String fileName = productManager.outExcel1(homes,on,down);
+            String fileName = productManager.outExcel1(homes, on, down);
             File file = new File(fileName);
             InputStream fis = new BufferedInputStream(new FileInputStream(fileName));
             byte[] buffer = new byte[fis.available()];
@@ -659,7 +636,7 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/createXML.do")
     @ResponseBody
-    public void createXML(HttpServletRequest request){
+    public void createXML(HttpServletRequest request) {
         String path = request.getServletContext().getRealPath("/productxml");
         productManager.createXMLByAddedProduct(path);
     }
@@ -667,12 +644,12 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/updateShow.do")
     @ResponseBody
-    public String updateShow(String subjectId,String show, HttpServletRequest request) {
+    public String updateShow(String subjectId, String show, HttpServletRequest request) {
 
         try {
-            Subject subject = (Subject)baseManager.getObject(Subject.class.getName(),subjectId);
+            Subject subject = (Subject) baseManager.getObject(Subject.class.getName(), subjectId);
             subject.setSubjectShow(show);
-            baseManager.saveOrUpdate(Subject.class.getName(),subject);
+            baseManager.saveOrUpdate(Subject.class.getName(), subject);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -681,41 +658,41 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/changePictureSort.do")
     @ResponseBody
-    public String changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort ) throws Exception {
-         productManager.changePictureSort(sourceId,sourceSort,targetId,targetSort);
-         return "";
+    public String changePictureSort(String sourceId, String sourceSort, String targetId, String targetSort) throws Exception {
+        productManager.changePictureSort(sourceId, sourceSort, targetId, targetSort);
+        return "";
 
     }
 
     @RequestMapping("/updatePictureSort.do")
     @ResponseBody
-    public String updatePictureSort(String id,String sort) throws Exception {
-        ProductPicture productPicture = (ProductPicture)baseManager.getObject(ProductPicture.class.getName(),id);
+    public String updatePictureSort(String id, String sort) throws Exception {
+        ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
         productPicture.setSort(Integer.parseInt(sort));
-        baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+        baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
         return sort;
 
     }
 
     @RequestMapping("/initSort.do")
     @ResponseBody
-    public String initSort(HttpServletRequest request){
+    public String initSort(HttpServletRequest request) {
         String f = "1";
         try {
-            XQuery xQuery = new XQuery("listProduct_default2",request);
+            XQuery xQuery = new XQuery("listProduct_default2", request);
             List<Product> productList = baseManager.listObject(xQuery);
-            for(Product product : productList){
-                if(product.getProductPictureList()!=null){
-                    int i=1;
-                    for(ProductPicture productPicture : product.getProductPictureList()){
-                        if("1".equals(productPicture.getStatus())){
+            for (Product product : productList) {
+                if (product.getProductPictureList() != null) {
+                    int i = 1;
+                    for (ProductPicture productPicture : product.getProductPictureList()) {
+                        if ("1".equals(productPicture.getStatus())) {
                             productPicture.setSort(i++);
-                            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+                            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
 
                         }
-                        if("2".equals(productPicture.getStatus())){
+                        if ("2".equals(productPicture.getStatus())) {
                             productPicture.setSort(0);
-                            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+                            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
                         }
 
                     }
@@ -731,23 +708,23 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/initProductViewSort.do")
     @ResponseBody
-    public String initProductViewSort(HttpServletRequest request){
+    public String initProductViewSort(HttpServletRequest request) {
         String f = "1";
         try {
-            XQuery xQuery = new XQuery("listProduct_default2",request);
+            XQuery xQuery = new XQuery("listProduct_default2", request);
             List<Product> productList = baseManager.listObject(xQuery);
-            for(Product product : productList){
-                if(product.getProductPictureList()!=null){
-                    int i=1;
-                    for(ProductPicture productPicture : product.getProductPictureList()){
-                        if("3".equals(productPicture.getStatus())&&productPicture.getSort()==null){
+            for (Product product : productList) {
+                if (product.getProductPictureList() != null) {
+                    int i = 1;
+                    for (ProductPicture productPicture : product.getProductPictureList()) {
+                        if ("3".equals(productPicture.getStatus()) && productPicture.getSort() == null) {
                             productPicture.setSort(i++);
-                            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+                            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
 
                         }
-                        if("9".equals(productPicture.getStatus())&&productPicture.getSort()==null){
+                        if ("9".equals(productPicture.getStatus()) && productPicture.getSort() == null) {
                             productPicture.setSort(i++);
-                            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+                            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
                         }
 
                     }

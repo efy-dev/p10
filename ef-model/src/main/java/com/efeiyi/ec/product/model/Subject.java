@@ -15,10 +15,10 @@ import java.util.List;
 public class Subject {
 
     private String id;
-    private String pictureUrl;
+    private String pictureUrl;  //封面
     private String name;
     private SubjectDescription subjectDescription;
-    private Integer subjectIndex;
+    private Integer subjectIndex;  //专题顺序
     private List<SubjectPicture> subjectPictureList;
     private List<SubjectProduct> subjectProductList;
     private String status;
