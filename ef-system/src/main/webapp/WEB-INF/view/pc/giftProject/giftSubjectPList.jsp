@@ -86,7 +86,7 @@
                                     <div class="am-btn-group am-btn-group-xs">
 
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           href="<c:url value="/basic/xm.do?qm=formSubject&view=gift&id=${subject.id}"/>">
+                                           href="<c:url value="/basic/xm.do?qm=formSubject&view=gift&id=${subject.id}&type=gift"/>">
                                             编辑
                                         </a>
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -98,14 +98,14 @@
                                         <c:if test="${not empty subject.getSubjectRecommendList()}">
                                             <c:forEach var="recommended"
                                                        items="${subject.getSubjectRecommendList()}">
-                                                <c:if test="${recommended.subject.id== subject.id && recommended.groupName == 'gift.productGiftRecommendedUp'}">
+                                                <c:if test="${recommended.subject.id== subject.id && recommended.groupName == 'gift.productGiftRecommended'}">
                                                     <c:set value="1" var="isOk"/>
                                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                                        href="#" onclick="recommended(this,1,'<c:url
                                                             value="/Recommended/deleteObjectRecommended.do"/>')"
                                                        recommendedId="${subject.id}" id="${recommended.id}"
                                                        recommend="0">
-                                                        <span class="am-icon-heart">取消推荐上部 </span>
+                                                        <span class="am-icon-heart">取消推荐 </span>
                                                     </a>
                                                 </c:if>
                                             </c:forEach>
@@ -114,7 +114,7 @@
                                             <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                                onclick="recommended(this)"
                                                href="#" recommend="1" recommendedId="${subject.id}" id="">
-                                                <span class="am-icon-heart"> 推荐首页上部分</span>
+                                                <span class="am-icon-heart"> 推荐</span>
                                             </a>
 
                                         </c:if>
@@ -122,41 +122,7 @@
                                         <span style="display: none;float: left;padding-left: 10px;">
                                             <input type="text" name="sort" style="width: 35px;" value=""/>
                                             <a class=" am-btn-primary"
-                                               onclick="saveRecommended(this,'gift.productGiftRecommendedUp',1,'<c:url
-                                                       value="/Recommended/saveObjectRecommended.do"/>')"
-                                               style="padding: 0px 10px 5px 10px"> 保存</a>
-                                        </span>
-
-
-                                        <c:set value="0" var="isOk"/>
-                                        <c:if test="${not empty subject.getSubjectRecommendList()}">
-                                            <c:forEach var="recommended"
-                                                       items="${subject.getSubjectRecommendList()}">
-                                                <c:if test="${recommended.subject.id== subject.id && recommended.groupName == 'gift.productGiftRecommendedDown'}">
-                                                    <c:set value="1" var="isOk"/>
-                                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                       href="#" onclick="recommended(this,1,'<c:url
-                                                            value="/Recommended/deleteObjectRecommended.do"/>')"
-                                                       recommendedId="${subject.id}" id="${recommended.id}"
-                                                       recommend="0">
-                                                        <span class="am-icon-heart">取消推荐下部 </span>
-                                                    </a>
-                                                </c:if>
-                                            </c:forEach>
-                                        </c:if>
-                                        <c:if test="${isOk=='0'}">
-                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                               onclick="recommended(this)"
-                                               href="#" recommend="1" recommendedId="${subject.id}" id="">
-                                                <span class="am-icon-heart"> 推荐首页下部分</span>
-                                            </a>
-
-                                        </c:if>
-
-                                        <span style="display: none;float: left;padding-left: 10px;">
-                                            <input type="text" name="sort" style="width: 35px;" value=""/>
-                                            <a class=" am-btn-primary"
-                                               onclick="saveRecommended(this,'gift.productGiftRecommendedDown',1,'<c:url
+                                               onclick="saveRecommended(this,'gift.productGiftRecommended',1,'<c:url
                                                        value="/Recommended/saveObjectRecommended.do"/>')"
                                                style="padding: 0px 10px 5px 10px"> 保存</a>
                                         </span>
