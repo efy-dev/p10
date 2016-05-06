@@ -1,5 +1,7 @@
 package com.efeiyi.ec.system.gift.controller;
 
+import com.efeiyi.ec.gift.model.ProductGift;
+import com.efeiyi.ec.gift.model.ProductGiftTag;
 import com.efeiyi.ec.product.model.Product;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -18,9 +20,11 @@ public class GiftHandler implements DoHandler {
 
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
-        XQuery xQuery = new XQuery("plistGiftProduct_default", request);
-        List<Product> productList = (List<Product>) baseManager.listObject(xQuery);
-        modelMap.put("productList", productList);
+        Object productGift = modelMap.get("object");
+        XQuery xQuery = new XQuery("listProductGiftTag_default", request);
+        xQuery.put("productGift_id", ((ProductGift) productGift).getId());
+        List<ProductGiftTag> productGiftTagList = baseManager.listObject(xQuery);
+        modelMap.put("productGiftTagList",productGiftTagList);
 
         XQuery labelQuery = new XQuery("plistGiftTag_default", request);
         List<Product> tagList = (List<Product>) baseManager.listObject(labelQuery);

@@ -31,7 +31,7 @@
                 </do>
                 <do name="formGift" label="礼品表单" access="" result="/giftProject/editGift"
                     execute="com.efeiyi.ec.system.gift.controller.GiftHandler"/>
-                <do name="formProjectGift" label="礼品表单" access="" result="/giftProject/giftProjectView"
+                <do name="viewProductGift" label="礼品详情页" access="" result="/giftProject/giftProjectView"
                     execute="com.efeiyi.ec.system.gift.controller.GiftHandler"/>
 
                 <do name="removeProjectGift" label="删除礼品" access="" result="json"
@@ -83,8 +83,7 @@
 
         <entity name="ProductGiftTag" label="礼物标签" model="com.efeiyi.ec.gift.model.ProductGiftTag">
             <does>
-                <do name="saveOrUpdateGiftTag" label="保存礼品标签" access=""
-                    result="redirect:/basic/xm.do?qm=plistGiftProject_default">
+                <do name="saveOrUpdateGiftTag" label="保存礼品标签" access="">
                     <page>
                         <fields>
                             <field name="status" label="默认状态" defaultValue="1"
@@ -92,6 +91,14 @@
                         </fields>
                     </page>
                 </do>
+                <do name="listProductGiftTag" label="礼物标签列表" result="">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="productGift.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="removeProductGiftTag" access="" label="删除标签与礼品的关联"/>
             </does>
         </entity>
 
