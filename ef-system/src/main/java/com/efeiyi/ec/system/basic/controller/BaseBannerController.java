@@ -1,6 +1,5 @@
 package com.efeiyi.ec.system.basic.controller;
 
-import com.efeiyi.ec.annotation.HttpServiceModel;
 import com.ming800.core.does.model.StatusType;
 import com.ming800.core.does.model.StatusTypeItem;
 import com.ming800.core.does.service.ModuleManager;

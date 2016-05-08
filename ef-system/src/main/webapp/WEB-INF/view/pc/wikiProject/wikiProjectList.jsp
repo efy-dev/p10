@@ -97,12 +97,12 @@
                         </td>
                         <td class="am-hide-sm-only" width="10%">
                             <a href="<c:url value="/basic/xm.do?qm=viewProjectWiki&view=masterWork&id=${wikiList.id}"/>">
-                                    ${wikiList.project.name}
+                                    ${wikiList.name}
                             </a>
                         </td>
                         <td class="am-hide-sm-only" width="10%">
-                            <ming800:status name="level" dataType="Project.level"
-                                            checkedValue="${wikiList.project.level}" type="normal"/>
+                            <ming800:status name="level" dataType="ProjectWiki.level"
+                                            checkedValue="${wikiList.level}" type="normal"/>
                         </td>
                         <td class="am-hide-sm-only" width="10%">
                             <ming800:status name="type" dataType="ProjectWiki.type" checkedValue="${wikiList.type}"

@@ -18,6 +18,8 @@ import java.util.List;
 public class Artistry {
     private String id;
     private String status;
+    private String name;    //项目名称
+    private String level;  //项目级别
     private Date createDatetime;
     private String type;
     private Project project;
@@ -25,6 +27,23 @@ public class Artistry {
     private List<ArtistryPicture> artistryPictureList;
     private List<ArtistryRecommended> artistryRecommendList;
 
+    @Column(name = "level")
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "artistry")

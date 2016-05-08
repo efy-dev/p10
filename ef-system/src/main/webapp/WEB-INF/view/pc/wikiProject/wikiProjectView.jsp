@@ -32,9 +32,7 @@
             <tbody>
             <tr>
                 <td class="am-primary am-u-md-3">工艺名称</td>
-                <td class="am-u-md-3">${object.project.name}</td>
-                <td class="am-primary am-u-md-3" style="padding: 0rem"></td>
-                <td class="am-u-md-3" style="padding: 0rem"></td>
+                <td class="am-u-md-3">${object.name}</td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">工艺类型</td>

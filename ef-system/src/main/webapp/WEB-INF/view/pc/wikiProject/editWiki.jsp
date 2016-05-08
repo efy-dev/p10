@@ -46,7 +46,23 @@
                 <div class="am-u-sm-9">
                     <input type="hidden" name="project.id" id="projectId" placeholder="" value="${object.project.id}">
                     <input type="text" name="project.name" id="projectName" placeholder=""
-                           data-am-modal="{target: '#my-popup'}" value="${object.project.name}" required>
+                           data-am-modal="{target: '#my-popup'}" value="${object.project.name}">
+                </div>
+            </div>
+
+            <div class="am-form-group">
+                <label name="name" class="am-u-sm-3 am-form-label">项目名称</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" name="name" id="name" placeholder="" value="${object.name}">
+                </div>
+            </div>
+
+            <div class="am-form-group">
+                <label name="level" class="am-u-sm-3 am-form-label">项目级别</label>
+
+                <div class="am-u-sm-9">
+                    <ming800:status name="level" dataType="ProjectWiki.level" checkedValue="${object.level}" type="select"/>
                 </div>
             </div>
 

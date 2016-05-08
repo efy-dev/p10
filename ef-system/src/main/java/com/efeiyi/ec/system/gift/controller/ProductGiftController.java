@@ -1,6 +1,5 @@
 package com.efeiyi.ec.system.gift.controller;
 
-import com.efeiyi.ec.annotation.HttpServiceModel;
 import com.efeiyi.ec.gift.model.IndustrySolution;
 import com.efeiyi.ec.gift.model.ProductGift;
 import com.efeiyi.ec.gift.model.ProductGiftIndustrySolution;

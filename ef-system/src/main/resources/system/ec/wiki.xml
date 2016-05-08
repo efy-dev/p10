@@ -90,6 +90,15 @@
                         <item label="非遗美术" value="2"/>
                     </statusType>
                 </field>
+                <field name="level" label="项目类型" inputType="text">
+                    <statusType fieldName="level">
+                        <item label="世界级" value="9"/>
+                        <item label="国家级" value="1"/>
+                        <item label="省级" value="2"/>
+                        <item label="市级" value="3"/>
+                        <item label="县级" value="4"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
                 <do name="plistProjectWiki" access="" label="工艺项目列表" result="/wikiProject/wikiProjectList">
@@ -113,7 +122,7 @@
                 <do name="formWiki" label="保存工艺项目" access="" result="/wikiProject/editWiki"
                     execute="com.efeiyi.ec.system.master.controller.MasterWorkForm2Handler"/>
                 <do name="removeProjectWiki" label="删除工艺项目" access="" result="json"
-                        />
+                />
             </does>
         </entity>
     </entities>
