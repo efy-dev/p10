@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.basic.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ming800.core.p.service.AliOssUploadManager;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,49 @@ public class ManageController {
     }
 
 
+    @RequestMapping({"/ueditorConfig.do"})
+    @ResponseBody
+    public ResponseEntity ueditorConfig(HttpServletRequest request) throws IOException {
+        String action = request.getParameter("action");
+        if (action.equals("config")) {
+            String realPath = request.getServletContext().getRealPath("/");
+            String filePath = realPath + "/scripts/utf8-jsp/jsp/config.json";
+            System.out.println(realPath);
+            File file = new File(filePath);
+            HttpHeaders headers = new HttpHeaders();
+            String fileName = "config.json";//为了解决中文名称乱码问题
+            headers.setContentDispositionFormData("attachment", fileName);
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            return new ResponseEntity<>(FileUtils.readFileToByteArray(file),
+                    headers, HttpStatus.OK);
+        } else if (action.equals("img.do")) {
+            String data = "";
+            String testValue = request.getParameter("test");
+            System.out.println(testValue);
+            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+            Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            String url;
+            Map.Entry<String, MultipartFile> entry = fileMap.entrySet().iterator().next();
+//            for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
+            //上传文件
+            MultipartFile mf = entry.getValue();
+            String fileName = mf.getOriginalFilename();//获取原文件名
+            url = "test/" + fileName;
+            try {
+                aliOssUploadManager.uploadFile(mf, "ef-wiki", url);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String result = "{\"original\":\""+fileName+"\",\"name\":\""+fileName+"\",\"url\":\"/"+url+"\",\"size\":\""+mf.getSize()+"\",\"type\":\""+mf.getContentType()+"\",\"state\":\"SUCCESS\"}";
+            String result2 = "/" + url;
+            JSONObject jsonObject = JSONObject.parseObject(result);
+//            }
+            return new ResponseEntity(jsonObject, HttpStatus.OK);
+        }
+        return null;
+    }
+
     @RequestMapping("/img.do")
     @ResponseBody
     public String img(HttpServletRequest request) {
@@ -69,7 +113,7 @@ public class ManageController {
     }
 
 
-    @RequestMapping("download")
+    @RequestMapping({"/config"})
     @ResponseBody
     public ResponseEntity<byte[]> download(HttpServletRequest request) throws IOException {
         String realPath = request.getServletContext().getRealPath("/");
