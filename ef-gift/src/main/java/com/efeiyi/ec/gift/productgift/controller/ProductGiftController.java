@@ -64,7 +64,7 @@ public class ProductGiftController {
 
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         PageEntity pageEntity = getPageEntity(request);
-        String hql = "from ProductGiftTag p where 1=1";
+        String hql = "from ProductGiftTag p where p.status=1";
         if(value != null && value != ""){
             queryParamMap.put("value", value);
             hql+=" and p.productGiftTagValue.value=:value";
