@@ -38,6 +38,14 @@
                     <input type="text" name="name" value="${object.name}">
                 </div>
             </div>
+            <div class="am-form-group">
+                <label name="type" class="am-u-sm-3 am-form-label">专题短描述
+                    <small>*</small>
+                </label>
+                <div class="am-u-sm-9">
+                    <input type="text" name="content" value="${object.content}">
+                </div>
+            </div>
             <input type="hidden" name="template" value="1">
             <input type="hidden" name="type" value="lp">
 

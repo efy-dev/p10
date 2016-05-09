@@ -24,7 +24,9 @@ public class GiftHandler implements DoHandler {
         XQuery xQuery = new XQuery("listProductGiftTag_default", request);
         xQuery.put("productGift_id", ((ProductGift) productGift).getId());
         List<ProductGiftTag> productGiftTagList = baseManager.listObject(xQuery);
-        modelMap.put("productGiftTagList",productGiftTagList);
+        modelMap.put("productGiftTagList", productGiftTagList);
+
+        modelMap.put("productList", baseManager.listObject("select obj from ProductModel obj where obj.status!=0"));
 
         XQuery labelQuery = new XQuery("plistGiftTag_default", request);
         List<Product> tagList = (List<Product>) baseManager.listObject(labelQuery);
