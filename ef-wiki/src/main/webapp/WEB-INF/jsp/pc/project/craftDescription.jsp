@@ -25,8 +25,8 @@
     <div class="skill">
       <div class="page">
         <div class="txt-page">
-          <p class="name">技艺名称：<a>${artistry.project.name}</a></p>
-          <p class="rank">技艺级别：<em><ming800:status name="level" dataType="Project.level" checkedValue="${artistry.project.getLevel()}" type="normal"/></em></p>
+          <p class="name">技艺名称：<a>${artistry.name}</a></p>
+          <p class="rank">技艺级别：<em><ming800:status name="level" dataType="Project.level" checkedValue="${artistry.getLevel()}" type="normal"/></em></p>
           <c:if test="${not empty artistry.project.addressDistrict}">
               <p class="area">所属地区：<em>${artistry.project.addressDistrict.addressCity.addressProvince.name}${artistry.project.addressDistrict.addressCity.name}${artistry.project.addressDistrict.name}</em></p>
           </c:if>

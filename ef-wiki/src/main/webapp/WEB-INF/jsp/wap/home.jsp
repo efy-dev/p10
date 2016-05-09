@@ -49,11 +49,11 @@
     <ul class="ul-col-2">
       <c:forEach items="${artRecommendList}" var="art" begin="0" end="7">
       <li>
-        <a href="<c:url value="/project/${art.artistry.project.artistry.id}"/>" title="">
+        <a href="<c:url value="/project/${art.artistry.id}"/>" title="">
           <img src="http://wiki-oss.efeiyi.com/${art.artistry.getMainPicture().pictureUrl}@!wiki-project-picture" alt="">
                     <span class="txt">
-                        <p>${art.artistry.project.name}</p>
-                        <p><ming800:status name="level" dataType="Project.level" checkedValue="${art.artistry.project.getLevel()}" type="normal"/>非遗项目</p>
+                        <p>${art.artistry.name}</p>
+                        <p><ming800:status name="level" dataType="Project.level" checkedValue="${art.artistry.getLevel()}" type="normal"/>非遗项目</p>
                     </span>
         </a>
       </li>
@@ -69,7 +69,7 @@
         <a href="<c:url value="/project/${craft.artistry.project.artistry.id}"/>" title="">
           <img src="http://wiki-oss.efeiyi.com/${craft.artistry.getMainPicture().pictureUrl}@!wiki-project-picture"  alt="">
                     <span class="txt">
-                        <p>${craft.artistry.project.name}</p>
+                        <p>${craft.artistry.name}</p>
                         <p><ming800:status name="level" dataType="Project.level" checkedValue="${craft.artistry.project.getLevel()}" type="normal"/>非遗项目</p>
                     </span>
         </a>

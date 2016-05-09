@@ -39,8 +39,8 @@
 
 <div class="craft">
   <div class="dt">
-    <h1>${artistry.project.name}</h1>
-    <p>[<ming800:status name="level" dataType="Project.level" checkedValue="${artistry.project.getLevel()}" type="normal"/>]非物质文化遗产传承项目</p>
+    <h1>${artistry.name}</h1>
+    <p>[<ming800:status name="level" dataType="Project.level" checkedValue="${artistry.getLevel()}" type="normal"/>]非物质文化遗产传承项目</p>
     <p>${artistry.project.addressDistrict.name}</p>
   </div>
   <!--//End--传统技艺-->

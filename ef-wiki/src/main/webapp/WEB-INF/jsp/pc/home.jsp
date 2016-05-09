@@ -72,8 +72,8 @@
           <a href="<c:url value="/project/${art.artistry.id}"/>">
             <img src="http://wiki-oss.efeiyi.com/${art.artistry.getMainPicture().pictureUrl}@!wiki-home-project-picture" alt="">
             <div class="list-content">
-              <p class="name">${art.artistry.project.name}</p>
-              <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${art.artistry.project.getLevel()}" type="normal"/>非遗项目</p>
+              <p class="name">${art.artistry.name}</p>
+              <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${art.artistry.getLevel()}" type="normal"/>非遗项目</p>
             </div>
           </a>
         </li>
