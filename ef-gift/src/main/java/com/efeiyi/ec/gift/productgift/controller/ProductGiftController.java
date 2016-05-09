@@ -4,10 +4,8 @@ import com.efeiyi.ec.gift.model.ProductGift;
 import com.efeiyi.ec.gift.model.ProductGiftTag;
 import com.efeiyi.ec.gift.model.ProductGiftTagValue;
 import com.efeiyi.ec.product.model.Subject;
-import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
-import com.ming800.core.p.model.Banner;
 import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import com.ming800.core.taglib.PageEntity;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
@@ -36,22 +33,13 @@ public class ProductGiftController {
 
     @RequestMapping({"/getProductGiftpList"})
     public String getProductGiftpList(HttpServletRequest request, Model model) throws Exception{
-                /*String page = request.getParameter("page");
-        String minPrice = request.getParameter("minPrice");
-        String value = request.getParameter("value");
-        String maxPrice = request.getParameter("maxPrice");*/
-        String page = "1";
+
         String minPrice = request.getParameter("minPrice");
         String maxPrice = request.getParameter("maxPrice");
         String value = request.getParameter("value");
         Map<String, List<ProductGiftTagValue>> map = new HashMap<>();
         Map<String, List<ProductGiftTagValue>> map1 = new HashMap<>();
         XQuery xQuery = new XQuery("listProductGiftTagValue_default", request);
-        /*//获取页头轮播图
-        List<Banner> bannerList = bannerManager.getBannerList("productGiftList");
-        //获取礼品频道推荐专题
-        List<Subject> subjectList = objectRecommendedManager.getRecommendedList("productGiftRecommendedUp");
-        List<Subject> subjectList1 = objectRecommendedManager.getRecommendedList("productGiftRecommendedDown");*/
         List<ProductGiftTagValue> list = baseManager.listObject(xQuery);
         try {
             for(ProductGiftTagValue productGiftTagValue:list){

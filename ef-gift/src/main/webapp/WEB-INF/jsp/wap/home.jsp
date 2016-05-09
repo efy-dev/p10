@@ -37,7 +37,7 @@
                     <c:forEach items="${advertisementList}" var="advertisement">
                         <li>
                             <a href="" title="">
-                                <img src="http://gift-oss.efeiyi.com/${advertisementList.img}" alt="">
+                                <img src="http://pro.efeiyi.com/${advertisementList.img}" alt="">
                        <%-- <span class="txt">
                             <p>${subject.name}</p>
                             <p>全网独家·匠心好礼</p>
