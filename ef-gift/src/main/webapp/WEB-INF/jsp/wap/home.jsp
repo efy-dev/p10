@@ -11,7 +11,7 @@
         <ul class="am-slides">
             <c:if test="${bannerList != null && bannerList != ''}">
                 <c:forEach items="${bannerList}" var="banner">
-                    <li><img src="http://gift-oss.efeiyi.com/${banner.wapUrl}"></li>
+                    <li><a href="${banner.wapUrl}"><img src="http://gift-oss.efeiyi.com/${banner.imageUrl}"></a></li>
                 </c:forEach>
             </c:if>
         </ul>
@@ -36,7 +36,7 @@
                 <c:if test="${advertisementList != null && advertisementList != ''}">
                     <c:forEach items="${advertisementList}" var="advertisement">
                         <li>
-                            <a href="" title="">
+                            <a href="${advertisement.wapRedirect}" title="">
                                 <img src="http://pro.efeiyi.com/${advertisementList.img}" alt="">
                        <%-- <span class="txt">
                             <p>${subject.name}</p>
