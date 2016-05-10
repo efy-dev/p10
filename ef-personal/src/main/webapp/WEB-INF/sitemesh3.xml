@@ -6,7 +6,6 @@
     <mapping path="/info/**" decorator="/layouts/templateWithoutNavAndFooter.jsp"/>
     <mapping path="/work/list**" decorator="/layouts/main.jsp"/>
     <mapping path="/work/**" decorator="/layouts/templateWithoutNavAndFooter.jsp"/>
-    <mapping path="/masterMessage/index.do" decorator="/layouts/mainTemplate.jsp"/>
 
     <!-- 大师入驻后台 -->
     <!--<mapping path="/" decorator="/layouts/mainTemp.jsp"/>-->
@@ -15,6 +14,7 @@
     <!--<mapping path="/toRegister.do" decorator="/layouts/temp.jsp"/>-->
 
     <!-- 暂时无用 -->
+    <!--<mapping path="/masterMessage/index.do" decorator="/layouts/mainTemplate.jsp"/>-->
     <!--<mapping path="/masterMessage/**" decorator="/layouts/mainTemplate.jsp"/>-->
     <!--<mapping path="/index.do" decorator="/layouts/mainTemplate.jsp"/>-->
 </sitemesh>
