@@ -11,7 +11,7 @@
 
 <div class="top2016">
     <div class="hd">
-        <div class="tips fl"><a class="logo"></a></div>
+        <div class="tips fl"><a class="logo" href=""></a></div>
         <ul class="fr">
             <li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>
             <li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>
@@ -41,7 +41,7 @@
 
 <div class="topv2" style="padding-top: 0;">
     <div class="hd">
-        <div class="tips fl"><a class="logo"></a></div>
+        <div class="tips fl"><a href="<c:url value="/"/>" class="logo"><img src="<c:url value="/scripts/assets/images/ef-logo-craft.png"/>" alt=""></a></div>
         <div class="fr">
             <form action="http://www.efeiyi.com/search.do" method="get">
                 <input type="text" value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>" name="q"
