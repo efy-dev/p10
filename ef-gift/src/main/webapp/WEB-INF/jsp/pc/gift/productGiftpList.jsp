@@ -5,9 +5,9 @@
 <!--//End--nav2016-->
 <div class="gift2016">
   <div class="screen">
-    <div class="min-nav">
+    <%--<div class="min-nav">
       <p><a href="">首页</a><i>></i><a href="" class="pitch-on">礼品选购</a></p>
-    </div>
+    </div>--%>
     <div class="gift-screen">
       <c:forEach items="${map}" var="map1">
         <div class="list-group">
@@ -75,7 +75,7 @@
       </ul>
     </div>
     <div class="gs-list">
-      <div class="more">还在为“丈母娘”送礼发愁？<a href="">看看礼品攻略吧 ></a></div>
+      <%--<div class="more">还在为“丈母娘”送礼发愁？<a href="">看看礼品攻略吧 ></a></div>--%>
       <ul class="list">
         <c:forEach items="${productGiftTagList}" var="productGiftTag">
           <li>
@@ -94,7 +94,7 @@
       </ul>
     </div>
     <ul class="pg-number">
-      <ming800:pcPageList bean="${pageEntity}" url="/getProductGiftpList">
+      <ming800:pcPageList bean="${pageEntity}" url="/ef-gift/getProductGiftpList">
         <ming800:pcPageParam name="value"
                              value='<%=request.getParameter("value")!=null ? request.getParameter("value") : ""%>'/>
         <ming800:pcPageParam name="minPrice"
@@ -103,12 +103,12 @@
                                value='<%=request.getParameter("maxPrice")!=null ? request.getParameter("maxPrice") : ""%>'/>
       </ming800:pcPageList>
     </ul>
-    <ul class="gift-red">
+   <%-- <ul class="gift-red">
       <li><img src="shop2016/upload/gift-pic2.jpg" alt=""><a href="">进入店铺</a></li>
       <li><img src="shop2016/upload/carf2016.jpg" alt=""><a href="">进入店铺</a></li>
       <li><img src="shop2016/upload/carf2016.jpg" alt=""><a href="">进入店铺</a></li>
       <li><img src="shop2016/upload/carf2016.jpg" alt=""><a href="">进入店铺</a></li>
-    </ul>
+    </ul>--%>
   </div>
 
 </div>

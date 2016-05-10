@@ -22,7 +22,7 @@
                 if (AuthorizationUtil.getMyUser().getId() == null) {
             %>
             <li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>
-            <li><a href="http://passport.efeiyi.com/register?service=http://j.efeiyi.com/ef-wiki/sso.do?registeSuccess=/pc/saveEnrollUser.do" title="快速注册">快速注册</a></li>
+            <li><a href="http://passport.efeiyi.com/register?service=http://j.efeiyi.com/ef-gift/sso.do?registeSuccess=/pc/saveEnrollUser.do" title="快速注册">快速注册</a></li>
             <%
                 }
             %>
