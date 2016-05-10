@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="<c:url value="/scripts/js/jquery.min.js"/>"></script>
 <!--//End--nav2016-->
 <div class="gift2016">
   <div class="screen">
@@ -8,7 +9,7 @@
       <p><a href="">首页</a><i>></i><a href="" class="pitch-on">礼品选购</a></p>
     </div>
     <div class="gift-screen">
-      <c:forEach items="${map1}" var="map1">
+      <c:forEach items="${map}" var="map1">
         <div class="list-group">
           <div class="head">${map1.key} :</div>
           <ul class="body">
@@ -18,14 +19,14 @@
               %>
               <li class="active"><a href="<c:url value="/getProductGiftpList?value="/>&minPrice=<%=request.getParameter("minPrice")%>&maxPrice=<%=request.getParameter("maxPrice")%>">全部</a></li>
               <c:forEach items="${map1.value}" var="productGiftTagValue">
-                  <li><a href="<c:url value="/getProductGiftpList?value="/>${productGiftTagValue.value}&minPrice=<%=request.getParameter("minPrice")%>&maxPrice=<%=request.getParameter("maxPrice")%>">${productGiftTagValue.value}</a></li>
+                  <li id="${productGiftTagValue.value}"><a href="<c:url value="/getProductGiftpList?value="/>${productGiftTagValue.value}&minPrice=<%=request.getParameter("minPrice")%>&maxPrice=<%=request.getParameter("maxPrice")%>">${productGiftTagValue.value}</a></li>
               </c:forEach>
               <%
                   }else {
               %>
               <li class="active"><a href="<c:url value="/getProductGiftpList?value="/>&minPrice=&maxPrice=">全部</a></li>
               <c:forEach items="${map1.value}" var="productGiftTagValue">
-                  <li><a href="<c:url value="/getProductGiftpList?value="/>${productGiftTagValue.value}&minPrice=&maxPrice=">${productGiftTagValue.value}</a></li>
+                  <li id="${productGiftTagValue.value}"><a href="<c:url value="/getProductGiftpList?value="/>${productGiftTagValue.value}&minPrice=&maxPrice=">${productGiftTagValue.value}</a></li>
               </c:forEach>
               <%
                   }
@@ -40,23 +41,23 @@
                 if(request.getParameter("value")!=null && !request.getParameter("value").equals("")){
 
             %>
-            <li class="active"><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=&maxPrice=">全部</a></li>
-            <li><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=0&maxPrice=100">百元以内</a></li>
-            <li><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=100&maxPrice=1000">100~1000</a></li>
-            <li><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=1000&maxPrice=5000">1000~5000</a></li>
-            <li><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=5000&maxPrice=10000">5000~1万</a></li>
-            <li><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=10000&maxPrice=100000">1万~10万</a></li>
-            <li><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=100000&maxPrice=1000000000">10万以上</a></li>
+            <li class="active" id="allPrice"><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=&maxPrice=">全部</a></li>
+            <li id="0"><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=0&maxPrice=100">百元以内</a></li>
+            <li id="100"><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=100&maxPrice=1000">100~1000</a></li>
+            <li id="1000"><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=1000&maxPrice=5000">1000~5000</a></li>
+            <li id="5000"><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=5000&maxPrice=10000">5000~1万</a></li>
+            <li id="10000"><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=10000&maxPrice=100000">1万~10万</a></li>
+            <li id="100000"><a href="<c:url value="/getProductGiftpList?value="/><%=request.getParameter("value")%>&minPrice=100000&maxPrice=">10万以上</a></li>
             <%
                 }else {
             %>
-            <li class="active"><a href="<c:url value="/getProductGiftpList?value="/>&minPrice=&maxPrice=">全部</a></li>
+            <li class="active" id="allPrice"><a href="<c:url value="/getProductGiftpList?value="/>&minPrice=&maxPrice=">全部</a></li>
             <li><a href="<c:url value="/getProductGiftpList?value="/>&minPrice=0&maxPrice=100">百元以内</a></li>
             <li><a href="<c:url value="/getProductGiftpList?value="/>&minPrice=100&maxPrice=1000">100~1000</a></li>
             <li><a href="<c:url value="/getProductGiftpList?value="/>&minPrice=1000&maxPrice=5000">1000~5000</a></li>
             <li><a href="<c:url value="/getProductGiftpList?value="/>&minPrice=5000&maxPrice=10000">5000~1万</a></li>
             <li><a href="<c:url value="/getProductGiftpList?value="/>&minPrice=10000&maxPrice=100000">1万~10万</a></li>
-            <li><a href="<c:url value="/getProductGiftpList?value="/>&minPrice=100000&maxPrice=1000000000">10万以上</a></li>
+            <li><a href="<c:url value="/getProductGiftpList?value="/>&minPrice=100000&maxPrice=">10万以上</a></li>
             <%
                 }
             %>
@@ -111,3 +112,19 @@
   </div>
 
 </div>
+<script type="text/javascript">
+    var value = "<%=request.getParameter("value")%>";
+    var minPrice = "<%=request.getParameter("minPrice")%>";
+    $(function(){
+        if(value != null && value != ""){
+            var firstNode = $("#"+value).parent().parent().find("li").eq(0);
+            $(firstNode).removeClass("active");
+            $("#"+value).addClass("active");
+        }
+        if(minPrice != null && minPrice != ""){
+            $("#allPrice").removeClass("active");
+            $("#"+minPrice).addClass("active");
+        }
+
+    });
+</script>

@@ -52,7 +52,11 @@ public class PostageManagerImpl implements PostageManager{
         String tenantId = purchaseOrder.getTenant().getId();
         BigTenant bigTenant = (BigTenant)baseManager.getObject(BigTenant.class.getName(),tenantId);
         startCity = bigTenant.getAddressCity().getName();
-        returnFreight = freightManager.calculateFreight(weight,startCity,reachProvince);
+        if(weight == 0) {
+            returnFreight = "0.00";
+        }else {
+            returnFreight = freightManager.calculateFreight(weight,startCity,reachProvince);
+        }
         if((!"error".equals(returnFreight))&&(!"false".equals(returnFreight))){
             freight = (freight.add(new BigDecimal(returnFreight))).setScale(2,BigDecimal.ROUND_HALF_UP);
         }else {

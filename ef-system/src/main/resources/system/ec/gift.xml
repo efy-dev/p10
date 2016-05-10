@@ -83,7 +83,7 @@
 
         <entity name="ProductGiftTag" label="礼物标签" model="com.efeiyi.ec.gift.model.ProductGiftTag">
             <does>
-                <do name="saveOrUpdateGiftTag" label="保存礼品标签" access="">
+                <do name="saveOrUpdateGiftTag" label="保存礼品标签" access="" result="redirect:/basic/xm.do?qm=plistGiftLabel_default">
                     <page>
                         <fields>
                             <field name="status" label="默认状态" defaultValue="1"

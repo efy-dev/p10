@@ -16,6 +16,8 @@
 
     <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 
+    <script src="<c:url value="/scripts/jquery.form.js"/>"></script>
+
 </head>
 <body>
 
@@ -59,7 +61,7 @@
             </div>
         </div>
 
-        <form action="<c:url value="/basic/xm.do"/>" class="am-form am-form-horizontal" method="post">
+        <form id="guanlian" action="<c:url value="/basic/xmj.do"/>" class="am-form am-form-horizontal" method="post">
             <input type="hidden" value="saveOrUpdateGiftTag" name="qm">
 
             <input type="hidden" name="productGift.id" value="${object.id}">
@@ -78,7 +80,7 @@
 
             <div class="am-form-group">
                 <div class="am-u-sm-9 am-u-end">
-                    <input type="submit" class="am-btn am-btn-primary" value="保存"/>
+                    <a onclick="guanlian()" href="#" class="am-btn am-btn-primary" value="保存">保存</a>
                 </div>
             </div>
         </form>
@@ -174,6 +176,29 @@
     </div>
 </div>
 <script>
+
+//    $().ready(function () {
+//        var options = {
+//            success: function (data) {
+//                window.location.href = window.location.href;
+//            }
+//        };
+//        $("#guanlian").ajaxForm(options);
+//    })
+
+    function guanlian() {
+        var options = {
+            url: '<c:url value="/basic/xmj.do"/>',
+            type: 'post',
+            dataType: 'text',
+            data: $("#guanlian").serialize(),
+            success: function (data) {
+                location.reload();
+            }
+        };
+        $.ajax(options);
+    }
+
     function selObj(obj, popup) {
 
         var v = $("#" + popup + " input[name='sel']").val();

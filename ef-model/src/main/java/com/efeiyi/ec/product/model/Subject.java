@@ -176,7 +176,7 @@ public class Subject {
         return "Subject{id = " + id + "}";
     }
 
-
+    @Column(name = "content")
     public String getContent() {
         return content;
     }
