@@ -79,7 +79,7 @@
       <ul class="list">
         <c:forEach items="${productGiftTagList}" var="productGiftTag">
           <li>
-            <a href="">
+            <a href="http://www.efeiyi.com/product/productModel/${productGiftTag.productGift.productModel.id}">
 <%--
               <img src="http://gift-oss.efeiyi.com/${productGift.product.picture_url}" alt="">
 --%>
