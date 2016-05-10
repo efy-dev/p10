@@ -111,8 +111,8 @@
             <ul>
                 <li><a href="<c:url value="/home.do"/>" title="">首页</a></li>
                 <li><a href="<c:url value="/industrySolution"/>" title="">企业礼品</a></li>
-                <li><a href="<c:url value="/viewSubject/{}"/>" title="">国礼轶事</a></li>
-                <li><a href="<c:url value="/viewSubject/{}"/>" title="">礼尚往来</a></li>
+                <li><a href="<c:url value="/viewSubject/inzu4ha1b7pa9flo"/>" title="">国礼轶事</a></li>
+                <li><a href="<c:url value="/viewSubject/inzu4s481azja868"/>" title="">中国“礼”文化</a></li>
             </ul>
         </div>
         <!--//End--导航-->

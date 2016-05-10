@@ -14,6 +14,7 @@ import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
+import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
@@ -243,9 +244,9 @@ public class PurchaseOrderController extends BaseController {
         return "/purchaseOrder/purchaseOrderConfirm";*/
         String amount = request.getParameter("amount");
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),productModelId);
-        String callback = "192.168.1.59:8080/cart/paySuccess.do";
+        String callback = PConst.WEBURL+"/cart/paySuccess.do";
 
-        return "redirect://localhost:8080/order/saveOrUpdateOrder2.do?productModelId="+productModelId+"&amount="+amount+"&price="+productModel.getPrice()+"&orderType=1&callback="+ URLEncoder.encode(callback, "UTF-8");
+        return "redirect:"+ PConst.WEBURL +"/order/saveOrUpdateOrder2.do?productModelId="+productModelId+"&amount="+amount+"&price="+productModel.getPrice()+"&orderType=1&callback="+ URLEncoder.encode(callback, "UTF-8");
     }
 
 

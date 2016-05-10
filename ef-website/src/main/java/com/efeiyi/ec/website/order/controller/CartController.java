@@ -10,6 +10,7 @@ import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.order.service.CartManager;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.p.PConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -248,9 +249,9 @@ public class CartController {
         String cartId = request.getParameter("cartId");
         String couponId = request.getParameter("couponId");
         //String callback = "www.efeiyi.com/cart/paySuccess.do";
-        String callback = "192.168.1.59:8080/cart/paySuccess.do";
+        String callback = PConst.WEBURL+"/cart/paySuccess.do";
 
-        return "redirect://localhost:8080/order/saveOrUpdateOrder.do?cartId="+cartId+"&couponId="+couponId+"&callback="+ URLEncoder.encode(callback, "UTF-8");
+        return "redirect:"+ PConst.WEBURL +"/order/saveOrUpdateOrder.do?cartId="+cartId+"&couponId="+couponId+"&callback="+ URLEncoder.encode(callback, "UTF-8");
     }
 
     @RequestMapping({"/cart/paySuccess.do"})
