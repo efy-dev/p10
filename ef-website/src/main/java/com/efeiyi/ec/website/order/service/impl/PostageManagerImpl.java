@@ -45,24 +45,30 @@ public class PostageManagerImpl implements PostageManager{
         String startCity = "";
         String returnFreight = "";
         for (PurchaseOrderProduct purchaseOrderProduct:purchaseOrder.getPurchaseOrderProductList()){
-            if(purchaseOrderProduct.getProductModel().getFreeDelivery() == null || "".equals(purchaseOrderProduct.getProductModel().getFreeDelivery()) || purchaseOrderProduct.getProductModel().getFreeDelivery().equals("0")){
-                weight += purchaseOrderProduct.getProductModel().getWeight()*purchaseOrderProduct.getPurchaseAmount();
+            if(purchaseOrderProduct.getProductModel().getWeight() != null || !purchaseOrderProduct.getProductModel().getWeight().equals("")){
+                if(purchaseOrderProduct.getProductModel().getFreeDelivery() == null || "".equals(purchaseOrderProduct.getProductModel().getFreeDelivery()) || purchaseOrderProduct.getProductModel().getFreeDelivery().equals("0")){
+                    weight += purchaseOrderProduct.getProductModel().getWeight()*purchaseOrderProduct.getPurchaseAmount();
+                }
             }
         }
         String tenantId = purchaseOrder.getTenant().getId();
         BigTenant bigTenant = (BigTenant)baseManager.getObject(BigTenant.class.getName(),tenantId);
-        startCity = bigTenant.getAddressCity().getName();
-        if(weight == 0) {
-            returnFreight = "0.00";
+        if(bigTenant.getAddressCity() == null || bigTenant.getAddressCity().equals("")){
+            return new BigDecimal(0);
         }else {
-            returnFreight = freightManager.calculateFreight(weight,startCity,reachProvince);
+            startCity = bigTenant.getAddressCity().getName();
+            if(weight == 0) {
+                returnFreight = "0.00";
+            }else {
+                returnFreight = freightManager.calculateFreight(weight,startCity,reachProvince);
+            }
+            if((!"error".equals(returnFreight))&&(!"false".equals(returnFreight))){
+                freight = (freight.add(new BigDecimal(returnFreight))).setScale(2,BigDecimal.ROUND_HALF_UP);
+            }else {
+                freight = new BigDecimal(10.00);
+            }
+            return freight;
         }
-        if((!"error".equals(returnFreight))&&(!"false".equals(returnFreight))){
-            freight = (freight.add(new BigDecimal(returnFreight))).setScale(2,BigDecimal.ROUND_HALF_UP);
-        }else {
-            freight = new BigDecimal(10.00);
-        }
-        return freight;
     }
 
     @Override
