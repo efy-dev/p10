@@ -5,7 +5,7 @@ public class PageEntity {
          this.size = size==0 ? 20:size;
     }*/
     private int index = 1;           //页数序号        p 标示page
-    private int size = 12;        //每页的记录条数
+    private int size = 10;        //每页的记录条数
     private int pCount;               //总共多少页
     private int count;          //记录总条数      r标示record
     private int rIndex;          //条数数序号
