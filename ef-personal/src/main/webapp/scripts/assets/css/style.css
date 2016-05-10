@@ -265,7 +265,7 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .img-mutual {max-width:250px;height:386px;border:1px solid #000;padding:28px 0 0 25px;margin-right:40px; float:left; margin-bottom:50px;}
 .box{width:198px;height:295px;position: relative;}
 .BG{width:198px;height:295px;position: absolute;top: 0;background: rgba(60,96,140,0.3);}
-.txt{width: 198px;height:74px;position: absolute;bottom: 0;color:#fff;background:url(../images/images/tx12.gif) bottom;}
+/*.txt{width: 198px;height:74px;position: absolute;bottom: 0;color:#fff;background:url(../images/images/tx12.gif) bottom;}*/
 .img-mutual h1 {text-align: right;}
 .img-mutual .img-mutual-text1 a {color:#fff}
 .img-mutual .active .txt {background:#fff;}
