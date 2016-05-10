@@ -45,7 +45,7 @@ public class PostageManagerImpl implements PostageManager{
         String startCity = "";
         String returnFreight = "";
         for (PurchaseOrderProduct purchaseOrderProduct:purchaseOrder.getPurchaseOrderProductList()){
-            if(purchaseOrderProduct.getProductModel().getWeight() != null || !purchaseOrderProduct.getProductModel().getWeight().equals("")){
+            if(purchaseOrderProduct.getProductModel().getWeight() != null && !purchaseOrderProduct.getProductModel().getWeight().equals("")){
                 if(purchaseOrderProduct.getProductModel().getFreeDelivery() == null || "".equals(purchaseOrderProduct.getProductModel().getFreeDelivery()) || purchaseOrderProduct.getProductModel().getFreeDelivery().equals("0")){
                     weight += purchaseOrderProduct.getProductModel().getWeight()*purchaseOrderProduct.getPurchaseAmount();
                 }
