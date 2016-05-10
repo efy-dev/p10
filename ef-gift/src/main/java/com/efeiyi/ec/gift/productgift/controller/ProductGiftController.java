@@ -139,7 +139,7 @@ public class ProductGiftController {
         String size = request.getParameter(PageEntity.PARAM_NAME_PAGERECORDS);
         PageEntity pageEntity = new PageEntity();
         pageEntity.setIndex(1);
-        pageEntity.setSize(4);
+        pageEntity.setSize(12);
         if (index != null && !index.equals("")) {
             pageEntity.setIndex(Integer.parseInt(index));
         }
