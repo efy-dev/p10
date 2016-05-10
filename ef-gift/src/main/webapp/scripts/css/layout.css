@@ -242,6 +242,6 @@ body { background: #fafafa; }
 .list li a .list-content { height: 64px; border: 1px solid #ebebeb; border-top-width: 0; padding: 0 10px; background: #fff; }
 .list li a .list-content .name { padding: 10px 0; font-size: 16px; line-height: 16px; color: #666; }
 .list li a .list-content .title { padding-top: 3px; font-size: 14px; line-height: 14px; color: #999; }
-.list li a img { height: 178px; transition: all 0.5s; -webkit-transition: all 0.5s; -ms-transition: all 0.5s; -o-transition: all 0.5s; -moz-transition: all 0.5s; }
+.list li a img {transition: all 0.5s; -webkit-transition: all 0.5s; -ms-transition: all 0.5s; -o-transition: all 0.5s; -moz-transition: all 0.5s; }
 
 /*# sourceMappingURL=layout.css.map */
