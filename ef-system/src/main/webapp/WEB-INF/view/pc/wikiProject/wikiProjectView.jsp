@@ -37,135 +37,161 @@
             <tr>
                 <td class="am-primary am-u-md-3">工艺类型</td>
                 <td class="am-u-md-3">
-                    <ming800:status name="type" dataType="ProjectWiki.type" checkedValue="${object.type}" type="normal"/>
+                    <ming800:status name="type" dataType="ProjectWiki.type" checkedValue="${object.type}"
+                                    type="normal"/>
                 </td>
             </tr>
             </tbody>
         </table>
 
         <h2>工艺描述</h2>
-
-        <form action="<c:url value="/projectWiki/update.do"/>" class="am-form am-form-horizontal" method="post"
-              enctype="multipart/form-data">
-            <input type="hidden" name="projectWikiId" value="${object.id}">
-
-            <%--<c:if test="${empty fatherId}">--%>
-            <%--<input type="hidden" name="level" value="1" />--%>
-            <%--</c:if>--%>
-            <%--<c:if test="${not empty fatherId}">--%>
-            <%--<input type="hidden" name="level" value="${object.level}" />--%>
-            <%--</c:if>--%>
-            <div class="am-form-group">
-                <label name="type" for="editor" class="am-u-sm-3 am-form-label">封面图片</label>
-                <div class="am-u-sm-9" style="margin-top: 10px">
-                    <c:if test="${object.getMainPicture()!=null}">
-                        <img src="http://wiki-oss.efeiyi.com/${object.getMainPicture().getPictureUrl()}">
-                    </c:if>
-                    <input type="file" name="projectWikiMainPicture">
-                </div>
-            </div>
-
-            <div class="am-form-group">
-                <label name="type" for="editor" class="am-u-sm-3 am-form-label">工艺描述PC
-                    <small>*</small>
-                </label>
-                <div class="am-u-sm-9" style="margin-top: 10px">
-
-                    <textarea id="editor" name="descriptionPC"
-                              placeholder="这里输入内容">${object.artistryDescription.descriptionPC}</textarea>
-                    <a class="am-btn am-btn-primary" onclick="textFilter()">过滤a标签</a>
-                </div>
-            </div>
-            <div class="am-form-group">
-                <label name="type" for="editor1" class="am-u-sm-3 am-form-label">工艺描述Wap
-                    <small>*</small>
-                </label>
-                <div class="am-u-sm-9" style="margin-top: 10px">
-                    <textarea id="editor1" name="descriptionWap"
-                              placeholder="这里输入内容">${object.artistryDescription.descriptionWap}</textarea>
-                    <a class="am-btn am-btn-primary" onclick="textFilter()">过滤a标签</a>
-                </div>
-            </div>
-            <div class="am-form-group">
-                <div class="am-u-sm-9 am-u-sm-push-3">
-                    <input type="submit" class="am-btn am-btn-primary" value="保存"/>
-                </div>
-            </div>
+        <form action="<c:url value="/ueditor/use.do"/>" name="uEditor">
+            <input type="hidden" name="callbackUrl" value="/basic/xm.do?qm=viewProjectWiki&id=${object.id}">
+            <input type="hidden" name="title" value="工艺描述pc">
+            <input type="hidden" name="action" value="/artistryDescription/saveOrUpdate.do">
+            <input type="hidden" name="name" value="descriptionPC">
+            <input type="hidden" name="uploadUrl" value="/artistryDescription/image/upload.do">
+            <input type="hidden" name="objectId" value="${object.artistryDescription.id}">
+            <input type="hidden" name="objectClassType" value="com.efeiyi.ec.wiki.model.ArtistryDescription">
+            <input type="hidden" name="paramName" value="artistryId">
+            <input type="hidden" name="paramValue" value="${object.id}">
+            <input type="submit" value="编辑工艺描述pc" class="am-btn am-btn-primary">
         </form>
-    </div>
-</div>
 
-<script type="text/javascript">
-    $(function () {
-        var editor = new Simditor({
-            textarea: $("#editor"),
-            toolbar: [
-                'title',
-                'bold',
-                'italic',
-                'underline',
-                'strikethrough',
-                'fontScale',
-                'color',
-                'ol',
-                'ul',
-                'blockquote',
-                'code',
-                'table',
-                'link',
-                'image',
-                'hr',
-                'indent',
-                'outdent',
-                'alignment'
-            ],
+        <form action="<c:url value="/ueditor/use.do"/>" name="uEditor">
+            <input type="hidden" name="callbackUrl" value="/basic/xm.do?qm=viewProjectWiki&id=${object.id}">
+            <input type="hidden" name="title" value="工艺描述wap">
+            <input type="hidden" name="action" value="/artistryDescription/saveOrUpdate.do">
+            <input type="hidden" name="name" value="descriptionWap">
+            <input type="hidden" name="uploadUrl" value="/artistryDescription/image/upload.do">
+            <input type="hidden" name="objectId" value="${object.artistryDescription.id}">
+            <input type="hidden" name="objectClassType" value="com.efeiyi.ec.wiki.model.ArtistryDescription">
+            <input type="hidden" name="paramName" value="artistryId">
+            <input type="hidden" name="paramValue" value="${object.id}">
+            <input type="submit" value="编辑工艺描述wap" class="am-btn am-btn-primary">
+        </form>
 
-            upload: {
-                url: "<c:url value="/task/img.do?projectWikiId=${object.id}" />",
-                params: ""
-            },
-            pasteImage: true,
+        <%--<form action="<c:url value="/projectWiki/update.do"/>" class="am-form am-form-horizontal" method="post"--%>
+              <%--enctype="multipart/form-data">--%>
+            <%--<input type="hidden" name="projectWikiId" value="${object.id}">--%>
 
-        });
-        var editor1 = new Simditor({
-            textarea: $("#editor1"),
-            toolbar: [
-                'title',
-                'bold',
-                'italic',
-                'underline',
-                'strikethrough',
-                'fontScale',
-                'color',
-                'ol',
-                'ul',
-                'blockquote',
-                'code',
-                'table',
-                'link',
-                'image',
-                'hr',
-                'indent',
-                'outdent',
-                'alignment'
-            ],
+            <%--&lt;%&ndash;<c:if test="${empty fatherId}">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<input type="hidden" name="level" value="1" />&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<c:if test="${not empty fatherId}">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<input type="hidden" name="level" value="${object.level}" />&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
+            <%--<div class="am-form-group">--%>
+                <%--<label name="type" for="editor" class="am-u-sm-3 am-form-label">封面图片</label>--%>
+                <%--<div class="am-u-sm-9" style="margin-top: 10px">--%>
+                    <%--<c:if test="${object.getMainPicture()!=null}">--%>
+                        <%--<img src="http://wiki-oss.efeiyi.com/${object.getMainPicture().getPictureUrl()}">--%>
+                    <%--</c:if>--%>
+                    <%--<input type="file" name="projectWikiMainPicture">--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
-            upload: {
-                url: "<c:url value="/task/img.do?projectWikiId=${object.id}" />",
-                params: ""
-            },
-            pasteImage: true,
+            <%--<div class="am-form-group">--%>
+                <%--<label name="type" for="editor" class="am-u-sm-3 am-form-label">工艺描述PC--%>
+                    <%--<small>*</small>--%>
+                <%--</label>--%>
+                <%--<div class="am-u-sm-9" style="margin-top: 10px">--%>
 
-        });
-    });
+                    <%--<textarea id="editor" name="descriptionPC"--%>
+                              <%--placeholder="这里输入内容">${object.artistryDescription.descriptionPC}</textarea>--%>
+                    <%--<a class="am-btn am-btn-primary" onclick="textFilter()">过滤a标签</a>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="am-form-group">--%>
+                <%--<label name="type" for="editor1" class="am-u-sm-3 am-form-label">工艺描述Wap--%>
+                    <%--<small>*</small>--%>
+                <%--</label>--%>
+                <%--<div class="am-u-sm-9" style="margin-top: 10px">--%>
+                    <%--<textarea id="editor1" name="descriptionWap"--%>
+                              <%--placeholder="这里输入内容">${object.artistryDescription.descriptionWap}</textarea>--%>
+                    <%--<a class="am-btn am-btn-primary" onclick="textFilter()">过滤a标签</a>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="am-form-group">--%>
+                <%--<div class="am-u-sm-9 am-u-sm-push-3">--%>
+                    <%--<input type="submit" class="am-btn am-btn-primary" value="保存"/>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</form>--%>
+    <%--</div>--%>
+<%--</div>--%>
 
-    function textFilter() {
-        var str = $(".simditor-body").html();
-        str = str.replace(/<a[^>]*>/g, '');
-        str = str.replace(/<\/a>/g, '');
-        $(".simditor-body").html(str);
-//        $("#editor").html(str);
-    }
-</script>
+<%--<script type="text/javascript">--%>
+    <%--$(function () {--%>
+        <%--var editor = new Simditor({--%>
+            <%--textarea: $("#editor"),--%>
+            <%--toolbar: [--%>
+                <%--'title',--%>
+                <%--'bold',--%>
+                <%--'italic',--%>
+                <%--'underline',--%>
+                <%--'strikethrough',--%>
+                <%--'fontScale',--%>
+                <%--'color',--%>
+                <%--'ol',--%>
+                <%--'ul',--%>
+                <%--'blockquote',--%>
+                <%--'code',--%>
+                <%--'table',--%>
+                <%--'link',--%>
+                <%--'image',--%>
+                <%--'hr',--%>
+                <%--'indent',--%>
+                <%--'outdent',--%>
+                <%--'alignment'--%>
+            <%--],--%>
+
+            <%--upload: {--%>
+                <%--url: "<c:url value="/task/img.do?projectWikiId=${object.id}" />",--%>
+                <%--params: ""--%>
+            <%--},--%>
+            <%--pasteImage: true,--%>
+
+        <%--});--%>
+        <%--var editor1 = new Simditor({--%>
+            <%--textarea: $("#editor1"),--%>
+            <%--toolbar: [--%>
+                <%--'title',--%>
+                <%--'bold',--%>
+                <%--'italic',--%>
+                <%--'underline',--%>
+                <%--'strikethrough',--%>
+                <%--'fontScale',--%>
+                <%--'color',--%>
+                <%--'ol',--%>
+                <%--'ul',--%>
+                <%--'blockquote',--%>
+                <%--'code',--%>
+                <%--'table',--%>
+                <%--'link',--%>
+                <%--'image',--%>
+                <%--'hr',--%>
+                <%--'indent',--%>
+                <%--'outdent',--%>
+                <%--'alignment'--%>
+            <%--],--%>
+
+            <%--upload: {--%>
+                <%--url: "<c:url value="/task/img.do?projectWikiId=${object.id}" />",--%>
+                <%--params: ""--%>
+            <%--},--%>
+            <%--pasteImage: true,--%>
+
+        <%--});--%>
+    <%--});--%>
+
+    <%--function textFilter() {--%>
+        <%--var str = $(".simditor-body").html();--%>
+        <%--str = str.replace(/<a[^>]*>/g, '');--%>
+        <%--str = str.replace(/<\/a>/g, '');--%>
+        <%--$(".simditor-body").html(str);--%>
+<%--//        $("#editor").html(str);--%>
+    <%--}--%>
+<%--</script>--%>
 </body>
 </html>

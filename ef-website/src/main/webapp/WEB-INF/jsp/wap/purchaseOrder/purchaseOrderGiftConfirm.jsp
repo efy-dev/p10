@@ -400,54 +400,55 @@
             $("#banlanceCheckbox").attr("checked",false);
             $("body").css("overflow", "scroll")
         }
-        /*$.ajax({
-            type: 'post',
-            async: false,
-            url: '<c:url value="/coupon/use.do"/>',
-            dataType: 'json',
-            data: {
-                couponId: couponId,
-                orderId: "${purchaseOrder.id}"
-
-            },
-            success: function (data) {
-                if (data == true) {
-                    var t_price = parseFloat(totalPrice);
-                    var chkobjs = document.getElementsByName("radio");
-                    for (var i = 0; i < chkobjs.length; i++) {
-                        if (chkobjs[i].checked) {
-                            t_price = t_price - parseFloat(chkobjs[i].value);
-                            $("#couponPrice").html("<em>-￥</em>" + chkobjs[i].value);
-                        }
-                    }
-                    $("#change").text(t_price);
-                    $("body").css("overflow", "scroll")
-                }
-            },
-
-        });
-
     }
-    $().ready(function () {
-        $(".edit-text").click(function () {
-            var t = $("#giftMessage").val();
-            $("#giftMessage").val("").focus().val(t);
-        })
-    })
+        <%--/*$.ajax({--%>
+            <%--type: 'post',--%>
+            <%--async: false,--%>
+            <%--url: '<c:url value="/coupon/use.do"/>',--%>
+            <%--dataType: 'json',--%>
+            <%--data: {--%>
+                <%--couponId: couponId,--%>
+                <%--orderId: "${purchaseOrder.id}"--%>
 
-    //使用余额
-    function useBalance(element){
-        var totalPrice1 = $("#totalPrice").text();
-        var couponPrice = $("#couponPrice").text();
-        var balance = $("#usefulBalance").text();
-        if ($(element).is(':checked') == true){
-            $("#balance").html(balance);
-            $("#change").html((totalPrice1-balance-couponPrice).toFixed(2));
-        }else if($(element).is(':checked') == false){
-            $("#balance").html("0.00");
-            $("#change").html((totalPrice1-couponPrice).toFixed(2));
-        }
-    }
+            <%--},--%>
+            <%--success: function (data) {--%>
+                <%--if (data == true) {--%>
+                    <%--var t_price = parseFloat(totalPrice);--%>
+                    <%--var chkobjs = document.getElementsByName("radio");--%>
+                    <%--for (var i = 0; i < chkobjs.length; i++) {--%>
+                        <%--if (chkobjs[i].checked) {--%>
+                            <%--t_price = t_price - parseFloat(chkobjs[i].value);--%>
+                            <%--$("#couponPrice").html("<em>-￥</em>" + chkobjs[i].value);--%>
+                        <%--}--%>
+                    <%--}--%>
+                    <%--$("#change").text(t_price);--%>
+                    <%--$("body").css("overflow", "scroll")--%>
+                <%--}--%>
+            <%--},--%>
+
+        <%--});--%>
+
+    <%--}--%>
+    <%--$().ready(function () {--%>
+        <%--$(".edit-text").click(function () {--%>
+            <%--var t = $("#giftMessage").val();--%>
+            <%--$("#giftMessage").val("").focus().val(t);--%>
+        <%--})--%>
+    <%--})--%>
+
+    <%--//使用余额--%>
+    <%--function useBalance(element){--%>
+        <%--var totalPrice1 = $("#totalPrice").text();--%>
+        <%--var couponPrice = $("#couponPrice").text();--%>
+        <%--var balance = $("#usefulBalance").text();--%>
+        <%--if ($(element).is(':checked') == true){--%>
+            <%--$("#balance").html(balance);--%>
+            <%--$("#change").html((totalPrice1-balance-couponPrice).toFixed(2));--%>
+        <%--}else if($(element).is(':checked') == false){--%>
+            <%--$("#balance").html("0.00");--%>
+            <%--$("#change").html((totalPrice1-couponPrice).toFixed(2));--%>
+        <%--}--%>
+    <%--}--%>
 </script>
 </body>
 </html>
