@@ -38,7 +38,7 @@ input {
   outline: none; }
 
 /*--reset--*/
-.fl, .topv2 .logo img, .topic, .topic .bd-list, .topic .topic-txt, .list, .list li, .list li a .list-content, .list li a .list-content .name, .list li a .list-content .title, .list li a img {
+.fl, .topv2 .logo img, .topic, .topic .bd-list, .topic .topic-txt, .list, .list li, .list li a .list-content, .list li a .list-content .name, .list li a .list-content .title,   {
   float: left; }
 
 .fr {
@@ -631,7 +631,6 @@ body {
         line-height: 14px;
         color: #999999; }
     .list li a img {
-      height: 178px;
       transition: all 0.5s;
       -webkit-transition: all 0.5s;
       -ms-transition: all 0.5s;

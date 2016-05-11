@@ -105,13 +105,7 @@ public class ProductGiftController {
          public String viewSubject(@PathVariable String subjectId, Model model) throws Exception{
         Subject subject = (Subject) baseManager.getObject(Subject.class.getName(),subjectId);
         model.addAttribute("subject", subject);
-        String url = "";
-        if (subjectId.equals("inzu4ha1b7pa9flo")){
-            url =  "/gift/guoliyishiView";
-        }else if (subjectId.equals("inzu4s481azja868")){
-            url = "/gift/lishangwanglaiView";
-        }
-        return url;
+        return "/gift/subjectView";
     }
 
     @RequestMapping({"/searchProductGift"})
