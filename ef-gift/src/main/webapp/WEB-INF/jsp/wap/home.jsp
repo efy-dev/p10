@@ -25,8 +25,8 @@
         </ul>
         <ul>
             <li><a href="<c:url value="/industrySolution"/>"><i class="icon icon-qylp"></i><p>企业礼品</p></a></li>
-            <li><a href="<c:url value="/viewSubject/{}"/>"><i class="icon icon-glys"></i><p>国礼轶事</p></a></li>
-            <li><a href="<c:url value="/viewSubject/{}"/>"><i class="icon icon-lswl"></i><p>礼尚往来</p></a></li>
+            <li><a href="<c:url value="/viewSubject/inzu4ha1b7pa9flo"/>"><i class="icon icon-glys"></i><p>国礼轶事</p></a></li>
+            <li><a href="<c:url value="/viewSubject/inzu4s481azja868"/>"><i class="icon icon-lswl"></i><p>中国“礼”文化</p></a></li>
         </ul>
     </div>
     <!--//End--menu-->
@@ -37,7 +37,7 @@
                     <c:forEach items="${advertisementList}" var="advertisement">
                         <li>
                             <a href="${advertisement.wapRedirect}" title="">
-                                <img src="http://pro.efeiyi.com/${advertisementList.img}" alt="">
+                                <img src="http://pro.efeiyi.com/${advertisement.img}" alt="">
                        <%-- <span class="txt">
                             <p>${subject.name}</p>
                             <p>全网独家·匠心好礼</p>
@@ -47,7 +47,7 @@
                     </c:forEach>
                 </c:if>
             </ul>
-            <div class="bd more"><a class="btn-link" href="" title="查看更多作品">查看更多作品</a></div>
+            <%--<div class="bd more"><a class="btn-link" href="" title="查看更多作品">查看更多作品</a></div>--%>
         </div>
     </div>
     <!--//ENd--ht-->
@@ -55,7 +55,7 @@
         <div class="bd">
             <c:if test="${subjectList != null && subjectList != ''}">
                 <c:forEach items="${subjectList}" var="subject">
-                    <a href=""><img class="bd" src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt=""></a>
+                    <a href="<c:url value="/viewSubject/${subject.id}"/>"><img class="bd" src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt=""></a>
                 </c:forEach>
             </c:if>
         </div>

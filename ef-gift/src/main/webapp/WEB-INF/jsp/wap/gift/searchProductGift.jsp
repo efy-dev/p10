@@ -64,7 +64,7 @@
     maxPrice = max;
   }
   function confirm(){
-    var url = "/searchProductGiftList?value="+value+"&minPrice="+minPrice+"&maxPrice="+maxPrice;
+    var url = "http://j.efeiyi.com/ef-gift/searchProductGiftList?value="+value+"&minPrice="+minPrice+"&maxPrice="+maxPrice;
     window.location.href = url;
   }
 </script>
