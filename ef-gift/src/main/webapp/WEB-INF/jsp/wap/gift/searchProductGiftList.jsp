@@ -38,15 +38,33 @@
       </li>
     </ul>
     <ul class="ul-list">
-      <c:forEach items="${productGiftTaglist}" var="productGiftTag">
+      <%
+        if(request.getParameter("value")!=null && !request.getParameter("value").equals("")){
+      %>
+      <c:forEach items="${productGiftTagList}" var="productGiftTag">
         <li>
-          <a href="" title="">
-            <img src="http://pro.efeiyi.com/${productGiftTag.productGift.productModel.productModel_url}@!pc-project-list" alt="">
+          <a href="http://www.efeiyi.com/product/productModel/${productGiftTag.productGift.productModel.id}" title="">
+            <img src="http://pro.efeiyi.com/${productGiftTag.productGift.productModel.productModel_url}@!product-model-wap-view" alt="">
             <p class="name">${productGiftTag.productGift.productModel.name}</p>
             <p class="price"><em>￥</em>${productGiftTag.productGift.productModel.price}</p>
           </a>
         </li>
       </c:forEach>
+      <%
+      }else {
+      %>
+      <c:forEach items="${productGiftList}" var="productGift">
+        <li>
+          <a href="http://www.efeiyi.com/product/productModel/${productGift.productModel.id}" title="">
+            <img src="http://pro.efeiyi.com/${productGift.productModel.productModel_url}@!product-model-wap-view" alt="">
+            <p class="name">${productGift.productModel.name}</p>
+            <p class="price"><em>￥</em>${productGift.productModel.price}</p>
+          </a>
+        </li>
+      </c:forEach>
+      <%
+        }
+      %>
     </ul>
   </div>
 </article>

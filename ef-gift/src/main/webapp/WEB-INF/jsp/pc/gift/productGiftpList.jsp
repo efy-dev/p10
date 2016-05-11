@@ -77,20 +77,43 @@
     <div class="gs-list">
       <%--<div class="more">还在为“丈母娘”送礼发愁？<a href="">看看礼品攻略吧 ></a></div>--%>
       <ul class="list">
-        <c:forEach items="${productGiftTagList}" var="productGiftTag">
-          <li>
-            <a href="http://www.efeiyi.com/product/productModel/${productGiftTag.productGift.productModel.id}">
-<%--
-              <img src="http://gift-oss.efeiyi.com/${productGift.product.picture_url}" alt="">
---%>
-              <img src="http://pro.efeiyi.com/${productGiftTag.productGift.productModel.productModel_url}" alt="">
-              <div class="list-content">
-                <p class="name">${productGiftTag.productGift.productModel.name}</p>
-                <p class="title">￥<em>${productGiftTag.productGift.productModel.price}</em></p>
-              </div>
-            </a>
-          </li>
-        </c:forEach>
+          <%
+              if(request.getParameter("value")!=null && !request.getParameter("value").equals("")){
+          %>
+          <c:forEach items="${productGiftTagList}" var="productGiftTag">
+              <li>
+                  <a href="http://www.efeiyi.com/product/productModel/${productGiftTag.productGift.productModel.id}">
+                          <%--
+                                        <img src="http://gift-oss.efeiyi.com/${productGift.product.picture_url}" alt="">
+                          --%>
+                      <img src="http://pro.efeiyi.com/${productGiftTag.productGift.productModel.productModel_url}@!product-hot" alt="">
+                      <div class="list-content">
+                          <p class="name">${productGiftTag.productGift.productModel.name}</p>
+                          <p class="title">￥<em>${productGiftTag.productGift.productModel.price}</em></p>
+                      </div>
+                  </a>
+              </li>
+          </c:forEach>
+          <%
+              }else {
+          %>
+          <c:forEach items="${productGiftList}" var="productGift">
+              <li>
+                  <a href="http://www.efeiyi.com/product/productModel/${productGift.productModel.id}">
+                          <%--
+                                        <img src="http://gift-oss.efeiyi.com/${productGift.product.picture_url}" alt="">
+                          --%>
+                      <img src="http://pro.efeiyi.com/${productGift.productModel.productModel_url}@!product-hot" alt="">
+                      <div class="list-content">
+                          <p class="name">${productGift.productModel.name}</p>
+                          <p class="title">￥<em>${productGift.productModel.price}</em></p>
+                      </div>
+                  </a>
+              </li>
+          </c:forEach>
+          <%
+              }
+          %>
       </ul>
     </div>
     <ul class="pg-number">

@@ -64,26 +64,38 @@ public class ProductGiftController {
 
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         PageEntity pageEntity = getPageEntity(request);
-        String hql = "from ProductGiftTag p where p.status=1";
+        String hql = "";
         if(value != null && value != ""){
-            queryParamMap.put("value", value);
-            hql+=" and p.productGiftTagValue.value=:value";
+            hql = "from ProductGiftTag p where p.status=1";
+            if(value != null && value != ""){
+                queryParamMap.put("value", value);
+                hql+=" and p.productGiftTagValue.value=:value";
+            }
+            if(minPrice != null && minPrice != ""){
+                queryParamMap.put("minPrice", new BigDecimal(minPrice));
+                hql+=" and p.productGift.productModel.price>=:minPrice";
+            }
+            if(maxPrice != null && maxPrice != ""){
+                queryParamMap.put("maxPrice", new BigDecimal(maxPrice));
+                hql+=" and p.productGift.productModel.price<=:maxPrice";
+            }
+            List<ProductGiftTag> productGiftTaglist = baseManager.listPageInfo(hql, pageEntity, queryParamMap).getList();
+            model.addAttribute("productGiftTagList", productGiftTaglist);
+        }else {
+            hql = "from ProductGift p where p.status=1";
+            if(minPrice != null && minPrice != ""){
+                queryParamMap.put("minPrice", new BigDecimal(minPrice));
+                hql+=" and p.productModel.price>=:minPrice";
+            }
+            if(maxPrice != null && maxPrice != ""){
+                queryParamMap.put("maxPrice", new BigDecimal(maxPrice));
+                hql+=" and p.productModel.price<=:maxPrice";
+            }
+            List<ProductGift> productGiftList = baseManager.listPageInfo(hql, pageEntity,queryParamMap).getList();
+            model.addAttribute("productGiftList", productGiftList);
         }
-        if(minPrice != null && minPrice != ""){
-            queryParamMap.put("minPrice", new BigDecimal(minPrice));
-            hql+=" and p.productGift.productModel.price>=:minPrice";
-        }
-        if(maxPrice != null && maxPrice != ""){
-            queryParamMap.put("maxPrice", new BigDecimal(maxPrice));
-            hql+=" and p.productGift.productModel.price<=:maxPrice";
-        }
-        List<ProductGiftTag> productGiftTaglist = baseManager.listPageInfo(hql, pageEntity, queryParamMap).getList();
-        /*model.addAttribute("bannerList", bannerList);
-        model.addAttribute("subjectList", subjectList);
-        model.addAttribute("subjectList1", subjectList1);*/
         model.addAttribute("map", map);
         model.addAttribute("map1", map1);
-        model.addAttribute("productGiftTagList", productGiftTaglist);
         model.addAttribute("pageInfo", baseManager.listPageInfo(hql,pageEntity,queryParamMap));
         model.addAttribute("pageEntity", pageEntity);
         return "/gift/productGiftpList";
@@ -116,6 +128,7 @@ public class ProductGiftController {
         String minPrice = request.getParameter("minPrice");
         String maxPrice = request.getParameter("maxPrice");
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        List<ProductGift> productGiftList = new ArrayList();
         String hql = "from ProductGiftTag p where 1=1";
         if(value != null && value != ""){
             queryParamMap.put("value", value);
@@ -130,7 +143,12 @@ public class ProductGiftController {
             hql+=" and p.productGift.productModel.price<=:maxPrice";
         }
         List<ProductGiftTag> productGiftTaglist = baseManager.listObject(hql,queryParamMap);
-        model.addAttribute("productGiftTaglist", productGiftTaglist);
+        for(ProductGiftTag productGiftTag:productGiftTaglist){
+            if(!productGiftList.contains(productGiftTag.getProductGift())){
+                productGiftList.add(productGiftTag.getProductGift());
+            }
+        }
+        model.addAttribute("productGiftList", productGiftList);
         return "/gift/searchProductGiftList";
     }
 

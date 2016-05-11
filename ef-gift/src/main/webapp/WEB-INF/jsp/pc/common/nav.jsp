@@ -4,7 +4,6 @@
 
 <div class="top2016">
     <div class="hd">
-        <div class="tips fl"><a class="logo"></a></div>
         <ul class="fr">
             <li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>
             <li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>
@@ -34,12 +33,12 @@
 
 <div class="topv2" style="padding-top: 0;">
     <div class="hd">
-        <div class="tips fl"><a class="logo"></a></div>
+        <div class="tips fl"><a class="logo"><img src="<c:url value="/scripts/images/ef-logo-gift.png"/>" alt=""></a></div>
         <div class="fr">
             <form action="http://www.efeiyi.com/search.do" method="get">
                 <input type="text" value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>" name="q"
                        id="q" placeholder="搜索" class="txt">
-                <input type="submit" value="" class="icon-new btn">
+                <input type="submit" value="" class="icon2016-gift btn">
                 <input type="hidden" id="resultPage" name="resultPage" value="/searchResult"/>
                 <input type="hidden" id="facetFields" name="facetFields" value="project_name"/>
                 <input type="hidden" id="group" name="group" value="efeiyi"/>
