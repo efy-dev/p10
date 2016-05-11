@@ -86,8 +86,8 @@
             <fields>
                 <field name="type" label="项目类型" inputType="text">
                     <statusType fieldName="type">
-                        <item label="非遗技艺" value="1"/>
-                        <item label="非遗美术" value="2"/>
+                        <item label="传统技艺" value="2"/>
+                        <item label="传统美术" value="1"/>
                     </statusType>
                 </field>
                 <field name="level" label="项目类型" inputType="text">
