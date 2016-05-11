@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>完整demo</title>
+    <title>e飞蚁编辑</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <script type="text/javascript" charset="utf-8" src="<c:url value="/scripts/utf8-jsp/ueditor.config.js"/>"></script>
     <script type="text/javascript" charset="utf-8" src="<c:url value="/scripts/utf8-jsp/ueditor.all.js"/>"></script>
