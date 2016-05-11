@@ -31,7 +31,9 @@
                     <c:forEach items="${advertisementList}" var="advertisement">
                         <li>
                             <a href="${advertisement.redirect}">
-                                <img src="http://pro.efeiyi.com/${advertisement.img}" alt="">
+                                <div style="height: 242px;float: left">
+                                    <img src="http://pro.efeiyi.com/${advertisement.img}" alt="">
+                                </div>
                                 <%--<div class="list-content">
                                     <p class="name">${subject.name}</p>
                                     <p class="title">国家级非遗项目</p>
@@ -48,7 +50,7 @@
                 <c:if test="${subjectList != null && subjectList != ''}">
                     <c:forEach items="${subjectList}" var="subject">
                         <li>
-                            <a href="">
+                            <a href="<c:url value="/viewSubject/${subject.id}"/>">
                                 <img src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt="">
                                 <div class="list-content">
                                     <p class="name">${subject.name}</p>

@@ -88,7 +88,7 @@
                           --%>
                       <img src="http://pro.efeiyi.com/${productGiftTag.productGift.productModel.productModel_url}@!product-hot" alt="">
                       <div class="list-content">
-                          <p class="name">${productGiftTag.productGift.productModel.name}</p>
+                          <p class="name">${productGiftTag.productGift.name}</p>
                           <p class="title">￥<em>${productGiftTag.productGift.productModel.price}</em></p>
                       </div>
                   </a>
@@ -103,9 +103,9 @@
                           <%--
                                         <img src="http://gift-oss.efeiyi.com/${productGift.product.picture_url}" alt="">
                           --%>
-                      <img src="http://pro.efeiyi.com/${productGift.productModel.productModel_url}@!product-hot" alt="">
+                      <div style="height: 226px;float: left"><img src="http://pro.efeiyi.com/${productGift.productModel.productModel_url}@!product-hot" alt=""></div>
                       <div class="list-content">
-                          <p class="name">${productGift.productModel.name}</p>
+                          <p class="name">${productGift.name}</p>
                           <p class="title">￥<em>${productGift.productModel.price}</em></p>
                       </div>
                   </a>
