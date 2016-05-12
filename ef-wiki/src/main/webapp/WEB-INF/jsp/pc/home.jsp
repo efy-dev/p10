@@ -11,12 +11,12 @@
 <!doctype html>
 <html class="no-js">
 <head>
+  <title>非遗百科</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <meta name="description" content="中国领先的非物质文化遗产百科全书">
+  <meta name="keywords" content="非遗百科,百科,非物质文化遗产,文化遗产,传统技艺,传统美术,e飞蚁,非遗电商,前门,前门大街">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>工艺首页</title>
 </head>
 <body>
 <div id="slide2016" class="slide2016">
@@ -25,7 +25,7 @@
     <ul style="text-align: center">
       <c:forEach items="${pcBannerList}" var="banner" varStatus="status">
         <li>
-          <a href="<c:url value="${banner.directUrl}"/> " target="_blank" title="非遗轮播图"><img
+          <a href="<c:url value="${banner.directUrl}"/> " target="_blank" title="非遗百科"><img
                   src="http://wiki-oss.efeiyi.com/${banner.imageUrl}" width="1920" height=""
                   alt="${banner.title}"/></a></li>
       </c:forEach>

@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>完整demo</title>
+    <title>e飞蚁编辑</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <script type="text/javascript" charset="utf-8" src="<c:url value="/scripts/utf8-jsp/ueditor.config.js"/>"></script>
     <script type="text/javascript" charset="utf-8" src="<c:url value="/scripts/utf8-jsp/ueditor.all.js"/>"></script>
@@ -28,13 +28,16 @@
 <div>
     <a href="<c:url value="${uEditor.callbackUrl}"/>"><h1>返回</h1></a>
     <h1>${uEditor.title}</h1>
-    <form action="${uEditor.action}" method="get">
+    <form action="${uEditor.action}" method="post">
         <input type="hidden" name="callbackUrl" value="${uEditor.callbackUrl}">
         <input type="hidden" name="objectId" value="${uEditor.objectId}">
         <input type="hidden" name="${uEditor.paramName}" value="${uEditor.paramValue}">
         <script id="editor" name="${uEditor.name}" type="text/plain" style="width:1024px;height:500px;"></script>
         <input type="submit" value="保存">
     </form>
+
+    <button onclick="autotypeset()">自动排版</button>
+
 </div>
 
 
@@ -46,9 +49,15 @@
 
     var ue = UE.getEditor('editor');
 
+    var defaultUploadUrl = "/ueditor/image/upload.do";
+
+
+    function autotypeset(){
+        ue.execCommand("autotypeset");
+    }
 
     ue.ready(function () {
-        ue.setContent("${textContent}");
+        ue.setContent('${textContent}');
         ue.execCommand('${uEditor.paramName}', {
             'test': '${uEditor.paramValue}'
         });
@@ -56,7 +65,12 @@
         UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
         UE.Editor.prototype.getActionUrl = function (action) {
             if (action == 'img.do') {
+                <c:if test="${not empty uEditor.uploadUrl}">
                 return '${uEditor.uploadUrl}?${uEditor.paramName}=${uEditor.paramValue}';
+                </c:if>
+                <c:if test="${empty uEditor.uploadUrl}">
+                return defaultUploadUrl;
+                </c:if>
             }
             return this._bkGetActionUrl.call(this, action);
         }

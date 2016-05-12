@@ -71,55 +71,28 @@
             <input type="submit" value="编辑工艺描述wap" class="am-btn am-btn-primary">
         </form>
 
-        <%--<form action="<c:url value="/projectWiki/update.do"/>" class="am-form am-form-horizontal" method="post"--%>
-              <%--enctype="multipart/form-data">--%>
-            <%--<input type="hidden" name="projectWikiId" value="${object.id}">--%>
+        <form action="<c:url value="/projectWiki/update.do"/>" class="am-form am-form-horizontal" method="post"
+              enctype="multipart/form-data">
+            <input type="hidden" name="projectWikiId" value="${object.id}">
 
-            <%--&lt;%&ndash;<c:if test="${empty fatherId}">&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<input type="hidden" name="level" value="1" />&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<c:if test="${not empty fatherId}">&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<input type="hidden" name="level" value="${object.level}" />&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
-            <%--<div class="am-form-group">--%>
-                <%--<label name="type" for="editor" class="am-u-sm-3 am-form-label">封面图片</label>--%>
-                <%--<div class="am-u-sm-9" style="margin-top: 10px">--%>
-                    <%--<c:if test="${object.getMainPicture()!=null}">--%>
-                        <%--<img src="http://wiki-oss.efeiyi.com/${object.getMainPicture().getPictureUrl()}">--%>
-                    <%--</c:if>--%>
-                    <%--<input type="file" name="projectWikiMainPicture">--%>
-                <%--</div>--%>
-            <%--</div>--%>
+            <div class="am-form-group">
+                <label name="type" for="projectWikiMainPicture" class="am-u-sm-3 am-form-label">封面图片</label>
+                <div class="am-u-sm-9" style="margin-top: 10px">
+                    <c:if test="${object.getMainPicture()!=null}">
+                        <img src="http://wiki-oss.efeiyi.com/${object.getMainPicture().getPictureUrl()}">
+                    </c:if>
+                    <input type="file" id="projectWikiMainPicture" name="projectWikiMainPicture">
+                </div>
+            </div>
 
-            <%--<div class="am-form-group">--%>
-                <%--<label name="type" for="editor" class="am-u-sm-3 am-form-label">工艺描述PC--%>
-                    <%--<small>*</small>--%>
-                <%--</label>--%>
-                <%--<div class="am-u-sm-9" style="margin-top: 10px">--%>
-
-                    <%--<textarea id="editor" name="descriptionPC"--%>
-                              <%--placeholder="这里输入内容">${object.artistryDescription.descriptionPC}</textarea>--%>
-                    <%--<a class="am-btn am-btn-primary" onclick="textFilter()">过滤a标签</a>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <%--<div class="am-form-group">--%>
-                <%--<label name="type" for="editor1" class="am-u-sm-3 am-form-label">工艺描述Wap--%>
-                    <%--<small>*</small>--%>
-                <%--</label>--%>
-                <%--<div class="am-u-sm-9" style="margin-top: 10px">--%>
-                    <%--<textarea id="editor1" name="descriptionWap"--%>
-                              <%--placeholder="这里输入内容">${object.artistryDescription.descriptionWap}</textarea>--%>
-                    <%--<a class="am-btn am-btn-primary" onclick="textFilter()">过滤a标签</a>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <%--<div class="am-form-group">--%>
-                <%--<div class="am-u-sm-9 am-u-sm-push-3">--%>
-                    <%--<input type="submit" class="am-btn am-btn-primary" value="保存"/>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</form>--%>
-    <%--</div>--%>
-<%--</div>--%>
+            <div class="am-form-group">
+                <div class="am-u-sm-9 am-u-sm-push-3">
+                    <input type="submit" class="am-btn am-btn-primary" value="保存"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 <%--<script type="text/javascript">--%>
     <%--$(function () {--%>
