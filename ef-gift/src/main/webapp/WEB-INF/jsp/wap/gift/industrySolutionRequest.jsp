@@ -6,6 +6,24 @@
   <title>礼品频道-方案咨询</title>
 </head>
 <body>
+<header id="header" class="am-header custom-header newheader">
+  <div class="am-header-left am-header-nav">
+    <a href="javascript:history.go(-1)" class="chevron-left"></a>
+  </div>
+  <!-- //End--chevron-left-->
+  <h1 class="am-header-title">方案咨询</h1>
+  <!-- //End--title-->
+  <div class="am-header-right am-header-nav">
+    <a href="#chevron-right" class="chevron-right" id="menu">
+      <i class="line"></i>
+    </a>
+  </div>
+  <div class="menu-list">
+    <ul class="bd">
+      <li><a href="http://j.efeiyi.com/ef-gift" title="礼品首页">礼品首页</a></li>
+    </ul>
+  </div>
+</header>
 <div class="gift gift-ask">
   <form action="<c:url value="/submitIndustrySolutionRequest"/>" method="post">
     <div class="area">

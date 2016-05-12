@@ -105,6 +105,13 @@ public class ProductGiftController {
          public String viewSubject(@PathVariable String subjectId, Model model) throws Exception{
         Subject subject = (Subject) baseManager.getObject(Subject.class.getName(),subjectId);
         model.addAttribute("subject", subject);
+        if (subjectId.equals("inzu4ha1b7pa9flo")){
+            model.addAttribute("title", "中国“礼”文化");
+        }else if (subjectId.equals("inzu4s481azja868")){
+            model.addAttribute("title", "国礼轶事");
+        }else {
+            model.addAttribute("title", "专题详情");
+        }
         return "/gift/subjectView";
     }
 
