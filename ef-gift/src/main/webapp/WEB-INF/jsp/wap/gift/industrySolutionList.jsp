@@ -17,18 +17,18 @@
     </ul>
   </div>
   <!--//End--轮播图-->
-  <c:if test="${subjectList != null && subjectList != ''}">
-    <c:forEach items="${subjectList}" var="subject">
+  <c:if test="${industrySolutionMap != null && industrySolutionMap != ''}">
+    <c:forEach items="${industrySolutionMap}" var="industrySolution">
       <div class="bd ht">
         <div class="title">
-          <h3>${subject.name}</h3>
-          <h4>适合银行、证券、基金等金融机构</h4>
+          <h3>${industrySolution.key.solutionName}</h3>
+          <h4>${industrySolution.key.introduction}</h4>
           <a class="btn-link" href="<c:url value="/industrySolutionRequest"/>" title="方案定制">方案定制</a>
         </div>
         <div class="bd list">
           <ul class="ul-col-2">
-            <c:forEach items="${subject.subjectProductList}" var="subjectProduct">
-            <li><a href="" title=""><img src="http://gift-oss.efeiyi.com/${subjectProduct.product.picture_url}" alt=""><span class="txt-abs"><em>${subjectProduct.product.name}</em></span></a></li>
+            <c:forEach items="${industrySolution.value}" var="productGiftIndustrySolution">
+            <li><a href="" title=""><img src="http://pro.efeiyi.com/${productGiftIndustrySolution.productGift.productModel.productModel_url}" alt=""><span class="txt-abs"><em>${subjectProduct.product.name}</em></span></a></li>
             </c:forEach>
           </ul>
         </div>
