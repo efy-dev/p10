@@ -171,12 +171,12 @@
 												</c:if>
 											</p>
 										</div>
-								    <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply}">
-										<div class="store">
-											<p class="s-title">店主回复</p>
-											<p class="s-info">${purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply.reply}</p>
-										</div>
-									</c:if>
+								    <%--<c:if test="${not empty purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply}">--%>
+										<%--<div class="store">--%>
+											<%--<p class="s-title">店主回复</p>--%>
+											<%--<p class="s-info">${purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply.reply}</p>--%>
+										<%--</div>--%>
+									<%--</c:if>--%>
 									</li>
 								</c:if>
 							</c:forEach>

@@ -58,16 +58,6 @@
             <input type="hidden" id="facetFields" name="facetFields" value="project_name"/>
             <input type="hidden" id="group" name="group" value="efeiyi"/>
             <input type="hidden" id="priceUD" name="priceUD" value="0"/>
-            <%-- End全文检索测试 --%>
-            <%--<div class="keywords">--%>
-            <%--<a href="">剪纸</a>--%>
-            <%--<a href="">景泰蓝</a>--%>
-            <%--<a href="">景德镇</a>--%>
-            <%--<a href="">二锅头</a>--%>
-            <%--<a href="">徽州三雕</a>--%>
-            <%--<a href="">藏药</a>--%>
-            <%--<a href="">十全大补丸</a>--%>
-            <%--</div>--%>
         </form>
     </div>
 </div>

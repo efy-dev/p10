@@ -3,6 +3,7 @@ package com.efeiyi.ec.personal.master.controller;
 
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterWork;
+import com.efeiyi.ec.personal.master.MasterUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,4 +60,5 @@ public class MasterWorkController extends BaseMasterController {
         return new ModelAndView("/tenantWork/tenantWorkView",modelMap);
 
     }
+
 }

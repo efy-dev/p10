@@ -30,22 +30,23 @@
             <tr>
                 <td class="am-primary am-u-md-3">模板</td>
                 <td class="am-u-md-3">
-                    <ming800:status name="template" dataType="Subject.template" checkedValue="${object.template}" type="normal"/>
+                    <ming800:status name="template" dataType="Subject.template" checkedValue="${object.template}"
+                                    type="normal"/>
                 </td>
                 <td class="am-primary am-u-md-3">类别</td>
                 <td class="am-u-md-3" colspan="3">
-                    <ming800:status name="type" dataType="Subject.type" checkedValue="${object.type}" type="normal" />
+                    <ming800:status name="type" dataType="Subject.type" checkedValue="${object.type}" type="normal"/>
                 </td>
             </tr>
             <c:if test="${object.template == '2'}">
-            <tr>
-                <td class="am-primary am-u-md-3">起始时间</td>
-                <td class="am-u-md-3">${object.startDateTime}</td>
-                <td class="am-primary am-u-md-3">结束时间</td>
-                <td class="am-u-md-3" colspan="3">
+                <tr>
+                    <td class="am-primary am-u-md-3">起始时间</td>
+                    <td class="am-u-md-3">${object.startDateTime}</td>
+                    <td class="am-primary am-u-md-3">结束时间</td>
+                    <td class="am-u-md-3" colspan="3">
                             ${object.endDateTime}
-                </td>
-            </tr>
+                    </td>
+                </tr>
             </c:if>
             </tbody>
         </table>
@@ -59,30 +60,16 @@
 
     <div class="am-u-md-12">
         <div class="am-panel-bd am-collapse am-in" id="collapse-panel-3" style="height: auto;overflow: hidden">
-
             <ul style="width: 100%" style="list-style:none" id="subjectPicture">
                 <c:if test="${!empty object.subjectPictureList}">
                     <c:forEach var="subjectPicture" items="${object.subjectPictureList}">
-
                         <li style="float: left;margin-right: 10px; width: 200px;" name="${subjectPicture.id}">
                             <dl style="margin-top: 6px;">
                                 <dt style="width: 100%">
                                     <img width="100%" name=""
                                          src="http://pro.efeiyi.com/${subjectPicture.pictureUrl}@!product-model"
                                          alt="附件图片"/>
-                                        <%--<input type="hidden" name="subjectPicture" value="${subjectPicture.pictureUrl}">--%>
-                                        <%--<input type="hidden" name="flag" value="0">--%>
-                                        <%--<input type="hidden" name="spId" value="${subjectPicture.id}">--%>
                                 </dt>
-
-                                    <%--<dd style="width: 100%;text-align: center;" >--%>
-
-                                    <%--<a href="javascript:void(0);" onclick="deletePicture1(this)">删除</a>--%>
-                                    <%--</dd>--%>
-
-                                    <%--<dd style="width: 100%;text-align: center;" >--%>
-                                    <%--<a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${subjectPicture.pictureUrl}">复制图片地址</a>--%>
-                                    <%--</dd>--%>
                             </dl>
                         </li>
 
@@ -103,8 +90,8 @@
     </div>
 </div>
 <script>
-    function openUrl(id){
-      var   url = "http://www2.efeiyi.com/subject/"+id;
+    function openUrl(id) {
+        var url = "http://www2.efeiyi.com/subject/" + id;
         window.open(url);
     }
 </script>

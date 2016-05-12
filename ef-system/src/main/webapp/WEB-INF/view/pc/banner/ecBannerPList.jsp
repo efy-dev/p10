@@ -21,9 +21,11 @@
 <body>
 <div class="am-btn-toolbar" style="margin-bottom: 10px">
     <div class="am-btn-group am-btn-group-xs">
-<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
-        <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formBanner&groupName=${groupName}&bucket=ec-efeiyi"/>"><span class="am-icon-plus"></span>新建轮播图</a>
-    </security:authorize>
+        <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
+            <a type="button" class="am-btn am-btn-default"
+               href="<c:url value="/basic/xm.do?qm=formBanner&groupName=${groupName}&bucket=ec-efeiyi"/>"><span
+                    class="am-icon-plus"></span>新建轮播图</a>
+        </security:authorize>
     </div>
 </div>
 
@@ -37,9 +39,9 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
-<security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
-                    <th class="table-set">操作</th>
-</security:authorize>
+                    <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
+                        <th class="table-set">操作</th>
+                    </security:authorize>
                     <th class="table-title">标题</th>
                     <th class="table-title">跳转地址</th>
                     <th class="table-title">类别</th>
@@ -53,20 +55,21 @@
                 <c:forEach items="${requestScope.pageInfo.list}" var="banner">
                     <tr id="${banner.id}" width="25%">
                         <security:authorize ifAnyGranted="admin,operational,c_operational,o_operational">
-                        <td>
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=formBanner&groupName=${groupName}&bucket=ec-efeiyi&id=${banner.id}"/>"><span
-                                            class="am-icon-trash-o">编辑</span>
-                                    </a>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       onclick="showConfirm('提示','是否删除',function(){removeBanner('${banner.id}')})" href="javascript:void (0);"><span
-                                            class="am-icon-trash-o">删除</span>
-                                    </a>
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=formBanner&groupName=${groupName}&bucket=ec-efeiyi&id=${banner.id}"/>"><span
+                                                class="am-icon-trash-o">编辑</span>
+                                        </a>
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           onclick="showConfirm('提示','是否删除',function(){removeBanner('${banner.id}')})"
+                                           href="javascript:void (0);"><span
+                                                class="am-icon-trash-o">删除</span>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
                         </security:authorize>
                         <td class="am-hide-sm-only" width="15%">${banner.title}</td>
                         <td class="am-hide-sm-only" width="25%">
@@ -80,22 +83,27 @@
                                     (WAP) <a target="_blank" href="${banner.wapUrl}">${banner.wapUrl}</a>
                                 </p>
                             </c:if>
-                             <%--<a href="${banner.directUrl}" target="_blank">${banner.directUrl}</a>--%>
+                                <%--<a href="${banner.directUrl}" target="_blank">${banner.directUrl}</a>--%>
                         </td>
                         <td class="am-hide-sm-only" width="15%">
                             <c:if test="${banner.group == 'ec.home.banner'}">
                                 电商首页
                             </c:if>
                             <c:if test="${banner.group!='ec.home.banner'}">
-                               <ming800:status name="groupName" dataType="Banner.group" checkedValue="${banner.group}"  type="normal"/>
+                                <ming800:status name="groupName" dataType="Banner.group" checkedValue="${banner.group}"
+                                                type="normal"/>
                             </c:if>
                         </td>
                         <td class="am-hide-sm-only" width="5%">
-                            <a href="#" onclick="toUpdateBannerOrder(this,'<c:url value="/banner/updateBannerOrder.do"/>')" bannerOrder="${banner.bannerOrder}" id="${banner.id}">
+                            <a href="#"
+                               onclick="toUpdateBannerOrder(this,'<c:url value="/banner/updateBannerOrder.do"/>')"
+                               bannerOrder="${banner.bannerOrder}" id="${banner.id}">
                                     ${banner.bannerOrder}
                             </a>
                         </td>
-                        <td class="am-hide-sm-only" width="15%"><img width="35px;" src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!product-model"/>" alt=""/></td>
+                        <td class="am-hide-sm-only" width="15%"><img width="35px;"
+                                                                     src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!product-model"/>"
+                                                                     alt=""/></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -114,17 +122,17 @@
 <script>
 
 
-    function toUpdateBannerOrder(obj,updateUrl){
+    function toUpdateBannerOrder(obj, updateUrl) {
         var bannerOrder = $(obj).attr("bannerOrder");
         var id = $(obj).attr("id");
-        $(obj).parent().html("<input id="+id+" onblur=\"updateBannerOrder(this,'"+updateUrl+"')\" type=\"text\" name=\"bannerOrder\" style=\"width: 35px;\" value="+bannerOrder+" />");
+        $(obj).parent().html("<input id=" + id + " onblur=\"updateBannerOrder(this,'" + updateUrl + "')\" type=\"text\" name=\"bannerOrder\" style=\"width: 35px;\" value=" + bannerOrder + " />");
     }
 
     /**
      * 更新序号
      * @param obj
      */
-    function updateBannerOrder(obj,updateUrl){
+    function updateBannerOrder(obj, updateUrl) {
         var bannerOrder = $(obj).val();
         var id = $(obj).attr("id");
         $.ajax({
@@ -132,22 +140,22 @@
             url: updateUrl,
             cache: false,
             dataType: "json",
-            data:{id:id,bannerOrder:bannerOrder},
+            data: {id: id, bannerOrder: bannerOrder},
             success: function (data) {
-                $(obj).parent().html("<a onclick=\"toUpdateBannerOrder(this,'"+updateUrl+"')\" bannerOrder="+bannerOrder+" id="+id+">"+bannerOrder+"</a>");
+                $(obj).parent().html("<a onclick=\"toUpdateBannerOrder(this,'" + updateUrl + "')\" bannerOrder=" + bannerOrder + " id=" + id + ">" + bannerOrder + "</a>");
             }
         });
     }
 
-    function removeBanner(divId){
+    function removeBanner(divId) {
         $.ajax({
             type: "get",
             url: '<c:url value="/basic/xmj.do?qm=removeBanner"/>',
             cache: false,
             dataType: "json",
-            data:{id:divId},
+            data: {id: divId},
             success: function (data) {
-                $("#"+divId).remove();
+                $("#" + divId).remove();
             }
         });
     }

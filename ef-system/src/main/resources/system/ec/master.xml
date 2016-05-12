@@ -134,6 +134,14 @@
                         <!--<condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>-->
                     </query>
                 </do>
+
+                <do name="listMasterTemp" label="传承人列表" access="" result="/master/masterList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="状态" name="status" defaultValue="0" operation="ne"/>
+                        <condition label="大师名称" name="name" defaultValue="1" operation="eq"/>
+                        <!--<condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>-->
+                    </query>
+                </do>
             </does>
         </entity>
 
@@ -212,7 +220,7 @@
                 <do name="listMasterBanner" label="传承人轮播图列表" access="" result="/masterBanner/masterBannerList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
-                        <condition label="状态" name="master.id" operation="eq"/>
+                        <condition label="状态" name="master.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
@@ -657,7 +665,7 @@
                         <condition label="大师" name="project.id" defaultValue="1" operation="eq"/>
                     </query>
                     <query name="include" label="嵌入" type="auto" orderBy="id:desc">
-                        <condition label="状态" name="status" defaultValue="0" operation="ne"/>
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
                         <condition label="传承人Id" name="master.id" operation="eq"/>
                     </query>
                 </do>
@@ -794,6 +802,34 @@
                         <condition label="新闻动态Id" name="master.id" defaultValue="0" operation="eq"/>
                     </query>
                 </do>
+            </does>
+        </entity>
+
+        <entity name="MasterReview" label="大师审核动态"
+                basic="simple" others=""
+                model="com.efeiyi.ec.master.model.MasterReview">
+            <does>
+
+                <do name="formMasterReview" label="" access=""
+                    execute="com.efeiyi.ec.system.master.controller.MasterReviewHandler"
+                    result="/masterReview/masterReviewForm"/>
+
+                <do name="listMasterReview" label="大师审核动态" access=""
+                    result="/masterReview/masterReviewList">
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition label="大师id" name="master.id" defaultValue="1"  operation="eq"/>
+                    </query>
+                </do>
+                <!--<do name="listMasterFollowed" label="大师著作产品" access="" result="/masterFollowed/masterFollowedList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="createDateTime:desc">-->
+                        <!--<condition label="新闻动态Id" name="master.id" defaultValue="0" operation="eq"/>-->
+                    <!--</query>-->
+                <!--</do>-->
+                <!--<do name="plistMasterFollowed" access="" label="传承人推荐列表" result="/masterFollowed/masterFollowedPList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="createDateTime:desc">-->
+                        <!--<condition label="新闻动态Id" name="master.id" defaultValue="0" operation="eq"/>-->
+                    <!--</query>-->
+                <!--</do>-->
             </does>
         </entity>
 

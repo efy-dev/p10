@@ -47,36 +47,52 @@ public class HomeController {
 
 
     //首先需要判断是否是微信浏览器，如果是微信浏览器，需要通过微信接口获得unionid 然后判断该用户是否注册了efeiyi用户，拿到用户数据后自动登陆，然后返回页面
-    @RequestMapping({"/authenticationTest.do"})
+//    @RequestMapping({"/authenticationTest.do"})
+//    @ResponseBody
+//    public String authenticationTest() {
+//        System.out.println(AuthorizationUtil.isAuthenticated());
+//        String name = "13693097151";
+//        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+//        param.put("username", name);
+//        MyUser myUser = (MyUser) baseManager.getUniqueObjectByConditions("select obj from " + MyUser.class.getName() + " obj where obj.username=:username", param);
+//        AuthenticationManager am = new SampleAuthenticationManager();
+//        try {
+//            Authentication request = new UsernamePasswordAuthenticationToken(myUser, StringUtil.encodePassword("1231", "SHA"));
+//            Authentication result = am.authenticate(request);
+//            SecurityContextHolder.getContext().setAuthentication(result);
+//        } catch (AuthenticationException e) {
+//            System.out.println("Authentication failed: " + e.getMessage());
+//        }
+//        return AuthorizationUtil.getMyUser().getUsername();
+//    }
+//
+//    private static class SampleAuthenticationManager implements AuthenticationManager {
+//        static final List<GrantedAuthority> AUTHORITIES = new ArrayList<>();
+//
+//        static {
+//            AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
+//        }
+//
+//        public Authentication authenticate(Authentication auth) throws AuthenticationException {
+//            return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
+//                    auth.getCredentials(), AUTHORITIES);
+//        }
+//    }
+
+
+    @RequestMapping({"/datafrom1.do"})
     @ResponseBody
-    public String authenticationTest() {
-        System.out.println(AuthorizationUtil.isAuthenticated());
-        String name = "13693097151";
-        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        param.put("username", name);
-        MyUser myUser = (MyUser) baseManager.getUniqueObjectByConditions("select obj from " + MyUser.class.getName() + " obj where obj.username=:username", param);
-        AuthenticationManager am = new SampleAuthenticationManager();
-        try {
-            Authentication request = new UsernamePasswordAuthenticationToken(myUser, StringUtil.encodePassword("1231", "SHA"));
-            Authentication result = am.authenticate(request);
-            SecurityContextHolder.getContext().setAuthentication(result);
-        } catch (AuthenticationException e) {
-            System.out.println("Authentication failed: " + e.getMessage());
+    public List selectDataFrom() {
+        List<Integer> optionList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            optionList.add(i);
         }
-        return AuthorizationUtil.getMyUser().getUsername();
+        return optionList;
     }
 
-    private static class SampleAuthenticationManager implements AuthenticationManager {
-        static final List<GrantedAuthority> AUTHORITIES = new ArrayList<>();
-
-        static {
-            AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
-        }
-
-        public Authentication authenticate(Authentication auth) throws AuthenticationException {
-            return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
-                    auth.getCredentials(), AUTHORITIES);
-        }
+    @RequestMapping({"/demo.do"})
+    public String selectDemo() {
+        return "/demo";
     }
 
 
@@ -89,8 +105,8 @@ public class HomeController {
 
     @RequestMapping({"/home.do"})
     public String home1(HttpServletRequest request, Model model) throws Exception {
-
         //判断是否有需要重定向的页面
+        model.addAttribute("homepage", "true");
         String redirectUrl = request.getParameter("redirect");
         if (redirectUrl != null) {
             return "redirect:" + redirectUrl;
@@ -218,47 +234,51 @@ public class HomeController {
         }
         return "recorded";
     }
+
     @RequestMapping({"/count.do"})
-    public String count(HttpServletRequest request,HttpServletResponse response,Model model) throws ParseException {
+    public String count(HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
         Date dateNow = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dateStr = formatter.format(dateNow);
-        String dateParam = dateStr+"%";
+        String dateParam = dateStr + "%";
         Date date = formatter.parse(dateStr);
         List<PurchaseOrder> purchaseOrderList = getPurchaseOrderList(dateParam);
         List<PurchaseOrderPayment> purchaseOrderPaymentList = getPurchaseOrderPaymentList(dateParam);
         List<User> userList = getRegisterList(dateParam);
         model.addAttribute("registerCount", userList.size());
-        model.addAttribute("purchaseOrderCount",purchaseOrderList.size());
-        model.addAttribute("purchaserPaymentCount",purchaseOrderPaymentList.size());
-        model.addAttribute("date",dateStr);
+        model.addAttribute("purchaseOrderCount", purchaseOrderList.size());
+        model.addAttribute("purchaserPaymentCount", purchaseOrderPaymentList.size());
+        model.addAttribute("date", dateStr);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         Date yesterday = calendar.getTime();
         dateStr = formatter.format(yesterday);
-        dateParam = dateStr+"%";
+        dateParam = dateStr + "%";
         purchaseOrderList = getPurchaseOrderList(dateParam);
         purchaseOrderPaymentList = getPurchaseOrderPaymentList(dateParam);
         userList = getRegisterList(dateParam);
-        model.addAttribute("yesterday",dateStr);
-        model.addAttribute("yesterdayRegisterCount",userList.size());
-        model.addAttribute("yesterdayPurchaseOrderCount",purchaseOrderList.size());
-        model.addAttribute("yesterdayPurchasePaymentCount",purchaseOrderPaymentList.size());
+        model.addAttribute("yesterday", dateStr);
+        model.addAttribute("yesterdayRegisterCount", userList.size());
+        model.addAttribute("yesterdayPurchaseOrderCount", purchaseOrderList.size());
+        model.addAttribute("yesterdayPurchasePaymentCount", purchaseOrderPaymentList.size());
         return "/count";
     }
-    private  List getPurchaseOrderList(String str){
-        String query = "FROM PurchaseOrder p WHERE p.createDatetime like '"+str+"' AND p.status != 0";
+
+    private List getPurchaseOrderList(String str) {
+        String query = "FROM PurchaseOrder p WHERE p.createDatetime like '" + str + "' AND p.status != 0";
         List<PurchaseOrder> purchaseOrderList = baseManager.listObject(query);
         return purchaseOrderList;
     }
-    private List getRegisterList(String str){
-        String query = "FROM User u WHERE u.createDatetime like '"+str+"' AND u.status != 0";
+
+    private List getRegisterList(String str) {
+        String query = "FROM User u WHERE u.createDatetime like '" + str + "' AND u.status != 0";
         List<User> userList = baseManager.listObject(query);
         return userList;
     }
-    private List getPurchaseOrderPaymentList(String str){
-        String query = "FROM PurchaseOrderPayment p WHERE p.createDateTime like '"+str+"' AND p.status = 2";
+
+    private List getPurchaseOrderPaymentList(String str) {
+        String query = "FROM PurchaseOrderPayment p WHERE p.createDateTime like '" + str + "' AND p.status = 2";
         List<PurchaseOrderPayment> list = baseManager.listObject(query);
         return list;
 

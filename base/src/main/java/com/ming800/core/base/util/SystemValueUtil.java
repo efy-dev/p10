@@ -1,5 +1,7 @@
 package com.ming800.core.base.util;
 
+import com.ming800.core.base.model.BaseMaster;
+import com.ming800.core.base.model.BaseMasterUser;
 import com.ming800.core.base.model.MethodCache;
 import com.ming800.core.base.model.MethodSetting;
 import com.ming800.core.util.DateUtil;
@@ -51,6 +53,14 @@ public class SystemValueUtil {
                         resultValue = BaseUserUtil.getMyUser().getBigTenant().getId();
                     } else {
                         resultValue = BaseUserUtil.getMyUser().getBigTenant();
+                    }
+                    break;
+                case  "MASTER":
+                    if (type.equals("id")) {
+                        BaseMaster master = BaseUserUtil.findMaster();
+                        resultValue = master.getId();
+                    } else {
+                        resultValue = BaseUserUtil.findMaster();
                     }
                     break;
 

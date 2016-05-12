@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<module name="wiki" label="系统-礼物管理" version="" package="com.efeiyi.ec.gift" path="">
+
+    <entities>
+
+        <entity name="ProductGift" label="礼物项目" model="com.efeiyi.ec.gift.model.ProductGift">
+
+            <does>
+                <do name="plistGiftProject" access="" label="礼物项目列表" result="/giftProject/giftProjectList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="plistProductGift" access="" label="礼物项目列表" result="/gift/industrySolutionProductGiftList">
+                    <query name="industry" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="saveOrUpdateGift" label="编辑礼品" access=""
+                    result="redirect:/basic/xm.do?qm=plistGiftProject_default">
+                    <page>
+                        <fields>
+                            <field name="createDatetime" label="创建时间" defaultValue="${CURRENT_DATETIME}"
+                                   inputType="default"/>
+                            <field name="status" label="默认状态" defaultValue="1"
+                                   inputType="default"/>
+                        </fields>
+                    </page>
+                </do>
+                <do name="formGift" label="礼品表单" access="" result="/giftProject/editGift"
+                    execute="com.efeiyi.ec.system.gift.controller.GiftHandler"/>
+                <do name="viewProductGift" label="礼品详情页" access="" result="/giftProject/giftProjectView"
+                    execute="com.efeiyi.ec.system.gift.controller.GiftHandler"/>
+
+                <do name="removeProjectGift" label="删除礼品" access="" result="json"
+                />
+            </does>
+        </entity>
+        <entity name="ProductGiftTagValue" label="礼物标签" model="com.efeiyi.ec.gift.model.ProductGiftTagValue">
+            <fields>
+                <field name="type" label="标签类型" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="场合" value="1"/>
+                        <item label="对象" value="2"/>
+                        <item label="价格" value="3"/>
+                    </statusType>
+                </field>
+            </fields>
+
+            <does>
+
+                <do name="plistGiftLabel" access="" label="礼物标签列表" result="/giftProject/giftLabelList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+
+                </do>
+                <do name="plistGiftTag" access="" label="礼物标签列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+
+                </do>
+                <do name="formGiftLabel" label="礼品标签表单" access="" result="/giftProject/editLabel"/>
+
+                <do name="saveOrUpdateGiftLabel" label="保存礼品标签" access=""
+                    result="redirect:/basic/xm.do?qm=plistGiftLabel_default">
+                    <page>
+                        <fields>
+                            <field name="createDatetime" label="创建时间" defaultValue="${CURRENT_DATETIME}"
+                                   inputType="default"/>
+                            <field name="status" label="默认状态" defaultValue="1"
+                                   inputType="default"/>
+                        </fields>
+                    </page>
+                </do>
+                <do name="removeGiftLabel" label="删除礼品标签" access="" result="json"
+                />
+            </does>
+        </entity>
+
+        <entity name="ProductGiftTag" label="礼物标签" model="com.efeiyi.ec.gift.model.ProductGiftTag">
+            <does>
+                <do name="saveOrUpdateGiftTag" label="保存礼品标签" access="" result="redirect:/basic/xm.do?qm=plistGiftLabel_default">
+                    <page>
+                        <fields>
+                            <field name="status" label="默认状态" defaultValue="1"
+                                   inputType="default"/>
+                        </fields>
+                    </page>
+                </do>
+                <do name="listProductGiftTag" label="礼物标签列表" result="">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="productGift.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="removeProductGiftTag" access="" label="删除标签与礼品的关联"/>
+            </does>
+        </entity>
+
+        <entity name="IndustrySolution" label="企业解决方案" model="com.efeiyi.ec.gift.model.IndustrySolution">
+            <does>
+                <do name="saveOrUpdateIndustrySolution" label="保存解决方案" access=""
+                    result="redirect:/basic/xm.do?qm=plistIndustrySolution_default">
+                    <page>
+                        <fields>
+                            <field name="status" label="默认状态" defaultValue="1"
+                                   inputType="default"/>
+                        </fields>
+                    </page>
+                </do>
+                <do name="plistIndustrySolution" access="" label="企业解决方案列表" result="/gift/industrySolutionList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="formIndustrySolution" access="" label="企业解决方案表单" result="/gift/industrySolutionForm"/>
+                <do name="viewIndustrySolution" access="" label="企业解决方案详情" result="/gift/industrySolutionView"
+                    execute="com.efeiyi.ec.system.gift.controller.ProductGiftIndustrySolutionHandler"/>
+            </does>
+        </entity>
+
+        <entity name="ProductGiftIndustrySolution" label="企业解决方案关联的礼品"
+                model="com.efeiyi.ec.gift.model.ProductGiftIndustrySolution">
+            <does>
+                <do name="plistProductGiftIndustrySolution" access="" label="解决方案关联礼品列表"
+                    result="/gift/industrySolutionProductGiftList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="listProductGiftIndustrySolution" access="" label="解决方案关联礼品列表"
+                    result="/gift/industrySolutionList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="industrySolution.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="removeProductGiftIndustrySolution" access="" label="解决方案关联礼品列表"/>
+            </does>
+        </entity>
+
+    </entities>
+</module>

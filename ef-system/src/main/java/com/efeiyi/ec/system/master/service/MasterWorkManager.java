@@ -1,5 +1,9 @@
 package com.efeiyi.ec.system.master.service;
 
+import org.springframework.web.multipart.MultipartRequest;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by IntelliJ IDEA.
  * User: ming
@@ -17,4 +21,12 @@ public interface MasterWorkManager {
      * @param targetSort
      */
     void changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort);
+
+    /**
+     *
+     * @param request
+     * @param multipartRequest
+     * @return
+     */
+    boolean saveMasterWork(HttpServletRequest request, MultipartRequest multipartRequest);
 }

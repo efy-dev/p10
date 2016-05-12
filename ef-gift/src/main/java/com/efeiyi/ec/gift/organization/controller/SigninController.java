@@ -97,7 +97,6 @@ public class SigninController extends BaseController {
     public void forward2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //将登陆的用户的用户信息保存到cookie中
         MyUser myUser = AuthorizationUtil.getMyUser();
-        CookieTool.addCookie(response, "userinfo", myUser.getId(), 10000000, ".efeiyi.com");
         response.sendRedirect(request.getContextPath() + "/");
     }
 

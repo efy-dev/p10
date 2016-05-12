@@ -14,11 +14,11 @@ import java.util.List;
 @Table(name = "subject")
 public class Subject {
 
-    private String id ;
-    private String pictureUrl;
+    private String id;
+    private String pictureUrl;  //封面
     private String name;
     private SubjectDescription subjectDescription;
-    private Integer subjectIndex;
+    private Integer subjectIndex;  //专题顺序
     private List<SubjectPicture> subjectPictureList;
     private List<SubjectProduct> subjectProductList;
     private String status;
@@ -28,6 +28,17 @@ public class Subject {
     private Date startDateTime;
     private Date endDateTime;
     private Date createDateTime;
+    private String content;
+    private List<SubjectRecommend> subjectRecommendList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
+    public List<SubjectRecommend> getSubjectRecommendList() {
+        return subjectRecommendList;
+    }
+
+    public void setSubjectRecommendList(List<SubjectRecommend> subjectRecommendList) {
+        this.subjectRecommendList = subjectRecommendList;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -58,7 +69,7 @@ public class Subject {
         this.pictureUrl = pictureUrl;
     }
 
-    @Column(name="name")
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -123,6 +134,7 @@ public class Subject {
     public void setType(String type) {
         this.type = type;
     }
+
     @Column(name = "subject_show")
     public String getSubjectShow() {
         return subjectShow;
@@ -162,5 +174,14 @@ public class Subject {
     @Override
     public String toString() {
         return "Subject{id = " + id + "}";
+    }
+
+    @Column(name = "content")
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

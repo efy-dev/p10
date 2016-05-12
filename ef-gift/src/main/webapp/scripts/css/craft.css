@@ -1,0 +1,185 @@
+@charset "UTF-8";
+/*
+ *name:工艺
+ *time:2016-04-13
+ *
+*/
+.fl, .min-logo, .footer2016, .craft-list2016 .craft-list, .craft-particulars2016, .craft-particulars2016 .craft-crumbs, .craft-particulars2016 .craft-crumbs .particulars .crumbs, .craft-particulars2016 .user, .craft-particulars2016 .user .skill .page, .craft-particulars2016 .user .skill .page .txt-page, .craft-particulars2016 .user .skill .page .txt-page .name, .craft-particulars2016 .user .skill .page .txt-page .rank, .craft-particulars2016 .user .skill .page .txt-page .area, .craft-particulars2016 .user .skill .page .pic-page .user-pic, .craft-particulars2016 .user .skill .page .pic-page .user-pic a img, .craft-particulars2016 .user .skill .page .pic-page .user-pic a .user-txt, .craft-particulars2016 .user .skill .page .pic-page .wechat img, .craft-particulars2016 .user .skill .page .pic-page .wechat .user-wechat, .craft-particulars2016 .introduce, .craft-particulars2016 .introduce .craft-introduce .txt {
+  float: left;
+}
+
+.wb, .footer2016, .craft-list2016 .craft-list, .craft-particulars2016, .craft-particulars2016 .craft-crumbs, .craft-particulars2016 .craft-crumbs .particulars .crumbs, .craft-particulars2016 .user, .craft-particulars2016 .user .skill .page, .craft-particulars2016 .user .skill .page .txt-page, .craft-particulars2016 .user .skill .page .txt-page .name, .craft-particulars2016 .user .skill .page .txt-page .rank, .craft-particulars2016 .user .skill .page .txt-page .area, .craft-particulars2016 .user .skill .page .pic-page .user-pic a img, .craft-particulars2016 .user .skill .page .pic-page .user-pic a .user-txt, .craft-particulars2016 .user .skill .page .pic-page .user-pic a .user-txt p, .craft-particulars2016 .user .skill .page .pic-page .wechat img, .craft-particulars2016 .user .skill .page .pic-page .wechat .user-wechat, .craft-particulars2016 .introduce, .craft-particulars2016 .introduce .craft-introduce .txt {
+  width: 100%;
+}
+
+.opacityG {
+  opacity: 0.5;
+}
+
+.wm, .craft-list2016, .craft-particulars2016 .craft-crumbs .particulars, .craft-particulars2016 .user .skill, .craft-particulars2016 .introduce .craft-introduce {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+/*
+ *name:工艺通用头部
+ *time:2016-04-13
+ *
+*/
+.min-logo {
+  width: 30px;
+  height: 31px;
+  background: url("../images/craft/logo.png");
+  margin: 8px 8px 0 0;
+}
+
+.bgf {
+  background: #fff !important;
+  height: 48px;
+  border: 1px solid #ececec;
+}
+
+.bgc {
+  background: #fafafa;
+  border-top-width: 0;
+  border-bottom-width: 0;
+}
+
+/*
+ *name:工艺通用底部
+ *time:2016-04-13
+ *
+*/
+.footer2016 {
+  margin-top: 30px;
+  border-top: 3px solid #cdcdcd;
+}
+
+/*
+ *name:工艺首页
+ *time:2016-04-13
+ *
+*/
+.craft-list2016 .craft-list {
+  padding-bottom: 50px;
+}
+
+/*
+ *name:工艺详情
+ *time:2016-04-13
+ *
+*/
+.craft-particulars2016 .craft-crumbs .particulars .crumbs {
+  padding: 15px 0 19px 0;
+}
+.craft-particulars2016 .craft-crumbs .particulars .crumbs a, .craft-particulars2016 .craft-crumbs .particulars .crumbs .link, .craft-particulars2016 .craft-crumbs .particulars .crumbs em {
+  color: #000;
+  font-size: 16px;
+}
+.craft-particulars2016 .craft-crumbs .particulars .crumbs a.present, .craft-particulars2016 .craft-crumbs .particulars .crumbs em.present {
+  color: #808080;
+}
+.craft-particulars2016 .user {
+  background: #fff;
+}
+.craft-particulars2016 .user .skill {
+  height: 370px;
+}
+.craft-particulars2016 .user .skill .page {
+  padding: 60px 0;
+  position: relative;
+}
+.craft-particulars2016 .user .skill .page .txt-page .name {
+  font-size: 30px;
+  line-height: 30px;
+  color: #333333;
+  margin-bottom: 30px;
+}
+.craft-particulars2016 .user .skill .page .txt-page .name em {
+  font-size: 30px;
+  line-height: 30px;
+  color: #333333;
+}
+.craft-particulars2016 .user .skill .page .txt-page .name a {
+  font-size: 30px;
+  line-height: 30px;
+  color: #333333;
+}
+.craft-particulars2016 .user .skill .page .txt-page .rank, .craft-particulars2016 .user .skill .page .txt-page .area {
+  font-size: 26px;
+  line-height: 26px;
+  color: #333333;
+  margin-bottom: 30px;
+}
+.craft-particulars2016 .user .skill .page .txt-page .rank em, .craft-particulars2016 .user .skill .page .txt-page .area em {
+  font-size: 26px;
+  line-height: 26px;
+  color: #333333;
+}
+.craft-particulars2016 .user .skill .page .txt-page .rank a, .craft-particulars2016 .user .skill .page .txt-page .area a {
+  font-size: 26px;
+  line-height: 26px;
+  color: #333333;
+}
+.craft-particulars2016 .user .skill .page .pic-page {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  width: 360px;
+  height: 250px;
+}
+.craft-particulars2016 .user .skill .page .pic-page .user-pic {
+  width: 160px;
+}
+.craft-particulars2016 .user .skill .page .pic-page .user-pic a img {
+  height: 160px;
+}
+.craft-particulars2016 .user .skill .page .pic-page .user-pic a .user-txt {
+  border: 1px solid #ccc;
+  border-top-width: 0;
+  height: 90px;
+  text-align: center;
+  padding-top: 10px;
+}
+.craft-particulars2016 .user .skill .page .pic-page .user-pic a .user-txt p {
+  display: inline-block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  line-height: 14px;
+  color: #999999;
+}
+.craft-particulars2016 .user .skill .page .pic-page .user-pic a .user-txt p.name {
+  font-size: 16px;
+  line-height: 16px;
+  color: black;
+}
+.craft-particulars2016 .user .skill .page .pic-page .wechat {
+  float: right;
+  width: 160px;
+}
+.craft-particulars2016 .user .skill .page .pic-page .wechat img {
+  height: 160px;
+}
+.craft-particulars2016 .user .skill .page .pic-page .wechat .user-wechat {
+  border: 1px solid #ccc;
+  border-top-width: 0;
+  height: 90px;
+  text-align: center;
+  padding-top: 22px;
+}
+.craft-particulars2016 .user .skill .page .pic-page .wechat .user-wechat p {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 16px;
+  color: #999999;
+  padding: 5px 0;
+}
+.craft-particulars2016 .introduce .craft-introduce .txt {
+  padding-bottom: 80px;
+}
+
+/*
+ *name:工艺详情
+ *time:2016-04-13
+ *
+*/

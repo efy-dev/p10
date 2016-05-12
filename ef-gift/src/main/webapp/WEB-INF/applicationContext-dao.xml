@@ -39,7 +39,7 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="userManager" class="com.efeiyi.ec.website.organization.service.impl.UserManagerImpl"/>
+    <bean id="userManager" class="com.efeiyi.ec.gift.organization.service.impl.UserManagerImpl"/>
 
     <bean id="commonManager" class="com.ming800.core.p.service.impl.CommonManagerImpl" />
     <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">

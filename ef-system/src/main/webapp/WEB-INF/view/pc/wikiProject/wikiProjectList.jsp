@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -50,32 +49,70 @@
                         <td width="10%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formWiki&view=wiki&id=${wikiList.id}"/>"><span
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
+                                       href="<c:url value="/basic/xm.do?qm=formWiki&view=wiki&id=${wikiList.id}"/>"><span
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeMasterWork('${wikiList.id}')})" href="#"><span
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       onclick="showConfirm('提示','是否删除',function(){removeMasterWork('${wikiList.id}')})"
+                                       href="#"><span
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
+                                        <%--<security:authorize ifAnyGranted="admin,operational,c_operational">--%>
+                                    <c:set value="0" var="isOk"/>
+                                    <c:if test="${not empty wikiList.getArtistryRecommendList()}">
+                                        <c:forEach var="recommended"
+                                                   items="${wikiList.getArtistryRecommendList()}">
+                                            <c:if test="${recommended.artistry.id== wikiList.id && recommended.groupName == 'wiki.artistryRecommend'}">
+                                                <c:set value="1" var="isOk"/>
+                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                   href="#" onclick="recommended(this,1,'<c:url
+                                                        value="/Recommended/deleteObjectRecommended.do"/>')"
+                                                   recommendedId="${wikiList.id}" id="${recommended.id}"
+                                                   recommend="0">
+                                                    <span class="am-icon-heart">取消推荐 </span>
+                                                </a>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if test="${isOk=='0'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           onclick="recommended(this)"
+                                           href="#" recommend="1" recommendedId="${wikiList.id}" id="">
+                                            <span class="am-icon-heart"> 推荐</span>
+                                        </a>
 
+                                    </c:if>
+
+                                        <span style="display: none;float: left;padding-left: 10px;">
+                                            <input type="text" name="sort" style="width: 35px;" value=""/>
+                                            <a class=" am-btn-primary"
+                                               onclick="saveRecommended(this,'wiki.artistryRecommend',1,'<c:url
+                                                       value="/Recommended/saveObjectRecommended.do"/>')"
+                                               style="padding: 0px 10px 5px 10px"> 保存</a>
+                                        </span>
+                                        <%--</security:authorize>--%>
                                 </div>
                             </div>
                         </td>
                         <td class="am-hide-sm-only" width="10%">
                             <a href="<c:url value="/basic/xm.do?qm=viewProjectWiki&view=masterWork&id=${wikiList.id}"/>">
-                                    ${wikiList.project.name}
+                                    ${wikiList.name}
                             </a>
                         </td>
                         <td class="am-hide-sm-only" width="10%">
-                            <ming800:status name="level" dataType="Project.level" checkedValue="${wikiList.project.level}" type="normal"/>
+                            <ming800:status name="level" dataType="ProjectWiki.level"
+                                            checkedValue="${wikiList.level}" type="normal"/>
                         </td>
                         <td class="am-hide-sm-only" width="10%">
-                            <ming800:status name="type" dataType="ProjectWiki.type" checkedValue="${wikiList.type}" type="normal"/>
+                            <ming800:status name="type" dataType="ProjectWiki.type" checkedValue="${wikiList.type}"
+                                            type="normal"/>
                         </td>
                         <td class="am-hide-sm-only" width="12%">
                                 ${wikiList.project.addressDistrict.addressCity.name}
                         </td>
                         <td class="am-hide-sm-only" width="12%">
-                               <fmt:formatDate value="${wikiList.createDatetime}" pattern="yyyy/MM/dd HH:MM:SS" />
+                            <fmt:formatDate value="${wikiList.createDatetime}" pattern="yyyy/MM/dd HH:MM:SS"/>
                         </td>
                     </tr>
                 </c:forEach>
@@ -93,9 +130,9 @@
 </div>
 <script type="text/javascript">
 
-    function  getPinyin(){
+    function getPinyin() {
         $("#dddd").text("正在初始化...");
-        $("#dddd").attr("disabled",true);
+        $("#dddd").attr("disabled", true);
         $.ajax({
             type: "get",
             url: '<c:url value="/masterWork/getPinyin.do" />',
@@ -103,9 +140,9 @@
             dataType: "json",
             data: {},
             success: function (data) {
-                if(data){
+                if (data) {
                     alert("初始化成功!");
-                }else{
+                } else {
                     alert("初始化失败!!");
                 }
                 $("#dddd").text("初始化作者");
@@ -114,14 +151,14 @@
         });
     }
 
-    function GetCode(serial){
+    function GetCode(serial) {
 
         $.ajax({
             type: "post",
             url: "<c:url value="/masterWork/gg.do" />",
             cache: false,
             dataType: "json",
-            data:{"serial":serial},
+            data: {"serial": serial},
             success: function (data) {
                 alert(data);
             }
@@ -129,15 +166,15 @@
         });
     }
 
-    function removeMasterWork(divId){
+    function removeMasterWork(divId) {
         $.ajax({
             type: "get",
             url: '<c:url value="/basic/xmj.do?qm=removeProjectWiki"/>',
             cache: false,
             dataType: "json",
-            data:{id:divId,masterWorkId:divId},
+            data: {id: divId, masterWorkId: divId},
             success: function (data) {
-                $("#"+divId).remove();
+                $("#" + divId).remove();
             }
         });
     }

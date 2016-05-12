@@ -327,7 +327,7 @@
                 <do name="listProjectRecommended" label="ProjectRecommended列表" access="">
                     <query name="default1" label="默认" type="auto" orderBy="sort:desc">
                         <condition name="groupName" defaultValue="wiki.projectRecommended" operation="eq"/>
-                        <condition name="project.type" defaultValue="1" operation="eq"/>
+                        <condition name="project.artistry.type" defaultValue="1" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                         <condition name="project.status" defaultValue="0" operation="ne"/>
                     </query>
@@ -373,21 +373,16 @@
             </does>
         </entity>
 
-        <entity name="ProductComment" label="ProductComment"
+        <entity name="ArtistryRecommended" label="ArtistryRecommended"
                 basic="simple" others=""
-                model="com.efeiyi.ec.wiki.model.ProductComment">
+                model="com.efeiyi.ec.wiki.model.ArtistryRecommended">
             <does>
-                <do name="plistProductComment" access="" label="ProductComment列表"
-                    result="json">
-                    <query name="coment" label="默认" type="auto" orderBy="createDateTime:desc">
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="product.id" defaultValue="0" operation="eq"/>
-                        <condition name="fatherComment.id" defaultValue="0" operation="eq"/>
-                    </query>
-                    <query name="ownerComent" label="默认" type="auto" orderBy="createDateTime:desc">
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="moderator.id" defaultValue="0" operation="eq"/>
-                        <condition name="watch" defaultValue="0" operation="eq"/>
+                <do name="listArtistryRecommended" label="ArtistryRecommended列表" access="">
+                    <query name="default1" label="默认" type="auto" orderBy="sort:desc">
+                        <condition name="groupName" defaultValue="wiki.artistryRecommend" operation="eq"/>
+                        <condition name="artistry.type" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="artistry.status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
             </does>
@@ -434,8 +429,8 @@
             <fields>
                 <field name="type" label="项目类型" inputType="text">
                     <statusType fieldName="type">
-                        <item label="非遗技艺" value="1"/>
-                        <item label="非遗美术" value="2"/>
+                        <item label="传统美术" value="1"/>
+                        <item label="非遗技艺" value="2"/>
                     </statusType>
                 </field>
                 <field name="level" label="等级" inputType="text">
@@ -450,6 +445,19 @@
 
 
         </entity>
+        <entity name="Artistry" label="Artistry"
+                basic="simple" others=""
+                model="com.efeiyi.ec.wiki.model.Artistry">
+            <fields>
+                <field name="type" label="项目类型" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="传统美术" value="1"/>
+                        <item label="非遗技艺" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
 
+
+        </entity>
     </entities>
 </module>

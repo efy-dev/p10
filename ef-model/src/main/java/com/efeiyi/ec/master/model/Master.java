@@ -3,6 +3,8 @@ package com.efeiyi.ec.master.model;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ming800.core.base.model.BaseMaster;
+import com.ming800.core.base.model.BaseMasterUser;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -23,7 +25,7 @@ import java.util.List;
 @Entity
 @Table(name = "master")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class Master implements Serializable,Comparable {
+public class Master implements Serializable,Comparable,BaseMaster {
 
     private String id;
     private String name;//名称标识
@@ -50,6 +52,9 @@ public class Master implements Serializable,Comparable {
     private Long fsAmount;
     private String cityName;
     private String followStatus;
+    private  String review;//审核 1:未审核 2:正在审核 3:审核失败 4:审核成功
+    private String identityCard;
+    private String identityPicture;
 
     @Transient
     public String getFollowStatus() {
@@ -310,5 +315,32 @@ public class Master implements Serializable,Comparable {
             return 0;
         }
       return  -1;
+    }
+
+    @Column(name = "review_status")
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    @Column(name = "identity_card")
+    public String getIdentityCard() {
+        return identityCard;
+    }
+
+    public void setIdentityCard(String identityCard) {
+        this.identityCard = identityCard;
+    }
+
+    @Column(name = "identity_pic")
+    public String getIdentityPicture() {
+        return identityPicture;
+    }
+
+    public void setIdentityPicture(String identityPicture) {
+        this.identityPicture = identityPicture;
     }
 }

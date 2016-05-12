@@ -1,7 +1,5 @@
 package com.efeiyi.ec.wiki.base.controller;
 
-import com.efeiyi.ec.project.model.Project;
-import com.efeiyi.ec.wiki.model.ProjectWiki;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.BannerManager;
@@ -35,10 +33,10 @@ public class HomeController {
      */
     @RequestMapping({"/home.do"})
     public String home(HttpServletRequest request,Model model) throws Exception {
-        XQuery query = new XQuery("listProjectRecommended_default", request);
-        query.put("project_type","1");
+        XQuery query = new XQuery("listArtistryRecommended_default", request);
+        query.put("artistry_type","1");
         List<Object> artRecommendList = baseManager.listObject(query);
-        query.put("project_type","2");
+        query.put("artistry_type","2");
         List<Object> craftRecommendList = baseManager.listObject(query);
         model.addAttribute("artRecommendList",artRecommendList);
         model.addAttribute("craftRecommendList",craftRecommendList);

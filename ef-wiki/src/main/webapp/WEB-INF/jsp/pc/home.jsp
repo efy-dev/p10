@@ -11,12 +11,12 @@
 <!doctype html>
 <html class="no-js">
 <head>
+  <title>非遗百科</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <meta name="description" content="中国领先的非物质文化遗产百科全书">
+  <meta name="keywords" content="非遗百科,百科,非物质文化遗产,文化遗产,传统技艺,传统美术,e飞蚁,非遗电商,前门,前门大街">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>工艺首页</title>
 </head>
 <body>
 <div id="slide2016" class="slide2016">
@@ -25,8 +25,8 @@
     <ul style="text-align: center">
       <c:forEach items="${pcBannerList}" var="banner" varStatus="status">
         <li>
-          <a href="<c:url value="${banner.directUrl}"/> " target="_blank" title="非遗轮播图"><img
-                  src="http://pro.efeiyi.com/${banner.imageUrl}" width="1280" height="481"
+          <a href="<c:url value="${banner.directUrl}"/> " target="_blank" title="非遗百科"><img
+                  src="http://wiki-oss.efeiyi.com/${banner.imageUrl}" width="1920" height=""
                   alt="${banner.title}"/></a></li>
       </c:forEach>
       <div class="click next"></div>
@@ -69,11 +69,11 @@
     <ul class="list">
       <c:forEach items="${artRecommendList}" var="art" begin="0" end="7">
         <li>
-          <a href="<c:url value="/project/${art.project.projectWiki.id}"/>">
-            <img src="http://wiki-oss.efeiyi.com/${art.project.picture_pc_url}@!wiki-home-project-picture" alt="">
+          <a href="<c:url value="/project/${art.artistry.id}"/>">
+            <img src="http://wiki-oss.efeiyi.com/${art.artistry.getMainPicture().pictureUrl}@!wiki-home-project-picture" alt="">
             <div class="list-content">
-              <p class="name">${art.project.name}</p>
-              <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${art.project.getLevel()}" type="normal"/>非遗项目</p>
+              <p class="name">${art.artistry.name}</p>
+              <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${art.artistry.getLevel()}" type="normal"/>非遗项目</p>
             </div>
           </a>
         </li>
@@ -83,17 +83,17 @@
   <div class="craft-list">
     <div class="topic">
       <div class="bd-list"></div>
-      <div class="topic-txt"><span>传统技艺</span></div>
+      <div class="topic-txt"><span>非遗技艺</span></div>
       <div class="bd-list"></div>
     </div>
     <ul class="list">
       <c:forEach items="${craftRecommendList}" var="craft" begin="0" end="7">
       <li>
-        <a href="<c:url value="/project/${craft.project.projectWiki.id}"/>">
-          <img src="http://wiki-oss.efeiyi.com/${craft.project.picture_pc_url}@!wiki-home-project-picture" alt="">
+        <a href="<c:url value="/project/${craft.artistry.id}"/>">
+          <img src="http://wiki-oss.efeiyi.com/${craft.artistry.getMainPicture().pictureUrl}@!wiki-home-project-picture" alt="">
           <div class="list-content">
-            <p class="name">${craft.project.name}</p>
-            <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${craft.project.getLevel()}" type="normal"/>非遗项目</p>
+            <p class="name">${craft.artistry.project.name}</p>
+            <p class="title"> <ming800:status name="level" dataType="Project.level" checkedValue="${craft.artistry.project.getLevel()}" type="normal"/>非遗项目</p>
           </div>
         </a>
       </li>

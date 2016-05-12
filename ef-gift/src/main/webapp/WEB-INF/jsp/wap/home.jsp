@@ -1,116 +1,68 @@
-<%@ page import="com.efeiyi.ec.website.base.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html class="am-touch js cssanimations">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>e飞蚁-领先的非物质文化遗产电商平台</title>
-    <meta name="keywords" content="e飞蚁,非物质文化遗产,中国非物质文化遗产,非物质文化遗产网,非遗博览园,非遗节,非遗产品,非遗大师,传统工艺" />
-    <meta name="description" content="e飞蚁，中国领先的非物质文化遗产电商与交流平台，汇聚诸多传承人和各类传统工艺" />
+    <title>礼品频道</title>
 </head>
 <body>
-<!--//End--header-->
-<article class="custom newcustom">
-    <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}' >
+<div class="gift gift-home">
+    <div data-am-widget="slider" class="am-slider am-slider-a4 img-slider" data-am-slider='{&quot;directionNav&quot;:false}' >
         <ul class="am-slides">
-            <c:forEach items="${bannerList}" var="banner">
-                <li><a href="<c:url value="${banner.wapUrl}"/> " ><img src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!home1-banner"/>"></a></li>
-            </c:forEach>
-        </ul>
-    </div>
-    <!--//End--am-slider-->
-    <%--<div class="toolbar">--%>
-        <%--<a class="item asso" href="<c:url value="/productCategoryList.do"/> ">--%>
-            <%--<span><i class="newicon"></i></span>--%>
-            <%--<span>分&nbsp;类</span>--%>
-        <%--</a>--%>
-        <%--<a class="item sh" href="http://www.efeiyi.com/subject/ig8zlvonengegjk9">--%>
-            <%--<span><i class="newicon"></i></span>--%>
-            <%--<span>专&nbsp;题</span>--%>
-        <%--</a>--%>
-        <%--<a class="item user" href="http://master.efeiyi.com">--%>
-            <%--<span><i class="newicon"></i></span>--%>
-            <%--<span>大&nbsp;师</span>--%>
-        <%--</a>--%>
-        <%--<a class="item coupon" href="#coupon">--%>
-            <%--<span><i class="newicon"></i></span>--%>
-            <%--<span>工&nbsp;艺</span>--%>
-        <%--</a>--%>
-    <%--</div>--%>
-    <div class="toolbar">
-        <a class="item asso" href="<c:url value="/productCategory.do"/> ">
-            <span><i class="newicon"></i></span>
-            <span>分&nbsp;类</span>
-        </a>
-        <a class="item sh" href="http://www.efeiyi.com/subject/ii09rq66455cnijf">
-            <span><i class="newicon"></i></span>
-            <span>专&nbsp;题</span>
-        </a>
-        <a class="item gift" href="http://www.efeiyi.com/subject/ihx20izq1o63bz5w">
-            <span><i class="newicon"></i></span>
-            <span>礼&nbsp;品</span>
-        </a>
-    </div>
-    <!--//End--toolbar-->
-    <div class="deduce">
-        <!-- 营销活动 -->
-        <ul class="list-top">
-            <c:if test="${not empty marketingActivityQueryList&&fn:length(marketingActivityQueryList)>0}">
-                <c:forEach items="${marketingActivityQueryList}" var="marketingActivity" >
-                    <li style="width: 100%;;"><a href="${marketingActivity.redirect}"><img src="http://pro.efeiyi.com/${marketingActivity.img}@!pc-home-marketing-activity"></a></li>
-                </c:forEach>
-            </c:if>
-        </ul>
-        <!--热卖商品-->
-        <ul class="deduce-all">
-            <c:if test="${not empty hotSaleList&&fn:length(hotSaleList)>0}">
-                <c:forEach items="${hotSaleList}" var="hotSale" begin="0" end="9">
-                    <li>
-                        <a href="${hotSale.redirect}">
-                            <em>${hotSale.name}</em>
-                            <img src="http://pro.efeiyi.com/${hotSale.img}@!home-hot-picture">
-                        </a>
-                        <span class="price"><i>￥</i><strong>${hotSale.price}</strong></span>
-                        <span class="heat"><font>热卖</font></span>
-                    </li>
+            <c:if test="${bannerList != null && bannerList != ''}">
+                <c:forEach items="${bannerList}" var="banner">
+                    <li><a href="${banner.wapUrl}"><img src="http://gift-oss.efeiyi.com/${banner.imageUrl}"></a></li>
                 </c:forEach>
             </c:if>
         </ul>
     </div>
-    <!--//End--deduce-->
-    <!--类别推荐-->
-    <c:forEach items="${recommendedCategoryList}" var="projectCategory">
-        <div class="max-cat ae">
-            <div class="ae">
-                <div class="cat-top">
-                    <div class="cat-t-o">${projectCategory.name}</div>
-                        <%--<div class="cat-t-t">${projectCategory.context}</div>--%>
-                        <%--<div class="cat-t-t">一物一乾坤</div>--%>
-                </div>
-            </div>
-            <ul class="cat-bottom ae">
-                <c:forEach items="${recommendMap.get(projectCategory.id)}" var="projectCategoryProductModel" varStatus="status" begin="0" end="7">
-                    <li>
-                        <a href="<c:url value="/product/hot/${projectCategoryProductModel.productModel.id}"/>">
-                            <em>${projectCategoryProductModel.productModel.product.name}</em>
-                            <img src="http://pro.efeiyi.com/${projectCategoryProductModel.productModel.product.getProductPicture().pictureUrl}@!home-project-picture">
-                        </a>
-                        <span class="price"><i>￥</i><strong>${projectCategoryProductModel.productModel.price.intValue()}</strong></span>
-                    </li>
-                </c:forEach>
+    <!--//End--轮播图-->
+    <div class="menu">
+        <ul>
+            <li><a href="<c:url value="/searchProductGift"/>"><i class="icon icon-slch"></i><p>送礼场合</p></a></li>
+            <li><a href="<c:url value="/searchProductGift"/>"><i class="icon icon-sldx"></i><p>送礼对象</p></a></li>
+            <li><a href="<c:url value="/searchProductGift"/>"><i class="icon icon-sljg"></i><p>送礼价格</p></a></li>
+        </ul>
+        <ul>
+            <li><a href="<c:url value="/industrySolution"/>"><i class="icon icon-qylp"></i><p>企业礼品</p></a></li>
+            <li><a href="<c:url value="/viewSubject/inzu4ha1b7pa9flo"/>"><i class="icon icon-glys"></i><p>国礼轶事</p></a></li>
+            <li><a href="<c:url value="/viewSubject/inzu4s481azja868"/>"><i class="icon icon-lswl"></i><p>中国“礼”文化</p></a></li>
+        </ul>
+    </div>
+    <!--//End--menu-->
+    <div class="bd ht">
+        <div class="bd list">
+            <ul class="ul-col-2">
+                <c:if test="${advertisementList != null && advertisementList != ''}">
+                    <c:forEach items="${advertisementList}" var="advertisement">
+                        <li>
+                            <a href="${advertisement.wapRedirect}" title="">
+                                <img src="http://pro.efeiyi.com/${advertisement.img}" alt="">
+                       <%-- <span class="txt">
+                            <p>${subject.name}</p>
+                            <p>全网独家·匠心好礼</p>
+                        </span>--%>
+                            </a>
+                        </li>
+                    </c:forEach>
+                </c:if>
             </ul>
+            <%--<div class="bd more"><a class="btn-link" href="" title="查看更多作品">查看更多作品</a></div>--%>
         </div>
-    </c:forEach>
-    <!--//End--一个max-cat-->
-</article>
-<!--//End--newcustom-->
-<style>
-    .newcustom .toolbar .item {
-        width: 36%;
-    }
-</style>
-</body>
-</html>
+    </div>
+    <!--//ENd--ht-->
+    <div class="bd ht reco">
+        <div class="bd">
+            <c:if test="${subjectList != null && subjectList != ''}">
+                <c:forEach items="${subjectList}" var="subject">
+                    <a href="<c:url value="/viewSubject/${subject.id}"/>"><img class="bd" src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt=""></a>
+                </c:forEach>
+            </c:if>
+        </div>
+        <%--<div class="bd more"><a class="btn-link" href="" title="查看更多作品">查看更多作品</a></div>--%>
+
+    </div>
+</div>
+
 </body>
 </html>

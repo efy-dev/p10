@@ -27,7 +27,7 @@
             <mvc:mapping path="/"/>
             <mvc:mapping path="/**"/>
             <mvc:mapping path="**"/>
-            <bean class="com.efeiyi.ec.website.base.interceptor.DriverInterceptor"/>
+            <bean class="com.efeiyi.ec.gift.base.interceptor.DriverInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/"/>
@@ -35,20 +35,20 @@
             <mvc:mapping path="**"/>
             <mvc:exclude-mapping path="/sso.do"/>
             <mvc:exclude-mapping path="/sso2.do"/>
-            <bean class="com.efeiyi.ec.website.base.interceptor.PromotionMarkInterceptor"/>
+            <bean class="com.efeiyi.ec.gift.base.interceptor.PromotionMarkInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/sso.do"/>
             <mvc:mapping path="/sso2.do"/>
-            <bean class="com.efeiyi.ec.website.base.interceptor.PromotionPersistenceInterceptor"/>
+            <bean class="com.efeiyi.ec.gift.base.interceptor.PromotionPersistenceInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/registerSuccess.do"/>
-            <bean class="com.efeiyi.ec.website.base.interceptor.PromotionRegisterSuccessPersistenceInterceptor"/>
+            <bean class="com.efeiyi.ec.gift.base.interceptor.PromotionRegisterSuccessPersistenceInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/order/pay/**"/>
-            <bean class="com.efeiyi.ec.website.base.interceptor.PromotionPurchaseRecorderInterceptor"/>
+            <bean class="com.efeiyi.ec.gift.base.interceptor.PromotionPurchaseRecorderInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
@@ -92,7 +92,7 @@
           p:prefix="/WEB-INF/jsp" p:suffix=".jsp"/>
     <context:annotation-config/>
     <context:component-scan base-package="com.**.**.controller"/>
-    <context:component-scan base-package="com.efeiyi.ec.website.base.authentication.**"/>
+    <context:component-scan base-package="com.efeiyi.ec.gift.base.authentication.**"/>
     <!--<context:component-scan base-package="com.efeiyi.ec.website.**.**.service"/>-->
 
 
@@ -102,22 +102,22 @@
 
     <bean id="userServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
         <property name="serviceUrl" value="http://192.168.227.129:8080/ef-user/service/userService"/>
-        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.UserManager"/>
+        <property name="serviceInterface" value="com.efeiyi.ec.gift.organization.service.UserManager"/>
     </bean>
 
     <bean id="consumerServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
         <property name="serviceUrl" value="http://192.168.227.129:8080/ef-user/service/consumerManager"/>
-        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.ConsumerManager"/>
+        <property name="serviceInterface" value="com.efeiyi.ec.gift.organization.service.ConsumerManager"/>
     </bean>
 
     <bean id="managerServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
         <property name="serviceUrl" value="http://192.168.227.129:8080/ef-user/service/adminManager"/>
-        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.AdminManager"/>
+        <property name="serviceInterface" value="com.efeiyi.ec.gift.organization.service.AdminManager"/>
     </bean>
 
     <bean id="professionalServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
         <property name="serviceUrl" value="http://192.168.227.129:8080/ef-user/service/professionalManager"/>
-        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.ProfessionalManager"/>
+        <property name="serviceInterface" value="com.efeiyi.ec.gift.organization.service.ProfessionalManager"/>
     </bean>
 
     <mvc:default-servlet-handler/>

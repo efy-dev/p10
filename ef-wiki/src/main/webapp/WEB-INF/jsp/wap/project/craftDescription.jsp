@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.wiki.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%--
@@ -15,15 +16,32 @@
   <meta charset="UTF-8">
   <title>内容频道-工艺详情</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="<c:url value="/scripts/assets/wap/css/amazeui.min.css"/>">
-  <link rel="stylesheet" href="<c:url value="/scripts/assets/wap/css/craft.css"/>">
+
 </head>
 <body>
+<header id="header" class="am-header custom-header newheader">
+  <div class="logo"><img src="<c:url value="/scripts/assets/wap/images/ef-logo-craft.png"/>" height="27" width="152" align="center" alt=""></div>
+  <!-- //End--logo-->
+  <!-- //End--chevron-left-->
+  <div class="am-header-right am-header-nav">
+    <a href="#chevron-right" class="chevron-right" id="menu">
+      <i class="line"></i>
+    </a>
+  </div>
+  <div class="menu-list">
+    <ul class="bd">
+      <li><a href="<c:url value="/"/>" title="首页">首页</a></li>
+      <li><a href="http://www.efeiyi.com" title="购物车">非遗商城</a></li>
+      <li><a href="http://master.efeiyi.com" title="个人中心">非遗大师</a></li>
+    </ul>
+  </div>
+</header>
+
 <div class="craft">
   <div class="dt">
-    <h1>${projectWiki.project.name}</h1>
-    <p>[<ming800:status name="level" dataType="Project.level" checkedValue="${projectWiki.project.getLevel()}" type="normal"/>]非物质文化遗产传承项目</p>
-    <p>${projectWiki.project.addressDistrict.name}</p>
+    <h1>${artistry.name}</h1>
+    <p>[<ming800:status name="level" dataType="Project.level" checkedValue="${artistry.getLevel()}" type="normal"/>]非物质文化遗产传承项目</p>
+    <p>${artistry.project.addressDistrict.name}</p>
   </div>
   <!--//End--传统技艺-->
   <div data-am-widget="tabs" class="am-tabs tabs">
@@ -34,7 +52,7 @@
     </ul>
     <div class="am-tabs-bd items">
       <div data-tab-panel-0 class="am-tab-panel am-active">
-       ${projectWiki.projectDescription.description}
+       ${artistry.artistryDescription.descriptionWap}
       </div>
       <!--//End--技艺介绍-->
       <div data-tab-panel-2 class="am-tab-panel">
@@ -44,7 +62,6 @@
             <a href="<c:url value="/masterWork/${masterWork.id}"/>" title="">
               <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!wiki-work-picture" alt="">
                             <span class="txt">
-                                <p>${productModel.product.name}${productModel.name}</p>
                                 <p>${masterWork.name}</p>
                             </span>
             </a>
@@ -74,17 +91,5 @@
   </div>
   <!--//End---->
 </div>
-
-
-
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value="/scripts/assets/wap/js/jquery.min.js"/>"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-<script src="<c:url value="/scripts/assets/wap/js/amazeui.min.js"/>"></script>
 </body>
 </html>

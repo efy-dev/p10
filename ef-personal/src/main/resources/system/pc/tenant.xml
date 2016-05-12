@@ -3,12 +3,16 @@
     <entities>
         <entity name="masterInfo" label="传承人资讯"  model="com.efeiyi.ec.master.model.MasterNews">
             <does>
-                <do name="plistMasterNews" access="" label="传承人资讯列表">
+                <do name="plistMasterNews" access="" label="传承人资讯列表" result="/master/masterNewsPList1">
                     <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
-                        <condition name="master.id" defaultValue="1" operation="eq"/>
+                        <condition name="master.id" defaultValue="${MASTER}" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
+                <do name="viewMasterNews" access="" label="传承人资讯列表" result="/master/masterNewsForm"/>
+                <do name="formMasterNews" label="保存工作坊页" access="" result="/master/masterNewsForm"
+                    execute="com.efeiyi.ec.personal.master.controller.MasterNewsHandler"/>
+                <do name="removeMasterNews" label="删除" access="" result="json"/>
             </does>
         </entity>
         <entity name="masterBanner" label="传承人资讯"  model="com.efeiyi.ec.master.model.MasterBanner">
@@ -47,13 +51,26 @@
             <do name="plistMasterWork" access="" label="传承人作品">
                 <query name="default" label="默认" type="auto" orderBy="id:desc">
                     <condition name="master.id" defaultValue="1" operation="eq"/>
-                    <condition name="status" defaultValue="1" operation="eq"/>
+                    <condition name="status" defaultValue="0" operation="ne"/>
                 </query>
                 <query name="part" label="默认" type="auto" orderBy="id:desc">
                     <condition name="master.id" defaultValue="1" operation="eq"/>
                     <condition name="status" defaultValue="1" operation="eq"/>
                 </query>
             </do>
+
+            <do name="plistMasterWork" access="" label="传承人作品" result="/master/masterWorkPList1">
+                <query name="default1" label="默认" type="auto" orderBy="createDateTime:desc">
+                    <condition name="master.id" defaultValue="${MASTER}" operation="eq"/>
+                    <condition name="status" defaultValue="0" operation="ne"/>
+                </query>
+                <!--<query name="default2" label="快速查询" type="auto" orderBy="createDateTime:desc">-->
+                    <!--<condition name="master.id" defaultValue="${MASTER}" operation="eq" inputType="default"/>-->
+                    <!--<condition name="status" defaultValue="0" operation="ne" inputType="default"/>-->
+                    <!--<condition name="name" defaultValue="0" operation="like" label="作品名称" inputType="text"/>-->
+                <!--</query>-->
+            </do>
+            <do name="removeMasterWork2" label="删除大师产品" access="" result="json"/>
             <do name="listMasterWork" access="" label="作品">
                 <query name="default" label="默认" type="auto" orderBy="id:desc">
                     <condition name="project.id" defaultValue="1" operation="eq"/>
@@ -74,6 +91,31 @@
         </entity>
         <entity name="masterWorkShop" label="工作坊"  model="com.efeiyi.ec.master.model.MasterWorkShop">
             <does>
+                <do name="plistMasterWorkShop" access="" label="传承人工作坊分页列表"
+                    result="/masterWorkShop/masterWorkShopPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="master.id" defaultValue="${MASTER}" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="formMasterWorkShop" label="保存工作坊页" access="" result="/masterWorkShop/masterWorkShopForm"
+                   />
+                <do name="viewMasterWorkShop" label="查看工作坊" access=""
+                    result="/masterWorkShop/masterWorkShopView"/>
+                <do name="saveOrUpdateMasterWorkShop" label="保存工作坊著作" access=""
+                    result="/masterWorkShop/masterWorkShopSaveSuccess"
+                    execute="com.efeiyi.ec.personal.master.controller.MasterWorkShopHandler">
+                    <page>
+                        <fields>
+                            <field name="status" label="状态" defaultValue="1"
+                                   inputType="default"/>
+                            <field name="createDateTime" label="状态" defaultValue="${CURRENT_DATETIME}"
+                                   inputType="default"/>
+                        </fields>
+                    </page>
+                </do>
+                <do name="removeMasterWorkShop" label="删除工作坊著作" access="" result="json"/>
                 <do name="listMasterWorkShop" access="" label="工作坊">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="master.id" defaultValue="1" operation="eq"/>
@@ -173,6 +215,12 @@
 
         <entity name="masterProject" label="关注前"  model="com.efeiyi.ec.master.model.MasterProject">
             <does>
+                <do name="plistMasterProject" access="" label="项目大师" result="/master/masterProjectPlist">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="master.id" defaultValue="${MASTER}" operation="eq"/>
+                    </query>
+                </do>
                 <do name="listMasterProject" access="" label="关注">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
@@ -185,12 +233,20 @@
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="master.id" defaultValue="0" operation="eq"/>
                     </query>
-                </do>
-                <do name="plistMasterProject" access="" label="关注">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="byAll" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="project.id" defaultValue="1" operation="eq"/>
+                        <condition name="master.id" defaultValue="0" operation="eq"/>
+                        <condition name="project.id" defaultValue="0" operation="eq"/>
                     </query>
+                </do>
+                <!--<do name="plistMasterProject" access="" label="关注">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="status" defaultValue="1" operation="eq"/>-->
+                        <!--<condition name="project.id" defaultValue="1" operation="eq"/>-->
+                    <!--</query>-->
+                <!--</do>-->
+                <do name="removeMasterProject" access="" label="项目大师" result="json">
+
                 </do>
             </does>
         </entity>
@@ -214,6 +270,12 @@
 
         <entity name="Master" label="关注前"  model="com.efeiyi.ec.master.model.Master">
             <fields>
+                <field name="sex" label="性别" inputType="text">
+                    <statusType fieldName="sex">
+                        <item label="男" value="1"/>
+                        <item label="女" value="2"/>
+                    </statusType>
+                </field>
                 <field name="level" label="等级" inputType="text">
                     <statusType fieldName="level">
                         <item label="国家级" value="1"/>
@@ -245,6 +307,7 @@
                         <condition name="level" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
+                <do name="viewMaster" label="查看商家" access="" result="/master/masterView"/>
             </does>
         </entity>
 
@@ -280,6 +343,18 @@
                     <query name="byAuthor" label="默认" type="auto" orderBy="createDateTime:desc">
                         <condition name="author.id" defaultValue="1" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="MasterReview" label="大师审核"
+                basic="simple" others=""
+                model="com.efeiyi.ec.master.model.MasterReview">
+            <does>
+                <do name="listMasterReview" label="大师审核" access=""
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition label="大师id" name="master.id" defaultValue="0"  operation="eq"/>
                     </query>
                 </do>
             </does>

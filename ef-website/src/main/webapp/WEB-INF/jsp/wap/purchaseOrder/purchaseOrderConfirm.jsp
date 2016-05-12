@@ -217,7 +217,7 @@
                 </c:forEach>
             </ul>
             <div class="bd">
-                <a href="#" id="add" class="add-address" onclick="add_Address()" title="新增收货地址">新增收货地址</a>
+                <a href="#" style="color:white " id="add" class="add-address" onclick="add_Address()" title="新增收货地址">新增收货地址</a>
             </div>
         </div>
         <div class="bd list-adress" id="adddiv" style="display: none;">

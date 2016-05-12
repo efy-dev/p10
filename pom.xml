@@ -160,6 +160,12 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-infinispan</artifactId>
             <version>4.3.5.Final</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-codec</artifactId>
+                    <groupId>commons-codec</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -349,7 +355,7 @@
             <artifactId>pinyin4j</artifactId>
             <version>2.5.0</version>
         </dependency>
-       <dependency>
+        <dependency>
             <groupId>cn.beecloud</groupId>
             <artifactId>beecloud-java-sdk</artifactId>
             <version>2.0.0</version>
@@ -388,16 +394,16 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>org.apache.httpcomponents</groupId>-->
-            <!--<artifactId>httpclient</artifactId>-->
-            <!--<version>4.3.2</version>-->
+        <!--<groupId>org.apache.httpcomponents</groupId>-->
+        <!--<artifactId>httpclient</artifactId>-->
+        <!--<version>4.3.2</version>-->
         <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.2</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.apache.httpcomponents</groupId>-->
+        <!--<artifactId>httpclient</artifactId>-->
+        <!--<version>4.5.2</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -411,7 +417,9 @@
             <properties>
                 <db-driver>com.mysql.jdbc.Driver</db-driver>
                 <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
-                <db-url>jdbc:mysql://192.168.1.57/efc?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
+                <db-url>
+                    jdbc:mysql://192.168.1.57/efc?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8
+                </db-url>
                 <db-username>root</db-username>
                 <db-level>DEBUG</db-level>
                 <dbpath>/tmp/logs/</dbpath>
@@ -431,7 +439,7 @@
                 <dbpath>/tmp/logs/</dbpath>
             </properties>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
         <profile>
@@ -445,7 +453,7 @@
                 <dbpath>/tmp/logs/</dbpath>
             </properties>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
         <profile>
@@ -453,7 +461,9 @@
             <properties>
                 <db-driver>com.mysql.jdbc.Driver</db-driver>
                 <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
-                <db-url>jdbc:mysql://192.168.1.57/efy?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
+                <db-url>
+                    jdbc:mysql://192.168.1.57/efy?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8
+                </db-url>
                 <db-username>root</db-username>
                 <db-level>DEBUG</db-level>
                 <dbpath>/tmp/logs/</dbpath>
@@ -518,7 +528,6 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
-
 
 
     </profiles>

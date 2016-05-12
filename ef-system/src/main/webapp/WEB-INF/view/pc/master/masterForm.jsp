@@ -115,6 +115,15 @@
             </div>
 
             <div class="am-form-group">
+                <label for="identityCard" class="am-u-sm-3 am-form-label">身份证</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="identityCard" name="identityCard" placeholder="身份证"
+                           value="${object.identityCard}">
+                </div>
+            </div>
+
+            <div class="am-form-group">
                 <label for="favicon" class="am-u-sm-3 am-form-label">头像(传承人列表页面的封面)</label>
 
                 <div class="am-u-sm-9">
@@ -137,7 +146,17 @@
                     <img src="http://tenant.efeiyi.com/${object.backgroundUrl}@!tenant-manage-photo">
                 </c:if>
             </div>
+            <div class="am-form-group">
+                <label for="identityPicture" class="am-u-sm-3 am-form-label">身份证手持照片</label>
 
+                <div class="am-u-sm-9">
+                    <input type="file" id="identityPicture" name="identityPicture" placeholder="身份证手持照片"
+                           value="${object.identityPicture}">
+                </div>
+                <c:if test="${!empty object.identityPicture}">
+                    <img src="http://tenant.efeiyi.com/${object.identityPicture}@!tenant-manage-photo">
+                </c:if>
+            </div>
 
             <div class="am-form-group">
                 <label for="logo" class="am-u-sm-3 am-form-label">Logo</label>

@@ -1,18 +1,16 @@
 package com.efeiyi.ec.project.model;
 
 import com.efeiyi.ec.master.model.MasterProject;
-import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressDistrict;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.wiki.model.ProjectContent;
-import com.efeiyi.ec.wiki.model.ProjectWiki;
+import com.efeiyi.ec.wiki.model.Artistry;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import javax.persistence.criteria.Fetch;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -51,7 +49,7 @@ public class Project implements Serializable {
     private List<ProjectRecommended> projectRecommendeds;
     private Long fsAmount;
     private List<MasterProject> masterProjects;
-    private ProjectWiki projectWiki;
+    private Artistry artistry;
 
     @Column(name="picture_wap_url")
     public String getPicture_wap_url() {
@@ -282,12 +280,12 @@ public class Project implements Serializable {
     }
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "project")
-    public ProjectWiki getProjectWiki() {
-        return projectWiki;
+    public Artistry getArtistry() {
+        return artistry;
     }
 
-    public void setProjectWiki(ProjectWiki projectWiki) {
-        this.projectWiki = projectWiki;
+    public void setArtistry(Artistry artistry) {
+        this.artistry = artistry;
     }
 }
 
