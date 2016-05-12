@@ -16,6 +16,10 @@
                 <do name="saveOrUpdateCustomProductGiftMessage"  access="" label="保存企业定制请求">
                     <page>
                         <fields>
+                            <field name="userName" label="默认值" defaultValue="" inputType="default" />
+                            <field name="tel" label="默认值" defaultValue="" inputType="default" />
+                            <field name="description" label="默认值" defaultValue="" inputType="default" />
+                            <field name="number" label="默认值" defaultValue="1" inputType="default" />
                             <field name="status" label="默认值" defaultValue="1" inputType="default" />
                         </fields>
                     </page>

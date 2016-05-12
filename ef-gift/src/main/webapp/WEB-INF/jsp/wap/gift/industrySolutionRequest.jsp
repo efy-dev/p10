@@ -10,19 +10,19 @@
   <form action="<c:url value="/submitIndustrySolutionRequest"/>" method="post">
     <div class="area">
       <div class="bd title">您的姓名</div>
-      <input type="text" class="txt" name="name">
+      <input type="text" class="txt" name="userName" required>
     </div>
     <div class="area">
       <div class="bd title">联系方式</div>
-      <input type="text" class="txt" name="tel">
+      <input type="text" class="txt" name="tel" required>
     </div>
     <div class="area">
       <div class="bd title">需求描述</div>
-      <textarea type="text" class="txt" placeholder="详细描述礼品品类，送礼场合，包装，单价范围等。" name="description"></textarea>
+      <textarea type="text" class="txt" placeholder="详细描述礼品品类，送礼场合，包装，单价范围等。" name="description" required></textarea>
     </div>
     <div class="area">
       <div class="bd title">需求数量</div>
-      <input type="text" class="txt" name="number">
+      <input type="text" class="txt" name="number" required>
     </div>
 
     <div class="btns">

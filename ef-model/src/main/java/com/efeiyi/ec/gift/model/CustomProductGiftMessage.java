@@ -28,7 +28,7 @@ public class CustomProductGiftMessage {
         this.id = id;
     }
 
-    @Column(name = "username")
+    @Column(name = "industry_name")
     public String getUserName() {
         return userName;
     }
