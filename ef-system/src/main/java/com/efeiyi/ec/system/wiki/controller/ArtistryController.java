@@ -27,7 +27,7 @@ import java.util.Map;
  * Created by Administrator on 2016/4/18.
  */
 @Controller
-public class WikiController {
+public class ArtistryController {
     @Autowired
     protected BaseManager baseManager;
 
@@ -55,8 +55,12 @@ public class WikiController {
         ArtistryDescription artistryDescription;
         if (objectId != null && !objectId.equals("")) {
             artistryDescription = (ArtistryDescription) baseManager.getObject(ArtistryDescription.class.getName(), objectId);
-            artistryDescription.setDescriptionPC(content);
-            artistryDescription.setDescriptionWap(contentWap);
+            if (content != null) {
+                artistryDescription.setDescriptionPC(content);
+            }
+            if (contentWap != null) {
+                artistryDescription.setDescriptionWap(contentWap);
+            }
             baseManager.saveOrUpdate(ArtistryDescription.class.getName(), artistryDescription);
         } else {
             artistryDescription = new ArtistryDescription();
