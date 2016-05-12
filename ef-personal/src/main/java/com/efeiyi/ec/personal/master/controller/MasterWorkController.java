@@ -37,7 +37,7 @@ public class MasterWorkController extends BaseMasterController {
     @RequestMapping("/list")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
         Master master = getMasterfromDomain(request);
-        XQuery xQuery = new XQuery("plistMasterWork_default",master.getId(),request.getParameter("sort"),request);
+        XQuery xQuery = new XQuery("plistMasterWorks_default",master.getId(),request.getParameter("sort"),request);
         xQuery.put("master_id",master.getId());
         xQuery.addRequestParamToModel(model, request);
         List WorkList = baseManager.listPageInfo(xQuery).getList();

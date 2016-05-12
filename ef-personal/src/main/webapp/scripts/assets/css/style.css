@@ -19,10 +19,10 @@ a:hover{color:#0b3775;}
 .logov{width:16px;height:15px;}
 .printing{width:230px;float:left;height:15px;padding-left:6px;font-size:12px;}
 .printing span{padding-left:9px;color:#CD6703;}
-.register{width:170px;height:33px;float:right;margin-right:21px;}
+.register{width:250px;height:33px;float:right;margin-right:21px;}
 .register li{float:right;}
-.register-page a{width:62px;height:11px;outline:none;}
-.register-left a{width:25px;height:10px;margin-left:38px;outline:none;}
+.register-page a{width:62px;height:11px;outline:none;font-size: 12px;}
+.register-left a{width:25px;height:10px;margin-left:38px;outline:none;font-size: 12px}
 .register-right a{width:25px;height:11px;pdding-left:10px;outline:none;}
 /*导航样式*/
 #nav{width:1000px; height: 224px;margin:0 auto; position: relative;}
