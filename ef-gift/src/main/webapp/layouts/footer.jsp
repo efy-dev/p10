@@ -71,10 +71,10 @@
         </div>-->
         <div class="wh authentication">
             <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
-            <a href="http://www.miitbeian.gov.cn" target="_blank" title=""> <img class="imgfilter" src="/scripts/images/authentication-0.png" alt=""></a>
-            <a href="http://www.miitbeian.gov.cn" target="_blank" title="网站域名备案"> <img class="imgfilter" src="/scripts/images/authentication-1.png" alt="网站域名备案"></a>
-            <a href="http://www.baic.gov.cn/" target="_blank" title="企业信用信息备案"> <img class="imgfilter" src="/scripts/images/authentication-2.png" alt="企业信用信息备案"></a>
-            <a href="/scripts/images/license.jpg" target="_blank" title="企业营业执照"> <img class="imgfilter" src="/scripts/images/authentication-3.png" alt="企业营业执照 "></a>
+            <a href="http://www.miitbeian.gov.cn" target="_blank" title=""> <img class="imgfilter" src="/ef-gift/scripts/images/authentication-0.png" alt=""></a>
+            <a href="http://www.miitbeian.gov.cn" target="_blank" title="网站域名备案"> <img class="imgfilter" src="/ef-gift/scripts/images/authentication-1.png" alt="网站域名备案"></a>
+            <a href="http://www.baic.gov.cn/" target="_blank" title="企业信用信息备案"> <img class="imgfilter" src="/ef-gift/scripts/images/authentication-2.png" alt="企业信用信息备案"></a>
+            <a href="/scripts/images/license.jpg" target="_blank" title="企业营业执照"> <img class="imgfilter" src="/ef-gift/scripts/images/authentication-3.png" alt="企业营业执照 "></a>
         </div>
     </div>
 </div>

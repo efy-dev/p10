@@ -51,16 +51,28 @@
         </div>
     </div>
     <!--//ENd--ht-->
-    <div class="bd ht reco">
-        <div class="bd">
-            <c:if test="${subjectList != null && subjectList != ''}">
-                <c:forEach items="${subjectList}" var="subject">
-                    <a href="<c:url value="/viewSubject/${subject.id}"/>"><img class="bd" src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt=""></a>
-                </c:forEach>
-            </c:if>
+    <div class="bd reco">
+        <a href=""><img class="bd" src="/ef-gift/scripts/upload/banner-gift.png" alt=""></a>
+    </div>
+    <div class="bd ht">
+        <div class="bd list">
+            <ul class="ul-col-2">
+                <c:if test="${subjectList != null && subjectList != ''}">
+                    <c:forEach items="${subjectList}" var="subject">
+                        <li>
+                            <a href="<c:url value="/viewSubject/${subject.id}"/>" title="">
+                                <img src="http://gift-oss.efeiyi.com/${subject.pictureUrl}" alt="">
+                                     <span class="txt">
+                                         <p>${subject.name}</p>
+                                         <%--<p>全网独家·匠心好礼</p>--%>
+                                     </span>
+                            </a>
+                        </li>
+                    </c:forEach>
+                </c:if>
+            </ul>
+            <%--<div class="bd more"><a class="btn-link" href="" title="查看更多作品">查看更多作品</a></div>--%>
         </div>
-        <%--<div class="bd more"><a class="btn-link" href="" title="查看更多作品">查看更多作品</a></div>--%>
-
     </div>
 </div>
 
