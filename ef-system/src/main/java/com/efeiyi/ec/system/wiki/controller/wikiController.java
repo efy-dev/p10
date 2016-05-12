@@ -98,6 +98,4 @@ public class WikiController {
         JSONObject jsonObject = JSONObject.parseObject(result);
         return new ResponseEntity(jsonObject, HttpStatus.OK);
     }
-
-
 }
