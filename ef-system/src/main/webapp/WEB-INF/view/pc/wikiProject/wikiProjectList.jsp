@@ -96,7 +96,7 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only" width="10%">
-                            <a href="<c:url value="/basic/xm.do?qm=viewProjectWiki&view=masterWork&id=${wikiList.id}"/>">
+                            <a target="_blank" href="<c:url value="/basic/xm.do?qm=viewProjectWiki&view=masterWork&id=${wikiList.id}"/>">
                                     ${wikiList.name}
                             </a>
                         </td>
