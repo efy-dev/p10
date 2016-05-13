@@ -111,7 +111,13 @@ public class HomeController {
         if (redirectUrl != null) {
             return "redirect:" + redirectUrl;
         }
+        String url = request.getRequestURL().toString();
+        if(url.equalsIgnoreCase("http://www.efeiyi.com/")) {
+            model.addAttribute("init", "true");
+            return "/inithome";
+        }
         //取得分类列表
+
         XQuery projectCategoryxQuery = new XQuery("listProjectCategory_default", request);
         projectCategoryxQuery.setSortHql("");
         projectCategoryxQuery.updateHql();
