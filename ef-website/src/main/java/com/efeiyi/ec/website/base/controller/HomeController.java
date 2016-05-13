@@ -114,7 +114,7 @@ public class HomeController {
         }
         String url = request.getRequestURL().toString();
 
-        if(HttpUtil.isPhone(request)) {
+        if(!HttpUtil.isPhone(request)) {
             if (url.equalsIgnoreCase("http://www.efeiyi.com/")) {
                 model.addAttribute("init", "true");
                 return "/inithome";
@@ -175,7 +175,9 @@ public class HomeController {
         model.addAttribute("projectMap", projectMap);
         model.addAttribute("recommendedTenantList", recommendedTenantList);
         return "/home";
+
     }
+
 
 
     @RequestMapping({"/productCategory.do"})
