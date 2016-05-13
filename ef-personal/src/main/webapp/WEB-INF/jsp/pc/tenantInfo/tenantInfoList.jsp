@@ -22,7 +22,7 @@
             <div class="column-left" style="">
                 <div class="page-img"><img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-favicon"></div>
             </div>
-            <div id="center--1">
+            <div id="center--1" style="width: 688px;">
                 <c:if test="${tenantInfoList != null && tenantInfoList.size() > 0}">
                     <div class="center-right">
                         <c:forEach items="${tenantInfoList}" var="tenantInfo" varStatus="vs">
@@ -47,7 +47,7 @@
                             </div>
                         </c:forEach>
                     </div>
-                    <div class="pages wh">
+                    <div class="pages wh" style="width: 688px;min-width: 688px">
                         <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/info/list">
                             <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
                             <ming800:pcPageParam name="conditions"

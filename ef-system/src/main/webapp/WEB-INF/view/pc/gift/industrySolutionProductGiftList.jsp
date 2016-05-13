@@ -104,6 +104,8 @@
         <c:url value="/basic/xm.do" var="url"/>
         <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
             <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
+            <ming800:pcPageParam name="industrySolutionId"
+                                 value="${pageContext.request.getParameter('industrySolutionId')}"/>
             <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
         </ming800:pcPageList>
     </div>

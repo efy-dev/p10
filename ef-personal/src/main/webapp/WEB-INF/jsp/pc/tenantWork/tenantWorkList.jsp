@@ -24,11 +24,11 @@
             <div class="column-left" style="">
                 <div class="page-img"><img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-favicon"></div>
             </div>
-            <div id="center--1">
-                <div class="center-right">
+            <div id="center--1" style="width: 688px;float:left">
+                <div class="center-right wh">
                     <c:forEach items="${tenantWorkList}" var="masterWork" varStatus="vs">
                     <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3 == 0}">
-                    <div class="works-container">
+                    <div class="works-container wh">
                         <a href="<c:url value="/work/${masterWork.id}"/>" target="_blank" class="works-img">
                             <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img">
                             <p>${masterWork.name}</p>
@@ -48,7 +48,7 @@
                     </div>
                     </c:if>
                     <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 0}">
-                        <div class="works-container">
+                        <div class="works-container wh">
                             <a href="<c:url value="/work/${masterWork.id}"/>" target="_blank" class="works-img">
                                 <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img">
                                 <p>${masterWork.name}</p>
@@ -64,7 +64,7 @@
                 </c:if>
                 </c:forEach>
                 <!--页码-->
-                <div class="pages wh">
+                <div class="pages wh" style="width: 688px;min-width: 688px">
                     <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/work/list">
                         <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
                         <ming800:pcPageParam name="conditions"

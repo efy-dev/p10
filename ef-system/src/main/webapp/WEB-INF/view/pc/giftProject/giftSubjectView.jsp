@@ -49,37 +49,33 @@
         </table>
 
 
+        <form action="<c:url value="/ueditor/use.do"/>" name="uEditor">
+            <input type="hidden" name="callbackUrl" value="/basic/xm.do?qm=viewGiftSubject&id=${object.id}">
+            <input type="hidden" name="title" value="礼品专题内容">
+            <input type="hidden" name="action" value="/subjectDescription/saveOrUpdate.do">
+            <input type="hidden" name="name" value="content">
+            <input type="hidden" name="uploadUrl" value="/subjectDescription/image/upload.do">
+            <input type="hidden" name="objectId" value="${object.subjectDescription.id}">
+            <input type="hidden" name="objectClassType" value="com.efeiyi.ec.product.model.SubjectDescription">
+            <input type="hidden" name="paramName" value="subjectId">
+            <input type="hidden" name="paramValue" value="${object.id}">
+            <input type="submit" value="编辑礼品专题内容" class="am-btn am-btn-primary">
+        </form>
+
         <form action="<c:url value="/giftSubject/update.do"/>" class="am-form am-form-horizontal" method="post"
               enctype="multipart/form-data">
             <input type="hidden" name="subjectId" value="${object.id}">
 
-            <%--<c:if test="${empty fatherId}">--%>
-            <%--<input type="hidden" name="level" value="1" />--%>
-            <%--</c:if>--%>
-            <%--<c:if test="${not empty fatherId}">--%>
-            <%--<input type="hidden" name="level" value="${object.level}" />--%>
-            <%--</c:if>--%>
             <div class="am-form-group">
-                <label name="type" for="editor" class="am-u-sm-3 am-form-label">封面图片</label>
+                <label name="type" for="pictureUrl" class="am-u-sm-3 am-form-label">封面图片</label>
                 <div class="am-u-sm-9" style="margin-top: 10px">
                     <c:if test="${object.pictureUrl!=null}">
                         <img src="http://gift-oss.efeiyi.com/${object.pictureUrl}">
                     </c:if>
-                    <input type="file" name="pictureUrl">
+                    <input type="file" id="pictureUrl" name="pictureUrl">
                 </div>
             </div>
 
-            <div class="am-form-group">
-                <label name="type" for="editor" class="am-u-sm-3 am-form-label">专题内容
-                    <small>*</small>
-                </label>
-                <div class="am-u-sm-9" style="margin-top: 10px">
-
-                    <textarea id="editor" name="description"
-                              placeholder="这里输入内容">${object.subjectDescription.content}</textarea>
-                    <%--<a class="am-btn am-btn-primary" onclick="textFilter()">过滤a标签</a>--%>
-                </div>
-            </div>
             <div class="am-form-group">
                 <div class="am-u-sm-9 am-u-sm-push-3">
                     <input type="submit" class="am-btn am-btn-primary" value="保存"/>

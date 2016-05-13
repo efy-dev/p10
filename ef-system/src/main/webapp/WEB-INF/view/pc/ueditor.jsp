@@ -40,6 +40,10 @@
 
 </div>
 
+<div style="display: none;" id="textContent">
+    ${textContent}
+</div>
+
 
 <script type="text/javascript">
 
@@ -52,12 +56,13 @@
     var defaultUploadUrl = "/ueditor/image/upload.do";
 
 
-    function autotypeset(){
+    function autotypeset() {
         ue.execCommand("autotypeset");
     }
 
     ue.ready(function () {
-        ue.setContent('${textContent}');
+        var textContent = document.getElementById("textContent").innerHTML;
+        ue.setContent(textContent);
         ue.execCommand('${uEditor.paramName}', {
             'test': '${uEditor.paramValue}'
         });

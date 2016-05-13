@@ -16,9 +16,9 @@
 </header>
 <div class="am-border-1"></div>
 <nav id="am-nav-1">
-    <div class="am-bg-tp " style="background:url(http://tenant.efeiyi.com/${tenant.backgroundUrl}@!tenant-mobile-view-background);background-size: 100% 100%;"></div>
+    <div class="am-bg-tp" id="backgroundUrl" style="background:url(http://tenant.efeiyi.com/${tenant.backgroundUrl}@!tenant-mobile-view-background);background-size: 100% 100%;"></div>
     <div class="am-xu-nav">
-        <div style="background:url(http://tenant.efeiyi.com/${tenant.favicon}@!tenant-mobile-view-icon);background-size:100% 100%;" alt="传承人" class="am-img-thumbnail am-circle"></div>
+        <div id="favicon" style="background:url(http://tenant.efeiyi.com/${tenant.favicon}@!tenant-mobile-view-icon);background-size:100% 100%;" alt="传承人" class="am-img-thumbnail am-circle"></div>
         <p id="am-mg-14">${tenant.fullName}</p>
         <p id="projectName"></p>
         <p ><span id="levelName"></span><img src="<c:url value="/scripts/assets/wap/images/logo2.gif"/>" class="am-page-img"></p>
@@ -27,30 +27,38 @@
 </nav>
 
 <script>
-    $.ajax({
-        type: "post",
-        url: '<c:url value="/getTenant.do"/>',
-        cache: false,
-        dataType: "json",
-        success: function (data) {
-            console.log(data);
-            $("#favicon").attr("src","http://tenant.efeiyi.com/"+data.logoUrl+"@!tenant-manage-banner")
+    $(document).ready(function(){
+        $.ajax({
+            type: "post",
+            url: '<c:url value="/getTenant.do"/>',
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+/*                $("#favicon").attr("src","http://tenant.efeiyi.com/"+data.logoUrl+"@!tenant-manage-banner")*/
+                $("#backgroundUrl").attr({
+                    style:"background:url(http://tenant.efeiyi.com/"+data.backgroundUrl+"@!tenant-mobile-view-background);"
+                });
+                $("#favicon").attr({
+                    style:"background:url(http://tenant.efeiyi.com/"+data.backgroundUrl+"@!tenant-mobile-view-background);"
+                });
                 $("#projectName").html(data.projectName);
-            var levelName = "";
-            if(data.level=="1"){
-                levelName = "国家级";
-            }
-            if(data.level=="2"){
-                levelName = "省级";
-            }
-            if(data.level=="3"){
-                levelName = "市级";
-            }
-            if(data.level=="4"){
-                levelName = "县级";
-            }
+                var levelName = "";
+                if(data.level=="1"){
+                    levelName = "国家级";
+                }
+                if(data.level=="2"){
+                    levelName = "省级";
+                }
+                if(data.level=="3"){
+                    levelName = "市级";
+                }
+                if(data.level=="4"){
+                    levelName = "县级";
+                }
 
-            $("#levelName").html(levelName+'非物质文化遗产传承人');
-        }
-    });
+                $("#levelName").html(levelName+'非物质文化遗产传承人');
+            }
+        });
+    })
 </script>

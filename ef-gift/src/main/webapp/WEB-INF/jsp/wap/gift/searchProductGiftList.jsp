@@ -17,6 +17,11 @@
       <i class="line"></i>
     </a>
   </div>
+  <div class="menu-list">
+    <ul class="bd">
+      <li><a href="http://j.efeiyi.com/ef-gift" title="礼品首页">礼品首页</a></li>
+    </ul>
+  </div>
 </header>
 <article>
   <div id="result" class="bd search-sort">

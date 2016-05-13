@@ -16,25 +16,25 @@
           <div class="option-list">
             <div class="name"><span>您的姓名</span></div>
             <div class="option-content">
-              <input type="text" class="txt" name="name">
+              <input type="text" class="txt" name="userName" required>
             </div>
           </div>
           <div class="option-list">
             <div class="name"><span>联系方式</span></div>
             <div class="option-content">
-              <input type="text" class="txt" maxlength="11" name="tel">
+              <input type="text" class="txt" maxlength="11" name="tel" required>
             </div>
           </div>
           <div class="option-list">
             <div class="name"><span>需求描述</span></div>
             <div class="option-content">
-              <textarea name="discription" class="more-txt"  placeholder="详细描述礼品品类，送礼场合，包装，单价范围等。"></textarea>
+              <textarea name="description" class="more-txt"  placeholder="详细描述礼品品类，送礼场合，包装，单价范围等。" required></textarea>
             </div>
           </div>
           <div class="option-list">
             <div class="name"><span>需求数量</span></div>
             <div class="option-content">
-              <input type="text" class="txt" maxlength="11" name="number">
+              <input type="text" class="txt" maxlength="11" name="number" required>
             </div>
           </div>
           <div class="option-btn">
