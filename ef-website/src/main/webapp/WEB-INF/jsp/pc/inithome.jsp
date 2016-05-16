@@ -82,12 +82,12 @@
             <div class="m-animate">
               <ul >
                 <li>
-                  <a href="">
+                  <a href="http://yaohuifen.efeiyi.com">
                     <img src="<c:url value="/scripts/upload/姚慧芬.jpg"/>" alt="" >
                   </a>
                 </li>
                 <li>
-                  <a href="">
+                  <a href="zhubingren.efeiyi.com">
                     <img
                             src="<c:url value="/scripts/upload/朱炳仁.jpg"/>"
                             alt=""
@@ -95,7 +95,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="">
+                  <a href="weilizhong.efeiyi.com">
                     <img
                             src="<c:url value="/scripts/upload/魏立中.jpg"/>"
                             alt=""
@@ -103,7 +103,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="">
+                  <a href="http://j.efeiyi.com/ef-wiki/project/inlcj19o29sjxcah">
                     <img
                             src="<c:url value="/scripts/upload/苏绣.jpg"/>"
                             alt=""
@@ -111,7 +111,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="">
+                  <a href="http://www.efeiyi.com/product/productModel/ihy6pqjo1dizwlaa">
                     <img
                             src="<c:url value="/scripts/upload/筷子.JPG"/>"
                             alt=""
@@ -119,7 +119,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="">
+                  <a href="http://j.efeiyi.com/ef-wiki">
                     <img
                             src="<c:url value="/scripts/upload/铜雕.jpg"/>"
                             alt=""
@@ -127,7 +127,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="">
+                  <a href="http://www.efeiyi.com/product/productModel/if3l43hd1h2oyvov">
                     <img
                             src="<c:url value="/scripts/upload/关山香炉.JPG"/>"
                             alt=""
@@ -151,44 +151,11 @@
                   <li><a href="http://www.efeiyi.com/product/productModel/ik4swda61xofep2u">庆赏昇平公交卡:庆赏昇平创意衍伸品 京剧人物图案 国家图书馆出品</a></li>
                 </ul>
               </div>
-              <%--<div class="consult">--%>
-                <%--<h5>大师动态</h5>--%>
-                <%--<ul>--%>
-                  <%--<li><a href="">国家级苏绣传承人姚惠芬大师入驻非遗大师平台</a></li>--%>
-                  <%--<li><a href="">木板水印传承人魏立中大师发布最新作品</a></li>--%>
-                  <%--<li><a href="">国家级苏绣传承人姚惠芬大师入驻非遗大师平台</a></li>--%>
-                  <%--<li><a href="">木板水印传承人魏立中大师发布最新作品</a></li>--%>
-                <%--</ul>--%>
-              <%--</div>--%>
             </div>
             <div class="west-pic">
               <div class="w-pic">
                 <a href=""><img src="<c:url value="/scripts/upload/zhutu320151123180151.jpg"/>" alt=""><span>吉祥佛黑檀</span></a>
               </div>
-              <%--<div class="w-list items">--%>
-                <%--<ul>--%>
-                  <%--<li>--%>
-                    <%--<a href="http://www.efeiyi.com/product/productModel/igxguzv01qjvk1wb" title="">--%>
-                      <%--<p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/gongse120151113173748.jpg"/>" height="222" width="132"  alt=""></p>--%>
-                      <%--<p class="info">--%>
-                        <%--<span class="name">剪纸工艺</span>--%>
-                        <%--<span class="works">剪纸，又叫刻纸，是一种镂空艺术。是中国汉族最古老的民间艺术之一。其在视觉上给人以透空的感觉和艺术享受。</span>--%>
-
-                      <%--</p>--%>
-                    <%--</a>--%>
-                  <%--</li>--%>
-                  <%--<li>--%>
-                    <%--<a href="" title="">--%>
-                      <%--<p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/红糖皂20160106155151.jpg"/>" alt="" style="opacity: 1;"></p>--%>
-                      <%--<p class="info">--%>
-                        <%--<span class="name">传统手工皂 </span>--%>
-                        <%--<span class="works">紫砂是一种炻器，是一种介于陶器与瓷器之间的陶瓷制品...</span>--%>
-
-                      <%--</p>--%>
-                    <%--</a>--%>
-                  <%--</li>--%>
-                <%--</ul>--%>
-              <%--</div>--%>
             </div>
           </div>
         </div>

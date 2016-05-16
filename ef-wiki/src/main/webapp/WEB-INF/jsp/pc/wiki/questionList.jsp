@@ -27,7 +27,9 @@
     <ul class="items">
       <c:forEach items="${questions}" var="question" varStatus="status" >
       <li>
-        <img src="<c:url value="/${question.pictureUrl}"/>" alt="" href="<c:url value="/question/${question.id}"/>">
+        <a href="<c:url value="/question/${question.id}"/>">
+        <img src="<c:url value="${question.pictureUrl}"/>" alt="">
+        </a>
         <div class="info">
           <a href="<c:url value="/question/${question.id}"/>" title="">【${status.index+1}】${question.questionContent}</a>
           <p>${question.answerKnowledge}</p>
