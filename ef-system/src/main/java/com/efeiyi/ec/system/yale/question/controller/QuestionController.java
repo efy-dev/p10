@@ -37,7 +37,7 @@ public class QuestionController {
         String type = "new";
         if (!questionId.isEmpty() && !questionId.trim().equals("")) {
             type = "edit";
-            question = (Question)baseManager.getObject(Question.class.getName(), questionId);
+            question = (Question) baseManager.getObject(Question.class.getName(), questionId);
         }
         question = setBaseProperty(question, request, type);
         question = upLoadPicture(multipartRequest, question);
@@ -57,6 +57,7 @@ public class QuestionController {
         String answerD = request.getParameter("answerD");
         String answerTrue = request.getParameter("answerTrue");
         String answerKnowledge = request.getParameter("answerKnowledge");
+        String level = request.getParameter("level");
 
         question.setQuestionName(questionName);
         question.setQuestionContent(questionContent);
@@ -66,8 +67,9 @@ public class QuestionController {
         question.setAnswerD(answerD);
         question.setAnswerTrue(answerTrue);
         question.setAnswerKnowledge(answerKnowledge);
-
-        if (type.equals("new")){
+        question.setLevel(level
+        );
+        if (type.equals("new")) {
             String serial = autoSerialManager.nextSerial("question");
             question.setSerial(serial);
             question.setStatus("1");
@@ -77,11 +79,11 @@ public class QuestionController {
         return question;
     }
 
-    private Question upLoadPicture(MultipartRequest multipartRequest, Question question) throws Exception{
+    private Question upLoadPicture(MultipartRequest multipartRequest, Question question) throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSS");
         String identify = sdf.format(new Date());
         String url = "question/" + identify + ".jpg";
-        String pictureUrl = "http://master3.efeiyi.com/"+url+"@!question-img-form";
+        String pictureUrl = "http://master3.efeiyi.com/" + url + "@!question-img-form";
 
         if (!multipartRequest.getFile("pictureUrl").getOriginalFilename().equals("")) {
             aliOssUploadManager.uploadFile(multipartRequest.getFile("pictureUrl"), "315pal", url);
