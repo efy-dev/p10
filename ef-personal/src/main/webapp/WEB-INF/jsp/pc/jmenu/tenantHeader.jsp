@@ -18,7 +18,7 @@
         <h2>大师后台</h2>
         <h1 id="fullName">
             <%
-                if(MasterUtil.findMaster()!=null){
+                if(MasterUtil.findMaster()!=null && !"".equals(MasterUtil.findMaster().getName()) && MasterUtil.findMaster().getName() != null){
             %>
                <a style="font-size: large" href="http://<%=MasterUtil.findMaster().getName()%>.efeiyi.com"><%=MasterUtil.findMaster().getFullName()%></a>
             <%

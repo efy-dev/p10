@@ -1,11 +1,15 @@
 <sitemesh>
     <!-- 大师平台 -->
     <mapping path="/index" decorator="/layouts/empty.jsp"/>
-    <mapping path="/**" decorator="/layouts/templateWithoutNavAndFooter.jsp"/>
+    <mapping path="/" decorator="/layouts/empty.jsp"/>
+    <mapping path="/**" decorator="/layouts/main.jsp"/>
+    <!--<mapping path="/**" decorator="/layouts/templateWithoutNavAndFooter.jsp"/>-->
     <mapping path="/info/list**" decorator="/layouts/main.jsp"/>
-    <mapping path="/info/**" decorator="/layouts/templateWithoutNavAndFooter.jsp"/>
+    <mapping path="/info/**" decorator="/layouts/main.jsp"/>
+    <!--<mapping path="/info/**" decorator="/layouts/templateWithoutNavAndFooter.jsp"/>-->
     <mapping path="/work/list**" decorator="/layouts/main.jsp"/>
-    <mapping path="/work/**" decorator="/layouts/templateWithoutNavAndFooter.jsp"/>
+    <mapping path="/work/**" decorator="/layouts/main.jsp"/>
+    <!--<mapping path="/work/**" decorator="/layouts/templateWithoutNavAndFooter.jsp"/>-->
 
     <!-- 大师入驻后台 -->
     <!--<mapping path="/" decorator="/layouts/mainTemp.jsp"/>-->

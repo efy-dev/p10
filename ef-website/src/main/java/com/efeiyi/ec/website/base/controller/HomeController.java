@@ -12,6 +12,7 @@ import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import com.ming800.core.util.CookieTool;
+import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -111,7 +112,16 @@ public class HomeController {
         if (redirectUrl != null) {
             return "redirect:" + redirectUrl;
         }
+        String url = request.getRequestURL().toString();
+
+        if(!HttpUtil.isPhone(request)) {
+            if (url.equalsIgnoreCase("http://www.efeiyi.com/")) {
+                model.addAttribute("init", "true");
+                return "/inithome";
+            }
+        }
         //取得分类列表
+
         XQuery projectCategoryxQuery = new XQuery("listProjectCategory_default", request);
         projectCategoryxQuery.setSortHql("");
         projectCategoryxQuery.updateHql();
@@ -165,7 +175,9 @@ public class HomeController {
         model.addAttribute("projectMap", projectMap);
         model.addAttribute("recommendedTenantList", recommendedTenantList);
         return "/home";
+
     }
+
 
 
     @RequestMapping({"/productCategory.do"})

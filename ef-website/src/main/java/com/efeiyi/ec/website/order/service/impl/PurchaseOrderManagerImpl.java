@@ -46,13 +46,16 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
                 productMap.put(tenant.getId(), productList);
             }
         }
+        List<PurchaseOrder> subPurchaseOrderList = new ArrayList<>();
         if (tenantSet != null && tenantSet.size() > 1) {
             for (Tenant tenantTemp : tenantSet) {
                 PurchaseOrder subPurchaseOrder = createNewPurchaseOrder2(productMap.get(tenantTemp.getId()));
                 subPurchaseOrder.setFatherPurchaseOrder(purchaseOrder);
                 subPurchaseOrder.setTenant(tenantTemp);
+                subPurchaseOrderList.add(subPurchaseOrder);
                 baseManager.saveOrUpdate(PurchaseOrder.class.getName(), subPurchaseOrder);
             }
+            purchaseOrder.setSubPurchaseOrder(subPurchaseOrderList);
         } else if (tenantSet != null && tenantSet.size() == 1) {
             purchaseOrder.setTenant(tenantSet.iterator().next());
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
@@ -134,14 +137,16 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
         purchaseOrder.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-
+        List<PurchaseOrderProduct> purchaseOrderProducts = new ArrayList<>();
         BigDecimal totalPrice = new BigDecimal(0);
         if (purchaseOrderProductList != null && purchaseOrderProductList.size() > 0) {
             for (PurchaseOrderProduct purchaseOrderProductTemp : purchaseOrderProductList) {
                 PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrder, purchaseOrderProductTemp.getProductModel(), purchaseOrderProductTemp.getPurchaseAmount(), purchaseOrderProductTemp.getProductModel().getPrice());
                 totalPrice = totalPrice.add(purchaseOrderProductTemp.getProductModel().getPrice().multiply(new BigDecimal(purchaseOrderProductTemp.getPurchaseAmount())));
+                purchaseOrderProducts.add(purchaseOrderProductTemp);
                 baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
             }
+            purchaseOrder.setPurchaseOrderProductList(purchaseOrderProducts);
             totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         }
         purchaseOrder.setTotal(totalPrice);

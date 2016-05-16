@@ -36,9 +36,9 @@
               <c:forEach items="${industrySolution.value}" var="productGiftIndustrySolution">
                 <li>
                   <a href="">
-                    <img src="http://gift-oss.efeiyi.com/${productGiftIndustrySolution.productGift.productModel.product.picture_url}" alt="">
+                    <img src="http://pro.efeiyi.com/${productGiftIndustrySolution.productGift.productModel.productModel_url}" alt="">
                     <div class="list-content delete-pd">
-                      <p class="name">${productGiftIndustrySolution.productGift.productModel.product.name}</p>
+                      <p class="name">${productGiftIndustrySolution.productGift.name}</p>
                       <p class="title">${productGiftIndustrySolution.productGift.productModel.product.subName}</p>
                     </div>
                   </a>
