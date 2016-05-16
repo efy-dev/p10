@@ -35,7 +35,7 @@
         </div>
         <!--//End--info-->
         <div class="imgsq">
-          <img src="<c:url value="/${question.pictureUrl}"/>" alt="">
+          <img src="<c:url value="${question.pictureUrl}"/>" alt="">
         </div>
       </div>
     </div>
