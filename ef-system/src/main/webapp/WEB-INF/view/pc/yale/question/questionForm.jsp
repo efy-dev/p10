@@ -44,6 +44,12 @@
                required="true">${object.questionContent}</textarea>
       </div>
     </div>
+      <div class="am-form-group">
+          <label for="level" class="am-u-sm-3 am-form-label">难度<small>*</small></label>
+              <div class="am-u-sm-9" id="LType">
+                  <ming800:status name="level" dataType="PCQuestion.level" checkedValue="${object.level}" type="select"/>
+              </div>
+      </div>
     <div class="am-form-group">
       <label for="answerA" class="am-u-sm-3 am-form-label">答案A<small>*</small></label>
       <div class="am-u-sm-9">
