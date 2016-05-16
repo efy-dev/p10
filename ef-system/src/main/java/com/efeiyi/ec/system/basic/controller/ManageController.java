@@ -1,34 +1,21 @@
 package com.efeiyi.ec.system.basic.controller;
 
-import com.alibaba.fastjson.JSONObject;
+import com.efeiyi.ec.wiki.model.Artistry;
+import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.service.AliOssUploadManager;
-import com.ming800.core.util.HttpUtil;
-import org.apache.commons.io.FileUtils;
 import org.dom4j.*;
-import org.dom4j.dom.DOMDocument;
 import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.InflaterInputStream;
+import java.net.URLEncoder;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/7/13.
@@ -39,6 +26,9 @@ public class ManageController {
     @Autowired
     private AliOssUploadManager aliOssUploadManager;
 
+    @Autowired
+    private BaseManager baseManager;
+
     @RequestMapping({"main.do"})
     public String main() {
         return "/main";
@@ -46,8 +36,29 @@ public class ManageController {
 
     @RequestMapping({"/fetchData.do"})
     @ResponseBody
-    public String fetchData(HttpServletRequest request) throws IOException, DocumentException {
-        URL url = new URL("http://baike.baidu.com/search/word?word=%E9%93%9C%E9%9B%95");
+    public String fetchData(final HttpServletRequest request) throws IOException, DocumentException {
+
+        //拼写链接
+        String urlstr = "http://baike.baidu.com/search/word?word=";
+        String realPath = request.getServletContext().getRealPath("/");
+        List<Artistry> artistryList = baseManager.listObject("from Artistry");
+        //得到工艺的名称生成filePath 以及 urlstr
+        for (Artistry artistry : artistryList) {
+            try {
+                String filepath = realPath + "files\\" + artistry.getName() + ".txt";
+                String url = urlstr + URLEncoder.encode(artistry.getName(), "utf-8");
+                getDataFunction(url, filepath);
+            } catch (Exception e) {
+                e.printStackTrace();
+                continue;
+            }
+        }
+        return "";
+
+    }
+
+    private void getDataFunction(String urlstr, String filePath) throws IOException, DocumentException {
+        URL url = new URL(urlstr);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestProperty("Accept-Charset", "utf-8");
         conn.setRequestProperty("contentType", "utf-8");
@@ -138,8 +149,8 @@ public class ManageController {
         //3.去掉所有a标签（可以使用java的正则表达式，编辑的按钮）
         //先把数据存到文件里再用domj4读取，先做一下筛选
 
-        String realPath = request.getServletContext().getRealPath("/");
-        String filePath = realPath + "files\\suxiu.xml";
+//        String realPath = request.getServletContext().getRealPath("/");
+//        String filePath = realPath + "files\\suxiu.xml";
         File file = new File(filePath);
         if (!file.exists()) {
             file.createNewFile();
@@ -191,9 +202,10 @@ public class ManageController {
             }
         }
         removeEditElement((Element) mainContentNode);
-        String test = mainContentNode.asXML();
+        removeImgeElement((Element) mainContentNode);
+        String test = mainContentNode.getStringValue();
 //        System.out.println(test);
-        test = test.replaceAll("/n", "");
+//        test = test.replaceAll("/n", "");
 
         if (!file.exists()) {
             file.createNewFile();
@@ -203,10 +215,21 @@ public class ManageController {
         writer2.write(test);
         writer2.close();
         write2.close();
-        return test;
-
     }
 
+    //去掉所有img标签
+    public void removeImgeElement(Element rootNode) {
+        Iterator iterator = rootNode.elementIterator();
+        while (iterator.hasNext()) {
+            Element elementTemp = (Element) iterator.next();
+            Iterator iteratorTemp = elementTemp.elementIterator();
+            if (iteratorTemp.hasNext()) {
+                removeImgeElement(elementTemp);
+            } else if (elementTemp.getName().equals("img")) {
+                iterator.remove();
+            }
+        }
+    }
 
     public void removeEditElement(Element rootNode) {
         Iterator iterator = rootNode.elementIterator();

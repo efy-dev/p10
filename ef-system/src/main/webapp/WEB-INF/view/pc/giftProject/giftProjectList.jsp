@@ -38,6 +38,7 @@
                     <th class="table-title">项目名称</th>
 
                     <th class="table-title">项目类别</th>
+                    <th class="table-title">已经关联的标签</th>
                     <th class="table-title">创建日期</th>
                 </tr>
                 </thead>
@@ -71,6 +72,11 @@
                         </td>
                         <td class="am-hide-sm-only" width="12%">
                                 ${giftList.project.projectCategory.name}
+                        </td>
+                        <td class="am-hide-sm-only" width="12%">
+                            <c:forEach items="${productGiftTagMap.get(giftList.getId())}" var="productGiftTag">
+                                ${productGiftTag.productGiftTagValue.value};
+                            </c:forEach>
                         </td>
                         <td class="am-hide-sm-only" width="12%">
                             <fmt:formatDate value="${giftList.createDatetime}" pattern="yyyy/MM/dd HH:MM:SS"/>
