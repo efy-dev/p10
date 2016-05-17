@@ -48,8 +48,9 @@ public class ManageController {
                 String filepath = realPath + "files\\" + artistry.getName() + ".txt";
                 String url = urlstr + URLEncoder.encode(artistry.getName(), "utf-8");
                 getDataFunction(url, filepath);
-            } catch (Exception e) {
+            } catch (DocumentException e) {
                 e.printStackTrace();
+                System.out.println(artistry.getName());
                 continue;
             }
         }
@@ -57,7 +58,24 @@ public class ManageController {
 
     }
 
+    @RequestMapping({"/test/fetchData.do"})
+    @ResponseBody
+    public String fetchData2(final HttpServletRequest request) throws IOException, DocumentException {
+
+        //拼写链接
+        String urlstr = "http://baike.baidu.com/search/word?word=%E8%8B%8F%E7%BB%A3";
+        String realPath = request.getServletContext().getRealPath("/");
+        String filepath = realPath + "files\\suxiu.txt";
+        getDataFunction(urlstr, filepath);
+
+        return "";
+
+    }
+
+
     private void getDataFunction(String urlstr, String filePath) throws IOException, DocumentException {
+
+
         URL url = new URL(urlstr);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestProperty("Accept-Charset", "utf-8");
@@ -140,6 +158,16 @@ public class ManageController {
             ++i;
         }
         String str = buffer.toString();
+        String regex = "<img([\\s\\S]*?)>";
+
+//        String testString = "-----<img src=\"jaljsfakldjsflk;ajdlf\" name=\"akljsdklf\">-----<img src=\"jaljsfakldjsflk;ajdlf\" name=\"akljsdklf\">---";
+//        String testString2 = "-----<img src=\"jaljsfakldjsflk;ajdlf\" name=\"akljsdklf\"/>-----";
+//        testString = testString.replaceAll(regex, "");
+//        testString2 = testString2.replaceAll(regex, "");
+//        System.out.println(testString);
+//        System.out.println(testString2);
+//        String regex1 = "^<img.*>$";
+        str = str.replaceAll(regex, "");
         str = str.replaceAll("&", "");
         str = str.replaceAll("target=_blank ", "");
 //        System.out.println(str);
@@ -160,12 +188,18 @@ public class ManageController {
         writer.write(str);
         writer.close();
         write.close();
-        Document document = new SAXReader().read(new FileInputStream(file));
-        List<Node> nodes = document.selectNodes("/html/body/div");
         Node bodyWrapperNode = null;
         Node contentWrapperNode = null;
         Node contentNode = null;
         Node mainContentNode = null;
+        Document document = null;
+        try {
+            document = new SAXReader().read(new FileInputStream(file));
+        } catch (DocumentException e) {
+            file.delete();
+            throw e;
+        }
+        List<Node> nodes = document.selectNodes("/html/body/div");
         for (Node node : nodes) {
             String clazz0 = node.selectSingleNode("@class").getText();
             if (clazz0.equals("body-wrapper")) {
@@ -201,6 +235,8 @@ public class ManageController {
                 }
             }
         }
+//        ((Element) (mainContentNode.selectNodes("div").get(0))).elementIterator().remove();
+        removeContentHead((Element) mainContentNode);
         removeEditElement((Element) mainContentNode);
         removeImgeElement((Element) mainContentNode);
         String test = mainContentNode.getStringValue();
@@ -228,6 +264,15 @@ public class ManageController {
             } else if (elementTemp.getName().equals("img")) {
                 iterator.remove();
             }
+        }
+    }
+
+    public void removeContentHead(Element rootNode) {
+        Iterator iterator = rootNode.elementIterator();
+        while (iterator.hasNext()) {
+            Object o = iterator.next();
+            iterator.remove();
+            break;
         }
     }
 

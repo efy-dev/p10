@@ -47,8 +47,9 @@ public class SubjectController {
                 SubjectPicture subjectPicture = new SubjectPicture();
                 subjectPicture.setPictureUrl(url);
                 subjectPicture.setSubject(subject);
-                baseManager.saveOrUpdate(SubjectPicture.class.getName(), subjectPicture);
                 subject.setPictureUrl(url);
+                baseManager.saveOrUpdate(SubjectPicture.class.getName(), subjectPicture);
+                baseManager.saveOrUpdate(Subject.class.getName(), subject);
             }
         }
         return "redirect:/basic/xm.do?qm=plistGiftSubject_default"; //返回列表页面
