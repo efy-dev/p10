@@ -40,7 +40,7 @@
     </div>
     <div class="area">
       <div class="bd title">需求数量</div>
-      <input type="text" class="txt" name="number" required>
+      <input type="text" class="txt" name="number" required onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')">
     </div>
 
     <div class="btns">

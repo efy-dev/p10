@@ -3,9 +3,6 @@
 <!--//End--nav2016-->
 <div class="gift2016">
   <div class="gift-home scheme">
-    <div class="min-nav">
-      <p><a href="">首页</a><i>></i><a href="" class="pitch-on">礼品定制</a></p>
-    </div>
     <div class="demand">
       <form action="<c:url value="/submitIndustrySolutionRequest"/>" method="post">
         <div class="title">
@@ -34,12 +31,12 @@
           <div class="option-list">
             <div class="name"><span>需求数量</span></div>
             <div class="option-content">
-              <input type="text" class="txt" maxlength="11" name="number" required>
+              <input type="text" class="txt" maxlength="11" name="number" required onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')">
             </div>
           </div>
           <div class="option-btn">
             <input type="submit"  class="affirm" value="提&nbsp;交">
-            <button class="cancel">取&nbsp;消</button>
+            <a href="javascript:history.go(-1)" class="cancel">取&nbsp;消</a>
           </div>
         </div>
       </form>

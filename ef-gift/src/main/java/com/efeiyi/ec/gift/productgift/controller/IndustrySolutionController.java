@@ -76,6 +76,22 @@ public class IndustrySolutionController {
 
     @RequestMapping({"/industrySolutionRequest"})
     public String IndustrySolutionRequest(HttpServletRequest request, Model model) throws Exception{
+        Map<String, List<ProductGiftTagValue>> map = new HashMap<>();
+        XQuery xQuery = new XQuery("listProductGiftTagValue_default", request);
+        List<ProductGiftTagValue> list = baseManager.listObject(xQuery);
+        try {
+            for(ProductGiftTagValue productGiftTagValue:list){
+                String group = productGiftTagValue.getGroup();
+                if (map.containsKey(group)){
+                    map.get(group).add(productGiftTagValue);
+                }else {
+                    List<ProductGiftTagValue> productGiftTagValueList = new ArrayList<>();
+                    productGiftTagValueList.add(productGiftTagValue);
+                    map.put(group,productGiftTagValueList);
+                }
+            }
+        }catch (Exception e){}
+        model.addAttribute("map", map);
         return "/gift/industrySolutionRequest";
     }
 

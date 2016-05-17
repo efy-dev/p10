@@ -2,7 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>${title}</title>
+<title>${title}</title>
+<style>
+#h5img img {width:100%;height:100%}
+</style>
 </head>
 <body>
 <header id="header" class="am-header custom-header newheader">
@@ -23,7 +26,7 @@
         </ul>
     </div>
 </header>
-<div>
+<div id="h5img">
   <c:if test="${subject.subjectDescription.content != null && subject.subjectDescription.content != ''}">
     ${subject.subjectDescription.content}
   </c:if>
