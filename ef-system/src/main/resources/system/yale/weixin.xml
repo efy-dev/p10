@@ -11,6 +11,13 @@
                         <item label="D" value="D"/>
                     </statusType>
                 </field>
+                <field name="level" label="难度" inputType="text">
+                    <statusType fieldName="level">
+                        <item label="易" value="1"/>
+                        <item label="中" value="2"/>
+                        <item label="难" value="3"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
                 <do name="plistQuestion" access="" label="题目分页列表" result="/yale/question/questionPList">

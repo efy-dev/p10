@@ -8,7 +8,8 @@
         <entity name="ProductGift" label="礼物项目" model="com.efeiyi.ec.gift.model.ProductGift">
 
             <does>
-                <do name="plistGiftProject" access="" label="礼物项目列表" result="/giftProject/giftProjectList">
+                <do name="plistGiftProject" access="" label="礼物项目列表" result="/giftProject/giftProjectList"
+                    execute="com.efeiyi.ec.system.gift.controller.GiftListHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -83,7 +84,8 @@
 
         <entity name="ProductGiftTag" label="礼物标签" model="com.efeiyi.ec.gift.model.ProductGiftTag">
             <does>
-                <do name="saveOrUpdateGiftTag" label="保存礼品标签" access="" result="redirect:/basic/xm.do?qm=plistGiftLabel_default">
+                <do name="saveOrUpdateGiftTag" label="保存礼品标签" access=""
+                    result="redirect:/basic/xm.do?qm=plistGiftLabel_default">
                     <page>
                         <fields>
                             <field name="status" label="默认状态" defaultValue="1"

@@ -2,7 +2,12 @@ package com.efeiyi.ec.wiki.art.controller;
 
 import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.master.model.MasterWork;
+import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.wiki.model.Artistry;
+import com.efeiyi.ec.wiki.model.ArtistryDescription;
+import com.efeiyi.ec.wiki.model.ArtistryRecord;
+import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -12,8 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,4 +66,63 @@ public class ArtController extends BaseController {
         model.addAttribute("artistry",artistry);
         return "/project/craftDescription";
     }
+    @RequestMapping(value="/test.do",method = RequestMethod.POST)
+    @ResponseBody
+    public String getQU(HttpServletRequest request){
+        StringBuffer url = request.getRequestURL();
+        String method = request.getMethod();
+        String param = request.getQueryString();
+        System.out.println(param);
+        String header = request.getHeader("num");
+        System.out.println(header);
+        System.out.println(method);
+        System.out.println(url);
+        Cookie[] cookies = request.getCookies();
+        for(int i=0;i<cookies.length;i++){
+            System.out.println(cookies[i].getValue());
+        }
+        return "";
+
+    }
+
+//    @RequestMapping({"ueditor.do"})
+//    public String ueditor(HttpServletRequest request,Model model) {
+//        String descriptionId =  request.getParameter("descriptionId");
+//        ArtistryDescription description = (ArtistryDescription) baseManager.getObject(ArtistryDescription.class.getName(),descriptionId);
+//        model.addAttribute("description",description);
+//        return "/project/editor";
+//    }
+    @RequestMapping({"/save.do"})
+    public String save(HttpServletRequest request,Model model){
+        String content = request.getParameter("content");
+        ArtistryRecord artistryRecord = new ArtistryRecord();
+        User user  = AuthorizationUtil.getUser();
+        ArtistryDescription artistryDescription = new ArtistryDescription();
+        artistryDescription.setDescriptionPC(content);
+        baseManager.saveOrUpdate(ArtistryDescription.class.getName(),artistryDescription);
+        String artistryId = request.getParameter("artistryId");
+        Artistry artistry = (Artistry) baseManager.getObject(Artistry.class.getName(),artistryId);
+        artistryRecord.setArtistry(artistry);
+        artistryRecord.setArtistryDescription(artistryDescription);
+        artistryRecord.setUser(user);
+        Date date = new Date();
+        artistryRecord.setCreateDatetime(date);
+        artistryRecord.setCheckResult("0");
+        baseManager.saveOrUpdate(ArtistryRecord.class.getName(),artistryRecord);
+        model.addAttribute("artistryDescription",artistryDescription);
+        return "/project/craftDescription1";
+
+    }
+
+    @RequestMapping({"/check.do"})
+    @ResponseBody
+    public boolean loginCheck(HttpServletRequest request){
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        if (currentUser.getId() != null) {
+             return true;
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -27,6 +27,7 @@ public class Question {
     private String status;// 0假删  1正常
     private String pictureUrl;
     private Date createDatetime;
+    private String level;
 //    private List<ExaminationQuestion> examinationQuestionList;
 
     @Id
@@ -148,4 +149,12 @@ public class Question {
         this.questionContent = questionContent;
     }
 
+    @Column(name = "level")
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
 }
