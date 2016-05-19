@@ -29,7 +29,7 @@
     <ul class="am-slides">
       <c:if test="${bannerList != null && bannerList != ''}">
         <c:forEach items="${bannerList}" var="banner">
-          <li><img src="http://gift-oss.efeiyi.com/${banner.imageUrl}@!gift-banner"></li>
+          <li><a href="${banner.wapUrl}"><img src="http://gift-oss.efeiyi.com/${banner.imageUrl}@!gift-banner"></a></li>
         </c:forEach>
       </c:if>
     </ul>

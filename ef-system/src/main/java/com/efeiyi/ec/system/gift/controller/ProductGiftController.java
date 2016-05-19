@@ -1,9 +1,7 @@
 package com.efeiyi.ec.system.gift.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.efeiyi.ec.gift.model.IndustrySolution;
-import com.efeiyi.ec.gift.model.ProductGift;
-import com.efeiyi.ec.gift.model.ProductGiftIndustrySolution;
+import com.efeiyi.ec.gift.model.*;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.product.model.Subject;
 import com.efeiyi.ec.product.model.SubjectDescription;
@@ -20,10 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2016/5/5 0005.
@@ -52,6 +47,26 @@ public class ProductGiftController {
         } catch (Exception e) {
             return false;
         }
+    }
+
+
+    @RequestMapping({"/productGift/relation.do"})
+    public String relationProductGiftTag(HttpServletRequest request) {
+        String productGiftId = request.getParameter("productGift.id");
+        ProductGift productGift = (ProductGift) baseManager.getObject(ProductGift.class.getName(), productGiftId);
+        String productGiftTagValueIds = request.getParameter("productGiftTagValueIds");
+        if (productGiftTagValueIds != null && !productGiftTagValueIds.equals("")) {
+            List<String> productGiftTagValueIdList = Arrays.asList(productGiftTagValueIds.split(";"));
+            for (String id : productGiftTagValueIdList) {
+                ProductGiftTagValue productGiftTagValue = (ProductGiftTagValue) baseManager.getObject(ProductGiftTagValue.class.getName(), id);
+                ProductGiftTag productGiftTag = new ProductGiftTag();
+                productGiftTag.setProductGift(productGift);
+                productGiftTag.setProductGiftTagValue(productGiftTagValue);
+                productGiftTag.setStatus("1");
+                baseManager.saveOrUpdate(ProductGiftTag.class.getName(), productGiftTag);
+            }
+        }
+        return "redirect:/basic/xm.do?qm=viewProductGift&id=" + productGiftId;
     }
 
 

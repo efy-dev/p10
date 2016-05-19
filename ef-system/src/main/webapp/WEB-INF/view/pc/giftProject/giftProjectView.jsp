@@ -61,9 +61,8 @@
             </div>
         </div>
 
-        <form id="guanlian" action="<c:url value="/basic/xmj.do"/>" class="am-form am-form-horizontal" method="post">
-            <input type="hidden" value="saveOrUpdateGiftTag" name="qm">
-
+        <form id="guanlian" action="<c:url value="/productGift/relation.do"/>" class="am-form am-form-horizontal"
+              method="post">
             <input type="hidden" name="productGift.id" value="${object.id}">
 
             <div class="am-form-group" style="margin-top: 20px">
@@ -71,7 +70,7 @@
                        style="text-align: left;padding-left: 0;margin: 10px 0">标签匹配</label>
 
                 <div class="am-u-sm-8 am-u-end">
-                    <input type="hidden" name="productGiftTagValue.id" id="productGiftTagValueId" placeholder=""
+                    <input type="hidden" name="productGiftTagValueIds" id="productGiftTagValueId" placeholder=""
                            value="">
                     <input type="text" name="productGiftTagValue.name" id="productGiftTagValueName" placeholder=""
                            data-am-modal="{target: '#my-popup'}" value="" required>
@@ -80,7 +79,7 @@
 
             <div class="am-form-group">
                 <div class="am-u-sm-9 am-u-end">
-                    <a onclick="guanlian()" href="#" class="am-btn am-btn-primary" value="保存">保存</a>
+                    <input type="submit" class="am-btn am-btn-primary" value="保存"/>
                 </div>
             </div>
         </form>
@@ -156,11 +155,12 @@
                             <a style="width: 10%;"
                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                href="javascript:void(0);"
-                               onclick="selectObj('${label.id}','${label.value}','my-popup','productGiftTagValue')">
+                               onclick="selectTag(this,'${label.id}','${label.value}')">
+                                    <%--onclick="selectTag('${label.id}','${label.value}','my-popup','productGiftTagValue')">--%>
                                 选择
                             </a>
                         </td>
-                        <td class="am-text-center" width="33%">
+                        <td class=" am-text-center" width="33%">
                             <ming800:status name="type" dataType="ProductGiftTagValue.type" checkedValue="${label.type}"
                                             type="normal"/>
                         </td>
@@ -169,7 +169,18 @@
                         </td>
 
                     </tr>
+
                 </c:forEach>
+                <tr>
+                    <td style="text-align: center">
+                        <a class="am-btn am-btn-primary"
+                           onclick="selectObj('my-popup','productGiftTagValue')">确认</a>
+
+                    </td>
+
+
+                </tr>
+
                 </tbody>
             </table>
         </div>
@@ -177,14 +188,14 @@
 </div>
 <script>
 
-//    $().ready(function () {
-//        var options = {
-//            success: function (data) {
-//                window.location.href = window.location.href;
-//            }
-//        };
-//        $("#guanlian").ajaxForm(options);
-//    })
+    //    $().ready(function () {
+    //        var options = {
+    //            success: function (data) {
+    //                window.location.href = window.location.href;
+    //            }
+    //        };
+    //        $("#guanlian").ajaxForm(options);
+    //    })
 
     function guanlian() {
         var options = {
@@ -218,9 +229,22 @@
             });
         }
     }
-    function selectObj(id, name, popup, select) {
-        $("#" + select + "Id").val(id);
-        $("#" + select + "Name").val(name);
+
+    var allId = "";
+    var allName = "";
+
+    function selectTag(element, id, value) {
+        $(element).html("已选择");
+        allName = allName + ";" + value;
+        allId = allId + ";" + id;
+    }
+
+    function selectObj(popup, select) {
+        //把选择的数据记录记录记录下来，然后再点击确认的时候再
+        allId = allId.substr(1, allId.length);
+        allName = allName.substr(1, allName.length);
+        $("#" + select + "Id").val(allId);
+        $("#" + select + "Name").val(allName);
         $("#" + popup).modal('close');
     }
 

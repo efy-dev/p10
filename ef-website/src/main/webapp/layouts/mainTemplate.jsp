@@ -27,7 +27,7 @@
 
 </head>
 <body>
-
+<c:if test="${empty init}">
 <%
     if (HttpUtil.isPhone(request)) {
 %>
@@ -45,7 +45,7 @@
 <%
     }
 %>
-
+</c:if>
 <%
     if (HttpUtil.isPhone(request)) {
 %>
@@ -59,6 +59,7 @@
 <%
     }
 %>
+
 
 <%
     if (HttpUtil.isPhone(request)) {

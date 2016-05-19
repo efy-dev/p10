@@ -13,9 +13,11 @@
     <div class="hd">
         <div class="tips fl"><a class="logo" href=""></a></div>
         <ul class="fr">
-            <li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>
-            <li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>
-            <li><a href="http://master.efeiyi.com" title="">大 师</a></li>
+            <li><a href="http://mall.efeiyi.com" title="e飞蚁商城">非遗电商</a></li>
+            <li><a href="http://master.efeiyi.com" title="非遗大师">非遗大师</a></li>
+            <li><a href="http://baike.efeiyi.com/" title="非遗大师">非遗百科</a></li>
+            <li><a href="http://gift.efeiyi.com/" title="非遗礼品">非遗礼品</a></li>
+            <li><a href="http://www.315cheng.com" title="诚品宝">诚品宝</a></li>
             <%
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
@@ -29,7 +31,7 @@
                 if (AuthorizationUtil.getMyUser().getId() == null) {
             %>
             <li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>
-            <li><a href="http://passport.efeiyi.com/register?service=http://j.efeiyi.com/ef-wiki/sso.do?registeSuccess=/pc/saveEnrollUser.do" title="快速注册">快速注册</a></li>
+            <li><a href="http://passport.efeiyi.com/register?service=http://baike.efeiyi.com/sso.do?registeSuccess=/pc/saveEnrollUser.do" title="快速注册">快速注册</a></li>
             <%
                 }
             %>
@@ -81,8 +83,7 @@
         <div class="navitems">
             <ul>
                 <li><a href="<c:url value="/"/>" title="">首页</a></li>
-                <li><a href="" title="">大师精品</a></li>
-                <li><a href="" title="">飞蚁工坊</a></li>
+                <li><a href="<c:url value="/questionList.do"/>" title="">非遗宝典</a></li>
             </ul>
         </div>
         <!--//End--导航-->
@@ -106,4 +107,5 @@
         }, "post");
     });
 */
+   document.setweb.submit();
 </script>

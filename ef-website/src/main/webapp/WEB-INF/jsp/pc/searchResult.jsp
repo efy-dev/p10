@@ -188,6 +188,7 @@
             var myInput = document.createElement("input");
             var paramEntry = params[x].split("=");
             myInput.name = paramEntry[0];
+            myInput.type = "hidden";
             myInput.value = decodeURI(paramEntry[1]);
             myForm.appendChild(myInput);
         }

@@ -102,13 +102,29 @@ public class ProductGiftController {
     }
 
     @RequestMapping({"/viewSubject/{subjectId}"})
-         public String viewSubject(@PathVariable String subjectId, Model model) throws Exception{
+    public String viewSubject(HttpServletRequest request, @PathVariable String subjectId, Model model) throws Exception{
         Subject subject = (Subject) baseManager.getObject(Subject.class.getName(),subjectId);
+        Map<String, List<ProductGiftTagValue>> map = new HashMap<>();
+        XQuery xQuery = new XQuery("listProductGiftTagValue_default", request);
+        List<ProductGiftTagValue> list = baseManager.listObject(xQuery);
+        try {
+            for(ProductGiftTagValue productGiftTagValue:list){
+                String group = productGiftTagValue.getGroup();
+                if (map.containsKey(group)){
+                    map.get(group).add(productGiftTagValue);
+                }else {
+                    List<ProductGiftTagValue> productGiftTagValueList = new ArrayList<>();
+                    productGiftTagValueList.add(productGiftTagValue);
+                    map.put(group,productGiftTagValueList);
+                }
+            }
+        }catch (Exception e){}
+        model.addAttribute("map", map);
         model.addAttribute("subject", subject);
         if (subjectId.equals("inzu4ha1b7pa9flo")){
-            model.addAttribute("title", "中国“礼”文化");
-        }else if (subjectId.equals("inzu4s481azja868")){
             model.addAttribute("title", "国礼轶事");
+        }else if (subjectId.equals("inzu4s481azja868")){
+            model.addAttribute("title", "中国“礼”文化");
         }else {
             model.addAttribute("title", "专题详情");
         }

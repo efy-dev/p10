@@ -5,9 +5,11 @@
 <div class="top2016">
     <div class="hd">
         <ul class="fr">
-            <li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>
-            <li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>
-            <li><a href="http://master.efeiyi.com" title="">大 师</a></li>
+            <li><a href="http://mall.efeiyi.com" title="非遗电商">非遗电商</a></li>
+            <li><a href="http://master.efeiyi.com" title="非遗大师">非遗大师</a></li>
+            <li><a href="http://j.efeiyi.com/ef-wiki/" title="非遗百科">非遗百科</a></li>
+            <li><a href="http://j.efeiyi.com/ef-gift/" title="非遗礼品">非遗礼品</a></li>
+            <li><a href="http://www.315cheng.com" title="诚品宝">诚品宝</a></li>
             <%
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
