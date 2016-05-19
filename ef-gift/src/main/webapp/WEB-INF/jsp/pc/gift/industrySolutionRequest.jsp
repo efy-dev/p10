@@ -31,7 +31,7 @@
           <div class="option-list">
             <div class="name"><span>需求数量</span></div>
             <div class="option-content">
-              <input type="text" class="txt" maxlength="11" name="number" required onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')">
+              <input type="text" class="txt" maxlength="10" name="number" required onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')">
             </div>
           </div>
           <div class="option-btn">

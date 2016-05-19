@@ -40,12 +40,12 @@
     </div>
     <div class="area">
       <div class="bd title">需求数量</div>
-      <input type="text" class="txt" name="number" required onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')">
+      <input type="text" class="txt" name="number" maxlength="10" required onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')">
     </div>
 
     <div class="btns">
       <input class="submit" type="submit" value="提交">
-      <input class="cancel" type="button" value="取消">
+      <a href="javascript:history.go(-1)" class="cancel" type="button" value="取消">
     </div>
 
     <div class="tels">咨询热线：4008768766</div>
