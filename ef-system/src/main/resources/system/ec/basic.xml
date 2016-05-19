@@ -65,19 +65,19 @@
                         <!--<condition name="id" defaultValue="1" operation="eq"/>-->
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
-                    <query name="master" label="传承人轮播图" type="auto" orderBy="bannerOrder:desc">
-                        <condition name="group" defaultValue="master" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                    </query>
+                    <!--<query name="master" label="传承人轮播图" type="auto" orderBy="bannerOrder:desc">-->
+                        <!--<condition name="group" defaultValue="master" operation="eq"/>-->
+                        <!--<condition name="status" defaultValue="1" operation="eq"/>-->
+                    <!--</query>-->
 
-                    <query name="master.homePage" label="首页轮播图" type="auto" orderBy="bannerOrder:desc">
-                        <condition name="group" defaultValue="master.homePage" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                    </query>
-                    <query name="tenant" label="电商网站轮播图" type="auto" orderBy="bannerOrder:desc">
-                        <condition name="group" defaultValue="tenant" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                    </query>
+                    <!--<query name="master.homePage" label="首页轮播图" type="auto" orderBy="bannerOrder:desc">-->
+                        <!--<condition name="group" defaultValue="master.homePage" operation="eq"/>-->
+                        <!--<condition name="status" defaultValue="1" operation="eq"/>-->
+                    <!--</query>-->
+                    <!--<query name="tenant" label="电商网站轮播图" type="auto" orderBy="bannerOrder:desc">-->
+                        <!--<condition name="group" defaultValue="tenant" operation="eq"/>-->
+                        <!--<condition name="status" defaultValue="1" operation="eq"/>-->
+                    <!--</query>-->
 
                 </do>
 

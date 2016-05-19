@@ -1,6 +1,6 @@
 <sitemesh>
     <mapping path="/main.do" decorator="/layouts/main.jsp"/>
-   <mapping path="/pcn/viewAttention.do" decorator="/layouts/main.jsp"/>
+    <mapping path="/pcn/viewAttention.do" decorator="/layouts/main.jsp"/>
     <!--<mapping path="/*" decorator="/layouts/main.jsp"/>-->
     <mapping path="/basic/**" decorator="/layouts/main.jsp"/>
     <mapping path="/Recommended/**" decorator="/layouts/main.jsp"/>
@@ -13,5 +13,6 @@
     <mapping path="/promotionPlan/**" decorator="/layouts/main.jsp"/><!--返利-->
     <mapping path="/virtualPlan/**" decorator="/layouts/main.jsp"/><!--虚拟计划-->
     <mapping path="/scoreboard/**" decorator="/layouts/main.jsp"/><!--微信答题-->
-    <mapping path="/imgView.jsp*" exclue="true" />
+    <mapping path="/ueditor/**" decorator="/layouts/main.jsp"/><!--ueditor-->
+    <mapping path="/imgView.jsp*" exclue="true"/>
 </sitemesh>

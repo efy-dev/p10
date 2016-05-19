@@ -25,7 +25,8 @@ import java.util.List;
  */
 @Controller
 @RequestMapping({"/wx"})
-public class WxController {
+public class
+WxController {
 
 
     @Autowired
