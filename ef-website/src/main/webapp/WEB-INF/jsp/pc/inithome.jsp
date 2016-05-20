@@ -70,7 +70,7 @@
       </div>
       <!--//End--搜索部分-->
       <div class="clinks">
-        <a class="item" href="" title="">大师官网入驻</a>
+        <a class="item" href="http://j.efeiyi.com/ef-person/" title="">大师官网入驻</a>
         <a class="item second" href="http://www.efeiyi.com/document/helpCenter?group=ec.rzlc" title="">商户免费入驻</a>
         <a class="item" href="" title="">企业礼品解决方案</a>
         <a class="close" href="" title="关闭"></a>
@@ -87,7 +87,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="zhubingren.efeiyi.com">
+                  <a href="http://zhubingren.efeiyi.com">
                     <img
                             src="<c:url value="/scripts/upload/朱炳仁.jpg"/>"
                             alt=""
@@ -95,7 +95,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="weilizhong.efeiyi.com">
+                  <a href="http://weilizhong.efeiyi.com">
                     <img
                             src="<c:url value="/scripts/upload/魏立中.jpg"/>"
                             alt=""
@@ -103,7 +103,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="http://j.efeiyi.com/ef-wiki/project/inlcj19o29sjxcah">
+                  <a href="http://baike.efeiyi.com/project/inlcj19o29sjxcah">
                     <img
                             src="<c:url value="/scripts/upload/苏绣.jpg"/>"
                             alt=""
@@ -111,7 +111,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="http://www.efeiyi.com/product/productModel/ihy6pqjo1dizwlaa">
+                  <a href="http://baike.efeiyi.com/product/productModel/ihy6pqjo1dizwlaa">
                     <img
                             src="<c:url value="/scripts/upload/筷子.JPG"/>"
                             alt=""
@@ -119,7 +119,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="http://j.efeiyi.com/ef-wiki">
+                  <a href="http://baike.efeiyi.com">
                     <img
                             src="<c:url value="/scripts/upload/铜雕.jpg"/>"
                             alt=""
@@ -127,7 +127,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="http://www.efeiyi.com/product/productModel/if3l43hd1h2oyvov">
+                  <a href="http://mall.efeiyi.com/product/productModel/if3l43hd1h2oyvov">
                     <img
                             src="<c:url value="/scripts/upload/关山香炉.JPG"/>"
                             alt=""
@@ -144,11 +144,10 @@
               <div class="consult">
                 <h5>新品上架</h5>
                 <ul>
-                  <li><a href="http://www.efeiyi.com/product/productModel/ijw78fl93dqtd4xj">猫蝶图天然水晶内画壶:大师之作 传世之物 罕见珍品</a></li>
-                  <li><a href="http://www.efeiyi.com/product/productModel/ijy2r09wbpav1jly">九龙呈瑞盘:高档摆件 金龙祥瑞 极佳寓意 乔迁好礼</a></li>
-                  <li><a href="http://www.efeiyi.com/product/productModel/il7ubj9p34n0qowg">高官厚禄得意长:闻名于世的真正的芦苇画，世界稀有孤品。最具收藏价值！</a></li>
-                  <li><a href="http://www.efeiyi.com/product/productModel/igdcsu0v3sa6nhb5">崖柏盘香:纯天然室内熏香养生安神助眠老料香薰</a></li>
-                  <li><a href="http://www.efeiyi.com/product/productModel/ik4swda61xofep2u">庆赏昇平公交卡:庆赏昇平创意衍伸品 京剧人物图案 国家图书馆出品</a></li>
+                  <li><a href="http://mall.efeiyi.com/product/productModel/ijw78fl93dqtd4xj">猫蝶图天然水晶内画壶:大师之作 传世之物 罕见珍品</a></li>
+                  <li><a href="http://mall.efeiyi.com/product/productModel/ijy2r09wbpav1jly">九龙呈瑞盘:高档摆件 金龙祥瑞 极佳寓意 乔迁好礼</a></li>
+                  <li><a href="http://mall.efeiyi.com/product/productModel/il7ubj9p34n0qowg">高官厚禄得意长:闻名于世的真正的芦苇画，世界稀有孤品。最具收藏价值！</a></li>
+                  <li><a href="http://mall.efeiyi.com/product/productModel/igdcsu0v3sa6nhb5">崖柏盘香:纯天然室内熏香养生安神助眠老料香薰</a></li>
                 </ul>
               </div>
             </div>
@@ -174,7 +173,7 @@
               <a href="http://yaohuifen.efeiyi.com/" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-1-2.jpg"/>" alt=""></p>
                 <p class="info">
-                  <span class="name">姚慧芬</span>
+                  <span class="name">姚惠芬</span>
                 </p>
               </a>
             </li>
@@ -226,7 +225,7 @@
           <div class="title"><strong>礼品推荐</strong></div>
           <ul>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/ihokg0wj2tek3fzo" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/ihokg0wj2tek3fzo" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-3-1.jpg"/>" alt=""></p>
                 <p class="info">
                   <span class="name">母亲节礼物  秋韵油画艺术丝巾</span>
@@ -235,7 +234,7 @@
               </a>
             </li>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/ijwo0vqfzvc1zu0t" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/ijwo0vqfzvc1zu0t" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-3-2.jpg"/>" alt=""></p>
                 <p class="info">
                   <span class="name">父亲节礼物  贞观紫砂杯</span>
@@ -244,7 +243,7 @@
               </a>
             </li>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/igvu2io13czbwif1" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/igvu2io13czbwif1" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-3-3.jpg"/>" alt=""></p>
                 <p class="info">
                   <span class="name">送女友  娟人王昭君</span>
@@ -253,7 +252,7 @@
               </a>
             </li>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/ihykdmfn1k8httnz" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/ihykdmfn1k8httnz" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-3-4.jpg"/>" alt=""></p>
                 <p class="info">
                   <span class="name">中秋送礼  华韵·中秋大礼包</span>
@@ -262,7 +261,7 @@
               </a>
             </li>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/ihbo02nj24x1v68o" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/ihbo02nj24x1v68o" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-3-5.jpg"/>" alt=""></p>
                 <p class="info">
                   <span class="name">乔迁送礼  财宝天王唐卡</span>
@@ -271,7 +270,7 @@
               </a>
             </li>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/ief3hjp46b9jk29l" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/ief3hjp46b9jk29l" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-3-6.jpg"/>" alt=""></p>
                 <p class="info">
                   <span class="name">结婚送礼  鸳鸯荷花剪纸</span>
@@ -287,7 +286,7 @@
           <div class="title2">千姿百态&nbsp;&nbsp;&nbsp;&nbsp;因美而生</div>
           <ul>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/iefgxes915akvek5" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/iefgxes915akvek5" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-4-1.jpg"/>" alt=""></p>
                 <p class="info">
                   <span class="name">牡丹花语斗笠碟</span>
@@ -296,7 +295,7 @@
               </a>
             </li>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/ighrk1id384nfu6r" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/ighrk1id384nfu6r" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-4-2.jpg"/>" alt=""></p>
                 <p class="info">
                   <span class="name">金蟾纳福砚</span>
@@ -305,7 +304,7 @@
               </a>
             </li>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/igrin2dh3cdj6gi1" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/igrin2dh3cdj6gi1" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-4-3.jpg"/>" alt=""></p>
                 <p class="info">
                   <span class="name">马到成功铜雕</span>
@@ -322,15 +321,15 @@
           <ul>
             <li>
               <a href="" title="">
-                <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-5-1.jpg"/>" alt=""></p>
+                <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/120151027164330.jpg"/>" alt=""></p>
                 <p class="info">
-                  <span class="name">景德镇青白瓷  牡丹花语斗笠碟</span>
-                  <span class="works">¥ 521</span>
+                  <span class="name">知足长乐壶</span>
+                  <span class="works">¥ 26000</span>
                 </p>
               </a>
             </li>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/ihd4sf6rgc6hjwnx" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/ihd4sf6rgc6hjwnx" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-5-2.jpg"/>" alt=""></p>
                 <p class="info">
                   <span class="name">金银丝镶嵌  金小叶紫檀</span>
@@ -339,7 +338,7 @@
               </a>
             </li>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/ihmqo94q19dvqlvy" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/ihmqo94q19dvqlvy" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-5-3.jpg"/>" alt=""></p>
                 <p class="info">
                   <span class="name">香道  高山流水</span>
@@ -355,30 +354,30 @@
       <div class="main-slide">
         <div class="bd mbox1">
           <a href="" class="" title=""><p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/1000000.jpg"/>" alt=""></p></a>
-          <a href="" title="">【非遗资讯】陶瓷“老男孩”的工匠情怀</a>
-          <a href="" title="">【非遗资讯】古法炒制碧螺春</a>
-          <a href="" title="">【非遗资讯】四川“抢救”10位国家级非遗传人 防“人走技失”</a>
-          <a href="" title="">【非遗资讯】《传承者》震撼收官 非遗传承有了自己的舞台</a>
+          <a href="" title="">陶瓷“老男孩”的工匠情怀</a>
+          <a href="" title="">古法炒制碧螺春</a>
+          <a href="" title="">四川“抢救”10位国家级非遗传人 防“人走技失”</a>
+          <a href="" title="">《传承者》震撼收官 非遗传承有了自己的舞台</a>
         </div>
         <div class="bd mbox2">
           <div class="title">精彩活动</div>
           <ul class="items">
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/im1ks2wy24egdx4q" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/im1ks2wy24egdx4q" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/主图220160321140311.jpg"/>" alt=""></p>
                 <p class="name">新品上市</p>
                 <p class="info">藏山香盒</p>
               </a>
             </li>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/in031lv24bmyuc9h" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/in031lv24bmyuc9h" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/120160414172814.jpg"/>" alt=""></p>
                 <p class="name">秒杀活动</p>
                 <p class="info">小缠线提梁方壶[88元包邮夏日饮茶秒杀中]</p>
               </a>
             </li>
             <li>
-              <a href="http://www.efeiyi.com/product/productModel/imret0bt539jqhyk" title="">
+              <a href="http://mall.efeiyi.com/product/productModel/imret0bt539jqhyk" title="">
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/主图320160408154741.jpg"/>" alt=""></p>
                 <p class="name">拼团活动</p>
                 <p class="info">建盏「鹧鸪斑」禅定杯手机端188元春日团购开启中</p>
