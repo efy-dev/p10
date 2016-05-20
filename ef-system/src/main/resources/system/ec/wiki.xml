@@ -105,6 +105,10 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
+                    <query name="byName" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="name" label="名称" defaultValue=" " operation="eq" inputType="text"/>
+                    </query>
 
                 </do>
 

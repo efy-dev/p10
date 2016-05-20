@@ -25,16 +25,18 @@
     <div class="hd">
         <div class="tips fl"><a class="logo"></a></div>
         <ul class="fr">
-            <li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>
-            <li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>
-            <li><a href="http://master.efeiyi.com" title="">大 师</a></li>
+            <li><a href="http://mall.efeiyi.com" title="非遗电商">非遗电商</a></li>
+            <li><a href="http://master.efeiyi.com" title="非遗大师">非遗大师</a></li>
+            <li><a href="http://j.efeiyi.com/ef-wiki/" title="非遗百科">非遗百科</a></li>
+            <li><a href="http://j.efeiyi.com/ef-gift/" title="非遗礼品">非遗礼品</a></li>
+            <li><a href="http://www.315cheng.com" title="诚品宝">诚品宝</a></li>
 
-
-
-            <li><a href="/ef-wiki/sso.do" title="请登录">请登录</a></li>
-            <li><a href="http://passport.efeiyi.com/register?service=http://j.efeiyi.com/ef-wiki/" title="快速注册">快速注册</a></li>
-
-            <li><a href="http://www.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
+            <%--<li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>--%>
+            <%--<li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>--%>
+            <%--<li><a href="http://master.efeiyi.com" title="">大 师</a></li>--%>
+            <%--<li><a href="/ef-wiki/sso.do" title="请登录">请登录</a></li>--%>
+            <%--<li><a href="http://passport.efeiyi.com/register?service=http://j.efeiyi.com/ef-wiki/" title="快速注册">快速注册</a></li>--%>
+            <%--<li><a href="http://www.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>--%>
         </ul>
     </div>
 </div>
@@ -53,12 +55,6 @@
         </div>
     </div>
 </div>
-
-<%--<div  class="topv2">--%>
-    <%--<h1><a href="http://www.efeiyi.com"><img src="<c:url value="/scripts/images/logo.png"/>"></a></h1>--%>
-    <%--<div class="header-aifeiyi"></div>--%>
-    <%--<div class="header-sj"></div>--%>
-<%--</div>--%>
 <div class="nav2016 bgc">
     <div class="hd bgf">
         <div class="navitems">
