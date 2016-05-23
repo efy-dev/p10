@@ -30,6 +30,7 @@
 </div>
 
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
+
 <div class="">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
@@ -43,7 +44,6 @@
                         <th class="table-set">操作</th>
                     </security:authorize>
                     <th class="table-title">标题</th>
-                    <th class="table-title">跳转地址</th>
                     <th class="table-title">类别</th>
                     <th class="table-title">序号</th>
                     <th class="table-title">图片</th>
@@ -72,19 +72,7 @@
                             </td>
                         </security:authorize>
                         <td class="am-hide-sm-only" width="15%">${banner.title}</td>
-                        <td class="am-hide-sm-only" width="25%">
-                            <c:if test="${not empty banner.directUrl}">
-                                <p style="margin-left: 10px;">
-                                    (PC)<a target="_blank" href="${banner.directUrl}">${banner.directUrl}</a>
-                                </p>
-                            </c:if>
-                            <c:if test="${not empty banner.wapUrl}">
-                                <p style="margin-left: 0px;">
-                                    (WAP) <a target="_blank" href="${banner.wapUrl}">${banner.wapUrl}</a>
-                                </p>
-                            </c:if>
-                                <%--<a href="${banner.directUrl}" target="_blank">${banner.directUrl}</a>--%>
-                        </td>
+
                         <td class="am-hide-sm-only" width="15%">
                             <c:if test="${banner.group == 'ec.home.banner'}">
                                 电商首页

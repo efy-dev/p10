@@ -50,7 +50,7 @@ public class XQuery {
     //初始化查询对象
     public XQuery(String doQueryName, HttpServletRequest request) throws Exception {
         Do tempDo = doManager.getDoByQueryModel(doQueryName.split("_")[0]);
-        getRemoteConfig(tempDo);
+//        getRemoteConfig(tempDo);
         //判断是否是分页查询
         if (doQueryName.startsWith("plist")) {
             this.setPageEntity(XDoUtil.getPageEntity(request));
@@ -141,7 +141,7 @@ public class XQuery {
 
 
     public XQuery(Do tempDo, DoQuery tempDoQuery, PageEntity pageEntity, String tempConditions) throws Exception {
-        getRemoteConfig(tempDo);
+//        getRemoteConfig(tempDo);
         //判断是否是分页查询
         if (pageEntity != null) {
             this.setPageEntity(pageEntity);
