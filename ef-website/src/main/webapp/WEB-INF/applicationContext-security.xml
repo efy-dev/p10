@@ -40,18 +40,14 @@
     </http>
 
     <b:bean id="casEntryPoint"  class="com.efeiyi.ec.website.base.authentication.CasAuthenticationRedirect">
-        <b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>
-<!--
         <b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>
--->
         <b:property name="serviceProperties" ref="serviceProperties"/>
+        <!--<b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>-->
     </b:bean>
 
     <b:bean id="serviceProperties"  class="org.springframework.security.cas.ServiceProperties">
-<!--
-        <b:property name="service"  value="http://localhost:8080/j_spring_cas_security_check"/>
--->
-        <b:property name="service"  value="http://mall.efeiyi.com/j_spring_cas_security_check"/>
+        <b:property name="service"  value="http://192.168.1.38:8080/j_spring_cas_security_check"/>
+        <!--<b:property name="service"  value="http://mall.efeiyi.com/j_spring_cas_security_check"/>-->
         <b:property name="sendRenew" value="false"/>
     </b:bean>
 
