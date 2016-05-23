@@ -25,7 +25,7 @@
             <%--<span><i class="newicon"></i></span>--%>
             <%--<span>分&nbsp;类</span>--%>
         <%--</a>--%>
-        <%--<a class="item sh" href="http://www.efeiyi.com/subject/ig8zlvonengegjk9">--%>
+        <%--<a class="item sh" href="http://mall.efeiyi.com/subject/ig8zlvonengegjk9">--%>
             <%--<span><i class="newicon"></i></span>--%>
             <%--<span>专&nbsp;题</span>--%>
         <%--</a>--%>
@@ -43,11 +43,11 @@
             <span><i class="newicon"></i></span>
             <span>分&nbsp;类</span>
         </a>
-        <a class="item sh" href="http://www.efeiyi.com/subject/ii09rq66455cnijf">
+        <a class="item sh" href="http://mall.efeiyi.com/subject/ii09rq66455cnijf">
             <span><i class="newicon"></i></span>
             <span>专&nbsp;题</span>
         </a>
-        <a class="item gift" href="http://www.efeiyi.com/subject/ihx20izq1o63bz5w">
+        <a class="item gift" href="http://mall.efeiyi.com/subject/ihx20izq1o63bz5w">
             <span><i class="newicon"></i></span>
             <span>礼&nbsp;品</span>
         </a>

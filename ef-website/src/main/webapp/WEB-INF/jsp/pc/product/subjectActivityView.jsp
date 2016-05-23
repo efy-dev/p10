@@ -55,7 +55,7 @@ ${subject.subjectDescription.content}
                 clickInput();
                 $('.btn-true').on('click',function(){
                     var $val=$('#ipt').val();
-                    window.location.href ='http://www.efeiyi.com/order/easyBuy/ihykdmfn1k8httnz?amount='+parseInt($val);
+                    window.location.href ='http://mall.efeiyi.com/order/easyBuy/ihykdmfn1k8httnz?amount='+parseInt($val);
                 });
                 return false;
             });
@@ -63,14 +63,14 @@ ${subject.subjectDescription.content}
                 currentButton="1";
                 $("#table").html("");
                 $(".dialog .con .title").html("请选择数量后扫码下单");
-                generateQrcode("http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/1");
+                generateQrcode("http://mall.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/1");
                 $('.dialog').each(function(){
                     $(this).addClass('dialog-gift').show();
                 })
                 clickInput();
                 $('.btn-true').on('click',function(){
                     var $val=$('#ipt').val();
-                    window.location.href ='http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/'+parseInt($val);
+                    window.location.href ='http://mall.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/'+parseInt($val);
                 });
                 return false;
             });
@@ -78,9 +78,9 @@ ${subject.subjectDescription.content}
 
                 var currentUrl = "";
                 if (currentButton=="0"){
-                    currentUrl = "http://www.efeiyi.com/order/easyBuy/ihykdmfn1k8httnz?amount=";
+                    currentUrl = "http://mall.efeiyi.com/order/easyBuy/ihykdmfn1k8httnz?amount=";
                 }else {
-                    currentUrl = "http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/"
+                    currentUrl = "http://mall.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/"
                 }
 
                 $('#add').on('click',function(){

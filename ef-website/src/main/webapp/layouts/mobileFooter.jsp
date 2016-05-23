@@ -15,7 +15,7 @@
 <div class="login-reg">
     <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
     <a id="signin"
-       href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do"
+       href="http://passport.efeiyi.com/register?service=http://mall.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do"
        class="btn-reg"
        onclick="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
 </div>
@@ -31,13 +31,13 @@
         <div class="bd">
             <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织"></a>
             <em class="line"></em>
-            <a class="icon2" href="http://www.efeiyi.com" title="e飞蚁"></a>
+            <a class="icon2" href="http://mall.efeiyi.com" title="e飞蚁"></a>
             <em class="line"></em>
             <a class="icon3" title="中国非物质文化遗产保护协会"></a>
         </div>
     </div>
     <div class="bd info">
-        <a class="icon" href="http://www.efeiyi.com"></a>
+        <a class="icon" href="http://mall.efeiyi.com"></a>
 
         <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台
         </div>
@@ -110,7 +110,7 @@
     }
 
     .MEIQIA-ICON {
-        background: url("http://www.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
+        background: url("http://mall.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
         background-size: auto auto;
     }
 
@@ -147,7 +147,7 @@
 
     var registerWx = "<c:url value="/wx/userInfo"/>";
 
-    var register = "http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do";
+    var register = "http://passport.efeiyi.com/register?service=http://mall.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do";
 
     if (isWeiXin()) {
 //        alert("not weixin");

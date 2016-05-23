@@ -32,9 +32,9 @@ public class PromotionMarkInterceptor extends HandlerInterceptorAdapter {
                 //返利计划是有效的
                 if (promotionPlan != null && !"0".equals(promotionPlan.getStatus())) {
                     //只以最后一次点击的返利链接为准,存入Session和Cookie
-                    CookieTool.addCookie(response, "source", promotionSource, promotionPlan.getRdDays() * 86400,"www.efeiyi.com");
+                    CookieTool.addCookie(response, "source", promotionSource, promotionPlan.getRdDays() * 86400,"mall.efeiyi.com");
                 }else{
-                    CookieTool.addCookie(response, "source", promotionSource, 86400 * 30,"www.efeiyi.com");
+                    CookieTool.addCookie(response, "source", promotionSource, 86400 * 30,"mall.efeiyi.com");
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("source", promotionSource);

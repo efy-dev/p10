@@ -25,7 +25,7 @@
 	<!-- //End--chevron-left-->
 	<div class="menu-list">
 		<ul class="bd">
-			<li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
+			<li><a href="http://mall.efeiyi.com" title="首页">首页</a></li>
 			<li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
 			<% if (AuthorizationUtil.isAuthenticated()) {%>
 			<li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
@@ -46,7 +46,7 @@
 				<c:set var="price" value="${yhq.couponBatch.price}"/>
 				<p class="text">恭&nbsp;喜&nbsp;您&nbsp;获&nbsp;得&nbsp;${fn:substringBefore(price, ".")}&nbsp;元&nbsp;现&nbsp;金&nbsp;券</p>
 
-				<div class="ae"><a href="http://www.efeiyi.com" class="but act">返回首面</a></div>
+				<div class="ae"><a href="http://mall.efeiyi.com" class="but act">返回首面</a></div>
 				<div class="ae"><a href="http://i.efeiyi.com/coupon/list?cf=4" class="but">查看我的优惠券</a></div>
 			</div>
 		</c:if>
@@ -59,7 +59,7 @@
 				<c:if test="${yhq=='used'}">
 					<p class="text">您已经领取过该优惠券了呦</p>
 				</c:if>
-				<div class="ae"><a href="http://www.efeiyi.com" class="but act">返回e飞蚁首页</a></div>
+				<div class="ae"><a href="http://mall.efeiyi.com" class="but act">返回e飞蚁首页</a></div>
 			</div>
 		</c:if>
 	</div>

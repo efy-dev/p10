@@ -294,7 +294,7 @@ public class PurchaseOrderPaymentController {
         model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
 
         if ("3".equals(purchaseOrder.getPayWay())) {
-            return "redirect:"+ PConst.WEBURL +"/sharePage/productShare/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
+            return "redirect:"+ PConst.NEWWEBURL +"/sharePage/productShare/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
         } else {
             //return "/purchaseOrder/paySuccess";
             if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback() != null) {

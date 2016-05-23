@@ -51,7 +51,7 @@
 <!--
         <b:property name="service"  value="http://localhost:8080/j_spring_cas_security_check"/>
 -->
-        <b:property name="service"  value="http://www.efeiyi.com/j_spring_cas_security_check"/>
+        <b:property name="service"  value="http://mall.efeiyi.com/j_spring_cas_security_check"/>
         <b:property name="sendRenew" value="false"/>
     </b:bean>
 
@@ -93,7 +93,7 @@
     <b:bean id="requestSingleLogoutFilter"
             class="org.springframework.security.web.authentication.logout.LogoutFilter">
         <b:constructor-arg
-                value="http://passport.efeiyi.com/logout?service=http://www.efeiyi.com/logoutHandler" />
+                value="http://passport.efeiyi.com/logout?service=http://mall.efeiyi.com/logoutHandler" />
         <b:constructor-arg>
             <b:bean
                     class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>

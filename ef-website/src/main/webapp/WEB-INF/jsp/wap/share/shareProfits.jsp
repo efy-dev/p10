@@ -78,12 +78,12 @@
           </div>
         </li>
         <li>
-          <a href="http://www.efeiyi.com/yhq.do?couponBatchId=iilsik60373zsqx4"></a>
+          <a href="http://mall.efeiyi.com/yhq.do?couponBatchId=iilsik60373zsqx4"></a>
         </li>
       </ul>
     </div>
     <div class="t-use-botton ae">
-      <a href="http://www.efeiyi.com/yhq.do?couponBatchId=iilsik60373zsqx4" class="botn">去&nbsp;领&nbsp;取</a>
+      <a href="http://mall.efeiyi.com/yhq.do?couponBatchId=iilsik60373zsqx4" class="botn">去&nbsp;领&nbsp;取</a>
     </div>
   </form>
 </div>

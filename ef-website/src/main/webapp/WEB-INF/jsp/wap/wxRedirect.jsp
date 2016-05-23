@@ -12,7 +12,7 @@
 </head>
 <body>
 <script>
-  var register = "http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do";
+  var register = "http://passport.efeiyi.com/register?service=http://mall.efeiyi.com/sso.do";
   window.location.href = register+"&unionid=${unionid}";
 </script>
 </body>

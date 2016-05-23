@@ -59,7 +59,7 @@
                                                                   alt=""></div>
   <div class="link ae">
     <a href="http://i.efeiyi.com/myEfeiyi/getBalanceDetailsList.do">查看余额<i class="pac-icon"></i></a>
-    <a href="http://www.efeiyi.com">首页<i class="pac-icon"></i></a>
+    <a href="http://mall.efeiyi.com">首页<i class="pac-icon"></i></a>
   </div>
 </div>
 <!--//End--colonel-packet-->
@@ -93,7 +93,7 @@
 <script>
   var wx_share_title = "${fn:substring(shareUser, 0,3 )}****${fn:substring(shareUser,7,11)}豪掷${order.getPurchaseOrderProductList().get(0).purchasePrice}入手了一批好宝贝"; //分享标题
   var wx_share_des = "${productModel.product.name}${productModel.name}";  //分享描述
-  var wx_share_link = "http://www.efeiyi.com/sharePage/openShare/${purchaseOrderId}"; //分享的链接地址  //需要动态获取，而不是直接填写静态值
+  var wx_share_link = "http://mall.efeiyi.com/sharePage/openShare/${purchaseOrderId}"; //分享的链接地址  //需要动态获取，而不是直接填写静态值
   var wx_share_imgUrl = "http://pro.efeiyi.com/${productModel.productModel_url}"; //分享图片的url
   var wx_share_type = '';   //分享的类型   分享类型,music、video或link，不填默认为link
   var wx_share_dataUrl = ""; // 如果type是music或video，则要提供数据链接，默认为空
@@ -102,7 +102,7 @@
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src="<c:url value="/scripts/wap/js/weixin.js"/>"></script>
 <script>
-  initWx("http://www.efeiyi.com/wx/init.do");
+  initWx("http://mall.efeiyi.com/wx/init.do");
 </script>
 </body>
 </html>

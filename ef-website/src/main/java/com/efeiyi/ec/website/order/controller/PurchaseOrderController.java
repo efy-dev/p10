@@ -244,9 +244,9 @@ public class PurchaseOrderController extends BaseController {
         return "/purchaseOrder/purchaseOrderConfirm";*/
         String amount = request.getParameter("amount");
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),productModelId);
-        String callback = PConst.WEBURL+"/cart/paySuccess.do";
+        String callback = PConst.NEWWEBURL+"/cart/paySuccess.do";
 
-        return "redirect:"+ PConst.WEBURL +"/order/saveOrUpdateOrder2.do?productModelId="+productModelId+"&amount="+amount+"&price="+productModel.getPrice()+"&orderType=1&callback="+ URLEncoder.encode(callback, "UTF-8");
+        return "redirect:"+ PConst.NEWWEBURL +"/order/saveOrUpdateOrder2.do?productModelId="+productModelId+"&amount="+amount+"&price="+productModel.getPrice()+"&orderType=1&callback="+ URLEncoder.encode(callback, "UTF-8");
     }
 
 

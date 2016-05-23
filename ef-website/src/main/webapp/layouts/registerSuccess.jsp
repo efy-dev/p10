@@ -44,7 +44,7 @@
         <!-- //End--chevron-left-->
         <div class="menu-list">
           <ul class="bd">
-            <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
+            <li><a href="http://mall.efeiyi.com" title="首页">首页</a></li>
             <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
             <% if (AuthorizationUtil.isAuthenticated()) {%>
             <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
@@ -71,7 +71,7 @@
         if (AuthorizationUtil.getMyUser().getId() == null) {
       %>
       <li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>
-      <li><a href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do" title="快速注册">快速注册</a></li>
+      <li><a href="http://passport.efeiyi.com/register?service=http://mall.efeiyi.com/sso.do" title="快速注册">快速注册</a></li>
       <%
         }
       %>

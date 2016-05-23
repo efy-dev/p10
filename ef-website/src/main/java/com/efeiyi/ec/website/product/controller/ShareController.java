@@ -64,8 +64,8 @@ public class ShareController {
      */
     @RequestMapping({"/sharePage/openShare/{purchaseOrderId}"})
     public String openPage(@PathVariable String purchaseOrderId,HttpServletRequest request,Model model) throws Exception{
-        String callback = URLEncoder.encode(PConst.WEBURL+"/sharePage/saveWXInfo.do?purchaseOrderId="+purchaseOrderId,"UTF-8");
-        return "redirect:"+ PConst.WEBURL +"/wx/getUserBaseInfo.do?dataKey=nickname;unionid;headimgurl"+"&callback="+callback;
+        String callback = URLEncoder.encode(PConst.NEWWEBURL+"/sharePage/saveWXInfo.do?purchaseOrderId="+purchaseOrderId,"UTF-8");
+        return "redirect:"+ PConst.NEWWEBURL +"/wx/getUserBaseInfo.do?dataKey=nickname;unionid;headimgurl"+"&callback="+callback;
     }
     /**分享后返利
      * @param request

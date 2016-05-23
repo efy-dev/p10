@@ -35,7 +35,7 @@ public class WxController {
     public String getWxCode(HttpServletRequest request) throws Exception {
         String callback = request.getParameter("callback");
         String dataKey = request.getParameter("dataKey");
-        String redirect_uri = "http://www.efeiyi.com/wx/fetchUserInfo/" + dataKey + "/" + callback;
+        String redirect_uri = "http://mall.efeiyi.com/wx/fetchUserInfo/" + dataKey + "/" + callback;
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
@@ -49,7 +49,7 @@ public class WxController {
     public String getWxUserInfo(HttpServletRequest request) throws Exception {
         String callback = request.getParameter("callback");
         String dataKey = request.getParameter("dataKey");
-        String redirect_uri = "http://www.efeiyi.com/wx/fetchBaseUserInfo.do?dataKey=" + dataKey + "&callback=" + callback;
+        String redirect_uri = "http://mall.efeiyi.com/wx/fetchBaseUserInfo.do?dataKey=" + dataKey + "&callback=" + callback;
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
@@ -146,7 +146,7 @@ public class WxController {
      */
     @RequestMapping({"/getInfo.do"})
     public String getWxInfo(HttpServletRequest request) {
-        String callback = request.getParameter("callback"); //www.efeiyi.com   www.efeiyi.com?name=xxxx
+        String callback = request.getParameter("callback"); //mall.efeiyi.com   mall.efeiyi.com?name=xxxx
         String dataKey = request.getParameter("dataKey");
         String requestSource = request.getParameter("source");
         String consumerId = request.getParameter("consumerId");

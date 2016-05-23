@@ -16,7 +16,7 @@
     <p>新用户注册送${couponAmount}张优惠券，已发放！</p>
 
     <div class="kbtn">
-        <a href="http://www.efeiyi.com">去首页</a>
+        <a href="http://mall.efeiyi.com">去首页</a>
         <a href="http://i.efeiyi.com/coupon/list">查看优惠券</a>
     </div>
 </div>
