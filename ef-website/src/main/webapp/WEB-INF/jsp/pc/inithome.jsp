@@ -148,7 +148,6 @@
                   <li><a href="http://mall.efeiyi.com/product/productModel/ijy2r09wbpav1jly">九龙呈瑞盘:高档摆件 金龙祥瑞 极佳寓意 乔迁好礼</a></li>
                   <li><a href="http://mall.efeiyi.com/product/productModel/il7ubj9p34n0qowg">高官厚禄得意长:闻名于世的真正的芦苇画，世界稀有孤品。最具收藏价值！</a></li>
                   <li><a href="http://mall.efeiyi.com/product/productModel/igdcsu0v3sa6nhb5">崖柏盘香:纯天然室内熏香养生安神助眠老料香薰</a></li>
-                  <li><a href="http://mall.efeiyi.com/product/productModel/ik4swda61xofep2u">庆赏昇平公交卡:庆赏昇平创意衍伸品 京剧人物图案 国家图书馆出品</a></li>
                 </ul>
               </div>
             </div>
@@ -206,7 +205,7 @@
                 <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/三花马-蓝色20151026115356.jpg"/>" alt=""></p>
                 <p class="info">
                   <span class="name">唐三彩</span>
-                  <span class="works">唐三彩是汉族古代陶瓷烧制工艺的珍品，全名唐代三彩釉陶器，属于一种盛行于唐代的低温铅釉的彩釉陶器。</span>
+                  <span class="works">唐三彩是汉族古代陶瓷烧制工艺的珍品，全名唐代三彩釉陶器...</span>
                 </p>
               </a>
             </li>
@@ -322,10 +321,10 @@
           <ul>
             <li>
               <a href="" title="">
-                <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/home-pic-5-1.jpg"/>" alt=""></p>
+                <p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/120151027164330.jpg"/>" alt=""></p>
                 <p class="info">
-                  <span class="name">景德镇青白瓷  牡丹花语斗笠碟</span>
-                  <span class="works">¥ 521</span>
+                  <span class="name">知足长乐壶</span>
+                  <span class="works">¥ 26000</span>
                 </p>
               </a>
             </li>
@@ -355,10 +354,10 @@
       <div class="main-slide">
         <div class="bd mbox1">
           <a href="" class="" title=""><p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/1000000.jpg"/>" alt=""></p></a>
-          <a href="" title="">【非遗资讯】陶瓷“老男孩”的工匠情怀</a>
-          <a href="" title="">【非遗资讯】古法炒制碧螺春</a>
-          <a href="" title="">【非遗资讯】四川“抢救”10位国家级非遗传人 防“人走技失”</a>
-          <a href="" title="">【非遗资讯】《传承者》震撼收官 非遗传承有了自己的舞台</a>
+          <a href="" title="">陶瓷“老男孩”的工匠情怀</a>
+          <a href="" title="">古法炒制碧螺春</a>
+          <a href="" title="">四川“抢救”10位国家级非遗传人 防“人走技失”</a>
+          <a href="" title="">《传承者》震撼收官 非遗传承有了自己的舞台</a>
         </div>
         <div class="bd mbox2">
           <div class="title">精彩活动</div>
