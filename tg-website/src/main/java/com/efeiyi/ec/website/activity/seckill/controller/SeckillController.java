@@ -229,7 +229,7 @@ public class SeckillController {
                 baseManager.saveOrUpdate(SeckillProduct.class.getName(), seckillProduct);
                 String callback = "a.efeiyi.com/miao/wait/" + seckillProduct.getId() + "?userId=" + AuthorizationUtil.getMyUser().getId();
                 callback = URLEncoder.encode(callback, "UTF-8");
-                return "redirect:http://www.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice() + "&callback=" + callback + "&orderType=2";
+                return "redirect:http://mall.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId=" + seckillProduct.getProductModel().getId() + "&amount=" + amount + "&price=" + seckillProduct.getPrice() + "&callback=" + callback + "&orderType=2";
             } else if (currentDate.getTime() > seckillProduct.getEndDatetime().getTime()) {
                 //秒杀已经结束
                 status = "3";
