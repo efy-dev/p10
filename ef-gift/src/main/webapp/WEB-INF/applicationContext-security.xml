@@ -49,7 +49,7 @@
 
     <b:bean id="serviceProperties"  class="org.springframework.security.cas.ServiceProperties">
         <b:property name="service"  value="http://j.efeiyi.com/ef-gift/j_spring_cas_security_check"/>
-        <!--<b:property name="service"  value="http://www.efeiyi.com/j_spring_cas_security_check"/>-->
+        <!--<b:property name="service"  value="http://mall.efeiyi.com/j_spring_cas_security_check"/>-->
         <b:property name="sendRenew" value="false"/>
     </b:bean>
 

@@ -22,7 +22,7 @@
             <!-- //End--chevron-left-->
             <div class="menu-list">
                 <ul class="bd">
-                    <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
+                    <li><a href="http://mall.efeiyi.com" title="首页">首页</a></li>
                     <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
                     <% if (AuthorizationUtil.isAuthenticated()) {%>
                     <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
@@ -43,7 +43,7 @@
         <%--<!-- //End--chevron-left-->--%>
         <%--<div class="menu-list">--%>
             <%--<ul class="bd">--%>
-                <%--<li><a href="http://www.efeiyi.com" title="首页">首页</a></li>--%>
+                <%--<li><a href="http://mall.efeiyi.com" title="首页">首页</a></li>--%>
                 <%--<li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>--%>
                 <%--<% if (AuthorizationUtil.isAuthenticated()) {%>--%>
                 <%--<li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>--%>
@@ -63,7 +63,7 @@
         <!-- //End--chevron-left-->
         <div class="menu-list">
             <ul class="bd">
-                <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
+                <li><a href="http://mall.efeiyi.com" title="首页">首页</a></li>
                 <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
                 <% if (AuthorizationUtil.isAuthenticated()) {%>
                 <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
@@ -129,7 +129,7 @@
             </div>
             <div class="menu-list">
                 <ul class="bd">
-                    <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
+                    <li><a href="http://mall.efeiyi.com" title="首页">首页</a></li>
                     <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
                     <% if (AuthorizationUtil.isAuthenticated()) {%>
                     <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>

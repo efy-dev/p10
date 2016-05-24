@@ -27,7 +27,7 @@
             <%
                 }
             %>
-            <li><a href="http://www.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
+            <li><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
         </ul>
     </div>
 </div>
@@ -37,7 +37,7 @@
     <div class="hd">
         <div class="tips fl"><a class="logo"><img src="<c:url value="/scripts/images/ef-logo-gift.png"/>" alt=""></a></div>
         <div class="fr">
-            <form action="http://www.efeiyi.com/search.do" method="get">
+            <form action="http://mall.efeiyi.com/search.do" method="get">
                 <input type="text" value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>" name="q"
                        id="q" placeholder="搜索" class="txt">
                 <input type="submit" value="" class="icon2016-gift btn">

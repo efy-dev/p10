@@ -45,7 +45,7 @@
     <ul class="ul-list">
       <c:forEach items="${productGiftList}" var="productGift">
         <li>
-          <a href="http://www.efeiyi.com/product/productModel/${productGift.productModel.id}" title="">
+          <a href="http://mall.efeiyi.com/product/productModel/${productGift.productModel.id}" title="">
             <img src="http://pro.efeiyi.com/${productGift.productModel.productModel_url}@!product-model-wap-view" alt="">
             <p class="name">${productGift.name}</p>
             <p class="price"><em>￥</em>${productGift.productModel.price}</p>
