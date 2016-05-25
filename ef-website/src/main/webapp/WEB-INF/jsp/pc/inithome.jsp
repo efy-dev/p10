@@ -70,7 +70,7 @@
       </div>
       <!--//End--搜索部分-->
       <div class="clinks">
-        <a class="item" href="" title="">大师官网入驻</a>
+        <a class="item" href="http://j.efeiyi.com/ef-person/" title="">大师官网入驻</a>
         <a class="item second" href="http://mall.efeiyi.com/document/helpCenter?group=ec.rzlc" title="">商户免费入驻</a>
         <a class="item" href="" title="">企业礼品解决方案</a>
         <a class="close" href="" title="关闭"></a>
@@ -83,21 +83,25 @@
               <ul >
                 <li>
                   <a href="http://yaohuifen.efeiyi.com">
-                    <img src="<c:url value="/scripts/upload/姚慧芬.jpg"/>" alt="" >
+                    <img src="<c:url value="/scripts/upload/姚慧芬.jpg"/>" alt="" date-h="苏绣国家级非遗传承人姚惠芬"  date-txt = "出生于苏州刺绣世家，自幼就开始学习刺绣。师从近代苏绣“仿真绣”大师沈寿的第三代传人牟志红和中国工艺美术大师任嘒娴。">
                   </a>
                 </li>
                 <li>
-                  <a href="zhubingren.efeiyi.com">
+                  <a href="http://zhubingren.efeiyi.com">
                     <img
                             src="<c:url value="/scripts/upload/朱炳仁.jpg"/>"
+                            date-h="铜雕技艺国家级非物质文化遗产唯一传承人"
+                            date-txt = "朱炳仁被誉为“中国当代铜建筑之父”，他独创的熔铜艺术开创了“熔现实主义”新流派，造就出的一种新的美学、视觉、艺术概念，是对世界已有的艺术流派的一种颠覆。"
                             alt=""
                             >
                   </a>
                 </li>
                 <li>
-                  <a href="weilizhong.efeiyi.com">
+                  <a href="http://weilizhong.efeiyi.com">
                     <img
                             src="<c:url value="/scripts/upload/魏立中.jpg"/>"
+                            date-h="十竹斋木版水印技艺非物质文化遗产代表性传承人"
+                            date-txt = "2012年荣获文化部中国非物质文化遗产生产性成果保护大展突出贡献奖，2014年荣获第三届“中华非物质文化遗产传承人薪传奖”，其作品《雷峰塔藏经卷》荣获金奖。"
                             alt=""
                             >
                   </a>
@@ -105,7 +109,9 @@
                 <li>
                   <a href="http://j.efeiyi.com/ef-wiki/project/inlcj19o29sjxcah">
                     <img
-                            src="<c:url value="/scripts/upload/苏绣.jpg"/>"
+                            src="<c:url value="/scripts/upload/ctms-1.jpg"/>"
+                            date-h="苏绣"
+                            date-txt = "“苏绣”是苏州刺绣的简称。苏州刺绣文化的长期熏陶，以及精湛技艺的广为传播，使得中国手工刺绣业得以飞速发展。"
                             alt=""
                             >
                   </a>
@@ -114,14 +120,8 @@
                   <a href="http://mall.efeiyi.com/product/productModel/ihy6pqjo1dizwlaa">
                     <img
                             src="<c:url value="/scripts/upload/筷子.JPG"/>"
-                            alt=""
-                            >
-                  </a>
-                </li>
-                <li>
-                  <a href="http://j.efeiyi.com/ef-wiki">
-                    <img
-                            src="<c:url value="/scripts/upload/铜雕.jpg"/>"
+                            date-h="筷子"
+                            date-txt = "五种珍稀木材 家用餐具 复古风范 手工打磨"
                             alt=""
                             >
                   </a>
@@ -130,11 +130,27 @@
                   <a href="http://mall.efeiyi.com/product/productModel/if3l43hd1h2oyvov">
                     <img
                             src="<c:url value="/scripts/upload/关山香炉.JPG"/>"
+                            date-h="观山香炉"
+                            date-txt = "香道用品 送礼佳品"
                             alt=""
                             >
                   </a>
                 </li>
+
               </ul>
+            </div>
+            <div class="m-top">
+              <div class="m-content">
+                <h5 >苏绣国家级非遗传承人姚惠芬</h5>
+                <p  >出生于苏州刺绣世家，自幼就开始学习刺绣。师从近代苏绣“仿真绣”大师沈寿的第三代传人牟志红和中国工艺美术大师任嘒娴。</p>
+              </div>
+              <div class="m-txt">
+                <div class="m-btn prev l-active"></div>
+                <div class="m-btn next  r-active"></div>
+                <div class="m-page">
+                  <span></span>/<strong ></strong>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -354,10 +370,10 @@
       <div class="main-slide">
         <div class="bd mbox1">
           <a href="" class="" title=""><p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/1000000.jpg"/>" alt=""></p></a>
-          <a href="" title="">陶瓷“老男孩”的工匠情怀</a>
-          <a href="" title="">古法炒制碧螺春</a>
-          <a href="" title="">四川“抢救”10位国家级非遗传人 防“人走技失”</a>
-          <a href="" title="">《传承者》震撼收官 非遗传承有了自己的舞台</a>
+          <a href="<c:url value="/document/news?group=news_0001"/>" title="">陶瓷“老男孩”的工匠情怀</a>
+          <a href="<c:url value="/document/news?group=news_0002"/>" title="">古法炒制碧螺春</a>
+          <a href="<c:url value="/document/news?group=news_0003"/>" title="">四川“抢救”10位国家级非遗传人 防“人走技失”</a>
+          <a href="<c:url value="/document/news?group=news_0004"/>" title="">《传承者》震撼收官 非遗传承有了自己的舞台</a>
         </div>
         <div class="bd mbox2">
           <div class="title">精彩活动</div>

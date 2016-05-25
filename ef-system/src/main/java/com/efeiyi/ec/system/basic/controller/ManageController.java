@@ -170,6 +170,7 @@ public class ManageController {
         str = str.replaceAll(regex, "");
         str = str.replaceAll("&", "");
         str = str.replaceAll("target=_blank ", "");
+        str = str.replaceAll("nbsp;", "");
 //        System.out.println(str);
 
         //1.首先需要判断是不是我想要的页面，是列表页面或者详情页面  我们要的是详情页面

@@ -25,6 +25,8 @@
         <intercept-url pattern="/yhq.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/saveOrUpdateOrder.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/pay/alipay/callback" access="isAnonymous()"/>
+        <!--<intercept-url pattern="/order/pay/wxParam/**" access="isAnonymous()"/>-->
+        <!--<intercept-url pattern="/order/pay/weixin//**" access="isAnonymous()"/>-->
         <intercept-url pattern="/sso2.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/myEfeiyi/list.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/easyBuy/**" access="isAuthenticated()"/>

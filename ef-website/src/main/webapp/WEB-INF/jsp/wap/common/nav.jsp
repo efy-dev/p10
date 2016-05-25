@@ -136,7 +136,7 @@
                     <%} else {%>
                     <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
                     <%}%>
-                    <li><a href="<c:url value="/productCategoryList.do"/>" title="个人中心">分类</a></li>
+                    <li><a href="<c:url value="/productCategory.do"/>" title="个人中心">分类</a></li>
                 </ul>
             </div>
         </header>

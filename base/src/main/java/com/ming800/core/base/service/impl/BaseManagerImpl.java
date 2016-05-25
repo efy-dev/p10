@@ -204,11 +204,11 @@ public class BaseManagerImpl implements BaseManager {
     public Object getUniqueObjectByConditions(String queryHql, LinkedHashMap<String, Object> queryParamMap) {
 
         Object object = xdoDao.getUniqueObjectByConditions(queryHql, queryParamMap);
-        try {
-            WebServiceHandlerManagerImpl.dealObject(object);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            WebServiceHandlerManagerImpl.dealObject(object);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return object;
     }
 
