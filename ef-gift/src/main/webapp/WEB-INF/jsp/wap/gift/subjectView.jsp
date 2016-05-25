@@ -31,5 +31,13 @@
     ${subject.subjectDescription.content}
   </c:if>
 </div>
+<script type="text/javascript">
+    $(function(){
+        $("img").each(function(){
+            var firstNode = this.parent();
+            firstNode.attr("style","text-align: center; line-height: 1.75em;");
+        })
+    });
+</script>
 </body>
 </html>

@@ -7,7 +7,7 @@
     <ul>
       <c:if test="${bannerList != null && bannerList != ''}">
         <c:forEach items="${bannerList}" var="banner">
-          <li><a href="" title=""><img src="http://gift-oss.efeiyi.com/${banner.imageUrl}" alt=""></a></li>
+          <li><a href="${banner.directUrl}" title=""><img src="http://gift-oss.efeiyi.com/${banner.imageUrl}" alt=""></a></li>
         </c:forEach>
       </c:if>
     </ul>
