@@ -10,8 +10,10 @@ import com.efeiyi.ec.wiki.model.ArtistryRecord;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.ObjectRecommendedManager;
+import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -124,5 +127,38 @@ public class ArtController extends BaseController {
             return false;
         }
     }
-
+    /**
+     * 检索
+     *
+     */
+    @RequestMapping(value = "/artistrySearch.do/{index}")
+    @ResponseBody
+    public List<Object> searchResult(HttpServletRequest request,@PathVariable String index) {
+        String name = request.getParameter("name");
+        PageEntity pageEntity = new PageEntity();
+        if (index != null) {
+            pageEntity.setIndex(Integer.parseInt(index));
+        }
+        pageEntity.setSize(8);
+        LinkedHashMap queryMap = new LinkedHashMap();
+        queryMap.put("name", "%"+name+"%");
+        String sql = "from Artistry where name like :name and status=1";
+        PageInfo pageInfo = baseManager.listPageInfo(sql, pageEntity, queryMap);
+        List<Object> list = pageInfo.getList();
+        return list;
+    }
+    @RequestMapping(value = "/artistrySearch.do")
+    public String searchResult(HttpServletRequest request,Model model){
+        String name = request.getParameter("q");
+        LinkedHashMap queryMap = new LinkedHashMap();
+        queryMap.put("name", "%"+name+"%");
+        String sql = "from Artistry where name like:name and status=1";
+        List<Artistry> artistryList = baseManager.listObject(sql,queryMap);
+        if(artistryList.size()==1){
+            return "forward:/project/"+artistryList.get(0).getId();
+        }
+        model.addAttribute("artistryList",artistryList);
+        model.addAttribute("name",name);
+        return "/searchResult" ;
+    }
 }

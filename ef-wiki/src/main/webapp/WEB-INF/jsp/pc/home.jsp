@@ -25,7 +25,7 @@
     <ul style="text-align: center">
       <c:forEach items="${pcBannerList}" var="banner" varStatus="status">
         <li>
-          <a href="<c:url value="${banner.directUrl}"/> " target="_blank" title="非遗百科"><img
+          <a href="<c:url value="${banner.directUrl}"/>" target="_blank" title="非遗百科"><img
                   src="http://wiki-oss.efeiyi.com/${banner.imageUrl}" width="1920" height=""
                   alt="${banner.title}"/></a></li>
       </c:forEach>
@@ -40,24 +40,6 @@
     </ul>
   </div>
 </div>
-<%--<div id="slide2016" class="slide2016">--%>
-  <%--<div class="img">--%>
-    <%--<div class="click prev"></div>--%>
-    <%--<ul>--%>
-      <%--<c:forEach items="${pcBannerList}" var="banner" varStatus="status">--%>
-        <%--<li><a href="<c:url value="${banner.directUrl}"/>" title=""><img  src="http://pro.efeiyi.com/${banner.imageUrl}" width="1280" height="481" alt=""></a></li>--%>
-      <%--</c:forEach>--%>
-    <%--</ul>--%>
-    <%--<div class="click next"></div>--%>
-  <%--</div>--%>
-  <%--<div class="num">--%>
-    <%--<ul>--%>
-      <%--<li class="active"></li>--%>
-      <%--<li></li>--%>
-      <%--<li></li>--%>
-    <%--</ul>--%>
-  <%--</div>--%>
-<%--</div>--%>
 <!--//End--slide2016-->
 <div class="craft-list2016">
   <div class="craft-list">
@@ -67,7 +49,7 @@
       <div class="bd-list"></div>
     </div>
     <ul class="list">
-      <c:forEach items="${artRecommendList}" var="art" begin="0" end="7">
+      <c:forEach items="${artRecommendList}" var="art" begin="0" end="3">
         <li>
           <a href="<c:url value="/project/${art.artistry.id}"/>">
             <img src="http://wiki-oss.efeiyi.com/${art.artistry.getMainPicture().pictureUrl}@!wiki-home-project-picture" alt="">
@@ -87,7 +69,7 @@
       <div class="bd-list"></div>
     </div>
     <ul class="list">
-      <c:forEach items="${craftRecommendList}" var="craft" begin="0" end="7">
+      <c:forEach items="${craftRecommendList}" var="craft" begin="0" end="3">
       <li>
         <a href="<c:url value="/project/${craft.artistry.id}"/>">
           <img src="http://wiki-oss.efeiyi.com/${craft.artistry.getMainPicture().pictureUrl}@!wiki-home-project-picture" alt="">
@@ -111,9 +93,6 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-
-
-
 <script src="shop2016/js/system.js"></script>
 </body>
 </html>

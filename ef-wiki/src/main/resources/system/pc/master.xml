@@ -393,6 +393,7 @@
 
                     <query name="byProject" label="默认" type="auto" orderBy="id:desc">
                         <condition name="project.id" operation="eq"/>
+                        <condition name="project.status" defaultValue="1" operation="eq"/>
                         <condition name="master.id" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
