@@ -413,22 +413,6 @@
     </dependencies>
     <profiles>
         <profile>
-            <id>ec-develop</id>
-            <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
-                <db-url>
-                    jdbc:mysql://192.168.1.57/efc?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8
-                </db-url>
-                <db-username>root</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
             <id>dev-efc</id>
             <properties>
                 <db-driver>com.mysql.jdbc.Driver</db-driver>
@@ -439,97 +423,23 @@
                 <dbpath>/tmp/logs/</dbpath>
             </properties>
             <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>efc-temp</id>
+            <properties>
+                <db-driver>com.mysql.jdbc.Driver</db-driver>
+                <db-password>sl7BbVfIumw5V/irhnO9FA==</db-password>
+                <db-url>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/efc-temp?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
+                <db-username>efy</db-username>
+                <db-level>DEBUG</db-level>
+                <dbpath>/tmp/logs/</dbpath>
+            </properties>
+            <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
-        <profile>
-            <id>dev-efc2</id>
-            <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>sl7BbVfIumw5V/irhnO9FA==</db-password>
-                <db-url>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/efc-temp?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
-                <db-username>efy</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>ec-test</id>
-            <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
-                <db-url>
-                    jdbc:mysql://192.168.1.57/efy?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8
-                </db-url>
-                <db-username>root</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>ec-release</id>
-            <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>sl7BbVfIumw5V/irhnO9FA==</db-password>
-                <db-url>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/efc?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
-                <db-username>efy</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>ec-db</id>
-            <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>sl7BbVfIumw5V/irhnO9FA==</db-password>
-                <db-url>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/efc-temp?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
-                <db-username>efy</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>ec-db-temp</id>
-            <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>sl7BbVfIumw5V/irhnO9FA==</db-password>
-                <db-url>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/efy-db-temp?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
-                <db-username>efy</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>dev-wiki</id>
-            <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>sl7BbVfIumw5V/irhnO9FA==</db-password>
-                <db-url>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/new_art_wiki?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
-                <db-username>efy</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-
-
     </profiles>
 
     <build>
@@ -544,8 +454,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>utf-8</encoding>
                 </configuration>
             </plugin>

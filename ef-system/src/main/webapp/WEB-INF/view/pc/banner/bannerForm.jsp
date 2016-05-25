@@ -37,12 +37,13 @@
                 <div class="am-form-group">
                     <label for="groupName" class="am-u-sm-3 am-form-label">类别 / Category</label>
                     <div class="am-u-sm-9">
-                        <div class="selectGroup">
+                        <div class="selectGroup" initValue="${object.group}">
                             <div class="selectItem" dataFrom="<c:url value="/banner/platform.do"/>"
                                  initValue="选择平台"></div>
                             <div class="selectItem" id="groupName" name="groupName" paramName="platform"
                                  dataFrom="<c:url value="/banner/position.do"/>"
-                                 initValue="请选位置"></div>
+                                 initValue="<c:if test="${not empty object.group}">${object.group}</c:if>
+                                 <c:if test="${empty object.group}">请选位置</c:if> "></div>
                         </div>
 
                     </div>
@@ -132,7 +133,7 @@
             if (i >= 0 && i < (groupSize - 1)) {
                 html += '<select isChange="true"';
             } else {
-                html += '<select ';
+                html += '<select value="' + parentDiv.attr("initValue") + '"';
             }
             html += ' paramName="' + selectTemp.paramName + '" dataFrom="' + selectTemp.dataFrom + '" grade="' + selectTemp.grade + '" class="' + selectTemp.clazz + '" id="' + selectTemp.id + '" name="' + selectTemp.name + '"><option>' + selectTemp.initValue + '</option></select> '
             selectTemp.html = html;
@@ -182,6 +183,7 @@
             });
         }
         parentDiv.on("change", "[isChange=true]", onChangeAction);
+//        parentDiv.on("load", "[name=]", onChangeAction);
     }
 
     $().ready(function () {

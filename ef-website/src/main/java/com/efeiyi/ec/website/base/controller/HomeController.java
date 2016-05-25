@@ -1,11 +1,9 @@
 package com.efeiyi.ec.website.base.controller;
 
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
-import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -13,15 +11,7 @@ import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import com.ming800.core.util.CookieTool;
 import com.ming800.core.util.HttpUtil;
-import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -114,11 +104,12 @@ public class HomeController {
         }
         String url = request.getRequestURL().toString();
 
-        if(!HttpUtil.isPhone(request)) {
-            if (url.equalsIgnoreCase("http://www.efeiyi.com/")) {
-                model.addAttribute("init", "true");
-                return "/inithome";
+        if (url.equalsIgnoreCase("http://www.efeiyi.com/")) {
+            if (HttpUtil.isPhone(request)) {
+                return "redirect:http://mall.efeiyi.com";
             }
+            model.addAttribute("init", "true");
+            return "/inithome";
         }
         //取得分类列表
 
@@ -177,7 +168,6 @@ public class HomeController {
         return "/home";
 
     }
-
 
 
     @RequestMapping({"/productCategory.do"})
