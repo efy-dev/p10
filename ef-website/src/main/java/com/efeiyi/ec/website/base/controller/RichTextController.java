@@ -36,5 +36,17 @@ public class RichTextController {
         model.addAttribute("document",list);
         return "/tenant/aboutUs";
     }
+    @RequestMapping("/news")
+    public String getNews(HttpServletRequest request,Model model) throws Exception{
+        XQuery xquery=new XQuery("listDocument_default",request);
+        String groupName = request.getParameter("group");
+        xquery.put("group",groupName);
+        List<Object> list=baseManager.listObject(xquery);
+        model.addAttribute("news",list);
+        return "/news/news0001";
+
+    }
+
+
 
 }
