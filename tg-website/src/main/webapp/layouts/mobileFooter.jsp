@@ -13,7 +13,7 @@
         if (AuthorizationUtil.getMyUser().getId() == null) {
     %>
     <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-    <a id="signin" href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do" class="btn-reg"
+    <a id="signin" href="http://passport.efeiyi.com/register?service=http://mall.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do" class="btn-reg"
        onclick="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
     <%
         }
@@ -94,7 +94,7 @@
         display: none;
     }
     .MEIQIA-ICON {
-        background:url("http://www.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
+        background:url("http://mall.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
         background-size: auto auto;
     }
     #MEIQIA-BTN-ICON {
@@ -150,7 +150,7 @@
 
     var registerWx = "<c:url value="/wx/userInfo"/>";
 
-    var register = "http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do";
+    var register = "http://passport.efeiyi.com/register?service=http://mall.efeiyi.com/sso.do";
 
     if (isWeiXin()) {
 //        alert("not weixin");

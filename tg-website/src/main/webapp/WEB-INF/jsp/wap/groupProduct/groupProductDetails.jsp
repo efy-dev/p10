@@ -57,7 +57,7 @@
   <!-- //End--chevron-left-->
   <div class="menu-list">
     <ul class="bd">
-      <li><a href="http://www.efeiyi.com" title="首页">e&nbsp;飞&nbsp;蚁&nbsp;商&nbsp;城</a></li>
+      <li><a href="http://mall.efeiyi.com" title="首页">e&nbsp;飞&nbsp;蚁&nbsp;商&nbsp;城</a></li>
       <li><a href="http://a.efeiyi.com/tuan" title="分类">团&nbsp;购&nbsp;首&nbsp;页</a></li>
     </ul>
   </div>
@@ -166,7 +166,7 @@
             </c:forEach>
 
           </c:if>
-          <div class="button ae"><a href="http://www.efeiyi.com/product/productModel/${groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
+          <div class="button ae"><a href="http://mall.efeiyi.com/product/productModel/${groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
         </div>
         <a class="efeiyi-btn" href="<c:url value="/group/protocol"/>">e飞蚁拼团协议<i class="efiyi"></i></a>
       </div>
@@ -238,7 +238,7 @@
   display: none;
   }
   .MEIQIA-ICON {
-    background:url("http://www.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
+    background:url("http://mall.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
     background-size: auto auto;
   }
   #MEIQIA-BTN-ICON {

@@ -73,7 +73,7 @@ public class GroupManagerImpl implements GroupManager {
             purchaseOrder.setCallback(callback);
             purchaseOrder.setCallbackBussiness(callback_business);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
-            url = PConst.WEBURL + "/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId();
+            url = PConst.NEWWEBURL + "/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId();
             return "redirect:" + url;
         } else {
             MyGroup group = (MyGroup) baseManager.getObject(MyGroup.class.getName(), groupId);
@@ -103,7 +103,7 @@ public class GroupManagerImpl implements GroupManager {
             purchaseOrder.setCallback(callback);
             purchaseOrder.setCallbackBussiness(callback_business);
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
-            url = PConst.WEBURL + "/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId();
+            url = PConst.NEWWEBURL + "/order/saveOrUpdateOrder3.do" + "?purchaseOrderId=" + purchaseOrder.getId();
             return "redirect:" + url;
         }
     }
