@@ -17,8 +17,6 @@
   <meta name="keywords" content="非遗百科,百科,非物质文化遗产,文化遗产,传统技艺,传统美术,e飞蚁,非遗电商,非遗答题">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>微信答题题库</title>
-  <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/amazeui.min.css"/>">
-  <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/layout.css"/>">
 </head>
 <body>
 
@@ -45,23 +43,7 @@
     </ming800:pcPageList>
   </div>
 </div>
-<!--//End--非遗题库-->
 
-
-
-<!--//End--homenew-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="shop2016/js/jquery.min.js"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="<c:url value="/scripts/assets/js/amazeui.ie8polyfill.min.js"/>"></script>
-<![endif]-->
-
-
-
-<script src="shop2016/js/system.js"></script>
 </body>
 </html>
 
