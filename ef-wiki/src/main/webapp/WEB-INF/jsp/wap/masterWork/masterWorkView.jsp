@@ -34,7 +34,7 @@
       <ul class="am-slides">
         <c:if test="${masterWork.masterWorkPictureList != null && masterWork.masterWorkPictureList != ''}">
           <c:forEach items="${masterWork.masterWorkPictureList}" var="picture">
-            <li><img src="http://tenant.efeiyi.com/${picture}"></li>
+            <li><img src="http://tenant.efeiyi.com/${picture.pictureUrl}"></li>
           </c:forEach>
         </c:if>
       </ul>
@@ -56,7 +56,7 @@
       <div class="works-page2 bd">
         <div class="title fz14 black txt-c bd">关于作者</div>
         <div class="master_img">
-          <div class="img"><img src="<c:url value='http://tenant.efeiyi.com/'/>${work.masterFavicon}" alt=""></div>
+          <div class="img"><img src="<c:url value='http://tenant.efeiyi.com/${work.masterFavicon}'/>" alt=""></div>
           <div class="fz14 black mt10">${work.masterFullName}</div>
           <div class="fz12 color6 mt10">${work.projectName}</div>
           <div class="fz12 color6 mt10">【<ming800:status name='level' dataType='Master.level' checkedValue='${work.masterLevel}' type='normal'/>】代表性传承人</div>
