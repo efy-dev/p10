@@ -59,7 +59,7 @@
 <!--自定义js--Start-->
 <script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
 <script src="<c:url value='/scripts/assets/wap/js/system.js'/>"></script>
-<script src="<c:url value='/scripts/assets/wap/js/amazeui.min.js'/>"></script>
+<script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
 <!--自定义js--End-->
 <script src="<c:url value='/resources/js/alert.js'/>"></script>
 <!--自定义js--End-->

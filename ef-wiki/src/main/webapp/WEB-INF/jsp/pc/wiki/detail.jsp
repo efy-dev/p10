@@ -12,12 +12,11 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <meta name="keywords" content="${question.questionContent},非遗百科,百科,非物质文化遗产,文化遗产,传统技艺,传统美术,e飞蚁,非遗电商,前门,前门大街"/>
+  <meta name="description"
+        content="${question.answerKnowledge},中国领先的非物质文化遗产百科全书"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>${question.questionContent}</title>
-  <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/amazeui.min.css"/>">
-  <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/layout.css"/>">
 </head>
 <body>
 <div class="wb fl page-question">
@@ -41,23 +40,7 @@
     </div>
   </div>
 </div>
-<!--//End--非遗题库-->
 
-
-
-<!--//End--homenew-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="shop2016/js/jquery.min.js"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="<c:url value="/scripts/assets/js/amazeui.ie8polyfill.min.js"/>"></script>
-<![endif]-->
-
-
-
-<script src="shop2016/js/system.js"></script>
 </body>
 </html>
 
