@@ -262,7 +262,7 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .page-section-text a{outline:none}
 .page-section-figure{width:870px;margin-bottom:50px;height:385px;}
 /*传承人主页图片交互效果*/
-.img-mutual {max-width:250px;height:386px;border:1px solid #000;padding:28px 0 0 25px;margin-right:40px; float:left; margin-bottom:50px;}
+.img-mutual {max-width:250px;height:386px;border:1px solid #ccc;padding:28px 0 0 25px;margin-right:40px; float:left; margin-bottom:50px;}
 .box{width:198px;height:295px;position: relative;}
 .BG{width:198px;height:295px;position: absolute;top: 0;background: rgba(60,96,140,0.3);}
 /*.txt{width: 198px;height:74px;position: absolute;bottom: 0;color:#fff;background:url(../images/images/tx12.gif) bottom;}*/
@@ -272,7 +272,7 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .img-mutual .active h1, .img-mutual .active a {color:#000;}
 
 /*传承人主页图片交互效2果*/
-.img-mutual{height:386px;border:1px solid #000;position:relative;}
+.img-mutual{height:386px;border:1px solid #f3f3f3;position:relative;}
 .img-mutual-img{padding:27px 0 0 25px;width:223px;height:322px;}
 .img-mutual-img a{width:200px;height:322px; display:block;}
 .img-mutual-jump{margin:22px 0 0 135px;padding-left:15px;display:block; background:url(../images/images/bs.gif) no-repeat 0 center}
