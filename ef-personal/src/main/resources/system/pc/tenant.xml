@@ -301,7 +301,10 @@
                     </query>
                 </do>
                 <do name="plistMaster" access="" label="关注">
-                    <query name="all" label="默认" type="auto" orderBy="id:desc">
+                    <query name="byDateTime" label="默认" type="auto" orderBy="createDateTime:asc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="all" label="默认" type="auto" orderBy="createDateTime:asc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                     <query name="byCity" label="默认" type="auto" orderBy="id:desc">

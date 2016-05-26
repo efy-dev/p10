@@ -93,7 +93,12 @@
             <c:forEach items="${masterList}" var="tenant" varStatus="rec">
             <div class="img-mutual am-u-sm-4" style="float:left;">
                 <div class="box">
-                    <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-tenant-list" alt="">
+                    <c:if test="${tenant.favicon != null && '' != tenant.favicon}">
+                        <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-tenant-list" alt="">
+                    </c:if>
+                    <c:if test="${tenant.favicon == null || '' == tenant.favicon}">
+                        <img src="<c:url value="/scripts/assets/images/emptyPhoto.jpg"/>" alt="">
+                    </c:if>
                     <div class="BG"></div>
                     <p class="txt">
                         <div class="img-mutual-text1">
@@ -114,14 +119,22 @@
             </span>
         </div>
         </c:forEach>
-        <div class="pages wh" style="width: 688px;min-width: 688px">
+        <ul class="pg-number" style="width: 100%;float:left">
             <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/allMaster">
                 <ming800:pcPageParam name="conditions"
                                      value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
                 <ming800:pcPageParam name="sort"
                                      value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
             </ming800:pcPageList>
-        </div>
+        </ul>
+        <%--<div class="pages wh" style="width: 688px;min-width: 688px">--%>
+            <%--<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/allMaster">--%>
+                <%--<ming800:pcPageParam name="conditions"--%>
+                                     <%--value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>--%>
+                <%--<ming800:pcPageParam name="sort"--%>
+                                     <%--value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>--%>
+            <%--</ming800:pcPageList>--%>
+        <%--</div>--%>
     </div>
 </div>
 <div class="footernew wh">

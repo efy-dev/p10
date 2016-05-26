@@ -92,7 +92,12 @@
             <c:forEach items="${skillList}" var="tenant" varStatus="rec">
             <div class="img-mutual am-u-sm-4" style="float:left;">
                 <div class="box">
-                    <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-tenant-list" alt="">
+                    <c:if test="${tenant.favicon != null && '' != tenant.favicon}">
+                        <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-tenant-list" alt="">
+                    </c:if>
+                    <c:if test="${tenant.favicon == null || '' == tenant.favicon}">
+                        <img src="<c:url value="/scripts/assets/images/newPIC.jpg"/>" alt="">
+                    </c:if>
                     <div class="BG"></div>
                     <p class="txt">
                         <div class="img-mutual-text1">

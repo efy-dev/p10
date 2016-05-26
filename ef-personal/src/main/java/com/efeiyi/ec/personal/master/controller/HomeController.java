@@ -68,7 +68,7 @@ public class HomeController {
 
     @RequestMapping("/allMaster")
     public String allMasterList(HttpServletRequest request,Model model) throws Exception {
-        XQuery xQuery = new XQuery("plistMaster_master","1",request.getParameter("sort"),request);
+        XQuery xQuery = new XQuery("plistMaster_byDateTime","1",request.getParameter("sort"),request);
         PageEntity entity = new PageEntity();
         String index = request.getParameter("pageEntity.index");
         if (index == null || "".equals(index)){
