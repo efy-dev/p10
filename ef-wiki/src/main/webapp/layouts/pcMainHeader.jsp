@@ -37,5 +37,5 @@
 <![endif]-->
 <!--自定义js--Start-->
 <script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/js/jquery.min.js?v=20150831'/>"></script>
+<script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 <script src="<c:url value='/resources/assets/js/amazeui.min.js?v=20150831'/>"></script>
