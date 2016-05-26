@@ -8,6 +8,7 @@
 </style>
 </head>
 <body>
+<script src="<c:url value="/scripts/js/jquery.min.js"/>"></script>
 <header id="header" class="am-header custom-header newheader">
     <div class="am-header-left am-header-nav">
         <a href="javascript:history.go(-1)" class="chevron-left"></a>
@@ -34,7 +35,7 @@
 <script type="text/javascript">
     $(function(){
         $("img").each(function(){
-            var firstNode = this.parent();
+            var firstNode = $(this).parent();
             firstNode.attr("style","text-align: center; line-height: 1.75em;");
         })
     });

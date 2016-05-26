@@ -622,6 +622,9 @@ body {
       background: #fff; }
       .list li a .list-content .name {
         padding: 10px 0;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
         font-size: 16px;
         line-height: 16px;
         color: #666666; }

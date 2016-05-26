@@ -70,26 +70,27 @@
 
 
 <div style="width:100%;float:left;margin-top: 20px;">
-    <div data-am-widget="slider" class="am-slider am-slider-a1 am-banner-q1" data-am-slider='{"directionNav":false}'>
-        <ul class="am-slides">
-            <li>
-                <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%A7%9A%E6%83%A0%E8%8A%AC%281%29.jpg">
-            </li>
-            <li>
-                <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%BC%A0%E5%90%8C%E7%A6%84%281%29.jpg">
-            </li>
-            <li>
-                <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E6%9C%B1%E7%82%B3%E4%BB%81%282%29.jpg">
-            </li>
-            <li>
-                <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E9%AD%8F%E7%AB%8B%E4%B8%ADbanner%281%29.jpg">
-            </li>
-        </ul>
-    </div>
+    <%--<div data-am-widget="slider" class="am-slider am-slider-a1 am-banner-q1" data-am-slider='{"directionNav":false}'>--%>
+        <%--<ul class="am-slides">--%>
+            <%--<li>--%>
+                <%--<img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%A7%9A%E6%83%A0%E8%8A%AC%281%29.jpg">--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%BC%A0%E5%90%8C%E7%A6%84%281%29.jpg">--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E6%9C%B1%E7%82%B3%E4%BB%81%282%29.jpg">--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E9%AD%8F%E7%AB%8B%E4%B8%ADbanner%281%29.jpg">--%>
+            <%--</li>--%>
+        <%--</ul>--%>
+    <%--</div>--%>
+
     <div id="page-section">
-        <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-5.gif" />"></a></div>
+        <%--<div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-5.gif" />"></a></div>--%>
         <div class="page-section-figure">
-            <c:forEach items="${skillList}" var="tenant" varStatus="rec">
+            <c:forEach items="${masterList}" var="tenant" varStatus="rec">
             <div class="img-mutual am-u-sm-4" style="float:left;">
                 <div class="box">
                     <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-tenant-list" alt="">
@@ -106,45 +107,23 @@
                 </div>
                 </p>
             </div>
-                <span class="img-mutual-jump">
-                    <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                        深入了解
-                    </a></span>
+            <span class="img-mutual-jump">
+                <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
+                    深入了解
+                </a>
+            </span>
         </div>
         </c:forEach>
-    </div>
-</div>
-<div class="page-border"></div>
-<div  class="page-section">
-    <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-6.gif" />"></a></div>
-    <div class="page-section-figure">
-        <c:forEach items="${artList}" var="tenant" varStatus="rec">
-        <div class="img-mutual am-u-sm-4" style="float:left;">
-            <div class="box">
-                <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-tenant-list" alt="">
-                <div class="BG"></div>
-                <p class="txt">
-                    <div class="img-mutual-text1">
-                        <h1>${tenant.fullName}</h1>
-                <p>
-                    <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                <p>[${tenant.masterProjectList[0].project.name}]</p>
-                <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
-                </a>
-                </p>
-            </div>
-            </p>
+        <div class="pages wh" style="width: 688px;min-width: 688px">
+            <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/allMaster">
+                <ming800:pcPageParam name="conditions"
+                                     value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
+                <ming800:pcPageParam name="sort"
+                                     value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+            </ming800:pcPageList>
         </div>
-                <span class="img-mutual-jump">
-                    <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                        深入了解
-                    </a></span>
     </div>
-    </c:forEach>
 </div>
-</div>
-<%--<div class="page-border-solid"></div>--%>
-<%--</div>--%>
 <div class="footernew wh">
     <div class="servicenew wh">
         <div class="hd tct">

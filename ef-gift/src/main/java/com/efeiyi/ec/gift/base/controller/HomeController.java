@@ -86,7 +86,7 @@ public class HomeController {
     @RequestMapping({"/logoutHandler"})
     public String logoutHandler(HttpServletResponse response) {
         //只有手动退出的时候清除cookie
-        CookieTool.addCookie(response, "userinfo", "", 1, ".efeiyi.com");
+        //CookieTool.addCookie(response, "userinfo", "", 1, ".efeiyi.com");
         return "redirect:/";
     }
 
