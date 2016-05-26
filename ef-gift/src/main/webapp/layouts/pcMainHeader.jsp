@@ -4,6 +4,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="icon" type="image/x-icon" href="<c:url value='/scripts/images/favicon.ico'/>">
 <title>个人礼品频道</title>
 <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/amazeui.min.css"/>">
 <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/layout.css"/>">

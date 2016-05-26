@@ -58,7 +58,7 @@
         <img src="<c:url value="/scripts/images/gift/flow.jpg"/>" alt="流程">
         <div class="flow-content">
           <div class="consult">
-            <a href="" class="z-btn">马上咨询</a>
+            <a class="z-btn">马上咨询</a>
           </div>
           <p class="phone">咨询热线：4008768766</p>
         </div>
