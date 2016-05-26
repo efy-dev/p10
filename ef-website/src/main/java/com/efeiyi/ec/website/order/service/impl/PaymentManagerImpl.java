@@ -52,7 +52,7 @@ public class PaymentManagerImpl implements PaymentManager {
     public String alipay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
         BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue() * 100);
         BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.ALI_WEB, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
-        param.setReturnUrl(PConst.WEBURL + "/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
+        param.setReturnUrl(PConst.NEWWEBURL + "/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
 //        param.setBillTimeout(120);
 //        param.setOptional(optional);
 
@@ -72,7 +72,7 @@ public class PaymentManagerImpl implements PaymentManager {
     public String alipayWap(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
         BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue() * 100);
         BCPayParameter param = new BCPayParameter(BCEumeration.PAY_CHANNEL.ALI_WAP, price.intValue(), purchaseOrderPaymentDetails.getId(), getTitle(purchaseOrderPaymentDetails));
-        param.setReturnUrl(PConst.WEBURL + "/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
+        param.setReturnUrl(PConst.NEWWEBURL + "/order/paysuccess/" + purchaseOrderPaymentDetails.getId());
 //        param.setBillTimeout(120);
 //        param.setOptional(optional);
 

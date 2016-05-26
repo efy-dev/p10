@@ -13,6 +13,7 @@
     <div class="hd">
         <div class="tips fl"><a class="logo" href=""></a></div>
         <ul class="fr">
+            <li><a href="http://www.efeiyi.com" title="e飞蚁首页">e飞蚁首页</a></li>
             <li><a href="http://mall.efeiyi.com" title="e飞蚁商城">非遗电商</a></li>
             <li><a href="http://master.efeiyi.com" title="非遗大师">非遗大师</a></li>
             <li><a href="http://baike.efeiyi.com/" title="非遗大师">非遗百科</a></li>

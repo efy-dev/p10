@@ -82,7 +82,7 @@
           %>
           <c:forEach items="${productGiftTagList}" var="productGiftTag">
               <li>
-                  <a href="http://www.efeiyi.com/product/productModel/${productGiftTag.productGift.productModel.id}">
+                  <a href="http://mall.efeiyi.com/product/productModel/${productGiftTag.productGift.productModel.id}">
                           <%--
                                         <img src="http://gift-oss.efeiyi.com/${productGift.product.picture_url}" alt="">
                           --%>
@@ -99,7 +99,7 @@
           %>
           <c:forEach items="${productGiftList}" var="productGift">
               <li>
-                  <a href="http://www.efeiyi.com/product/productModel/${productGift.productModel.id}">
+                  <a href="http://mall.efeiyi.com/product/productModel/${productGift.productModel.id}">
                           <%--
                                         <img src="http://gift-oss.efeiyi.com/${productGift.product.picture_url}" alt="">
                           --%>

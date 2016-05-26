@@ -71,8 +71,8 @@ public class PurchaseOrderGiftController {
 
         String requestUrl = request.getRequestURL().toString();
         String requestParam = request.getQueryString();
-//        http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/1#btn-right?
-//        http://www.efeiyi.com/giftReceive/iidvpcgt3j0ab3hz?from=singlemessage&isa
+//        http://mall.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/1#btn-right?
+//        http://mall.efeiyi.com/giftReceive/iidvpcgt3j0ab3hz?from=singlemessage&isa
         try {
             if (!HttpUtil.isPhone(request)) {
                 String url = requestUrl + "?" + requestParam;
@@ -213,7 +213,7 @@ public class PurchaseOrderGiftController {
         }
         g.dispose();
         //二维码生成
-        String content = "http://www.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
+        String content = "http://mall.efeiyi.com/giftReceive/" + purchaseOrderGift.getId();
         Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
         hints.put(EncodeHintType.MARGIN, 0);
         BitMatrix bitMatrix = null;

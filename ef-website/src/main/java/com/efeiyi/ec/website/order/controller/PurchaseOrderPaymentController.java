@@ -137,7 +137,7 @@ public class PurchaseOrderPaymentController {
     @RequestMapping({"/pay/weixin/{orderId}"})
     public String wxPay(HttpServletRequest request, @PathVariable String orderId) throws Exception {
         //@TODO 添加订单数据部分
-        String redirect_uri = PConst.WEBURL + "/order/pay/wxParam/" + orderId;
+        String redirect_uri = PConst.NEWWEBURL + "/order/pay/wxParam/" + orderId;
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
@@ -294,7 +294,7 @@ public class PurchaseOrderPaymentController {
         model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
 
         if ("3".equals(purchaseOrder.getPayWay())) {
-            return "redirect:"+ PConst.WEBURL +"/sharePage/productShare/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
+            return "redirect:"+ PConst.NEWWEBURL +"/sharePage/productShare/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
         } else {
             //return "/purchaseOrder/paySuccess";
             if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback() != null) {

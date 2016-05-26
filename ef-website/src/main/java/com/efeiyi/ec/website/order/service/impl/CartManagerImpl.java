@@ -172,12 +172,13 @@ public class CartManagerImpl implements CartManager {
     @Override
     public Cart copyCart(Cart sessionCart,Cart realCart) {
         if (sessionCart != null) {
-            List<CartProduct> cartProductList = sessionCart.getCartProductList();
+           /* List<CartProduct> cartProductList = sessionCart.getCartProductList();
             for (CartProduct cartProductTemp : cartProductList) {
                 cartProductTemp.setCart(realCart);
                 addToCart(realCart,cartProductTemp.getProductModel(),cartProductTemp.getAmount());
                 baseManager.saveOrUpdate(Cart.class.getName(), realCart);
-            }
+            }*/
+            return sessionCart;
         }
         return realCart;
     }

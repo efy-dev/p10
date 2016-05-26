@@ -18,25 +18,32 @@
     <script type="text/javascript" charset="utf-8"
             src="<c:url value="/scripts/utf8-jsp/lang/zh-cn/zh-cn.js"/>"></script>
 
-    <style type="text/css">
-        div {
-            width: 100%;
-        }
-    </style>
 </head>
 <body>
-<div>
-    <a href="<c:url value="${uEditor.callbackUrl}"/>"><h1>返回</h1></a>
-    <h1>${uEditor.title}</h1>
-    <form action="${uEditor.action}" method="post">
-        <input type="hidden" name="callbackUrl" value="${uEditor.callbackUrl}">
-        <input type="hidden" name="objectId" value="${uEditor.objectId}">
-        <input type="hidden" name="${uEditor.paramName}" value="${uEditor.paramValue}">
-        <script id="editor" name="${uEditor.name}" type="text/plain" style="width:1024px;height:500px;"></script>
-        <input type="submit" value="保存">
-    </form>
+<div class="am-g">
+    <div class="am-u-m-12" style="margin-top: 10px">
+        <a class="am-btn am-btn-default am-btn-lg" href="<c:url value="${uEditor.callbackUrl}"/>">返回</a>
+    </div>
 
-    <button onclick="autotypeset()">自动排版</button>
+    <div class="am-u-m-12" style="margin-top: 10px">
+        <hr>
+    </div>
+    <div class="am-u-md-12">
+        <form class="am-form" action="${uEditor.action}" method="post">
+            <input type="hidden" name="callbackUrl" value="${uEditor.callbackUrl}">
+            <input type="hidden" name="objectId" value="${uEditor.objectId}">
+            <input type="hidden" name="${uEditor.paramName}" value="${uEditor.paramValue}">
+            <div class="am-form-group">
+                <label for="editor">
+                    ${uEditor.title}
+                </label>
+                <script id="editor" name="${uEditor.name}" type="text/plain"
+                        style="width:1024px;height:500px;"></script>
+            </div>
+            <button class="am-btn am-btn-primary" type="button" onclick="autotypeset()">自动排版</button>
+            <input class="am-btn am-btn-primary" type="submit" value="保存">
+        </form>
+    </div>
 
 </div>
 

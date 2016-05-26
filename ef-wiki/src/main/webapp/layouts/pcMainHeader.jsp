@@ -20,7 +20,7 @@
 <!-- Tile icon for Win8 (144x144 + tile color) -->
 <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
 <meta name="msapplication-TileColor" content="#0e90d2">
-<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/amazeui.min.css?v=20150831'/>">
+<link type="text/css" rel="stylesheet" href="<c:url value='/resources/assets/css/amazeui.min.css?v=20150831'/>">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/app.css?v=20150831'/>">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/layout.css?v=20150831'/>">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/craft.css?v=20150831'/>">
@@ -37,5 +37,5 @@
 <![endif]-->
 <!--自定义js--Start-->
 <script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/js/jquery.min.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/js/amazeui.min.js?v=20150831'/>"></script>
+<script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
+<script src="<c:url value='/resources/assets/js/amazeui.min.js?v=20150831'/>"></script>

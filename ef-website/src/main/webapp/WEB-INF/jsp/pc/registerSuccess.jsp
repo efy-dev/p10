@@ -25,7 +25,7 @@
     <h5>恭喜您已经注册成功</h5>
     <p>新用户注册送${couponAmount}张优惠券，已发放到您的账户</p>
     <div class="btn-q">
-      <a href="http://www.efeiyi.com" class="but1">去购物</a>
+      <a href="http://mall.efeiyi.com" class="but1">去购物</a>
       <a href="http://i.efeiyi.com/coupon/list" class="but2">去查看</a>
     </div>
     <p><span>您的手机号会显示到页面顶部和商品评价等位置，如不希望暴露，建议您修改昵称。</span></p>

@@ -12,7 +12,7 @@
 </head>
 <body>
 <header id="header" class="am-header custom-header newheader">
-  <div class="logo"><img src="<c:url value="/scripts/assets/wap/images/ef-logo-craft.png"/>" height="27" width="152" align="center" alt=""></div>
+  <div class="logo"><img src="<c:url value="/scripts/assets/wap/images/ef-logo-craft.png"/>" height="27" width="110" align="center" alt=""></div>
   <!-- //End--logo-->
   <!-- //End--chevron-left-->
   <div class="am-header-right am-header-nav">

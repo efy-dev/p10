@@ -25,7 +25,7 @@
     <script src="<c:url value="/scripts/wap/js/weixin.js"/>"></script>
 
     <script>
-        initWx("http://www.efeiyi.com/wx/init.do");
+        initWx("http://mall.efeiyi.com/wx/init.do");
     </script>
 </head>
 <body>
@@ -77,7 +77,7 @@
             clickInput();
             $('.btn-true').on('click',function(){
                 var $val=$('#ipt').val();
-                window.location.href ='http://www.efeiyi.com/order/easyBuy/ihykdmfn1k8httnz?amount='+parseInt($val);
+                window.location.href ='http://mall.efeiyi.com/order/easyBuy/ihykdmfn1k8httnz?amount='+parseInt($val);
             });
             return false;
         });
@@ -88,7 +88,7 @@
             clickInput();
             $('.btn-true').on('click',function(){
                 var $val=$('#ipt').val();
-                window.location.href ='http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/'+parseInt($val);
+                window.location.href ='http://mall.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/'+parseInt($val);
             });
             return false;
         });

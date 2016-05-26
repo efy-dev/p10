@@ -149,21 +149,21 @@
                 clickInput();
                 $('.btn-true').on('click',function(){
                     var $val=$('#ipt').val();
-                    window.location.href ='http://www.efeiyi.com/order/easyBuy/ihykdmfn1k8httnz?amount='+parseInt($val);
+                    window.location.href ='http://mall.efeiyi.com/order/easyBuy/ihykdmfn1k8httnz?amount='+parseInt($val);
                 });
                 return false;
             });
             $('#btn-gift').on('click',function(){
                 currentButton="1";
                 $("#table").html("");
-                generateQrcode("http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/1");
+                generateQrcode("http://mall.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/1");
                 $('.dialog').each(function(){
                     $(this).addClass('dialog-gift').show();
                 })
                 clickInput();
                 $('.btn-true').on('click',function(){
                     var $val=$('#ipt').val();
-                    window.location.href ='http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/'+parseInt($val);
+                    window.location.href ='http://mall.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/'+parseInt($val);
                 });
                 return false;
             });
@@ -171,9 +171,9 @@
 
                 var currentUrl = "";
                 if (currentButton=="0"){
-                    currentUrl = "http://www.efeiyi.com/order/easyBuy/ihykdmfn1k8httnz?amount=";
+                    currentUrl = "http://mall.efeiyi.com/order/easyBuy/ihykdmfn1k8httnz?amount=";
                 }else {
-                    currentUrl = "http://www.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/"
+                    currentUrl = "http://mall.efeiyi.com/order/giftBuy/ihykdmfn1k8httnz/"
                 }
 
                 $('#add').on('click',function(){
@@ -213,7 +213,7 @@
     });
 
 </script>
-<script src="http://www.efeiyi.com/resources/jquery/jquery.qrcode.min.js"></script>
+<script src="http://mall.efeiyi.com/resources/jquery/jquery.qrcode.min.js"></script>
 <script>
     function generateQrcode(url){
         $('#table').qrcode({

@@ -21,7 +21,7 @@
 <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
 <meta name="msapplication-TileColor" content="#0e90d2">
 
-<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/amazeui.min.css'/>">
+<link type="text/css" rel="stylesheet" href="<c:url value='/resources/assets/css/amazeui.min.css'/>">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/app.css'/>">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/layout.css'/>">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/craft.css'/>">

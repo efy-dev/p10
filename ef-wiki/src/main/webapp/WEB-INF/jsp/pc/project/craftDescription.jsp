@@ -13,6 +13,8 @@
 <head>
   <script src="<c:url value="/resources/jquery/jquery.qrcode.min.js"/>"></script>
     <title></title>
+  <meta name="description" content="中国领先的非物质文化遗产百科全书">
+  <meta name="keywords" content="${artistry.name},非遗百科,百科,非物质文化遗产,文化遗产,传统技艺,传统美术,e飞蚁,非遗电商,前门,前门大街">
 </head>
 <body>
 <div class="craft-particulars2016">

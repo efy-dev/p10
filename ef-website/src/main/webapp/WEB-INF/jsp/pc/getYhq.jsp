@@ -21,7 +21,7 @@
       }else{
         index=0;
         clearInterval(s);
-        window.location.href = "http://www.efeiyi.com";
+        window.location.href = "http://mall.efeiyi.com";
 
       }
     }
@@ -39,8 +39,8 @@
         <p><span id="sj">5</span>秒后为您自动跳转</p>
       </div>
       <div class="act">
-        <a href="http://www.efeiyi.com" class="btn1 left">返回首页</a>
-        <a href="http://www.efeiyi.com" class="btn1 right">关闭页面</a>
+        <a href="http://mall.efeiyi.com" class="btn1 left">返回首页</a>
+        <a href="http://mall.efeiyi.com" class="btn1 right">关闭页面</a>
       </div>
     </div>
       </c:if>
@@ -56,8 +56,8 @@
           <p><span id="xj">5</span>秒后为您自动跳转</p>
         </div>
         <div class="act">
-          <a href="http://www.efeiyi.com" class="btn1 left">返回首页</a>
-          <a href="http://www.efeiyi.com" class="btn1 right">关闭页面</a>
+          <a href="http://mall.efeiyi.com" class="btn1 left">返回首页</a>
+          <a href="http://mall.efeiyi.com" class="btn1 right">关闭页面</a>
         </div>
       </div>
     </c:if>

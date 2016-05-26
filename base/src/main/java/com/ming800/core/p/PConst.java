@@ -86,6 +86,7 @@ public class PConst {
     public static final Integer PACKAGEORDER = 2;
 
     public static final String HOSTNAME = "http://www.efeiyi.com";
+    public static final String NEWWEBURL = "http://mall.efeiyi.com";
 
     public static final String WEBURL = "http://www.efeiyi.com";//web电商测试地址(如需改成正式环境此处改为www.efeiyi.comn)
     public static final String TUANURL = "a.efeiyi.com";//团购正式地址

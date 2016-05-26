@@ -248,10 +248,10 @@ public class CartController {
     public String addCallBack(HttpServletRequest request) throws Exception {
         String cartId = request.getParameter("cartId");
         String couponId = request.getParameter("couponId");
-        //String callback = "www.efeiyi.com/cart/paySuccess.do";
-        String callback = PConst.WEBURL+"/cart/paySuccess.do";
+        //String callback = "mall.efeiyi.com/cart/paySuccess.do";
+        String callback = PConst.NEWWEBURL+"/cart/paySuccess.do";
 
-        return "redirect:"+ PConst.WEBURL +"/order/saveOrUpdateOrder.do?cartId="+cartId+"&couponId="+couponId+"&callback="+ URLEncoder.encode(callback, "UTF-8");
+        return "redirect:"+ PConst.NEWWEBURL +"/order/saveOrUpdateOrder.do?cartId="+cartId+"&couponId="+couponId+"&callback="+ URLEncoder.encode(callback, "UTF-8");
     }
 
     @RequestMapping({"/cart/paySuccess.do"})
