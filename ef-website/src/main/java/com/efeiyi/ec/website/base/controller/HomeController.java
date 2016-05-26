@@ -104,7 +104,7 @@ public class HomeController {
         }
         String url = request.getRequestURL().toString();
 
-        if (url.equalsIgnoreCase("http://www.efeiyi.com/")) {
+        if (url.equalsIgnoreCase("http://www.efeiyi.com/")||url.equalsIgnoreCase("http://efeiyi.com/")) {
             if (HttpUtil.isPhone(request)) {
                 return "redirect:http://mall.efeiyi.com";
             }

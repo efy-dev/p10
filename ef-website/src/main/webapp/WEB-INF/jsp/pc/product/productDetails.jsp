@@ -19,7 +19,7 @@
         </c:set>
     </c:if>
     <meta name="keywords"
-          content="${product.project.name},${master},${product.name},${product.subName}, ${productModel.name},${product.bigTenant.name}"/>
+          content="${product.name},${productModel.name},${product.subName},${product.project.name},${master},${productModel.name},${product.bigTenant.name}"/>
     <meta name="description"
           content="${product.name},${productModel.name},${product.subName},${product.project.description}"/>
 

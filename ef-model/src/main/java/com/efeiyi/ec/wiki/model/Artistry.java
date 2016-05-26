@@ -1,5 +1,6 @@
 package com.efeiyi.ec.wiki.model;
 
+import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.project.model.Project;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,6 +27,16 @@ public class Artistry {
     private ArtistryDescription artistryDescription;
     private List<ArtistryPicture> artistryPictureList;
     private List<ArtistryRecommended> artistryRecommendList;
+//    private String city;
+//
+//    @Column(name = "city")
+//    public String getCity() {
+//        return city;
+//    }
+//
+//    public void setCity(String city) {
+//        this.city = city;
+//    }
 
     @Column(name = "level")
     public String getLevel() {

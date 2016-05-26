@@ -16,25 +16,14 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>首页</title>
+  <title>e飞蚁-国际非物质文化遗产网络平台</title>
   <link type="text/css" rel="stylesheet" href="<c:url value="/resources/assets/css/amazeui.min.css?v=20160411"/>">
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/home.css?v=20160411"/>">
 </head>
 <body>
 <div class="home wh">
   <div class="hd">
-    <div class="nav-fixed">
-      <a class="logo" href=""><img src="<c:url value="/scripts/images/home-logo.png"/>" alt=""></a>
-      <ul class="items">
-        <li><a href="http://master.efeiyi.com" title=""><i class="icon icon1"></i>非遗大师</a></li>
-        <li><a href="http://j.efeiyi.com/ef-wiki/" title=""><i class="icon icon2"></i>非遗百科</a></li>
-        <li><a href="http://j.efeiyi.com/ef-gift/" title=""><i class="icon icon3"></i>非遗礼品</a></li>
-        <li><a href="http://www.315cheng.com" title=""><i class="icon icon4"></i>诚品宝</a></li>
-        <li><a href="http://mall.efeiyi.com" title=""><i class="icon icon5"></i>非遗电商</a></li>
-        <li><a href="" title=""><i class="icon icon6"></i>产权交易</a></li>
-        <li><a href="" title=""><i class="icon icon7"></i>融艺投</a></li>
-      </ul>
-    </div>
+
     <!--//End-左侧悬浮导航-->
     <div class="main">
       <div class="form">
@@ -370,10 +359,10 @@
       <div class="main-slide">
         <div class="bd mbox1">
           <a href="" class="" title=""><p class="img"><img class="imgbg" src="<c:url value="/scripts/upload/1000000.jpg"/>" alt=""></p></a>
-          <a href="<c:url value="/document/news?group=news_0001"/>" title="">陶瓷“老男孩”的工匠情怀</a>
-          <a href="<c:url value="/document/news?group=news_0002"/>" title="">古法炒制碧螺春</a>
-          <a href="<c:url value="/document/news?group=news_0003"/>" title="">四川“抢救”10位国家级非遗传人 防“人走技失”</a>
-          <a href="<c:url value="/document/news?group=news_0004"/>" title="">《传承者》震撼收官 非遗传承有了自己的舞台</a>
+          <a href="" title="">陶瓷“老男孩”的工匠情怀</a>
+          <a href="" title="">古法炒制碧螺春</a>
+          <a href="" title="">四川“抢救”10位国家级非遗传人 防“人走技失”</a>
+          <a href="" title="">《传承者》震撼收官 非遗传承有了自己的舞台</a>
         </div>
         <div class="bd mbox2">
           <div class="title">精彩活动</div>
