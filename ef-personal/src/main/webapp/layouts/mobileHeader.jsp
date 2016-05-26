@@ -27,7 +27,6 @@
 </nav>
 
 <script>
-    $(document).ready(function(){
         $.ajax({
             type: "post",
             url: '<c:url value="/getTenant.do"/>',
@@ -40,7 +39,7 @@
                     style:"background:url(http://tenant.efeiyi.com/"+data.backgroundUrl+"@!tenant-mobile-view-background);"
                 });
                 $("#favicon").attr({
-                    style:"background:url(http://tenant.efeiyi.com/"+data.backgroundUrl+"@!tenant-mobile-view-background);"
+                    style:"background:url(http://tenant.efeiyi.com/"+data.favicon+"@!tenant-mobile-view-icon);"
                 });
                 $("#projectName").html(data.projectName);
                 var levelName = "";
@@ -60,5 +59,4 @@
                 $("#levelName").html(levelName+'非物质文化遗产传承人');
             }
         });
-    })
 </script>
