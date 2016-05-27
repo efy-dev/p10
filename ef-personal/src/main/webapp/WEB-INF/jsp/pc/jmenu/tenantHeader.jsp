@@ -25,7 +25,7 @@
                 }
             %>
         </h1>
-        <h1 id="personalPage">
+        <h1 id="personalPage" style="margin-left: 415px;">
             <%
                 if(MasterUtil.findMaster()!=null && !"".equals(MasterUtil.findMaster().getName()) && MasterUtil.findMaster().getName() != null){
             %>
