@@ -46,6 +46,15 @@
                 <match url="/basic/xm.do?qm=plistDocument_search"/>
 
             </jnode>
+            <jnode url="/basic/xm.do?qm=plistDocumentNews_default&amp;groupName=ec1"
+                   access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="新闻资讯">
+                <match url="/basic/xm.do?qm=plistDocument_tenant&amp;groupName=tenant"/>
+                <match url="/basic/xm.do?qm=formDocumentNews&amp;groupName=ec"/>
+                <match url="/basic/xm.do?qm=viewDocument&amp;groupName=ec1"/>
+                <match url="/document/saveDocument.do&amp;groupName=ec1"/>
+                <match url="/basic/xm.do?qm=plistDocument_search"/>
+
+            </jnode>
         </jnode>
         <jnode url="" id="recommendManager" text_zh_CN="推荐管理"
                access="admin,operational,c_operational,o_operational,product_manager" state="closed">

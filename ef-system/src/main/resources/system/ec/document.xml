@@ -74,5 +74,51 @@
 
             </does>
         </entity>
+
+        <entity name="Document" label="Document"
+                basic="simple" others=""
+                model="com.ming800.core.p.model.Document">
+            <fields>
+                <field name="group" label="类别" inputType="text">
+                    <statusType fieldName="group">
+                        <item label="非遗资讯" value="news"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistDocumentNews" access="" label="Document列表"
+                    result="/document/documentNewsPList"
+                    execute="com.efeiyi.ec.system.basic.controller.commonHandler"
+                        >
+                    <query name="default" label="默认" type="auto" orderBy="id:desc" >
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="group" defaultValue="news" operation="eq"/>
+                    </query>
+                    <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="title" operation="likes" label="标题" inputType="text"/>
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                    </query>
+                </do>
+
+                <do name="removeDocument" label="删除document" access="" result="json"/>
+                <do name="formDocumentNews" label="保存document" access="" result="/document/newsDocumentEditor"
+                    execute="com.efeiyi.ec.system.basic.controller.commonHandler"
+                        />
+                <do name="viewDocument" label="保存document" access="" result="/document/documentView"/>
+                <do name="saveOrUpdateDocumentNews" label="保存Document" access="" result="redirect:/basic/xm.do?qm=plistDocumentNews_default">
+                    <page>
+                        <fields>
+                            <field name="status" label="状态" defaultValue="1"/>
+                        </fields>
+                    </page>
+                </do>
+                <do name="listDocument" label="document列表" access="" result="/document/documentList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
     </entities>
 </module>
