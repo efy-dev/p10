@@ -21,6 +21,7 @@
                             <field name="description" label="默认值" defaultValue="" inputType="default" />
                             <field name="number" label="默认值" defaultValue="1" inputType="default" />
                             <field name="status" label="默认值" defaultValue="1" inputType="default" />
+                            <field name="createDateTime" label="默认值" defaultValue="${CURRENT_DATETIME}" inputType="default" />
                         </fields>
                     </page>
                 </do>
