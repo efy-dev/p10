@@ -25,6 +25,15 @@
                 }
             %>
         </h1>
+        <h1 id="personalPage" style="margin-left: 415px;">
+            <%
+                if(MasterUtil.findMaster()!=null && !"".equals(MasterUtil.findMaster().getName()) && MasterUtil.findMaster().getName() != null){
+            %>
+            <a style="font-size: large" href="http://<%=MasterUtil.findMaster().getName()%>.efeiyi.com">查看个人首页</a>
+            <%
+                }
+            %>
+        </h1>
         <span>客服热线：<strong>400-876-8766</strong></span>
     </div>
 </div>
