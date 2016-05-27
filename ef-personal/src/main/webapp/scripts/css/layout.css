@@ -390,7 +390,7 @@ body {
   right: -275px; }
 
 .footernew .servicenew .wechatnew .inro-icon0 {
-  background: url(../images/footernew-icon.jpg) no-repeat 0 0;
+  background: url(../assets/images/footernew-icon.jpg) no-repeat 0 0;
   width: 141px;
   height: 160px;
   position: absolute;
@@ -458,7 +458,7 @@ body {
 .footernew .links a .icon {
   width: 6px;
   height: 12px;
-  background: url(../images/icon-new.png) no-repeat -41px 0;
+  background: url(../assets/images/icon-new.png) no-repeat -41px 0;
   float: left;
   margin: 2px  7px 0 0; }
 
