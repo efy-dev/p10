@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.personal.AuthorizationUtil" %>
 <!DocType html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -22,14 +23,33 @@
 
 <!-- 新头部 -->
 <div class="top2016">
-    <div class="hd">
+    <div class="hd" style="width:1200px;">
         <div class="tips fl"><a class="logo"></a></div>
         <ul class="fr">
+            <li><a href="http://www.efeiyi.com" title="e飞蚁首页">e飞蚁首页</a></li>
             <li><a href="http://mall.efeiyi.com" title="非遗电商">非遗电商</a></li>
             <li><a href="http://master.efeiyi.com" title="非遗大师">非遗大师</a></li>
-            <li><a href="http://j.efeiyi.com/ef-wiki/" title="非遗百科">非遗百科</a></li>
-            <li><a href="http://j.efeiyi.com/ef-gift/" title="非遗礼品">非遗礼品</a></li>
+            <li><a href="http://minglu.efeiyi.com" title="非遗百科">非遗百科</a></li>
+            <li><a href="http://gift.efeiyi.com" title="非遗礼品">非遗礼品</a></li>
             <li><a href="http://www.315cheng.com" title="诚品宝">诚品宝</a></li>
+            <%
+                if (AuthorizationUtil.getMyUser().getId() != null) {
+            %>
+            <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+            <li><a href="<c:url value='/j_spring_cas_security_logout'/>" title="退出">退出</a></li>
+            <%
+                }
+            %>
+
+            <%
+                if (AuthorizationUtil.getMyUser().getId() == null) {
+            %>
+            <li><a href="<c:url value="/sign/sso.do"/>" title="请登录">请登录</a></li>
+            <li><a href="http://passport.efeiyi.com/register?service=http://j.efeiyi.com/ef-gift/sso.do?registeSuccess=/pc/saveEnrollUser.do" title="快速注册">快速注册</a></li>
+            <%
+                }
+            %>
+            <li><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
 
             <%--<li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>--%>
             <%--<li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>--%>
@@ -41,7 +61,7 @@
     </div>
 </div>
 <div class="topv2" style="padding-top: 0;height:86px;">
-    <div class="hd">
+    <div class="hd" style="width:1200px;">
         <div class="tips fl"><a class="logo" href=""><img src="<c:url value="/scripts/images/ef-logo-gf.png" />" alt=""></a></div>
         <div class="fr">
             <form action="http://www.efeiyi.com/search.do" method="get">
@@ -56,7 +76,7 @@
     </div>
 </div>
 <div class="nav2016 bgc">
-    <div class="hd bgf">
+    <div class="hd bgf" style="width:1200px;">
         <div class="navitems">
             <ul>
                 <li><a href="<c:url value='/index'/>" title="">首页</a></li>
@@ -211,6 +231,7 @@
             <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
             <a href="http://www.miitbeian.gov.cn" target="_blank" title=""> <img class="imgfilter" src="<c:url value="/scripts/assets/images/authentication-0.png"/>" alt=""></a>
             <a href="http://www.miitbeian.gov.cn" target="_blank" title="网站域名备案"> <img class="imgfilter" src="<c:url value="/scripts/assets/images/authentication-1.png"/>" alt="网站域名备案"></a>
+            <a href="http://www.baic.gov.cn/" target="_blank" title="企业信用信息备案"> <img class="imgfilter" src="<c:url value="/scripts/assets/images/authentication-2.png"/>" alt="企业信用信息备案"></a>
             <a href="/scripts/images/license.jpg" target="_blank" title="企业营业执照"> <img class="imgfilter" src="<c:url value="/scripts/assets/images/authentication-3.png"/>" alt="企业营业执照 "></a>
         </div>
     </div>

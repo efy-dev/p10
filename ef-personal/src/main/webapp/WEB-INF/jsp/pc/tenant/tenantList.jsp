@@ -1,5 +1,5 @@
-<%@ page import="com.efeiyi.ec.personal.AuthorizationUtil" %>
 <!DocType html>
+<%@ page import="com.efeiyi.ec.personal.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
@@ -16,47 +16,40 @@
 </div>--%>
 <!-- 第一版头部 -->
 <%--<div  class="header-search">--%>
-    <%--<h1><a href="http://www.efeiyi.com"><img src="<c:url value="/scripts/assets/images/images/logo.png"/>"></a></h1>--%>
-    <%--<div class="header-aifeiyi"></div>--%>
-    <%--<div class="header-sj"></div>--%>
+<%--<h1><a href="http://www.efeiyi.com"><img src="<c:url value="/scripts/assets/images/images/logo.png"/>"></a></h1>--%>
+<%--<div class="header-aifeiyi"></div>--%>
+<%--<div class="header-sj"></div>--%>
 <%--</div>--%>
 
 <!-- 新头部 -->
 <div class="top2016">
-    <div class="hd">
+    <div class="hd" style="width:1200px;">
         <div class="tips fl"><a class="logo"></a></div>
         <ul class="fr">
-            <%--<li><a href="http://mall.efeiyi.com" title="非遗电商">非遗电商</a></li>--%>
-            <%--<li><a href="http://master.efeiyi.com" title="非遗大师">非遗大师</a></li>--%>
-            <%--<li><a href="http://j.efeiyi.com/ef-wiki/" title="非遗百科">非遗百科</a></li>--%>
-            <%--<li><a href="http://j.efeiyi.com/ef-gift/" title="非遗礼品">非遗礼品</a></li>--%>
-            <%--<li><a href="http://www.315cheng.com" title="诚品宝">诚品宝</a></li>--%>
+            <li><a href="http://www.efeiyi.com" title="e飞蚁首页">e飞蚁首页</a></li>
+            <li><a href="http://mall.efeiyi.com" title="非遗电商">非遗电商</a></li>
+            <li><a href="http://master.efeiyi.com" title="非遗大师">非遗大师</a></li>
+            <li><a href="http://minglu.efeiyi.com" title="非遗百科">非遗百科</a></li>
+            <li><a href="http://gift.efeiyi.com" title="非遗礼品">非遗礼品</a></li>
+            <li><a href="http://www.315cheng.com" title="诚品宝">诚品宝</a></li>
+            <%
+                if (AuthorizationUtil.getMyUser().getId() != null) {
+            %>
+            <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+            <li><a href="<c:url value='/j_spring_cas_security_logout'/>" title="退出">退出</a></li>
+            <%
+                }
+            %>
 
-                <li><a href="http://www.efeiyi.com" title="e飞蚁首页">e飞蚁首页</a></li>
-                <li><a href="http://mall.efeiyi.com" title="非遗电商">非遗电商</a></li>
-                <li><a href="http://master.efeiyi.com" title="非遗大师">非遗大师</a></li>
-                <li><a href="http://minglu.efeiyi.com" title="非遗百科">非遗百科</a></li>
-                <li><a href="http://gift.efeiyi.com" title="非遗礼品">非遗礼品</a></li>
-                <li><a href="http://www.315cheng.com" title="诚品宝">诚品宝</a></li>
-                <%
-                    if (AuthorizationUtil.getMyUser().getId() != null) {
-                %>
-                <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
-                <li><a href="<c:url value='/j_spring_cas_security_logout'/>" title="退出">退出</a></li>
-                <%
-                    }
-                %>
-
-                <%
-                    if (AuthorizationUtil.getMyUser().getId() == null) {
-                %>
-                <li><a href="<c:url value="/sign/sso.do"/>" title="请登录">请登录</a></li>
-                <li><a href="http://passport.efeiyi.com/register?service=http://j.efeiyi.com/ef-gift/sso.do?registeSuccess=/pc/saveEnrollUser.do" title="快速注册">快速注册</a></li>
-                <%
-                    }
-                %>
-                <li><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
-
+            <%
+                if (AuthorizationUtil.getMyUser().getId() == null) {
+            %>
+            <li><a href="<c:url value="/sign/sso.do"/>" title="请登录">请登录</a></li>
+            <li><a href="http://passport.efeiyi.com/register?service=http://j.efeiyi.com/ef-gift/sso.do?registeSuccess=/pc/saveEnrollUser.do" title="快速注册">快速注册</a></li>
+            <%
+                }
+            %>
+            <li><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
             <%--<li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>--%>
             <%--<li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>--%>
             <%--<li><a href="http://master.efeiyi.com" title="">大 师</a></li>--%>
@@ -67,7 +60,7 @@
     </div>
 </div>
 <div class="topv2" style="padding-top: 0;height:86px;">
-    <div class="hd">
+    <div class="hd" style="width:1200px;">
         <div class="tips fl"><a class="logo" href=""><img src="<c:url value="/scripts/images/ef-logo-gf.png" />" alt=""></a></div>
         <div class="fr">
             <form action="http://www.efeiyi.com/search.do" method="get">
@@ -82,7 +75,7 @@
     </div>
 </div>
 <div class="nav2016 bgc">
-    <div class="hd bgf">
+    <div class="hd bgf" style="width:1200px;">
         <div class="navitems">
             <ul>
                 <li><a href="<c:url value='/index'/>" title="">首页</a></li>
@@ -122,7 +115,7 @@
                         <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-tenant-list" alt="">
                     </c:if>
                     <c:if test="${tenant.favicon == null || '' == tenant.favicon}">
-                        <img src="<c:url value="/scripts/assets/images/newPIC.jpg"/>" alt="">
+                        <img src="<c:url value="/scripts/assets/images/emptyPhoto.jpg"/>" alt="">
                     </c:if>
                     <div class="BG"></div>
                     <p class="txt">
@@ -240,6 +233,6 @@
         </div>
     </div>
 </div>
-    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255887869'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/q_stat.php%3Fid%3D1255887869' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255887869'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/q_stat.php%3Fid%3D1255887869' type='text/javascript'%3E%3C/script%3E"));</script>
 </body>
 </html>
