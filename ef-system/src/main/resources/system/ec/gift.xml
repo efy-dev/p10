@@ -125,6 +125,15 @@
                     execute="com.efeiyi.ec.system.gift.controller.ProductGiftIndustrySolutionHandler"/>
             </does>
         </entity>
+        <entity name="CustomProductGiftMessage" label="企业定制方案请求列表" model="com.efeiyi.ec.gift.model.CustomProductGiftMessage">
+            <does>
+                <do name="plistIndustrySolutionRequest" access="" label="企业定制方案请求列表" result="/gift/industrySolutionRequestList">
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
 
         <entity name="ProductGiftIndustrySolution" label="企业解决方案关联的礼品"
                 model="com.efeiyi.ec.gift.model.ProductGiftIndustrySolution">
