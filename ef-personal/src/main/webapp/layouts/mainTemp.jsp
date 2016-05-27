@@ -45,7 +45,7 @@
     <div class="am-cf admin-main">
         <%----%>
         <jsp:include flush="true"
-                     page="/getMenu.do?jmenuId=tenantMenu&resultPage=/jmenu/tenantManage&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"></jsp:include>
+                     page="/getMenu.do?jmenuId=tenantMenu&resultPage=/jmenu/tenantManage&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
         <div class="admin-content audit" style="height: auto;">
             <sitemesh:write property='body'/>
         </div>
