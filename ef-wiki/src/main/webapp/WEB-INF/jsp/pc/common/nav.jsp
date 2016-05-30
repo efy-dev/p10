@@ -16,7 +16,7 @@
             <li><a href="http://www.efeiyi.com" title="e飞蚁首页">e飞蚁首页</a></li>
             <li><a href="http://mall.efeiyi.com" title="e飞蚁商城">非遗电商</a></li>
             <li><a href="http://master.efeiyi.com" title="非遗大师">非遗大师</a></li>
-            <li><a href="http://baike.efeiyi.com/" title="非遗大师">非遗百科</a></li>
+            <li><a href="http://minglu.efeiyi.com/" title="非遗大师">非遗百科</a></li>
             <li><a href="http://gift.efeiyi.com/" title="非遗礼品">非遗礼品</a></li>
             <li><a href="http://www.315cheng.com" title="诚品宝">诚品宝</a></li>
             <%
@@ -33,7 +33,7 @@
             %>
             <li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>
             <li>
-                <a href="http://passport.efeiyi.com/register?service=http://baike.efeiyi.com/sso.do?registeSuccess=/pc/saveEnrollUser.do"
+                <a href="http://passport.efeiyi.com/register?service=http://minglu.efeiyi.com/sso.do?registeSuccess=/pc/saveEnrollUser.do"
                    title="快速注册">快速注册</a></li>
             <%
                 }

@@ -16,7 +16,7 @@
   <title>非遗百科-e飞蚁</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="description" content="中国领先的非物质文化遗产百科全书">
-  <meta name="keywords" content="非遗百科,百科,非物质文化遗产,文化遗产,传统技艺,传统美术,e飞蚁,非遗电商,前门,前门大街，baike.efeiyi.com">
+  <meta name="keywords" content="非遗百科,百科,非物质文化遗产,文化遗产,传统技艺,传统美术,e飞蚁,非遗电商,前门,前门大街，minglu.efeiyi.com">
   <link rel="stylesheet" href="<c:url value="/scripts/assets/wap/css/myorder.css?t=20160520"/>">
 
 </head>
