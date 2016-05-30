@@ -23,7 +23,18 @@
 <body>
 <div class="home wh">
   <div class="hd">
-
+    <div class="nav-fixed">
+      <a class="logo" href=""><img src="<c:url value="/scripts/images/home-logo.png"/>" alt=""></a>
+      <ul class="items">
+        <li><a href="http://master.efeiyi.com" title=""><i class="icon icon1"></i>非遗大师</a></li>
+        <li><a href="http://minglu.efeiyi.com" title=""><i class="icon icon2"></i>非遗百科</a></li>
+        <li><a href="http://gift.efeiyi.com" title=""><i class="icon icon3"></i>非遗礼品</a></li>
+        <li><a href="http://www.315cheng.com" title=""><i class="icon icon4"></i>诚品宝</a></li>
+        <li><a href="http://mall.efeiyi.com" title=""><i class="icon icon5"></i>非遗电商</a></li>
+        <li><a href="" title=""><i class="icon icon6"></i>产权交易</a></li>
+        <li><a href="" title=""><i class="icon icon7"></i>融艺投</a></li>
+      </ul>
+    </div>
     <!--//End-左侧悬浮导航-->
     <div class="main">
       <div class="form">
