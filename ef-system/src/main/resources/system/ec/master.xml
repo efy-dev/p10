@@ -46,6 +46,13 @@
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
+                <do name="plistMasterECRecommended" access="" label="传承人分页列表"
+                    result="/master/masterRecommendedPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
                 <do name="plistTMaster" access="" label="传承人分页列表"
                     execute="com.efeiyi.ec.system.master.controller.TenantMasterListHandler"
                     result="/tenantMaster/tenantMasterPList">

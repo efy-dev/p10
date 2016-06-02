@@ -64,6 +64,14 @@
                         <condition name="serial" operation="like" label="类别编号" inputType="text"/>
                     </query>
                 </do>
+
+                <do name="plistProjectCategoryRecommended" access="" label="ProjectCategory列表"
+                    result="/projectCategory/ecProjectCategoryRecommendedPList"
+                    execute="com.efeiyi.ec.system.project.controller.ProjectCategoryHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                    </query>
+                </do>
                 <do name="viewEcProjectCategory" label="查看" access="" result="/projectCategory/ecProjectCategoryView"/>
                 <do name="removeProjectCategory" label="删除category" access=""
                     result="redirect:/basic/xm.do?qm=plistProjectCategory_default"/>

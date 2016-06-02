@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="am-form-group">
-      <label for="group" class="am-u-sm-3 am-form-label">类别</label>
+      <label for="group" class="am-u-sm-3 am-form-label">大师</label>
       <div class="am-u-sm-9">
         <ming800:status name="group" dataType="Document.group" checkedValue="${object.group}" type="select"/>
       </div>
