@@ -7,20 +7,6 @@
 <head>
 </head>
 <body>
-<%--<div id="page-header">
-    <div class="page-header-left">
-        <h6 class="page-header-logo"><a href="http://www.efeiyi.com" target="_blank"><img src="<c:url value="/scripts/assets/images/logo.gif" />"></a></h6>
-        <p>中国非遗电商平台-传承人官网</p>
-    </div>
-    <div class="page-header-right"></div>
-</div>--%>
-<!-- 第一版头部 -->
-<%--<div  class="header-search">--%>
-<%--<h1><a href="http://www.efeiyi.com"><img src="<c:url value="/scripts/assets/images/images/logo.png"/>"></a></h1>--%>
-<%--<div class="header-aifeiyi"></div>--%>
-<%--<div class="header-sj"></div>--%>
-<%--</div>--%>
-
 <!-- 新头部 -->
 <div class="top2016">
     <div class="hd" style="width:1200px;">
@@ -50,12 +36,6 @@
                 }
             %>
             <li><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
-            <%--<li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>--%>
-            <%--<li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>--%>
-            <%--<li><a href="http://master.efeiyi.com" title="">大 师</a></li>--%>
-            <%--<li><a href="/ef-wiki/sso.do" title="请登录">请登录</a></li>--%>
-            <%--<li><a href="http://passport.efeiyi.com/register?service=http://j.efeiyi.com/ef-wiki/" title="快速注册">快速注册</a></li>--%>
-            <%--<li><a href="http://www.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>--%>
         </ul>
     </div>
 </div>
@@ -92,16 +72,24 @@
     <div data-am-widget="slider" class="am-slider am-slider-a1 am-banner-q1" data-am-slider='{"directionNav":false}'>
         <ul class="am-slides">
             <li>
-                <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%A7%9A%E6%83%A0%E8%8A%AC%281%29.jpg">
+                <a href="http://yaohuifen.efeiyi.com" target="_blank">
+                    <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%A7%9A%E6%83%A0%E8%8A%AC%281%29.jpg">
+                </a>
             </li>
             <li>
-                <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%BC%A0%E5%90%8C%E7%A6%84%281%29.jpg">
+                <a href="http://zhangtonglu.efeiyi.com" target="_blank">
+                    <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%BC%A0%E5%90%8C%E7%A6%84%281%29.jpg">
+                </a>
             </li>
             <li>
-                <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E6%9C%B1%E7%82%B3%E4%BB%81%282%29.jpg">
+                <a href="http://zhubingren.efeiyi.com" target="_blank">
+                    <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E6%9C%B1%E7%82%B3%E4%BB%81%282%29.jpg">
+                </a>
             </li>
             <li>
+                <a href="http://weilizhong.efeiyi.com" target="_blank">
                 <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E9%AD%8F%E7%AB%8B%E4%B8%ADbanner%281%29.jpg">
+                </a>
             </li>
         </ul>
     </div>
