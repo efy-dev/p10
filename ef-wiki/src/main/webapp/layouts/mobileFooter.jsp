@@ -7,7 +7,7 @@
     <div class="login-reg">
         <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
         <a id="signin"
-           href="http://passport.efeiyi.com/register?service=http://baike.efeiyi.com/sso.do?registeSuccess=/pc/saveEnrollUser.do"
+           href="http://passport.efeiyi.com/register?service=http://minglu.efeiyi.com/sso.do?registeSuccess=/pc/saveEnrollUser.do"
            class="btn-reg"
            >注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
     </div>

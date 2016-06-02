@@ -12,7 +12,7 @@
 <html class="no-js">
 <head>
   <script src="<c:url value="/resources/jquery/jquery.qrcode.min.js"/>"></script>
-    <title></title>
+    <title>${artistry.name}-非遗百科</title>
   <meta name="description" content="中国领先的非物质文化遗产百科全书">
   <meta name="keywords" content="${artistry.name},非遗百科,百科,非物质文化遗产,文化遗产,传统技艺,传统美术,e飞蚁,非遗电商,前门,前门大街">
 </head>
@@ -20,7 +20,7 @@
 <div class="craft-particulars2016">
   <div class="craft-crumbs">
     <div class="particulars">
-      <div class="crumbs"><a href="http://baike.efeiyi.com/" >首页</a><em class="">></em><a href="http://baike.efeiyi.com/" class=""><ming800:status name="type" dataType="Project.type" checkedValue="${artistry.getType()}" type="normal"/></a><a href="" class="present"><em class="present">></em>${artistry.project.name}</a></div>
+      <div class="crumbs"><a href="http://minglu.efeiyi.com/" >首页</a><em class="">></em><a href="http://baike.efeiyi.com/" class=""><ming800:status name="type" dataType="Project.type" checkedValue="${artistry.getType()}" type="normal"/></a><a href="" class="present"><em class="present">></em>${artistry.project.name}</a></div>
     </div>
   </div>
   <div class="user">
@@ -71,11 +71,12 @@
         </c:if>
       </div>
     </div>
+    <a href="http://minglu.efeiyi.com/question" title="题库地图-非遗百科" style="color: #fff;;">题库地图</a>
   </div>
 </div>
 <script type="text/javascript">
   $().ready(function () {
-    var url = "http://baike.efiyi.com/project/${artistry.id}";
+    var url = "http://minglu.efiyi.com/project/${artistry.id}";
     $('#native').qrcode({
       text: url,
             width: 160,
