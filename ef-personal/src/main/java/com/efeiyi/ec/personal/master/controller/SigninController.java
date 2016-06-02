@@ -4,6 +4,8 @@ package com.efeiyi.ec.personal.master.controller;
  * Created by Administrator on 2014/11/13.
  */
 
+import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterUserTemp;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.Professional;
 import com.efeiyi.ec.personal.AuthorizationUtil;
@@ -40,10 +42,22 @@ public class   SigninController extends BaseController {
      * 跳转注册页面
      */
     @RequestMapping("/toRegister.do")
-    public String forward(String result) {
-
+    public String forward(String result , Model model) {
+        if (result != null && !"".equals(result)){
+            MasterUserTemp temp = (MasterUserTemp) baseManager.getObject(MasterUserTemp.class.getName(),result);
+            model.addAttribute("object",temp);
+        }
         return "/register";
     }
+
+
+    //测试所用
+    @RequestMapping("/testLogin.do")
+    public String forwards(String result) {
+
+        return "/testLogin";
+    }
+
 
     @RequestMapping("/Register.do")
     public String Register(Professional professional, Model model){
