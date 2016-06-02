@@ -17,9 +17,10 @@
 <div class="login hd">
     <div class="reg-box">
         <form action="<c:url value="/sign/Register.do"/>" method="post" id="form">
+            <input type="hidden" name="result" value="${object.id}">
             <div class="items">
                 <p>用户名</p>
-                <input class="ipt" type="text" name="username" id="username" onblur="checkUserName()" placeholder=""  />
+                <input class="ipt" type="text" name="username" id="username" onblur="checkUserName()" placeholder="" value="${object.userName}"/>
 
                 <small name="message" style="color: red;line-height: 22px;"></small>
             </div>

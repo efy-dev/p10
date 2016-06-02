@@ -134,6 +134,25 @@ public class TenantController extends BaseMasterController {
 //    }
 
 
+    /*
+    保存临时数据到临时表masterTemp
+     */
+    @RequestMapping("/forwardPage")
+    public String forwardPage(HttpServletRequest request,Model model){
+        try {
+            MasterUserTemp temp = new MasterUserTemp();
+            temp.setUserName(request.getParameter("username"));
+            temp.setLevel(request.getParameter("level"));
+            temp.setProjectName(request.getParameter("projectName"));
+            temp.setPhoneNum(request.getParameter("phoneNum"));
+            baseManager.saveOrUpdate(MasterUserTemp.class.getName(),temp);
+            return "redirect:/sign/toRegister.do?result="+temp.getId();
+        }catch (Exception e){
+            e.printStackTrace();
+            return "";
+        }
+    }
+
     @RequestMapping("/onlyMaster.do")
     public String OnlyMaster() {
         Master master = MasterUtil.findMaster();
