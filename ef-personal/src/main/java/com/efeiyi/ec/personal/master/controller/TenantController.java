@@ -69,6 +69,12 @@ public class TenantController extends BaseMasterController {
     }
 
 
+    @RequestMapping("/subject")
+    public String masterSubject(){
+
+        return "/tenant/masterSubject";
+    }
+
     @ResponseBody
     @RequestMapping("/getTenant.do")
     public Object getTenant(HttpServletRequest request) throws Exception {

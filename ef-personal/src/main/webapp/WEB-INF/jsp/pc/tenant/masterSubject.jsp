@@ -7,20 +7,18 @@
 <head>
 </head>
 <body>
-<%--<div id="page-header">
-    <div class="page-header-left">
-        <h6 class="page-header-logo"><a href="http://www.efeiyi.com" target="_blank"><img src="<c:url value="/scripts/assets/images/logo.gif" />"></a></h6>
-        <p>中国非遗电商平台-传承人官网</p>
-    </div>
-    <div class="page-header-right"></div>
-</div>--%>
-<!-- 第一版头部 -->
-<%--<div  class="header-search">--%>
-<%--<h1><a href="http://www.efeiyi.com"><img src="<c:url value="/scripts/assets/images/images/logo.png"/>"></a></h1>--%>
-<%--<div class="header-aifeiyi"></div>--%>
-<%--<div class="header-sj"></div>--%>
-<%--</div>--%>
 
+<style>
+    .wh {width:100%;min-width:1200px;float:left;position: relative;overflow: hidden;}
+    .master-pro img {position: absolute;top:0;left:50%;margin-left: -960px;z-index: 1;}
+    .master-pro .linkb {width:1200px;position: absolute;top:0;left:50%;margin-left: -600px;z-index: 2;}
+    .master-pro .linkb .link1{width: 314px;height: 70px;position: absolute;top: 419px;left: 180px;}
+    .master-pro .linkb .link2{    width: 158px;
+        height: 158px;
+        position: absolute;
+        top: 327px;
+        left: 522px;}
+</style>
 <!-- 新头部 -->
 <div class="top2016">
     <div class="hd" style="width:1200px;">
@@ -50,12 +48,6 @@
                 }
             %>
             <li><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
-            <%--<li><a href="http://www.efeiyi.com" title="e飞蚁商城">e飞蚁商城</a></li>--%>
-            <%--<li><a href="http://craft.efeiyi.com/ef-wiki/" title="">工 艺</a></li>--%>
-            <%--<li><a href="http://master.efeiyi.com" title="">大 师</a></li>--%>
-            <%--<li><a href="/ef-wiki/sso.do" title="请登录">请登录</a></li>--%>
-            <%--<li><a href="http://passport.efeiyi.com/register?service=http://j.efeiyi.com/ef-wiki/" title="快速注册">快速注册</a></li>--%>
-            <%--<li><a href="http://www.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>--%>
         </ul>
     </div>
 </div>
@@ -80,7 +72,7 @@
             <ul>
                 <li><a href="<c:url value='/index'/>" title="">首页</a></li>
                 <li><a href="<c:url value='/allMaster'/>" target="_blank" title="">全部大师</a></li>
-                <li><a href="<c:url value='/subject'/>" target="_blank" title="">大师入驻</a></li>
+                <li><a href="http://j.efeiyi.com/ef-person" target="_blank" title="">大师入驻</a></li>
             </ul>
         </div>
         <!--//End--导航-->
@@ -88,84 +80,62 @@
 </div>
 
 
-<div style="width:100%;float:left;margin-top: 20px;">
-    <div data-am-widget="slider" class="am-slider am-slider-a1 am-banner-q1" data-am-slider='{"directionNav":false}'>
-        <ul class="am-slides">
-            <li>
-                <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%A7%9A%E6%83%A0%E8%8A%AC%281%29.jpg">
-            </li>
-            <li>
-                <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%BC%A0%E5%90%8C%E7%A6%84%281%29.jpg">
-            </li>
-            <li>
-                <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E6%9C%B1%E7%82%B3%E4%BB%81%282%29.jpg">
-            </li>
-            <li>
-                <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E9%AD%8F%E7%AB%8B%E4%B8%ADbanner%281%29.jpg">
-            </li>
-        </ul>
+<div class="master-pro wh">
+    <div class="wh" style="height:667px;">
+        <div class="linkb"><a class="link1" href="http://j.efeiyi.com/ef-person/" target="_blank" title="马上入住"></a></div>
+        <img src="http://pro.efeiyi.com/subject/m-banner.jpg" alt="">
     </div>
-    <div id="page-section">
-        <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-5.gif" />"></a></div>
-        <div class="page-section-figure">
-            <c:forEach items="${skillList}" var="tenant" varStatus="rec">
-            <div class="img-mutual am-u-sm-4" style="float:left;">
-                <div class="box">
-                    <c:if test="${tenant.favicon != null && '' != tenant.favicon}">
-                        <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-tenant-list" alt="">
-                    </c:if>
-                    <c:if test="${tenant.favicon == null || '' == tenant.favicon}">
-                        <img src="<c:url value="/scripts/assets/images/emptyPhoto.jpg"/>" alt="">
-                    </c:if>
-                    <div class="BG"></div>
-                    <p class="txt">
-                        <div class="img-mutual-text1">
-                            <h1>${tenant.fullName}</h1>
-                    <p>
-                        <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                    <p>[${tenant.masterProjectList[0].project.name}]</p>
-                    <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
-                    </a>
-                    </p>
-                </div>
-                </p>
+    <div class="wh" style="height:620px;">
+        <div class="linkb" style="top:320px;">
+            <div class="wh text" style="text-align: center;line-height:34px;">
+                <p style="font-size: 19px;">手工艺从业者与非遗大师的社交平台，融入资讯、社交、电商等多元化因素，</p>
+                <p style="font-size: 19px;">为手工艺人、非遗大师提供生态晋升体系，</p>
+                <p style="font-size: 19px;">为手工爱好者、收藏者提供了直观学习、欣赏、购买原创手工作品的平台。</p>
             </div>
-                <span class="img-mutual-jump">
-                    <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                        深入了解
-                    </a></span>
         </div>
-        </c:forEach>
+        <img src="http://pro.efeiyi.com/subject/m-img1.jpg" alt="">
     </div>
-</div>
-<div class="page-border"></div>
-<div  class="page-section">
-    <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-6.gif" />"></a></div>
-    <div class="page-section-figure">
-        <c:forEach items="${artList}" var="tenant" varStatus="rec">
-        <div class="img-mutual am-u-sm-4" style="float:left;">
-            <div class="box">
-                <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-tenant-list" alt="">
-                <div class="BG"></div>
-                <p class="txt">
-                    <div class="img-mutual-text1">
-                        <h1>${tenant.fullName}</h1>
-                <p>
-                    <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                <p>[${tenant.masterProjectList[0].project.name}]</p>
-                <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
-                </a>
-                </p>
+    <div class="wh" style="height:666px;"><img src="http://pro.efeiyi.com/subject/m-img2.jpg" alt=""></div>
+    <div class="wh" style="height:1388px;">
+        <div class="linkb" style="top:1325px">
+            <div class="wh text">
+                <p style="font-size:14px;color:#3e3a39;margin-left:20px;">非遗大师个人主页(首页包含大师姓名、形象照、简介、推荐作品展示等)。</p>
             </div>
-            </p>
         </div>
-                <span class="img-mutual-jump">
-                    <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                        深入了解
-                    </a></span>
+        <img src="http://pro.efeiyi.com/subject/m-img3.jpg" alt="">
     </div>
-    </c:forEach>
-</div>
+    <div class="wh" style="height:766px;">
+        <div class="linkb" style="top:581px">
+            <div class="wh text">
+                <p style="font-size:14px;color:#3e3a39;margin-left:20px;width:590px;">简介：全面的展示非遗传承人、大师的个人信息，关联您的出版著作、荣誉证书、艺术年表，<em style="width:42px;height:20px;display: inline-block;">&nbsp;</em>让潜在藏家更加了解您。</p>
+                <p style="font-size:14px;color:#3e3a39;margin-left:20px;width:528px;float: right;margin-top:51px;">作品：上传您的作品，为您和藏家提供一个随时欣赏您作品的空间。</p>
+            </div>
+        </div>
+        <img src="http://pro.efeiyi.com/subject/m-img4.jpg" alt="">
+    </div>
+    <div class="wh" style="height:927px;">
+        <div class="linkb" style="top:687px">
+            <div class="wh text">
+                <p style="font-size:14px;color:#3e3a39;margin-left:20px;width:500px;">资讯：您的个人观点，他人对您的作品、个人等方面的评论，参加的展览活动及
+                    <em style="width:42px;height:20px;display: inline-block;">&nbsp;</em>各媒体对您的报道。</p>
+                <p style="font-size:14px;color:#3e3a39;margin-left:20px;width:528px;position: absolute;top:0;right:83px">工作坊：工作室的视频或图文介绍，外景、内景的全面展示。</p>
+            </div>
+        </div>
+        <img src="http://pro.efeiyi.com/subject/m-img5.jpg" alt="">
+    </div>
+    <div class="wh" style="height:663px;">
+        <div class="linkb" style="position: absolute;color: #fff;z-index:-1;">
+            <span><p>【注册】</p><p>点击我要入驻</p>同意入驻协议<p></p></span>
+            <span><p>【填写/提交信息及资料】</p><p>个人信息，提交资质</p><p>主页设置</p></span>
+            <span><p>【等待e飞蚁审核】</p><p>e飞蚁2个工作日内反馈审核结果</p></span>
+            <span><p>【个人主页开通】</p><p>主页开通</p><p>大师登陆后台</p></span>
+        </div>
+        <img src="http://pro.efeiyi.com/subject/m-img6.jpg" alt="">
+    </div>
+    <div class="wh" style="height:680px;">
+        <div class="linkb"><a class="link2" href="http://j.efeiyi.com/ef-person/" target="_blank" title="马上入住"></a></div>
+        <img src="http://pro.efeiyi.com/subject/m-img7.jpg" alt="">
+    </div>
 </div>
 <%--<div class="page-border-solid"></div>--%>
 <%--</div>--%>

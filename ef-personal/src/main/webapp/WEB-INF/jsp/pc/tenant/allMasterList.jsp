@@ -81,7 +81,7 @@
             <ul>
                 <li><a href="<c:url value='/index'/>" title="">首页</a></li>
                 <li><a href="<c:url value='/allMaster'/>" target="_blank" title="">全部大师</a></li>
-                <li><a href="http://j.efeiyi.com/ef-person" target="_blank" title="">大师入驻</a></li>
+                <li><a href="<c:url value='/subject'/>" target="_blank" title="">大师入驻</a></li>
             </ul>
         </div>
         <!--//End--导航-->
