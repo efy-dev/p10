@@ -111,8 +111,11 @@
                     </query>
 
                 </do>
-
-
+                <do name="plistProjectRecommended" access="" label="工艺项目列表" result="/wikiProject/projectRecommendedList">
+                    <query name="default" label="默认" type="default" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
                 <do name="viewProjectWiki" access="" label="工艺详情" result="/wikiProject/wikiProjectView"/>
                 <do name="saveOrUpdateProjectWiki" label="保存项目列表" access=""
                     result="redirect:/basic/xm.do?qm=plistProjectWiki_default">

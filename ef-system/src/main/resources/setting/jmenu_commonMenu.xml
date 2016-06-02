@@ -32,7 +32,7 @@
                access="admin,operational,c_operational,o_operational,product_manager" state="closed">
             <jnode url="/basic/xm.do?qm=plistBanner_default&amp;groupName=ec.home.banner"
                    access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="上传轮播图">
-                <match url="/basic/xm.do?qm=plistEcBanner_tenant"/>
+                <match url="/basic/xm.do?qm=plistEcBanner_tenanwt"/>
                 <match url="/basic/xm.do?qm=formBanner&amp;groupName=ec.home.banner"/>
                 <match url="/basic/xm.do?qm=plistEcBanner_search"/>
 
@@ -86,6 +86,35 @@
                    access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="首页推荐广告">
                 <match url="/basic/xm.do?qm=plistAdvertisement_default"/>
                 <match url="/basic/xm.do?qm=formAdvertisement"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistGiftSubject_default"
+                   access="admin,operational,c_operational,product_manager,offline_manager" text_zh_CN="大首页推荐礼品">
+                <match url="/basic/xm.do?qm=plistGiftLabel_default"/>
+                <match url="/basic/xm.do?qm=formSubject&amp;type=gift"/>
+                <match url="/basic/xm.do?qm=formGiftLabel&amp;view=editLabel"/>
+                <match url="/basic/xm.do?qm=viewGiftSubject"/>
+                <match url="/basic/xm.do?qm=formSubject&amp;view=gift"/>
+                <match url="/basic/xm.do?qm=formGiftSubject"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistProjectRecommended_default"
+                   access="admin,operational,c_operational,product_manager" text_zh_CN="大首页推荐百科">
+                <match url="/basic/xm.do?qm=plistProjectWiki_default"/>
+                <match url="/basic/xm.do?qm=formWiki&amp;view=wiki"/>
+                <match url="/basic/xm.do?qm=viewProjectWiki&amp;view=masterWork"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistMasterECRecommended_default"
+                   access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="大首页推荐大师">
+                <match url="/basic/xm.do?qm=plistMasterRecommended_default"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistProjectCategoryRecommended_default"
+                   access="admin,operational,c_operational,o_operational,product_manager" text_zh_CN="大首页推荐类别">
+                <match url="/basic/xm.do?qm=plistProjectCategoryRecommended_default"/>
+                <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>
+                <match url="/basic/xm.do?qm=formEcProjectCategory&amp;param=tenant"/>
+                <match url="/basic/xm.do?qm=formProjectCategory&amp;param=tenant"/>
+                <match url="/basic/xm.do?qm=viewEcProjectCategory"/>
+                <match url="/basic/xm.do?qm=plistPCProductModel_default"/>
+
             </jnode>
         </jnode>
         <jnode url="" id="rebateManager" access="admin,operational,c_operational,o_operational,product_manager"

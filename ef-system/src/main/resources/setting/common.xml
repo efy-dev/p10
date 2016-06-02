@@ -19,6 +19,7 @@
         <recommend group="tenantRecommended" recommendedModel="com.efeiyi.ec.tenant.model.Tenant" note="商家推荐" amount="10" />
         <recommend group="categoryRecommended" recommendedModel="com.efeiyi.ec.project.model.ProjectCategory" note="首页类别推荐" amount="5"/>
         <recommend group="projectRecommended" recommendedModel="com.efeiyi.ec.project.model.Project" note="项目推荐" amount="5"/>
+        <recommend group="mainCategoryRecommended" recommendedModel="com.efeiyi.ec.project.model.ProjectCategory" note="大首页类别推荐" amount="8"/>
     </recommends>
     <autoserials>
         <autoserial group="purchaseOrderDelivery" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />

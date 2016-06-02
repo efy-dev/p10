@@ -81,7 +81,20 @@
             <fields>
                 <field name="group" label="类别" inputType="text">
                     <statusType fieldName="group">
-                        <item label="非遗资讯" value="news"/>
+                        <item label="姚惠芬" value="news.yaohuifen"/>
+                        <item label="朱炳仁" value="news.zhubingren"/>
+                        <item label="甘而可" value="news.ganerke"/>
+                        <item label="洪建华" value="news.yaohuifen"/>
+                        <item label="霍庆顺" value="news.huoqingshun"/>
+                        <item label="张同禄" value="news.zhangtonglu"/>
+                        <item label="蔡云娣" value="news.caiyundi"/>
+                        <item label="高水旺" value="news.gaoshuiwang"/>
+                        <item label="嵇锡贵" value="news.jixigui"/>
+                        <item label="胡秋生" value="news.huqiusheng"/>
+                        <item label="魏立中" value="news.weilizhong"/>
+                        <item label="张同禄" value="news.zhangtonglu"/>
+                        <item label="魏立中" value="news.weilizhong"/>
+                        <item label="希热布" value="news.xirebu"/>
                     </statusType>
                 </field>
             </fields>
@@ -92,7 +105,7 @@
                         >
                     <query name="default" label="默认" type="auto" orderBy="id:desc" >
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
-                        <condition name="group" defaultValue="news" operation="eq"/>
+                        <condition name="group" defaultValue="news" operation="like" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="title" operation="likes" label="标题" inputType="text"/>

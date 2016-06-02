@@ -11,6 +11,7 @@
                 <field name="group" label="分组" inputType="text">
                     <statusType fieldName="ef-website" label="电商平台" data="ec-efeiy">
                         <item label="电商首页" value="ec.home.banner"/>
+                        <item label="电商大首页" value="ec.main.banner"/>
                         <item label="陶冶烧造" value="ec.home.banner.tysz"/>
                         <item label="传统美术" value="ec.home.banner.ctms"/>
                         <item label="织染印绣" value="ec.home.banner.zryx"/>
