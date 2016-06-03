@@ -10,7 +10,6 @@
 
 <html>
 <head>
-    <script src="<c:url value="/resources/jquery/jquery.qrcode.min.js"/>"></script>
     <title></title>
 </head>
 <body>
@@ -25,11 +24,14 @@
             </ul>
         </div>
         <div class="scan-img">
-            <div class="scan-img-left"><div id="native" style="float:left;margin-left: 16px;margin-top: 16px;"></div></div>
+            <div class="scan-img-left">
+                <div id="native" style="float:left;margin-left: 16px;margin-top: 16px;"></div>
+            </div>
             <div class="scan-img-right"></div>
         </div>
     </div>
 </div>
+<script src="<c:url value="/resources/jquery/jquery.qrcode.min.js"/>"></script>
 <script>
     $('#native').qrcode({
         render: "div",
