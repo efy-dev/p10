@@ -3,11 +3,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <footer data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
     <div class="am-footer-switch">
-        <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}"><a href="http://www.efeiyi.com" target="_blank"><img src="<c:url value='/scripts/assets/wap/images/logo.gif'/>" width="61" height="23"></a></span>
+        <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}"><a href="http://www.efeiyi.com" target="_blank"><img src="<c:url value='/scripts/images/ef-logo-gf.png'/>" style="width: 35%;"></a></span>
     </div>
-    <div class="am-footer-miscs ">
-        <p><a href="<c:url value='/index'/>">中国非遗电商平台·传承人官网</a></p>
-    </div>
+    <%--<div class="am-footer-miscs ">--%>
+        <%--<p><a href="<c:url value='/index'/>">中国非遗电商平台·传承人官网</a></p>--%>
+    <%--</div>--%>
 </footer>
 <div id="am-footer-modal" class="am-modal am-modal-no-btn am-switch-mode-m am-switch-mode-m-default">
     <div class="am-modal-dialog">
