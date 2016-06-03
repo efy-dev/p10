@@ -6,7 +6,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html class="no-js">
-<head></head>
+<head>
+    <title>${tenant.fullName}-作品列表</title>
+</head>
 <body>
 <!--输入内容-->
 <%--<div class="am-g am-color-000">

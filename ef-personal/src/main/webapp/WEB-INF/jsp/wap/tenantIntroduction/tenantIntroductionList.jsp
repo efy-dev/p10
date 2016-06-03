@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!--输入内容-->
 <head>
+  <title>${tenant.fullName}-简介</title>
 </head>
 <body>
 <div class="am-u-sm-12" id="intro-content1">

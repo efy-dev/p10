@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!--1-->
+<title>${tenant.fullName}-工作坊</title>
 <section class="vessel">
     <c:if test="${workShop.videoPath != null}">
         <div class="video-img-or">

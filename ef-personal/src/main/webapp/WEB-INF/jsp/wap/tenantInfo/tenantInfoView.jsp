@@ -6,7 +6,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
-<head></head>
+<head>
+    <title>${masterNews.title}</title>
+    <meta name="description" content="${masterNews.title}">
+    <meta name="keywords" content="${masterNews.master.fullName}">
+</head>
 <body style="background-color:#F1F5F8">
 <header class="work-details">
     <div class="work-details-i"><a href="<c:url value="/info/list"/>"><img src="<c:url value="/scripts/assets/wap/images/logo10.gif"/>"></a></div>

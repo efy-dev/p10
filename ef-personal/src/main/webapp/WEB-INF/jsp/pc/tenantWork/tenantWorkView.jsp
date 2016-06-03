@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <meta name="description" content="${product.name}">
+    <meta name="keywords" content="${product.productDescription.content}">
 </head>
 <body>
 <!--作品详情-->

@@ -6,7 +6,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html class="no-js">
-<head></head>
+<head>
+  <title>${product.master.fullName}-${product.name}</title>
+</head>
 <body style="background-color:#F1F5F8">
 <header class="work-details">
   <div class="work-details-i"><a href="javascript:history.go(-1)"><img src="<c:url value="/scripts/assets/wap/images/logo10.gif"/>"></a></div>

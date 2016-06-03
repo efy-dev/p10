@@ -3,7 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html class="no-js">
-<head></head>
+<head>
+    <meta name="description" content="${masterNews.title}">
+    <meta name="keywords" content="${masterNews.master.fullName}">
+</head>
+
 <body>
 <!--内容-->
 <!--资讯详情-->

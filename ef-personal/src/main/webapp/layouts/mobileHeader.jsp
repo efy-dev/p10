@@ -7,7 +7,7 @@
         </a>
     </div>
     <h1 class="am-header-title">
-        <a href="<c:url value="/index"/>" class="">e飞蚁—传承人官网</a>
+        <a href="<c:url value="/index"/>" class="">e飞蚁—非遗大师</a>
     </h1>
     <div class="am-header-right am-header-nav">
         <a href="#right-link" class="">
