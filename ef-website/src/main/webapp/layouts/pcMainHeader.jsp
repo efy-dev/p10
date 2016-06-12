@@ -12,8 +12,11 @@
 <META HTTP-EQUIV="Cache-Control" CONTENT="max-age=1920600">
 
 <link type="text/css" rel="stylesheet" href="<c:url value="/resources/assets/css/amazeui.min.css"/>">
-<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/app.css?v=929"/>">
+
+<c:if test="${init!=true}">
 <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/myorder.css?v=929"/>">
-<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/layout.css?v=659"/>">
+<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/app.css?v=929"/>">
+</c:if>
+<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/layout.css?v=20160601"/>">
 
 

@@ -1,0 +1,396 @@
+p{margin: 0;}
+ul,dl {list-style: none;
+    padding: 0;
+    margin: 0;}
+.bd{width:100%;float: left}
+/*--//End--*/
+
+.icon-home {
+    background: url(../images/icon-home.png) no-repeat;
+    -webkit-background-size: 141px auto;
+    background-size: 141px auto;
+    display: inline-block;
+}
+.home .icon-logo {
+    width: 60px;
+    height: 21px;
+    background-position: 0 0;
+}
+
+.home header {
+    height: 44px;
+    padding:7px 80px;
+    position: relative;
+    background: #fff;
+}
+.home header .icon-logo {
+    position: absolute;
+    top:50%;
+    left:10px;
+    margin-top:-11px;
+}
+
+.home header .form form{
+    position: relative;
+    padding-right:30px;
+}
+.home header .form .txt {
+    width:100%;
+    height:30px;
+    line-height:30px;
+    padding:0 10px;
+    border: 1px solid #e6e6e6;
+    border-right:0;
+    float: left;
+}
+.home header .form .btn{
+    width:30px;
+    height:30px;
+    background:transparent;
+    border: 1px solid #e6e6e6;
+    position: absolute;
+    top:0;
+    right:0;
+    z-index:2;
+}
+.home header .form form:after{
+    content: '';
+    width:17px;
+    height:17px;
+    background: url(../images/icon-home.png) no-repeat -34px -31px;
+    -webkit-background-size: 141px auto;
+    background-size: 141px auto;
+    position: absolute;
+    top:50%;
+    right:6px;
+    margin-top:-8px;
+    z-index:1;
+}
+.home header .icons{
+    height:17px;
+    position: absolute;
+    top:50%;
+    right:0;
+    margin-top:-8px;
+}
+.home header .icons .icon-user{
+    background-position: -17px -31px;
+    width:17px;
+    height:17px;
+    float: left;
+    margin-right:13px;
+}
+.home header .icons .icon-cart{
+    background-position: 0 -31px;
+    width:17px;
+    height:17px;
+    float: left;
+    margin-right: 13px;
+}
+.home header .icons .icon-cart span{
+    width:14px;
+    height:10px;
+    line-height:10px;
+    padding:0 3px;
+    background: #f35067;
+    position: absolute;
+    top:-5px;
+    right:5px;
+    font-style: normal;
+    color: #fff;
+    -webkit-border-radius:20px;
+    border-radius:20px;
+}
+.home header .icons .icon-cart span em {
+    width:14px;
+    line-height:10px;
+    -webkit-transform: scale(0.8);
+    font-size:7px;
+    display: inline-block;
+    font-style: normal;
+    position: absolute;
+    top:0;
+    left:0;
+}
+/*--//End--header--*/
+.home .am-control-nav {bottom: 5px;}
+.home .am-control-nav li {margin:0 3px;}
+.home .am-control-nav li a {background:#cecece;box-shadow:none;}
+.home .am-control-nav li a.am-active {background:#f35067}
+.home .am-slider-a4 {margin-bottom: 0;box-shadow:none;}
+/*--//End--am-control-nav--*/
+.home .nav {
+    display: flex;
+    border-top:1px solid #e6e6e6;
+    border-bottom:1px solid #e6e6e6;
+}
+.home .nav a {
+    flex:1;
+    padding:15px 0;
+    text-align: center;
+    font-size:10px;
+    color: #666;
+}
+.home .nav .icon-home{
+    width:22px;
+    height:18px;
+}
+.home .nav .icon1 {background-position: 0 -58px;}
+.home .nav .icon2 {background-position: -22px -58px;}
+.home .nav .icon3 {background-position: -44px -58px;}
+.home .nav .icon4 {background-position: -66px -58px;}
+.home .nav .icon5 {background-position: -88px -58px;}
+/*--//End--nav--*/
+.home .plat,.home .plat dl,.home .plat dt,.home .plat dd{width:100%;float: left;margin-top: 0}
+.home .plat {background: #f5f5f5;}
+.home .plat dt{text-align: center;
+    margin-top:15px;
+    margin-bottom: 10px;}
+.home .plat dt strong{
+    line-height: 13px;
+    font-weight: bold;
+    border:2px solid #000;
+    width:24px;
+    font-size: 10px;
+    color: #000;
+    padding:5px 0;
+    display: inline-block;
+}
+.home .plat dd img {
+    width:100%;
+    float: left;
+}
+.home .plat dd a {
+    width:100%;
+    float: left;
+    position: relative;}
+.home .plat dd .items {
+    width:100%;
+    float: left;
+    border-top: 1px solid #fff;
+}
+
+.home .plat dd .items li:nth-child(odd){
+    float: left;
+}
+.home .plat dd .items li:nth-child(even){
+    float: right;
+}
+.home .plat dd .items li {
+    width: 50%;
+    border: 1px solid #fff;
+    position: relative;
+}
+.home .plat dd .info {
+    width:100%;
+    height:41px;
+    padding:0 10px;
+    position: absolute;
+    left:0;
+    bottom:0;
+    background: url(../images/icon-home.png) repeat-x 0 -132px;
+    -webkit-background-size: 141px auto;
+    background-size: 141px auto;
+}
+.home .plat dd .info p {
+    width:100%;
+    margin:0;
+    color: #fff;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.home .plat dd .info .t1{
+    font-size:10px;
+}
+.home .plat dd .info p.t2{
+    font-size:11px;
+}
+.home .plat dd .more {
+    width:auto;
+    font-size:12px;
+    color: #10366d;
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+.home .master dd .items {
+    border: 0;
+    border-bottom:1px solid #e6e6e6;
+}
+.home .master dd .items li{
+    width:100%;
+    padding:10px 0;
+    border: 0;
+    border-top:1px solid #e6e6e6;
+}
+.home .master dd .items li a {
+    padding-left:131px;
+    padding-right: 10px;
+}
+.home .master dd .items li img {
+    width:114px;
+    height: 80px;
+    position: absolute;
+    top:0;
+    left:10px;
+}
+.home .master dd .items li .master-info {
+    font-size:10px;
+    color: #808080;
+}
+.home .master dd .items li .master-info p {
+    width:100%;
+    line-height:13px;
+    float: left;
+
+}
+.home .master dd .items li .master-info .t1 {
+    color: #333;
+    font-size:11px;
+    margin-bottom: 5px;
+}
+.home .master dd .items li .master-info .t2 {
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    margin-bottom:10px;
+}
+.home .cpb {width:100%;float: left;padding-top:25px;background:#f5f5f5;}
+.home .cpb img {width:100%;float: left;}
+.home .cpb form{background: #efe4db;width:100%;
+    float: left;
+    padding:0 10px 15px 10px;
+    position: relative;}
+.home .cpb form .ctxt{
+    width:100%;
+    height:32px;
+    line-height:32px;
+    padding:0 10px;
+    border: 1px solid #ee7700;
+    font-size:9px;
+}
+.home .cpb form .cbtn{
+    width: 50px;
+    height:32px;
+    line-height:30px;
+    background: #ee7700;
+    border:0;
+    font-size:12px;
+    color: #fff;
+    position: absolute;
+    top:0;
+    right:10px;
+}
+
+.home footer .links{
+    width: 100%;
+    text-align: center;
+    float: left;
+    padding:40px 0;
+    background: #f5f5f5;
+}
+.home footer .links a{
+    width: 40%;
+    line-height: 34px;
+    border: 1px #333 solid;
+    text-align: center;
+    display: inline-block;
+    margin: 0 6px;
+    color: #333;
+    font-size:12px;
+}
+.home footer .item{
+    text-align: center;
+    background: #ebebeb;
+    border-top: 1px solid #e0e0e0;
+    padding:0 20px;
+}
+.home footer .item h3 {
+    line-height:40px;
+    font-size: 12px;
+    color: #333;
+    font-weight:normal;
+    margin-bottom: 0;
+}
+
+.home footer .item .icons{
+    display: flex;
+}
+.home footer .item .icons a {
+    font-size:9px;
+    color: #666;
+}
+.home footer .item .icons span {
+    flex:1;
+    text-align: center;
+    position: relative;
+}
+.home footer .item .icons span:nth-of-type(2):before{
+    content: '';
+    width:1px;
+    height:15px;
+    background: #e6e6e6;
+    position: absolute;
+    top:50%;
+    left:-2px;
+    margin-top:-22px;
+}
+.home footer .item .icons span:nth-of-type(2):after{
+    content: '';
+    width:1px;
+    height:15px;
+    background: #e6e6e6;
+    position: absolute;
+    top:50%;
+    right:-2px;
+    margin-top:-22px;
+}
+
+.home footer .item .icons .icon-home {
+    width:47px;
+    height:36px;
+    display: inline-block;
+}
+.home footer .item .icons .icon1{
+    background-position: 0 -86px;
+}
+.home footer .item .icons .icon2{
+    background-position:-47px -86px;
+}
+.home footer .item .icons .icon3{
+    background-position:-94px -86px;
+}
+
+.home footer .content {
+    padding:0 10px 25px 10px;
+    background: #ebebeb;
+    font-size:11px;
+}
+.home footer .content .wechat {
+    border-top:1px solid #e6e6e6;
+    text-align: center;
+    margin-top:25px;
+    padding-top:25px;
+}
+.home footer .content .wechat h4 {
+    font-size:12px;
+    color: #333333;
+    font-weight:normal;
+    margin:0;
+}
+.home footer .content .wechat .img {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.home footer .content .wechat .img img {
+    width:40%;
+}
+.home footer .copyright {
+    height:16px;
+    line-height:16px;
+    background: #e0e0e0;
+    font-size:9px;
+    text-align: center;
+    color: #333;
+}
+
+
+
+

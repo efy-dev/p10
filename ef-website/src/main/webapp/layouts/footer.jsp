@@ -4,7 +4,9 @@
 <script src="<c:url value="/resources/assets/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/js/ef.util.js"/>"></script>
 <script src="<c:url value="/scripts/js/myorder.js?v=929"/>"></script>
+<c:if test="${init!=true}">
 <script src="<c:url value="/scripts/js/system.js?v=929"/>"></script>
+
 <div class="footernew wh">
     <div class="servicenew wh">
         <div class="hd tct">
@@ -88,11 +90,13 @@
         </div>
     </div>
 </div>
+
 <div class="scroll-bar" style="z-index: 9999">
     <div class="scroll-bar-top">
         <span class="btn"><i class="icon" style="margin-left: 4px;margin-top: 6px;display: block;"></i></span>
     </div>
 </div>
+
 <style type="text/css">
     #MEIQIA-BTN-HOLDER {
         right: 0;bottom: 252px;}
@@ -126,6 +130,7 @@
         margin-top: 6px;
     }
 </style>
+</c:if>
 <!--[if lte IE 8 ]>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
@@ -162,6 +167,7 @@
     })();
 
 </script>
+<c:if test="${init!=true}">
 <script type='text/javascript'>
     (function(m, ei, q, i, a, j, s) {
         m[a] = m[a] || function() {
@@ -175,7 +181,7 @@
     })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
     _MEIQIA('entId', 486);
 </script>
-
+</c:if>
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -9,6 +9,7 @@
     <banners>
         <banner group="master.index" note="传承人首页轮播图" />
         <banner group="ec.home.banner" note="电商轮播图" />
+        <banner group="ec.main.banner" note="大首页轮播图" />
         <banner group="ec.home.banner.tysz" note="陶冶烧造" />
         <banner group="ec.home.banner.ctms" note="传统美术" />
         <banner group="ec.home.banner.zryx" note="织染印绣" />
@@ -33,6 +34,12 @@
         <recommend group="productModelRecommended" recommendedModel="com.efeiyi.ec.product.model.ProductModel" note="推荐分类" amount="5" />
         <recommend group="tenantRecommended" recommendedModel="com.efeiyi.ec.tenant.model.Tenant" note="推荐分类" amount="5" />
         <recommend group="ec.masterRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="推荐分类" amount="6" />
+        <recommend group="mainProductRecommended" recommendedModel="com.efeiyi.ec.product.model.product" note="大首页商品推荐" amount="5"/>
+        <recommend group="mainNewsRecommended" recommendedModel="com.ming800.core.p.model.Document" note="资讯推荐" amount="8"/>
+        <recommend group="mainMasterRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="大首页大师推荐" amount="8"/>
+        <recommend group="mainGiftListRecommended" recommendedModel="com.efeiyi.ec.product.model.Subject" note="大首页礼品推荐" amount="8"/>
+        <recommend group="mainArtistryRecommended" recommendedModel="com.efeiyi.ec.wiki.model.Artistry" note="大首页百科推荐" amount="8"/>
+        <recommend group="mainCategoryRecommended" recommendedModel="com.efeiyi.ec.wiki.model.Artistry" note="大首页类别推荐" amount="8"/>
     </recommends>
     <autoserials>
         <autoserial group="orderSerial" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
