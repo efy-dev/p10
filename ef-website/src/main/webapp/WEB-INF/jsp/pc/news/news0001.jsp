@@ -14,7 +14,6 @@
 
 <div class="wh">
   <div class="help-order">
-
     ${news.get(0).documentContent.content}
   </div>
 </div>

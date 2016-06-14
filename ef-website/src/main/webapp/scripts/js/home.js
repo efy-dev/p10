@@ -1,84 +1,83 @@
 $(function(){
-	//大首页
-	(function(){
-	if($('div').hasClass('home')){
-        var home=$('.home');
-        home.find('.close').click(function(){
-            $(this).parent('.clinks').slideUp(100);
-            return false;
-        });
-        home.find('.imgbg').hover(function(){
-            $(this).stop().animate({'opacity':'0.6'},200)
-        },function () {
-            $(this).stop().animate({'opacity':'1'},200)
-        })
-    }
-	})();
-    //轮播图
-    (function () {
-        var slide=$('#slide2016'),
-            imgLi=slide.find('.img').find('li'),
-            numLi=slide.find('.num').find('li'),
-            timer=null,
-            index=0,
-            iSpeed=3000,
-            imgLigth = imgLi.length,
-            prev = $(".prev"),
-            next = $(".next");
-        //鼠标滑过
-        $("#slide2016").hover(function () {
-            clearInterval(timer);
-            $(".click").stop().animate({opacity:1},500)
-        },function(){
-            timer=setInterval(autoSlide,iSpeed)
-            $(".click").stop().animate({opacity:0},500)
-        });
-        imgLi.eq(0).show();
-        //自动播放
-        timer=setInterval(autoSlide,iSpeed)
-        //按下
-        numLi.mousedown(function () {
-            clearInterval(timer)
-            index=$(this).index();
-            imgLi.eq(index).stop(true).fadeIn().siblings('li').fadeOut();
-            $(this).addClass('active').siblings('li').removeClass('active');
-        });
-        //
-        numLi.mouseup(function () {
-            timer=setInterval(autoSlide,iSpeed);
-            index=$(this).index();
-            imgLi.eq(index).fadeIn().siblings('li').fadeOut()
-            $(this).addClass('active').siblings('li').removeClass('active');
-        });
-
-        //右点击
-        next.click(function () {
-            autoSlide()
-        })
-        //左点击方法
-        prev.click(function () {
-            index--;
-            if(index<0){
-                index = numLi.length-1;
-                play()
-            }else{
-                play()
-            }
-        })
-        //auto方法
-        function autoSlide(){
-            index++;
-            if(index>=numLi.length){index=0}
-            imgLi.eq(index).fadeIn().siblings('li').fadeOut();
-            numLi.eq(index).addClass('active').siblings('li').removeClass('active');
+    //大首页
+    (function(){
+        if($('div').hasClass('home')){
+            var home=$('.home');
+            home.find('.close').click(function(){
+                $(this).parent('.clinks').slideUp(100);
+                return false;
+            });
+            home.find('.imgbg').hover(function(){
+                $(this).stop().animate({'opacity':'0.6'},200)
+            },function () {
+                $(this).stop().animate({'opacity':'1'},200)
+            })
         }
-        function play() {
-            imgLi.eq(index).stop().fadeIn().siblings('li').fadeOut();
-            numLi.eq(index).addClass('active').siblings('li').removeClass('active');
-        }
-
     })();
+    //轮播图
+    /*    (function () {
+     var slide=$('#slide2016'),
+     imgLi=slide.find('.img').find('li'),
+     numLi=slide.find('.num').find('li'),
+     timer=null,
+     index=0,
+     iSpeed=3000,
+     imgLigth = imgLi.length,
+     prev = $(".prev"),
+     next = $(".next");
+     //鼠标滑过
+     $("#slide2016").hover(function () {
+     clearInterval(timer);
+     $(".click").stop().animate({opacity:1},500)
+     },function(){
+     timer=setInterval(autoSlide,iSpeed)
+     $(".click").stop().animate({opacity:0},500)
+     });
+     imgLi.eq(0).show();
+     //自动播放
+     timer=setInterval(autoSlide,iSpeed)
+     //按下
+     numLi.mousedown(function () {
+     clearInterval(timer)
+     index=$(this).index();
+     imgLi.eq(index).stop(true).fadeIn().siblings('li').fadeOut();
+     $(this).addClass('active').siblings('li').removeClass('active');
+     });
+     //
+     numLi.mouseup(function () {
+     timer=setInterval(autoSlide,iSpeed);
+     index=$(this).index();
+     imgLi.eq(index).fadeIn().siblings('li').fadeOut()
+     $(this).addClass('active').siblings('li').removeClass('active');
+     });
 
+     //右点击
+     next.click(function () {
+     autoSlide()
+     })
+     //左点击方法
+     prev.click(function () {
+     index--;
+     if(index<0){
+     index = numLi.length-1;
+     play()
+     }else{
+     play()
+     }
+     })
+     //auto方法
+     function autoSlide(){
+     index++;
+     if(index>=numLi.length){index=0}
+     imgLi.eq(index).fadeIn().siblings('li').fadeOut();
+     numLi.eq(index).addClass('active').siblings('li').removeClass('active');
+     }
+     function play() {
+     imgLi.eq(index).stop().fadeIn().siblings('li').fadeOut();
+     numLi.eq(index).addClass('active').siblings('li').removeClass('active');
+     }
+
+     })();*/
     //全部商品
     (function () {
         var cate=$('#cate'),

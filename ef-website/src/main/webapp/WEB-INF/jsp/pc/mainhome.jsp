@@ -13,6 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>首页</title>
   <link type="text/css" rel="stylesheet" href="<c:url value="/resources/assets/css/amazeui.min.css"/>">
+  <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/layout.css?v=20160601"/>">
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/home.css?v=20160601"/>">
 </head>
 <body style="background:#fff;">
@@ -45,17 +46,17 @@
   </div>
 </div>
 <!--//End--头部-->
-<div class="header2016">
+<div class="header2016 newhead">
   <div class="hd">
     <a href="http://www.efeiyi.com" class="logo"></a>
     <ul class="nav">
-      <li><a href="http://www.efeiyi.com" title="e飞蚁首页">e飞蚁首页</a></li>
+      <li><a href="http://www.efeiyi.com" title="e飞蚁首页">首页</a></li>
       <li><a href="http://mall.efeiyi.com" title="e飞蚁商城">非遗电商</a></li>
       <li><a href="http://master.efeiyi.com" title="非遗大师">非遗大师</a></li>
       <li><a href="http://minglu.efeiyi.com" title="非遗百科">非遗百科</a></li>
       <li><a href="http://gift.efeiyi.com" title="非遗礼品">非遗礼品</a></li>
       <li><a href="http://www.315cheng.com" title="诚品宝">诚品宝</a></li>
-      <li><a href="" title="融艺投">融艺投</a></li>
+      <li><a href="http://ryt.efeiyi.com" title="融艺投">融艺投</a></li>
     </ul>
     <form action="http://mall.efeiyi.com/search.do" method="get">
       <input type="text" value="" name="q" id="q" placeholder="搜索" class="txt">
@@ -69,29 +70,15 @@
 </div>
 <!--//End--logo和搜索-->
 <div id="slide2016" class="slide2016">
-  <div class="img">
-    <div class="click prev"></div>
-    <ul>
-      <c:if test="${not empty bannerList&&fn:length(bannerList)>0}">
+    <div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{"controlNav":false}' data-am-flexslider="{playAfterPaused: 2000}" data-am-slider='{&quot;directionNav&quot;:false}'>
+      <ul class="am-slides" >
+        <c:if test="${not empty bannerList&&fn:length(bannerList)>0}">
         <c:forEach items="${bannerList}" var="banner">
-      <li><a href="<c:url value="${banner.directUrl}"/>" title=""><img src="http://pro.efeiyi.com/${banner.imageUrl}" width="1920" height="" alt=""></a></li>
+        <li><a href="<c:url value="${banner.directUrl}"/>"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
         </c:forEach>
-      </c:if>
-    </ul>
-    <div class="click next"></div>
-  </div>
-  <div class="num">
-    <ul>
-      <%--<li class="active"></li>--%>
-      <%--<li></li>--%>
-      <%--<li></li>--%>
-        <ul>
-          <c:forEach items="${bannerList}" var="banner" varStatus="status">
-            <li class=""></li>
-          </c:forEach>
-        </ul>
-    </ul>
-  </div>
+          </c:if>
+      </ul>
+    </div>
 </div>
 <!--//End--slide2016-->
 <div class="home">
@@ -165,6 +152,7 @@
       <div class="mbody">
         <div class="mlist">
           <c:if test="${not empty masterList&&fn:length(masterList)>0}">
+            <div class="intl"><img src="<c:url value="/scripts/images/intl-efeiyi.png"/>" alt=""/></div>
           <div class="list" style="padding: 26px 20px">
             <dt class="dhead"><a href="http://${masterList.get(0).getName()}.efeiyi.com"><img src="http://tenant.efeiyi.com/${masterList.get(0).getFavicon()}@!pc-main-master-picture" alt=""/></a></dt>
             <dd class="dbody">
@@ -280,13 +268,14 @@
           <c:forEach items="${artistryList}" var="artistry">
           <li>
             <a href="http://minglu.efeiyi.com/project/${artistry.id}" title="" target="">
-              <div class="img"> <img class="imgbg" src="http://wiki-oss.efeiyi.com/${artistry.project.picture_url}@!pc-main-artistry-picture" alt=""></div>
+              <div class="img"> <img class="imgbg" src="http://wiki-oss.efeiyi.com/${artistry.getMainPicture().pictureUrl}@!pc-main-artistry-picture" alt=""></div>
               <div class="info">
                 <p class="txt">${artistry.name}</p>
                 <p class="txt2"><ming800:status name="level" dataType="Project.level"
                                              checkedValue="${artistry.getLevel()}" type="normal"></ming800:status>非遗项目</p>
 
               </div>
+              <div class="intl"><img src="<c:url value="/scripts/images/intl-efeiyi.png"/>" alt=""/></div>
             </a>
           </li>
           </c:forEach>
@@ -308,9 +297,8 @@
     <!--//End--非遗百科-->
     <div class="box cpb" style="margin-top: 25px;">
       <div class="cpimg">
-        <a href="http://www.315cheng.com/"><img class="logo" src="<c:url value="/scripts/images/es-logo.png"/>" alt="诚品宝"/></a>
-        <img class="es-logo" src="<c:url value="/scripts/images/easy.png"/>" alt="融易投"/>
-        <p class="es-yard"><img src="<c:url value="/scripts/images/easy2.png"/>" alt="融易投扫码"/><span>扫码关注订阅号</span></p>
+        <a><img class="logo" src="<c:url value="/scripts/images/es-logo.png"/>" alt="诚品宝"/></a>
+        <img src="<c:url value="/scripts/images/easy.png"/>" alt="" class="ryts"/>
       </div>
       <div class="cptext">
         <p class="chead">打造非遗作品有据可查“身份证”，让非遗作品真假可辨，流传有序</p>
@@ -318,15 +306,35 @@
           诚品宝价值：非遗作品集合二维码、防伪芯片、非遗作品DNA等高科技手段,为非遗作品打造一张数字“身份证”；由非遗大师授权认可，是大师高附加值真品的见证；消费者随时随地可查询非遗作品的真伪及溯源信息。</p>
         <div class="csearch">
           <form action="http://www.315cheng.com/checkLabelPc.do">
-            <input type="text" class="ctxt" name="serial" placeholder="请输入商品防伪码"/>
+            <input type="text" class="ctxt" placeholder="请输入商品防伪码"/>
             <input type="submit" class="cbtn" value=""/>
           </form>
         </div>
-        <div class="ryt"></div>
-        <p class="cbody">融艺投，作为一款面向艺术家和大众的艺术交流与投资的社交APP，引领互联网+艺术新模式。</p>
       </div>
     </div>
     <!--//End--诚品宝-->
+    <%--<!--//End--非遗百科-->--%>
+    <%--<div class="box cpb" style="margin-top: 25px;">--%>
+      <%--<div class="cpimg">--%>
+        <%--<a href="http://www.315cheng.com/"><img class="logo" src="<c:url value="/scripts/images/es-logo.png"/>" alt="诚品宝"/></a>--%>
+        <%--<img class="es-logo" src="<c:url value="/scripts/images/easy.png"/>" alt="融易投"/>--%>
+        <%--<p class="es-yard"><img src="<c:url value="/scripts/images/easy2.png"/>" alt="融易投扫码"/><span>扫码关注订阅号</span></p>--%>
+      <%--</div>--%>
+      <%--<div class="cptext">--%>
+        <%--<p class="chead">打造非遗作品有据可查“身份证”，让非遗作品真假可辨，流传有序</p>--%>
+        <%--<p class="cbody">--%>
+          <%--诚品宝价值：非遗作品集合二维码、防伪芯片、非遗作品DNA等高科技手段,为非遗作品打造一张数字“身份证”；由非遗大师授权认可，是大师高附加值真品的见证；消费者随时随地可查询非遗作品的真伪及溯源信息。</p>--%>
+        <%--<div class="csearch">--%>
+          <%--<form action="http://www.315cheng.com/checkLabelPc.do">--%>
+            <%--<input type="text" class="ctxt" name="serial" placeholder="请输入商品防伪码"/>--%>
+            <%--<input type="submit" class="cbtn" value=""/>--%>
+          <%--</form>--%>
+        <%--</div>--%>
+        <%--<div class="ryt"></div>--%>
+        <%--<p class="cbody">融艺投，作为一款面向艺术家和大众的艺术交流与投资的社交APP，引领互联网+艺术新模式。</p>--%>
+      <%--</div>--%>
+    <%--</div>--%>
+    <%--<!--//End--诚品宝-->--%>
   </div>
 </div>
 <!--//End--home-->

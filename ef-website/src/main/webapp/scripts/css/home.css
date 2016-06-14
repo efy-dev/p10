@@ -81,7 +81,8 @@
   height: 258px;
   float: left;
   margin-left: 24px;
-  margin-bottom: 24px; }
+  margin-bottom: 24px;
+  position: relative; }
 .home .recommend .pro li a:hover {
   color: #333; }
 .home .recommend .pro li .img {
@@ -128,7 +129,8 @@
   width: 282px;
   height: 289px;
   float: left;
-  margin-right: 24px; }
+  margin-right: 24px;
+  position: relative; }
 .home .wiki .partl ul li a {
   color: #333; }
 .home .wiki .partl ul li .img {
@@ -166,10 +168,10 @@
   top: 71px;
   background: url(../images/icon-home2016.png) no-repeat; }
 .home .wiki .partl .prev {
-  background-position: 0 -70px;
+  background-position: 0 -83px;
   left: 12px; }
 .home .wiki .partl .next {
-  background-position: -20px -70px;
+  background-position: -20px -83px;
   right: 12px; }
 .home .wiki .partr {
   width: 282px;
@@ -217,7 +219,7 @@
   color: #333333;
   margin-bottom: 20px; }
 .mform .mpage {
-  padding: 8px 10px;
+  padding: 6px 10px;
   font-size: 14px;
   line-height: 14px;
   color: black;
@@ -258,12 +260,20 @@
   background-position: 0 -9px; }
 .mform .mbtn {
   height: 36px;
-  background: #0ea0c5;
-  color: #fff;
+  color: #0ea0c5;
+  border: 1px solid #0ea0c5;
+  background: #fff;
   font-size: 18px;
   line-height: 36px;
   text-align: center;
-  border: 0; }
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -moz-transition: all 0.2s; }
+.mform .mbtn:hover {
+  background: #0ea0c5;
+  color: #fff; }
 
 .mofg .mhead {
   padding: 30px 0; }
@@ -274,13 +284,14 @@
   font-weight: 500; }
 .mofg .mbody .mlist {
   width: 918px;
-  margin-left: -24px; }
+  margin-left: -24px;
+  position: relative; }
 .mofg .mbody .mlist .list {
   background: #fff;
   margin-left: 24px;
   border: 1px solid #ebebeb;
   width: 895px;
-  padding: 20px; }
+  padding: 26px 20px; }
 .mofg .mbody .mlist .list .dhead {
   width: 415px;
   height: 251px;
@@ -307,9 +318,7 @@
   line-height: 22px;
   margin-bottom: 14px; }
 .mofg .mbody .mlist .list .dbody .mtime .tlist {
-  margin-bottom: 17px;
-  margin-left: 0;
-}
+  margin-bottom: 14px; }
 .mofg .mbody .mlist .list .dbody .mtime .tlist .time {
   font-size: 15px;
   line-height: 15px;
@@ -391,12 +400,10 @@
   height: 109px;
   float: left;
   margin: 24px 0 0 51px; }
-.cpb .cpimg .es-logo {
-  width: 94px;
-  height: 94px;
-  top: 159px;
-  left: 27px;
-  position: absolute; }
+.cpb .cpimg .ryts {
+  position: absolute;
+  bottom: -216px;
+  left: 50px; }
 .cpb .cpimg .es-yard {
   width: 104px;
   height: 94px;
@@ -432,6 +439,8 @@
 .cpb .cptext .csearch .cbtn {
   width: 102px;
   height: 40px;
+  background: url("../images/es-btnh.png"); }
+.cpb .cptext .csearch .cbtn:hover {
   background: url("../images/es-btn.png"); }
 .cpb .cptext .ryt {
   width: 243px;
@@ -471,6 +480,75 @@
   width: 130px;
   height: 32px;
   float: right;
+  border: 1px solid #f35067;
+  background: #fff;
+  color: #f35067;
+  font-size: 18px;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -moz-transition: all 0.2s; }
+
+.enterbtn:hover {
   background: #f35067;
-  color: #fff;
-  font-size: 18px; }
+  color: #fff; }
+
+.intl {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 63px;
+  height: 63px; }
+.intl img {
+  width: 100%;
+  float: left; }
+
+.am-slider-default .am-direction-nav a.am-next {
+  right: 50px; }
+
+.am-slider-default .am-direction-nav a.am-prev {
+  left: 50px; }
+
+.am-slider-default .am-direction-nav .am-prev:before {
+  background: url("../images/next.png") no-repeat 20px 10px;
+  content: ''; }
+
+.am-slider-default .am-direction-nav a.am-next:before {
+  background: url("../images/next.png") no-repeat -82px 10px;
+  content: ''; }
+
+.am-slider-default .am-direction-nav a:before, .am-slider-default .am-direction-nav a.am-prev, .am-slider-default .am-direction-nav a.am-next {
+  width: 70px;
+  height: 70px;
+  background-color: inherit; }
+
+.am-slider-default .am-control-nav {
+  bottom: 20px; }
+
+.am-slider-default .am-control-nav li a.am-active {
+  background-color: #f35067; }
+
+.top2016 li.cart .icon-cart {
+  background: url(../images/icon-home2016.png) no-repeat 0 -218px;
+  width: 58px; }
+
+.home .recommend .pro li:hover .txt, .home .wiki .partl ul li:hover .txt {
+  color: #f35067; }
+
+.newhead {
+  height: 59px; }
+
+.newhead .nav {
+  margin-top: 15px; }
+
+.newhead .nav li {
+  padding: 10px 30px; }
+
+.newhead .logo {
+  width: 182px;
+  height: 58px;
+  background-position: 0 -138px; }
+
+.newhead form {
+  padding: 18px 0; }

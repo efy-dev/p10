@@ -150,8 +150,8 @@
                     <img src="http://tenant.efeiyi.com/${master.getFavicon()}" alt="">
                                 <span class="master-info">
                                     <p class="t1">${master.name}</p>
-                                    <p class="t2">${masterList.get(0).getTitle()}</p>
-                                    <p class="t3">${masterList.get(0).getBrief()}</p>
+                                    <p class="t2">${master.getTitle()}</p>
+                                    <p class="t3">${master.getBrief()}</p>
                                 </span>
                   </a>
                 </li>
@@ -177,7 +177,7 @@
             <c:forEach items="${artistryList}" var="artistry" begin="0" end="3">
               <li>
                 <a href="http://minglu.efeiyi.com/project/${artistry.id}" title="">
-                  <img src="http://wiki-oss.efeiyi.com/${artistry.project.picture_url}@!wiki-project-picture">
+                  <img src="http://wiki-oss.efeiyi.com/${artistry.getMainPicture().pictureUrl}@!wiki-project-picture">
                                 <span class="info">
                                     <p class="t1">&nbsp;</p>
                                     <p class="t2">${artistry.name}</p>
