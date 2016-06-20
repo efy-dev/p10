@@ -97,7 +97,10 @@
     </filter-mapping>
 
     <welcome-file-list>
+        <!--<welcome-file>大师入驻平台访问路径</welcome-file>-->
         <!--<welcome-file>/sign/toRegister.do</welcome-file>-->
+
+        <!--<welcome-file>大师平台访问路径</welcome-file>-->
         <welcome-file>/home.do</welcome-file>
     </welcome-file-list>
 </web-app>
