@@ -49,7 +49,7 @@
 <%--</div>--%>
 
 
-<div id="slide2016" class="slide2016">
+<div id="slide2016" class="slide2016" style="margin-top:20px;">
     <div class="img">
         <ul style="text-align: center">
             <c:forEach items="${bannerList}" var="banner" varStatus="status">

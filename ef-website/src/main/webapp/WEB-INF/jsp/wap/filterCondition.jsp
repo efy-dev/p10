@@ -124,6 +124,8 @@
     myForm.submit();
   }
 </script>
-
+<style type="text/css">
+  .wh {width:100%;min-width:414px;float:left;position:relative;z-index:1}
+</style>
 </body>
 </html>

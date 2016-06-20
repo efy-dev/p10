@@ -4,95 +4,108 @@
 <script src="<c:url value="/resources/assets/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/js/ef.util.js"/>"></script>
 <script src="<c:url value="/scripts/js/myorder.js?v=929"/>"></script>
+<c:if test="${init!=true}">
 <script src="<c:url value="/scripts/js/system.js?v=929"/>"></script>
-<div class="footernew wh">
-    <div class="servicenew wh">
-        <div class="hd tct">
-            <div class=" foremax">
-                <dl class="fore">
-                    <dt>帮助中心</dt>
-                    <dd><a href="<c:url value="/document/helpCenter?group=ec.gwlc"/>" target="_blank">购物流程</a></dd>
-                    <dd><a href="<c:url value="/document/helpCenter?group=ec.zffs"/>" target="_blank">支付方式</a></dd>
-                    <dd><a href="<c:url value="/document/helpCenter?group=ec.psfs"/>" target="_blank">配送方式</a></dd>
-                </dl>
-                <dl class="fore">
-                    <dt>商家服务</dt>
-                    <dd><a href="<c:url value="/document/helpCenter?group=ec.rzxz"/>" target="_blank">入驻须知</a></dd>
-                    <dd><a href="<c:url value="/document/helpCenter?group=ec.rzlc"/>" target="_blank">入驻流程</a></dd>
-                    <dd><a href="<c:url value="/document/helpCenter?group=ec.rzzx"/>" target="_blank">入驻咨询</a></dd>
-                </dl>
-                <dl class="fore">
-                    <dt>售后流程</dt>
-                    <dd><a href="<c:url value="/document/helpCenter?group=ec.thlc"/>" target="_blank">退货流程</a></dd>
-                    <dd><a href="<c:url value="/document/helpCenter?group=ec.hhlc"/>" target="_blank">换货流程</a></dd>
-                </dl>
-                <dl class="fore">
-                    <dt>服务保障</dt>
-                    <dd><a href="<c:url value="/document/helpCenter?group=ec.zpbz"/>" target="_blank">正品保障</a></dd>
-                    <dd><a href="<c:url value="/document/helpCenter?group=ec.shzc"/>" target="_blank">售后政策</a></dd>
-                </dl>
-                <dl class="fore">
-                    <dt>法律声明</dt>
-                    <dd><a href="<c:url value="/document/helpCenter?group=ec.flsm"/>" target="_blank">法律声明</a></dd>
-                    <dd><a href="<c:url value="/document/helpCenter?group=ec.aqjyssm"/>" target="_blank">安全及隐私声明</a></dd>
-                </dl>
-                <div class="wechatnew" title="手机e飞蚁">
-                    <i class="inro-icon0"></i>
-                    <i class="inro-icon"></i>
+    <div class="footernew wh">
+        <div class="servicenew wh">
+            <div class="hd tct">
+                <div class=" foremax">
+                    <div class="foretop"></div>
+                    <dl class="fore">
+                        <dt>帮助中心</dt>
+                        <dd><a href="/document/helpCenter?group=ec.gwlc" target="_blank">购物流程</a></dd>
+                        <dd><a href="/document/helpCenter?group=ec.zffs" target="_blank">支付方式</a></dd>
+                        <dd><a href="/document/helpCenter?group=ec.psfs" target="_blank">配送方式</a></dd>
+                    </dl>
+                    <dl class="fore">
+                        <dt>商家服务</dt>
+                        <dd><a href="/document/helpCenter?group=ec.rzxz" target="_blank">入驻须知</a></dd>
+                        <dd><a href="/document/helpCenter?group=ec.rzlc" target="_blank">入驻流程</a></dd>
+                        <dd><a href="/document/helpCenter?group=ec.rzzx" target="_blank">入驻咨询</a></dd>
+                    </dl>
+                    <dl class="fore">
+                        <dt>售后流程</dt>
+                        <dd><a href="/document/helpCenter?group=ec.thlc" target="_blank">退货流程</a></dd>
+                        <dd><a href="/document/helpCenter?group=ec.hhlc" target="_blank">换货流程</a></dd>
+                    </dl>
+                    <dl class="fore">
+                        <dt>服务保障</dt>
+                        <dd><a href="/document/helpCenter?group=ec.zpbz" target="_blank">正品保障</a></dd>
+                        <dd><a href="/document/helpCenter?group=ec.shzc" target="_blank">售后政策</a></dd>
+                    </dl>
+                    <dl class="fore">
+                        <dt>法律声明</dt>
+                        <dd><a href="/document/helpCenter?group=ec.flsm" target="_blank">法律声明</a></dd>
+                        <dd><a href="/document/helpCenter?group=ec.aqjyssm" target="_blank">安全及隐私声明</a></dd>
+                    </dl>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="max-links wh">
-        <div class="links wh">
-            <a href="<c:url value="/document/aboutUs?group=ec.gywm"/>" target="_blank" title="关于我们">关于我们</a>
-            <a class="line"></a>
-            <a href="<c:url value="/document/aboutUs?group=ec.ptys"/>" target="_blank" title="平台优势">平台优势</a>
-            <a class="line"></a>
-            <a href="<c:url value="/document/aboutUs?group=ec.cpyc"/>" target="_blank" title="诚聘英才">诚聘英才</a>
-            <a class="line"></a>
-            <a href="<c:url value="/document/aboutUs?group=ec.lxwm"/>" target="_blank" title="联系我们">联系我们</a>
-            <a class="line"></a>
-            <a href="<c:url value="/document/aboutUs?group=ec.yjfk"/>" target="_blank" title="意见反馈">意见反馈</a>
-            <a class="line"></a>
-            <a href="<c:url value="/document/aboutUs?group=ec.fyjj"/>" target="_blank" title="非遗简介">非遗简介</a>
-        </div>
-        <div class="copyright wh">
-            <div class="frlinksimg">
-                <div class="simgbox">
-                <strong>战略合作伙伴</strong>
-                <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织" target="_blank"></a><em class="line"></em><a class="icon3" title="中国非物质文化遗产保护协会"></a><em class="line"></em><a class="icon2" title="中国非物质文化遗产保护协会"></a>
+        <div class="max-links wh">
+            <div class="copyright wh">
+                <div class="frlinksimg">
+                    <div class="simgbox">
+                        <strong>战略合作伙伴</strong>
+                        <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织" target="_blank"></a><em
+                            class="line"></em><a class="icon3" title="中国非物质文化遗产保护协会"></a><em class="line"></em><a
+                            class="icon2" title="中国非物质文化遗产保护协会"></a>
+                    </div>
                 </div>
-             </div>
+
+            </div>
+            <div class="links wh">
+                <a href="/document/aboutUs?group=ec.gywm" target="_blank" title="关于我们">关于我们</a>
+                <a class="line"></a>
+                <a href="/document/aboutUs?group=ec.ptys" target="_blank" title="平台优势">平台优势</a>
+                <a class="line"></a>
+                <a href="/document/aboutUs?group=ec.cpyc" target="_blank" title="诚聘英才">诚聘英才</a>
+                <a class="line"></a>
+                <a href="/document/aboutUs?group=ec.lxwm" target="_blank" title="联系我们">联系我们</a>
+                <a class="line"></a>
+                <a href="/document/aboutUs?group=ec.yjfk" target="_blank" title="意见反馈">意见反馈</a>
+                <a class="line"></a>
+                <a href="/document/aboutUs?group=ec.fyjj" target="_blank" title="非遗简介">非遗简介</a>
+            </div>
+            <!--<div class="copyright wh">
+                <div class="phone">
+                    <strong>商家入驻热线</strong>
+                    <em>400-876-8766</em>
+                </div>
+                <div class="frlinks">
+                    <span>友情链接：</span>
+                    <a rel="nofollow" href="http://www.unesco.org.cn/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>
+                    <a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>
+                    <a rel="nofollow" href="" target="_blank" title="中国文化部非物质文化遗产保护司">中国文化部非物质文化遗产保护司</a>
+                    <a rel="nofollow" href="" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>
+                </div>
+                <div class="info">Copyright ? 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
+            </div>-->
+            <div class="wh authentication">
+                <a href="http://www.miitbeian.gov.cn" target="_blank" title=""> <img class="imgfilter"
+                                                                                     src="<c:url value="/scripts/images/authentication-0.png"/>"
+                                                                                     alt=""></a>
+                <a href="http://www.miitbeian.gov.cn" target="_blank" title="网站域名备案"> <img class="imgfilter"
+                                                                                           src="<c:url value="/scripts/images/authentication-1.png"/>"
+                                                                                           alt="网站域名备案"></a>
+                <a href="http://www.baic.gov.cn/" target="_blank" title="企业信用信息备案"> <img class="imgfilter"
+                                                                                         src="<c:url value="/scripts/images/authentication-2.png"/>"
+                                                                                         alt="企业信用信息备案"></a>
+                <a href="/scripts/images/license.jpg" target="_blank" title="企业营业执照"> <img class="imgfilter"
+                                                                                           src="<c:url value="/scripts/images/authentication-3.png"/>"
+                                                                                           alt="企业营业执照 "></a>
                 <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
+            </div>
         </div>
-        <!--<div class="copyright wh">
-            <div class="phone">
-                <strong>商家入驻热线</strong>
-                <em>400-876-8766</em>
-            </div>
-            <div class="frlinks">
-                <span>友情链接：</span>
-                <a rel="nofollow" href="http://www.unesco.org.cn/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>
-                <a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>
-                <a rel="nofollow" href="" target="_blank" title="中国文化部非物质文化遗产保护司">中国文化部非物质文化遗产保护司</a>
-                <a rel="nofollow" href="" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>
-            </div>
-            <div class="info">Copyright ? 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
-        </div>-->
-        <div class="wh authentication">
-            <a href="http://www.miitbeian.gov.cn" target="_blank" title=""> <img class="imgfilter" src="<c:url value="/scripts/images/authentication-0.png"/>" alt=""></a>
-            <a href="http://www.miitbeian.gov.cn" target="_blank" title="网站域名备案"> <img class="imgfilter" src="<c:url value="/scripts/images/authentication-1.png"/>" alt="网站域名备案"></a>
-            <a href="http://www.baic.gov.cn/" target="_blank" title="企业信用信息备案"> <img class="imgfilter" src="<c:url value="/scripts/images/authentication-2.png"/>" alt="企业信用信息备案"></a>
-            <a href="/scripts/images/license.jpg" target="_blank" title="企业营业执照"> <img class="imgfilter" src="<c:url value="/scripts/images/authentication-3.png"/>" alt="企业营业执照 "></a>
+        <div class="newphone">
         </div>
     </div>
-</div>
+
 <div class="scroll-bar" style="z-index: 9999">
     <div class="scroll-bar-top">
         <span class="btn"><i class="icon" style="margin-left: 4px;margin-top: 6px;display: block;"></i></span>
     </div>
 </div>
+
 <style type="text/css">
     #MEIQIA-BTN-HOLDER {
         right: 0;bottom: 252px;}
@@ -126,6 +139,7 @@
         margin-top: 6px;
     }
 </style>
+</c:if>
 <!--[if lte IE 8 ]>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
@@ -162,6 +176,7 @@
     })();
 
 </script>
+<c:if test="${init!=true}">
 <script type='text/javascript'>
     (function(m, ei, q, i, a, j, s) {
         m[a] = m[a] || function() {
@@ -175,7 +190,7 @@
     })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
     _MEIQIA('entId', 486);
 </script>
-
+</c:if>
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -216,7 +231,13 @@
         s.parentNode.insertBefore(mvl, s);
     })();
 </script>
-
+<script>
+    $(function(){
+        $(".foretop").click(function(){
+            $('html,body').animate({'scrollTop':0},500);
+        });
+    })();
+</script>
 <!--//End--右侧返回顶部和在线客服-->
 <div style="display: none">
     <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>

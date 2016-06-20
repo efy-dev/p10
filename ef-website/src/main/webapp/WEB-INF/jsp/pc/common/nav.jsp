@@ -12,7 +12,10 @@
 
 <div class="top2016">
     <div class="hd">
-        <div class="tips fl"><a class="logo"></a></div>
+        <%--<div class="tips fl"><a class="logo"></a></div>--%>
+<%--
+        <div class="tips fl"><a class="logo" ><img src="<c:url value="/scripts/images/ef-logo-mall.png"/>"></a></div>
+--%>
 
         <%--<c:if test="${homepage}">--%>
             <%--<div class="tips fl">欢迎使用e飞蚁-中国最具权威的非遗平台</div>--%>
@@ -22,11 +25,13 @@
         <%--</c:if>--%>
 
         <ul class="fr">
+            <li><a href="http://www.efeiyi.com" title="e飞蚁首页">首页</a></li>
             <li><a href="http://mall.efeiyi.com" title="e飞蚁商城">非遗电商</a></li>
             <li><a href="http://master.efeiyi.com" title="非遗大师">非遗大师</a></li>
             <li><a href="http://j.efeiyi.com/ef-wiki/" title="非遗大师">非遗百科</a></li>
             <li><a href="http://j.efeiyi.com/ef-gift/" title="非遗礼品">非遗礼品</a></li>
             <li><a href="http://www.315cheng.com" title="诚品宝">诚品宝</a></li>
+            <li><a href="http://ryt.efeiyi.com" title="融艺投">融艺投</a></li>
             <li>
 
                 <%
@@ -57,7 +62,7 @@
 </div>
 <div class="topv2" style="padding-top: 0;">
     <div class="hd">
-        <div class="tips fl"><a class="logo"></a></div>
+        <div class="tips fl"><a class="logo" href="http://www.efeiyi.com"><img src="<c:url value="/scripts/images/ef-logo-mall.png"/>"></a></div>
     </div>
 </div>
 <div class="nav2016">
