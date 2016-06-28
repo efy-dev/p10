@@ -20,53 +20,11 @@
 
 
 <!-- //End--topbar-->
-
-<!--//End--focus-new-->
-<%--<div class="wh focus-new">--%>
-<%--<div class="hd">--%>
-<%--<ul class="slider-main">--%>
-<%--<c:forEach items="${bannerList}" var="banner" varStatus="status">--%>
-<%--<c:if test="${status.index==0}">--%>
-<%--<li style="display: block;">--%>
-<%--</c:if>--%>
-<%--<c:if test="${status.index!=0}">--%>
-<%--<li>--%>
-<%--</c:if>--%>
-<%--<a href="<c:url value="${banner.directUrl}"/> " target="_blank"><img--%>
-<%--src="http://pro.efeiyi.com/${banner.imageUrl}" width="1280" height="481"--%>
-<%--alt=""/></a></li>--%>
-<%--</c:forEach>--%>
-<%--</ul>--%>
-<%--<ul class="slider-nav">--%>
-<%--<li class="active"></li>--%>
-<%--<c:forEach items="${bannerList}" var="banner" begin="1">--%>
-<%--<li></li>--%>
-<%--</c:forEach>--%>
-<%--</ul>--%>
-<%--<div class="btn btn-prev" title="上一页"></div>--%>
-<%--<div class="btn btn-next" title="下一页"></div>--%>
-<%--</div>--%>
-<%--</div>--%>
-
-
 <div id="slide2016" class="slide2016" style="margin-top:20px;">
-    <div class="img">
-        <ul style="text-align: center">
+    <div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{"controlNav":false}' data-am-flexslider="{playAfterPaused: 2000}" data-am-slider='{&quot;directionNav&quot;:false}'>
+        <ul class="am-slides" >
             <c:forEach items="${bannerList}" var="banner" varStatus="status">
-                <li>
-                    <a href="<c:url value="${banner.directUrl}"/> " target="_blank" title="非遗"><img
-                            src="http://pro.efeiyi.com/${banner.imageUrl}" width="1920" height="492"
-                            alt="${banner.title}"/></a></li>
-            </c:forEach>
-            <%--<li><a href="" title=""><img src="/scripts/upload/slide2016-1.jpg" alt=""></a></li>--%>
-            <%--<li><a href="" title=""><img src="/scripts/upload/slide2016-2.jpg" alt=""></a></li>--%>
-            <%--<li><a href="" title=""><img src="/scripts/upload/slide2016-3.jpg" alt=""></a></li>--%>
-        </ul>
-    </div>
-    <div class="num">
-        <ul>
-            <c:forEach items="${bannerList}" var="banner" varStatus="status">
-                <li class=""></li>
+            <li><a href="javascript:vido(0)"><img src="http://pro.efeiyi.com/${banner.imageUrl}"></a></li>
             </c:forEach>
         </ul>
     </div>
