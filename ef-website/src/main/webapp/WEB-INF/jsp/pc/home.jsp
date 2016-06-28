@@ -55,7 +55,7 @@
             <c:forEach items="${bannerList}" var="banner" varStatus="status">
                 <li>
                     <a href="<c:url value="${banner.directUrl}"/> " target="_blank" title="非遗"><img
-                            src="http://pro.efeiyi.com/${banner.imageUrl}" width="1280" height="481"
+                            src="http://pro.efeiyi.com/${banner.imageUrl}" width="1920" height="492"
                             alt="${banner.title}"/></a></li>
             </c:forEach>
             <%--<li><a href="" title=""><img src="/scripts/upload/slide2016-1.jpg" alt=""></a></li>--%>
