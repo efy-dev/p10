@@ -18,7 +18,7 @@ ${subject.subjectDescription.content}
 
 <script type="text/javascript">
   $(function(){
-    $("title").html("“华韵礼遇·中国年”大礼包");$("meta[name=description]").attr("content","e飞蚁为中国传统文化打造系列礼物，为您送上原汁原味的节庆文化。");
+//    $("title").html("“华韵礼遇·中国年”大礼包");$("meta[name=description]").attr("content","e飞蚁为中国传统文化打造系列礼物，为您送上原汁原味的节庆文化。");
     $('#btn-buy').on('click',function(){
       $('.dialog').each(function(){
         $(this).show();

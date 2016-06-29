@@ -99,7 +99,7 @@
         <div class="newphone">
         </div>
     </div>
-
+</c:if>
 <div class="scroll-bar" style="z-index: 9999">
     <div class="scroll-bar-top">
         <span class="btn"><i class="icon" style="margin-left: 4px;margin-top: 6px;display: block;"></i></span>
@@ -139,7 +139,7 @@
         margin-top: 6px;
     }
 </style>
-</c:if>
+
 <!--[if lte IE 8 ]>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
@@ -176,7 +176,6 @@
     })();
 
 </script>
-<c:if test="${init!=true}">
 <script type='text/javascript'>
     (function(m, ei, q, i, a, j, s) {
         m[a] = m[a] || function() {
@@ -190,7 +189,6 @@
     })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
     _MEIQIA('entId', 486);
 </script>
-</c:if>
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -238,6 +236,7 @@
         });
     })();
 </script>
+
 <!--//End--右侧返回顶部和在线客服-->
 <div style="display: none">
     <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>

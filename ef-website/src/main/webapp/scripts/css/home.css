@@ -552,3 +552,13 @@
 
 .newhead form {
   padding: 18px 0; }
+.scroll-bar {position:fixed;bottom:184px;right:0;text-align:center;z-index:20}
+.scroll-bar .btn {width:33px;height:53px;line-height:37px;float:left;font-size:12px;border-radius:5px;text-decoration:none;cursor:pointer}
+.scroll-bar .btn .icon {width:23px;display:inline-block;position:relative}
+.scroll-bar-top {width:100%;float:left;margin-bottom:10px;display:none}
+.scroll-bar-top .btn {background:#fff;border:1px solid #ccc;color:#000}
+.scroll-bar-top .btn .icon {background-position:-238px -95px;height:11px}
+.scroll-bar-ask .btn {background:#000;border:1px solid #000;color:#fff}
+.scroll-bar-ask .btn .icon {background-position:-181px -50px;height:18px;top:6px;margin-right:5px}
+.scroll-bar-ask .btn:hover {text-decoration:none;background:#fff;color:#000}
+.scroll-bar-ask .btn:hover .icon {background-position:-204px -50px}

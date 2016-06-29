@@ -299,7 +299,7 @@ public class PurchaseOrderPaymentController {
             //return "/purchaseOrder/paySuccess";
             if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback() != null) {
                 String redirect = URLDecoder.decode(purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback(), "UTF-8");
-                return "redirect:http://" + redirect;
+                return "redirect:" + redirect;
             } else if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType() != null && purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType().equals("3")) {
                 return "redirect:/giftReceive/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
             }else {

@@ -78,6 +78,20 @@ $(function(){
      }
 
      })();*/
+    (function(){
+        $(window).scroll(function(){
+            var _top=$(window).scrollTop();
+            var btnTop=$('.scroll-bar-top');
+            if(_top>200){
+                btnTop.fadeIn();
+            }else{
+                btnTop.fadeOut();
+            }
+            btnTop.bind('click',function(){
+                $('html,body').stop(true).animate({'scrollTop':'0'},300);
+            })
+        })
+    })();
     //全部商品
     (function () {
         var cate=$('#cate'),
