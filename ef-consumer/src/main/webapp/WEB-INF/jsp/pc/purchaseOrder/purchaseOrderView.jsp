@@ -36,7 +36,7 @@
                 <c:if test="${order.orderStatus==1}">
                     <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus"
                                                   checkedValue="${order.orderStatus}" type="normal"/></span><a
-                            class="od-id-btn" href="<%=PConst.HOSTNAME%>/order/pay/${order.id}" title="去付款">去付款</a></p>
+                            class="od-id-btn" href="<%=PConst.NEWWEBURL%>/order/pay/${order.id}" title="去付款">去付款</a></p>
                 </c:if>
             </dd>
         </dl>
@@ -50,14 +50,14 @@
                             <td class="commodity_info1">
                                 <ul class="commodity_info-1">
                                     <li class="l1 informala"><a
-                                            href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}"
+                                            href="<%=PConst.NEWWEBURL%>/product/productModel/${op.productModel.id}"
                                             style="outline: none"><img
                                             src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a>
                                     </li>
                                 </ul>
                             </td>
                             <td class="commodity_price_unit1  price9"><a
-                                    href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">
+                                    href="<%=PConst.NEWWEBURL%>/product/productModel/${op.productModel.id}">
                                     ${op.productModel.product.name}
                                         <c:if test="${op.productModel.product.productModelList.size()>1}">
                                             [${op.productModel.name}]
