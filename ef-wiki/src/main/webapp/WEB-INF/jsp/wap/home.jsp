@@ -24,7 +24,7 @@
 
 <body>
 <header id="header" class="am-header custom-header index-header newheader">
-  <div class="logo"><a class="icon" style="background:none;width:110px;" href="" title="e飞蚁"><img style="width:100%;top: -10px;position: relative;" src="<c:url value="/scripts/assets/wap/images/ef-logo-craft.png?t=20160520"/>" alt=""/></a></div>
+  <div class="logo"><a class="icon" style="background:none;width:100px;" href="" title="e飞蚁"><img style="width:100%;top: -10px;position: relative;" src="<c:url value="/scripts/assets/wap/images/ef-logo-craft.png?t=20160520"/>" alt=""/></a></div>
   <!-- //End--logo-->
   <div class="newsearch">
     <form action="<c:url value='/artistrySearch.do'/>" method="get">

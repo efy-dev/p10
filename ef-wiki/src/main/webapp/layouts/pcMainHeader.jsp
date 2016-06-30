@@ -20,10 +20,11 @@
 <!-- Tile icon for Win8 (144x144 + tile color) -->
 <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
 <meta name="msapplication-TileColor" content="#0e90d2">
-<link type="text/css" rel="stylesheet" href="<c:url value='/resources/assets/css/amazeui.min.css?v=20150831'/>">
-<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/app.css?v=20150831'/>">
-<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/layout.css?v=20150831'/>">
+<link type="text/css" rel="stylesheet" href="<c:url value="/resources/assets/css/amazeui.min.css"/>">
+<%--<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/app.css?v=20150831'/>">--%>
+<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/layout.css?v=20160601'/>">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/craft.css?v=20150831'/>">
+<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/home.css?v=20160601"/>">
 
 <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 <!--[if (gte IE 9)|!(IE)]><!-->

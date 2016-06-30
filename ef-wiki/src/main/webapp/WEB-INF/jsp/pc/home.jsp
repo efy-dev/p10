@@ -67,7 +67,7 @@
             <div class="bd-list"></div>
         </div>
         <ul class="list">
-            <c:forEach items="${artRecommendList}" var="art" begin="0" end="7">
+            <c:forEach items="${artRecommendList}" var="art" begin="0" end="3">
                 <li>
                     <a href="<c:url value="/project/${art.artistry.id}"/>" title="${art.artistry.name}-非遗百科">
                         <img src="http://wiki-oss.efeiyi.com/${art.artistry.getMainPicture().pictureUrl}@!wiki-home-project-picture"
@@ -89,7 +89,7 @@
             <div class="bd-list"></div>
         </div>
         <ul class="list">
-            <c:forEach items="${craftRecommendList}" var="craft" begin="0" end="7">
+            <c:forEach items="${craftRecommendList}" var="craft" begin="0" end="3">
                 <li>
                     <a href="<c:url value="/project/${craft.artistry.id}"/>" title="${craft.artistry.name}-非遗百科">
                         <img src="http://wiki-oss.efeiyi.com/${craft.artistry.getMainPicture().pictureUrl}@!wiki-home-project-picture"

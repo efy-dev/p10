@@ -19,6 +19,7 @@
             <li><a href="http://minglu.efeiyi.com/" title="非遗大师">非遗百科</a></li>
             <li><a href="http://gift.efeiyi.com/" title="非遗礼品">非遗礼品</a></li>
             <li><a href="http://www.315cheng.com" title="诚品宝">诚品宝</a></li>
+            <li><a href="http://ryt.efeiyi.com" title="融艺投">融艺投</a></li>
             <%
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
