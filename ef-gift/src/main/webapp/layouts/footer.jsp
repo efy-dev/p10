@@ -3,6 +3,7 @@
     <div class="servicenew wh">
         <div class="hd tct">
             <div class=" foremax">
+                <div class="foretop"></div>
                 <dl class="fore">
                     <dt>帮助中心</dt>
                     <dd><a href="/document/helpCenter?group=ec.gwlc" target="_blank">购物流程</a></dd>
@@ -30,10 +31,10 @@
                     <dd><a href="/document/helpCenter?group=ec.flsm" target="_blank">法律声明</a></dd>
                     <dd><a href="/document/helpCenter?group=ec.aqjyssm" target="_blank">安全及隐私声明</a></dd>
                 </dl>
-                <div class="wechatnew" title="手机e飞蚁">
-                    <i class="inro-icon0"></i>
-                    <i class="inro-icon"></i>
-                </div>
+                <%--<div class="wechatnew" title="手机e飞蚁">--%>
+                    <%--<i class="inro-icon0"></i>--%>
+                    <%--<i class="inro-icon"></i>--%>
+                <%--</div>--%>
             </div>
         </div>
     </div>
@@ -70,14 +71,27 @@
             <div class="info">Copyright ? 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
         </div>-->
         <div class="wh authentication">
+            <a href="http://www.miitbeian.gov.cn" target="_blank" title=""> <img class="imgfilter"
+                                                                                 src="<c:url value="/scripts/images/authentication-0.png"/>"
+                                                                                 alt=""></a>
+            <a href="http://www.miitbeian.gov.cn" target="_blank" title="网站域名备案"> <img class="imgfilter"
+                                                                                       src="<c:url value="/scripts/images/authentication-1.png"/>"
+                                                                                       alt="网站域名备案"></a>
+            <a href="http://www.baic.gov.cn/" target="_blank" title="企业信用信息备案"> <img class="imgfilter"
+                                                                                     src="<c:url value="/scripts/images/authentication-2.png"/>"
+                                                                                     alt="企业信用信息备案"></a>
+            <a href="/scripts/images/license.jpg" target="_blank" title="企业营业执照"> <img class="imgfilter"
+                                                                                       src="<c:url value="/scripts/images/authentication-3.png"/>"
+                                                                                       alt="企业营业执照 "></a>
             <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
-            <a href="http://www.miitbeian.gov.cn" target="_blank" title=""> <img class="imgfilter" src="/ef-gift/scripts/images/authentication-0.png" alt=""></a>
-            <a href="http://www.miitbeian.gov.cn" target="_blank" title="网站域名备案"> <img class="imgfilter" src="/ef-gift/scripts/images/authentication-1.png" alt="网站域名备案"></a>
-            <a href="http://www.baic.gov.cn/" target="_blank" title="企业信用信息备案"> <img class="imgfilter" src="/ef-gift/scripts/images/authentication-2.png" alt="企业信用信息备案"></a>
-            <a href="/scripts/images/license.jpg" target="_blank" title="企业营业执照"> <img class="imgfilter" src="/ef-gift/scripts/images/authentication-3.png" alt="企业营业执照 "></a>
         </div>
     </div>
+    <div class="newphone">
+        <%--<div class="efy-icon"></div>--%>
+    </div>
+    </div>
 </div>
+
 <!--//End--homenew-->
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/js/jquery.min.js"/>"></script>
@@ -88,3 +102,10 @@
 <script src="/scripts/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <script src="<c:url value="/scripts/js/system.js"/>"></script>
+<script>
+    $(function(){
+        $(".foretop").click(function(){
+            $('html,body').animate({'scrollTop':0},500);
+        });
+    })();
+</script>

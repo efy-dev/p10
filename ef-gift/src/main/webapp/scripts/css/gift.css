@@ -597,3 +597,12 @@
 .screen .gift-red li:hover a {
   background: #facd2f;
 }
+.newphone {
+  width: 74px;
+  height: 146px;
+  position: fixed;
+  right: 40px;
+  bottom: 35px;
+  background: url("../images/newphone.png"), #ededed no-repeat;
+  cursor: pointer;
+  z-index: 999; }
