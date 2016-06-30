@@ -69,29 +69,31 @@
 
 
 <div style="width:100%;float:left;margin-top: 20px;">
-    <div data-am-widget="slider" class="am-slider am-slider-a1 am-banner-q1" data-am-slider='{"directionNav":false}'>
-        <ul class="am-slides">
-            <li>
-                <a href="http://yaohuifen.efeiyi.com" target="_blank">
-                    <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%A7%9A%E6%83%A0%E8%8A%AC%281%29.jpg">
-                </a>
-            </li>
-            <li>
-                <a href="http://zhangtonglu.efeiyi.com" target="_blank">
-                    <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%BC%A0%E5%90%8C%E7%A6%84%281%29.jpg">
-                </a>
-            </li>
-            <li>
-                <a href="http://zhubingren.efeiyi.com" target="_blank">
-                    <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E6%9C%B1%E7%82%B3%E4%BB%81%282%29.jpg">
-                </a>
-            </li>
-            <li>
-                <a href="http://weilizhong.efeiyi.com" target="_blank">
-                <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E9%AD%8F%E7%AB%8B%E4%B8%ADbanner%281%29.jpg">
-                </a>
-            </li>
-        </ul>
+    <div id="slide2016" class="slide2016">
+        <div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{"controlNav":false}' data-am-flexslider="{playAfterPaused: 2000}" data-am-slider='{&quot;directionNav&quot;:false}'>
+            <ul class="am-slides" >
+                <li>
+                    <a href="http://yaohuifen.efeiyi.com" target="_blank">
+                        <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%A7%9A%E6%85%A7%E8%8A%ACbanner%281%29.jpg">
+                    </a>
+                </li>
+                <li>
+                    <a href="http://zhangtonglu.efeiyi.com" target="_blank">
+                        <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%BC%A0%E5%90%8C%E7%A6%84banner%20%E5%89%AF%E6%9C%AC.jpg">
+                    </a>
+                </li>
+                <li>
+                    <a href="http://zhubingren.efeiyi.com" target="_blank">
+                        <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E6%9C%B1%E7%82%B3%E4%BB%81banner.jpg">
+                    </a>
+                </li>
+                <li>
+                    <a href="http://weilizhong.efeiyi.com" target="_blank">
+                        <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E9%AD%8F%E7%AB%8B%E4%B8%ADbanner%20%E5%89%AF%E6%9C%AC.jpg">
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
     <div id="page-section">
         <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-5.gif" />"></a></div>
@@ -222,5 +224,6 @@
     </div>
 </div>
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255887869'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/q_stat.php%3Fid%3D1255887869' type='text/javascript'%3E%3C/script%3E"));</script>
+
 </body>
 </html>

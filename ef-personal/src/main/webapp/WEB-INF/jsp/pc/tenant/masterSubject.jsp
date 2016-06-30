@@ -172,7 +172,7 @@
                 </dl>
                 <div class="wechatnew" title="手机e飞蚁">
                     <i class="inro-icon0"></i>
-                    <i class="inro-icon"></i>
+                    <%--<i class="inro-icon"></i>--%>
                 </div>
             </div>
         </div>

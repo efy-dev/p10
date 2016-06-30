@@ -6,6 +6,30 @@ h1,h2,h3,h4,h5,h6,p,ul,li,dl,dt,dd,input,img{font-size:12px;margin:0;padding:0;l
 a:link,a:visited{color:#000;text-decoration:none; outline:none;}
 a:hover{color:#0b3775;}
 /*字体样式*/
+.am-slider-default .am-direction-nav a.am-next {
+    right: 50px; }
+
+.am-slider-default .am-direction-nav a.am-prev {
+    left: 50px; }
+
+.am-slider-default .am-direction-nav .am-prev:before {
+    background: url("../images/next.png") no-repeat 20px 10px;
+    content: ''; }
+
+.am-slider-default .am-direction-nav a.am-next:before {
+    background: url("../images/next.png") no-repeat -82px 10px;
+    content: ''; }
+
+.am-slider-default .am-direction-nav a:before, .am-slider-default .am-direction-nav a.am-prev, .am-slider-default .am-direction-nav a.am-next {
+    width: 70px;
+    height: 70px;
+    background-color: inherit; }
+
+.am-slider-default .am-control-nav {
+    bottom: 20px; }
+
+.am-slider-default .am-control-nav li a.am-active {
+    background-color: #f35067; }
 .wh { width:100%; float: left;}
 .hd {width:1000px; margin: 0 auto;}
 .Font-type-size-12{font-size:12px;color:#000;}
@@ -14,6 +38,9 @@ a:hover{color:#0b3775;}
 .Font-type-size-18{font-size:18px;color:#000;}
 /*首页-内容样式*/
 /*头部样式*/
+.slide2016{width: 100%;float: left;min-width: 1200px;position: relative;}
+.am-slider-default .am-control-nav {  bottom: 20px; }
+.am-slider-default .am-control-nav li a.am-active { background-color: #f35067; }
 #header{margin:0 auto; width:1000px;height:35px;padding:21px 0 0 15px;}
 #header h1{width:16px;height:15px;margin:0;float:left;font-size: 12px;}
 .logov{width:16px;height:15px;}
