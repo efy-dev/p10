@@ -8,30 +8,30 @@
                 <div class="foretop"></div>
                 <dl class="fore">
                     <dt>帮助中心</dt>
-                    <dd><a href="/document/helpCenter?group=ec.gwlc" target="_blank">购物流程</a></dd>
-                    <dd><a href="/document/helpCenter?group=ec.zffs" target="_blank">支付方式</a></dd>
-                    <dd><a href="/document/helpCenter?group=ec.psfs" target="_blank">配送方式</a></dd>
+                    <dd><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.gwlc" target="_blank">购物流程</a></dd>
+                    <dd><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.zffs" target="_blank">支付方式</a></dd>
+                    <dd><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.psfs" target="_blank">配送方式</a></dd>
                 </dl>
                 <dl class="fore">
                     <dt>商家服务</dt>
-                    <dd><a href="/document/helpCenter?group=ec.rzxz" target="_blank">入驻须知</a></dd>
-                    <dd><a href="/document/helpCenter?group=ec.rzlc" target="_blank">入驻流程</a></dd>
-                    <dd><a href="/document/helpCenter?group=ec.rzzx" target="_blank">入驻咨询</a></dd>
+                    <dd><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.rzxz" target="_blank">入驻须知</a></dd>
+                    <dd><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.rzlc" target="_blank">入驻流程</a></dd>
+                    <dd><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.rzzx" target="_blank">入驻咨询</a></dd>
                 </dl>
                 <dl class="fore">
                     <dt>售后流程</dt>
-                    <dd><a href="/document/helpCenter?group=ec.thlc" target="_blank">退货流程</a></dd>
+                    <dd><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.thlc" target="_blank">退货流程</a></dd>
                     <dd><a href="/document/helpCenter?group=ec.hhlc" target="_blank">换货流程</a></dd>
                 </dl>
                 <dl class="fore">
                     <dt>服务保障</dt>
-                    <dd><a href="/document/helpCenter?group=ec.zpbz" target="_blank">正品保障</a></dd>
-                    <dd><a href="/document/helpCenter?group=ec.shzc" target="_blank">售后政策</a></dd>
+                    <dd><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.zpbz" target="_blank">正品保障</a></dd>
+                    <dd><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.shzc" target="_blank">售后政策</a></dd>
                 </dl>
                 <dl class="fore">
                     <dt>法律声明</dt>
-                    <dd><a href="/document/helpCenter?group=ec.flsm" target="_blank">法律声明</a></dd>
-                    <dd><a href="/document/helpCenter?group=ec.aqjyssm" target="_blank">安全及隐私声明</a></dd>
+                    <dd><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.flsm" target="_blank">法律声明</a></dd>
+                    <dd><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.aqjyssm" target="_blank">安全及隐私声明</a></dd>
                 </dl>
             </div>
         </div>
@@ -49,17 +49,17 @@
 
         </div>
         <div class="links wh">
-            <a href="/document/aboutUs?group=ec.gywm" target="_blank" title="关于我们">关于我们</a>
+            <a href="http://mall.efeiyi.com/document/aboutUs?group=ec.gywm" target="_blank" title="关于我们">关于我们</a>
             <a class="line"></a>
-            <a href="/document/aboutUs?group=ec.ptys" target="_blank" title="平台优势">平台优势</a>
+            <a href="http://mall.efeiyi.com/document/aboutUs?group=ec.ptys" target="_blank" title="平台优势">平台优势</a>
             <a class="line"></a>
-            <a href="/document/aboutUs?group=ec.cpyc" target="_blank" title="诚聘英才">诚聘英才</a>
+            <a href="http://mall.efeiyi.com/document/aboutUs?group=ec.cpyc" target="_blank" title="诚聘英才">诚聘英才</a>
             <a class="line"></a>
-            <a href="/document/aboutUs?group=ec.lxwm" target="_blank" title="联系我们">联系我们</a>
+            <a href="http://mall.efeiyi.com/document/aboutUs?group=ec.lxwm" target="_blank" title="联系我们">联系我们</a>
             <a class="line"></a>
-            <a href="/document/aboutUs?group=ec.yjfk" target="_blank" title="意见反馈">意见反馈</a>
+            <a href="http://mall.efeiyi.com/document/aboutUs?group=ec.yjfk" target="_blank" title="意见反馈">意见反馈</a>
             <a class="line"></a>
-            <a href="/document/aboutUs?group=ec.fyjj" target="_blank" title="非遗简介">非遗简介</a>
+            <a href="http://mall.efeiyi.com/document/aboutUs?group=ec.fyjj" target="_blank" title="非遗简介">非遗简介</a>
         </div>
         <div class="wh authentication">
             <a href="http://www.miitbeian.gov.cn" target="_blank" title=""> <img class="imgfilter"
