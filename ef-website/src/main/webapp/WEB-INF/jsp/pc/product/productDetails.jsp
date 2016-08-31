@@ -107,7 +107,14 @@
             <c:if test="${product.master!=null}">
                 <div class="master-name">
                     <p class="p1"><a href="http://${product.master.name}.efeiyi.com"
-                                     target="_blank"><span>${product.master.fullName}</span></a>[${product.master.getMainProjectName().getProject().getName()}]
+                                     target="_blank"><span>${product.master.fullName}</span></a>
+                        <c:if test="${not empty artistry}">
+                            <a href="http://minglu.efeiyi.com/project/${artistry.id}">[${product.master.getMainProjectName().getProject().getName()}]</a>
+                        </c:if>
+                        <c:if test="${empty artistry}">
+                            [${product.master.getMainProjectName().getProject().getName()}]
+                        </c:if>
+
                     </p>
 
                     <p class="p2"><ming800:status name="level" dataType="Project.level"
@@ -289,19 +296,19 @@
                                             <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
                                                 ${purchaseOrderProduct.purchaseOrderComment.content}
                                                 <%--<c:if test="${not empty purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply}">--%>
-                                                    <%--<div class=" hotel ae">--%>
-                                                        <%--<p><strong>[店家回复]</strong>${purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply.reply}</p>--%>
-                                                        <%--<div class="time ae" >--%>
-                                                            <%--<span>${fn:substring(purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply.createDatetime,0 ,11 )}</span>--%>
-                                                            <%--<span>${fn:substring(purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply.createDatetime,11 ,19 )}</span>--%>
-                                                        <%--</div>--%>
-                                                    <%--</div>--%>
+                                                <%--<div class=" hotel ae">--%>
+                                                <%--<p><strong>[店家回复]</strong>${purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply.reply}</p>--%>
+                                                <%--<div class="time ae" >--%>
+                                                <%--<span>${fn:substring(purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply.createDatetime,0 ,11 )}</span>--%>
+                                                <%--<span>${fn:substring(purchaseOrderProduct.purchaseOrderComment.purchaseOrderBusinessReply.createDatetime,11 ,19 )}</span>--%>
+                                                <%--</div>--%>
+                                                <%--</div>--%>
                                                 <%--</c:if>--%>
                                             </c:if>
                                         </div>
                                         <div class="star">
                                             <c:if test="${empty purchaseOrderProduct.purchaseOrderComment.starts||purchaseOrderProduct.purchaseOrderComment.starts=='5'}">
-                                            <i class="star-icon star-5"></i>
+                                                <i class="star-icon star-5"></i>
                                             </c:if>
                                             <c:if test="${purchaseOrderProduct.purchaseOrderComment.starts=='4'}">
                                                 <i class="star-icon star-4"></i>
@@ -338,9 +345,9 @@
 <div class="dialog-gift" style="display: none;">
     <div class="content">
         <div class="title">
-      <c:if test="${fn:length(product.productModelList)==1}">
-        ${productModel.name}
-      </c:if>
+            <c:if test="${fn:length(product.productModelList)==1}">
+                ${productModel.name}
+            </c:if>
             <c:if test="${fn:length(product.productModelList)>1}">
                 ${product.name}[${productModel.name}]
             </c:if>
@@ -361,19 +368,19 @@
 <!--//End-/*够阿米送礼弹出框*/-->
 <script src="<c:url value="/resources/jquery/jquery.qrcode.min.js"/>"></script>
 <script type="text/javascript">
-        $(function(){
-            $('#btn-gift').bind('click',function(){
-                var $div=$('.dialog-gift');
-                var $close=$div.find('.icon-close');
-                $div.show();
-                $(".nav-new,.header-new,.topbar,.footernew").css("z-index","-1")
-                $close.bind('click',function(){
-                    $div.hide();
-                    $(".nav-new,.header-new,.topbar,.footernew").css("z-index","")
-                });
-                return false;
+    $(function () {
+        $('#btn-gift').bind('click', function () {
+            var $div = $('.dialog-gift');
+            var $close = $div.find('.icon-close');
+            $div.show();
+            $(".nav-new,.header-new,.topbar,.footernew").css("z-index", "-1")
+            $close.bind('click', function () {
+                $div.hide();
+                $(".nav-new,.header-new,.topbar,.footernew").css("z-index", "")
             });
-        })
+            return false;
+        });
+    })
 
     $().ready(function () {
         ajaxRequest("<c:url value="/product/favorite/productFavoriteStatus.do"/>", {"id": "${productModel.id}"}, function (data) {
@@ -497,15 +504,16 @@
 </script>
 <script>
     //    var t = document.getElementById("value").value;
-//    $('#native').qrcode({
-//        render: "div",
-//        text: url,
-//        width: 172,
-//        height: 184
-//    });
+    //    $('#native').qrcode({
+    //        render: "div",
+    //        text: url,
+    //        width: 172,
+    //        height: 184
+    //    });
     $('#btn-gift').bind('click', function () {
-        var t = document.getElementById("value").value;;
-        var url = "http://mall.efeiyi.com/order/giftBuy/${productModel.id}/"+t;
+        var t = document.getElementById("value").value;
+        ;
+        var url = "http://mall.efeiyi.com/order/giftBuy/${productModel.id}/" + t;
         $("#native").html("");
         $('#native').qrcode({
             text: url,
@@ -530,8 +538,8 @@
     _mvq.push(['$setGeneral', 'goodsdetail', '', /*用户名*/ '', /*用户id*/ '']);
     _mvq.push(['$logConversion']);
 
-    _mvq.push(['$addGoods', /*分类id*/ '', /*品牌id*/ '',/*商品名称*/ '${productModel.name}',/*商品ID*/ '${productModel.id}',/*商品售价*/ '${productModel.price}',
-     /*商品图片url*/ 'http://pro.efeiyi.com/${productModel.productModel_url}', /*分类名*/ '${productModel.product.project.name}', /*品牌名*/ '', /*商品库存状态1或是0*/ '${productModel.product.status}', /*网络价*/ '',/*收藏人数*/ '', /*商品下架时间*/ '']);
+    _mvq.push(['$addGoods', /*分类id*/ '', /*品牌id*/ '', /*商品名称*/ '${productModel.name}', /*商品ID*/ '${productModel.id}', /*商品售价*/ '${productModel.price}',
+        /*商品图片url*/ 'http://pro.efeiyi.com/${productModel.productModel_url}', /*分类名*/ '${productModel.product.project.name}', /*品牌名*/ '', /*商品库存状态1或是0*/ '${productModel.product.status}', /*网络价*/ '', /*收藏人数*/ '', /*商品下架时间*/ '']);
     _mvq.push(['$logData']);
 </script>
 </body>

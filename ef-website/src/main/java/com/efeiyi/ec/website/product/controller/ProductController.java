@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.product.controller;
 
+import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.project.model.Project;
@@ -7,6 +8,7 @@ import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.base.util.NormalUtil;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
+import com.efeiyi.ec.wiki.model.Artistry;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
@@ -34,59 +36,65 @@ public class ProductController {
 
 
     @RequestMapping(value = "/productList.do")
-    public ModelAndView listProduct(HttpServletRequest request, ModelMap model) throws Exception{
+    public ModelAndView listProduct(HttpServletRequest request, ModelMap model) throws Exception {
         String id = request.getParameter("id");
-        XQuery xQuery = new XQuery("plistProduct_default",request);
+        XQuery xQuery = new XQuery("plistProduct_default", request);
         List productList = baseManager.listObject(xQuery);
-        model.addAttribute("productList",productList);
-        return  new ModelAndView("/product/productList",model);
+        model.addAttribute("productList", productList);
+        return new ModelAndView("/product/productList", model);
     }
 
 
     @RequestMapping({"/{productId}"})
-    public String viewProduct(@PathVariable String productId, HttpServletRequest request ,Model model){
-        ProductModel productModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),productId);
-        model.addAttribute("productModel",productModel);
+    public String viewProduct(@PathVariable String productId, HttpServletRequest request, Model model) {
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productId);
+        model.addAttribute("productModel", productModel);
         return "/product/productView";
     }
 
     @RequestMapping("/list/{projectId}")
-    public String plistProduct(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception{
+    public String plistProduct(@PathVariable String projectId, HttpServletRequest request, Model model) throws Exception {
         //前端传递projectId
-        XQuery xQuery = new XQuery("plistProductModel_default",request);
+        XQuery xQuery = new XQuery("plistProductModel_default", request);
         xQuery.put("product_project_id", projectId);
-        String sortString= request.getParameter("sort");
+        String sortString = request.getParameter("sort");
         String[] sort = new String[]{};
-        if(sortString!=null&&sortString.length()>0){
+        if (sortString != null && sortString.length() > 0) {
             sort = sortString.split(":");
         }
         String str = null;
         int activeFlag = 0;
-        if(sort.length>0){
+        if (sort.length > 0) {
             str = sort[0];
-            switch(sort[1]){
-                case "price": activeFlag = 1;
+            switch (sort[1]) {
+                case "price":
+                    activeFlag = 1;
                     break;
-                case "popularityAmount": activeFlag = 2;
+                case "popularityAmount":
+                    activeFlag = 2;
                     break;
-                case "saleAmount":  activeFlag = 3;
+                case "saleAmount":
+                    activeFlag = 3;
                     break;
-                case "product.createDateTime":  activeFlag = 4;
+                case "product.createDateTime":
+                    activeFlag = 4;
                     break;
-                default: activeFlag = 0;
+                default:
+                    activeFlag = 0;
             }
         }
-        model.addAttribute("flag",activeFlag);
-        xQuery.addRequestParamToModel(model,request);
+        model.addAttribute("flag", activeFlag);
+        xQuery.addRequestParamToModel(model, request);
         List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
-        Map<ProductModel,String> map = new HashMap<>();
-        Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
-        model.addAttribute("project",project);
-        model.addAttribute("map",map);
-        model.addAttribute("str",str);
-        model.addAttribute("productModelList",productModelList);
+        Map<ProductModel, String> map = new HashMap<>();
+        Project project = (Project) baseManager.getObject(Project.class.getName(), projectId);
+        model.addAttribute("project", project);
+        model.addAttribute("map", map);
+        model.addAttribute("str", str);
+        model.addAttribute("productModelList", productModelList);
         return "/product/productModelList";
     }
+
     @RequestMapping(value = "/getProduct.do")
     public String getProduct(HttpServletRequest request, Model model) {
         String id = request.getParameter("id");
@@ -97,6 +105,7 @@ public class ProductController {
 
     /**
      * 产品收藏
+     *
      * @param request
      * @return
      * @throws Exception
@@ -118,6 +127,7 @@ public class ProductController {
         }
         return flag;
     }
+
     /**
      * 爆款推荐
      */
@@ -125,49 +135,54 @@ public class ProductController {
     public String recommendation(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         Project project = productModel.getProduct().getProject();
-        XQuery xQuery = new XQuery("listProductModel_default",request);
+        XQuery xQuery = new XQuery("listProductModel_default", request);
         xQuery.put("product_project_id", project.getId());
-        List<ProductModel> productModelList =  baseManager.listObject(xQuery);
-        Map<ProductModel,String> map = new HashMap<>();
+        List<ProductModel> productModelList = baseManager.listObject(xQuery);
+        Map<ProductModel, String> map = new HashMap<>();
         model.addAttribute("productModelList", productModelList);
         model.addAttribute("productModel", productModel);
-        model.addAttribute("map",map);
+        model.addAttribute("map", map);
         return "/product/recommendationList";
     }
+
     /**
      * 删除收藏产品
+     *
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping({"/removeProductFavorite.do"})
     @ResponseBody
-    public boolean removeProductFavorite(HttpServletRequest request) throws Exception{
+    public boolean removeProductFavorite(HttpServletRequest request) throws Exception {
         String productModelId = request.getParameter("id");
-        XQuery xQuery = new XQuery("listProductFavorite_default",request);
+        XQuery xQuery = new XQuery("listProductFavorite_default", request);
         MyUser currentUser = AuthorizationUtil.getMyUser();
         xQuery.put("user_id", currentUser.getId());
-        xQuery.put("productModel_id",productModelId);
-        List<Object> productFavoriteList =  baseManager.listObject(xQuery);
-        ProductFavorite p = (ProductFavorite)productFavoriteList.get(0);
-        baseManager.remove(ProductFavorite.class.getName(),p.getId());
+        xQuery.put("productModel_id", productModelId);
+        List<Object> productFavoriteList = baseManager.listObject(xQuery);
+        ProductFavorite p = (ProductFavorite) productFavoriteList.get(0);
+        baseManager.remove(ProductFavorite.class.getName(), p.getId());
         return true;
     }
 
     /**
      * 查看收藏产品
+     *
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping({"/favorite/list"})
-    public List<Object> listProductFavorite(HttpServletRequest request) throws Exception{
-        XQuery xQuery = new XQuery("plistProductFavorite_default",request);
+    public List<Object> listProductFavorite(HttpServletRequest request) throws Exception {
+        XQuery xQuery = new XQuery("plistProductFavorite_default", request);
         List<Object> objectList = baseManager.listObject(xQuery);
         return objectList;
     }
 
-    /**商品详情
+    /**
+     * 商品详情
+     *
      * @param request
      * @return
      * @throws Exception
@@ -175,90 +190,106 @@ public class ProductController {
     @RequestMapping({"/productModel/{productModelId}"})
     public String productDetalis(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
-        productModel.setPopularityAmount(productModel.getPopularityAmount()==null?1:productModel.getPopularityAmount()+1);
-        baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
+        productModel.setPopularityAmount(productModel.getPopularityAmount() == null ? 1 : productModel.getPopularityAmount() + 1);
+        baseManager.saveOrUpdate(ProductModel.class.getName(), productModel);
         Product product = productModel.getProduct();
         Project project = product.getProject();
-        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
+        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default", request);
         purchaseOrderProductQuery.put("productModel_id", productModelId);
         List<Object> purchaseOrderProductList = new ArrayList<Object>();
-        try{
+        try {
             purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
-            if(purchaseOrderProductList!=null&&purchaseOrderProductList.size()>0){
-                for(int i=0;i<purchaseOrderProductList.size();i++){
-                    PurchaseOrder purchaseOrder = ((PurchaseOrderProduct)purchaseOrderProductList.get(i)).getPurchaseOrder();
-                    if(purchaseOrder.getId()==null||purchaseOrder.getUser()==null||purchaseOrder.getUser().getUsername()==null){
+            if (purchaseOrderProductList != null && purchaseOrderProductList.size() > 0) {
+                for (int i = 0; i < purchaseOrderProductList.size(); i++) {
+                    PurchaseOrder purchaseOrder = ((PurchaseOrderProduct) purchaseOrderProductList.get(i)).getPurchaseOrder();
+                    if (purchaseOrder.getId() == null || purchaseOrder.getUser() == null || purchaseOrder.getUser().getUsername() == null) {
                         purchaseOrderProductList.remove(i);
                     }
                 }
-                if(purchaseOrderProductList!=null&&purchaseOrderProductList.size()>0){
+                if (purchaseOrderProductList != null && purchaseOrderProductList.size() > 0) {
                     Collections.reverse(purchaseOrderProductList);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             purchaseOrderProductList = null;
         }
-        model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
-        XQuery productPicturexQuery = new XQuery("listProductPicture_default",request);
-        productPicturexQuery.put("product_id",product.getId());
+        model.addAttribute("purchaseOrderProductList", purchaseOrderProductList);
+        XQuery productPicturexQuery = new XQuery("listProductPicture_default", request);
+        productPicturexQuery.put("product_id", product.getId());
         List<Object> productPictureList = baseManager.listObject(productPicturexQuery);
-        model.addAttribute("productPictureList",productPictureList);
+        model.addAttribute("productPictureList", productPictureList);
         List<ProductModel> productModelListTmp = product.getProductModelList();
         List<ProductPicture> productPictures = product.getProductPictureList();
         ProductPicture productPicture = new ProductPicture();
         if (productPictures != null && productPictures.size() > 0) {
             for (ProductPicture p : productPictures) {
-                if("2".equals(p.getStatus())){
+                if ("2".equals(p.getStatus())) {
                     productPicture = p;
                     break;
                 }
             }
         }
+
+        if (productModel != null) {
+            String hql = "select obj from Artistry obj where obj.project.id=:projectId";
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            param.put("projectId", productModel.getProduct().getProject().getId());
+            List<Artistry> artistries = baseManager.listObject(hql, param);
+            if (artistries != null && !artistries.isEmpty()) {
+                model.addAttribute("artistry", artistries.get(0));
+            }
+        }
+
         model.addAttribute("productModelList", productModelListTmp);
         model.addAttribute("productModel", productModel);
         model.addAttribute("product", product);
-        model.addAttribute("productPicture",productPicture);
-        model.addAttribute("productPictures",productPictures);
-        model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
-        model.addAttribute("project",project);
+        model.addAttribute("productPicture", productPicture);
+        model.addAttribute("productPictures", productPictures);
+        model.addAttribute("purchaseOrderProductList", purchaseOrderProductList);
+        model.addAttribute("project", project);
         return "/product/productDetails";
     }
-    /**商品收藏状态判断
+
+    /**
+     * 商品收藏状态判断
+     *
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping({"/favorite/productFavoriteStatus.do"})
     @ResponseBody
-    public Boolean productFavoriteStatus(HttpServletRequest request) throws Exception{
+    public Boolean productFavoriteStatus(HttpServletRequest request) throws Exception {
         MyUser currentUser = AuthorizationUtil.getMyUser();
         Boolean flag = false;
         if (currentUser.getId() != null) {
             String productModelId = request.getParameter("id");
-            XQuery xQuery = new XQuery("listProductFavorite_default",request);
+            XQuery xQuery = new XQuery("listProductFavorite_default", request);
             xQuery.put("user_id", currentUser.getId());
             xQuery.put("productModel_id", productModelId);
-            List<ProductFavorite> productFavoriteList =  baseManager.listObject(xQuery);
-            if(productFavoriteList!=null&&productFavoriteList.size()>0){
-                if("1".equals(productFavoriteList.get(0).getStatus())){
+            List<ProductFavorite> productFavoriteList = baseManager.listObject(xQuery);
+            if (productFavoriteList != null && productFavoriteList.size() > 0) {
+                if ("1".equals(productFavoriteList.get(0).getStatus())) {
                     flag = true;
                 }
             }
         }
         return flag;
     }
+
     /**
      * 根据projectId取推荐商品
+     *
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping({"/recommend/listProductModel.do"})
     @ResponseBody
-    public List<Object> listProjectProduct(HttpServletRequest request) throws Exception{
+    public List<Object> listProjectProduct(HttpServletRequest request) throws Exception {
         String projectId = request.getParameter("projectId");
-        XQuery xQuery = new XQuery("listProductModel_projectIdRecommend",request);
-        xQuery.put("product_project_id",projectId);
+        XQuery xQuery = new XQuery("listProductModel_projectIdRecommend", request);
+        xQuery.put("product_project_id", projectId);
         List<Object> productModelList = baseManager.listObject(xQuery);
         return productModelList;
     }
