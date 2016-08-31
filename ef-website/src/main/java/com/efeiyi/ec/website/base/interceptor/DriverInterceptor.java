@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.base.interceptor;
 
+import com.ming800.core.util.CookieTool;
 import com.ming800.core.util.HttpUtil;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -17,11 +18,20 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
             throws Exception {
         if (mav != null && mav.getViewName() != null && !mav.getViewName().startsWith("redirect") && !mav.getViewName().startsWith("forward")) {
 
+
             if (!HttpUtil.isPhone(request.getHeader("User-Agent"))) {
                 mav.setViewName("/pc" + mav.getViewName());
             } else {
                 mav.setViewName("/wap" + mav.getViewName());
             }
+
+            String url = request.getRequestURL().toString();
+            if (url.startsWith("http://minglu2.efeiyi.com/".toLowerCase()) && !url.endsWith("login")) {
+                mav.setViewName("/wiki/jsp" + mav.getViewName());
+            } else if (url.startsWith("http://i2.efeiyi.com/".toLowerCase()) && !url.endsWith("login")) {
+                mav.setViewName("/consumer/jsp" + mav.getViewName());
+            }
+
         }
         response.setHeader("X-Frame-Options", "");
     }
@@ -29,10 +39,18 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获取当前请求的路径
+        CookieTool.addCookie(response, "JSESSIONID", request.getRequestedSessionId(), 100000, "efeiyi.com");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
-
+        String url = request.getRequestURL().toString();
+        if (url.equalsIgnoreCase("http://minglu2.efeiyi.com/")) {
+            response.sendRedirect("http://minglu2.efeiyi.com/minglu");
+            return false;
+        } else if (url.equalsIgnoreCase("http://i2.efeiyi.com/")) {
+            response.sendRedirect("http://i2.efeiyi.com/order/myEfeiyi/list.do");
+            return false;
+        }
         return true;
     }
 

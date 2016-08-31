@@ -22,6 +22,8 @@
         <banner group="ec.home.banner.yyys" note="医药养生" />
         <banner group="ec.home.banner.wfsb" note="文房四宝" />
         <banner group="ec.home.banner.cysh" note="创意生活" />
+        <banner group="wiki.pc.dynamic" note="wiki动态轮播图" />
+        <banner group="wiki.wap.dynamic" note="wiki动态轮播图" />
     </banners>
     <!-- 文档 -->
     <documents>

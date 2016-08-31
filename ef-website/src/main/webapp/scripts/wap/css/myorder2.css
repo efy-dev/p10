@@ -1,0 +1,272 @@
+@charset "utf-8";
+body,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd,img,input,a,p,strong,em,i{margin:0;padding:0;font-family:"Microsoft YaHei"}
+strong,b,em {font-weight:normal;font-style: normal;}
+img {border:0}
+ul,dl{list-style:none}
+/*--//End--reset*/
+/*0202个人中心 myorder*/
+@media (min-width: 510px) {
+    body{width: 640px;margin:0 auto}
+}
+.myorder{padding: 0 19px;width: 100%;}
+.myorder .order-head{padding:20px 0;overflow: hidden;height: auto}
+.myorder .order-head dt{float: left;width: 17%;height: 17%;}
+.myorder .order-head dd{font-size:0.9rem;float: left;padding-left: 30px;}
+.myorder .myfunction{overflow: hidden;}
+.myorder  .marctive{margin:0;}
+.myorder .myfunction ul{padding:20px 0;width: 100%;overflow: hidden;height: auto}
+.myorder .myfunction ul li{text-align: center;font-size: 0.9rem;color: #000;float: left;padding: 0;}
+.myorder .myfunction .ac-ave{margin-left: -1px;}
+.myorder .myfunction .ac-ave1{margin-left: -2px;}
+.myorder .myfunction  a{background-color:#fff; border:1px solid  #000;padding:7px 0;float:left;color: #000;margin: 0 auto;width: 100%}
+.myorder .myfunction  a:hover{background: #000;color: #fff;transition: all 0.5s;}
+.myorder .myfunction  button p{color:#000;text-align: center;}
+.myorder .order-list{width: 100%;border:1px solid #ccc;margin:18px 0;overflow: hidden;height: auto}
+.myorder .list-topic{width: 100%;border-bottom:1px solid #ccc;overflow: hidden;padding: 10px 0;height: auto}
+.myorder .list-topic h2{float: left;font-size: 1.2rem;padding-left: 0.8rem;font-weight: 100;}
+.myorder .list-topic span{float:right;font-size: 1.2rem;padding-right: 1.8rem;position: relative;}
+.myorder .list-topic .jt-bg{background: url("../images/myorder.fw.png") no-repeat ;position: absolute;width: 7px;height: 13px;right: .8rem;top:18%;}
+.myorder .list-topic span a{font-size: 1.2rem;color: #000;}
+.myorder .list-pege .state{width: 100%;float: left;text-align: right;font-size: 1rem;padding: .5rem 0;}
+.myorder .list-pege .state .clo-1{color: #ccc;}
+.myorder .list-pege .state .clo-2{color: #ff0000}
+.myorder .list-pege{padding: 0 7px;margin-bottom: 15px;}
+.myorder .list-pege ul{width: 100%;padding-top: 16px;overflow: hidden;height: auto}
+.myorder .list-pege ul li{margin-bottom:.8rem}
+.myorder .list-pege ul li img{width:100%;}
+.myorder .jp-pd{padding:18px 0;}
+.myorder .jp-pd-l{padding-left:.4rem;padding-right:.4rem;text-align: right}
+.myorder .jp-pd-r{padding:0;text-align:left}
+.myorder .jp-pd li{font-size: 1rem;color:#ff0000;padding-top: 18px;}
+.myorder .jp-pd li a{padding:11px 15px;border: 1px solid #000;color:#000;transition: all 0.5s;}
+.myorder .jp-pd li a:hover{background: #000;color: #fff;}
+.myorder .Extras{border:1px solid #ccc;width: 100%;overflow: hidden;height: auto;padding:11px 8px;margin-bottom: 20px;}
+.myorder .Extras a{float: left;width: 100%;font-size: 1rem;font-weight: 100;position: relative;color: #000;}
+/*左三角*/
+.myorder .Extras  .icon-sj{
+    width: 12px;
+    height: 12px;
+    margin-top: 3px;
+    border-right:1px solid #000;
+    border-bottom: 1px solid #000 ;
+    float: left;
+    transfrom:rotate(-45deg);/*deg:度；旋转的属性*/
+    -webkit-transform:rotate(-45deg);/*谷歌和苹果浏览器*/
+    -ms-transfrom:rotate(-45deg);/*ie浏览器*/
+    -o-transfrom:rotate(-45deg);/*欧鹏浏览器*/
+    -moz-transform:rotate(-45deg);/*火狐浏览器*/
+    position: absolute;
+    right: 1rem;
+}
+.myorder .aq-btn{width: 100%;border: 1px solid #000;margin-bottom: 80px;}
+.myorder .aq-btn a{display: block;padding: 12px 0;width: 100%;text-align: center;font-size: 1rem;color: #000;transition: all 0.5s}
+.myorder .aq-btn a:hover{color:#fff;background: #000;}
+/*0202个人中心*/
+/*020201订单详情-未付款line-item*/
+.line-item{padding: 0 19px;width: 100%;}
+.line-item .address{width: 100%;border: 1px solid #ccc;padding: 10px;overflow: hidden;height: auto;margin-top: 2rem}
+.line-item .address p{font-size: 1rem;padding-top: 5px;}
+.line-item .address span{padding-right: 13px;}
+.line-item .order-content{width: 100%;overflow: hidden;margin-top: 2rem}
+.line-item .order-header{width: 100%;border:1px solid #ccc;padding:1.2rem 1rem;}
+.line-item .order-header p{font-size: 1rem;color:#000;}
+.line-item .order-js-list{width: 100%;border:1px solid #ccc;margin-top:-1px;height: auto;padding:0  .9rem;}
+.line-item .order-js-list h1{padding:1.25rem 0;font-size: 1rem;color:#000;font-weight: 100}
+.line-item .item-act{padding:0 0.3rem 0 0.3rem;}
+.line-item .item-acr{margin-bottom: 1rem}
+.line-item .item-rmb{color:#ff0000;position: relative;}
+.line-item .item-rmb span{position: absolute;right: 0;color: #000}
+.line-item .btn-payment{width: 100%;border: 1px solid #ccc;height: auto;display: block;margin:2rem 0 6rem 0;}
+.line-item .btn-payment a{padding: 0.6rem 0.9rem;display: block;color: #000;font-size: 1rem;}
+.line-item .btn-payment a:hover{transition: all 0.5s;background: #000;color: #fff;}
+.line-item .btn-payment a span{position: relative;width: 100%;display: block}
+.line-item .btn-payment a span .sp-active{position: absolute;right: 0}
+/*020201订单详情-未付款*/
+/*020201订单详情-已付款*/
+.line-item .express-address{padding: 0 0.9rem;height: auto;width: 100%;overflow: hidden}
+.line-item .an-address{height: 90px;display: block;}
+.line-item .an-address p{font-size: 1rem;color:#000;text-align: center}
+.line-item .address-time{float: left;width: 30%;margin-right:15px;}
+.line-item .address-logo{width: 10%;float: left;position: relative;margin: 0 0.5rem;height: auto}
+.line-item .address-page{width: 34%;float: left;margin-left: 34px;}
+.line-item .dot{width: 9px;height: 9px;background: url("../images/myorder.fw.png") no-repeat -8px -2px;position: absolute;display: block;top:5px;left:-1px; }
+.line-item .dot-j{width: 12px;height: 13px;background: url("../images/myorder.fw.png") no-repeat -7px -14px;position: absolute;display: block;top:5px;left:-2px; }
+.line-item .rectangle{width: 5px;height: 70px;background: url("../images/myorder.fw.png") no-repeat 0px -13px;position: absolute;display: block;top:20px;left:1px; }
+.line-item .am-form-group p{font-size: 1rem;color: #000;line-height: 1.4rem}
+.line-item .am-form-group{width: 100%}
+/*020201订单详情-已完成*/
+/*020202优惠券*/
+.discount{width: 100%;padding:0 19px;float: left}
+.discount .employ{padding: 2rem 0;float:left;width: 100%;}
+.discount .employ a{padding: 4px 30px;display: block;font-size: 1rem;border: 1px solid #ccc;text-align: center;color: #000;}
+.discount .employ li{padding: 0;}
+.discount .employ li  .yhq-active{border: 1px solid  #000;background-color: #000;color: #fff;}
+.discount .list-employ{width: 100%;float: left;padding: 0 1rem;}
+.discount .on-list{width: 100%;border: 1px solid #ccc;float:left;margin-top: 17px;}
+.discount .on-list dl{width: 100%;display: block;padding-bottom: 17px;float: left; }
+.discount .on-list dl dt{float: left;width: 33%;padding: .8rem .9rem;position: relative}
+.discount .on-list dl dt img{width: 100%}
+.discount .on-list dl dt a{width: 100%}
+.discount .on-list dl dd{float: left;width: 67%;font-size: 1rem;}
+.discount .on-list dl dd p{float:left;width: 100%;}
+.discount .on-list dl dd p a{padding:3px 26px;border: 1px solid #ccc;float: right;margin-right: 7px;color: #000;}
+.discount .on-list dl dd p a:hover{color: #fff;background-color: #000;}
+.discount .on-list dl dd p span{padding:3px 15px;border: 1px solid #ccc;float: right;margin-right: 7px;color: #ccc;}
+.discount .clpt{color: #ccc;}
+.discount .icon-gq{position: absolute;background:url("../images/myorder.fw.png") no-repeat -20px 0;background－size:cover;bottom:0;right:0;transform:rotate(-45deg);}
+/*amazeuiorg*/
+.discount .am-tabs-default .am-tabs-nav a{background-color:#fff;color:#000;border: 1px solid #000;}
+.discount .am-tabs-default .am-tabs-nav>.am-active a{background-color: #000;color: #fff;}
+.discount .am-tabs-nav li p{font-size: 1rem;height: auto}
+.discount .am-tabs-default .am-tabs-nav a{line-height:normal;padding: 4px 0;}
+.discount .am-tabs-bd{margin-top: 5px;border: 0}
+.discount .am-tabs-bd .am-tab-panel{padding: 0}
+/*amazeuiorg*/
+/*020202优惠券*/
+/*020203店铺收藏*/
+.collection{width: 100%;padding:0 19px;float: left}
+.collection .collection-list{width: 100%;float: left;margin-top: 17px;}
+.collection .collection-list dl{width: 100%;float: left;border:1px solid #ccc;}
+.collection .collection-list dl dt{padding: 11px 8px;}
+.collection .collection-list dl dt img{width:100%;}
+.collection .collection-list dl dd{font-size: 1rem;padding-top: 11px;}
+.collection .act-p{height: 2.8rem;}
+.collection .list-content{margin-top: -1px;border: 1px solid #ccc;float: left;width: 100%}
+.collection .list-content ul{width: 100%;padding: 18px 9px;float: left}
+.collection .list-content ul li{padding-right: 0.7rem;padding-left: 0.7rem}
+.collection .list-content ul li img{width: 100%}
+.collection .favorites-tab{width: 100%;float: left;padding-bottom: 18px;}
+.collection .favorites-tab a{padding:11px 32px;text-align: center;display: block;font-size: 1rem;border:1px solid #000;color: #000;}
+.collection .favorites-tab a:hover{transition: all 0.5s;background-color: #000;color: #fff;}
+.collection .tab-left{float: left;}
+.collection .tab-right{float: right;}
+/*020203店铺收藏*/
+/*020204商品收藏*/
+.commodity .commodity-bt{height: 4rem;overflow: hidden}
+.commodity .on-list strong{color: #ff0000;line-height: 27px;}
+.commodity .on-list dl{width: 100%;display: block;padding-bottom: 17px;float: left;margin:-1px;border-top: 1px solid #ccc;}
+.commodity  .act-wid{padding: 0 0.9rem;float: left; width: 100%;}
+/*020204商品收藏*/
+/*020206个人信息*/
+.personal-material{width: 100%;padding:0 19px;float: left}
+.personal-material .personal{margin-top:2rem;float: left;width: 100%;border: 1px solid #ccc; }
+.personal-material .material{padding:1.2rem 0.9rem 0 1.2rem;width: 100%;float: left}
+.personal-material .material strong{width: 25%;float: left}
+.personal-material .material strong img{width: 100%}
+.personal-material .personal-list{width: 100%;float: left;}
+.personal-material .personal-list ul{width: 100%;float: left;padding-left: 0.9rem;}
+.personal-material .personal-list ul li{padding:1.3rem 0;float: left;width: 100%;color: #000;font-size:1rem;border-bottom: 1px solid #ccc; margin-bottom: -1px;}
+.personal-material .personal-list ul li span{padding-left: 0.5rem;}
+.personal-material .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
+.personal-material .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
+.personal-material .edit-info .a:hover{color: #fff;background-color: #000;}
+/*020206个人信息*/
+/*020206个人信息编辑页面*/
+.edit-personal{width: 100%;float: left;}
+.edit-personal .edit-material{padding:1.2rem 0.9rem 1.2rem 0.9rem;float: left;width: 100%;}
+.edit-personal .gender{width: 100%;float: left}
+.edit-personal .gender li{padding: 0;border: 1px solid #ccc;min-height: 33px;}
+.edit-personal .ot-amg{margin-left: -1px;}
+.edit-personal .personal-material .material strong{width: 25%;float: left}
+.edit-personal .edit-material ul{float: left;width: 100%;}
+.edit-personal .edit-material ul li{float: left;width: 100%;margin-bottom: 0.5rem;}
+.edit-personal .edit-material ul li label{width: 100%;font-size: 1rem;;float:left;margin: 0;padding: 0.5rem 0 }
+.edit-personal .edit-material ul li input{width: 100%;border: 1px solid #ccc;padding: 1rem;font-size: 1rem;background-color: #fff;}
+.edit-personal .sex .sex1{width: 50%;border: 1px solid #ccc;padding: 1rem;font-size: 1rem;}
+.edit-personal .sex .sex2{width: 50%;}
+.edit-personal .am-icon-rq{
+    width: 1rem;
+    height: 1rem;
+    border-right: 1px solid #000;
+    border-bottom:1px solid #000;
+    transfrom:rotate(45deg);
+    -webkit-transform:rotate(45deg);/*谷歌和苹果浏览器*/
+    -ms-transfrom:rotate(45deg);/*ie浏览器*/
+    -o-transfrom:rotate(45deg);/*欧鹏浏览器*/
+    -moz-transform:rotate(45deg);/*火狐浏览器*/
+}
+.edit-personal .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
+.edit-personal .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
+.edit-personal .edit-info .a:hover{color: #fff;background-color: #000;}
+/*amazeui.org*/
+.edit-personal .am-input-group-btn>.am-btn{background-color: #fff;}
+/*amazeui.org*/
+/*020206个人信息编辑页面*/
+/*020207编辑收货地址*/
+.shipping-address{width: 100%;float: left;padding: 2rem  0.9rem 0 0.9rem;}
+.shipping-address .address{width: 100%;border: 1px solid #ccc;float: left}
+.shipping-address .address ul{padding: 0 0.9rem;width: 100%;float: left}
+.shipping-address .address ul li{float: left;width: 100%;margin-bottom: 1rem}
+.shipping-address label{padding:.5rem 0;font-size: 1rem;color:#000;width: 100%;float: left}
+.shipping-address .txt{width: 100%;float: left;border: 1px solid #ccc;padding: 1.2rem 0.9rem;font-size: 1rem}
+/*amazeui.org*/
+.shipping-address .am-active .am-btn-default.am-dropdown-toggle, .am-btn-default.am-active, .am-btn-default:active{color:#fff;background: #000;}
+.shipping-address .am-selected{width: 100%;margin-bottom: 1.2rem}
+.shipping-address .am-selected-btn{border:1px solid #ccc;font-size: 1rem;color: #000;padding: 1.2rem 0.9rem}
+.shipping-address .text-act{width: 100%;font-size: 1rem}
+.shipping-address .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
+.shipping-address .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
+.shipping-address .edit-info .a:hover{color: #fff;background-color: #000;}
+.shipping-address .default{padding:1rem 0;float: left;width: 100%}
+.shipping-address .default p{font-size: 1rem;color: #000;}
+.shipping-address .default p input{vertical-align:text-bottom;}
+.shipping-address .default p span{color: #ccc;}
+/*amazeui.org*/
+/*020207编辑收货地址*/
+/*020207管理收货地址*/
+.manage{width: 100%;float: left;padding: 0 0.9rem;}
+.manage .manage-list{margin-top: 2rem;width: 100%;float: left}
+.manage .list-one{padding: 0 0.7rem;width: 100%;float: left;border: 1px solid #ccc;margin-bottom: 2rem;}
+.manage .head-list{width: 100%;float: left;padding: 1.2rem 0;border-bottom: 1px solid #ccc;font-size: 1rem}
+.manage .head-list strong{font-weight: 100;}
+.manage .head-list span{padding-left: 1rem}
+.manage .content-list{padding: 1.2rem 0;width: 100%;float: left;font-size: 1rem}
+.manage .botton-list{width: 40%;float: right;padding-bottom: 1rem}
+.manage .botton-list a{font-size: 1rem;float: right;padding-left: 2rem;}
+.manage .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
+.manage .edit-info  a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
+.manage .edit-info  a:hover{color: #fff;background-color: #000;}
+/*02021511000847907管理收货地址*/
+/*020209注册*/
+.enroll{width: 100%;float: left;}
+.enroll .start{margin: 2rem 0;width: 100%;float: left;}
+.enroll .start .login{float: left;width: 100%;}
+.enroll .start .login .page{width: 100%;float: left;padding: 0 0.9rem}
+.enroll .start .login .page li{width: 100%;float: left;margin-bottom: 1.2rem;}
+.enroll .start .login .page li label{padding: 0.8rem 0;font-size: 1.4rem;width: 100%;float: left;font-weight:100;}
+.enroll .start .login .page li .txt{width: 100%;border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1.4rem;width: 100%;float: left}
+.enroll .start .login .page li .txt1{}
+.enroll .start .login .page li span a{padding:0.9rem 1.1rem;font-size: 1rem;border: 1px solid #000;float: right;color:#000;}
+
+
+.enroll .start .login .page li .span-ipt {width:100%;float:left;position:relative;padding-right:115px}
+.enroll .start .login .page li .span-ipt .txt1 {width:100%;border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1.6rem;}
+.enroll .start .login .page li .span-btn{width:100px;position:absolute;top:0;right:0;}
+
+.enroll .start .err-tips{font-size:14px;padding:0 0.9rem;color:#000;}
+.enroll .start .err-tips a{font-size:14px;}
+
+
+.enroll .start .login .page li .tet1{width: 100%;float: left;position:relative}
+.enroll .edit-info{width: 100%;padding:0 0.9rem;float: left;text-align: center;margin-top: 2rem}
+.enroll .edit-info .a{width: 100%;float: left;border: 1px solid #d42811;padding: 1.6rem 0;font-size: 1.6rem;color: #fff;transition: all 0.5s;background-color: #d42811;}
+/*020209注册*/
+/*020209登录*/
+.enroll .telnet a{font-size: 1rem;padding-top: 1rem;color:#003366}
+.enroll .telnet .telnet1{float: left}
+.enroll .telnet .telnet2{float: right}
+/*020209登录*/
+/*020208修改密码*/
+.change{width: 100%;float: left;position: relative;}
+.change .imparity{width: 100%;position: absolute;text-align: center;top:25%;padding: 0 12px;left: 0}
+.change .imparity span{font-size: 1rem;color: #fff;background-color: #333;float: left;padding:.5rem 0;width: 100%}
+/*020208修改密码*/
+/*共同样式*/
+.active-cl-si{font-size: 1rem;color: #ff0000;}
+/*移动按钮*/
+.btn-p-1{padding:1.1rem;border: 1px solid #000;font-size: 1.4rem;text-decoration: none;background: #fff;transition: all 0.5s;float:right}
+.btn-p-1:hover{background: #000;color: #fff;}
+/*共同样式*/
+.newmsg{color:#d42811;font-size:14px;}
+.newlink{border:0!important;padding:0!important;font-size:14px!important;text-decoration:underline;float:inherit!important;color:#d42811!important}
+.filled{color:#d42811;font-size:14px;}

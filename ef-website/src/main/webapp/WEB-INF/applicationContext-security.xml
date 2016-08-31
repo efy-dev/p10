@@ -18,9 +18,31 @@
     <!--<intercept-url pattern="/**" access="ROLE_ADMIN"/>-->
     <!--</http>-->
     <!--SSO -->
-    <http auto-config="true" entry-point-ref="casEntryPoint" use-expressions="true">
-        <csrf disabled="true"/>
+    <!--<http auto-config="true" entry-point-ref="casEntryPoint" use-expressions="true">-->
+    <!--<csrf disabled="true"/>-->
 
+    <!--&lt;!&ndash;<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>&ndash;&gt;-->
+    <!--<intercept-url pattern="/yhq.do" access="isAuthenticated()"/>-->
+    <!--<intercept-url pattern="/order/saveOrUpdateOrder.do" access="isAuthenticated()"/>-->
+    <!--<intercept-url pattern="/order/pay/alipay/callback" access="isAnonymous()"/>-->
+    <!--&lt;!&ndash;<intercept-url pattern="/order/pay/wxParam/**" access="isAnonymous()"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<intercept-url pattern="/order/pay/weixin//**" access="isAnonymous()"/>&ndash;&gt;-->
+    <!--<intercept-url pattern="/sso2.do" access="isAuthenticated()"/>-->
+    <!--<intercept-url pattern="/order/myEfeiyi/list.do" access="isAuthenticated()"/>-->
+    <!--<intercept-url pattern="/order/easyBuy/**" access="isAuthenticated()"/>-->
+    <!--<intercept-url pattern="/order/**" access="isAuthenticated()"/>-->
+    <!--&lt;!&ndash;<intercept-url pattern="/myEfeiyi/**" access="hasRole('ROLE_USER')"/>&ndash;&gt;-->
+    <!--<intercept-url pattern="/j_spring_cas_security_check/**" access="permitAll"/>-->
+    <!--&lt;!&ndash; logout-success-url="/login.html" &ndash;&gt;-->
+    <!--&lt;!&ndash;        <logout logout-url="/login.do" success-handler-ref="casLogoutSuccessHandler"/>   &ndash;&gt;-->
+    <!--<custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER" />-->
+    <!--<custom-filter ref="singleLogoutFilter" before="CAS_FILTER" />-->
+    <!--<custom-filter position="CAS_FILTER" ref="casFilter"/>-->
+
+    <!--</http>-->
+
+    <http realm="Contacts Realm" use-expressions="true">
+        <csrf disabled="true"/>
         <!--<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>-->
         <intercept-url pattern="/yhq.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/saveOrUpdateOrder.do" access="isAuthenticated()"/>
@@ -31,75 +53,25 @@
         <intercept-url pattern="/order/myEfeiyi/list.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/easyBuy/**" access="isAuthenticated()"/>
         <intercept-url pattern="/order/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/purchaseCollect/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/comment/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/myEfeiyi/**" access="isAuthenticated()"/>
         <!--<intercept-url pattern="/myEfeiyi/**" access="hasRole('ROLE_USER')"/>-->
-        <intercept-url pattern="/j_spring_cas_security_check/**" access="permitAll"/>
-        <!-- logout-success-url="/login.html" -->
-        <!--        <logout logout-url="/login.do" success-handler-ref="casLogoutSuccessHandler"/>   -->
-        <custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER" />
-        <custom-filter ref="singleLogoutFilter" before="CAS_FILTER" />
-        <custom-filter position="CAS_FILTER" ref="casFilter"/>
+        <!--<intercept-url pattern="/j_spring_cas_security_check/**" access="permitAll"/>-->
 
+        <!--<anonymous key="cookie_key" username="ananoymous" granted-authority="anonymous,ROLE_ANONYMOUS"/>-->
+        <form-login login-page="/login" login-processing-url="/j_spring_security_check"
+                    authentication-success-handler-ref="loginSuccessHandler"
+                    authentication-failure-handler-ref="loginFailureHandler"/>
+        <logout invalidate-session="true" logout-url="/j_spring_security_logout"
+                success-handler-ref="loginOutSuccessHandler"/>
     </http>
+    <b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.website.organization.LoginOutSuccessHandler"/>
 
-    <b:bean id="casEntryPoint"  class="com.efeiyi.ec.website.base.authentication.CasAuthenticationRedirect">
-        <b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>
-        <!--
-                <b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>
-        -->
-        <b:property name="serviceProperties" ref="serviceProperties"/>
-    </b:bean>
-
-    <b:bean id="serviceProperties"  class="org.springframework.security.cas.ServiceProperties">
-        <!--
-                <b:property name="service"  value="http://localhost:8080/j_spring_cas_security_check"/>
-        -->
-        <b:property name="service"  value="http://mall.efeiyi.com/j_spring_cas_security_check"/>
-        <b:property name="sendRenew" value="false"/>
-    </b:bean>
-
-
-
-    <b:bean id="casFilter"  class="org.springframework.security.cas.web.CasAuthenticationFilter">
-        <b:property name="authenticationManager" ref="authenticationManager"/>
-    </b:bean>
-
-    <authentication-manager alias="authenticationManager">
-        <authentication-provider ref="casAuthenticationProvider"/>
+    <authentication-manager>
+        <authentication-provider user-service-ref="userManager">
+            <password-encoder hash="sha"/>
+        </authentication-provider>
     </authentication-manager>
 
-    <b:bean id="casAuthenticationUserDetailsService" class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
-        <b:property name="userDetailsService" >
-            <b:ref bean="userManager" />
-        </b:property>
-    </b:bean>
-
-    <b:bean id="casAuthenticationProvider"
-            class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
-        <b:property name="authenticationUserDetailsService" ref="casAuthenticationUserDetailsService"/>
-        <b:property name="serviceProperties" ref="serviceProperties" />
-        <b:property name="ticketValidator">
-            <b:bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
-                <b:constructor-arg index="0" value="http://passport.efeiyi.com" />
-                <!--
-                                <b:constructor-arg index="0" value="http://192.168.1.57/cas" />
-                -->
-            </b:bean>
-        </b:property>
-        <b:property name="key" value="an_id_for_this_auth_provider_only"/>
-    </b:bean>
-    <!--<b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.website.organization.LoginOutSuccessHandler"/>-->
-    <!-- 注销客户端 -->
-    <b:bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter" />
-
-    <!-- 注销服务器端 -->
-    <b:bean id="requestSingleLogoutFilter"
-            class="org.springframework.security.web.authentication.logout.LogoutFilter">
-        <b:constructor-arg
-                value="http://passport.efeiyi.com/logout?service=http://mall.efeiyi.com/logoutHandler" />
-        <b:constructor-arg>
-            <b:bean
-                    class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
-        </b:constructor-arg>
-        <b:property name="filterProcessesUrl" value="/j_spring_cas_security_logout" />
-    </b:bean>
 </b:beans>

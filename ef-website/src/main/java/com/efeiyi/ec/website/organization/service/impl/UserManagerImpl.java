@@ -35,11 +35,16 @@ public class UserManagerImpl implements UserDetailsService {
         String queryStr = "SELECT u FROM MyUser u WHERE u.username=:username AND u.status != 0";
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("username", username);
-        MyUser myUser = (MyUser) baseManager.getUniqueObjectByConditions(queryStr, queryParamMap);
-        if (myUser == null) {
-            throw new UsernameNotFoundException("user '" + username + "' not found...");
-        } else {
-            return myUser;
+        try {
+            MyUser myUser = (MyUser) baseManager.getUniqueObjectByConditions(queryStr, queryParamMap);
+            if (myUser == null) {
+                throw new UsernameNotFoundException("用户名或密码错误");
+            } else {
+                return myUser;
+            }
+        } catch (Exception e) {
+            throw new UsernameNotFoundException("用户名或密码错误");
         }
+
     }
 }

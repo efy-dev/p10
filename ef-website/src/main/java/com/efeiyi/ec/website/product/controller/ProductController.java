@@ -1,12 +1,13 @@
 package com.efeiyi.ec.website.product.controller;
 
-import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.product.model.*;
+import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductFavorite;
+import com.efeiyi.ec.product.model.ProductModel;
+import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
-import com.efeiyi.ec.website.base.util.NormalUtil;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.wiki.model.Artistry;
 import com.ming800.core.base.service.BaseManager;

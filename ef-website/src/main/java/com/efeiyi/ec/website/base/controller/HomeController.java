@@ -188,7 +188,7 @@ public class HomeController {
     @RequestMapping({"/redirect.do"})
     public String redirect(HttpServletRequest request){
         String url = request.getRequestURL().toString();
-        if (url.equalsIgnoreCase("http://www.efeiyi.com/")) {
+        if (url.equalsIgnoreCase("http://www2.efeiyi.com/")) {
                 return "forward:/main.do";
         }else{
             //访问mall.efeiyi.com

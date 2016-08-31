@@ -1,0 +1,46 @@
+/*020209×¢²á*/
+.enroll{width: 100%;float: left;}
+.enroll .start{margin: 2rem 0;width: 100%;float: left;}
+.enroll .start .login{float: left;width: 100%;}
+.enroll .start .login .page{width: 100%;float: left;padding: 0 0.9rem}
+.enroll .start .login .page li{width: 100%;float: left;margin-bottom: 1.2rem;}
+.enroll .start .login .page li label{padding: 0.8rem 0;font-size: 1.4rem;width: 100%;float: left}
+.enroll .start .login .page li .txt{width: 100%;border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1.4rem;width: 100%;float: left}
+.enroll .start .login .page li .txt1{border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1.4rem;}
+.enroll .start .login .page li span a{padding:0.9rem 1.1rem;font-size: 1.2rem;border: 1px solid #000;float: right;color:#000;}
+.enroll .start .login .page li .span-ipt {width:100%;float:left;position:relative;padding-right:115px}
+.enroll .start .login .page li .span-ipt .txt1 {width:100%;border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1.4rem;}
+.enroll .start .login .page li .span-btn{width:100px;position:absolute;top:0;right:0;}
+.enroll .start .login .page li .tet1{width: 100%;float: left;position:relative}
+.enroll .edit-info{width: 100%;padding:0 0.9rem;float: left;text-align: center;margin-top: 2rem}
+.enroll .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 1.6rem 0;font-size: 1.4rem;color: #000;transition: all 0.5s;background-color: #fff;}
+.enroll .edit-info .a:hover{color: #fff;background-color: #000;}
+/*020209×¢²á*/
+/*020209µÇÂ¼*/
+.enroll .telnet a{font-size: 1.2rem;padding-top: 1rem;color:#003366}
+.enroll .telnet .telnet1{float: left}
+.enroll .telnet .telnet2{float: right}
+/*020209µÇÂ¼*/
+/*020208ÐÞ¸ÄÃÜÂë*/
+.change{width: 100%;float: left;position: relative;}
+.change .imparity{width: 100%;position: absolute;text-align: center;top:25%;padding: 0 12px;left: 0}
+.change .imparity span{font-size: 1.2rem;color: #fff;background-color: #333;float: left;padding:.5rem 0;width: 100%}
+/*020208ÐÞ¸ÄÃÜÂë*/
+fieldset{pading:0;margin: 0;list-style:none; }
+.single-sign-on{width: 100%;float:left;}
+.single-sign-on .login{width: 100%;float:left;}
+.single-sign-on .login .login-wrap{width: 100%;float:left;}
+.single-sign-on .login-form{width: 100%;float:left;}
+.single-sign-on .bk{width: 100%;float:left;padding-top: 2rem;}
+.single-sign-on .bk .ld{width: 100%;float: left;padding: 0 1rem}
+.single-sign-on .wh{width: 100%;float:left;}
+.single-sign-on .wh .link{float: right;margin-right: 1rem}
+.single-sign-on .wh .link a{color: #003366;font-size: 1.2rem;}
+.single-sign-on .am-form-group{width: 100%;float:left;margin: 0}
+.single-sign-on .am-form-group label{width: 100%;font-size: 1.4rem;color: #000;margin-bottom: 1.2rem;}
+.single-sign-on .am-form-group .text1{width: 100%;padding:1rem 1.1rem;border: 1px solid #cbcccc;margin-bottom: 1.2rem;font-size: 1.4rem}
+.single-sign-on .am-form-group img{width: 30%;}
+.single-sign-on .warn{width: 20%!important;}
+.single-sign-on .forgetpwd{font-size: 1.2rem;float: right;color: #003366;}
+.single-sign-on .am-btn-secondary{height: 4.2rem;width: 100%;border: 1px solid #000;color: #000;background: #fff;margin-bottom: 1.2rem;font-size: 1.6rem;}
+.single-sign-on .am-btn-secondary:active{background-color: #000;color: #fff;}

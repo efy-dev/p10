@@ -128,7 +128,7 @@ public class YunPianSmsProvider implements SmsProvider {
     public SendCode post(String phone, String content, String tpl_id) {
 
         try {
-            content = URLEncoder.encode("#null#=" + content, ENCODING);
+            content = URLEncoder.encode("#code#=" + content, ENCODING);
 
         } catch (Exception e) {
             e.printStackTrace();
