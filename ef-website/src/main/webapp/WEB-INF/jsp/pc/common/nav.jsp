@@ -1,4 +1,5 @@
 <%@ page import="com.efeiyi.ec.website.base.util.AuthorizationUtil" %>
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -12,23 +13,12 @@
 
 <div class="top2016">
     <div class="hd">
-        <%--<div class="tips fl"><a class="logo"></a></div>--%>
-        <%--
-                <div class="tips fl"><a class="logo" ><img src="<c:url value="/scripts/images/ef-logo-mall.png"/>"></a></div>
-        --%>
-
-        <%--<c:if test="${homepage}">--%>
-        <%--<div class="tips fl">欢迎使用e飞蚁-中国最具权威的非遗平台</div>--%>
-        <%--</c:if>--%>
-        <%--<c:if test="${empty homepage}">--%>
-        <%--<div class="tips fl"><i class="min-logo"></i>汇聚东方工艺精粹</div>--%>
-        <%--</c:if>--%>
 
         <ul class="fr">
-            <li><a href="http://www.efeiyi.com" title="e飞蚁首页">首页</a></li>
-            <li><a href="http://mall.efeiyi.com" title="e飞蚁商城">非遗电商</a></li>
+            <li><a href="http://<%=PConst.WEBSITE_HOST%>" title="e飞蚁首页">首页</a></li>
+            <li><a href="http://<%=PConst.WEBSITE_MALL_HOST%>" title="e飞蚁商城">非遗电商</a></li>
             <li><a href="http://master.efeiyi.com" title="非遗大师">非遗大师</a></li>
-            <li><a href="http://minglu.efeiyi.com" title="非遗大师">非遗百科</a></li>
+            <li><a href="http://<%=PConst.WEBSITE_WIKI_HOST%>" title="非遗大师">非遗百科</a></li>
             <li><a href="http://gift.efeiyi.com" title="非遗礼品">非遗礼品</a></li>
             <li><a href="http://www.315cheng.com" title="诚品宝">诚品宝</a></li>
             <li><a href="http://ryt.efeiyi.com" title="融艺投">融艺投</a></li>
@@ -37,21 +27,23 @@
                 <%
                     if (AuthorizationUtil.isAuthenticated()) {
                 %>
-                <a href="http://i.efeiyi.com" title="个人中心"><%=AuthorizationUtil.getCurrentSampleUsername()%>
+                <a href="http://<%=PConst.WEBSITE_CONSUMER_HOST%>"
+                   title="个人中心"><%=AuthorizationUtil.getCurrentSampleUsername()%>
                 </a>
                 <a href="<c:url value='/j_spring_security_logout'/>" title="退出">退出</a>
                 <%
                 } else {
                 %>
 
-                <a href="http://www.efeiyi.com/login" title="e飞蚁登录">登录</a>
-                <a href="http://www.efeiyi.com/signin"
+                <a href="http://<%=PConst.WEBSITE_HOST%>/login" title="e飞蚁登录">登录</a>
+                <a href="http://<%=PConst.WEBSITE_HOST%>/signin"
                    title="e飞蚁注册">注册</a>
                 <%
                     }
                 %>
             </li>
-            <li><a href="http://mall.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
+            <li><a href="http://<%=PConst.WEBSITE_MALL_HOST%>/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a>
+            </li>
             <%--<li><a href="" title="">手机e飞蚁</a></li>--%>
             <li class="cart">
                 <a href="<c:url value="/cart/view"/> " title=""><i class="icon2016 icon-cart"></i><em id="cartAmount"
@@ -62,7 +54,7 @@
 </div>
 <div class="topv2" style="padding-top: 0;">
     <div class="hd">
-        <div class="tips fl"><a class="logo" href="http://www.efeiyi.com"><img
+        <div class="tips fl"><a class="logo" href="http://<%=PConst.WEBSITE_HOST%>"><img
                 src="<c:url value="/scripts/images/ef-logo-mall.png"/>"></a></div>
     </div>
 </div>
@@ -75,9 +67,9 @@
         <!--//End--分类-->
         <div class="navitems">
             <ul>
-                <li><a href="http://mall.efeiyi.com" title="非遗电商平台">首页</a></li>
-                <li><a href="http://mall.efeiyi.com/subject/ihygpb6m24v43zv9" title="非遗礼品">礼品专区</a></li>
-                <li><a href="http://mall.efeiyi.com/subject/ihygpskg3j28dh60" title="非遗专题">精选专题</a></li>
+                <li><a href="http://<%=PConst.WEBSITE_MALL_HOST%>" title="非遗电商平台">首页</a></li>
+                <li><a href="http://<%=PConst.WEBSITE_MALL_HOST%>/subject/ihygpb6m24v43zv9" title="非遗礼品">礼品专区</a></li>
+                <li><a href="http://<%=PConst.WEBSITE_MALL_HOST%>/subject/ihygpskg3j28dh60" title="非遗专题">精选专题</a></li>
             </ul>
         </div>
         <!--//End--导航-->

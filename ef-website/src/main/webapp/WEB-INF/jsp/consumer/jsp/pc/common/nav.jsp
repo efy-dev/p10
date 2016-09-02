@@ -16,7 +16,7 @@
             <%
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
-            <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+            <li><a href="http://<%=PConst.WEBSITE_CONSUMER_HOST%>" title="个人中心">个人中心</a></li>
             <li><a href="<c:url value='/j_spring_security_logout'/>" title="退出">退出</a></li>
             <%
                 }
@@ -25,9 +25,9 @@
             <%
                 if (AuthorizationUtil.getMyUser().getId() == null) {
             %>
-            <li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>
+            <li><a href="http://<%=PConst.WEBSITE_HOST%>/login" title="请登录">请登录</a></li>
             <li>
-                <a href="http://www.efeiyi.com/signin"
+                <a href="http://<%=PConst.WEBSITE_HOST%>/signin"
                    title="快速注册">快速注册</a></li>
             <%
                 }
@@ -69,9 +69,9 @@
 
             </div>
             <div class="items">
-                <a href="http://www.efeiyi.com">首页</a>
-                <a href="http://www.efeiyi.com/subject/ihygpb6m24v43zv9">礼品专区</a>
-                <a href="http://www.efeiyi.com/subject/ihygpskg3j28dh60">精选专题</a>
+                <a href="http://<%=PConst.WEBSITE_HOST%>">首页</a>
+                <a href="http://<%=PConst.WEBSITE_HOST%>/subject/ihygpb6m24v43zv9">礼品专区</a>
+                <a href="http://<%=PConst.WEBSITE_HOST%>/subject/ihygpskg3j28dh60">精选专题</a>
             </div>
         </div>
     </div>
@@ -87,8 +87,8 @@
             </div>
             <div class="items">
                 <a href="<%=PConst.HOSTNAME%>">首页</a>
-                <a href="http://www.efeiyi.com/subject/ihygpb6m24v43zv9">礼品专区</a>
-                <a href="http://www.efeiyi.com/subject/ihygpskg3j28dh60">精选专题</a>
+                <a href="http://<%=PConst.WEBSITE_HOST%>/subject/ihygpb6m24v43zv9">礼品专区</a>
+                <a href="http://<%=PConst.WEBSITE_HOST%>/subject/ihygpskg3j28dh60">精选专题</a>
             </div>
         </div>
     </div>

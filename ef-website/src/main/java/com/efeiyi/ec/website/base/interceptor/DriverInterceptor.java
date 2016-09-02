@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.base.interceptor;
 
+import com.ming800.core.p.PConst;
 import com.ming800.core.util.CookieTool;
 import com.ming800.core.util.HttpUtil;
 import org.springframework.web.servlet.ModelAndView;
@@ -7,6 +8,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static com.sun.javafx.css.SizeUnits.PC;
 
 /**
  * Created by Administrator on 2015/7/20.
@@ -43,12 +46,13 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
+
         String url = request.getRequestURL().toString();
-        if (url.equalsIgnoreCase("http://minglu2.efeiyi.com/")) {
-            response.sendRedirect("http://minglu2.efeiyi.com/minglu");
+        if (url.equalsIgnoreCase("http://" + PConst.WEBSITE_WIKI_HOST + "/")) {
+            response.sendRedirect("http://" + PConst.WEBSITE_WIKI_HOST + "/minglu");
             return false;
-        } else if (url.equalsIgnoreCase("http://i2.efeiyi.com/")) {
-            response.sendRedirect("http://i2.efeiyi.com/order/myEfeiyi/list.do");
+        } else if (url.equalsIgnoreCase("http://" + PConst.WEBSITE_CONSUMER_HOST + "/")) {
+            response.sendRedirect("http://" + PConst.WEBSITE_CONSUMER_HOST + "/order/myEfeiyi/list.do");
             return false;
         }
         return true;

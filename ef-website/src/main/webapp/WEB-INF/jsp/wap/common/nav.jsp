@@ -1,4 +1,5 @@
 <%@ page import="com.efeiyi.ec.website.base.util.AuthorizationUtil" %>
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -22,10 +23,10 @@
             <!-- //End--chevron-left-->
             <div class="menu-list">
                 <ul class="bd">
-                    <li><a href="http://mall.efeiyi.com" title="首页">首页</a></li>
+                    <li><a href="http://<%=PConst.WEBSITE_MALL_HOST%>" title="首页">首页</a></li>
                     <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
                     <% if (AuthorizationUtil.isAuthenticated()) {%>
-                    <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+                    <li><a href="http://<%=PConst.WEBSITE_CONSUMER_HOST%>" title="个人中心">个人中心</a></li>
                     <%} else {%>
                     <li><a href="<c:url value="/sso.do?callUrl=i.efeiyi.com"/>" title="个人中心">个人中心</a></li>
                     <%}%>
@@ -36,24 +37,24 @@
     </header>
 </c:if>
 <%--<c:if test="${request=='/purchaseOrder/giftView'}">--%>
-    <%--<header id="header" class="am-header custom-header newam-header">--%>
-        <%--<!-- //End--chevron-left-->--%>
-        <%--<h1 class="am-header-title">e飞蚁，领先的非物质文化遗产电商平台</h1>--%>
-        <%--<!-- //End--title-->--%>
-        <%--<!-- //End--chevron-left-->--%>
-        <%--<div class="menu-list">--%>
-            <%--<ul class="bd">--%>
-                <%--<li><a href="http://mall.efeiyi.com" title="首页">首页</a></li>--%>
-                <%--<li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>--%>
-                <%--<% if (AuthorizationUtil.isAuthenticated()) {%>--%>
-                <%--<li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>--%>
-                <%--<%} else {%>--%>
-                <%--<li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>--%>
-                <%--<%}%>--%>
-                <%--<li><a href="<c:url value="/productCategoryList.do"/>" title="个人中心">分类</a></li>--%>
-            <%--</ul>--%>
-        <%--</div>--%>
-    <%--</header>--%>
+<%--<header id="header" class="am-header custom-header newam-header">--%>
+<%--<!-- //End--chevron-left-->--%>
+<%--<h1 class="am-header-title">e飞蚁，领先的非物质文化遗产电商平台</h1>--%>
+<%--<!-- //End--title-->--%>
+<%--<!-- //End--chevron-left-->--%>
+<%--<div class="menu-list">--%>
+<%--<ul class="bd">--%>
+<%--<li><a href="http://mall.efeiyi.com" title="首页">首页</a></li>--%>
+<%--<li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>--%>
+<%--<% if (AuthorizationUtil.isAuthenticated()) {%>--%>
+<%--<li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>--%>
+<%--<%} else {%>--%>
+<%--<li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>--%>
+<%--<%}%>--%>
+<%--<li><a href="<c:url value="/productCategoryList.do"/>" title="个人中心">分类</a></li>--%>
+<%--</ul>--%>
+<%--</div>--%>
+<%--</header>--%>
 <%--</c:if>--%>
 <c:if test="${request=='/purchaseOrder/receiveGift'}">
     <header id="header" class="am-header custom-header newam-header">
@@ -63,10 +64,10 @@
         <!-- //End--chevron-left-->
         <div class="menu-list">
             <ul class="bd">
-                <li><a href="http://mall.efeiyi.com" title="首页">首页</a></li>
+                <li><a href="http://<%=PConst.WEBSITE_MALL_HOST%>" title="首页">首页</a></li>
                 <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
                 <% if (AuthorizationUtil.isAuthenticated()) {%>
-                <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+                <li><a href="http://<%=PConst.WEBSITE_CONSUMER_HOST%>" title="个人中心">个人中心</a></li>
                 <%} else {%>
                 <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
                 <%}%>
@@ -95,11 +96,7 @@
             <div class="am-header-right am-header-nav">
                 <a href="<c:url value="/cart/view"/>" class="icon icon-cart"><span class="tips"><em
                         id="cartAmount">0</em></span></a>
-                <% if (AuthorizationUtil.isAuthenticated()) {%>
-                <a href="http://i.efeiyi.com/order/myEfeiyi/list.do" class="icon icon-user"></a>
-                <%} else {%>
-                <a href="<c:url value="/sso.do"/>" class="icon icon-user"></a>
-                <%}%>
+                <a href="http://<%=PConst.WEBSITE_CONSUMER_HOST%>/order/myEfeiyi/list.do" class="icon icon-user"></a>
             </div>
         </header>
     </c:if>
@@ -129,13 +126,9 @@
             </div>
             <div class="menu-list">
                 <ul class="bd">
-                    <li><a href="http://mall.efeiyi.com" title="首页">首页</a></li>
+                    <li><a href="http://<%=PConst.WEBSITE_MALL_HOST%>" title="首页">首页</a></li>
                     <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
-                    <% if (AuthorizationUtil.isAuthenticated()) {%>
-                    <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
-                    <%} else {%>
-                    <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
-                    <%}%>
+                    <li><a href="http://<%=PConst.WEBSITE_CONSUMER_HOST%>" title="个人中心">个人中心</a></li>
                     <li><a href="<c:url value="/productCategory.do"/>" title="个人中心">分类</a></li>
                 </ul>
             </div>

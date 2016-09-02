@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -31,7 +32,7 @@
         <!--地址-->
         <div class="clearing-site">
             <span class="clearing-left">收货人信息</span>
-        <span class="clearing-right">
+            <span class="clearing-right">
             <a href="#" class="btn-cart-add">新增收货地址</a>
             <div class="active-pop" style="display: none">
                 <div class="pop-up">
@@ -96,7 +97,8 @@
                              onclick="chooseAddress(this,'${address.id}')">
                             </c:if>
                             <c:if test="${address.status=='1'}">
-                            <div id="${address.id}" class="default-text" name="addressItem" onclick="chooseAddress(this,'${address.id}')">
+                            <div id="${address.id}" class="default-text" name="addressItem"
+                                 onclick="chooseAddress(this,'${address.id}')">
                                 </c:if>
                                 <strong id="consigneeAndProvince${address.id}">${address.consignee} ${address.province.name}</strong>
                                     <%--<i class="triangle" style="display: block"></i>--%>
@@ -112,7 +114,8 @@
 
                         <div class="jc-hc" style="display: none;height: 40px;">
                             <a href="#" onclick="removeAddress('${address.id}');">删除</a>
-                            <a href="#" class="edit-act" onclick="openAddress('${address.id}','${address.consignee}','${address.province.name}','${address.province.id}','${address.city.name}','${address.city.id}','${address.district.name}','${address.district.id}','${address.details}','${address.phone}')">编辑</a>
+                            <a href="#" class="edit-act"
+                               onclick="openAddress('${address.id}','${address.consignee}','${address.province.name}','${address.province.id}','${address.city.name}','${address.city.id}','${address.district.name}','${address.district.id}','${address.details}','${address.phone}')">编辑</a>
                             <a href="#" onclick="defaultAddress('${address.id}');">设为默认地址</a>
                         </div>
                     </div>
@@ -140,15 +143,18 @@
                                             <select id="provinceVal" name="province.id"
                                                     class="cars" onclick="provinceChange(this)"
                                                     required>
-                                                <option value="${address.province.id}" id="provinceOption">${address.province.name}</option>
+                                                <option value="${address.province.id}"
+                                                        id="provinceOption">${address.province.name}</option>
                                             </select>
                                             <select id="cityVal" name="city.id" class="car1"
                                                     onclick="cityChange(this)" required>
-                                                <option value="${address.city.id}" id="cityOption">${address.city.name}</option>
+                                                <option value="${address.city.id}"
+                                                        id="cityOption">${address.city.name}</option>
                                             </select>
                                             <select id="districtVal" name="district.id"
                                                     class="car1" required>
-                                                <option value="${address.district.id}" id="districtOption">${address.district.name}</option>
+                                                <option value="${address.district.id}"
+                                                        id="districtOption">${address.district.name}</option>
                                             </select>
                                         </form>
                                     </li>
@@ -206,7 +212,7 @@
         <!--订货清单-->
         <div class="clearing-site divtop">
             <span class="clearing-left">订货清单</span>
-        <span class="clearing-right">
+            <span class="clearing-right">
             <c:if test="${!isEasyBuy}">
                 <a href="<c:url value="/cart/view"/>"
                    onclick="window.location.href='<c:url value="/cart/view"/>'">返回修改购物车</a>
@@ -328,7 +334,7 @@
         <div class="System">
             <div class="System-text">
                 <span class="btns"><a target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a></span>
-            <span class="price-info">
+                <span class="price-info">
                 <%--js 取回来  第一次也是js取 统一js取--%>
                 <p class="price1">总金额：<em id="totalPrice">${purchaseOrder.total}</em> 元</p>
                 <p class="price2">优惠：-<em id="couponPrice">0.00</em>元</p>
@@ -380,7 +386,7 @@
         var freight = $("#freight").text();
         var couponId = "";
         $("input[name=coupon]").each(function () {
-            if($(this).is(':checked') == true){
+            if ($(this).is(':checked') == true) {
                 couponId = $(this).attr("id");
             }
         })
@@ -410,7 +416,7 @@
                             success: function (data1) {
                                 if (data1) {
                                     var url = "<c:url value="/order/confirm/"/>";
-                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + "&balance=" + balance +"&couponId=" + couponId + "&freight=" + freight;
+                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + "&balance=" + balance + "&couponId=" + couponId + "&freight=" + freight;
                                     element.onclick = null;
                                     $(element).attr("href", url);
                                     $(element).click();
@@ -432,9 +438,9 @@
 
                                     if (finalPrice != 0) {
                                         showChooseConfirm("提示", "是否支付成功？", function () {
-                                            window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
+                                            window.location.href = "http://<%=PConst.WEBSITE_CONSUMER_HOST%>/order/myEfeiyi/view/" + orderId;
                                         }, function () {
-                                            window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/" + orderId;
+                                            window.location.href = "http://<%=PConst.WEBSITE_CONSUMER_HOST%>/order/myEfeiyi/view/" + orderId;
                                         })
                                     }
                                 } else {
@@ -523,7 +529,7 @@
 //                window.location.href=window.location.href;
                 var html = newAddress(data);
                 $("#address").find(".page-box-m").append(html);
-                $(".page-box-m").css("position","relative")
+                $(".page-box-m").css("position", "relative")
                 $(".active-pop").hide();
                 $("#reset").click();
                 $("#" + data.id).click();
@@ -546,25 +552,25 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                dataType:"json",
+                dataType: "json",
                 url: '<c:url value="/order/updateAddress.do"/>',
                 data: $('#updateAddress').serialize(),
                 success: function (data) {
                     if (data != null && data != "") {
                         var data = JSON.parse(data);
-                        $("#consigneeAndProvince"+addressId).text(data["consignee"] + " " + data["province"]);
-                        $("#resultConsignee"+addressId).text(data["consignee"]);
-                        $("#resultProvince"+addressId).text(data["province"]);
-                        $("#resultCity"+addressId).text(data["city"]);
-                        $("#resultDistrict"+addressId).text(data["district"]);
-                        $("#resultDetails"+addressId).text(data["details"]);
-                        $("#resultPhone"+addressId).text(data["phone"]);
+                        $("#consigneeAndProvince" + addressId).text(data["consignee"] + " " + data["province"]);
+                        $("#resultConsignee" + addressId).text(data["consignee"]);
+                        $("#resultProvince" + addressId).text(data["province"]);
+                        $("#resultCity" + addressId).text(data["city"]);
+                        $("#resultDistrict" + addressId).text(data["district"]);
+                        $("#resultDetails" + addressId).text(data["details"]);
+                        $("#resultPhone" + addressId).text(data["phone"]);
 
                         $(".apt").hide();
-                        $('.my-clearing .page-default').mouseleave(function(){
+                        $('.my-clearing .page-default').mouseleave(function () {
                             $(this).find('.jc-hc').hide();
-                            $(this).find('.jc-hc').css("z-index","")
-                            $(".header,.footer,.am-sticky-placeholder,.topbar,.header-new,.nav-new,.footernew").css("z-index","")
+                            $(this).find('.jc-hc').css("z-index", "")
+                            $(".header,.footer,.am-sticky-placeholder,.topbar,.header-new,.nav-new,.footernew").css("z-index", "")
                         });
 
                     }
@@ -596,24 +602,24 @@
                 $("#freight").text(data);
                 var couponPrice = $("#couponPrice").text();
                 var totalPrice = $("#totalPrice").text();
-                var finalPrice = parseFloat(totalPrice-couponPrice)+parseFloat(data);
+                var finalPrice = parseFloat(totalPrice - couponPrice) + parseFloat(data);
                 //$("#finalPrice").html(finalPrice.toFixed(2));
                 if (finalPrice < parseFloat(${consumer.balance})) {
                     $("#usefulBalance").html(finalPrice.toFixed(2));
-                    if ($("#balanceCheckbox").is(':checked') == true){
+                    if ($("#balanceCheckbox").is(':checked') == true) {
                         $("#balance").html(finalPrice.toFixed(2));
                         $("#finalPrice").html("0.00");
-                    }else{
+                    } else {
                         $("#balance").html("0.00");
                         $("#finalPrice").html(finalPrice.toFixed(2));
                     }
-                }else{
+                } else {
                     $("#usefulBalance").html((${consumer.balance}).toFixed(2));
-                    if ($("#balanceCheckbox").is(':checked') == true){
+                    if ($("#balanceCheckbox").is(':checked') == true) {
                         $("#balance").html((${consumer.balance}).toFixed(2));
                         var finalPrice1 = finalPrice - ${consumer.balance};
                         $("#finalPrice").html(finalPrice1.toFixed(2));
-                    }else{
+                    } else {
                         $("#balance").html("0.00");
                         $("#finalPrice").html(finalPrice.toFixed(2));
                     }
@@ -627,9 +633,9 @@
         var out = ' ';
         for (var i = 0; i < it.length; i++) {
             if (it[i]["couponBatch"]["type"] == "1") {
-                out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this,'+it[i].couponBatch.price+')" name="coupon" id="' + it[i].id + '"> <span class="t1">满' + (it[i]["couponBatch"]["priceLimit"]) + '元立减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
+                out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this,' + it[i].couponBatch.price + ')" name="coupon" id="' + it[i].id + '"> <span class="t1">满' + (it[i]["couponBatch"]["priceLimit"]) + '元立减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
             } else {
-                out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this,'+it[i].couponBatch.price+')" name="coupon" id="' + it[i].id + '"> <span class="t1">减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
+                out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this,' + it[i].couponBatch.price + ')" name="coupon" id="' + it[i].id + '"> <span class="t1">减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
             }
         }
         return out;
@@ -685,12 +691,12 @@
         console.log($(element).is(':checked'));
         if ($(element).is(':checked') == true) {
             status = "1";
-            var finalPrice = parseFloat(totalPrice-price)+parseFloat(freight);
+            var finalPrice = parseFloat(totalPrice - price) + parseFloat(freight);
             $("#couponPrice").html(price.toFixed(2));
             $("#finalPrice").html((finalPrice).toFixed(2));
             if (finalPrice < parseFloat(${consumer.balance})) {
                 $("#usefulBalance").html(finalPrice.toFixed(2));
-            }else{
+            } else {
                 $("#usefulBalance").html((${consumer.balance}).toFixed(2));
             }
             $("#balance").html("0.00");
@@ -699,34 +705,39 @@
             status = "2";
         }
 
-       /* //选中优惠卷以后会发送一个请求就是把优惠券绑定到订单当中，绑定完成之后再发送一个请求来更新价格返回的是一个拼装好的json字符串
-        var param = {"purchaseOrderId": "${purchaseOrder.id}", "couponId": $(element).attr("id"), "status": status};
-        var success = function (data) {
-            if (data) {
-                var param = {"purchaseOrderId": "${purchaseOrder.id}"};
-                var success = function (data) {
-                    //输出新的订单价格
-                    data = JSON.parse(data);
-                    console.log(data);
-                    console.log(data["totalPrice"]);
-                    console.log(data["couponPrice"]);
-                    console.log(data["finalPrice"]);
-                    $("#totalPrice").html(data["totalPrice"]);
-                    $("#couponPrice").html(data["couponPrice"]);
-                    $("#finalPrice").html(data["finalPrice"]);
-                    var finalPrice = parseFloat(data["finalPrice"]);
-                    if (finalPrice < parseFloat(${consumer.balance})) {
-                        $("#usefulBalance").html(finalPrice.toFixed(2));
-                    }
-                    $("#balance").html("0.00");
-                    $("#banlanceCheckbox").attr("checked", false);
-                }
-                ajaxRequest("<c:url value="/order/getPurchaseOrderPrice.do"/>", param, success, function () {
-                }, "post");
-            }
-        }
-        ajaxRequest("<c:url value="/useCoupon.do"/>", param, success, function () {
-        }, "post");*/
+        /* //选中优惠卷以后会发送一个请求就是把优惠券绑定到订单当中，绑定完成之后再发送一个请求来更新价格返回的是一个拼装好的json字符串
+         var param = {"purchaseOrderId": "
+        ${purchaseOrder.id}", "couponId": $(element).attr("id"), "status": status};
+         var success = function (data) {
+         if (data) {
+         var param = {"purchaseOrderId": "
+        ${purchaseOrder.id}"};
+         var success = function (data) {
+         //输出新的订单价格
+         data = JSON.parse(data);
+         console.log(data);
+         console.log(data["totalPrice"]);
+         console.log(data["couponPrice"]);
+         console.log(data["finalPrice"]);
+         $("#totalPrice").html(data["totalPrice"]);
+         $("#couponPrice").html(data["couponPrice"]);
+         $("#finalPrice").html(data["finalPrice"]);
+         var finalPrice = parseFloat(data["finalPrice"]);
+         if (finalPrice < parseFloat(
+        ${consumer.balance})) {
+         $("#usefulBalance").html(finalPrice.toFixed(2));
+         }
+         $("#balance").html("0.00");
+         $("#banlanceCheckbox").attr("checked", false);
+         }
+         ajaxRequest("
+        <c:url value="/order/getPurchaseOrderPrice.do"/>", param, success, function () {
+         }, "post");
+         }
+         }
+         ajaxRequest("
+        <c:url value="/useCoupon.do"/>", param, success, function () {
+         }, "post");*/
     }
 
 
@@ -786,10 +797,10 @@
         var freight = $("#freight").text();
         if ($(element).is(':checked') == true) {
             $("#balance").html(balance);
-            $("#finalPrice").html((totalPrice - balance - couponPrice + freight*1).toFixed(2));
+            $("#finalPrice").html((totalPrice - balance - couponPrice + freight * 1).toFixed(2));
         } else if ($(element).is(':checked') == false) {
             $("#balance").html("0.00");
-            $("#finalPrice").html((totalPrice - couponPrice + freight*1).toFixed(2));
+            $("#finalPrice").html((totalPrice - couponPrice + freight * 1).toFixed(2));
         }
     }
 
@@ -874,7 +885,7 @@
     }
 
     //编辑收货地址
-    function openAddress(addressId,consignee,province,provinceId,city,cityId,district,districtId,details,phone) {
+    function openAddress(addressId, consignee, province, provinceId, city, cityId, district, districtId, details, phone) {
         $("#consignee").val(consignee);
         $("#provinceOption").text(province);
         $("#provinceOption").val(provinceId);
@@ -890,17 +901,17 @@
     }
 
     //删除地址
-    function removeAddress(addressId){
-        showConfirm('提示','是否删除',function(){
+    function removeAddress(addressId) {
+        showConfirm('提示', '是否删除', function () {
             $.ajax({
                 type: 'post',
                 async: false,
-                url: '<c:url value="/order/removeAddress.do?addressId="/>'+addressId,
+                url: '<c:url value="/order/removeAddress.do?addressId="/>' + addressId,
                 dataType: 'json',
                 data: {},
                 success: function (data) {
-                    if(data){
-                        $("#address"+addressId).hide();
+                    if (data) {
+                        $("#address" + addressId).hide();
 
                     }
                 },
@@ -926,7 +937,7 @@
                     $("div[name=addressItem]").each(function () {
                         $(this).attr("class", "default-text");
                     })
-                    $("#"+consumerAddress).attr("class", "default-text triangle")
+                    $("#" + consumerAddress).attr("class", "default-text triangle")
                 }
             },
 

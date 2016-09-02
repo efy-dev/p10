@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -22,7 +23,7 @@
     <div class="menu-list">
         <ul class="bd">
             <li><a href="<c:url value="/minglu"/>" title="首页">首页</a></li>
-            <li><a href="http://www.efeiyi.com" title="购物车">非遗商城</a></li>
+            <li><a href="http://<%=PConst.WEBSITE_HOST%>" title="购物车">非遗商城</a></li>
             <li><a href="http://master.efeiyi.com" title="个人中心">非遗大师</a></li>
         </ul>
     </div>

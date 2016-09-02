@@ -25,8 +25,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping({"/wx"})
-public class
-WxController {
+public class WxController {
 
 
     @Autowired
@@ -142,6 +141,7 @@ WxController {
 
     /**
      * 获取微信用户的身份信息，该操作不用授权 （参数同获取基本信息的接口一样）
+     *
      * @param request
      * @return
      */
@@ -164,6 +164,7 @@ WxController {
 
     /**
      * 获取微信用户的基本信息（昵称头像之类的 需要用户授权给公众账号）
+     *
      * @param request
      * @return
      */
@@ -187,6 +188,7 @@ WxController {
 
     /**
      * 初始化微信签名（jssdk）
+     *
      * @param request
      * @return
      * @throws Exception

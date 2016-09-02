@@ -1,4 +1,5 @@
 <%@ page import="com.efeiyi.ec.website.base.util.AuthorizationUtil" %>
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -23,7 +24,7 @@
             <%
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
-            <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+            <li><a href="http://<%=PConst.WEBSITE_CONSUMER_HOST%>" title="个人中心">个人中心</a></li>
             <li><a href="<c:url value='/j_spring_security_logout'/>" title="退出">退出</a></li>
             <%
                 }
@@ -32,14 +33,14 @@
             <%
                 if (AuthorizationUtil.getMyUser().getId() == null) {
             %>
-            <li><a href="http://www.efeiyi.com/login" title="请登录">请登录</a></li>
+            <li><a href="http://<%=PConst.WEBSITE_HOST%>/login" title="请登录">请登录</a></li>
             <li>
-                <a href="http://www.efeiyi.com/signin"
+                <a href="http://<%=PConst.WEBSITE_HOST%>/signin"
                    title="快速注册">快速注册</a></li>
             <%
                 }
             %>
-            <li><a href="http://www.efeiyi.com/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
+            <li><a href="http://<%=PConst.WEBSITE_HOST%>/document/helpCenter?group=ec.rzlc" title="e飞蚁入驻">商家入驻</a></li>
         </ul>
     </div>
 </div>
@@ -50,7 +51,7 @@
         <div class="tips fl"><a href="<c:url value="/"/>" class="logo"><img
                 src="<c:url value="/scripts/images/ef-logo-craft.png"/>" alt=""></a></div>
         <div class="fr">
-            <form action="http://www.efeiyi.com/search.do" method="get">
+            <form action="http://<%=PConst.WEBSITE_HOST%>/search.do" method="get">
                 <input type="text" value="<c:if test="${searchParamBean.q != '*'}">${searchParamBean.q}</c:if>" name="q"
                        id="q" placeholder="搜索" class="txt">
                 <input type="submit" value="" class="icon-new btn">

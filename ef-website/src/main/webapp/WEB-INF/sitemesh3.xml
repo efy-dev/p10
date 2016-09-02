@@ -9,7 +9,8 @@
     <mapping path="/filterSearch.do" decorator="/layouts/filterTemplate.jsp"/><!--检索使用请勿删除-->
     <mapping path="/AjaxSearch.do" exclue="true"/><!--检索使用请勿删除-->
 
-    <mapping path="/minglu**" decorator="/layouts/consumer/myEfeiyiTemplate.jsp"/><!--检索使用请勿删除-->
+    <mapping path="/minglu**" decorator="/layouts/wiki/mainTemplate.jsp"/>
+
     <mapping path="/order/myEfeiyi**" decorator="/layouts/consumer/myEfeiyiTemplate.jsp"/>
     <mapping path="/order/cancelOrder**" decorator="/layouts/consumer/myEfeiyiTemplate.jsp"/>
     <mapping path="/order/confirmGet**" decorator="/layouts/consumer/myEfeiyiTemplate.jsp"/>
