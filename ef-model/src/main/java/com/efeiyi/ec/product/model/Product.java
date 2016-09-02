@@ -21,38 +21,38 @@ import java.util.List;
  */
 @Entity
 @Table(name = "product")
-public class Product implements Serializable{
+public class Product implements Serializable {
     private String id;
     private String name;
+    private String subName;//副标题
     private String serial;
     private String picture_url;
-    private Master master;
-//    private ProjectCategory category;
-    private BigDecimal price;
-    private List<ProductPicture> productPictureList;
-    private ProductDescription productDescription;
-    private String status;//1:上架 2 下架
-    private Project project;
-    private Date createDateTime;
-    private Tenant tenant;
-    private BigTenant bigTenant;
-//    private List<ProjectProperty> projectPropertyList;//项目属性 可以使用project获得
-//    private List<ProductPropertyValue> productPropertyValueList;//项目属性值（所有可能的值）可以使用project获得
     private Integer recommendedIndex;//首页推荐排序字段
+    private ProductDescription productDescription;
+    private List<ProductPicture> productPictureList;
+    private Date createDateTime;
+    private String status;//1:上架 2 下架
+    private String type;//1：普通2：收藏品
+
+    private Master master;
+    private Tenant tenant;
+    private Project project;
+    private BigTenant bigTenant;
     private List<ProductModel> productModelList;
-    private String subName;//副标题
+
+    private BigDecimal price;
     private Long fsAmount;
     private Long amount;
-    private  String type;//1：普通2：收藏品
-    private  Date showDateTime;
+    private Date showDateTime;
+
 
     @Transient
     @JsonIgnore
-    public ProductPicture getProductPicture(){
+    public ProductPicture getProductPicture() {
         ProductPicture productPicture = null;
         List<ProductPicture> productPictureList = getProductPictureList();
-        for (ProductPicture productPictureTemp : productPictureList){
-            if (productPictureTemp.getStatus().equals("9")){
+        for (ProductPicture productPictureTemp : productPictureList) {
+            if (productPictureTemp.getStatus().equals("9")) {
                 productPicture = productPictureTemp;
                 break;
             }
@@ -68,6 +68,7 @@ public class Product implements Serializable{
     public List<ProductModel> getProductModelList() {
         return productModelList;
     }
+
     public void setProductModelList(List<ProductModel> productModelList) {
         this.productModelList = productModelList;
     }
@@ -113,18 +114,6 @@ public class Product implements Serializable{
     }
 
 
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "category_id")
-//    @JsonIgnore
-//    public ProjectCategory getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(ProjectCategory category) {
-//        this.category = category;
-//    }
-
     @Column(name = "picture_url")
     public String getPicture_url() {
         return picture_url;
@@ -157,7 +146,7 @@ public class Product implements Serializable{
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="product_description_id")
+    @JoinColumn(name = "product_description_id")
     @JsonIgnore
     public ProductDescription getProductDescription() {
         return productDescription;
@@ -167,7 +156,7 @@ public class Product implements Serializable{
         this.productDescription = productDescription;
     }
 
-    @Column(name="status")
+    @Column(name = "status")
     public String getStatus() {
         return status;
     }
@@ -177,7 +166,7 @@ public class Product implements Serializable{
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="project_id")
+    @JoinColumn(name = "project_id")
     @JsonIgnore
     public Project getProject() {
         return project;
@@ -237,7 +226,7 @@ public class Product implements Serializable{
     }
 
 
-    @Column(name="fans_amount")
+    @Column(name = "fans_amount")
     public Long getFsAmount() {
         return fsAmount;
     }
@@ -245,6 +234,7 @@ public class Product implements Serializable{
     public void setFsAmount(Long fsAmount) {
         this.fsAmount = fsAmount;
     }
+
     @Column(name = "praise_number")
     public Long getAmount() {
         return amount;
@@ -273,7 +263,7 @@ public class Product implements Serializable{
     }
 
     @Override
-    public String toString(){
-        return  "Product{id = "+id+"}";
+    public String toString() {
+        return "Product{id = " + id + "}";
     }
 }

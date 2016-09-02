@@ -19,22 +19,25 @@ public class ProductModel implements Serializable {
 
     private String id;
     private String serial; // 产品编号
-    private BigDecimal price;//产品价格
-    private Product product;//产品种类
-    private Integer amount; //库存
-    private List<ProductPropertyValue> productPropertyValueList; //属性值
     private String status;//1.项目属性 2.自定义属性
-    private Integer recommendIndex;
     private String name;
-    private String productModel_url;
-    private BigDecimal marketPrice;//市场价格
-    private ProductModelDescription productModelDescription;
-    private String customProperty;//自定义属性值
+    private String productModel_url; //商品主图
+    private String freeDelivery;//是否包邮 1:包邮 0:不包邮
+    private Product product;//产品种类
+    private Integer recommendIndex;  //推荐序号
     private List<ProductPicture> productPictureList;
+    private ProductModelDescription productModelDescription;
+
+    private Double weight;
+    private Integer amount; //库存
+    private BigDecimal price;//产品价格
+    private BigDecimal marketPrice;//市场价格
+
+    private List<ProductPropertyValue> productPropertyValueList; //属性值
+    private String customProperty;//自定义属性值
     private Integer popularityAmount;
     private Integer saleAmount;
-    private Double weight;
-    private String freeDelivery;//是否包邮 1:包邮 0:不包邮
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
     public List<ProductPicture> getProductPictureList() {
@@ -45,17 +48,6 @@ public class ProductModel implements Serializable {
         this.productPictureList = productPictureList;
     }
 
-    //    private ProductPicture  productPicture;
-//
-
-//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "productModel")
-//    public ProductPicture getProductPicture() {
-//        return productPicture;
-//    }
-//
-//    public void setProductPicture(ProductPicture productPicture) {
-//        this.productPicture = productPicture;
-//    }
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_description_id")
     public ProductModelDescription getProductModelDescription() {
@@ -186,6 +178,7 @@ public class ProductModel implements Serializable {
     public void setPopularityAmount(Integer popularityAmount) {
         this.popularityAmount = popularityAmount;
     }
+
     @Column(name = "sale_amount")
     public Integer getSaleAmount() {
         return saleAmount;
