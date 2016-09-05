@@ -1,5 +1,6 @@
 package com.efeiyi.ec.product.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -37,7 +38,8 @@ public class ProductModelDescription {
     }
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="product_model_id")
+    @JoinColumn(name = "product_model_id")
+    @JsonIgnore
     public ProductModel getProductModel() {
         return productModel;
     }

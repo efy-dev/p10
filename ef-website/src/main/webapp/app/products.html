@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品列表</title>
+    <script src="/app/common/jquery-3.1.0.min.js"></script>
+    <script src="/app/common/doT.min.js"></script>
+    <script src="/app/common/util.js"></script>
+    <script src="/app/guide/js/model.js"></script>
+    <script src="/app/guide/js/controller.js"></script>
+</head>
+<body>
+<div id="dataView">
+
+
+</div>
+
+<!--模板-->
+<script type="text/x-dot-template" id="productModelList">
+    {{=JSON.stringify(it)}}
+</script>
+
+<script>
+    //demo
+    getProductModelList({}, 10, 0);
+
+</script>
+</body>
+</html>

@@ -45,10 +45,12 @@
                     <%--<a title="了解传承人" target="_blank">了 解 大 师</a>--%>
                 </c:if>
                 <c:if test="${not empty tenantMasterList}">
-                    <a href="http://${tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人" target="_blank"> ${tenantMasterList.get(0).master.fullName} 个人主页</a>
+                    <a href="http://${tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人"
+                       target="_blank"> ${tenantMasterList.get(0).master.fullName} 个人主页</a>
                 </c:if>
                 <c:if test="${not empty artistry}">
-                    <a href="http://minglu.efeiyi.com/project/${artistry.id}" title="了解传承人" target="_blank">了解 ${artistry.name}</a>
+                    <a href="http://minglu.efeiyi.com/project/${artistry.id}" title="了解传承人"
+                       target="_blank">了解 ${artistry.name}</a>
                 </c:if>
             </div>
         </div>
@@ -96,7 +98,9 @@
                             </c:set>
                             <p class="wh name"> ${name}
                             </p>
-                            <p class="wh price">￥${productModel.price}</p>
+                            <c:if test="${productModel.price.intValue()!= 0 }">
+                                <p class="wh price">￥${productModel.price}</p>
+                            </c:if>
                         </a>
                     </li>
                 </c:forEach>

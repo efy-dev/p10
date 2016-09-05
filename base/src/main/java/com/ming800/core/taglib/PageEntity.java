@@ -58,8 +58,16 @@ public class PageEntity {
 
     public synchronized int getrIndex() {
         //   if(this.xmlRecords!=0)this.size =this.xmlRecords;
-        this.rIndex = this.index == 0 ? 1 : (this.index - 1) * this.size;
-        return rIndex;
+        if (rIndex < 0) {
+            return rIndex * (-1);
+        } else {
+            this.rIndex = this.index == 0 ? 1 : (this.index - 1) * this.size;
+            return rIndex;
+        }
+    }
+
+    public void setrIndex(int rIndex) {
+        this.rIndex = rIndex;
     }
 
 	/*public int getPageStep() {

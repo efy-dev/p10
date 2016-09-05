@@ -50,7 +50,8 @@ public class ProductModelColumn {
         this.imageList = imageList;
     }
 
-    @Column(name = "ower_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ower_id")
     public ProductModel getProductModel() {
         return productModel;
     }

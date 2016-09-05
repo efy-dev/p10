@@ -8,6 +8,7 @@
     <mapping path="/coupon/getCouponView.do" decorator="/layouts/empty.jsp"/>
     <mapping path="/filterSearch.do" decorator="/layouts/filterTemplate.jsp"/><!--检索使用请勿删除-->
     <mapping path="/AjaxSearch.do" exclue="true"/><!--检索使用请勿删除-->
+    <mapping path="/app/**" exclue="true"/><!--静态页面使用-->
 
     <mapping path="/minglu**" decorator="/layouts/wiki/mainTemplate.jsp"/>
 

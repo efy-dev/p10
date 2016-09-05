@@ -48,7 +48,8 @@ public class TenantColumn {
         this.imageList = imageList;
     }
 
-    @Column(name = "ower_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ower_id")
     public BigTenant getBigTenant() {
         return bigTenant;
     }

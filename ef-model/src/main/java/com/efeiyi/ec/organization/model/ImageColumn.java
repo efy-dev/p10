@@ -27,7 +27,8 @@ public class ImageColumn {
         this.id = id;
     }
 
-    @Column(name = "image_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id")
     public Image getImage() {
         return image;
     }

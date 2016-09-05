@@ -2,6 +2,7 @@ package com.efeiyi.ec.product.model;
 
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterWork;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -34,6 +35,7 @@ public class ProductPicture {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
+    @JsonIgnore
     public Product getProduct() {
         return product;
     }
@@ -63,6 +65,7 @@ public class ProductPicture {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_model_id")
+    @JsonIgnore
     public ProductModel getProductModel() {
         return productModel;
     }

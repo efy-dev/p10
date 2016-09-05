@@ -11,8 +11,12 @@ import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.wiki.model.Artistry;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
+import com.ming800.core.taglib.PageEntity;
+import com.sun.research.ws.wadl.Link;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -293,5 +297,37 @@ public class ProductController {
         xQuery.put("product_project_id", projectId);
         List<Object> productModelList = baseManager.listObject(xQuery);
         return productModelList;
+    }
+
+
+    // url : /product/getProductModelList
+    @RequestMapping({"/getProductModelList"})
+    @ResponseBody
+    public Object getProductModelList(HttpServletRequest request) {
+        try {
+            JSONObject jsonObject = JSONObject.fromObject(request.getParameter("param"));
+            int limit = Integer.parseInt(request.getParameter("limit"));
+            int offset = Integer.parseInt(request.getParameter("offset"));
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            StringBuilder hql = new StringBuilder("select productModel from ProductModel productModel where productModel.status!=0 ");
+            for (Object key : jsonObject.keySet()) {
+                hql.append("and ");
+                hql.append("productModel.");
+                hql.append(key.toString());
+                hql.append("=:");
+                hql.append(key.toString());
+                hql.append(" ");
+                param.put(key.toString(), jsonObject.get(key));
+            }
+            PageEntity pageEntity = new PageEntity();
+            pageEntity.setSize(limit);
+            pageEntity.setrIndex(offset);
+            PageInfo pageInfo = baseManager.listPageInfo(hql.toString(), pageEntity, param);
+            return pageInfo.getList();
+        } catch (Exception e) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
     }
 }

@@ -50,6 +50,7 @@ public class ProductModel implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_description_id")
+    @JsonIgnore
     public ProductModelDescription getProductModelDescription() {
         return productModelDescription;
     }
