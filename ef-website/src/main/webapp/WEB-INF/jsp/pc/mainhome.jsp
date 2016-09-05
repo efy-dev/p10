@@ -72,6 +72,7 @@
 <div id="slide2016" class="slide2016">
     <div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{"controlNav":false}' data-am-flexslider="{playAfterPaused: 2000}" data-am-slider='{&quot;directionNav&quot;:false}'>
       <ul class="am-slides" >
+        <li><a href="http://master.efeiyi.com/html/master_home.html"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E6%88%BF%E5%BF%97%E8%BE%BEbanner.jpg" ></a></li>
         <c:if test="${not empty bannerList&&fn:length(bannerList)>0}">
         <c:forEach items="${bannerList}" var="banner">
         <li><a href="<c:url value="${banner.directUrl}"/>"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
