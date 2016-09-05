@@ -28,7 +28,7 @@ function getTenantById(id) {
 }
 
 //@TODO
-function getTenantColumnListByTenant(id) {
+function getColumnListByTenant(id) {
 
 }
 

@@ -2,16 +2,20 @@ package com.efeiyi.ec.website.tenant.controller;
 
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.tenant.model.TenantMaster;
+import com.efeiyi.ec.product.model.ProductModelColumn;
+import com.efeiyi.ec.tenant.model.*;
 import com.efeiyi.ec.wiki.model.Artistry;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.taglib.PageEntity;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -78,5 +82,82 @@ public class TenantController {
         return "/tenant/productList";
     }
 
+    @RequestMapping({"/tenant/getTenantById"})
+    @ResponseBody
+    public Object getTenantById(HttpServletRequest request) {
+        try {
+            String id = request.getParameter("id");
+            return baseManager.getObject(BigTenant.class.getName(), id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
+
+    @RequestMapping({"/tenant/getColumnListByTenant"})
+    @ResponseBody
+    public Object getColumnListByTenant(HttpServletRequest request) {
+        try {
+            String id = request.getParameter("id");
+            String hql = "select obj from " + TenantColumn.class.getName() + " obj where obj.bigTenant.id=:id";
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            param.put("id", id);
+            return baseManager.listObject(hql, param);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
+
+    @RequestMapping({"/tenant/getTenantPraiseListByTenant"})
+    @ResponseBody
+    public Object getTenantPraiseListByTenant(HttpServletRequest request) {
+        try {
+            String id = request.getParameter("id");
+            String hql = "select obj from " + TenantPraise.class.getName() + " obj where obj.tenant.id=:id";
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            param.put("id", id);
+            return baseManager.listObject(hql, param);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
+
+    @RequestMapping({"/tenant/getTenantList"})
+    @ResponseBody
+    public Object getTenantList(HttpServletRequest request) {
+        try {
+            JSONObject jsonObject = JSONObject.fromObject(request.getParameter("param"));
+            int limit = Integer.parseInt(request.getParameter("limit"));
+            int offset = Integer.parseInt(request.getParameter("offset"));
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            StringBuilder hql = new StringBuilder("select tenant from BigTenant tenant where tenant.status!=0 ");
+            for (Object key : jsonObject.keySet()) {
+                hql.append("and ");
+                hql.append("tenant.");
+                hql.append(key.toString());
+                hql.append("=:");
+                hql.append(key.toString());
+                hql.append(" ");
+                param.put(key.toString(), jsonObject.get(key));
+            }
+            PageEntity pageEntity = new PageEntity();
+            pageEntity.setSize(limit);
+            pageEntity.setrIndex(offset);
+            PageInfo pageInfo = baseManager.listPageInfo(hql.toString(), pageEntity, param);
+            return pageInfo.getList();
+        } catch (Exception e) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
 
 }
