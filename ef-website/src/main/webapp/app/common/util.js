@@ -1,6 +1,3 @@
-/**
- * Created by Administrator on 2016/9/5 0005.
- */
 function ajaxRequest(url, param, success) {
     $.ajax({
         crossDomain: true,
@@ -23,6 +20,9 @@ function ajaxRequest(url, param, success) {
     })
     ;
 }
+function renderTemplate(templateId, data) {
+    $("[dot-template="+templateId+"]").html(doT.template($("#" + templateId).text())(data));
+}
 Date.prototype.format = function (fmt) { //author: meizz
     var o = {
         "M+": this.getMonth() + 1,                 //月份
@@ -40,7 +40,3 @@ Date.prototype.format = function (fmt) { //author: meizz
             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 };
-
-function renderTemplate(templateId, data) {
-    return doT.template($("#" + templateId).text())(data);
-}  //dot.js 通用模板工具
