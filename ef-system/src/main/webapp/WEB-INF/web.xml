@@ -21,20 +21,20 @@
     </context-param>
 
     <!--&lt;!&ndash; Spring提供的避免Hibernate懒加载异常的过滤器-->
-<!--让Session在请求解释完成之后再关闭，从而避免懒加载异常 &ndash;&gt;-->
+    <!--让Session在请求解释完成之后再关闭，从而避免懒加载异常 &ndash;&gt;-->
     <!--<filter>-->
-        <!--<filter-name>openSessionInViewFilter</filter-name>-->
-        <!--<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>-->
+    <!--<filter-name>openSessionInViewFilter</filter-name>-->
+    <!--<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>-->
     <!--</filter>-->
 
     <!--<filter-mapping>-->
-        <!--<filter-name>openSessionInViewFilter</filter-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
+    <!--<filter-name>openSessionInViewFilter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
     <!--</filter-mapping>-->
 
     <!--&lt;!&ndash; 需要添加spring-web.jar包，否则用发生错误信息 &ndash;&gt;-->
     <!--<listener>-->
-        <!--<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>-->
+    <!--<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>-->
     <!--</listener>-->
 
     <filter>
@@ -79,9 +79,9 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <listener>
-    <listener-class>com.efeiyi.ec.system.zero.virtual.listener.VirtualPlanInitListener</listener-class>
-    </listener>
+    <!--<listener>-->
+        <!--<listener-class>com.efeiyi.ec.system.zero.virtual.listener.VirtualPlanInitListener</listener-class>-->
+    <!--</listener>-->
 
 
     <!-- 定义DispatcherServlet -->
@@ -118,12 +118,12 @@
 
     <!--sitemesh2.4.2 配置-->
     <!--<filter>-->
-        <!--<filter-name>sitemesh</filter-name>-->
-        <!--<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>-->
+    <!--<filter-name>sitemesh</filter-name>-->
+    <!--<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>-->
     <!--</filter>-->
     <!--<filter-mapping>-->
-        <!--<filter-name>sitemesh</filter-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
+    <!--<filter-name>sitemesh</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
     <!--</filter-mapping>-->
 
     <filter>

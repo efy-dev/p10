@@ -55,6 +55,28 @@ public class BigTenant implements Serializable,BaseTenant {
     private  String phone;
     private  String review;//审核 1:未审核 2:正在审核 3:审核失败 4:审核成功
 
+
+    private Double latitude;    //纬度
+    private Double longitude;   //经度
+
+    @Column(name = "latitude")
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    @Column(name = "longitude")
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
     public List<TenantProject> getTenantProjectList() {

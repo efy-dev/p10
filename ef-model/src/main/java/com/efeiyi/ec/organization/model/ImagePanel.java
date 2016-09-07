@@ -1,20 +1,21 @@
 package com.efeiyi.ec.organization.model;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
- * Created by Administrator on 2016/9/2 0002.
+ * Created by Administrator on 2016/9/6 0006.
  */
 @Entity
-@Table(name = "image_column")
-public class ImageColumn {
+@Table(name = "image_panel")
+public class ImagePanel {
 
     private String id;
     private Image image;
-    private String columnId;
+    private String panelId;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -37,12 +38,12 @@ public class ImageColumn {
         this.image = image;
     }
 
-    @Column(name = "column_id")
-    public String getColumnId() {
-        return columnId;
+    @Column(name = "panel_id")
+    public String getPanelId() {
+        return panelId;
     }
 
-    public void setColumnId(String columnId) {
-        this.columnId = columnId;
+    public void setPanelId(String panelId) {
+        this.panelId = panelId;
     }
 }

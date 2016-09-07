@@ -33,8 +33,8 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/7/20.
  */
-@Controller("/")
-public class MasterWorkController {
+@Controller()
+public class WorkController {
 
 
     @Autowired

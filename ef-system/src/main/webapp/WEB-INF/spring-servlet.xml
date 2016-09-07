@@ -9,10 +9,6 @@
 
     <mvc:resources mapping="/resources/" location="/resources/**"/>
     <mvc:resources mapping="/scripts/**" location="/scripts/"/>
-<!--    <mvc:resources mapping="/scripts/**" location="/scripts/"/>
-    <mvc:resources mapping="/images/**" location="/images/"/>
-    <mvc:resources mapping="/m8/**" location="/m8/"/>
-    <mvc:resources mapping="/theme/**" location="/theme/"/>-->
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -29,10 +25,6 @@
             <mvc:mapping path="/**"/>
             <mvc:mapping path="**"/>
             <bean class="com.efeiyi.ec.system.interceptor.DriverInterceptor"/>
-        </mvc:interceptor>
-        <mvc:interceptor>
-            <mvc:mapping path="/basic/**"/>
-            <bean class="com.efeiyi.ec.system.listener.controller.RoleListener"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/product/**"/>

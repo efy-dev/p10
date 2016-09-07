@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.tenant.controller;
 
 import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.organization.model.Panel;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.product.model.ProductModelColumn;
 import com.efeiyi.ec.tenant.model.*;
@@ -159,5 +160,68 @@ public class TenantController {
             return jsonObject;
         }
     }
+
+    @RequestMapping({"/tenant/getImageTextListByTenant"})
+    @ResponseBody
+    public Object getImageTextListByTenant(HttpServletRequest request) {
+        try {
+            String id = request.getParameter("id");
+            String hql = "select obj from " + Panel.class.getName() + " obj where obj.owner=:id";
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            param.put("id", id);
+            return baseManager.listObject(hql, param);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
+
+    @RequestMapping({"/tenant/getImageTextById"})
+    @ResponseBody
+    public Object getImageTextById(HttpServletRequest request) {
+        try {
+            String id = request.getParameter("id");
+            return baseManager.getObject(Panel.class.getName(), id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
+
+
+    @RequestMapping({"/tenant/getRecommendList"})
+    @ResponseBody
+    public Object getRecommendList(HttpServletRequest request) {
+        try {
+            JSONObject jsonObject = JSONObject.fromObject(request.getParameter("param"));
+            int limit = Integer.parseInt(request.getParameter("limit"));
+            int offset = Integer.parseInt(request.getParameter("offset"));
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            StringBuilder hql = new StringBuilder("select recommend from Recommend recommend where recommend.status!=0 ");
+            for (Object key : jsonObject.keySet()) {
+                hql.append("and ");
+                hql.append("recommend.");
+                hql.append(key.toString());
+                hql.append("=:");
+                hql.append(key.toString());
+                hql.append(" ");
+                param.put(key.toString(), jsonObject.get(key));
+            }
+            PageEntity pageEntity = new PageEntity();
+            pageEntity.setSize(limit);
+            pageEntity.setrIndex(offset);
+            PageInfo pageInfo = baseManager.listPageInfo(hql.toString(), pageEntity, param);
+            return pageInfo.getList();
+        } catch (Exception e) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
+
 
 }

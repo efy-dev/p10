@@ -14,5 +14,6 @@
     <mapping path="/virtualPlan/**" decorator="/layouts/main.jsp"/><!--虚拟计划-->
     <mapping path="/scoreboard/**" decorator="/layouts/main.jsp"/><!--微信答题-->
     <mapping path="/ueditor/**" decorator="/layouts/main.jsp"/><!--ueditor-->
+    <mapping path="/yuanqu/**" decorator="/layouts/main.jsp"/><!--yuanqu-->
     <mapping path="/imgView.jsp*" exclue="true"/>
 </sitemesh>
