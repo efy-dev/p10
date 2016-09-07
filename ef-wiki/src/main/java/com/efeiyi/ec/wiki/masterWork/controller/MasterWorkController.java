@@ -1,6 +1,6 @@
 package com.efeiyi.ec.wiki.masterWork.controller;
 
-import com.efeiyi.ec.master.model.MasterWork;
+import com.efeiyi.ec.master.model.*;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.wiki.masterWork.model.MasterWorkModel;
 import com.efeiyi.ec.wiki.masterWork.utils.ConvertWorkModel;
@@ -43,6 +43,33 @@ public class MasterWorkController {
             model.addAttribute("work",workModel);
         }
         return "/masterWork/masterWorkView";
+    }
+
+    /**
+     *
+     * @param masterProjectId
+     * @param model
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/master/{masterProjectId}")
+    public String getMasterInfo(@PathVariable String masterProjectId, Model model,HttpServletRequest request) throws Exception {
+        MasterProject masterProject = (MasterProject) baseManager.getObject(MasterProject.class.getName(), masterProjectId);
+        Project project = masterProject.getProject();
+        Artistry artistry = project.getArtistry();
+        XQuery mwXQuery = new XQuery("listMasterWork_master", request);
+        //相关作品
+        mwXQuery.put("master_id",masterProject.getMaster().getId());
+        List<MasterWork> masterWorkList = baseManager.listObject(mwXQuery);
+        model.addAttribute("workList",masterWorkList);
+        model.addAttribute("artistry",artistry);
+        XQuery xQuery = new XQuery("listMasterIntroduction_default",request);
+        xQuery.put("master_id",masterProject.getMaster().getId());
+        List<MasterIntroduction> introductionList = baseManager.listObject(xQuery);
+        model.addAttribute("introductionList",introductionList);
+        model.addAttribute("masterProject",masterProject);
+        return "/masterWork/masterIntroduction";
     }
 
 }
