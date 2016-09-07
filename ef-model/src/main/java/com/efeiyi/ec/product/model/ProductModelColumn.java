@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Administrator on 2016/9/2 0002.
  */
 @Entity
-@Table(name = "column")
+@Table(name = "description")
 public class ProductModelColumn {
 
     private String id;

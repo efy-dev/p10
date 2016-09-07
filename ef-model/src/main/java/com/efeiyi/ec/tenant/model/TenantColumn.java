@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Administrator on 2016/9/2 0002.
  */
 @Entity
-@Table(name = "column")
+@Table(name = "description")
 public class TenantColumn {
 
     private String id;
@@ -19,6 +19,7 @@ public class TenantColumn {
     private BigTenant bigTenant;
     private String status;
     private String type;
+
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")

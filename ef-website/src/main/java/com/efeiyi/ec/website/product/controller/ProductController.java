@@ -1,10 +1,7 @@
 package com.efeiyi.ec.website.product.controller;
 
 import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.product.model.ProductFavorite;
-import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.product.model.ProductPicture;
+import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
@@ -27,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -325,6 +323,37 @@ public class ProductController {
             PageInfo pageInfo = baseManager.listPageInfo(hql.toString(), pageEntity, param);
             return pageInfo.getList();
         } catch (Exception e) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
+
+    // url: /product/getProductModelById
+    @RequestMapping({"/getProductModelById"})
+    @ResponseBody
+    public Object getProductModelById(HttpServletRequest request) {
+        try {
+            String id = request.getParameter("id");
+            return baseManager.getObject(ProductModel.class.getName(), id);
+        } catch (Exception e) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
+
+    @RequestMapping({"/getColumnListByProductModel"})
+    @ResponseBody
+    public Object getColumnListByProductModel(HttpServletRequest request) {
+        try {
+            String id = request.getParameter("id");
+            String hql = "select obj from " + ProductModelColumn.class.getName() + " obj where obj.productModel.id=:id";
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            param.put("id", id);
+            return baseManager.listObject(hql, param);
+        } catch (Exception e) {
+            e.printStackTrace();
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("code", "1");
             return jsonObject;
