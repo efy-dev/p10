@@ -1,4 +1,4 @@
-function ajaxRequest(url, param, success) {
+function request(url, param, success) {
     $.ajax({
         crossDomain: true,
         type: "post",
@@ -8,11 +8,7 @@ function ajaxRequest(url, param, success) {
         data: param,
         success: function (data) {
             //1.处理data当中的错误信息
-            if (typeof data.code != "undefined") {
-                //@TODO renderRequestErrorTemplate
-            } else {
-                success(data);
-            }
+            success(data);
         },
         error: function () {
             // @TODO renderRequestErrorTemplate
@@ -21,7 +17,7 @@ function ajaxRequest(url, param, success) {
     ;
 }
 function renderTemplate(templateId, data) {
-    $("[dot-template="+templateId+"]").html(doT.template($("#" + templateId).text())(data));
+    $("[dot-template=" + templateId + "]").html(doT.template($("#" + templateId).text())(data));
 }
 Date.prototype.format = function (fmt) { //author: meizz
     var o = {

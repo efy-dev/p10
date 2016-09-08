@@ -97,4 +97,6 @@ public class PConst {
     public static final String WEBSITE_MALL_HOST = "mall2.efeiyi.com";
     public static final String WEBSITE_HOST = "www2.efeiyi.com";
 
+    public static final String OSS_EF_WIKI_HOST = "http://wiki-oss.efeiyi.com/";
+
 }

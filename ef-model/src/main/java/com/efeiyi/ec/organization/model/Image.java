@@ -17,7 +17,7 @@ public class Image {
     private String src;
     private String owner;
     private String status;
-    private String type;
+    private String type;   //1.image 2.audio 3.video
     private Date createTime;
 
     @Id

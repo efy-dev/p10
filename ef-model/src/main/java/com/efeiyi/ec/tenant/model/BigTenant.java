@@ -25,13 +25,17 @@ import java.util.List;
 @Table(name = "tenant")
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class BigTenant implements Serializable,BaseTenant {
+public class BigTenant implements Serializable, BaseTenant {
+
+    public static final String TENANT_TYPE_OFFLINE = "111"; //线下实体店铺
+    public static final String REVIEW_STATUS_WILL = "1"; //未审核
+    public static final String REVIEW_STATUS_SUCCESS = "4"; //审核成功
 
     private String id;
     private String name;//名称标识
     private String content; // 简介(长)
     private String logoUrl;
-    private String tenantType;// 11:企业 12:个体 13:个人
+    private String tenantType;// 11:企业 12:个体 13:个人 111线下店铺
     private Date createDateTime;
     private String status;
     private String serial;//商家编号
@@ -47,13 +51,13 @@ public class BigTenant implements Serializable,BaseTenant {
     //个体信息
 
     //公司信息
-    private  List<TenantMaster> tenantMasterList;
+    private List<TenantMaster> tenantMasterList;
     private List<TenantProject> tenantProjectList;
     private List<TenantRecommended> tenantRecommendedList;
-    private  String pictureUrl;
-    private  String address;//商户地址
-    private  String phone;
-    private  String review;//审核 1:未审核 2:正在审核 3:审核失败 4:审核成功
+    private String pictureUrl;
+    private String address;//商户地址
+    private String phone;
+    private String review;//审核 1:未审核 2:正在审核 3:审核失败 4:审核成功
 
 
     private Double latitude;    //纬度
@@ -283,6 +287,7 @@ public class BigTenant implements Serializable,BaseTenant {
     public void setEpositBank(String epositBank) {
         this.epositBank = epositBank;
     }
+
     @Column(name = "account")
     public String getAccount() {
         return account;
