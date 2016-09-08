@@ -10,6 +10,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
+
+<body>
 <header id="header" class="am-header custom-header newheader">
   <div class="logo"><img src="<c:url value="/scripts/assets/wap/images/ef-logo-craft.png"/>" height="27" width="110" align="center" alt=""></div>
   <!-- //End--logo-->
@@ -27,7 +29,6 @@
     </ul>
   </div>
 </header>
-<body>
 <div class="master">
   <div class="master_top pt15 pb15 bgfff">
     <div class="master_img">
