@@ -2,6 +2,7 @@ package com.efeiyi.ec.tenant.model;
 
 import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressProvince;
+import com.efeiyi.ec.organization.model.Image;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ming800.core.base.model.BaseTenant;
@@ -30,6 +31,7 @@ public class BigTenant implements Serializable, BaseTenant {
     public static final String TENANT_TYPE_OFFLINE = "111"; //线下实体店铺
     public static final String REVIEW_STATUS_WILL = "1"; //未审核
     public static final String REVIEW_STATUS_SUCCESS = "4"; //审核成功
+    public static final String TENANT_TYPE_SCENIC = "112"; //线下景区
 
     private String id;
     private String name;//名称标识
@@ -62,6 +64,17 @@ public class BigTenant implements Serializable, BaseTenant {
 
     private Double latitude;    //纬度
     private Double longitude;   //经度
+
+    private String audio;
+
+    @Transient
+    public String getAudio() {
+        return audio;
+    }
+
+    public void setAudio(String audio) {
+        this.audio = audio;
+    }
 
     @Column(name = "latitude")
     public Double getLatitude() {

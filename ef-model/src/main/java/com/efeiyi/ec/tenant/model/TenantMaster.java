@@ -1,6 +1,7 @@
 package com.efeiyi.ec.tenant.model;
 
 import com.efeiyi.ec.master.model.Master;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -32,6 +33,7 @@ public class TenantMaster {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
+    @JsonIgnore
     public BigTenant getTenant() {
         return tenant;
     }
@@ -39,7 +41,6 @@ public class TenantMaster {
     public void setTenant(BigTenant tenant) {
         this.tenant = tenant;
     }
-
 
 
     @ManyToOne(fetch = FetchType.LAZY)

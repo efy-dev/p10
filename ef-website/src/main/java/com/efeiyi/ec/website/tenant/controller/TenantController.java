@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.tenant.controller;
 
 import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.organization.model.Image;
 import com.efeiyi.ec.organization.model.Panel;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.product.model.ProductModelColumn;
@@ -88,7 +89,15 @@ public class TenantController {
     public Object getTenantById(HttpServletRequest request) {
         try {
             String id = request.getParameter("id");
-            return baseManager.getObject(BigTenant.class.getName(), id);
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            param.put("tenantId", id);
+            String imageHql = "select obj from Image obj where obj.owner=:tenantId and obj.type='2'";
+            Image image = (Image) baseManager.getUniqueObjectByConditions(imageHql, param);
+            BigTenant tenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), id);
+            if (image != null) {
+                tenant.setAudio(image.getSrc());
+            }
+            return tenant;
         } catch (Exception e) {
             e.printStackTrace();
             JSONObject jsonObject = new JSONObject();
@@ -139,7 +148,7 @@ public class TenantController {
             int limit = Integer.parseInt(request.getParameter("limit"));
             int offset = Integer.parseInt(request.getParameter("offset"));
             LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-            StringBuilder hql = new StringBuilder("select tenant from BigTenant tenant where tenant.status!=0 ");
+            StringBuilder hql = new StringBuilder("select obj from BigTenant obj where obj.tenantType='111' and obj.status!='0' ");
             for (Object key : jsonObject.keySet()) {
                 hql.append("and ");
                 hql.append("tenant.");

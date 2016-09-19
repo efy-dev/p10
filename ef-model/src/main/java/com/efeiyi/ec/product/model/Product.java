@@ -7,6 +7,7 @@ import com.efeiyi.ec.project.model.ProjectProperty;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -21,7 +22,16 @@ import java.util.List;
  */
 @Entity
 @Table(name = "product")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Product implements Serializable {
+
+    public static final String PRODUCT_STATUS_UP = "1";
+    public static final String PRODUCT_STATUS_DOWN = "2";
+
+    public static final String PRODUCT_TYPE_NORMAL = "1";
+    public static final String PRODUCT_TYPE_COMPETITIVE = "2";
+    public static final String PRODUCT_TYPE_OFFLINE = "3";
+
     private String id;
     private String name;
     private String subName;//副标题
@@ -32,7 +42,7 @@ public class Product implements Serializable {
     private List<ProductPicture> productPictureList;
     private Date createDateTime;
     private String status;//1:上架 2 下架
-    private String type;//1：普通2：收藏品
+    private String type;//1：普通2：收藏品 3.线下店铺商品
 
     private Master master;
     private Tenant tenant;
@@ -196,7 +206,6 @@ public class Product implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id", updatable = false, insertable = false)
-    @JsonIgnore
     public Tenant getTenant() {
         return tenant;
     }

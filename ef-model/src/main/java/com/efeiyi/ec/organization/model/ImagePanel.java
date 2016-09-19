@@ -1,21 +1,24 @@
 package com.efeiyi.ec.organization.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2016/9/6 0006.
  */
 @Entity
 @Table(name = "image_panel")
-public class ImagePanel {
+@Inheritance(strategy = InheritanceType.JOINED)
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+public class ImagePanel implements Serializable {
 
     private String id;
     private Image image;
-    private String panelId;
+    private Panel panel;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -38,12 +41,21 @@ public class ImagePanel {
         this.image = image;
     }
 
-    @Column(name = "panel_id")
-    public String getPanelId() {
-        return panelId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "panel_id")
+    @JsonIgnore
+    public Panel getPanel() {
+        return panel;
     }
 
-    public void setPanelId(String panelId) {
-        this.panelId = panelId;
+    public void setPanel(Panel panel) {
+        this.panel = panel;
     }
+    //    public String getPanelId() {
+//        return panelId;
+//    }
+//
+//    public void setPanelId(String panelId) {
+//        this.panelId = panelId;
+//    }
 }

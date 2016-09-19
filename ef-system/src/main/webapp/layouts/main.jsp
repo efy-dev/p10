@@ -23,10 +23,12 @@
     <link rel="icon" type="image/png" href="<c:url value='/resources/assets/i/favicon.png'/>"/>
     <link rel="apple-touch-icon-precomposed" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>"/>
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="stylesheet" href="<c:url value='/resources/assets/css/amazeui.min.css'/>"/>
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css"/>
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/admin.css'/>"/>
     <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
-    <script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.min.js"></script>
     <script src="<c:url value='/resources/js/alert.js'/>"></script>
 
     <sitemesh:write property='head'/>

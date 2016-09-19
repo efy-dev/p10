@@ -115,7 +115,6 @@ public class ProductModel implements Serializable {
         this.price = price;
     }
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     public Product getProduct() {

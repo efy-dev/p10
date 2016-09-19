@@ -1,8 +1,10 @@
 package com.efeiyi.ec.organization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +12,9 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "image")
-public class Image {
+@Inheritance(strategy = InheritanceType.JOINED)
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+public class Image implements Serializable {
 
     private String id;
     private String name;
@@ -19,6 +23,19 @@ public class Image {
     private String status;
     private String type;   //1.image 2.audio 3.video
     private Date createTime;
+
+
+    public Image() {
+    }
+
+    public Image(String name, String src, String owner, String status, String type) {
+        this.name = name;
+        this.src = src;
+        this.owner = owner;
+        this.status = status;
+        this.type = type;
+        this.createTime = new Date();
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

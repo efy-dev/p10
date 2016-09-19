@@ -67,7 +67,7 @@ public class PageEntity {
     }
 
     public void setrIndex(int rIndex) {
-        this.rIndex = rIndex;
+        this.rIndex = rIndex * -1;
     }
 
 	/*public int getPageStep() {

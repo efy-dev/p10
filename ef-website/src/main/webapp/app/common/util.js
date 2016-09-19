@@ -1,4 +1,4 @@
-function request(url, param, success) {
+function ajaxRequest(url, param, success) {
     $.ajax({
         crossDomain: true,
         type: "post",

@@ -40,8 +40,7 @@ public class ProductModelColumn {
         this.text = text;
     }
 
-    //@TODO 待测试
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "columnId")
+    @Transient
     public List<ImageColumn> getImageList() {
         return imageList;
     }

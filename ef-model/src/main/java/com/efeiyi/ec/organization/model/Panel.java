@@ -1,8 +1,10 @@
 package com.efeiyi.ec.organization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,9 +12,12 @@ import java.util.List;
  */
 @Entity
 @Table(name = "panel")
-public class Panel {
+@Inheritance(strategy = InheritanceType.JOINED)
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+public class Panel implements Serializable {
 
     private String id;
+    private String name;
     private List<ImagePanel> imageList;
     private String content;
     private Image media;
@@ -31,7 +36,16 @@ public class Panel {
         this.id = id;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "panelId")
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "panel")
     public List<ImagePanel> getImageList() {
         return imageList;
     }
