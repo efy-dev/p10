@@ -33,10 +33,10 @@
   <div class="master_top pt15 pb15 bgfff">
     <div class="master_img">
       <div class="img"><img src="<c:url value='http://tenant.efeiyi.com/${masterProject.master.getFavicon()}'/>" alt=""></div>
-      <div class="fz14 black mt10">${masterProject.master.getFullName()}</div>
+      <dweiv class="fz14 black mt10">${masterProject.master.getFullName()}</dweiv>
       <div class="fz12 color6 mt10">${artistry.getName()}</div>
       <div class="fz12 color6 mt10"><ming800:status name="level" dataType="Project.level"
-                                                     checkedValue="${artistry.getLevel()}" type="normal"/>传承人</div>
+                                                     checkedValue="${masterProject.master.getLevel()}" type="normal"/>传承人</div>
     </div>
     <!--//End-->
     <div class="master_text fz11 mt10 bgfff">
