@@ -47,25 +47,35 @@ public class MasterWorkController {
 
     /**
      *
-     * @param masterProjectId
+     * @param masterId
      * @param model
      * @param request
      * @return
      * @throws Exception
      */
-    @RequestMapping("/master/{masterProjectId}")
-    public String getMasterInfo(@PathVariable String masterProjectId, Model model,HttpServletRequest request) throws Exception {
-        MasterProject masterProject = (MasterProject) baseManager.getObject(MasterProject.class.getName(), masterProjectId);
-        Project project = masterProject.getProject();
-        Artistry artistry = project.getArtistry();
+    @RequestMapping("/master/{masterId}")
+    public String getMasterInfo(@PathVariable String masterId, Model model,HttpServletRequest request) throws Exception {
+        Master master = (Master) baseManager.getObject(Master.class.getName(),masterId);
+        List<MasterProject> masterProjectList = null;
+        if(master!=null){
+             masterProjectList = master.getMasterProjectList();
+        }
+
+        MasterProject masterProject = null;
+        Artistry artistry = null;
+        if(masterProjectList!=null&&masterProjectList.size()>0){
+            masterProject = masterProjectList.get(0);
+            artistry = masterProject.getProject().getArtistry();
+        }
+
         XQuery mwXQuery = new XQuery("listMasterWork_master", request);
         //相关作品
-        mwXQuery.put("master_id",masterProject.getMaster().getId());
+        mwXQuery.put("master_id",masterId);
         List<MasterWork> masterWorkList = baseManager.listObject(mwXQuery);
         model.addAttribute("workList",masterWorkList);
         model.addAttribute("artistry",artistry);
         XQuery xQuery = new XQuery("listMasterIntroduction_default",request);
-        xQuery.put("master_id",masterProject.getMaster().getId());
+        xQuery.put("master_id",masterId);
         List<MasterIntroduction> introductionList = baseManager.listObject(xQuery);
         model.addAttribute("introductionList",introductionList);
         model.addAttribute("masterProject",masterProject);

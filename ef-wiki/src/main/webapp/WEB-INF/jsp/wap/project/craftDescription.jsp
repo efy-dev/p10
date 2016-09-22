@@ -74,7 +74,7 @@
         <ul class="ul-col-2">
           <c:forEach items="${masterProjectList}" var="masterProject">
           <li>
-            <a href="<c:url value="/master/${masterProject.getId()}"/>" title="">
+            <a href="<c:url value="/master/${masterProject.master.getId()}"/>" title="">
               <img src="http://tenant.efeiyi.com/${masterProject.master.favicon}@!wiki-tenant-picture" alt="">
                             <span class="txt">
                                 <p>${masterProject.master.fullName}</p>

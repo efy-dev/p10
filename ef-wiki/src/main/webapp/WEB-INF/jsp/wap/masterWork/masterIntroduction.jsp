@@ -32,11 +32,11 @@
 <div class="master">
   <div class="master_top pt15 pb15 bgfff">
     <div class="master_img">
-      <div class="img"><img src="<c:url value='http://tenant.efeiyi.com/${masterProject.master.getFavicon()}'/>" alt=""></div>
-      <dweiv class="fz14 black mt10">${masterProject.master.getFullName()}</dweiv>
+      <div class="img"><img src="<c:url value='http://tenant.efeiyi.com/${master.getFavicon()}'/>" alt=""></div>
+      <dweiv class="fz14 black mt10">${master.getFullName()}</dweiv>
       <div class="fz12 color6 mt10">${artistry.getName()}</div>
       <div class="fz12 color6 mt10"><ming800:status name="level" dataType="Project.level"
-                                                     checkedValue="${masterProject.master.getLevel()}" type="normal"/>传承人</div>
+                                                     checkedValue="${master.getLevel()}" type="normal"/>传承人</div>
     </div>
     <!--//End-->
     <div class="master_text fz11 mt10 bgfff">
@@ -74,7 +74,9 @@
         </div>
       </div>
       <div data-tab-panel-1 class="am-tab-panel ">
+        <c:if test="${introductionList!=null&&introductionList.size()>0}">
         ${introductionList.get(0).content}
+        </c:if>
       </div>
       <div data-tab-panel-2 class="am-tab-panel ">
         ${artistry.artistryDescription.descriptionWap}
