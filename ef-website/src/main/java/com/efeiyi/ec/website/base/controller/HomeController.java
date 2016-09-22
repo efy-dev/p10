@@ -3,10 +3,12 @@ package com.efeiyi.ec.website.base.controller;
 import com.efeiyi.ec.gift.model.ProductGiftTagValue;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterUserTemp;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -15,7 +17,15 @@ import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import com.ming800.core.util.CookieTool;
 import com.ming800.core.util.HttpUtil;
+import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,38 +51,7 @@ public class HomeController {
     private BaseManager baseManager;
 
 
-    //首先需要判断是否是微信浏览器，如果是微信浏览器，需要通过微信接口获得unionid 然后判断该用户是否注册了efeiyi用户，拿到用户数据后自动登陆，然后返回页面
-//    @RequestMapping({"/authenticationTest.do"})
-//    @ResponseBody
-//    public String authenticationTest() {
-//        System.out.println(AuthorizationUtil.isAuthenticated());
-//        String name = "13693097151";
-//        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-//        param.put("username", name);
-//        MyUser myUser = (MyUser) baseManager.getUniqueObjectByConditions("select obj from " + MyUser.class.getName() + " obj where obj.username=:username", param);
-//        AuthenticationManager am = new SampleAuthenticationManager();
-//        try {
-//            Authentication request = new UsernamePasswordAuthenticationToken(myUser, StringUtil.encodePassword("1231", "SHA"));
-//            Authentication result = am.authenticate(request);
-//            SecurityContextHolder.getContext().setAuthentication(result);
-//        } catch (AuthenticationException e) {
-//            System.out.println("Authentication failed: " + e.getMessage());
-//        }
-//        return AuthorizationUtil.getMyUser().getUsername();
-//    }
-//
-//    private static class SampleAuthenticationManager implements AuthenticationManager {
-//        static final List<GrantedAuthority> AUTHORITIES = new ArrayList<>();
-//
-//        static {
-//            AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
-//        }
-//
-//        public Authentication authenticate(Authentication auth) throws AuthenticationException {
-//            return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
-//                    auth.getCredentials(), AUTHORITIES);
-//        }
-//    }
+
 
 
     @RequestMapping({"/datafrom1.do"})

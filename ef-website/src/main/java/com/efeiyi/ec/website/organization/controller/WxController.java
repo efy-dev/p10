@@ -1,5 +1,8 @@
 package com.efeiyi.ec.website.organization.controller;
 
+import com.efeiyi.ec.organization.model.Consumer;
+import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.website.order.model.WxPayConfig;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.model.WxCalledRecord;
@@ -7,6 +10,13 @@ import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -57,6 +69,19 @@ public class WxController {
                 "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
         return "redirect:" + url;
     }
+
+    @RequestMapping({"/fetchLoginCode.do"})
+    public String getWxLoginCode(HttpServletRequest request) throws Exception {
+        String redirect = request.getParameter("redirect");
+        String redirect_uri = "http://www2.efeiyi.com/wx/login.do?redirect=" + redirect;
+        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+                "appid=" + WxPayConfig.APPID +
+                "&redirect_uri=" +
+                URLEncoder.encode(redirect_uri, "UTF-8") +
+                "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+        return "redirect:" + url;
+    }
+
 
     @RequestMapping({"/fetchUserInfo/{dataKey}/{callback}"})
     public String getUserInfo(HttpServletRequest request, Model model, @PathVariable String dataKey, @PathVariable String callback) throws Exception {
@@ -136,6 +161,107 @@ public class WxController {
         wxCalledRecord.setData(data);
         baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
         return "redirect:" + callbackUrl;
+    }
+
+
+    @RequestMapping({"/login.do"})
+    public String login(HttpServletRequest request, Model model) throws Exception {
+        String result;
+        String redirect = request.getParameter("redirect");
+        String code = request.getParameter("code");
+        if (request.getSession().getAttribute(code) != null) {
+            result = request.getSession().getAttribute(code).toString();
+        } else {
+            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+            result = HttpUtil.getHttpResponse(urlForOpenId, null);
+            request.getSession().setAttribute(code, result);
+        }
+        JSONObject jsonObject = JSONObject.fromObject(result);
+        if (jsonObject.containsKey("errcode")) {
+            throw new RuntimeException("get openId error：" + result);
+        }
+        String access_token = jsonObject.getString("access_token");
+        String openid = jsonObject.getString("openid");
+
+        String urlForOpenId = "https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + openid + "&lang=zh_CN";
+        String userInfo = HttpUtil.getHttpResponse(urlForOpenId, null);
+        JSONObject userJsonObject = JSONObject.fromObject(userInfo);
+
+        String nickname = userJsonObject.get("nickname").toString();
+        String sex = userJsonObject.get("sex").toString();
+        String city = userJsonObject.get("city").toString();
+        String headimgurl = userJsonObject.get("headimgurl").toString();
+        String unionid = userJsonObject.get("unionid").toString();
+        MyUser myUser = authenticate(unionid);
+        if (myUser == null) {
+            Consumer consumer;
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            param.put("unionid", unionid);
+            consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid", param);
+            if (consumer == null) {
+                consumer = new Consumer();
+            }
+            consumer.setUnionid(unionid);
+            consumer.setName(nickname);
+            consumer.setPassword(StringUtil.encodePassword(nickname, "sha"));
+            consumer.setCreateDatetime(new Date(System.currentTimeMillis()));
+            consumer.setStatus("1");
+            consumer.setBalance(new BigDecimal(0));
+            consumer.setAccountExpired(false);
+            consumer.setAccountLocked(false);
+            consumer.setCredentialsExpired(true);
+            consumer.setCityName(city);
+            consumer.setPictureUrl(headimgurl);
+            consumer.setSex(Integer.parseInt(sex));
+            baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
+            authenticate(unionid);
+        }
+        redirect = URLDecoder.decode(redirect, "UTF-8");
+        return "redirect:" + redirect;
+    }
+
+
+    private MyUser authenticate(String unionid) {
+        MyUser myUser;
+        System.out.println(AuthorizationUtil.isAuthenticated());
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("unionid", unionid);
+        Consumer consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid", param);
+        if (consumer != null) {
+            myUser = (MyUser) baseManager.getObject(MyUser.class.getName(), consumer.getId());
+        } else {
+            return null;
+        }
+        AuthenticationManager am = new SampleAuthenticationManager();
+        try {
+            Authentication authentication = new UsernamePasswordAuthenticationToken(myUser, myUser.getPassword());
+            Authentication result = am.authenticate(authentication);
+            SecurityContextHolder.getContext().setAuthentication(result);
+        } catch (AuthenticationException e) {
+            System.out.println("Authentication failed: " + e.getMessage());
+        }
+        return myUser;
+    }
+
+
+    @RequestMapping({"/authenticate.do"})
+    @ResponseBody
+    public MyUser authenticate(HttpServletRequest request) {
+        String unionid = request.getParameter("unionid");
+        return authenticate(unionid);
+    }
+
+    private static class SampleAuthenticationManager implements AuthenticationManager {
+        static final List<GrantedAuthority> AUTHORITIES = new ArrayList<>();
+
+        static {
+            AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+
+        public Authentication authenticate(Authentication auth) throws AuthenticationException {
+            return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
+                    auth.getCredentials(), AUTHORITIES);
+        }
     }
 
 

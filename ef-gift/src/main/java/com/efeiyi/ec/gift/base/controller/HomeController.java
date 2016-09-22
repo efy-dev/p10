@@ -49,38 +49,38 @@ public class HomeController {
     private BaseManager baseManager;
 
 
-    //首先需要判断是否是微信浏览器，如果是微信浏览器，需要通过微信接口获得unionid 然后判断该用户是否注册了efeiyi用户，拿到用户数据后自动登陆，然后返回页面
-    @RequestMapping({"/authenticationTest.do"})
-    @ResponseBody
-    public String authenticationTest() {
-        System.out.println(AuthorizationUtil.isAuthenticated());
-        String name = "13693097151";
-        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        param.put("username", name);
-        MyUser myUser = (MyUser) baseManager.getUniqueObjectByConditions("select obj from " + MyUser.class.getName() + " obj where obj.username=:username", param);
-        AuthenticationManager am = new SampleAuthenticationManager();
-        try {
-            Authentication request = new UsernamePasswordAuthenticationToken(myUser, StringUtil.encodePassword("1231", "SHA"));
-            Authentication result = am.authenticate(request);
-            SecurityContextHolder.getContext().setAuthentication(result);
-        } catch (AuthenticationException e) {
-            System.out.println("Authentication failed: " + e.getMessage());
-        }
-        return AuthorizationUtil.getMyUser().getUsername();
-    }
-
-    private static class SampleAuthenticationManager implements AuthenticationManager {
-        static final List<GrantedAuthority> AUTHORITIES = new ArrayList<>();
-
-        static {
-            AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
-        }
-
-        public Authentication authenticate(Authentication auth) throws AuthenticationException {
-            return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
-                    auth.getCredentials(), AUTHORITIES);
-        }
-    }
+//    //首先需要判断是否是微信浏览器，如果是微信浏览器，需要通过微信接口获得unionid 然后判断该用户是否注册了efeiyi用户，拿到用户数据后自动登陆，然后返回页面
+//    @RequestMapping({"/authenticationTest.do"})
+//    @ResponseBody
+//    public String authenticationTest() {
+//        System.out.println(AuthorizationUtil.isAuthenticated());
+//        String name = "13693097151";
+//        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+//        param.put("username", name);
+//        MyUser myUser = (MyUser) baseManager.getUniqueObjectByConditions("select obj from " + MyUser.class.getName() + " obj where obj.username=:username", param);
+//        AuthenticationManager am = new SampleAuthenticationManager();
+//        try {
+//            Authentication request = new UsernamePasswordAuthenticationToken(myUser, StringUtil.encodePassword("1231", "SHA"));
+//            Authentication result = am.authenticate(request);
+//            SecurityContextHolder.getContext().setAuthentication(result);
+//        } catch (AuthenticationException e) {
+//            System.out.println("Authentication failed: " + e.getMessage());
+//        }
+//        return AuthorizationUtil.getMyUser().getUsername();
+//    }
+//
+//    private static class SampleAuthenticationManager implements AuthenticationManager {
+//        static final List<GrantedAuthority> AUTHORITIES = new ArrayList<>();
+//
+//        static {
+//            AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
+//        }
+//
+//        public Authentication authenticate(Authentication auth) throws AuthenticationException {
+//            return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
+//                    auth.getCredentials(), AUTHORITIES);
+//        }
+//    }
 
 
     @RequestMapping({"/logoutHandler"})

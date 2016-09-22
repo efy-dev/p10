@@ -10,6 +10,7 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.website.base.authentication.ContextUtils;
 import com.efeiyi.ec.website.organization.model.SmsProvider;
 import com.efeiyi.ec.website.organization.model.ValidateCode;
 import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
@@ -24,6 +25,13 @@ import com.ming800.core.util.CookieTool;
 import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,12 +43,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -64,37 +70,39 @@ public class SigninController extends BaseController {
     @Autowired
     private UserDetailsService userManager;
 
-//    @RequestMapping({"userServiceTest.do"})
-//    @ResponseBody
-//    public String userServiceTest() throws Exception {
-//        UserManager userManager = (UserManager) ContextUtils.getBean("userServiceProxy");
-//        MyUser myUser = userManager.getUserByUserId(AuthorizationUtil.getMyUser().getId());
-//        return myUser.getUsername();
-//    }
-//
-//    @RequestMapping({"addressServiceTest.do"})
-//    @ResponseBody
-//    public List<ConsumerAddress> addressServiceTest() throws Exception {
-//        AddressManager addressManager = (AddressManager) ContextUtils.getBean("addressServiceProxy");
-//        List<ConsumerAddress> consumerAddressList = addressManager.listConsumerAddressByUserId(AuthorizationUtil.getMyUser().getId());
-//        return consumerAddressList;
+
+
+//    @RequestMapping({"/wxLogin"})
+//    public String wxLogin(HttpServletRequest request) {
+//        String dataKey = "nickname;sex;province;city;headimgurl;unionid";
+//        String callback = "/wxLoginCallback";
 //    }
 
-    @RequestMapping({"testAspect.do"})
-    @ResponseBody
-    public String testAspect(HttpServletRequest request) throws Exception {
-        String order = "ie86ug7qxnujeidw";
-        String userName = "ih33g5t18ge151fg";
-//        String hql = "select obj from " + PurchaseOrder.class.getName() + " obj where obj.user.id=:username";
-//        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-//        param.put("username", userName);
-//        baseManager.listObject(hql, param);
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), order);
-        XQuery xQuery = new XQuery("listPurchaseOrder_byUser", request);
-        xQuery.put("user_id", userName);
-        baseManager.listObject(xQuery);
-        return "";
-    }
+//    @RequestMapping({"/wxLoginCallback"})
+//    public String wxLoginCallback(HttpServletRequest request) {
+//        String nickname = request.getParameter("nickname");
+//        String sex = request.getParameter("sex");
+//        String province = request.getParameter("province");
+//        String city = request.getParameter("city");
+//        String country = request.getParameter("country");
+//        String headimgurl = request.getParameter("headimgurl");
+//        String unionid = request.getParameter("unionid");
+//        Consumer consumer = new Consumer();
+//        consumer.setUnionid(unionid);
+//        consumer.setName(nickname);
+//        consumer.setPassword(StringUtil.encodePassword(nickname, "sha"));
+//        consumer.setCreateDatetime(new Date(System.currentTimeMillis()));
+//        consumer.setStatus("1");
+//        consumer.setBalance(new BigDecimal(0));
+//        consumer.setAccountExpired(false);
+//        consumer.setAccountLocked(false);
+//        consumer.setCredentialsExpired(true);
+//        consumer.setCityName(city);
+//        consumer.setPictureUrl(headimgurl);
+//        consumer.setSex(Integer.parseInt(sex));
+//        baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
+//
+//    }
 
 
     @RequestMapping({"login"})
@@ -113,7 +121,7 @@ public class SigninController extends BaseController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         password = StringUtil.encodePassword(password, "sha");
-        BigUser bigUser = new BigUser();
+        Consumer bigUser = new Consumer();
         bigUser.setUsername(username);
         bigUser.setPassword(password);
         bigUser.setAccountExpired(false);

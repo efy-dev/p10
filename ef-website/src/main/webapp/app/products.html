@@ -21,6 +21,29 @@
     //demo
     getProductModelList({}, 10, 0);
 
+    function getRequestParameter() {
+        var url = window.location.href.split("?");
+        var result = {};
+        if (url.length > 1) {
+            var queryStr = url[1];
+            var paramList = queryStr.split("&");
+            for (var i = 0; i < paramList.length; i++) {
+                var param = paramList[i].split("=");
+                if (param[0] != "") {
+                    result[param[0]] = param[1];
+                }
+            }
+            console.log(result);
+            return result
+        }
+        console.log(result);
+        return result;
+    }
+
+    $().ready(function () {
+        getRequestParameter();
+    });
+
 </script>
 </body>
 </html>
