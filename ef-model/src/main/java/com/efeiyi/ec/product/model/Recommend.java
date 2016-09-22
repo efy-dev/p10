@@ -102,7 +102,7 @@ public class Recommend {
         this.createDatetime = createDatetime;
     }
 
-    @Column(name = "group")
+    @Column(name = "recommend_group")
     public String getGroup() {
         return group;
     }

@@ -1,6 +1,8 @@
 package com.efeiyi.ec.website.product.controller;
 
+import com.efeiyi.ec.organization.model.Image;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.Panel;
 import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
@@ -335,7 +337,13 @@ public class ProductController {
     public Object getProductModelById(HttpServletRequest request) {
         try {
             String id = request.getParameter("id");
-            return baseManager.getObject(ProductModel.class.getName(), id);
+            ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), id);
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            param.put("productId", productModel.getProduct().getId());
+            String audioHql = "select obj from Image obj where obj.owner=:productId and obj.status!='0' and obj.type='2'";
+            Image image = (Image) baseManager.getUniqueObjectByConditions(audioHql, param);
+            productModel.setAudio(image.getSrc());
+            return productModel;
         } catch (Exception e) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("code", "1");
@@ -348,7 +356,7 @@ public class ProductController {
     public Object getColumnListByProductModel(HttpServletRequest request) {
         try {
             String id = request.getParameter("id");
-            String hql = "select obj from " + ProductModelColumn.class.getName() + " obj where obj.productModel.id=:id";
+            String hql = "select obj from " + Panel.class.getName() + " obj where obj.owner=:id";
             LinkedHashMap<String, Object> param = new LinkedHashMap<>();
             param.put("id", id);
             return baseManager.listObject(hql, param);

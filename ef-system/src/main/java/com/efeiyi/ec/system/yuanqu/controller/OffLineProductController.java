@@ -6,6 +6,7 @@ import com.efeiyi.ec.organization.model.ImagePanel;
 import com.efeiyi.ec.organization.model.Panel;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
+import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
@@ -43,7 +44,15 @@ public class OffLineProductController {
     @ResponseBody
     public Object getProductById(HttpServletRequest request) {
         String id = request.getParameter("id");
-        return baseManager.getObject(Product.class.getName(), id);
+        Product product = (Product) baseManager.getObject(Product.class.getName(), id);
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("productId", product.getId());
+        String audioHql = "select obj from Image obj where obj.owner=:productId and obj.status!='0' and obj.type='2'";
+        Image image = (Image) baseManager.getUniqueObjectByConditions(audioHql, param);
+        if (image != null) {
+            product.setAudio(image.getSrc());
+        }
+        return product;
     }
 
     @RequestMapping({"/baseSubmit"})
@@ -54,19 +63,20 @@ public class OffLineProductController {
             product = (Product) baseManager.getObject(Product.class.getName(), request.getParameter("id"));
         } else {
             product = new Product();
+            if (request.getParameter("tenantId") != null) {
+                BigTenant tenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), request.getParameter("tenantId"));
+                product.setBigTenant(tenant);
+            }
         }
         product.setName(request.getParameter("name"));
         product.setSubName(request.getParameter("subName"));
         product.setCreateDateTime(new Date());
         product.setStatus(Product.PRODUCT_STATUS_DOWN);
         product.setType(Product.PRODUCT_TYPE_OFFLINE);
-        if (request.getParameter("tenantId") != null) {
-            BigTenant tenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), request.getParameter("tenantId"));
-            product.setBigTenant(tenant);
-        }
         baseManager.saveOrUpdate(Product.class.getName(), product);
         String pictureUrl = uploadImage(multipartRequest.getFile("picture_url"));//主图
         if (!"".equals(pictureUrl)) {
+            product.setPicture_url(pictureUrl);
             Image image = new Image(product.getName(), pictureUrl, product.getId(), "1", "1");
             baseManager.saveOrUpdate(Image.class.getName(), image);
         }
@@ -75,6 +85,7 @@ public class OffLineProductController {
             Image audio = new Image(product.getName() + "_audio", audioUrl, product.getId(), "1", "2");
             baseManager.saveOrUpdate(Image.class.getName(), audio);
         }
+        baseManager.saveOrUpdate(Product.class.getName(), product);
         return product;
     }
 
@@ -143,13 +154,17 @@ public class OffLineProductController {
     @ResponseBody
     public Object masterSubmit(HttpServletRequest request) {
         String id = request.getParameter("id");
-        String masterId = request.getParameter("masterId");
-        if (id == null || masterId == null) {
-            return null;
-        }
         Product product = (Product) baseManager.getObject(Product.class.getName(), id);
-        Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
-        product.setMaster(master);
+        String masterId = request.getParameter("masterId");
+        String projectId = request.getParameter("projectId");
+        if (masterId != null) {
+            Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
+            product.setMaster(master);
+        }
+        if (projectId != null) {
+            Project project = (Project) baseManager.getObject(Project.class.getName(), projectId);
+            product.setProject(project);
+        }
         baseManager.saveOrUpdate(Product.class.getName(), product);
         return product;
     }
@@ -232,6 +247,17 @@ public class OffLineProductController {
             baseManager.saveOrUpdate(Panel.class.getName(), panel);
         }
         return panel;
+    }
+
+
+    @RequestMapping({"/getProjectList"})
+    @ResponseBody
+    public Object getProjectList(HttpServletRequest request) {
+        String name = request.getParameter("name");
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        String hql = "select obj from Project obj where obj.name like :name and obj.status='1'";
+        param.put("name", "%" + name + "%");
+        return baseManager.listObject(hql, param);
     }
 
 

@@ -55,6 +55,16 @@ public class Product implements Serializable {
     private Long amount;
     private Date showDateTime;
 
+    private String audio;
+
+    @Transient
+    public String getAudio() {
+        return audio;
+    }
+
+    public void setAudio(String audio) {
+        this.audio = audio;
+    }
 
     @Transient
     @JsonIgnore
@@ -114,7 +124,7 @@ public class Product implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "master_id")
-    @JsonIgnore
+//    @JsonIgnore
     public Master getMaster() {
         return master;
     }
@@ -177,7 +187,6 @@ public class Product implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
-    @JsonIgnore
     public Project getProject() {
         return project;
     }

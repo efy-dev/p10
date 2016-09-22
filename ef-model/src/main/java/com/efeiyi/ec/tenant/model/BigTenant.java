@@ -94,7 +94,7 @@ public class BigTenant implements Serializable, BaseTenant {
         this.longitude = longitude;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
     public List<TenantProject> getTenantProjectList() {
         return tenantProjectList;
@@ -114,7 +114,7 @@ public class BigTenant implements Serializable, BaseTenant {
         this.pictureUrl = pictureUrl;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
     public List<TenantMaster> getTenantMasterList() {
         return tenantMasterList;

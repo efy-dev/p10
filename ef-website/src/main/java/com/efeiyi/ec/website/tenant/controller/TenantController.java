@@ -3,6 +3,7 @@ package com.efeiyi.ec.website.tenant.controller;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.Image;
 import com.efeiyi.ec.organization.model.Panel;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.product.model.ProductModelColumn;
 import com.efeiyi.ec.tenant.model.*;
@@ -12,6 +13,7 @@ import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.taglib.PageEntity;
 import net.sf.json.JSONObject;
+import org.hibernate.context.TenantIdentifierMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -138,6 +140,20 @@ public class TenantController {
             jsonObject.put("code", "1");
             return jsonObject;
         }
+    }
+
+    @RequestMapping({"/tenant/saveTenantPraise"})
+    @ResponseBody
+    public Object saveTenantPraise(HttpServletRequest request) {
+        String userId = request.getParameter("userId");
+        String tenantId = request.getParameter("tenantId");
+        User user = (User) baseManager.getObject(User.class.getName(), userId);
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+        TenantPraise tenantPraise = new TenantPraise();
+        tenantPraise.setTenant(tenant);
+        tenantPraise.setUser(user);
+        baseManager.saveOrUpdate(TenantPraise.class.getName(), tenantPraise);
+        return tenantPraise;
     }
 
     @RequestMapping({"/tenant/getTenantList"})

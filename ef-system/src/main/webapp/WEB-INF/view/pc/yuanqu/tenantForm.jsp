@@ -158,6 +158,14 @@
 
     </div>
 
+    <div dot-template="main-recommend-base">
+
+    </div>
+
+
+    <div dot-template="main-recommend-list">
+
+    </div>
 
     <%---------------------------content--------------------------------%>
 
@@ -195,16 +203,16 @@
     <ol class="am-breadcrumb main-nav">
         {{ if(it.currentComponent.hierarchy== 0){ }}
         <li><a>园区管理</a></li>
-        {{ } else{ }}
+        {{ } else { }}
         <li><a onclick="PubSub.publish('menu.render')">园区管理</a></li>
         {{ } }}
         {{
         if(typeof it.currentComponent != "undefined" && it.currentComponent!=null){
-        if (it.currentComponent.hierarchy== 1){
+        if (it.currentComponent.father == null){
         }}
         <li><a class="am-active" href="#">{{=it.currentComponent.label}}</a></li>
-        {{ } else if (it.currentComponent.hierarchy == 2){ }}
-        <li><a onclick="PubSub.publish('{{=it.currentComponent.father.name}}.render')">{{=it.currentComponent.father.label}}</a>
+        {{ } else { }}
+        <li><a onclick="PubSub.publish('{{=it.currentComponent.father.name}}.show')">{{=it.currentComponent.father.label}}</a>
         </li>
         <li><a class="am-active" href="#">{{=it.currentComponent.label}}</a></li>
         {{ } }}
@@ -223,9 +231,11 @@
         <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('scenicRegionList.render')">
             <span>景区管理</span>
         </button>
-        <button type="button" class="am-btn am-btn-primary "><span>新推荐</span></button>
-        <button type="button" class="am-btn am-btn-primary "><span>推荐管理</span></button>
-        <button type="button" class="am-btn am-btn-primary "><span>图片管理</span></button>
+        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('recommendBase.render')">
+            <span>新推荐</span></button>
+        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('recommendList.render',null)">
+            <span>推荐管理</span></button>
+        <%--<button type="button" class="am-btn am-btn-primary "><span>图片管理</span></button>--%>
     </div>
 </script>
 
@@ -333,7 +343,9 @@
                         <%--<a class="am-btn am-btn-primary am-btn-lg">< 上一步</a>--%>
                         <a onclick="PubSub.publish('tenantBase.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
-                        {{ if(typeof data !="undefined" && data != null){ }}
+                        {{ if(typeof it.data !="undefined" && it.data != null){ }}
+                        <a onclick="PubSub.publish('tenantBase.complete','{{=it.template}}-form')"
+                           class="am-btn am-btn-primary am-btn-lg">完成</a>
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('tenantCheck.render','{{=it.data.id}}')">跳过</a>
                         {{ } }}
@@ -493,64 +505,14 @@
 
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+                        <a onclick="PubSub.publish('tenantCheck.complete','{{=it.template}}-form')"
+                           class="am-btn am-btn-primary am-btn-lg">完成</a>
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('tenantBase.render','{{=it.data.id}}')">< 上一步</a>
                         <a onclick="PubSub.publish('tenantCheck.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('tenantMaster.render','{{=it.data.id}}')">跳过</a>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-</script>
-
-<script type="text/x-dot-template" id="main-product-master-list">
-    {{ if(typeof it =="undefined" || it == null && it.length <= 0){ }}
-    <a onclick="">未找到相关大师，点击提交数据补全请求</a>
-    {{ }else{ }}
-    <ul class="am-list  am-list-border" id="searchResult">
-        {{ for(var i = 0 ; i < it.length; i++){ }}
-        <li><a onclick="PubSub.publish('tenantMaster.chooseMaster','{{=it[i].id}}:{{=it[i].fullName}}')">{{=it[i].fullName}}</a>
-        </li>
-        {{ } }}
-    </ul>
-    {{ } }}
-</script>
-
-<script type="text/x-dot-template" id="main-product-master">
-    <div class="main-tenant-base">
-        <form class="am-form am-form-horizontal" name="tenant" id="main-product-master-form" action="{{=it.submit}}"
-              enctype="multipart/form-data"
-              method="post">
-
-            <fieldset>
-
-                <legend><b>{{=it.data.name}}</b> 大师信息</legend>
-
-                <div class="am-form-group">
-                    <div class="am-u-sm-10">
-                        <input name="name" type="text" id="product-search"
-                               value="{{=(it.data!=null && it.data.tenantMasterList!=null && it.data.tenantMasterList.length>0) ? it.data.tenantMasterList[0].fullName : ''}}"
-                               placeholder="输入大师的名称" oninput="PubSub.publish('productMaster.search',this)">
-                        <input name="masterId" type="hidden" id="product-masterId"
-                               value="{{=(it.data!=null && it.data.tenantMasterList!=null && it.data.tenantMasterList.length>0) ? it.data.tenantMasterList[0].id : ''}}">
-                        <input name="id" type="hidden" id="product-id"
-                               value="{{=(it.data!=null) ? it.data.id : ''}}">
-                    </div>
-                </div>
-
-                <div class="am-form-group">
-                    <div class="am-u-sm-10" dot-template="{{=it.masterList}}">
-                    </div>
-                </div>
-
-
-                <div class="am-form-group">
-                    <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
-                        <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productModel.render',{ productId :'{{=it.data.id}}'})">去添加商品规格</a>
                     </div>
                 </div>
             </fieldset>
@@ -741,6 +703,96 @@
             </fieldset>
         </form>
     </div>
+
+</script>
+
+<script type="text/x-dot-template" id="main-tenant-list">
+
+    <div>
+        <div class="am-u-lg-6">
+            <legend>店铺列表</legend>
+            <div class="am-input-group">
+                <input type="text" class="am-form-field" oninput="PubSub.publish('{{=it.name}}.search',this)">
+                <span class="am-input-group-btn">
+                    <button class="am-btn am-btn-default" disabled type="button"><span
+                            class="am-icon-search"></span></button>
+                </span>
+            </div>
+        </div>
+        <div class="am-u-lg-12" dot-template="main-tenant-list-body">
+            {{
+            PubSub.publish(it.name+".body");
+            }}
+        </div>
+
+        <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.prePage')">上一页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" id="tenant-index">第{{=it.index}}页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.nextPage')">下一页</a>
+        </div>
+    </div>
+
+</script>
+
+<script type="text/x-dot-template" id="main-tenant-list-body">
+
+    <table class="am-table am-table-bordered am-table-radius am-table-striped">
+        <tbody>
+        <tr style="text-align:left">
+            <td>操作</td>
+            <td>店铺名称</td>
+            <td>店铺编号</td>
+            <td>创建时间</td>
+        </tr>
+
+        {{
+        for(var i = 0 ; i< it.length ; i++){
+        var tenant = it[i];
+        }}
+        <tr>
+            <td>
+                <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
+                        <button onclick="PubSub.publish('tenantBase.render','{{=tenant.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 基本信息
+                        </button>
+                        <button onclick="PubSub.publish('tenantCheck.render','{{=tenant.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 公司信息
+                        </button>
+                        <button onclick="PubSub.publish('tenantPanel.render','{{=tenant.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 店内实景
+                        </button>
+                        <button onclick="PubSub.publish('productList.render','{{=tenant.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 商品管理
+                        </button>
+                        <button onclick="PubSub.publish('productBase.render',{tenantId:'{{=tenant.id}}'})"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 添加商品
+                        </button>
+                        <button onclick="PubSub.publish('tenantBase.recommend','{{=tenant.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 推荐
+                        </button>
+                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                class="am-icon-trash-o"></span> 删除(暂时不支持)
+                        </button>
+                    </div>
+                </div>
+            </td>
+            <td>{{=tenant.name}}</td>
+            <td>{{=tenant.serial}}</td>
+            <td>
+                {{=tenant.createDateTime}}
+            </td>
+        </tr>
+        {{ } }}
+
+        </tbody>
+    </table>
 
 </script>
 
@@ -1038,92 +1090,6 @@
 
 </script>
 
-<script type="text/x-dot-template" id="main-tenant-list">
-
-    <div>
-        <div class="am-u-lg-6">
-            <legend>店铺列表</legend>
-            <div class="am-input-group">
-                <input type="text" class="am-form-field" oninput="PubSub.publish('{{=it.name}}.search',this)">
-                <span class="am-input-group-btn">
-                    <button class="am-btn am-btn-default" disabled type="button"><span
-                            class="am-icon-search"></span></button>
-                </span>
-            </div>
-        </div>
-        <div class="am-u-lg-12" dot-template="main-tenant-list-body">
-            {{
-            PubSub.publish(it.name+".body");
-            }}
-        </div>
-
-        <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
-            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.prePage')">上一页</a>
-            <a class="am-btn am-btn-primary am-btn-lg" id="tenant-index">第{{=it.index}}页</a>
-            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.nextPage')">下一页</a>
-        </div>
-    </div>
-
-</script>
-
-<script type="text/x-dot-template" id="main-tenant-list-body">
-
-    <table class="am-table am-table-bordered am-table-radius am-table-striped">
-        <tbody>
-        <tr style="text-align:left">
-            <td>操作</td>
-            <td>店铺名称</td>
-            <td>店铺编号</td>
-            <td>创建时间</td>
-        </tr>
-
-        {{
-        for(var i = 0 ; i< it.length ; i++){
-        var tenant = it[i];
-        }}
-        <tr>
-            <td>
-                <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
-                        <button onclick="PubSub.publish('tenantBase.render','{{=tenant.id}}')"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 基本信息
-                        </button>
-                        <button onclick="PubSub.publish('tenantCheck.render','{{=tenant.id}}')"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 公司信息
-                        </button>
-                        <button onclick="PubSub.publish('tenantPanel.render','{{=tenant.id}}')"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 店内实景
-                        </button>
-                        <button onclick="PubSub.publish('productList.render','{{=tenant.id}}')"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 商品管理
-                        </button>
-                        <button onclick="PubSub.publish('productBase.render',{tenantId:'{{=tenant.id}}'})"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 添加商品
-                        </button>
-                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                class="am-icon-trash-o"></span> 删除(暂时不支持)
-                        </button>
-                    </div>
-                </div>
-            </td>
-            <td>{{=tenant.name}}</td>
-            <td>{{=tenant.serial}}</td>
-            <td>
-                {{=tenant.createDateTime}}
-            </td>
-        </tr>
-        {{ } }}
-
-        </tbody>
-    </table>
-
-</script>
-
 <script type="text/x-dot-template" id="main-product-list">
 
     <div>
@@ -1171,7 +1137,7 @@
             <td>
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
-                        <button onclick="PubSub.publish('productBase.render','{{=product.id}}')"
+                        <button onclick="PubSub.publish('productBase.render',{productId:'{{=product.id}}'})"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
                         </button>
@@ -1179,8 +1145,11 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 商品规格
                         </button>
+                        <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 添加英文版商品（暂不支持）
+                        </button>
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                class="am-icon-trash-o"></span> 删除(暂时不支持)
+                                class="am-icon-trash-o"></span> 删除(暂不支持)
                         </button>
                     </div>
                 </div>
@@ -1236,7 +1205,7 @@
             <td>
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
-                        <button onclick="PubSub.publish('productModel.render','{{=productModel.id}}')"
+                        <button onclick="PubSub.publish('productModel.render',{id:'{{=productModel.id}}'})"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
                         </button>
@@ -1264,6 +1233,91 @@
         </tbody>
     </table>
 
+</script>
+
+<script type="text/x-dot-template" id="main-product-master-list">
+    {{ if(typeof it =="undefined" || it == null && it.length <= 0){ }}
+    <a onclick="">未找到相关大师，点击提交数据补全请求</a>
+    {{ }else{ }}
+    <ul class="am-list  am-list-border" id="searchResult">
+        {{ for(var i = 0 ; i < it.length; i++){ }}
+        <li><a onclick="PubSub.publish('productMaster.chooseMaster','{{=it[i].id}}:{{=it[i].fullName}}')">{{=it[i].fullName}}</a>
+        </li>
+        {{ } }}
+    </ul>
+    {{ } }}
+</script>
+
+<script type="text/x-dot-template" id="main-product-project-list">
+    {{ if(typeof it =="undefined" || it == null && it.length <= 0){ }}
+    <a onclick="">未找到相关技艺，点击提交数据补全请求</a>
+    {{ }else{ }}
+    <ul class="am-list  am-list-border" id="">
+        {{ for(var i = 0 ; i < it.length; i++){ }}
+        <li>
+            <a onclick="PubSub.publish('productMaster.chooseProject','{{=it[i].id}}:{{=it[i].name}}')">{{=it[i].name}}</a>
+        </li>
+        {{ } }}
+    </ul>
+    {{ } }}
+</script>
+
+<script type="text/x-dot-template" id="main-product-master">
+    <div class="main-tenant-base">
+        <form class="am-form am-form-horizontal" name="tenant" id="main-product-master-form" action="{{=it.submit}}"
+              enctype="multipart/form-data"
+              method="post">
+
+            <fieldset>
+
+                <legend><b>{{=it.data.name}}</b> 大师信息与技艺信息</legend>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label">大师</label>
+                    <div class="am-u-sm-10">
+
+                        <input name="name" type="text" id="master-search"
+                               value="{{=it.data!=null && it.data.master!=null  ? it.data.master.fullName : ''}}"
+                               placeholder="输入大师的名称" oninput="PubSub.publish('productMaster.search',this)">
+                        <input name="masterId" type="hidden" id="product-masterId"
+                               value="{{=it.data!=null && it.data.master!=null  ? it.data.master.id : ''}}">
+                        <input name="id" type="hidden" id="product-id"
+                               value="{{=(it.data!=null) ? it.data.id : ''}}">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10" dot-template="{{=it.masterList}}">
+                    </div>
+                </div>
+
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label">技艺</label>
+                    <div class="am-u-sm-10">
+                        <input name="name" type="text" id="project-search"
+                               value="{{=it.data!=null && it.data.project!=null  ? it.data.project.name : ''}}"
+                               placeholder="输入相关技艺的名称" oninput="PubSub.publish('productMaster.projectSearch',this)">
+                        <input name="projectId" type="hidden" id="product-projectId"
+                               value="{{=it.data!=null && it.data.project!=null  ? it.data.project.id : ''}}">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10" dot-template="{{=it.projectList}}">
+                    </div>
+                </div>
+
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品规格</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 </script>
 
 <script type="text/x-dot-template" id="main-scenic-region">
@@ -1421,6 +1475,174 @@
 
 </script>
 
+<script type="text/x-dot-template" id="main-recommend-base">
+    <div class="main-base">
+        <form class="am-form am-form-horizontal" name="recommend" id="main-recommend-base-form" action="{{=it.submit}}"
+              enctype="multipart/form-data"
+              method="post">
+
+            <fieldset>
+
+                <legend>推荐信息</legend>
+
+                <input name="id" type="hidden" value="{{=(it.data!=null && it.data.id!=null ) ? it.data.id: ''}}">
+
+                <div class="am-form-group">
+                    <label for="recommend-title" class="am-u-sm-2 am-form-label">标题</label>
+                    <div class="am-u-sm-10">
+                        <input name="title" type="text" id="recommend-title"
+                               value="{{=( it.data!=null ) ? it.data.title : ''}}"
+                               placeholder="输入推荐标题">
+                    </div>
+                </div>
+
+
+                <div class="am-form-group">
+                    <label for="recommend-short-text" class="am-u-sm-2 am-form-label">短简介</label>
+                    <div class="am-u-sm-10">
+                        <input name="shortText" type="text" id="recommend-short-text"
+                               value="{{=(it.data!=null) ? it.data.shortText : ''}}"
+                               placeholder="输入推荐的简介">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label for="recommend-redirect" class="am-u-sm-2 am-form-label">跳转链接</label>
+                    <div class="am-u-sm-10">
+                        <input name="redirect" type="text" id="recommend-redirect"
+                               value="{{=(it.data!=null) ? it.data.redirect : ''}}"
+                               placeholder="输入跳转链接">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label" for="doc-select-1">推荐分组</label>
+                    <div class="am-u-sm-10">
+                        <select id="doc-select-1" name="group">
+                            <option value="001">首页店铺推荐</option>
+                        </select>
+                    </div>
+                    <span class="am-form-caret"></span>
+                </div>
+
+
+                <div class="am-form-group am-form-file">
+                    <label for="recommond-image" class="am-u-sm-2 am-form-label">主图</label>
+                    <div class="am-u-sm-10">
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">
+                            选择文件
+                        </button>
+                        <input id="recommond-image" name="image" type="file"
+                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
+                    </div>
+                    <div class="file-list am-u-sm-10">
+                        {{ if(it.data!=null && it.data.image !=null){ }}
+                        <img src="{{=it.data.image.src}}" width="500"/>
+                        {{ } }}
+                    </div>
+                </div>
+
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
+                        <a onclick="PubSub.publish('{{=it.name}}.submitAndNext','{{=it.template}}-form')"
+                           class="am-btn am-btn-primary am-btn-lg">保存并添加下一个</a>
+                        <a onclick="PubSub.publish('{{=it.name}}.submitAndList','{{=it.template}}-form')"
+                           class="am-btn am-btn-primary am-btn-lg">保存并跳到推荐管理</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</script>
+
+<script type="text/x-dot-template" id="main-recommend-list">
+
+    <div>
+        <div class="am-u-lg-10">
+            <legend> 推荐列表</legend>
+            <div class="am-u-lg-6 am-input-group">
+                <input type="text" class="am-form-field" oninput="PubSub.publish('{{=it.name}}.search',this)"
+                       placeholder="输入推荐标题进行搜索">
+                <span class="am-input-group-btn">
+                    <button class="am-btn am-btn-default" disabled type="button"><span
+                            class="am-icon-search"></span></button>
+                </span>
+            </div>
+            <div class="am-u-lg-6">
+                <form class="am-form">
+                    <div class="am-form-group">
+                        <select onchange="PubSub.publish('{{=it.name}}.groupSearch',this)">
+                            <option value="001">首页推荐</option>
+                        </select>
+                        <span class="am-form-caret"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="am-u-lg-12" dot-template="main-recommend-list-body">
+            {{
+            PubSub.publish(it.name+".body");
+            }}
+        </div>
+
+        <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.prePage')">上一页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" id="recommend-index">第{{=it.index}}页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.nextPage')">下一页</a>
+        </div>
+    </div>
+
+</script>
+
+<script type="text/x-dot-template" id="main-recommend-list-body">
+
+    <table class="am-table am-table-bordered am-table-radius am-table-striped">
+        <tbody>
+        <tr style="text-align:left">
+            <td>操作</td>
+            <td>标题</td>
+            <td>简介</td>
+            <td>跳转链接</td>
+            <td>创建时间</td>
+        </tr>
+
+        {{
+        for(var i = 0 ; i< it.length ; i++){
+        var recommend = it[i];
+        }}
+        <tr>
+            <td>
+                <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
+                        <button onclick="PubSub.publish('recommendBase.render','{{=recommend.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 编辑
+                        </button>
+                        <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 添加英文版商品（暂不支持）
+                        </button>
+                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                class="am-icon-trash-o"></span> 删除(暂不支持)
+                        </button>
+                    </div>
+                </div>
+            </td>
+            <td>{{=recommend.title}}</td>
+            <td>{{=recommend.shortText}}</td>
+            <td>{{=recommend.redirect}}</td>
+            <td>
+                {{=recommend.createDatetime}}
+            </td>
+        </tr>
+        {{ } }}
+
+        </tbody>
+    </table>
+
+</script>
+
 <script>
 
     window.onbeforeunload = function () {
@@ -1428,21 +1650,6 @@
     };
 
     $().ready(function () {
-        var nav = new Nav();
-        var tenantBase = new TenantBase();
-        var tenantCheck = new TenantCheck();
-        var tenantMaster = new TenantMaster();
-        var tenantPanel = new TenantPanel();
-        var productBase = new ProductBase();
-        var productMaster = new ProductMaster();
-        var productModel = new ProductModel();
-        var productPanel = new ProductPanel();
-        var tenantList = new TenantList();
-        var productList = new ProductList();
-        var productModelList = new ProductModelList();
-        var scenicRegion = new ScenicRegion();
-        var scenicRegionList = new ScenicRegionList();
-        var menu = new Menu();
         menu.render();
     });
 
@@ -1472,13 +1679,13 @@
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("[dot-template=" + this.template + "]").remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
         this.setCurrentComponent = function (msg, data) {
             if (this.currentComponent != null) {
                 this.currentComponent.hide();
             }
-            data.father = this.currentComponent
+            data.father = this.currentComponent;
             this.currentComponent = data;
             this.refresh();
         };
@@ -1508,16 +1715,16 @@
         this.render = function (msg, data) {
             renderTemplate(this.template, this);
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
         };
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("[dot-template=" + this.template + "]").remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
 
         this.tenantBase = function (msg, data) {
@@ -1558,7 +1765,7 @@
                 renderTemplate(this.template, this);
             }
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
+
         };
 
         this.submitForm = function (msg, data) {
@@ -1575,15 +1782,36 @@
             return false;
         };
 
+        this.complete = function (msg, data) {
+            $("#my-modal-loading").modal();
+            $("#" + data).ajaxSubmit(function (data) {
+                if (typeof data == "string") {
+                    data = JSON.parse(data);
+                }
+                if (typeof data.id != "undefined" && data.id != null) {
+                    this.father.show();
+                }
+                $("#my-modal-loading").modal("close");
+            }.bind(this));
+            return false;
+        };
+
+        this.recommend = function (msg, data) {
+            ajaxRequest("/yuanqu/tenant/saveTenantRecommend", {id: data}, function (responseData) {
+                PubSub.publish("recommendBase.render", responseData.id);
+            }.bind(this))
+        };
+
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
         this.imageView = function (msg, data) {
             var images = data.files;
@@ -1614,6 +1842,7 @@
             {message: this.name + ".render", subscriber: this.render},
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".imageView", subscriber: this.imageView},
+            {message: this.name + ".complete", subscriber: this.complete},
             {message: this.name + ".submit", subscriber: this.submitForm}
         ];
 
@@ -1645,7 +1874,7 @@
                 renderTemplate(this.template, this);
             }
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
+
         };
 
         this.submitForm = function (msg, data) {
@@ -1662,15 +1891,30 @@
             return false;
         };
 
+        this.complete = function (msg, data) {
+            $("#my-modal-loading").modal();
+            $("#" + data).ajaxSubmit(function (data) {
+                if (typeof data == "string") {
+                    data = JSON.parse(data);
+                }
+                if (typeof data.id != "undefined" && data.id != null) {
+                    this.father.show();
+                }
+                $("#my-modal-loading").modal("close");
+            }.bind(this));
+            return false;
+        };
+
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
         this.imageView = function (msg, data) {
             var images = data.files;
@@ -1701,6 +1945,7 @@
             {message: this.name + ".render", subscriber: this.render},
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".imageView", subscriber: this.imageView},
+            {message: this.name + ".complete", subscriber: this.complete},
             {message: this.name + ".submit", subscriber: this.submitForm}
         ];
 
@@ -1709,7 +1954,7 @@
             PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
         }
 
-    }
+    };
 
     var TenantList = function (param) {
         this.currentSearch = null;
@@ -1754,7 +1999,6 @@
             this.index = 1;
             renderTemplate(this.template, this);
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
         };
 
         this.search = function (msg, data) {
@@ -1765,13 +2009,14 @@
 
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
 
         this.subscribeArray = [
@@ -1814,7 +2059,7 @@
                 renderTemplate(this.template, this);
             }
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
+
         };
 
         this.chooseMaster = function (msg, data) {
@@ -1847,13 +2092,14 @@
 
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
 
         this.subscribeArray = [
@@ -1895,7 +2141,7 @@
                 renderTemplate(this.template, this);
             }
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
+
         };
 
 
@@ -1958,13 +2204,14 @@
 
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
 
         this.subscribeArray = [
@@ -2013,7 +2260,7 @@
 
             }
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
+
         };
 
         this.submitForm = function (msg, data) {
@@ -2032,13 +2279,14 @@
 
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
         this.imageView = function (msg, data) {
             var images = data.files;
@@ -2088,6 +2336,7 @@
         this.name = "productMaster";
         this.template = "main-product-master";         //组件绑定的模板//组件需要订阅的事件与消息
         this.masterList = "main-product-master-list";
+        this.projectList = "main-product-project-list";
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
@@ -2099,7 +2348,7 @@
                 renderTemplate(this.template, this);
             }
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
+
         };
 
         this.chooseMaster = function (msg, data) {
@@ -2109,11 +2358,24 @@
             $("#product-search").val(fullName)
         };
 
+        this.chooseProject = function (msg, data) {
+            var id = data.split(":")[0];
+            var fullName = data.split(":")[1];
+            $("#product-projectId").val(id);
+            $("#project-search").val(fullName)
+        };
+
         this.search = function (msg, data) {
             var success = function (responseData) {
                 renderTemplate(this.masterList, responseData);
             }.bind(this);
             ajaxRequest("/yuanqu/tenant/getTenantMasterList", {name: $(data).val()}, success);
+        };
+        this.projectSearch = function (msg, data) {
+            var success = function (responseData) {
+                renderTemplate(this.projectList, responseData);
+            }.bind(this);
+            ajaxRequest("/yuanqu/product/getProjectList", {name: $(data).val()}, success);
         };
 
         this.submitForm = function (msg, data) {
@@ -2123,23 +2385,26 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-//                    PubSub.publish("tenantPanel.render", data.id);
+                    PubSub.publish('productModel.render', {
+                        productId: this.data.id
+                    });
                     //@TODO
                 }
                 $("#my-modal-loading").modal("close");
-            });
+            }.bind(this));
             return false;
         };
 
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
 
         this.subscribeArray = [
@@ -2149,7 +2414,9 @@
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".submit", subscriber: this.submitForm},
             {message: this.name + ".chooseMaster", subscriber: this.chooseMaster},
-            {message: this.name + ".search", subscriber: this.search}
+            {message: this.name + ".chooseProject", subscriber: this.chooseProject},
+            {message: this.name + ".search", subscriber: this.search},
+            {message: this.name + ".projectSearch", subscriber: this.projectSearch}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2175,6 +2442,7 @@
             if (typeof data != "undefined" && data != null && typeof data.id != "undefined") {
                 ajaxRequest("/yuanqu/product/getProductModelById", {id: data.id}, function (responseData) {
                     this.data = responseData;
+                    this.product = this.data.product.id;
                     renderTemplate(this.template, this);
                 }.bind(this))
             } else if (typeof data != "undefined" && data != null) {
@@ -2182,7 +2450,7 @@
                 renderTemplate(this.template, this);
             }
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
+
         };
 
         this.submitForm = function (msg, data) {
@@ -2202,13 +2470,14 @@
 
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
         this.imageView = function (msg, data) {
             var images = data.files;
@@ -2296,7 +2565,7 @@
             this.tenantId = data;
             renderTemplate(this.template, this);
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
+
         };
 
         this.search = function (msg, data) {
@@ -2307,13 +2576,14 @@
 
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
 
         this.subscribeArray = [
@@ -2363,18 +2633,19 @@
             this.productId = data;
             renderTemplate(this.template, this);
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
+
         };
 
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
 
         this.subscribeArray = [
@@ -2414,7 +2685,7 @@
                 renderTemplate(this.template, this);
             }
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
+
         };
 
 
@@ -2486,13 +2757,14 @@
 
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
 
         this.subscribeArray = [
@@ -2534,7 +2806,7 @@
                 renderTemplate(this.template, this);
             }
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
+
         };
 
         this.submitAndNext = function (msg, data) {
@@ -2567,13 +2839,14 @@
 
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
         };
         this.imageView = function (msg, data) {
             var images = data.files;
@@ -2659,7 +2932,7 @@
             this.tenantId = data;
             renderTemplate(this.template, this);
             this.show();
-            PubSub.publish("nav.setCurrentComponent", this);
+
         };
 
         this.search = function (msg, data) {
@@ -2670,13 +2943,210 @@
 
 
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
-            $("." + this.template).remove();
+            $("[dot-template=" + this.template + "]").html("");
+        };
+
+        this.subscribeArray = [
+            {message: this.name + ".show", subscriber: this.show},
+            {message: this.name + ".hide", subscriber: this.hide},
+            {message: this.name + ".render", subscriber: this.render},
+            {message: this.name + ".remove", subscriber: this.remove},
+            {message: this.name + ".body", subscriber: this.body},
+            {message: this.name + ".search", subscriber: this.search},
+            {message: this.name + ".nextPage", subscriber: this.nextPage},
+            {message: this.name + ".prePage", subscriber: this.prePage}
+        ];
+
+        for (var i = 0; i < this.subscribeArray.length; i++) {
+            var subscribe = this.subscribeArray[i];
+            PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
+        }
+
+    };
+
+    var RecommendBase = function (param) {
+        this.submit = "/yuanqu/tenant/recommendSubmit";
+        this.label = "新推荐";
+        this.data = null;
+        this.father = null;
+        this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
+        this.param = param;
+        this.name = "recommendBase";
+        this.template = "main-recommend-base";         //组件绑定的模板//组件需要订阅的事件与消息
+
+        this.render = function (msg, data) {
+            if (typeof data != "undefined" && data != null) {
+                ajaxRequest("/yuanqu/tenant/getRecommendById", {id: data}, function (responseData) {
+                    this.data = responseData;
+                    renderTemplate(this.template, this);
+                }.bind(this))
+            } else {
+                renderTemplate(this.template, this);
+            }
+            this.show();
+        };
+
+        this.submitAndNext = function (msg, data) {
+            $("#my-modal-loading").modal();
+            $("#" + data).ajaxSubmit(function (data) {
+                if (typeof data == "string") {
+                    data = JSON.parse(data);
+                }
+                if (typeof data.id != "undefined" && data.id != null) {
+                    this.render();
+                }
+                $("#my-modal-loading").modal("close");
+            }.bind(this));
+            return false;
+        };
+
+
+        this.submitAndList = function (msg, data) {
+            $("#my-modal-loading").modal();
+            $("#" + data).ajaxSubmit(function (data) {
+                if (typeof data == "string") {
+                    data = JSON.parse(data);
+                }
+                if (typeof data.id != "undefined" && data.id != null) {
+                    PubSub.publish("recommendList.render");
+                }
+                $("#my-modal-loading").modal("close");
+            }.bind(this));
+            return false;
+        };
+
+
+        this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
+            $("[dot-template=" + this.template + "]").show();
+        };
+        this.hide = function (msg, data) {
+            $("[dot-template=" + this.template + "]").hide();
+        };
+        this.remove = function (msg, data) {
+            $("[dot-template=" + this.template + "]").html("");
+        };
+        this.imageView = function (msg, data) {
+            var images = data.files;
+            $(data).parent().parent().find(".file-list").html("");
+            for (var i = 0; i < images.length; i++) {
+                if (images[i]) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(images[i]);
+                    if ((/audio\/\w+/.test(images[i].type))) {
+                        reader.onload = function (e) {
+                            var urlData = this.result;
+                            $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                        }
+                    }
+                    if ((/image\/\w+/.test(images[i].type))) {
+                        reader.onload = function (e) {
+                            var urlData = this.result;
+                            $(data).parent().parent().find(".file-list").append("<img src=\"" + urlData + "\" width=\"500\"  />")
+                        }
+                    }
+                }
+            }
+        };
+
+        this.subscribeArray = [
+            {message: this.name + ".show", subscriber: this.show},
+            {message: this.name + ".hide", subscriber: this.hide},
+            {message: this.name + ".render", subscriber: this.render},
+            {message: this.name + ".remove", subscriber: this.remove},
+            {message: this.name + ".imageView", subscriber: this.imageView},
+            {message: this.name + ".submitAndNext", subscriber: this.submitAndNext},
+            {message: this.name + ".submitAndList", subscriber: this.submitAndList},
+        ];
+
+        for (var i = 0; i < this.subscribeArray.length; i++) {
+            var subscribe = this.subscribeArray[i];
+            PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
+        }
+    };
+
+    var RecommendList = function (param) {
+        this.currentSearch = null;
+        this.group = null;
+        this.index = 1;
+        this.size = 10;
+        this.label = "推荐管理";
+        this.data = null;
+        this.father = null;
+        this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
+        this.param = param;
+        this.name = "recommendList";
+        this.template = "main-recommend-list";         //组件绑定的模板//组件需要订阅的事件与消息
+
+        this.nextPage = function (msg, data) {
+            this.index = this.index + 1;
+            $("#recommend-index").html("第" + this.index + "页");
+            this.body();
+        };
+
+        this.prePage = function (msg, data) {
+            this.index = this.index > 1 ? this.index - 1 : 1;
+            $("#recommend-index").html("第" + this.index + "页");
+            this.body();
+        };
+
+        this.body = function (msg, data) {
+            //@TODO 搜索列表与商品实体
+            var param = {
+                limit: this.size,
+                offset: ((this.index - 1) * this.size)
+            };
+            if (this.currentSearch != null) {
+                param.name = this.currentSearch
+            }
+            if (this.group != null) {
+                param.group = this.group;
+            }
+            ajaxRequest("/yuanqu/tenant/getRecommendList", param, function (responseData) {
+                this.data = responseData;
+                renderTemplate(this.template + "-body", responseData);
+            }.bind(this));
+        };
+
+        this.render = function (msg, data) {
+            this.index = 1;
+            this.group = data;
+            renderTemplate(this.template, this);
+            this.show();
+
+        };
+
+        this.search = function (msg, data) {
+            this.index = 1;
+            this.currentSearch = $(data).val();
+            this.body();
+        };
+
+        this.search = function (msg, data) {
+            this.index = 1;
+            this.group = $(data).val();
+            this.body();
+        };
+
+
+        this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
+//            setTimeout("$('#data-am-selected').selected()", 1000);
+            $("select").selected();
+            $("[dot-template=" + this.template + "]").show();
+        };
+        this.hide = function (msg, data) {
+            $("[dot-template=" + this.template + "]").hide();
+        };
+        this.remove = function (msg, data) {
+            $("[dot-template=" + this.template + "]").html("");
         };
 
         this.subscribeArray = [
@@ -2700,6 +3170,24 @@
     function renderTemplate(templateId, data) {
         $("[dot-template=" + templateId + "]").html(doT.template($("#" + templateId).text())(data));
     }
+
+    var nav = new Nav();
+    var tenantBase = new TenantBase();      //店铺基本信息
+    var tenantCheck = new TenantCheck();    //店铺公司信息
+    var tenantMaster = new TenantMaster();  //店铺大师信息
+    var tenantPanel = new TenantPanel();    //店铺实景信息
+    var productBase = new ProductBase();    //商品基本信息
+    var productMaster = new ProductMaster();//商品大师信息
+    var productModel = new ProductModel();  //商品规格信息
+    var productPanel = new ProductPanel();  //商品详情
+    var tenantList = new TenantList();      //店铺列表
+    var productList = new ProductList();    //商品列表
+    var productModelList = new ProductModelList();  //商品规格列表
+    var scenicRegion = new ScenicRegion();          //景区信息
+    var scenicRegionList = new ScenicRegionList();  //景区列表
+    var recommendBase = new RecommendBase();        //推荐信息
+    var recommendList = new RecommendList();        //推荐列表
+    var menu = new Menu();
 
 </script>
 

@@ -38,6 +38,17 @@ public class ProductModel implements Serializable {
     private Integer popularityAmount;
     private Integer saleAmount;
 
+    private String audio;
+
+    @Transient
+    public String getAudio() {
+        return audio;
+    }
+
+    public void setAudio(String audio) {
+        this.audio = audio;
+    }
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
     public List<ProductPicture> getProductPictureList() {

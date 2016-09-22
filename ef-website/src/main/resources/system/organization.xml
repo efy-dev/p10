@@ -35,7 +35,7 @@
             </does>
         </entity>
 
-        <entity name="ConsumerAddress" label="收货地址列表"  model="com.efeiyi.ec.organization.model.ConsumerAddress">
+        <entity name="ConsumerAddress" label="收货地址列表" model="com.efeiyi.ec.organization.model.ConsumerAddress">
             <does>
                 <do name="ListConsumerAddress" access="" label="收货地址列表">
                     <query name="default" label="默认" type="auto" orderBy="status:desc">
@@ -53,25 +53,25 @@
                 </do>
 
 
-                <do name="saveOrUpdateConsumerAddress"  access="" label="保存配送地址">
+                <do name="saveOrUpdateConsumerAddress" access="" label="保存配送地址">
                     <page>
                         <fields>
-                            <field name="status" label="默认值" defaultValue="1" inputType="default" />
-                            <field name="consumer" label="默认值" defaultValue="${MY_USER}" inputType="default" />
+                            <field name="status" label="默认值" defaultValue="1" inputType="default"/>
+                            <field name="consumer" label="默认值" defaultValue="${MY_USER}" inputType="default"/>
                         </fields>
                     </page>
                 </do>
             </does>
         </entity>
-        <entity name="bigUser" label="用户"  model="com.efeiyi.ec.organization.model.BigUser">
+        <entity name="bigUser" label="用户" model="com.efeiyi.ec.organization.model.BigUser">
             <does>
-                <do name="saveOrUpdatePassword"  access="" label="修改密码">
+                <do name="saveOrUpdatePassword" access="" label="修改密码">
                     <page>
                         <fields>
                         </fields>
                     </page>
                 </do>
-                <do name="saveOrUpdateInfo"  access="" label="修改个人信息">
+                <do name="saveOrUpdateInfo" access="" label="修改个人信息">
                     <page>
                         <fields>
                         </fields>
@@ -79,6 +79,35 @@
                 </do>
                 <do name="listUser" access="" label="所有用户">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="BalanceRecord" label="余额表" model="com.efeiyi.ec.balance.model.BalanceRecord">
+            <fields>
+                <field name="type" label="余额类型" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="购买商品返现余额" value="1"/>
+                        <item label="微信答题发放余额" value="2"/>
+                        <item label="取消订单返回所用余额" value="3"/>
+                        <item label="购买商品使用余额" value="4"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="listBalanceRecord" access="" label="账户余额">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="consumer.id" defaultValue="1" operation="eq"/>
+
+
+                    </query>
+                    <query name="default1" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="consumer.id" defaultValue="1" operation="eq"/>
+                        <condition name="key" defaultValue="1" operation="eq"/>
+
                     </query>
                 </do>
             </does>

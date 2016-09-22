@@ -4,6 +4,7 @@ import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.Image;
 import com.efeiyi.ec.organization.model.ImagePanel;
 import com.efeiyi.ec.organization.model.Panel;
+import com.efeiyi.ec.product.model.Recommend;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.EnterpriseTenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
@@ -372,5 +373,107 @@ public class OffLineTenantController {
         return tenant;
     }
 
+
+    @RequestMapping({"/tenant/getRecommendList"})
+    @ResponseBody
+    public Object getRecommendList(HttpServletRequest request) {
+        int limit = Integer.parseInt(request.getParameter("limit"));
+        int offset = Integer.parseInt(request.getParameter("offset"));
+        String group = request.getParameter("group");
+        String name = request.getParameter("name");
+        String hql = "select obj from Recommend obj where obj.status!='0'";
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        if (name != null) {
+            hql += " and obj.name=:name";
+            param.put("name", name);
+        }
+        if (group != null) {
+            hql += " and obj.group=:group";
+            param.put("group", group);
+        }
+        hql += " order by obj.createDatetime desc";
+        PageEntity pageEntity = new PageEntity();
+        pageEntity.setSize(limit);
+        pageEntity.setrIndex(offset * -1);
+        PageInfo pageInfo = baseManager.listPageInfo(hql, pageEntity, param);
+        return pageInfo.getList();
+    }
+
+    @RequestMapping({"/tenant/getRecommendById"})
+    @ResponseBody
+    public Object getRecommendById(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        return baseManager.getObject(Recommend.class.getName(), id);
+    }
+
+
+    @RequestMapping({"/tenant/recommendSubmit"})
+    @ResponseBody
+    public Object recommendSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
+        String id = request.getParameter("id");
+        Recommend recommend;
+        if (id != null && !"".equals(id)) {
+            recommend = (Recommend) baseManager.getObject(Recommend.class.getName(), id);
+        } else {
+            recommend = new Recommend();
+        }
+        recommend.setStatus("1");
+        recommend.setType("0");
+        recommend.setShortText(request.getParameter("shortText"));
+        recommend.setTitle(request.getParameter("title"));
+        recommend.setCreateDatetime(new Date());
+        recommend.setGroup(request.getParameter("group"));
+        recommend.setRedirect(request.getParameter("redirect"));
+        baseManager.saveOrUpdate(Recommend.class.getName(), recommend);
+        MultipartFile multipartFile = multipartRequest.getFile("image");
+        String oName = multipartFile.getOriginalFilename();
+        String nName;
+        try {
+            nName = System.currentTimeMillis() + "" + (int) (Math.random() * 1000000) + "." + oName.split("\\.")[1];
+            String url = "image/" + nName;
+            aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
+            String fullUrl = PConst.OSS_EF_WIKI_HOST + url;
+            Image image = new Image();
+            image.setName("recommendImage");
+            image.setCreateTime(new Date(System.currentTimeMillis()));
+            image.setOwner(recommend.getId());
+            image.setSrc(fullUrl);
+            image.setStatus("1");
+            image.setType("1");
+            baseManager.saveOrUpdate(Image.class.getName(), image);
+            recommend.setImage(image);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        baseManager.saveOrUpdate(Recommend.class.getName(), recommend);
+        return recommend;
+    }
+
+    @RequestMapping({"/tenant/saveTenantRecommend"})
+    @ResponseBody
+    public Object saveTenantRecommend(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        BigTenant bigTenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), id);
+        Recommend recommend = new Recommend();
+        recommend.setShortText(bigTenant.getContent());
+        recommend.setStatus("1");
+        recommend.setTitle(bigTenant.getName());
+        recommend.setType("0");
+        //@TODO 需要换成真实链接
+        recommend.setRedirect(PConst.WEBURL);
+        recommend.setGroup(Recommend.GROUP_GARDEN_HOME);
+        recommend.setCreateDatetime(new Date(System.currentTimeMillis()));
+        baseManager.saveOrUpdate(Recommend.class.getName(), recommend);
+        Image image = new Image();
+        image.setCreateTime(new Date(System.currentTimeMillis()));
+        image.setSrc(bigTenant.getPictureUrl());
+        image.setName(bigTenant.getName());
+        image.setOwner(recommend.getId());
+        image.setType("1");
+        baseManager.saveOrUpdate(Image.class.getName(), image);
+        recommend.setImage(image);
+        baseManager.saveOrUpdate(Recommend.class.getName(), recommend);
+        return recommend;
+    }
 
 }
