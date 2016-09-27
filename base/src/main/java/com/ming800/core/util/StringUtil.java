@@ -11,9 +11,11 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringUtil {
-
+    private final static String regxpForHtml = "<([^>]*)>"; // 过滤所有以<开头以>结尾的标签
     public static String encodePassword(String password, String algorithm){
         byte[] unencodedPassword={};
      try{
@@ -238,5 +240,25 @@ public class StringUtil {
             }
         }
         return buf.toString();
+    }
+
+    /**
+     *
+     * 基本功能：过滤所有以"<"开头以">"结尾的标签
+     * @param str
+     * @return String
+     */
+    public static String filterHtml(String str) {
+        String temp = str == null ? "" : str;
+        Pattern pattern = Pattern.compile(regxpForHtml);
+        Matcher matcher = pattern.matcher(temp);
+        StringBuffer sb = new StringBuffer();
+        boolean result = matcher.find();
+        while (result) {
+            matcher.appendReplacement(sb, "");
+            result = matcher.find();
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 }

@@ -348,7 +348,8 @@ public class ProductController {
             param.put("productId", productModel.getProduct().getId());
             String audioHql = "select obj from Image obj where obj.owner=:productId and obj.status!='0' and obj.type='2'";
             Image image = (Image) baseManager.getUniqueObjectByConditions(audioHql, param);
-            productModel.setAudio(image.getSrc());
+            String src=image==null?"":image.getSrc();
+            productModel.setAudio(src);
             return productModel;
         } catch (Exception e) {
             JSONObject jsonObject = new JSONObject();

@@ -7,6 +7,7 @@ import com.efeiyi.ec.wiki.model.ProjectContent;
 import com.efeiyi.ec.wiki.model.Artistry;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ming800.core.util.StringUtil;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -136,7 +137,9 @@ public class Project implements Serializable {
     }
     @Column(name="description")
     public String getDescription() {
-        return description;
+        String temp = description == null ? "" : description;
+        temp = StringUtil.filterHtml(temp);
+        return temp;
     }
 
     public void setDescription(String description) {
