@@ -1,8 +1,0 @@
-<sitemesh>
-    <mapping path="/myEfeiyi/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
-    <mapping path="/order/myEfeiyi/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
-    <mapping path="/comment/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
-    <mapping path="/purchaseCollect/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
-    <mapping path="/coupon/list" decorator="/layouts/myEfeiyiTemplate.jsp"/>
-    <mapping path="/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
-</sitemesh>

@@ -1,6 +1,0 @@
-<sitemesh>
-    <mapping path="/base/**" decorator="/layouts/mainTemplate.jsp"/>
-    <mapping path="/pc/**" decorator="/layouts/mainTemplate.jsp"/>
-    <mapping path="/project/**" decorator="/layouts/mainTemplate.jsp"/>
-    <mapping path="/**" decorator="/layouts/mainTemplate.jsp"/>
-</sitemesh>

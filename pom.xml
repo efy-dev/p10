@@ -17,8 +17,6 @@
         <module>ef-personal</module>
         <module>ef-tenant</module>
         <module>base_resource</module>
-        <module>ef-wiki</module>
-        <module>ef-consumer</module>
         <module>tg-website</module>
         <module>app-wikiServer</module>
         <module>ef-user</module>
