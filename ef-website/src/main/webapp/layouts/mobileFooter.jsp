@@ -14,11 +14,10 @@
 <c:if test="${request!='/purchaseOrder/receiveGift'&&request!='/purchaseOrder/giftView'}">
     <c:if test="${init!=true}">
         <div class="login-reg">
-            <a href="<c:url value="/login"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+            <a href="http://www.efeiyi.com/login" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
             <a id="signin"
-               href="<c:url value="/signin"/>"
-               class="btn-reg"
-               onclick="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+               href="http://www.efeiyi.com/signin"
+               class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
         </div>
     </c:if>
 </c:if>

@@ -1,6 +1,12 @@
-<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2016/4/14
+  Time: 15:43
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -9,12 +15,14 @@
     <meta charset="UTF-8">
     <title>内容频道-工艺详情</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
 </head>
 <body>
 <header id="header" class="am-header custom-header newheader">
-    <div class="logo"><img src="<c:url value="/scripts/images/ef-logo-craft.png"/>" height="27" width="110"
+    <div class="logo"><img src="<c:url value="/scripts/assets/wap/images/ef-logo-craft.png"/>" height="27" width="110"
                            align="center" alt=""></div>
-
+    <!-- //End--logo-->
+    <!-- //End--chevron-left-->
     <div class="am-header-right am-header-nav">
         <a href="#chevron-right" class="chevron-right" id="menu">
             <i class="line"></i>
@@ -22,8 +30,8 @@
     </div>
     <div class="menu-list">
         <ul class="bd">
-            <li><a href="<c:url value="/minglu"/>" title="首页">首页</a></li>
-            <li><a href="http://<%=PConst.WEBSITE_HOST%>" title="购物车">非遗商城</a></li>
+            <li><a href="http://minglu.efeiyi.com" title="首页">首页</a></li>
+            <li><a href="http://www.efeiyi.com" title="购物车">非遗商城</a></li>
             <li><a href="http://master.efeiyi.com" title="个人中心">非遗大师</a></li>
         </ul>
     </div>
@@ -66,7 +74,7 @@
                 <ul class="ul-col-2">
                     <c:forEach items="${masterProjectList}" var="masterProject">
                         <li>
-                            <a href="http://${masterProject.master.name}.efeiyi.com" title="">
+                            <a href="<c:url value="/minglu/master/${masterProject.master.getId()}"/>" title="">
                                 <img src="http://tenant.efeiyi.com/${masterProject.master.favicon}@!wiki-tenant-picture"
                                      alt="">
                                 <span class="txt">

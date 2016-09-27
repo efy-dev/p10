@@ -14,6 +14,7 @@ import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.taglib.PageEntity;
+import com.ming800.core.util.StringUtil;
 import com.sun.research.ws.wadl.Link;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -315,9 +316,9 @@ public class ProductController {
                 hql.append("productModel.");
                 hql.append(key.toString());
                 hql.append("=:");
-                hql.append(key.toString());
+                hql.append(paramKeyFillter(key.toString()));
                 hql.append(" ");
-                param.put(key.toString(), jsonObject.get(key));
+                param.put(paramKeyFillter(key.toString()), jsonObject.get(key));
             }
             PageEntity pageEntity = new PageEntity();
             pageEntity.setSize(limit);
@@ -325,10 +326,15 @@ public class ProductController {
             PageInfo pageInfo = baseManager.listPageInfo(hql.toString(), pageEntity, param);
             return pageInfo.getList();
         } catch (Exception e) {
+            e.printStackTrace();
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("code", "1");
             return jsonObject;
         }
+    }
+
+    private String paramKeyFillter(String key) {
+        return key.replaceAll("\\.", "_");
     }
 
     // url: /product/getProductModelById

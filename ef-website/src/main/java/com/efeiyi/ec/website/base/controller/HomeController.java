@@ -5,9 +5,11 @@ import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterUserTemp;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.ming800.core.base.service.BaseManager;
@@ -28,6 +30,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -51,7 +54,18 @@ public class HomeController {
     private BaseManager baseManager;
 
 
-
+    @RequestMapping({"/app/redirect/{dataType}/{dataId}"})
+    public String appRedirect(@PathVariable String dataType, @PathVariable String dataId, HttpServletRequest request) {
+        String redirect = "";
+        if (dataType.equals("tenant")) {
+            BigTenant bigTenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), dataId);
+            redirect = "http://www.efeiyi.com/app/tenant_details.html?tenantId=" + dataId + "&title=" + bigTenant.getName();
+        } else if (dataType.equals("product")) {
+            ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), dataId);
+            redirect = "http://www.efeiyi.com/app/product_details.html?productId=" + dataId + "&title=" + productModel.getName();
+        }
+        return "redirect:" + redirect;
+    }
 
 
     @RequestMapping({"/datafrom1.do"})
@@ -76,43 +90,45 @@ public class HomeController {
         CookieTool.addCookie(response, "userinfo", "", 1, ".efeiyi.com");
         return "redirect:/";
     }
+
     /**
      * 大首页各种推荐
+     *
      * @param request
      * @param model
      * @return
      * @throws Exception
      */
     @RequestMapping({"/main.do"})
-    public String home(HttpServletRequest request,Model model) throws Exception {
+    public String home(HttpServletRequest request, Model model) throws Exception {
         //大首页轮播图
         List<Object> bannerList = bannerManager.getBannerList("ec.main.banner");
         model.addAttribute("bannerList", bannerList);
         //商品推荐
         List<Object> recommendedProductList = objectRecommendedManager.getRecommendedList("mainProductRecommended");
-        model.addAttribute("productList",recommendedProductList);
+        model.addAttribute("productList", recommendedProductList);
         //大师推荐
         List<Object> recommendedMasterList = objectRecommendedManager.getRecommendedList("mainMasterRecommended");
-        model.addAttribute("masterList",recommendedMasterList);
-        LinkedHashMap<Object,List> masterNewsMap = new LinkedHashMap<>();
+        model.addAttribute("masterList", recommendedMasterList);
+        LinkedHashMap<Object, List> masterNewsMap = new LinkedHashMap<>();
         String hql = "from MasterNews where master.id =:id and status=1";
         LinkedHashMap queryMap = new LinkedHashMap();
-        if(recommendedMasterList!=null&&recommendedMasterList.size()>0) {
+        if (recommendedMasterList != null && recommendedMasterList.size() > 0) {
             for (int i = 0; i < recommendedMasterList.size(); i++) {
                 //非遗资讯
                 Master master = (Master) recommendedMasterList.get(i);
-                queryMap.put("id",master.getId());
-                List<Object> newsList = baseManager.listObject(hql,queryMap);
+                queryMap.put("id", master.getId());
+                List<Object> newsList = baseManager.listObject(hql, queryMap);
                 masterNewsMap.put(master, newsList);
             }
         }
-        model.addAttribute("masterNewsMap",masterNewsMap);
+        model.addAttribute("masterNewsMap", masterNewsMap);
         //礼品推荐
         List<Object> recommendedSubjectList = objectRecommendedManager.getRecommendedList("mainGiftListRecommended");
-        model.addAttribute("subjectList",recommendedSubjectList);
+        model.addAttribute("subjectList", recommendedSubjectList);
         //非遗百科推荐
         List<Object> recommendedArtistryList = objectRecommendedManager.getRecommendedList("mainArtistryRecommended");
-        model.addAttribute("artistryList",recommendedArtistryList);
+        model.addAttribute("artistryList", recommendedArtistryList);
         //首页类别推荐
         XQuery projectCategoryXQuery = new XQuery("listProjectCategory_default", request);
         projectCategoryXQuery.setSortHql("");
@@ -128,69 +144,74 @@ public class HomeController {
             projectMap.put(((ProjectCategory) object).getId(), baseManager.listObject(projectQuery));
 
         }
-        model.addAttribute("categoryList",categoryList);
-        model.addAttribute("projectMap",projectMap);
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("projectMap", projectMap);
         XQuery marketingActivityQuery = new XQuery("listAdvertisement_default1", request);
         XQuery hotSaleQuery = new XQuery("listAdvertisement_default3", request);
         List<Object> marketingActivityQueryList = baseManager.listObject(marketingActivityQuery);
         List<Object> hotSaleList = baseManager.listObject(hotSaleQuery);
-        model.addAttribute("marketingActivityQueryList",marketingActivityQueryList);
-        model.addAttribute("hotSaleList",hotSaleList);
+        model.addAttribute("marketingActivityQueryList", marketingActivityQueryList);
+        model.addAttribute("hotSaleList", hotSaleList);
         model.addAttribute("init", "true");
         Map<String, List<ProductGiftTagValue>> map = new HashMap<>();
         XQuery productGiftTagValueQuery = new XQuery("listProductGiftTagValue_default", request);//场合标签组
         List<ProductGiftTagValue> list = baseManager.listObject(productGiftTagValueQuery);
         try {
-            for(ProductGiftTagValue productGiftTagValue:list){
+            for (ProductGiftTagValue productGiftTagValue : list) {
                 String group = productGiftTagValue.getGroup();
-                if (map.containsKey(group)){
+                if (map.containsKey(group)) {
                     map.get(group).add(productGiftTagValue);
-                }else {
+                } else {
                     List<ProductGiftTagValue> productGiftTagValueList = new ArrayList<>();
                     productGiftTagValueList.add(productGiftTagValue);
-                    map.put(group,productGiftTagValueList);
+                    map.put(group, productGiftTagValueList);
                 }
             }
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
         XQuery giftXQuery = new XQuery("listAdvertisement_default", request);
         List advertisementList = baseManager.listObject(giftXQuery);
-        model.addAttribute("advertisementList",advertisementList);
-        model.addAttribute("map",map);
+        model.addAttribute("advertisementList", advertisementList);
+        model.addAttribute("map", map);
         return "/mainhome";
     }
 
     /**
-     *跳转判断
+     * 跳转判断
+     *
      * @param request
      * @return
      */
     @RequestMapping({"/redirect.do"})
-    public String redirect(HttpServletRequest request){
+    public String redirect(HttpServletRequest request) {
         String url = request.getRequestURL().toString();
-        if (url.equalsIgnoreCase("http://www2.efeiyi.com/")) {
-                return "forward:/main.do";
-        }else{
+        if (url.equalsIgnoreCase("http://www.efeiyi.com/")) {
+            return "forward:/main.do";
+        } else {
             //访问mall.efeiyi.com
             return "forward:/mall.do";
         }
     }
+
     @RequestMapping("/forwardPage.do")
-    public String forwardPage(HttpServletRequest request,Model model){
+    public String forwardPage(HttpServletRequest request, Model model) {
         try {
             MasterUserTemp temp = new MasterUserTemp();
             temp.setUserName(request.getParameter("username"));
             temp.setLevel(request.getParameter("level"));
             temp.setProjectName(request.getParameter("projectName"));
             temp.setPhoneNum(request.getParameter("phoneNum"));
-            baseManager.saveOrUpdate(MasterUserTemp.class.getName(),temp);
-            return "redirect:/sign/toRegister.do?result="+temp.getId();
-        }catch (Exception e){
+            baseManager.saveOrUpdate(MasterUserTemp.class.getName(), temp);
+            return "redirect:/sign/toRegister.do?result=" + temp.getId();
+        } catch (Exception e) {
             e.printStackTrace();
             return "";
         }
     }
+
     /**
      * 电商首页
+     *
      * @param request
      * @param model
      * @return
@@ -224,7 +245,7 @@ public class HomeController {
             //首页
             XQuery projectQuery = new XQuery("listProject_default", request);
             projectQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
-            projectQuery.setSortHql("") ;
+            projectQuery.setSortHql("");
             projectQuery.updateHql();
             projectMap.put(((ProjectCategory) object).getId(), baseManager.listObject(projectQuery));
         }
@@ -330,7 +351,6 @@ public class HomeController {
     }
 
     /**
-     *
      * @param request
      * @param response
      * @param model

@@ -290,7 +290,7 @@
 			<a href="<c:url value="/myEfeiyi/getPassword.do"/>"> 修改密码<i class="icon-sj"></i></a>
 		</div>
 		<!--安全退出-->
-		<div class="aq-btn"><a href="<c:url value="/j_spring_cas_security_logout"/>">安全退出</a></div>
+		<div class="aq-btn"><a href="<c:url value="/j_spring_security_logout"/>">安全退出</a></div>
 	</div>
 </div>
 <script>

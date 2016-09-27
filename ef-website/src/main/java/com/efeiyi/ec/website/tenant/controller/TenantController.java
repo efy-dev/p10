@@ -221,31 +221,35 @@ public class TenantController {
     @RequestMapping({"/tenant/getRecommendList"})
     @ResponseBody
     public Object getRecommendList(HttpServletRequest request) {
-        try {
-            JSONObject jsonObject = JSONObject.fromObject(request.getParameter("param"));
-            int limit = Integer.parseInt(request.getParameter("limit"));
-            int offset = Integer.parseInt(request.getParameter("offset"));
-            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-            StringBuilder hql = new StringBuilder("select recommend from Recommend recommend where recommend.status!=0 ");
-            for (Object key : jsonObject.keySet()) {
-                hql.append("and ");
-                hql.append("recommend.");
-                hql.append(key.toString());
-                hql.append("=:");
-                hql.append(key.toString());
-                hql.append(" ");
-                param.put(key.toString(), jsonObject.get(key));
-            }
-            PageEntity pageEntity = new PageEntity();
-            pageEntity.setSize(limit);
-            pageEntity.setrIndex(offset);
-            PageInfo pageInfo = baseManager.listPageInfo(hql.toString(), pageEntity, param);
-            return pageInfo.getList();
-        } catch (Exception e) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("code", "1");
-            return jsonObject;
+//        try {
+        JSONObject jsonObject = JSONObject.fromObject(request.getParameter("param"));
+        int limit = Integer.parseInt(request.getParameter("limit"));
+        int offset = Integer.parseInt(request.getParameter("offset"));
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        StringBuilder hql = new StringBuilder("select recommend from Recommend recommend where recommend.status!=0 ");
+        for (Object key : jsonObject.keySet()) {
+            hql.append("and ");
+            hql.append("recommend.");
+            hql.append(key.toString());
+            hql.append("=:");
+            hql.append(key.toString());
+            hql.append(" ");
+            param.put(key.toString(), jsonObject.get(key));
         }
+        PageEntity pageEntity = new PageEntity();
+        pageEntity.setSize(limit);
+        pageEntity.setrIndex(offset);
+        if (limit == -1) {
+            return baseManager.listObject(hql.toString(), param);
+        }
+        PageInfo pageInfo = baseManager.listPageInfo(hql.toString(), pageEntity, param);
+        return pageInfo.getList();
+//        }
+//        } catch (Exception e) {
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("code", "1");
+//            return jsonObject;
+//        }
     }
 
 

@@ -85,17 +85,17 @@ public class PConst {
     public static final Integer CUSTOMIZATION = 3;
     public static final Integer PACKAGEORDER = 2;
 
-    public static final String HOSTNAME = "http://www2.efeiyi.com";
-    public static final String NEWWEBURL = "http://mall2.efeiyi.com";
+    public static final String HOSTNAME = "http://www.efeiyi.com";
+    public static final String NEWWEBURL = "http://mall.efeiyi.com";
 
-    public static final String WEBURL = "http://www2.efeiyi.com";//web电商测试地址(如需改成正式环境此处改为www.efeiyi.comn)
+    public static final String WEBURL = "http://www.efeiyi.com";//web电商测试地址(如需改成正式环境此处改为www.efeiyi.comn)
     public static final String TUANURL = "a.efeiyi.com";//团购正式地址
-    public static final String PERSONALURL = "http://i2.efeiyi.com";//个人中心正式地址
+    public static final String PERSONALURL = "http://i.efeiyi.com";//个人中心正式地址
 
-    public static final String WEBSITE_CONSUMER_HOST = "i2.efeiyi.com";
-    public static final String WEBSITE_WIKI_HOST = "minglu2.efeiyi.com";
-    public static final String WEBSITE_MALL_HOST = "mall2.efeiyi.com";
-    public static final String WEBSITE_HOST = "www2.efeiyi.com";
+    public static final String WEBSITE_CONSUMER_HOST = "i.efeiyi.com";
+    public static final String WEBSITE_WIKI_HOST = "minglu.efeiyi.com";
+    public static final String WEBSITE_MALL_HOST = "mall.efeiyi.com";
+    public static final String WEBSITE_HOST = "www.efeiyi.com";
 
     public static final String OSS_EF_WIKI_HOST = "http://wiki-oss.efeiyi.com/";
 

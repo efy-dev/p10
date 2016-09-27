@@ -57,132 +57,41 @@
 </head>
 <body>
 <div class="am-g">
-    <%--表单页页面是一个流程控制页面，编辑或者新建商铺的时候--%>
-    <%--1.店铺信息--%>
-    <%--（1）.基本信息--%>
-    <%--（2）.验证审核信息--%>
-    <%--（3）.添加对应的大师（选填）--%>
-    <%--2.店铺内部实景（选填）--%>
-    <%--3.商品信息（选填）--%>
-
-    <%--如果是新建店铺，加载页面的时候就是直接进入流程，从第一步开始逐步添加信息--%>
-    <%--如果是编辑店铺，加载页面的时候就是显示店铺的详细信息，以及编辑按钮--%>
-
-    <%--页面中包含一个流程，而且流程中的各个节点又是独立存在的，每个几点的视图层使用dot模板来拆分，每个模板，就相当于一个流程节点，然后每个模板又是可以单独去渲染的（通过controller中的方法）--%>
-
-    <%--把流程统一一下就是下边的结果--%>
-
-    <%--第一步：店铺基本信息--%>
-    <%--第二部：店铺的审核认证信息--%>
-    <%--第三部：关联店铺大师--%>
-    <%--第四部：添加店内实景--%>
-    <%--第五部：添加店铺的商品信息--%>
-
-
-    <%-----------------------------nav-----------------------------%>
     <div dot-template="main-nav">
-        <%--<ol class="am-breadcrumb main-nav">--%>
-        <%--<li><a href="#">园区管理</a></li>--%>
-        <%--<li><a href="#">新的店铺</a></li>--%>
-        <%--<li class="am-active">基本信息</li>--%>
-        <%--</ol>--%>
     </div>
-
-
-    <%----------------------------menu-----------------------------%>
-
-
     <div dot-template="main-menu">
-        <%--<div class="main-menu">--%>
-        <%--<button type="button" class="am-btn am-btn-primary "><span>新店铺</span></button>--%>
-        <%--<button type="button" class="am-btn am-btn-primary "><span>店铺列表</span></button>--%>
-        <%--<button type="button" class="am-btn am-btn-primary "><span>新景区</span></button>--%>
-        <%--<button type="button" class="am-btn am-btn-primary "><span>景区列表</span></button>--%>
-        <%--<button type="button" class="am-btn am-btn-primary "><span>新推荐</span></button>--%>
-        <%--<button type="button" class="am-btn am-btn-primary "><span>推荐列表</span></button>--%>
-        <%--<button type="button" class="am-btn am-btn-primary "><span>所有图片</span></button>--%>
-        <%--</div>--%>
     </div>
-
     <div dot-template="main-tenant-base">
-
     </div>
-
     <div dot-template="main-tenant-check">
-
     </div>
-
     <div dot-template="main-tenant-master">
-
     </div>
-
     <div dot-template="main-tenant-panel">
-
     </div>
-
-
     <div dot-template="main-product-base">
-
     </div>
-
     <div dot-template="main-product-model">
-
     </div>
-
     <div dot-template="main-product-panel">
-
     </div>
-
     <div dot-template="main-product-master">
-
     </div>
-
-
     <div dot-template="main-tenant-list">
-
     </div>
-
     <div dot-template="main-product-list">
-
     </div>
-
     <div dot-template="main-product-model-list">
-
     </div>
-
     <div dot-template="main-scenic-region">
-
     </div>
-
     <div dot-template="main-scenic-region-list">
-
     </div>
-
     <div dot-template="main-recommend-base">
-
     </div>
-
-
     <div dot-template="main-recommend-list">
-
     </div>
-
-    <%---------------------------content--------------------------------%>
-
-    <%--<div class="tenant-progress">--%>
-    <%--<legend class="title">总体进度</legend>--%>
-    <%--<div class="am-progress">--%>
-    <%--<div class="am-progress-bar am-progress-bar-success" style="width: 20%">基本信息</div>--%>
-    <%--<div class="am-progress-bar am-progress-bar-danger" style="width: 20%">审核认证</div>--%>
-    <%--<div class="am-progress-bar am-progress-bar-danger" style="width: 20%">关联大师</div>--%>
-    <%--<div class="am-progress-bar am-progress-bar-danger" style="width: 20%">添加店内实景</div>--%>
-    <%--<div class="am-progress-bar am-progress-bar-danger" style="width: 20%">添加商品</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-
-
 </div>
-
 
 <div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
     <div class="am-modal-dialog">

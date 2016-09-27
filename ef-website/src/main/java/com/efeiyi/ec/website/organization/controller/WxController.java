@@ -73,7 +73,7 @@ public class WxController {
     @RequestMapping({"/fetchLoginCode.do"})
     public String getWxLoginCode(HttpServletRequest request) throws Exception {
         String redirect = request.getParameter("redirect");
-        String redirect_uri = "http://www2.efeiyi.com/wx/login.do?redirect=" + redirect;
+        String redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
@@ -193,23 +193,35 @@ public class WxController {
         String headimgurl = userJsonObject.get("headimgurl").toString();
         String unionid = userJsonObject.get("unionid").toString();
         MyUser myUser = authenticate(unionid);
+        WxCalledRecord wxCalledRecord = new WxCalledRecord();
+        wxCalledRecord.setCallback(redirect);
+        wxCalledRecord.setDataKey("unionid");
+        wxCalledRecord.setData(unionid);
+        wxCalledRecord.setCreateDatetime(new Date());
+        baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
         if (myUser == null) {
             Consumer consumer;
             LinkedHashMap<String, Object> param = new LinkedHashMap<>();
             param.put("unionid", unionid);
-            consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid", param);
+            try {
+                consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param);
+            } catch (Exception e) {
+                consumer = (Consumer) baseManager.listObject("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param).get(0);
+            }
             if (consumer == null) {
                 consumer = new Consumer();
             }
             consumer.setUnionid(unionid);
             consumer.setName(nickname);
+            consumer.setUsername(unionid);
             consumer.setPassword(StringUtil.encodePassword(nickname, "sha"));
             consumer.setCreateDatetime(new Date(System.currentTimeMillis()));
             consumer.setStatus("1");
             consumer.setBalance(new BigDecimal(0));
             consumer.setAccountExpired(false);
             consumer.setAccountLocked(false);
-            consumer.setCredentialsExpired(true);
+            consumer.setCredentialsExpired(false);
+            consumer.setEnabled(true);
             consumer.setCityName(city);
             consumer.setPictureUrl(headimgurl);
             consumer.setSex(Integer.parseInt(sex));
@@ -226,7 +238,12 @@ public class WxController {
         System.out.println(AuthorizationUtil.isAuthenticated());
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         param.put("unionid", unionid);
-        Consumer consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid", param);
+        Consumer consumer = null;
+        try {
+            consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param);
+        } catch (Exception e) {
+            consumer = (Consumer) baseManager.listObject("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param).get(0);
+        }
         if (consumer != null) {
             myUser = (MyUser) baseManager.getObject(MyUser.class.getName(), consumer.getId());
         } else {

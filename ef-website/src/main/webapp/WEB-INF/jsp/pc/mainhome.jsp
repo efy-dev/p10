@@ -28,13 +28,13 @@
         %>
         <a href="http://i.efeiyi.com" title="个人中心"><%=AuthorizationUtil.getCurrentSampleUsername()%>
         </a>
-        <a href="<c:url value='/j_spring_cas_security_logout'/>" title="退出">退出</a>
+        <a href="<c:url value='/j_spring_security_logout'/>" title="退出">退出</a>
         <%
          } else {
         %>
-        <a href="<c:url value="/sso.do"/>" title="e飞蚁登录">登录</a>
+        <a href="<c:url value="/login"/>" title="e飞蚁登录">登录</a>
         <em>&nbsp;/&nbsp;</em>
-        <a href="http://passport.efeiyi.com/register?service=http://mall.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do" title="e飞蚁注册">注册</a>
+        <a href="<c:url value="/signin"/>" title="e飞蚁注册">注册</a>
         <%
           }
         %>

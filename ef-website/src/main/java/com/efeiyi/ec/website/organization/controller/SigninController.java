@@ -71,40 +71,6 @@ public class SigninController extends BaseController {
     private UserDetailsService userManager;
 
 
-
-//    @RequestMapping({"/wxLogin"})
-//    public String wxLogin(HttpServletRequest request) {
-//        String dataKey = "nickname;sex;province;city;headimgurl;unionid";
-//        String callback = "/wxLoginCallback";
-//    }
-
-//    @RequestMapping({"/wxLoginCallback"})
-//    public String wxLoginCallback(HttpServletRequest request) {
-//        String nickname = request.getParameter("nickname");
-//        String sex = request.getParameter("sex");
-//        String province = request.getParameter("province");
-//        String city = request.getParameter("city");
-//        String country = request.getParameter("country");
-//        String headimgurl = request.getParameter("headimgurl");
-//        String unionid = request.getParameter("unionid");
-//        Consumer consumer = new Consumer();
-//        consumer.setUnionid(unionid);
-//        consumer.setName(nickname);
-//        consumer.setPassword(StringUtil.encodePassword(nickname, "sha"));
-//        consumer.setCreateDatetime(new Date(System.currentTimeMillis()));
-//        consumer.setStatus("1");
-//        consumer.setBalance(new BigDecimal(0));
-//        consumer.setAccountExpired(false);
-//        consumer.setAccountLocked(false);
-//        consumer.setCredentialsExpired(true);
-//        consumer.setCityName(city);
-//        consumer.setPictureUrl(headimgurl);
-//        consumer.setSex(Integer.parseInt(sex));
-//        baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
-//
-//    }
-
-
     @RequestMapping({"login"})
     public String login(HttpServletRequest request, HttpServletResponse response) {
         return "/login";
@@ -126,7 +92,8 @@ public class SigninController extends BaseController {
         bigUser.setPassword(password);
         bigUser.setAccountExpired(false);
         bigUser.setAccountLocked(false);
-        bigUser.setCredentialsExpired(true);
+        bigUser.setCredentialsExpired(false);
+        bigUser.setEnabled(true);
         bigUser.setStatus("1");
         bigUser.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(BigUser.class.getName(), bigUser);

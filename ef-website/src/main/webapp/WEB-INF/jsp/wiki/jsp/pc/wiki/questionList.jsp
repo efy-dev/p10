@@ -43,7 +43,7 @@
                                  value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
         </ming800:pcPageList>
     </div>
-    <a href="http://minglu.efeiyi.com/minglu/question" title="题库地图-非遗百科" style="color: #fff;;">题库地图</a>
+    <a href="http://minglu.efeiyi.com/question" title="题库地图-非遗百科" style="color: #fff;;">题库地图</a>
 </div>
 
 </body>

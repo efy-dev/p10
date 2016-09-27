@@ -31,7 +31,7 @@
       <% if (AuthorizationUtil.isAuthenticated()) {%>
       <a class="icon-home icon-cart" href="http://i.efeiyi.com/order/myEfeiyi/list.do" title=""><span><em></em></span></a>
       <%} else {%>
-      <a class="icon-home icon-cart" href="<c:url value="/sso.do"/>" title=""><span style="text-align: center;"><em id="cartAmount"></em></span></a>
+      <a class="icon-home icon-cart" href="<c:url value="/login"/>" title=""><span style="text-align: center;"><em id="cartAmount"></em></span></a>
       <%}%>
       <a class="icon-home icon-user" href="<c:url value="/cart/view"/>" title=""></a>
     </div>

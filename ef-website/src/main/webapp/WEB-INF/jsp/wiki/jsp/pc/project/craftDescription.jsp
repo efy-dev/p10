@@ -88,7 +88,7 @@
 </div>
 <script type="text/javascript">
     $().ready(function () {
-        var url = "http://minglu.efeiyi.com/minglu/project/${artistry.id}";
+        var url = "http://minglu.efeiyi.com/project/${artistry.id}";
         $('#native').qrcode({
             text: url,
             width: 160,

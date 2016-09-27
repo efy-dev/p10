@@ -23,7 +23,7 @@
     <div class="wm">
         <div class="details">
             <div class="return">
-                <a href="<c:url value="/minglu/questionList.do"/>" title=""><i class="icon"></i>返回上一级</a>
+                <a href="<c:url value="/questionList.do"/>" title=""><i class="icon"></i>返回上一级</a>
             </div>
             <div class="contain">
                 <div class="info">
@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-    <a href="http://minglu.efeiyi.com/minglu/question" title="题库地图-非遗百科" style="color: #fff;;">题库地图</a>
+<a href="http://minglu.efeiyi.com/question" title="题库地图-非遗百科" style="color: #fff;;">题库地图</a>
 </div>
 
 </body>

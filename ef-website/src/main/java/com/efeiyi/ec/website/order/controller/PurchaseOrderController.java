@@ -181,67 +181,6 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/easyBuy/{productModelId}"})
     public String buyImmediate(HttpServletRequest request, @PathVariable String productModelId, Model model) throws Exception {
-        /*cartManager.fetchCart();
-        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
-        CartProduct cartProduct = new CartProduct();
-        cartProduct.setProductModel(productModel);
-        String amount = request.getParameter("amount");
-        try {
-            cartProduct.setAmount(Integer.valueOf(amount));
-        } catch (Exception e) {
-            cartProduct.setAmount(1);
-        }
-        cartProduct.setIsChoose("1");
-        cartProduct.setStatus("1");
-        Cart cart = new Cart();
-        cart.setTotalPrice(productModel.getPrice().multiply(new BigDecimal(cartProduct.getAmount())));
-        model.addAttribute("cart", cart);
-        List<Tenant> tenantList = new ArrayList<>();
-        tenantList.add(productModel.getProduct().getTenant());
-        model.addAttribute("tenantList", tenantList);
-
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
-        xSaveOrUpdate.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
-        xSaveOrUpdate.getParamMap().put("user.id", AuthorizationUtil.getMyUser().getId());
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdate);
-
-        purchaseOrder.setTenant(tenantList.get(0));
-        purchaseOrder.setTotal(cart.getTotalPrice());
-        purchaseOrder.setOriginalPrice(cart.getTotalPrice());
-        purchaseOrder.setOrderType("1");
-        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-
-        PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
-        purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
-        purchaseOrderProduct.setProductModel(productModel);
-        purchaseOrderProduct.setPurchasePrice(productModel.getPrice());
-        purchaseOrderProduct.setPurchaseAmount(cartProduct.getAmount());
-        baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
-        List<PurchaseOrderProduct> purchaseOrderProductList = new ArrayList<>();
-        purchaseOrderProductList.add(purchaseOrderProduct);
-        Map<String, List> productMap = new HashMap<>();
-        productMap.put(productModel.getProduct().getTenant().getId(), purchaseOrderProductList);
-        model.addAttribute("productMap", productMap);
-
-        XQuery xQuery = new XQuery("listConsumerAddress_default", request);
-        xQuery.addRequestParamToModel(model, request);
-        List addressList = baseManager.listObject(xQuery);
-
-        String consumerId = AuthorizationUtil.getMyUser().getId();
-        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
-        if (null == consumer.getBalance()) {
-            consumer.setBalance(new BigDecimal(0));
-            baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
-        }
-
-        model.addAttribute("addressList", addressList);
-        model.addAttribute("purchaseOrder", purchaseOrder);
-        model.addAttribute("productModel", productModel);
-        model.addAttribute("amount", amount);
-        model.addAttribute("isEasyBuy", true);
-        model.addAttribute("consumer", consumer);
-
-        return "/purchaseOrder/purchaseOrderConfirm";*/
         String amount = request.getParameter("amount");
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),productModelId);
         String callback = PConst.NEWWEBURL+"/cart/paySuccess.do";
@@ -250,13 +189,6 @@ public class PurchaseOrderController extends BaseController {
     }
 
 
-    /**
-     *
-     * @param request
-     * @param model
-     * @return
-     * @throws Exception
-     */
     @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
         Cart cart = cartManager.copyCart((Cart) request.getSession().getAttribute("cart"), cartManager.getCurrentCart(request));

@@ -329,7 +329,9 @@ public class BigUser {
     @Override
     public int hashCode() {
         int result = id.hashCode();
-        result = 31 * result + username.hashCode();
+        if (username != null) {
+            result = 31 * result + username.hashCode();
+        }
         return result;
     }
 

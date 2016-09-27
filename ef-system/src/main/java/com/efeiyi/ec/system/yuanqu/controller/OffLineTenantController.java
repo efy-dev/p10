@@ -8,6 +8,11 @@ import com.efeiyi.ec.product.model.Recommend;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.EnterpriseTenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.p.PConst;
@@ -18,7 +23,12 @@ import javafx.scene.layout.Pane;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +36,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/6 0006.
@@ -426,24 +444,26 @@ public class OffLineTenantController {
         recommend.setRedirect(request.getParameter("redirect"));
         baseManager.saveOrUpdate(Recommend.class.getName(), recommend);
         MultipartFile multipartFile = multipartRequest.getFile("image");
-        String oName = multipartFile.getOriginalFilename();
-        String nName;
-        try {
-            nName = System.currentTimeMillis() + "" + (int) (Math.random() * 1000000) + "." + oName.split("\\.")[1];
-            String url = "image/" + nName;
-            aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
-            String fullUrl = PConst.OSS_EF_WIKI_HOST + url;
-            Image image = new Image();
-            image.setName("recommendImage");
-            image.setCreateTime(new Date(System.currentTimeMillis()));
-            image.setOwner(recommend.getId());
-            image.setSrc(fullUrl);
-            image.setStatus("1");
-            image.setType("1");
-            baseManager.saveOrUpdate(Image.class.getName(), image);
-            recommend.setImage(image);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (multipartFile != null) {
+            String oName = multipartFile.getOriginalFilename();
+            String nName;
+            try {
+                nName = System.currentTimeMillis() + "" + (int) (Math.random() * 1000000) + "." + oName.split("\\.")[1];
+                String url = "image/" + nName;
+                aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
+                String fullUrl = PConst.OSS_EF_WIKI_HOST + url;
+                Image image = new Image();
+                image.setName("recommendImage");
+                image.setCreateTime(new Date(System.currentTimeMillis()));
+                image.setOwner(recommend.getId());
+                image.setSrc(fullUrl);
+                image.setStatus("1");
+                image.setType("1");
+                baseManager.saveOrUpdate(Image.class.getName(), image);
+                recommend.setImage(image);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         baseManager.saveOrUpdate(Recommend.class.getName(), recommend);
         return recommend;
@@ -474,6 +494,55 @@ public class OffLineTenantController {
         recommend.setImage(image);
         baseManager.saveOrUpdate(Recommend.class.getName(), recommend);
         return recommend;
+    }
+
+
+//    public ResponseEntity<byte[]> createQRCode(String dataId, String content){
+//
+//    }
+
+    @RequestMapping("/tenant/createQRCode.do")
+    @ResponseBody
+    public ResponseEntity<byte[]> createQRCode(HttpServletRequest request) throws IOException {
+        String tenantId = request.getParameter("id");
+        String content = "http://www.efeiyi.com/wx/fetchLoginCode.do?redirect=http://www.efeiyi.com/app/redirect/tenant/" + tenantId;
+        Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
+        hints.put(EncodeHintType.MARGIN, 0);
+        BitMatrix bitMatrix = null;
+        try {
+            bitMatrix = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, 600, 600, hints);//二维码像素
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+        int qRWidth = bitMatrix.getWidth();
+        int qRHeight = bitMatrix.getHeight();
+        BufferedImage image = new BufferedImage(qRWidth, qRHeight, BufferedImage.TYPE_INT_RGB);
+
+        String path = this.getClass().getResource("/").getPath().toString() + "com/efeiyi/ec/system/download";
+
+        File downloadFileTest = new File(path);
+        if (!downloadFileTest.exists()) {
+            downloadFileTest.mkdir();
+        }
+
+        String fileName = tenantId + ".jpg";
+        File downloadFile = new File(path + "//" + fileName);
+        try {
+            ImageIO.write(image, "jpg", downloadFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        try {
+            headers.setContentDispositionFormData("attachment", new String(fileName.getBytes("UTF-8"), "iso-8859-1"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        byte[] bytes = FileUtils.readFileToByteArray(downloadFile);
+        return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
     }
 
 }

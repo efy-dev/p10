@@ -22,7 +22,7 @@ import java.util.*;
 @Entity
 @Table(name = "organization_user")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class MyUser implements Serializable, UserDetails ,BaseUser{
+public class MyUser implements Serializable, UserDetails, BaseUser {
 
     private String id;
     private String username;
@@ -76,6 +76,7 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
 
     public MyUser() {
     }
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
@@ -259,22 +260,21 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     @Transient
     public Collection<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> gList = new ArrayList<GrantedAuthority>();
-      if(role!=null) {
-          Permission rolePermission = new Permission();//角色即权限
-          rolePermission.setAuthority(role.getName());
-          gList.add(rolePermission);
+        if (role != null) {
+            Permission rolePermission = new Permission();//角色即权限
+            rolePermission.setAuthority(role.getName());
+            gList.add(rolePermission);
 //          if (role.getPermissionsList() != null) {
 //              for (Permission permission : role.getPermissionsList()) {
 //                  gList.add(permission);
 //              }
 //          }
-      }
+        }
         Permission defaultPermission = new Permission();//每个用户都默认带ROLE_USER这个权限
         defaultPermission.setAuthority("ROLE_USER");//普通用户
         gList.add(defaultPermission);
         return gList;
     }
-
 
 
     @Transient
@@ -336,7 +336,9 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     @Override
     public int hashCode() {
         int result = id.hashCode();
-        result = 31 * result + username.hashCode();
+        if (username != null) {
+            result = 31 * result + username.hashCode();
+        }
         return result;
     }
 
@@ -377,6 +379,7 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     public void setLastLoginDatetime(Date lastLoginDatetime) {
         this.lastLoginDatetime = lastLoginDatetime;
     }
+
     @Transient
     public Date getLastLogoutDatetime() {
         return lastLogoutDatetime;
@@ -387,7 +390,8 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     }
 
     private String source;//来源推广渠道
-//    private Date rdEndDay;//推广渠道有效时间
+
+    //    private Date rdEndDay;//推广渠道有效时间
     @Column(name = "source")
     public String getSource() {
         return source;
