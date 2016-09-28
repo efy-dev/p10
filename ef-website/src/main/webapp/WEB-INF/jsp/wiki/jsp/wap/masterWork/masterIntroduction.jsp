@@ -23,7 +23,7 @@
   </div>
   <div class="menu-list">
     <ul class="bd">
-      <li><a href="http://minglu.efeiyi.com" title="首页">首页</a></li>
+      <li><a href="<c:url value="/"/>" title="首页">首页</a></li>
       <li><a href="http://www.efeiyi.com" title="购物车">非遗商城</a></li>
       <li><a href="http://master.efeiyi.com" title="个人中心">非遗大师</a></li>
     </ul>
@@ -32,7 +32,7 @@
 <div class="master">
   <div class="master_top pt15 pb15 bgfff">
     <div class="master_img">
-      <div class="img"><img src="<c:url value='http://tenant.efeiyi.com/${master.getFavicon()}'/>" alt=""></div>
+      <div class="img"><img src="<c:url value='http://tenant.efeiyi.com/${master.favicon}'/>" alt=""></div>
       <dweiv class="fz14 black mt10">${master.getFullName()}</dweiv>
       <div class="fz12 color6 mt10">${artistry.getName()}</div>
       <div class="fz12 color6 mt10"><ming800:status name="level" dataType="Project.level"

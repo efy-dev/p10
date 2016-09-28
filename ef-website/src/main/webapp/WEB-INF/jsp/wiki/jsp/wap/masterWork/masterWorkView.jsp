@@ -1,3 +1,5 @@
+<%@ page import="com.efeiyi.ec.website.base.util.AuthorizationUtil" %>
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,7 +13,7 @@
 </head>
 <body>
 <header id="header" class="am-header custom-header newheader">
-    <div class="logo"><img src="<c:url value="/scripts/assets/wap/images/ef-logo-craft.png"/>" height="27" width="110"
+    <div class="logo"><img src="<c:url value="/scripts/images/ef-logo-craft.png"/>" height="27" width="110"
                            align="center" alt=""></div>
     <!-- //End--logo-->
     <!-- //End--chevron-left-->
@@ -22,8 +24,8 @@
     </div>
     <div class="menu-list">
         <ul class="bd">
-            <li><a href="minglu.efeiyi.com" title="首页">首页</a></li>
-            <li><a href="http://www.efeiyi.com/" title="购物车">非遗商城</a></li>
+            <li><a href="<c:url value="/minglu"/>" title="首页">首页</a></li>
+            <li><a href="http://<%=PConst.WEBSITE_HOST%>/" title="购物车">非遗商城</a></li>
             <li><a href="http://master.efeiyi.com" title="个人中心">非遗大师</a></li>
         </ul>
     </div>
@@ -81,7 +83,7 @@
                     <li><strong>技艺简介：</strong><span>${work.projectDescription}</span></li>
                 </ul>
                 <div class="bd txt-c">
-                    <a href="<c:url value="/project/${projectWiki.id}"/>" class="link" title="查看详情">查看详情</a>
+                    <a href="<c:url value="/minglu/project/${projectWiki.id}"/>" class="link" title="查看详情">查看详情</a>
                 </div>
             </div>
             <!--//End-- 关于技艺 -->
