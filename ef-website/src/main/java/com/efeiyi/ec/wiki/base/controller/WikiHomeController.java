@@ -28,11 +28,6 @@ public class WikiHomeController {
 
     /**
      * PC和移动首页；推荐技艺列表；轮播图；
-     *
-     * @param request
-     * @param model
-     * @return
-     * @throws Exception
      */
     @RequestMapping({""})
     public String home(HttpServletRequest request, Model model) throws Exception {
@@ -43,9 +38,7 @@ public class WikiHomeController {
         List<Object> craftRecommendList = baseManager.listObject(query);
         model.addAttribute("artRecommendList", artRecommendList);
         model.addAttribute("craftRecommendList", craftRecommendList);
-        //@TODO PC轮播图groupname待定
         List<Object> pcBannerList = bannerManager.getBannerList("wiki.pc.dynamic");
-        //@TODO wap轮播图groupname待定
         List<Object> wapBannerList = bannerManager.getBannerList("wiki.wap.dynamic");
         model.addAttribute("pcBannerList", pcBannerList);
         model.addAttribute("wapBannerList", wapBannerList);

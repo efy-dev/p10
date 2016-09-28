@@ -310,7 +310,7 @@ public class ProductController {
             int limit = Integer.parseInt(request.getParameter("limit"));
             int offset = Integer.parseInt(request.getParameter("offset"));
             LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-            StringBuilder hql = new StringBuilder("select productModel from ProductModel productModel where productModel.status!=0 ");
+            StringBuilder hql = new StringBuilder("select productModel from ProductModel productModel where productModel.status!=0 and productModel.product.type='3' ");
             for (Object key : jsonObject.keySet()) {
                 hql.append("and ");
                 hql.append("productModel.");

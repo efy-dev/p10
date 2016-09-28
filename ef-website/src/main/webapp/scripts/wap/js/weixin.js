@@ -22,7 +22,7 @@ function initWx(initUrl) {
         timestamp: timestamp, // 必填，生成签名的时间戳
         nonceStr: noncestr, // 必填，生成签名的随机串
         signature: '',// 必填，签名，见附录1
-        jsApiList: typeof wx_api_list != "undefined" ? wx_api_list : ['onMenuShareAppMessage', 'onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        jsApiList: typeof wx_api_list != "undefined" ? wx_api_list : ['getLocation','openLocation','onMenuShareAppMessage', 'onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     };
     ajaxRequest(initUrl, {
         "nonceStr": noncestr,
@@ -73,4 +73,24 @@ function initWx(initUrl) {
     }, function () {
     }, "get");
 
+}
+
+/**
+ * 打开微信地图
+ * @param latitude 纬度
+ * @param longitude 经度
+ * @param name  位置名
+ * @param address  地址详情说明
+ * @param scale 地图缩放级别 默认14
+ * @param infoUrl  超链接跳转地址（位置界面底部有个显示超链接的位置，点击可跳转）
+ */
+function openLocation(latitude, longitude, name, address, scale, infoUrl) {
+    wx.openLocation({
+        latitude: latitude, // 纬度，浮点数，范围为90 ~ -90
+        longitude: longitude, // 经度，浮点数，范围为180 ~ -180。
+        name: name, // 位置名
+        address: address, // 地址详情说明
+        scale: (typeof scale != "undefined" && scale != null) ? scale : 14, // 地图缩放级别,整形值,范围从1~28。默认为最大
+        infoUrl: infoUrl // 在查看位置界面底部显示的超链接,可点击跳转
+    });
 }

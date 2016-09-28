@@ -157,6 +157,7 @@
             <fieldset>
 
                 <legend>店铺基本信息</legend>
+                <input name="id" type="hidden" value="{{=it.data!=null ? it.data.id : ''}}">
 
                 <div class="am-form-group">
                     <label for="name" class="am-u-sm-2 am-form-label">店铺名称</label>
@@ -689,6 +690,10 @@
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                 class="am-icon-trash-o"></span> 删除(暂时不支持)
                         </button>
+                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                           href="/yuanqu/tenant/createQRCode.do?id={{=tenant.id}}"><span
+                                class="am-icon-trash-o"></span> 生成二维码
+                        </a>
                     </div>
                 </div>
             </td>
@@ -1060,6 +1065,10 @@
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                 class="am-icon-trash-o"></span> 删除(暂不支持)
                         </button>
+                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                           href="/yuanqu/product/createQRCode.do?id={{=product.id}}"><span
+                                class="am-icon-trash-o"></span> 生成二维码
+                        </a>
                     </div>
                 </div>
             </td>
@@ -1185,7 +1194,7 @@
                     <label class="am-u-sm-2 am-form-label">大师</label>
                     <div class="am-u-sm-10">
 
-                        <input name="name" type="text" id="master-search"
+                        <input name="name" type="text" id="product-search"
                                value="{{=it.data!=null && it.data.master!=null  ? it.data.master.fullName : ''}}"
                                placeholder="输入大师的名称" oninput="PubSub.publish('productMaster.search',this)">
                         <input name="masterId" type="hidden" id="product-masterId"
@@ -1889,6 +1898,13 @@
             this.body();
         };
 
+        this.qrcode = function (msg, data) {
+            var param = {};
+            param.id = data;
+            ajaxRequest("/yuanqu/tenant/createQRCode.do", param, function () {
+            });
+        };
+
         this.body = function (msg, data) {
             //@TODO 搜索列表与商品实体
             var param = {
@@ -1935,6 +1951,7 @@
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".body", subscriber: this.body},
             {message: this.name + ".search", subscriber: this.search},
+            {message: this.name + ".qrcode", subscriber: this.qrcode},
             {message: this.name + ".nextPage", subscriber: this.nextPage},
             {message: this.name + ".prePage", subscriber: this.prePage}
         ];

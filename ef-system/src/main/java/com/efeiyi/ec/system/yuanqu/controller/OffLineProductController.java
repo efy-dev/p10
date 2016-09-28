@@ -8,7 +8,6 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.tenant.model.BigTenant;
-import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.p.PConst;
@@ -16,6 +15,7 @@ import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.LinkedHashMap;
+
+import static com.efeiyi.ec.system.yuanqu.controller.Util.createQRCode;
 
 @Controller
 @RequestMapping({"/yuanqu/product"})
@@ -140,7 +142,10 @@ public class OffLineProductController {
         productModel.setName(request.getParameter("name"));
         String amountStr = request.getParameter("amount");
         productModel.setAmount(amountStr != null ? Integer.parseInt(amountStr) : 1);
-        productModel.setMarketPrice(new BigDecimal(request.getParameter("marketPrice")));
+        String marketPrice = request.getParameter("marketPrice");
+        if (marketPrice != null && !marketPrice.equals("")) {
+            productModel.setMarketPrice(new BigDecimal(marketPrice));
+        }
         productModel.setPrice(new BigDecimal(request.getParameter("price")));
         productModel.setProduct(product);
         productModel.setStatus("1");
@@ -282,6 +287,14 @@ public class OffLineProductController {
             return "";
         }
         return PConst.OSS_EF_WIKI_HOST + url;
+    }
+
+    @RequestMapping("/createQRCode.do")
+    @ResponseBody
+    public ResponseEntity<byte[]> createProductQRCode(HttpServletRequest request) throws Exception {
+        String productId = request.getParameter("id");
+        String content = "http://www.efeiyi.com/wx/fetchLoginCode.do?redirect=http://www.efeiyi.com/app/redirect/product/" + productId;
+        return createQRCode(this.getClass().getResource("/").getPath().toString(), productId, content);
     }
 
 }
