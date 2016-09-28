@@ -142,18 +142,40 @@ public class TenantController {
         }
     }
 
-    @RequestMapping({"/tenant/saveTenantPraise"})
+    @RequestMapping({"/tenant/saveOrCanelTenantPraise"})
     @ResponseBody
-    public Object saveTenantPraise(HttpServletRequest request) {
-        String userId = request.getParameter("userId");
-        String tenantId = request.getParameter("tenantId");
-        User user = (User) baseManager.getObject(User.class.getName(), userId);
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        TenantPraise tenantPraise = new TenantPraise();
-        tenantPraise.setTenant(tenant);
-        tenantPraise.setUser(user);
-        baseManager.saveOrUpdate(TenantPraise.class.getName(), tenantPraise);
-        return tenantPraise;
+    public Object saveOrCanelTenantPraise(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String userId = request.getParameter("userId");
+            String tenantId = request.getParameter("tenantId");
+            String delFlag = request.getParameter("delFlag");
+            String hql = "select obj  FROM "+TenantPraise.class.getName()+" obj WHERE obj.tenant.id=:tenant_id AND obj.user.id=:user_id";
+            if ("0".equals(delFlag)) {
+                User user = (User) baseManager.getObject(User.class.getName(), userId);
+                Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+                TenantPraise tenantPraise = new TenantPraise();
+                tenantPraise.setTenant(tenant);
+                tenantPraise.setUser(user);
+                baseManager.saveOrUpdate(TenantPraise.class.getName(), tenantPraise);
+                jsonObject.put("code", "2");
+            } else if ("1".equals(delFlag)) {
+                LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+                param.put("tenant_id", tenantId);
+                param.put("user_id", userId);
+                TenantPraise tenantPraise = (TenantPraise) baseManager.getUniqueObjectByConditions(hql, param);
+                String tenantPraiseId = tenantPraise == null ? "" : tenantPraise.getId();
+                baseManager.delete(TenantPraise.class.getName(), tenantPraiseId);
+                jsonObject.put("code", "3");
+            }else{
+                jsonObject.put("code", "3");
+            }
+            return jsonObject;
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
     }
 
     @RequestMapping({"/tenant/getTenantList"})
@@ -164,10 +186,12 @@ public class TenantController {
             int limit = Integer.parseInt(request.getParameter("limit"));
             int offset = Integer.parseInt(request.getParameter("offset"));
             LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            LinkedHashMap<String, Object> param_img = new LinkedHashMap<>();
             StringBuilder hql = new StringBuilder("select obj from BigTenant obj where obj.tenantType='111' and obj.status!='0' ");
+            StringBuilder hql_img = new StringBuilder("select o from Image o where o.owner=:owner and o.status!='0' and o.type='2' and o.name='audio' ");
             for (Object key : jsonObject.keySet()) {
                 hql.append("and ");
-                hql.append("tenant.");
+                hql.append("obj.");
                 hql.append(key.toString());
                 hql.append("=:");
                 hql.append(key.toString());
@@ -178,7 +202,17 @@ public class TenantController {
             pageEntity.setSize(limit);
             pageEntity.setrIndex(offset);
             PageInfo pageInfo = baseManager.listPageInfo(hql.toString(), pageEntity, param);
-            return pageInfo.getList();
+            List<BigTenant> bigTenants = pageInfo.getList();
+            if (null != bigTenants && bigTenants.size() > 0) {
+                for (BigTenant bigTenant : bigTenants) {
+                    String id = bigTenant.getId();
+                    param_img.put("owner", id);
+                    Image image = (Image) baseManager.getUniqueObjectByConditions(hql_img.toString(), param_img);
+                    String src = image == null ? "" : image.getSrc();
+                    bigTenant.setAudio(src);
+                }
+            }
+            return bigTenants;
         } catch (Exception e) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("code", "1");

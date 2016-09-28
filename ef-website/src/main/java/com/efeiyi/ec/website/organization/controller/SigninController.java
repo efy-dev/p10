@@ -294,6 +294,12 @@ public class SigninController extends BaseController {
         return "/wxRedirect";
     }
 
-
+    @RequestMapping({"/user/getCurrentUser"})
+    @ResponseBody
+    public MyUser getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        return currentUser;
+    }
 }
 
