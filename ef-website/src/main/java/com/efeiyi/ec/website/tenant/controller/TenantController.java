@@ -168,7 +168,7 @@ public class TenantController {
                 baseManager.delete(TenantPraise.class.getName(), tenantPraiseId);
                 jsonObject.put("code", "3");
             }else{
-                jsonObject.put("code", "3");
+                jsonObject.put("code", "4");
             }
             return jsonObject;
         } catch (Exception e) {
