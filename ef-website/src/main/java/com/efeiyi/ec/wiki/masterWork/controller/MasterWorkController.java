@@ -48,8 +48,6 @@ public class MasterWorkController {
         }
         return "/masterWork/masterWorkView";
     }
-
-
     /**
      *
      * @param masterId
@@ -73,7 +71,7 @@ public class MasterWorkController {
             artistry = masterProject.getProject().getArtistry();
         }
 
-        XQuery mwXQuery = new XQuery("listMasterWork_master", request);
+        XQuery mwXQuery = new XQuery("listMasterWork_default1", request);
         //相关作品
         mwXQuery.put("master_id",masterId);
         List<MasterWork> masterWorkList = baseManager.listObject(mwXQuery);
@@ -84,6 +82,7 @@ public class MasterWorkController {
         List<MasterIntroduction> introductionList = baseManager.listObject(xQuery);
         model.addAttribute("introductionList",introductionList);
         model.addAttribute("masterProject",masterProject);
+        model.addAttribute("master",master);
         return "/masterWork/masterIntroduction";
     }
 
