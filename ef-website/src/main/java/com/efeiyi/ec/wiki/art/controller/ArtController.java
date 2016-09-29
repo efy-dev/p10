@@ -164,4 +164,15 @@ public class ArtController extends BaseController {
         model.addAttribute("name", name);
         return "/searchResult";
     }
+
+
+    @RequestMapping({"/artistry"})
+    public String viewArtistryByProject(HttpServletRequest request) {
+        String projectId = request.getParameter("projectId");
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        String hql = "select obj from Artistry obj where obj.project.id=:projectId";
+        param.put("projectId", projectId);
+        Artistry artistry = (Artistry) baseManager.getUniqueObjectByConditions(hql, param);
+        return "redirect: /minglu/project/" + artistry.getId();
+    }
 }

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>商品详情</title>
+    <link rel="stylesheet" href="guide/css/layouts.css">
+</head>
+<body class="detail" style="padding-bottom:60px">
+<header class="header"><a href="" class="angle left" title="返回上一页"></a><a href="" class="icon user" title="个人中心"></a>
+</header>
+<!--//End--header-->
+
+<div dot-template="product-base"></div>
+
+<div class="wlist" dot-template="product-detail">
+</div>
+<!--//End wlist-->
+
+
+<div class="fixed" dot-template="product-buy"></div>
+
+
+<script type="text/x-dot-template" id="product-base">
+
+
+    <div class="shop_signs">
+        <a href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"><img
+                src="{{=it.product.tenant.logoUrl}}@!o2o-tenant-logo" alt=""></a>
+    </div>
+
+    <div class="focus">
+        <img style="width: 100%;" src="{{=it.productModel_url}}@!o2o-home-banner" alt="">
+    </div>
+
+    {{if(it.audio!=null) { }}
+    <div class="audio audio-box" id="audio">
+        <a data-type="audio-button">
+            <span class="play active" data-type="audio-icon"><i class="icon"></i></span>
+        </a>
+        <span class="title">
+        <p>{{=it.product.name}}</p>
+        <p>{{=it.product.name}}的语音简介</p>
+        </span>
+        <span class="time"></span>
+        <audio data-type="audio-body" id="media" src="{{=it.audio}}" autoplay="autoplay"></audio>
+    </div>
+
+    {{ } }}
+
+    <div class="info">
+        <div class="base">
+            <div class="title text_hidden">{{=it.product.name}}</div>
+            <div class="txt text_hidden">{{=it.product.subName}}</div>
+            <div class="price"><span> ¥ </span><strong>{{=it.price}}</strong></div>
+            {{ if(it.marketPrice!=null && it.marketPrice>it.price){ }}
+            <div class="price_sub"><span>¥ {{=it.marketPrice}}</span></div>
+            {{ } }}
+        </div>
+        {{ if(it.product.master!=null) { }}
+        <div class="master">
+            <a href="">
+                <div class="img"><img src="http://tenant.efeiyi.com/{{=it.product.master.favicon}}" alt=""></div>
+                <div class="text">
+                    <p>{{=it.product.master.fullName}}</p>
+                    <p>{{=(it.product.master.title!=null &&it.product.master.title!="" ?
+                        it.product.master.title:"大师简介")}}</p>
+                </div>
+                <i class="angle right"></i>
+            </a>
+        </div>
+        {{ } }}
+        {{ if(it.product.project!=null){ }}
+        <div class="brief">
+            <div class="title">非遗技艺</div>
+            <div class="text"><span>技艺名称：</span>{{=it.product.project.name}}</div>
+            {{ if(it.product.project.addressDistrict!=null){ }}
+            <div class="text"><span>所属地区：</span>{{=it.product.project.addressDistrict.name}}</div>
+            {{ } }}
+            <div class="text des"><span>技艺简介：</span>{{=it.product.project.description}}</div>
+            <div class="text more"><a
+                    href="http://minglu.efeiyi.com/minglu/artistry?projectId={{=it.product.project.id}}">了解技艺<i
+                    class="angle right"></i></a></div>
+        </div>
+        {{ } }}
+    </div>
+
+</script>
+
+<script type="text/x-dot-template" id="product-detail">
+    <div class="title"><h2>作品详情</h2></div>
+    {{
+    for (var i = 0 ; i < it.length ; i++){
+    var imageList = it[i].imageList;
+    for (var j = 0 ; j < imageList.length ; j++){
+    }}
+    <div class="img"><img src="{{=imageList[j].image.src}}" alt=""></div>
+    {{ } }}
+    {{ } }}
+</script>
+
+<script type="text/x-dot-template" id="product-buy">
+    <a href="http://mall.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId={{=it.id}}&amount=1&price={{=it.price}}&orderType=6&callback=http%3a%2f%2fi.efeiyi.com%2forder%2fmyEfeiyi%2fview%2f{{=it.id}}"
+       class="button-block-danger">立即购买</a>
+</script>
+
+
+<script src="common/js/jquery-3.1.0.min.js"></script>
+<script src="common/js/swiper.min.js"></script>
+<script src="common/js/doT.min.js"></script>
+<script src="common/js/util.js"></script>
+<script src="/scripts/wap/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
+<script src="guide/js/model.js"></script>
+
+
+<script>
+
+
+    $().ready(function () {
+        initPage();
+    });
+
+    function initPage() {
+        var requestParam = getRequestParameter();
+        if (typeof requestParam.title == "undefined") {
+            requestParam.title = "";
+        }
+        PageVariable.productId = requestParam.productId;
+        PageVariable.title = decodeURI(requestParam.title);
+        $("title").html(PageVariable.title);
+        $("[dot-template=header]").html(renderHeader(PageVariable));
+
+        getProductModelById(PageVariable.productId, function () {
+            renderTemplate(PageVariable.template.productBase, PageVariable.productModel);
+            renderTemplate(PageVariable.template.productBuy, PageVariable.productModel);
+            $(".audio-box").each(function () {
+                PageVariable.audioList.push(new Audio($(this).attr("id")));
+            });
+        });
+
+        getColumnListByProductModel(PageVariable.productId, function () {
+            renderTemplate(PageVariable.template.productDetail, PageVariable.productModelColumnList);
+        })
+
+    }
+
+
+</script>
+</body>
+</html>

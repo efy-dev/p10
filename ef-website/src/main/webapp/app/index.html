@@ -48,8 +48,8 @@
 
 <script type="text/x-dot-template" id="home-recommend-list">
 
-    {{ for(var i = 0 ; i < it.length ;i++){ }}
     <div class="swiper-wrapper">
+        {{ for(var i = 0 ; i < it.length ;i++){ }}
         <div class="swiper-slide">
             <a href="{{=it[i].redirect}}">
                 <img src="{{=it[i].image.src}}@!o2o-tenant-list" alt="">
@@ -62,8 +62,8 @@
             </a>
         </div>
         <!--//End 3-->
+        {{ } }}
     </div>
-    {{ } }}
 </script>
 <script type="text/x-dot-template" id="header">
     <a href="http://www.efeiyi.com/app/index.html" class="icon logo" title="前门 华韵"></a>
@@ -79,6 +79,8 @@
 <script src="common/js/swiper.min.js"></script>
 <script src="common/js/doT.min.js"></script>
 <script src="common/js/util.js"></script>
+<script src="/scripts/wap/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
 <script src="guide/js/model.js"></script>
 <!--//End-->
 <!--<script src="assets/js/system.js"></script>-->
@@ -101,7 +103,7 @@
 
     function initPage() {
 
-        renderTemplate("header");
+        $("[dot-template=header]").html(renderHomeHeader());
 
         getRecommendList({}, 5, 0, function () {
             renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);

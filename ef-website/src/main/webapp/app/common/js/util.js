@@ -36,3 +36,21 @@ Date.prototype.format = function (fmt) { //author: meizz
             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 };
+function getRequestParameter() {
+    var url = window.location.href.split("?");
+    var result = {};
+    if (url.length > 1) {
+        var queryStr = url[1];
+        var paramList = queryStr.split("&");
+        for (var i = 0; i < paramList.length; i++) {
+            var param = paramList[i].split("=");
+            if (param[0] != "") {
+                result[param[0]] = param[1];
+            }
+        }
+        console.log(result);
+        return result
+    }
+    console.log(result);
+    return result;
+}

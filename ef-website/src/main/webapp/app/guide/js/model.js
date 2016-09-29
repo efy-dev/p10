@@ -1,10 +1,16 @@
 var PageVariable = {
     template: {
-        productModelList: "productModelList",
-        tenantList: "tenantList",
         homeRecommendList: "home-recommend-list",
         tenantBase: "tenant-base",
-        tenantPraise: "tenant-praise"
+        tenantPraise: "tenant-praise",
+        tenantProductList: "tenant-product-list",
+        tenantPanelList: "tenant-panel-list",
+        productBase: "product-base",
+        productDetail: "product-detail",
+        productBuy: "product-buy",
+        productList: "product-list",
+        tenantList: "tenant-list",
+        tenantAudioList: "tenant-audio-list"
     },
     service: {
         login: "/wx/login",
@@ -13,7 +19,9 @@ var PageVariable = {
         listRecommend: "/tenant/getRecommendList",
         viewTenantById: "/tenant/getTenantById",
         listTenantPraise: "/tenant/getTenantPraiseListByTenant",
-        listTenantPanel: "/tenant/getImageTextListByTenant"
+        listTenantPanel: "/tenant/getImageTextListByTenant",
+        viewProductModelById: "/product/getProductModelById",
+        listProductModelPanel: "/product/getColumnListByProductModel"
     },
 
     userId: "",
@@ -30,13 +38,34 @@ var PageVariable = {
     imageText: {},
     recommendList: [],
 
-    imageStyle: {}
+    imageStyle: {},
+
+    currentAudio: null,
+
+    audioList: [],
+
+    setCurrentAudio: function (audio) {
+        if (PageVariable.currentAudio != null) {
+            PageVariable.currentAudio.bodyStop();
+        }
+        PageVariable.currentAudio = audio;
+        PageVariable.currentAudio.bodyPlay();
+    },
+
+    removeCurrentAudio: function (audio) {
+        if (PageVariable.currentAudio == null) {
+            audio.bodyStop();
+        } else if (audio.id == PageVariable.currentAudio.id) {
+            PageVariable.currentAudio.bodyStop();
+            PageVariable.currentAudio = null;
+        }
+    }
 };
 
 //@TODO
 function getTenantById(id, callback) {
     var success = function (data) {
-        PageVariable.productModelList = data;
+        PageVariable.tenant = data;
         if (typeof callback == "function") {
             callback();
         }
@@ -54,44 +83,44 @@ function getColumnListByTenant(id) {
 //@TODO
 function getTenantPraiseListByTenant(id, callback) {
     var success = function (data) {
-        PageVariable.productModelList = data;
+        PageVariable.tenantPraiseList = data;
         if (typeof callback == "function") {
             callback();
         }
     };
     var requestParam = {};
-    requestParam.tenantId = id;
+    requestParam.id = id;
     ajaxRequest(PageVariable.service.listTenantPraise, requestParam, success);
 }
 
 //@TODO
-function getProductModelById(id) {
-
-}
-
-//@TODO
-function getColumnListByProductModel(id) {
-
-}
-
-//@TODO
-function getTenantList(param, limit, offset, callback) {
+function getProductModelById(id, callback) {
     var success = function (data) {
-        PageVariable.productModelList = data;
+        PageVariable.productModel = data;
         if (typeof callback == "function") {
             callback();
         }
     };
     var requestParam = {};
-    requestParam.param = param;
-    requestParam.limit = limit;
-    requestParam.offset = offset;
-    ajaxRequest(PageVariable.service.listProductModel, requestParam, success);
+    requestParam.id = id;
+    ajaxRequest(PageVariable.service.viewProductModelById, requestParam, success);
 }
 
+//@TODO
+function getColumnListByProductModel(id, callback) {
+    var success = function (data) {
+        PageVariable.productModelColumnList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.id = id;
+    ajaxRequest(PageVariable.service.listProductModelPanel, requestParam, success);
+}
 
-//demo
-function getProductModelList(param, limit, offset, callback) {
+//@TODO
+function getTenantList(param, limit, offset, callback) {
     var success = function (data) {
         PageVariable.tenantList = data;
         if (typeof callback == "function") {
@@ -105,8 +134,9 @@ function getProductModelList(param, limit, offset, callback) {
     ajaxRequest(PageVariable.service.listTenant, requestParam, success);
 }
 
-//@TODO
-function getImageTextListByTenant(id, callback) {
+
+//demo
+function getProductModelList(param, limit, offset, callback) {
     var success = function (data) {
         PageVariable.productModelList = data;
         if (typeof callback == "function") {
@@ -114,7 +144,22 @@ function getImageTextListByTenant(id, callback) {
         }
     };
     var requestParam = {};
-    requestParam.tenantId = id;
+    requestParam.param = param;
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.listProductModel, requestParam, success);
+}
+
+//@TODO
+function getImageTextListByTenant(id, callback) {
+    var success = function (data) {
+        PageVariable.imageTextList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.id = id;
     ajaxRequest(PageVariable.service.listTenantPanel, requestParam, success);
 }
 
