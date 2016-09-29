@@ -358,7 +358,7 @@
                         <input id="organizationAttachment" name="organizationAttachment" type="file" multiple
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
-                    <div class="file-list am-u-sm-10">
+                    <div class="file-list am-u-sm-9">
                         {{ if(it.data!=null && it.data.organizationAttachment !=null){ }}
                         <img src="{{=it.data.organizationAttachment}}" width="500"/>
                         {{ } }}
@@ -374,7 +374,7 @@
                         <input id="bankAttachment" name="bankAttachment" type="file" multiple
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
-                    <div class="file-list am-u-sm-10">
+                    <div class="file-list am-u-sm-9">
                         {{ if(it.data!=null && it.data.bankAttachment !=null){ }}
                         <img src="{{=it.data.bankAttachment}}" width="500"/>
                         {{ } }}
@@ -390,7 +390,7 @@
                         <input id="businessLicense" name="businessLicense" type="file" multiple
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
-                    <div class="file-list am-u-sm-10">
+                    <div class="file-list am-u-sm-9">
                         {{ if(it.data!=null && it.data.businessLicense !=null){ }}
                         <img src="{{=it.data.businessLicense}}" width="500"/>
                         {{ } }}
@@ -406,7 +406,7 @@
                         <input id="taxRegistrationAttachment" name="taxRegistrationAttachment" type="file" multiple
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
-                    <div class="file-list am-u-sm-10">
+                    <div class="file-list am-u-sm-9">
                         {{ if(it.data!=null && it.data.taxRegistrationAttachment !=null){ }}
                         <img src="{{=it.data.taxRegistrationAttachment}}" width="500"/>
                         {{ } }}
@@ -584,7 +584,7 @@
                         <input id="imageList" name="imageList" type="file" multiple
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
-                    <div class="file-list am-u-sm-10">
+                    <div class="file-list am-u-sm-9">
                     </div>
                 </div>
                 <div class="am-form-group am-form-file">
@@ -596,7 +596,7 @@
                         <input id="media" name="media" type="file" multiple
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
-                    <div class="file-list am-u-sm-10">
+                    <div class="file-list am-u-sm-9">
                     </div>
                 </div>
 
@@ -972,7 +972,7 @@
                         <input id="product-imageList" name="imageList" type="file" multiple
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
-                    <div class="file-list am-u-sm-10">
+                    <div class="file-list am-u-sm-9">
                     </div>
                 </div>
                 <div class="am-form-group am-form-file">
@@ -984,7 +984,7 @@
                         <input id="product-media" name="media" type="file" multiple
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
-                    <div class="file-list am-u-sm-10">
+                    <div class="file-list am-u-sm-9">
                     </div>
                 </div>
 
