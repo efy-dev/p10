@@ -142,9 +142,9 @@ public class TenantController {
         }
     }
 
-    @RequestMapping({"/tenant/saveOrCanelTenantPraise"})
+    @RequestMapping({"/tenant/saveTenantPraise"})
     @ResponseBody
-    public Object saveOrCanelTenantPraise(HttpServletRequest request) {
+    public Object saveTenantPraise(HttpServletRequest request) {
         JSONObject jsonObject = new JSONObject();
         try {
             String userId = request.getParameter("userId");
