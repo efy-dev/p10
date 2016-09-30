@@ -7,6 +7,7 @@ import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.product.model.ProductModelColumn;
 import com.efeiyi.ec.tenant.model.*;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.wiki.model.Artistry;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -147,28 +148,32 @@ public class TenantController {
     public Object saveTenantPraise(HttpServletRequest request) {
         JSONObject jsonObject = new JSONObject();
         try {
-            String userId = request.getParameter("userId");
             String tenantId = request.getParameter("tenantId");
             String delFlag = request.getParameter("delFlag");
-            String hql = "select obj  FROM "+TenantPraise.class.getName()+" obj WHERE obj.tenant.id=:tenant_id AND obj.user.id=:user_id";
-            if ("0".equals(delFlag)) {
-                User user = (User) baseManager.getObject(User.class.getName(), userId);
-                Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-                TenantPraise tenantPraise = new TenantPraise();
-                tenantPraise.setTenant(tenant);
-                tenantPraise.setUser(user);
-                baseManager.saveOrUpdate(TenantPraise.class.getName(), tenantPraise);
-                jsonObject.put("code", "2");
-            } else if ("1".equals(delFlag)) {
-                LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-                param.put("tenant_id", tenantId);
-                param.put("user_id", userId);
-                TenantPraise tenantPraise = (TenantPraise) baseManager.getUniqueObjectByConditions(hql, param);
-                String tenantPraiseId = tenantPraise == null ? "" : tenantPraise.getId();
-                baseManager.delete(TenantPraise.class.getName(), tenantPraiseId);
-                jsonObject.put("code", "3");
-            }else{
-                jsonObject.put("code", "4");
+            if (AuthorizationUtil.isAuthenticated()) {
+                String userId = AuthorizationUtil.getMyUser().getId();
+                String hql = "select obj  FROM " + TenantPraise.class.getName() + " obj WHERE obj.tenant.id=:tenant_id AND obj.user.id=:user_id";
+                if ("0".equals(delFlag)) {
+                    User user = (User) baseManager.getObject(User.class.getName(), userId);
+                    Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+                    TenantPraise tenantPraise = new TenantPraise();
+                    tenantPraise.setTenant(tenant);
+                    tenantPraise.setUser(user);
+                    baseManager.saveOrUpdate(TenantPraise.class.getName(), tenantPraise);
+                    jsonObject.put("code", "2");
+                } else if ("1".equals(delFlag)) {
+                    LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+                    param.put("tenant_id", tenantId);
+                    param.put("user_id", userId);
+                    TenantPraise tenantPraise = (TenantPraise) baseManager.getUniqueObjectByConditions(hql, param);
+                    String tenantPraiseId = tenantPraise == null ? "" : tenantPraise.getId();
+                    baseManager.delete(TenantPraise.class.getName(), tenantPraiseId);
+                    jsonObject.put("code", "3");
+                } else {
+                    jsonObject.put("code", "4");
+                }
+            } else {
+                jsonObject.put("code", "5");
             }
             return jsonObject;
         } catch (Exception e) {
