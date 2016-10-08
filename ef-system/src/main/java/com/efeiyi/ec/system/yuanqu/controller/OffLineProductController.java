@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
@@ -133,12 +134,12 @@ public class OffLineProductController {
         String productId = request.getParameter("productId");
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
         ProductModel productModel;
-        if (id == null) {
+        if (id != null && !"".equals(id)) {
             productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), id);
         } else {
             productModel = new ProductModel();
+            productModel.setSerial(autoSerialManager.nextSerial("product"));
         }
-        productModel.setSerial(autoSerialManager.nextSerial("product"));
         productModel.setName(request.getParameter("name"));
         String amountStr = request.getParameter("amount");
         productModel.setAmount(amountStr != null ? Integer.parseInt(amountStr) : 1);
@@ -293,8 +294,16 @@ public class OffLineProductController {
     @ResponseBody
     public ResponseEntity<byte[]> createProductQRCode(HttpServletRequest request) throws Exception {
         String productId = request.getParameter("id");
-        String content = "http://www.efeiyi.com/wx/fetchLoginCode.do?redirect=http://www.efeiyi.com/app/redirect/product/" + productId;
-        return createQRCode(this.getClass().getResource("/").getPath().toString(), productId, content);
+
+        String redirect = "http://www.efeiyi.com/qrcode/redirect/product/" + productId;
+        String redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
+        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+                "appid=wx7f6aa253b75466dd" +
+                "&redirect_uri=" +
+                URLEncoder.encode(redirect_uri, "UTF-8") +
+                "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+
+        return createQRCode(this.getClass().getResource("/").getPath().toString(), productId, url);
     }
 
 }

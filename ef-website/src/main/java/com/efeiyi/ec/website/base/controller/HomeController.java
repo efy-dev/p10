@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -54,15 +55,15 @@ public class HomeController {
     private BaseManager baseManager;
 
 
-    @RequestMapping({"/app/redirect/{dataType}/{dataId}"})
-    public String appRedirect(@PathVariable String dataType, @PathVariable String dataId, HttpServletRequest request) {
+    @RequestMapping({"/qrcode/redirect/{dataType}/{dataId}"})
+    public String appRedirect(@PathVariable String dataType, @PathVariable String dataId, HttpServletRequest request) throws Exception {
         String redirect = "";
         if (dataType.equals("tenant")) {
             BigTenant bigTenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), dataId);
-            redirect = "http://www.efeiyi.com/app/tenant_details.html?tenantId=" + dataId + "&title=" + bigTenant.getName();
+            redirect = "http://www.efeiyi.com/app/tenant_details.html?tenantId=" + dataId + "&title=" + URLEncoder.encode(bigTenant.getName(), "utf-8");
         } else if (dataType.equals("product")) {
             ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), dataId);
-            redirect = "http://www.efeiyi.com/app/product_details.html?productId=" + dataId + "&title=" + productModel.getName();
+            redirect = "http://www.efeiyi.com/app/product_details.html?productId=" + dataId + "&title=" + URLEncoder.encode(productModel.getName(), "utf-8");
         }
         return "redirect:" + redirect;
     }

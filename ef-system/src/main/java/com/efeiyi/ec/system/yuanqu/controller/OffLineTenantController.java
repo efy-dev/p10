@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
 import java.util.*;
 import java.util.List;
 
@@ -484,9 +485,18 @@ public class OffLineTenantController {
     @RequestMapping("/tenant/createQRCode.do")
     @ResponseBody
     public ResponseEntity<byte[]> createTenantQRCode(HttpServletRequest request) throws Exception {
+
         String tenantId = request.getParameter("id");
-        String content = "http://www.efeiyi.com/wx/fetchLoginCode.do?redirect=http://www.efeiyi.com/app/redirect/tenant/" + tenantId;
-        return createQRCode(this.getClass().getResource("/").getPath().toString(), tenantId, content);
+
+        String redirect = "http://www.efeiyi.com/qrcode/redirect/tenant/" + tenantId;
+        String redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
+        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+                "appid=wx7f6aa253b75466dd" +
+                "&redirect_uri=" +
+                URLEncoder.encode(redirect_uri, "UTF-8") +
+                "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+
+        return createQRCode(this.getClass().getResource("/").getPath().toString(), tenantId, url);
     }
 
 }
