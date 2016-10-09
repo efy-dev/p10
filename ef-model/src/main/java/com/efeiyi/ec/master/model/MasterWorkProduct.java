@@ -11,7 +11,7 @@ import javax.persistence.*;
  * 关联MasterWork&&Product
  */
 @Entity
-@Table(name = "masterwork_product")
+@Table(name = "master_work_product")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class MasterWorkProduct {
     private String id;
@@ -29,14 +29,13 @@ public class MasterWorkProduct {
     public void setId(String id) {
         this.id = id;
     }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "master_work_id")
     public MasterWork getMasterWork() {
         return masterWork;
     }
 
-    public void setMasterwork(MasterWork masterWork) {
+    public void setMasterWork(MasterWork masterWork) {
         this.masterWork = masterWork;
     }
 
