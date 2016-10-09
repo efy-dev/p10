@@ -55,19 +55,17 @@ public class Product implements Serializable {
     private Date showDateTime;
 
     private String audio;
-    private List<MasterWorkProduct> masterWorkProducts;
+    private List<MasterWorkProduct> masterWorkProductList;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "product")
-    public List<MasterWorkProduct> getMasterWorkProducts() {
-        return masterWorkProducts;
+    public List<MasterWorkProduct> getMasterWorkProductList() {
+        return masterWorkProductList;
     }
 
-    public void setMasterWorkProducts(List<MasterWorkProduct> masterWorkProducts) {
-        this.masterWorkProducts = masterWorkProducts;
+    public void setMasterWorkProductList(List<MasterWorkProduct> masterWorkProductList) {
+        this.masterWorkProductList = masterWorkProductList;
     }
-
-
 
     @Transient
     public String getAudio() {

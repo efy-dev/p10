@@ -43,18 +43,17 @@ public class MasterWork {
     private String material;//材质
     private String description;//介绍
     private String audio;//语音
-    private List<MasterWorkProduct> masterWorkProducts;
+    private List<MasterWorkProduct> masterWorkProductList;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "masterWork")
-    public List<MasterWorkProduct> getMasterWorkProduct() {
-        return masterWorkProducts;
+    public List<MasterWorkProduct> getMasterWorkProductList() {
+        return masterWorkProductList;
     }
 
-    public void setMasterWorkProduct(List<MasterWorkProduct> masterWorkProduct) {
-        this.masterWorkProducts = masterWorkProduct;
+    public void setMasterWorkProductList(List<MasterWorkProduct> masterWorkProductList) {
+        this.masterWorkProductList = masterWorkProductList;
     }
-
     @Transient
     public String getPraiseStatus() {
         return praiseStatus;
