@@ -1,9 +1,8 @@
 package com.efeiyi.ec.product.model;
 
-import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterWorkProduct;
 import com.efeiyi.ec.project.model.Project;
-import com.efeiyi.ec.project.model.ProjectProperty;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -56,6 +55,19 @@ public class Product implements Serializable {
     private Date showDateTime;
 
     private String audio;
+    private List<MasterWorkProduct> masterWorkProducts;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "product")
+    public List<MasterWorkProduct> getMasterWorkProducts() {
+        return masterWorkProducts;
+    }
+
+    public void setMasterWorkProducts(List<MasterWorkProduct> masterWorkProducts) {
+        this.masterWorkProducts = masterWorkProducts;
+    }
+
+
 
     @Transient
     public String getAudio() {
