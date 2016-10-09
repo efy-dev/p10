@@ -15,7 +15,7 @@ import javax.persistence.*;
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class MasterWorkProduct {
     private String id;
-    private MasterWork masterwork;
+    private MasterWork masterWork;
     private Product product;
     private String status;
 
@@ -31,13 +31,13 @@ public class MasterWorkProduct {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "masterwork_id")
-    public MasterWork getMasterwork() {
-        return masterwork;
+    @JoinColumn(name = "master_work_id")
+    public MasterWork getMasterWork() {
+        return masterWork;
     }
 
-    public void setMasterwork(MasterWork masterwork) {
-        this.masterwork = masterwork;
+    public void setMasterwork(MasterWork masterWork) {
+        this.masterWork = masterWork;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

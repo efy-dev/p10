@@ -46,7 +46,7 @@ public class MasterWork {
     private List<MasterWorkProduct> masterWorkProducts;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "masterwork")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "masterWork")
     public List<MasterWorkProduct> getMasterWorkProduct() {
         return masterWorkProducts;
     }
