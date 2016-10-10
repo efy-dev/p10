@@ -13,7 +13,7 @@
 </head>
 <body>
 <header id="header" class="am-header custom-header newheader">
-    <div class="logo"><img src="<c:url value="/scripts/images/ef-logo-craft.png"/>" height="27" width="110"
+    <div class="logo"><img src="<c:url value="/scripts/images/ef-logo-craft.png"/>" width="110"
                            align="center" alt=""></div>
     <!-- //End--logo-->
     <!-- //End--chevron-left-->
@@ -37,7 +37,7 @@
             <ul class="am-slides">
                 <c:if test="${masterWork.masterWorkPictureList != null && masterWork.masterWorkPictureList != ''}">
                     <c:forEach items="${masterWork.masterWorkPictureList}" var="picture">
-                        <li><img src="http://tenant.efeiyi.com/${picture.pictureUrl}"></li>
+                        <li><img src="http://tenant.efeiyi.com/${picture.pictureUrl}@!wiki-master-work-banner"></li>
                     </c:forEach>
                 </c:if>
             </ul>

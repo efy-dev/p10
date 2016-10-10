@@ -3,6 +3,7 @@ package com.efeiyi.ec.master.model;
 import com.efeiyi.ec.product.model.Product;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -50,6 +51,7 @@ public class MasterWorkProduct {
     }
 
     @Column(name = "status")
+    @Where(clause = "status=1")
     public String getStatus() {
         return status;
     }
