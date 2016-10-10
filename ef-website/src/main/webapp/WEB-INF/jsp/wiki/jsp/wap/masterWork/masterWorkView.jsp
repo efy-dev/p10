@@ -64,7 +64,7 @@
                     </div>
                     <div class="fz14 black mt10">${work.masterFullName}</div>
                     <div class="fz12 color6 mt10">${work.projectName}</div>
-                    <div class="fz12 color6 mt10">【<ming800:status name='level' dataType='Master.level'
+                    <div class="fz12 color6 mt10">【<ming800:status name='level' dataType='Project.level'
                                                                    checkedValue='${work.masterLevel}' type='normal'/>】代表性传承人
                     </div>
                 </div>
@@ -74,9 +74,11 @@
                 <div class="title fz14 black txt-c bd">关于技艺</div>
                 <ul class="bd">
                     <li><strong>技艺名称：</strong><span>${work.projectName}</span></li>
-                    <li><strong>技艺级别：</strong><span><ming800:status name='level' dataType='Project.level'
+                    <li><strong>技艺级别：</strong><span>
+                        <ming800:status name='level' dataType='Project.level'
                                                                     checkedValue='${work.projectLevel}'
-                                                                    type='normal'/></span></li>
+                                                                    type='normal'/>
+                    </span></li>
                     <c:if test="${not empty work.projectCityName}">
                         <li><strong>所属地区：</strong><span>${work.projectCityName}</span></li>
                     </c:if>
