@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="guide/css/layouts.css">
 </head>
 <body class="detail" style="padding-bottom:60px">
-<header class="header"><a href="" class="angle left" title="返回上一页"></a><a href="" class="icon user" title="个人中心"></a>
-</header>
+<div class="header" dot-template="header"></div>
 <!--//End--header-->
 
 <div dot-template="product-base"></div>
@@ -33,7 +32,7 @@
         <img style="width: 100%;" src="{{=it.productModel_url}}@!o2o-home-banner" alt="">
     </div>
 
-    {{if(it.audio!=null) { }}
+    {{if(it.product.audio!=null) { }}
     <div class="audio audio-box" id="audio">
         <a data-type="audio-button">
             <span class="play active" data-type="audio-icon"><i class="icon"></i></span>
@@ -43,7 +42,7 @@
         <p>{{=it.product.name}}的语音简介</p>
         </span>
         <span class="time"></span>
-        <audio data-type="audio-body" id="media" src="{{=it.audio}}" autoplay="autoplay"></audio>
+        <audio data-type="audio-body" id="media" src="{{=it.product.audio}}" autoplay="autoplay"></audio>
     </div>
 
     {{ } }}
@@ -51,7 +50,7 @@
     <div class="info">
         <div class="base">
             <div class="title text_hidden">{{=it.product.name}}</div>
-            <div class="txt text_hidden">{{=it.product.subName}}</div>
+            <div class="txt">{{=it.product.subName}}</div>
             <div class="price"><span> ¥ </span><strong>{{=it.price}}</strong></div>
             {{ if(it.marketPrice!=null && it.marketPrice>it.price){ }}
             <div class="price_sub"><span>¥ {{=it.marketPrice}}</span></div>
@@ -94,7 +93,7 @@
     var imageList = it[i].imageList;
     for (var j = 0 ; j < imageList.length ; j++){
     }}
-    <div class="img"><img src="{{=imageList[j].image.src}}" alt=""></div>
+    <div class="img"><img src="{{=imageList[j].image.src}}@!o2o-product-detail" alt=""></div>
     {{ } }}
     {{ } }}
 </script>
@@ -112,6 +111,7 @@
 <script src="/scripts/wap/js/weixin.js"></script>
 <script src="guide/js/controller.js"></script>
 <script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 
 <script>

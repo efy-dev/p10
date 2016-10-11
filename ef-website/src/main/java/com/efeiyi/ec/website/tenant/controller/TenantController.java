@@ -143,6 +143,15 @@ public class TenantController {
         }
     }
 
+
+    /**
+     * 参数列表：
+     * 1.tenantId
+     * 2.delFlag  0 添加， 1 删除
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping({"/tenant/saveTenantPraise"})
     @ResponseBody
     public Object saveTenantPraise(HttpServletRequest request) {
@@ -160,7 +169,7 @@ public class TenantController {
                     tenantPraise.setTenant(tenant);
                     tenantPraise.setUser(user);
                     baseManager.saveOrUpdate(TenantPraise.class.getName(), tenantPraise);
-                    jsonObject.put("code", "2");
+                    return tenantPraise;
                 } else if ("1".equals(delFlag)) {
                     LinkedHashMap<String, Object> param = new LinkedHashMap<>();
                     param.put("tenant_id", tenantId);
@@ -168,12 +177,12 @@ public class TenantController {
                     TenantPraise tenantPraise = (TenantPraise) baseManager.getUniqueObjectByConditions(hql, param);
                     String tenantPraiseId = tenantPraise == null ? "" : tenantPraise.getId();
                     baseManager.delete(TenantPraise.class.getName(), tenantPraiseId);
-                    jsonObject.put("code", "3");
+                    jsonObject.put("id", tenantPraiseId);
                 } else {
-                    jsonObject.put("code", "4");
+                    jsonObject.put("code", "1");
                 }
             } else {
-                jsonObject.put("code", "5");
+                jsonObject.put("code", "1");
             }
             return jsonObject;
         } catch (Exception e) {

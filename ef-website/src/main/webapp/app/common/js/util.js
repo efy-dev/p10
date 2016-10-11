@@ -54,3 +54,17 @@ function getRequestParameter() {
     console.log(result);
     return result;
 }
+
+
+function subString(str, number, postfix) {
+    if (number <= 0) {
+        return str;
+    }
+    var result = "";
+    if (str.length > number) {
+        result = str.substr(0, number) + (typeof postfix != "undefined" ? postfix : "");
+    } else {
+        result = str;
+    }
+    return result;
+}

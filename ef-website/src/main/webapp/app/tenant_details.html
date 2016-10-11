@@ -46,7 +46,7 @@
         <p>{{=it.name}}的语音介绍</p>
         </span>
         <span class="time"></span>
-        <audio id="media" data-type="audio-body" src="{{=it.audio}}" autoplay></audio>
+        <audio id="media" data-type="audio-body" src="{{=it.audio}}" autoplay="autoplay"></audio>
     </div>
     {{ } }}
     <!--//End audio-->
@@ -89,7 +89,14 @@
 
 <script type="text/x-dot-template" id="tenant-praise">
 
-    <a class="btn" href="" onclick="praiseTenant()"><i class="icon icon_heart"></i><span>{{=it.length}}</span></a>
+    {{ if(PageVariable.currentUser!=null && PageVariable.currentUser.id!=null && PageVariable.currentUser.isPraised==true){ }}
+    <a class="btn" onclick="praiseTenant(PageVariable.tenant.id,1)"><i class="icon icon_heart_active"></i><span>{{=it.length}}</span></a>
+    {{ }else if(PageVariable.currentUser!=null && PageVariable.currentUser.id!=null){ }}
+    <a class="btn" onclick="praiseTenant(PageVariable.tenant.id,0)"><i
+            class="icon icon_heart"></i><span>{{=it.length}}</span></a>
+    {{ }else { }}
+    <a class="btn"><i class="icon icon_heart"></i><span>{{=it.length}}</span></a>
+    {{ } }}
     <ul class="ulist">
         {{ for(var i = 0 ; i < it.length ; i++){ }}
         {{
@@ -115,19 +122,21 @@
 
         }}
         <div class="swiper-slide">
-            <img src="{{=product.productModel_url}}@!o2o-tenant-list" alt="">
-            <div class="base">
-                <dl class="txt">
-                    <dt class="text_hidden">{{=product.product.name}}</dt>
-                    <dd class="text_hidden">{{=product.product.subName}}</dd>
-                </dl>
-                <dl class="price">
-                    <dt class="text_hidden"> ¥ {{=product.price}}</dt>
-                    {{ if(product.marketPrice!=null && product.marketPrice > product.price){ }}
-                    <dd class="text_hidden">原价 ¥ 8800</dd>
-                    {{ } }}
-                </dl>
-            </div>
+            <a href="/app/product_details.html?productId={{=product.id}}&title={{=product.product.name}}">
+                <img src="{{=product.productModel_url}}@!o2o-tenant-list" alt="">
+                <div class="base">
+                    <dl class="txt">
+                        <dt class="text_hidden">{{=product.product.name}}</dt>
+                        <dd class="text_hidden">{{=product.product.subName}}</dd>
+                    </dl>
+                    <dl class="price">
+                        <dt class="text_hidden"> ¥ {{=product.price}}</dt>
+                        {{ if(product.marketPrice!=null && product.marketPrice > product.price){ }}
+                        <dd class="text_hidden">原价 ¥ 8800</dd>
+                        {{ } }}
+                    </dl>
+                </div>
+            </a>
         </div>
         {{ } }}
     </div>
@@ -151,6 +160,7 @@
 <script src="/scripts/wap/js/weixin.js"></script>
 <script src="guide/js/controller.js"></script>
 <script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <!--//End-->
 <!--<script src="assets/js/system.js"></script>-->
 
@@ -173,6 +183,20 @@
         getTenantById(PageVariable.tenantId, function () {
             renderTemplate(PageVariable.template.tenantBase, PageVariable.tenant);
             getTenantPraiseListByTenant(PageVariable.tenantId, function () {
+                if (PageVariable.currentUser != null) {
+                    PageVariable.currentUser.isPraised = false;
+                    for (var i = 0; i < PageVariable.tenantPraiseList.length; i++) {
+                        var praise = PageVariable.tenantPraiseList[i];
+                        if (praise.user.id == PageVariable.currentUser.id) {
+                            PageVariable.currentUser.isPraised = true;
+                            break;
+                        } else {
+                            PageVariable.currentUser.isPraised = false;
+                        }
+                    }
+                }
+
+
                 renderTemplate(PageVariable.template.tenantPraise, PageVariable.tenantPraiseList);
             });
             $(".audio-box").each(function () {
@@ -206,8 +230,24 @@
 
     }
 
-    function praiseTenant() {
-
+    function praiseTenant(tenantId, delFlag) {
+        saveTenantPraise(tenantId, delFlag, function () {
+            getTenantPraiseListByTenant(PageVariable.tenantId, function () {
+                if (PageVariable.currentUser != null) {
+                    PageVariable.currentUser.isPraised = false;
+                    for (var i = 0; i < PageVariable.tenantPraiseList.length; i++) {
+                        var praise = PageVariable.tenantPraiseList[i];
+                        if (praise.user.id == PageVariable.currentUser.id) {
+                            PageVariable.currentUser.isPraised = true;
+                            break;
+                        } else {
+                            PageVariable.currentUser.isPraised = false;
+                        }
+                    }
+                }
+                renderTemplate(PageVariable.template.tenantPraise, PageVariable.tenantPraiseList);
+            });
+        })
     }
 
 </script>

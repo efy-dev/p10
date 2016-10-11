@@ -173,6 +173,6 @@ public class ArtController extends BaseController {
         String hql = "select obj from Artistry obj where obj.project.id=:projectId";
         param.put("projectId", projectId);
         Artistry artistry = (Artistry) baseManager.getUniqueObjectByConditions(hql, param);
-        return "redirect: /minglu/project/" + artistry.getId();
+        return "redirect: http://minglu.efeiyi.com/minglu/project/" + artistry.getId();
     }
 }

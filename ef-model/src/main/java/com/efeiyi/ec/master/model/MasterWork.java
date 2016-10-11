@@ -32,7 +32,7 @@ public class MasterWork {
     private String status;
     private Project project;  //类别
     private Date createDateTime;
-    private  List<MasterWorkRecommended> masterWorkRecommendedList;//推荐
+    private List<MasterWorkRecommended> masterWorkRecommendedList;//推荐
     private String praiseStatus;
     private String storeStatus;
     private Integer amount;
@@ -43,7 +43,17 @@ public class MasterWork {
     private String material;//材质
     private String description;//介绍
     private String audio;//语音
+    private List<MasterWorkProduct> masterWorkProductList;
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "masterWork")
+    public List<MasterWorkProduct> getMasterWorkProductList() {
+        return masterWorkProductList;
+    }
+
+    public void setMasterWorkProductList(List<MasterWorkProduct> masterWorkProductList) {
+        this.masterWorkProductList = masterWorkProductList;
+    }
     @Transient
     public String getPraiseStatus() {
         return praiseStatus;
@@ -182,7 +192,7 @@ public class MasterWork {
         this.project = project;
     }
 
-    @Column(name="create_datetime")
+    @Column(name = "create_datetime")
     public Date getCreateDateTime() {
         return createDateTime;
     }
@@ -192,7 +202,7 @@ public class MasterWork {
     }
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "masterWork")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "masterWork")
     @Where(clause = "status=1")
     public List<MasterWorkRecommended> getMasterWorkRecommendedList() {
         return masterWorkRecommendedList;
@@ -237,6 +247,7 @@ public class MasterWork {
     public void setSize(String size) {
         this.size = size;
     }
+
     @Column(name = "site")
     public String getSite() {
         return site;
@@ -245,6 +256,7 @@ public class MasterWork {
     public void setSite(String site) {
         this.site = site;
     }
+
     @Column(name = "material")
     public String getMaterial() {
         return material;
@@ -253,6 +265,7 @@ public class MasterWork {
     public void setMaterial(String material) {
         this.material = material;
     }
+
     @Column(name = "description")
     public String getDescription() {
         return description;
@@ -272,7 +285,7 @@ public class MasterWork {
     }
 
     @Override
-    public String toString(){
-        return  "MasterWork{id = "+id+"}";
+    public String toString() {
+        return "MasterWork{id = " + id + "}";
     }
 }
