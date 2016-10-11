@@ -152,7 +152,7 @@
 
     if (isWeiXin()) {
 //        alert("not weixin");
-        $("#signin").attr("href", registerWx);
+//        $("#signin").attr("href", registerWx);
 
     } else {
         $("#wechat").hide();
