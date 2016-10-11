@@ -1065,10 +1065,6 @@
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                 class="am-icon-trash-o"></span> 删除(暂不支持)
                         </button>
-                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                           href="/yuanqu/product/createQRCode.do?id={{=product.id}}"><span
-                                class="am-icon-trash-o"></span> 生成二维码
-                        </a>
                     </div>
                 </div>
             </td>
@@ -1131,6 +1127,10 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 规格详情
                         </button>
+                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                           href="/yuanqu/product/createQRCode.do?id={{=productModel.id}}"><span
+                                class="am-icon-trash-o"></span> 生成二维码
+                        </a>
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                 class="am-icon-trash-o"></span> 删除(暂时不支持)
                         </button>

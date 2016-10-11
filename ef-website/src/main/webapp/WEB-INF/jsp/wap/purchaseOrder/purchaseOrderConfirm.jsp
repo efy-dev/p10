@@ -83,7 +83,8 @@
                 <p class="title"><span id="span1">${address.consignee}</span><span id="span2">${address.phone}</span>
                 </p>
 
-                <p class="txt" id="txt">${address.province.name}${address.city.name}${address.district.name}${address.details}</p>
+                <p class="txt"
+                   id="txt">${address.province.name}${address.city.name}${address.district.name}${address.details}</p>
                 <a href="#arrow-right" class="arrow-right"></a>
             </a>
         </div>
@@ -93,20 +94,29 @@
                 <ul class="ul-list">
                     <c:forEach items="${productMap.get(tenant.id)}" var="product">
                         <li>
-                            <img class="img" src="http://pro.efeiyi.com/${product.productModel.productModel_url}"
-                                 alt="">
+                            <c:if test="${product.productModel.product.type!=3}">
 
+                                <img class="img" src="http://pro.efeiyi.com/${product.productModel.productModel_url}"
+                                     alt="">
+
+                            </c:if>
+                            <c:if test="${product.productModel.product.type==3}">
+
+                                <img class="img" src="${product.productModel.productModel_url}"
+                                     alt="">
+
+                            </c:if>
                             <div class="bd info">
                                 <p class="text">${product.productModel.product.name}
                                     <c:if test="${product.productModel.product.productModelList.size()>1}">
                                         [${product.productModel.name}]
                                     </c:if>
-                                    <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
+                                        <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
                                         <%--[--%>
                                         <%--<c:forEach items="${product.productModel.productPropertyValueList}"--%>
-                                                   <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                                        <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
                                         <%--]--%>
-                                    <%--</c:if>--%>
+                                        <%--</c:if>--%>
                                 </p>
 
                                 <p class="price"><em>￥</em><span>${product.purchasePrice}</span></p>
@@ -121,19 +131,23 @@
             </div>
         </c:forEach>
         <c:if test="${null != consumer.balance && 0<consumer.balance}">
-            <div class="balance"><input type="checkbox" id="balanceCheckbox" onclick="useBalance(this);">使用余额支付<span id="usefulBalance"><c:if test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元</div>
+            <div class="balance"><input type="checkbox" id="balanceCheckbox" onclick="useBalance(this);">使用余额支付<span
+                    id="usefulBalance"><c:if
+                    test="${consumer.balance>purchaseOrder.total}">${purchaseOrder.total}</c:if><c:if
+                    test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元
+            </div>
         </c:if>
         <!-- //End--order-list-->
         <div class="bd order-total">
             <%--<c:if test="${empty purchaseOrder.callback}">--%>
-                <p><strong>优惠券</strong><span class="btn-coupons" id="yhq">0张券可用</span><a href="#arrow-right"
-                                                                                         class="arrow-right"></a></p>
+            <p><strong>优惠券</strong><span class="btn-coupons" id="yhq">0张券可用</span><a href="#arrow-right"
+                                                                                     class="arrow-right"></a></p>
             <%--</c:if>--%>
 
             <p><strong>商品金额</strong><span><em>￥</em><em id="totalPrice">${purchaseOrder.total}</em></span></p>
             <%--<c:if test="${empty purchaseOrder.callback}">--%>
-                <p><strong>优惠</strong><span><em>-￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span>
-                </p>
+            <p><strong>优惠</strong><span><em>-￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span>
+            </p>
             <%--</c:if>--%>
             <p><strong>余额</strong><span> <em>-￥</em><em id="balance">0.00</em></span></p>
             <p><strong>运费</strong><span><em>￥</em><em id="freight">${freight}</em></span></p>
@@ -175,7 +189,7 @@
                     </div>
                     <span class="add-zfb"></span>
                 </a></li>
-                <li class="add-btn1"  id="weixin">
+                <li class="add-btn1" id="weixin">
                     <a href="#微信支付" onclick="weixin(this)" title="微信支付">
                         <i class="icon icon-wechat"></i>
 
@@ -190,7 +204,7 @@
             </ul>
         </div>
         <div class="bd payment-total-bar newpayment-total-bar">
-            <span class="txt" >总金额<span id="change">${purchaseOrder.total+freight}</span>元</span>
+            <span class="txt">总金额<span id="change">${purchaseOrder.total+freight}</span>元</span>
             <a href="#btn-right" class="btn-right btn-red" onclick="submitOrder('${purchaseOrder.id}')">结&nbsp;算</a>
         </div>
 
@@ -264,7 +278,9 @@
                         <label></label>
 
                         <p>
-                            <button onclick="submitNewAddress()" type="button" class="am-btn am-btn-default add-btn">保存收货人信息</button>
+                            <button onclick="submitNewAddress()" type="button" class="am-btn am-btn-default add-btn">
+                                保存收货人信息
+                            </button>
                             <input type="reset" id="reset" style="display: none">
                         </p>
                         <span id="ts" style="border: 0"></span>
@@ -279,19 +295,20 @@
 <!--//End--弹出地址-->
 <!--Start--弹出地址-->
 <div id="order-total" class="alert-delete yhq" style="display:none;">
-    <div class="bd cart-coupons addtop"<%-- style="position: fixed;--%>">
-        <div class="title">
-            <h2>优惠券</h2>
-        </div>
-        <!--//ENd-->
-        <ul class="ul-list" id="ul-list">
-        </ul>
+    <div class="bd cart-coupons addtop"
+    <%-- style="position: fixed;--%>">
+    <div class="title">
+        <h2>优惠券</h2>
+    </div>
+    <!--//ENd-->
+    <ul class="ul-list" id="ul-list">
+    </ul>
 
     <div class="bd add-new-btn">
         <a onclick="yhq();" class="cart-btn" id="yhq-btn" title="确定">确定</a>
     </div>
-    </div>
-    <div class="overbg"></div>
+</div>
+<div class="overbg"></div>
 </div>
 
 <script>
@@ -302,7 +319,7 @@
 
     $(function () {
 
-        $("#yhq").click(function(){
+        $("#yhq").click(function () {
             $("#order-total").show();
 
         });
@@ -343,10 +360,10 @@
                             out += '<p>适用范围：单品专用</p> </li>';
                         }
                     }
-                   /* for (var i = 0; i < data.length; i++) {
-                        out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
-                                + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';
-                    }*/
+                    /* for (var i = 0; i < data.length; i++) {
+                     out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
+                     + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';
+                     }*/
                     $("#ul-list").html(out);
                 }
             },
@@ -392,7 +409,7 @@
                 couponid = $(this).attr("id");
             }
         })
-        if(couponid!=null){
+        if (couponid != null) {
             //var couponId = couponid.substring(4, couponid.length);
             var t_price = parseFloat(totalPrice);
             var chkobjs = document.getElementsByName("radio");
@@ -403,49 +420,51 @@
                     $("#couponPrice").html(couponPrice.toFixed(2));
                 }
             }
-            var change = parseFloat(t_price)+parseFloat(freight);
+            var change = parseFloat(t_price) + parseFloat(freight);
             $("#change").html(change.toFixed(2));
             $(".yhq").hide();
-            if(change<parseFloat(${consumer.balance})){
+            if (change < parseFloat(${consumer.balance})) {
                 $("#usefulBalance").html(change.toFixed(2));
-            }else{
+            } else {
                 $("#usefulBalance").html((${consumer.balance}).toFixed(2));
             }
             $("#balance").html("0.00");
-            $("#balanceCheckbox").attr("checked",false);
+            $("#balanceCheckbox").attr("checked", false);
             /*$.ajax({
-                type: 'post',
-                async: false,
-                url: '<c:url value="/coupon/use.do"/>',
-                dataType: 'json',
-                data: {
-                    couponId: couponId,
-                    orderId: orderId
+             type: 'post',
+             async: false,
+             url: '
+            <c:url value="/coupon/use.do"/>',
+             dataType: 'json',
+             data: {
+             couponId: couponId,
+             orderId: orderId
 
-                },
-                success: function (data) {
-                    if (data == true) {
-                        var t_price = parseFloat(totalPrice);
-                        var chkobjs = document.getElementsByName("radio");
-                        for (var i = 0; i < chkobjs.length; i++) {
-                            if (chkobjs[i].checked) {
-                                t_price = t_price - parseFloat(chkobjs[i].value);
-                                $("#couponPrice").html(chkobjs[i].value);
-                            }
-                        }
-                        $("#change").html(t_price.toFixed(2));
-                        $(".yhq").hide();
-                        if(t_price<parseFloat(${consumer.balance})){
-                            $("#usefulBalance").html(t_price.toFixed(2));
-                        }
-                        $("#balance").html("0.00");
-                        $("#balanceCheckbox").attr("checked",false);
-                    }
-                },
+             },
+             success: function (data) {
+             if (data == true) {
+             var t_price = parseFloat(totalPrice);
+             var chkobjs = document.getElementsByName("radio");
+             for (var i = 0; i < chkobjs.length; i++) {
+             if (chkobjs[i].checked) {
+             t_price = t_price - parseFloat(chkobjs[i].value);
+             $("#couponPrice").html(chkobjs[i].value);
+             }
+             }
+             $("#change").html(t_price.toFixed(2));
+             $(".yhq").hide();
+             if(t_price<parseFloat(
+            ${consumer.balance})){
+             $("#usefulBalance").html(t_price.toFixed(2));
+             }
+             $("#balance").html("0.00");
+             $("#balanceCheckbox").attr("checked",false);
+             }
+             },
 
-            });*/
+             });*/
 
-        }else{
+        } else {
             $(".yhq").hide();
         }
 
@@ -516,10 +535,10 @@
                         $.ajax({
                             type: 'post',
                             async: false,
-                            url: '<c:url value="/order/checkBalance"/>'+'?balance='+balance,
+                            url: '<c:url value="/order/checkBalance"/>' + '?balance=' + balance,
                             dataType: 'json',
                             success: function (data1) {
-                                if(data1){
+                                if (data1) {
                                     var isweixin = "";
 
                                     if (isWeiXin()) {
@@ -528,9 +547,9 @@
                                     }
 
                                     var url = "<c:url value="/order/confirm/"/>";
-                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin +"&balance=" + balance + "&couponId=" + couponId + "&freight=" + freight;
+                                    url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin + "&balance=" + balance + "&couponId=" + couponId + "&freight=" + freight;
                                     window.location.href = url;
-                                }else{
+                                } else {
                                     showAlert("提示", "抱歉，余额不足！");
                                 }
                             }
@@ -583,7 +602,7 @@
     }
 
     function newAddress(it) {
-        var out2 = '<li id="'+it.id+'" class="cart-btn acd" onclick="chooseAddress(\'' + it.id + '\',\'' + it.consignee + '\',\'' + it.phone + '\',\'' + it.province.name + '\',\'' + it.city.name + '\',\'' + it.district.name + '\',\'' + it.details + '\')"><p class="bd title">' + it.consignee + '  ' + it.phone + '</p><p class="bd des">' + it.province.name + it.city.name + it.details + '</p><p class="bd btns"></p></li><br>';
+        var out2 = '<li id="' + it.id + '" class="cart-btn acd" onclick="chooseAddress(\'' + it.id + '\',\'' + it.consignee + '\',\'' + it.phone + '\',\'' + it.province.name + '\',\'' + it.city.name + '\',\'' + it.district.name + '\',\'' + it.details + '\')"><p class="bd title">' + it.consignee + '  ' + it.phone + '</p><p class="bd des">' + it.province.name + it.city.name + it.details + '</p><p class="bd btns"></p></li><br>';
         return out2;
     }
 
@@ -629,24 +648,24 @@
                 $("#freight").text(data);
                 var couponPrice = $("#couponPrice").text();
                 var totalPrice = $("#totalPrice").text();
-                var finalPrice = parseFloat(totalPrice-couponPrice)+parseFloat(data);
+                var finalPrice = parseFloat(totalPrice - couponPrice) + parseFloat(data);
                 //$("#change").html(finalPrice.toFixed(2));
                 if (finalPrice < parseFloat(${consumer.balance})) {
                     $("#usefulBalance").html(finalPrice.toFixed(2));
-                    if ($("#balanceCheckbox").is(':checked') == true){
+                    if ($("#balanceCheckbox").is(':checked') == true) {
                         $("#balance").html(finalPrice.toFixed(2));
                         $("#change").html("0.00");
-                    }else{
+                    } else {
                         $("#balance").html("0.00");
                         $("#change").html(finalPrice.toFixed(2));
                     }
-                }else{
+                } else {
                     $("#usefulBalance").html((${consumer.balance}).toFixed(2));
-                    if ($("#balanceCheckbox").is(':checked') == true){
+                    if ($("#balanceCheckbox").is(':checked') == true) {
                         $("#balance").html((${consumer.balance}).toFixed(2));
                         var finalPrice1 = finalPrice - ${consumer.balance};
                         $("#change").html(finalPrice1.toFixed(2));
-                    }else{
+                    } else {
                         $("#balance").html("0.00");
                         $("#change").html(finalPrice.toFixed(2));
                     }
@@ -807,18 +826,18 @@
     }
 
     //使用余额
-    function useBalance(element){
+    function useBalance(element) {
         var totalPrice = $("#totalPrice").text();
         var couponPrice = $("#couponPrice").text();
         var balance = $("#usefulBalance").text();
         var freight = $("#freight").text();
-        if ($(element).is(':checked') == true){
+        if ($(element).is(':checked') == true) {
             $("#balance").html(balance);
-            var change = parseFloat(totalPrice-balance-couponPrice)+parseFloat(freight);
+            var change = parseFloat(totalPrice - balance - couponPrice) + parseFloat(freight);
             $("#change").html(change.toFixed(2));
-        }else if($(element).is(':checked') == false){
+        } else if ($(element).is(':checked') == false) {
             $("#balance").html("0.00");
-            var change = parseFloat(totalPrice-couponPrice)+parseFloat(freight);
+            var change = parseFloat(totalPrice - couponPrice) + parseFloat(freight);
             $("#change").html(change.toFixed(2));
         }
     }

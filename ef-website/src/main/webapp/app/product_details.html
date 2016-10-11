@@ -19,7 +19,8 @@
 
 <div class="fixed" dot-template="product-buy"></div>
 
-
+<div class="footer">
+</div>
 <script type="text/x-dot-template" id="product-base">
 
 
@@ -29,10 +30,10 @@
     </div>
 
     <div class="focus">
-        <img style="width: 100%;" src="{{=it.productModel_url}}@!o2o-home-banner" alt="">
+        <img style="width: 100%;" src="{{=it.productModel_url}}@!o2o-product-detail" alt="">
     </div>
 
-    {{if(it.product.audio!=null) { }}
+    {{if(it.audio!=null) { }}
     <div class="audio audio-box" id="audio">
         <a data-type="audio-button">
             <span class="play active" data-type="audio-icon"><i class="icon"></i></span>
@@ -42,7 +43,7 @@
         <p>{{=it.product.name}}的语音简介</p>
         </span>
         <span class="time"></span>
-        <audio data-type="audio-body" id="media" src="{{=it.product.audio}}" autoplay="autoplay"></audio>
+        <audio data-type="audio-body" id="media" src="{{=it.audio}}" autoplay="autoplay"></audio>
     </div>
 
     {{ } }}
@@ -58,7 +59,7 @@
         </div>
         {{ if(it.product.master!=null) { }}
         <div class="master">
-            <a href="">
+            <a href="http://minglu.efeiyi.com/minglu/master/{{=it.product.master.id}}">
                 <div class="img"><img src="http://tenant.efeiyi.com/{{=it.product.master.favicon}}" alt=""></div>
                 <div class="text">
                     <p>{{=it.product.master.fullName}}</p>
