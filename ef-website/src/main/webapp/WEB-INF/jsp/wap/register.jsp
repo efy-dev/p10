@@ -64,16 +64,6 @@
                         </label>
                     </li>
                     <li>
-                        <label>验证码</label>
-                        <div class="tet1">
-                            <span class="span-ipt"><input class="txt1 am-u-sm-7 am-u-end" type="text" id="verification"
-                                                          placeholder="验证码" data-parsley-required="true"
-                                                          data-parsley-required-message="请输入验证码" data-parsley-id="1138"><ul
-                                    class="parsley-errors-list" id="parsley-id-1138"></ul></span>
-                            <span class="span-btn"><a class="btn-p-1" id="verificationButton">获取验证码</a></span>
-                        </div>
-                    </li>
-                    <li>
                         <label>图片验证码</label>
                         <input class="txt" type="text" id="imageVCode" minlength="3" placeholder="输入图片中的验证码"
                                data-parsley-required="true" onblur="checkImageCode()" data-parsley-id="5221">
@@ -88,6 +78,16 @@
                                                            src="<c:url value="/getImageCode"/>" data-parsley-id="8391"><ul
                                     class="parsley-errors-list" id="parsley-id-8391"></ul></span>
                             <span class="am-u-sm-6"><a onclick="changeImageCode()">看不清？换一张</a></span>
+                        </div>
+                    </li>
+                    <li>
+                        <label>验证码</label>
+                        <div class="tet1">
+                            <span class="span-ipt"><input class="txt1 am-u-sm-7 am-u-end" type="text" id="verification"
+                                                          placeholder="验证码" data-parsley-required="true"
+                                                          data-parsley-required-message="请输入验证码" data-parsley-id="1138"><ul
+                                    class="parsley-errors-list" id="parsley-id-1138"></ul></span>
+                            <span class="span-btn"><a class="btn-p-1" id="verificationButton">获取验证码</a></span>
                         </div>
                     </li>
                     <li>

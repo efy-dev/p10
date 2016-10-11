@@ -127,7 +127,7 @@
 
 
             <div class="am-form-group">
-                <input type="password" id="password" name="password" data-parsley-pattern="^[a-zA-Z0-9]{6,16}$"
+                <input type="password" id="password" name="password" minlength="6" maxlength="16" data-parsley-pattern="^[a-zA-Z0-9]{6,16}$"
                        data-parsley-error-message="密码由6-16位字母或数字组成" placeholder="密码由6-16位字母或数字组成"
                        data-parsley-trigger="change" required="" data-parsley-id="6670">
             </div>
@@ -137,7 +137,7 @@
                        data-parsley-required="true"
                        data-parsley-required-message="请确认密码"
                        data-parsley-trigger="change"
-                       placeholder="请与上面输入的值一致">
+                       placeholder="请与上面输入的值一致" minlength="6" maxlength="16" >
                 <label class="msg-tips" for="passwordAgain" style="display: none;" id="passwordAgainError">
                     <span class="msg">！两次密码输入不一致，请重新输入</span>
                 </label>
@@ -514,7 +514,7 @@
             if (isVerification && bool && $("#agreemen").is(':checked') && checkPasswordAgain()) {
                 $("#consumerSubmit").click();
                 $("#consumerSubmit").attr("disabled", true);
-                $(".loading").show();
+//                $(".loading").show();
             } else if (!isVerification) {
                 $("#consumerVerificationCodeCheck").css("display", "block");
                 $("#consumerSubmit").attr("disabled", false);

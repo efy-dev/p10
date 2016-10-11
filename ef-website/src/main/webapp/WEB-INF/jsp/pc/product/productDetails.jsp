@@ -129,13 +129,15 @@
             </c:if>
             <!-- //End-->
             <div class="master-cost">
-                <c:if test="${not empty productModel.marketPrice&&productModel.product.status==1}">
-                    <p><font>市场价：</font><em>${productModel.marketPrice}</em></p>
-                </c:if>
-                <c:if test="${not empty productModel.price&&productModel.product.status==1}">
-                    <p>飞蚁价</p>
+                <c:if test="${productModel.price.intValue()!=0}">
+                    <c:if test="${not empty productModel.marketPrice&&productModel.product.status==1}">
+                        <p><font>市场价：</font><em>${productModel.marketPrice}</em></p>
+                    </c:if>
+                    <c:if test="${not empty productModel.price&&productModel.product.status==1}">
+                        <p>飞蚁价</p>
 
-                    <p><strong>￥</strong><span>${productModel.price}</span></p>
+                        <p><strong>￥</strong><span>${productModel.price}</span></p>
+                    </c:if>
                 </c:if>
             </div>
             <!-- //End-->

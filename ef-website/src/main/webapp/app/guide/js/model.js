@@ -67,7 +67,6 @@ var PageVariable = {
     }
     ;
 
-//@TODO
 function getTenantById(id, callback) {
     var success = function (data) {
         PageVariable.tenant = data;
@@ -148,7 +147,6 @@ function getProductModelById(id, callback) {
     ajaxRequest(PageVariable.service.viewProductModelById, requestParam, success);
 }
 
-//@TODO
 function getColumnListByProductModel(id, callback) {
     var success = function (data) {
         PageVariable.productModelColumnList = data;
@@ -161,7 +159,6 @@ function getColumnListByProductModel(id, callback) {
     ajaxRequest(PageVariable.service.listProductModelPanel, requestParam, success);
 }
 
-//@TODO
 function getTenantList(param, limit, offset, callback) {
     var success = function (data) {
         PageVariable.tenantList = data;
@@ -176,8 +173,6 @@ function getTenantList(param, limit, offset, callback) {
     ajaxRequest(PageVariable.service.listTenant, requestParam, success);
 }
 
-
-//demo
 function getProductModelList(param, limit, offset, callback) {
     var success = function (data) {
         PageVariable.productModelList = data;
@@ -192,7 +187,6 @@ function getProductModelList(param, limit, offset, callback) {
     ajaxRequest(PageVariable.service.listProductModel, requestParam, success);
 }
 
-//@TODO
 function getImageTextListByTenant(id, callback) {
     var success = function (data) {
         PageVariable.imageTextList = data;
@@ -210,7 +204,6 @@ function getImageTextById(id) {
 
 }
 
-//@TODO
 function getRecommendList(param, limit, offset, callback) {
     var success = function (data) {
         PageVariable.recommendList = data;
@@ -226,4 +219,4 @@ function getRecommendList(param, limit, offset, callback) {
 }
 
 getCurrentUser();
-
+75898

@@ -236,7 +236,7 @@ ul,dl{list-style:none}
 .enroll .start .login .page li label{padding: 0.8rem 0;font-size: 1.4rem;width: 100%;float: left;font-weight:100;}
 .enroll .start .login .page li .txt{width: 100%;border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1.4rem;width: 100%;float: left}
 .enroll .start .login .page li .txt1{}
-.enroll .start .login .page li span a{padding:0.9rem 1.1rem;font-size: 1rem;border: 1px solid #000;float: right;color:#000;}
+.enroll .start .login .page li span a{padding:0.9rem 1.1rem;font-size: 1rem;border: 1px solid #000;float: right;}
 
 
 .enroll .start .login .page li .span-ipt {width:100%;float:left;position:relative;padding-right:115px}
@@ -265,7 +265,7 @@ ul,dl{list-style:none}
 .active-cl-si{font-size: 1rem;color: #ff0000;}
 /*移动按钮*/
 .btn-p-1{padding:1.1rem;border: 1px solid #000;font-size: 1.4rem;text-decoration: none;background: #fff;transition: all 0.5s;float:right}
-.btn-p-1:hover{background: #000;color: #fff;}
+/*.btn-p-1:hover{background: #000;color: #fff;}*/
 /*共同样式*/
 .newmsg{color:#d42811;font-size:14px;}
 .newlink{border:0!important;padding:0!important;font-size:14px!important;text-decoration:underline;float:inherit!important;color:#d42811!important}

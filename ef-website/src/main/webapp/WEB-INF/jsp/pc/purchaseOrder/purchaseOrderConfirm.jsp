@@ -249,12 +249,6 @@
                                                 <c:if test="${product.productModel.product.productModelList.size()>1}">
                                                     [${product.productModel.name}]
                                                 </c:if>
-                                                    <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
-                                                    <%--[--%>
-                                                    <%--<c:forEach--%>
-                                                    <%--items="${product.productModel.productPropertyValueList}"--%>
-                                                    <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>]--%>
-                                                    <%--</c:if>--%>
                                             </a>
                                             </p>
                                         </div>
@@ -282,23 +276,11 @@
         <!--订货清单-->
         <!--发票-->
         <div class="invoice divtop">
-            <%--<div class="title"><input type="checkbox" class="middle-active" value="">开具发票</div>--%>
             <div class="con-info">
                 <div class="tbar">
-                    <%--<input type="checkbox" class="middle-active" value="">--%>
                     <span class="name">使用优惠券</span>
-                    <%--<span class="txt">已减</span>--%>
-                    <%--<span class="price">￥20</span>--%>
                 </div>
                 <ul class="list ul-list" id="couponList">
-                    <%--{{ for(var i = 0 ; i<it.length ; i++){ }}--%>
-                    <%--<li>--%>
-                    <%--<input type="checkbox" name="coupon">--%>
-                    <%--<span class="t1">满{{=it.couponBatch.priceLimit}}元立减{{=it.couponBatch.price}}元</span>--%>
-                    <%--<span class="t2">{{=it.rangeLabel}}</span>--%>
-                    <%--<span class="t3">{{=it.startDate}}至{{=it.endDate}}</span>--%>
-                    <%--</li>--%>
-                    <%--{{ } }}--%>
                 </ul>
                 <div class="list div-list" id="couponExchange">
                     <span>使用兑换码</span>
@@ -307,12 +289,6 @@
                     <span class="red" id="exchangeError" style="display: none">订单不满足该优惠券使用条件</span>
                 </div>
                 <ul class="list ul-list ul-list-last" id="exchangeCouponList">
-                    <%--<li>--%>
-                    <%--<input type="checkbox" name="coupon">--%>
-                    <%--<span class="t1">满{{=it.couponBatch.priceLimit}}元立减{{=it.couponBatch.price}}元</span>--%>
-                    <%--<span class="t2">{{=it.rangeLabel}}</span>--%>
-                    <%--<span class="t3">{{=it.startDate}}至{{=it.endDate}}</span>--%>
-                    <%--</li>--%>
                 </ul>
             </div>
         </div>
@@ -379,6 +355,7 @@
         $("#zhifubao").attr("class", "alipay");
         payment = "3";
     }
+
     function submitOrder(element, orderId) {
         var messageObject = new Object();
         var balance = $("#balance").text();
@@ -420,22 +397,6 @@
                                     element.onclick = null;
                                     $(element).attr("href", url);
                                     $(element).click();
-
-                                    //逐条发送商品下单记录给GA
-                                    $.each(productMap, function (key, value) {
-                                        ga('ec:setAction', 'purchase', {
-                                            'id': key,
-                                            'affiliation': 'efeiyi',
-                                            'revenue': ${purchaseOrder.total},
-                                            'step': 1,
-                                            'option': payment,
-//                            'tax': '2.85',
-//                            'shipping': '5.34',
-//                            'coupon': 'SUMMER2013'    // User added a coupon at checkout.
-                                        });
-                                    });
-                                    ga('send', 'pageview');
-
                                     if (finalPrice != 0) {
                                         showChooseConfirm("提示", "是否支付成功？", function () {
                                             window.location.href = "http://<%=PConst.WEBSITE_CONSUMER_HOST%>/order/myEfeiyi/view/" + orderId;
@@ -483,7 +444,7 @@
         }, function () {
         }, "post")
 
-    })
+    });
 
     function provinceChange(element) {
         var provinceId = $(element).val();
@@ -704,40 +665,6 @@
         } else {
             status = "2";
         }
-
-        /* //选中优惠卷以后会发送一个请求就是把优惠券绑定到订单当中，绑定完成之后再发送一个请求来更新价格返回的是一个拼装好的json字符串
-         var param = {"purchaseOrderId": "
-        ${purchaseOrder.id}", "couponId": $(element).attr("id"), "status": status};
-         var success = function (data) {
-         if (data) {
-         var param = {"purchaseOrderId": "
-        ${purchaseOrder.id}"};
-         var success = function (data) {
-         //输出新的订单价格
-         data = JSON.parse(data);
-         console.log(data);
-         console.log(data["totalPrice"]);
-         console.log(data["couponPrice"]);
-         console.log(data["finalPrice"]);
-         $("#totalPrice").html(data["totalPrice"]);
-         $("#couponPrice").html(data["couponPrice"]);
-         $("#finalPrice").html(data["finalPrice"]);
-         var finalPrice = parseFloat(data["finalPrice"]);
-         if (finalPrice < parseFloat(
-        ${consumer.balance})) {
-         $("#usefulBalance").html(finalPrice.toFixed(2));
-         }
-         $("#balance").html("0.00");
-         $("#banlanceCheckbox").attr("checked", false);
-         }
-         ajaxRequest("
-        <c:url value="/order/getPurchaseOrderPrice.do"/>", param, success, function () {
-         }, "post");
-         }
-         }
-         ajaxRequest("
-        <c:url value="/useCoupon.do"/>", param, success, function () {
-         }, "post");*/
     }
 
 
@@ -768,26 +695,6 @@
 
     });
 
-    function df(addressId, consumerId) {
-        $.ajax({
-            type: 'post',
-            async: false,
-            url: '<c:url value="/myEfeiyi/defaultAddress.do"/>',
-            dataType: 'json',
-            data: {
-                status: 2,
-                id: addressId,
-                consumerId: consumerId,
-
-            },
-            success: function (data) {
-                if (data == true) {
-                    window.location.reload();
-                }
-            },
-
-        });
-    }
 
     //使用余额
     function useBalance(element) {

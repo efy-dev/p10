@@ -527,7 +527,7 @@ input[type="checkbox"], textarea,select {border-radius:0;box-shadow:none}
 .search-sort .ul-list {padding:0 20px}
 .search-sort .ul-list li {width:48%;margin-top:20px;padding-bottom:10px;font-size:14px;float:left;border-bottom:1px solid #cdcdcd}
 .search-sort .ul-list li img {width:100%}
-.search-sort .ul-list li p {width:100%;float:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search-sort .ul-list li p {width:100%;float:left;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .search-sort .ul-list li p.name {padding-top:10px;padding-bottom:5px}
 .search-sort .ul-list li .price em {font-size:12px}
 .search-sort .ul-list li a {color:#000}

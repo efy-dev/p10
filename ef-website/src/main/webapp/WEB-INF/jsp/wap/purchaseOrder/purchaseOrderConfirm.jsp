@@ -49,9 +49,6 @@
 <!--//End--header-->
 <article class="bd shop-cart">
     <div class="bd cart-order">
-        <%
-            boolean b = false;
-        %>
         <div class="bd order-address" id="order-add">
             <c:if test="${addressList.size() > 0}">
                 <c:forEach items="${addressList}" var="address">
@@ -63,15 +60,12 @@
 
                             <p class="txt">${address.province.name}${address.city.name}${address.district.name}${address.details}</p>
                             <a href="#arrow-right" class="arrow-right"></a>
-                            <%
-                                b = true;
-                            %>
                         </a>
                     </c:if>
                 </c:forEach>
-                <c:if test="<%=!b%>">
-                    <a href="#btn-edit-addres" class="btn-edit-addres">请选择一个地址</a>
-                </c:if>
+                <%--<c:if test="<%=!b%>">--%>
+                    <%--<a href="#btn-edit-addres" class="btn-edit-addres">请选择一个地址</a>--%>
+                <%--</c:if>--%>
             </c:if>
             <c:if test="${addressList.size() == 0}">
                 <a href="#btn-edit-addres" class="btn-edit-addres"
@@ -80,11 +74,8 @@
         </div>
         <div class="bd order-address" id="order-add1" style="display: none">
             <a href="#btn-edit-addres" class="btn-edit-addres">
-                <p class="title"><span id="span1">${address.consignee}</span><span id="span2">${address.phone}</span>
-                </p>
-
-                <p class="txt"
-                   id="txt">${address.province.name}${address.city.name}${address.district.name}${address.details}</p>
+                <p class="title"><span id="span1">${address.consignee}</span><span id="span2">${address.phone}</span></p>
+                <p class="txt" id="txt">${address.province.name}${address.city.name}${address.district.name}${address.details}</p>
                 <a href="#arrow-right" class="arrow-right"></a>
             </a>
         </div>
@@ -111,12 +102,6 @@
                                     <c:if test="${product.productModel.product.productModelList.size()>1}">
                                         [${product.productModel.name}]
                                     </c:if>
-                                        <%--<c:if test="${product.productModel.productPropertyValueList.size()>1}">--%>
-                                        <%--[--%>
-                                        <%--<c:forEach items="${product.productModel.productPropertyValueList}"--%>
-                                        <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
-                                        <%--]--%>
-                                        <%--</c:if>--%>
                                 </p>
 
                                 <p class="price"><em>￥</em><span>${product.purchasePrice}</span></p>
@@ -137,43 +122,14 @@
                     test="${consumer.balance<=purchaseOrder.total}">${consumer.balance}</c:if></span>元
             </div>
         </c:if>
-        <!-- //End--order-list-->
         <div class="bd order-total">
-            <%--<c:if test="${empty purchaseOrder.callback}">--%>
-            <p><strong>优惠券</strong><span class="btn-coupons" id="yhq">0张券可用</span><a href="#arrow-right"
-                                                                                     class="arrow-right"></a></p>
-            <%--</c:if>--%>
-
             <p><strong>商品金额</strong><span><em>￥</em><em id="totalPrice">${purchaseOrder.total}</em></span></p>
-            <%--<c:if test="${empty purchaseOrder.callback}">--%>
-            <p><strong>优惠</strong><span><em>-￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span>
-            </p>
-            <%--</c:if>--%>
             <p><strong>余额</strong><span> <em>-￥</em><em id="balance">0.00</em></span></p>
-            <p><strong>运费</strong><span><em>￥</em><em id="freight">${freight}</em></span></p>
         </div>
-        <!-- //End--order-total-->
-        <%--<div class="bd cart-pay">--%>
-        <%--<div class="title">请选择支付方式</div>--%>
-        <%--<ul class="ul-list">--%>
-        <%--<li><a id="zhifubao" onclick="zhifubao(this)" title="支付宝" style="border: 2px solid red"><i--%>
-        <%--class="icon icon-zfb"></i>支 付 宝</a></li>--%>
-        <%--<li><a id="weixin" onclick="weixin(this)" title="微信支付"><i class="icon icon-wechat"></i>微 信 支 付</a></li>--%>
-        <%--</ul>--%>
-        <%--</div>--%>
 
     </div>
-
-
-    <!-- //End--cart-order-->
-    <%--<div class="bd payment-total-bar">--%>
-    <%--<span>总计付款</span>--%>
-    <%--<span class="txt" id="change" style="float: none">--%>
-    <%--${purchaseOrder.total}</span>--%>
-    <%--<span>元</span>--%>
-    <%--<a onclick="submitOrder('${purchaseOrder.id}')" class="btn-right">提交订单</a>--%>
-    <%--</div>--%>
 </article>
+
 <div class="gift ae">
     <div class="gift-details ae">
         <div class="bd cart-pay newcart-pay new-yierqiu">
@@ -210,6 +166,7 @@
 
     </div>
 </div>
+
 <!--Start--弹出地址-->
 <div id="order-address" class="alert-delete or-address" style="display:none;">
     <div class="bd cart-address">
@@ -231,7 +188,7 @@
                 </c:forEach>
             </ul>
             <div class="bd">
-                <a href="#" style="color:white " id="add" class="add-address" onclick="add_Address()" title="新增收货地址">新增收货地址</a>
+                <a href="#" style="color:white " id="add" class="add-address" onclick="addAddress()" title="新增收货地址">新增收货地址</a>
             </div>
         </div>
         <div class="bd list-adress" id="adddiv" style="display: none;">
@@ -262,12 +219,12 @@
                         </div>
                         <div class="am-form-group">
                             <label>所在地区</label>
-                            <select id="provinceVal" class="cars" name="province.id"
-                                    onclick="province(this);" required>
+                            <select id="provinceVal" class="cars" name="province.id" onchange="provinceChange(this);"
+                                    required>
                             </select>
-                            <select id="cityVal" class="car1" name="city.id" onclick="city(this);" required>
+                            <select id="cityVal" class="car1" name="city.id" onchange="cityChange(this);" required>
                             </select>
-                            <select id="districtVal" class="car1" name="district.id" onclick="district(this);" required>
+                            <select id="districtVal" class="car1" name="district.id" required>
                             </select>
                         </div>
                         <div class="am-form-group">
@@ -293,23 +250,6 @@
     <div class="overbg"></div>
 </div>
 <!--//End--弹出地址-->
-<!--Start--弹出地址-->
-<div id="order-total" class="alert-delete yhq" style="display:none;">
-    <div class="bd cart-coupons addtop"
-    <%-- style="position: fixed;--%>">
-    <div class="title">
-        <h2>优惠券</h2>
-    </div>
-    <!--//ENd-->
-    <ul class="ul-list" id="ul-list">
-    </ul>
-
-    <div class="bd add-new-btn">
-        <a onclick="yhq();" class="cart-btn" id="yhq-btn" title="确定">确定</a>
-    </div>
-</div>
-<div class="overbg"></div>
-</div>
 
 <script>
     var payment = "1";
@@ -319,10 +259,17 @@
 
     $(function () {
 
-        $("#yhq").click(function () {
-            $("#order-total").show();
-
-        });
+        ajaxRequest("<c:url value="/myEfeiyi/address/listProvince.do"/>", {}, function (data) {
+            var out = '<option value="">请选择所在省市</option>';
+            var out1 = "";
+            for (var i = 0; i < data.length; i++) {
+                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+                out1 += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+            }
+            $("#province").html(out);
+            $("#provinceVal").html(out1);
+        }, function () {
+        }, "post");
 
         if (!isWeiXin()) {
             $("#weixin").hide();
@@ -330,50 +277,7 @@
             $("#zhifubao").remove();
         }
 
-        $.ajax({
-            type: 'get',
-            async: false,
-            url: '<c:url value="/coupon/list/${purchaseOrder.id}"/>',
-            dataType: 'json',
-            data: {
-                status: 1,
-            },
-            success: function (data) {
-                if (data != null) {
-                    var out = '';
-                    $("#yhq").text(data.length + "张优惠券可用");
-                    for (var i = 0; i < data.length; i++) {
-                        out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">';
-                        if (data[i].couponBatch.type != null && data[i].couponBatch.type == 1) {
-                            out += '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>';
-                        } else if (data[i].couponBatch.type != null && data[i].couponBatch.type == 2) {
-                            out += '<p>' + data[i]["couponBatch"]["price"] + "元" + '</p>';
-                        }
-                        out += '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>';
-                        if (data[i].couponBatch.range != null && data[i].couponBatch.range == 1) {
-                            out += '<p>适用范围：全网通用</p> </li>';
-                        } else if (data[i].couponBatch.range != null && data[i].couponBatch.range == 2) {
-                            out += '<p>适用范围：品类专用</p> </li>';
-                        } else if (data[i].couponBatch.range != null && data[i].couponBatch.range == 3) {
-                            out += '<p>适用范围：店铺专用</p> </li>';
-                        } else if (data[i].couponBatch.range != null && data[i].couponBatch.range == 4) {
-                            out += '<p>适用范围：单品专用</p> </li>';
-                        }
-                    }
-                    /* for (var i = 0; i < data.length; i++) {
-                     out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
-                     + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';
-                     }*/
-                    $("#ul-list").html(out);
-                }
-            },
-            error: function (data) {
-                console.log(data);
-            }
-
-        });
-    })
-
+    });
 
     function submitNewAddress() {
         var consignee = $(":input[name='consignee']").val();
@@ -400,87 +304,20 @@
         }
     }
 
-    function yhq() {
-        $(".yhq").hide();
-        var couponid = null;
-        var freight = $("#freight").text();
-        $("input:radio").each(function () {
-            if (this.checked) {
-                couponid = $(this).attr("id");
-            }
-        })
-        if (couponid != null) {
-            //var couponId = couponid.substring(4, couponid.length);
-            var t_price = parseFloat(totalPrice);
-            var chkobjs = document.getElementsByName("radio");
-            for (var i = 0; i < chkobjs.length; i++) {
-                if (chkobjs[i].checked) {
-                    t_price = t_price - parseFloat(chkobjs[i].value);
-                    var couponPrice = parseFloat(chkobjs[i].value);
-                    $("#couponPrice").html(couponPrice.toFixed(2));
-                }
-            }
-            var change = parseFloat(t_price) + parseFloat(freight);
-            $("#change").html(change.toFixed(2));
-            $(".yhq").hide();
-            if (change < parseFloat(${consumer.balance})) {
-                $("#usefulBalance").html(change.toFixed(2));
-            } else {
-                $("#usefulBalance").html((${consumer.balance}).toFixed(2));
-            }
-            $("#balance").html("0.00");
-            $("#balanceCheckbox").attr("checked", false);
-            /*$.ajax({
-             type: 'post',
-             async: false,
-             url: '
-            <c:url value="/coupon/use.do"/>',
-             dataType: 'json',
-             data: {
-             couponId: couponId,
-             orderId: orderId
-
-             },
-             success: function (data) {
-             if (data == true) {
-             var t_price = parseFloat(totalPrice);
-             var chkobjs = document.getElementsByName("radio");
-             for (var i = 0; i < chkobjs.length; i++) {
-             if (chkobjs[i].checked) {
-             t_price = t_price - parseFloat(chkobjs[i].value);
-             $("#couponPrice").html(chkobjs[i].value);
-             }
-             }
-             $("#change").html(t_price.toFixed(2));
-             $(".yhq").hide();
-             if(t_price<parseFloat(
-            ${consumer.balance})){
-             $("#usefulBalance").html(t_price.toFixed(2));
-             }
-             $("#balance").html("0.00");
-             $("#balanceCheckbox").attr("checked",false);
-             }
-             },
-
-             });*/
-
-        } else {
-            $(".yhq").hide();
-        }
-
-    }
-
-    function add_Address() {
+    //打开添加收货地址的弹窗
+    function addAddress() {
         $("#adddiv").attr("style", "display:block;background: #fff;z-index:9999;width: 90%;left: 5%");
         $("#list-order").attr("style", "display:none");
     }
 
+    //关闭弹出的窗口
     function closeAll() {
         $(".or-address").attr("style", "display:none");
         $("#adddiv").attr("style", "display:none");
         $("#list-order").attr("style", "");
     }
 
+    //支付宝支付
     function zhifubao(element) {
         $("#zhifubao").attr("class", "add-btn1");
 //        if (isWeiXin()) {
@@ -490,16 +327,13 @@
         payment = "1";
     }
 
+    //微信支付
     function weixin(element) {
-//    $(element).attr("class", "alipay wechat-active");
         $("#weixin").attr("class", "add-btn1");
         $("#zhifubao").attr("class", "");
-
-//    $("#weixin").attr("class", "paymentActive");
-//    $("#zhifubao").find("i").remove();
-//    $(element).append('<i class="triangle" style="display: block"></i>')
         payment = "3";
     }
+
     function submitOrder(orderId) {
         var messageObject = new Object();
         var balance = $("#balance").text();
@@ -510,10 +344,10 @@
                 var couponid = $(this).attr("id");
                 couponId = couponid.substring(4, couponid.length);
             }
-        })
+        });
         $("textarea[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
-        })
+        });
         var message1 = "";
         for (var key in messageObject) {
             message1 += key + ":" + messageObject[key] + ";"
@@ -566,7 +400,6 @@
 
     }
 
-
     $(function () {
         $('.clearing-site span a').click(function () {
             $(this).siblings('.active-pop').show();
@@ -588,36 +421,13 @@
 
     })
 
-
-    function provinceChange(element) {
-        var provinceId = $(element).val();
-        ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>", {provinceId: provinceId}, function (data) {
-            var out = '<option value="">请选择</option>';
-            for (var i = 0; i < data.length; i++) {
-                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
-            }
-            $("#city").html(out);
-        }, function () {
-        }, "post")
-    }
-
+    //新收货地址的模板
     function newAddress(it) {
         var out2 = '<li id="' + it.id + '" class="cart-btn acd" onclick="chooseAddress(\'' + it.id + '\',\'' + it.consignee + '\',\'' + it.phone + '\',\'' + it.province.name + '\',\'' + it.city.name + '\',\'' + it.district.name + '\',\'' + it.details + '\')"><p class="bd title">' + it.consignee + '  ' + it.phone + '</p><p class="bd des">' + it.province.name + it.city.name + it.details + '</p><p class="bd btns"></p></li><br>';
         return out2;
     }
 
-    <%--function submitNewAddress() {--%>
-    <%--var param = $("#newAddress").serialize();--%>
-    <%--var success = function (data) {--%>
-    <%--console.log(data)--%>
-    <%--var html = newAddress(data);--%>
-    <%--$("#address").append(html);--%>
-    <%--$(".active-pop").hide();--%>
-    <%--}--%>
-    <%--ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {--%>
-    <%--}, "post")--%>
-    <%--}--%>
-
+    //选择收货地址
     function chooseAddress(addressId, consignee, phone, province, city, district, details) {
         consumerAddress = addressId;
         var conConsignee = consignee;
@@ -676,14 +486,6 @@
 
     }
 
-    function putVal(o) {
-        var ele = document.getElementById("checkbox");
-        if (ele.checked) {
-            $(o).val("1");
-        } else {
-            $(o).val("0");
-        }
-    }
     $(function () {
         $("#add").click(function () {
             $(this).siblings('.active-pop').show();
@@ -694,6 +496,7 @@
             return false;
         })
     });
+
     $(function () {
         $(".hideDiv").click(function () {
             $(this).siblings('.active-pop').show();
@@ -703,126 +506,31 @@
             return false;
         });
     });
-    function df(id) {
-        $.ajax({
-            type: 'post',
-            async: false,
-            url: '<c:url value="/myEfeiyi/defaultAddress.do"/>',
-            dataType: 'json',
-            data: {
-                status: 2,
-                id: id
 
-            },
-            success: function (data) {
-                if (data == true) {
-                    window.location.reload();
-                }
-            },
-
-        });
-    }
-
-    function district(obj) {
-        var cid = $("#cityVal").val();
-        var v = $(obj).val();
-        $("#districtVal").empty();
-        $.ajax({
-            type: 'post',
-            async: false,
-            url: '<c:url value="/myEfeiyi/address/listDistrict.do"/>',
-            dataType: 'json',
-            data: {
-                cityId: cid
-            },
-            success: function (data) {
-                var obj = eval(data);
-                var rowHtml = "";
-                rowHtml += "<option value='请选择'>请选择</option>";
-                for (var i = 0; i < obj.length; i++) {
-                    rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
-                }
-                $("#districtVal").append(rowHtml);
-                $("#districtVal option[value='" + v + "']").attr("selected", "selected");
-
-            },
-        });
-    }
-
-    function city(obj) {
-        var pid = $("#provinceVal").val();
-        var v = $(obj).val();
-        $("#cityVal").empty();
-        $.ajax({
-            type: 'post',
-            async: false,
-            url: '<c:url value="/myEfeiyi/address/listCity.do"/>',
-            dataType: 'json',
-            data: {
-                provinceId: pid
-            },
-            success: function (data) {
-                var obj = eval(data);
-                var rowHtml = "";
-                rowHtml += "<option value='请选择'>请选择</option>";
-                for (var i = 0; i < obj.length; i++) {
-                    rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
-                }
-                $("#cityVal").append(rowHtml);
-                $("#cityVal option[value='" + v + "']").attr("selected", "selected");
-                district(v);
-            },
-        });
-    }
-
-    function province(obj) {
-        var v = $(obj).val();
-        $("#provinceVal").empty();
-        $.ajax({
-            type: 'post',
-            async: false,
-            url: '<c:url value="/myEfeiyi/address/listProvince.do"/>',
-            dataType: 'json',
-            success: function (data) {
-                var obj = eval(data);
-                var rowHtml = "";
-                rowHtml += "<option value='请选择'>请选择</option>";
-                for (var i = 0; i < obj.length; i++) {
-                    rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
-
-                }
-                $("#provinceVal").append(rowHtml);
-                $("#provinceVal option[value='" + v + "']").attr("selected", "selected");
-                city(v);
-            },
-
-        });
-    }
-
-    function provinceChange(element, o, callback) {
-        $("#citys" + o).empty();
+    function provinceChange(element) {
         var provinceId = $(element).val();
-        ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>",
-                {provinceId: provinceId},
-                function (data) {
-                    var out = '<option value="">请选择</option>';
-                    for (var i = 0; i < data.length; i++) {
-                        out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
-                    }
-                    $("#citys" + o).append(out);
-                    if (typeof callback != "undefined") {
-                        callback();
-                    }
-                }
-        )
+        ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>", {provinceId: provinceId}, function (data) {
+            var out = '<option value="">请选择所在市</option>';
+            for (var i = 0; i < data.length; i++) {
+                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+            }
+            $("#city").html(out);
+            $("#cityVal").html(out);
+        }, function () {
+        }, "post")
     }
 
-    function chooseCity(element, provinceId, cityId, o) {
-        $(element).val(provinceId);
-        var callback = function () {
-            $("#citys" + o).val(cityId);
-        }
-        provinceChange(element, o, callback);
+    function cityChange(element) {
+        var cityId = $(element).val();
+        ajaxRequest("<c:url value="/myEfeiyi/address/listDistrict.do"/>", {cityId: cityId}, function (data) {
+            var out = '<option value="">请选择所在区县</option>';
+            for (var i = 0; i < data.length; i++) {
+                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
+            }
+            $("#district").html(out);
+            $("#districtVal").html(out);
+        }, function () {
+        }, "post")
     }
 
     //使用余额
@@ -845,28 +553,6 @@
     <c:forEach items="${addressList}" var="address">
     chooseCity($("${address.id}"), "${address.province.id}", "${address.city.id}", "${address.id}");
     </c:forEach>
-
-    /*  $().ready(function () {
-     $("#addAddress").validate({
-     rules: {
-     consignee: "required",
-     details: "required",
-     name: "required",
-     phone: "required",
-     },
-     });
-     $("#updateAddress").validate({
-     rules: {
-     consignee: "required",
-     details: "required",
-     name: "required",
-     phone: "required",
-     },
-     });
-     });*/
-    /*   function formatDate(now) {
-     return new Date(parseInt(now)).toLocaleString().replace(/:\d{1,2}$/, ' ');
-     }*/
 
 
 </script>

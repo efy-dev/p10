@@ -77,12 +77,12 @@
     <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
     document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>
-<div class="scroll-bar">
-    <div class="scroll-bar-top" style="display: block;">
-        <span class="btn"><i class="icon1"></i></span>
-    </div>
-    <!-- //End--返回顶部-->
-</div>
+<%--<div class="scroll-bar">--%>
+<%--<div class="scroll-bar-top" style="display: block;">--%>
+<%--<span class="btn"><i class="icon1"></i></span>--%>
+<%--</div>--%>
+<%--<!-- //End--返回顶部-->--%>
+<%--</div>--%>
 
 <style type="text/css">
     #MEIQIA-BTN-HOLDER {
@@ -136,25 +136,25 @@
             return false;
         }
     }
-    (function (m, ei, q, i, a, j, s) {
-        m[a] = m[a] || function () {
-                    (m[a].a = m[a].a || []).push(arguments)
-                };
-        j = ei.createElement(q),
-                s = ei.getElementsByTagName(q)[0];
-        j.async = true;
-        j.src = i;
-        s.parentNode.insertBefore(j, s)
-    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
-    _MEIQIA('entId', 486);
+    //    (function (m, ei, q, i, a, j, s) {
+    //        m[a] = m[a] || function () {
+    //                    (m[a].a = m[a].a || []).push(arguments)
+    //                };
+    //        j = ei.createElement(q),
+    //                s = ei.getElementsByTagName(q)[0];
+    //        j.async = true;
+    //        j.src = i;
+    //        s.parentNode.insertBefore(j, s)
+    //    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+    //    _MEIQIA('entId', 486);
 
-    var registerWx = "<c:url value="/wx/userInfo"/>";
+    <%--var registerWx = "<c:url value="/wx/userInfo"/>";--%>
 
-    var register = "http://passport.efeiyi.com/register?service=http://mall.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do";
+    //    var register = "http://passport.efeiyi.com/register?service=http://mall.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do";
 
     if (isWeiXin()) {
 //        alert("not weixin");
-        $("#signin").attr("href", registerWx);
+//        $("#signin").attr("href", registerWx);
 
     } else {
         $("#wechat").hide();
@@ -164,66 +164,66 @@
 </script>
 
 <script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-69796169-1', 'auto');
-    ga('send', 'pageview');
+//    (function (i, s, o, g, r, a, m) {
+//        i['GoogleAnalyticsObject'] = r;
+//        i[r] = i[r] || function () {
+//                    (i[r].q = i[r].q || []).push(arguments)
+//                }, i[r].l = 1 * new Date();
+//        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+//        a.async = 1;
+//        a.src = g;
+//        m.parentNode.insertBefore(a, m)
+//    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+//    ga('create', 'UA-69796169-1', 'auto');
+//    ga('send', 'pageview');
 
     //统计推广source点击量
-    var currentUrl = window.location.href;
-    if (currentUrl.indexOf("source") > 0) {
-        $.ajax({
-            type: 'post',
-            url: '<c:url value="/watchUrlSource.do"/>',
-            dataType: 'json',
-            data: {
-                "currentUrl": currentUrl
-            },
-            success: function (data) {
-                console.log(data);
-            },
+<%--var currentUrl = window.location.href;--%>
+<%--if (currentUrl.indexOf("source") > 0) {--%>
+<%--$.ajax({--%>
+<%--type: 'post',--%>
+<%--url: '<c:url value="/watchUrlSource.do"/>',--%>
+<%--dataType: 'json',--%>
+<%--data: {--%>
+<%--"currentUrl": currentUrl--%>
+<%--},--%>
+<%--success: function (data) {--%>
+<%--console.log(data);--%>
+<%--},--%>
 
-        });
-    }
+<%--});--%>
+<%--}--%>
 </script>
 <script>
 
-    var _hmt = _hmt || [];
-
-    (function () {
-
-        var hm = document.createElement("script");
-
-        hm.src = "//hm.baidu.com/hm.js?15b49366788c12ff091a0f6b23c8835f";
-
-        var s = document.getElementsByTagName("script")[0];
-
-        s.parentNode.insertBefore(hm, s);
-
-    })();
+//    var _hmt = _hmt || [];
+//
+//    (function () {
+//
+//        var hm = document.createElement("script");
+//
+//        hm.src = "//hm.baidu.com/hm.js?15b49366788c12ff091a0f6b23c8835f";
+//
+//        var s = document.getElementsByTagName("script")[0];
+//
+//        s.parentNode.insertBefore(hm, s);
+//
+//    })();
 
 </script>
 
 <script type="text/javascript">
-    var _mvq = window._mvq || [];
-    window._mvq = _mvq;
-    _mvq.push(['$setAccount', 'm-197303-0']);
-
-    _mvq.push(['$logConversion']);
-    (function () {
-        var mvl = document.createElement('script');
-        mvl.type = 'text/javascript';
-        mvl.async = true;
-        mvl.src = ('https:' == document.location.protocol ? 'https://static-ssl.mediav.com/mvl.js' : 'http://static.mediav.com/mvl.js');
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(mvl, s);
-    })();
+//    var _mvq = window._mvq || [];
+//    window._mvq = _mvq;
+//    _mvq.push(['$setAccount', 'm-197303-0']);
+//
+//    _mvq.push(['$logConversion']);
+//    (function () {
+//        var mvl = document.createElement('script');
+//        mvl.type = 'text/javascript';
+//        mvl.async = true;
+//        mvl.src = ('https:' == document.location.protocol ? 'https://static-ssl.mediav.com/mvl.js' : 'http://static.mediav.com/mvl.js');
+//        var s = document.getElementsByTagName('script')[0];
+//        s.parentNode.insertBefore(mvl, s);
+//    })();
 </script>
