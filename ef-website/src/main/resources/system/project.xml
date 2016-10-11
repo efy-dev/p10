@@ -54,6 +54,7 @@
                     <item label="省级" value="2"/>
                     <item label="市级" value="3"/>
                     <item label="县级" value="4"/>
+                    <item label="其他" value="9"/>
                 </statusType>
             </field>
             </fields>

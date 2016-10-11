@@ -72,7 +72,7 @@
                                 <span class="txt">
                                 <p>${masterProject.master.fullName}</p>
                                 <p>${masterProject.project.name}</p>
-                                <p<ming800:status name="level" dataType="Project.level"
+                                <p><ming800:status name="level" dataType="Project.level"
                                                   checkedValue="${masterProject.project.level}" type="normal"/>传承人</p>
                             </span>
                             </a>

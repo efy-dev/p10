@@ -16,7 +16,7 @@
             src="<c:url value="/scripts/assets/wap/images/ef-logo-craft.png?t=20160520"/>" alt=""/></a></div>
     <!-- //End--logo-->
     <div class="newsearch">
-        <form action="<c:url value='/artistrySearch.do'/>" method="get">
+        <form action="<c:url value='/minglu/artistrySearch.do'/>" method="get">
             <input type="text" class="newsebox" placeholder="搜" name="q">
             <input type="submit" class="newsebut" value="搜">
         </form>
