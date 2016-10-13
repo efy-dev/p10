@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta charset="UTF-8">
-    <title>首页</title>
+    <title>前门华韵</title>
     <!--<link rel="stylesheet" href="assets/css/swiper.min.css">-->
     <link rel="stylesheet" href="guide/css/layouts.css">
 </head>
@@ -96,6 +96,16 @@
 
 <script>
 
+    wx_share_title = "前门华韵"; //分享标题
+    wx_share_des = "带上耳机，轻松领略中国传统文化与传承";  //分享描述
+    var redirect = "http://www.efeiyi.com/app/index.html";
+    var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
+    wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+            "appid=wx7f6aa253b75466dd" +
+            "&redirect_uri=" +
+            encodeURI(redirect_uri) +
+            "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+
     $().ready(function () {
         initPage();
         setTimeout(function () {
@@ -126,6 +136,8 @@
         });
 
     }
+
+
 
 </script>
 

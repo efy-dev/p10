@@ -64,8 +64,7 @@ var PageVariable = {
                 PageVariable.currentAudio = null;
             }
         }
-    }
-    ;
+    };
 
 function getTenantById(id, callback) {
     var success = function (data) {

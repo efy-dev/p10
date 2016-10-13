@@ -83,4 +83,4 @@ var Audio = function (audioBoxId) {
         PageVariable.removeCurrentAudio(this);
     };
 
-}
+};

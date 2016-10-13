@@ -182,6 +182,16 @@
         $("[dot-template=header]").html(renderHeader(PageVariable));
 
         getTenantById(PageVariable.tenantId, function () {
+            wx_share_title = PageVariable.tenant.name;
+            wx_share_des = PageVariable.tenant.content;  //分享描述
+            var redirect = "http://www.efeiyi.com/qrcode/redirect/tenant/" + PageVariable.tenantId;
+            var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
+            wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+                    "appid=wx7f6aa253b75466dd" +
+                    "&redirect_uri=" +
+                    encodeURI(redirect_uri) +
+                    "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+            wx_share_imgUrl = PageVariable.tenant.pictureUrl + "@!o2o-audio-list";
             renderTemplate(PageVariable.template.tenantBase, PageVariable.tenant);
             getTenantPraiseListByTenant(PageVariable.tenantId, function () {
                 if (PageVariable.currentUser != null) {

@@ -49,6 +49,17 @@
 
 <script>
 
+    wx_share_title = "商品列表"; //分享标题
+    wx_share_des = "";  //分享描述
+    var redirect = window.location.href;
+    var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
+    wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+            "appid=wx7f6aa253b75466dd" +
+            "&redirect_uri=" +
+            encodeURI(redirect_uri) +
+            "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+
+
     $().ready(function () {
         initPage();
     });
@@ -69,6 +80,7 @@
         }
         PageVariable.param = JSON.stringify(param);
         PageVariable.title = decodeURI(requestParam.title);
+        wx_share_title = PageVariable.title; //分享标题
         $("title").html(PageVariable.title);
         $("[dot-template=header]").html(renderHeader(PageVariable));
 

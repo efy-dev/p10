@@ -133,6 +133,16 @@
         $("[dot-template=header]").html(renderHeader(PageVariable));
 
         getProductModelById(PageVariable.productId, function () {
+            wx_share_title = PageVariable.productModel.product.name;
+            wx_share_des = PageVariable.productModel.product.subName;  //分享描述
+            var redirect = "http://www.efeiyi.com/qrcode/redirect/product/" + PageVariable.productId;
+            var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
+            wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+                    "appid=wx7f6aa253b75466dd" +
+                    "&redirect_uri=" +
+                    encodeURI(redirect_uri) +
+                    "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+            wx_share_imgUrl = PageVariable.productModel.productModel_url+"@!o2o-audio-list";
             renderTemplate(PageVariable.template.productBase, PageVariable.productModel);
             renderTemplate(PageVariable.template.productBuy, PageVariable.productModel);
             $(".audio-box").each(function () {
