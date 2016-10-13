@@ -106,6 +106,7 @@
 <script src="/scripts/yuanqu/js/jquery.form.js"></script>
 <script src="/scripts/yuanqu/js/doT.min.js"></script>
 <script src="/scripts/yuanqu/js/pubsub.js"></script>
+<script src="/scripts/yuanqu/js/alert.js"></script>
 <script src="/scripts/yuanqu/js/util.js"></script>
 
 <script type="text/x-dot-template" id="main-nav">
@@ -700,7 +701,7 @@
             <td>{{=tenant.name}}</td>
             <td>{{=tenant.serial}}</td>
             <td>
-                {{=tenant.createDateTime}}
+                {{=(new Date(tenant.createDateTime)).format("yyyy-MM-dd hh:mm:ss")}}
             </td>
         </tr>
         {{ } }}
@@ -780,6 +781,8 @@
                 <div class="am-form-group">
                     <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
                         <a onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')"
+                           class="am-btn am-btn-primary am-btn-lg">保存</a>
+                        <a onclick="PubSub.publish('{{=it.name}}.submitAndNext','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">下一步关联大师</a>
                     </div>
                 </div>
@@ -847,7 +850,7 @@
                         <input id="productModel_url" name="productModel_url" type="file" multiple
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
-                    <div class="file-list am-u-sm-10">
+                    <div class="file-list am-u-sm-9">
                         {{ if(it.data!=null && it.data.productModel_url !=null){ }}
                         <img src="{{=it.data.productModel_url}}" width="500"/>
                         {{ } }}
@@ -1059,6 +1062,10 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 商品规格
                         </button>
+                        <button onclick="PubSub.publish('productModel.render',{productId:'{{=product.id}}'})"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 添加规格
+                        </button>
                         <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 添加英文版商品（暂不支持）
                         </button>
@@ -1071,7 +1078,7 @@
             <td>{{=product.name}}</td>
             <td>{{=product.subName}}</td>
             <td>
-                {{=product.createDateTime}}
+                {{=(new Date(product.createDateTime)).format("yyyy-MM-dd hh:mm:ss")}}
             </td>
         </tr>
         {{ } }}
@@ -1772,7 +1779,6 @@
     };
 
     var TenantCheck = function (param) {
-
         this.submit = "/yuanqu/tenant/checkSubmit";
         this.label = "店铺审核认证信息";
         this.data = null;
@@ -1964,7 +1970,6 @@
     };
 
     var TenantMaster = function (param) {
-
         this.submit = "/yuanqu/tenant/masterSubmit";
         this.label = "关联大师";
         this.data = null;
@@ -2046,7 +2051,6 @@
     };
 
     var TenantPanel = function (param) {
-
         this.submit = "/yuanqu/tenant/panelSubmit";
         this.label = "店内实景";
         this.data = null;
@@ -2159,7 +2163,6 @@
     };
 
     var ProductBase = function (param) {
-
         this.tenant = null;
         this.submit = "/yuanqu/product/baseSubmit";
         this.label = "商品信息";
@@ -2190,6 +2193,20 @@
         };
 
         this.submitForm = function (msg, data) {
+            $("#my-modal-loading").modal();
+            $("#" + data).ajaxSubmit(function (data) {
+                if (typeof data == "string") {
+                    data = JSON.parse(data);
+                }
+                if (typeof data.id != "undefined" && data.id != null) {
+                    PubSub.publish("productList.render", data.tenant.id);
+                }
+                $("#my-modal-loading").modal("close");
+            });
+            return false;
+        };
+
+        this.submitAndNext = function (msg, data) {
             $("#my-modal-loading").modal();
             $("#" + data).ajaxSubmit(function (data) {
                 if (typeof data == "string") {
@@ -2243,7 +2260,8 @@
             {message: this.name + ".render", subscriber: this.render},
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".imageView", subscriber: this.imageView},
-            {message: this.name + ".submit", subscriber: this.submitForm}
+            {message: this.name + ".submit", subscriber: this.submitForm},
+            {message: this.name + ".submitAndNext", subscriber: this.submitAndNext}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2353,7 +2371,6 @@
     };
 
     var ProductModel = function (param) {
-
         this.submit = "/yuanqu/product/modelSubmit";
         this.label = "商品规格信息";
         this.data = null;
@@ -2590,7 +2607,6 @@
     };
 
     var ProductPanel = function (param) {
-
         this.submit = "/yuanqu/product/panelSubmit";
         this.label = "店内实景";
         this.data = null;

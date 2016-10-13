@@ -2,6 +2,7 @@ package com.ming800.core.does.model;
 
 import com.ming800.core.taglib.PageEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public class PageInfo {
 
     private PageEntity pageEntity;
 
-    private List list;
+    private List list = new ArrayList();
 
     public int getCount() {
         return count;

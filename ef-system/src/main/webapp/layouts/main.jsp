@@ -45,12 +45,12 @@
              page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
 
 <div class="am-cf admin-main">
-<%----%>
+    <%----%>
     <jsp:include flush="true"
                  page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
-<div class="admin-content" style="height: auto;">
-<sitemesh:write property='body'/>
-</div>
+    <div class="admin-content" style="height: auto;">
+        <sitemesh:write property='body'/>
+    </div>
 
 </div>
 </body>

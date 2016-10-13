@@ -1,4 +1,3 @@
-
 function ajaxRequest(url, param, success) {
     $.ajax({
         crossDomain: true,
@@ -10,12 +9,31 @@ function ajaxRequest(url, param, success) {
         success: function (data) {
             //1.处理data当中的错误信息
             success(data);
-        },
-        error: function () {
-            // @TODO renderRequestErrorTemplate
         }
-    })
-    ;
+    });
+
+    $.ajaxSetup({
+        type: "POST",
+        error: function (jqXHR, textStatus, errorThrown) {
+            $("#my-modal-loading").modal("close");
+            switch (jqXHR.status) {
+                case(500):
+                    showAlert("提示", "服务器出错啦，请联系管理员。。。");
+                    break;
+                case(401):
+                    showAlert("提示", "请先登录！");
+                    break;
+                case(403):
+                    showAlert("提示", "您没有执行该操作的权限！");
+                    break;
+                case(408):
+                    showAlert("提示", "服务器繁忙，请稍后重试");
+                    break;
+                default:
+                    showAlert("提示", "未知错误，请联系管理员。。。");
+            }
+        }
+    });
 }
 function renderTemplate(templateId, data) {
     $("[dot-template=" + templateId + "]").html(doT.template($("#" + templateId).text())(data));

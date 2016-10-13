@@ -12,7 +12,7 @@
 
 <header class="am-topbar admin-header">
     <div class="am-topbar-brand">
-        <h1 style="margin-bottom: 0px">e飞蚁后台管理系统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+        <h1 style="margin-bottom: 0px;color: #333;">e飞蚁后台管理系统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
     </div>
 
     <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
@@ -26,7 +26,7 @@
                 <c:forEach items="${jmenu.children}" var="jmenuNode">
                     <security:authorize ifAnyGranted="${jmenuNode.access}">
                         <li>
-                            <a class="${jmenuNode.jnodeMatch('efy-active',jnode)}"
+                            <a class="${jmenuNode.jnodeMatch('efy-active',jnode)}" style="color: #333;"
                                href="<c:url value="${jmenuNode.url}"/>">${jmenuNode.text_zh_CN}</a>
                         </li>
                     </security:authorize>

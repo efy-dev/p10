@@ -214,13 +214,13 @@ public class OffLineTenantController {
 
     @RequestMapping({"/tenant/getTenantList"})
     @ResponseBody
-    public Object getTenantList(HttpServletRequest request) {
+    public List getTenantList(HttpServletRequest request) {
         int limit = Integer.parseInt(request.getParameter("limit"));
         int offset = Integer.parseInt(request.getParameter("offset"));
         String name = request.getParameter("name");
         String hql = "select obj from BigTenant obj where obj.tenantType='" + BigTenant.TENANT_TYPE_OFFLINE + "' and obj.status!='0'";
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        if (name != null) {
+        if (name != null && !"".equals(name)) {
             hql += " and obj.name=:name";
             param.put("name", name);
         }
@@ -379,7 +379,7 @@ public class OffLineTenantController {
 
     @RequestMapping({"/tenant/getRecommendList"})
     @ResponseBody
-    public Object getRecommendList(HttpServletRequest request) {
+    public List getRecommendList(HttpServletRequest request) {
         int limit = Integer.parseInt(request.getParameter("limit"));
         int offset = Integer.parseInt(request.getParameter("offset"));
         String group = request.getParameter("group");

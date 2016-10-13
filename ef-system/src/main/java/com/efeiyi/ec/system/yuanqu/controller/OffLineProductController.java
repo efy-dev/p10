@@ -27,6 +27,7 @@ import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import static com.efeiyi.ec.system.yuanqu.controller.Util.createQRCode;
 
@@ -85,6 +86,13 @@ public class OffLineProductController {
         }
         String audioUrl = uploadImage(multipartRequest.getFile("audio"));
         if (!"".equals(audioUrl)) {
+            List<Image> oAudio = baseManager.listObject("select obj from Image obj where obj.status='1' and obj.type='2' and obj.owner='" + product.getId() + "'");
+            if (oAudio != null) {
+                for (Image image : oAudio) {
+                    image.setStatus("0");
+                    baseManager.saveOrUpdate(Image.class.getName(), image);
+                }
+            }
             Image audio = new Image(product.getName() + "_audio", audioUrl, product.getId(), "1", "2");
             baseManager.saveOrUpdate(Image.class.getName(), audio);
         }
@@ -102,7 +110,7 @@ public class OffLineProductController {
         String tenantId = request.getParameter("tenantId");
         String hql = "select obj from Product obj where obj.type='" + Product.PRODUCT_TYPE_OFFLINE + "' and obj.status!='0'";
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        if (name != null) {
+        if (name != null && !"".equals(name)) {
             hql += " and obj.name=:name";
             param.put("name", name);
         }
