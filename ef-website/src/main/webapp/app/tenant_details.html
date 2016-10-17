@@ -215,7 +215,7 @@
             });
         });
 
-        getProductModelList("{\"product.tenant.id\":\"" + PageVariable.tenantId + "\"}", 10, 0, function () {
+        getProductModelList("{\"product.tenant.id\":\"" + PageVariable.tenantId + "\"}", 30, 0, function () {
             renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
             setTimeout(function () {
                 PageVariable.productSwiper = new Swiper('[dot-template=tenant-product-list]', {
