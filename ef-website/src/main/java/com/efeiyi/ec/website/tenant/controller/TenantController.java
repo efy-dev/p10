@@ -300,5 +300,22 @@ public class TenantController {
 //        }
     }
 
-
+    @RequestMapping({"/tenant/getPanelById"})
+    @ResponseBody
+    public Object getPanelById(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String id = request.getParameter("id");
+            if (null != id && !"".equals(id)) {
+                return baseManager.getObject(Panel.class.getName(), id);
+            } else {
+                jsonObject.put("code", "1");
+                return jsonObject;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
 }

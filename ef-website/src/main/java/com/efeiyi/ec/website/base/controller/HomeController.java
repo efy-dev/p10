@@ -4,6 +4,7 @@ import com.efeiyi.ec.gift.model.ProductGiftTagValue;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterUserTemp;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.Panel;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.ProjectCategory;
@@ -64,6 +65,9 @@ public class HomeController {
         } else if (dataType.equals("product")) {
             ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), dataId);
             redirect = "http://www.efeiyi.com/app/product_details.html?productId=" + dataId + "&title=" + URLEncoder.encode(productModel.getName(), "utf-8");
+        } else if (dataType.equals("panel")) {
+            Panel panel = (Panel) baseManager.getObject(Panel.class.getName(), dataId);
+            redirect = "http://www.efeiyi.com/app/pannel_details.html.html?panelId=" + dataId + "&title=" + URLEncoder.encode(panel.getName(), "utf-8");
         }
         return "redirect:" + redirect;
     }
