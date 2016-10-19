@@ -218,4 +218,3 @@ function getRecommendList(param, limit, offset, callback) {
 }
 
 getCurrentUser();
-75898

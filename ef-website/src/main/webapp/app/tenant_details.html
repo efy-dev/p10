@@ -190,6 +190,7 @@
                     "appid=wx7f6aa253b75466dd" +
                     "&redirect_uri=" +
                     encodeURI(redirect_uri) +
+
                     "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
             wx_share_imgUrl = PageVariable.tenant.pictureUrl + "@!o2o-audio-list";
             renderTemplate(PageVariable.template.tenantBase, PageVariable.tenant);
@@ -212,6 +213,9 @@
             });
             $(".audio-box").each(function () {
                 PageVariable.audioList.push(new Audio($(this).attr("id")));
+                wx.ready(function () {
+                    PageVariable.setCurrentAudio(PageVariable.audioList[0]);
+                })
             });
         });
 

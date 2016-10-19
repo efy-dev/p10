@@ -47,6 +47,8 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
 
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
         String url = request.getRequestURL().toString();
         if (url.equalsIgnoreCase("http://" + PConst.WEBSITE_WIKI_HOST + "/")) {
             response.sendRedirect("http://" + PConst.WEBSITE_WIKI_HOST + "/minglu");

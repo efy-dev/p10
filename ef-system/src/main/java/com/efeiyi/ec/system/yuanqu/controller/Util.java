@@ -30,7 +30,7 @@ public class Util {
         hints.put(EncodeHintType.MARGIN, 0);
         BitMatrix bitMatrix = null;
         try {
-            bitMatrix = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, 600, 600, hints);//二维码像素
+            bitMatrix = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, 1200, 1200, hints);//二维码像素
         } catch (WriterException e) {
             e.printStackTrace();
         }

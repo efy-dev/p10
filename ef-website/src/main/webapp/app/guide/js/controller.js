@@ -37,13 +37,14 @@ $().ready(function () {
     $(".footer").html(renderFooter());
 });
 
-var Audio = function (audioBoxId) {
+var Audio = function (audioBoxId, isAutoPlay) {
     this.id = audioBoxId;
     this.box = $("#" + audioBoxId);
     this.body = this.box.find("[data-type=audio-body]");
     this.button = this.box.find("[data-type=audio-button]");
     this.icon = this.box.find("[data-type=audio-icon]");
     this.status = this.body.attr("autoplay");
+
 
     if (this.status == "autoplay") {
         this.button.unbind();

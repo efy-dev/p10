@@ -43,7 +43,7 @@
 </div>
 <div class="enroll">
     <form class="am-form" data-parsley-validate id="bigUser" name="bigUser"
-          action="<c:url value="signinUser"/>" method="post">
+          action="http://www.efeiyi.com/signinUser" method="post">
         <div class="start">
             <div class="login">
                 <ul class="page">

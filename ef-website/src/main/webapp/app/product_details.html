@@ -43,7 +43,7 @@
         <p>{{=it.product.name}}的语音简介</p>
         </span>
         <span class="time"></span>
-        <audio data-type="audio-body" id="media" src="{{=it.audio}}" autoplay="autoplay"></audio>
+        <audio data-type="audio-body" id="media" src="{{=it.audio}}"></audio>
     </div>
 
     {{ } }}
@@ -142,13 +142,22 @@
                     "&redirect_uri=" +
                     encodeURI(redirect_uri) +
                     "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-            wx_share_imgUrl = PageVariable.productModel.productModel_url+"@!o2o-audio-list";
+            wx_share_imgUrl = PageVariable.productModel.productModel_url + "@!o2o-audio-list";
             renderTemplate(PageVariable.template.productBase, PageVariable.productModel);
             renderTemplate(PageVariable.template.productBuy, PageVariable.productModel);
             $(".audio-box").each(function () {
-                PageVariable.audioList.push(new Audio($(this).attr("id")));
+                PageVariable.audioList.push(new Audio($(this).attr("id"), true));
+                wx.ready(function () {
+                    PageVariable.setCurrentAudio(PageVariable.audioList[0]);
+                })
             });
         });
+
+
+//        setTimeout(function () {
+//            console.log("自动播放");
+//            PageVariable.currentAudio.bodyPlay();
+//        }.bind(this), 2000);
 
         getColumnListByProductModel(PageVariable.productId, function () {
             renderTemplate(PageVariable.template.productDetail, PageVariable.productModelColumnList);
