@@ -338,7 +338,7 @@
         var messageObject = new Object();
         var balance = $("#balance").text();
         var couponId = "";
-        var freight = $("#freight").text();
+        var freight = "0";
         $("input:radio").each(function () {
             if (this.checked) {
                 var couponid = $(this).attr("id");

@@ -64,7 +64,7 @@
                                 &lt;%&ndash;window.location.href = "http://www2.efeiyi.com/sharePage/productShare/${orderId}";&ndash;%&gt;
                                 window.location.href = "http://mall.efeiyi.com/order/paysuccess/${purchaseOrderPaymentDetails.id}";
                                 </c:if>--%>
-                                window.location.href = "http://mall.efeiyi.com/order/paysuccess/${purchaseOrderPaymentDetails.id}";
+                                window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";
                             }
                         });
                     }
