@@ -271,7 +271,7 @@
             <!--</jnode>-->
         <!--</jnode>-->
     </jnode>
-    <jnode id="efecProductAndTenant" access="admin,operational,c_operational,o_operational,financial,product_manager"
+    <jnode id="efecProductAndTenant" access="admin,operational,c_operational,o_operational,financial,product_manager,offline_manager"
            url="/main.do?jnodeId=efecProductAndTenant" text_zh_CN="商品与商家">
         <jnode url="" id="productManager"
                access="admin,operational,c_operational,o_operational,financial,product_manager" state="closed"
@@ -357,15 +357,15 @@
             </jnode>
         </jnode>
 
-        <jnode url="" id="yuanquManager" access="admin,offLine" state="closed" text_zh_CN="园区管理">
+        <jnode url="" id="yuanquManager" access="admin,offline_manager" state="closed" text_zh_CN="园区管理">
             <jnode url="/yuanqu/tenantForm"
-                   access="admin,offLine" text_zh_CN="园区管理">
+                   access="admin,offline_manager" text_zh_CN="园区管理">
             </jnode>
         </jnode>
 
     </jnode>
 
-    <jnode id="ttManager" access="admin,operational,c_operational,product_manager,offline_manager"
+    <jnode id="ttManager" access="admin,operational,c_operational,product_manager"
            url="/main.do?jnodeId=ttManager" text_zh_CN="工艺与大师">
         <jnode url="" id="tenantManager" access="admin,operational,c_operational,product_manager" state="closed"
                text_zh_CN="大师管理">

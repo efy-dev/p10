@@ -1,23 +1,19 @@
 package com.efeiyi.ec.system.yuanqu.controller;
 
 import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.organization.model.Image;
-import com.efeiyi.ec.organization.model.ImagePanel;
-import com.efeiyi.ec.organization.model.Panel;
+import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.product.model.Recommend;
+import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.EnterpriseTenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
-
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.taglib.PageEntity;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +24,6 @@ import org.springframework.web.multipart.MultipartRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLEncoder;
 import java.util.*;
-import java.util.List;
 
 import static com.efeiyi.ec.system.yuanqu.controller.Util.createQRCode;
 
@@ -50,7 +45,31 @@ public class OffLineTenantController {
 
     @RequestMapping({"/tenantForm"})
     public String tenantForm() {
-        return "/yuanqu/tenantForm";
+        MyUser user = AuthorizationUtil.getMyUser();
+        String roleName = "";
+        Role role = null;
+        String tempRedirect = "/yuanqu/tenantForm";
+        String offline_managerRedirect = "/yuanqu/offline_manager_tenantForm";
+        if (null != user) {
+            role = user.getRole();
+            roleName = role == null ? "" : role.getName();
+        }
+        if ("offline_manager".equals(roleName) /*&& null != getUserTenants()*/) {
+            return offline_managerRedirect;
+        }
+        return tempRedirect;
+    }
+    @RequestMapping({"/getUserTenants"})
+    @ResponseBody
+    public Object getUserTenants() {
+        MyUser user = AuthorizationUtil.getMyUser();
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        if (null != user) {
+            param.put("userId", user.getId());
+            String hql = "select obj from UserTenant obj where obj.status!='0' and obj.user.id=:userId";
+            return baseManager.listObject(hql, param);
+        }
+        return null;
     }
 
     @RequestMapping({"/tenant/baseSubmit"})
@@ -498,5 +517,6 @@ public class OffLineTenantController {
 
         return createQRCode(this.getClass().getResource("/").getPath().toString(), tenantId, url);
     }
+
 
 }

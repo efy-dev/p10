@@ -1,12 +1,15 @@
 package com.efeiyi.ec.system.yuanqu.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.Image;
 import com.efeiyi.ec.organization.model.ImagePanel;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.Panel;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -58,6 +61,42 @@ public class OffLineProductController {
         }
         return product;
     }
+    @RequestMapping({"/getPanelById"})
+    @ResponseBody
+    public Object getPanelById(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        String id = request.getParameter("id");
+        String hql = "select obj from Panel obj where obj.owner=:id and obj.status!='0'";
+        LinkedHashMap<String, Object> panelParam = new LinkedHashMap<>();
+        panelParam.put("id", id);
+        Panel panel = (Panel) baseManager.getUniqueObjectByConditions(hql, panelParam);
+        LinkedHashMap<String, Object> imagesParam = new LinkedHashMap<>();
+        imagesParam.put("panelId", panel.getId());
+        String imageHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='1'";
+        String audioHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='2'";
+        ImagePanel audio = (ImagePanel) baseManager.getUniqueObjectByConditions(audioHql, imagesParam);
+        List<ImagePanel> images = (List<ImagePanel>)baseManager.listObject(imageHql, imagesParam);
+        jsonObject.put("basePanel", panel);
+        jsonObject.put("images", images);
+        jsonObject.put("audio",audio);
+        return jsonObject.toString();
+    }
+    @RequestMapping({"/getProductsByTenantId"})
+    @ResponseBody
+    public Object getProductsByTenantId(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        String hql="select obj from  Product where obj.tenant_id="+id;
+        Product product = (Product) baseManager.getObject(Product.class.getName(), id);
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("productId", product.getId());
+        String audioHql = "select obj from Image obj where obj.owner=:productId and obj.status!='0' and obj.type='2'";
+        Image image = (Image) baseManager.getUniqueObjectByConditions(audioHql, param);
+        if (image != null) {
+            product.setAudio(image.getSrc());
+        }
+        return product;
+    }
+
 
     @RequestMapping({"/baseSubmit"})
     @ResponseBody

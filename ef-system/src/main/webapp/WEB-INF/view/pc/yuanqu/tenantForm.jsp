@@ -73,6 +73,8 @@
     </div>
     <div dot-template="main-product-model">
     </div>
+    <div dot-template="main-productDetails-panel">
+    </div>
     <div dot-template="main-product-panel">
     </div>
     <div dot-template="main-product-master">
@@ -873,6 +875,67 @@
     </div>
 </script>
 
+<script type="text/x-dot-template" id="main-productDetails-panel">
+
+    <div class="main-base" data-for="productDetails-panelForm">
+        <form class="am-form am-form-horizontal" name="tenant" id="main-productDetails-panel-form" action="{{=it.submit}}"
+              enctype="multipart/form-data"
+              method="post">
+            <fieldset>
+                <legend><b>{{=it.data.name}}</b> 的栏目列表（商品详情）</legend>
+                <input type="hidden" name="id" value="{{=it.data.id}}">
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-form-label">名称</label>
+                    <div class="am-u-sm-9">
+                        <input name="name" type="text" placeholder="名称">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-form-label">介绍</label>
+                    <div class="am-u-sm-9">
+                        <textarea name="content" rows="5" placeholder="介绍"></textarea>
+                    </div>
+                </div>
+
+                <div class="am-form-group am-form-file">
+                    <label for="productDetails-imageList" class="am-u-sm-3 am-form-label">图片（可以选择多张图片）</label>
+                    <div class="am-u-sm-9">
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">
+                            选择文件
+                        </button>
+                        <input id="productDetails-imageList" name="imageList" type="file" multiple
+                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
+                    </div>
+                    <div class="file-list am-u-sm-9">
+                    </div>
+                </div>
+                <div class="am-form-group am-form-file">
+                    <label for="productDetails-media" class="am-u-sm-3 am-form-label">语音介绍</label>
+                    <div class="am-u-sm-9">
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">
+                            选择文件
+                        </button>
+                        <input id="productDetails-media" name="media" type="file" multiple
+                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
+                    </div>
+                    <div class="file-list am-u-sm-9">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品规格</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</script>
+
 <script type="text/x-dot-template" id="main-product-panel-list">
     {{
     for(var i = 0 ; i< it.length ; i++){
@@ -1237,7 +1300,7 @@
                 <div class="am-form-group">
                     <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品规格</a>
+                           onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品详情</a>
                     </div>
                 </div>
             </fieldset>
@@ -2329,10 +2392,9 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    PubSub.publish('productModel.render', {
-                        productId: this.data.id
+                    PubSub.publish('productDetailsPanel.render', {
+                        id: this.data.id
                     });
-                    //@TODO
                 }
                 $("#my-modal-loading").modal("close");
             }.bind(this));
@@ -2719,6 +2781,103 @@
             {message: this.name + ".imageView", subscriber: this.imageView},
             {message: this.name + ".deletePanel", subscriber: this.deletePanel},
             {message: this.name + ".nextProductModel", subscriber: this.nextProductModel}
+        ];
+
+        for (var i = 0; i < this.subscribeArray.length; i++) {
+            var subscribe = this.subscribeArray[i];
+            PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
+        }
+
+    }
+
+    var ProductDetailsPanel = function (param) {
+        this.submit = "/yuanqu/product/panelSubmit";
+        this.label = "商品详情";
+        this.data = null;
+        this.father = null;
+        this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
+        this.param = param;
+        this.name = "productDetailsPanel";
+        this.template = "main-productDetails-panel";         //组件绑定的模板//组件需要订阅的事件与消息
+
+        this.render = function (msg, data) {
+            if (typeof data != "undefined" && data != null) {
+                ajaxRequest("/yuanqu/product/getProductById", {id: data.id}, function (responseData) {
+                    this.data = responseData;
+                    renderTemplate(this.template, this);
+                }.bind(this))
+            } else {
+                renderTemplate(this.template, this);
+            }
+            this.show();
+
+        };
+
+        this.deletePanel = function (msg, data) {
+            var success = function (responseData) {
+                $("#" + responseData).remove();
+            };
+            ajaxRequest("/yuanqu/product/deletePanel", {id: data}, success);
+        };
+        this.submitForm = function (msg, data) {
+            $("#my-modal-loading").modal();
+            $("#" + data).ajaxSubmit(function (data) {
+                if (typeof data == "string") {
+                    data = JSON.parse(data);
+                }
+                if (typeof data.id != "undefined" && data.id != null) {
+                    PubSub.publish('productModel.render', {
+                        productId: this.data.id
+                    });
+                }
+                $("#my-modal-loading").modal("close");
+            }.bind(this));
+            return false;
+        };
+
+        this.imageView = function (msg, data) {
+            var images = data.files;
+            $(data).parent().parent().find(".file-list").html("");
+            for (var i = 0; i < images.length; i++) {
+                if (images[i]) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(images[i]);
+                    if ((/audio\/\w+/.test(images[i].type))) {
+                        reader.onload = function (e) {
+                            var urlData = this.result;
+                            $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                        }
+                    }
+                    if ((/image\/\w+/.test(images[i].type))) {
+                        reader.onload = function (e) {
+                            var urlData = this.result;
+                            $(data).parent().parent().find(".file-list").append("<img src=\"" + urlData + "\" width=\"500\"  />")
+                        }
+                    }
+                }
+            }
+        };
+
+
+        this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
+            $("[dot-template=" + this.template + "]").show();
+        };
+        this.hide = function (msg, data) {
+            $("[dot-template=" + this.template + "]").hide();
+        };
+        this.remove = function (msg, data) {
+            $("[dot-template=" + this.template + "]").html("");
+        };
+
+        this.subscribeArray = [
+            {message: this.name + ".show", subscriber: this.show},
+            {message: this.name + ".hide", subscriber: this.hide},
+            {message: this.name + ".render", subscriber: this.render},
+            {message: this.name + ".remove", subscriber: this.remove},
+            {message: this.name + ".submit", subscriber: this.submitForm},
+            {message: this.name + ".imageView", subscriber: this.imageView},
+            {message: this.name + ".deletePanel", subscriber: this.deletePanel},
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -3121,7 +3280,8 @@
     var productBase = new ProductBase();    //商品基本信息
     var productMaster = new ProductMaster();//商品大师信息
     var productModel = new ProductModel();  //商品规格信息
-    var productPanel = new ProductPanel();  //商品详情
+    var productPanel = new ProductPanel();  //商品规格详情
+    var productDetailsPanel = new ProductDetailsPanel();//商品详情
     var tenantList = new TenantList();      //店铺列表
     var productList = new ProductList();    //商品列表
     var productModelList = new ProductModelList();  //商品规格列表
