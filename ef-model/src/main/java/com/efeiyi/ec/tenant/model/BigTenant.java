@@ -3,6 +3,7 @@ package com.efeiyi.ec.tenant.model;
 import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.organization.model.Image;
+import com.efeiyi.ec.organization.model.UserTenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ming800.core.base.model.BaseTenant;
@@ -66,6 +67,16 @@ public class BigTenant implements Serializable, BaseTenant {
     private Double longitude;   //经度
 
     private String audio;
+  /*  private UserTenant userTenant;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+    public UserTenant getUserTenant() {
+        return userTenant;
+    }
+
+    public void setUserTenant(UserTenant userTenant) {
+        this.userTenant = userTenant;
+    }*/
 
     @Transient
     public String getAudio() {

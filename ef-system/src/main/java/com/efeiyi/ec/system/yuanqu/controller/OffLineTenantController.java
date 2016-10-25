@@ -59,9 +59,17 @@ public class OffLineTenantController {
         }
         return tempRedirect;
     }
-    @RequestMapping({"/getUserTenants"})
-    @ResponseBody
-    public Object getUserTenants() {
+
+ /*   public Object getProductsByTenant(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        String hql = "select obj from  Product where  obj.tenant.id =:tenantId where obj.status!='0'";
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("tenantId", id);
+        return baseManager.listObject(hql, param);
+    }*/
+
+
+   /* public Object getUserTenants() {
         MyUser user = AuthorizationUtil.getMyUser();
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         if (null != user) {
@@ -70,7 +78,7 @@ public class OffLineTenantController {
             return baseManager.listObject(hql, param);
         }
         return null;
-    }
+    }*/
 
     @RequestMapping({"/tenant/baseSubmit"})
     @ResponseBody

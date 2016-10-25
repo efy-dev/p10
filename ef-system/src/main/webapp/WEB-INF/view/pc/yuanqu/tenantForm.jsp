@@ -73,9 +73,9 @@
     </div>
     <div dot-template="main-product-model">
     </div>
-    <div dot-template="main-productDetails-panel">
-    </div>
     <div dot-template="main-product-panel">
+    </div>
+    <div dot-template="main-product-model-panel">
     </div>
     <div dot-template="main-product-master">
     </div>
@@ -875,73 +875,12 @@
     </div>
 </script>
 
-<script type="text/x-dot-template" id="main-productDetails-panel">
-
-    <div class="main-base" data-for="productDetails-panelForm">
-        <form class="am-form am-form-horizontal" name="tenant" id="main-productDetails-panel-form" action="{{=it.submit}}"
-              enctype="multipart/form-data"
-              method="post">
-            <fieldset>
-                <legend><b>{{=it.data.name}}</b> 的栏目列表（商品详情）</legend>
-                <input type="hidden" name="id" value="{{=it.data.id}}">
-
-                <div class="am-form-group">
-                    <label class="am-u-sm-3 am-form-label">名称</label>
-                    <div class="am-u-sm-9">
-                        <input name="name" type="text" placeholder="名称">
-                    </div>
-                </div>
-
-                <div class="am-form-group">
-                    <label class="am-u-sm-3 am-form-label">介绍</label>
-                    <div class="am-u-sm-9">
-                        <textarea name="content" rows="5" placeholder="介绍"></textarea>
-                    </div>
-                </div>
-
-                <div class="am-form-group am-form-file">
-                    <label for="productDetails-imageList" class="am-u-sm-3 am-form-label">图片（可以选择多张图片）</label>
-                    <div class="am-u-sm-9">
-                        <button type="button" class="am-btn am-btn-default am-btn-sm">
-                            选择文件
-                        </button>
-                        <input id="productDetails-imageList" name="imageList" type="file" multiple
-                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
-                    </div>
-                    <div class="file-list am-u-sm-9">
-                    </div>
-                </div>
-                <div class="am-form-group am-form-file">
-                    <label for="productDetails-media" class="am-u-sm-3 am-form-label">语音介绍</label>
-                    <div class="am-u-sm-9">
-                        <button type="button" class="am-btn am-btn-default am-btn-sm">
-                            选择文件
-                        </button>
-                        <input id="productDetails-media" name="media" type="file" multiple
-                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
-                    </div>
-                    <div class="file-list am-u-sm-9">
-                    </div>
-                </div>
-
-                <div class="am-form-group">
-                    <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
-                        <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品规格</a>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-
-</script>
-
-<script type="text/x-dot-template" id="main-product-panel-list">
+<script type="text/x-dot-template" id="main-product-model-panel-list">
     {{
     for(var i = 0 ; i< it.length ; i++){
     var imageText = it[i];
     }}
-    <tr id="{{=imageText.id}}">
+    <tr id="{{it=imageText.id}}">
         <td>
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
@@ -971,16 +910,16 @@
     {{ } }}
 </script>
 
-<script type="text/x-dot-template" id="main-product-panel">
+<script type="text/x-dot-template" id="main-product-model-panel">
     <div class="main-base">
         <ul class="am-nav am-nav-tabs am-nav-justify">
-            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="product-panelForm">新的商品栏目</a>
+            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="product-model-panelForm">新的商品栏目</a>
             </li>
-            <li><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="product-panelList">查看所有</a></li>
+            <li><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="product-model-panelList">查看所有</a></li>
         </ul>
     </div>
 
-    <div class="main-base" data-for="product-panelList" data-type="tabs" style="display: none">
+    <div class="main-base" data-for="product-model-panelList" data-type="tabs" style="display: none">
         <legend><b>{{=it.data.name}}</b> 的栏目列表（商品详情）</legend>
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
@@ -992,7 +931,7 @@
                 <th class="table-title">语音预览</th>
             </tr>
             </thead>
-            <tbody dot-template="main-product-panel-list">
+            <tbody dot-template="main-product-model-panel-list">
 
             </tbody>
         </table>
@@ -1007,7 +946,72 @@
         </div>
     </div>
 
-    <div class="main-base" data-for="product-panelForm" data-type="tabs">
+    <div class="main-base" data-for="product-model-panelForm" data-type="tabs">
+        <form class="am-form am-form-horizontal" name="tenant" id="main-product-model-panel-form" action="{{=it.submit}}"
+              enctype="multipart/form-data"
+              method="post">
+            <fieldset>
+                <legend><b>{{=it.data.name}}</b> 的栏目列表（商品详情）</legend>
+                <input type="hidden" name="id" value="{{=it.data.id}}">
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-form-label">名称</label>
+                    <div class="am-u-sm-9">
+                        <input name="name" type="text" placeholder="名称">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-form-label">介绍</label>
+                    <div class="am-u-sm-9">
+                        <textarea name="content" rows="5" placeholder="介绍"></textarea>
+                    </div>
+                </div>
+
+                <div class="am-form-group am-form-file">
+                    <label for="product-model-imageList" class="am-u-sm-3 am-form-label">图片（可以选择多张图片）</label>
+                    <div class="am-u-sm-9">
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">
+                            选择文件
+                        </button>
+                        <input id="product-model-imageList" name="imageList" type="file" multiple
+                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
+                    </div>
+                    <div class="file-list am-u-sm-9">
+                    </div>
+                </div>
+                <div class="am-form-group am-form-file">
+                    <label for="product-model-media" class="am-u-sm-3 am-form-label">语音介绍</label>
+                    <div class="am-u-sm-9">
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">
+                            选择文件
+                        </button>
+                        <input id="product-model-media" name="media" type="file" multiple
+                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
+                    </div>
+                    <div class="file-list am-u-sm-9">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('productModel.render','{{=it.data.id}}')">< 上一步</a>
+                        <a onclick="PubSub.publish('tenantPanel.submit','{{=it.template}}-form')"
+                           class="am-btn am-btn-primary am-btn-lg">添加</a>
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('{{=it.name}}.nextProductModel','{{=it.template}}-form')">去添加下一个商品规格</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</script>
+
+<script type="text/x-dot-template" id="main-product-panel">
+
+    <div class="main-base" data-for="product-panelForm">
         <form class="am-form am-form-horizontal" name="tenant" id="main-product-panel-form" action="{{=it.submit}}"
               enctype="multipart/form-data"
               method="post">
@@ -1057,11 +1061,7 @@
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productModel.render','{{=it.data.id}}')">< 上一步</a>
-                        <a onclick="PubSub.publish('tenantPanel.submit','{{=it.template}}-form')"
-                           class="am-btn am-btn-primary am-btn-lg">添加</a>
-                        <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('{{=it.name}}.nextProductModel','{{=it.template}}-form')">去添加下一个商品规格</a>
+                           onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品规格</a>
                     </div>
                 </div>
             </fieldset>
@@ -2392,7 +2392,7 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    PubSub.publish('productDetailsPanel.render', {
+                    PubSub.publish('productPanel.render', {
                         id: this.data.id
                     });
                 }
@@ -2465,7 +2465,7 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    PubSub.publish("productPanel.render", data.id);
+                    PubSub.publish("productModelPanel.render", data.id);
                     //@TODO
                 }
                 $("#my-modal-loading").modal("close");
@@ -2668,16 +2668,16 @@
 
     };
 
-    var ProductPanel = function (param) {
+    var ProductModelPanel = function (param) {
         this.submit = "/yuanqu/product/panelSubmit";
         this.label = "店内实景";
         this.data = null;
         this.father = null;
         this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
         this.param = param;
-        this.name = "productPanel";
-        this.template = "main-product-panel";         //组件绑定的模板//组件需要订阅的事件与消息
-        this.panelListTemplate = "main-product-panel-list";
+        this.name = "productModelPanel";
+        this.template = "main-product-model-panel";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.panelListTemplate = "main-product-model-panel-list";
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
@@ -2720,7 +2720,7 @@
         this.submitForm = function (msg, data) {
             $("#my-modal-loading").modal();
             $("#" + data).ajaxSubmit(function (responseData) {
-                $("[data=product-panelList]").click();
+                $("[data=product-model-panelList]").click();
                 document.getElementById(data).reset();
                 $("#my-modal-loading").modal("close");
             });
@@ -2790,15 +2790,15 @@
 
     }
 
-    var ProductDetailsPanel = function (param) {
+    var ProductPanel = function (param) {
         this.submit = "/yuanqu/product/panelSubmit";
         this.label = "商品详情";
         this.data = null;
         this.father = null;
         this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
         this.param = param;
-        this.name = "productDetailsPanel";
-        this.template = "main-productDetails-panel";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.name = "productPanel";
+        this.template = "main-product-panel";         //组件绑定的模板//组件需要订阅的事件与消息
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
@@ -3280,8 +3280,8 @@
     var productBase = new ProductBase();    //商品基本信息
     var productMaster = new ProductMaster();//商品大师信息
     var productModel = new ProductModel();  //商品规格信息
-    var productPanel = new ProductPanel();  //商品规格详情
-    var productDetailsPanel = new ProductDetailsPanel();//商品详情
+    var productModelPanel = new ProductModelPanel();  //商品规格详情
+    var productPanel = new ProductPanel();//商品详情
     var tenantList = new TenantList();      //店铺列表
     var productList = new ProductList();    //商品列表
     var productModelList = new ProductModelList();  //商品规格列表

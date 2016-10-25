@@ -65,6 +65,17 @@ public class BigUser {
     protected Date lastLoginDatetime; //最后一次登陆时间
     protected BigDecimal redPacket;//红包（相当于钱包）
 
+/*    protected  UserTenant userTenant;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    public UserTenant getUserTenant() {
+        return userTenant;
+    }
+
+    public void setUserTenant(UserTenant userTenant) {
+        this.userTenant = userTenant;
+    }*/
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_id", updatable = false, insertable = false)
     public AddressProvince getAddressProvince() {
