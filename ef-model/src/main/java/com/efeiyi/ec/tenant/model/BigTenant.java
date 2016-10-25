@@ -67,16 +67,17 @@ public class BigTenant implements Serializable, BaseTenant {
     private Double longitude;   //经度
 
     private String audio;
-  /*  private UserTenant userTenant;
+    private List<UserTenant> userTenant;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
-    public UserTenant getUserTenant() {
+    public List<UserTenant> getUserTenant() {
         return userTenant;
     }
 
-    public void setUserTenant(UserTenant userTenant) {
+    public void setUserTenant(List<UserTenant> userTenant) {
         this.userTenant = userTenant;
-    }*/
+    }
 
     @Transient
     public String getAudio() {

@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "organization_user")
@@ -64,17 +65,17 @@ public class BigUser {
     protected AddressProvince addressProvince;
     protected Date lastLoginDatetime; //最后一次登陆时间
     protected BigDecimal redPacket;//红包（相当于钱包）
+    protected List<UserTenant> userTenant;
 
-/*    protected  UserTenant userTenant;
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    public UserTenant getUserTenant() {
+    public List<UserTenant> getUserTenant() {
         return userTenant;
     }
 
-    public void setUserTenant(UserTenant userTenant) {
+    public void setUserTenant(List<UserTenant> userTenant) {
         this.userTenant = userTenant;
-    }*/
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_id", updatable = false, insertable = false)

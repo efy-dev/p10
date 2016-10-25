@@ -352,5 +352,12 @@ public class OffLineProductController {
 
         return createQRCode(this.getClass().getResource("/").getPath().toString(), productId, url);
     }
+    @RequestMapping("/getProductModelUrl.do")
+    public String getProductModelUrl(HttpServletRequest request) throws Exception {
+
+        String productId = request.getParameter("id");
+
+        return  "redirect:http://www.efeiyi.com/qrcode/redirect/product/" + productId;
+    }
 
 }

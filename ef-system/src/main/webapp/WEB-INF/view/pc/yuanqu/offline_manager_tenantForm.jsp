@@ -63,16 +63,17 @@
     </div>
     <div dot-template="main-product-base">
     </div>
-    <div dot-template="main-product-model">
+    <div dot-template="main-product-master">
     </div>
     <div dot-template="main-product-panel">
     </div>
-    <div dot-template="main-product-master">
+    <div dot-template="main-product-model">
+    </div>
+    <div dot-template="main-product-model-panel">
     </div>
     <div dot-template="main-product-list">
     </div>
     <div dot-template="main-product-model-list">
-    </div>
     </div>
 </div>
 
@@ -115,8 +116,10 @@
 
 <script type="text/x-dot-template" id="main-menu">
     <div class="main-menu">
-        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('productBase.render')"><span>新商品</span></button>
-        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('productList.render')"><span>商品管理</span></button>
+        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('productBase.render')">
+            <span>新商品</span></button>
+        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('productList.render')">
+            <span>商品管理</span></button>
     </div>
 </script>
 
@@ -128,9 +131,8 @@
 
             <fieldset>
 
-                <legend>商品信息信息</legend>
+                <legend>{{=it.tenantName}} 商品列表</legend>
 
-                <input name="tenantId" type="hidden" value="{{=it.tenant!=null ? it.tenant : ''}}">
                 <input name="id" type="hidden" value="{{=(it.data!=null && it.data.id!=null ) ? it.data.id: ''}}">
 
                 <div class="am-form-group">
@@ -198,6 +200,219 @@
             </fieldset>
         </form>
     </div>
+</script>
+
+<script type="text/x-dot-template" id="main-product-master">
+    <div class="main-tenant-base">
+        <form class="am-form am-form-horizontal" name="tenant" id="main-product-master-form" action="{{=it.submit}}"
+              enctype="multipart/form-data"
+              method="post">
+
+            <fieldset>
+
+                <legend><b>{{=it.data.name}}</b> 大师信息与技艺信息</legend>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label">大师</label>
+                    <div class="am-u-sm-10">
+
+                        <input name="name" type="text" id="product-search"
+                               value="{{=it.data!=null && it.data.master!=null  ? it.data.master.fullName : ''}}"
+                               placeholder="输入大师的名称" oninput="PubSub.publish('productMaster.search',this)">
+                        <input name="masterId" type="hidden" id="product-masterId"
+                               value="{{=it.data!=null && it.data.master!=null  ? it.data.master.id : ''}}">
+                        <input name="id" type="hidden" id="product-id"
+                               value="{{=(it.data!=null) ? it.data.id : ''}}">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10" dot-template="{{=it.masterList}}">
+                    </div>
+                </div>
+
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label">技艺</label>
+                    <div class="am-u-sm-10">
+                        <input name="name" type="text" id="project-search"
+                               value="{{=it.data!=null && it.data.project!=null  ? it.data.project.name : ''}}"
+                               placeholder="输入相关技艺的名称" oninput="PubSub.publish('productMaster.projectSearch',this)">
+                        <input name="projectId" type="hidden" id="product-projectId"
+                               value="{{=it.data!=null && it.data.project!=null  ? it.data.project.id : ''}}">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10" dot-template="{{=it.projectList}}">
+                    </div>
+                </div>
+
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品详情</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</script>
+
+<script type="text/x-dot-template" id="main-product-master-list">
+    {{ if(typeof it =="undefined" || it == null && it.length <= 0){ }}
+    <a onclick="">未找到相关大师，点击提交数据补全请求</a>
+    {{ }else{ }}
+    <ul class="am-list  am-list-border" id="searchResult">
+        {{ for(var i = 0 ; i < it.length; i++){ }}
+        <li><a onclick="PubSub.publish('productMaster.chooseMaster','{{=it[i].id}}:{{=it[i].fullName}}')">{{=it[i].fullName}}</a>
+        </li>
+        {{ } }}
+    </ul>
+    {{ } }}
+</script>
+
+<script type="text/x-dot-template" id="main-product-panel">
+
+    <div class="main-base" data-for="product-panelForm">
+        <form class="am-form am-form-horizontal" name="tenant" id="main-product-panel-form" action="{{=it.submit}}"
+              enctype="multipart/form-data"
+              method="post">
+            <fieldset>
+                <legend><b>{{=it.data.name}}</b> 的栏目列表（商品详情）</legend>
+                <input type="hidden" name="id" value="{{=it.data.id}}">
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-form-label">名称</label>
+                    <div class="am-u-sm-9">
+                        <input name="name" type="text" placeholder="名称">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-form-label">介绍</label>
+                    <div class="am-u-sm-9">
+                        <textarea name="content" rows="5" placeholder="介绍"></textarea>
+                    </div>
+                </div>
+
+                <div class="am-form-group am-form-file">
+                    <label for="product-imageList" class="am-u-sm-3 am-form-label">图片（可以选择多张图片）</label>
+                    <div class="am-u-sm-9">
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">
+                            选择文件
+                        </button>
+                        <input id="product-imageList" name="imageList" type="file" multiple
+                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
+                    </div>
+                    <div class="file-list am-u-sm-9">
+                    </div>
+                </div>
+                <div class="am-form-group am-form-file">
+                    <label for="product-media" class="am-u-sm-3 am-form-label">语音介绍</label>
+                    <div class="am-u-sm-9">
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">
+                            选择文件
+                        </button>
+                        <input id="product-media" name="media" type="file" multiple
+                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
+                    </div>
+                    <div class="file-list am-u-sm-9">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品规格</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</script>
+
+<script type="text/x-dot-template" id="main-product-list">
+
+    <div>
+        <div class="am-u-lg-6">
+            <legend>{{=it.tenantName}} 商品列表</legend>
+            <div class="am-input-group">
+                <input type="text" class="am-form-field" oninput="PubSub.publish('{{=it.name}}.search',this)">
+                <span class="am-input-group-btn">
+                    <button class="am-btn am-btn-default" disabled type="button"><span
+                            class="am-icon-search"></span></button>
+                </span>
+            </div>
+        </div>
+        <div class="am-u-lg-12" dot-template="main-product-list-body">
+            {{
+            PubSub.publish(it.name+".body");
+            }}
+        </div>
+
+        <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.prePage')">上一页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" id="product-index">第{{=it.index}}页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.nextPage')">下一页</a>
+        </div>
+    </div>
+
+</script>
+
+<script type="text/x-dot-template" id="main-product-list-body">
+
+    <table class="am-table am-table-bordered am-table-radius am-table-striped">
+        <tbody>
+        <tr style="text-align:left">
+            <td>操作</td>
+            <td>商品名称</td>
+            <td>副标题</td>
+            <td>创建时间</td>
+        </tr>
+
+        {{
+        for(var i = 0 ; i< it.length ; i++){
+        var product = it[i];
+        }}
+        <tr>
+            <td>
+                <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
+                        <button onclick="PubSub.publish('productBase.render',{productId:'{{=product.id}}'})"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 基本信息
+                        </button>
+                        <button onclick="PubSub.publish('productModelList.render','{{=product.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 商品规格
+                        </button>
+                        <button onclick="PubSub.publish('productModel.render',{productId:'{{=product.id}}'})"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 添加规格
+                        </button>
+                        <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 添加英文版商品（暂不支持）
+                        </button>
+                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                class="am-icon-trash-o"></span> 删除(暂不支持)
+                        </button>
+                    </div>
+                </div>
+            </td>
+            <td>{{=product.name}}</td>
+            <td>{{=product.subName}}</td>
+            <td>
+                {{=(new Date(product.createDateTime)).format("yyyy-MM-dd hh:mm:ss")}}
+            </td>
+        </tr>
+        {{ } }}
+
+        </tbody>
+    </table>
+
 </script>
 
 <script type="text/x-dot-template" id="main-product-model">
@@ -282,12 +497,111 @@
     </div>
 </script>
 
-<script type="text/x-dot-template" id="main-product-panel-list">
+<script type="text/x-dot-template" id="main-product-model-panel">
+    <div class="main-base">
+        <ul class="am-nav am-nav-tabs am-nav-justify">
+            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="product-model-panelForm">新的商品栏目</a>
+            </li>
+            <li><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="product-model-panelList">查看所有</a></li>
+        </ul>
+    </div>
+
+    <div class="main-base" data-for="product-model-panelList" data-type="tabs" style="display: none">
+        <legend><b>{{=it.data.name}}</b> 的栏目列表（商品详情）</legend>
+        <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+            <tr>
+                <th class="table-set">操作</th>
+                <th class="table-title">名称</th>
+                <th class="table-title">介绍</th>
+                <th class="table-title">图片预览</th>
+                <th class="table-title">语音预览</th>
+            </tr>
+            </thead>
+            <tbody dot-template="main-product-model-panel-list">
+
+            </tbody>
+        </table>
+
+        <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+            <a class="am-btn am-btn-primary am-btn-lg"
+               onclick="PubSub.publish('productList.render')">完成</a>
+            <a class="am-btn am-btn-primary am-btn-lg"
+               onclick="PubSub.publish('productModel.render',{productId:'{{=it.data.product.id}}'})">添加下一个商品规格</a>
+            <a class="am-btn am-btn-primary am-btn-lg"
+               onclick="PubSub.publish('productBase.render',{tenantId:'{{=it.data.product.tenant.id}}'})">添加下一个商品</a>
+        </div>
+    </div>
+
+    <div class="main-base" data-for="product-model-panelForm" data-type="tabs">
+        <form class="am-form am-form-horizontal" name="tenant" id="main-product-model-panel-form" action="{{=it.submit}}"
+              enctype="multipart/form-data"
+              method="post">
+            <fieldset>
+                <legend><b>{{=it.data.name}}</b> 的栏目列表（商品详情）</legend>
+                <input type="hidden" name="id" value="{{=it.data.id}}">
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-form-label">名称</label>
+                    <div class="am-u-sm-9">
+                        <input name="name" type="text" placeholder="名称">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-form-label">介绍</label>
+                    <div class="am-u-sm-9">
+                        <textarea name="content" rows="5" placeholder="介绍"></textarea>
+                    </div>
+                </div>
+
+                <div class="am-form-group am-form-file">
+                    <label for="product-model-imageList" class="am-u-sm-3 am-form-label">图片（可以选择多张图片）</label>
+                    <div class="am-u-sm-9">
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">
+                            选择文件
+                        </button>
+                        <input id="product-model-imageList" name="imageList" type="file" multiple
+                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
+                    </div>
+                    <div class="file-list am-u-sm-9">
+                    </div>
+                </div>
+                <div class="am-form-group am-form-file">
+                    <label for="product-model-media" class="am-u-sm-3 am-form-label">语音介绍</label>
+                    <div class="am-u-sm-9">
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">
+                            选择文件
+                        </button>
+                        <input id="product-model-media" name="media" type="file" multiple
+                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
+                    </div>
+                    <div class="file-list am-u-sm-9">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('productModel.render','{{=it.data.id}}')">< 上一步</a>
+                        <a onclick="PubSub.publish('tenantPanel.submit','{{=it.template}}-form')"
+                           class="am-btn am-btn-primary am-btn-lg">添加</a>
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('{{=it.name}}.nextProductModel','{{=it.template}}-form')">去添加下一个商品规格</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</script>
+
+<script type="text/x-dot-template" id="main-product-model-panel-list">
     {{
     for(var i = 0 ; i< it.length ; i++){
     var imageText = it[i];
     }}
-    <tr id="{{=imageText.id}}">
+    <tr id="{{it=imageText.id}}">
         <td>
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
@@ -315,186 +629,6 @@
         </td>
     </tr>
     {{ } }}
-</script>
-
-<script type="text/x-dot-template" id="main-product-panel">
-    <div class="main-base">
-        <ul class="am-nav am-nav-tabs am-nav-justify">
-            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="product-panelForm">新的商品栏目</a>
-            </li>
-            <li><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="product-panelList">查看所有</a></li>
-        </ul>
-    </div>
-
-    <div class="main-base" data-for="product-panelList" data-type="tabs" style="display: none">
-        <legend><b>{{=it.data.name}}</b> 的栏目列表（商品详情）</legend>
-        <table class="am-table am-table-striped am-table-hover table-main">
-            <thead>
-            <tr>
-                <th class="table-set">操作</th>
-                <th class="table-title">名称</th>
-                <th class="table-title">介绍</th>
-                <th class="table-title">图片预览</th>
-                <th class="table-title">语音预览</th>
-            </tr>
-            </thead>
-            <tbody dot-template="main-product-panel-list">
-
-            </tbody>
-        </table>
-
-        <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
-            <a class="am-btn am-btn-primary am-btn-lg"
-               onclick="PubSub.publish('productList.render')">完成</a>
-            <a class="am-btn am-btn-primary am-btn-lg"
-               onclick="PubSub.publish('productModel.render',{productId:'{{=it.data.product.id}}'})">添加下一个商品规格</a>
-            <a class="am-btn am-btn-primary am-btn-lg"
-               onclick="PubSub.publish('productBase.render',{tenantId:'{{=it.data.product.tenant.id}}'})">添加下一个商品</a>
-        </div>
-    </div>
-
-    <div class="main-base" data-for="product-panelForm" data-type="tabs">
-        <form class="am-form am-form-horizontal" name="tenant" id="main-product-panel-form" action="{{=it.submit}}"
-              enctype="multipart/form-data"
-              method="post">
-            <fieldset>
-                <legend><b>{{=it.data.name}}</b> 的栏目列表（商品详情）</legend>
-                <input type="hidden" name="id" value="{{=it.data.id}}">
-
-                <div class="am-form-group">
-                    <label class="am-u-sm-3 am-form-label">名称</label>
-                    <div class="am-u-sm-9">
-                        <input name="name" type="text" placeholder="名称">
-                    </div>
-                </div>
-
-                <div class="am-form-group">
-                    <label class="am-u-sm-3 am-form-label">介绍</label>
-                    <div class="am-u-sm-9">
-                        <textarea name="content" rows="5" placeholder="介绍"></textarea>
-                    </div>
-                </div>
-
-                <div class="am-form-group am-form-file">
-                    <label for="product-imageList" class="am-u-sm-3 am-form-label">图片（可以选择多张图片）</label>
-                    <div class="am-u-sm-9">
-                        <button type="button" class="am-btn am-btn-default am-btn-sm">
-                            选择文件
-                        </button>
-                        <input id="product-imageList" name="imageList" type="file" multiple
-                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
-                    </div>
-                    <div class="file-list am-u-sm-9">
-                    </div>
-                </div>
-                <div class="am-form-group am-form-file">
-                    <label for="product-media" class="am-u-sm-3 am-form-label">语音介绍</label>
-                    <div class="am-u-sm-9">
-                        <button type="button" class="am-btn am-btn-default am-btn-sm">
-                            选择文件
-                        </button>
-                        <input id="product-media" name="media" type="file" multiple
-                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
-                    </div>
-                    <div class="file-list am-u-sm-9">
-                    </div>
-                </div>
-
-                <div class="am-form-group">
-                    <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
-                        <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productModel.render','{{=it.data.id}}')">< 上一步</a>
-                        <a onclick="PubSub.publish('tenantPanel.submit','{{=it.template}}-form')"
-                           class="am-btn am-btn-primary am-btn-lg">添加</a>
-                        <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('{{=it.name}}.nextProductModel','{{=it.template}}-form')">去添加下一个商品规格</a>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-
-</script>
-
-<script type="text/x-dot-template" id="main-product-list">
-
-    <div>
-        <div class="am-u-lg-6">
-            <legend>前门园区{{=it.tenantId}} 店铺</legend>
-            <div class="am-input-group">
-                <input type="text" class="am-form-field" oninput="PubSub.publish('{{=it.name}}.search',this)">
-                <span class="am-input-group-btn">
-                    <button class="am-btn am-btn-default" disabled type="button"><span
-                            class="am-icon-search"></span></button>
-                </span>
-            </div>
-        </div>
-        <div class="am-u-lg-12" dot-template="main-product-list-body">
-            {{
-            PubSub.publish(it.name+".body");
-            }}
-        </div>
-
-        <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
-            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.prePage')">上一页</a>
-            <a class="am-btn am-btn-primary am-btn-lg" id="product-index">第{{=it.index}}页</a>
-            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.nextPage')">下一页</a>
-        </div>
-    </div>
-
-</script>
-
-<script type="text/x-dot-template" id="main-product-list-body">
-
-    <table class="am-table am-table-bordered am-table-radius am-table-striped">
-        <tbody>
-        <tr style="text-align:left">
-            <td>操作</td>
-            <td>商品名称</td>
-            <td>副标题</td>
-            <td>创建时间</td>
-        </tr>
-
-        {{
-        for(var i = 0 ; i< it.length ; i++){
-        var product = it[i];
-        }}
-        <tr>
-            <td>
-                <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
-                        <button onclick="PubSub.publish('productBase.render',{productId:'{{=product.id}}'})"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 基本信息
-                        </button>
-                        <button onclick="PubSub.publish('productModelList.render','{{=product.id}}')"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 商品规格
-                        </button>
-                        <button onclick="PubSub.publish('productModel.render',{productId:'{{=product.id}}'})"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 添加规格
-                        </button>
-                        <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 添加英文版商品（暂不支持）
-                        </button>
-                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                class="am-icon-trash-o"></span> 删除(暂不支持)
-                        </button>
-                    </div>
-                </div>
-            </td>
-            <td>{{=product.name}}</td>
-            <td>{{=product.subName}}</td>
-            <td>
-                {{=(new Date(product.createDateTime)).format("yyyy-MM-dd hh:mm:ss")}}
-            </td>
-        </tr>
-        {{ } }}
-
-        </tbody>
-    </table>
-
 </script>
 
 <script type="text/x-dot-template" id="main-product-model-list">
@@ -569,19 +703,6 @@
 
 </script>
 
-<script type="text/x-dot-template" id="main-product-master-list">
-    {{ if(typeof it =="undefined" || it == null && it.length <= 0){ }}
-    <a onclick="">未找到相关大师，点击提交数据补全请求</a>
-    {{ }else{ }}
-    <ul class="am-list  am-list-border" id="searchResult">
-        {{ for(var i = 0 ; i < it.length; i++){ }}
-        <li><a onclick="PubSub.publish('productMaster.chooseMaster','{{=it[i].id}}:{{=it[i].fullName}}')">{{=it[i].fullName}}</a>
-        </li>
-        {{ } }}
-    </ul>
-    {{ } }}
-</script>
-
 <script type="text/x-dot-template" id="main-product-project-list">
     {{ if(typeof it =="undefined" || it == null && it.length <= 0){ }}
     <a onclick="">未找到相关技艺，点击提交数据补全请求</a>
@@ -596,64 +717,6 @@
     {{ } }}
 </script>
 
-<script type="text/x-dot-template" id="main-product-master">
-    <div class="main-tenant-base">
-        <form class="am-form am-form-horizontal" name="tenant" id="main-product-master-form" action="{{=it.submit}}"
-              enctype="multipart/form-data"
-              method="post">
-
-            <fieldset>
-
-                <legend><b>{{=it.data.name}}</b> 大师信息与技艺信息</legend>
-
-                <div class="am-form-group">
-                    <label class="am-u-sm-2 am-form-label">大师</label>
-                    <div class="am-u-sm-10">
-
-                        <input name="name" type="text" id="product-search"
-                               value="{{=it.data!=null && it.data.master!=null  ? it.data.master.fullName : ''}}"
-                               placeholder="输入大师的名称" oninput="PubSub.publish('productMaster.search',this)">
-                        <input name="masterId" type="hidden" id="product-masterId"
-                               value="{{=it.data!=null && it.data.master!=null  ? it.data.master.id : ''}}">
-                        <input name="id" type="hidden" id="product-id"
-                               value="{{=(it.data!=null) ? it.data.id : ''}}">
-                    </div>
-                </div>
-
-                <div class="am-form-group">
-                    <div class="am-u-sm-10" dot-template="{{=it.masterList}}">
-                    </div>
-                </div>
-
-
-                <div class="am-form-group">
-                    <label class="am-u-sm-2 am-form-label">技艺</label>
-                    <div class="am-u-sm-10">
-                        <input name="name" type="text" id="project-search"
-                               value="{{=it.data!=null && it.data.project!=null  ? it.data.project.name : ''}}"
-                               placeholder="输入相关技艺的名称" oninput="PubSub.publish('productMaster.projectSearch',this)">
-                        <input name="projectId" type="hidden" id="product-projectId"
-                               value="{{=it.data!=null && it.data.project!=null  ? it.data.project.id : ''}}">
-                    </div>
-                </div>
-
-                <div class="am-form-group">
-                    <div class="am-u-sm-10" dot-template="{{=it.projectList}}">
-                    </div>
-                </div>
-
-
-                <div class="am-form-group">
-                    <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
-                        <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品规格</a>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-</script>
-
 <script>
 
     window.onbeforeunload = function () {
@@ -662,7 +725,6 @@
 
     $().ready(function () {
         menu.render();
-        productList.loader();
     });
 
     var Nav = function (param) {
@@ -769,22 +831,12 @@
         this.template = "main-product-base";         //组件绑定的模板//组件需要订阅的事件与消息
 
         this.render = function (msg, data) {
-
-            if (typeof data != "undefined" && data != null && typeof data.productId != "undefined" && data.productId != null) {
-                this.tenant = null;
-                ajaxRequest("/yuanqu/product/getProductById", {id: data.productId}, function (responseData) {
-                    this.data = responseData;
-                    renderTemplate(this.template, this);
-                }.bind(this))
-            } else if (typeof data.tenantId == "undefined" || data.tenantId == null) {
-                showAlert("提示", "没有传递必要参数\"店铺id\"");
-            } else {
-                this.tenant = data.tenantId;
+            this.tenant = null;
+            ajaxRequest("/yuanqu/tenant/getUserTenants", {}, function (responseData) {
+                this.data = responseData;
                 renderTemplate(this.template, this);
-
-            }
+            }.bind(this))
             this.show();
-
         };
 
         this.submitForm = function (msg, data) {
@@ -814,7 +866,6 @@
             });
             return false;
         };
-
 
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
@@ -924,10 +975,9 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    PubSub.publish('productModel.render', {
-                        productId: this.data.id
+                    PubSub.publish('productPanel.render', {
+                        id: this.data.id
                     });
-                    //@TODO
                 }
                 $("#my-modal-loading").modal("close");
             }.bind(this));
@@ -998,7 +1048,7 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    PubSub.publish("productPanel.render", data.id);
+                    PubSub.publish("productModelPanel.render", data.id);
                     //@TODO
                 }
                 $("#my-modal-loading").modal("close");
@@ -1058,6 +1108,7 @@
     var ProductList = function (param) {
         this.currentSearch = null;
         this.tenantId = null;
+        this.tenantName = null;
         this.index = 1;
         this.size = 10;
         this.label = "商品管理";
@@ -1100,10 +1151,12 @@
 
         this.render = function (msg, data) {
             this.index = 1;
-
+            ajaxRequest("/yuanqu/tenant/getUserTenants", {}, function (responseData) {
+                this.tenantId = responseData.id;
+                this.tenantName=responseData.name;
+            }.bind(this));
             renderTemplate(this.template, this);
             this.show();
-
         };
 
         this.search = function (msg, data) {
@@ -1122,12 +1175,6 @@
         };
         this.remove = function (msg, data) {
             $("[dot-template=" + this.template + "]").html("");
-        };
-        this.loader = function () {
-            ajaxRequest("/yuanqu/product/getTenantProductsByUser",{}, function (responseData) {
-                this.data = responseData;
-                this.tenantId=this.data;
-            }.bind(this));
         };
 
         this.subscribeArray = [
@@ -1207,16 +1254,16 @@
 
     };
 
-    var ProductPanel = function (param) {
+    var ProductModelPanel = function (param) {
         this.submit = "/yuanqu/product/panelSubmit";
         this.label = "店内实景";
         this.data = null;
         this.father = null;
         this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
         this.param = param;
-        this.name = "productPanel";
-        this.template = "main-product-panel";         //组件绑定的模板//组件需要订阅的事件与消息
-        this.panelListTemplate = "main-product-panel-list";
+        this.name = "productModelPanel";
+        this.template = "main-product-model-panel";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.panelListTemplate = "main-product-model-panel-list";
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
@@ -1259,7 +1306,7 @@
         this.submitForm = function (msg, data) {
             $("#my-modal-loading").modal();
             $("#" + data).ajaxSubmit(function (responseData) {
-                $("[data=product-panelList]").click();
+                $("[data=product-model-panelList]").click();
                 document.getElementById(data).reset();
                 $("#my-modal-loading").modal("close");
             });
@@ -1327,6 +1374,103 @@
             PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
         }
 
+    }
+
+    var ProductPanel = function (param) {
+        this.submit = "/yuanqu/product/panelSubmit";
+        this.label = "商品详情";
+        this.data = null;
+        this.father = null;
+        this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
+        this.param = param;
+        this.name = "productPanel";
+        this.template = "main-product-panel";         //组件绑定的模板//组件需要订阅的事件与消息
+
+        this.render = function (msg, data) {
+            if (typeof data != "undefined" && data != null) {
+                ajaxRequest("/yuanqu/product/getProductById", {id: data.id}, function (responseData) {
+                    this.data = responseData;
+                    renderTemplate(this.template, this);
+                }.bind(this))
+            } else {
+                renderTemplate(this.template, this);
+            }
+            this.show();
+
+        };
+
+        this.deletePanel = function (msg, data) {
+            var success = function (responseData) {
+                $("#" + responseData).remove();
+            };
+            ajaxRequest("/yuanqu/product/deletePanel", {id: data}, success);
+        };
+        this.submitForm = function (msg, data) {
+            $("#my-modal-loading").modal();
+            $("#" + data).ajaxSubmit(function (data) {
+                if (typeof data == "string") {
+                    data = JSON.parse(data);
+                }
+                if (typeof data.id != "undefined" && data.id != null) {
+                    PubSub.publish('productModel.render', {
+                        productId: this.data.id
+                    });
+                }
+                $("#my-modal-loading").modal("close");
+            }.bind(this));
+            return false;
+        };
+
+        this.imageView = function (msg, data) {
+            var images = data.files;
+            $(data).parent().parent().find(".file-list").html("");
+            for (var i = 0; i < images.length; i++) {
+                if (images[i]) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(images[i]);
+                    if ((/audio\/\w+/.test(images[i].type))) {
+                        reader.onload = function (e) {
+                            var urlData = this.result;
+                            $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                        }
+                    }
+                    if ((/image\/\w+/.test(images[i].type))) {
+                        reader.onload = function (e) {
+                            var urlData = this.result;
+                            $(data).parent().parent().find(".file-list").append("<img src=\"" + urlData + "\" width=\"500\"  />")
+                        }
+                    }
+                }
+            }
+        };
+
+
+        this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
+            $("[dot-template=" + this.template + "]").show();
+        };
+        this.hide = function (msg, data) {
+            $("[dot-template=" + this.template + "]").hide();
+        };
+        this.remove = function (msg, data) {
+            $("[dot-template=" + this.template + "]").html("");
+        };
+
+        this.subscribeArray = [
+            {message: this.name + ".show", subscriber: this.show},
+            {message: this.name + ".hide", subscriber: this.hide},
+            {message: this.name + ".render", subscriber: this.render},
+            {message: this.name + ".remove", subscriber: this.remove},
+            {message: this.name + ".submit", subscriber: this.submitForm},
+            {message: this.name + ".imageView", subscriber: this.imageView},
+            {message: this.name + ".deletePanel", subscriber: this.deletePanel},
+        ];
+
+        for (var i = 0; i < this.subscribeArray.length; i++) {
+            var subscribe = this.subscribeArray[i];
+            PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
+        }
+
     };
 
     function renderTemplate(templateId, data) {
@@ -1337,7 +1481,8 @@
     var productBase = new ProductBase();    //商品基本信息
     var productMaster = new ProductMaster();//商品大师信息
     var productModel = new ProductModel();  //商品规格信息
-    var productPanel = new ProductPanel();  //商品详情
+    var productModelPanel = new ProductModelPanel();  //商品规格详情
+    var productPanel = new ProductPanel();//商品详情
     var productList = new ProductList();    //商品列表
     var productModelList = new ProductModelList();  //商品规格列表
     var menu = new Menu();

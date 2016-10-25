@@ -1201,6 +1201,10 @@
                            href="/yuanqu/product/createQRCode.do?id={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 生成二维码
                         </a>
+                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                           href="/yuanqu/product/getProductModelUrl.do?id={{=productModel.id}}"><span
+                                class="am-icon-trash-o"></span> 预览页面
+                        </a>
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                 class="am-icon-trash-o"></span> 删除(暂时不支持)
                         </button>

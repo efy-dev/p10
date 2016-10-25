@@ -47,38 +47,32 @@ public class OffLineTenantController {
     public String tenantForm() {
         MyUser user = AuthorizationUtil.getMyUser();
         String roleName = "";
-        Role role = null;
         String tempRedirect = "/yuanqu/tenantForm";
         String offline_managerRedirect = "/yuanqu/offline_manager_tenantForm";
         if (null != user) {
-            role = user.getRole();
-            roleName = role == null ? "" : role.getName();
+            roleName = user.getRole() == null ? "" : user.getRole().getName();
         }
-        if ("offline_manager".equals(roleName) /*&& null != getUserTenants()*/) {
+        if ("offline_manager".equals(roleName)) {
             return offline_managerRedirect;
         }
         return tempRedirect;
     }
 
- /*   public Object getProductsByTenant(HttpServletRequest request) {
-        String id = request.getParameter("id");
-        String hql = "select obj from  Product where  obj.tenant.id =:tenantId where obj.status!='0'";
-        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        param.put("tenantId", id);
-        return baseManager.listObject(hql, param);
-    }*/
-
-
-   /* public Object getUserTenants() {
+    @RequestMapping({"/tenant/getUserTenants"})
+    @ResponseBody
+    public Object getUserTenants() {
         MyUser user = AuthorizationUtil.getMyUser();
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         if (null != user) {
             param.put("userId", user.getId());
-            String hql = "select obj from UserTenant obj where obj.status!='0' and obj.user.id=:userId";
-            return baseManager.listObject(hql, param);
+            String hql = "select obj from UserTenant obj where obj.user.id=:userId and obj.user.status!='0'";
+            List<UserTenant> userTenants = baseManager.listObject(hql, param);
+            if (null != userTenants && userTenants.size() > 0) {
+                return userTenants.get(0).getTenant();
+            }
         }
         return null;
-    }*/
+    }
 
     @RequestMapping({"/tenant/baseSubmit"})
     @ResponseBody
@@ -525,6 +519,5 @@ public class OffLineTenantController {
 
         return createQRCode(this.getClass().getResource("/").getPath().toString(), tenantId, url);
     }
-
 
 }
