@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.yuanqu.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.product.model.Recommend;
@@ -13,6 +14,7 @@ import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.taglib.PageEntity;
+import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLEncoder;
 import java.util.*;
@@ -56,6 +59,21 @@ public class OffLineTenantController {
             return offline_managerRedirect;
         }
         return tempRedirect;
+    }
+    @RequestMapping({"/tenant/deleteTenantById"})
+    @ResponseBody
+    public Object deleteTenantById(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String id = request.getParameter("id");
+            if (id != null && !id.equals("")) {
+                baseManager.remove(BigTenant.class.getName(), id);
+            }
+        } catch (Exception e) {
+            jsonObject.put("code", "1");
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     @RequestMapping({"/tenant/getUserTenants"})

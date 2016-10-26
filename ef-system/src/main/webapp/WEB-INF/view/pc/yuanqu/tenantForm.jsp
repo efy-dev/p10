@@ -690,8 +690,9 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 推荐
                         </button>
-                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                class="am-icon-trash-o"></span> 删除(暂时不支持)
+                        <button onclick="PubSub.publish('tenantList.delete','{{=tenant.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                class="am-icon-trash-o"></span> 删除
                         </button>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                            href="/yuanqu/tenant/createQRCode.do?id={{=tenant.id}}"><span
@@ -721,7 +722,7 @@
 
             <fieldset>
 
-                <legend>商品信息信息</legend>
+                <legend>商品信息</legend>
 
                 <input name="tenantId" type="hidden" value="{{=it.tenant!=null ? it.tenant : ''}}">
                 <input name="id" type="hidden" value="{{=(it.data!=null && it.data.id!=null ) ? it.data.id: ''}}">
@@ -746,7 +747,7 @@
                 </div>
 
 
-                <div class="am-form-group am-form-file">
+              <%--  <div class="am-form-group am-form-file">
                     <label for="picture_url" class="am-u-sm-2 am-form-label">主图</label>
                     <div class="am-u-sm-10">
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
@@ -760,7 +761,7 @@
                         <img src="{{=it.data.picture_url}}" width="500"/>
                         {{ } }}
                     </div>
-                </div>
+                </div>--%>
 
 
                 <div class="am-form-group am-form-file">
@@ -913,8 +914,7 @@
 <script type="text/x-dot-template" id="main-product-model-panel">
     <div class="main-base">
         <ul class="am-nav am-nav-tabs am-nav-justify">
-            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)"
-                                     data="product-model-panelForm">新的商品栏目</a>
+            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="product-model-panelForm">新的商品栏目</a>
             </li>
             <li><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="product-model-panelList">查看所有</a></li>
         </ul>
@@ -948,8 +948,7 @@
     </div>
 
     <div class="main-base" data-for="product-model-panelForm" data-type="tabs">
-        <form class="am-form am-form-horizontal" name="tenant" id="main-product-model-panel-form"
-              action="{{=it.submit}}"
+        <form class="am-form am-form-horizontal" name="tenant" id="main-product-model-panel-form" action="{{=it.submit}}"
               enctype="multipart/form-data"
               method="post">
             <fieldset>
@@ -1018,20 +1017,20 @@
               enctype="multipart/form-data"
               method="post">
             <fieldset>
-                <legend><b>{{=it.data.name}}</b> 的栏目列表（商品详情）</legend>
+                <legend><b>{{=it.data.productPanel.id}}</b> 的栏目列表（商品详情）</legend>
                 <input type="hidden" name="id" value="{{=it.data.id}}">
 
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">名称</label>
                     <div class="am-u-sm-9">
-                        <input name="name" type="text" placeholder="名称">
+                        <input name="name" type="text" placeholder="名称"   value="{{=it.data.productPanel.name}}">
                     </div>
                 </div>
 
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">介绍</label>
                     <div class="am-u-sm-9">
-                        <textarea name="content" rows="5" placeholder="介绍"></textarea>
+                        <textarea id="productPanelContent" name="content" rows="5" placeholder="介绍"></textarea>
                     </div>
                 </div>
 
@@ -1123,6 +1122,10 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
                         </button>
+                        <button onclick="PubSub.publish('productPanel.render',{productId:'{{=product.id}}'})"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 商品详情
+                        </button>
                         <button onclick="PubSub.publish('productModelList.render','{{=product.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 商品规格
@@ -1134,8 +1137,9 @@
                         <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 添加英文版商品（暂不支持）
                         </button>
-                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                class="am-icon-trash-o"></span> 删除(暂不支持)
+                        <button onclick="PubSub.publish('productList.delete','{{=product.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                class="am-icon-trash-o"></span> 删除
                         </button>
                     </div>
                 </div>
@@ -1203,12 +1207,13 @@
                            href="/yuanqu/product/createQRCode.do?id={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 生成二维码
                         </a>
-                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" target="_blank"
-                           href="http://www.efeiyi.com/app/product_details.html?productId={{=productModel.id}}"><span
+                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                          target="_blank" href="/yuanqu/product/getProductModelUrl.do?id={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 预览页面
                         </a>
-                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                class="am-icon-trash-o"></span> 删除(暂时不支持)
+                        <button onclick="PubSub.publish('productModelList.delete','{{=productModel.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                class="am-icon-trash-o"></span> 删除
                         </button>
                     </div>
                 </div>
@@ -1655,7 +1660,6 @@
         this.param = param;
         this.name = "nav";
         this.template = "main-nav";         //组件绑定的模板//组件需要订阅的事件与消息
-
         this.render = function (msg, data) {
             renderTemplate(this.template, this);
             if (typeof this.currentComponent != "undefined" && this.currentComponent != null) {
@@ -1757,6 +1761,7 @@
                     renderTemplate(this.template, this);
                 }.bind(this))
             } else {
+                this.data=null;
                 renderTemplate(this.template, this);
             }
             this.show();
@@ -1796,7 +1801,6 @@
                 PubSub.publish("recommendBase.render", responseData.id);
             }.bind(this))
         };
-
 
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
@@ -1838,7 +1842,7 @@
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".imageView", subscriber: this.imageView},
             {message: this.name + ".complete", subscriber: this.complete},
-            {message: this.name + ".submit", subscriber: this.submitForm}
+            {message: this.name + ".submit", subscriber: this.submitForm},
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -1974,6 +1978,15 @@
             this.body();
         };
 
+        this.delete = function (msg, data) {
+            ajaxRequest("/yuanqu/tenant/deleteTenantById", {id:data}, function (responseData) {
+                this.data=responseData;
+                if(data.code!="1"){
+                    this.body();
+                }
+            }.bind(this));
+        };
+
         this.qrcode = function (msg, data) {
             var param = {};
             param.id = data;
@@ -2008,7 +2021,6 @@
             this.body();
         };
 
-
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
@@ -2029,7 +2041,8 @@
             {message: this.name + ".search", subscriber: this.search},
             {message: this.name + ".qrcode", subscriber: this.qrcode},
             {message: this.name + ".nextPage", subscriber: this.nextPage},
-            {message: this.name + ".prePage", subscriber: this.prePage}
+            {message: this.name + ".prePage", subscriber: this.prePage},
+            {message: this.name + ".delete", subscriber: this.delete}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2572,6 +2585,15 @@
             }.bind(this));
         };
 
+        this.delete = function (msg, data) {
+            ajaxRequest("/yuanqu/product/deleteProductById", {id:data}, function (responseData) {
+                this.data=responseData;
+                if(data.code!="1"){
+                    this.body();
+                }
+            }.bind(this));
+        };
+
         this.render = function (msg, data) {
             this.index = 1;
             this.tenantId = data;
@@ -2606,7 +2628,8 @@
             {message: this.name + ".body", subscriber: this.body},
             {message: this.name + ".search", subscriber: this.search},
             {message: this.name + ".nextPage", subscriber: this.nextPage},
-            {message: this.name + ".prePage", subscriber: this.prePage}
+            {message: this.name + ".prePage", subscriber: this.prePage},
+            {message: this.name + ".delete", subscriber: this.delete}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2647,7 +2670,14 @@
             this.show();
 
         };
-
+        this.delete = function (msg, data) {
+            ajaxRequest("/yuanqu/product/deleteProductModelById", {id:data}, function (responseData) {
+                this.data=responseData;
+                if(data.code!="1"){
+                    this.body();
+                }
+            }.bind(this));
+        };
 
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
@@ -2665,7 +2695,8 @@
             {message: this.name + ".hide", subscriber: this.hide},
             {message: this.name + ".render", subscriber: this.render},
             {message: this.name + ".remove", subscriber: this.remove},
-            {message: this.name + ".body", subscriber: this.body}
+            {message: this.name + ".body", subscriber: this.body},
+            {message: this.name + ".delete", subscriber: this.delete}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2809,8 +2840,8 @@
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
-                ajaxRequest("/yuanqu/product/getProductById", {id: data.id}, function (responseData) {
-                    this.data = responseData;
+                ajaxRequest("/yuanqu/product/getPanelById", {id: data.productId}, function (responseData) {
+                    this.data =  JSON.parse(responseData);
                     renderTemplate(this.template, this);
                 }.bind(this))
             } else {
@@ -3297,7 +3328,6 @@
     var recommendBase = new RecommendBase();        //推荐信息
     var recommendList = new RecommendList();        //推荐列表
     var menu = new Menu();
-
 
 </script>
 

@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -116,9 +117,10 @@
 
 <script type="text/x-dot-template" id="main-menu">
     <div class="main-menu">
-        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('productBase.render')">
+   <%--     <input name="id" type="hidden" value="{{=(it.data!=null && it.data.id!=null ) ? it.data.id: ''}}">--%>
+        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('productBase.render',{tenantId:'{{=it.data.id}}'})">
             <span>新商品</span></button>
-        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('productList.render')">
+        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('productList.render',{tenantId:'{{=it.data.id}}'})">
             <span>商品管理</span></button>
     </div>
 </script>
@@ -130,10 +132,10 @@
               method="post">
 
             <fieldset>
-
-                <legend>{{=it.tenantName}} 商品列表</legend>
+                <legend>{{=it.tenantId}} 的店铺</legend>
 
                 <input name="id" type="hidden" value="{{=(it.data!=null && it.data.id!=null ) ? it.data.id: ''}}">
+                <input name="tenantId" type="hidden" value="{{=(it.tenantId!=null) ? it.tenantId: ''}}">
 
                 <div class="am-form-group">
                     <label for="product-name" class="am-u-sm-2 am-form-label">名称</label>
@@ -155,7 +157,7 @@
                 </div>
 
 
-                <div class="am-form-group am-form-file">
+                <%--<div class="am-form-group am-form-file">
                     <label for="picture_url" class="am-u-sm-2 am-form-label">主图</label>
                     <div class="am-u-sm-10">
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
@@ -169,7 +171,7 @@
                         <img src="{{=it.data.picture_url}}" width="500"/>
                         {{ } }}
                     </div>
-                </div>
+                </div>--%>
 
 
                 <div class="am-form-group am-form-file">
@@ -338,7 +340,7 @@
 
     <div>
         <div class="am-u-lg-6">
-            <legend>{{=it.tenantName}} 商品列表</legend>
+            <legend>{{=it.tenantId}} 店铺的商品列表</legend>
             <div class="am-input-group">
                 <input type="text" class="am-form-field" oninput="PubSub.publish('{{=it.name}}.search',this)">
                 <span class="am-input-group-btn">
@@ -381,7 +383,7 @@
             <td>
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
-                        <button onclick="PubSub.publish('productBase.render',{productId:'{{=product.id}}'})"
+                        <button onclick="PubSub.publish('productBase.render',{productId:'{{=product.id}}',tenantId:'{{=product.tenant.id}}'})"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
                         </button>
@@ -519,7 +521,6 @@
             </tr>
             </thead>
             <tbody dot-template="main-product-model-panel-list">
-
             </tbody>
         </table>
 
@@ -584,7 +585,7 @@
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('productModel.render','{{=it.data.id}}')">< 上一步</a>
-                        <a onclick="PubSub.publish('tenantPanel.submit','{{=it.template}}-form')"
+                        <a onclick="PubSub.publish('productModelPanel.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">添加</a>
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('{{=it.name}}.nextProductModel','{{=it.template}}-form')">去添加下一个商品规格</a>
@@ -606,7 +607,7 @@
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                       onclick="PubSub.publish('tenantPanel.deletePanel','{{=imageText.id}}')"><span
+                       onclick="PubSub.publish('productModelPanel.deletePanel','{{=imageText.id}}')"><span
                             class="am-icon-trash-o"></span> 删除
                     </a>
                 </div>
@@ -673,7 +674,7 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
                         </button>
-                        <button onclick="PubSub.publish('productPanel.render','{{=productModel.id}}')"
+                        <button onclick="PubSub.publish('productModelPanel.render','{{=productModel.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 规格详情
                         </button>
@@ -725,6 +726,7 @@
 
     $().ready(function () {
         menu.render();
+
     });
 
     var Nav = function (param) {
@@ -785,9 +787,14 @@
         this.param = param;
         this.name = "menu";
         this.template = "main-menu";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.tenantId=null;
 
         this.render = function (msg, data) {
-            renderTemplate(this.template, this);
+            var param = {};
+            ajaxRequest("/yuanqu/tenant/getUserTenants",param, function (responseData) {
+                this.data = responseData;
+                renderTemplate(this.template, this);
+            }.bind(this));
             this.show();
         };
         this.show = function (msg, data) {
@@ -829,13 +836,25 @@
         this.param = param;
         this.name = "productBase";
         this.template = "main-product-base";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.tenantId="";
 
         this.render = function (msg, data) {
-            this.tenant = null;
-            ajaxRequest("/yuanqu/tenant/getUserTenants", {}, function (responseData) {
-                this.data = responseData;
+            if(typeof data.tenantId != "undefined" && data.tenantId != null){
+                this.tenantId=data.tenantId;
                 renderTemplate(this.template, this);
-            }.bind(this))
+            } else if (typeof data.productId != "undefined" && data.productId != null) {
+                ajaxRequest("/yuanqu/product/getProductById", {id:data.productId}, function (responseData) {
+                    this.data = responseData;
+                    renderTemplate(this.template, this);
+                }.bind(this))
+            }else if (typeof data != "undefined" && data != null) {
+                ajaxRequest("/yuanqu/tenant/getTenantById", {id: data}, function (responseData) {
+                    this.data = responseData;
+                    renderTemplate(this.template, this);
+                }.bind(this))
+            } else {
+                renderTemplate(this.template, this);
+            }
             this.show();
         };
 
@@ -930,7 +949,7 @@
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
-                ajaxRequest("/yuanqu/product/getProductById", {id: data}, function (responseData) {
+                ajaxRequest("/yuanqu/product", {id: data}, function (responseData) {
                     this.data = responseData;
                     renderTemplate(this.template, this);
                 }.bind(this))
@@ -1108,7 +1127,6 @@
     var ProductList = function (param) {
         this.currentSearch = null;
         this.tenantId = null;
-        this.tenantName = null;
         this.index = 1;
         this.size = 10;
         this.label = "商品管理";
@@ -1134,6 +1152,7 @@
         this.body = function (msg, data) {
             //@TODO 搜索列表与商品实体
             var param = {
+                tenantId:this.tenantId,
                 limit: this.size,
                 offset: ((this.index - 1) * this.size)
             };
@@ -1150,11 +1169,8 @@
         };
 
         this.render = function (msg, data) {
+            this.tenantId=data.tenantId;
             this.index = 1;
-            ajaxRequest("/yuanqu/tenant/getUserTenants", {}, function (responseData) {
-                this.tenantId = responseData.id;
-                this.tenantName=responseData.name;
-            }.bind(this));
             renderTemplate(this.template, this);
             this.show();
         };
@@ -1275,7 +1291,6 @@
                 renderTemplate(this.template, this);
             }
             this.show();
-
         };
 
 
@@ -1301,7 +1316,6 @@
                 renderTemplate(this.panelListTemplate, responseData);
             }.bind(this));
         };
-
 
         this.submitForm = function (msg, data) {
             $("#my-modal-loading").modal();

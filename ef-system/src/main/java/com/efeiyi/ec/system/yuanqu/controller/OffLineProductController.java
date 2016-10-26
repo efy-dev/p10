@@ -47,6 +47,38 @@ public class OffLineProductController {
     @Autowired
     private AutoSerialManager autoSerialManager;
 
+    @RequestMapping({"/deleteProductById"})
+    @ResponseBody
+    public Object deleteProductById(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String id = request.getParameter("id");
+            if (id != null && !id.equals("")) {
+                baseManager.delete(Product.class.getName(), id);
+            }
+        } catch (Exception e) {
+            jsonObject.put("code", "1");
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    @RequestMapping({"/deleteProductModelById"})
+    @ResponseBody
+    public Object deleteProductModelById(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String id = request.getParameter("id");
+            if (id != null && !id.equals("")) {
+                baseManager.delete(ProductModel.class.getName(), id);
+            }
+        } catch (Exception e) {
+            jsonObject.put("code", "1");
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
     @RequestMapping({"/getProductById"})
     @ResponseBody
     public Object getProductById(HttpServletRequest request) {
@@ -76,9 +108,11 @@ public class OffLineProductController {
         String audioHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='2'";
         ImagePanel audio = (ImagePanel) baseManager.getUniqueObjectByConditions(audioHql, imagesParam);
         List<ImagePanel> images = (List<ImagePanel>)baseManager.listObject(imageHql, imagesParam);
-        jsonObject.put("basePanel", panel);
-        jsonObject.put("images", images);
-        jsonObject.put("audio",audio);
+        panel.setImageList(images);
+        if(audio!=null){
+            panel.setMedia(audio.getImage());
+        }
+        jsonObject.put("productPanel", panel);
         return jsonObject.toString();
     }
     @RequestMapping({"/getProductsByTenantId"})
@@ -97,7 +131,6 @@ public class OffLineProductController {
         return product;
     }
 
-
     @RequestMapping({"/baseSubmit"})
     @ResponseBody
     public Object baseSubmit(HttpServletRequest request, MultipartRequest multipartRequest) {
@@ -106,7 +139,7 @@ public class OffLineProductController {
             product = (Product) baseManager.getObject(Product.class.getName(), request.getParameter("id"));
         } else {
             product = new Product();
-            if (request.getParameter("tenantId") != null) {
+            if (request.getParameter("tenantId") != null&&!request.getParameter("tenantId").equals("")) {
                 BigTenant tenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), request.getParameter("tenantId"));
                 product.setBigTenant(tenant);
             }
