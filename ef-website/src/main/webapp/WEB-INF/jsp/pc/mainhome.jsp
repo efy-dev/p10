@@ -297,7 +297,7 @@
                 <ul class="pro">
                     <c:forEach items="${artistryList}" var="artistry">
                         <li>
-                            <a href="http://minglu.efeiyi.com/project/${artistry.id}" title="" target="">
+                            <a href="http://minglu.efeiyi.com/minglu/project/${artistry.id}" title="" target="">
                                 <div class="img"><img class="imgbg"
                                                       src="http://wiki-oss.efeiyi.com/${artistry.getMainPicture().pictureUrl}@!pc-main-artistry-picture"
                                                       alt=""></div>

@@ -1,4 +1,5 @@
 <%@ page import="com.efeiyi.ec.website.base.util.AuthorizationUtil" %>
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -183,7 +184,7 @@
                     <ul class="items">
                         <c:forEach items="${artistryList}" var="artistry" begin="0" end="3">
                             <li>
-                                <a href="http://minglu.efeiyi.com/project/${artistry.id}" title="">
+                                <a href="http://minglu.efeiyi.com/minglu/project/${artistry.id}" title="">
                                     <img src="http://wiki-oss.efeiyi.com/${artistry.getMainPicture().pictureUrl}@!wiki-project-picture">
                                     <span class="info">
                                     <p class="t1">&nbsp;</p>
@@ -222,8 +223,8 @@
                 if (AuthorizationUtil.getMyUser().getId() == null) {
             %>
             <div class="bd links">
-                <a href="<c:url value="/sso.do"/>" title="登录">登&nbsp;&nbsp;录</a>
-                <a href="<c:url value="/signin"/> " title="注册">注&nbsp;&nbsp;册</a>
+                <a href="http://<%=PConst.WEBSITE_HOST%>/login" title="登录">登&nbsp;&nbsp;录</a>
+                <a href=http://<%=PConst.WEBSITE_HOST%>/signin" title="注册">注&nbsp;&nbsp;册</a>
             </div>
             <%
                 }
