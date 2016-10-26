@@ -11,6 +11,7 @@ import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.base.authentication.ContextUtils;
+import com.efeiyi.ec.website.order.model.WxPayConfig;
 import com.efeiyi.ec.website.organization.model.SmsProvider;
 import com.efeiyi.ec.website.organization.model.ValidateCode;
 import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
@@ -20,10 +21,13 @@ import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.PConst;
+import com.ming800.core.p.model.WxCalledRecord;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.CookieTool;
+import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -44,6 +48,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -300,5 +305,117 @@ public class SigninController extends BaseController {
         MyUser currentUser = AuthorizationUtil.getMyUser();
         return currentUser;
     }
+
+
+    @RequestMapping({"/wl"})
+    public String login(HttpServletRequest request, Model model) throws Exception {
+        String result;
+        String redirect = request.getParameter("state");
+        String code = request.getParameter("code");
+        if (request.getSession().getAttribute(code) != null) {
+            result = request.getSession().getAttribute(code).toString();
+        } else {
+            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+            result = HttpUtil.getHttpResponse(urlForOpenId, null);
+            request.getSession().setAttribute(code, result);
+        }
+        JSONObject jsonObject = JSONObject.fromObject(result);
+        if (jsonObject.containsKey("errcode")) {
+            throw new RuntimeException("get openId error：" + result);
+        }
+        String access_token = jsonObject.getString("access_token");
+        String openid = jsonObject.getString("openid");
+
+        String urlForOpenId = "https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + openid + "&lang=zh_CN";
+        String userInfo = HttpUtil.getHttpResponse(urlForOpenId, null);
+        JSONObject userJsonObject = JSONObject.fromObject(userInfo);
+
+        String nickname = userJsonObject.get("nickname").toString();
+        String sex = userJsonObject.get("sex").toString();
+        String city = userJsonObject.get("city").toString();
+        String headimgurl = userJsonObject.get("headimgurl").toString();
+        String unionid = userJsonObject.get("unionid").toString();
+        MyUser myUser = authenticate(unionid);
+        WxCalledRecord wxCalledRecord = new WxCalledRecord();
+        wxCalledRecord.setCallback(redirect);
+        wxCalledRecord.setDataKey("unionid");
+        wxCalledRecord.setData(unionid);
+        wxCalledRecord.setCreateDatetime(new Date());
+        baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
+        if (myUser == null) {
+            Consumer consumer;
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            param.put("unionid", unionid);
+            try {
+                consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param);
+            } catch (Exception e) {
+                consumer = (Consumer) baseManager.listObject("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param).get(0);
+            }
+            if (consumer == null) {
+                consumer = new Consumer();
+            }
+            consumer.setUnionid(unionid);
+            consumer.setName(nickname);
+            consumer.setUsername(unionid);
+            consumer.setPassword(StringUtil.encodePassword(nickname, "sha"));
+            consumer.setCreateDatetime(new Date(System.currentTimeMillis()));
+            consumer.setStatus("1");
+            consumer.setBalance(new BigDecimal(0));
+            consumer.setAccountExpired(false);
+            consumer.setAccountLocked(false);
+            consumer.setCredentialsExpired(false);
+            consumer.setEnabled(true);
+            consumer.setCityName(city);
+            consumer.setPictureUrl(headimgurl);
+            consumer.setSex(Integer.parseInt(sex));
+            baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
+            authenticate(unionid);
+        }
+        redirect = URLDecoder.decode(redirect, "UTF-8");
+        return "redirect:http://www.efeiyi.com/qrcode/redirect/" + redirect;
+    }
+
+
+    private MyUser authenticate(String unionid) {
+        MyUser myUser;
+        System.out.println(AuthorizationUtil.isAuthenticated());
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("unionid", unionid);
+        Consumer consumer = null;
+        try {
+            consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param);
+        } catch (Exception e) {
+            consumer = (Consumer) baseManager.listObject("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param).get(0);
+        }
+        if (consumer != null) {
+            myUser = (MyUser) baseManager.getObject(MyUser.class.getName(), consumer.getId());
+        } else {
+            return null;
+        }
+        AuthenticationManager am = new SampleAuthenticationManager();
+        try {
+            Authentication authentication = new UsernamePasswordAuthenticationToken(myUser, myUser.getPassword());
+            Authentication result = am.authenticate(authentication);
+            SecurityContextHolder.getContext().setAuthentication(result);
+        } catch (AuthenticationException e) {
+            System.out.println("Authentication failed: " + e.getMessage());
+        }
+        return myUser;
+    }
+
+
+    private static class SampleAuthenticationManager implements AuthenticationManager {
+        static final List<GrantedAuthority> AUTHORITIES = new ArrayList<>();
+
+        static {
+            AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+
+        public Authentication authenticate(Authentication auth) throws AuthenticationException {
+            return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
+                    auth.getCredentials(), AUTHORITIES);
+        }
+    }
+
 }
 

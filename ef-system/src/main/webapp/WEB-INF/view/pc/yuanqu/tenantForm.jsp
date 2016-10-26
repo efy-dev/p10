@@ -1204,7 +1204,7 @@
                                 class="am-icon-trash-o"></span> 生成二维码
                         </a>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" target="_blank"
-                           href="/yuanqu/product/getProductModelUrl.do?id={{=productModel.id}}"><span
+                           href="http://www.efeiyi.com/app/product_details.html?productId={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 预览页面
                         </a>
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
@@ -3297,6 +3297,7 @@
     var recommendBase = new RecommendBase();        //推荐信息
     var recommendList = new RecommendList();        //推荐列表
     var menu = new Menu();
+
 
 </script>
 

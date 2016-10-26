@@ -732,7 +732,7 @@
                 $("#provinceVal" + addressId).append(rowHtml);
                 $("#provinceVal" + addressId + " option[value='" + v + "']").attr("selected", "selected");
                 city(v, addressId);
-            },
+            }
 
         });
     }
@@ -787,7 +787,7 @@
                 $("#cityVal" + addressId).append(rowHtml);
                 $("#cityVal" + addressId + " option[value='" + v + "']").attr("selected", "selected");
                 district(v, addressId);
-            },
+            }
         });
     }
 
@@ -821,7 +821,7 @@
                         $("#address" + addressId).hide();
 
                     }
-                },
+                }
             });
         })
     }
@@ -835,7 +835,7 @@
             dataType: 'json',
             data: {
                 status: 2,
-                id: addressId,
+                id: addressId
 
             },
             success: function (data) {
@@ -843,10 +843,10 @@
                     consumerAddress = addressId;
                     $("div[name=addressItem]").each(function () {
                         $(this).attr("class", "default-text");
-                    })
+                    });
                     $("#" + consumerAddress).attr("class", "default-text triangle")
                 }
-            },
+            }
 
         });
     }
