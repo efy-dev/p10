@@ -27,12 +27,13 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
             } else {
                 mav.setViewName("/wap" + mav.getViewName());
             }
-
-            String url = request.getRequestURL().toString();
-            if (url.startsWith("http://minglu.efeiyi.com/".toLowerCase()) && !url.endsWith("login")) {
-                mav.setViewName("/wiki/jsp" + mav.getViewName());
-            } else if (url.startsWith("http://i.efeiyi.com/".toLowerCase()) && !url.endsWith("login")) {
-                mav.setViewName("/consumer/jsp" + mav.getViewName());
+            if (response.getStatus() >= 200 && response.getStatus() < 300) {
+                String url = request.getRequestURL().toString();
+                if (url.startsWith("http://minglu.efeiyi.com/".toLowerCase()) && !url.endsWith("login")) {
+                    mav.setViewName("/wiki/jsp" + mav.getViewName());
+                } else if (url.startsWith("http://i.efeiyi.com/".toLowerCase()) && !url.endsWith("login")) {
+                    mav.setViewName("/consumer/jsp" + mav.getViewName());
+                }
             }
 
         }
@@ -50,7 +51,9 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         String url = request.getRequestURL().toString();
-        if (url.equalsIgnoreCase("http://" + PConst.WEBSITE_WIKI_HOST + "/")) {
+        if (url.endsWith("404") || url.endsWith("500") || url.endsWith("404")) {
+            return true;
+        } else if (url.equalsIgnoreCase("http://" + PConst.WEBSITE_WIKI_HOST + "/")) {
             response.sendRedirect("http://" + PConst.WEBSITE_WIKI_HOST + "/minglu");
             return false;
         } else if (url.equalsIgnoreCase("http://" + PConst.WEBSITE_CONSUMER_HOST + "/")) {

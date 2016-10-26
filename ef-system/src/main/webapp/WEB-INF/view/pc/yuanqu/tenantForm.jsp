@@ -913,7 +913,8 @@
 <script type="text/x-dot-template" id="main-product-model-panel">
     <div class="main-base">
         <ul class="am-nav am-nav-tabs am-nav-justify">
-            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="product-model-panelForm">新的商品栏目</a>
+            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)"
+                                     data="product-model-panelForm">新的商品栏目</a>
             </li>
             <li><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="product-model-panelList">查看所有</a></li>
         </ul>
@@ -947,7 +948,8 @@
     </div>
 
     <div class="main-base" data-for="product-model-panelForm" data-type="tabs">
-        <form class="am-form am-form-horizontal" name="tenant" id="main-product-model-panel-form" action="{{=it.submit}}"
+        <form class="am-form am-form-horizontal" name="tenant" id="main-product-model-panel-form"
+              action="{{=it.submit}}"
               enctype="multipart/form-data"
               method="post">
             <fieldset>
@@ -1193,7 +1195,7 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
                         </button>
-                        <button onclick="PubSub.publish('productPanel.render','{{=productModel.id}}')"
+                        <button onclick="PubSub.publish('productModelPanel.render','{{=productModel.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 规格详情
                         </button>
@@ -1201,7 +1203,7 @@
                            href="/yuanqu/product/createQRCode.do?id={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 生成二维码
                         </a>
-                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" target="_blank"
                            href="/yuanqu/product/getProductModelUrl.do?id={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 预览页面
                         </a>
@@ -1653,6 +1655,7 @@
         this.param = param;
         this.name = "nav";
         this.template = "main-nav";         //组件绑定的模板//组件需要订阅的事件与消息
+
         this.render = function (msg, data) {
             renderTemplate(this.template, this);
             if (typeof this.currentComponent != "undefined" && this.currentComponent != null) {
