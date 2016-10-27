@@ -2674,7 +2674,7 @@
             ajaxRequest("/yuanqu/product/deleteProductModelById", {id:data}, function (responseData) {
                 this.data=responseData;
                 if(data.code!="1"){
-                    this.body();
+                    this.body();xc
                 }
             }.bind(this));
         };

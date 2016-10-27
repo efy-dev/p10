@@ -3,7 +3,6 @@ package com.efeiyi.ec.website.base.controller;
 import com.efeiyi.ec.gift.model.ProductGiftTagValue;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterUserTemp;
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.Panel;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.ProductModel;
@@ -11,24 +10,13 @@ import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
 import com.efeiyi.ec.tenant.model.BigTenant;
-import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
-import com.ming800.core.p.model.Banner;
 import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import com.ming800.core.util.CookieTool;
-import com.ming800.core.util.HttpUtil;
-import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -72,7 +60,7 @@ public class HomeController {
         return "redirect:" + redirect;
     }
 
-    @RequestMapping({"/qrcode/redirect/{dataType}/{dataId}"})
+    @RequestMapping({"/qrcode/sample/{dataType}/{dataId}"})
     public String appRedirectSampleUrl(@PathVariable String dataType, @PathVariable String dataId, HttpServletRequest request) throws Exception {
         String redirect = "";
         if (dataType.equals("0")) {

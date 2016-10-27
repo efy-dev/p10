@@ -25,6 +25,28 @@ import java.util.Map;
  */
 public class Util {
 
+
+    class Qrcode {
+
+        BufferedImage background;
+        BufferedImage logo;
+        BufferedImage qrcode;
+
+        String qrcodeContent;
+        String backgroundUrl;
+        String logoUrl;
+
+
+        public BufferedImage createQrcode() {
+            return null;
+        }
+
+        public BufferedImage assembleElement() {
+            return null;
+        }
+
+    }
+
     public static ResponseEntity<byte[]> createQRCode(String classPath, String dataId, String content) throws Exception {
         Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
         hints.put(EncodeHintType.MARGIN, 0);
