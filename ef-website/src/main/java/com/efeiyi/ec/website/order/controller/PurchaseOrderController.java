@@ -337,14 +337,14 @@ public class PurchaseOrderController extends BaseController {
 
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         //校验运费是否正确
-        if(addressId != null && freight != null){
-            BigDecimal returnFreight = postageManager.getFreight((PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId),(ConsumerAddress)baseManager.getObject(ConsumerAddress.class.getName(),addressId));
-            if(postageManager.fetchFreight(freight,returnFreight)){
-                purchaseOrder.setFreight(new BigDecimal(freight));
-                purchaseOrder.setTotal(purchaseOrder.getTotal().add(new BigDecimal(freight)));
-                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
-            }
-        }
+//        if(addressId != null && freight != null){
+//            BigDecimal returnFreight = postageManager.getFreight((PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId),(ConsumerAddress)baseManager.getObject(ConsumerAddress.class.getName(),addressId));
+//            if(postageManager.fetchFreight(freight,returnFreight)){
+//                purchaseOrder.setFreight(new BigDecimal(freight));
+//                purchaseOrder.setTotal(purchaseOrder.getTotal().add(new BigDecimal(freight)));
+//                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+//            }
+//        }
         //这里首先余额是从客户端传递过来，需要跟数据库做对比，如果余额的数目不对，就会报错，ckeck的步骤可以放到Manager里做
         if (balanceManager.checkBalance(Float.valueOf(balance))) {
             //订单收货地址//初始化订单状态
