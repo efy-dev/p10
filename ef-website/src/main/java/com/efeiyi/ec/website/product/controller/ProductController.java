@@ -3,7 +3,10 @@ package com.efeiyi.ec.website.product.controller;
 import com.efeiyi.ec.organization.model.Image;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.Panel;
-import com.efeiyi.ec.product.model.*;
+import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductFavorite;
+import com.efeiyi.ec.product.model.ProductModel;
+import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
@@ -14,8 +17,6 @@ import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.StringUtil;
-import com.sun.research.ws.wadl.Link;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -348,7 +348,7 @@ public class ProductController {
             param.put("productId", productModel.getProduct().getId());
             String audioHql = "select obj from Image obj where obj.owner=:productId and obj.status!='0' and obj.type='2'";
             Image image = (Image) baseManager.getUniqueObjectByConditions(audioHql, param);
-            String src=image==null?"":image.getSrc();
+            String src = image == null ? "" : image.getSrc();
             productModel.setAudio(src);
             return productModel;
         } catch (Exception e) {
@@ -362,11 +362,19 @@ public class ProductController {
     @ResponseBody
     public Object getColumnListByProductModel(HttpServletRequest request) {
         try {
-            String id = request.getParameter("id");
+            String productModelId = request.getParameter("id");
+            ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+            String productId = productModel.getProduct().getId();
+            List<Panel> result;
             String hql = "select obj from " + Panel.class.getName() + " obj where obj.owner=:id";
             LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-            param.put("id", id);
-            return baseManager.listObject(hql, param);
+            param.put("id", productId);
+            result = baseManager.listObject(hql, param);
+            if (result.isEmpty()) {
+                param.put("id", productModelId);
+                result = baseManager.listObject(hql, param);
+            }
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
             JSONObject jsonObject = new JSONObject();
