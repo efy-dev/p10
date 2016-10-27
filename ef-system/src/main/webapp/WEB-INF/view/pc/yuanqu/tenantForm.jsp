@@ -951,7 +951,7 @@
               enctype="multipart/form-data"
               method="post">
             <fieldset>
-                <legend><b>{{=it.data.name}}</b> 的栏目列表（商品详情）</legend>
+                <legend><b>{{=it.data}}</b> 的栏目列表（商品详情）</legend>
                 <input type="hidden" name="id" value="{{=it.data.id}}">
 
                 <div class="am-form-group">

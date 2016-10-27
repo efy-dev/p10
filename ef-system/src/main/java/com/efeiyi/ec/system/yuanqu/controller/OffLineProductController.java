@@ -390,12 +390,20 @@ public class OffLineProductController {
 
         return createQRCode(this.getClass().getResource("/").getPath().toString(), productId, url);
     }
-    @RequestMapping("/getProductModelUrl.do")
-    public String getProductModelUrl(HttpServletRequest request) throws Exception {
+    @RequestMapping("/createQRCodeSample.do")
+    @ResponseBody
+    public ResponseEntity<byte[]> createProductQRCodeSample(HttpServletRequest request) throws Exception {
 
         String productId = request.getParameter("id");
+        String redirect = "0/" + productId;
+        String redirect_uri = "http://mall.efeiyi.com/wl";
+        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+                "appid=wx7f6aa253b75466dd" +
+                "&redirect_uri=" +
+                URLEncoder.encode(redirect_uri, "UTF-8") +
+                "&response_type=code&scope=snsapi_userinfo&state=" + URLEncoder.encode(redirect, "UTF-8") + "#wechat_redirect";
 
-        return  "redirect:http://www.efeiyi.com/qrcode/redirect/product/" + productId;
+        return createQRCode(this.getClass().getResource("/").getPath().toString(), productId, url);
     }
 
 }
