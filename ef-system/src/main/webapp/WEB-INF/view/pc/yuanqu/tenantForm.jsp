@@ -454,7 +454,7 @@
 
             <fieldset>
 
-                <legend><b>{{=it.data.name}}</b> 大师信息</legend>
+                <legend><b>{{=it.data.name}}</b> 的大师信息</legend>
 
                 <div class="am-form-group">
                     <div class="am-u-sm-10">
@@ -682,7 +682,7 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 商品管理
                         </button>
-                        <button onclick="PubSub.publish('productBase.render',{tenantId:'{{=tenant.id}}'})"
+                        <button onclick="PubSub.publish('productBase.render','{{=tenant.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 添加商品
                         </button>
@@ -802,15 +802,14 @@
 
             <fieldset>
 
-                <legend><b>{{=it.product}}</b> 商品规格信息</legend>
-                <input type="hidden" name="id" value="{{=it.data != null ? it.data.id : ''}}">
-                <input type="hidden" name="productId" value="{{=it.product}}">
-
+                <legend>商品规格信息</legend>
+              <%--  <input type="hidden" name="id" value="{{=it.data != null ? it.data.productModelId : ''}}">--%>
+                <input type="hidden" name="productId" value="{{=it.data != null ? it.data.id : ''}}">
                 <div class="am-form-group">
                     <label for="product-model-name" class="am-u-sm-3 am-form-label">规格名称</label>
                     <div class="am-u-sm-9">
                         <input name="name" type="text" id="product-model-name"
-                               value="{{=(it.data!=null && it.data.name!=null) ? it.data.name: ''}}"
+                              <%-- value="{{=(it.data!=null && it.data.name!=null) ? it.data.name: ''}}"--%>
                                placeholder="输入规格名称">
                     </div>
                 </div>
@@ -819,7 +818,7 @@
                     <label for="product-model-amount" class="am-u-sm-3 am-form-label">库存（默认为1）</label>
                     <div class="am-u-sm-9">
                         <input name="amount" type="text" id="product-model-amount"
-                               value="{{=(it.data!=null && it.data.amount!=null) ? it.data.amount : ''}}"
+                              <%-- value="{{=(it.data!=null && it.data.amount!=null) ? it.data.amount : ''}}"--%>
                                placeholder="输入库存">
                     </div>
                 </div>
@@ -828,7 +827,7 @@
                     <label for="product-model-price" class="am-u-sm-3 am-form-label">线上价格</label>
                     <div class="am-u-sm-9">
                         <input name="price" type="text" id="product-model-price"
-                               value="{{=(it.data!=null && it.data.price!=null)  ? it.data.price : ''}}"
+                             <%--  value="{{=(it.data!=null && it.data.price!=null)  ? it.data.price : ''}}"--%>
                                placeholder="输入商品价格">
                     </div>
                 </div>
@@ -838,7 +837,7 @@
                            class="am-u-sm-3 am-form-label">线下价格（如果与线上价格相同，就不要填写了）</label>
                     <div class="am-u-sm-9">
                         <input name="marketPrice" type="text" id="product-model-marketPrice"
-                               value="{{=(it.data!=null && it.data.marketPrice!=null) ? it.data.marketPrice : ''}}"
+                              <%-- value="{{=(it.data!=null && it.data.marketPrice!=null) ? it.data.marketPrice : ''}}"--%>
                                placeholder="输入线下实体店中的价格">
                     </div>
                 </div>
@@ -921,7 +920,7 @@
     </div>
 
     <div class="main-base" data-for="product-model-panelList" data-type="tabs" style="display: none">
-        <legend><b>{{=it.data.name}}</b> 的栏目列表（商品详情）</legend>
+        <legend><b>{{=it.data}}</b> 的栏目列表（商品详情）</legend>
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
@@ -941,9 +940,9 @@
             <a class="am-btn am-btn-primary am-btn-lg"
                onclick="PubSub.publish('productList.render')">完成</a>
             <a class="am-btn am-btn-primary am-btn-lg"
-               onclick="PubSub.publish('productModel.render',{productId:'{{=it.data.product.id}}'})">添加下一个商品规格</a>
+               onclick="PubSub.publish('productModel.render','{{=it.data.id}}')">添加下一个商品规格</a>
             <a class="am-btn am-btn-primary am-btn-lg"
-               onclick="PubSub.publish('productBase.render',{tenantId:'{{=it.data.product.tenant.id}}'})">添加下一个商品</a>
+               onclick="PubSub.publish('productBase.render','{{=it.data.id}}')">添加下一个商品</a>
         </div>
     </div>
 
@@ -1017,13 +1016,13 @@
               enctype="multipart/form-data"
               method="post">
             <fieldset>
-                <legend><b>{{=it.data.productPanel.id}}</b> 的栏目列表（商品详情）</legend>
+                <legend><b>{{=it.data.id}}</b> 的栏目列表（商品详情）</legend>
                 <input type="hidden" name="id" value="{{=it.data.id}}">
 
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">名称</label>
                     <div class="am-u-sm-9">
-                        <input name="name" type="text" placeholder="名称"   value="{{=it.data.productPanel.name}}">
+                        <input name="name" type="text" placeholder="名称"  <%-- value="{{=it.data.name}}"--%>>
                     </div>
                 </div>
 
@@ -1118,11 +1117,11 @@
             <td>
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
-                        <button onclick="PubSub.publish('productBase.render',{productId:'{{=product.id}}'})"
+                        <button onclick="PubSub.publish('productBase.render','{{=product.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
                         </button>
-                        <button onclick="PubSub.publish('productPanel.render',{productId:'{{=product.id}}'})"
+                        <button onclick="PubSub.publish('productPanel.render','{{=product.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 商品详情
                         </button>
@@ -1130,7 +1129,7 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 商品规格
                         </button>
-                        <button onclick="PubSub.publish('productModel.render',{productId:'{{=product.id}}'})"
+                        <button onclick="PubSub.publish('productModel.render','{{=product.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 添加规格
                         </button>
@@ -1195,7 +1194,7 @@
             <td>
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
-                        <button onclick="PubSub.publish('productModel.render',{id:'{{=productModel.id}}'})"
+                        <button onclick="PubSub.publish('productModelPanel.render','{{=productModel.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
                         </button>
@@ -2258,19 +2257,15 @@
 
         this.render = function (msg, data) {
 
-            if (typeof data != "undefined" && data != null && typeof data.productId != "undefined" && data.productId != null) {
+         /*   if (typeof data != "undefined" && data != null) {
                 this.tenant = null;
-                ajaxRequest("/yuanqu/product/getProductById", {id: data.productId}, function (responseData) {
+                ajaxRequest("/yuanqu/product/getProductById", {id:data}, function (responseData) {
                     this.data = responseData;
                     renderTemplate(this.template, this);
                 }.bind(this))
-            } else if (typeof data.tenantId == "undefined" || data.tenantId == null) {
-                showAlert("提示", "没有传递必要参数\"店铺id\"");
-            } else {
-                this.tenant = data.tenantId;
-                renderTemplate(this.template, this);
-
-            }
+            }*/
+            this.tenant=data;
+            renderTemplate(this.template, this);
             this.show();
 
         };
@@ -2412,15 +2407,12 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    PubSub.publish('productPanel.render', {
-                        id: this.data.id
-                    });
+                    PubSub.publish('productPanel.render',this.data.id);
                 }
                 $("#my-modal-loading").modal("close");
             }.bind(this));
             return false;
         };
-
 
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
@@ -2461,17 +2453,14 @@
         this.param = param;
         this.name = "productModel";
         this.template = "main-product-model";         //组件绑定的模板//组件需要订阅的事件与消息
-        this.product = null;
 
         this.render = function (msg, data) {
-            if (typeof data != "undefined" && data != null && typeof data.id != "undefined") {
-                ajaxRequest("/yuanqu/product/getProductModelById", {id: data.id}, function (responseData) {
+            if (typeof data != "undefined" && data != null) {
+                ajaxRequest("/yuanqu/product/getProductById", {id: data}, function (responseData) {
                     this.data = responseData;
-                    this.product = this.data.product.id;
                     renderTemplate(this.template, this);
                 }.bind(this))
-            } else if (typeof data != "undefined" && data != null) {
-                this.product = data.productId;
+            } else {
                 renderTemplate(this.template, this);
             }
             this.show();
@@ -2484,8 +2473,8 @@
                 if (typeof data == "string") {
                     data = JSON.parse(data);
                 }
-                if (typeof data.id != "undefined" && data.id != null) {
-                    PubSub.publish("productModelPanel.render", data.id);
+                if (typeof data != "undefined" && data != null) {
+                    PubSub.publish("productModelPanel.render", data);
                     //@TODO
                 }
                 $("#my-modal-loading").modal("close");
@@ -2719,11 +2708,12 @@
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
-                ajaxRequest("/yuanqu/product/getProductModelById", {id: data}, function (responseData) {
+              /*  ajaxRequest("/yuanqu/product/getProductModelById", data, function (responseData) {
                     this.data = responseData;
                     renderTemplate(this.template, this);
                 }.bind(this))
-            } else {
+            } else {*/
+                this.data=data;
                 renderTemplate(this.template, this);
             }
             this.show();
@@ -2749,11 +2739,10 @@
             });
             var tabData = $(data).attr("data");
             $("[data-for=" + tabData + "]").show();
-            ajaxRequest("/yuanqu/product/getPanelListByProductModel", {id: this.data.id}, function (responseData) {
+            ajaxRequest("/yuanqu/product/getPanelListByProductModel", {id:this.data.id}, function (responseData) {
                 renderTemplate(this.panelListTemplate, responseData);
             }.bind(this));
         };
-
 
         this.submitForm = function (msg, data) {
             $("#my-modal-loading").modal();
@@ -2768,7 +2757,7 @@
         this.nextProductModel = function (msg, data) {
             $("#my-modal-loading").modal();
             $("#" + data).ajaxSubmit(function (responseData) {
-                PubSub.publish("productModel.render", {productId: this.data.product.id})
+                PubSub.publish("productModel.render", this.data.product.id)
                 $("#my-modal-loading").modal("close");
             }.bind(this));
             return false;
@@ -2840,17 +2829,16 @@
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
-                ajaxRequest("/yuanqu/product/getPanelById", {id: data.productId}, function (responseData) {
-                    this.data =  JSON.parse(responseData);
-                    renderTemplate(this.template, this);
-                }.bind(this))
-            } else {
+                ajaxRequest("/yuanqu/product/getProductById", {id: data}, function (responseData) {
+                        this.data=responseData;
+                        renderTemplate(this.template, this);
+                    }.bind(this));
+            }else {
+                this.data=null;
                 renderTemplate(this.template, this);
             }
             this.show();
-
         };
-
         this.deletePanel = function (msg, data) {
             var success = function (responseData) {
                 $("#" + responseData).remove();
@@ -2864,10 +2852,7 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    PubSub.publish('productModel.render', {
-                        productId: this.data.id
-                    });
-                }
+                    PubSub.publish('productModel.render', this.data.id);}
                 $("#my-modal-loading").modal("close");
             }.bind(this));
             return false;
