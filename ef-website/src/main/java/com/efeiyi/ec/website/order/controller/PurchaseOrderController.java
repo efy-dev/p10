@@ -200,11 +200,11 @@ public class PurchaseOrderController extends BaseController {
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
         List<ConsumerAddress> addressList = baseManager.listObject(xQuery);
-        for(ConsumerAddress consumerAddress:addressList){
-            if(consumerAddress.getStatus().equals("2")){
-                model.addAttribute("freight",postageManager.getFreight(purchaseOrder,consumerAddress));
-            }
-        }
+//        for(ConsumerAddress consumerAddress:addressList){
+//            if(consumerAddress.getStatus().equals("2")){
+//                model.addAttribute("freight",postageManager.getFreight(purchaseOrder,consumerAddress));
+//            }
+//        }
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
@@ -253,11 +253,11 @@ public class PurchaseOrderController extends BaseController {
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
         List<ConsumerAddress> addressList = baseManager.listObject(xQuery);
-        for(ConsumerAddress consumerAddress:addressList){
-            if(consumerAddress.getStatus().equals("2")){
-                model.addAttribute("freight",postageManager.getFreight(purchaseOrder,consumerAddress));
-            }
-        }
+//        for(ConsumerAddress consumerAddress:addressList){
+//            if(consumerAddress.getStatus().equals("2")){
+//                model.addAttribute("freight",postageManager.getFreight(purchaseOrder,consumerAddress));
+//            }
+//        }
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
@@ -279,11 +279,11 @@ public class PurchaseOrderController extends BaseController {
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
         List<ConsumerAddress> addressList = baseManager.listObject(xQuery);
-        for(ConsumerAddress consumerAddress:addressList){
-            if(consumerAddress.getStatus().equals("2")){
-                model.addAttribute("freight",postageManager.getFreight(purchaseOrder,consumerAddress));
-            }
-        }
+//        for(ConsumerAddress consumerAddress:addressList){
+//            if(consumerAddress.getStatus().equals("2")){
+//                model.addAttribute("freight",postageManager.getFreight(purchaseOrder,consumerAddress));
+//            }
+//        }
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
         Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
