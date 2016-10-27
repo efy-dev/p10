@@ -124,7 +124,7 @@
                     </label>
 
                     <a class="forgetpwd"
-                       href="<c:url value='/forgetPassword'/>"
+                       href="http://www.efeiyi.com/forgetPassword"
                        title="忘记密码">忘记密码？</a>
                 </div>
 

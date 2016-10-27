@@ -21,7 +21,7 @@ public class LoginOutSuccessHandler extends
     public void onLogoutSuccess
             (HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-        MyUser myUser = (MyUser) authentication.getPrincipal();
+        //MyUser myUser = (MyUser) authentication.getPrincipal();
         super.onLogoutSuccess(request, response, authentication);
     }
 }

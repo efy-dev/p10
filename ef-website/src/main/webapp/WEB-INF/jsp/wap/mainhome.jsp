@@ -224,7 +224,7 @@
             %>
             <div class="bd links">
                 <a href="http://<%=PConst.WEBSITE_HOST%>/login" title="登录">登&nbsp;&nbsp;录</a>
-                <a href=http://<%=PConst.WEBSITE_HOST%>/signin" title="注册">注&nbsp;&nbsp;册</a>
+                <a href="http://<%=PConst.WEBSITE_HOST%>/signin" title="注册">注&nbsp;&nbsp;册</a>
             </div>
             <%
                 }
