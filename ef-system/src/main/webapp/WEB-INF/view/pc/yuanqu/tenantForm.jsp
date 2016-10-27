@@ -1208,7 +1208,7 @@
                                 class="am-icon-trash-o"></span> 生成二维码
                         </a>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                          target="_blank" href="/yuanqu/product/getProductModelUrl.do?id={{=productModel.id}}"><span
+                          target="_blank"  href="http://www.efeiyi.com/app/product_details.html?productId={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 预览页面
                         </a>
                         <button onclick="PubSub.publish('productModelList.delete','{{=productModel.id}}')"
