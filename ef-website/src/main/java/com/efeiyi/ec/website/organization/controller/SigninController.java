@@ -9,13 +9,11 @@ import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
-import com.efeiyi.ec.purchase.model.PurchaseOrder;
-import com.efeiyi.ec.website.base.authentication.ContextUtils;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.website.order.model.WxPayConfig;
 import com.efeiyi.ec.website.organization.model.SmsProvider;
 import com.efeiyi.ec.website.organization.model.ValidateCode;
 import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
-import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
@@ -372,7 +370,7 @@ public class SigninController extends BaseController {
             authenticate(unionid);
         }
         redirect = URLDecoder.decode(redirect, "UTF-8");
-        return "redirect:http://www.efeiyi.com/qrcode/redirect/" + redirect;
+        return "redirect:http://www.efeiyi.com/qrcode/sample/" + redirect;
     }
 
 
