@@ -39,38 +39,7 @@
                     "paySign": "${paySign}"//微信签名
                 },
                 function (res) {
-//                    alert(res.err_code + res.err.desc + res.err_msg);
-                    if (res.err_msg == "get_brand_wcpay_request:ok") {//支付成功
-
-                        <c:set var="payAmount" value="0"  scope="page"/>
-                        <c:forEach items="${order.purchaseOrderPaymentList}" var="payment">
-                        <c:set var="payAmount" value="${payAmount = payAmount + payment.paymentAmount}" scope="page"/>
-                        </c:forEach>
-                        //加入GA追踪
-                        ga('send', 'event', {
-                            'eventCategory': '支付成功',
-                            'eventAction': '微信',
-                            'eventLabel': 'wap',
-                            'eventValue': parseInt(${payAmount * 100}),
-                            'hitCallback': function () {
-//                              //跳转到查看支付是否成功
-                                <%--<c:if test="${order.orderType=='3'}">
-                                window.location.href = "http://mall.efeiyi.com/giftReceive/${orderId}";
-                                </c:if>
-                                <c:if test="${not empty order.callback && order.orderType!='3'}">
-                                window.location.href = "http://${order.callback}";
-                                </c:if>
-                                <c:if test="${empty order.callback && order.orderType!='3'}">
-                                &lt;%&ndash;window.location.href = "http://www2.efeiyi.com/sharePage/productShare/${orderId}";&ndash;%&gt;
-                                window.location.href = "http://mall.efeiyi.com/order/paysuccess/${purchaseOrderPaymentDetails.id}";
-                                </c:if>--%>
-                                window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";
-                            }
-                        });
-                    }
-                    else {
-                        window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";
-                    }
+                    window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";
                 }
         );
     }
