@@ -190,14 +190,18 @@ public class SigninController extends BaseController {
 
     @RequestMapping({"checkUserNameAndVerify"})
     public String checkUsernameAndVerify(HttpServletRequest request, HttpServletResponse response, Model model) {
-        String username = request.getParameter("targetname");
-        String verifyCode = request.getParameter("verificationCode");
-        String sessionVerifyCode = request.getSession().getAttribute(username).toString();
-        if (verifyCode != null && sessionVerifyCode != null && verifyCode.equals(sessionVerifyCode)) {
-            request.getSession().setAttribute(username, "checked");
-            model.addAttribute("username", username);
-            return "/setPassword";
-        } else {
+        try{
+            String username = request.getParameter("targetname");
+            String verifyCode = request.getParameter("verificationCode");
+            String sessionVerifyCode = request.getSession().getAttribute(username).toString();
+            if (verifyCode != null && sessionVerifyCode != null && verifyCode.equals(sessionVerifyCode)) {
+                request.getSession().setAttribute(username, "checked");
+                model.addAttribute("username", username);
+                return "/setPassword";
+            } else {
+                return "redirect:/forgetPassword";
+            }
+        }catch (Exception e){
             return "redirect:/forgetPassword";
         }
     }
