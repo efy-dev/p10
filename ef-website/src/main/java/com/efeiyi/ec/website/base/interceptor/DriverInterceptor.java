@@ -27,9 +27,9 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
 
             if (response.getStatus() >= 200 && response.getStatus() < 300) {
                 String url = request.getRequestURL().toString();
-                if (url.startsWith("http://minglu.efeiyi.com/".toLowerCase()) && !url.endsWith("login")) {
+                if (url.startsWith("http://" + PConst.WEBSITE_WIKI_HOST + "/".toLowerCase()) && !url.endsWith("login")) {
                     mav.setViewName("/wiki/jsp" + mav.getViewName());
-                } else if (url.startsWith("http://i.efeiyi.com/".toLowerCase()) && !url.endsWith("login")) {
+                } else if (url.startsWith("http://" + PConst.WEBSITE_CONSUMER_HOST + "/".toLowerCase()) && !url.endsWith("login")) {
                     mav.setViewName("/consumer/jsp" + mav.getViewName());
                 }
             }
@@ -52,9 +52,9 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
 
         if (url.endsWith("404") || url.endsWith("500") || url.endsWith("404")) {
             return true;
-        } else if (url.startsWith("http://minglu.efeiyi.com/".toLowerCase()) && url.endsWith("login")) {
+        } else if (url.startsWith("http://" + PConst.WEBSITE_WIKI_HOST + "/".toLowerCase()) && url.endsWith("login")) {
             return true;
-        } else if (url.startsWith("http://i.efeiyi.com/".toLowerCase()) && url.endsWith("login")) {
+        } else if (url.startsWith("http://" + PConst.WEBSITE_CONSUMER_HOST + "/".toLowerCase()) && url.endsWith("login")) {
             return true;
         } else if (url.equalsIgnoreCase("http://" + PConst.WEBSITE_WIKI_HOST + "/")) {
             response.sendRedirect("http://" + PConst.WEBSITE_WIKI_HOST + "/minglu");
