@@ -9,8 +9,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static com.sun.javafx.css.SizeUnits.PC;
-
 /**
  * Created by Administrator on 2015/7/20.
  */
@@ -21,12 +19,12 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
             throws Exception {
         if (mav != null && mav.getViewName() != null && !mav.getViewName().startsWith("redirect") && !mav.getViewName().startsWith("forward")) {
 
-
             if (!HttpUtil.isPhone(request.getHeader("User-Agent"))) {
                 mav.setViewName("/pc" + mav.getViewName());
             } else {
                 mav.setViewName("/wap" + mav.getViewName());
             }
+
             if (response.getStatus() >= 200 && response.getStatus() < 300) {
                 String url = request.getRequestURL().toString();
                 if (url.startsWith("http://minglu.efeiyi.com/".toLowerCase()) && !url.endsWith("login")) {
@@ -48,10 +46,15 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Origin", "*");
 
         String url = request.getRequestURL().toString();
+
         if (url.endsWith("404") || url.endsWith("500") || url.endsWith("404")) {
+            return true;
+        } else if (url.startsWith("http://minglu.efeiyi.com/".toLowerCase()) && url.endsWith("login")) {
+            return true;
+        } else if (url.startsWith("http://i.efeiyi.com/".toLowerCase()) && url.endsWith("login")) {
             return true;
         } else if (url.equalsIgnoreCase("http://" + PConst.WEBSITE_WIKI_HOST + "/")) {
             response.sendRedirect("http://" + PConst.WEBSITE_WIKI_HOST + "/minglu");
