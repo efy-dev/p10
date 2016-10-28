@@ -60,6 +60,22 @@ public class OffLineTenantController {
         }
         return tempRedirect;
     }
+    @RequestMapping({"/tenant/deletePanelById"})
+    @ResponseBody
+    public Object deletePanelById(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String id = request.getParameter("id");
+            if (id != null && !id.equals("")) {
+                baseManager.remove(Panel.class.getName(), id);
+            }
+        } catch (Exception e) {
+            jsonObject.put("code", "1");
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
     @RequestMapping({"/tenant/deleteTenantById"})
     @ResponseBody
     public Object deleteTenantById(HttpServletRequest request) {

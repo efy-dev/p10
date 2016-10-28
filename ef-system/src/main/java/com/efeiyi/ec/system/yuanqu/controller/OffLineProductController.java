@@ -2,12 +2,17 @@ package com.efeiyi.ec.system.yuanqu.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterWork;
+import com.efeiyi.ec.master.model.MasterWorkPicture;
+import com.efeiyi.ec.master.model.MasterWorkProduct;
 import com.efeiyi.ec.organization.model.Image;
 import com.efeiyi.ec.organization.model.ImagePanel;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.Panel;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -91,39 +96,36 @@ public class OffLineProductController {
         }
         return product;
     }
-
-    @RequestMapping({"/getPanelById"})
+    @RequestMapping({"/getProductPanelById"})
     @ResponseBody
-    public Object getPanelById(HttpServletRequest request) {
+    public Object getProductPanelById(HttpServletRequest request) {
         JSONObject jsonObject = new JSONObject();
         String id = request.getParameter("id");
         String hql = "select obj from Panel obj where obj.owner=:id and obj.status!='0'";
         LinkedHashMap<String, Object> panelParam = new LinkedHashMap<>();
         panelParam.put("id", id);
-        Panel panel = (Panel) baseManager.getUniqueObjectByConditions(hql, panelParam);
-        LinkedHashMap<String, Object> imagesParam = new LinkedHashMap<>();
-        if (panel != null) {
-            imagesParam.put("panelId", panel.getId());
+        List<Panel> panels = (List<Panel>) baseManager.listObject(hql, panelParam);
+        if (panels != null && panels.size() > 0) {
+            LinkedHashMap<String, Object> imagesParam = new LinkedHashMap<>();
+            imagesParam.put("panelId", panels.get(0).getId());
             String imageHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='1'";
             String audioHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='2'";
             ImagePanel audio = (ImagePanel) baseManager.getUniqueObjectByConditions(audioHql, imagesParam);
             List<ImagePanel> images = (List<ImagePanel>) baseManager.listObject(imageHql, imagesParam);
-            panel.setImageList(images);
+            panels.get(0).setImageList(images);
             if (audio != null) {
-                panel.setMedia(audio.getImage());
+                panels.get(0).setMedia(audio.getImage());
             }
-            jsonObject.put("productPanel", panel);
-        } else {
-            jsonObject.put("code", "1");
+            return panels.get(0);
         }
-        return jsonObject.toString();
+        jsonObject.put("code", "1");
+        return jsonObject;
     }
-
     @RequestMapping({"/getProductsByTenantId"})
     @ResponseBody
     public Object getProductsByTenantId(HttpServletRequest request) {
         String id = request.getParameter("id");
-        String hql = "select obj from  Product where obj.tenant_id=" + id;
+        String hql="select obj from  Product where obj.tenant_id="+id;
         Product product = (Product) baseManager.getObject(Product.class.getName(), id);
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         param.put("productId", product.getId());
@@ -143,7 +145,7 @@ public class OffLineProductController {
             product = (Product) baseManager.getObject(Product.class.getName(), request.getParameter("id"));
         } else {
             product = new Product();
-            if (request.getParameter("tenantId") != null && !request.getParameter("tenantId").equals("")) {
+            if (request.getParameter("tenantId") != null&&!request.getParameter("tenantId").equals("")) {
                 BigTenant tenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), request.getParameter("tenantId"));
                 product.setBigTenant(tenant);
             }
@@ -257,7 +259,6 @@ public class OffLineProductController {
         baseManager.saveOrUpdate(Product.class.getName(), product);
         return product;
     }
-
     @RequestMapping({"/getProductModelById"})
     @ResponseBody
     public Object getProductModelById(HttpServletRequest request) {
@@ -281,7 +282,13 @@ public class OffLineProductController {
     @RequestMapping({"/panelSubmit"})
     @ResponseBody
     public Object panelSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
-        Panel panel = new Panel();
+        Panel panel = null;
+        if (request.getParameter("productPanelId") != null && request.getParameter("productPanelId") != "") {
+            panel = (Panel) baseManager.getObject(Panel.class.getName(), request.getParameter("productPanelId"));
+        }
+        if (panel == null) {
+            panel = new Panel();
+        }
         panel.setStatus("1");
         panel.setType("1");
         panel.setName(request.getParameter("name"));
@@ -388,8 +395,6 @@ public class OffLineProductController {
 
         return createQRCode(this.getClass().getResource("/").getPath().toString(), productId, url);
     }
-
-
     @RequestMapping("/createQRCodeSample.do")
     @ResponseBody
     public ResponseEntity<byte[]> createProductQRCodeSample(HttpServletRequest request) throws Exception {
