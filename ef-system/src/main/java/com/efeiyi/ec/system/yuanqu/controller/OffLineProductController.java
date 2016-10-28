@@ -2,17 +2,12 @@ package com.efeiyi.ec.system.yuanqu.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.master.model.MasterWork;
-import com.efeiyi.ec.master.model.MasterWorkPicture;
-import com.efeiyi.ec.master.model.MasterWorkProduct;
 import com.efeiyi.ec.organization.model.Image;
 import com.efeiyi.ec.organization.model.ImagePanel;
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.Panel;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
-import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -96,6 +91,7 @@ public class OffLineProductController {
         }
         return product;
     }
+
     @RequestMapping({"/getPanelById"})
     @ResponseBody
     public Object getPanelById(HttpServletRequest request) {
@@ -117,16 +113,17 @@ public class OffLineProductController {
                 panel.setMedia(audio.getImage());
             }
             jsonObject.put("productPanel", panel);
-        }else{
-            jsonObject.put("code","1");
+        } else {
+            jsonObject.put("code", "1");
         }
         return jsonObject.toString();
     }
+
     @RequestMapping({"/getProductsByTenantId"})
     @ResponseBody
     public Object getProductsByTenantId(HttpServletRequest request) {
         String id = request.getParameter("id");
-        String hql="select obj from  Product where obj.tenant_id="+id;
+        String hql = "select obj from  Product where obj.tenant_id=" + id;
         Product product = (Product) baseManager.getObject(Product.class.getName(), id);
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         param.put("productId", product.getId());
@@ -146,7 +143,7 @@ public class OffLineProductController {
             product = (Product) baseManager.getObject(Product.class.getName(), request.getParameter("id"));
         } else {
             product = new Product();
-            if (request.getParameter("tenantId") != null&&!request.getParameter("tenantId").equals("")) {
+            if (request.getParameter("tenantId") != null && !request.getParameter("tenantId").equals("")) {
                 BigTenant tenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), request.getParameter("tenantId"));
                 product.setBigTenant(tenant);
             }
@@ -260,6 +257,7 @@ public class OffLineProductController {
         baseManager.saveOrUpdate(Product.class.getName(), product);
         return product;
     }
+
     @RequestMapping({"/getProductModelById"})
     @ResponseBody
     public Object getProductModelById(HttpServletRequest request) {
@@ -390,6 +388,8 @@ public class OffLineProductController {
 
         return createQRCode(this.getClass().getResource("/").getPath().toString(), productId, url);
     }
+
+
     @RequestMapping("/createQRCodeSample.do")
     @ResponseBody
     public ResponseEntity<byte[]> createProductQRCodeSample(HttpServletRequest request) throws Exception {
@@ -403,7 +403,14 @@ public class OffLineProductController {
                 URLEncoder.encode(redirect_uri, "UTF-8") +
                 "&response_type=code&scope=snsapi_userinfo&state=" + URLEncoder.encode(redirect, "UTF-8") + "#wechat_redirect";
 
-        return createQRCode(this.getClass().getResource("/").getPath().toString(), productId, url);
+        QRCodeGenerator QRCodeGenerator = new QRCodeGenerator(url);
+        return QRCodeGenerator
+                .createQRCode(582, 582)
+                .assembleLogo("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/logo.png")
+                .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/background.jpg", 123, 92)
+                .getResponseEntityResult(productId + "jpg");
+
+
     }
 
 }

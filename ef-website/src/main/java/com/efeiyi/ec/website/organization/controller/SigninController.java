@@ -190,7 +190,7 @@ public class SigninController extends BaseController {
 
     @RequestMapping({"checkUserNameAndVerify"})
     public String checkUsernameAndVerify(HttpServletRequest request, HttpServletResponse response, Model model) {
-        try{
+        try {
             String username = request.getParameter("targetname");
             String verifyCode = request.getParameter("verificationCode");
             String sessionVerifyCode = request.getSession().getAttribute(username).toString();
@@ -201,7 +201,7 @@ public class SigninController extends BaseController {
             } else {
                 return "redirect:/forgetPassword";
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return "redirect:/forgetPassword";
         }
     }
@@ -310,26 +310,23 @@ public class SigninController extends BaseController {
 
 
     @RequestMapping({"/wl"})
-    public String login(HttpServletRequest request, Model model) throws Exception {
+    public String login(HttpServletRequest request) throws Exception {
         String result;
         String redirect = request.getParameter("state");
         String code = request.getParameter("code");
-        if (request.getSession().getAttribute(code) != null) {
-            result = request.getSession().getAttribute(code).toString();
-        } else {
-            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
-            result = HttpUtil.getHttpResponse(urlForOpenId, null);
-            request.getSession().setAttribute(code, result);
-        }
+        String wxOpenIdUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+        result = HttpUtil.getHttpResponse(wxOpenIdUrl, null);
+        request.getSession().setAttribute(code, result);
         JSONObject jsonObject = JSONObject.fromObject(result);
         if (jsonObject.containsKey("errcode")) {
             throw new RuntimeException("get openId error：" + result);
         }
-        String access_token = jsonObject.getString("access_token");
-        String openid = jsonObject.getString("openid");
 
-        String urlForOpenId = "https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + openid + "&lang=zh_CN";
-        String userInfo = HttpUtil.getHttpResponse(urlForOpenId, null);
+        String accessToken = jsonObject.getString("access_token");
+        String openId = jsonObject.getString("openid");
+        String wxInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + accessToken + "&openid=" + openId + "&lang=zh_CN";
+
+        String userInfo = HttpUtil.getHttpResponse(wxInfoUrl, null);
         JSONObject userJsonObject = JSONObject.fromObject(userInfo);
 
         String nickname = userJsonObject.get("nickname").toString();
@@ -337,25 +334,19 @@ public class SigninController extends BaseController {
         String city = userJsonObject.get("city").toString();
         String headimgurl = userJsonObject.get("headimgurl").toString();
         String unionid = userJsonObject.get("unionid").toString();
-        MyUser myUser = authenticate(unionid);
+
         WxCalledRecord wxCalledRecord = new WxCalledRecord();
         wxCalledRecord.setCallback(redirect);
         wxCalledRecord.setDataKey("unionid");
         wxCalledRecord.setData(unionid);
         wxCalledRecord.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
+
+        //登录
+        MyUser myUser = authenticate(unionid);
+        //注册
         if (myUser == null) {
-            Consumer consumer;
-            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-            param.put("unionid", unionid);
-            try {
-                consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param);
-            } catch (Exception e) {
-                consumer = (Consumer) baseManager.listObject("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param).get(0);
-            }
-            if (consumer == null) {
-                consumer = new Consumer();
-            }
+            Consumer consumer = new Consumer();
             consumer.setUnionid(unionid);
             consumer.setName(nickname);
             consumer.setUsername(unionid);
@@ -371,8 +362,10 @@ public class SigninController extends BaseController {
             consumer.setPictureUrl(headimgurl);
             consumer.setSex(Integer.parseInt(sex));
             baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
+            //登录
             authenticate(unionid);
         }
+        //跳转
         redirect = URLDecoder.decode(redirect, "UTF-8");
         return "redirect:http://www.efeiyi.com/qrcode/sample/" + redirect;
     }
@@ -380,10 +373,9 @@ public class SigninController extends BaseController {
 
     private MyUser authenticate(String unionid) {
         MyUser myUser;
-        System.out.println(AuthorizationUtil.isAuthenticated());
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         param.put("unionid", unionid);
-        Consumer consumer = null;
+        Consumer consumer;
         try {
             consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param);
         } catch (Exception e) {
