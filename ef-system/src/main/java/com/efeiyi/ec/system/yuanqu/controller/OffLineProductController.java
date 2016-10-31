@@ -283,17 +283,87 @@ public class OffLineProductController {
     @RequestMapping({"/panelSubmit"})
     @ResponseBody
     public Object panelSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
-        Panel panel = null;
-        if (request.getParameter("productPanelId") != null && request.getParameter("productPanelId") != "") {
-            panel = (Panel) baseManager.getObject(Panel.class.getName(), request.getParameter("productPanelId"));
-        }
-        if (panel == null) {
+        String id = request.getParameter("id");
+        String productId = request.getParameter("productId");
+        Panel panel;
+        if (id != null && !"".equals(id)) {
+            panel = (Panel) baseManager.getObject(Panel.class.getName(), id);
+        } else {
             panel = new Panel();
+            Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
+            panel.setOwner(product.getId());
         }
         panel.setStatus("1");
         panel.setType("1");
         panel.setName(request.getParameter("name"));
-        panel.setOwner(request.getParameter("id"));
+        panel.setContent(request.getParameter("content"));
+        baseManager.saveOrUpdate(Panel.class.getName(), panel);
+        for (MultipartFile multipartFile : multipartRequest.getFiles("imageList")) {
+            String oName = multipartFile.getOriginalFilename();
+            String nName;
+            try {
+                nName = System.currentTimeMillis() + "" + (int) (Math.random() * 1000000) + "." + oName.split("\\.")[1];
+            } catch (Exception e) {
+                continue;
+            }
+            String url = "image/" + nName;
+            aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
+            String fullUrl = PConst.OSS_EF_WIKI_HOST + url;
+            Image image = new Image();
+            image.setStatus("1");
+            image.setType("1");
+            image.setOwner(panel.getId());
+            image.setCreateTime(new Date());
+            image.setSrc(fullUrl);
+            ImagePanel imagePanel = new ImagePanel();
+            imagePanel.setImage(image);
+            imagePanel.setPanel(panel);
+            baseManager.saveOrUpdate(Image.class.getName(), image);
+            baseManager.saveOrUpdate(ImagePanel.class.getName(), imagePanel);
+        }
+
+        MultipartFile multipartFile = multipartRequest.getFile("media");
+        if (multipartFile != null) {
+            String oName = multipartFile.getOriginalFilename();
+            String nName;
+            String fullUrl = null;
+            try {
+                nName = System.currentTimeMillis() + "" + (int) (Math.random() * 1000000) + "." + oName.split("\\.")[1];
+                String url = "image/" + nName;
+                aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
+                fullUrl = PConst.OSS_EF_WIKI_HOST + url;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Image image = new Image();
+            image.setStatus("1");
+            image.setType("2");
+            image.setOwner(panel.getId());
+            image.setCreateTime(new Date());
+            image.setSrc(fullUrl);
+            baseManager.saveOrUpdate(Image.class.getName(), image);
+            panel.setMedia(image);
+            baseManager.saveOrUpdate(Panel.class.getName(), panel);
+        }
+        return panel;
+    }
+
+    @RequestMapping({"/modelpanelSubmit"})
+    @ResponseBody
+    public Object modelpanelSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
+        String id = request.getParameter("id");
+        String productModelId = request.getParameter("productId");
+        Panel panel;
+        if (id != null && !"".equals(id)) {
+            panel = (Panel) baseManager.getObject(Panel.class.getName(), id);
+        } else {
+            panel = new Panel();
+            ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+            panel.setOwner(productModel.getId());
+        }
+        panel.setStatus("1");
+        panel.setType("1");
+        panel.setName(request.getParameter("name"));
         panel.setContent(request.getParameter("content"));
         baseManager.saveOrUpdate(Panel.class.getName(), panel);
         for (MultipartFile multipartFile : multipartRequest.getFiles("imageList")) {

@@ -725,7 +725,7 @@
                 <legend>商品信息</legend>
 
                 <input name="id" type="hidden" value="{{=(it.data!=null && it.data.id!=null ) ? it.data.id: ''}}">
-                <input name="tenantId" type="hidden" value="{{=(it.data!=null && it.data!=null ) ? it.data: ''}}">
+                <input name="tenantId" type="hidden" value="{{=(it.data.tenant!=null && it.data.tenant!=undefined ) ? it.data.tenant.id: ''}}">
                 <div class="am-form-group">
                     <label for="product-name" class="am-u-sm-2 am-form-label">名称</label>
                     <div class="am-u-sm-10">
@@ -803,7 +803,8 @@
 
                 <legend>商品规格信息</legend>
                 <input type="hidden" name="id" value="{{=it.data != null&&it.data.id!=undefined ? it.data.id : ''}}">
-                <input type="hidden" name="productId" value="{{=(it.data.product!=null && it.data.product!=undefined ) ? it.data.product.id: ''}}">
+           <%--     <input type="hidden" name="productId" value="{{=(it.data.product!=null && it.data.product!=undefined ) ? it.data.product.id: ''}}">--%>
+                <input type="hidden" name="productId" value="{{=(it.productId!=null && it.productId!=undefined ) ? it.productId: ''}}">
                 <div class="am-form-group">
                     <label for="product-model-name" class="am-u-sm-3 am-form-label">规格名称</label>
                     <div class="am-u-sm-9">
@@ -852,7 +853,7 @@
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
-                        {{ if(it.data!=null && it.data.productModel_url !=null){ }}
+                        {{ if(it.data!=null && it.data.productModel_url !=null&&it.data.productModel_url!=""){ }}
                         <img src="{{=it.data.productModel_url}}" width="500"/>
                         {{ } }}
                     </div>
@@ -919,7 +920,7 @@
     </div>
 
     <div class="main-base" data-for="product-model-panelList" data-type="tabs" style="display: none">
-        <legend><b>{{=it.data}}</b> 的栏目列表（商品规格详情）</legend>
+        <legend><b>{{=it.productModelId}}</b> 的栏目列表（商品规格详情）</legend>
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
@@ -950,9 +951,9 @@
               enctype="multipart/form-data"
               method="post">
             <fieldset>
-                <legend><b>{{=it.data}}</b> 的栏目列表（商品规格详情）</legend>
-              <%--  <input type="hidden" name="id" value="{{=it.data.id}}">--%>
-                <input type="hidden" name="id" value="{{=it.data}}">
+                <legend><b>{{=it.productModelId}}</b> 的栏目列表（商品规格详情）</legend>
+                <input type="hidden" name="id" value="{{=it.data!=null&&it.data!=''&&it.data!=undefined?it.data:''}}">
+                <input type="hidden" name="productId" value="{{=it.productModelId!=null&&it.productModelId!=''&&it.productModelId!=undefined?it.productModelId:''}}">
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">名称</label>
                     <div class="am-u-sm-9">
@@ -995,7 +996,7 @@
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productModel.render','{{=it.data.id}}')">< 上一步</a>
+                           onclick="PubSub.publish('productModel.render','{{=it.data}}')">< 上一步</a>
                         <a onclick="PubSub.publish('productModelPanel.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">添加</a>
                      <%--   <a class="am-btn am-btn-primary am-btn-lg"
@@ -1016,8 +1017,8 @@
               method="post">
             <fieldset>
                 <legend>商品详情</legend>
-                <input type="hidden" name="id" value="{{=it.data}}">
-                <input type="hidden" name="productPanelId" value="{{=it.data.id!=null&&it.data.id!=undefined?it.data.id:''}}">
+                <input type="hidden" name="id" value="{{=it.data.id!=null&&it.data.id!=undefined?it.data.id:''}}">
+                <input type="hidden" name="productId" value="{{=it.data.owner!=null&&it.data.owner!=undefined?it.data.owner:''}}">
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">名称</label>
                     <div class="am-u-sm-9">
@@ -2471,6 +2472,7 @@
         this.param = param;
         this.name = "productModel";
         this.template = "main-product-model";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.productId=null;
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
@@ -2492,7 +2494,8 @@
                     renderTemplate(this.template, this);
                 }.bind(this))
             } else {*/
-                this.data=data;
+                this.data=null;
+                this.productId=data;
                 renderTemplate(this.template, this);
             }
             this.show();
@@ -2506,7 +2509,7 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data != "undefined" && data != null) {
-                    PubSub.publish("productModelPanel.render", data);
+                    PubSub.publish("productModelPanel.addProductModelPanel", data);
                     //@TODO
                 }
                 $("#my-modal-loading").modal("close");
@@ -2729,7 +2732,7 @@
     };
 
     var ProductModelPanel = function (param) {
-        this.submit = "/yuanqu/product/panelSubmit";
+        this.submit = "/yuanqu/product/modelpanelSubmit";
         this.label = "商品规格详情";
         this.data = null;
         this.father = null;
@@ -2738,7 +2741,7 @@
         this.name = "productModelPanel";
         this.template = "main-product-model-panel";         //组件绑定的模板//组件需要订阅的事件与消息
         this.panelListTemplate = "main-product-model-panel-list";
-
+        this.productModelId=null;
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
                 if (typeof data.id != "undefined") {
@@ -2752,7 +2755,7 @@
         };
         this.addProductModelPanel = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
-                this.data = data;
+                this.productModelId = data.id;
                 renderTemplate(this.template, this);
             }
             this.show();
@@ -2761,9 +2764,7 @@
         this.deletePanel = function (msg, data) {
             ajaxRequest("/yuanqu/tenant/deletePanelById", {id: data}, function (responseData) {
                 if (responseData.code != "1") {
-                    ajaxRequest("/yuanqu/product/getPanelListByProductModel", {id: this.data}, function (responseData) {
-                        renderTemplate(this.panelListTemplate, responseData);
-                    }.bind(this));
+                    renderTemplate(this.template, this);
                 }
             }.bind(this));
         };
@@ -2779,7 +2780,7 @@
             });
             var tabData = $(data).attr("data");
             $("[data-for=" + tabData + "]").show();
-            ajaxRequest("/yuanqu/product/getPanelListByProductModel", {id:this.data}, function (responseData) {
+            ajaxRequest("/yuanqu/product/getPanelListByProductModel", {id:this.productModelId}, function (responseData) {
                 renderTemplate(this.panelListTemplate, responseData);
             }.bind(this));
         };
@@ -2904,8 +2905,8 @@
                 if (typeof data == "string") {
                     data = JSON.parse(data);
                 }
-                if (typeof data.id != "undefined" && data.id != null) {
-                    PubSub.publish('productModel.render', this.data.id);}
+                if (typeof data.owner != "undefined" && data.owner != null) {
+                    PubSub.publish('productModel.addProductModel', this.data.owner);}
                 $("#my-modal-loading").modal("close");
             }.bind(this));
             return false;
