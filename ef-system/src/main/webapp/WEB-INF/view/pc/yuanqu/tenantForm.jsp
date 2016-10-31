@@ -1206,7 +1206,7 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
                         </button>
-                        <button onclick="PubSub.publish('productModelPanel.render','{{=productModel.id}}')"
+                        <button onclick="PubSub.publish('productModelPanel.addProductModelPanel','{{=productModel.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 规格详情
                         </button>
@@ -2755,7 +2755,13 @@
         };
         this.addProductModelPanel = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
-                this.productModelId = data.id;
+                this.data = null;
+                if (typeof data.id != "undefined") {
+                    this.productModelId = data.id;
+                } else {
+                    this.productModelId = data;
+                }
+
                 renderTemplate(this.template, this);
             }
             this.show();
