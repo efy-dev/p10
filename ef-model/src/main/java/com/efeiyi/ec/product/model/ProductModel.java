@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class ProductModel implements Serializable {
     private String customProperty;//自定义属性值
     private Integer popularityAmount;
     private Integer saleAmount;
-
+    private Date createDateTime;
     private String audio;
 
     @Transient
@@ -47,6 +48,14 @@ public class ProductModel implements Serializable {
 
     public void setAudio(String audio) {
         this.audio = audio;
+    }
+    @Column(name = "create_datetime")
+    public Date getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 
     @JsonIgnore

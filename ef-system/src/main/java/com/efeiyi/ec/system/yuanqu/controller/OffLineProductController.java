@@ -236,6 +236,7 @@ public class OffLineProductController {
         productModel.setProduct(product);
         productModel.setStatus("1");
         productModel.setProductModel_url(uploadImage(multipartRequest.getFile("productModel_url")));
+        productModel.setCreateDateTime(new Date());
         baseManager.saveOrUpdate(ProductModel.class.getName(), productModel);
         return productModel;
     }

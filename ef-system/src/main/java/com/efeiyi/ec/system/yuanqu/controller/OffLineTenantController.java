@@ -67,7 +67,7 @@ public class OffLineTenantController {
         try {
             String id = request.getParameter("id");
             if (id != null && !id.equals("")) {
-                baseManager.remove(Panel.class.getName(), id);
+                baseManager.delete(Panel.class.getName(), id);
             }
         } catch (Exception e) {
             jsonObject.put("code", "1");

@@ -803,7 +803,7 @@
 
                 <legend>商品规格信息</legend>
                 <input type="hidden" name="id" value="{{=it.data != null&&it.data.id!=undefined ? it.data.id : ''}}">
-                <input type="hidden" name="productId" value="{{=(it.data!=null && it.data!=undefined ) ? it.data: ''}}">
+                <input type="hidden" name="productId" value="{{=(it.data.product!=null && it.data.product!=undefined ) ? it.data.product.id: ''}}">
                 <div class="am-form-group">
                     <label for="product-model-name" class="am-u-sm-3 am-form-label">规格名称</label>
                     <div class="am-u-sm-9">
@@ -851,11 +851,11 @@
                         <input id="productModel_url" name="productModel_url" type="file" multiple
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
-                   <%-- <div class="file-list am-u-sm-9">
+                    <div class="file-list am-u-sm-9">
                         {{ if(it.data!=null && it.data.productModel_url !=null){ }}
                         <img src="{{=it.data.productModel_url}}" width="500"/>
                         {{ } }}
-                    </div>--%>
+                    </div>
                 </div>
 
 
@@ -879,12 +879,12 @@
     for(var i = 0 ; i< it.length ; i++){
     var imageText = it[i];
     }}
-    <tr id="{{it=imageText.id}}">
+    <tr id="{{=imageText.id}}">
         <td>
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                       onclick="PubSub.publish('tenantPanel.deletePanel','{{=imageText.id}}')"><span
+                       onclick="PubSub.publish('productModelPanel.deletePanel','{{=imageText.id}}')"><span
                             class="am-icon-trash-o"></span> 删除
                     </a>
                 </div>
@@ -919,7 +919,7 @@
     </div>
 
     <div class="main-base" data-for="product-model-panelList" data-type="tabs" style="display: none">
-        <legend><b>{{=it.data}}</b> 的栏目列表（商品详情）</legend>
+        <legend><b>{{=it.data}}</b> 的栏目列表（商品规格详情）</legend>
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
@@ -935,14 +935,14 @@
             </tbody>
         </table>
 
-        <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+       <%-- <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
             <a class="am-btn am-btn-primary am-btn-lg"
                onclick="PubSub.publish('productList.render')">完成</a>
             <a class="am-btn am-btn-primary am-btn-lg"
-               onclick="PubSub.publish('productModel.render','{{=it.data.id}}')">添加下一个商品规格</a>
+               onclick="PubSub.publish('productModel.render','{{=it.data}}')">添加下一个商品规格</a>
             <a class="am-btn am-btn-primary am-btn-lg"
-               onclick="PubSub.publish('productBase.render','{{=it.data.id}}')">添加下一个商品</a>
-        </div>
+               onclick="PubSub.publish('productBase.render','{{=it.data}}')">添加下一个商品</a>
+        </div>--%>
     </div>
 
     <div class="main-base" data-for="product-model-panelForm" data-type="tabs">
@@ -950,7 +950,7 @@
               enctype="multipart/form-data"
               method="post">
             <fieldset>
-                <legend><b>{{=it.data}}</b> 的栏目列表（商品详情）</legend>
+                <legend><b>{{=it.data}}</b> 的栏目列表（商品规格详情）</legend>
               <%--  <input type="hidden" name="id" value="{{=it.data.id}}">--%>
                 <input type="hidden" name="id" value="{{=it.data}}">
                 <div class="am-form-group">
@@ -996,10 +996,10 @@
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('productModel.render','{{=it.data.id}}')">< 上一步</a>
-                        <a onclick="PubSub.publish('tenantPanel.submit','{{=it.template}}-form')"
+                        <a onclick="PubSub.publish('productModelPanel.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">添加</a>
-                        <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('{{=it.name}}.nextProductModel','{{=it.template}}-form')">去添加下一个商品规格</a>
+                     <%--   <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('{{=it.name}}.nextProductModel','{{=it.template}}-form')">去添加下一个商品规格</a>--%>
                     </div>
                 </div>
             </fieldset>
@@ -1042,6 +1042,11 @@
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
+                        {{ if(it.data!=null && it.data.imageList !=null){ }}
+                        {{for(var i = 0 ; i< it.data.imageList.length ; i++){ }}
+                        {{ var imagePanel = it.data.imageList[i];}}
+                        <img src="{{=imagePanel.image.src}}" width="500"/>
+                        {{ } } }}
                     </div>
                 </div>
                 <div class="am-form-group am-form-file">
@@ -1054,11 +1059,9 @@
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
-                      <%--  {{ if(it.data!=null && it.data.imageList !=null){ }}
-                        {{for(var i = 0 ; i< it.data.imageList.length ; i++){}}
-                        {{ var imagePanel = it.data.imageList[i];}}
-                        {{<img src="{{=imagePanel.image.src}}" width="500"/>}}
-                        {{ } }}--%>
+                        {{ if(it.data!=null && it.data.media !=null){ }}
+                        <audio src="{{=it.data.media.src}}" width="500" controls="controls"></audio>
+                        {{ } }}
                     </div>
                 </div>
 
@@ -1227,7 +1230,7 @@
             <td>{{=productModel.marketPrice}}</td>
             <td>{{=productModel.amount}}</td>
             <td>
-                {{=productModel.createDateTime}}
+                {{=(new Date(productModel.createDateTime)).format("yyyy-MM-dd hh:mm:ss")}}
             </td>
         </tr>
         {{ } }}
@@ -2160,10 +2163,9 @@
 
         };
         this.deletePanel = function (msg, data) {
-            ajaxRequest("/yuanqu/tenant/deletePanelById", {id:data}, function (responseData) {
-                this.data=responseData;
-                if(data.code!="1"){
-                /*    this.render();*/
+            ajaxRequest("/yuanqu/tenant/deletePanelById", {id: data}, function (responseData) {
+                if (responseData.code != "1") {
+                    renderTemplate(this.panelListTemplate, this);
                 }
             }.bind(this));
         };
@@ -2694,7 +2696,7 @@
             ajaxRequest("/yuanqu/product/deleteProductModelById", {id:data}, function (responseData) {
                 this.data=responseData;
                 if(data.code!="1"){
-                    this.body();xc
+                    this.body();
                 }
             }.bind(this));
         };
@@ -2757,10 +2759,13 @@
         };
 
         this.deletePanel = function (msg, data) {
-            var success = function (responseData) {
-                $("#" + responseData).remove();
-            };
-            ajaxRequest("/yuanqu/product/deletePanel", {id: data}, success);
+            ajaxRequest("/yuanqu/tenant/deletePanelById", {id: data}, function (responseData) {
+                if (responseData.code != "1") {
+                    ajaxRequest("/yuanqu/product/getPanelListByProductModel", {id: this.data}, function (responseData) {
+                        renderTemplate(this.panelListTemplate, responseData);
+                    }.bind(this));
+                }
+            }.bind(this));
         };
 
         this.tabShow = function (msg, data) {
@@ -2774,7 +2779,7 @@
             });
             var tabData = $(data).attr("data");
             $("[data-for=" + tabData + "]").show();
-            ajaxRequest("/yuanqu/product/getPanelListByProductModel", {id:this.data.id}, function (responseData) {
+            ajaxRequest("/yuanqu/product/getPanelListByProductModel", {id:this.data}, function (responseData) {
                 renderTemplate(this.panelListTemplate, responseData);
             }.bind(this));
         };
