@@ -18,8 +18,6 @@
         <module>ef-tenant</module>
         <module>base_resource</module>
         <module>tg-website</module>
-        <module>app-wikiServer</module>
-        <module>ef-user</module>
         <module>ef-gift</module>
     </modules>
 
