@@ -128,7 +128,7 @@
 
 </div>
 <div class="footer-fx"><a href="#" class="footer-btn" id="share">邀&nbsp;请&nbsp;好&nbsp;友&nbsp;来&nbsp;赚&nbsp;翻&nbsp;全&nbsp;场</a></div>
-<div id="cover" style="display: none;"><em class="bg"></em><img src="/scripts/wap/upload/guide-share.png" class="share-picture"
+<div id="cover" style="display: none;"><em class="bg"></em><img src="/scripts/wap/images/guide-share.png" class="share-picture"
                                                                 alt=""></div>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script type="text/javascript">

@@ -94,10 +94,8 @@
     </div>
 </div>
 <!--//End--homenew-->
-</div>
 <script type="text/javascript">
     $().ready(function () {
-        ;
         $(".allsort").show()
         $(".cate").removeAttr("id");
     })

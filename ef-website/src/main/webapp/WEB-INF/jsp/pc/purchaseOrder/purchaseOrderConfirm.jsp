@@ -275,7 +275,7 @@
         </c:forEach>
         <!--订货清单-->
         <!--发票-->
-        <div class="invoice divtop">
+<%--        <div class="invoice divtop">
             <div class="con-info">
                 <div class="tbar">
                     <span class="name">使用优惠券</span>
@@ -291,7 +291,7 @@
                 <ul class="list ul-list ul-list-last" id="exchangeCouponList">
                 </ul>
             </div>
-        </div>
+        </div>--%>
         <!--发票-->
         <!--余额支付-->
         <c:if test="${null != consumer.balance && 0<consumer.balance}">
@@ -313,9 +313,9 @@
                 <span class="price-info">
                 <%--js 取回来  第一次也是js取 统一js取--%>
                 <p class="price1">总金额：<em id="totalPrice">${purchaseOrder.total}</em> 元</p>
-                <p class="price2">优惠：-<em id="couponPrice">0.00</em>元</p>
+                <%--<p class="price2">优惠：-<em id="couponPrice">0.00</em>元</p>--%>
                 <p class="price2">余额：-<em id="balance">0.00</em>元</p>
-                <p class="price4">运费：<em id="freight">${freight}</em>元</p>
+                <%--<p class="price4">运费：<em id="freight">${freight}</em>元</p>--%>
                 <p class="price3">应付金额：<strong id="finalPrice">${purchaseOrder.total+freight}</strong> 元</p>
             </span>
             </div>

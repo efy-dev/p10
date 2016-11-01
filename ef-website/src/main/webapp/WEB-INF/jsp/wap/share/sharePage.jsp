@@ -55,7 +55,7 @@
     <li>领&nbsp;取&nbsp;<em>5</em>&nbsp;元&nbsp;现&nbsp;金&nbsp;红&nbsp;包!</li>
   </ul>
   <a class="pac-btn ae" id="share">去&nbsp;分&nbsp;享</a>
-  <div id="cover" style="display: none;"><em class="bg"></em><img src="/scripts/wap/upload/guide-share.png" class="share-picture"
+  <div id="cover" style="display: none;"><em class="bg"></em><img src="/scripts/wap/images/guide-share.png" class="share-picture"
                                                                   alt=""></div>
   <div class="link ae">
     <a href="http://i.efeiyi.com/myEfeiyi/getBalanceDetailsList.do">查看余额<i class="pac-icon"></i></a>

@@ -19,9 +19,9 @@
         <jnode url="/purchaseCollect/collectList.do" access="admin,manager" text_zh_CN="我的收藏">
 
         </jnode>
-        <jnode url="/coupon/list" access="admin,manager" text_zh_CN="我的卡券">
+        <!--<jnode url="/coupon/list" access="admin,manager" text_zh_CN="我的卡券">
 
-        </jnode>
+        </jnode>-->
 
         <jnode url="/comment/finishOrderList.do" access="admin,manager" text_zh_CN="我的评价">
 

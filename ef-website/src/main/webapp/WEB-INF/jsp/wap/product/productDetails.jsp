@@ -50,7 +50,7 @@
                 <p>分享</p>
             </a>
 
-            <div id="cover" style="display: none;"><em class="bg"></em><img src="/scripts/wap/upload/guide-share.png"
+            <div id="cover" style="display: none;"><em class="bg"></em><img src="/scripts/wap/images/guide-share.png"
                                                                             class="share-picture"
                                                                             alt=""></div>
             <div id="cover2" style="display: none" style="text-align: center">

@@ -77,7 +77,7 @@
         url:"/myEfeiyi/updatePassword.do",
         data:{pwd:pwd,id:'${user.id}'},
         success:function(data){
-          window.location.href="<c:url value="/sso.do"/>";
+          showAlert("提示","密码修改成功")
         }
       });
     }

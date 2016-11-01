@@ -48,7 +48,7 @@
             <a href="<c:url value="/createGiftImage/${order.id}"/> ">保存为图片</a>
 
             <div id="cover" style="display: none;"><em class="bg"></em><img
-                    src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt=""></div>
+                    src="<c:url value="/scripts/wap/images/guide-share.png"/>" alt=""></div>
             <div id="cover2" style="display: none">
                 <div class="text-co2">
                     <strong class="cov-titie">提示</strong>

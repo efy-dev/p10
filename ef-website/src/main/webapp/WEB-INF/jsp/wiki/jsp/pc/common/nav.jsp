@@ -32,7 +32,7 @@
             <%
                 if (AuthorizationUtil.getMyUser().getId() == null) {
             %>
-            <li><a href="http://www.efeiyi.com/login" title="请登录">请登录</a></li>
+            <li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>
             <li>
                 <a href="http://www.efeiyi.com/signin"
                    title="快速注册">快速注册</a></li>

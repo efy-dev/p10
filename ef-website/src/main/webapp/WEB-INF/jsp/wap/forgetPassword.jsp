@@ -33,7 +33,7 @@
                                    placeholder="短信验证码，请注意查收">
                             <span class="am-u-sm-5 am-u-end"><button id="verificationButton"
                                                                      class="btn-p-1"
-                                                                     type="button">获取短信效验码</button></span>
+                                                                     type="button">获取效验码</button></span>
                         </div>
                     </li>
                 </ul>
