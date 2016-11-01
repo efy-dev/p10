@@ -1,6 +1,5 @@
 package com.efeiyi.ec.system.yuanqu.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.product.model.Recommend;
@@ -15,6 +14,7 @@ import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.taglib.PageEntity;
 import com.sun.net.httpserver.Authenticator;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -48,18 +48,31 @@ public class OffLineTenantController {
 
     @RequestMapping({"/tenantForm"})
     public String tenantForm() {
-        MyUser user = AuthorizationUtil.getMyUser();
-        String roleName = "";
         String tempRedirect = "/yuanqu/tenantForm";
-        String offline_managerRedirect = "/yuanqu/offline_manager_tenantForm";
-        if (null != user) {
-            roleName = user.getRole() == null ? "" : user.getRole().getName();
-        }
-        if ("offline_manager".equals(roleName)) {
-            return offline_managerRedirect;
-        }
         return tempRedirect;
     }
+
+    @RequestMapping({"/tenant/getUserTenantMessage"})
+    @ResponseBody
+    public Object getUserTenantMessage(HttpServletRequest request) {
+        MyUser user = AuthorizationUtil.getMyUser();
+        JSONObject jsonObject = new JSONObject();
+        if (null != user) {
+            String roleName = user.getRole() == null ? "" : user.getRole().getName();
+            if (PConst.USER_PERMISSION_OFFLINE_MANAGER.equals(roleName)) {
+                jsonObject.put("permission", PConst.USER_PERMISSION_OFFLINE_MANAGER);
+                LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+                param.put("userId", user.getId());
+                String hql = "select obj from UserTenant obj where obj.user.id=:userId and obj.user.status!='0'";
+                List<UserTenant> userTenants = baseManager.listObject(hql, param);
+                if (null != userTenants && userTenants.size() > 0) {
+                    jsonObject.put("userTenant", userTenants.get(0).getTenant().getId());
+                }
+            }
+        }
+        return jsonObject;
+    }
+
     @RequestMapping({"/tenant/deletePanelById"})
     @ResponseBody
     public Object deletePanelById(HttpServletRequest request) {
@@ -90,22 +103,6 @@ public class OffLineTenantController {
             e.printStackTrace();
         }
         return jsonObject;
-    }
-
-    @RequestMapping({"/tenant/getUserTenants"})
-    @ResponseBody
-    public Object getUserTenants() {
-        MyUser user = AuthorizationUtil.getMyUser();
-        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        if (null != user) {
-            param.put("userId", user.getId());
-            String hql = "select obj from UserTenant obj where obj.user.id=:userId and obj.user.status!='0'";
-            List<UserTenant> userTenants = baseManager.listObject(hql, param);
-            if (null != userTenants && userTenants.size() > 0) {
-                return userTenants.get(0).getTenant();
-            }
-        }
-        return null;
     }
 
     @RequestMapping({"/tenant/baseSubmit"})

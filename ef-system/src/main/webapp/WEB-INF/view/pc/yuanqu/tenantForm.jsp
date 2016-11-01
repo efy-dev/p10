@@ -134,6 +134,12 @@
 
 <script type="text/x-dot-template" id="main-menu">
     <div class="main-menu">
+        {{if(it.data.permission!=null&&it.data.permission=='offline_manager'&&it.data.userTenant!=null){}}
+        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('productBase.new','{{=it.data.userTenant}}')">
+            <span>新商品</span></button>
+        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('productList.render','{{=it.data.userTenant}}')">
+            <span>商品管理</span></button>
+        {{}else{}}
         <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('tenantBase.render')">
             <span>新店铺</span></button>
         <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('tenantList.render')">
@@ -147,6 +153,7 @@
             <span>新推荐</span></button>
         <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('recommendList.render',null)">
             <span>推荐管理</span></button>
+        {{}}}
         <%--<button type="button" class="am-btn am-btn-primary "><span>图片管理</span></button>--%>
     </div>
 </script>
@@ -499,7 +506,7 @@
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                       onclick="PubSub.publish('tenantPanel.deletePanel','{{=imageText.id}}')"><span
+                       onclick="PubSub.publish('tenantPanel.delete','{{=imageText.id}}')"><span
                             class="am-icon-trash-o"></span> 删除
                     </a>
                 </div>
@@ -552,7 +559,7 @@
 
         <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
             <a class="am-btn am-btn-primary am-btn-lg"
-               onclick="PubSub.publish('productBase.addProduct','{{=it.data.id}}')">去添加商品</a>
+               onclick="PubSub.publish('productBase.new','{{=it.data.id}}')">去添加商品</a>
         </div>
     </div>
 
@@ -561,7 +568,7 @@
               enctype="multipart/form-data"
               method="post">
             <fieldset>
-                <legend><b>{{=it.data.name}}</b> 的店内实景</legend>
+                <legend><b>{{=it.data.id}}</b> 的店内实景</legend>
                 <input type="hidden" name="id" id="tenantPanelId" value="{{=it.data.id}}">
 
                 <div class="am-form-group">
@@ -682,7 +689,7 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 商品管理
                         </button>
-                        <button onclick="PubSub.publish('productBase.addProduct','{{=tenant.id}}')"
+                        <button onclick="PubSub.publish('productBase.new','{{=tenant.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 添加商品
                         </button>
@@ -785,7 +792,6 @@
 
                 <legend>商品规格信息</legend>
                 <input type="hidden" name="id" value="{{=it.data != null&&it.data.id!=undefined ? it.data.id : ''}}">
-           <%--     <input type="hidden" name="productId" value="{{=(it.data.product!=null && it.data.product!=undefined ) ? it.data.product.id: ''}}">--%>
                 <input type="hidden" name="productId" value="{{=(it.productId!=null && it.productId!=undefined ) ? it.productId: ''}}">
                 <div class="am-form-group">
                     <label for="product-model-name" class="am-u-sm-3 am-form-label">规格名称</label>
@@ -848,8 +854,6 @@
                            onclick="PubSub.publish('productBase.render','{{=it.product}}')">< 上一步</a>
                         <a onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
-                        <%--<a class="am-btn am-btn-primary am-btn-lg"--%>
-                        <%--onclick="PubSub.publish('tenantMaster.render','{{=it.data.id}}')">跳过</a>--%>
                     </div>
                 </div>
             </fieldset>
@@ -867,7 +871,7 @@
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                       onclick="PubSub.publish('productModelPanel.deletePanel','{{=imageText.id}}')"><span
+                       onclick="PubSub.publish('productModelPanel.delete','{{=imageText.id}}')"><span
                             class="am-icon-trash-o"></span> 删除
                     </a>
                 </div>
@@ -918,7 +922,7 @@
             </tbody>
         </table>
 
-       <%-- <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+      <%--  <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
             <a class="am-btn am-btn-primary am-btn-lg"
                onclick="PubSub.publish('productList.render')">完成</a>
             <a class="am-btn am-btn-primary am-btn-lg"
@@ -981,7 +985,7 @@
                            onclick="PubSub.publish('productModel.render','{{=it.data}}')">< 上一步</a>
                         <a onclick="PubSub.publish('productModelPanel.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">添加</a>
-                     <%--   <a class="am-btn am-btn-primary am-btn-lg"
+                      <%--  <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('{{=it.name}}.nextProductModel','{{=it.template}}-form')">去添加下一个商品规格</a>--%>
                     </div>
                 </div>
@@ -999,19 +1003,19 @@
               method="post">
             <fieldset>
                 <legend>商品详情</legend>
-                <input type="hidden" name="id" value="{{=it.data!=null&&it.data!=undefined?it.data.id:''}}">
+                <input type="hidden" name="id" value="{{=it.data!=null&&it.data.id!=undefined?it.data.id:''}}">
                 <input type="hidden" name="productId" value="{{=it.productId!=null&&it.productId!=undefined?it.productId:''}}">
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">名称</label>
                     <div class="am-u-sm-9">
-                        <input name="name" type="text" placeholder="名称"  value="{{=it.data!=null&&it.data!=undefined?it.data.name:''}}">
+                        <input name="name" type="text" placeholder="名称"  value="{{=it.data!=null&&it.data.name!=undefined?it.data.name:''}}">
                     </div>
                 </div>
 
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">介绍</label>
                     <div class="am-u-sm-9">
-                        <textarea id="productPanelContent" name="content" rows="5" placeholder="介绍">{{=it.data!=null&&it.data!=undefined?it.data.content:''}}</textarea>
+                        <textarea id="productPanelContent" name="content" rows="5" placeholder="介绍">{{=it.data!=null&&it.data.content!=undefined?it.data.content:''}}</textarea>
                     </div>
                 </div>
 
@@ -1119,7 +1123,7 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 商品规格
                         </button>
-                        <button onclick="PubSub.publish('productModel.addProductModel','{{=product.id}}')"
+                        <button onclick="PubSub.publish('productModel.new','{{=product.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 添加规格
                         </button>
@@ -1188,7 +1192,7 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
                         </button>
-                        <button onclick="PubSub.publish('productModelPanel.addProductModelPanel','{{=productModel.id}}')"
+                        <button onclick="PubSub.publish('productModelPanel.new','{{=productModel.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 规格详情
                         </button>
@@ -1699,9 +1703,13 @@
         this.param = param;
         this.name = "menu";
         this.template = "main-menu";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.data=null;
 
         this.render = function (msg, data) {
-            renderTemplate(this.template, this);
+            ajaxRequest("/yuanqu/tenant/getUserTenantMessage", {}, function (responseData) {
+                this.data = responseData;
+                renderTemplate(this.template, this);
+            }.bind(this));
             this.show();
         };
         this.show = function (msg, data) {
@@ -2145,7 +2153,7 @@
             this.show();
 
         };
-        this.deletePanel = function (msg, data) {
+        this.delete = function (msg, data) {
             ajaxRequest("/yuanqu/tenant/deletePanelById", {id: data}, function (responseData) {
                 if (responseData.code != "1") {
                     renderTemplate(this.panelListTemplate, this);
@@ -2222,7 +2230,7 @@
             {message: this.name + ".submit", subscriber: this.submitForm},
             {message: this.name + ".tabShow", subscriber: this.tabShow},
             {message: this.name + ".imageView", subscriber: this.imageView},
-            {message: this.name + ".deletePanel", subscriber: this.deletePanel}
+            {message: this.name + ".delete", subscriber: this.delete}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2246,21 +2254,19 @@
         this.render = function (msg, data) {
 
             if (typeof data != "undefined" && data != null) {
-                this.tenant = null;
-                ajaxRequest("/yuanqu/product/getProductById", {id:data}, function (responseData) {
+                ajaxRequest("/yuanqu/product/getProductById", {id: data}, function (responseData) {
                     this.data = responseData;
                     renderTemplate(this.template, this);
                 }.bind(this))
+            } else {
+                renderTemplate(this.template, this);
             }
-            this.data=data;
-            renderTemplate(this.template, this);
             this.show();
-
         };
 
-        this.addProduct=function (msg, data) {
-            this.data=null;
-            this.tenantId=data;
+        this.new = function (msg, data) {
+            this.data = null;
+            this.tenantId = data;
             renderTemplate(this.template, this);
             this.show();
         };
@@ -2335,7 +2341,7 @@
             {message: this.name + ".imageView", subscriber: this.imageView},
             {message: this.name + ".complete", subscriber: this.complete},
             {message: this.name + ".submitAndNext", subscriber: this.submitAndNext},
-            {message: this.name + ".addProduct", subscriber: this.addProduct}
+            {message: this.name + ".new", subscriber: this.new}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2366,7 +2372,6 @@
                 renderTemplate(this.template, this);
             }
             this.show();
-
         };
 
         this.chooseMaster = function (msg, data) {
@@ -2403,7 +2408,7 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    PubSub.publish('productPanel.addProductPanel',this.data.id);
+                    PubSub.publish('productPanel.new',this.data.id);
                 }
                 $("#my-modal-loading").modal("close");
             }.bind(this));
@@ -2461,16 +2466,10 @@
                 renderTemplate(this.template, this);
             }
             this.show();
-
         };
 
-        this.addProductModel = function (msg, data) {
+        this.new = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
-             /*   ajaxRequest("/yuanqu/product/getProductModelById", {id: data}, function (responseData) {
-                    this.data = responseData;
-                    renderTemplate(this.template, this);
-                }.bind(this))
-            } else {*/
                 this.data=null;
                 this.productId=data;
                 renderTemplate(this.template, this);
@@ -2486,7 +2485,7 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data != "undefined" && data != null) {
-                    PubSub.publish("productModelPanel.addProductModelPanel", data);
+                    PubSub.publish("productModelPanel.new", data);
                     //@TODO
                 }
                 $("#my-modal-loading").modal("close");
@@ -2535,7 +2534,7 @@
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".imageView", subscriber: this.imageView},
             {message: this.name + ".submit", subscriber: this.submitForm},
-            {message: this.name + ".addProductModel", subscriber: this.addProductModel}
+            {message: this.name + ".new", subscriber: this.new}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2730,7 +2729,7 @@
             }
             this.show();
         };
-        this.addProductModelPanel = function (msg, data) {
+        this.new = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
                 this.data = null;
                 if (typeof data.id != "undefined") {
@@ -2744,7 +2743,7 @@
             this.show();
         };
 
-        this.deletePanel = function (msg, data) {
+        this.delete = function (msg, data) {
             ajaxRequest("/yuanqu/tenant/deletePanelById", {id: data}, function (responseData) {
                 if (responseData.code != "1") {
                     renderTemplate(this.template, this);
@@ -2781,7 +2780,7 @@
         this.nextProductModel = function (msg, data) {
             $("#my-modal-loading").modal();
             $("#" + data).ajaxSubmit(function (responseData) {
-                PubSub.publish("productModel.render", this.data.product.id)
+                PubSub.publish("productModel.new", this.data.product.id)
                 $("#my-modal-loading").modal("close");
             }.bind(this));
             return false;
@@ -2830,9 +2829,9 @@
             {message: this.name + ".submit", subscriber: this.submitForm},
             {message: this.name + ".tabShow", subscriber: this.tabShow},
             {message: this.name + ".imageView", subscriber: this.imageView},
-            {message: this.name + ".deletePanel", subscriber: this.deletePanel},
+            {message: this.name + ".delete", subscriber: this.delete},
             {message: this.name + ".nextProductModel", subscriber: this.nextProductModel},
-            {message: this.name + ".addProductModelPanel", subscriber: this.addProductModelPanel}
+            {message: this.name + ".new", subscriber: this.new}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2856,11 +2855,11 @@
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
                 ajaxRequest("/yuanqu/product/getProductPanelById", {id: data}, function (responseData) {
-                    if (responseData.code!="1" ) {
+                    if (responseData.code != "1") {
                         this.data = responseData;
                         renderTemplate(this.template, this);
                     } else {
-                        this.data=data;
+                        this.productId = data;
                         renderTemplate(this.template, this);
                     }
                 }.bind(this));
@@ -2869,16 +2868,15 @@
             }
             this.show();
         };
-        this.addProductPanel = function (msg, data) {
+        this.new = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
-                this.data=null;
-                this.productId=data;
+                this.data = null;
+                this.productId = data;
                 renderTemplate(this.template, this);
             }
             this.show();
-
         };
-        this.deletePanel = function (msg, data) {
+        this.delete = function (msg, data) {
             var success = function (responseData) {
                 $("#" + responseData).remove();
             };
@@ -2891,7 +2889,8 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.owner != "undefined" && data.owner != null) {
-                    PubSub.publish('productModel.addProductModel', data.owner);}
+                    PubSub.publish('productModel.new', data.owner);
+                }
                 $("#my-modal-loading").modal("close");
             }.bind(this));
             return false;
@@ -2920,7 +2919,6 @@
             }
         };
 
-
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
@@ -2939,8 +2937,8 @@
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".submit", subscriber: this.submitForm},
             {message: this.name + ".imageView", subscriber: this.imageView},
-            {message: this.name + ".deletePanel", subscriber: this.deletePanel},
-            {message: this.name + ".addProductPanel", subscriber: this.addProductPanel}
+            {message: this.name + ".delete", subscriber: this.delete},
+            {message: this.name + ".new", subscriber: this.new}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {

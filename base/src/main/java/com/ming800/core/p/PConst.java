@@ -98,5 +98,6 @@ public class PConst {
     public static final String WEBSITE_HOST = "www.efeiyi.com";
 
     public static final String OSS_EF_WIKI_HOST = "http://wiki-oss.efeiyi.com/";
+    public static final String USER_PERMISSION_OFFLINE_MANAGER= "offline_manager";
 
 }
