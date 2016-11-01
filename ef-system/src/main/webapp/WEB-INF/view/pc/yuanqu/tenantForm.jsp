@@ -725,7 +725,7 @@
                 <legend>商品信息</legend>
 
                 <input name="id" type="hidden" value="{{=(it.data!=null && it.data.id!=null ) ? it.data.id: ''}}">
-                <input name="tenantId" type="hidden" value="{{=(it.data.tenant!=null && it.data.tenant!=undefined ) ? it.data.tenant.id: ''}}">
+                <input name="tenantId" type="hidden" value="{{=(it.tenantId!=null && it.tenantId!=undefined ) ? it.tenantId: ''}}">
                 <div class="am-form-group">
                     <label for="product-name" class="am-u-sm-2 am-form-label">名称</label>
                     <div class="am-u-sm-10">
@@ -744,24 +744,6 @@
                                placeholder="输入新商品副标题">
                     </div>
                 </div>
-
-
-              <%--  <div class="am-form-group am-form-file">
-                    <label for="picture_url" class="am-u-sm-2 am-form-label">主图</label>
-                    <div class="am-u-sm-10">
-                        <button type="button" class="am-btn am-btn-default am-btn-sm">
-                            选择文件
-                        </button>
-                        <input id="picture_url" name="picture_url" type="file" multiple
-                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
-                    </div>
-                    <div class="file-list am-u-sm-10">
-                        {{ if(it.data!=null && it.data.picture_url !=null){ }}
-                        <img src="{{=it.data.picture_url}}" width="500"/>
-                        {{ } }}
-                    </div>
-                </div>--%>
-
 
                 <div class="am-form-group am-form-file">
                     <label for="product-audio" class="am-u-sm-2 am-form-label">语音介绍</label>
@@ -1017,19 +999,19 @@
               method="post">
             <fieldset>
                 <legend>商品详情</legend>
-                <input type="hidden" name="id" value="{{=it.data.id!=null&&it.data.id!=undefined?it.data.id:''}}">
-                <input type="hidden" name="productId" value="{{=it.data.owner!=null&&it.data.owner!=undefined?it.data.owner:''}}">
+                <input type="hidden" name="id" value="{{=it.data!=null&&it.data!=undefined?it.data.id:''}}">
+                <input type="hidden" name="productId" value="{{=it.productId!=null&&it.productId!=undefined?it.productId:''}}">
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">名称</label>
                     <div class="am-u-sm-9">
-                        <input name="name" type="text" placeholder="名称"  value="{{=it.data.name!=null&&it.data.name!=undefined?it.data.name:''}}">
+                        <input name="name" type="text" placeholder="名称"  value="{{=it.data!=null&&it.data!=undefined?it.data.name:''}}">
                     </div>
                 </div>
 
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">介绍</label>
                     <div class="am-u-sm-9">
-                        <textarea id="productPanelContent" name="content" rows="5" placeholder="介绍">{{=it.data.name!=null&&it.data.content!=undefined?it.data.content:''}}</textarea>
+                        <textarea id="productPanelContent" name="content" rows="5" placeholder="介绍">{{=it.data!=null&&it.data!=undefined?it.data.content:''}}</textarea>
                     </div>
                 </div>
 
@@ -2259,6 +2241,7 @@
         this.param = param;
         this.name = "productBase";
         this.template = "main-product-base";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.tenantId=null;
 
         this.render = function (msg, data) {
 
@@ -2276,14 +2259,8 @@
         };
 
         this.addProduct=function (msg, data) {
-          /*  if (typeof data != "undefined" && data != null) {
-                this.tenant = null;
-                ajaxRequest("/yuanqu/product/getProductById", {id:data}, function (responseData) {
-                    this.data = responseData;
-                    renderTemplate(this.template, this);
-                }.bind(this))
-            }*/
-            this.data=data;
+            this.data=null;
+            this.tenantId=data;
             renderTemplate(this.template, this);
             this.show();
         };
@@ -2874,6 +2851,7 @@
         this.param = param;
         this.name = "productPanel";
         this.template = "main-product-panel";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.productId=null;
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
@@ -2893,7 +2871,8 @@
         };
         this.addProductPanel = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
-                this.data=data;
+                this.data=null;
+                this.productId=data;
                 renderTemplate(this.template, this);
             }
             this.show();
@@ -2912,7 +2891,7 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.owner != "undefined" && data.owner != null) {
-                    PubSub.publish('productModel.addProductModel', this.data.owner);}
+                    PubSub.publish('productModel.addProductModel', data.owner);}
                 $("#my-modal-loading").modal("close");
             }.bind(this));
             return false;

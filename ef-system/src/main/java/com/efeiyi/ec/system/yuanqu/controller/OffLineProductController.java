@@ -224,6 +224,7 @@ public class OffLineProductController {
         } else {
             productModel = new ProductModel();
             productModel.setSerial(autoSerialManager.nextSerial("product"));
+            productModel.setProduct(product);
         }
         productModel.setName(request.getParameter("name"));
         String amountStr = request.getParameter("amount");
@@ -233,7 +234,6 @@ public class OffLineProductController {
             productModel.setMarketPrice(new BigDecimal(marketPrice));
         }
         productModel.setPrice(new BigDecimal(request.getParameter("price")));
-        productModel.setProduct(product);
         productModel.setStatus("1");
         productModel.setProductModel_url(uploadImage(multipartRequest.getFile("productModel_url")));
         productModel.setCreateDateTime(new Date());
