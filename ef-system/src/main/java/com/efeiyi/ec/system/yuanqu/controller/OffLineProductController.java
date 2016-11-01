@@ -96,31 +96,30 @@ public class OffLineProductController {
         }
         return product;
     }
-    @RequestMapping({"/getPanelById"})
+    @RequestMapping({"/getProductPanelById"})
     @ResponseBody
-    public Object getPanelById(HttpServletRequest request) {
+    public Object getProductPanelById(HttpServletRequest request) {
         JSONObject jsonObject = new JSONObject();
         String id = request.getParameter("id");
         String hql = "select obj from Panel obj where obj.owner=:id and obj.status!='0'";
         LinkedHashMap<String, Object> panelParam = new LinkedHashMap<>();
         panelParam.put("id", id);
-        Panel panel = (Panel) baseManager.getUniqueObjectByConditions(hql, panelParam);
-        LinkedHashMap<String, Object> imagesParam = new LinkedHashMap<>();
-        if (panel != null) {
-            imagesParam.put("panelId", panel.getId());
+        List<Panel> panels = (List<Panel>) baseManager.listObject(hql, panelParam);
+        if (panels != null && panels.size() > 0) {
+            LinkedHashMap<String, Object> imagesParam = new LinkedHashMap<>();
+            imagesParam.put("panelId", panels.get(0).getId());
             String imageHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='1'";
             String audioHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='2'";
             ImagePanel audio = (ImagePanel) baseManager.getUniqueObjectByConditions(audioHql, imagesParam);
             List<ImagePanel> images = (List<ImagePanel>) baseManager.listObject(imageHql, imagesParam);
-            panel.setImageList(images);
+            panels.get(0).setImageList(images);
             if (audio != null) {
-                panel.setMedia(audio.getImage());
+                panels.get(0).setMedia(audio.getImage());
             }
-            jsonObject.put("productPanel", panel);
-        }else{
-            jsonObject.put("code","1");
+            return panels.get(0);
         }
-        return jsonObject.toString();
+        jsonObject.put("code", "1");
+        return jsonObject;
     }
     @RequestMapping({"/getProductsByTenantId"})
     @ResponseBody
@@ -225,6 +224,7 @@ public class OffLineProductController {
         } else {
             productModel = new ProductModel();
             productModel.setSerial(autoSerialManager.nextSerial("product"));
+            productModel.setProduct(product);
         }
         productModel.setName(request.getParameter("name"));
         String amountStr = request.getParameter("amount");
@@ -234,9 +234,9 @@ public class OffLineProductController {
             productModel.setMarketPrice(new BigDecimal(marketPrice));
         }
         productModel.setPrice(new BigDecimal(request.getParameter("price")));
-        productModel.setProduct(product);
         productModel.setStatus("1");
         productModel.setProductModel_url(uploadImage(multipartRequest.getFile("productModel_url")));
+        productModel.setCreateDateTime(new Date());
         baseManager.saveOrUpdate(ProductModel.class.getName(), productModel);
         return productModel;
     }
@@ -283,11 +283,87 @@ public class OffLineProductController {
     @RequestMapping({"/panelSubmit"})
     @ResponseBody
     public Object panelSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
-        Panel panel = new Panel();
+        String id = request.getParameter("id");
+        String productId = request.getParameter("productId");
+        Panel panel;
+        if (id != null && !"".equals(id)) {
+            panel = (Panel) baseManager.getObject(Panel.class.getName(), id);
+        } else {
+            panel = new Panel();
+            Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
+            panel.setOwner(product.getId());
+        }
         panel.setStatus("1");
         panel.setType("1");
         panel.setName(request.getParameter("name"));
-        panel.setOwner(request.getParameter("id"));
+        panel.setContent(request.getParameter("content"));
+        baseManager.saveOrUpdate(Panel.class.getName(), panel);
+        for (MultipartFile multipartFile : multipartRequest.getFiles("imageList")) {
+            String oName = multipartFile.getOriginalFilename();
+            String nName;
+            try {
+                nName = System.currentTimeMillis() + "" + (int) (Math.random() * 1000000) + "." + oName.split("\\.")[1];
+            } catch (Exception e) {
+                continue;
+            }
+            String url = "image/" + nName;
+            aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
+            String fullUrl = PConst.OSS_EF_WIKI_HOST + url;
+            Image image = new Image();
+            image.setStatus("1");
+            image.setType("1");
+            image.setOwner(panel.getId());
+            image.setCreateTime(new Date());
+            image.setSrc(fullUrl);
+            ImagePanel imagePanel = new ImagePanel();
+            imagePanel.setImage(image);
+            imagePanel.setPanel(panel);
+            baseManager.saveOrUpdate(Image.class.getName(), image);
+            baseManager.saveOrUpdate(ImagePanel.class.getName(), imagePanel);
+        }
+
+        MultipartFile multipartFile = multipartRequest.getFile("media");
+        if (multipartFile != null) {
+            String oName = multipartFile.getOriginalFilename();
+            String nName;
+            String fullUrl = null;
+            try {
+                nName = System.currentTimeMillis() + "" + (int) (Math.random() * 1000000) + "." + oName.split("\\.")[1];
+                String url = "image/" + nName;
+                aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
+                fullUrl = PConst.OSS_EF_WIKI_HOST + url;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Image image = new Image();
+            image.setStatus("1");
+            image.setType("2");
+            image.setOwner(panel.getId());
+            image.setCreateTime(new Date());
+            image.setSrc(fullUrl);
+            baseManager.saveOrUpdate(Image.class.getName(), image);
+            panel.setMedia(image);
+            baseManager.saveOrUpdate(Panel.class.getName(), panel);
+        }
+        return panel;
+    }
+
+    @RequestMapping({"/modelpanelSubmit"})
+    @ResponseBody
+    public Object modelpanelSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
+        String id = request.getParameter("id");
+        String productModelId = request.getParameter("productId");
+        Panel panel;
+        if (id != null && !"".equals(id)) {
+            panel = (Panel) baseManager.getObject(Panel.class.getName(), id);
+        } else {
+            panel = new Panel();
+            ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+            panel.setOwner(productModel.getId());
+        }
+        panel.setStatus("1");
+        panel.setType("1");
+        panel.setName(request.getParameter("name"));
         panel.setContent(request.getParameter("content"));
         baseManager.saveOrUpdate(Panel.class.getName(), panel);
         for (MultipartFile multipartFile : multipartRequest.getFiles("imageList")) {
@@ -403,7 +479,14 @@ public class OffLineProductController {
                 URLEncoder.encode(redirect_uri, "UTF-8") +
                 "&response_type=code&scope=snsapi_userinfo&state=" + URLEncoder.encode(redirect, "UTF-8") + "#wechat_redirect";
 
-        return createQRCode(this.getClass().getResource("/").getPath().toString(), productId, url);
+        QRCodeGenerator QRCodeGenerator = new QRCodeGenerator(url);
+        return QRCodeGenerator
+                .createQRCode(582, 582)
+                .assembleLogo("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/logo.png")
+                .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/background.jpg", 123, 92)
+                .getResponseEntityResult(productId + "jpg");
+
+
     }
 
 }

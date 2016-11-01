@@ -1,9 +1,0 @@
-<sitemesh>
-    <mapping path="/base/**" decorator="/layouts/mainTemplate.jsp"/>
-    <mapping path="/pc/**" decorator="/layouts/mainTemplate.jsp"/>
-    <mapping path="/project/**" decorator="/layouts/mainTemplate.jsp"/>
-    <mapping path="/product/**" decorator="/layouts/mainTemplate.jsp"/>
-    <mapping path="/**" decorator="/layouts/mainTemplate.jsp"/>
-    <mapping path="/comment.jsp" exclue="true"/>
-    <mapping path="/comment2.jsp" exclue="true"/>
-</sitemesh>
