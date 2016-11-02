@@ -134,12 +134,13 @@
 
 <script type="text/x-dot-template" id="main-menu">
     <div class="main-menu">
-        {{if(it.data.permission!=null&&it.data.permission=='offline_manager'&&it.data.userTenant!=null){}}
+        {{if(it.data.permission!=null&&it.data.permission=='offline_manager'){}}
+        {{if(it.data.userTenant!=null){}}
         <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('productBase.new','{{=it.data.userTenant}}')">
             <span>新商品</span></button>
         <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('productList.render','{{=it.data.userTenant}}')">
             <span>商品管理</span></button>
-        {{}else{}}
+        {{}}else{}}
         <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('tenantBase.render')">
             <span>新店铺</span></button>
         <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('tenantList.render')">
