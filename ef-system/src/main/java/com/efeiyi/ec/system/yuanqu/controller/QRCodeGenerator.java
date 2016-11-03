@@ -111,7 +111,7 @@ public class QRCodeGenerator {
 
         BufferedImage image = QRCodeGenerator
                 .createQRCode(582, 582)
-                .assembleLogo("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/logo.png")
+//                .assembleLogo("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/logo.png")
                 .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/background.jpg", 123, 92)
                 .getImageResult();
         String path = "C://Users//Administrator//Desktop";

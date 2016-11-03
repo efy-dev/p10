@@ -5,18 +5,12 @@ package com.efeiyi.ec.gift.organization.controller;
  */
 
 import com.efeiyi.ec.gift.base.util.AuthorizationUtil;
-import com.efeiyi.ec.gift.organization.model.SmsProvider;
-import com.efeiyi.ec.gift.organization.model.YunPianSmsProvider;
-import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.purchase.model.Coupon;
-import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AutoSerialManager;
-import com.ming800.core.util.CookieTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,10 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 
 /**
@@ -100,43 +90,6 @@ public class SigninController extends BaseController {
         response.sendRedirect(request.getContextPath() + "/");
     }
 
-
-    @RequestMapping({"/createCoupon.do"})
-    @ResponseBody
-    public boolean transitPage(HttpServletRequest request) throws Exception {
-        String userId = request.getParameter("userId");
-        if (userId != null && !"".equals(userId)) {
-            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
-            XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
-            List<Object> couponBatchList = baseManager.listObject(xQuery);
-            for (Object couponBatchTemp : couponBatchList) {
-                if (((CouponBatch) couponBatchTemp).getCouponList().size() < ((CouponBatch) couponBatchTemp).getAmount()) {
-                    Coupon coupon = new Coupon();
-                    coupon.setStatus("1");
-                    coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
-                    coupon.setCouponBatch((CouponBatch) couponBatchTemp);
-                    Date currentDate = new Date();
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-                    String currentDateStr = simpleDateFormat.format(currentDate);
-                    coupon.setUniqueKey(currentDateStr + coupon.getSerial());
-                    coupon.setConsumer(consumer);
-                    coupon.setWhetherBind("2");
-                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
-                } else if (((CouponBatch) couponBatchTemp).fetchCouponList().size() > 0) {
-                    List<Coupon> couponList = ((CouponBatch) couponBatchTemp).fetchCouponList();
-                    Coupon coupon = couponList.get(0);
-                    coupon.setWhetherBind("2");
-                    coupon.setConsumer(consumer);
-                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
-                }
-            }
-            SmsProvider smsProvider = new YunPianSmsProvider();
-            String phoneNumber = consumer.getUsername();
-            HashMap map = null;
-            smsProvider.post(phoneNumber, map, "1186309");
-        }
-        return true;
-    }
 
 
     @RequestMapping("/registerSuccess/{couponAmount}")

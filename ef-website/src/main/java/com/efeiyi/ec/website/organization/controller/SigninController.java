@@ -4,23 +4,18 @@ package com.efeiyi.ec.website.organization.controller;
  * Created by Administrator on 2014/11/13.
  */
 
-import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.exception.NonUniqueConsumerException;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.purchase.model.Coupon;
-import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.website.order.model.WxPayConfig;
-import com.efeiyi.ec.website.organization.model.SmsProvider;
 import com.efeiyi.ec.website.organization.model.ValidateCode;
-import com.efeiyi.ec.website.organization.model.YunPianSmsProvider;
+import com.efeiyi.ec.website.organization.service.IConsumerService;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.model.WxCalledRecord;
-import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.CookieTool;
 import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
@@ -45,11 +40,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
@@ -64,8 +61,6 @@ import java.util.*;
 public class SigninController extends BaseController {
     @Autowired
     private BaseManager baseManager;
-    @Autowired
-    private AutoSerialManager autoSerialManager;
 
     @Autowired
     private SmsCheckManager smsCheckManager;
@@ -73,34 +68,39 @@ public class SigninController extends BaseController {
     @Autowired
     private UserDetailsService userManager;
 
+    @Autowired
+    private IConsumerService consumerService;
+
+    private Lock lock = new ReentrantLock();
+
 
     @RequestMapping({"login"})
-    public String login(HttpServletRequest request, HttpServletResponse response) {
+    public String login() {
         return "/login";
     }
 
     @RequestMapping({"signin"})
-    public String siginin(HttpServletRequest request, HttpServletResponse response) {
+    public String siginin() {
         return "/register";
     }
 
 
     @RequestMapping({"signinUser"})
-    public String signinUser(HttpServletRequest request, HttpServletResponse response) {
+    public String signinUser(HttpServletRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        password = StringUtil.encodePassword(password, "sha");
-        Consumer bigUser = new Consumer();
-        bigUser.setUsername(username);
-        bigUser.setPassword(password);
-        bigUser.setAccountExpired(false);
-        bigUser.setAccountLocked(false);
-        bigUser.setCredentialsExpired(false);
-        bigUser.setEnabled(true);
-        bigUser.setStatus("1");
-        bigUser.setCreateDatetime(new Date());
-        baseManager.saveOrUpdate(BigUser.class.getName(), bigUser);
-        return "/registerSuccess";
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("username", username);
+        lock.lock();
+        List<Consumer> consumers = consumerService.listConsumerByUsername(username);
+        if (!consumers.isEmpty()) {
+            for (Consumer consumer : consumers) {
+                consumerService.removeConsumer(consumer);
+            }
+        }
+        consumerService.saveOrUpdateConsumer(username, password);
+        lock.unlock();
+        return "/login";
     }
 
 
@@ -134,17 +134,13 @@ public class SigninController extends BaseController {
     @ResponseBody
     public boolean checkUserName(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
-        String hql = "select obj from BigUser obj where obj.username=:username and obj.status!='0'";
-        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        param.put("username", username);
-        BigUser bigUser;
+        Consumer consumer;
         try {
-            bigUser = (BigUser) baseManager.getUniqueObjectByConditions(hql, param);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            consumer = consumerService.getConsumerByUsername(username);
+        } catch (NonUniqueConsumerException e) {
+            return true;
         }
-        return (bigUser != null && bigUser.getId() != null);
+        return (consumer != null && consumer.getId() != null);
     }
 
 
@@ -170,17 +166,8 @@ public class SigninController extends BaseController {
         String cellPhoneNumber = request.getParameter("phone");
         String verificationCode = VerificationCodeGenerator.createVerificationCode();
         request.getSession().setAttribute(cellPhoneNumber, verificationCode);
-//        boolean validate = this.smsCheckManager.validate(cellPhoneNumber, String.valueOf(request.getSession().getAttribute(cellPhoneNumber)));
-//        if (!validate) {
-        String massage = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1104699", PConst.YUNPIAN);
-        if (massage != null) {
-            return true;
-        } else {
-            return false;
-        }
-//        } else {
-//            return false;
-//        }
+        String message = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1104699", PConst.YUNPIAN);
+        return message != null;
     }
 
     @RequestMapping({"forgetPassword"})
@@ -227,7 +214,6 @@ public class SigninController extends BaseController {
         if (redirect != null) {
             return "redirect:http://" + redirect;
         }
-//        response.sendRedirect(request.getContextPath() + "/sso2.do");
         return "redirect:/sso2.do";
     }
 
@@ -238,44 +224,6 @@ public class SigninController extends BaseController {
         MyUser myUser = AuthorizationUtil.getMyUser();
         CookieTool.addCookie(response, "userinfo", myUser.getId(), 10000000, "efeiyi.com");
         response.sendRedirect(request.getContextPath() + "/");
-    }
-
-
-    @RequestMapping({"/createCoupon.do"})
-    @ResponseBody
-    public boolean transitPage(HttpServletRequest request) throws Exception {
-        String userId = request.getParameter("userId");
-        if (userId != null && !"".equals(userId)) {
-            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
-            XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
-            List<Object> couponBatchList = baseManager.listObject(xQuery);
-            for (Object couponBatchTemp : couponBatchList) {
-                if (((CouponBatch) couponBatchTemp).getCouponList().size() < ((CouponBatch) couponBatchTemp).getAmount()) {
-                    Coupon coupon = new Coupon();
-                    coupon.setStatus("1");
-                    coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
-                    coupon.setCouponBatch((CouponBatch) couponBatchTemp);
-                    Date currentDate = new Date();
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-                    String currentDateStr = simpleDateFormat.format(currentDate);
-                    coupon.setUniqueKey(currentDateStr + coupon.getSerial());
-                    coupon.setConsumer(consumer);
-                    coupon.setWhetherBind("2");
-                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
-                } else if (((CouponBatch) couponBatchTemp).fetchCouponList().size() > 0) {
-                    List<Coupon> couponList = ((CouponBatch) couponBatchTemp).fetchCouponList();
-                    Coupon coupon = couponList.get(0);
-                    coupon.setWhetherBind("2");
-                    coupon.setConsumer(consumer);
-                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
-                }
-            }
-            SmsProvider smsProvider = new YunPianSmsProvider();
-            String phoneNumber = consumer.getUsername();
-            HashMap map = null;
-            smsProvider.post(phoneNumber, map, "1186309");
-        }
-        return true;
     }
 
 
@@ -304,8 +252,7 @@ public class SigninController extends BaseController {
     @RequestMapping({"/user/getCurrentUser"})
     @ResponseBody
     public MyUser getCurrentUser() {
-        MyUser currentUser = AuthorizationUtil.getMyUser();
-        return currentUser;
+        return AuthorizationUtil.getMyUser();
     }
 
 
@@ -316,83 +263,30 @@ public class SigninController extends BaseController {
         String code = request.getParameter("code");
         String wxOpenIdUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
         result = HttpUtil.getHttpResponse(wxOpenIdUrl, null);
-        request.getSession().setAttribute(code, result);
         JSONObject jsonObject = JSONObject.fromObject(result);
-        if (jsonObject.containsKey("errcode")) {
-            throw new RuntimeException("get openId error：" + result);
-        }
-
-        String accessToken = jsonObject.getString("access_token");
-        String openId = jsonObject.getString("openid");
-        String wxInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + accessToken + "&openid=" + openId + "&lang=zh_CN";
-
+        String wxInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + jsonObject.getString("access_token") + "&openid=" + jsonObject.getString("openid") + "&lang=zh_CN";
         String userInfo = HttpUtil.getHttpResponse(wxInfoUrl, null);
-        JSONObject userJsonObject = JSONObject.fromObject(userInfo);
-
-        String nickname = userJsonObject.get("nickname").toString();
-        String sex = userJsonObject.get("sex").toString();
-        String city = userJsonObject.get("city").toString();
-        String headimgurl = userJsonObject.get("headimgurl").toString();
-        String unionid = userJsonObject.get("unionid").toString();
-
-        WxCalledRecord wxCalledRecord = new WxCalledRecord();
-        wxCalledRecord.setCallback(redirect);
-        wxCalledRecord.setDataKey("unionid");
-        wxCalledRecord.setData(unionid);
-        wxCalledRecord.setCreateDatetime(new Date());
-        baseManager.saveOrUpdate(WxCalledRecord.class.getName(), wxCalledRecord);
-
-        //登录
-        MyUser myUser = authenticate(unionid);
-        //注册
-        if (myUser == null) {
-            Consumer consumer = new Consumer();
-            consumer.setUnionid(unionid);
-            consumer.setName(nickname);
-            consumer.setUsername(unionid);
-            consumer.setPassword(StringUtil.encodePassword(nickname, "sha"));
-            consumer.setCreateDatetime(new Date(System.currentTimeMillis()));
-            consumer.setStatus("1");
-            consumer.setBalance(new BigDecimal(0));
-            consumer.setAccountExpired(false);
-            consumer.setAccountLocked(false);
-            consumer.setCredentialsExpired(false);
-            consumer.setEnabled(true);
-            consumer.setCityName(city);
-            consumer.setPictureUrl(headimgurl);
-            consumer.setSex(Integer.parseInt(sex));
-            baseManager.saveOrUpdate(Consumer.class.getName(), consumer);
-            //登录
-            authenticate(unionid);
-        }
-        //跳转
-        redirect = URLDecoder.decode(redirect, "UTF-8");
-        return "redirect:http://www.efeiyi.com/qrcode/sample/" + redirect;
+        baseManager.saveOrUpdate(WxCalledRecord.class.getName(), new WxCalledRecord("wxInfo", userInfo, redirect));
+        authenticate(userInfo);
+        return "redirect:http://www.efeiyi.com/qrcode/sample/" + URLDecoder.decode(redirect, "UTF-8");
     }
 
 
-    private MyUser authenticate(String unionid) {
-        MyUser myUser;
-        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        param.put("unionid", unionid);
-        Consumer consumer;
-        try {
-            consumer = (Consumer) baseManager.getUniqueObjectByConditions("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param);
-        } catch (Exception e) {
-            consumer = (Consumer) baseManager.listObject("select obj from " + Consumer.class.getName() + " obj where obj.unionid=:unionid and obj.status!='0'", param).get(0);
+    private MyUser authenticate(String userInfo) {
+        JSONObject wxInfo = JSONObject.fromObject(userInfo);
+        Consumer consumer = consumerService.getConsumerOrNullByUnionid(wxInfo.get("unionid").toString());
+        MyUser myUser = consumerService.getMyUserOrNullByConsumer(consumer);
+        if (myUser == null) {
+            consumer = consumerService.saveOrUpdateConsumer(wxInfo.get("nickname").toString(), wxInfo.get("unionid").toString(), wxInfo.get("city").toString(), wxInfo.get("headimgurl").toString(), Integer.parseInt(wxInfo.get("sex").toString()));
+            myUser = consumerService.getMyUserOrNullByConsumer(consumer);
         }
-        if (consumer != null) {
-            myUser = (MyUser) baseManager.getObject(MyUser.class.getName(), consumer.getId());
-        } else {
-            return null;
-        }
-        AuthenticationManager am = new SampleAuthenticationManager();
         try {
+            AuthenticationManager am = new SampleAuthenticationManager();
             Authentication authentication = new UsernamePasswordAuthenticationToken(myUser, myUser.getPassword());
             Authentication result = am.authenticate(authentication);
             SecurityContextHolder.getContext().setAuthentication(result);
-        } catch (AuthenticationException e) {
-            System.out.println("Authentication failed: " + e.getMessage());
+        } catch (Exception e) {
+            return null;
         }
         return myUser;
     }

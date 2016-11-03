@@ -1,6 +1,5 @@
 package com.ming800.core.p.model;
 
-import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -21,6 +20,18 @@ public class WxCalledRecord {
     private String requestSource; //请求来源
     private Date createDatetime; //请求时间
     private String consumerId;    //目标用户的id (非必须)
+
+
+    public WxCalledRecord(String dataKey, String data, String callback) {
+        this.dataKey = dataKey;
+        this.data = data;
+        this.callback = callback;
+        this.createDatetime = new Date();
+    }
+
+    public WxCalledRecord() {
+    }
+
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

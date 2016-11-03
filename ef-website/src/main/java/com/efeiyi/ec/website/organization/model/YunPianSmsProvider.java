@@ -13,7 +13,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,48 +44,40 @@ public class YunPianSmsProvider implements SmsProvider {
      */
     private static String URI_GET_USER_INFO = BASE_URI + "/" + VERSION + "/user/get.json";
     /**
-     * 通用发送接口的http地址
-     */
-    private static String URI_SEND_SMS = BASE_URI + "/" + VERSION + "/sms/send.json";
-    /**
      * 模板发送接口的http地址
      */
     private static String URI_TPL_SEND_SMS = BASE_URI + "/" + VERSION + "/sms/tpl_send.json";
 
 
-    final static String apikey = "b802cb40c7a0db20e787884bf29f1e6d";
+    private final static String apiKey = "b802cb40c7a0db20e787884bf29f1e6d";
 
 
     /**
      * 发送, 并返回结果
-     *
-     * @param phone
-     * @param param
-     * @return
      */
     @Override
-    public SendCode post(String phone, HashMap<String,String> param, String tpl_id) {
+    public SendCode post(String phone, HashMap<String, String> param, String tpl_id) {
 
         String content = "";
         try {
-            if(param==null){
-                content = URLEncoder.encode("#null#="+content, ENCODING);
-            }else{
+            if (param == null) {
+                content = URLEncoder.encode("#null#=" + content, ENCODING);
+            } else {
                 int i = 0;
-             for(Map.Entry<String,String> entry:param.entrySet()){
-                 if(i++==0){
-                      content = content + "#"+entry.getKey()+"#="+entry.getValue();
-                 }else{
-                      content = content + "&#"+entry.getKey()+"#="+entry.getValue();
-                 }
-             }
+                for (Map.Entry<String, String> entry : param.entrySet()) {
+                    if (i++ == 0) {
+                        content = content + "#" + entry.getKey() + "#=" + entry.getValue();
+                    } else {
+                        content = content + "&#" + entry.getKey() + "#=" + entry.getValue();
+                    }
+                }
                 content = URLEncoder.encode(content, ENCODING);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String postData = "apikey=" + apikey + "&mobile=" + phone + "&tpl_id=" + tpl_id + "&tpl_value=" + content + "";
+        String postData = "apikey=" + apiKey + "&mobile=" + phone + "&tpl_id=" + tpl_id + "&tpl_value=" + content + "";
 
 
         System.out.println(postData);
@@ -133,7 +126,7 @@ public class YunPianSmsProvider implements SmsProvider {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String postData = "apikey=" + apikey + "&mobile=" + phone + "&tpl_id=" + tpl_id + "&tpl_value=" + content + "";
+        String postData = "apikey=" + apiKey + "&mobile=" + phone + "&tpl_id=" + tpl_id + "&tpl_value=" + content + "";
 
 
         System.out.println(postData);
@@ -169,9 +162,6 @@ public class YunPianSmsProvider implements SmsProvider {
     /**
      * 返回结果
      * 通过JSON解析
-     *
-     * @param
-     * @return
      */
     public SendCode conversion(String data) {
         SendCode postResult = JSON.parseObject(data, SendCode.class);
@@ -187,13 +177,12 @@ public class YunPianSmsProvider implements SmsProvider {
     @Override
     public String checkAmount() throws IOException {
         HttpClient client = new HttpClient();
-        HttpMethod method = new GetMethod(URI_GET_USER_INFO + "?apikey=" + apikey);
+        HttpMethod method = new GetMethod(URI_GET_USER_INFO + "?apikey=" + apiKey);
         HttpMethodParams param = method.getParams();
         param.setContentCharset(ENCODING);
         client.executeMethod(method);
         String jsonBody = method.getResponseBodyAsString();
         return jsonBody;
-
     }
 
 

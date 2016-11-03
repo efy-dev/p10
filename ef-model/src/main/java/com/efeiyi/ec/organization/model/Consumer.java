@@ -1,10 +1,9 @@
 package com.efeiyi.ec.organization.model;
 
-import com.efeiyi.ec.wiki.model.ProjectContent;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/5/28.
@@ -17,6 +16,14 @@ public class Consumer extends BigUser {
     private String unionid;
     private BigDecimal balance;
     //private List<ProjectContent> projectContents;
+
+    public Consumer() {
+        setAccountExpired(false);
+        setAccountLocked(false);
+        setCredentialsExpired(false);
+        setEnabled(true);
+        setStatus("1");
+    }
 
     @Column(name = "deposit")
     public BigDecimal getDeposit() {
@@ -54,16 +61,16 @@ public class Consumer extends BigUser {
         this.balance = balance;
     }
 
-   /* @ManyToMany(fetch = FetchType.LAZY,mappedBy = "consumer")
-    public List<ProjectContent> getProjectContents() {
-        return projectContents;
-    }
+    /* @ManyToMany(fetch = FetchType.LAZY,mappedBy = "consumer")
+     public List<ProjectContent> getProjectContents() {
+         return projectContents;
+     }
 
-    public void setProjectContents(List<ProjectContent> projectContents) {
-        this.projectContents = projectContents;
-    }*/
-   @Override
-   public String toString() {
-       return "Consumer{id = " + id + "}";
-   }
+     public void setProjectContents(List<ProjectContent> projectContents) {
+         this.projectContents = projectContents;
+     }*/
+    @Override
+    public String toString() {
+        return "Consumer{id = " + id + "}";
+    }
 }

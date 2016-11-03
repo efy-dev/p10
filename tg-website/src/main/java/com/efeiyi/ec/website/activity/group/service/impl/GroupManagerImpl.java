@@ -8,18 +8,14 @@ import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.activity.group.service.GroupManager;
 import com.efeiyi.ec.website.activity.group.service.PurchaseOrderGroupManager;
-import com.efeiyi.ec.website.organization.service.SmsCheckManager;
-import com.ming800.core.does.model.XQuery;
-import com.ming800.core.p.PConst;
-import org.springframework.stereotype.Service;
-
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.p.PConst;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -33,8 +29,6 @@ public class GroupManagerImpl implements GroupManager {
     @Autowired
     private BaseManager baseManager;
 
-    @Autowired
-    private SmsCheckManager smsCheckManager;
 
     @Autowired
     private PurchaseOrderGroupManager purchaseOrderGroupManager;
@@ -183,9 +177,9 @@ public class GroupManagerImpl implements GroupManager {
         } else {
             memberLeft = "0";
         }
-        if (myGroup != null && myGroup.getGroupMemberList().size() > 1) {
-            this.smsCheckManager.send(myGroup.getManUser().getUsername(), "#userName#=" + purchaseOrder.getReceiverName() + "&#timeLeft#=" + left + "&#memberLeft#=" + memberLeft, "1108985", PConst.TIANYI);
-        }
+//        if (myGroup != null && myGroup.getGroupMemberList().size() > 1) {
+//            this.smsCheckManager.send(myGroup.getManUser().getUsername(), "#userName#=" + purchaseOrder.getReceiverName() + "&#timeLeft#=" + left + "&#memberLeft#=" + memberLeft, "1108985", PConst.TIANYI);
+//        }
     }
 
     /*@Override

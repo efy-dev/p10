@@ -69,7 +69,7 @@
         var param = {};
         for (var p in requestParam) {
             if (requestParam.hasOwnProperty(p)) {
-                if (p.indexOf("param.") > 0) {
+                if (p.indexOf("param.") >= 0) {
                     var key = p.substr(6, p.length);
                     param[key] = requestParam[p];
                 }
@@ -85,7 +85,7 @@
         $("[dot-template=header]").html(renderHeader(PageVariable));
 
 
-        getProductModelList(PageVariable.param, 10, 0, function () {
+        getProductModelList(PageVariable.param, 100, 0, function () {
             renderTemplate(PageVariable.template.productList, PageVariable.productModelList);
         })
 

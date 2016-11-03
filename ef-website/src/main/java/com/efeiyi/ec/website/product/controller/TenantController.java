@@ -1,4 +1,4 @@
-package com.efeiyi.ec.website.tenant.controller;
+package com.efeiyi.ec.website.product.controller;
 
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.Image;

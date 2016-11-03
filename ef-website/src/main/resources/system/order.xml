@@ -5,8 +5,7 @@
     <entities>
         <entity name="PurchaseOrder" label="商品列表" model="com.efeiyi.ec.purchase.model.PurchaseOrder">
             <fields>
-                <field name="user" label="订单所属用户" inputType="remoteObject"
-                       source="com.efeiyi.ec.website.organization.model.UserServiceHandler"/>
+                <field name="user" label="订单所属用户" inputType="remoteObject"/>
                 <field name="orderStatus" label="订单状态" inputType="text">
                     <statusType fieldName="orderStatus">
                         <item label="等待付款" value="1"/>

@@ -358,6 +358,7 @@ public class ProductController {
         }
     }
 
+
     @RequestMapping({"/getColumnListByProductModel"})
     @ResponseBody
     public Object getColumnListByProductModel(HttpServletRequest request) {
@@ -370,6 +371,23 @@ public class ProductController {
             LinkedHashMap<String, Object> param = new LinkedHashMap<>();
             param.put("id", productId);
             result = baseManager.listObject(hql, param);
+
+            boolean isImageNotEmpty = false;
+
+            if (!result.isEmpty()) {
+                for (Object object : result) {
+                    if (!((Panel) object).getImageList().isEmpty()) {
+                        isImageNotEmpty = true;
+                        break;
+                    }
+                }
+
+                if (!isImageNotEmpty) {
+                    param.put("id", productModelId);
+                    result = baseManager.listObject(hql, param);
+                }
+
+            }
             if (result.isEmpty()) {
                 param.put("id", productModelId);
                 result = baseManager.listObject(hql, param);

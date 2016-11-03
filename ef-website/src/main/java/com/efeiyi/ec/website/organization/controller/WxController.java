@@ -378,7 +378,7 @@ public class WxController {
     }
 
     @RequestMapping({"/wxTest.do"})
-    public String wxTest(HttpServletRequest request) {
+    public String wxTest() {
         return "/wxTest";
     }
 

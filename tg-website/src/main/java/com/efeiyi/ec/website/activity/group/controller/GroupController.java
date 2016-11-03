@@ -8,15 +8,9 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.activity.group.service.GroupManager;
-import com.efeiyi.ec.website.activity.group.service.PurchaseOrderGroupManager;
-import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
-import com.ming800.core.p.PConst;
-import com.ming800.core.util.HttpUtil;
-import org.apache.http.HttpResponse;
-import org.apache.http.concurrent.FutureCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,8 +33,7 @@ public class GroupController {
 
     @Autowired
     private BaseManager baseManager;
-    @Autowired
-    private SmsCheckManager smsCheckManager;
+
     @Autowired
     private GroupManager groupManager;
 

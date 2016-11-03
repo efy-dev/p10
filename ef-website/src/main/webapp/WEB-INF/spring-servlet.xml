@@ -10,10 +10,7 @@
     <mvc:resources mapping="/scripts/**" location="/scripts/"/>
     <mvc:resources mapping="/html/**" location="/html/"/>
     <mvc:resources mapping="/app/**" location="/app/"/>
-    <!--    <mvc:resources mapping="/scripts/**" location="/scripts/"/>
-        <mvc:resources mapping="/images/**" location="/images/"/>
-        <mvc:resources mapping="/m8/**" location="/m8/"/>
-        <mvc:resources mapping="/theme/**" location="/theme/"/>-->
+
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -31,27 +28,6 @@
             <mvc:mapping path="**"/>
             <bean class="com.efeiyi.ec.website.base.interceptor.DriverInterceptor"/>
         </mvc:interceptor>
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/"/>-->
-            <!--<mvc:mapping path="/**"/>-->
-            <!--<mvc:mapping path="**"/>-->
-            <!--<mvc:exclude-mapping path="/sso.do"/>-->
-            <!--<mvc:exclude-mapping path="/sso2.do"/>-->
-            <!--<bean class="com.efeiyi.ec.website.base.interceptor.PromotionMarkInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/sso.do"/>-->
-            <!--<mvc:mapping path="/sso2.do"/>-->
-            <!--<bean class="com.efeiyi.ec.website.base.interceptor.PromotionPersistenceInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/registerSuccess.do"/>-->
-            <!--<bean class="com.efeiyi.ec.website.base.interceptor.PromotionRegisterSuccessPersistenceInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/order/pay/**"/>-->
-            <!--<bean class="com.efeiyi.ec.website.base.interceptor.PromotionPurchaseRecorderInterceptor"/>-->
-        <!--</mvc:interceptor>-->
     </mvc:interceptors>
 
 
@@ -74,14 +50,7 @@
             </util:list>
         </property>
     </bean>
-    <!--    <bean id="mappingJacksonHttpMessageConverter"
-              class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-            <property name="supportedMediaTypes">
-                <list>
-                    <value>text/plain;charset=UTF-8</value>
-                </list>
-            </property>
-        </bean>-->
+
     <bean id="mappingJacksonHttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes">
@@ -95,32 +64,11 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.**.**.controller"/>
     <context:component-scan base-package="com.efeiyi.ec.website.base.authentication.**"/>
-    <!--<context:component-scan base-package="com.efeiyi.ec.website.**.**.service"/>-->
-
 
     <bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
         <property name="basename" value="spring-view"/>
     </bean>
 
-    <bean id="userServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-        <property name="serviceUrl" value="http://192.168.227.129:8080/ef-user/service/userService"/>
-        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.UserManager"/>
-    </bean>
-
-    <bean id="consumerServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-        <property name="serviceUrl" value="http://192.168.227.129:8080/ef-user/service/consumerManager"/>
-        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.ConsumerManager"/>
-    </bean>
-
-    <bean id="managerServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-        <property name="serviceUrl" value="http://192.168.227.129:8080/ef-user/service/adminManager"/>
-        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.AdminManager"/>
-    </bean>
-
-    <bean id="professionalServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-        <property name="serviceUrl" value="http://192.168.227.129:8080/ef-user/service/professionalManager"/>
-        <property name="serviceInterface" value="com.efeiyi.ec.website.organization.service.ProfessionalManager"/>
-    </bean>
 
     <mvc:default-servlet-handler/>
 </beans>
