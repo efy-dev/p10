@@ -75,6 +75,8 @@
     </div>
     <div dot-template="main-product-panel">
     </div>
+    <div dot-template="main-product-master-work">
+    </div>
     <div dot-template="main-product-model-panel">
     </div>
     <div dot-template="main-product-master">
@@ -1056,7 +1058,7 @@
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品规格</a>
+                           onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">关联作品</a>
                     </div>
                 </div>
             </fieldset>
@@ -1306,6 +1308,57 @@
                     <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品详情</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</script>
+
+<script type="text/x-dot-template" id="main-product-master-work-list">
+    {{ if(typeof it =="undefined" || it == null && it.length <= 0){ }}
+    <a onclick="">未找到相关作品，点击提交数据补全请求</a>
+    {{ }else{ }}
+    <ul class="am-list  am-list-border" id="searchResult">
+        {{ for(var i = 0 ; i < it.length; i++){ }}
+        <li><a onclick="PubSub.publish('productMasterWork.chooseMasterWork','{{=it[i].id}}:{{=it[i].name}}')">{{=it[i].name}}</a>
+        </li>
+        {{ } }}
+    </ul>
+    {{ } }}
+</script>
+
+<script type="text/x-dot-template" id="main-product-master-work">
+    <div class="main-tenant-base">
+        <form class="am-form am-form-horizontal" name="tenant" id="main-product-master-work-form" action="{{=it.submit}}"
+              enctype="multipart/form-data"
+              method="post">
+
+            <fieldset>
+
+                <legend><b>{{=it.data.id}}</b>关联作品</legend>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label">作品</label>
+                    <div class="am-u-sm-10">
+                        <input name="name" type="text" id="master-work-search"
+                               placeholder="输入作品名称" oninput="PubSub.publish('productMasterWork.search',this)">
+                        <input name="masterWorkId" type="hidden" id="master-work-id">
+                        <input name="id" type="hidden" id="product-id" value="{{=it.data.id}}">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10" dot-template="{{=it.masterWorkList}}">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品规格</a>
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('productModel.new','{{=it.data.id}}')">跳过</a>
                     </div>
                 </div>
             </fieldset>
@@ -2446,6 +2499,84 @@
 
     };
 
+    var ProductMasterWork = function (param) {
+        this.submit = "/yuanqu/product/masterWorkSubmit";
+        this.label = "关联作品";
+        this.data = null;
+        this.father = null;
+        this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
+        this.param = param;
+        this.name = "productMasterWork";
+        this.template = "main-product-master-work";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.masterWorkList = "main-product-master-work-list";
+        this.render = function (msg, data) {
+            if (typeof data != "undefined" && data != null) {
+                ajaxRequest("/yuanqu/product/getProductById", {id: data}, function (responseData) {
+                    this.data = responseData;
+                    renderTemplate(this.template, this);
+                }.bind(this));
+            } else {
+                renderTemplate(this.template, this);
+            }
+            this.show();
+        };
+
+        this.chooseMasterWork = function (msg, data) {
+            var id = data.split(":")[0];
+            var name = data.split(":")[1];
+            $("#master-work-id").val(id);
+            $("#master-work-search").val(name)
+        };
+
+        this.search = function (msg, data) {
+            var success = function (responseData) {
+                renderTemplate(this.masterWorkList, responseData);
+            }.bind(this);
+            ajaxRequest("/yuanqu/product/getMasterWorkList", {name: $(data).val()}, success);
+        };
+
+        this.submitForm = function (msg, data) {
+            $("#my-modal-loading").modal();
+            $("#" + data).ajaxSubmit(function (data) {
+                if (typeof data == "string") {
+                    data = JSON.parse(data);
+                }
+                if (typeof data.id != "undefined" && data.id != null) {
+                    PubSub.publish('productModel.new',this.data.id);
+                }
+                $("#my-modal-loading").modal("close");
+            }.bind(this));
+            return false;
+        };
+
+        this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
+            $("[dot-template=" + this.template + "]").show();
+        };
+        this.hide = function (msg, data) {
+            $("[dot-template=" + this.template + "]").hide();
+        };
+        this.remove = function (msg, data) {
+            $("[dot-template=" + this.template + "]").html("");
+        };
+
+        this.subscribeArray = [
+            {message: this.name + ".show", subscriber: this.show},
+            {message: this.name + ".hide", subscriber: this.hide},
+            {message: this.name + ".render", subscriber: this.render},
+            {message: this.name + ".remove", subscriber: this.remove},
+            {message: this.name + ".submit", subscriber: this.submitForm},
+            {message: this.name + ".chooseMasterWork", subscriber: this.chooseMasterWork},
+            {message: this.name + ".search", subscriber: this.search}
+        ];
+
+        for (var i = 0; i < this.subscribeArray.length; i++) {
+            var subscribe = this.subscribeArray[i];
+            PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
+        }
+
+    };
+
     var ProductModel = function (param) {
         this.submit = "/yuanqu/product/modelSubmit";
         this.label = "商品规格信息";
@@ -2890,7 +3021,7 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.owner != "undefined" && data.owner != null) {
-                    PubSub.publish('productModel.new', data.owner);
+                    PubSub.publish('productMasterWork.render', data.owner);
                 }
                 $("#my-modal-loading").modal("close");
             }.bind(this));
@@ -3348,6 +3479,7 @@
     var tenantList = new TenantList();      //店铺列表
     var productList = new ProductList();    //商品列表
     var productModelList = new ProductModelList();  //商品规格列表
+    var productMasterWork=new ProductMasterWork();//关联作品
     var scenicRegion = new ScenicRegion();          //景区信息
     var scenicRegionList = new ScenicRegionList();  //景区列表
     var recommendBase = new RecommendBase();        //推荐信息

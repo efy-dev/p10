@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "master_work")
-public class MasterWork {
+public class MasterWork implements Serializable{
     private String id;
     private String name;
     private String serial;  //随机生成
@@ -104,6 +105,7 @@ public class MasterWork {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "master_id")
+    @JsonIgnore
     public Master getMaster() {
         return master;
     }

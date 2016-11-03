@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by zhao on 2016/10/9.
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "master_work_product")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class MasterWorkProduct {
+public class MasterWorkProduct implements Serializable{
     private String id;
     private MasterWork masterWork;
     private Product product;

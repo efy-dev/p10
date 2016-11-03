@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.product.controller;
 
 import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.organization.model.HotSpot;
 import com.efeiyi.ec.organization.model.Image;
 import com.efeiyi.ec.organization.model.Panel;
 import com.efeiyi.ec.organization.model.User;
@@ -312,6 +313,27 @@ public class TenantController {
                 jsonObject.put("code", "1");
                 return jsonObject;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
+
+    @RequestMapping({"/tenant/getHotSpotsByImage"})
+    @ResponseBody
+    public Object getHotSpotsByImage(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String id = request.getParameter("id");
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            if (null != id && !"".equals(id)) {
+                String hql = "select obj from HotSpot obj where obj.image.id=:imageId";
+                param.put("imageId", id);
+                List<HotSpot> hotSpots = (List<HotSpot>) baseManager.listObject(hql, param);
+                return hotSpots;
+            }
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
             jsonObject.put("code", "1");

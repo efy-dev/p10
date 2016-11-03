@@ -1,5 +1,6 @@
 package com.efeiyi.ec.product.model;
 
+import com.efeiyi.ec.organization.model.HotSpot;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
@@ -40,6 +41,17 @@ public class ProductModel implements Serializable {
     private Integer saleAmount;
     private Date createDateTime;
     private String audio;
+    private List<HotSpot> hotSpotList;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
+    public List<HotSpot> getHotSpotList() {
+        return hotSpotList;
+    }
+
+    public void setHotSpotList(List<HotSpot> hotSpotList) {
+        this.hotSpotList = hotSpotList;
+    }
 
     @Transient
     public String getAudio() {
@@ -49,6 +61,7 @@ public class ProductModel implements Serializable {
     public void setAudio(String audio) {
         this.audio = audio;
     }
+
     @Column(name = "create_datetime")
     public Date getCreateDateTime() {
         return createDateTime;

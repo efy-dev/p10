@@ -1,11 +1,13 @@
 package com.efeiyi.ec.organization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/2 0002.
@@ -23,7 +25,7 @@ public class Image implements Serializable {
     private String status;
     private String type;   //1.image 2.audio 3.video
     private Date createTime;
-
+    private List<HotSpot> hotSpotList;
 
     public Image() {
     }
@@ -101,4 +103,9 @@ public class Image implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "image")
+    public List<HotSpot> getHotSpotList() {return hotSpotList;}
+
+    public void setHotSpotList(List<HotSpot> hotSpotList) {this.hotSpotList = hotSpotList;}
 }

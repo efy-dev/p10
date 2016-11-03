@@ -3,16 +3,13 @@ package com.efeiyi.ec.system.yuanqu.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterWork;
-import com.efeiyi.ec.master.model.MasterWorkPicture;
 import com.efeiyi.ec.master.model.MasterWorkProduct;
 import com.efeiyi.ec.organization.model.Image;
 import com.efeiyi.ec.organization.model.ImagePanel;
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.Panel;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
-import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -49,6 +46,16 @@ public class OffLineProductController {
 
     @Autowired
     private AutoSerialManager autoSerialManager;
+
+    @RequestMapping({"/getMasterWorkList"})
+    @ResponseBody
+    public Object getMasterWorkList(HttpServletRequest request) {
+        String name = request.getParameter("name");
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            String hql = "select obj from MasterWork obj where obj.name like :name and obj.status='1'";
+            param.put("name", "%" + name + "%");
+            return baseManager.listObject(hql, param);
+    }
 
     @RequestMapping({"/deleteProductById"})
     @ResponseBody
@@ -260,6 +267,27 @@ public class OffLineProductController {
         baseManager.saveOrUpdate(Product.class.getName(), product);
         return product;
     }
+    @RequestMapping({"/masterWorkSubmit"})
+    @ResponseBody
+    public Object masterWorkSubmit(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        Product product = (Product) baseManager.getObject(Product.class.getName(), id);
+        String masterWorkId = request.getParameter("masterWorkId");
+        MasterWork masterWork = null;
+        MasterWorkProduct masterWorkProduct = null;
+        if (masterWorkId != null) {
+            masterWork = (MasterWork) baseManager.getObject(MasterWork.class.getName(), masterWorkId);
+        }
+        if (masterWork != null && product != null) {
+            masterWorkProduct = new MasterWorkProduct();
+            masterWorkProduct.setProduct(product);
+            masterWorkProduct.setMasterWork(masterWork);
+            masterWorkProduct.setStatus("1");
+            baseManager.saveOrUpdate(MasterWorkProduct.class.getName(), masterWorkProduct);
+        }
+        return product;
+    }
+
     @RequestMapping({"/getProductModelById"})
     @ResponseBody
     public Object getProductModelById(HttpServletRequest request) {
