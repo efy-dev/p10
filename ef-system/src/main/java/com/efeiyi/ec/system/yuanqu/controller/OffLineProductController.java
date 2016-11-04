@@ -116,12 +116,12 @@ public class OffLineProductController {
             LinkedHashMap<String, Object> imagesParam = new LinkedHashMap<>();
             imagesParam.put("panelId", panels.get(0).getId());
             String imageHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='1'";
-            String audioHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='2'";
-            ImagePanel audio = (ImagePanel) baseManager.getUniqueObjectByConditions(audioHql, imagesParam);
+            String audioHql = "select obj from Image obj where obj.owner=:panelId and obj.status!='0' and obj.type='2'";
+            Image audio = (Image) baseManager.getUniqueObjectByConditions(audioHql, imagesParam);
             List<ImagePanel> images = (List<ImagePanel>) baseManager.listObject(imageHql, imagesParam);
             panels.get(0).setImageList(images);
             if (audio != null) {
-                panels.get(0).setMedia(audio.getImage());
+                panels.get(0).setMedia(audio);
             }
             return panels.get(0);
         }
@@ -235,7 +235,7 @@ public class OffLineProductController {
         }
         productModel.setName(request.getParameter("name"));
         String amountStr = request.getParameter("amount");
-        productModel.setAmount(amountStr != null ? Integer.parseInt(amountStr) : 1);
+        productModel.setAmount(amountStr != null && !amountStr.equals("") ? Integer.parseInt(amountStr) : 1);
         String marketPrice = request.getParameter("marketPrice");
         if (marketPrice != null && !marketPrice.equals("")) {
             productModel.setMarketPrice(new BigDecimal(marketPrice));

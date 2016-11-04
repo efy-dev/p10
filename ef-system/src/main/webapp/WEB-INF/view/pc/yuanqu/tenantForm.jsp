@@ -469,10 +469,10 @@
                 <div class="am-form-group">
                     <div class="am-u-sm-10">
                         <input name="name" type="text" id="search"
-                               value="{{=(it.data!=null && it.data.tenantMasterList!=null && it.data.tenantMasterList.length>0) ? it.data.tenantMasterList[0].master.fullName : ''}}"
+                               value="{{=(it.data!=null && it.data.tenantMasterList!=null && it.data.tenantMasterList.length>0&&it.data.tenantMasterList[0].master!=null) ? it.data.tenantMasterList[0].master.fullName : ''}}"
                                placeholder="输入大师的名称" oninput="PubSub.publish('tenantMaster.search',this)">
                         <input name="masterId" type="hidden" id="masterId"
-                               value="{{=(it.data!=null && it.data.tenantMasterList!=null && it.data.tenantMasterList.length>0) ? it.data.tenantMasterList[0].master.id : ''}}">
+                               value="{{=(it.data!=null && it.data.tenantMasterList!=null && it.data.tenantMasterList.length>0&&it.data.tenantMasterList[0].master!=null) ? it.data.tenantMasterList[0].master.id : ''}}">
                         <input name="id" type="hidden" id="id"
                                value="{{=(it.data!=null) ? it.data.id : ''}}">
                     </div>
@@ -509,13 +509,13 @@
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                       onclick="PubSub.publish('tenantPanel.delete','{{=imageText.id}}')"><span
+                       onclick= "showConfirm('提示','是否删除',function(){ PubSub.publish('tenantPanel.delete','{{=imageText.id}}')})"><span
                             class="am-icon-trash-o"></span> 删除
                     </a>
                 </div>
             </div>
         </td>
-        <td class="am-hide-sm-only"><a href="" style="padding-right: 20px">{{=imageText.name}}</a>
+        <td class="am-hide-sm-only"><span href="" style="padding-right: 20px">{{=imageText.name}}</span>
         </td>
         <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=imageText.content}}</span>
         </td>
@@ -700,7 +700,7 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 推荐
                         </button>
-                        <button onclick="PubSub.publish('tenantList.delete','{{=tenant.id}}')"
+                        <button onclick="showConfirm('提示','是否删除',function(){PubSub.publish('tenantList.delete','{{=tenant.id}}')})"
                                 class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                 class="am-icon-trash-o"></span> 删除
                         </button>
@@ -854,7 +854,7 @@
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productBase.render','{{=it.product}}')">< 上一步</a>
+                           onclick="PubSub.publish('productBase.render','{{=it.productId}}')">< 上一步</a>
                         <a onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
                     </div>
@@ -874,13 +874,13 @@
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                       onclick="PubSub.publish('productModelPanel.delete','{{=imageText.id}}')"><span
+                       onclick="showConfirm('提示','是否删除',function(){PubSub.publish('productModelPanel.delete','{{=imageText.id}}')})"><span
                             class="am-icon-trash-o"></span> 删除
                     </a>
                 </div>
             </div>
         </td>
-        <td class="am-hide-sm-only"><a href="" style="padding-right: 20px">{{=imageText.name}}</a>
+        <td class="am-hide-sm-only"><span href="" style="padding-right: 20px">{{=imageText.name}}</span>
         </td>
         <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=imageText.content}}</span>
         </td>
@@ -985,7 +985,7 @@
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productModel.render','{{=it.data}}')">< 上一步</a>
+                           onclick="PubSub.publish('productModel.render','{{=it.productModelId}}')">< 上一步</a>
                         <a onclick="PubSub.publish('productModelPanel.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">添加</a>
                       <%--  <a class="am-btn am-btn-primary am-btn-lg"
@@ -1133,7 +1133,7 @@
                         <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 添加英文版商品（暂不支持）
                         </button>
-                        <button onclick="PubSub.publish('productList.delete','{{=product.id}}')"
+                        <button onclick="showConfirm('提示','是否删除',function(){PubSub.publish('productList.delete','{{=product.id}}')})"
                                 class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                 class="am-icon-trash-o"></span> 删除
                         </button>
@@ -1207,7 +1207,7 @@
                           target="_blank"  href="http://www.efeiyi.com/app/product_details.html?productId={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 预览页面
                         </a>
-                        <button onclick="PubSub.publish('productModelList.delete','{{=productModel.id}}')"
+                        <button onclick="showConfirm('提示','是否删除',function(){PubSub.publish('productModelList.delete','{{=productModel.id}}')})"
                                 class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                 class="am-icon-trash-o"></span> 删除
                         </button>
@@ -1947,7 +1947,8 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    this.father.show();
+                    /*this.father.show();*/
+                    showConfirm('提示','保存成功',function(){})
                 }
                 $("#my-modal-loading").modal("close");
             }.bind(this));

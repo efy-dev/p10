@@ -124,7 +124,6 @@ public class OffLineTenantController {
         tenant.setTenantType(BigTenant.TENANT_TYPE_OFFLINE);
         tenant.setStatus("1");
         tenant.setCreateDateTime(new Date());
-        baseManager.saveOrUpdate(EnterpriseTenant.class.getName(), tenant);
         Iterator<String> fileNames = multipartRequest.getFileNames();
         while (fileNames.hasNext()) {
             String filename = fileNames.next();
@@ -239,7 +238,14 @@ public class OffLineTenantController {
     @ResponseBody
     public Object getTenantById(HttpServletRequest request) {
         String id = request.getParameter("id");
-        return baseManager.getObject(EnterpriseTenant.class.getName(), id);
+        BigTenant bigTenant = (BigTenant) baseManager.getObject(EnterpriseTenant.class.getName(), id);
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("id", id);
+        String hql = "select obj from Image obj where obj.owner=:id and obj.type='2'";
+        Image image = (Image) baseManager.getUniqueObjectByConditions(hql, param);
+        String audio = image == null ? null : image.getSrc();
+        bigTenant.setAudio(audio);
+        return bigTenant;
     }
 
 
@@ -279,7 +285,7 @@ public class OffLineTenantController {
         hql += " order by obj.createDateTime desc";
         PageEntity pageEntity = new PageEntity();
         pageEntity.setSize(limit);
-        pageEntity.setrIndex(offset * -1);
+        pageEntity.setrIndex(offset);
         PageInfo pageInfo = baseManager.listPageInfo(hql, pageEntity, param);
         return pageInfo.getList();
     }
