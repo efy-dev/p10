@@ -272,7 +272,7 @@ public class OffLineTenantController {
 
     @RequestMapping({"/tenant/getTenantList"})
     @ResponseBody
-    public List getTenantList(HttpServletRequest request) {
+    public Object getTenantList(HttpServletRequest request) {
         int limit = Integer.parseInt(request.getParameter("limit"));
         int offset = Integer.parseInt(request.getParameter("offset"));
         String name = request.getParameter("name");
@@ -287,7 +287,7 @@ public class OffLineTenantController {
         pageEntity.setSize(limit);
         pageEntity.setrIndex(offset);
         PageInfo pageInfo = baseManager.listPageInfo(hql, pageEntity, param);
-        return pageInfo.getList();
+        return pageInfo;
     }
 
     @RequestMapping({"/tenant/getScenicList"})

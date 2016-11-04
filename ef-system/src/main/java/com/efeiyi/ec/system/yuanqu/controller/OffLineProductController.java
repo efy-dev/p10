@@ -208,7 +208,7 @@ public class OffLineProductController {
         pageEntity.setSize(limit);
         pageEntity.setrIndex(offset);
         PageInfo pageInfo = baseManager.listPageInfo(hql, pageEntity, param);
-        return pageInfo.getList();
+        return pageInfo;
     }
 
     @RequestMapping({"/getProductModelList"})

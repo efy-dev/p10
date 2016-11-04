@@ -1059,6 +1059,8 @@
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">关联作品</a>
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('productMasterWork.render','{{=it.productId}}')">跳过</a>
                     </div>
                 </div>
             </fieldset>
@@ -2017,9 +2019,11 @@
         this.param = param;
         this.name = "tenantList";
         this.template = "main-tenant-list";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.totalPages = "";
+        this.totalRecords = "";
 
         this.nextPage = function (msg, data) {
-            this.index = this.index + 1;
+            this.index = this.index + 1 > this.totalPages ? this.totalPages : this.index + 1;
             $("#tenant-index").html("第" + this.index + "页");
             this.body();
         };
@@ -2056,8 +2060,10 @@
                 param.name = this.currentSearch
             }
             ajaxRequest("/yuanqu/tenant/getTenantList", param, function (responseData) {
-                this.data = responseData;
-                renderTemplate(this.template + "-body", responseData);
+                this.data = responseData.list;
+                this.totalRecords = responseData.count;
+                this.totalPages = this.totalRecords % this.size == 0 ? this.totalRecords / this.size : Math.floor(this.totalRecords / this.size) + 1;
+                renderTemplate(this.template + "-body", this.data);
             }.bind(this));
         };
 
@@ -2593,6 +2599,7 @@
             if (typeof data != "undefined" && data != null) {
                 ajaxRequest("/yuanqu/product/getProductModelById", {id: data}, function (responseData) {
                     this.data = responseData;
+                    this.productId = responseData.product.id
                     renderTemplate(this.template, this);
                 }.bind(this))
             } else {
@@ -2688,9 +2695,11 @@
         this.param = param;
         this.name = "productList";
         this.template = "main-product-list";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.totalRecords = null;
+        this.totalPages = null;
 
         this.nextPage = function (msg, data) {
-            this.index = this.index + 1;
+            this.index = this.index + 1 > this.totalPages ? this.totalPages : this.index + 1;
             $("#product-index").html("第" + this.index + "页");
             this.body();
         };
@@ -2714,8 +2723,10 @@
                 param.tenantId = this.tenantId;
             }
             ajaxRequest("/yuanqu/product/getProductList", param, function (responseData) {
-                this.data = responseData;
-                renderTemplate(this.template + "-body", responseData);
+                this.data = responseData.list;
+                this.totalRecords = responseData.count;
+                this.totalPages = this.totalRecords % this.size == 0 ? this.totalRecords / this.size : Math.floor(this.totalRecords / this.size) + 1;
+                renderTemplate(this.template + "-body", this.data);
             }.bind(this));
         };
 
@@ -2990,6 +3001,7 @@
                 ajaxRequest("/yuanqu/product/getProductPanelById", {id: data}, function (responseData) {
                     if (responseData.code != "1") {
                         this.data = responseData;
+                        this.productId = responseData.owner;
                         renderTemplate(this.template, this);
                     } else {
                         this.productId = data;
