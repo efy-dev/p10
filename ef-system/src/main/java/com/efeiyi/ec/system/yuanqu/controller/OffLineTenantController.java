@@ -256,7 +256,11 @@ public class OffLineTenantController {
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         String hql = "select obj from Master obj where obj.fullName like :name and obj.status='1'";
         param.put("name", "%" + name + "%");
-        return baseManager.listObject(hql, param);
+        List masters = baseManager.listObject(hql, param);
+        if (masters != null && masters.size() > 10) {
+            masters = masters.subList(0, 10);
+        }
+        return masters;
     }
 
     @RequestMapping({"/tenant/getPanelListByTenant"})

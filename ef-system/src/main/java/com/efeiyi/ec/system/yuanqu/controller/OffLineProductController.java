@@ -51,10 +51,14 @@ public class OffLineProductController {
     @ResponseBody
     public Object getMasterWorkList(HttpServletRequest request) {
         String name = request.getParameter("name");
-            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-            String hql = "select obj from MasterWork obj where obj.name like :name and obj.status='1'";
-            param.put("name", "%" + name + "%");
-            return baseManager.listObject(hql, param);
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        String hql = "select obj from MasterWork obj where obj.name like :name and obj.status='1'";
+        param.put("name", "%" + name + "%");
+        List masterWorks = baseManager.listObject(hql, param);
+        if (masterWorks != null && masterWorks.size() > 10) {
+            masterWorks = masterWorks.subList(0, 10);
+        }
+        return masterWorks;
     }
 
     @RequestMapping({"/deleteProductById"})
@@ -107,6 +111,7 @@ public class OffLineProductController {
     @ResponseBody
     public Object getProductPanelById(HttpServletRequest request) {
         JSONObject jsonObject = new JSONObject();
+        Image audio = null;
         String id = request.getParameter("id");
         String hql = "select obj from Panel obj where obj.owner=:id and obj.status!='0'";
         LinkedHashMap<String, Object> panelParam = new LinkedHashMap<>();
@@ -117,7 +122,10 @@ public class OffLineProductController {
             imagesParam.put("panelId", panels.get(0).getId());
             String imageHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='1'";
             String audioHql = "select obj from Image obj where obj.owner=:panelId and obj.status!='0' and obj.type='2'";
-            Image audio = (Image) baseManager.getUniqueObjectByConditions(audioHql, imagesParam);
+            List<Image> audios = (List<Image>) baseManager.listObject(audioHql, imagesParam);
+            if (audios != null && audios.size() > 0) {
+                audio = audios.get(0);
+            }
             List<ImagePanel> images = (List<ImagePanel>) baseManager.listObject(imageHql, imagesParam);
             panels.get(0).setImageList(images);
             if (audio != null) {
@@ -240,7 +248,10 @@ public class OffLineProductController {
         if (marketPrice != null && !marketPrice.equals("")) {
             productModel.setMarketPrice(new BigDecimal(marketPrice));
         }
-        productModel.setPrice(new BigDecimal(request.getParameter("price")));
+        String price = request.getParameter("price");
+        if (price != null && !price.equals("")) {
+            productModel.setPrice(new BigDecimal(price));
+        }
         productModel.setStatus("1");
         productModel.setProductModel_url(uploadImage(multipartRequest.getFile("productModel_url")));
         productModel.setCreateDateTime(new Date());
@@ -452,7 +463,11 @@ public class OffLineProductController {
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         String hql = "select obj from Project obj where obj.name like :name and obj.status='1'";
         param.put("name", "%" + name + "%");
-        return baseManager.listObject(hql, param);
+        List projects = baseManager.listObject(hql, param);
+        if (projects != null && projects.size() > 10) {
+            projects = projects.subList(0, 10);
+        }
+        return projects;
     }
 
 
