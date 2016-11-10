@@ -2,6 +2,7 @@ package com.efeiyi.ec.system.yuanqu.controller;
 
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.*;
+import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.product.model.Recommend;
 import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.tenant.model.BigTenant;
@@ -89,6 +90,22 @@ public class OffLineTenantController {
         return jsonObject;
     }
 
+    @RequestMapping({"/tenant/deleteHotById"})
+    @ResponseBody
+    public Object deleteHotById(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String id = request.getParameter("id");
+            if (id != null && !id.equals("")) {
+                baseManager.delete(HotSpot.class.getName(), id);
+            }
+        } catch (Exception e) {
+            jsonObject.put("code", "1");
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
     @RequestMapping({"/tenant/deleteTenantById"})
     @ResponseBody
     public Object deleteTenantById(HttpServletRequest request) {
@@ -103,6 +120,36 @@ public class OffLineTenantController {
             e.printStackTrace();
         }
         return jsonObject;
+    }
+
+    @RequestMapping({"/tenant/hotSubmit"})
+    @ResponseBody
+    public Object hotSubmit(HttpServletRequest request) throws Exception {
+        Image image;
+        HotSpot hot;
+        ProductModel productModel;
+        String id = request.getParameter("id");
+        if (id != null && !id.equals("")) {
+            hot = (HotSpot) baseManager.getObject(HotSpot.class.getName(), id);
+        } else {
+            hot = new HotSpot();
+        }
+        String imageId = request.getParameter("imageId");
+        if (imageId != null && !imageId.equals("")) {
+            image = (Image) baseManager.getObject(Image.class.getName(), imageId);
+            hot.setImage(image);
+        }
+        String productModelId = request.getParameter("productModelId");
+        if (productModelId != null && !productModelId.equals("")) {
+            productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+            hot.setProductModel(productModel);
+        }
+        hot.setAbscissa(Double.parseDouble(request.getParameter("abscissa")));
+        hot.setOrdinate(Double.parseDouble(request.getParameter("ordinate")));
+        hot.setStatus("1");
+        hot.setCreateDateTime(new Date());
+        baseManager.saveOrUpdate(HotSpot.class.getName(), hot);
+        return hot;
     }
 
     @RequestMapping({"/tenant/baseSubmit"})
@@ -261,6 +308,16 @@ public class OffLineTenantController {
             masters = masters.subList(0, 10);
         }
         return masters;
+    }
+
+    @RequestMapping({"/tenant/getHotListByImage"})
+    @ResponseBody
+    public Object getHotListByImage(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        String hql = "select obj from Hot obj where obj.image.id=: id and obj.status='1'";
+        param.put("name", id);
+        return baseManager.listObject(hql, param);
     }
 
     @RequestMapping({"/tenant/getPanelListByTenant"})

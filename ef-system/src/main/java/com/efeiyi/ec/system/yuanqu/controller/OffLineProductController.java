@@ -1,6 +1,5 @@
 package com.efeiyi.ec.system.yuanqu.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterWork;
 import com.efeiyi.ec.master.model.MasterWorkProduct;
@@ -17,9 +16,11 @@ import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.taglib.PageEntity;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,6 +60,20 @@ public class OffLineProductController {
             masterWorks = masterWorks.subList(0, 10);
         }
         return masterWorks;
+    }
+
+    @RequestMapping({"/getProductModelNameList"})
+    @ResponseBody
+    public Object getProductModelNameList(HttpServletRequest request) {
+        String name = request.getParameter("name");
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        String hql = "select obj from ProductModel obj where obj.name like :name and obj.status='1'";
+        param.put("name", "%" + name + "%");
+        List productModels = baseManager.listObject(hql, param);
+        if (productModels != null && productModels.size() > 10) {
+            productModels = productModels.subList(0, 10);
+        }
+        return productModels;
     }
 
     @RequestMapping({"/deleteProductById"})
@@ -470,6 +485,21 @@ public class OffLineProductController {
         return projects;
     }
 
+    @RequestMapping("/setProductModelStatus")
+    @ResponseBody
+    public Object setProductModelStatus(HttpServletRequest request) {
+        String data = request.getParameter("data");
+        JSONObject json = JSONObject.fromObject(data);
+        String id = (String) json.get("id");
+        String status = (String) json.get("status");
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), id);
+        productModel.setStatus(status);
+        if (status.equals("1")) {
+            productModel.setCreateDateTime(new Date());
+        }
+        baseManager.saveOrUpdate(productModel.getClass().getName(), productModel);
+        return productModel;
+    }
 
     private String uploadImage(MultipartFile multipartFile) {
         if (multipartFile == null) {

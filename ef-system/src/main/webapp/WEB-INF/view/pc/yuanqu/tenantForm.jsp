@@ -112,6 +112,8 @@
     </div>
     <div dot-template="main-tenant-list">
     </div>
+    <div dot-template="main-tenant-panel-hot">
+    </div>
     <div dot-template="main-product-list">
     </div>
     <div dot-template="main-product-model-list">
@@ -562,16 +564,16 @@
         <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=imageText.content}}</span>
         </td>
         <td class="am-hide-sm-only">
-            {{ if(typeof imageText.imageList!= "undefined" && imageText.imageList!=null &&
-            imageText.imageList.length>0){ }}
-            <img width="10%" src="{{=imageText.imageList[0].image.src}}" alt=""/>
-            {{ } }}
-        </td>
-        <td class="am-hide-sm-only">
             {{ if(imageText.media!=null) { }}
             <audio src="{{=imageText.media.src}}" controls="controls">浏览器不支持音频插件</audio>
             {{ } }}
         </td>
+        {{ if( typeof imageText.imageList!= "undefined" && imageText.imageList!=null &&imageText.imageList.length > 0 ){}}
+        {{ for( var i=0; i < imageText.imageList.length; i++ ){ }}
+        <td class="am-hide-sm-only">
+           <a onclick="PubSub.publish('hotBase.new','{{=imageText.id}}')"><img width="10%" src="{{=imageText.imageList[0].image.src}}" alt=""/></a>
+        </td>
+        {{} } }}
     </tr>
     {{ } }}
 </script>
@@ -593,8 +595,8 @@
                 <th class="table-set">操作</th>
                 <th class="table-title">名称</th>
                 <th class="table-title">介绍</th>
-                <th class="table-title">图片预览</th>
                 <th class="table-title">语音预览</th>
+                <th class="table-title">图片预览</th>
             </tr>
             </thead>
             <tbody dot-template="main-tenant-panel-list">
@@ -663,6 +665,128 @@
                            class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('tenantMaster.render','{{=it.data.id}}')">跳过</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</script>
+
+<script type="text/x-dot-template" id="main-tenant-panel-product-model-list">
+    {{ if(typeof it =="undefined" || it == null && it.length <= 0){ }}
+    <a onclick="">未找到相关商品规格，点击提交数据补全请求</a>
+    {{ }else{ }}
+    <ul class="am-list  am-list-border" id="searchResult">
+        {{ for(var i = 0 ; i < it.length; i++){ }}
+        <li><a onclick="PubSub.publish('hotBase.chooseProductModel','{{=it[i].id}}:{{=it[i].name}}')">{{=it[i].name}}</a>
+        </li>
+        {{ } }}
+    </ul>
+    {{ } }}
+</script>
+
+<script type="text/x-dot-template" id="main-tenant-panel-hot-list">
+    {{
+    for(var i = 0 ; i< it.length ; i++){
+    var hot = it[i];
+    }}
+    <tr id="{{=hot.id}}">
+        <td>
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                       onclick="showConfirm('提示','是否删除',function(){ PubSub.publish('hotBase.delete','{{=hot.id}}')})"><span
+                            class="am-icon-trash-o"></span> 删除
+                    </a>
+                </div>
+            </div>
+        </td>
+        <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=hot.name}}</span>
+        </td>
+        <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=hot.productModel.name}}</span>
+        </td>
+        <td class="am-hide-sm-only">
+            {{ if(typeof hot.image!= "undefined"&&hot.image!=null}}
+            <img width="10%" src="{{=hot.image.src}}" alt=""/>
+            {{ } }}
+        </td>
+    </tr>
+    {{ } }}
+</script>
+
+<script type="text/x-dot-template" id="main-tenant-panel-hot">
+    <div class="main-tenant-base">
+        <ul class="am-nav am-nav-tabs am-nav-justify">
+            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="panelHotForm">新的热点</a>
+            </li>
+            <li><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="panelHotList">查看所有</a></li>
+        </ul>
+    </div>
+
+    <div class="main-tenant-base" data-for="panelHotList" data-type="tabs" style="display: none">
+        <legend><b>{{=it.data.id}}</b> 的热点</legend>
+        <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+            <tr>
+                <th class="table-set">操作</th>
+                <th class="table-title">名称</th>
+                <th class="table-title">商品规格名称</th>
+                <th class="table-title">图片预览</th>
+            </tr>
+            </thead>
+            <tbody dot-template="main-tenant-panel-hot-list">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="main-tenant-base" data-for="panelHotForm" data-type="tabs">
+        <form class="am-form am-form-horizontal" name="tenant" id="main-tenant-panel-hot-form" action="{{=it.submit}}"
+              enctype="multipart/form-data"
+              method="post">
+            <fieldset>
+                <legend><b>{{=it.data.id}}</b> 的热点</legend>
+                <input type="hidden" name="imageId" id="imageId" value="{{=it.data.id}}">
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-form-label">名称</label>
+                    <div class="am-u-sm-9">
+                        <input name="name" type="text" placeholder="名称">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-form-label">横坐标</label>
+                    <div class="am-u-sm-9">
+                        <input name="abscissa" type="text" placeholder="横坐标"></input>
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-form-label">纵坐标</label>
+                    <div class="am-u-sm-9">
+                        <input name="ordinate" type="text" placeholder="纵坐标"></input>
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-form-label">商品规格</label>
+                    <div class="am-u-sm-9">
+                        <input name="name" type="text" id="search"
+                               placeholder="输入商品规格名称" oninput="PubSub.publish('hotBase.search',this)">
+                        <input name="productModelId" type="hidden" id="productModelId">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10" dot-template="{{=it.productModelList}}">
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('HotBase.submit','{{=it.data.id}}')">完成</a>
                     </div>
                 </div>
             </fieldset>
@@ -1231,6 +1355,7 @@
             <td>线上价格</td>
             <td>实体店价格</td>
             <td>库存</td>
+            <td>状态</td>
             <td>创建时间</td>
         </tr>
 
@@ -1251,7 +1376,7 @@
                                 class="am-icon-edit"></span> 规格详情
                         </button>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                           href="/yuanqu/product/createQRCode.do?id={{=productModel.id}}"><span
+                           href="/yuanqu/product/createQRCodeSample.do?id={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 生成二维码
                         </a>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -1259,6 +1384,15 @@
                            href="http://www.efeiyi.com/app/product_details.html?productId={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 预览页面
                         </a>
+                      <%--  '{id:{{=productModel.id}},status:{{=productModel.status}}}'--%>
+                        <button onclick="PubSub.publish('productModelList.upper',{'id':'{{=productModel.id}}','status':'{{=productModel.status}}'})"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
+                            {{?productModel.status==2}}
+                            <span class="am-icon-edit"></span> 上架
+                            {{??productModel.status==1}}
+                            <span class="am-icon-edit"></span> 下架
+                            {{?}}
+                        </button>
                         <button onclick="showConfirm('提示','是否删除',function(){PubSub.publish('productModelList.delete','{{=productModel.id}}')})"
                                 class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                 class="am-icon-trash-o"></span> 删除
@@ -1271,6 +1405,11 @@
             <td>{{=productModel.price}}</td>
             <td>{{=productModel.marketPrice}}</td>
             <td>{{=productModel.amount}}</td>
+            {{?productModel.status==2}}
+            <td>下架</td>
+            {{??productModel.status==1 }}
+            <td>上架</td>
+            {{?}}
             <td>
                 {{=(new Date(productModel.createDateTime)).format("yyyy-MM-dd hh:mm:ss")}}
             </td>
@@ -2165,6 +2304,104 @@
 
     };
 
+    var HotBase = function (param) {
+        this.submit = "/yuanqu/tenant/hotSubmit";
+        this.label = "热点";
+        this.data = null;
+        this.father = null;
+        this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
+        this.param = param;
+        this.name = "hotBase";
+        this.template = "main-tenant-panel-hot";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.panelListTemplate = "main-tenant-panel-hot-list";
+        this.imageId = null;
+        this.productModelList = "main-tenant-panel-product-model-list";
+
+        this.new = function (msg, data) {
+            if (typeof data != "undefined" && data != null) {
+                this.imageId = data;
+            }
+            renderTemplate(this.template, this);
+            this.show();
+        };
+        this.delete = function (msg, data) {
+            ajaxRequest("/yuanqu/tenant/deleteHotById", {id: data}, function (responseData) {
+                if (responseData.code != "1") {
+                    ajaxRequest("/yuanqu/tenant/getHotListByImage", {id: this.data.id}, function (responseData) {
+                        renderTemplate(this.panelListTemplate, responseData);
+                    }.bind(this));
+                }
+            }.bind(this));
+        };
+        this.tabShow = function (msg, data) {
+            $(data).parent().parent().find("li").each(function () {
+                $(this).attr("class", "");
+            });
+            $(data).parent().attr("class", "am-active");
+
+            $("[data-type=tabs]").each(function () {
+                $(this).hide();
+            });
+            var tabData = $(data).attr("data");
+            $("[data-for=" + tabData + "]").show();
+            ajaxRequest("/yuanqu/tenant/getHotListByImage", {id: this.data.id}, function (responseData) {
+                renderTemplate(this.panelListTemplate, responseData);
+            }.bind(this));
+        };
+
+        this.chooseProductModel = function (msg, data) {
+            var id = data.split(":")[0];
+            var fullName = data.split(":")[1];
+            $("#productModelId").val(id);
+            $("#search").val(fullName)
+        };
+
+        this.search = function (msg, data) {
+            var success = function (responseData) {
+                renderTemplate(this.productModelList, responseData);
+            }.bind(this);
+            ajaxRequest("/yuanqu/product/getProductModelNameList", {name: $(data).val()}, success);
+        };
+
+        this.submitForm = function (msg, data) {
+            $("#my-modal-loading").modal();
+            $("#" + data).ajaxSubmit(function (responseData) {
+                $("[data=panelList]").click();
+                document.getElementById(data).reset();
+                $("#my-modal-loading").modal("close");
+            });
+            return false;
+        };
+
+        this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
+            $("[dot-template=" + this.template + "]").show();
+        };
+        this.hide = function (msg, data) {
+            $("[dot-template=" + this.template + "]").hide();
+        };
+        this.remove = function (msg, data) {
+            $("[dot-template=" + this.template + "]").html("");
+        };
+
+        this.subscribeArray = [
+            {message: this.name + ".show", subscriber: this.show},
+            {message: this.name + ".hide", subscriber: this.hide},
+            {message: this.name + ".remove", subscriber: this.remove},
+            {message: this.name + ".submit", subscriber: this.submitForm},
+            {message: this.name + ".tabShow", subscriber: this.tabShow},
+            {message: this.name + ".delete", subscriber: this.delete},
+            {message: this.name + ".chooseProductModel", subscriber: this.chooseProductModel},
+            {message: this.name + ".new", subscriber: this.new}
+        ];
+
+        for (var i = 0; i < this.subscribeArray.length; i++) {
+            var subscribe = this.subscribeArray[i];
+            PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
+        }
+
+    };
+
     var TenantMaster = function (param) {
         this.submit = "/yuanqu/tenant/masterSubmit";
         this.label = "关联大师";
@@ -2690,7 +2927,6 @@
             return false;
         };
 
-
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
@@ -2880,7 +3116,17 @@
                 }
             }.bind(this));
         };
-
+        this.upper = function (msg, data) {
+            if (data.status == "1") {
+                data.status = "2";
+            } else if (data.status == "2") {
+                data.status = "1";
+            }
+            ajaxRequest("/yuanqu/product/setProductModelStatus",{data: JSON.stringify(data)}, function (responseData) {
+                this.productId = responseData.product.id;
+                this.body();
+            }.bind(this));
+        };
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
@@ -2898,7 +3144,8 @@
             {message: this.name + ".render", subscriber: this.render},
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".body", subscriber: this.body},
-            {message: this.name + ".delete", subscriber: this.delete}
+            {message: this.name + ".delete", subscriber: this.delete},
+            {message: this.name + ".upper", subscriber: this.upper}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -3551,6 +3798,7 @@
     var productPanel = new ProductPanel();//商品详情
     var tenantList = new TenantList();      //店铺列表
     var productList = new ProductList();    //商品列表
+    var HotBase = new HotBase();  //热点
     var productModelList = new ProductModelList();  //商品规格列表
     var productMasterWork = new ProductMasterWork();//关联作品
     var scenicRegion = new ScenicRegion();          //景区信息
