@@ -571,7 +571,7 @@
         {{ if( typeof imageText.imageList!= "undefined" && imageText.imageList!=null &&imageText.imageList.length > 0 ){}}
         {{ for( var i=0; i < imageText.imageList.length; i++ ){ }}
         <td class="am-hide-sm-only">
-           <a onclick="PubSub.publish('hotBase.new','{{=imageText.id}}')"><img width="10%" src="{{=imageText.imageList[0].image.src}}" alt=""/></a>
+           <a onclick="PubSub.publish('hotBase.new','{{=imageText.imageList[i].image.id}}')"><img width="10%" src="{{=imageText.imageList[i].image.src}}" alt=""/></a>
         </td>
         {{} } }}
     </tr>
@@ -706,8 +706,12 @@
         </td>
         <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=hot.productModel.name}}</span>
         </td>
+        <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=hot.abscissa==null?"":hot.abscissa}}</span>
+        </td>
+        <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=hot.ordinate==null?"":hot.ordinate}}</span>
+        </td>
         <td class="am-hide-sm-only">
-            {{ if(typeof hot.image!= "undefined"&&hot.image!=null}}
+            {{ if(typeof hot.image!= "undefined"&&hot.image!=null){}}
             <img width="10%" src="{{=hot.image.src}}" alt=""/>
             {{ } }}
         </td>
@@ -725,13 +729,15 @@
     </div>
 
     <div class="main-tenant-base" data-for="panelHotList" data-type="tabs" style="display: none">
-        <legend><b>{{=it.data.id}}</b> 的热点</legend>
+        <legend><b>{{=it.imageId}}</b> 的热点</legend>
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
                 <th class="table-set">操作</th>
                 <th class="table-title">名称</th>
                 <th class="table-title">商品规格名称</th>
+                <th class="table-title">热点横坐标</th>
+                <th class="table-title">热点纵坐标</th>
                 <th class="table-title">图片预览</th>
             </tr>
             </thead>
@@ -746,8 +752,8 @@
               enctype="multipart/form-data"
               method="post">
             <fieldset>
-                <legend><b>{{=it.data.id}}</b> 的热点</legend>
-                <input type="hidden" name="imageId" id="imageId" value="{{=it.data.id}}">
+                <legend><b>{{=it.imageId}}</b> 的热点</legend>
+                <input type="hidden" name="imageId" id="imageId" value="{{=it.imageId}}">
 
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">名称</label>
@@ -759,14 +765,14 @@
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">横坐标</label>
                     <div class="am-u-sm-9">
-                        <input name="abscissa" type="text" placeholder="横坐标"></input>
+                        <input name="abscissa" type="number" placeholder="横坐标"></input>
                     </div>
                 </div>
 
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">纵坐标</label>
                     <div class="am-u-sm-9">
-                        <input name="ordinate" type="text" placeholder="纵坐标"></input>
+                        <input name="ordinate" type="number" placeholder="纵坐标"></input>
                     </div>
                 </div>
 
@@ -786,7 +792,7 @@
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('HotBase.submit','{{=it.data.id}}')">完成</a>
+                           onclick="PubSub.publish('hotBase.submit','{{=it.template}}-form')">完成</a>
                     </div>
                 </div>
             </fieldset>
@@ -871,7 +877,7 @@
                                 class="am-icon-trash-o"></span> 删除
                         </button>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                           href="/yuanqu/tenant/createQRCode.do?id={{=tenant.id}}"><span
+                           href="/yuanqu/product/createQRCodeSample.do?tenantId={{=tenant.id}}"><span
                                 class="am-icon-trash-o"></span> 生成二维码
                         </a>
                     </div>
@@ -1376,7 +1382,7 @@
                                 class="am-icon-edit"></span> 规格详情
                         </button>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                           href="/yuanqu/product/createQRCodeSample.do?id={{=productModel.id}}"><span
+                           href="/yuanqu/product/createQRCodeSample.do?productModelId={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 生成二维码
                         </a>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -1384,7 +1390,6 @@
                            href="http://www.efeiyi.com/app/product_details.html?productId={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 预览页面
                         </a>
-                      <%--  '{id:{{=productModel.id}},status:{{=productModel.status}}}'--%>
                         <button onclick="PubSub.publish('productModelList.upper',{'id':'{{=productModel.id}}','status':'{{=productModel.status}}'})"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
                             {{?productModel.status==2}}
@@ -2327,7 +2332,7 @@
         this.delete = function (msg, data) {
             ajaxRequest("/yuanqu/tenant/deleteHotById", {id: data}, function (responseData) {
                 if (responseData.code != "1") {
-                    ajaxRequest("/yuanqu/tenant/getHotListByImage", {id: this.data.id}, function (responseData) {
+                    ajaxRequest("/yuanqu/tenant/getHotListByImage", {id: this.imageId}, function (responseData) {
                         renderTemplate(this.panelListTemplate, responseData);
                     }.bind(this));
                 }
@@ -2344,7 +2349,7 @@
             });
             var tabData = $(data).attr("data");
             $("[data-for=" + tabData + "]").show();
-            ajaxRequest("/yuanqu/tenant/getHotListByImage", {id: this.data.id}, function (responseData) {
+            ajaxRequest("/yuanqu/tenant/getHotListByImage", {id: this.imageId}, function (responseData) {
                 renderTemplate(this.panelListTemplate, responseData);
             }.bind(this));
         };
@@ -2366,7 +2371,7 @@
         this.submitForm = function (msg, data) {
             $("#my-modal-loading").modal();
             $("#" + data).ajaxSubmit(function (responseData) {
-                $("[data=panelList]").click();
+                $("[data=panelHotList]").click();
                 document.getElementById(data).reset();
                 $("#my-modal-loading").modal("close");
             });
@@ -2392,6 +2397,7 @@
             {message: this.name + ".tabShow", subscriber: this.tabShow},
             {message: this.name + ".delete", subscriber: this.delete},
             {message: this.name + ".chooseProductModel", subscriber: this.chooseProductModel},
+            {message: this.name + ".search", subscriber: this.search},
             {message: this.name + ".new", subscriber: this.new}
         ];
 

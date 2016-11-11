@@ -20,7 +20,6 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,8 +31,6 @@ import java.net.URLEncoder;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
-
-import static com.efeiyi.ec.system.yuanqu.controller.Util.createQRCode;
 
 @Controller
 @RequestMapping({"/yuanqu/product"})
@@ -524,28 +521,27 @@ public class OffLineProductController {
         return PConst.OSS_EF_WIKI_HOST + url;
     }
 
-    @RequestMapping("/createQRCode.do")
-    @ResponseBody
-    public ResponseEntity<byte[]> createProductQRCode(HttpServletRequest request) throws Exception {
-        String productId = request.getParameter("id");
-
-        String redirect = "http://www.efeiyi.com/qrcode/redirect/product/" + productId;
-        String redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
-        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=wx7f6aa253b75466dd" +
-                "&redirect_uri=" +
-                URLEncoder.encode(redirect_uri, "UTF-8") +
-                "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-
-        return createQRCode(this.getClass().getResource("/").getPath().toString(), productId, url);
-    }
     @RequestMapping("/createQRCodeSample.do")
     @ResponseBody
-    public ResponseEntity<byte[]> createProductQRCodeSample(HttpServletRequest request) throws Exception {
+    public ResponseEntity<byte[]> createQRCodeSample(HttpServletRequest request) throws Exception {
 
-        String productId = request.getParameter("id");
-        String redirect = "0/" + productId;
+        String productModelId = request.getParameter("productModelId");
+        String tenantId = request.getParameter("tenantId");
+        String panelId = request.getParameter("panelId");
+        String id = "";
+        String redirect = "";
+        if (tenantId != null && !tenantId.equals("")) {
+            redirect = "0/" + tenantId;
+            id = tenantId;
+        } else if (productModelId != null && !productModelId.equals("")) {
+            redirect = "1/" + productModelId;
+            id = productModelId;
+        } else if (panelId != null && !panelId.equals("")) {
+            redirect = "2/" + panelId;
+            id = panelId;
+        }
         String redirect_uri = "http://mall.efeiyi.com/wl";
+
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=wx7f6aa253b75466dd" +
                 "&redirect_uri=" +
@@ -557,9 +553,7 @@ public class OffLineProductController {
                 .createQRCode(582, 582)
                 .assembleLogo("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/logo.png")
                 .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/background.jpg", 123, 92)
-                .getResponseEntityResult(productId + "jpg");
-
-
+                .getResponseEntityResult(id + "jpg");
     }
 
 }

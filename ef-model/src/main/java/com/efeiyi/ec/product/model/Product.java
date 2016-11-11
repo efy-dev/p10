@@ -8,6 +8,8 @@ import com.efeiyi.ec.tenant.model.Tenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -222,7 +224,7 @@ public class Product implements Serializable {
     public void setRecommendedIndex(Integer recommendedIndex) {
         this.recommendedIndex = recommendedIndex;
     }
-
+    @NotFound(action= NotFoundAction.IGNORE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id", updatable = false, insertable = false)
     public Tenant getTenant() {
@@ -232,7 +234,7 @@ public class Product implements Serializable {
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
     }
-
+    @NotFound(action= NotFoundAction.IGNORE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     @JsonIgnore

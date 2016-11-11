@@ -44,7 +44,7 @@ public class HomeController {
     private BaseManager baseManager;
 
 
-    @RequestMapping({"/qrcode/redirect/{dataType}/{dataId}"})
+    /*@RequestMapping({"/qrcode/redirect/{dataType}/{dataId}"})
     public String appRedirect(@PathVariable String dataType, @PathVariable String dataId, HttpServletRequest request) throws Exception {
         String redirect = "";
         if (dataType.equals("tenant")) {
@@ -58,7 +58,7 @@ public class HomeController {
             redirect = "http://www.efeiyi.com/app/pannel_details.html.html?panelId=" + dataId + "&title=" + URLEncoder.encode(panel.getName(), "utf-8");
         }
         return "redirect:" + redirect;
-    }
+    }*/
 
     @RequestMapping({"/qrcode/sample/{dataType}/{dataId}"})
     public String appRedirectSampleUrl(@PathVariable String dataType, @PathVariable String dataId, HttpServletRequest request) throws Exception {

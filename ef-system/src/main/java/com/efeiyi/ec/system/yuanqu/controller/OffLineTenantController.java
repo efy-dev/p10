@@ -14,7 +14,6 @@ import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.taglib.PageEntity;
-import com.sun.net.httpserver.Authenticator;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLEncoder;
 import java.util.*;
@@ -144,8 +142,13 @@ public class OffLineTenantController {
             productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
             hot.setProductModel(productModel);
         }
-        hot.setAbscissa(Double.parseDouble(request.getParameter("abscissa")));
-        hot.setOrdinate(Double.parseDouble(request.getParameter("ordinate")));
+        if (request.getParameter("abscissa") != null && !request.getParameter("abscissa").equals("")) {
+            hot.setAbscissa(Double.parseDouble(request.getParameter("abscissa")));
+        }
+        if (request.getParameter("ordinate") != null && !request.getParameter("ordinate").equals("")) {
+            hot.setAbscissa(Double.parseDouble(request.getParameter("ordinate")));
+        }
+        hot.setName(request.getParameter("name"));
         hot.setStatus("1");
         hot.setCreateDateTime(new Date());
         baseManager.saveOrUpdate(HotSpot.class.getName(), hot);
@@ -315,8 +318,8 @@ public class OffLineTenantController {
     public Object getHotListByImage(HttpServletRequest request) {
         String id = request.getParameter("id");
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        String hql = "select obj from Hot obj where obj.image.id=: id and obj.status='1'";
-        param.put("name", id);
+        String hql = "select obj from HotSpot obj where obj.image.id=:id and obj.status='1'";
+        param.put("id", id);
         return baseManager.listObject(hql, param);
     }
 
@@ -599,23 +602,4 @@ public class OffLineTenantController {
         baseManager.saveOrUpdate(Recommend.class.getName(), recommend);
         return recommend;
     }
-
-
-    @RequestMapping("/tenant/createQRCode.do")
-    @ResponseBody
-    public ResponseEntity<byte[]> createTenantQRCode(HttpServletRequest request) throws Exception {
-
-        String tenantId = request.getParameter("id");
-
-        String redirect = "http://www.efeiyi.com/qrcode/redirect/tenant/" + tenantId;
-        String redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
-        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=wx7f6aa253b75466dd" +
-                "&redirect_uri=" +
-                URLEncoder.encode(redirect_uri, "UTF-8") +
-                "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-
-        return createQRCode(this.getClass().getResource("/").getPath().toString(), tenantId, url);
-    }
-
 }
