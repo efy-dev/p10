@@ -70,7 +70,7 @@
             position: absolute;
         }
 
-        .text_green{
+        .text_green {
             width: 160px;
             clear: both;
             color: green;
@@ -261,7 +261,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="pictureUrl" name="pictureUrl" type="file" multiple
+                        <input id="pictureUrl" name="pictureUrl" type="file" accept="image/jpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-10">
@@ -277,8 +277,8 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="logoUrl" name="logoUrl" type="file" multiple  accept="image/jpeg"
-                        onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
+                        <input id="logoUrl" name="logoUrl" type="file" accept="image/jpeg"
+                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-10">
                         {{ if(it.data!=null && it.data.logoUrl !=null){ }}
@@ -294,7 +294,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="audio" name="audio" type="file" multiple accept="audio/mpeg"
+                        <input id="audio" name="audio" type="file" accept="audio/mpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-10">
@@ -307,7 +307,6 @@
 
                 <div class="am-form-group">
                     <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
-                        <%--<a class="am-btn am-btn-primary am-btn-lg">< 上一步</a>--%>
                         <a onclick="PubSub.publish('tenantBase.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
                         {{ if(typeof it.data !="undefined" && it.data != null){ }}
@@ -412,7 +411,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="organizationAttachment" name="organizationAttachment" type="file" multiple
+                        <input id="organizationAttachment" name="organizationAttachment" type="file" accept="image/jpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -428,7 +427,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="bankAttachment" name="bankAttachment" type="file" multiple
+                        <input id="bankAttachment" name="bankAttachment" type="file" accept="image/jpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -444,7 +443,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="businessLicense" name="businessLicense" type="file" multiple
+                        <input id="businessLicense" name="businessLicense" type="file" accept="image/jpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -460,7 +459,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="taxRegistrationAttachment" name="taxRegistrationAttachment" type="file" multiple
+                        <input id="taxRegistrationAttachment" name="taxRegistrationAttachment" type="file" accept="image/jpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -568,10 +567,13 @@
             <audio src="{{=imageText.media.src}}" controls="controls">浏览器不支持音频插件</audio>
             {{ } }}
         </td>
-        {{ if( typeof imageText.imageList!= "undefined" && imageText.imageList!=null &&imageText.imageList.length > 0 ){}}
-        {{ for( var i=0; i < imageText.imageList.length; i++ ){ }}
+        {{ if( typeof imageText.imageList!= "undefined" && imageText.imageList!=null &&imageText.imageList.length > 0
+        ){}}
+        {{ for( var x=0; x < imageText.imageList.length; x++ ){ }}
         <td class="am-hide-sm-only">
-           <a onclick="PubSub.publish('hotBase.new','{{=imageText.imageList[i].image.id}}')"><img width="10%" src="{{=imageText.imageList[i].image.src}}" alt=""/></a>
+            <a onclick="PubSub.publish('hotBase.new','{{=imageText.imageList[x].image.id}}')"><img width="10%"
+                                                                                                   src="{{=imageText.imageList[x].image.src}}"
+                                                                                                   alt=""/></a>
         </td>
         {{} } }}
     </tr>
@@ -581,7 +583,7 @@
 <script type="text/x-dot-template" id="main-tenant-panel">
     <div class="main-tenant-base">
         <ul class="am-nav am-nav-tabs am-nav-justify">
-            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="panelForm">新的店内实景</a>
+            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="panelForm" id="panelForm">新的店内实景</a>
             </li>
             <li><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="panelList">查看所有</a></li>
         </ul>
@@ -638,7 +640,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="imageList" name="imageList" type="file" multiple
+                        <input id="imageList" name="imageList" type="file" multiple accept="image/jpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -650,7 +652,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="media" name="media" type="file" multiple
+                        <input id="media" name="media" type="file" accept="audio/mpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -679,7 +681,8 @@
     {{ }else{ }}
     <ul class="am-list  am-list-border" id="searchResult">
         {{ for(var i = 0 ; i < it.length; i++){ }}
-        <li><a onclick="PubSub.publish('hotBase.chooseProductModel','{{=it[i].id}}:{{=it[i].name}}')">{{=it[i].name}}</a>
+        <li>
+            <a onclick="PubSub.publish('hotBase.chooseProductModel','{{=it[i].id}}:{{=it[i].name}}')">{{=it[i].name}}</a>
         </li>
         {{ } }}
     </ul>
@@ -704,7 +707,7 @@
         </td>
         <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=hot.name}}</span>
         </td>
-        <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=hot.productModel.name}}</span>
+        <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=hot.productModel==null?"":hot.productModel.name}}</span>
         </td>
         <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=hot.abscissa==null?"":hot.abscissa}}</span>
         </td>
@@ -763,21 +766,27 @@
                 </div>
 
                 <div class="am-form-group">
-                    <label class="am-u-sm-3 am-form-label">横坐标</label>
+                    <label class="am-u-sm-3 am-form-label">
+                        <span class="org">*</span> 横坐标
+                    </label>
                     <div class="am-u-sm-9">
                         <input name="abscissa" type="number" placeholder="横坐标"></input>
                     </div>
                 </div>
 
                 <div class="am-form-group">
-                    <label class="am-u-sm-3 am-form-label">纵坐标</label>
+                    <label class="am-u-sm-3 am-form-label">
+                        <span class="org">*</span> 纵坐标
+                    </label>
                     <div class="am-u-sm-9">
                         <input name="ordinate" type="number" placeholder="纵坐标"></input>
                     </div>
                 </div>
 
                 <div class="am-form-group">
-                    <label class="am-u-sm-3 am-form-label">商品规格</label>
+                    <label class="am-u-sm-3 am-form-label">
+                        <span class="org">*</span> 纬度商品规格
+                    </label>
                     <div class="am-u-sm-9">
                         <input name="name" type="text" id="search"
                                placeholder="输入商品规格名称" oninput="PubSub.publish('hotBase.search',this)">
@@ -934,7 +943,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="product-audio" name="audio" type="file" multiple
+                        <input id="product-audio" name="audio" type="file" accept="audio/mpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-10">
@@ -982,7 +991,7 @@
                 <div class="am-form-group">
                     <label for="product-model-amount" class="am-u-sm-3 am-form-label">库存（默认为1）</label>
                     <div class="am-u-sm-9">
-                        <input name="amount" type="number" id="product-model-amount"
+                        <input name="amount" type="number" id="product-model-amount" min="0"
                                value="{{=(it.data!=null && it.data.amount!=null) ? it.data.amount : ''}}"
                                placeholder="输入库存">
                     </div>
@@ -1014,7 +1023,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="productModel_url" name="productModel_url" type="file" multiple
+                        <input id="productModel_url" name="productModel_url" type="file" accept="image/jpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -1028,7 +1037,7 @@
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productBase.render','{{=it.productId}}')">< 上一步</a>
+                           onclick="PubSub.publish('productMasterWork.render','{{=it.productId}}')">< 上一步</a>
                         <a onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
                     </div>
@@ -1140,7 +1149,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="product-model-imageList" name="imageList" type="file" multiple
+                        <input id="product-model-imageList" name="imageList" type="file" multiple accept="image/jpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -1152,7 +1161,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="product-model-media" name="media" type="file" multiple
+                        <input id="product-model-media" name="media" type="file" accept="audio/mpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -1207,7 +1216,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="product-imageList" name="imageList" type="file" multiple
+                        <input id="product-imageList" name="imageList" type="file" multiple  accept="image/jpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -1224,7 +1233,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="product-media" name="media" type="file" multiple
+                        <input id="product-media" name="media" type="file" accept="audio/mpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -1407,8 +1416,8 @@
             </td>
             <td>{{=productModel.name}}</td>
             <td>{{=productModel.serial}}</td>
-            <td>{{=productModel.price}}</td>
-            <td>{{=productModel.marketPrice}}</td>
+            <td>{{=productModel.price==null?"":productModel.price}}</td>
+            <td>{{=productModel.marketPrice==null?"":productModel.marketPrice}}</td>
             <td>{{=productModel.amount}}</td>
             {{?productModel.status==2}}
             <td>下架</td>
@@ -2078,7 +2087,7 @@
                                 var urlData = this.result;
                                 $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
                             }
-                        }else{
+                        } else {
                             return false;
                         }
                     }
@@ -2175,10 +2184,14 @@
                 if (images[i]) {
                     var reader = new FileReader();
                     reader.readAsDataURL(images[i]);
-                    if ((/audio\/\w+/.test(images[i].type))) {
-                        reader.onload = function (e) {
-                            var urlData = this.result;
-                            $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                    if (data.name == "audio") {
+                        if (/audio\/\w+/.test(images[i].type)) {
+                            reader.onload = function (e) {
+                                var urlData = this.result;
+                                $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                            }
+                        } else {
+                            return false;
                         }
                     }
                     if ((/image\/\w+/.test(images[i].type))) {
@@ -2381,6 +2394,7 @@
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
+           /* this.new(null,this.imageId);*/
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
@@ -2555,10 +2569,14 @@
                 if (images[i]) {
                     var reader = new FileReader();
                     reader.readAsDataURL(images[i]);
-                    if ((/audio\/\w+/.test(images[i].type))) {
-                        reader.onload = function (e) {
-                            var urlData = this.result;
-                            $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                    if (data.name == "audio") {
+                        if (/audio\/\w+/.test(images[i].type)) {
+                            reader.onload = function (e) {
+                                var urlData = this.result;
+                                $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                            }
+                        } else {
+                            return false;
                         }
                     }
                     if ((/image\/\w+/.test(images[i].type))) {
@@ -2678,10 +2696,14 @@
                 if (images[i]) {
                     var reader = new FileReader();
                     reader.readAsDataURL(images[i]);
-                    if ((/audio\/\w+/.test(images[i].type))) {
-                        reader.onload = function (e) {
-                            var urlData = this.result;
-                            $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                    if (data.name == "audio") {
+                        if (/audio\/\w+/.test(images[i].type)) {
+                            reader.onload = function (e) {
+                                var urlData = this.result;
+                                $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                            }
+                        } else {
+                            return false;
                         }
                     }
                     if ((/image\/\w+/.test(images[i].type))) {
@@ -2950,10 +2972,14 @@
                 if (images[i]) {
                     var reader = new FileReader();
                     reader.readAsDataURL(images[i]);
-                    if ((/audio\/\w+/.test(images[i].type))) {
-                        reader.onload = function (e) {
-                            var urlData = this.result;
-                            $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                    if (data.name == "audio") {
+                        if (/audio\/\w+/.test(images[i].type)) {
+                            reader.onload = function (e) {
+                                var urlData = this.result;
+                                $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                            }
+                        } else {
+                            return false;
                         }
                     }
                     if ((/image\/\w+/.test(images[i].type))) {
@@ -3128,7 +3154,7 @@
             } else if (data.status == "2") {
                 data.status = "1";
             }
-            ajaxRequest("/yuanqu/product/setProductModelStatus",{data: JSON.stringify(data)}, function (responseData) {
+            ajaxRequest("/yuanqu/product/setProductModelStatus", {data: JSON.stringify(data)}, function (responseData) {
                 this.productId = responseData.product.id;
                 this.body();
             }.bind(this));
@@ -3250,10 +3276,14 @@
                 if (images[i]) {
                     var reader = new FileReader();
                     reader.readAsDataURL(images[i]);
-                    if ((/audio\/\w+/.test(images[i].type))) {
-                        reader.onload = function (e) {
-                            var urlData = this.result;
-                            $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                    if (data.name == "audio") {
+                        if (/audio\/\w+/.test(images[i].type)) {
+                            reader.onload = function (e) {
+                                var urlData = this.result;
+                                $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                            }
+                        } else {
+                            return false;
                         }
                     }
                     if ((/image\/\w+/.test(images[i].type))) {
@@ -3361,10 +3391,14 @@
                 if (images[i]) {
                     var reader = new FileReader();
                     reader.readAsDataURL(images[i]);
-                    if ((/audio\/\w+/.test(images[i].type))) {
-                        reader.onload = function (e) {
-                            var urlData = this.result;
-                            $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                    if (data.name == "audio") {
+                        if (/audio\/\w+/.test(images[i].type)) {
+                            reader.onload = function (e) {
+                                var urlData = this.result;
+                                $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                            }
+                        } else {
+                            return false;
                         }
                     }
                     if ((/image\/\w+/.test(images[i].type))) {
@@ -3475,10 +3509,14 @@
                 if (images[i]) {
                     var reader = new FileReader();
                     reader.readAsDataURL(images[i]);
-                    if ((/audio\/\w+/.test(images[i].type))) {
-                        reader.onload = function (e) {
-                            var urlData = this.result;
-                            $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                    if (data.name == "audio") {
+                        if (/audio\/\w+/.test(images[i].type)) {
+                            reader.onload = function (e) {
+                                var urlData = this.result;
+                                $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                            }
+                        } else {
+                            return false;
                         }
                     }
                     if ((/image\/\w+/.test(images[i].type))) {
@@ -3660,10 +3698,14 @@
                 if (images[i]) {
                     var reader = new FileReader();
                     reader.readAsDataURL(images[i]);
-                    if ((/audio\/\w+/.test(images[i].type))) {
-                        reader.onload = function (e) {
-                            var urlData = this.result;
-                            $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                    if (data.name == "audio") {
+                        if (/audio\/\w+/.test(images[i].type)) {
+                            reader.onload = function (e) {
+                                var urlData = this.result;
+                                $(data).parent().parent().find(".file-list").append("<audio src=\"" + urlData + "\" width=\"500\"  controls=\"controls\"/>")
+                            }
+                        } else {
+                            return false;
                         }
                     }
                     if ((/image\/\w+/.test(images[i].type))) {

@@ -119,6 +119,7 @@ public class OffLineProductController {
         }
         return product;
     }
+
     @RequestMapping({"/getProductPanelById"})
     @ResponseBody
     public Object getProductPanelById(HttpServletRequest request) {
@@ -148,21 +149,6 @@ public class OffLineProductController {
         jsonObject.put("code", "1");
         return jsonObject;
     }
-    @RequestMapping({"/getProductsByTenantId"})
-    @ResponseBody
-    public Object getProductsByTenantId(HttpServletRequest request) {
-        String id = request.getParameter("id");
-        String hql="select obj from  Product where obj.tenant_id="+id;
-        Product product = (Product) baseManager.getObject(Product.class.getName(), id);
-        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        param.put("productId", product.getId());
-        String audioHql = "select obj from Image obj where obj.owner=:productId and obj.status!='0' and obj.type='2'";
-        Image image = (Image) baseManager.getUniqueObjectByConditions(audioHql, param);
-        if (image != null) {
-            product.setAudio(image.getSrc());
-        }
-        return product;
-    }
 
     @RequestMapping({"/baseSubmit"})
     @ResponseBody
@@ -183,12 +169,6 @@ public class OffLineProductController {
         product.setStatus(Product.PRODUCT_STATUS_DOWN);
         product.setType(Product.PRODUCT_TYPE_OFFLINE);
         baseManager.saveOrUpdate(Product.class.getName(), product);
-        String pictureUrl = uploadImage(multipartRequest.getFile("picture_url"));//主图
-        if (!"".equals(pictureUrl)) {
-            product.setPicture_url(pictureUrl);
-            Image image = new Image(product.getName(), pictureUrl, product.getId(), "1", "1");
-            baseManager.saveOrUpdate(Image.class.getName(), image);
-        }
         String audioUrl = uploadImage(multipartRequest.getFile("audio"));
         if (!"".equals(audioUrl)) {
             List<Image> oAudio = baseManager.listObject("select obj from Image obj where obj.status='1' and obj.type='2' and obj.owner='" + product.getId() + "'");
@@ -256,13 +236,15 @@ public class OffLineProductController {
         productModel.setName(request.getParameter("name"));
         String amountStr = request.getParameter("amount");
         productModel.setAmount(amountStr != null && !amountStr.equals("") ? Integer.parseInt(amountStr) : 1);
-        String marketPrice = request.getParameter("marketPrice");
-        if (marketPrice != null && !marketPrice.equals("")) {
-            productModel.setMarketPrice(new BigDecimal(marketPrice));
-        }
         String price = request.getParameter("price");
         if (price != null && !price.equals("")) {
             productModel.setPrice(new BigDecimal(price));
+        }
+        String marketPrice = request.getParameter("marketPrice");
+        if (marketPrice != null && !marketPrice.equals("")) {
+            productModel.setMarketPrice(new BigDecimal(marketPrice));
+        } else if (price != null && !price.equals("")) {
+            productModel.setMarketPrice(new BigDecimal(price));
         }
         productModel.setStatus("1");
         productModel.setProductModel_url(uploadImage(multipartRequest.getFile("productModel_url")));
