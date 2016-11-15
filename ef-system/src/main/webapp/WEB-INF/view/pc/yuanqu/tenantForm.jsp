@@ -785,7 +785,7 @@
 
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">
-                        <span class="org">*</span> 纬度商品规格
+                        <span class="org">*</span> 商品规格
                     </label>
                     <div class="am-u-sm-9">
                         <input name="name" type="text" id="search"
@@ -2394,7 +2394,16 @@
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
-           /* this.new(null,this.imageId);*/
+            /*******************************************/
+            $("#panelHotForm").parent().parent().find("li").each(function () {
+                $(this).attr("class", "");
+            });
+            $("#panelHotForm").parent().attr("class", "am-active");
+
+            $("[data-type=tabs]").each(function () {
+                $(this).hide();
+            });
+            $("[data-for=panelHotForm]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
@@ -2524,7 +2533,6 @@
                 renderTemplate(this.template, this);
             }
             this.show();
-
         };
         this.delete = function (msg, data) {
             ajaxRequest("/yuanqu/tenant/deletePanelById", {id: data}, function (responseData) {
@@ -2569,7 +2577,7 @@
                 if (images[i]) {
                     var reader = new FileReader();
                     reader.readAsDataURL(images[i]);
-                    if (data.name == "audio") {
+                    if (data.name == "media") {
                         if (/audio\/\w+/.test(images[i].type)) {
                             reader.onload = function (e) {
                                 var urlData = this.result;
@@ -2593,6 +2601,16 @@
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
+            /*******************************************/
+            $("#panelForm").parent().parent().find("li").each(function () {
+                $(this).attr("class", "");
+            });
+            $("#panelForm").parent().attr("class", "am-active");
+
+            $("[data-type=tabs]").each(function () {
+                $(this).hide();
+            });
+            $("[data-for=panelForm]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
