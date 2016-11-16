@@ -168,8 +168,12 @@ public class OffLineTenantController {
         }
         tenant.setName(request.getParameter("name"));
         tenant.setAddress(request.getParameter("address"));
-        tenant.setLatitude(Double.parseDouble(request.getParameter("latitude")));
-        tenant.setLongitude(Double.parseDouble(request.getParameter("longitude")));
+        if (request.getParameter("latitude") != null && !request.getParameter("latitude").equals("")) {
+            tenant.setLatitude(Double.parseDouble(request.getParameter("latitude")));
+        }
+        if (request.getParameter("longitude") != null && !request.getParameter("longitude").equals("")) {
+            tenant.setLongitude(Double.parseDouble(request.getParameter("longitude")));
+        }
         tenant.setContent(request.getParameter("content"));
         tenant.setTenantType(BigTenant.TENANT_TYPE_OFFLINE);
         tenant.setStatus("1");

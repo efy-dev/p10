@@ -57,31 +57,6 @@
             color: #FF6600;
         }
 
-        .text_red {
-            width: 160px;
-            clear: both;
-            color: red;
-            float: left;
-            height: 29px;
-            left: 600px;
-            line-height: 29px;
-            padding: 0 10px;
-            top: 2px;
-            position: absolute;
-        }
-
-        .text_green {
-            width: 160px;
-            clear: both;
-            color: green;
-            float: left;
-            height: 29px;
-            left: 600px;
-            line-height: 29px;
-            padding: 0 10px;
-            top: 2px;
-            position: absolute;
-        }
     </style>
 </head>
 <body>
@@ -143,7 +118,6 @@
 <script src="/scripts/yuanqu/js/pubsub.js"></script>
 <script src="/scripts/yuanqu/js/alert.js"></script>
 <script src="/scripts/yuanqu/js/util.js"></script>
-<script src="/scripts/yuanqu/js/verify.js"></script>
 
 <script type="text/x-dot-template" id="main-nav">
     <ol class="am-breadcrumb main-nav">
@@ -228,10 +202,7 @@
                     </label>
                     <div class="am-u-sm-10">
                         <input name="latitude" type="number" id="latitude"
-                               onblur="PubSub.publish('tenantBase.isEmpty',this)"
                                value="{{=it.data!=null ? it.data.latitude : ''}}" placeholder="输入实体店铺的纬度">
-                        <span class="text_red"></span>
-                        <span class="text_green"></span>
                     </div>
                 </div>
                 <div class="am-form-group">
@@ -240,10 +211,7 @@
                     </label>
                     <div class="am-u-sm-10">
                         <input name="longitude" id="longitude" type="number"
-                               onblur="PubSub.publish('tenantBase.isEmpty',this)"
                                value="{{=it.data!=null ? it.data.longitude : ''}}" placeholder="输入实体店铺的经度">
-                        <span class="text_red"></span>
-                        <span class="text_green"></span>
                     </div>
                 </div>
 
@@ -567,15 +535,15 @@
             <audio src="{{=imageText.media.src}}" controls="controls">浏览器不支持音频插件</audio>
             {{ } }}
         </td>
+        <td class="am-hide-sm-only">
         {{ if( typeof imageText.imageList!= "undefined" && imageText.imageList!=null &&imageText.imageList.length > 0
         ){}}
         {{ for( var x=0; x < imageText.imageList.length; x++ ){ }}
-        <td class="am-hide-sm-only">
-            <a onclick="PubSub.publish('hotBase.new','{{=imageText.imageList[x].image.id}}')"><img width="10%"
-                                                                                                   src="{{=imageText.imageList[x].image.src}}"
-                                                                                                   alt=""/></a>
-        </td>
+            <a onclick="PubSub.publish('hotBase.new','{{=imageText.imageList[x].image.id}}')">
+                <img width="10%" src="{{=imageText.imageList[x].image.src}}" alt=""/>
+            </a>
         {{} } }}
+        </td>
     </tr>
     {{ } }}
 </script>
@@ -666,7 +634,7 @@
                         <a onclick="PubSub.publish('tenantPanel.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('tenantMaster.render','{{=it.data.id}}')">跳过</a>
+                           onclick="PubSub.publish('productBase.new','{{=it.data.id}}')">跳过</a>
                     </div>
                 </div>
             </fieldset>
@@ -2010,7 +1978,6 @@
         this.param = param;
         this.name = "tenantBase";
         this.template = "main-tenant-base";         //组件绑定的模板//组件需要订阅的事件与消息
-        this.submitFlag = true;
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
@@ -2027,20 +1994,16 @@
         };
 
         this.submitForm = function (msg, data) {
-            $("#latitude").blur(this.isEmpty(null, "#latitude"));
-            $("#longitude").blur(this.isEmpty(null, "#longitude"));
-            if (this.submitFlag) {
-                $("#my-modal-loading").modal();
-                $("#" + data).ajaxSubmit(function (data) {
-                    if (typeof data == "string") {
-                        data = JSON.parse(data);
-                    }
-                    if (typeof data.id != "undefined" && data.id != null) {
-                        PubSub.publish("tenantCheck.render", data.id);
-                    }
-                    $("#my-modal-loading").modal("close");
-                });
-            }
+            $("#my-modal-loading").modal();
+            $("#" + data).ajaxSubmit(function (data) {
+                if (typeof data == "string") {
+                    data = JSON.parse(data);
+                }
+                if (typeof data.id != "undefined" && data.id != null) {
+                    PubSub.publish("tenantCheck.render", data.id);
+                }
+                $("#my-modal-loading").modal("close");
+            });
             return false;
         };
 
@@ -2100,17 +2063,6 @@
                 }
             }
         };
-        this.isEmpty = function (msg, data) {
-            $(data).next().next().text("");
-            $(data).next().text("");
-            if (isEmpty($(data).val())) {
-                $(data).next().text("×不能不填");
-                this.submitFlag = false;
-            } else {
-                $(data).next().next().text("√");
-                this.submitFlag = true;
-            }
-        };
 
         this.subscribeArray = [
             {message: this.name + ".show", subscriber: this.show},
@@ -2119,8 +2071,7 @@
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".imageView", subscriber: this.imageView},
             {message: this.name + ".complete", subscriber: this.complete},
-            {message: this.name + ".submit", subscriber: this.submitForm},
-            {message: this.name + ".isEmpty", subscriber: this.isEmpty}
+            {message: this.name + ".submit", subscriber: this.submitForm}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2371,10 +2322,12 @@
             var id = data.split(":")[0];
             var fullName = data.split(":")[1];
             $("#productModelId").val(id);
-            $("#search").val(fullName)
+            $("#search").val(fullName);
+            this.selectHide();
         };
 
         this.search = function (msg, data) {
+            this.selectShow();
             var success = function (responseData) {
                 renderTemplate(this.productModelList, responseData);
             }.bind(this);
@@ -2408,6 +2361,12 @@
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
+        this.selectHide = function (msg, data) {
+            $("[dot-template=" + this.productModelList + "]").hide();
+        };
+        this.selectShow=function (msg, data) {
+            $("[dot-template=" + this.productModelList + "]").show();
+        };
         this.remove = function (msg, data) {
             $("[dot-template=" + this.template + "]").html("");
         };
@@ -2421,7 +2380,9 @@
             {message: this.name + ".delete", subscriber: this.delete},
             {message: this.name + ".chooseProductModel", subscriber: this.chooseProductModel},
             {message: this.name + ".search", subscriber: this.search},
-            {message: this.name + ".new", subscriber: this.new}
+            {message: this.name + ".new", subscriber: this.new},
+            {message: this.name + ".selectShow", subscriber: this.selectShow},
+            {message: this.name + ".selectHide", subscriber: this.selectHide}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2460,9 +2421,11 @@
             var fullName = data.split(":")[1];
             $("#masterId").val(id);
             $("#search").val(fullName)
+            this.selectHide();
         };
 
         this.search = function (msg, data) {
+            this.selectShow();
             var success = function (responseData) {
                 renderTemplate(this.masterList, responseData);
             }.bind(this);
@@ -2483,6 +2446,13 @@
             return false;
         };
 
+        this.selectHide = function (msg, data) {
+            $("[dot-template=" + this.masterList + "]").hide();
+        };
+
+        this.selectShow=function (msg, data) {
+            $("[dot-template=" + this.masterList + "]").show();
+        };
 
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
@@ -2502,7 +2472,9 @@
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".submit", subscriber: this.submitForm},
             {message: this.name + ".chooseMaster", subscriber: this.chooseMaster},
-            {message: this.name + ".search", subscriber: this.search}
+            {message: this.name + ".search", subscriber: this.search},
+            {message: this.name + ".selectHide", subscriber: this.selectHide},
+            {message: this.name + ".selectShow", subscriber: this.selectShow}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2544,6 +2516,7 @@
             }.bind(this));
         };
         this.tabShow = function (msg, data) {
+            $(".file-list").html("");
             $(data).parent().parent().find("li").each(function () {
                 $(this).attr("class", "");
             });
@@ -2780,26 +2753,45 @@
             var fullName = data.split(":")[1];
             $("#product-masterId").val(id);
             $("#product-search").val(fullName)
+            this.selectHide();
         };
 
         this.chooseProject = function (msg, data) {
             var id = data.split(":")[0];
             var fullName = data.split(":")[1];
             $("#product-projectId").val(id);
-            $("#project-search").val(fullName)
+            $("#project-search").val(fullName);
+            this.selectProjectHide();
         };
 
         this.search = function (msg, data) {
+            this.selectShow();
             var success = function (responseData) {
                 renderTemplate(this.masterList, responseData);
             }.bind(this);
             ajaxRequest("/yuanqu/tenant/getTenantMasterList", {name: $(data).val()}, success);
         };
+
         this.projectSearch = function (msg, data) {
+            this.selectProjectShow()
             var success = function (responseData) {
                 renderTemplate(this.projectList, responseData);
             }.bind(this);
             ajaxRequest("/yuanqu/product/getProjectList", {name: $(data).val()}, success);
+        };
+
+        this.selectHide = function (msg, data) {
+            $("[dot-template=" + this.masterList + "]").hide();
+        };
+        this.selectShow=function (msg, data) {
+            $("[dot-template=" + this.masterList + "]").show();
+        };
+
+        this.selectProjectHide = function (msg, data) {
+            $("[dot-template=" + this.projectList + "]").hide();
+        };
+        this.selectProjectShow = function (msg, data) {
+            $("[dot-template=" + this.projectList + "]").show();
         };
 
         this.submitForm = function (msg, data) {
@@ -2836,7 +2828,11 @@
             {message: this.name + ".chooseMaster", subscriber: this.chooseMaster},
             {message: this.name + ".chooseProject", subscriber: this.chooseProject},
             {message: this.name + ".search", subscriber: this.search},
-            {message: this.name + ".projectSearch", subscriber: this.projectSearch}
+            {message: this.name + ".projectSearch", subscriber: this.projectSearch},
+            {message: this.name + ".selectHide", subscriber: this.selectHide},
+            {message: this.name + ".selectShow", subscriber: this.selectShow},
+            {message: this.name + ".selectProjectHide", subscriber: this.selectProjectHide},
+            {message: this.name + ".selectProjectShow", subscriber: this.selectProjectShow},
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2872,16 +2868,24 @@
             var id = data.split(":")[0];
             var name = data.split(":")[1];
             $("#master-work-id").val(id);
-            $("#master-work-search").val(name)
+            $("#master-work-search").val(name);
+            this.selectShow();
         };
 
         this.search = function (msg, data) {
+            this.selectShow();
             var success = function (responseData) {
                 renderTemplate(this.masterWorkList, responseData);
             }.bind(this);
             ajaxRequest("/yuanqu/product/getMasterWorkList", {name: $(data).val()}, success);
         };
 
+        this.selectHide = function (msg, data) {
+            $("[dot-template=" + this.masterWorkList + "]").hide();
+        };
+        this.selectShow = function (msg, data) {
+            $("[dot-template=" + this.masterWorkList + "]").show();
+        };
         this.submitForm = function (msg, data) {
             $("#my-modal-loading").modal();
             $("#" + data).ajaxSubmit(function (data) {
@@ -2914,7 +2918,9 @@
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".submit", subscriber: this.submitForm},
             {message: this.name + ".chooseMasterWork", subscriber: this.chooseMasterWork},
-            {message: this.name + ".search", subscriber: this.search}
+            {message: this.name + ".search", subscriber: this.search},
+            {message: this.name + ".selectHide", subscriber: this.selectHide},
+            {message: this.name + ".selectShow", subscriber: this.selectShow}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -3294,7 +3300,7 @@
                 if (images[i]) {
                     var reader = new FileReader();
                     reader.readAsDataURL(images[i]);
-                    if (data.name == "audio") {
+                    if (data.name == "media") {
                         if (/audio\/\w+/.test(images[i].type)) {
                             reader.onload = function (e) {
                                 var urlData = this.result;
@@ -3409,7 +3415,7 @@
                 if (images[i]) {
                     var reader = new FileReader();
                     reader.readAsDataURL(images[i]);
-                    if (data.name == "audio") {
+                    if (data.name == "media") {
                         if (/audio\/\w+/.test(images[i].type)) {
                             reader.onload = function (e) {
                                 var urlData = this.result;
@@ -3864,7 +3870,7 @@
     var productPanel = new ProductPanel();//商品详情
     var tenantList = new TenantList();      //店铺列表
     var productList = new ProductList();    //商品列表
-    var HotBase = new HotBase();  //热点
+    var hotBase = new HotBase();  //热点
     var productModelList = new ProductModelList();  //商品规格列表
     var productMasterWork = new ProductMasterWork();//关联作品
     var scenicRegion = new ScenicRegion();          //景区信息

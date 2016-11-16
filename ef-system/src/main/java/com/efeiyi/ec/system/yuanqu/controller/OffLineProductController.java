@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -158,7 +159,7 @@ public class OffLineProductController {
             product = (Product) baseManager.getObject(Product.class.getName(), request.getParameter("id"));
         } else {
             product = new Product();
-            if (request.getParameter("tenantId") != null&&!request.getParameter("tenantId").equals("")) {
+            if (request.getParameter("tenantId") != null && !request.getParameter("tenantId").equals("")) {
                 BigTenant tenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), request.getParameter("tenantId"));
                 product.setBigTenant(tenant);
             }
@@ -272,6 +273,7 @@ public class OffLineProductController {
         baseManager.saveOrUpdate(Product.class.getName(), product);
         return product;
     }
+
     @RequestMapping({"/masterWorkSubmit"})
     @ResponseBody
     public Object masterWorkSubmit(HttpServletRequest request) {
@@ -318,9 +320,30 @@ public class OffLineProductController {
     public Object panelSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
         String id = request.getParameter("id");
         String productId = request.getParameter("productId");
+        List<String> strs = new ArrayList<String>();
+        String[] array = new String[strs.size()];
         Panel panel;
         if (id != null && !"".equals(id)) {
             panel = (Panel) baseManager.getObject(Panel.class.getName(), id);
+            String imageHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='1'";
+            LinkedHashMap<String, Object> imagesParam = new LinkedHashMap<>();
+            imagesParam.put("panelId", id);
+            List<ImagePanel> imagePanels = baseManager.listObject(imageHql, imagesParam);
+            if (imagePanels != null && imagePanels.size() > 0) {
+                for (ImagePanel imagePanel : imagePanels) {
+                    strs.add(imagePanel.getId());
+                }
+                if (strs != null && strs.size() > 0) {
+                    baseManager.batchDelete(ImagePanel.class.getName(), strs.toArray(array));
+                }
+            }
+            String audioHql = "select obj from Image obj where obj.owner=:panelId and obj.status!='0' and obj.type='2'";
+            LinkedHashMap<String, Object> audioParam = new LinkedHashMap<>();
+            audioParam.put("panelId", id);
+            Image audio = (Image) baseManager.getObject(Image.class.getName(), audioHql);
+            if (audio != null) {
+                baseManager.delete(Image.class.getName(), audio.getId());
+            }
         } else {
             panel = new Panel();
             Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
