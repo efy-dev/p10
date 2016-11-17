@@ -9,12 +9,12 @@ function renderHeader(it /**/) {
 }
 
 function renderHomeHeader(it /**/) {
-    var out = ' <a href="http://www.efeiyi.com/app/index.html" class="icon logo" title="前门 华韵"></a> <button class="icon user" title="个人中心" style="border: none;" ></button> <div class="layer"> <a class="link" href="/app/index.html"><i class="icon icon-home"></i>首页</a> <a class="link" href="http://i.efeiyi.com/"><i class="icon icon-center"></i>个人中心</a> <i class="angle"></i> </div>';
+    var out = ' <a href="http://www.efeiyi.com/app/index.html" class="icon logo_efeiyi" title="e飞蚁"></a><a href="http://www.efeiyi.com/app/index.html" class="icon logo" title="前门 华韵"></a> <button class="icon user" title="个人中心" style="border: none;" ></button> <div class="layer"> <a class="link" href="/app/index.html"><i class="icon icon-home"></i>首页</a> <a class="link" href="http://i.efeiyi.com/"><i class="icon icon-center"></i>个人中心</a> <i class="angle"></i> </div>';
     return out;
 }
 
 function renderFooter(it /**/) {
-    var out = ' <footer> <div class="bd item"><h3>战略合作伙伴</h3> <div class="bd icons"><span><a href="http://en.unesco.org/" title="联合国教科文组织"><em class="bd"><i class="icon-home icon1"></i></em>联合国教科文组织</a></span><span><a href="http://mall.efeiyi.com" title="非物质文化遗产平台"><em class="bd"><i class="icon-home icon2"></i></em>非物质文化遗产平台</a></span><span><a title="中国非物质文化遗产保护协会"><em class="bd"><i class="icon-home icon3"></i></em>中国非遗保护协会</a></span></div> </div> <div class="bd content"> <div class="bd wechat"> <div class="bd"> <div class="icon-home icon-logo"></div> </div> <div class="bd"><h4>非物质文化遗产平台</h4></div> <div class="bd img"><img src="/app/images/icon-home-wechat.png"></div> <div class="bd txt"><p>关注微信公众号</p> <p>领取超值代金券</p></div> </div> </div> <div class="bd copyright">京ICP备15032511号-1</div> </footer>';
+    var out = ' <footer> <div class="bd item"><h3>战略合作伙伴</h3> <div class="bd icons"><span><a href="http://en.unesco.org/" title="联合国教科文组织"><em class="bd"><i class="icon-home icon1"></i></em>联合国教科文组织</a></span><span><a href="http://mall.efeiyi.com" title="非物质文化遗产平台"><em class="bd"><i class="icon-home icon2"></i></em>非物质文化遗产平台</a></span><span><a title="中国非物质文化遗产保护协会"><em class="bd"><i class="icon-home icon3"></i></em>中国非遗保护协会</a></span></div> </div> <div class="bd content"> <div class="bd wechat"> <div class="bd"> <div class="icon-home icon-logo"></div> </div> <div class="bd"><h4>非物质文化遗产平台</h4></div> <div class="bd img"><img src="http://www.efeiyi.com/app/images/icon-home-wechat.png"></div> <div class="bd txt"><p>关注微信公众号</p> <p>领取超值代金券</p></div> </div> </div> <div class="bd copyright">京ICP备15032511号-1</div> </footer>';
     return out;
 }
 
@@ -24,15 +24,20 @@ function renderFooter(it /**/) {
 $().ready(function () {
     initWx("http://www.efeiyi.com/wx/init.do");
 
-    $("[dot-template=header]").on("click", ".icon.user", function () {
-        $(".layer").slideToggle(50, function () {
-            if ($(".icon.user").hasClass("active")) {
-                $(".icon.user").removeClass("active")
-            } else {
-                $(".icon.user").addClass("active");
-            }
-        });
-    })
+    $("[dot-template=header]").on("touchend", '.icon.user', function (e) {
+        var iconUser = $('.icon.user');
+        var layer = $('.layer');
+
+        if(layer.is(':hidden')){
+            iconUser.addClass('active');
+            layer.show();
+        }else{
+            layer.hide();
+            iconUser.removeClass('active');
+        }
+        e.preventDefault();
+
+    });
 
     $(".footer").html(renderFooter());
 });

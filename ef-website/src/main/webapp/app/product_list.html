@@ -35,9 +35,7 @@
 </script>
 
 
-<script src="common/js/jquery-3.1.0.min.js"></script>
-<script src="common/js/swiper.min.js"></script>
-<script src="common/js/doT.min.js"></script>
+<script src="common/js/common.js"></script>
 <script src="common/js/util.js"></script>
 <script src="common/js/weixin.js"></script>
 <script src="guide/js/controller.js"></script>
@@ -67,7 +65,7 @@
         var param = {};
         for (var p in requestParam) {
             if (requestParam.hasOwnProperty(p)) {
-                if (p.indexOf("param.") >= 0) {
+                if (p.indexOf("param.") > 0) {
                     var key = p.substr(6, p.length);
                     param[key] = requestParam[p];
                 }
@@ -83,7 +81,7 @@
         $("[dot-template=header]").html(renderHeader(PageVariable));
 
 
-        getProductModelList(PageVariable.param, 100, 0, function () {
+        getProductModelList(PageVariable.param, 10, 0, function () {
             renderTemplate(PageVariable.template.productList, PageVariable.productModelList);
         })
 

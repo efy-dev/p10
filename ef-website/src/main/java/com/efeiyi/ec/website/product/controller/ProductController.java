@@ -301,7 +301,6 @@ public class ProductController {
     }
 
 
-    // url : /product/getProductModelList
     @RequestMapping({"/getProductModelList"})
     @ResponseBody
     public Object getProductModelList(HttpServletRequest request) {

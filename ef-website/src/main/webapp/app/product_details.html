@@ -12,21 +12,19 @@
 
 <div dot-template="product-base"></div>
 
-<div class="wlist" dot-template="product-detail">
-</div>
+<div class="wlist" dot-template="product-detail"></div>
 <!--//End wlist-->
 
 
 <div class="fixed" dot-template="product-buy"></div>
 
-<div class="footer">
-</div>
+<div class="footer"></div>
+
+
 <script type="text/x-dot-template" id="product-base">
 
-
     <div class="shop_signs">
-        <a href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"><img
-                src="{{=it.product.tenant.logoUrl}}@!o2o-tenant-logo" alt=""></a>
+        <a href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"><img src="{{=it.product.tenant.logoUrl}}@!o2o-tenant-logo" alt=""></a>
     </div>
 
     <div class="focus">
@@ -51,7 +49,7 @@
     <div class="info">
         <div class="base">
             <div class="title text_hidden">{{=it.product.name}}</div>
-            <div class="txt">{{=it.product.subName}}</div>
+            <div class="subtitle">{{=it.product.subName}}</div>
             <div class="price"><span> ¥ </span><strong>{{=it.price}}</strong></div>
             {{ if(it.marketPrice!=null && it.marketPrice>it.price){ }}
             <div class="price_sub"><span>¥ {{=it.marketPrice}}</span></div>
@@ -100,14 +98,18 @@
 </script>
 
 <script type="text/x-dot-template" id="product-buy">
-    <a href="http://mall.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId={{=it.id}}&amount=1&price={{=it.price}}&orderType=6&callback=http%3a%2f%2fi.efeiyi.com%2forder%2fmyEfeiyi%2fview%2f{{=it.id}}"
-       class="button-block-danger">立即购买</a>
+
+    {{ if( it.amount > 0 ){ }}
+        <a class="tenant_link" href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
+        <a href="http://mall.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId={{=it.id}}&amount=1&price={{=it.price}}&orderType=6&callback=http%3a%2f%2fi.efeiyi.com%2forder%2fmyEfeiyi%2fview%2f{{=it.id}}"
+           class="button-block-danger">立即购买</a>
+    {{ }else{ }}
+        <a class="tenant_link" style="bottom:16px" href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
+    {{ } }}
 </script>
 
 
-<script src="common/js/jquery-3.1.0.min.js"></script>
-<script src="common/js/swiper.min.js"></script>
-<script src="common/js/doT.min.js"></script>
+<script src="common/js/common.js"></script>
 <script src="common/js/util.js"></script>
 <script src="common/js/weixin.js"></script>
 <script src="guide/js/controller.js"></script>
@@ -153,11 +155,6 @@
             });
         });
 
-
-//        setTimeout(function () {
-//            console.log("自动播放");
-//            PageVariable.currentAudio.bodyPlay();
-//        }.bind(this), 2000);
 
         getColumnListByProductModel(PageVariable.productId, function () {
             renderTemplate(PageVariable.template.productDetail, PageVariable.productModelColumnList);

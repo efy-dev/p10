@@ -146,7 +146,7 @@ public class OffLineTenantController {
             hot.setAbscissa(Double.parseDouble(request.getParameter("abscissa")));
         }
         if (request.getParameter("ordinate") != null && !request.getParameter("ordinate").equals("")) {
-            hot.setAbscissa(Double.parseDouble(request.getParameter("ordinate")));
+            hot.setOrdinate(Double.parseDouble(request.getParameter("ordinate")));
         }
         hot.setName(request.getParameter("name"));
         hot.setStatus("1");

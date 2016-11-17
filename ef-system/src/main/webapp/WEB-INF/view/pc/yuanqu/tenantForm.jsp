@@ -860,8 +860,8 @@
                     </div>
                 </div>
             </td>
-            <td>{{=tenant.name}}</td>
-            <td>{{=tenant.serial}}</td>
+            <td>{{=tenant.name==null?"":tenant.name}}</td>
+            <td>{{=tenant.serial==null?"":tenant.serial}}</td>
             <td>
                 {{=(new Date(tenant.createDateTime)).format("yyyy-MM-dd hh:mm:ss")}}
             </td>

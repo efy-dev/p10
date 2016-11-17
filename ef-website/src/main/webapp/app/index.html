@@ -4,43 +4,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta charset="UTF-8">
     <title>前门华韵</title>
-    <!--<link rel="stylesheet" href="assets/css/swiper.min.css">-->
     <link rel="stylesheet" href="guide/css/layouts.css">
 </head>
 <body>
-<div class="header" dot-template="header">
-</div>
-
+<div class="header" dot-template="header"></div>
 <!--//End--header-->
 
-<div class="focus">
-    <div class="swiper-container" id="focus">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="uploads/b1.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="uploads/b1.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="uploads/b1.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="uploads/b1.jpg" alt=""></div>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-    </div>
+<div class="image">
+    <img src="uploads/b1.jpg" alt="">
 </div>
 <!--//End--focus-->
 
 <div class="menu">
     <a href="http://www.efeiyi.com/app/audio_guide.html?title=语音导览"><i class="icon icon-audio"></i><span>语音导览</span></a>
     <a href=""><i class="icon icon-tour"></i><span>旅游攻略</span></a>
-    <a href="http://www.efeiyi.com/app/product_list.html?title=限时折扣"><i
-            class="icon icon-limit"></i><span>限时折扣</span></a>
+    <a href="http://www.efeiyi.com/app/product_list.html?title=限时折扣"><i class="icon icon-limit"></i><span>限时折扣</span></a>
 </div>
 <!--//End--menu-->
 
 <div class="promimg">
-    <a href="" title=""><img alt="" src="uploads/ad1.jpg"></a>
+    <a href="" title=""><img style="height:60px" alt="" src="uploads/ad1.jpg"></a>
 </div>
 <!--//End--ad-->
 
-<div class="horizontal">
+<div class="horizontal" style="margin-bottom:40px">
     <div class="title"><h1>艺术馆</h1><a class="more" href="" title="更多">更多&gt;</a></div>
     <div class="swiper-container" dot-template="home-recommend-list">
     </div>
@@ -52,7 +39,6 @@
 </div>
 
 <script type="text/x-dot-template" id="home-recommend-list">
-
     <div class="swiper-wrapper">
         {{ for(var i = 0 ; i < it.length ;i++){ }}
         {{ if(it[i].image!=null){ }}
@@ -82,20 +68,17 @@
     </div>
 </script>
 
-<script src="common/js/jquery-3.1.0.min.js"></script>
-<script src="common/js/swiper.min.js"></script>
-<script src="common/js/doT.min.js"></script>
+<script src="common/js/common.js"></script>
 <script src="common/js/util.js"></script>
 <script src="common/js/weixin.js"></script>
 <script src="guide/js/controller.js"></script>
 <script src="guide/js/model.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <!--//End-->
-<!--<script src="assets/js/system.js"></script>-->
+
 
 
 <script>
-
     wx_share_title = "前门华韵"; //分享标题
     wx_share_des = "带上耳机，轻松领略中国传统文化与传承";  //分享描述
     var redirect = "http://www.efeiyi.com/app/index.html";
@@ -107,32 +90,18 @@
             "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
 
     $().ready(function () {
+
         initPage();
-        setTimeout(function () {
-            var swiper = new Swiper('.swiper-container', {
-                slidesPerView: 'auto',
-                centeredSlides: true,
-                spaceBetween: 10,
-                initialSlide: 0
-            });
-        }, 1000)
     });
 
+    $(function () {
+
+    });
 
     function initPage() {
-
         $("[dot-template=header]").html(renderHomeHeader());
-
         getRecommendList({}, 5, 0, function () {
             renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
-            setTimeout(function () {
-                var swiper = new Swiper('.swiper-container', {
-                    slidesPerView: 'auto',
-                    centeredSlides: true,
-                    spaceBetween: 10,
-                    initialSlide: 0
-                });
-            }, 200)
         });
 
     }
