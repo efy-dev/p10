@@ -20,7 +20,6 @@ public interface UserManager {
 
     User getUserByUserId(String userId);
 
-
     MyUser queryMyUser(String hql, LinkedHashMap<String, Object> param);
 
     MyUser getMyUserByUserId(String userId);

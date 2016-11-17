@@ -84,6 +84,16 @@ public class SigninController extends BaseController {
         return "/register";
     }
 
+    @RequestMapping({"forgetPassword"})
+    public String forgetPassword() {
+        return "/forgetPassword";
+    }
+
+    @RequestMapping({"/user/getCurrentUser"})
+    @ResponseBody
+    public MyUser getCurrentUser() {
+        return AuthorizationUtil.getMyUser();
+    }
 
     @RequestMapping({"signinUser"})
     public String signinUser(HttpServletRequest request) {
@@ -170,10 +180,7 @@ public class SigninController extends BaseController {
         return message != null;
     }
 
-    @RequestMapping({"forgetPassword"})
-    public String forgetPassword() {
-        return "/forgetPassword";
-    }
+
 
     @RequestMapping({"checkUserNameAndVerify"})
     public String checkUsernameAndVerify(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -249,11 +256,7 @@ public class SigninController extends BaseController {
         return "/wxRedirect";
     }
 
-    @RequestMapping({"/user/getCurrentUser"})
-    @ResponseBody
-    public MyUser getCurrentUser() {
-        return AuthorizationUtil.getMyUser();
-    }
+
 
 
     @RequestMapping({"/wl"})
