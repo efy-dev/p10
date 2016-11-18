@@ -412,7 +412,7 @@ public class OffLineProductController {
     @ResponseBody
     public Object modelpanelSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
         String id = request.getParameter("id");
-        String productModelId = request.getParameter("productId");
+        String productModelId = request.getParameter("productModelId");
         Panel panel;
         if (id != null && !"".equals(id)) {
             panel = (Panel) baseManager.getObject(Panel.class.getName(), id);

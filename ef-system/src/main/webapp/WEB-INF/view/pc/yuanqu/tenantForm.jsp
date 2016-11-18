@@ -52,11 +52,6 @@
         .file-list {
             z-index: 10;
         }
-
-        .org {
-            color: #FF6600;
-        }
-
     </style>
 </head>
 <body>
@@ -198,7 +193,7 @@
 
                 <div class="am-form-group">
                     <label for="latitude" class="am-u-sm-2 am-form-label">
-                        <span class="org">*</span> 纬度
+                        纬度
                     </label>
                     <div class="am-u-sm-10">
                         <input name="latitude" type="number" id="latitude"
@@ -207,7 +202,7 @@
                 </div>
                 <div class="am-form-group">
                     <label for="longitude" class="am-u-sm-2 am-form-label">
-                        <span class="org">*</span> 经度
+                        经度
                     </label>
                     <div class="am-u-sm-10">
                         <input name="longitude" id="longitude" type="number"
@@ -427,7 +422,8 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="taxRegistrationAttachment" name="taxRegistrationAttachment" type="file" accept="image/jpeg"
+                        <input id="taxRegistrationAttachment" name="taxRegistrationAttachment" type="file"
+                               accept="image/jpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -536,13 +532,13 @@
             {{ } }}
         </td>
         <td class="am-hide-sm-only">
-        {{ if( typeof imageText.imageList!= "undefined" && imageText.imageList!=null &&imageText.imageList.length > 0
-        ){}}
-        {{ for( var x=0; x < imageText.imageList.length; x++ ){ }}
+            {{ if( typeof imageText.imageList!= "undefined" && imageText.imageList!=null &&imageText.imageList.length > 0
+            ){}}
+            {{ for( var x=0; x < imageText.imageList.length; x++ ){ }}
             <a onclick="PubSub.publish('hotBase.new','{{=imageText.imageList[x].image.id}}')">
                 <img width="10%" src="{{=imageText.imageList[x].image.src}}" alt=""/>
             </a>
-        {{} } }}
+            {{} } }}
         </td>
     </tr>
     {{ } }}
@@ -551,7 +547,8 @@
 <script type="text/x-dot-template" id="main-tenant-panel">
     <div class="main-tenant-base">
         <ul class="am-nav am-nav-tabs am-nav-justify">
-            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="panelForm" id="panelForm">新的店内实景</a>
+            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="panelForm"
+                                     id="panelForm">新的店内实景</a>
             </li>
             <li><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="panelList">查看所有</a></li>
         </ul>
@@ -635,6 +632,8 @@
                            class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('productBase.new','{{=it.data.id}}')">跳过</a>
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('tenantList.render')">返回店铺列表</a>
                     </div>
                 </div>
             </fieldset>
@@ -735,7 +734,7 @@
 
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">
-                        <span class="org">*</span> 横坐标
+                        横坐标
                     </label>
                     <div class="am-u-sm-9">
                         <input name="abscissa" type="number" placeholder="横坐标"></input>
@@ -744,7 +743,7 @@
 
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">
-                        <span class="org">*</span> 纵坐标
+                        纵坐标
                     </label>
                     <div class="am-u-sm-9">
                         <input name="ordinate" type="number" placeholder="纵坐标"></input>
@@ -753,7 +752,7 @@
 
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">
-                        <span class="org">*</span> 商品规格
+                        商品规格
                     </label>
                     <div class="am-u-sm-9">
                         <input name="name" type="text" id="search"
@@ -928,6 +927,10 @@
                            class="am-btn am-btn-primary am-btn-lg">保存</a>
                         <a onclick="PubSub.publish('{{=it.name}}.submitAndNext','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">下一步关联大师</a>
+                        {{if(it.data!=null&&it.data.id!=null){}}
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('productMaster.render','{{=it.data.id}}')">跳过</a>
+                        {{}}}
                     </div>
                 </div>
             </fieldset>
@@ -1008,6 +1011,10 @@
                            onclick="PubSub.publish('productMasterWork.render','{{=it.productId}}')">< 上一步</a>
                         <a onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
+                        {{if(it.data!=null&&it.data.id!=null){}}
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('productModelPanel.new','{{=it.data.id}}')">跳过</a>
+                        {{}}}
                     </div>
                 </div>
             </fieldset>
@@ -1077,14 +1084,6 @@
             </tbody>
         </table>
 
-        <%--  <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
-              <a class="am-btn am-btn-primary am-btn-lg"
-                 onclick="PubSub.publish('productList.render')">完成</a>
-              <a class="am-btn am-btn-primary am-btn-lg"
-                 onclick="PubSub.publish('productModel.render','{{=it.data}}')">添加下一个商品规格</a>
-              <a class="am-btn am-btn-primary am-btn-lg"
-                 onclick="PubSub.publish('productBase.render','{{=it.data}}')">添加下一个商品</a>
-          </div>--%>
     </div>
 
     <div class="main-base" data-for="product-model-panelForm" data-type="tabs">
@@ -1094,8 +1093,7 @@
               method="post">
             <fieldset>
                 <legend><b>{{=it.productModelId}}</b> 的栏目列表（商品规格详情）</legend>
-                <input type="hidden" name="id" value="{{=it.data!=null&&it.data!=''&&it.data!=undefined?it.data:''}}">
-                <input type="hidden" name="productId"
+                <input type="hidden" name="productModelId"
                        value="{{=it.productModelId!=null&&it.productModelId!=''&&it.productModelId!=undefined?it.productModelId:''}}">
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">名称</label>
@@ -1142,8 +1140,6 @@
                            onclick="PubSub.publish('productModel.render','{{=it.productModelId}}')">< 上一步</a>
                         <a onclick="PubSub.publish('productModelPanel.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">添加</a>
-                        <%--  <a class="am-btn am-btn-primary am-btn-lg"
-                             onclick="PubSub.publish('{{=it.name}}.nextProductModel','{{=it.template}}-form')">去添加下一个商品规格</a>--%>
                     </div>
                 </div>
             </fieldset>
@@ -1184,7 +1180,7 @@
                         <button type="button" class="am-btn am-btn-default am-btn-sm">
                             选择文件
                         </button>
-                        <input id="product-imageList" name="imageList" type="file" multiple  accept="image/jpeg"
+                        <input id="product-imageList" name="imageList" type="file" multiple accept="image/jpeg"
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
@@ -1216,7 +1212,9 @@
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">关联作品</a>
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productMasterWork.render','{{=it.productId}}')">跳过</a>
+                           onclick="PubSub.publish('productModel.new','{{=it.productId}}')">跳过</a>
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('productModel.new','{{=it.productId}}')">返回商品列表</a>
                     </div>
                 </div>
             </fieldset>
@@ -1481,6 +1479,8 @@
                     <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品详情</a>
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('productPanel.render','{{=it.data.id}}')">跳过</a>
                     </div>
                 </div>
             </fieldset>
@@ -1531,6 +1531,8 @@
                     <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品规格</a>
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('productList.render','{{=it.data.tenant.id}}')">返回商品列表</a>
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('productModel.new','{{=it.data.id}}')">跳过</a>
                     </div>
@@ -2364,7 +2366,7 @@
         this.selectHide = function (msg, data) {
             $("[dot-template=" + this.productModelList + "]").hide();
         };
-        this.selectShow=function (msg, data) {
+        this.selectShow = function (msg, data) {
             $("[dot-template=" + this.productModelList + "]").show();
         };
         this.remove = function (msg, data) {
@@ -2450,7 +2452,7 @@
             $("[dot-template=" + this.masterList + "]").hide();
         };
 
-        this.selectShow=function (msg, data) {
+        this.selectShow = function (msg, data) {
             $("[dot-template=" + this.masterList + "]").show();
         };
 
@@ -2783,7 +2785,7 @@
         this.selectHide = function (msg, data) {
             $("[dot-template=" + this.masterList + "]").hide();
         };
-        this.selectShow=function (msg, data) {
+        this.selectShow = function (msg, data) {
             $("[dot-template=" + this.masterList + "]").show();
         };
 

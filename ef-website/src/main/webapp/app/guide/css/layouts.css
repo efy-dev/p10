@@ -158,7 +158,7 @@ img{width: 100%;}
 .header .layer .icon-home{background-position: 0 -80px;}
 .header .layer .icon-center{background-position: -15px -80px;}
 /*--//End header--*/.menu{width: 100%;height: 109px;padding: 0 16px;margin-top: 20px;text-align: center;}
-.menu a{width: 109px;height: 109px;position: relative;border: 1px solid #dbdbdb;}
+.menu a{width: 30%;height: 109px;position: relative;border: 1px solid #dbdbdb;}
 .menu a:nth-child(1){float: left;}
 .menu a:nth-child(2){display: inline-block;}
 .menu a:nth-child(3){float: right;}
