@@ -103,9 +103,14 @@ public class Image implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-    /*@JsonIgnore*/
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "image")
-    public List<HotSpot> getHotSpotList() {return hotSpotList;}
 
-    public void setHotSpotList(List<HotSpot> hotSpotList) {this.hotSpotList = hotSpotList;}
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "image")
+    public List<HotSpot> getHotSpotList() {
+        return hotSpotList;
+    }
+
+    public void setHotSpotList(List<HotSpot> hotSpotList) {
+        this.hotSpotList = hotSpotList;
+    }
 }

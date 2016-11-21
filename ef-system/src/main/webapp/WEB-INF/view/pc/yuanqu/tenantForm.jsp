@@ -1213,8 +1213,6 @@
                            onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">关联作品</a>
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('productModel.new','{{=it.productId}}')">跳过</a>
-                        <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productModel.new','{{=it.productId}}')">返回商品列表</a>
                     </div>
                 </div>
             </fieldset>
@@ -2188,6 +2186,7 @@
         this.totalRecords = "";
 
         this.nextPage = function (msg, data) {
+            this.totalPages = this.totalPages == 0 ? 1 : this.totalPages;
             this.index = this.index + 1 > this.totalPages ? this.totalPages : this.index + 1;
             $("#tenant-index").html("第" + this.index + "页");
             this.body();
@@ -2342,6 +2341,7 @@
                 $("[data=panelHotList]").click();
                 document.getElementById(data).reset();
                 $("#my-modal-loading").modal("close");
+                $("#productModelId").val("");
             });
             return false;
         };
@@ -3050,6 +3050,7 @@
         this.totalPages = null;
 
         this.nextPage = function (msg, data) {
+            this.totalPages = this.totalPages == 0 ? 1 : this.totalPages;
             this.index = this.index + 1 > this.totalPages ? this.totalPages : this.index + 1;
             $("#product-index").html("第" + this.index + "页");
             this.body();
