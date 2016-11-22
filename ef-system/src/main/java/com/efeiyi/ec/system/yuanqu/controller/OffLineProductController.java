@@ -79,7 +79,7 @@ public class OffLineProductController {
         try {
             String id = request.getParameter("id");
             if (id != null && !id.equals("")) {
-                baseManager.delete(Product.class.getName(), id);
+                baseManager.remove(Product.class.getName(), id);
             }
         } catch (Exception e) {
             jsonObject.put("code", "1");
@@ -95,7 +95,7 @@ public class OffLineProductController {
         try {
             String id = request.getParameter("id");
             if (id != null && !id.equals("")) {
-                baseManager.delete(ProductModel.class.getName(), id);
+                baseManager.remove(ProductModel.class.getName(), id);
             }
         } catch (Exception e) {
             jsonObject.put("code", "1");
@@ -562,7 +562,7 @@ public class OffLineProductController {
                 .createQRCode(582, 582)
                 .assembleLogo("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/logo.png")
                 .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/background.jpg", 123, 92)
-                .getResponseEntityResult(id + "jpg");
+                .getResponseEntityResult(id + ".jpg");
     }
 
 }

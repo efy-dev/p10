@@ -1,12 +1,8 @@
 package com.efeiyi.ec.website.product.controller;
 
 import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.organization.model.HotSpot;
-import com.efeiyi.ec.organization.model.Image;
-import com.efeiyi.ec.organization.model.Panel;
-import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.product.model.ProductModelColumn;
 import com.efeiyi.ec.tenant.model.*;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.wiki.model.Artistry;
@@ -14,8 +10,8 @@ import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.taglib.PageEntity;
+import com.ming800.core.util.DateUtil;
 import net.sf.json.JSONObject;
-import org.hibernate.context.TenantIdentifierMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/8/18.
@@ -334,6 +327,95 @@ public class TenantController {
                 return hotSpots;
             }
             return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
+
+    @RequestMapping({"/tenant/saveUserOrder"})
+    @ResponseBody
+    public Object saveUserOrder(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String name = request.getParameter("name");
+            String count = request.getParameter("count");
+            String phone = request.getParameter("phone");
+            String date = request.getParameter("date");
+            String message = request.getParameter("message");
+            String tenantId = request.getParameter("tenantId");
+            Order order = new Order();
+            order.setStatus("1");
+            order.setName(name);
+            if (date != null && !date.equals("")) {
+                order.setDate(DateUtil.parseDate(date));
+            }
+            order.setMessage(message);
+            order.setPhone(phone);
+            order.setCount(count);
+            TenantOrder tenantOrder = new TenantOrder();
+            List<TenantOrder> tenantOrders = new ArrayList<TenantOrder>();
+            if (tenantId != null && !tenantId.equals("")) {
+                tenantOrder.setBigTenant((BigTenant) baseManager.getObject(BigTenant.class.getName(), tenantId));
+                tenantOrder.setStatus("1");
+                tenantOrder.setOrder(order);
+                tenantOrders.add(tenantOrder);
+                baseManager.saveOrUpdate(TenantOrder.class.getName(), tenantOrder);
+                order.setTenantOrders(tenantOrders);
+            } else {
+                jsonObject.put("code", "1");
+            }
+            if (AuthorizationUtil.isAuthenticated()) {
+                String userId = AuthorizationUtil.getMyUser().getId();
+                order.setBigUser((BigUser) baseManager.getObject(BigUser.class.getName(), userId));
+            } else {
+                jsonObject.put("code", "1");
+            }
+            baseManager.saveOrUpdate(Order.class.getName(), order);
+            jsonObject.put("order", order);
+            return jsonObject;
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
+
+    @RequestMapping({"/tenant/getOrderById"})
+    @ResponseBody
+    public Object getOrderById(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String id = request.getParameter("id");
+            if (id != null && !id.equals("")) {
+                return baseManager.getObject(Order.class.getName(), id);
+            } else {
+                jsonObject.put("code", "1");
+                return jsonObject;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonObject.put("code", 1);
+            return jsonObject;
+        }
+    }
+
+    @RequestMapping({"/tenant/getOrdersByTenantId"})
+    @ResponseBody
+    public Object getOrdersByTenantId(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String tenantId = request.getParameter("id");
+            String hql = "select obj form TenantOrder obj where obj.status!='0' and obj.bigTenant.id=:id";
+            LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+            param.put("id", tenantId);
+            if (tenantId != null && !tenantId.equals("")) {
+                return baseManager.listObject(hql.toString(), param);
+            } else {
+                jsonObject.put("code", "1");
+                return jsonObject;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             jsonObject.put("code", "1");

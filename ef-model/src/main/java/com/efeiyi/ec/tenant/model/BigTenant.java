@@ -1,9 +1,6 @@
 package com.efeiyi.ec.tenant.model;
 
-import com.efeiyi.ec.organization.model.AddressCity;
-import com.efeiyi.ec.organization.model.AddressProvince;
-import com.efeiyi.ec.organization.model.Image;
-import com.efeiyi.ec.organization.model.UserTenant;
+import com.efeiyi.ec.organization.model.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ming800.core.base.model.BaseTenant;
@@ -68,6 +65,17 @@ public class BigTenant implements Serializable, BaseTenant {
 
     private String audio;
     private List<UserTenant> userTenant;
+    private List<TenantOrder> tenantOrders;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bigTenant")
+    public List<TenantOrder> getTenantOrders() {
+        return tenantOrders;
+    }
+
+    public void setTenantOrders(List<TenantOrder> tenantOrders) {
+        this.tenantOrders = tenantOrders;
+    }
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
@@ -106,7 +114,7 @@ public class BigTenant implements Serializable, BaseTenant {
         this.longitude = longitude;
     }
 
-//    @JsonIgnore
+    //    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
     public List<TenantProject> getTenantProjectList() {
         return tenantProjectList;
@@ -126,7 +134,7 @@ public class BigTenant implements Serializable, BaseTenant {
         this.pictureUrl = pictureUrl;
     }
 
-//    @JsonIgnore
+    //    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
     public List<TenantMaster> getTenantMasterList() {
         return tenantMasterList;

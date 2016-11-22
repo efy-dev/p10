@@ -79,7 +79,7 @@ public class OffLineTenantController {
         try {
             String id = request.getParameter("id");
             if (id != null && !id.equals("")) {
-                baseManager.delete(Panel.class.getName(), id);
+                baseManager.remove(Panel.class.getName(), id);
             }
         } catch (Exception e) {
             jsonObject.put("code", "1");
@@ -95,7 +95,7 @@ public class OffLineTenantController {
         try {
             String id = request.getParameter("id");
             if (id != null && !id.equals("")) {
-                baseManager.delete(HotSpot.class.getName(), id);
+                baseManager.remove(HotSpot.class.getName(), id);
             }
         } catch (Exception e) {
             jsonObject.put("code", "1");
