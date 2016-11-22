@@ -44,38 +44,6 @@ public class HomeController {
     private BaseManager baseManager;
 
 
-    /*@RequestMapping({"/qrcode/redirect/{dataType}/{dataId}"})
-    public String appRedirect(@PathVariable String dataType, @PathVariable String dataId, HttpServletRequest request) throws Exception {
-        String redirect = "";
-        if (dataType.equals("tenant")) {
-            BigTenant bigTenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), dataId);
-            redirect = "http://www.efeiyi.com/app/tenant_details.html?tenantId=" + dataId + "&title=" + URLEncoder.encode(bigTenant.getName(), "utf-8");
-        } else if (dataType.equals("product")) {
-            ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), dataId);
-            redirect = "http://www.efeiyi.com/app/product_details.html?productId=" + dataId + "&title=" + URLEncoder.encode(productModel.getName(), "utf-8");
-        } else if (dataType.equals("panel")) {
-            Panel panel = (Panel) baseManager.getObject(Panel.class.getName(), dataId);
-            redirect = "http://www.efeiyi.com/app/pannel_details.html.html?panelId=" + dataId + "&title=" + URLEncoder.encode(panel.getName(), "utf-8");
-        }
-        return "redirect:" + redirect;
-    }*/
-
-    @RequestMapping({"/qrcode/sample/{dataType}/{dataId}"})
-    public String appRedirectSampleUrl(@PathVariable String dataType, @PathVariable String dataId, HttpServletRequest request) throws Exception {
-        String redirect = "";
-        if (dataType.equals("0")) {
-            BigTenant bigTenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), dataId);
-            redirect = "http://www.efeiyi.com/app/tenant_details.html?tenantId=" + dataId + "&title=" + URLEncoder.encode(bigTenant.getName(), "utf-8");
-        } else if (dataType.equals("1")) {
-            ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), dataId);
-            redirect = "http://www.efeiyi.com/app/product_details.html?productId=" + dataId + "&title=" + URLEncoder.encode(productModel.getName(), "utf-8");
-        } else if (dataType.equals("2")) {
-            Panel panel = (Panel) baseManager.getObject(Panel.class.getName(), dataId);
-            redirect = "http://www.efeiyi.com/app/pannel_details.html.html?panelId=" + dataId + "&title=" + URLEncoder.encode(panel.getName(), "utf-8");
-        }
-        return "redirect:" + redirect;
-    }
-
 
     @RequestMapping({"/datafrom1.do"})
     @ResponseBody

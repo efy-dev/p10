@@ -181,7 +181,6 @@ public class SigninController extends BaseController {
     }
 
 
-
     @RequestMapping({"checkUserNameAndVerify"})
     public String checkUsernameAndVerify(HttpServletRequest request, HttpServletResponse response, Model model) {
         try {
@@ -258,55 +257,6 @@ public class SigninController extends BaseController {
 
 
 
-
-    @RequestMapping({"/wl"})
-    public String login(HttpServletRequest request) throws Exception {
-        String result;
-        String redirect = request.getParameter("state");
-        String code = request.getParameter("code");
-        String wxOpenIdUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
-        result = HttpUtil.getHttpResponse(wxOpenIdUrl, null);
-        JSONObject jsonObject = JSONObject.fromObject(result);
-        String wxInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + jsonObject.getString("access_token") + "&openid=" + jsonObject.getString("openid") + "&lang=zh_CN";
-        String userInfo = HttpUtil.getHttpResponse(wxInfoUrl, null);
-        baseManager.saveOrUpdate(WxCalledRecord.class.getName(), new WxCalledRecord("wxInfo", userInfo, redirect));
-        authenticate(userInfo);
-        return "redirect:http://www.efeiyi.com/qrcode/sample/" + URLDecoder.decode(redirect, "UTF-8");
-    }
-
-
-    private MyUser authenticate(String userInfo) {
-        JSONObject wxInfo = JSONObject.fromObject(userInfo);
-        Consumer consumer = consumerService.getConsumerOrNullByUnionid(wxInfo.get("unionid").toString());
-        MyUser myUser = consumerService.getMyUserOrNullByConsumer(consumer);
-        if (myUser == null) {
-            consumer = consumerService.saveOrUpdateConsumer(wxInfo.get("nickname").toString(), wxInfo.get("unionid").toString(), wxInfo.get("city").toString(), wxInfo.get("headimgurl").toString(), Integer.parseInt(wxInfo.get("sex").toString()));
-            myUser = consumerService.getMyUserOrNullByConsumer(consumer);
-        }
-        try {
-            AuthenticationManager am = new SampleAuthenticationManager();
-            Authentication authentication = new UsernamePasswordAuthenticationToken(myUser, myUser.getPassword());
-            Authentication result = am.authenticate(authentication);
-            SecurityContextHolder.getContext().setAuthentication(result);
-        } catch (Exception e) {
-            return null;
-        }
-        return myUser;
-    }
-
-
-    private static class SampleAuthenticationManager implements AuthenticationManager {
-        static final List<GrantedAuthority> AUTHORITIES = new ArrayList<>();
-
-        static {
-            AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
-        }
-
-        public Authentication authenticate(Authentication auth) throws AuthenticationException {
-            return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
-                    auth.getCredentials(), AUTHORITIES);
-        }
-    }
 
 }
 
