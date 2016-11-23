@@ -348,30 +348,33 @@ public class TenantController {
             Order order = new Order();
             order.setStatus("1");
             order.setName(name);
-            if (date != null && !date.equals("")) {
-                order.setDate(DateUtil.parseDate(date));
-            }
+            order.setDate(date);
             order.setMessage(message);
             order.setPhone(phone);
             order.setCount(count);
             TenantOrder tenantOrder = new TenantOrder();
             List<TenantOrder> tenantOrders = new ArrayList<TenantOrder>();
             if (tenantId != null && !tenantId.equals("")) {
-                tenantOrder.setBigTenant((BigTenant) baseManager.getObject(BigTenant.class.getName(), tenantId));
+                BigTenant bigTenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), tenantId);
+                tenantOrder.setBigTenant(bigTenant);
                 tenantOrder.setStatus("1");
                 tenantOrder.setOrder(order);
                 tenantOrders.add(tenantOrder);
-                baseManager.saveOrUpdate(TenantOrder.class.getName(), tenantOrder);
                 order.setTenantOrders(tenantOrders);
+                String address = bigTenant == null ? "" : bigTenant.getAddress();
+                order.setAddress(address);
             } else {
                 jsonObject.put("code", "1");
+                return jsonObject;
             }
             if (AuthorizationUtil.isAuthenticated()) {
                 String userId = AuthorizationUtil.getMyUser().getId();
                 order.setBigUser((BigUser) baseManager.getObject(BigUser.class.getName(), userId));
             } else {
                 jsonObject.put("code", "1");
+                return jsonObject;
             }
+            baseManager.saveOrUpdate(TenantOrder.class.getName(), tenantOrder);
             baseManager.saveOrUpdate(Order.class.getName(), order);
             jsonObject.put("order", order);
             return jsonObject;
@@ -396,7 +399,7 @@ public class TenantController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            jsonObject.put("code", 1);
+            jsonObject.put("code", "1");
             return jsonObject;
         }
     }
@@ -407,11 +410,12 @@ public class TenantController {
         JSONObject jsonObject = new JSONObject();
         try {
             String tenantId = request.getParameter("id");
-            String hql = "select obj form TenantOrder obj where obj.status!='0' and obj.bigTenant.id=:id";
+            String hql = "select obj from TenantOrder obj where obj.status!='0' and obj.bigTenant.id=:id";
             LinkedHashMap<String, Object> param = new LinkedHashMap<>();
             param.put("id", tenantId);
             if (tenantId != null && !tenantId.equals("")) {
-                return baseManager.listObject(hql.toString(), param);
+                List<TenantOrder> tenantOrders = (List<TenantOrder>) baseManager.listObject(hql.toString(), param);
+                return tenantOrders;
             } else {
                 jsonObject.put("code", "1");
                 return jsonObject;
@@ -422,4 +426,5 @@ public class TenantController {
             return jsonObject;
         }
     }
+
 }

@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -13,17 +14,19 @@ import java.util.List;
  * Created by Administrator on 2016/11/22.
  */
 @Entity
-@Table(name = "order")
+@Table(name = "garden_order")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class Order {
+public class Order implements Serializable {
     private String id;
     private String name;
     private String phone;
-    private Date date;
+    private String date;
     private String message;
     private BigUser bigUser;
     private String status;
     private String count;
+    private String address;
+
     private List<TenantOrder> tenantOrders;
 
     @Id
@@ -44,6 +47,15 @@ public class Order {
 
     public void setCount(String count) {
         this.count = count;
+    }
+
+    @Column(name = "address")
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @JsonIgnore
@@ -75,11 +87,11 @@ public class Order {
     }
 
     @Column(name = "date")
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

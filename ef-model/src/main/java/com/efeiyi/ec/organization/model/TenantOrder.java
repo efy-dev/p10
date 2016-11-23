@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2016/11/22.
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tenant_order")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class TenantOrder {
+public class TenantOrder implements Serializable {
     private String id;
     private String status;
     private Order order;
@@ -53,7 +54,7 @@ public class TenantOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
-    @JsonIgnore
+   /* @JsonIgnore*/
     public BigTenant getBigTenant() {
         return bigTenant;
     }
