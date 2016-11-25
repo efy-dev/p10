@@ -5,12 +5,12 @@ import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.tenant.model.*;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
+import com.efeiyi.ec.website.base.util.OrderNumberGenerator;
 import com.efeiyi.ec.wiki.model.Artistry;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.DateUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -352,32 +352,20 @@ public class TenantController {
             order.setMessage(message);
             order.setPhone(phone);
             order.setCount(count);
+            order.setOrderNumber(OrderNumberGenerator.generateShortUuid());
             TenantOrder tenantOrder = new TenantOrder();
-            List<TenantOrder> tenantOrders = new ArrayList<TenantOrder>();
             if (tenantId != null && !tenantId.equals("")) {
                 BigTenant bigTenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), tenantId);
                 tenantOrder.setBigTenant(bigTenant);
                 tenantOrder.setStatus("1");
                 tenantOrder.setOrder(order);
-                tenantOrders.add(tenantOrder);
-                order.setTenantOrders(tenantOrders);
-                String address = bigTenant == null ? "" : bigTenant.getAddress();
-                order.setAddress(address);
             } else {
                 jsonObject.put("code", "1");
                 return jsonObject;
             }
-            if (AuthorizationUtil.isAuthenticated()) {
-                String userId = AuthorizationUtil.getMyUser().getId();
-                order.setBigUser((BigUser) baseManager.getObject(BigUser.class.getName(), userId));
-            } else {
-                jsonObject.put("code", "1");
-                return jsonObject;
-            }
-            baseManager.saveOrUpdate(TenantOrder.class.getName(), tenantOrder);
             baseManager.saveOrUpdate(Order.class.getName(), order);
-            jsonObject.put("order", order);
-            return jsonObject;
+            baseManager.saveOrUpdate(TenantOrder.class.getName(), tenantOrder);
+            return order;
         } catch (Exception e) {
             e.printStackTrace();
             jsonObject.put("code", "1");

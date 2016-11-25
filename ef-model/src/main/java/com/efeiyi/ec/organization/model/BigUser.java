@@ -66,17 +66,6 @@ public class BigUser {
     protected Date lastLoginDatetime; //最后一次登陆时间
     protected BigDecimal redPacket;//红包（相当于钱包）
     protected List<UserTenant> userTenant;
-    protected List<Order> orders;
-
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bigUser")
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")

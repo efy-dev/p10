@@ -46,7 +46,7 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
 
-//        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Origin", "*");
 
         String url = request.getRequestURL().toString();
 

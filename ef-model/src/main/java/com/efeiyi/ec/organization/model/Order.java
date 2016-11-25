@@ -7,7 +7,6 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,10 +21,10 @@ public class Order implements Serializable {
     private String phone;
     private String date;
     private String message;
-    private BigUser bigUser;
     private String status;
     private String count;
-    private String address;
+    private String idCard;
+    private String orderNumber;
 
     private List<TenantOrder> tenantOrders;
 
@@ -40,6 +39,24 @@ public class Order implements Serializable {
         this.id = id;
     }
 
+    @Column(name = "orderNumber")
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    @Column(name = "idCard")
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
     @Column(name = "count")
     public String getCount() {
         return count;
@@ -47,15 +64,6 @@ public class Order implements Serializable {
 
     public void setCount(String count) {
         this.count = count;
-    }
-
-    @Column(name = "address")
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     @JsonIgnore
@@ -104,17 +112,6 @@ public class Order implements Serializable {
         this.message = message;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    public BigUser getBigUser() {
-        return bigUser;
-    }
-
-    public void setBigUser(BigUser bigUser) {
-        this.bigUser = bigUser;
-    }
-
     @Column(name = "status")
     @Where(clause = "status=1")
     public String getStatus() {
@@ -131,10 +128,11 @@ public class Order implements Serializable {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
-                ", date=" + date +
+                ", date='" + date + '\'' +
                 ", message='" + message + '\'' +
-                ", bigUser=" + bigUser +
                 ", status='" + status + '\'' +
+                ", count='" + count + '\'' +
+                ", idCard='" + idCard + '\'' +
                 ", tenantOrders=" + tenantOrders +
                 '}';
     }
