@@ -321,7 +321,7 @@ public class TenantController {
             String id = request.getParameter("id");
             LinkedHashMap<String, Object> param = new LinkedHashMap<>();
             if (null != id && !"".equals(id)) {
-                String hql = "select obj from HotSpot obj where obj.image.id=:imageId";
+                String hql = "select obj from HotSpot obj where obj.image.id=:imageId and obj.status!='0'";
                 param.put("imageId", id);
                 List<HotSpot> hotSpots = (List<HotSpot>) baseManager.listObject(hql, param);
                 return hotSpots;
@@ -345,6 +345,7 @@ public class TenantController {
             String date = request.getParameter("date");
             String message = request.getParameter("message");
             String tenantId = request.getParameter("tenantId");
+            String idCard = request.getParameter("idCard");
             Order order = new Order();
             order.setStatus("1");
             order.setName(name);
@@ -352,6 +353,7 @@ public class TenantController {
             order.setMessage(message);
             order.setPhone(phone);
             order.setCount(count);
+            order.setIdCard(idCard);
             order.setOrderNumber(OrderNumberGenerator.generateShortUuid());
             TenantOrder tenantOrder = new TenantOrder();
             if (tenantId != null && !tenantId.equals("")) {

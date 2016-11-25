@@ -95,7 +95,7 @@ public class HotSpot implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id")
-    /*@JsonIgnore*/
+    @JsonIgnore
     public Image getImage() {
         return image;
     }
@@ -104,16 +104,4 @@ public class HotSpot implements Serializable {
         this.image = image;
     }
 
-    @Override
-    public String toString() {
-        return "HotSpot{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", abscissa=" + abscissa +
-                ", ordinate=" + ordinate +
-                ", status='" + status + '\'' +
-                ", createDateTime=" + createDateTime +
-                ", productModel=" + productModel +
-                '}';
-    }
 }

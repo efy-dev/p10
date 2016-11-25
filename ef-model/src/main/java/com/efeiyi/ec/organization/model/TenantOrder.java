@@ -63,13 +63,4 @@ public class TenantOrder implements Serializable {
         this.bigTenant = bigTenant;
     }
 
-    @Override
-    public String toString() {
-        return "TenantOrder{" +
-                "id='" + id + '\'' +
-                ", status='" + status + '\'' +
-                ", order=" + order +
-                ", bigTenant=" + bigTenant +
-                '}';
-    }
 }

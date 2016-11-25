@@ -122,18 +122,4 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", date='" + date + '\'' +
-                ", message='" + message + '\'' +
-                ", status='" + status + '\'' +
-                ", count='" + count + '\'' +
-                ", idCard='" + idCard + '\'' +
-                ", tenantOrders=" + tenantOrders +
-                '}';
-    }
 }

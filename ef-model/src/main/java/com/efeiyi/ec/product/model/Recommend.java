@@ -1,7 +1,10 @@
 package com.efeiyi.ec.product.model;
 
 import com.efeiyi.ec.organization.model.Image;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -40,6 +43,7 @@ public class Recommend {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public Image getImage() {
         return image;
     }

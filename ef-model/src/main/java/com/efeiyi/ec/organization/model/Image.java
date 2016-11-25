@@ -3,6 +3,7 @@ package com.efeiyi.ec.organization.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -104,8 +105,9 @@ public class Image implements Serializable {
         this.createTime = createTime;
     }
 
-    @JsonIgnore
+    /*@JsonIgnore*/
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "image")
+    @Where(clause = "status=1")
     public List<HotSpot> getHotSpotList() {
         return hotSpotList;
     }
