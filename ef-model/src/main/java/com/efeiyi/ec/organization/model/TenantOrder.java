@@ -41,7 +41,7 @@ public class TenantOrder implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-    @JsonIgnore
+    /*@JsonIgnore*/
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     public Order getOrder() {

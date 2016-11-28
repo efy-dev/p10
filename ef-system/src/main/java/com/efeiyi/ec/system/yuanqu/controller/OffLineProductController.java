@@ -167,7 +167,6 @@ public class OffLineProductController {
         product.setCreateDateTime(new Date());
         product.setStatus(Product.PRODUCT_STATUS_DOWN);
         product.setType(Product.PRODUCT_TYPE_OFFLINE);
-        baseManager.saveOrUpdate(Product.class.getName(), product);
         String audioUrl = uploadImage(multipartRequest.getFile("audio"));
         if (!"".equals(audioUrl)) {
             List<Image> oAudio = baseManager.listObject("select obj from Image obj where obj.status='1' and obj.type='2' and obj.owner='" + product.getId() + "'");
@@ -303,6 +302,25 @@ public class OffLineProductController {
         return productModel;
     }
 
+    @RequestMapping({"/getPanelById"})
+    @ResponseBody
+    public Object getPanelById(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String id = request.getParameter("id");
+            if (null != id && !"".equals(id)) {
+                return baseManager.getObject(Panel.class.getName(), id);
+            } else {
+                jsonObject.put("code", "1");
+                return jsonObject;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonObject.put("code", "1");
+            return jsonObject;
+        }
+    }
+
     @RequestMapping({"/getPanelListByProductModel"})
     @ResponseBody
     public Object getPanelListByProductModel(HttpServletRequest request) {
@@ -413,6 +431,13 @@ public class OffLineProductController {
     public Object modelpanelSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
         String id = request.getParameter("id");
         String productModelId = request.getParameter("productModelId");
+        List<String> ids = new ArrayList();
+        String imageHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='1'";
+        LinkedHashMap<String, Object> imagesParam = new LinkedHashMap<>();
+        imagesParam.put("panelId", id);
+        String audioHql = "select obj from Image obj where obj.owner=:panelId and obj.status!='0' and obj.type='2'";
+        LinkedHashMap<String, Object> audioParam = new LinkedHashMap<>();
+        audioParam.put("panelId", id);
         Panel panel;
         if (id != null && !"".equals(id)) {
             panel = (Panel) baseManager.getObject(Panel.class.getName(), id);
@@ -426,32 +451,52 @@ public class OffLineProductController {
         panel.setName(request.getParameter("name"));
         panel.setContent(request.getParameter("content"));
         baseManager.saveOrUpdate(Panel.class.getName(), panel);
-        for (MultipartFile multipartFile : multipartRequest.getFiles("imageList")) {
-            String oName = multipartFile.getOriginalFilename();
-            String nName;
-            try {
-                nName = System.currentTimeMillis() + "" + (int) (Math.random() * 1000000) + "." + oName.split("\\.")[1];
-            } catch (Exception e) {
-                continue;
+        if (multipartRequest.getFiles("imageList") != null && multipartRequest.getFiles("imageList").size() > 0) {
+            List<ImagePanel> imagePanels = baseManager.listObject(imageHql, imagesParam);
+            if (imagePanels != null && imagePanels.size() > 0) {
+                for (ImagePanel imagePanel : imagePanels) {
+                    ids.add(imagePanel.getId());
+                }
+                if (ids != null && ids.size() > 0) {
+                    baseManager.batchDelete(ImagePanel.class.getName(), ids.toArray(new String[ids.size()]));
+                }
             }
-            String url = "image/" + nName;
-            aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
-            String fullUrl = PConst.OSS_EF_WIKI_HOST + url;
-            Image image = new Image();
-            image.setStatus("1");
-            image.setType("1");
-            image.setOwner(panel.getId());
-            image.setCreateTime(new Date());
-            image.setSrc(fullUrl);
-            ImagePanel imagePanel = new ImagePanel();
-            imagePanel.setImage(image);
-            imagePanel.setPanel(panel);
-            baseManager.saveOrUpdate(Image.class.getName(), image);
-            baseManager.saveOrUpdate(ImagePanel.class.getName(), imagePanel);
+            for (MultipartFile multipartFile : multipartRequest.getFiles("imageList")) {
+                String oName = multipartFile.getOriginalFilename();
+                String nName;
+                try {
+                    nName = System.currentTimeMillis() + "" + (int) (Math.random() * 1000000) + "." + oName.split("\\.")[1];
+                } catch (Exception e) {
+                    continue;
+                }
+                String url = "image/" + nName;
+                aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
+                String fullUrl = PConst.OSS_EF_WIKI_HOST + url;
+                Image image = new Image();
+                image.setStatus("1");
+                image.setType("1");
+                image.setOwner(panel.getId());
+                image.setCreateTime(new Date());
+                image.setSrc(fullUrl);
+                ImagePanel imagePanel = new ImagePanel();
+                imagePanel.setImage(image);
+                imagePanel.setPanel(panel);
+                baseManager.saveOrUpdate(Image.class.getName(), image);
+                baseManager.saveOrUpdate(ImagePanel.class.getName(), imagePanel);
+            }
         }
-
         MultipartFile multipartFile = multipartRequest.getFile("media");
         if (multipartFile != null) {
+            List<Image> audios = baseManager.listObject(audioHql, audioParam);
+            if (audios != null && audios.size() > 0) {
+                ids.clear();
+                for (Image audio : audios) {
+                    ids.add(audio.getId());
+                }
+                if (ids != null && ids.size() > 0) {
+                    baseManager.batchDelete(Image.class.getName(), ids.toArray(new String[audios.size()]));
+                }
+            }
             String oName = multipartFile.getOriginalFilename();
             String nName;
             String fullUrl = null;
@@ -475,7 +520,6 @@ public class OffLineProductController {
         }
         return panel;
     }
-
 
     @RequestMapping({"/getProjectList"})
     @ResponseBody
