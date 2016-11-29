@@ -3274,6 +3274,8 @@
                 ajaxRequest("/yuanqu/product/getProductModelById", {id: this.productModelId}, function (responseData) {
                     this.data = responseData;
                     renderTemplate(this.template, this);
+                    $("#panelIntroduction").val("");
+                    $("#panelName").val("");
                 }.bind(this));
             }
             this.show();
