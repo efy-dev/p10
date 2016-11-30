@@ -377,7 +377,7 @@ public class OffLineProductController {
     public Object modelpanelSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
         String id = request.getParameter("id");
         String productModelId = request.getParameter("productModelId");
-        String imageHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='1'";
+        String imageHql = "select obj from ImagePanel obj where obj.panel.id=:panelId";
         LinkedHashMap<String, Object> imagesParam = new LinkedHashMap<>();
         imagesParam.put("panelId", id);
         String audioHql = "select obj from Image obj where obj.owner=:id and obj.status!='0' and obj.type='2'";
@@ -495,7 +495,7 @@ public class OffLineProductController {
                 .getResponseEntityResult(id + ".jpg");
     }
 
-    /*商品规格详情和商品详情编辑时先清空之前的关联关系，避免图片累加*/
+    /*商品规格详情和商品详情编辑提交时，避免图片累加*/
 
     public void cascadeRemove(String hql, LinkedHashMap param, Class clazz) throws Exception {
         List<String> ids = new ArrayList<>();

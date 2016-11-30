@@ -233,7 +233,7 @@ public class TenantController {
     public Object getImageTextListByTenant(HttpServletRequest request) {
         try {
             String id = request.getParameter("id");
-            String hql = "select obj from " + Panel.class.getName() + " obj where obj.owner=:id";
+            String hql = "select obj from " + Panel.class.getName() + " obj where obj.owner=:id and obj.status!='0'";
             LinkedHashMap<String, Object> param = new LinkedHashMap<>();
             param.put("id", id);
             return baseManager.listObject(hql, param);

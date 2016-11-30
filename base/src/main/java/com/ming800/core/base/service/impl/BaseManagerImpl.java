@@ -220,7 +220,7 @@ public class BaseManagerImpl implements BaseManager {
         if (idArray == null || idArray.length == 0) {
             return 0;
         } else {
-            StringBuilder queryStrBuilder = new StringBuilder("update " + model + " set theStatus = 0 where id in (:ids)");
+            StringBuilder queryStrBuilder = new StringBuilder("update " + model + " set status = 0 where id in (:ids)");
             LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
             queryParamMap.put("ids", idArray);
             return xdoDao.execteBulk(queryStrBuilder.toString(), queryParamMap);

@@ -63,7 +63,7 @@ public class Panel implements Serializable {
         this.content = content;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "media_id")
     public Image getMedia() {
         return media;
