@@ -1,6 +1,6 @@
 //var api_url = 'http://192.168.1.10';
-// var api_url = 'http://192.168.1.72';
 var api_url = '';
+// var api_url = 'http://192.168.1.72';
 var PageVariable = {
     template: {
         homeRecommendList: "home-recommend-list",
@@ -14,7 +14,8 @@ var PageVariable = {
         productList: "product-list",
         tenantList: "tenant-list",
         tenantAudioList: "tenant-audio-list",
-        panelBase: "panel-base"
+        panelBase: "panel-base",
+        tenantAppointment: "tenant-appointment"
     },
     service: {
         login: "/wx/login",
@@ -28,7 +29,10 @@ var PageVariable = {
         viewProductModelById: api_url + "/product/getProductModelById",
         listProductModelPanel: api_url + "/product/getColumnListByProductModel",
         currentUser: api_url + "/user/getCurrentUser",
-        panelById: api_url + "/tenant/getPanelById"
+        panelById: api_url + "/tenant/getPanelById",
+        saveUserOrder: api_url + "/tenant/saveUserOrder",  //提交预约信息
+        getOrderById: api_url + "/tenant/getOrderById",  //获取预约信息
+        hasArtistry: api_url + "/project/hasArtistry"
     },
 
     currentUser: null,
@@ -45,7 +49,8 @@ var PageVariable = {
     imageTextList: [],
     imageText: {},
     recommendList: [],
-    panelList: [],
+    panelList: {},  //店铺实景
+    appointment: {},
     imageStyle: {},
     currentAudio: null,
     audioList: [],
@@ -224,7 +229,7 @@ function getRecommendList(param, limit, offset, callback) {
 }
 
 /**
- * @param id
+ * @param 店铺实景
  * @param callback
  */
 function getPanelById(id, callback) {
@@ -240,5 +245,35 @@ function getPanelById(id, callback) {
     requestParam.id = id;
     ajaxRequest(PageVariable.service.panelById, requestParam, success);
 }
+
+
+
+/**
+ * @param 店铺预约
+ * @param callback
+ */
+function getOrderById(id, callback) {
+    var success = function (data) {
+        PageVariable.appointment = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.id = id;
+    ajaxRequest(PageVariable.service.getOrderById, requestParam, success);
+}
+
+
+function hasArtistry(projectId, callback) {
+    var success = function (data) {
+        PageVariable.hasArtistry = data;
+        callback();
+    };
+    var requestParam = {};
+    requestParam.projectId = projectId;
+    ajaxRequest(PageVariable.service.hasArtistry, requestParam, success);
+}
+
 
 getCurrentUser();

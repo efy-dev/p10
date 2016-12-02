@@ -107,13 +107,13 @@ public class QRCodeGenerator {
 
 
     public static void main(String[] args) throws Exception {
-        QRCodeGenerator QRCodeGenerator = new QRCodeGenerator("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7f6aa253b75466dd&redirect_uri=http%3A%2F%2Fmall.efeiyi.com%2Fwl&response_type=code&scope=snsapi_userinfo&state=0%2Fiu0sc2bu318fkbta#wechat_redirect");
+        QRCodeGenerator QRCodeGenerator = new QRCodeGenerator("http://www.efeiyi.com/createWxLoginUrl/0/iugd2v0v7mbwxumv");
 
         BufferedImage image = QRCodeGenerator
-                .createQRCode(582, 582)
+                .createQRCode(1280, 1280).getImageResult();
 //                .assembleLogo("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/logo.png")
-                .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/background.jpg", 123, 92)
-                .getImageResult();
+//                .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/background.jpg", 123, 92)
+//                .getImageResult();
         String path = "C://Users//Administrator//Desktop";
         File downloadFileTest = new File(path);
         if (!downloadFileTest.exists()) {

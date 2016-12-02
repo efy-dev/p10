@@ -3,11 +3,10 @@ package com.efeiyi.ec.project.model;
 import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.organization.model.AddressDistrict;
 import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.wiki.model.ProjectContent;
 import com.efeiyi.ec.wiki.model.Artistry;
+import com.efeiyi.ec.wiki.model.ProjectContent;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ming800.core.util.StringUtil;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -21,7 +20,7 @@ import java.util.List;
  * 非遗项目管理
  */
 @Entity
-@Table(name="project")
+@Table(name = "project")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Project implements Serializable {
     private String id;
@@ -32,13 +31,12 @@ public class Project implements Serializable {
     private String type; //类别 1.美术 2.技艺
 
 
-
     private Project fatherProject;//父id
     private ProjectCategory projectCategory;//类别
     private Date createDateTime;//忽略
     private List<Project> subProjectList;//子项目
     private List<ProjectTag> projectTagList;//项目标签
-    private  List<ProjectProperty> projectPropertyList;//项目属性
+    private List<ProjectProperty> projectPropertyList;//项目属性
     private String description;// project描述
     private String picture_url;//project图片
     private String picture_pc_url;//pc端图片project图片
@@ -52,7 +50,7 @@ public class Project implements Serializable {
     private List<MasterProject> masterProjects;
     private Artistry artistry;
 
-    @Column(name="picture_wap_url")
+    @Column(name = "picture_wap_url")
     public String getPicture_wap_url() {
         return picture_wap_url;
     }
@@ -60,7 +58,8 @@ public class Project implements Serializable {
     public void setPicture_wap_url(String picture_wap_url) {
         this.picture_wap_url = picture_wap_url;
     }
-    @Column(name="picture_url")
+
+    @Column(name = "picture_url")
     public String getPicture_url() {
         return picture_url;
     }
@@ -68,6 +67,7 @@ public class Project implements Serializable {
     public void setPicture_url(String picture_url) {
         this.picture_url = picture_url;
     }
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     public List<Product> getProductList() {
@@ -89,7 +89,7 @@ public class Project implements Serializable {
         this.id = id;
     }
 
-    @Column(name="serial")
+    @Column(name = "serial")
     public String getSerial() {
         return serial;
     }
@@ -97,18 +97,19 @@ public class Project implements Serializable {
     public void setSerial(String serial) {
         this.serial = serial;
     }
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "father_project_id")
-    public  Project getFatherProject(){
-        return  fatherProject;
+    public Project getFatherProject() {
+        return fatherProject;
     }
 
-    public void  setFatherProject(Project fatherProject){
+    public void setFatherProject(Project fatherProject) {
         this.fatherProject = fatherProject;
     }
 
-    @Column(name="name")
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -117,7 +118,7 @@ public class Project implements Serializable {
         this.name = name;
     }
 
-    @Column(name="status")
+    @Column(name = "status")
     @Where(clause = "status=1")
     public String getStatus() {
         return status;
@@ -127,7 +128,7 @@ public class Project implements Serializable {
         this.status = status;
     }
 
-    @Column(name="level")
+    @Column(name = "level")
     public String getLevel() {
         return level;
     }
@@ -135,19 +136,21 @@ public class Project implements Serializable {
     public void setLevel(String level) {
         this.level = level;
     }
-    @Column(name="description")
+
+    @Column(name = "description")
     public String getDescription() {
         String temp = description == null ? "" : description;
-        temp = StringUtil.filterHtml(temp);
+//        temp = StringUtil.filterHtml(temp);
         return temp;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="category_id")
+    @JoinColumn(name = "category_id")
     public ProjectCategory getProjectCategory() {
         return projectCategory;
     }
@@ -156,7 +159,7 @@ public class Project implements Serializable {
         this.projectCategory = projectCategory;
     }
 
-    @Column(name="create_datetime")
+    @Column(name = "create_datetime")
     public Date getCreateDateTime() {
         return createDateTime;
     }
@@ -165,36 +168,39 @@ public class Project implements Serializable {
         this.createDateTime = createDateTime;
     }
 
-    @Column(name="type")
-    public  String getType(){
-        return  type;
+    @Column(name = "type")
+    public String getType() {
+        return type;
     }
 
-    public  void  setType(String type){
-        this.type=type;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     @Where(clause = "status=1")
-    public  List<ProjectTag> getProjectTagList(){
-        return  projectTagList;
+    public List<ProjectTag> getProjectTagList() {
+        return projectTagList;
     }
-    public  void  setProjectTagList(List<ProjectTag> projectTagList){
+
+    public void setProjectTagList(List<ProjectTag> projectTagList) {
         this.projectTagList = projectTagList;
     }
+
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "fatherProject")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fatherProject")
     @Where(clause = "status=1")
-    public  List<Project> getSubProjectList(){
-        return  subProjectList;
+    public List<Project> getSubProjectList() {
+        return subProjectList;
     }
-    public  void  setSubProjectList(List<Project> subProjectList){
+
+    public void setSubProjectList(List<Project> subProjectList) {
         this.subProjectList = subProjectList;
     }
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     @Where(clause = "status=1")
     public List<ProjectProperty> getProjectPropertyList() {
         return projectPropertyList;
@@ -203,8 +209,9 @@ public class Project implements Serializable {
     public void setProjectPropertyList(List<ProjectProperty> projectPropertyList) {
         this.projectPropertyList = projectPropertyList;
     }
+
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     public List<ProjectContent> getProjectContents() {
         return projectContents;
     }
@@ -219,7 +226,7 @@ public class Project implements Serializable {
 //          this.fatherProjectId = fatherProjectId;
 //    }
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     public List<ProjectFollowed> getProjectFolloweds() {
         return projectFolloweds;
     }
@@ -229,8 +236,8 @@ public class Project implements Serializable {
     }
 
     //@JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY,optional = true)
-    @JoinColumn(name="district_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "district_id")
 
     public AddressDistrict getAddressDistrict() {
         return addressDistrict;
@@ -242,7 +249,7 @@ public class Project implements Serializable {
 
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     public List<ProjectRecommended> getProjectRecommendeds() {
         return projectRecommendeds;
     }
@@ -250,7 +257,8 @@ public class Project implements Serializable {
     public void setProjectRecommendeds(List<ProjectRecommended> projectRecommendeds) {
         this.projectRecommendeds = projectRecommendeds;
     }
-    @Column(name="fans_amount")
+
+    @Column(name = "fans_amount")
     public Long getFsAmount() {
         return fsAmount;
     }
@@ -260,7 +268,7 @@ public class Project implements Serializable {
     }
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     public List<MasterProject> getMasterProjects() {
         return masterProjects;
     }
@@ -268,7 +276,8 @@ public class Project implements Serializable {
     public void setMasterProjects(List<MasterProject> masterProjects) {
         this.masterProjects = masterProjects;
     }
-    @Column(name="picture_pc_url")
+
+    @Column(name = "picture_pc_url")
     public String getPicture_pc_url() {
         return picture_pc_url;
     }
@@ -281,6 +290,7 @@ public class Project implements Serializable {
     public String toString() {
         return "Project{id = " + id + "}";
     }
+
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "project")
     public Artistry getArtistry() {

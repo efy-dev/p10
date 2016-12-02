@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -180,11 +181,11 @@
             var redirect = "http://www.efeiyi.com/qrcode/redirect/tenant/" + PageVariable.tenantId;
             var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
             wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                    "appid=wx7f6aa253b75466dd" +
-                    "&redirect_uri=" +
-                    encodeURI(redirect_uri) +
+                "appid=wx7f6aa253b75466dd" +
+                "&redirect_uri=" +
+                encodeURI(redirect_uri) +
 
-                    "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+                "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
             wx_share_imgUrl = PageVariable.tenant.pictureUrl + "@!o2o-audio-list";
             renderTemplate(PageVariable.template.tenantBase, PageVariable.tenant);
             getTenantPraiseListByTenant(PageVariable.tenantId, function () {

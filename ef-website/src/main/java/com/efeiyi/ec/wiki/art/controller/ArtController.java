@@ -4,10 +4,10 @@ import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.master.model.MasterWork;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.wiki.model.Artistry;
 import com.efeiyi.ec.wiki.model.ArtistryDescription;
 import com.efeiyi.ec.wiki.model.ArtistryRecord;
-import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -175,4 +175,7 @@ public class ArtController extends BaseController {
         Artistry artistry = (Artistry) baseManager.getUniqueObjectByConditions(hql, param);
         return "redirect: project/" + artistry.getId();
     }
+
+
+
 }
