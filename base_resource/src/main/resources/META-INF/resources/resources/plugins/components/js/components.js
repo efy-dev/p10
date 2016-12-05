@@ -37,10 +37,10 @@ var ChooseCountComponent = function () {
         }
     }
     var disabled = "";
-    if (options["inputStatus"]== 1){
+    if (options["inputStatus"] == 1) {
         disabled = "disabled";
     }
-    var html = '<div class="opt"><a class="sub" title="减" ></a><input name="' + options["inputName"] + '" '+disabled+' class="ipt-txt" type="text" value="' + options["defaultValue"] + '" /><a class="add" title="加" ></a></div>'
+    var html = '<div class="opt"><a class="sub" title="减" ></a><input name="' + options["inputName"] + '" ' + disabled + ' class="ipt-txt" type="text" value="' + options["defaultValue"] + '" /><a class="add" title="加" ></a></div>'
     //加号的事件
     var addAction = function (e) {
         var inputElement = $(e.target).parent().find(".ipt-txt");
@@ -73,8 +73,8 @@ var ChooseCountComponent = function () {
 //根据配置给的联动组建的大小来创建item对象item对象当中需要包含数据来源（这里的数据来源默认是ajax请求过来的，所以需要把每个层级的url传递进来)
 /**
  <div class="selectGroup">
-    <div class="selectItem" dataFrom="<c:url value="/banner/platform.do"/>" initValue="选择平台"></div>
-    <div class="selectItem" id="groupName" name="groupName" paramName="platform"dataFrom="<c:url value="/banner/position.do"/>" initValue="请选位置"></div>
+ <div class="selectItem" dataFrom="<c:url value="/banner/platform.do"/>" initValue="选择平台"></div>
+ <div class="selectItem" id="groupName" name="groupName" paramName="platform"dataFrom="<c:url value="/banner/position.do"/>" initValue="请选位置"></div>
  </div>
  */
 //联动组件中的元素个数由 selectItem决定，在div中有几个selectItem就是有几个元素
@@ -98,7 +98,7 @@ var SelectGroupComponent = function () {
         this.grade = grade;
         this.html = html;
         this.paramName = paramName;
-    }
+    };
 
     var selectMap = new Object(); //用来按顺序存放所有的select标签
     var parentDiv = $(".selectGroup");
@@ -134,7 +134,7 @@ var SelectGroupComponent = function () {
             result += selectMap[key].html;
         }
         parentDiv.html(result);
-    })
+    });
     //选择当前级别的select之后出发下一级的数据获取，数据获取是通过当前级别所选戳来的选项去获取下一级数据
     var onChangeAction = function (e) {
         //可以得到当前级别选中的值（value）
@@ -154,7 +154,7 @@ var SelectGroupComponent = function () {
             }
             //@TODO 待优化
             var nextFirstOption = nextSelect.children()[0];
-            console.log(nextFirstOption)
+            console.log(nextFirstOption);
             out = nextFirstOption.outerHTML + out;
             nextSelect.html(out);
             var nextNextSelect = nextSelect.next();
@@ -162,6 +162,6 @@ var SelectGroupComponent = function () {
             nextNextSelect.html(nextNextFirstOption.outerHTML);
             nextNextSelect.child("option:first").prop("selected", 'selected')
         });
-    }
+    };
     parentDiv.on("change", "[isChange=true]", onChangeAction);
-}
+};

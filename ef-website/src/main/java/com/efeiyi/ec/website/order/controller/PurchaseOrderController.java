@@ -1,15 +1,13 @@
 package com.efeiyi.ec.website.order.controller;
 
-import com.efeiyi.ec.organization.model.*;
+import com.efeiyi.ec.organization.model.Consumer;
+import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.*;
-import com.efeiyi.ec.purchase.model.CartProduct;
-import com.efeiyi.ec.purchase.model.PurchaseOrder;
-import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.website.order.service.*;
+import com.efeiyi.ec.website.base.util.ApplicationException;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
+import com.efeiyi.ec.website.order.service.*;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -18,6 +16,8 @@ import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,10 +26,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -182,10 +187,10 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/easyBuy/{productModelId}"})
     public String buyImmediate(HttpServletRequest request, @PathVariable String productModelId, Model model) throws Exception {
         String amount = request.getParameter("amount");
-        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),productModelId);
-        String callback = PConst.NEWWEBURL+"/cart/paySuccess.do";
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+        String callback = PConst.NEWWEBURL + "/cart/paySuccess.do";
 
-        return "redirect:"+ PConst.NEWWEBURL +"/order/saveOrUpdateOrder2.do?productModelId="+productModelId+"&amount="+amount+"&price="+productModel.getPrice()+"&orderType=1&callback="+ URLEncoder.encode(callback, "UTF-8");
+        return "redirect:" + PConst.NEWWEBURL + "/order/saveOrUpdateOrder2.do?productModelId=" + productModelId + "&amount=" + amount + "&price=" + productModel.getPrice() + "&orderType=1&callback=" + URLEncoder.encode(callback, "UTF-8");
     }
 
 
@@ -233,6 +238,112 @@ public class PurchaseOrderController extends BaseController {
         }
         return callback;
     }
+
+
+    /**
+     * 创建新的商品订单
+     *
+     * @param request  productList  商品规格列表的json对象  tenantId 店铺id，如果没有改参数说明是多商铺订单，如果有改参数说明所有商品都是属于改店铺
+     * @param response JSONObject 新生成的订单
+     * @return JSONObject 新生成的订单
+     */
+    @RequestMapping({"/createNewOrder"})
+    @ResponseBody
+    public JSONObject createNewOrder(HttpServletRequest request, HttpServletResponse response) {
+        String productListStr = request.getParameter("productList");
+        String tenantId = request.getParameter("tenantId");
+
+        JSONArray productJSONArray;
+        Tenant tenant;
+        try {
+            tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+            productJSONArray = JSONArray.fromObject(productListStr);
+        } catch (Exception e) {
+            ApplicationException exception = new ApplicationException(ApplicationException.PARAM_ERROR);
+            return exception.toJSONObject();
+        }
+
+
+
+        return null;
+    }
+
+
+    /**
+     * 确认订单状态，下一步是根据选择的支付类型进行在线支付
+     *
+     * @param request  invoice 发票信息的json对象，paymentType 支付类型，purchaseOrderId 订单id， message 留言，ConsumerAddressId 收货地址id
+     * @param response JSONObject 已经确认的订单，由前端来判断是否
+     * @return JSONObject 已经确认的订单
+     */
+    @RequestMapping({"/confirmOrderById"})
+    @ResponseBody
+    public JSONObject confirmOrderById(HttpServletRequest request, HttpServletResponse response) {
+        return null;
+    }
+
+
+    /**
+     * 通过订单的id获得订单
+     *
+     * @param request  purchaseOrderId  订单id
+     * @param response PurchaseOrder 订单对象
+     * @return PurchaseOrder 订单对象
+     */
+    @RequestMapping({"/getPurchaseOrderById"})
+    @ResponseBody
+    public PurchaseOrder getPurchaseOrderById(HttpServletRequest request, HttpServletResponse response) {
+        return null;
+    }
+
+
+    /**
+     * 通过运单编号查询物流信息
+     *
+     * @param request  serial 物流单号
+     * @param response JSONObject 物流信息数据
+     * @return JSONObject 物流信息数据
+     */
+    @RequestMapping({"/getDeliveryInfoBySerial"})
+    @ResponseBody
+    public JSONObject getDeliveryInfoBySerial(HttpServletRequest request, HttpServletResponse response) {
+        String result = getLogistics("1122334455667", "yunda");
+        JSONObject jsonObjectResult = JSONObject.fromObject(result);
+        return jsonObjectResult;
+    }
+
+
+    /**
+     * 获取物流信息
+     *
+     * @param serial
+     * @param logisticsCompany
+     * @return
+     */
+    private String getLogistics(String serial, String logisticsCompany) {
+        String content = "";//物流信息
+        try {
+            URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + logisticsCompany + "&nu=" + serial);
+            URLConnection con = url.openConnection();
+            con.setAllowUserInteraction(false);
+            InputStream urlStream = url.openStream();
+            byte b[] = new byte[10000];
+            int numRead = urlStream.read(b);
+            content = new String(b, 0, numRead);
+            while (numRead != -1) {
+                numRead = urlStream.read(b);
+                if (numRead != -1) {
+                    String newContent = new String(b, 0, numRead, "UTF-8");
+                    content += newContent;
+                }
+            }
+            urlStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return content;
+    }
+
 
     @RequestMapping("/saveOrUpdateOrder2.do")
     public String saveOrUpdateOrder2(HttpServletRequest request, Model model) throws Exception {
@@ -467,12 +578,12 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/getFreight.do"})
     @ResponseBody
-    public String getFreight(HttpServletRequest request){
+    public String getFreight(HttpServletRequest request) {
         String purchaseOrderId = request.getParameter("purchaseOrderId");
         String addressId = request.getParameter("addressId");
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
-        ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(),addressId);
-        return postageManager.getFreight(purchaseOrder,consumerAddress).toString();
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+        ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
+        return postageManager.getFreight(purchaseOrder, consumerAddress).toString();
     }
 
 }

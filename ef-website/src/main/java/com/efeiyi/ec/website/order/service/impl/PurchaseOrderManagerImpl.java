@@ -3,10 +3,14 @@ package com.efeiyi.ec.website.order.service.impl;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.purchase.model.*;
+import com.efeiyi.ec.purchase.model.Cart;
+import com.efeiyi.ec.purchase.model.CartProduct;
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
+import com.efeiyi.ec.website.base.util.ApplicationException;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
+import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +106,20 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         return purchaseOrder;
     }
 
+
+    @Override
+    public PurchaseOrder saveOrUpdatePurchaseOrder(List<CartProduct> cartProductList, Tenant tenant) throws Exception {
+        PurchaseOrder purchaseOrder;
+        try {
+            purchaseOrder = createNewPurchaseOrder(cartProductList);
+            purchaseOrder.setTenant(tenant);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        } catch (Exception e) {
+            throw new ApplicationException(ApplicationException.SQL_ERROR);
+        }
+        return purchaseOrder;
+    }
+
     private PurchaseOrder createNewPurchaseOrder(List<CartProduct> cartProductList) throws Exception {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
         User user = (User) baseManager.getObject(User.class.getName(), AuthorizationUtil.getMyUser().getId());
@@ -128,6 +146,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         return purchaseOrder;
     }
+
 
     private PurchaseOrder createNewPurchaseOrder2(List<PurchaseOrderProduct> purchaseOrderProductList) throws Exception {
 

@@ -19,12 +19,15 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -113,6 +116,29 @@ public class YuanquController {
         String userInfo = HttpUtil.getHttpResponse(wxInfoUrl, null);
         authenticate(userInfo);
         return "redirect:http://www.efeiyi.com/qrcode/sample/" + URLDecoder.decode(redirect, "UTF-8");
+    }
+
+
+    @RequestMapping({"/wxLogin"})
+    @ResponseBody
+    public String wxLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
+        String result;
+        String code = request.getParameter("code");
+        if (code == null || "".equals(code)) {
+            return "redirect:http://www.efeiyi.com/app/index.html";
+        }
+        String wxOpenIdUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+        result = HttpUtil.getHttpResponse(wxOpenIdUrl, null);
+        JSONObject jsonObject = JSONObject.fromObject(result);
+        String wxInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + jsonObject.getString("access_token") + "&openid=" + jsonObject.getString("openid") + "&lang=zh_CN";
+        String userInfo = HttpUtil.getHttpResponse(wxInfoUrl, null);
+        authenticate(userInfo);
+        if (savedRequest != null) {
+            return "redirect:" + savedRequest.getRedirectUrl();
+        } else {
+            return "redirect:http://www.efeiyi.com/app/index.html";
+        }
     }
 
 

@@ -419,7 +419,7 @@
                 <dbpath>/tmp/logs/</dbpath>
             </properties>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
         <profile>
@@ -448,11 +448,10 @@
                 <dbpath>/tmp/logs/</dbpath>
             </properties>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
     </profiles>
-
 
 
     <build>
