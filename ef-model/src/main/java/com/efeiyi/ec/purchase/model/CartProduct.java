@@ -1,29 +1,24 @@
 package com.efeiyi.ec.purchase.model;
 
-import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ming800.core.base.service.BaseManager;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
-import javax.persistence.criteria.Fetch;
 import java.io.Serializable;
 
 /**
  * Created by Administrator on 2015/6/15.
  */
 @Entity
-@Table(name="purchase_cart_product")
+@Table(name = "purchase_cart_product")
 public class CartProduct implements Serializable {
 
     private String id;
     private Cart cart;
     private ProductModel productModel;
     private Integer amount;
-    private String status;
-    private String isChoose;
+    private String status; // 9:临时数据
+    private String isChoose; // 1：已选中 2：未选中
     private Cart cartCatch;
 
     @Transient
@@ -48,7 +43,7 @@ public class CartProduct implements Serializable {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="cart_id")
+    @JoinColumn(name = "cart_id")
     public Cart getCart() {
         return cart;
     }
@@ -58,7 +53,7 @@ public class CartProduct implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="product_id")
+    @JoinColumn(name = "product_id")
     public ProductModel getProductModel() {
         return productModel;
     }
@@ -68,8 +63,7 @@ public class CartProduct implements Serializable {
     }
 
 
-
-    @Column(name="amount")
+    @Column(name = "amount")
     public Integer getAmount() {
         return amount;
     }

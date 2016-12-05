@@ -8,6 +8,7 @@ import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.base.util.ApplicationException;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.website.order.service.*;
+import com.efeiyi.ec.website.product.service.ProductManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -63,6 +64,9 @@ public class PurchaseOrderController extends BaseController {
 
     @Autowired
     private PostageManager postageManager;
+
+    @Autowired
+    private ProductManager productManager;
 
     @RequestMapping("/giftBuy/showNameStatus.do")
     @ResponseBody
@@ -243,15 +247,15 @@ public class PurchaseOrderController extends BaseController {
     /**
      * 创建新的商品订单
      *
-     * @param request  productList  商品规格列表的json对象  tenantId 店铺id，如果没有改参数说明是多商铺订单，如果有改参数说明所有商品都是属于改店铺
-     * @param response JSONObject 新生成的订单
+     * @param request productList  商品规格列表的json对象  tenantId 店铺id，如果没有改参数说明是多商铺订单，如果有改参数说明所有商品都是属于改店铺
      * @return JSONObject 新生成的订单
      */
     @RequestMapping({"/createNewOrder"})
     @ResponseBody
-    public JSONObject createNewOrder(HttpServletRequest request, HttpServletResponse response) {
+    public JSONObject createNewOrder(HttpServletRequest request) {
         String productListStr = request.getParameter("productList");
         String tenantId = request.getParameter("tenantId");
+        List<CartProduct> cartProductList = new ArrayList<>();
 
         JSONArray productJSONArray;
         Tenant tenant;
@@ -259,13 +263,34 @@ public class PurchaseOrderController extends BaseController {
             tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
             productJSONArray = JSONArray.fromObject(productListStr);
         } catch (Exception e) {
+            e.printStackTrace();
             ApplicationException exception = new ApplicationException(ApplicationException.PARAM_ERROR);
             return exception.toJSONObject();
         }
 
 
+        try {
+            for (Object productInfoJson : productJSONArray) {
+                JSONObject productInfoJSONObject = (JSONObject) productInfoJson;
+                ProductModel productModel = productManager.getProductModelById(productInfoJSONObject.get("id").toString());
+                CartProduct cartProduct = productManager.saveCartProduct(productModel, productInfoJSONObject.getInt("amount"));
+                cartProductList.add(cartProduct);
+            }
+        } catch (ApplicationException e) {
+            e.printStackTrace();
+            return e.toJSONObject();
+        }
 
-        return null;
+        PurchaseOrder purchaseOrder;
+        try {
+            purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cartProductList, tenant);
+        } catch (ApplicationException e) {
+            e.printStackTrace();
+            return e.toJSONObject();
+        }
+
+
+        return JSONObject.fromObject(purchaseOrder);
     }
 
 

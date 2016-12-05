@@ -108,7 +108,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
 
 
     @Override
-    public PurchaseOrder saveOrUpdatePurchaseOrder(List<CartProduct> cartProductList, Tenant tenant) throws Exception {
+    public PurchaseOrder saveOrUpdatePurchaseOrder(List<CartProduct> cartProductList, Tenant tenant) throws ApplicationException {
         PurchaseOrder purchaseOrder;
         try {
             purchaseOrder = createNewPurchaseOrder(cartProductList);

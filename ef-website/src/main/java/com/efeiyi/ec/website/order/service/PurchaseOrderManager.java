@@ -6,6 +6,7 @@ import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.website.base.util.ApplicationException;
 import org.springframework.ui.Model;
 
 import java.math.BigDecimal;
@@ -76,7 +77,7 @@ public interface PurchaseOrderManager {
      * @return 生成的订单对象
      * @throws Exception ApplicationException.SQL_ERROR
      */
-    PurchaseOrder saveOrUpdatePurchaseOrder(List<CartProduct> cartProductList, Tenant tenant) throws Exception;
+    PurchaseOrder saveOrUpdatePurchaseOrder(List<CartProduct> cartProductList, Tenant tenant) throws ApplicationException;
 
 
 }
