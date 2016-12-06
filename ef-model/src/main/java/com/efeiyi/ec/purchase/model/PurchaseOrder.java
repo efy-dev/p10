@@ -3,13 +3,13 @@ package com.efeiyi.ec.purchase.model;
 import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.zero.promotion.model.PromotionPlan;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -32,12 +32,37 @@ public class PurchaseOrder {
     public static final String ORDER_STATUS_CONSEL = "17"; //已取消
     public static final String ORDER_STATUS_SCANNING = "19"; //待扫运单
 
+    public static HashMap<String, String> orderStatusMap = new HashMap<>();
+    public static HashMap<String, String> paymentTypeMap = new HashMap<>();
+
+
     //支付方式
     public static final String ZHIFUBAO = "1"; //支付宝
     public static final String YINHANGKA = "2"; //银行卡
     public static final String WEIXIN = "3";    //微信支付
     public static final String YOUHUIQUAN = "4";    //优惠券
     public static final String YUE = "5";       //余额
+
+    static {
+        orderStatusMap.put(ORDER_STATUS_WPAY, "等待付款");
+        orderStatusMap.put(ORDER_STATUS_WAIT_GROUP, "等待成团");
+        orderStatusMap.put(ORDER_STATUS_WRECEIVE, "未发货");
+        orderStatusMap.put(ORDER_STATUS_WPOST, "发货中");
+        orderStatusMap.put(ORDER_STATUS_WRGIFT, "待收礼");
+        orderStatusMap.put(ORDER_STATUS_POSTED, "已发货");
+        orderStatusMap.put(ORDER_STATUS_UNCOMMENT, "未评价");
+        orderStatusMap.put(ORDER_STATUS_FINISHED, "已完成");
+        orderStatusMap.put(ORDER_STATUS_REFUND, "已退款");
+        orderStatusMap.put(ORDER_STATUS_CONSEL, "已取消");
+        orderStatusMap.put(ORDER_STATUS_SCANNING, "待扫运单");
+
+        paymentTypeMap.put(ZHIFUBAO, "支付宝");
+        paymentTypeMap.put(YINHANGKA, "银行卡");
+        paymentTypeMap.put(WEIXIN, "威信");
+        paymentTypeMap.put(YOUHUIQUAN, "优惠卷");
+        paymentTypeMap.put(YUE, "余额");
+    }
+
 
     //基本属性
     private String id;
@@ -380,35 +405,38 @@ public class PurchaseOrder {
     public BigDecimal getOrderPayMoney() {
         BigDecimal couponPrice = new BigDecimal(0);
         BigDecimal spendBalance = new BigDecimal(0);
-        if (this.getOrderStatus().equals("1") || this.getOrderStatus().equals("17")) {
-            PurchaseOrderPayment purchaseOrderPaymentTemp = this.getPurchaseOrderPaymentList().get(0);
-            for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
-                if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
-                    couponPrice = couponPrice.add(BigDecimal.valueOf(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice()));
+        if (this.getOrderStatus() != null) {
 
+            if (this.getOrderStatus().equals("1") || this.getOrderStatus().equals("17")) {
+                PurchaseOrderPayment purchaseOrderPaymentTemp = this.getPurchaseOrderPaymentList().get(0);
+                for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
+                    if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
+                        couponPrice = couponPrice.add(BigDecimal.valueOf(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice()));
+
+                    }
+                    if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")) {
+                        spendBalance = purchaseOrderPaymentDetailsTemp.getMoney();
+
+                    }
                 }
-                if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")) {
-                    spendBalance = purchaseOrderPaymentDetailsTemp.getMoney();
+            } else {
+                for (PurchaseOrderPayment purchaseOrderPaymentTemp : this.getPurchaseOrderPaymentList()) {
+                    if (purchaseOrderPaymentTemp.getStatus().equals("2")) {
+                        for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
+                            if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
+                                couponPrice = couponPrice.add(BigDecimal.valueOf(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice()));
 
-                }
-            }
-        } else {
-            for (PurchaseOrderPayment purchaseOrderPaymentTemp : this.getPurchaseOrderPaymentList()) {
-                if (purchaseOrderPaymentTemp.getStatus().equals("2")) {
-                    for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
-                        if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")) {
-                            couponPrice = couponPrice.add(BigDecimal.valueOf(purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice()));
+                            }
+                            if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")) {
+                                spendBalance = purchaseOrderPaymentDetailsTemp.getMoney();
 
-                        }
-                        if (purchaseOrderPaymentDetailsTemp.getPayWay().equals("5")) {
-                            spendBalance = purchaseOrderPaymentDetailsTemp.getMoney();
+                            }
 
                         }
 
                     }
 
                 }
-
             }
         }
         couponPrice = couponPrice.setScale(2, BigDecimal.ROUND_HALF_UP);

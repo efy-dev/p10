@@ -1,6 +1,9 @@
 package com.efeiyi.ec.tenant.model;
 
-import com.efeiyi.ec.organization.model.*;
+import com.efeiyi.ec.organization.model.AddressCity;
+import com.efeiyi.ec.organization.model.AddressProvince;
+import com.efeiyi.ec.organization.model.TenantOrder;
+import com.efeiyi.ec.organization.model.UserTenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ming800.core.base.model.BaseTenant;
@@ -66,6 +69,16 @@ public class BigTenant implements Serializable, BaseTenant {
     private String audio;
     private List<UserTenant> userTenant;
     private List<TenantOrder> tenantOrders;
+    private Integer discount;
+
+    @Column(name = "discount")
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "bigTenant")

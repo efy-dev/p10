@@ -1,13 +1,11 @@
 package com.efeiyi.ec.tenant.model;
 
-import com.efeiyi.ec.organization.model.BigUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 
@@ -34,6 +32,16 @@ public class Tenant implements Serializable {
     private List<TenantProject> tenantProjectList;
     private List<TenantRecommended> tenantRecommendedList;
     private String pictureUrl;
+    private Integer discount;
+
+    @Column(name = "discount")
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -75,6 +83,7 @@ public class Tenant implements Serializable {
     public void setTenantMasterList(List<TenantMaster> tenantMasterList) {
         this.tenantMasterList = tenantMasterList;
     }
+
     @Column(name = "name")
     public String getName() {
         return name;

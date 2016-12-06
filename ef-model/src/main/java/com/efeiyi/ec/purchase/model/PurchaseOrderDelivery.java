@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created by Administrator on 2015/5/28.
@@ -12,6 +13,37 @@ import java.util.Date;
 @Entity
 @Table(name = "purchase_order_delivery")
 public class PurchaseOrderDelivery {
+
+//                            <item label="顺丰" value="shunfeng"/>
+//                        <item label="圆通" value="yuantong"/>
+//                        <item label="申通" value="shentong"/>
+//                        <item label="中通" value="zhongtong"/>
+//                        <item label="韵达" value="yunda"/>
+//                        <item label="宅急送" value="zhaijisong"/>
+//                        <item label="EMS" value="ems"/>
+//                        <item label="汇通快运" value="huitongkuaidi"/>
+//                        <item label="天天快递" value="tiantian"/>
+//                        <item label="UPS" value="ups"/>
+//                        <item label="德邦物流" value="debangwuliu"/>
+//                        <item label="国通快递" value="guotongkuaidi"/>
+    public static HashMap<String,String> deliveryMap = new HashMap<>();
+
+    static {
+        deliveryMap.put("shunfeng","顺丰");
+        deliveryMap.put("yuantong","圆通");
+        deliveryMap.put("shentong","申通");
+        deliveryMap.put("yunda","韵达");
+        deliveryMap.put("zhaijisong","宅急送");
+        deliveryMap.put("ems","EMS");
+        deliveryMap.put("huitongkuaidi","汇通快运");
+        deliveryMap.put("tiantian","天天快递");
+        deliveryMap.put("ups","UPS");
+        deliveryMap.put("debangwuliu","德邦物流");
+        deliveryMap.put("guotongkuaidi","国通快递");
+    }
+
+
+
     private String id;
     private PurchaseOrder purchaseOrder;
     private ConsumerAddress consumerAddress;

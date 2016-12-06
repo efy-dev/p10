@@ -3,10 +3,7 @@ package com.efeiyi.ec.website.order.service.impl;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.purchase.model.Cart;
-import com.efeiyi.ec.purchase.model.CartProduct;
-import com.efeiyi.ec.purchase.model.PurchaseOrder;
-import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.efeiyi.ec.purchase.model.*;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.base.util.ApplicationException;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
@@ -113,6 +110,10 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         try {
             purchaseOrder = createNewPurchaseOrder(cartProductList);
             purchaseOrder.setTenant(tenant);
+            if (tenant.getDiscount() != null && tenant.getDiscount() > 0) {
+                BigDecimal total = purchaseOrder.getOriginalPrice().multiply(new BigDecimal(tenant.getDiscount() / 100));
+                purchaseOrder.setTotal(total);
+            }
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         } catch (Exception e) {
             throw new ApplicationException(ApplicationException.SQL_ERROR);
@@ -207,7 +208,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
     }
 
     @Override
-    public PurchaseOrder confirmPurchaseOrder(PurchaseOrder purchaseOrder, ConsumerAddress consumerAddress, HashMap<String, String> messageMap, String payWay) {
+    public PurchaseOrder confirmPurchaseOrder(PurchaseOrder purchaseOrder, ConsumerAddress consumerAddress, Map<String, String> messageMap, String payWay) {
         purchaseOrder.setStatus("1");
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WPAY);
         purchaseOrder.setPayWay(payWay);
@@ -241,6 +242,32 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
 
+        return purchaseOrder;
+    }
+
+
+    @Override
+    public PurchaseOrder confirmPurchaseOrder(PurchaseOrder purchaseOrder, ConsumerAddress consumerAddress, Map<String, String> messageMap, String payWay, Invoice invoice) throws ApplicationException {
+
+        try {
+            baseManager.saveOrUpdate(Invoice.class.getName(), invoice);
+            confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payWay);
+        } catch (Exception e) {
+            throw new ApplicationException(ApplicationException.SQL_ERROR);
+        }
+
+        return purchaseOrder;
+    }
+
+    @Override
+    public PurchaseOrder getPurchaseOrderById(String id) throws ApplicationException {
+        PurchaseOrder purchaseOrder;
+        try {
+            purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ApplicationException(ApplicationException.SQL_ERROR);
+        }
         return purchaseOrder;
     }
 }

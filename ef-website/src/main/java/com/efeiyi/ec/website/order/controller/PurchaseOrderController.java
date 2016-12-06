@@ -18,6 +18,7 @@ import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,10 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.efeiyi.ec.purchase.model.PurchaseOrder.orderStatusMap;
+import static com.efeiyi.ec.purchase.model.PurchaseOrder.paymentTypeMap;
+import static com.efeiyi.ec.purchase.model.PurchaseOrderDelivery.deliveryMap;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -247,7 +252,7 @@ public class PurchaseOrderController extends BaseController {
     /**
      * 创建新的商品订单
      *
-     * @param request productList  商品规格列表的json对象  tenantId 店铺id，如果没有改参数说明是多商铺订单，如果有改参数说明所有商品都是属于改店铺
+     * @param request productList  商品规格列表的json对象 [{"id":"100000000006","amount":"1"}]  tenantId 店铺id，如果没有改参数说明是多商铺订单，如果有改参数说明所有商品都是属于改店铺
      * @return JSONObject 新生成的订单
      */
     @RequestMapping({"/createNewOrder"})
@@ -262,6 +267,7 @@ public class PurchaseOrderController extends BaseController {
         try {
             tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
             productJSONArray = JSONArray.fromObject(productListStr);
+//            @TODO 当TenantId为空的时候说明是多店铺商品
         } catch (Exception e) {
             e.printStackTrace();
             ApplicationException exception = new ApplicationException(ApplicationException.PARAM_ERROR);
@@ -276,9 +282,12 @@ public class PurchaseOrderController extends BaseController {
                 CartProduct cartProduct = productManager.saveCartProduct(productModel, productInfoJSONObject.getInt("amount"));
                 cartProductList.add(cartProduct);
             }
-        } catch (ApplicationException e) {
-            e.printStackTrace();
-            return e.toJSONObject();
+        } catch (ApplicationException ae) {
+            ae.printStackTrace();
+            return ae.toJSONObject();
+        } catch (JSONException je) {
+            ApplicationException exception = new ApplicationException(ApplicationException.PARAM_ERROR);
+            return exception.toJSONObject();
         }
 
         PurchaseOrder purchaseOrder;
@@ -290,21 +299,67 @@ public class PurchaseOrderController extends BaseController {
         }
 
 
-        return JSONObject.fromObject(purchaseOrder);
+        JSONObject result = new JSONObject();
+        result.put("code", "0");
+        result.put("orderId", purchaseOrder.getId());
+        return result;
     }
 
 
     /**
      * 确认订单状态，下一步是根据选择的支付类型进行在线支付
      *
-     * @param request  invoice 发票信息的json对象，paymentType 支付类型，purchaseOrderId 订单id， message 留言，ConsumerAddressId 收货地址id
+     * @param request  invoiceName发票名 invoiceTitle发票抬头 invoiceType发票类型 paymentType 支付类型，purchaseOrderId 订单id， message JSONObject [{"tenantId":"messageContent","tenantId2":"meessageContent2"} 留言，ConsumerAddressId 收货地址id
      * @param response JSONObject 已经确认的订单，由前端来判断是否
      * @return JSONObject 已经确认的订单
      */
     @RequestMapping({"/confirmOrderById"})
     @ResponseBody
     public JSONObject confirmOrderById(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        String paymentType = request.getParameter("paymentType");
+        String purchaseOrderId = request.getParameter("purchaseOrderId");
+        String consumerAddressId = request.getParameter("consumerAddressId");
+        String invoiceName = request.getParameter("invoiceName");
+        String invoiceTitle = request.getParameter("invoiceTitle");
+        String invoiceType = request.getParameter("invoiceType");
+        String message = request.getParameter("message");
+
+        PurchaseOrder purchaseOrder;
+        JSONObject messageMap;
+        ConsumerAddress consumerAddress;
+
+
+        try {
+            messageMap = JSONObject.fromObject(message);
+        } catch (Exception e) {
+            return new ApplicationException(ApplicationException.PARAM_ERROR).toJSONObject();
+        }
+
+        try {
+            purchaseOrder = purchaseOrderManager.getPurchaseOrderById(purchaseOrderId);
+            //@TODO 需要替换成  ConsumerAddressManager
+            consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), consumerAddressId);
+        } catch (ApplicationException ae) {
+            return ae.toJSONObject();
+        }
+
+        Invoice invoice = new Invoice();
+        invoice.setStatus("1");
+        invoice.setName(invoiceName);
+        invoice.setTitle(invoiceTitle);
+        invoice.setType(invoiceType);
+        invoice.setPurchaseOrder(purchaseOrder);
+
+        try {
+            purchaseOrderManager.confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, paymentType, invoice);
+        } catch (ApplicationException ae) {
+            return ae.toJSONObject();
+        }
+
+        JSONObject result = new JSONObject();
+        result.put("code", "0");
+        result.put("purchaseOrderId", purchaseOrder.getId());
+        return result;
     }
 
 
@@ -317,8 +372,57 @@ public class PurchaseOrderController extends BaseController {
      */
     @RequestMapping({"/getPurchaseOrderById"})
     @ResponseBody
-    public PurchaseOrder getPurchaseOrderById(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+    public JSONObject getPurchaseOrderById(HttpServletRequest request, HttpServletResponse response) {
+        String purchaseOrderId = request.getParameter("purchaseOrderId");
+
+        PurchaseOrder purchaseOrder;
+
+        try {
+            purchaseOrder = purchaseOrderManager.getPurchaseOrderById(purchaseOrderId);
+        } catch (ApplicationException ae) {
+            return ae.toJSONObject();
+        }
+
+        JSONObject result = new JSONObject();
+        JSONObject purchaseOrderJSONObject = new JSONObject();
+        JSONArray productListJSONArray = new JSONArray();
+        for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+            JSONObject productJSONObject = new JSONObject();
+            productJSONObject.put("id", purchaseOrderProduct.getProductModel().getId());
+            productJSONObject.put("productName", purchaseOrderProduct.getProductModel().getProduct().getName());
+            productJSONObject.put("productModelName", purchaseOrderProduct.getProductModel().getName());
+            productJSONObject.put("imageUrl", purchaseOrderProduct.getProductModel().getProductModel_url());
+            productJSONObject.put("price", purchaseOrderProduct.getPurchasePrice().floatValue());
+            productJSONObject.put("amount", purchaseOrderProduct.getPurchaseAmount());
+            productListJSONArray.add(productJSONObject);
+        }
+
+        JSONArray deliveryListJSONArray = new JSONArray();
+        for (PurchaseOrderDelivery purchaseOrderDelivery : purchaseOrder.getPurchaseOrderDeliveryList()) {
+            JSONObject deliveryJSONObject = new JSONObject();
+            deliveryJSONObject.put("logisticsCompany", deliveryMap.get(purchaseOrderDelivery.getLogisticsCompany()));
+            deliveryJSONObject.put("serial", purchaseOrderDelivery.getSerial());
+            deliveryListJSONArray.add(deliveryJSONObject);
+        }
+
+        purchaseOrderJSONObject.put("id", purchaseOrder.getId());
+        purchaseOrderJSONObject.put("serial", purchaseOrder.getSerial());
+        purchaseOrderJSONObject.put("createDatetime", purchaseOrder.getCreateDatetime().getTime());
+        purchaseOrderJSONObject.put("orderStatus", orderStatusMap.get(purchaseOrder.getOrderStatus()));
+        purchaseOrderJSONObject.put("total", purchaseOrder.getTotal().floatValue());
+        purchaseOrderJSONObject.put("originalPrice", purchaseOrder.getOriginalPrice().floatValue());
+        purchaseOrderJSONObject.put("paymentType", paymentTypeMap.get(purchaseOrder.getPayWay()));
+        purchaseOrderJSONObject.put("message", purchaseOrder.getMessage());
+        purchaseOrderJSONObject.put("address", purchaseOrder.getPurchaseOrderAddress());
+        purchaseOrderJSONObject.put("receiverName", purchaseOrder.getReceiverName());
+        purchaseOrderJSONObject.put("receiverPhone", purchaseOrder.getReceiverPhone());
+        result.put("code", "0");
+        result.put("purchaseOrder", purchaseOrderJSONObject);
+        result.put("productList", productListJSONArray);
+        result.put("deliveryList", deliveryListJSONArray);
+
+
+        return result;
     }
 
 
