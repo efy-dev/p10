@@ -2,11 +2,14 @@ package com.efeiyi.ec.website.order.controller;
 
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.purchase.model.*;
-import com.efeiyi.ec.website.order.service.PaymentManager;
-import com.efeiyi.ec.website.order.model.WxPayConfig;
-import com.efeiyi.ec.website.organization.service.SmsCheckManager;
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
+import com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails;
+import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
+import com.efeiyi.ec.website.order.model.WxPayConfig;
+import com.efeiyi.ec.website.order.service.PaymentManager;
+import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
 import com.ming800.core.util.HttpUtil;
@@ -218,9 +221,18 @@ public class PurchaseOrderPaymentController {
             //model.addAttribute("order", purchaseOrder);
             //return "/purchaseOrder/paySuccess";
         }
-        return "redirect:/order/paysuccess/"+orderId;
+        return "redirect:/order/paysuccess/" + orderId;
     }
 
+
+    /**
+     * 订单支付接口
+     *
+     * @param orderId 订单的id  isWeiXin 判断是否是微信浏览器
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping({"/pay/{orderId}"})
     public String orderPay(@PathVariable String orderId, HttpServletRequest request) throws Exception {
         //从新创建支付记录详情
@@ -241,71 +253,55 @@ public class PurchaseOrderPaymentController {
     }
 
 
+    private void sendTenantSMS(String purchaseOrderSerial, String productMassge, String deliveryName, String deliveryNum, String deliveryAddress, String phone) {
+        HashMap<String, String> smsParam = new HashMap<>();
+        smsParam.put("purchaseOrderSerial", purchaseOrderSerial);
+        smsParam.put("productMassge", productMassge);
+        smsParam.put("deliveryName", deliveryName);
+        smsParam.put("deliveryNum", deliveryNum);
+        smsParam.put("deliveryAddress", deliveryAddress);
+        smsCheckManager.send(phone, smsParam, "1216591");
+        smsCheckManager.send("13671386900", smsParam, "1216591");//和坤手机号
+    }
+
+
     @RequestMapping({"/paysuccess/{orderId}"})
     public String paySuccess(@PathVariable String orderId, Model model) throws Exception {
-        PurchaseOrderPaymentDetails purchaseOrder = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
-        String purchaseOrderSerial;
-        String productMassge = "";
-        String deliveryName;
-        String deliveryNum;
-        String deliveryAddress;
-        HashMap<String, String> map = new HashMap<>();
+        PurchaseOrderPaymentDetails paymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
+        PurchaseOrder purchaseOrder = paymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
+        String productMessage = "";
 
         //支付成功发送短信
-        PurchaseOrderPayment purchaseOrderPayment = purchaseOrder.getPurchaseOrderPayment();
-        if (purchaseOrderPayment == null) {
-            PurchaseOrder purchaseOrder1 = ((PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrder.getPurchaseOrderPayment().getId())).getPurchaseOrder();
-            purchaseOrderSerial = purchaseOrder1.getId();
-            if (purchaseOrder1.getSubPurchaseOrder() != null && purchaseOrder1.getSubPurchaseOrder().size() > 0) {
-                //获取自订单信息
-                for (PurchaseOrder purchaseOrderTemp : purchaseOrder1.getSubPurchaseOrder()) {
-                    purchaseOrderSerial = purchaseOrderTemp.getId();
-                    for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrderTemp.getPurchaseOrderProductList()) {
-                        productMassge += purchaseOrderProduct.getProductModel().getProduct().getName() + "(" + purchaseOrderProduct.getPurchaseAmount() + ");";
-                    }
-                    deliveryName = purchaseOrderTemp.getReceiverName();
-                    deliveryNum = purchaseOrderTemp.getReceiverPhone();
-                    deliveryAddress = purchaseOrderTemp.getPurchaseOrderAddress();
-                    map.put("purchaseOrderSerial", purchaseOrderSerial);
-                    map.put("productMassge", productMassge);
-                    map.put("deliveryName", deliveryName);
-                    map.put("deliveryNum", deliveryNum);
-                    map.put("deliveryAddress", deliveryAddress);
-                    smsCheckManager.send(purchaseOrderTemp.getBigTenant().getPhone(), map, "1216591");
-                    smsCheckManager.send("13671386900", map, "1216591");
-                }
-            } else {
-                for (PurchaseOrderProduct purchaseOrderProduct1 : purchaseOrder1.getPurchaseOrderProductList()) {
-                    productMassge += purchaseOrderProduct1.getProductModel().getProduct().getName() + "(" + purchaseOrderProduct1.getPurchaseAmount() + ");";
-                }
-                deliveryName = purchaseOrder1.getReceiverName();
-                deliveryNum = purchaseOrder1.getReceiverPhone();
-                deliveryAddress = purchaseOrder1.getPurchaseOrderAddress();
-                map.put("purchaseOrderSerial", purchaseOrderSerial);
-                map.put("productMassge", productMassge);
-                map.put("deliveryName", deliveryName);
-                map.put("deliveryNum", deliveryNum);
-                map.put("deliveryAddress", deliveryAddress);
-                smsCheckManager.send(purchaseOrder1.getBigTenant().getPhone(), map, "1216591");
-                smsCheckManager.send("13671386900", map, "1216591");
+        for (PurchaseOrder order : purchaseOrder.getSubPurchaseOrder()) {
+            for (PurchaseOrderProduct product : order.getPurchaseOrderProductList()) {
+                productMessage += product.getProductModel().getProduct().getName() + "(" + product.getPurchaseAmount() + ");";
             }
+            sendTenantSMS(order.getId(), productMessage, order.getReceiverName(), order.getReceiverPhone(), order.getPurchaseOrderAddress(), order.getBigTenant().getPhone());
         }
 
-        model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
+        if (purchaseOrder.getTenant() != null) {
+            for (PurchaseOrderProduct product : purchaseOrder.getPurchaseOrderProductList()) {
+                productMessage += product.getProductModel().getProduct().getName() + "(" + product.getPurchaseAmount() + ");";
+            }
+            sendTenantSMS(purchaseOrder.getSerial(), productMessage, purchaseOrder.getReceiverName(), purchaseOrder.getReceiverPhone(), purchaseOrder.getPurchaseOrderAddress(), purchaseOrder.getBigTenant().getPhone());
+        }
 
-        if ("3".equals(purchaseOrder.getPayWay())) {
-            return "redirect:"+ PConst.NEWWEBURL +"/sharePage/productShare/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
+
+        HashMap<String, String> smsParam = new HashMap<>();
+        smsParam.put("order", purchaseOrder.getSerial());
+        smsCheckManager.send(purchaseOrder.getReceiverPhone(), smsParam, "1646994");
+
+
+        model.addAttribute("order", purchaseOrder);
+        if (purchaseOrder.getCallback() != null) {
+            String redirect = URLDecoder.decode(purchaseOrder.getCallback(), "UTF-8");
+            return "redirect:" + redirect;
+        } else if (purchaseOrder.getOrderType() != null && purchaseOrder.getOrderType().equals("3")) {
+            return "redirect:/giftReceive/" + purchaseOrder.getId();
         } else {
-            //return "/purchaseOrder/paySuccess";
-            if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback() != null) {
-                String redirect = URLDecoder.decode(purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getCallback(), "UTF-8");
-                return "redirect:" + redirect;
-            } else if (purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType() != null && purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getOrderType().equals("3")) {
-                return "redirect:/giftReceive/" + purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder().getId();
-            }else {
-                return "/purchaseOrder/paySuccess";
-            }
+            return "/purchaseOrder/paySuccess";
         }
+
     }
 
     @RequestMapping({"/checkInventory/{orderId}"})

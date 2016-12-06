@@ -58,7 +58,7 @@ public class PurchaseOrder {
 
         paymentTypeMap.put(ZHIFUBAO, "支付宝");
         paymentTypeMap.put(YINHANGKA, "银行卡");
-        paymentTypeMap.put(WEIXIN, "威信");
+        paymentTypeMap.put(WEIXIN, "微信");
         paymentTypeMap.put(YOUHUIQUAN, "优惠卷");
         paymentTypeMap.put(YUE, "余额");
     }

@@ -3,7 +3,7 @@ package com.efeiyi.ec.website.organization.controller;
 import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.website.base.util.ApplicationException;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
-import com.efeiyi.ec.website.organization.service.O2oAddressManager;
+import com.efeiyi.ec.website.organization.service.AddressManager;
 import com.ming800.core.base.controller.BaseController;
 
 import com.ming800.core.does.model.XQuery;
@@ -21,11 +21,11 @@ import java.util.Map;
  * Created by Administrator on 2016/12/5.
  */
 @Controller
-@RequestMapping("o2oAddress")
-public class O2oAddressController extends BaseController {
+@RequestMapping("address")
+public class AddressController extends BaseController {
 
     @Autowired
-    O2oAddressManager addressManager;
+    AddressManager addressManager;
 
     /**
      * 获取地址列表

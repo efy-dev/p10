@@ -94,6 +94,8 @@ public interface PurchaseOrderManager {
     PurchaseOrder saveOrUpdatePurchaseOrder(List<CartProduct> cartProductList, Tenant tenant) throws ApplicationException;
 
 
+    PurchaseOrder saveOrUpdatePurchaseOrder(PurchaseOrder purchaseOrder) throws ApplicationException;
+
     /**
      * 通过订单的id获得订单对象
      *

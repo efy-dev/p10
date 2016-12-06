@@ -253,6 +253,7 @@ public class PurchaseOrderController extends BaseController {
      * 创建新的商品订单
      *
      * @param request productList  商品规格列表的json对象 [{"id":"100000000006","amount":"1"}]  tenantId 店铺id，如果没有改参数说明是多商铺订单，如果有改参数说明所有商品都是属于改店铺
+     *                callback 支付成功之后的回调地址
      * @return JSONObject 新生成的订单
      */
     @RequestMapping({"/createNewOrder"})
@@ -261,6 +262,7 @@ public class PurchaseOrderController extends BaseController {
         String productListStr = request.getParameter("productList");
         String tenantId = request.getParameter("tenantId");
         List<CartProduct> cartProductList = new ArrayList<>();
+        String callback = request.getParameter("callback");
 
         JSONArray productJSONArray;
         Tenant tenant;
@@ -293,11 +295,28 @@ public class PurchaseOrderController extends BaseController {
         PurchaseOrder purchaseOrder;
         try {
             purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cartProductList, tenant);
+
         } catch (ApplicationException e) {
             e.printStackTrace();
             return e.toJSONObject();
         }
 
+        try {
+            callback = URLEncoder.encode(callback, "UTF-8");
+            callback = URLDecoder.decode(callback, "UTF-8");
+            if (callback.contains("?")) {
+                callback += "&purchaseOrderId=" + purchaseOrder.getId();
+            } else {
+                callback += "?purchaseOrderId=" + purchaseOrder.getId();
+            }
+            purchaseOrder.setCallback(callback);
+            purchaseOrderManager.saveOrUpdatePurchaseOrder(purchaseOrder);
+        } catch (ApplicationException ae) {
+            return ae.toJSONObject();
+        } catch (Exception e) {
+            return new ApplicationException(ApplicationException.PARAM_ERROR).toJSONObject();
+
+        }
 
         JSONObject result = new JSONObject();
         result.put("code", "0");
@@ -309,7 +328,7 @@ public class PurchaseOrderController extends BaseController {
     /**
      * 确认订单状态，下一步是根据选择的支付类型进行在线支付
      *
-     * @param request  invoiceName发票名 invoiceTitle发票抬头 invoiceType发票类型 paymentType 支付类型，purchaseOrderId 订单id， message JSONObject [{"tenantId":"messageContent","tenantId2":"meessageContent2"} 留言，ConsumerAddressId 收货地址id
+     * @param request  invoiceName发票名 invoiceTitle发票抬头 invoiceType发票类型 paymentType 支付类型，purchaseOrderId 订单id， message JSONObject {"tenantId":"messageContent","tenantId2":"meessageContent2"} 留言，ConsumerAddressId 收货地址id
      * @param response JSONObject 已经确认的订单，由前端来判断是否
      * @return JSONObject 已经确认的订单
      */
@@ -327,7 +346,6 @@ public class PurchaseOrderController extends BaseController {
         PurchaseOrder purchaseOrder;
         JSONObject messageMap;
         ConsumerAddress consumerAddress;
-
 
         try {
             messageMap = JSONObject.fromObject(message);
@@ -409,8 +427,8 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrderJSONObject.put("serial", purchaseOrder.getSerial());
         purchaseOrderJSONObject.put("createDatetime", purchaseOrder.getCreateDatetime().getTime());
         purchaseOrderJSONObject.put("orderStatus", orderStatusMap.get(purchaseOrder.getOrderStatus()));
-        purchaseOrderJSONObject.put("total", purchaseOrder.getTotal().floatValue());
-        purchaseOrderJSONObject.put("originalPrice", purchaseOrder.getOriginalPrice().floatValue());
+        purchaseOrderJSONObject.put("total", purchaseOrder.getTotal().setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+        purchaseOrderJSONObject.put("originalPrice", purchaseOrder.getOriginalPrice().setScale(2, BigDecimal.ROUND_HALF_UP).toString());
         purchaseOrderJSONObject.put("paymentType", paymentTypeMap.get(purchaseOrder.getPayWay()));
         purchaseOrderJSONObject.put("message", purchaseOrder.getMessage());
         purchaseOrderJSONObject.put("address", purchaseOrder.getPurchaseOrderAddress());
@@ -436,9 +454,15 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/getDeliveryInfoBySerial"})
     @ResponseBody
     public JSONObject getDeliveryInfoBySerial(HttpServletRequest request, HttpServletResponse response) {
-        String result = getLogistics("1122334455667", "yunda");
-        JSONObject jsonObjectResult = JSONObject.fromObject(result);
-        return jsonObjectResult;
+        String serial = request.getParameter("serial");
+        String company = request.getParameter("company");
+        String result;
+        try {
+            result = getLogistics(serial, company);
+        } catch (Exception e) {
+            return new ApplicationException(ApplicationException.INNER_ERROR).toJSONObject();
+        }
+        return JSONObject.fromObject(result);
     }
 
 

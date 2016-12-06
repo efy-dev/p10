@@ -14,7 +14,7 @@ import java.util.Date;
 public class PurchaseOrderPaymentDetails {
 
 
-    private String id ;
+    private String id;
     private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信 4优惠券 5.余额
     private BigDecimal money;
     private Coupon coupon;
@@ -62,7 +62,7 @@ public class PurchaseOrderPaymentDetails {
         this.coupon = coupon;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "purchase_order_payment_id")
     public PurchaseOrderPayment getPurchaseOrderPayment() {
         return purchaseOrderPayment;
