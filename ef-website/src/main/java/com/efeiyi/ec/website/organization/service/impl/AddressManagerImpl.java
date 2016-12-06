@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.organization.service.impl;
 
 import com.efeiyi.ec.organization.model.ConsumerAddress;
+import com.efeiyi.ec.website.base.util.ApplicationException;
 import com.efeiyi.ec.website.organization.service.AddressManager;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class AddressManagerImpl implements AddressManager {
     private String ADDRESS_LIST = "select s from com.efeiyi.ec.organization.model.ConsumerAddress s where s.consumer.id = :userId and s.status <> 0";
 
     @Autowired
-    BaseManager baseManager;
+    private BaseManager baseManager;
 
     @Override
     public List<ConsumerAddress> getConsumerAddressList(String userId) throws Exception {
@@ -34,4 +35,14 @@ public class AddressManagerImpl implements AddressManager {
         baseManager.saveOrUpdate(ConsumerAddress.class.getName(), consumerAddress);
     }
 
+    @Override
+    public ConsumerAddress getConsumerAddressById(String id) throws ApplicationException {
+        ConsumerAddress consumerAddress;
+        try {
+            consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), id);
+        } catch (Exception e) {
+            throw new ApplicationException(ApplicationException.SQL_ERROR);
+        }
+        return consumerAddress;
+    }
 }
