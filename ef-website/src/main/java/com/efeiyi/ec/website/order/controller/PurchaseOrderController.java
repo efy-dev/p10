@@ -8,6 +8,7 @@ import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.base.util.ApplicationException;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.website.order.service.*;
+import com.efeiyi.ec.website.organization.service.AddressManager;
 import com.efeiyi.ec.website.product.service.ProductManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
@@ -72,6 +73,10 @@ public class PurchaseOrderController extends BaseController {
 
     @Autowired
     private ProductManager productManager;
+
+
+    @Autowired
+    private AddressManager addressManager;
 
     @RequestMapping("/giftBuy/showNameStatus.do")
     @ResponseBody
@@ -355,8 +360,7 @@ public class PurchaseOrderController extends BaseController {
 
         try {
             purchaseOrder = purchaseOrderManager.getPurchaseOrderById(purchaseOrderId);
-            //@TODO 需要替换成  ConsumerAddressManager
-            consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), consumerAddressId);
+            consumerAddress = addressManager.getConsumerAddressById(consumerAddressId);
         } catch (ApplicationException ae) {
             return ae.toJSONObject();
         }
