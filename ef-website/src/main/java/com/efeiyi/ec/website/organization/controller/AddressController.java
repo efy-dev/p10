@@ -240,9 +240,9 @@ public class AddressController extends BaseController {
      * @param request
      * @return resultMap
      */
-    @RequestMapping("provinceList")
+    @RequestMapping("getProvinceList")
     @ResponseBody
-    public Map listAddressProvince(HttpServletRequest request) {
+    public Map getProvinceList(HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
         List<AddressProvince> provinceList;
         XQuery xQuery;
@@ -273,9 +273,9 @@ public class AddressController extends BaseController {
      * @param request
      * @return resultMap
      */
-    @RequestMapping("cityList")
+    @RequestMapping("getCityList")
     @ResponseBody
-    public Map listAddressCity(HttpServletRequest request) {
+    public Map getCityList(HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
         XQuery xQuery;
         List<AddressCity> cityList;
@@ -309,9 +309,9 @@ public class AddressController extends BaseController {
      * @param request
      * @return resultMap
      */
-    @RequestMapping("districtList")
+    @RequestMapping("getDistrictList")
     @ResponseBody
-    public Map listAddressDistrict(HttpServletRequest request) {
+    public Map getDistrictList(HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
         XQuery xQuery;
         List<AddressDistrict> districtList;
