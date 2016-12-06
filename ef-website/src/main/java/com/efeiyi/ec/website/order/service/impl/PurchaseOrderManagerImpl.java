@@ -111,9 +111,20 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
             purchaseOrder = createNewPurchaseOrder(cartProductList);
             purchaseOrder.setTenant(tenant);
             if (tenant.getDiscount() != null && tenant.getDiscount() > 0) {
-                BigDecimal total = purchaseOrder.getOriginalPrice().multiply(new BigDecimal(tenant.getDiscount() / 100));
+                BigDecimal total = purchaseOrder.getOriginalPrice().multiply(new BigDecimal(tenant.getDiscount() / 100.0));
+                total.setScale(2, BigDecimal.ROUND_HALF_UP);
                 purchaseOrder.setTotal(total);
             }
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        } catch (Exception e) {
+            throw new ApplicationException(ApplicationException.SQL_ERROR);
+        }
+        return purchaseOrder;
+    }
+
+
+    public PurchaseOrder saveOrUpdatePurchaseOrder(PurchaseOrder purchaseOrder) throws ApplicationException {
+        try {
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         } catch (Exception e) {
             throw new ApplicationException(ApplicationException.SQL_ERROR);
@@ -253,6 +264,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
             baseManager.saveOrUpdate(Invoice.class.getName(), invoice);
             confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payWay);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ApplicationException(ApplicationException.SQL_ERROR);
         }
 

@@ -6,16 +6,15 @@ import cn.beecloud.BCPayResult;
 import cn.beecloud.BeeCloud;
 import cn.beecloud.bean.BCPayParameter;
 import com.efeiyi.ec.balance.model.BalanceRecord;
-import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.website.order.service.BalanceManager;
 import com.efeiyi.ec.website.order.service.CouponManager;
 import com.efeiyi.ec.website.order.service.PaymentManager;
-import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AutoSerialManager;
@@ -161,29 +160,11 @@ public class PaymentManagerImpl implements PaymentManager {
         purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
         purchaseOrderPayment.setPayWay(purchaseOrder.getPayWay());
         purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("payment"));
-        String userid = AuthorizationUtil.getMyUser().getId();
-        User user = (User) baseManager.getObject(User.class.getName(), userid);
+        User user = (User) baseManager.getObject(User.class.getName(), AuthorizationUtil.getMyUser().getId());
         purchaseOrderPayment.setUser(user);
         baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
-        //支付详情
-        //判断优惠券
-        if (purchaseOrder.getCoupon() != null) {
-            Coupon coupon = purchaseOrder.getCoupon();
-            coupon.setStatus("2"); //设置优惠券已使用
-            baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
-            PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
-            purchaseOrderPaymentDetails.setCoupon(coupon);
-            purchaseOrderPaymentDetails.setMoney(new BigDecimal(coupon.getCouponBatch().getPrice()));
-            purchaseOrderPaymentDetails.setPayWay(PurchaseOrder.YOUHUIQUAN);
-            purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
-            baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
-        }
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
-        if (purchaseOrder.getCoupon() != null) {
-            purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
-        } else {
-            purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal());
-        }
+        purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal());
         purchaseOrderPaymentDetails.setPayWay(purchaseOrder.getPayWay());
         purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
         baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
