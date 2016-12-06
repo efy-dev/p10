@@ -78,6 +78,7 @@ public class PurchaseOrderController extends BaseController {
     @Autowired
     private AddressManager addressManager;
 
+
     @RequestMapping("/giftBuy/showNameStatus.do")
     @ResponseBody
     public boolean changeShowGiftStatus(HttpServletRequest request) {
@@ -97,8 +98,9 @@ public class PurchaseOrderController extends BaseController {
     @ResponseBody
     public boolean updateImg(HttpServletRequest request) {
         try {
-            String imageUrl = request.getParameter("imageUrl");
+
             String purchaseOrderId = request.getParameter("purchaseOrderId");
+            String imageUrl = request.getParameter("imageUrl");
             PurchaseOrderGift purchaseOrderGift = (PurchaseOrderGift) baseManager.getObject(PurchaseOrderGift.class.getName(), purchaseOrderId);
             purchaseOrderGift.setGiftPictureUrl(imageUrl);
             baseManager.saveOrUpdate(PurchaseOrderGift.class.getName(), purchaseOrderGift);
@@ -414,7 +416,7 @@ public class PurchaseOrderController extends BaseController {
             productJSONObject.put("productName", purchaseOrderProduct.getProductModel().getProduct().getName());
             productJSONObject.put("productModelName", purchaseOrderProduct.getProductModel().getName());
             productJSONObject.put("imageUrl", purchaseOrderProduct.getProductModel().getProductModel_url());
-            productJSONObject.put("price", purchaseOrderProduct.getPurchasePrice().floatValue());
+            productJSONObject.put("price", purchaseOrderProduct.getPurchasePrice().setScale(2, BigDecimal.ROUND_HALF_UP).toString());
             productJSONObject.put("amount", purchaseOrderProduct.getPurchaseAmount());
             productListJSONArray.add(productJSONObject);
         }
@@ -438,6 +440,7 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrderJSONObject.put("address", purchaseOrder.getPurchaseOrderAddress());
         purchaseOrderJSONObject.put("receiverName", purchaseOrder.getReceiverName());
         purchaseOrderJSONObject.put("receiverPhone", purchaseOrder.getReceiverPhone());
+        purchaseOrderJSONObject.put("tenantName", purchaseOrder.getTenant().getName());
         result.put("code", "0");
         result.put("purchaseOrder", purchaseOrderJSONObject);
         result.put("productList", productListJSONArray);
