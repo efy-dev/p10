@@ -4,13 +4,15 @@ import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
+import com.efeiyi.ec.purchase.model.Invoice;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.website.base.util.ApplicationException;
 import org.springframework.ui.Model;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/10/21 0021.
@@ -65,7 +67,20 @@ public interface PurchaseOrderManager {
      * @param payWay
      * @return
      */
-    PurchaseOrder confirmPurchaseOrder(PurchaseOrder purchaseOrder, ConsumerAddress consumerAddress, HashMap<String, String> messageMap, String payWay);
+    PurchaseOrder confirmPurchaseOrder(PurchaseOrder purchaseOrder, ConsumerAddress consumerAddress, Map<String, String> messageMap, String payWay);
+
+
+    /**
+     * 确认订单的接口，修改订单的状态 在个人中心可见，判断支付方式跳转到相应的支付环境
+     *
+     * @param purchaseOrder   订单
+     * @param consumerAddress 消费者收货地址
+     * @param messageMap      订单留言的map
+     * @param payWay          支付方式
+     * @param invoice         发票
+     * @return
+     */
+    PurchaseOrder confirmPurchaseOrder(PurchaseOrder purchaseOrder, ConsumerAddress consumerAddress, Map<String, String> messageMap, String payWay, Invoice invoice) throws ApplicationException;
 
 
     /**
@@ -76,7 +91,16 @@ public interface PurchaseOrderManager {
      * @return 生成的订单对象
      * @throws Exception ApplicationException.SQL_ERROR
      */
-    PurchaseOrder saveOrUpdatePurchaseOrder(List<CartProduct> cartProductList, Tenant tenant) throws Exception;
+    PurchaseOrder saveOrUpdatePurchaseOrder(List<CartProduct> cartProductList, Tenant tenant) throws ApplicationException;
+
+
+    /**
+     * 通过订单的id获得订单对象
+     *
+     * @param id
+     * @return
+     */
+    PurchaseOrder getPurchaseOrderById(String id) throws ApplicationException;
 
 
 }
