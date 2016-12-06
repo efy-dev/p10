@@ -1,6 +1,7 @@
 package com.efeiyi.ec.product.model;
 
 import com.efeiyi.ec.organization.model.HotSpot;
+import com.efeiyi.ec.tenant.model.TenantGroup;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
@@ -44,6 +45,18 @@ public class ProductModel implements Serializable {
     private Date createDateTime;
     private String audio;
     private List<HotSpot> hotSpotList;
+    private TenantGroup tenantGroup;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenantGroup_id")
+    @NotFound(action = NotFoundAction.IGNORE)
+    public TenantGroup getTenantGroup() {
+        return tenantGroup;
+    }
+
+    public void setTenantGroup(TenantGroup tenantGroup) {
+        this.tenantGroup = tenantGroup;
+    }
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
@@ -152,7 +165,7 @@ public class ProductModel implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    @NotFound(action= NotFoundAction.IGNORE)
+    @NotFound(action = NotFoundAction.IGNORE)
     public Product getProduct() {
         return product;
     }

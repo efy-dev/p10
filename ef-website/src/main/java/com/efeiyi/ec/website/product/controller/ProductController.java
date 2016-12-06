@@ -10,7 +10,10 @@ import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.efeiyi.ec.website.base.util.ApplicationException;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
+import com.efeiyi.ec.website.product.model.RequestParamModel;
+import com.efeiyi.ec.website.product.service.ProductManager;
 import com.efeiyi.ec.wiki.model.Artistry;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -39,7 +42,8 @@ public class ProductController {
 
     @Autowired
     private BaseManager baseManager;
-
+    @Autowired
+    private ProductManager productManager;
 
     @RequestMapping(value = "/productList.do")
     public ModelAndView listProduct(HttpServletRequest request, ModelMap model) throws Exception {
@@ -397,6 +401,47 @@ public class ProductController {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("code", "1");
             return jsonObject;
+        }
+    }
+
+    @RequestMapping({"/searchProductModels"})
+    @ResponseBody
+    public Object searchProductModels(RequestParamModel requestParamModel) {
+        try {
+            return productManager.searchProductModels(requestParamModel);
+        } catch (Exception e) {
+            return e instanceof ApplicationException ? ((ApplicationException) e).toJSONObject() : e.getMessage();
+        }
+    }
+
+    @RequestMapping({"/getProductCategory"})
+    @ResponseBody
+    public Object getProductCategory() {
+        try {
+            return productManager.getProductCategory();
+        } catch (Exception e) {
+            return e instanceof ApplicationException ? ((ApplicationException) e).toJSONObject() : e.getMessage();
+        }
+    }
+
+    @RequestMapping({"/getTenantGroup"})
+    @ResponseBody
+    public Object getTenantGroup(RequestParamModel requestParamModel) {
+        try {
+            return productManager.getTenantGroup(requestParamModel);
+        } catch (Exception e) {
+            return e instanceof ApplicationException ? ((ApplicationException) e).toJSONObject() : e.getMessage();
+        }
+    }
+
+
+    @RequestMapping({"/searchProductModelsByTenantGroup"})
+    @ResponseBody
+    public Object searchProductModelsByTenantGroup(RequestParamModel requestParamModel) {
+        try {
+            return productManager.searchProductModelsByGroup(requestParamModel);
+        } catch (Exception e) {
+            return e instanceof ApplicationException ? ((ApplicationException) e).toJSONObject() : e.getMessage();
         }
     }
 }

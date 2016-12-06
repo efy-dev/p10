@@ -66,6 +66,17 @@ public class BigTenant implements Serializable, BaseTenant {
     private String audio;
     private List<UserTenant> userTenant;
     private List<TenantOrder> tenantOrders;
+    private List<TenantGroup> tenantGroups;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+    public List<TenantGroup> getTenantGroups() {
+        return tenantGroups;
+    }
+
+    public void setTenantGroups(List<TenantGroup> tenantGroups) {
+        this.tenantGroups = tenantGroups;
+    }
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "bigTenant")
