@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2016/12/5.
@@ -70,7 +68,13 @@ public class AddressController extends BaseController {
         Map<String, Object> resultMap = new HashMap<>();
         List<ConsumerAddress> consumerAddressList;
 
-        String userId = AuthorizationUtil.getMyUser().getId();
+        String userId = "ie884zfj2wy1h50s";//AuthorizationUtil.getMyUser().getId();
+
+        if(userId == null) {
+            ApplicationException exception = new ApplicationException(ApplicationException.INNER_ERROR);
+            exception.setInnerDescription("用户没有登录");
+            return exception.toJSONObject();
+        }
 
         try {
             consumerAddressList = addressManager.getConsumerAddressList(userId);
@@ -96,7 +100,9 @@ public class AddressController extends BaseController {
     public Map getConsumerAddress(HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
         ConsumerAddress consumerAddress;
-        String id = request.getParameter("id");
+
+        Map<String, String[]> paramMap = request.getParameterMap();
+        String id = paramMap.get("id")[0];
 
         try {
             consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), id);
@@ -123,20 +129,38 @@ public class AddressController extends BaseController {
         Map<String, Object> resultMap = new HashMap<>();
         ConsumerAddress consumerAddress = new ConsumerAddress();
 
-        AddressProvince province = new AddressProvince();
-        province.setId(request.getParameter("provinceId"));
-        AddressCity city = new AddressCity();
-        city.setId(request.getParameter("cityId"));
-        AddressDistrict district = new AddressDistrict();
-        district.setId(request.getParameter("districtId"));
+        Map<String, String[]> paramMap = request.getParameterMap();
 
-        consumerAddress.setConsumer(AuthorizationUtil.getMyUser());
-        consumerAddress.setProvince(province);
-        consumerAddress.setCity(city);
-        consumerAddress.setDistrict(district);
-        consumerAddress.setDetails(request.getParameter("details"));
-        consumerAddress.setPhone(request.getParameter("phone"));
-        consumerAddress.setConsignee(request.getParameter("consignee"));
+        MyUser user = new MyUser();//AuthorizationUtil.getMyUser();
+        user.setId("ie884zfj2wy1h50s");
+        if(user.getId() == null) {
+            ApplicationException exception = new ApplicationException(ApplicationException.INNER_ERROR);
+            exception.setInnerDescription("用户没有登录");
+            return exception.toJSONObject();
+        }
+
+        if(paramMap.containsKey("provinceId")) {
+            AddressProvince province = new AddressProvince();
+            province.setId(paramMap.get("provinceId")[0]);
+            consumerAddress.setProvince(province);
+        }
+
+        if(paramMap.containsKey("cityId")) {
+            AddressCity city = new AddressCity();
+            city.setId(paramMap.get("cityId")[0]);
+            consumerAddress.setCity(city);
+        }
+
+        if(paramMap.containsKey("districtId")) {
+            AddressDistrict district = new AddressDistrict();
+            district.setId(paramMap.get("districtId")[0]);
+            consumerAddress.setDistrict(district);
+        }
+
+        consumerAddress.setConsumer(user);
+        consumerAddress.setDetails(paramMap.get("details")[0]);
+        consumerAddress.setPhone(paramMap.get("phone")[0]);
+        consumerAddress.setConsignee(paramMap.get("consignee")[0]);
         consumerAddress.setStatus("1");
 
         try {
@@ -164,8 +188,18 @@ public class AddressController extends BaseController {
         Map<String, Object> resultMap = new HashMap<>();
         ConsumerAddress consumerAddress;
 
-        String id = request.getParameter("id");
-        String status = request.getParameter("status");
+        Map<String, String[]> paramMap = request.getParameterMap();
+
+        String id = paramMap.get("id")[0];
+        String status = paramMap.get("status")[0];
+
+        MyUser user = new MyUser();//AuthorizationUtil.getMyUser();
+        user.setId("ie884zfj2wy1h50s");
+        if(user.getId() == null) {
+            ApplicationException exception = new ApplicationException(ApplicationException.INNER_ERROR);
+            exception.setInnerDescription("用户没有登录");
+            return exception.toJSONObject();
+        }
 
         try {
             consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), id);
@@ -174,20 +208,28 @@ public class AddressController extends BaseController {
             return exception.toJSONObject();
         }
 
-        AddressProvince province = new AddressProvince();
-        province.setId(request.getParameter("provinceId"));
-        AddressCity city = new AddressCity();
-        city.setId(request.getParameter("cityId"));
-        AddressDistrict district = new AddressDistrict();
-        district.setId(request.getParameter("districtId"));
+        if(paramMap.containsKey("provinceId")) {
+            AddressProvince province = new AddressProvince();
+            province.setId(paramMap.get("provinceId")[0]);
+            consumerAddress.setProvince(province);
+        }
 
-        consumerAddress.setConsumer(AuthorizationUtil.getMyUser());
-        consumerAddress.setProvince(province);
-        consumerAddress.setCity(city);
-        consumerAddress.setDistrict(district);
-        consumerAddress.setDetails(request.getParameter("details"));
-        consumerAddress.setPhone(request.getParameter("phone"));
-        consumerAddress.setConsignee(request.getParameter("consignee"));
+        if(paramMap.containsKey("cityId")) {
+            AddressCity city = new AddressCity();
+            city.setId(paramMap.get("cityId")[0]);
+            consumerAddress.setCity(city);
+        }
+
+        if(paramMap.containsKey("districtId")) {
+            AddressDistrict district = new AddressDistrict();
+            district.setId(paramMap.get("districtId")[0]);
+            consumerAddress.setDistrict(district);
+        }
+
+        consumerAddress.setConsumer(user);
+        consumerAddress.setDetails(paramMap.get("details")[0]);
+        consumerAddress.setPhone(paramMap.get("phone")[0]);
+        consumerAddress.setConsignee(paramMap.get("consignee")[0]);
 
         if (status != null) {
             consumerAddress.setStatus(status);
@@ -217,7 +259,9 @@ public class AddressController extends BaseController {
     public Map deleteConsumerAddress(HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
         ConsumerAddress consumerAddress;
-        String id = request.getParameter("id");
+
+        Map<String, String[]> paramMap = request.getParameterMap();
+        String id = paramMap.get("id")[0];
 
         try {
             consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), id);
@@ -279,7 +323,8 @@ public class AddressController extends BaseController {
         Map<String, Object> resultMap = new HashMap<>();
         XQuery xQuery;
         List<AddressCity> cityList;
-        String provinceId = request.getParameter("provinceId");
+
+        Map<String, String[]> paramMap = request.getParameterMap();
 
         try {
             xQuery = new XQuery("listAddressCity_default", request);
@@ -288,7 +333,7 @@ public class AddressController extends BaseController {
             return exception.toJSONObject();
         }
 
-        xQuery.put("addressProvince_id", provinceId);
+        xQuery.put("addressProvince_id", paramMap.get("provinceId")[0]);
 
         try {
             cityList = baseManager.listObject(xQuery);
@@ -315,7 +360,8 @@ public class AddressController extends BaseController {
         Map<String, Object> resultMap = new HashMap<>();
         XQuery xQuery;
         List<AddressDistrict> districtList;
-        String cityId = request.getParameter("cityId");
+
+        Map<String, String[]> paramMap = request.getParameterMap();
 
         try {
             xQuery = new XQuery("listAddressDistrict_default", request);
@@ -324,7 +370,7 @@ public class AddressController extends BaseController {
             return exception.toJSONObject();
         }
 
-        xQuery.put("addressCity_id", cityId);
+        xQuery.put("addressCity_id", paramMap.get("cityId")[0]);
 
         try {
             districtList = baseManager.listObject(xQuery);
