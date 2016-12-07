@@ -1,9 +1,6 @@
 package com.efeiyi.ec.website.organization.controller;
 
-import com.efeiyi.ec.organization.model.AddressCity;
-import com.efeiyi.ec.organization.model.AddressDistrict;
-import com.efeiyi.ec.organization.model.AddressProvince;
-import com.efeiyi.ec.organization.model.ConsumerAddress;
+import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.website.base.util.ApplicationException;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.website.organization.service.AddressManager;
