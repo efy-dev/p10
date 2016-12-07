@@ -21,8 +21,7 @@ var PageVariable = {
         purchasePay: "purchase-pay",
         purchaseInfo: "purchase-info",
         purchaseAddress: "purchase-address",
-        purchaseDelivery: "purchase-delivery"
-        tenantAppointment: "tenant-appointment",
+        purchaseDelivery: "purchase-delivery",
         tenantCategory: "tenant-category",
         productModels: "search-productModels",
         productCategory: "product-category"
@@ -42,13 +41,12 @@ var PageVariable = {
         panelById: api_url + "/tenant/getPanelById",
         saveUserOrder: api_url + "/tenant/saveUserOrder",  //提交预约信息
         getOrderById: api_url + "/tenant/getOrderById",  //获取预约信息
-        hasArtistry: api_url + "/project/hasArtistry",
         createNewOrder: api_url + "/order/createNewOrder",
         hasAuthenticated: api_url + "/hasAuthenticated",
         getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
         getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
         confirmOrderById: api_url + "/order/confirmOrderById",
-        getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial"
+        getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial",
         hasArtistry: api_url + "/project/hasArtistry",
         tenantCategoryId: api_url + "/product/getTenantGroup", //店铺品类
         searchProductModels: api_url + "/product/searchProductModels",
