@@ -68,6 +68,8 @@
                             <%--<input class="am-btn am-btn-secondary " type="submit" tabindex="5"--%>
                             <%--value="登&nbsp;&nbsp;&nbsp;&nbsp;录">--%>
                             <a class="am-btn am-btn-secondary " href="javascript:void(0);" onclick="login()">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+                            <a class="am-btn am-btn-secondary " href="javascript:void(0);" onclick="wxLogin()"
+                               style="background-color: #44b549;border: 1px solid #44b549;">微信登录</a>
                         </div>
                     </div>
                 </form>
@@ -91,6 +93,19 @@
     }
 </style>
 <script>
+
+
+
+    function wxLogin() {
+        var redirect_uri = "http://mall.efeiyi.com/wxLogin";
+        var wxLoginUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+            "appid=wx7f6aa253b75466dd" +
+            "&redirect_uri=" +
+            encodeURI(redirect_uri) +
+            "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+        window.location.href = wxLoginUrl;
+    }
+
     function login() {
         var username = $("input[name=username]").val();
         var password = $("input[name=password]").val();

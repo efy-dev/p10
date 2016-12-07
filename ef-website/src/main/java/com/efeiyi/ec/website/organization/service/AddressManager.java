@@ -15,4 +15,6 @@ public interface AddressManager {
     void saveConsumerAddress(ConsumerAddress consumerAddress) throws Exception;
 
     ConsumerAddress getConsumerAddressById(String id) throws ApplicationException;
+
+    ConsumerAddress getConsumerAddressByStatus(String userId, String status) throws ApplicationException;
 }

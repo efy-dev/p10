@@ -8,7 +8,16 @@ function ajaxRequest(url, param, success) {
         data: param,
         success: function (data) {
             //1.处理data当中的错误信息
-            success(data);
+            if (typeof data.code != "undefined") {
+
+                if (data.code == "0") {
+                    success(data);
+                } else {
+                    modal.overAlert(data.description, "fail");
+                }
+            } else {
+                success(data);
+            }
         },
         error: function () {
             // @TODO renderRequestErrorTemplate
@@ -120,7 +129,7 @@ var modal = {
             console.log('取消删除');
             return false;
         });
-    },
+    }
 };
 
 /**

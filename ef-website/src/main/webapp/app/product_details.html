@@ -53,12 +53,15 @@
             {{ if(it.price != null){ }}
             <div class="price"><span> ¥ </span><strong>{{=it.price}}</strong></div>
             <div class="fixed">
-                <a class="tenant_link" href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
-                <a href="http://mall.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId={{=it.id}}&amount=1&price={{=it.price}}&orderType=6&callback=http%3a%2f%2fi.efeiyi.com%2forder%2fmyEfeiyi%2fview%2f{{=it.id}}"
+                <a class="tenant_link"
+                   href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
+                <a href="http://localhost/app/order.html?productList={{=generateJSONArrayFromProduct(it)}}&callback={{=encodeURIComponent('http://localhost/app/order_detail.html')}}&tenantId={{=it.product.tenant.id}}"
                    class="button-block-danger">立即购买</a>
             </div>
             {{ }else{ }}
-            <div class="fixed"><a class="tenant_link" style="bottom:16px" href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a></div>
+            <div class="fixed"><a class="tenant_link" style="bottom:16px"
+                                  href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
+            </div>
             {{ } }}
 
 
@@ -180,6 +183,16 @@
                 $("#artistry").remove();
             }
         })
+    }
+
+    function generateJSONArrayFromProduct(data) {
+        var result = [];
+        var obj = {};
+        obj.id = data.id;
+        obj.amount = 1;
+        result.push(obj);
+        var resultStr = JSON.stringify(result);
+        return encodeURI(resultStr);
     }
 
 

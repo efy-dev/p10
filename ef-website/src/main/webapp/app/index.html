@@ -5,18 +5,24 @@
     <meta charset="UTF-8">
     <title>前门华韵</title>
     <link rel="stylesheet" href="guide/css/layouts.css">
+
+
     <style>
-        .swiper-container {padding:0 16px}
-        .horizontal .swiper-slide {width:100%;}
+        .swiper-container {
+            padding: 0 16px
+        }
+
+        .horizontal .swiper-slide {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
 <div class="header" dot-template="header"></div>
 <!--//End--header-->
 
-
 <div class="image">
-    <img src="uploads/b1.jpg" alt="">
+    <img src="uploads/668284120090350147.jpg"/>
 </div>
 <!--//End--focus-->
 
@@ -34,8 +40,22 @@
 <!--//End--ad-->
 
 <div class="horizontal" style="margin-bottom:40px">
-    <div class="title"><h1>店铺</h1><!--<a class="more" href="tenant_list.html?title=店铺列表" title="更多">更多&gt;</a>--></div>
-    <div class="swiper-container" dot-template="home-recommend-list"></div>
+    <div class="title"><h1>店铺</h1><a class="more" href="tenant_list.html?title=店铺列表" title="更多">更多&gt;</a></div>
+    <div class="swiper-container" dot-template="home-recommend-list">
+
+        <div class="swiper-slide">
+            <a href="{{=it[i].redirect}}">
+                <img src="uploads/447530959026349984.jpg"/>
+                <div class="base">
+                    <dl class="txt" style="padding-right: 0px;">
+                        <dt>非遗体验中心</dt>
+                        <dd>开业庆典，全场8折</dd>
+                    </dl>
+                </div>
+            </a>`
+        </div>
+
+    </div>
 </div>
 <!--//End--product-->
 

@@ -228,7 +228,7 @@ public class PurchaseOrderPaymentController {
     /**
      * 订单支付接口
      *
-     * @param orderId 订单的id  isWeiXin 判断是否是微信浏览器
+     * @param orderId 订单的id  isWeiXin 判断是否是微信浏览器Con
      * @param request
      * @return
      * @throws Exception
@@ -237,8 +237,11 @@ public class PurchaseOrderPaymentController {
     public String orderPay(@PathVariable String orderId, HttpServletRequest request) throws Exception {
         //从新创建支付记录详情
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
-        String isWeiXin = request.getParameter("isWeiXin");//移动网站页面用的
+        String isWeiXin = request.getParameter("");//移动网站页面用的
         String payment = purchaseOrder.getPayWay();
+        if (payment == null) {
+            payment = request.getParameter("payment");
+        }
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder);
         if (payment.equals("1")) {//支付宝
             return "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();

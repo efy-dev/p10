@@ -274,6 +274,7 @@ public class PurchaseOrderController extends BaseController {
         JSONArray productJSONArray;
         Tenant tenant;
         try {
+            productListStr = URLDecoder.decode(productListStr, "UTF-8");
             tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
             productJSONArray = JSONArray.fromObject(productListStr);
 //            @TODO 当TenantId为空的时候说明是多店铺商品
@@ -354,10 +355,10 @@ public class PurchaseOrderController extends BaseController {
         JSONObject messageMap;
         ConsumerAddress consumerAddress;
 
-        try {
+        if (message != null && !message.equals("")) {
             messageMap = JSONObject.fromObject(message);
-        } catch (Exception e) {
-            return new ApplicationException(ApplicationException.PARAM_ERROR).toJSONObject();
+        } else {
+            messageMap = new JSONObject();
         }
 
         try {
@@ -425,6 +426,7 @@ public class PurchaseOrderController extends BaseController {
         for (PurchaseOrderDelivery purchaseOrderDelivery : purchaseOrder.getPurchaseOrderDeliveryList()) {
             JSONObject deliveryJSONObject = new JSONObject();
             deliveryJSONObject.put("logisticsCompany", deliveryMap.get(purchaseOrderDelivery.getLogisticsCompany()));
+            deliveryJSONObject.put("company", purchaseOrderDelivery.getLogisticsCompany());
             deliveryJSONObject.put("serial", purchaseOrderDelivery.getSerial());
             deliveryListJSONArray.add(deliveryJSONObject);
         }
@@ -463,13 +465,17 @@ public class PurchaseOrderController extends BaseController {
     public JSONObject getDeliveryInfoBySerial(HttpServletRequest request, HttpServletResponse response) {
         String serial = request.getParameter("serial");
         String company = request.getParameter("company");
-        String result;
+        String resultStr;
         try {
-            result = getLogistics(serial, company);
+            resultStr = getLogistics(serial, company);
         } catch (Exception e) {
             return new ApplicationException(ApplicationException.INNER_ERROR).toJSONObject();
         }
-        return JSONObject.fromObject(result);
+
+        JSONObject result = new JSONObject();
+        result.put("src", resultStr);
+
+        return result;
     }
 
 

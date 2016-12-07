@@ -137,10 +137,10 @@
     var redirect = "http://www.efeiyi.com/app/index.html";
     var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
     wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-            "appid=wx7f6aa253b75466dd" +
-            "&redirect_uri=" +
-            encodeURI(redirect_uri) +
-            "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+        "appid=wx7f6aa253b75466dd" +
+        "&redirect_uri=" +
+        encodeURI(redirect_uri) +
+        "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
 
     $().ready(function () {
         initPage();
