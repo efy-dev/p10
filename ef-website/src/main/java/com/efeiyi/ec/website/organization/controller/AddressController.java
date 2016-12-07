@@ -1,12 +1,15 @@
 package com.efeiyi.ec.website.organization.controller;
 
-import com.efeiyi.ec.organization.model.*;
+import com.efeiyi.ec.organization.model.AddressCity;
+import com.efeiyi.ec.organization.model.AddressDistrict;
+import com.efeiyi.ec.organization.model.AddressProvince;
+import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.website.base.util.ApplicationException;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.website.organization.service.AddressManager;
 import com.ming800.core.base.controller.BaseController;
-
 import com.ming800.core.does.model.XQuery;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +28,39 @@ import java.util.Map;
 public class AddressController extends BaseController {
 
     @Autowired
-    AddressManager addressManager;
+    private AddressManager addressManager;
+
+    @RequestMapping({"/getDefaultConsumerAddress"})
+    @ResponseBody
+    public JSONObject getDefaultConsumerAddress() {
+        ConsumerAddress consumerAddress;
+        try {
+            consumerAddress = addressManager.getConsumerAddressByStatus(AuthorizationUtil.getMyUser().getId(), "2");
+        } catch (ApplicationException ae) {
+            return ae.toJSONObject();
+        }
+
+        JSONObject result = new JSONObject();
+        result.put("code", "0");
+        if (consumerAddress != null) {
+            result.put("addressId", consumerAddress.getId());
+            result.put("addressCity", consumerAddress.getCity().getName());
+            result.put("addressProvince", consumerAddress.getProvince().getName());
+            result.put("addressDistrict", consumerAddress.getDistrict().getName());
+            result.put("addressDetail", consumerAddress.getDetails());
+            result.put("addressConsignee", consumerAddress.getConsignee());
+            result.put("addressPhone", consumerAddress.getPhone());
+        } else {
+            result.put("addressId", null);
+        }
+
+        return result;
+
+    }
 
     /**
      * 获取地址列表
+     *
      * @param request
      * @return resultMap
      */
@@ -55,6 +87,7 @@ public class AddressController extends BaseController {
 
     /**
      * 获取某个地址
+     *
      * @param request
      * @return resultMap
      */
@@ -80,6 +113,7 @@ public class AddressController extends BaseController {
 
     /**
      * 新增地址
+     *
      * @param request
      * @return resultMap
      */
@@ -120,6 +154,7 @@ public class AddressController extends BaseController {
 
     /**
      * 修改地址
+     *
      * @param request
      * @return resultMap
      */
@@ -154,7 +189,7 @@ public class AddressController extends BaseController {
         consumerAddress.setPhone(request.getParameter("phone"));
         consumerAddress.setConsignee(request.getParameter("consignee"));
 
-        if(status != null) {
+        if (status != null) {
             consumerAddress.setStatus(status);
         }
 
@@ -173,6 +208,7 @@ public class AddressController extends BaseController {
 
     /**
      * 删除地址
+     *
      * @param request
      * @return resultMap
      */
@@ -200,6 +236,7 @@ public class AddressController extends BaseController {
 
     /**
      * 获取省列表
+     *
      * @param request
      * @return resultMap
      */
@@ -232,6 +269,7 @@ public class AddressController extends BaseController {
 
     /**
      * 获取市列表
+     *
      * @param request
      * @return resultMap
      */
@@ -267,6 +305,7 @@ public class AddressController extends BaseController {
 
     /**
      * 获取地区列表
+     *
      * @param request
      * @return resultMap
      */

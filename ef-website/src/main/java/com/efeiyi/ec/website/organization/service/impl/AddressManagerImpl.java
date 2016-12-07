@@ -45,4 +45,21 @@ public class AddressManagerImpl implements AddressManager {
         }
         return consumerAddress;
     }
+
+    @Override
+    public ConsumerAddress getConsumerAddressByStatus(String userId, String status) throws ApplicationException {
+        String hql = "select obj from ConsumerAddress obj where obj.status='" + status + "' and obj.consumer.id='" + userId + "'";
+        List<ConsumerAddress> consumerAddressList;
+        try {
+            consumerAddressList = baseManager.listObject(hql);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ApplicationException(ApplicationException.SQL_ERROR);
+        }
+        if (!consumerAddressList.isEmpty()) {
+            return consumerAddressList.get(0);
+        } else {
+            return null;
+        }
+    }
 }
