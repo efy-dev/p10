@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>搜索结果页</title>
+    <link rel="stylesheet" href="guide/css/layouts.css">
+</head>
+<body style="background:#f5f5f5;">
+<div class="header pagesearch">
+    <a href="javascript:history.go(-1)" class="angle left" title="返回上一页"></a>
+    <!--/End/-->
+    <div class="search active">
+        <i class="icon"></i>
+        <form action=""><input type="text" value="" placeholder="搜索"></form>
+    </div>
+    <!--/End/-->
+    <div class="filter-btn">
+        <span>价格</span>
+        <span>分类</span>
+    </div>
+</div>
+<!--//End--header-->
+<div class="filter" style="width:100%;position: fixed;top:44px;left: 0;background:#fff;z-index:3;">
+    <div class="content">
+        <ul class="price" style="display: none;">
+            <li>199元以下</li>
+            <li>199元 — 599元</li>
+            <li>599元 — 999元</li>
+            <li>1000元以上</li>
+        </ul>
+        <ul class="category" style="display: none;">
+            <li>分类1</li>
+            <li>分类2</li>
+            <li>分类3</li>
+            <li>分类4</li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="filter">
+    <div class="tab2">
+        <div class="together">综合</div>
+        <div class="price ">价格<i></i></div>
+        <div class="sales">销量</div>
+        <div class="heat">热度</div>
+    </div>
+</div>
+<!--//End-->
+<div class="filter-list">
+    <dl>
+        <dt>热搜商品</dt>
+        <dd>
+            <a href="">
+                <img src="uploads/guide1.jpg" alt="">
+                <div class="text">
+                    <p>苏绣—水乡小品</p>
+                    <p>姚惠芬苏绣艺术馆</p>
+                    <p>¥ 29999</p>
+                </div>
+            </a>
+        </dd>
+        <dd>
+            <a href="">
+                <img src="uploads/guide1.jpg" alt="">
+                <div class="text">
+                    <p>苏绣—水乡小品</p>
+                    <p>姚惠芬苏绣艺术馆</p>
+                    <p>¥ 29999</p>
+                </div>
+            </a>
+        </dd>
+
+    </dl>
+</div>
+
+
+<script type="text/x-dot-template" id="home-recommend-list">
+    <div class="swiper-wrapper">
+        {{ for(var i = 0 ; i < it.length ;i++){ }}
+        {{ if(it[i].image!=null){ }}
+        <div class="swiper-slide">
+            <a href="{{=it[i].redirect}}">
+                <img src="{{=it[i].image.src}}@!o2o-tenant-list" alt="">
+                <div class="base">
+                    <dl class="txt" style="padding-right: 0px;">
+                        <dt>{{=it[i].title}}</dt>
+                        <dd>{{=it[i].shortText}}</dd>
+                    </dl>
+                </div>
+            </a>
+        </div>
+        <!--//End 3-->
+        {{ } }}
+        {{ } }}
+    </div>
+</script>
+
+
+<script src="common/js/common.js"></script>
+<script src="common/js/util.js"></script>
+<script src="common/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
+<script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--//End-->
+
+
+<script>
+    wx_share_title = "前门华韵"; //分享标题
+    wx_share_des = "带上耳机，轻松领略中国传统文化与传承";  //分享描述
+    var redirect = "http://www.efeiyi.com/app/index.html";
+    var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
+    wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+        "appid=wx7f6aa253b75466dd" +
+        "&redirect_uri=" +
+        encodeURI(redirect_uri) +
+        "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+
+    $().ready(function () {
+        initPage();
+    });
+
+    function initPage() {
+        getRecommendList({}, 5, 0, function () {
+            renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
+        });
+
+        filterSearch();
+    }
+
+    //筛选
+    function filterSearch() {
+        //选择按钮
+        var $filterBtn = $('.filter-btn span');
+        var $filterUl = $('.filter .content ul');
+        var $filterTab2 = $('.filter .tab2');
+
+
+        //筛选条件
+        $filterBtn.on('touchend', function () {
+            var index = $(this).index();
+            $(this).toggleClass('active').siblings('span').removeClass('active');
+            $filterUl.eq(index).stop(true).slideToggle(200).siblings('ul').slideUp(0);
+        });
+
+        //下拉框：筛选条件
+        $filterUl.find('li').on('click', function () {
+            $filterUl.slideUp(200);
+            $(this).addClass('active').siblings('li').removeClass('active');
+            $filterBtn.removeClass('active');
+        });
+
+        //第二部分筛选
+        $filterTab2.on('touchend', '.together, .price, .sales, .heat', function (e) {
+            var index= $(this).index();
+            $filterTab2.find('div').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+
+        //价格
+        var indexold = -1;
+        $filterTab2.on('touchend', '.price', function (e) {
+            var index=0;
+            $(this).addClass('active');
+            if(index==indexold){
+                $(this).toggleClass('active2');
+            }
+            indexold=index;
+            console.log(indexold)
+            e.preventDefault();
+        });
+
+
+    }
+</script>
+
+
+</body>
+</html>

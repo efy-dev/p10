@@ -19,11 +19,15 @@
     <ul class="items">
         {{ for(var i = 0 ; i < it.length ; i++){ }}
         <li>
-            <div class="image"><img src="{{=it[i].pictureUrl}}@!o2o-tenant-list" alt=""></div>
+            <a href="tenant_details.html?tenantId={{=it[i].id}}&title={{=it[i].name}}">
+                {{ if(it[i].pictureUrl !=null){ }}
+                <div class="image"><img src="{{=it[i].pictureUrl}}@!o2o-tenant-list" alt=""></div>
+                {{ } }}
+            </a>
             <div class="text audio-box" id="{{=it[i].id}}">
                 <div class="txt">{{=it[i].name}}</div>
                 <div class="des">{{=it[i].content}}</div>
-                {{ if(it[i].audio!=null){ }}
+                {{ if(it[i].audio != ''){ }}
                 <a data-type="audio-button">
                     <div class="audio">
                         <span class="play" data-type="audio-icon"><i class="icon"></i></span>
@@ -35,8 +39,6 @@
         </li>
         {{ } }}
     </ul>
-
-
 </script>
 
 
@@ -53,10 +55,10 @@
     var redirect = window.location.href;
     var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
     wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-            "appid=wx7f6aa253b75466dd" +
-            "&redirect_uri=" +
-            encodeURI(redirect_uri) +
-            "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+        "appid=wx7f6aa253b75466dd" +
+        "&redirect_uri=" +
+        encodeURI(redirect_uri) +
+        "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
 
     $().ready(function () {
         initPage();

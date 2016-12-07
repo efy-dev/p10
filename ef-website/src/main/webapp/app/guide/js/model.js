@@ -1,5 +1,5 @@
-//var api_url = 'http://192.168.1.10';
 var api_url = '';
+// var api_url = 'http://192.168.1.10';
 // var api_url = 'http://192.168.1.72';
 var PageVariable = {
     template: {
@@ -15,7 +15,13 @@ var PageVariable = {
         tenantList: "tenant-list",
         tenantAudioList: "tenant-audio-list",
         panelBase: "panel-base",
-        tenantAppointment: "tenant-appointment"
+        tenantAppointment: "tenant-appointment",
+        purchaseProduct: "purchase-product",
+        purchaseOrder: "purchase-order",
+        purchasePay: "purchase-pay",
+        purchaseInfo: "purchase-info",
+        purchaseAddress: "purchase-address",
+        purchaseDelivery: "purchase-delivery"
     },
     service: {
         login: "/wx/login",
@@ -32,7 +38,13 @@ var PageVariable = {
         panelById: api_url + "/tenant/getPanelById",
         saveUserOrder: api_url + "/tenant/saveUserOrder",  //提交预约信息
         getOrderById: api_url + "/tenant/getOrderById",  //获取预约信息
-        hasArtistry: api_url + "/project/hasArtistry"
+        hasArtistry: api_url + "/project/hasArtistry",
+        createNewOrder: api_url + "/order/createNewOrder",
+        hasAuthenticated: api_url + "/hasAuthenticated",
+        getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
+        getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
+        confirmOrderById: api_url + "/order/confirmOrderById",
+        getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial"
     },
 
     currentUser: null,
@@ -218,7 +230,6 @@ function getRecommendList(param, limit, offset, callback) {
         PageVariable.recommendList = data;
         if (typeof callback == "function") {
             callback();
-            swiperContaniner('.swiper-container');
         }
     };
     var requestParam = {};
@@ -245,7 +256,6 @@ function getPanelById(id, callback) {
     requestParam.id = id;
     ajaxRequest(PageVariable.service.panelById, requestParam, success);
 }
-
 
 
 /**
@@ -275,5 +285,89 @@ function hasArtistry(projectId, callback) {
     ajaxRequest(PageVariable.service.hasArtistry, requestParam, success);
 }
 
+
+function createNewOrder(productList, tenantId, callback) {
+    var success = function (data) {
+        PageVariable.purchaseOrderId = data.orderId;
+        callback();
+    };
+    var requestParam = {};
+    requestParam.productList = productList;
+    requestParam.tenantId = tenantId;
+    requestParam.callback = "http://localhost/app/order_details.html";
+    ajaxRequest(PageVariable.service.createNewOrder, requestParam, success);
+}
+
+function confirmOrderById(orderId, consumerAddressId, invoiceName, invoiceType, invoiceTitle, paymentType, callback) {
+    var success = function (data) {
+        callback();
+    };
+    var requestParam = {};
+    requestParam.purchaseOrderId = orderId;
+    requestParam.invoiceName = invoiceName;
+    requestParam.invoiceType = invoiceType;
+    requestParam.invoiceTitle = invoiceTitle;
+    requestParam.consumerAddressId = consumerAddressId;
+    requestParam.paymentType = paymentType;
+
+    ajaxRequest(PageVariable.service.confirmOrderById, requestParam, success);
+}
+
+function getPurchaseOrderById(id, callback) {
+    var success = function (data) {
+        PageVariable.purchaseOrder = data.purchaseOrder;
+        PageVariable.productList = data.productList;
+        PageVariable.deliveryList = data.deliveryList;
+
+        PageVariable.purchaseorderInfo = data;
+
+        callback();
+    };
+    var requestParam = {};
+    requestParam.purchaseOrderId = id;
+    ajaxRequest(PageVariable.service.getPurchaseOrderById, requestParam, success);
+}
+
+
+function authenticationFilter(filterMappingFunction, failFunction) {
+    var success = function (data) {
+        PageVariable.hasAuthenticated = data.hasAuthenticated;
+        if (PageVariable.hasAuthenticated) {
+            filterMappingFunction();
+        } else {
+            failFunction();
+        }
+    };
+    ajaxRequest(PageVariable.service.hasAuthenticated, {}, success);
+}
+
+function getDefaultConsumerAddress(callback) {
+    var success = function (data) {
+        var currentAddress = {};
+        currentAddress.id = data.addressId;
+        currentAddress.city = data.addressCity;
+        currentAddress.province = data.addressProvince;
+        currentAddress.district = data.addressDistrict;
+        currentAddress.consignee = data.addressConsignee;
+        currentAddress.phone = data.addressPhone;
+        currentAddress.detail = data.addressDetail;
+        PageVariable.currentAddress = currentAddress;
+        callback();
+    };
+    ajaxRequest(PageVariable.service.getDefaultConsumerAddress, {}, success);
+}
+
+
+function getDeliveryInfoBySerial(serial, company, callback) {
+    var success = function (data) {
+        PageVariable.deliveryInfo = data.src;
+        callback();
+    };
+    var requestParam = {};
+    requestParam.serial = serial;
+    requestParam.company = company;
+    ajaxRequest(PageVariable.service.getDeliveryInfoBySerial, requestParam, success);
+
+}
 
 getCurrentUser();
