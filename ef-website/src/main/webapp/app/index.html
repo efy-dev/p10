@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <title>前门华韵</title>
     <link rel="stylesheet" href="guide/css/layouts.css">
+    <style>
+        .swiper-container {padding:0 16px}
+        .horizontal .swiper-slide {width:100%;}
+    </style>
 </head>
 <body>
 <div class="header" dot-template="header"></div>
 <!--//End--header-->
+
 
 <div class="image">
     <img src="uploads/b1.jpg" alt="">
@@ -18,7 +23,8 @@
 <div class="menu">
     <a href="http://www.efeiyi.com/app/audio_guide.html?title=语音导览"><i class="icon icon-audio"></i><span>语音导览</span></a>
     <a href=""><i class="icon icon-tour"></i><span>旅游攻略</span></a>
-    <a href="http://www.efeiyi.com/app/product_list.html?title=限时折扣"><i class="icon icon-limit"></i><span>限时折扣</span></a>
+    <a href="http://www.efeiyi.com/app/product_list.html?title=限时折扣"><i
+            class="icon icon-limit"></i><span>限时折扣</span></a>
 </div>
 <!--//End--menu-->
 
@@ -28,9 +34,8 @@
 <!--//End--ad-->
 
 <div class="horizontal" style="margin-bottom:40px">
-    <div class="title"><h1>艺术馆</h1><a class="more" href="" title="更多">更多&gt;</a></div>
-    <div class="swiper-container" dot-template="home-recommend-list">
-    </div>
+    <div class="title"><h1>店铺</h1><!--<a class="more" href="tenant_list.html?title=店铺列表" title="更多">更多&gt;</a>--></div>
+    <div class="swiper-container" dot-template="home-recommend-list"></div>
 </div>
 <!--//End--product-->
 
@@ -58,15 +63,7 @@
         {{ } }}
     </div>
 </script>
-<script type="text/x-dot-template" id="header">
-    <a href="http://www.efeiyi.com/app/index.html" class="icon logo" title="前门 华韵"></a>
-    <a class="icon user" title="个人中心"></a>
-    <div class="layer">
-        <a class="link" href="/"><i class="icon icon-home"></i>首页</a>
-        <a class="link" href="http://i.efeiyi.com/"><i class="icon icon-center"></i>个人中心</a>
-        <i class="angle"></i>
-    </div>
-</script>
+
 
 <script src="common/js/common.js"></script>
 <script src="common/js/util.js"></script>
@@ -97,6 +94,7 @@
         getRecommendList({}, 5, 0, function () {
             renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
         });
+
 
     }
 

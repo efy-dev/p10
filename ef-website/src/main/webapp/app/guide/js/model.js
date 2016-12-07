@@ -1,6 +1,6 @@
-//var api_url = 'http://192.168.1.10';
-var api_url = '';
-// var api_url = 'http://192.168.1.72';
+// var api_url = '';
+// var api_url = 'http://192.168.1.10';
+var api_url = 'http://192.168.1.72';
 var PageVariable = {
     template: {
         homeRecommendList: "home-recommend-list",
@@ -15,7 +15,10 @@ var PageVariable = {
         tenantList: "tenant-list",
         tenantAudioList: "tenant-audio-list",
         panelBase: "panel-base",
-        tenantAppointment: "tenant-appointment"
+        tenantAppointment: "tenant-appointment",
+        tenantCategory: "tenant-category",
+        productModels: "search-productModels",
+        productCategory: "product-category"
     },
     service: {
         login: "/wx/login",
@@ -32,7 +35,11 @@ var PageVariable = {
         panelById: api_url + "/tenant/getPanelById",
         saveUserOrder: api_url + "/tenant/saveUserOrder",  //提交预约信息
         getOrderById: api_url + "/tenant/getOrderById",  //获取预约信息
-        hasArtistry: api_url + "/project/hasArtistry"
+        hasArtistry: api_url + "/project/hasArtistry",
+        tenantCategoryId: api_url + "/product/getTenantGroup", //店铺品类
+        searchProductModels: api_url + "/product/searchProductModels",
+        searchProductModelsByTenantGroup: api_url + "/product/searchProductModelsByTenantGroup",
+        getProductCategory: api_url + "/product/getProductCategory"
     },
 
     currentUser: null,
@@ -51,9 +58,12 @@ var PageVariable = {
     recommendList: [],
     panelList: {},  //店铺实景
     appointment: {},
+    tenantCategory: [],  //店铺品类
+    productCategory: [],
     imageStyle: {},
     currentAudio: null,
     audioList: [],
+    requestModel: {},
 
     setCurrentAudio: function (audio) {
         if (PageVariable.currentAudio != null) {
@@ -247,7 +257,6 @@ function getPanelById(id, callback) {
 }
 
 
-
 /**
  * @param 店铺预约
  * @param callback
@@ -275,5 +284,68 @@ function hasArtistry(projectId, callback) {
     ajaxRequest(PageVariable.service.hasArtistry, requestParam, success);
 }
 
+
+/**
+ * @param 店铺品类
+ * @param callback
+ */
+function getTenantCategory(id, callback) {
+    console.log('====' + id)
+
+    var success = function (data) {
+        PageVariable.tenantCategory = data;
+
+        console.log(data)
+
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.tenantId = id;
+    ajaxRequest(PageVariable.service.tenantCategoryId, requestParam, success);
+}
+
+function getProductCategory(id, callback) {
+    var success = function (data) {
+        PageVariable.productCategory = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.getProductCategory, null, success);
+}
+
+/**
+ * @param 筛选店铺内商品
+ * @param callback
+ */
+function searchProductModelsByTenantGroup(param, limit, offset, callback) {
+    var success = function (data) {
+        PageVariable.productModelList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.param = JSON.stringify(param);
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.searchProductModelsByTenantGroup, requestParam, success);
+}
+
+function searchProductModels(param, limit, offset, callback) {
+    var success = function (data) {
+        PageVariable.productModelList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.param = param;
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.searchProductModels, requestParam, success);
+}
 
 getCurrentUser();

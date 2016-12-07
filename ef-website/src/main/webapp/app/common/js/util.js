@@ -152,7 +152,7 @@ function getScreenInfo(x, y) {
 
 //前门店铺预约
 function orderFormatDate() {
-    var $ul=$('#group-drop-date');
+    var $ul = $('#group-drop-date');
     var $li = $ul.find('li');
     var $length = $li.length;
     var currentFirstDate;
@@ -178,8 +178,8 @@ function orderFormatDate() {
         date = addDate(date, week * -1);
         currentFirstDate = new Date(date);
         $li.each(function () {
-            var index=$(this).index();
-            $(this).attr('data-time',formatDate(index == 0 ? date : addDate(date, 1)));
+            var index = $(this).index();
+            $(this).attr('data-time', formatDate(index == 0 ? date : addDate(date, 1)));
         })
     };
     $ul.on('click', function () {
@@ -190,3 +190,4 @@ function orderFormatDate() {
     }, 100)
     setDate(new Date());
 }
+
