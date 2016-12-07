@@ -95,17 +95,6 @@
 <script>
 
 
-    $().ready(function () {
-        var redirect_uri = "http://mall.efeiyi.com/wxLogin";
-        var wxLoginUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-            "appid=wx7f6aa253b75466dd" +
-            "&redirect_uri=" +
-            encodeURI(redirect_uri) +
-            "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-
-
-    });
-
 
     function wxLogin() {
         var redirect_uri = "http://mall.efeiyi.com/wxLogin";
