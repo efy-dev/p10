@@ -67,8 +67,9 @@
 
                             <%--<input class="am-btn am-btn-secondary " type="submit" tabindex="5"--%>
                             <%--value="登&nbsp;&nbsp;&nbsp;&nbsp;录">--%>
-                            <a class="am-btn am-btn-secondary " href="javascript:void(0);" onclick="login()">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-                            <a class="am-btn am-btn-secondary " href="javascript:void(0);" onclick="wxLogin()"
+                            <a class="am-btn am-btn-secondary" href="javascript:void(0);" onclick="login()">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+                            <a class="am-btn am-btn-secondary" id="wxLoginButton" href="javascript:void(0);"
+                               onclick="wxLogin()"
                                style="background-color: #44b549;border: 1px solid #44b549;">微信登录</a>
                         </div>
                     </div>
@@ -94,6 +95,12 @@
 </style>
 <script>
 
+
+    $().ready(function () {
+        if (!isWeiXin()) {
+            $("#wxLoginButton").remove();
+        }
+    });
 
 
     function wxLogin() {

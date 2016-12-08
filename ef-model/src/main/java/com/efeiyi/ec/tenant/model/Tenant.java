@@ -34,6 +34,17 @@ public class Tenant implements Serializable {
     private String pictureUrl;
     private Integer discount;
 
+    private List<TenantGroup> tenantGroups;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+    public List<TenantGroup> getTenantGroups() {
+        return tenantGroups;
+    }
+
+    public void setTenantGroups(List<TenantGroup> tenantGroups) {
+        this.tenantGroups = tenantGroups;
+    }
+
     @Column(name = "discount")
     public Integer getDiscount() {
         return discount;

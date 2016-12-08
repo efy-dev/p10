@@ -70,6 +70,7 @@ public class BigTenant implements Serializable, BaseTenant {
     private List<UserTenant> userTenant;
     private List<TenantOrder> tenantOrders;
     private List<TenantGroup> tenantGroups;
+    private Integer discount;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
@@ -80,7 +81,6 @@ public class BigTenant implements Serializable, BaseTenant {
     public void setTenantGroups(List<TenantGroup> tenantGroups) {
         this.tenantGroups = tenantGroups;
     }
-    private Integer discount;
 
     @Column(name = "discount")
     public Integer getDiscount() {

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2016/12/5.
@@ -39,9 +41,46 @@ public class AddressController extends BaseController {
         result.put("code", "0");
         if (consumerAddress != null) {
             result.put("addressId", consumerAddress.getId());
-            result.put("addressCity", consumerAddress.getCity().getName());
-            result.put("addressProvince", consumerAddress.getProvince().getName());
-            result.put("addressDistrict", consumerAddress.getDistrict().getName());
+            try {
+                result.put("addressCity", consumerAddress.getCity().getName());
+                result.put("addressProvince", consumerAddress.getProvince().getName());
+                result.put("addressDistrict", consumerAddress.getDistrict().getName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            result.put("addressDetail", consumerAddress.getDetails());
+            result.put("addressConsignee", consumerAddress.getConsignee());
+            result.put("addressPhone", consumerAddress.getPhone());
+        } else {
+            result.put("addressId", null);
+        }
+
+        return result;
+
+    }
+
+
+    @RequestMapping({"/getConsumerAddressById"})
+    @ResponseBody
+    public JSONObject getConsumerAddressById(HttpServletRequest request) {
+        ConsumerAddress consumerAddress;
+        try {
+            consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), request.getParameter("id"));
+        } catch (Exception e) {
+            return new ApplicationException(ApplicationException.SQL_ERROR).toJSONObject();
+        }
+
+        JSONObject result = new JSONObject();
+        result.put("code", "0");
+        if (consumerAddress != null) {
+            result.put("addressId", consumerAddress.getId());
+            try {
+                result.put("addressCity", consumerAddress.getCity().getName());
+                result.put("addressProvince", consumerAddress.getProvince().getName());
+                result.put("addressDistrict", consumerAddress.getDistrict().getName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             result.put("addressDetail", consumerAddress.getDetails());
             result.put("addressConsignee", consumerAddress.getConsignee());
             result.put("addressPhone", consumerAddress.getPhone());
@@ -67,7 +106,7 @@ public class AddressController extends BaseController {
 
         String userId = AuthorizationUtil.getMyUser().getId();
 
-        if(userId == null) {
+        if (userId == null) {
             ApplicationException exception = new ApplicationException(ApplicationException.INNER_ERROR);
             exception.setInnerDescription("用户没有登录");
             return exception.toJSONObject();
@@ -129,26 +168,26 @@ public class AddressController extends BaseController {
         Map<String, String[]> paramMap = request.getParameterMap();
 
         MyUser user = AuthorizationUtil.getMyUser();
-        //user.setId("ie884zfj2wy1h50s");
-        if(user.getId() == null) {
+//        user.setId("ie884zfj2wy1h50s");
+        if (user.getId() == null) {
             ApplicationException exception = new ApplicationException(ApplicationException.INNER_ERROR);
             exception.setInnerDescription("用户没有登录");
             return exception.toJSONObject();
         }
 
-        if(paramMap.containsKey("provinceId")) {
+        if (paramMap.containsKey("provinceId")) {
             AddressProvince province = new AddressProvince();
             province.setId(paramMap.get("provinceId")[0]);
             consumerAddress.setProvince(province);
         }
 
-        if(paramMap.containsKey("cityId")) {
+        if (paramMap.containsKey("cityId")) {
             AddressCity city = new AddressCity();
             city.setId(paramMap.get("cityId")[0]);
             consumerAddress.setCity(city);
         }
 
-        if(paramMap.containsKey("districtId")) {
+        if (paramMap.containsKey("districtId")) {
             AddressDistrict district = new AddressDistrict();
             district.setId(paramMap.get("districtId")[0]);
             consumerAddress.setDistrict(district);
@@ -190,9 +229,9 @@ public class AddressController extends BaseController {
         String id = paramMap.get("id")[0];
         String status = paramMap.get("status")[0];
 
-        MyUser user = AuthorizationUtil.getMyUser();
-        //user.setId("ie884zfj2wy1h50s");
-        if(user.getId() == null) {
+        MyUser user = new MyUser();//AuthorizationUtil.getMyUser();
+        user.setId("ie884zfj2wy1h50s");
+        if (user.getId() == null) {
             ApplicationException exception = new ApplicationException(ApplicationException.INNER_ERROR);
             exception.setInnerDescription("用户没有登录");
             return exception.toJSONObject();
@@ -205,19 +244,19 @@ public class AddressController extends BaseController {
             return exception.toJSONObject();
         }
 
-        if(paramMap.containsKey("provinceId")) {
+        if (paramMap.containsKey("provinceId")) {
             AddressProvince province = new AddressProvince();
             province.setId(paramMap.get("provinceId")[0]);
             consumerAddress.setProvince(province);
         }
 
-        if(paramMap.containsKey("cityId")) {
+        if (paramMap.containsKey("cityId")) {
             AddressCity city = new AddressCity();
             city.setId(paramMap.get("cityId")[0]);
             consumerAddress.setCity(city);
         }
 
-        if(paramMap.containsKey("districtId")) {
+        if (paramMap.containsKey("districtId")) {
             AddressDistrict district = new AddressDistrict();
             district.setId(paramMap.get("districtId")[0]);
             consumerAddress.setDistrict(district);

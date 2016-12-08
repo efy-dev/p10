@@ -5,6 +5,7 @@ import com.efeiyi.ec.master.model.MasterWorkProduct;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantGroup;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
@@ -59,8 +60,21 @@ public class Product implements Serializable {
     private String audio;
     private List<MasterWorkProduct> masterWorkProductList;
 
+    private TenantGroup tenantGroup;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_group_id")
+    public TenantGroup getTenantGroup() {
+        return tenantGroup;
+    }
+
+    public void setTenantGroup(TenantGroup tenantGroup) {
+        this.tenantGroup = tenantGroup;
+    }
+
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "product")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     public List<MasterWorkProduct> getMasterWorkProductList() {
         return masterWorkProductList;
     }
@@ -224,7 +238,8 @@ public class Product implements Serializable {
     public void setRecommendedIndex(Integer recommendedIndex) {
         this.recommendedIndex = recommendedIndex;
     }
-    @NotFound(action= NotFoundAction.IGNORE)
+
+    @NotFound(action = NotFoundAction.IGNORE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id", updatable = false, insertable = false)
     public Tenant getTenant() {
@@ -234,7 +249,8 @@ public class Product implements Serializable {
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
     }
-    @NotFound(action= NotFoundAction.IGNORE)
+
+    @NotFound(action = NotFoundAction.IGNORE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     @JsonIgnore

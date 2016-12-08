@@ -532,7 +532,8 @@
             {{ } }}
         </td>
         <td class="am-hide-sm-only">
-            {{ if( typeof imageText.imageList!= "undefined" && imageText.imageList!=null &&imageText.imageList.length > 0
+            {{ if( typeof imageText.imageList!= "undefined" && imageText.imageList!=null &&imageText.imageList.length >
+            0
             ){}}
             {{ for( var x=0; x < imageText.imageList.length; x++ ){ }}
             <a onclick="PubSub.publish('hotBase.new','{{=imageText.imageList[x].image.id}}')">
@@ -1105,11 +1106,13 @@
                 <legend><b>{{=it.data.id}}</b> 的栏目列表（商品规格详情）</legend>
                 <input type="hidden" name="productModelId"
                        value="{{=it.productModelId!=null&&it.productModelId!=undefined?it.productModelId:''}}">
-                <input type="hidden" id="productModelPanelId" name="id" value="{{=it.id!=null&&it.id!=undefined?it.id:''}}">
+                <input type="hidden" id="productModelPanelId" name="id"
+                       value="{{=it.id!=null&&it.id!=undefined?it.id:''}}">
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">名称</label>
                     <div class="am-u-sm-9">
-                        <input name="name" type="text" placeholder="名称" id="panelName" value="{{=it.data!=null&&it.data.name!=undefined?it.data.name:''}}">
+                        <input name="name" type="text" placeholder="名称" id="panelName"
+                               value="{{=it.data!=null&&it.data.name!=undefined?it.data.name:''}}">
                     </div>
                 </div>
 
@@ -1280,6 +1283,7 @@
         <tbody>
         <tr style="text-align:left">
             <td>操作</td>
+            <td>分组</td>
             <td>商品名称</td>
             <td>副标题</td>
             <td>创建时间</td>
@@ -1318,6 +1322,18 @@
                         </button>
                     </div>
                 </div>
+            </td>
+            <td>
+                <select id="{{=product.id}}" onchange="PubSub.publish('productList.chooseTenantGroup',this)">
+                    {{ for(var j = 0 ; j < product.tenant.tenantGroups.length ; j++){
+                    var tenantGroup = product.tenant.tenantGroups[j];
+                    }}
+                    <option {{if(product.tenantGroup!=null && product.tenantGroup.id==tenantGroup.id){ }}
+                            selected="selected" {{ } }}
+                            value="{{=tenantGroup.id}}"> {{=tenantGroup.name}}
+                    </option>
+                    {{ } }}
+                </select>
             </td>
             <td>{{=product.name}}</td>
             <td>{{=product.subName}}</td>
@@ -3124,6 +3140,18 @@
 
         };
 
+        this.chooseTenantGroup = function (msg, data) {
+            var productId = $(data).attr("id");
+            var tenantGroupId = $(data).val();
+            ajaxRequest("/yuanqu/product/chooseTenantGroup", {
+                "productId": productId,
+                "tenantGroupId": tenantGroupId
+            }, function () {
+                console.log("保存成功");
+            });
+        };
+
+
         this.search = function (msg, data) {
             this.index = 1;
             this.currentSearch = $(data).val();
@@ -3151,7 +3179,8 @@
             {message: this.name + ".search", subscriber: this.search},
             {message: this.name + ".nextPage", subscriber: this.nextPage},
             {message: this.name + ".prePage", subscriber: this.prePage},
-            {message: this.name + ".delete", subscriber: this.delete}
+            {message: this.name + ".delete", subscriber: this.delete},
+            {message: this.name + ".chooseTenantGroup", subscriber: this.chooseTenantGroup}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -3250,7 +3279,7 @@
         this.template = "main-product-model-panel";         //组件绑定的模板//组件需要订阅的事件与消息
         this.panelListTemplate = "main-product-model-panel-list";
         this.productModelId = null;
-        this.id=null;
+        this.id = null;
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
                 ajaxRequest("/yuanqu/product/getPanelById", {id: data}, function (responseData) {

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>收货地址</title>
     <link rel="stylesheet" href="guide/css/layouts.css">
+    <link rel="stylesheet" href="plugin/css/LArea.css">
 </head>
 <body>
 <div class="header" dot-template="header"></div>
@@ -12,53 +13,36 @@
 
 <article class="address">
     <div class="address-list" style="display: block;">
-        <div class="item">
-            <p><strong>温群英</strong><span>15110008479</span></p>
-            <p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
-            <i class="arrow-right"></i>
+        <div dot-template="address-list">
+            <div class="item">
+                <p><strong>温群英</strong><span>15110008479</span></p>
+                <p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
+                <i class="arrow-right"></i>
+            </div>
+            <div class="item">
+                <p><strong>温群英</strong><span>15110008479</span></p>
+                <p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
+                <i class="arrow-right"></i>
+            </div>
         </div>
-        <div class="item">
-            <p><strong>温群英</strong><span>15110008479</span></p>
-            <p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
-            <i class="arrow-right"></i>
-        </div>
-        <input class="btn-new" type="button" value="新增收货地址">
+        <input class="btn-new" type="button" value="新增收货地址"/>
     </div>
     <!--/End/地址列表-->
     <div class="address-add" style="display: none;">
         <form action="">
             <div class="group">
                 <strong>收货人：</strong>
-                <label for=""><input type="text" placeholder="请输入收货人"></label>
+                <label for=""><input type="text" placeholder="请输入收货人" id="consignee"/></label>
             </div>
             <div class="group">
                 <strong>手机号：</strong>
-                <label for=""><input type="text" placeholder="手机号"></label>
+                <label for=""><input type="text" placeholder="手机号" id="phone"/></label>
             </div>
             <div class="group">
                 <strong>所在地区：</strong>
-                <label class="select" for="">
-                    <select name="" id="0">
-                        <option value="110000">北京</option>
-                        <option value="120000">天津</option>
-                    </select>
-                </label>
-            </div>
-            <div class="group">
-                <strong>&nbsp;</strong>
-                <label class="select" for="">
-                    <select name="" id="1">
-                        <option value="110000">朝阳区</option>
-                        <option value="120000">海淀区</option>
-                    </select>
-                </label>
-            </div>
-            <div class="group">
-                <strong>&nbsp;</strong>
-                <label class="select" for="">
-                    <select name="" id="2">
-                        <option value="110000">酒仙桥</option>
-                    </select>
+                <label for="">
+                    <input id="city_select" type="text" readonly="" placeholder="城市选择"  value="北京,北京市,朝阳区"/>
+                    <input id="city_value" type="hidden" value="110000,110100,110105"/>
                 </label>
             </div>
             <div class="group text">
@@ -68,7 +52,7 @@
                 </label>
             </div>
             <div class="group button">
-                <input type="button" value="保存收货人信息">
+                <input type="button" value="保存收货人信息" id="save_address"/>
             </div>
         </form>
     </div>
@@ -76,6 +60,15 @@
 
 </article>
 
+<script type="text/x-dot-template" id="address-list">
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+        <div class="item">
+            <p><strong>{{=it[i].consignee}}</strong><span>{{=it[i].phone}}</span></p>
+            <p>{{=it[i].details}}</p>
+            <i class="arrow-right"></i>
+        </div>
+    {{ } }}
+</script>
 
 <script src="common/js/common.js"></script>
 <script src="common/js/util.js"></script>
@@ -83,6 +76,8 @@
 <script src="guide/js/controller.js"></script>
 <script src="guide/js/model.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="plugin/js/LAreaData.js"></script>
+<script src="plugin/js/LArea.js"></script>
 <!--//End-->
 
 
@@ -93,10 +88,60 @@
     function initPage() {
         $("[dot-template=header]").html(renderHeader(PageVariable));
         $('h1').html('地址列表');
-
         addressEvent();
-    }
 
+        getAddressList(function () {
+            renderTemplate(PageVariable.template.addressList, PageVariable.addressList);
+        });
+
+        $("#save_address").on("click", function () {
+            var param = {};
+            param.consignee = $("#consignee").val();
+            param.phone = $("#phone").val();
+            param.details = $("#doc-vld-ta-2-1").val();
+
+            if(param.consignee == null || param.consignee == "") {
+                modal.overAlert('收货人不能为空', 'fail');
+                return;
+            }
+
+            if(param.phone == null || param.phone == "") {
+                modal.overAlert('手机号不能为空', 'fail');
+                return;
+            }
+
+            if(param.details == null || param.details == "") {
+                modal.overAlert('具体地址不能为空', 'fail');
+                return;
+            }
+
+            var city = $("#city_value").val();
+            var city_arr = city.split(',');
+
+            var provinceId = city_arr[0];
+            var cityId = city_arr[1];
+            var districtId = city_arr[2];
+
+            if(provinceId != null && provinceId != "") {
+                param.provinceId = provinceId;
+            }
+
+            if(cityId != null && cityId != "") {
+                param.cityId = cityId;
+            }
+
+            if(districtId != null && districtId != "") {
+                param.districtId = districtId;
+            }
+
+            ajaxRequest(PageVariable.service.addAddress, param, function (data) {
+                if(data.code == "0") {
+                    location.reload();
+                }
+            });
+        });
+
+    }
 
     function addressEvent() {
         var $address = $('article.address');
@@ -111,9 +156,20 @@
             $add.show();
             $('h1').html('新增收货地址');
         });
-
-
     }
+
+    var area = new LArea();
+    area.init({
+        'trigger': '#city_select', //触发选择控件的文本框，同时选择完毕后name属性输出到该位置
+        'valueTo': '#city_value', //选择完毕后id属性输出到该位置
+        'keys': {
+            id: 'id',
+            name: 'name'
+        }, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+        'type': 1, //数据源类型
+        'data': LAreaData //数据源
+    });
+    area.value=[0,0,2];//控制初始位置，注意：该方法并不会影响到input的value
 
 </script>
 

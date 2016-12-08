@@ -19,6 +19,10 @@ var PageVariable = {
         purchaseProduct: "purchase-product",
         purchaseOrder: "purchase-order",
         purchasePay: "purchase-pay",
+        addressList: "address-list",
+        provinceList: "province-list",
+        cityList: "city-list",
+        districtList: "district-list",
         purchaseInfo: "purchase-info",
         purchaseAddress: "purchase-address",
         purchaseDelivery: "purchase-delivery",
@@ -41,13 +45,20 @@ var PageVariable = {
         panelById: api_url + "/tenant/getPanelById",
         saveUserOrder: api_url + "/tenant/saveUserOrder",  //提交预约信息
         getOrderById: api_url + "/tenant/getOrderById",  //获取预约信息
+        hasArtistry: api_url + "/project/hasArtistry",
         createNewOrder: api_url + "/order/createNewOrder",
         hasAuthenticated: api_url + "/hasAuthenticated",
+        getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
+        getAddressList: api_url + "/address/getAddressList",
+        getProvinceList: api_url + "/address/getProvinceList",
+        getCityList: api_url + "/address/getCityList",
+        getDistrictList: api_url + "/address/getDistrictList",
+        addAddress: api_url + "/address/addAddress",
         getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
         getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
         confirmOrderById: api_url + "/order/confirmOrderById",
         getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial",
-        hasArtistry: api_url + "/project/hasArtistry",
+        getConsumerAddressById: api_url + "/address/getConsumerAddressById",
         tenantCategoryId: api_url + "/product/getTenantGroup", //店铺品类
         searchProductModels: api_url + "/product/searchProductModels",
         searchProductModelsByTenantGroup: api_url + "/product/searchProductModelsByTenantGroup",
@@ -70,11 +81,15 @@ var PageVariable = {
     recommendList: [],
     panelList: {},  //店铺实景
     appointment: {},
-    tenantCategory: [],  //店铺品类
-    productCategory: [],
     imageStyle: {},
     currentAudio: null,
     audioList: [],
+    addressList: [],
+    provinceList: [],
+    cityList: [],
+    districtList: [],
+    tenantCategory: [],  //店铺品类
+    productCategory: [],
     requestModel: {},
 
     setCurrentAudio: function (audio) {
@@ -240,7 +255,6 @@ function getRecommendList(param, limit, offset, callback) {
         PageVariable.recommendList = data;
         if (typeof callback == "function") {
             callback();
-            swiperContaniner('.swiper-container');
         }
     };
     var requestParam = {};
@@ -381,6 +395,65 @@ function getDeliveryInfoBySerial(serial, company, callback) {
 
 }
 
+function getAddressList(callback) {
+    var success = function (data) {
+        PageVariable.addressList = data.data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.getAddressList, {}, success);
+}
+
+function getProvinceList(callback) {
+    var success = function (data) {
+        PageVariable.provinceList = data.data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.getProvinceList, {}, success);
+}
+
+function getCityList(param, callback) {
+    var success = function (data) {
+        PageVariable.cityList = data.data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.getCityList, param, success);
+}
+
+function getConsumerAddressById(id, callback) {
+    var success = function (data) {
+        var currentAddress = {};
+        currentAddress.id = data.addressId;
+        currentAddress.city = data.addressCity;
+        currentAddress.province = data.addressProvince;
+        currentAddress.district = data.addressDistrict;
+        currentAddress.consignee = data.addressConsignee;
+        currentAddress.phone = data.addressPhone;
+        currentAddress.detail = data.addressDetail;
+        PageVariable.currentAddress = currentAddress;
+        callback();
+    };
+    ajaxRequest(PageVariable.service.getConsumerAddressById, {"id": id}, success);
+}
+
+function getDistrictList(param, callback) {
+    var success = function (data) {
+        PageVariable.districtList = data.data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.getDistrictList, param, success);
+}
+
+getCurrentUser();
+
+
 /**
  * @param 店铺品类
  * @param callback
@@ -443,5 +516,3 @@ function searchProductModels(param, limit, offset, callback) {
     requestParam.offset = offset;
     ajaxRequest(PageVariable.service.searchProductModels, requestParam, success);
 }
-
-getCurrentUser();

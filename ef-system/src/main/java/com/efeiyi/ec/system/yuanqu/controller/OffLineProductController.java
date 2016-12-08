@@ -10,6 +10,7 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.tenant.model.BigTenant;
+import com.efeiyi.ec.tenant.model.TenantGroup;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.p.PConst;
@@ -17,7 +18,6 @@ import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.taglib.PageEntity;
 import net.sf.json.JSONObject;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -49,6 +49,19 @@ public class OffLineProductController {
 
     @Autowired
     private AutoSerialManager autoSerialManager;
+
+
+    @RequestMapping({"/chooseTenantGroup"})
+    @ResponseBody
+    public Object chooseTenantGroup(HttpServletRequest request) {
+        String productId = request.getParameter("productId");
+        String tenantGroupId = request.getParameter("tenantGroupId");
+        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
+        TenantGroup tenantGroup = (TenantGroup) baseManager.getObject(TenantGroup.class.getName(), tenantGroupId);
+        product.setTenantGroup(tenantGroup);
+        baseManager.saveOrUpdate(Product.class.getName(), product);
+        return product;
+    }
 
     @RequestMapping({"/getMasterWorkList"})
     @ResponseBody

@@ -855,7 +855,7 @@ input[type=button], input[type=text], select, textarea {
 
 .pagesearch {
     padding-right: 130px;
-    padding-left: 40px;
+    padding-left:40px;
 }
 
 .pagesearch .filter-btn {
@@ -2208,7 +2208,7 @@ footer .copyright {
     font-size: 16px;
     text-align: center;
     border: 0;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
 }
@@ -2456,6 +2456,9 @@ footer .copyright {
     border-bottom-color: #b5261f;
 }
 
+
+
+
 .filter .tab2 div.active2 i:after {
     border-top-color: #b5261f;
 }
@@ -2591,7 +2594,7 @@ footer .copyright {
     margin-bottom: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space:nowrap;
 }
 
 .tenant .product-list li a .price {
@@ -2928,7 +2931,6 @@ footer .copyright {
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
-
 .searchbg {
     position: fixed;
     top: 0;
@@ -2954,6 +2956,7 @@ footer .copyright {
     margin-bottom:20px;
     background: #fff;
 }
+
 
 
 

@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <title>订单结算页</title>
     <link rel="stylesheet" href="guide/css/layouts.css?12">
+    <link rel="stylesheet" href="plugin/css/LArea.css">
 </head>
 <body>
 <div class="header" dot-template="header"></div>
 <!--//End--header-->
 
-<article class="order">
+<article class="order" id="orderPanel">
     <div class="address-list" dot-template="purchase-address" style="width: 100%;">
         <!--<div class="item">-->
         <!--<p><strong>温群英</strong><span>15110008479</span></p>-->
@@ -62,6 +63,57 @@
     <!--/End/-->
 </article>
 
+<article class="address" id="addressListPanel" style="display: none">
+
+    <div class="address-list" style="display: block;width: 100%">
+        <div dot-template="address-list" style="width: 100%;">
+            <!--<div class="item">-->
+            <!--<p><strong>温群英</strong><span>15110008479</span></p>-->
+            <!--<p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>-->
+            <!--<i class="arrow-right"></i>-->
+            <!--</div>-->
+            <!--<div class="item">-->
+            <!--<p><strong>温群英</strong><span>15110008479</span></p>-->
+            <!--<p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>-->
+            <!--<i class="arrow-right"></i>-->
+            <!--</div>-->
+        </div>
+        <input class="btn-new" type="button" onclick="newAddress()" value="新增收货地址"/>
+    </div>
+
+</article>
+
+<article class="address" id="addressFormPanel" style="display: none;">
+    <div class="address-add">
+        <form action="">
+            <div class="group">
+                <strong>收货人：</strong>
+                <label for=""><input type="text" placeholder="请输入收货人" id="consignee"/></label>
+            </div>
+            <div class="group">
+                <strong>手机号：</strong>
+                <label for=""><input type="text" placeholder="手机号" id="phone"/></label>
+            </div>
+            <div class="group">
+                <strong>所在地区：</strong>
+                <label for="">
+                    <input id="city_select" type="text" readonly="" placeholder="城市选择" value="北京,北京市,朝阳区"/>
+                    <input id="city_value" type="hidden" value="110000,110100,110105"/>
+                </label>
+            </div>
+            <div class="group text">
+                <strong>具体地址：</strong>
+                <label for="">
+                    <textarea name="details" id="doc-vld-ta-2-1" class="text-act" required=""></textarea>
+                </label>
+            </div>
+            <div class="group button">
+                <input type="button" value="保存收货人信息" id="save_address" fun-type="add"/>
+            </div>
+        </form>
+    </div>
+</article>
+
 
 <script type="text/x-dot-template" id="purchase-product">
 
@@ -104,21 +156,47 @@
 
 </script>
 
-
 <script type="text/x-dot-template" id="purchase-address">
-    <a onclick="addressList()">
-        <div class="item">
-            {{ if(it.id != null && typeof typeof it.id != "undefined"){ }}
-            <p><strong>{{=it.consignee}}</strong><span>{{=it.phone}}</span></p>
-            <p>{{=it.province+it.city+it.district+it.detail}}</p>
-            <i class="arrow-right"></i>
-            {{ }else{ }}
-            <p></p>
-            <p style="margin-top: 41px;">请选择收货地址</p>
-            <i class="arrow-right"></i>
-            {{ } }}
-        </div>
-    </a>
+    <div class="item" onclick="addressList()">
+        {{ if(it.id != null && typeof typeof it.id != "undefined"){ }}
+        <p><strong>{{=it.consignee}}</strong><span>{{=it.phone}}</span></p>
+        <p>{{=it.province+it.city+it.district+it.detail}}</p>
+        <i class="arrow-right"></i>
+        {{ }else{ }}
+        <p></p>
+        <p style="margin-top: 41px;">请选择收货地址</p>
+        <i class="arrow-right"></i>
+        {{ } }}
+    </div>
+</script>
+
+<script type="text/x-dot-template" id="address-list">
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <div class="item" onclick="chooseAddress('{{=it[i].id}}')">
+        <p><strong>{{=it[i].consignee}}</strong><span>{{=it[i].phone}}</span></p>
+        <p>
+            {{=getValue(it[i].province,'name')+getValue(it[i].city,'name')+getValue(it[i].district,'name')+it[i].details}}</p>
+        <i class="arrow-right"></i>
+    </div>
+    {{ } }}
+</script>
+
+<script type="text/x-dot-template" id="province-list">
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <option value="{{=it[i].id}}">{{=it[i].name}}</option>
+    {{ } }}
+</script>
+
+<script type="text/x-dot-template" id="city-list">
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <option value="{{=it[i].id}}">{{=it[i].name}}</option>
+    {{ } }}
+</script>
+
+<script type="text/x-dot-template" id="district-list">
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <option value="{{=it[i].id}}">{{=it[i].name}}</option>
+    {{ } }}
 </script>
 
 
@@ -128,6 +206,8 @@
 <script src="guide/js/controller.js"></script>
 <script src="guide/js/model.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="plugin/js/LAreaData.js"></script>
+<script src="plugin/js/LArea.js"></script>
 <!--//End-->
 <script>
     $().ready(function () {
@@ -156,6 +236,72 @@
         });
 
         selectPay();
+
+
+        addressEvent();
+
+        getAddressList(function () {
+            renderTemplate(PageVariable.template.addressList, PageVariable.addressList);
+
+        });
+
+        getProvinceList(function () {
+            renderTemplate(PageVariable.template.provinceList, PageVariable.provinceList);
+            $("#0").on("change", function () {
+                var param = {};
+                param.provinceId = $(this).val();
+                PageVariable.param = param;
+                buildCityList();
+                $("#2").children().remove();
+            });
+        });
+
+        $("#save_address").on("click", function () {
+            var param = {};
+            param.consignee = $("#consignee").val();
+            param.phone = $("#phone").val();
+            param.details = $("#doc-vld-ta-2-1").val();
+
+            if (param.consignee == null || param.consignee == "") {
+                modal.overAlert('收货人不能为空', 'fail');
+                return;
+            }
+
+            if (param.phone == null || param.phone == "") {
+                modal.overAlert('手机号不能为空', 'fail');
+                return;
+            }
+
+            if (param.details == null || param.details == "") {
+                modal.overAlert('具体地址不能为空', 'fail');
+                return;
+            }
+
+            var city = $("#city_value").val();
+            var city_arr = city.split(',');
+
+            var provinceId = city_arr[0];
+            var cityId = city_arr[1];
+            var districtId = city_arr[2];
+
+            if (provinceId != null && provinceId != "") {
+                param.provinceId = provinceId;
+            }
+
+            if (cityId != null && cityId != "") {
+                param.cityId = cityId;
+            }
+
+            if (districtId != null && districtId != "") {
+                param.districtId = districtId;
+            }
+
+            ajaxRequest(PageVariable.service.addAddress, param, function (data) {
+                if (data.code == "0") {
+                    location.reload();
+                }
+            });
+        });
     }
 
 
@@ -176,13 +322,6 @@
 
 
     function confirm() {
-//        1.获得支付方式
-//        2.获得订单
-//        3.获得发票信息
-//        4.获得地址信息
-//        4.1.参数校验
-//        5.调用confirmOrderById方法
-//        6.confirm成功之后跳转到支付处理接口
         var payment = PageVariable.currentPaymentType;
         var orderId = PageVariable.purchaseOrder.id;
         var invoiceName = $("#invoiceName").val();
@@ -205,8 +344,121 @@
 
 
     function addressList() {
+        $("#orderPanel").hide();
+        $("#addressFormPanel").hide();
+        $("#addressListPanel").show();
+        getAddressList(function () {
+            renderTemplate(PageVariable.template.addressList, PageVariable.addressList);
+        });
+
+        backOrder();
+    }
+
+    function chooseAddress(id) {
+        $("#orderPanel").show();
+        $("#addressListPanel").hide();
+        $("#addressFormPanel").hide();
+        getConsumerAddressById(id, function () {
+            renderTemplate(PageVariable.template.purchaseAddress, PageVariable.currentAddress)
+        });
+        backPrePage();
+    }
+
+    function newAddress() {
+        $("#addressFormPanel").show();
+        $("#addressListPanel").hide();
+        $("#orderPanel").hide();
+        backAddressList();
+    }
+
+    function backOrder() {
+        var $backButton = $(".header").find("a");
+        $backButton.unbind();
+        $backButton.attr("href", "javascript:void(0)");
+        $backButton.click(function () {
+            $("#orderPanel").show();
+            $("#addressListPanel").hide();
+            $("#addressFormPanel").hide();
+            backPrePage();
+        });
 
     }
+
+    function backAddressList() {
+        var $backButton = $(".header").find("a");
+        $backButton.unbind();
+        $backButton.attr("href", "javascript:void(0)");
+        $backButton.click(function () {
+            $("#orderPanel").hide();
+            $("#addressFormPanel").hide();
+            $("#addressListPanel").show();
+            backOrder();
+        });
+    }
+
+    function backPrePage() {
+        var $backButton = $(".header").find("a");
+        $backButton.unbind();
+        $backButton.attr("href", "javascript:void(0)");
+        $backButton.click(function () {
+            history.go(-1);
+        });
+    }
+
+
+    function buildCityList() {
+        getCityList(PageVariable.param, function () {
+            renderTemplate(PageVariable.template.cityList, PageVariable.cityList);
+            $("#1").on("change", function () {
+                var param = {};
+                param.cityId = $(this).val();
+                PageVariable.param = param;
+                buildDistrictList();
+            });
+        });
+    }
+
+    function buildDistrictList() {
+        getDistrictList(PageVariable.param, function () {
+            renderTemplate(PageVariable.template.districtList, PageVariable.districtList);
+        });
+    }
+
+    function addressEvent() {
+        var $address = $('article.address');
+        var $list = $address.find('div.address-list'); //地址列表
+        var $add = $address.find('div.address-add');   //新建收货人表单
+        var $selectAddress = $address.find('div.item');   //新增收货人信息按钮
+        var $newAddress = $address.find('input.btn-new');   //新增收货人信息按钮
+
+        //新增收货地址
+        $newAddress.on('click', function () {
+            $("#save_address").attr("fun-type", "add");
+        });
+
+    }
+
+    function getValue(obj, key) {
+        if (obj != null && typeof obj != "undefined") {
+            return obj[key]
+        } else {
+            return "";
+        }
+    }
+
+
+    var area = new LArea();
+    area.init({
+        'trigger': '#city_select', //触发选择控件的文本框，同时选择完毕后name属性输出到该位置
+        'valueTo': '#city_value', //选择完毕后id属性输出到该位置
+        'keys': {
+            id: 'id',
+            name: 'name'
+        }, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+        'type': 1, //数据源类型
+        'data': LAreaData //数据源
+    });
+    area.value = [0, 0, 2];//控制初始位置，注意：该方法并不会影响到input的value
 
 
 </script>
