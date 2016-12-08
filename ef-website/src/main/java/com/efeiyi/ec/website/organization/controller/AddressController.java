@@ -65,7 +65,7 @@ public class AddressController extends BaseController {
         Map<String, Object> resultMap = new HashMap<>();
         List<ConsumerAddress> consumerAddressList;
 
-        String userId = "ie884zfj2wy1h50s";//AuthorizationUtil.getMyUser().getId();
+        String userId = AuthorizationUtil.getMyUser().getId();
 
         if(userId == null) {
             ApplicationException exception = new ApplicationException(ApplicationException.INNER_ERROR);
@@ -128,8 +128,8 @@ public class AddressController extends BaseController {
 
         Map<String, String[]> paramMap = request.getParameterMap();
 
-        MyUser user = new MyUser();//AuthorizationUtil.getMyUser();
-        user.setId("ie884zfj2wy1h50s");
+        MyUser user = AuthorizationUtil.getMyUser();
+        //user.setId("ie884zfj2wy1h50s");
         if(user.getId() == null) {
             ApplicationException exception = new ApplicationException(ApplicationException.INNER_ERROR);
             exception.setInnerDescription("用户没有登录");
@@ -190,8 +190,8 @@ public class AddressController extends BaseController {
         String id = paramMap.get("id")[0];
         String status = paramMap.get("status")[0];
 
-        MyUser user = new MyUser();//AuthorizationUtil.getMyUser();
-        user.setId("ie884zfj2wy1h50s");
+        MyUser user = AuthorizationUtil.getMyUser();
+        //user.setId("ie884zfj2wy1h50s");
         if(user.getId() == null) {
             ApplicationException exception = new ApplicationException(ApplicationException.INNER_ERROR);
             exception.setInnerDescription("用户没有登录");
