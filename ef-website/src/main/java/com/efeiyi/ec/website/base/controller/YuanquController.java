@@ -5,18 +5,23 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.Panel;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.tenant.model.BigTenant;
+import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.website.order.model.WxPayConfig;
 import com.efeiyi.ec.website.organization.service.IConsumerService;
 import com.efeiyi.ec.wiki.model.Artistry;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.util.CookieTool;
 import com.ming800.core.util.HttpUtil;
+import com.ming800.core.util.StringUtil;
 import net.sf.json.JSONObject;
+import org.glassfish.grizzly.http.util.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -102,7 +107,7 @@ public class YuanquController {
      * WebApp微信登录的接口
      */
     @RequestMapping({"/wl"})
-    public String login(HttpServletRequest request) throws Exception {
+    public String login(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             String result;
             String redirect = request.getParameter("state");
@@ -115,7 +120,14 @@ public class YuanquController {
             JSONObject jsonObject = JSONObject.fromObject(result);
             String wxInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + jsonObject.getString("access_token") + "&openid=" + jsonObject.getString("openid") + "&lang=zh_CN";
             String userInfo = HttpUtil.getHttpResponse(wxInfoUrl, null);
-            authenticate(userInfo);
+
+            JSONObject jsonObjectInfo = JSONObject.fromObject(userInfo);
+            String unid = jsonObjectInfo.getString("unionid");
+            CookieTool.addCookie(response, "junionid", unid, 100000);
+            request.getSession().setAttribute("unionid", unid);
+
+            MyUser myUser = authenticate(userInfo);
+            request.getSession().setAttribute("myuser", myUser);
             return "redirect:http://www.efeiyi.com/qrcode/sample/" + URLDecoder.decode(redirect, "UTF-8");
         } catch (Exception e) {
             return "redirect:http://www.efeiyi.com/app/index.html";
@@ -125,6 +137,9 @@ public class YuanquController {
 
     @RequestMapping({"/wxLogin"})
     public String wxLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        System.out.println("sessionId : " + request.getRequestedSessionId());
+
         try {
             SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
             String result;
@@ -140,7 +155,13 @@ public class YuanquController {
 
             String wxInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + jsonObject.getString("access_token") + "&openid=" + jsonObject.getString("openid") + "&lang=zh_CN";
             String userInfo = HttpUtil.getHttpResponse(wxInfoUrl, null);
-            authenticate(userInfo);
+
+            JSONObject jsonObjectInfo = JSONObject.fromObject(userInfo);
+            String unid = jsonObjectInfo.getString("unionid");
+            CookieTool.addCookie(response, "junionid", unid, 100000);
+            request.getSession().setAttribute("unionid", unid);
+            MyUser myUser = authenticate(userInfo);
+            request.getSession().setAttribute("myuser", myUser);
             if (savedRequest != null) {
                 return "redirect:" + savedRequest.getRedirectUrl();
             } else {
@@ -153,23 +174,61 @@ public class YuanquController {
     }
 
 
-    private MyUser authenticate(String userInfo) {
-        JSONObject wxInfo = JSONObject.fromObject(userInfo);
-        Consumer consumer = consumerService.getConsumerOrNullByUnionid(wxInfo.get("unionid").toString());
-        MyUser myUser = consumerService.getMyUserOrNullByConsumer(consumer);
-        if (myUser == null) {
-            consumer = consumerService.saveOrUpdateConsumer(wxInfo.get("nickname").toString(), wxInfo.get("unionid").toString(), wxInfo.get("city").toString(), wxInfo.get("headimgurl").toString(), Integer.parseInt(wxInfo.get("sex").toString()));
-            myUser = consumerService.getMyUserOrNullByConsumer(consumer);
-        }
+    @RequestMapping({"/loginAction"})
+    @ResponseBody
+    public String loginAction(HttpServletRequest request) throws java.lang.Exception {
+        String result;
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        password = StringUtil.encodePassword(password, "SHA");
+        String hql = "select obj from MyUser obj where obj.username=:username and obj.password=:password and obj.status!='0'";
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("username", username);
+        param.put("password", password);
+        MyUser myUser;
         try {
-            AuthenticationManager am = new SampleAuthenticationManager();
-            Authentication authentication = new UsernamePasswordAuthenticationToken(myUser, myUser.getPassword());
-            Authentication result = am.authenticate(authentication);
-            SecurityContextHolder.getContext().setAuthentication(result);
-        } catch (Exception e) {
-            return null;
+            myUser = (MyUser) baseManager.getUniqueObjectByConditions(hql, param);
+
+        } catch (java.lang.Exception e) {
+            myUser = null;
         }
-        return myUser;
+        if (myUser == null) {
+            result = "{\"login\":\"false\",\"message\":\"" + "登陆失败" + "\"}";
+        } else {
+            request.getSession().setAttribute("myuser", myUser);
+            Object redirectUrlObj = request.getSession().getAttribute("redirectUrl");
+            if (redirectUrlObj != null) {
+                result = "{\"login\":\"true\",\"redirect\":\"" + redirectUrlObj.toString() + "\"}";
+            } else {
+                result = "{\"login\":\"true\",\"redirect\":\"/\"}";
+            }
+        }
+        return result;
+    }
+
+
+    private MyUser authenticate(String userInfo) {
+        if (AuthorizationUtil.getMyUser().getId() == null) {
+
+            JSONObject wxInfo = JSONObject.fromObject(userInfo);
+            Consumer consumer = consumerService.getConsumerOrNullByUnionid(wxInfo.get("unionid").toString());
+            MyUser myUser = consumerService.getMyUserOrNullByConsumer(consumer);
+            if (myUser == null) {
+                consumer = consumerService.saveOrUpdateConsumer(wxInfo.get("nickname").toString(), wxInfo.get("unionid").toString(), wxInfo.get("city").toString(), wxInfo.get("headimgurl").toString(), Integer.parseInt(wxInfo.get("sex").toString()));
+                myUser = consumerService.getMyUserOrNullByConsumer(consumer);
+            }
+//            try {
+//                AuthenticationManager am = new SampleAuthenticationManager();
+//                Authentication authentication = new UsernamePasswordAuthenticationToken(myUser, myUser.getPassword());
+//                Authentication result = am.authenticate(authentication);
+//                SecurityContextHolder.getContext().setAuthentication(result);
+//            } catch (Exception e) {
+//                return null;
+//            }
+            return myUser;
+        } else {
+            return AuthorizationUtil.getMyUser();
+        }
     }
 
 

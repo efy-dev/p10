@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.base.interceptor;
 
+import com.efeiyi.ec.organization.model.MyUser;
 import com.ming800.core.p.PConst;
 import com.ming800.core.util.CookieTool;
 import com.ming800.core.util.HttpUtil;
@@ -45,6 +46,19 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
+
+        try {
+
+            MyUser myUser = (MyUser) request.getSession().getAttribute("myuser");
+            if (myUser == null) {
+                String redirectUrl = request.getRequestURI() + request.getQueryString();
+                request.getSession().setAttribute("redirectUtl", redirectUrl);
+                response.sendRedirect("http://www.efeiyi.com/login");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("http://www.efeiyi.com/login");
+        }
 
         response.setHeader("Access-Control-Allow-Origin", "*");
 

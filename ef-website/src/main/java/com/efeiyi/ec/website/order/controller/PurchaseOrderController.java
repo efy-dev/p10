@@ -266,6 +266,11 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/createNewOrder"})
     @ResponseBody
     public JSONObject createNewOrder(HttpServletRequest request) {
+
+        String unionId = request.getSession().getAttribute("unionid").toString();
+
+
+
         String productListStr = request.getParameter("productList");
         String tenantId = request.getParameter("tenantId");
         List<CartProduct> cartProductList = new ArrayList<>();
