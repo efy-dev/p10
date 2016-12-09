@@ -264,7 +264,10 @@ public class OffLineProductController {
             productModel.setMarketPrice(new BigDecimal(price));
         }
         productModel.setStatus("1");
-        productModel.setProductModel_url(uploadImage(multipartRequest.getFile("productModel_url")));
+        String productModelUrl = uploadImage(multipartRequest.getFile("productModel_url"));
+        if (!"".equals(productModelUrl)) {
+            productModel.setProductModel_url(uploadImage(multipartRequest.getFile("productModel_url")));
+        }
         productModel.setCreateDateTime(new Date());
         baseManager.saveOrUpdate(ProductModel.class.getName(), productModel);
         return productModel;
