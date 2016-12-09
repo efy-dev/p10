@@ -248,6 +248,22 @@ public class OffLineProductController {
         return product.getProductModelList();
     }
 
+    @RequestMapping({"/getSKUList"})
+    @ResponseBody
+    public Object getSKUList(HttpServletRequest request) {
+        String name = request.getParameter("name") == null ? "" : request.getParameter("name");
+        int limit = Integer.parseInt(request.getParameter("limit"));
+        int offset = Integer.parseInt(request.getParameter("offset"));
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        String hql = "select obj from ProductModel obj where obj.status!='0' and obj.name like :name ";
+        param.put("name", "%" + name + "%");
+        PageEntity pageEntity = new PageEntity();
+        pageEntity.setSize(limit);
+        pageEntity.setrIndex(offset);
+        PageInfo pageInfo = baseManager.listPageInfo(hql, pageEntity, param);
+        return pageInfo;
+    }
+
     @RequestMapping({"/modelSubmit"})
     @ResponseBody
     public Object modelSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {

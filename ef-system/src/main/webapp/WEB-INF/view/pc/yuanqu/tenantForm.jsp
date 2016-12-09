@@ -96,6 +96,8 @@
     </div>
     <div dot-template="main-recommend-list">
     </div>
+    <div dot-template="main-sku-list">
+    </div>
 </div>
 
 <div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
@@ -159,6 +161,8 @@
             <span>新推荐</span></button>
         <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('recommendList.render',null)">
             <span>推荐管理</span></button>
+        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('skuList.render',null)">
+            <span>SKU管理</span></button>
         {{}}}
         <%--<button type="button" class="am-btn am-btn-primary "><span>图片管理</span></button>--%>
     </div>
@@ -864,6 +868,110 @@
             <td>{{=tenant.serial==null?"":tenant.serial}}</td>
             <td>
                 {{=(new Date(tenant.createDateTime)).format("yyyy-MM-dd hh:mm:ss")}}
+            </td>
+        </tr>
+        {{ } }}
+
+        </tbody>
+    </table>
+
+</script>
+
+<script type="text/x-dot-template" id="main-sku-list">
+
+    <div>
+        <div class="am-u-lg-6">
+            <legend>SKU列表</legend>
+            <div class="am-input-group">
+                <input type="text" class="am-form-field" oninput="PubSub.publish('{{=it.name}}.search',this)">
+                <span class="am-input-group-btn">
+                    <button class="am-btn am-btn-default" disabled type="button"><span
+                            class="am-icon-search"></span></button>
+                </span>
+            </div>
+        </div>
+        <div class="am-u-lg-12" dot-template="main-sku-list-body">
+            {{
+            PubSub.publish(it.name+".body");
+            }}
+        </div>
+
+        <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.prePage')">上一页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" id="tenant-index">第{{=it.index}}页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.nextPage')">下一页</a>
+        </div>
+    </div>
+
+</script>
+
+<script type="text/x-dot-template" id="main-sku-list-body">
+
+    <table class="am-table am-table-bordered am-table-radius am-table-striped">
+        <tbody>
+        <tr style="text-align:left">
+            <td>操作</td>
+            <td>规格名称</td>
+            <td>规格编号</td>
+            <td>线上价格</td>
+            <td>实体店价格</td>
+            <td>库存</td>
+            <td>状态</td>
+            <td>创建时间</td>
+        </tr>
+
+        {{
+        for(var i = 0 ; i< it.length ; i++){
+        var productModel = it[i];
+        }}
+        <tr>
+            <td>
+                <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
+                        <button onclick="PubSub.publish('productModel.render','{{=productModel.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 基本信息
+                        </button>
+                        <button onclick="PubSub.publish('productModelPanel.new','{{=productModel.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 规格详情
+                        </button>
+                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                           href="/yuanqu/product/createQRCodeSample.do?productModelId={{=productModel.id}}"><span
+                                class="am-icon-trash-o"></span> 生成二维码
+                        </a>
+                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                           target="_blank"
+                           href="http://www.efeiyi.com/app/product_details.html?productId={{=productModel.id}}"><span
+                                class="am-icon-trash-o"></span> 预览页面
+                        </a>
+                        <button onclick="PubSub.publish('productModelList.upper',{'id':'{{=productModel.id}}','status':'{{=productModel.status}}'})"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
+                            {{?productModel.status==2}}
+                            <span class="am-icon-edit"></span> 上架
+                            {{??productModel.status==1}}
+                            <span class="am-icon-edit"></span> 下架
+                            {{?}}
+                        </button>
+                        <button onclick="showConfirm('提示','是否删除',function(){PubSub.publish('productModelList.delete','{{=productModel.id}}')})"
+                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                class="am-icon-trash-o"></span> 删除
+                        </button>
+                    </div>
+                </div>
+            </td>
+            <td>{{=productModel.name}}</td>
+            <td>{{=productModel.serial}}</td>
+            <td>{{=productModel.price==null?"":productModel.price}}</td>
+            <td>{{=productModel.marketPrice==null?"":productModel.marketPrice}}</td>
+            <td>{{=productModel.amount}}</td>
+            {{?productModel.status==2}}
+            <td>下架</td>
+            {{??productModel.status==1 }}
+            <td>上架</td>
+            {{?}}
+            <td>
+                {{=(new Date(productModel.createDateTime)).format("yyyy-MM-dd hh:mm:ss")}}
             </td>
         </tr>
         {{ } }}
@@ -3268,6 +3376,109 @@
 
     };
 
+    var SKUList = function (param) {
+        this.currentSearch = null;
+        this.index = 1;
+        this.size = 10;
+        this.label = "SKU管理";
+        this.data = null;
+        this.father = null;
+        this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
+        this.param = param;
+        this.name = "skuList";
+        this.template = "main-sku-list";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.totalPages = "";
+        this.totalRecords = "";
+
+        this.nextPage = function (msg, data) {
+            this.totalPages = this.totalPages == 0 ? 1 : this.totalPages;
+            this.index = this.index + 1 > this.totalPages ? this.totalPages : this.index + 1;
+            $("#tenant-index").html("第" + this.index + "页");
+            this.body();
+        };
+
+        this.prePage = function (msg, data) {
+            this.index = this.index > 1 ? this.index - 1 : 1;
+            $("#tenant-index").html("第" + this.index + "页");
+            this.body();
+        };
+
+        this.delete = function (msg, data) {
+            ajaxRequest("/yuanqu/tenant/deleteProductModelById", {id: data}, function (responseData) {
+                this.data = responseData;
+                if (data.code != "1") {
+                    this.body();
+                }
+            }.bind(this));
+        };
+
+        this.qrcode = function (msg, data) {
+            var param = {};
+            param.id = data;
+            ajaxRequest("/yuanqu/tenant/createQRCode.do", param, function () {
+            });
+        };
+
+        this.body = function (msg, data) {
+            //@TODO 搜索列表与商品实体
+            var param = {
+                limit: this.size,
+                offset: ((this.index - 1) * this.size)
+            };
+            if (this.currentSearch != null) {
+                param.name = this.currentSearch
+            }
+            ajaxRequest("/yuanqu/product/getSKUList", param, function (responseData) {
+                this.data = responseData.list;
+                this.totalRecords = responseData.count;
+                this.totalPages = this.totalRecords % this.size == 0 ? this.totalRecords / this.size : Math.floor(this.totalRecords / this.size) + 1;
+                renderTemplate(this.template + "-body", this.data);
+            }.bind(this));
+        };
+
+        this.render = function (msg, data) {
+            this.index = 1;
+            renderTemplate(this.template, this);
+            this.show();
+        };
+
+        this.search = function (msg, data) {
+            this.index = 1;
+            this.currentSearch = $(data).val();
+            this.body();
+        };
+
+        this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
+            $("[dot-template=" + this.template + "]").show();
+        };
+        this.hide = function (msg, data) {
+            $("[dot-template=" + this.template + "]").hide();
+        };
+        this.remove = function (msg, data) {
+            $("[dot-template=" + this.template + "]").html("");
+        };
+
+        this.subscribeArray = [
+            {message: this.name + ".show", subscriber: this.show},
+            {message: this.name + ".hide", subscriber: this.hide},
+            {message: this.name + ".render", subscriber: this.render},
+            {message: this.name + ".remove", subscriber: this.remove},
+            {message: this.name + ".body", subscriber: this.body},
+            {message: this.name + ".search", subscriber: this.search},
+            {message: this.name + ".qrcode", subscriber: this.qrcode},
+            {message: this.name + ".nextPage", subscriber: this.nextPage},
+            {message: this.name + ".prePage", subscriber: this.prePage},
+            {message: this.name + ".delete", subscriber: this.delete}
+        ];
+
+        for (var i = 0; i < this.subscribeArray.length; i++) {
+            var subscribe = this.subscribeArray[i];
+            PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
+        }
+
+    };
+
     var ProductModelPanel = function (param) {
         this.submit = "/yuanqu/product/modelpanelSubmit";
         this.label = "商品规格详情";
@@ -3944,6 +4155,7 @@
     var scenicRegionList = new ScenicRegionList();  //景区列表
     var recommendBase = new RecommendBase();        //推荐信息
     var recommendList = new RecommendList();        //推荐列表
+    var skuList = new SKUList();
 
 </script>
 
