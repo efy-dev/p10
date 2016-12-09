@@ -23,7 +23,8 @@
 
 
 <div class="image">
-    <a href="http://www.efeiyi.com/app/tenant_details.html?tenantId=iugd2v0v7mbwxumv&title=%E5%89%8D%E9%97%A8%E5%8D%8E%E9%9F%B5%E9%9D%9E%E9%81%97%E4%BD%93%E9%AA%8C%E4%B8%AD%E5%BF%83"><img src="uploads/668284120090350147.jpg"/></a>
+    <a href="http://www.efeiyi.com/app/tenant_details.html?tenantId=iugd2v0v7mbwxumv&title=%E5%89%8D%E9%97%A8%E5%8D%8E%E9%9F%B5%E9%9D%9E%E9%81%97%E4%BD%93%E9%AA%8C%E4%B8%AD%E5%BF%83"><img
+            src="uploads/668284120090350147.jpg"/></a>
 </div>
 <!--//End--focus-->
 
@@ -44,17 +45,17 @@
     <div class="title"><h1>店铺</h1><a class="more" href="tenant_list.html?title=店铺列表" title="更多">更多&gt;</a></div>
     <div class="swiper-container" dot-template="home-recommend-list">
 
-        <div class="swiper-slide">
-            <a href="{{=it[i].redirect}}">
-                <img src="uploads/447530959026349984.jpg"/>
-                <div class="base">
-                    <dl class="txt" style="padding-right: 0px;">
-                        <dt>非遗体验中心</dt>
-                        <dd>开业庆典，全场8折</dd>
-                    </dl>
-                </div>
-            </a>`
-        </div>
+        <!--<div class="swiper-slide">-->
+        <!--<a href="{{=it[i].redirect}}">-->
+        <!--<img src="uploads/447530959026349984.jpg"/>-->
+        <!--<div class="base">-->
+        <!--<dl class="txt" style="padding-right: 0px;">-->
+        <!--<dt>非遗体验中心</dt>-->
+        <!--<dd>开业庆典，全场8折</dd>-->
+        <!--</dl>-->
+        <!--</div>-->
+        <!--</a>`-->
+        <!--</div>-->
 
     </div>
 </div>
@@ -65,9 +66,9 @@
 </div>
 
 <script type="text/x-dot-template" id="home-recommend-list">
+    {{ for(var i = 0 ; i < it.length ;i++){ }}
+    {{ if(it[i].image!=null){ }}
     <div class="swiper-wrapper">
-        {{ for(var i = 0 ; i < it.length ;i++){ }}
-        {{ if(it[i].image!=null){ }}
         <div class="swiper-slide">
             <a href="{{=it[i].redirect}}">
                 <img src="{{=it[i].image.src}}@!o2o-tenant-list" alt="">
@@ -79,10 +80,10 @@
                 </div>
             </a>
         </div>
-        <!--//End 3-->
-        {{ } }}
-        {{ } }}
     </div>
+    <!--//End 3-->
+    {{ } }}
+    {{ } }}
 </script>
 
 
@@ -103,7 +104,7 @@
     wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
         "appid=wx7f6aa253b75466dd" +
         "&redirect_uri=" +
-        encodeURI(redirect_uri) +
+        encodeURIComponent(redirect_uri) +
         "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
 
     $().ready(function () {
@@ -115,8 +116,10 @@
         getRecommendList({}, 5, 0, function () {
             renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
         });
-
-
+      /*  $('input.name').on('blur', function () {
+            //  window.location.href = "localhost:63343/o2o-application/app/search.html?name=" + $(this).val();
+            window.location.href = "search.html?name=" + $(this).val();
+        });*/
     }
 
 

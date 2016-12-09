@@ -19,7 +19,7 @@
 	<div class="order-head ae">
 		<dl>
 			<c:if test="${!empty user.pictureUrl}">
-				<dt><img src="<c:url value="http://pro.efeiyi.com/${user.pictureUrl}@!user-pic"/>" alt="..."
+				<dt><img src="<c:url value="${user.pictureUrl}@!user-pic"/>" alt="..."
 						 class="am-img-thumbnail"></dt>
 			</c:if>
 			<c:if test="${empty user.pictureUrl}">
@@ -62,7 +62,7 @@
 						<c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct">
 							<li>
 								<div class="shops-pic"><img
-										src="http://pro.efeiyi.com/<c:url value="${purchaseOrderProduct.productModel.productModel_url}"/>"
+										src="<c:url value="${purchaseOrderProduct.productModel.productModel_url}"/>"
 										onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></div>
 								<div class="shops-text">
 									<p>${purchaseOrderProduct.productModel.product.name}</p>
@@ -76,7 +76,7 @@
 						</c:forEach>
 					</ul>
 					<!-- 商品-->
-					<div class="payment">应付款：<em>${purchaseOrder.total-purchaseOrder.getOrderPayMoney()}</em>元</div>
+					<%--<div class="payment">应付款：<em>${purchaseOrder.total-purchaseOrder.getOrderPayMoney()}</em>元</div>--%>
 					<div class="money-btn">
 						<c:choose>
 							<c:when test="${purchaseOrder.orderStatus == '3'}">
@@ -115,7 +115,7 @@
 							<c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct">
 								<li>
 									<div class="shops-pic"><img
-											src="http://pro.efeiyi.com/<c:url value="${purchaseOrderProduct.productModel.productModel_url}"/>"
+											src="<c:url value="${purchaseOrderProduct.productModel.productModel_url}"/>"
 											onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'">
 									</div>
 									<div class="shops-text">
@@ -130,7 +130,7 @@
 							</c:forEach>
 						</ul>
 						<!-- 商品-->
-						<div class="payment">实付款：<em>${purchaseOrder.total-purchaseOrder.getOrderPayMoney()}</em>元</div>
+						<%--<div class="payment">实付款：<em>${purchaseOrder.total-purchaseOrder.getOrderPayMoney()}</em>元</div>--%>
 						<div class="money-btn" >
 							<c:choose>
 								<c:when test="${purchaseOrder.orderStatus == '3'}">
@@ -198,7 +198,7 @@
 								<c:forEach items="${spList.purchaseOrderProductList}" var="purchaseOrderProduct">
 									<li>
 										<div class="shops-pic"><img
-												src="http://pro.efeiyi.com/<c:url value="${purchaseOrderProduct.productModel.productModel_url}"/>"
+												src="<c:url value="${purchaseOrderProduct.productModel.productModel_url}"/>"
 												onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'">
 										</div>
 										<div class="shops-text">
@@ -214,7 +214,7 @@
 								</c:forEach>
 							</ul>
 							<!-- 商品-->
-							<div class="payment">实付款：<em>${spList.total-purchaseOrder.getOrderPayMoney()}</em>元</div>
+							<%--<div class="payment">实付款：<em>${spList.total-purchaseOrder.getOrderPayMoney()}</em>元</div>--%>
 							<div class="money-btn">
 								<c:choose>
 									<c:when test="${spList.orderStatus == '3'}">

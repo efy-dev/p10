@@ -39,7 +39,11 @@
                 "paySign": "${paySign}"//微信签名
             },
             function (res) {
-                window.location.href = "http://mall.efeiyi.com/order/paysuccess/${purchaseOrderPaymentDetails.id}";
+                if (res.err_msg == "get_brand_wcpay_request:ok") {
+                    window.location.href = "http://mall.efeiyi.com/order/paysuccess/${purchaseOrderPaymentDetails.id}";
+                } else {
+                    console.log(res.err_msg);
+                }
             }
         );
     }
