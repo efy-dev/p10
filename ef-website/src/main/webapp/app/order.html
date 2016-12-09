@@ -298,7 +298,7 @@
 
             ajaxRequest(PageVariable.service.addAddress, param, function (data) {
                 chooseAddress(data.data.id);
-                $("#addressForm").reset();
+                $("#addressForm")[0].reset();
             });
         });
     }

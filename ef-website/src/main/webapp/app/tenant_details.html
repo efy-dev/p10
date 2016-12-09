@@ -20,14 +20,14 @@
         <div class="tab"><span>价格</span><span>品类</span></div>
         <div class="content"
              style="width: 100%;position: absolute;top:54px;left: 0;background:#fff;border:0;z-index:10;">
-            <ul class="price" style="display: none;z-index: 99999">
-                <li onclick="filterPrice(0,10000000000000000)" up="0" down="1000">全部</li>
-                <li onclick="filterPrice(0,200)">0元-200元</li>
-                <li onclick="filterPrice(200,1000)">200元 — 1000元</li>
-                <li onclick="filterPrice(1000,5000)">1000元 — 5000元</li>
-                <li onclick="filterPrice(5000,10000000000000000)">5000元以上</li>
+            <ul class="price" style="display: none;">
+                <li min="0" ,max="10000000000000000">全部</li>
+                <li min="0" max="200">0元-200元</li>
+                <li min="200" max="1000">200元 — 1000元</li>
+                <li min="1000" max="5000">1000元 — 5000元</li>
+                <li min="5000" ,max="10000000000000000">5000元以上</li>
             </ul>
-            <ul class="category" dot-template="tenant-category" style="display: none; z-index: 99999">
+            <ul class="category" dot-template="tenant-category" style="display: none;">
 
             </ul>
         </div>
@@ -159,11 +159,11 @@
 </script>
 
 <script type="text/x-dot-template" id="tenant-category">
-    <li onclick="filterCategory()">全部</li>
+    <li class='category' categoryId="">全部</li>
     {{ for( var i=0; i < it.length; i++ ){ }}
 
-    <li onclick="filterCategory('{{=it[i].id}}')">{{=it[i].name}}</li>
-
+    <!--<li onclick="filterCategory('{{=it[i].id}}')">{{=it[i].name}}</li>-->
+    <li class='category' categoryId="{{=it[i].id}}">{{=it[i].name}}</li>
     {{ } }}
 </script>
 
@@ -271,6 +271,34 @@
             });
         })
     }
+    //价格筛选
+    var page = 1;
+    function filterPrice(min, max) {
+        PageVariable.requestModel["startPrice"] = min;
+        PageVariable.requestModel["endPrice"] = max;
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+            renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
+        })
+        page = 1;
+    }
+
+    function filterCategory(id) {
+        if (id == "") {
+            delete PageVariable.requestModel["product.tenantGroup.id"];
+        } else {
+            PageVariable.requestModel["product.tenantGroup.id"] = id;
+        }
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+            renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
+        });
+        page = 1;
+    }
+    function loadMore() {
+        page = page + 1;
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6 * page, 0, function () {
+            renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
+        });
+    }
 
     //筛选
     function filterTenant() {
@@ -284,49 +312,23 @@
             var index = $(this).index();
             $(this).toggleClass('active').siblings('span').removeClass('active');
             $ul.eq(index).stop(true).slideToggle(200).siblings('ul').slideUp(0);
-            return false
-        });
-
-        //下拉框：筛选条件s
-        $ul.on('touchend', "li", function () {
-            $ul.slideUp(400);
-            $span.removeClass('active');
-            $(this).addClass('active').siblings('li').removeClass('active');
             return false;
         });
 
-
-    }
-
-    //价格筛选
-    var page = 1;
-    function filterPrice(min, max) {
-        PageVariable.requestModel["startPrice"] = min;
-        PageVariable.requestModel["endPrice"] = max;
-        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
-            renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
-        })
-        page = 1;
-    }
-
-    function filterCategory(id) {
-        if (id != null && id != "undefined") {
-            PageVariable.requestModel["tenantGroup.id"] = id;
-        } else {
-            delete PageVariable.requestModel["tenantGroup.id"];
-        }
-        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
-            renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
-        })
-        page = 1;
-    }
-    function loadMore() {
-        page = page + 1;
-        searchProductModelsByTenantGroup(PageVariable.requestModel, 6 * page, 0, function () {
-            renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
+        //下拉框：筛选条件
+        $ul.on('touchend', "li", function () {
+            $ul.slideUp(200);
+            $span.removeClass('active');
+            $(this).addClass('active').siblings('li').removeClass('active');
+            if ($(this).attr("class") == "active") {
+                filterPrice($(this).attr("min"), $(this).attr("max"));
+            }
+            if ($(this).attr("class") == "category active") {
+                filterCategory($(this).attr("categoryId"));
+            }
+            return false;
         });
     }
-    //
 
 
 </script>
