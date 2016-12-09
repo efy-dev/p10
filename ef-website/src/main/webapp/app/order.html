@@ -85,7 +85,7 @@
 
 <article class="address" id="addressFormPanel" style="display: none;">
     <div class="address-add">
-        <form action="">
+        <form action="" id="addressForm">
             <div class="group">
                 <strong>收货人：</strong>
                 <label for=""><input type="text" placeholder="请输入收货人" id="consignee"/></label>
@@ -297,9 +297,8 @@
             }
 
             ajaxRequest(PageVariable.service.addAddress, param, function (data) {
-                if (data.code == "0") {
-                    location.reload();
-                }
+                chooseAddress(data.data.id);
+                $("#addressForm").reset();
             });
         });
     }
@@ -332,7 +331,7 @@
             modal.overAlert("请选择收货地址", "fail");
         } else {
             confirmOrderById(orderId, consumerAddressId, invoiceName, invoiceType, invoiceTitle, payment, function () {
-                var redirectUrl = "http://localhost/order/pay/" + orderId;
+                var redirectUrl = "http://www.efeiyi.com/order/pay/" + orderId;
                 if (isWeiXin()) {
                     redirectUrl += "?isWeiXin=true";
                 }

@@ -237,7 +237,7 @@ public class PurchaseOrderPaymentController {
     public String orderPay(@PathVariable String orderId, HttpServletRequest request) throws Exception {
         //从新创建支付记录详情
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
-        String isWeiXin = request.getParameter("");//移动网站页面用的
+        String isWeiXin = request.getParameter("isWeiXin");//移动网站页面用的
         String payment = purchaseOrder.getPayWay();
         if (payment == null) {
             payment = request.getParameter("payment");

@@ -19,7 +19,6 @@ import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.taglib.PageEntity;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.FileUtils;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -36,23 +35,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.font.TextAttribute;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyDescriptor;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.net.URLEncoder;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
-
-import static java.awt.SystemColor.text;
 
 @Controller
 @RequestMapping({"/yuanqu/product"})
@@ -515,13 +510,6 @@ public class OffLineProductController {
             redirect = "2/" + panelId;
             id = panelId;
         }
-        //String redirect_uri = "http://mall.efeiyi.com/wl";
-
-        /*String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=wx7f6aa253b75466dd" +
-                "&redirect_uri=" +
-                URLEncoder.encode(redirect_uri, "UTF-8") +
-                "&response_type=code&scope=snsapi_userinfo&state=" + URLEncoder.encode(redirect, "UTF-8") + "#wechat_redirect";*/
 
         String url = "http://www.efeiyi.com/createWxLoginUrl/" + redirect;
 
@@ -542,7 +530,7 @@ public class OffLineProductController {
         g.setFont(font);
         /* 消除java.awt.Font字体的锯齿 */
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        if(contentLength != 0) {
+        if (contentLength != 0) {
             ats.addAttribute(TextAttribute.FONT, font, 0, contentLength);
         }
         AttributedCharacterIterator iter = ats.getIterator();
@@ -557,6 +545,96 @@ public class OffLineProductController {
         byte[] bytes = FileUtils.readFileToByteArray(imageFile);
         return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
     }
+
+
+    @RequestMapping({"/batchExportQRCode"})
+    @ResponseBody
+    public int batchExportQRCode(HttpServletRequest request) throws Exception {
+        String tenantGroupId = request.getParameter("tenantGroupId");
+        String hql = "select obj from ProductModel obj where obj.product.tenantGroup.id=:tenantGroupId and obj.status!='0'";
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("tenantGroupId", tenantGroupId);
+        List<ProductModel> productModels = baseManager.listObject(hql, param);
+        for (ProductModel productModel : productModels) {
+            try {
+                generateQRCode(productModel);
+            } catch (Exception e) {
+                continue;
+            }
+        }
+        return productModels.size();
+    }
+
+
+    private void generateQRCode(ProductModel productModel) throws Exception {
+        String id = productModel.getId();
+
+        String productModelId = productModel.getId();
+
+        String redirect = "1/" + productModelId;
+
+        String url = "http://www.efeiyi.com/createWxLoginUrl/" + redirect;
+
+        String markContent = "";
+        int contentLength = 0;
+
+        markContent = productModel.getSerial() + "：" + productModel.getName();
+//        markContent = "测试";
+        contentLength = markContent.length();
+
+        QRCodeGenerator QRCodeGenerator = new QRCodeGenerator(url);
+        QRCodeGenerator.createQRCode(470, 470).assembleBackground("http://m.315cheng.com/images/erweima2016120801.jpg", 175, 200);
+
+        ImageIcon imageIcon = new ImageIcon(QRCodeGenerator.getImageResult());
+        java.awt.Image img = imageIcon.getImage();
+        int width = img.getWidth(null);
+        int height = img.getHeight(null);
+        BufferedImage bimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = bimage.createGraphics();
+        g.setColor(Color.BLACK);
+        g.setBackground(Color.white);
+        g.drawImage(img, 0, 0, null);
+        AttributedString ats = new AttributedString(markContent);
+        Font font = new Font("微软雅黑", Font.PLAIN, 22);
+        g.setFont(font);
+        /* 消除java.awt.Font字体的锯齿 */
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        if (contentLength != 0) {
+            ats.addAttribute(TextAttribute.FONT, font, 0, contentLength);
+        }
+        AttributedCharacterIterator iter = ats.getIterator();
+        g.drawString(iter, 180, 698);
+        g.dispose();
+
+//        File imageFile = new File(id + ".jpg");
+
+
+        String path = "C://Users//Administrator//Desktop//qrcode";
+        File downloadFileTest = new File(path);
+        if (!downloadFileTest.exists()) {
+            downloadFileTest.mkdir();
+        }
+
+        String fileName = productModel.getName() + productModel.getSerial() + ".jpg";
+        File downloadFile = new File(path + "//" + fileName);
+        try {
+            ImageIO.write(bimage, "jpg", downloadFile);
+//            ImageIO.write(image, "jpg", downloadFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
 
     /*商品规格详情和商品详情编辑提交时，避免图片累加*/
 
