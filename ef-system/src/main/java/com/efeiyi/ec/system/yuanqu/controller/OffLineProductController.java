@@ -586,62 +586,8 @@ public class OffLineProductController {
 
 
     private void generateQRCode(ProductModel productModel) throws Exception {
-        String id = productModel.getId();
-
-        String productModelId = productModel.getId();
-
-        String redirect = "1/" + productModelId;
-
-        String url = "http://www.efeiyi.com/createWxLoginUrl/" + redirect;
-
-        String markContent = "";
-        int contentLength = 0;
-
-        markContent = productModel.getSerial() + "：" + productModel.getName();
-//        markContent = "测试";
-        contentLength = markContent.length();
-
-        QRCodeGenerator QRCodeGenerator = new QRCodeGenerator(url);
-        QRCodeGenerator.createQRCode(470, 470).assembleBackground("http://m.315cheng.com/images/erweima2016120801.jpg", 175, 200);
-
-        ImageIcon imageIcon = new ImageIcon(QRCodeGenerator.getImageResult());
-        java.awt.Image img = imageIcon.getImage();
-        int width = img.getWidth(null);
-        int height = img.getHeight(null);
-        BufferedImage bimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = bimage.createGraphics();
-        g.setColor(Color.BLACK);
-        g.setBackground(Color.white);
-        g.drawImage(img, 0, 0, null);
-        AttributedString ats = new AttributedString(markContent);
-        Font font = new Font("微软雅黑", Font.PLAIN, 22);
-        g.setFont(font);
-        /* 消除java.awt.Font字体的锯齿 */
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        if (contentLength != 0) {
-            ats.addAttribute(TextAttribute.FONT, font, 0, contentLength);
-        }
-        AttributedCharacterIterator iter = ats.getIterator();
-        g.drawString(iter, 180, 698);
-        g.dispose();
-
-//        File imageFile = new File(id + ".jpg");
 
 
-        String path = "C://Users//Administrator//Desktop//qrcode";
-        File downloadFileTest = new File(path);
-        if (!downloadFileTest.exists()) {
-            downloadFileTest.mkdir();
-        }
-
-        String fileName = productModel.getName() + productModel.getSerial() + ".jpg";
-        File downloadFile = new File(path + "//" + fileName);
-        try {
-            ImageIO.write(bimage, "jpg", downloadFile);
-//            ImageIO.write(image, "jpg", downloadFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 

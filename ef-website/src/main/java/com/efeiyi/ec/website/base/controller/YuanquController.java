@@ -126,9 +126,11 @@ public class YuanquController {
     @RequestMapping({"/wxLogin"})
     public String wxLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
-            SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
             String result;
             String code = request.getParameter("code");
+
+            System.out.println("code: " + code);
+
             if (code == null || "".equals(code)) {
                 return "redirect:http://www.efeiyi.com/app/index.html";
             }
@@ -141,7 +143,9 @@ public class YuanquController {
             String wxInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + jsonObject.getString("access_token") + "&openid=" + jsonObject.getString("openid") + "&lang=zh_CN";
             String userInfo = HttpUtil.getHttpResponse(wxInfoUrl, null);
             authenticate(userInfo);
+            SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
             if (savedRequest != null) {
+                System.out.println("savedRequest : " + savedRequest.getRedirectUrl());
                 return "redirect:" + savedRequest.getRedirectUrl();
             } else {
                 return "redirect:http://www.efeiyi.com/app/index.html";
@@ -153,6 +157,29 @@ public class YuanquController {
     }
 
 
+    @RequestMapping({"/authenticateTest"})
+    @ResponseBody
+    public String authenticateTest() {
+
+        String userInfo = "    {\n" +
+                "        \"openid\":\"OPENID\",\n" +
+                "            \"nickname\":\"娃哈哈\",\n" +
+                "            \"sex\":\"2\",\n" +
+                "            \"province\":\"PROVINCE\",\n" +
+                "            \"city\":\"CITY\",\n" +
+                "            \"country\":\"COUNTRY\",\n" +
+                "            \"headimgurl\":\n" +
+                "        \"http://wx.qlogo.cn/mmopen/bczZjSx5rPIoZJn6AOF2Ee4unwCOXibp8Mk89gEd1ibvjdkqAa5XcnKVzsNfNzLNmqzGJqb7retuhXlF5C8l6DXnnp39bymjmz/0\",\n" +
+                "                \"privilege\":[\n" +
+                "        \"PRIVILEGE1\",\n" +
+                "        \"PRIVILEGE2\"\n" +
+                "        ],\n" +
+                "        \"unionid\":\"o-z7bvr__4mESneMhcMSzNC0umHc\"\n" +
+                "    }";
+        authenticate(userInfo);
+        return "";
+    }
+
     private MyUser authenticate(String userInfo) {
         JSONObject wxInfo = JSONObject.fromObject(userInfo);
         Consumer consumer = consumerService.getConsumerOrNullByUnionid(wxInfo.get("unionid").toString());
@@ -161,12 +188,20 @@ public class YuanquController {
             consumer = consumerService.saveOrUpdateConsumer(wxInfo.get("nickname").toString(), wxInfo.get("unionid").toString(), wxInfo.get("city").toString(), wxInfo.get("headimgurl").toString(), Integer.parseInt(wxInfo.get("sex").toString()));
             myUser = consumerService.getMyUserOrNullByConsumer(consumer);
         }
+
+        if (myUser != null) {
+            System.out.println(myUser.getUsername());
+        } else {
+            System.out.println("myUser is null");
+        }
+
         try {
             AuthenticationManager am = new SampleAuthenticationManager();
             Authentication authentication = new UsernamePasswordAuthenticationToken(myUser, myUser.getPassword());
             Authentication result = am.authenticate(authentication);
             SecurityContextHolder.getContext().setAuthentication(result);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
         return myUser;

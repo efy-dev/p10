@@ -22,8 +22,8 @@ import java.util.Map;
 @Service
 public class ConsumerService implements IConsumerService {
 
-    private final String HQL_GET_CONSUMER_BY_UNIONID = "SELECT consumer FROM Consumer consumer WHERE consumer.status!='0' AND consumer.unionid=:unionid";
-    private final String HQL_GET_CONSUMER_BY_USERNAME = "SELECT consumer FROM Consumer consumer WHERE consumer.status!='0' AND consumer.username=:username";
+    private final String HQL_GET_CONSUMER_BY_UNIONID = "SELECT consumer FROM Consumer consumer WHERE consumer.status='1' AND consumer.unionid=:unionid";
+    private final String HQL_GET_CONSUMER_BY_USERNAME = "SELECT consumer FROM Consumer consumer WHERE consumer.status='1' AND consumer.username=:username";
 
     @Autowired
     private BaseManager baseManager;
@@ -44,13 +44,17 @@ public class ConsumerService implements IConsumerService {
 
     @Override
     public Consumer getConsumerOrNullByUnionid(String unionid) {
-        Consumer consumer;
+        Consumer consumer = null;
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         param.put("unionid", unionid);
-        try {
-            consumer = (Consumer) baseManager.getUniqueObjectByConditions(HQL_GET_CONSUMER_BY_UNIONID, param);
-        } catch (NonUniqueResultException e) {
-            consumer = null;
+        List<Consumer> consumerList = baseManager.listObject(HQL_GET_CONSUMER_BY_UNIONID, param);
+        if (!consumerList.isEmpty() && consumerList.size() > 1) {
+            for (Consumer ct : consumerList) {
+                ct.setStatus("0");
+                baseManager.saveOrUpdate(Consumer.class.getName(), ct);
+            }
+        } else if (consumerList.size() == 1) {
+            consumer = consumerList.get(0);
         }
         return consumer;
     }

@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
@@ -99,6 +98,45 @@ public class QRCodeGenerator {
         return result;
     }
 
+    public QRCodeGenerator assembleText(String fontName, int fontSize, int fontStyle, String content, int positionX, int positionY) {
+        if (qrCode == null) {
+            throw new RuntimeException("Please call 'createQRCode(int width, int height)' first.");
+        }
+//        首先创造文字
+        Font font = new Font(fontName, fontStyle, fontSize);
+        AttributedString contentString = new AttributedString(content);
+        contentString.addAttribute(TextAttribute.FONT, font, 0, content.length());
+        AttributedCharacterIterator contentStringIterator = contentString.getIterator();
+        Graphics2D resultG2D = result.createGraphics();
+        resultG2D.setColor(Color.black);
+        resultG2D.setBackground(Color.white);
+        resultG2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        resultG2D.drawString(contentStringIterator, positionX, positionY);
+        resultG2D.dispose();
+        return this;
+    }
+
+    public QRCodeGenerator assembleText(String fontName, int fontSize, String content, int positionX, int positionY) {
+        return assembleText(fontName, fontSize, Font.PLAIN, content, positionX, positionY);
+    }
+
+    public void createLocalFile(String path, String fileName) {
+        if (qrCode == null) {
+            throw new RuntimeException("Please call 'createQRCode(int width, int height)' first.");
+        }
+        File downloadFileTest = new File(path);
+        if (!downloadFileTest.exists()) {
+            downloadFileTest.mkdir();
+        }
+
+        File downloadFile = new File(path + "//" + fileName);
+        try {
+            ImageIO.write(result, "jpg", downloadFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ResponseEntity<byte[]> getResponseEntityResult(String entityName) throws Exception {
         File imageFile = new File(entityName);
         ImageIO.write(result, "jpg", imageFile);
@@ -110,89 +148,18 @@ public class QRCodeGenerator {
     }
 
 
-    public static void main1(String[] args) throws Exception {
-        QRCodeGenerator QRCodeGenerator = new QRCodeGenerator("http://www.efeiyi.com/createWxLoginUrl/0/iugd2v0v7mbwxumv");
-
-        BufferedImage image = QRCodeGenerator
-                .createQRCode(1280, 1280).getImageResult();
-//                .assembleLogo("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/logo.png")
-//                .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/test/background.jpg", 123, 92)
-//                .getImageResult();
-        String path = "C://Users//Administrator//Desktop";
-        File downloadFileTest = new File(path);
-        if (!downloadFileTest.exists()) {
-            downloadFileTest.mkdir();
-        }
-
-        String fileName = System.currentTimeMillis() + ".jpg";
-        File downloadFile = new File(path + "//" + fileName);
-        try {
-            ImageIO.write(image, "jpg", downloadFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public static void main(String[] args) throws Exception {
-
-        String id = "iuqmdbotfarydf33";
-
-        String productModelId = "iuqmdbotfarydf33";
-
-        String redirect = "1/" + productModelId;
-
-        String url = "http://www.efeiyi.com/createWxLoginUrl/" + redirect;
-
-        String markContent = "";
-        int contentLength = 0;
-
-//        markContent = productModel.getSerial() + "：" + productModel.getName();
-        markContent = "测试";
-        contentLength = markContent.length();
-
-        QRCodeGenerator QRCodeGenerator = new QRCodeGenerator(url);
-        QRCodeGenerator.createQRCode(470, 470).assembleBackground("http://m.315cheng.com/images/erweima2016120801.jpg", 175, 200);
-
-        ImageIcon imageIcon = new ImageIcon(QRCodeGenerator.getImageResult());
-        java.awt.Image img = imageIcon.getImage();
-        int width = img.getWidth(null);
-        int height = img.getHeight(null);
-        BufferedImage bimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = bimage.createGraphics();
-        g.setColor(Color.BLACK);
-        g.setBackground(Color.white);
-        g.drawImage(img, 0, 0, null);
-        AttributedString ats = new AttributedString(markContent);
-        Font font = new Font("微软雅黑", Font.PLAIN, 22);
-        g.setFont(font);
-        /* 消除java.awt.Font字体的锯齿 */
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        if (contentLength != 0) {
-            ats.addAttribute(TextAttribute.FONT, font, 0, contentLength);
-        }
-        AttributedCharacterIterator iter = ats.getIterator();
-        g.drawString(iter, 180, 698);
-        g.dispose();
-
-//        File imageFile = new File(id + ".jpg");
-
-
-        String path = "C://Users//Administrator//Desktop//qrcode";
-        File downloadFileTest = new File(path);
-        if (!downloadFileTest.exists()) {
-            downloadFileTest.mkdir();
-        }
-
+        QRCodeGenerator codeGenerator = new QRCodeGenerator("http://www.efeiyi.com/createWxLoginUrl/0/iugd2v0v7mbwxumv");
+        String path = "C://Users//Administrator//Desktop";
         String fileName = System.currentTimeMillis() + ".jpg";
-        File downloadFile = new File(path + "//" + fileName);
-        try {
-            ImageIO.write(bimage, "jpg", downloadFile);
-//            ImageIO.write(image, "jpg", downloadFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
+        codeGenerator
+                .createQRCode(122, 122)
+                .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/picture/newqrcodebackground.jpg", 313, 20)
+                .assembleText("微软雅黑", 12, "1000007108", 145, 34)
+                .assembleText("微软雅黑", 12, "手机壳系列", 145, 51)
+                .assembleText("等线", 80, Font.PLAIN, "79", 106, 164)
+                .createLocalFile(path, fileName);
 
     }
 

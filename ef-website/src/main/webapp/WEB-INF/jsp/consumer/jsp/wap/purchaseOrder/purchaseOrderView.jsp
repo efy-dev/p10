@@ -37,7 +37,8 @@
                     </div>
                     <div class="am-g am-intro-bd">
                         <div class="am-intro-left am-u-sm-5 item-act"><a
-                                href="<%=PConst.NEWWEBURL%>/product/productModel/${purchaseOrderProduct.productModel.id}"><img
+                                <%--href="<%=PConst.NEWWEBURL%>/product/productModel/${purchaseOrderProduct.productModel.id}"--%>
+                        ><img
                                 class="am-u-sm-12 item-act"
                                 src="<c:url value="${purchaseOrderProduct.productModel.productModel_url}"/>"
                                 alt="产品"/></a></div>
