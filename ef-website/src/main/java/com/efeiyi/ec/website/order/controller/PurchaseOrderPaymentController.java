@@ -150,6 +150,19 @@ public class PurchaseOrderPaymentController {
         return "redirect:" + url;
     }
 
+    @RequestMapping({"/pay/weixin/callback/{orderId}"})
+    public String weixinPay(HttpServletRequest request, @PathVariable String orderId) throws Exception {
+        //@TODO 添加订单数据部分
+        String redirect_uri = PConst.NEWWEBURL + "/order/pay/wxParam/callback/" + orderId;
+        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+                "appid=" + WxPayConfig.APPID +
+                "&redirect_uri=" +
+                URLEncoder.encode(redirect_uri, "UTF-8") +
+                "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+
+        return "redirect:" + url;
+    }
+
     @RequestMapping({"/pay/wxParam/{orderId}"})
     public String getWxOpenId(HttpServletRequest request, Model model, @PathVariable String orderId) throws Exception {
         try {
