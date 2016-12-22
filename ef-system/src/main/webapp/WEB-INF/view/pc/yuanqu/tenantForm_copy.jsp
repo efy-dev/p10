@@ -60,13 +60,13 @@
     </div>
     <div dot-template="main-menu">
     </div>
-    <div dot-template="main-tenant-new">
+    <div dot-template="main-tenant-base">
     </div>
-    <div dot-template="main-tenant-panel-list">
+    <div dot-template="main-tenant-check">
     </div>
-    <%--<div dot-template="main-tenant-panel">
-    </div>--%>
     <div dot-template="main-tenant-master">
+    </div>
+    <div dot-template="main-tenant-panel">
     </div>
     <div dot-template="main-product-base">
     </div>
@@ -148,7 +148,7 @@
                 onclick="PubSub.publish('productList.render','{{=it.data.userTenant}}')">
             <span>商品管理</span></button>
         {{}}else{}}
-        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('tenantNew.render')">
+        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('tenantBase.render')">
             <span>新店铺</span></button>
         <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('tenantList.render')">
             <span>店铺管理</span></button>
@@ -165,22 +165,6 @@
             <span>SKU管理</span></button>
         {{}}}
         <%--<button type="button" class="am-btn am-btn-primary "><span>图片管理</span></button>--%>
-    </div>
-</script>
-
-<script type="text/x-dot-template" id="main-tenant-new">
-    <div class="am-tabs" id="doc-my-tabs">
-        <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify" id="tenantNew">
-            <li class="am-active" name="main-tenant-base"><a
-                    onclick="PubSub.publish('{{=it.name}}.tabShow',this)" >基本信息</a></li>
-            <li name="main-tenant-check"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)">公司信息</a></li>
-            <li name="main-tenant-panel"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)">店内实景</a></li>
-        </ul>
-        <div class="am-tabs-bd">
-            <div name="main-tenant-base" dot-template="main-tenant-base" am-active></div>
-            <div name="main-tenant-check" dot-template="main-tenant-check"></div>
-            <div name="main-tenant-panel" dot-template="main-tenant-panel"></div>
-        </div>
     </div>
 </script>
 
@@ -227,26 +211,6 @@
                     <div class="am-u-sm-10">
                         <input name="longitude" id="longitude" type="number"
                                value="{{=it.data!=null ? it.data.longitude : ''}}" placeholder="输入实体店铺的经度">
-                    </div>
-                </div>
-
-                <div class="am-form-group">
-                    <label for="longitude" class="am-u-sm-2 am-form-label">
-                        大师
-                    </label>
-                    <div class="am-u-sm-10">
-                        <input name="name" type="text" id="search"
-                               value="{{=(it.data!=null && it.data.tenantMasterList!=null && it.data.tenantMasterList.length>0&&it.data.tenantMasterList[0].master!=null) ? it.data.tenantMasterList[0].master.fullName : ''}}"
-                               placeholder="输入大师的名称" oninput="PubSub.publish('tenantMaster.search',this)">
-                    </div>
-                    <input name="masterId" type="hidden" id="masterId"
-                           value="{{=(it.data!=null && it.data.tenantMasterList!=null && it.data.tenantMasterList.length>0&&it.data.tenantMasterList[0].master!=null) ? it.data.tenantMasterList[0].master.id : ''}}">
-                    <input name="id" type="hidden" id="id"
-                           value="{{=(it.data!=null) ? it.data.id : ''}}">
-                </div>
-
-                <div class="am-form-group">
-                    <div class="am-u-sm-10" dot-template="{{=it.masterList}}">
                     </div>
                 </div>
 
@@ -312,6 +276,12 @@
                     <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
                         <a onclick="PubSub.publish('tenantBase.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
+                        {{ if(typeof it.data !="undefined" && it.data != null){ }}
+                        <a onclick="PubSub.publish('tenantBase.complete','{{=it.template}}-form')"
+                           class="am-btn am-btn-primary am-btn-lg">完成</a>
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('tenantCheck.render','{{=it.data.id}}')">跳过</a>
+                        {{ } }}
                     </div>
                 </div>
             </fieldset>
@@ -469,6 +439,10 @@
 
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+                        <%-- <a onclick="PubSub.publish('tenantCheck.complete','{{=it.template}}-form')"
+                            class="am-btn am-btn-primary am-btn-lg">完成</a>--%>
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('tenantBase.render','{{=it.data.id}}')">< 上一步</a>
                         <a onclick="PubSub.publish('tenantCheck.submit','{{=it.template}}-form')"
                            class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
                         <a class="am-btn am-btn-primary am-btn-lg"
@@ -536,104 +510,97 @@
     </div>
 </script>
 
-<script type="text/x-dot-template" id="main-tenant-panel-list-body">
-    <table class="am-table am-table-striped am-table-hover table-main">
-        <thead>
-        <tr>
-            <th class="table-set">操作</th>
-            <th class="table-title">名称</th>
-            <th class="table-title">介绍</th>
-            <th class="table-title">图片预览</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{
-        for(var i = 0 ; i< it.length ; i++){
-        var imageText = it[i];
-        }}
-        <tr id="{{=imageText.id}}">
-            <td>
-                <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs">
-                        <button onclick="PubSub.publish('tenantPanel.render','{{=imageText.id}}')"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 编辑
-                        </button>
-                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                           onclick="showConfirm('提示','是否删除',function(){ PubSub.publish('tenantPanelList.delete','{{=imageText.id}}')})"><span
-                                class="am-icon-trash-o"></span> 删除
-                        </a>
-                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                          <%-- href="/yuanqu/product/createQRCodeSample.do?productModelId={{=productModel.id}}"--%>><span
-                                class="am-icon-trash-o"></span> 生成二维码
-                        </a>
-                    </div>
-                </div>
-            </td>
-            <td class="am-hide-sm-only"><span href="" style="padding-right: 20px">{{=imageText.name}}</span>
-            </td>
-            <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=imageText.content}}</span>
-            </td>
-            <td class="am-hide-sm-only">
-                {{ if( typeof imageText.imageList!= "undefined" && imageText.imageList!=null
-                &&imageText.imageList.length >
-                0
-                ){}}
-                {{ for( var x=0; x < imageText.imageList.length; x++ ){ }}
-                <a onclick="PubSub.publish('hotBase.new','{{=imageText.imageList[x].image.id}}')">
-                    <img width="10%" src="{{=imageText.imageList[x].image.src}}" alt=""/>
-                </a>
-                {{} } }}
-            </td>
-        </tr>
-        {{ } }}
-        </tbody>
-    </table>
-</script>
-
 <script type="text/x-dot-template" id="main-tenant-panel-list">
-    <div class="main-tenant-base" data-for="panelList" data-type="tabs">
-        <legend>店内实景</legend>
-        <a class="am-btn am-btn-primary am-btn-lg"
-           onclick="PubSub.publish('tenantPanel.new','{{=it.tenantId}}')">新建</a>
-        <div class="am-u-lg-12" dot-template="main-tenant-panel-list-body">
-            {{
-            PubSub.publish(it.name+".body");
-            }}
-        </div>
-       <%-- <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
-            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.prePage')">上一页</a>
-            <a class="am-btn am-btn-primary am-btn-lg" id="tenant-index">第{{=it.index}}页</a>
-            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.nextPage')">下一页</a>
-        </div>--%>
-    </div>
+    {{
+    for(var i = 0 ; i< it.length ; i++){
+    var imageText = it[i];
+    }}
+    <tr id="{{=imageText.id}}">
+        <td>
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                       onclick="showConfirm('提示','是否删除',function(){ PubSub.publish('tenantPanel.delete','{{=imageText.id}}')})"><span
+                            class="am-icon-trash-o"></span> 删除
+                    </a>
+                </div>
+            </div>
+        </td>
+        <td class="am-hide-sm-only"><span href="" style="padding-right: 20px">{{=imageText.name}}</span>
+        </td>
+        <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=imageText.content}}</span>
+        </td>
+        <td class="am-hide-sm-only">
+            {{ if(imageText.media!=null) { }}
+            <audio src="{{=imageText.media.src}}" controls="controls">浏览器不支持音频插件</audio>
+            {{ } }}
+        </td>
+        <td class="am-hide-sm-only">
+            {{ if( typeof imageText.imageList!= "undefined" && imageText.imageList!=null &&imageText.imageList.length >
+            0
+            ){}}
+            {{ for( var x=0; x < imageText.imageList.length; x++ ){ }}
+            <a onclick="PubSub.publish('hotBase.new','{{=imageText.imageList[x].image.id}}')">
+                <img width="10%" src="{{=imageText.imageList[x].image.src}}" alt=""/>
+            </a>
+            {{} } }}
+        </td>
+    </tr>
+    {{ } }}
 </script>
 
 <script type="text/x-dot-template" id="main-tenant-panel">
     <div class="main-tenant-base">
+        <ul class="am-nav am-nav-tabs am-nav-justify">
+            <li class="am-active"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="panelForm"
+                                     id="panelForm">新的店内实景</a>
+            </li>
+            <li><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)" data="panelList">查看所有</a></li>
+        </ul>
+    </div>
+
+    <div class="main-tenant-base" data-for="panelList" data-type="tabs" style="display: none">
+        <legend><b>{{=it.data.id}}</b> 的店内实景</legend>
+        <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+            <tr>
+                <th class="table-set">操作</th>
+                <th class="table-title">名称</th>
+                <th class="table-title">介绍</th>
+                <th class="table-title">语音预览</th>
+                <th class="table-title">图片预览</th>
+            </tr>
+            </thead>
+            <tbody dot-template="main-tenant-panel-list">
+
+            </tbody>
+        </table>
+
+        <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+            <a class="am-btn am-btn-primary am-btn-lg"
+               onclick="PubSub.publish('productBase.new','{{=it.data.id}}')">去添加商品</a>
+        </div>
+    </div>
+
+    <div class="main-tenant-base" data-for="panelForm" data-type="tabs">
         <form class="am-form am-form-horizontal" name="tenant" id="main-tenant-panel-form" action="{{=it.submit}}"
               enctype="multipart/form-data"
               method="post">
             <fieldset>
-                <legend>店内实景</legend>
-                <input type="hidden" name="id" value="{{=it.data != null&&it.data.id!=undefined ? it.data.id : ''}}">
-                <input type="hidden" name="tenantId"
-                       value="{{=(it.tenantId!=null && it.tenantId!=undefined ) ? it.tenantId: ''}}">
+                <legend><b>{{=it.data.id}}</b> 的店内实景</legend>
+                <input type="hidden" name="id" id="tenantPanelId" value="{{=it.data.id}}">
+
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">名称</label>
                     <div class="am-u-sm-9">
-                        <input name="name" type="text"
-                               value="{{=(it.data!=null && it.data.name!=null) ? it.data.name: ''}}"
-                               placeholder="输入实景名称">
+                        <input name="name" type="text" placeholder="名称">
                     </div>
                 </div>
 
                 <div class="am-form-group">
                     <label class="am-u-sm-3 am-form-label">介绍</label>
                     <div class="am-u-sm-9">
-                        <textarea name="content" rows="5"
-                                  value="{{=(it.data!=null && it.data.content!=null) ? it.data.content: ''}}"
-                                  placeholder="输入实景介绍"></textarea>
+                        <textarea name="content" rows="5" placeholder="介绍"></textarea>
                     </div>
                 </div>
 
@@ -647,11 +614,6 @@
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
-                        {{ if(it.data!=null && it.data.imageList !=null){ }}
-                        {{for(var i = 0 ; i< it.data.imageList.length ; i++){ }}
-                        {{ var imagePanel = it.data.imageList[i];}}
-                        <img src="{{=imagePanel.image.src}}" width="500"/>
-                        {{ } } }}
                     </div>
                 </div>
                 <div class="am-form-group am-form-file">
@@ -664,16 +626,17 @@
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
-                        {{ if(it.data!=null && it.data.media !=null){ }}
-                        <audio src="{{=it.data.media.src}}" width="500" controls="controls"></audio>
-                        {{ } }}
                     </div>
                 </div>
 
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('tenantMaster.render','{{=it.data.id}}')">< 上一步</a>
                         <a onclick="PubSub.publish('tenantPanel.submit','{{=it.template}}-form')"
-                           class="am-btn am-btn-primary am-btn-lg">完成</a>
+                           class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
+                        <a class="am-btn am-btn-primary am-btn-lg"
+                           onclick="PubSub.publish('productBase.new','{{=it.data.id}}')">跳过</a>
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('tenantList.render')">返回店铺列表</a>
                     </div>
@@ -824,19 +787,10 @@
     <div>
         <div class="am-u-lg-6">
             <legend>店铺列表</legend>
-            <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('tenantNew.render')">
-                <span>新建</span></button>
             <div class="am-input-group">
-                <input type="text" class="am-form-field" id="inputValue" style="width: 100px">
-                <select data-am-selected style="width: 100px;height: 38px" id="selectField">
-                    <option value="name" selected>店名</option>
-                    <option value="serial">编号</option>
-                </select>
-                <label>
-                    <input type="checkbox" id="checkbox"> 无图
-                </label>
+                <input type="text" class="am-form-field" oninput="PubSub.publish('{{=it.name}}.search',this)">
                 <span class="am-input-group-btn">
-                    <button class="am-btn am-btn-default" type="button" onclick="PubSub.publish('{{=it.name}}.search')"><span
+                    <button class="am-btn am-btn-default" disabled type="button"><span
                             class="am-icon-search"></span></button>
                 </span>
             </div>
@@ -875,9 +829,17 @@
             <td>
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
-                        <button onclick="PubSub.publish('tenantNew.render','{{=tenant.id}}')"
+                        <button onclick="PubSub.publish('tenantBase.render','{{=tenant.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
+                        </button>
+                        <button onclick="PubSub.publish('tenantCheck.render','{{=tenant.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 公司信息
+                        </button>
+                        <button onclick="PubSub.publish('tenantPanel.render','{{=tenant.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 店内实景
                         </button>
                         <button onclick="PubSub.publish('productList.render','{{=tenant.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
@@ -983,7 +945,7 @@
                            href="http://www.efeiyi.com/app/product_details.html?productId={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 预览页面
                         </a>
-                        <button onclick="PubSub.publish('skuList.upper',{'id':'{{=productModel.id}}','status':'{{=productModel.status}}'})"
+                        <button onclick="PubSub.publish('productModelList.upper',{'id':'{{=productModel.id}}','status':'{{=productModel.status}}'})"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
                             {{?productModel.status==2}}
                             <span class="am-icon-edit"></span> 上架
@@ -991,7 +953,7 @@
                             <span class="am-icon-edit"></span> 下架
                             {{?}}
                         </button>
-                        <button onclick="showConfirm('提示','是否删除',function(){PubSub.publish('skuList.delete','{{=productModel.id}}')})"
+                        <button onclick="showConfirm('提示','是否删除',function(){PubSub.publish('productModelList.delete','{{=productModel.id}}')})"
                                 class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                 class="am-icon-trash-o"></span> 删除
                         </button>
@@ -2156,105 +2118,6 @@
         }
     };
 
-    var TenantNew = function (param) {
-        this.data = null;
-        this.father = null;
-        this.label = "店铺信息";
-        this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
-        this.param = param;
-        this.name = "tenantNew";
-        this.template = "main-tenant-new";
-
-        this.render = function (msg, data) {
-            var $data = {};
-            renderTemplate(this.template, this);
-            if (typeof data != "undefined" && data != null) {
-                $data["templateName"] = "main-tenant-base";
-                $data["id"] = data;
-                this.tabShow(null, $data);
-            } else {
-                var templateName = $("#tenantNew .am-active").attr("name");
-                $data["templateName"] = templateName;
-                this.tabShow(null, $data);
-            }
-            this.show();
-        };
-        this.tabShow = function (msg, data) {
-            var templateName = "";
-            if (data != null && typeof data.templateName != "undefined" && data.templateName != "") {
-                templateName = data.templateName;
-                this.data = data.id;
-                $("#tenantNew").find("li").removeClass("am-active");
-                $("#tenantNew").find("li[name=" + templateName + "]").addClass("am-active");
-                var $active = $(".am-tabs-bd").find("div[name=" + templateName + "]");
-                $active.show();
-                $active.siblings().hide();
-            } else {
-                $(data).parent().siblings().removeClass("am-active");
-                $(data).parent().addClass("am-active");
-                templateName = $(data).parent().attr("name");
-                var $active = $(data).parent().parent().next().find("div[name=" + templateName + "]");
-                $active.show();
-                $active.siblings().hide();
-            }
-            switch (templateName) {
-                case "main-tenant-base":
-                    tenantBase.render(null, this.data);
-                    $("div[dot-template=main-tenant-panel-list]").hide();
-                    break;
-                case "main-tenant-check":
-                    if (this.data == null || typeof this.data == "undefined" || this.data == "") {
-                        showAlert('提示', '请填写基本信息', function () {
-                            tenantBase.render(null, this.data);
-                            return false;
-                        });
-                    } else {
-                        tenantCheck.render(null, this.data);
-                        $("div[dot-template=main-tenant-panel-list]").hide();
-                    }
-                    break;
-                case "main-tenant-panel":
-                    $("div[dot-template=main-tenant-panel-list]").show();
-                    $("div[dot-template=main-tenant-panel]").hide();
-                    if (this.data == null || typeof this.data == "undefined" || this.data == "") {
-                        showAlert('提示', '请填写基本信息', function () {
-                            tenantBase.render(null, this.data);
-                            return false;
-                        });
-                    } else {
-                        $("div[dot-template=main-tenant-panel-list]").show();
-                        tenantPanelList.render(null, this.data);
-                    }
-                    break;
-            }
-        };
-
-        this.show = function (msg, data) {
-            PubSub.publish("nav.setCurrentComponent", this);
-            $("[dot-template=" + this.template + "]").show();
-        };
-        this.hide = function (msg, data) {
-            $("[dot-template=" + this.template + "]").hide();
-        };
-        this.remove = function (msg, data) {
-            $("[dot-template=" + this.template + "]").html("");
-        };
-
-        this.subscribeArray = [
-            {message: this.name + ".render", subscriber: this.render},
-            {message: this.name + ".show", subscriber: this.show},
-            {message: this.name + ".hide", subscriber: this.hide},
-            {message: this.name + ".remove", subscriber: this.remove},
-            {message: this.name + ".tabShow", subscriber: this.tabShow},
-        ];
-
-        for (var i = 0; i < this.subscribeArray.length; i++) {
-            var subscribe = this.subscribeArray[i];
-            PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
-        }
-
-    };
-
     var TenantBase = function (param) {
         this.submit = "/yuanqu/tenant/baseSubmit";
         this.label = "店铺基本信息";
@@ -2264,7 +2127,6 @@
         this.param = param;
         this.name = "tenantBase";
         this.template = "main-tenant-base";         //组件绑定的模板//组件需要订阅的事件与消息
-        this.masterList = "main-tenant-master-list";
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
@@ -2276,6 +2138,8 @@
                 this.data = null;
                 renderTemplate(this.template, this);
             }
+            this.show();
+
         };
 
         this.submitForm = function (msg, data) {
@@ -2285,10 +2149,7 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    var param = {};
-                    param["templateName"] = "main-tenant-check";
-                    param["id"] = data.id;
-                    PubSub.publish("tenantNew.tabShow", param);
+                    PubSub.publish("tenantCheck.render", data.id);
                 }
                 $("#my-modal-loading").modal("close");
             });
@@ -2314,26 +2175,7 @@
                 PubSub.publish("recommendBase.render", responseData.id);
             }.bind(this))
         };
-        this.chooseMaster = function (msg, data) {
-            var id = data.split(":")[0];
-            var fullName = data.split(":")[1];
-            $("#masterId").val(id);
-            $("#search").val(fullName)
-            this.selectHide();
-        };
-        this.selectHide = function (msg, data) {
-            $("[dot-template=" + this.masterList + "]").hide();
-        };
-        this.selectShow = function (msg, data) {
-            $("[dot-template=" + this.masterList + "]").show();
-        };
-        this.searchMaster = function (msg, data) {
-            this.selectShow();
-            var success = function (responseData) {
-                renderTemplate(this.masterList, responseData);
-            }.bind(this);
-            ajaxRequest("/yuanqu/tenant/getTenantMasterList", {name: $(data).val()}, success);
-        };
+
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
@@ -2378,10 +2220,7 @@
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".imageView", subscriber: this.imageView},
             {message: this.name + ".complete", subscriber: this.complete},
-            {message: this.name + ".submit", subscriber: this.submitForm},
-            {message: this.name + ".searchMaster", subscriber: this.searchMaster},
-            {message: this.name + ".selectShow", subscriber: this.selectShow},
-            {message: this.name + ".selectHide", subscriber: this.selectHide}
+            {message: this.name + ".submit", subscriber: this.submitForm}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2410,6 +2249,8 @@
             } else {
                 renderTemplate(this.template, this);
             }
+            this.show();
+
         };
 
         this.submitForm = function (msg, data) {
@@ -2419,10 +2260,7 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    var param = {};
-                    param["templateName"] = "main-tenant-panel";
-                    param["id"] = data.id;
-                    PubSub.publish("tenantNew.tabShow", param);
+                    PubSub.publish("tenantMaster.render", data.id);
                 }
                 $("#my-modal-loading").modal("close");
             });
@@ -2483,8 +2321,6 @@
     };
 
     var TenantList = function (param) {
-        this.serachField = null;
-        this.imageFlag = null;
         this.currentSearch = null;
         this.index = 1;
         this.size = 10;
@@ -2535,8 +2371,6 @@
             };
             if (this.currentSearch != null) {
                 param.name = this.currentSearch
-                param.imageFlag = this.imageFlag;
-                param.serachField = this.serachField;
             }
             ajaxRequest("/yuanqu/tenant/getTenantList", param, function (responseData) {
                 this.data = responseData.list;
@@ -2554,9 +2388,7 @@
 
         this.search = function (msg, data) {
             this.index = 1;
-            this.currentSearch = $("#inputValue").val();
-            this.imageFlag = $("#checkbox").is(':checked');
-            this.serachField = $("#selectField").val();
+            this.currentSearch = $(data).val();
             this.body();
         };
 
@@ -2806,46 +2638,59 @@
     var TenantPanel = function (param) {
         this.submit = "/yuanqu/tenant/panelSubmit";
         this.label = "店内实景";
-        this.data = {};
+        this.data = null;
         this.father = null;
         this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
         this.param = param;
         this.name = "tenantPanel";
         this.template = "main-tenant-panel";         //组件绑定的模板//组件需要订阅的事件与消息
-        this.tenantId = "";
+        this.panelListTemplate = "main-tenant-panel-list";
+
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
-                ajaxRequest("/yuanqu/product/getPanelById", {id: data}, function (responseData) {
+                ajaxRequest("/yuanqu/tenant/getTenantById", {id: data}, function (responseData) {
                     this.data = responseData;
                     renderTemplate(this.template, this);
-                    this.show();
-                    tenantPanelList.hide();
-                }.bind(this));
-            }
-        };
-        this.new = function (msg, data) {
-            if (typeof data != "undefined" && data != null) {
-                this.data = null;
-                this.tenantId = data;
+                }.bind(this))
+            } else {
                 renderTemplate(this.template, this);
-                this.show();
-                tenantPanelList.hide();
             }
+            this.show();
         };
+        this.delete = function (msg, data) {
+            ajaxRequest("/yuanqu/tenant/deletePanelById", {id: data}, function (responseData) {
+                if (responseData.code != "1") {
+                    ajaxRequest("/yuanqu/tenant/getPanelListByTenant", {id: this.data.id}, function (responseData) {
+                        renderTemplate(this.panelListTemplate, responseData);
+                    }.bind(this));
+                }
+            }.bind(this));
+        };
+        this.tabShow = function (msg, data) {
+            $(".file-list").html("");
+            $(data).parent().parent().find("li").each(function () {
+                $(this).attr("class", "");
+            });
+            $(data).parent().attr("class", "am-active");
+
+            $("[data-type=tabs]").each(function () {
+                $(this).hide();
+            });
+            var tabData = $(data).attr("data");
+            $("[data-for=" + tabData + "]").show();
+            ajaxRequest("/yuanqu/tenant/getPanelListByTenant", {id: this.data.id}, function (responseData) {
+                renderTemplate(this.panelListTemplate, responseData);
+            }.bind(this));
+        };
+
 
         this.submitForm = function (msg, data) {
             $("#my-modal-loading").modal();
-            $("#" + data).ajaxSubmit(function (data) {
-                if (typeof data == "string") {
-                    data = JSON.parse(data);
-                }
-                if (typeof data != "undefined" && data != null) {
-                    PubSub.publish("tenantPanelList.render", data.owner);
-                }
-                this.hide();
-                tenantPanelList.show();
+            $("#" + data).ajaxSubmit(function (responseData) {
+                $("[data=panelList]").click();
+                document.getElementById(data).reset();
                 $("#my-modal-loading").modal("close");
-            }.bind(this));
+            });
             return false;
         };
 
@@ -2876,89 +2721,20 @@
             }
         };
 
-        this.hide = function (msg, data) {
-            $("[dot-template=" + this.template + "]").hide();
-        };
-        this.remove = function (msg, data) {
-            $("[dot-template=" + this.template + "]").html("");
-        };
+
         this.show = function (msg, data) {
+            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
-        }
-        this.subscribeArray = [
-            {message: this.name + ".new", subscriber: this.new},
-            {message: this.name + ".hide", subscriber: this.hide},
-            {message: this.name + ".render", subscriber: this.render},
-            {message: this.name + ".remove", subscriber: this.remove},
-            {message: this.name + ".submit", subscriber: this.submitForm},
-            {message: this.name + ".imageView", subscriber: this.imageView},
-        ];
-
-        for (var i = 0; i < this.subscribeArray.length; i++) {
-            var subscribe = this.subscribeArray[i];
-            PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
-        }
-
-    };
-
-    var TenantPanelList = function (param) {
-        this.index = 1;
-        this.size = 10;
-        this.label = "店内实景管理";
-        this.data = null;
-        this.father = null;
-        this.hierarchy = 1;  //组件的层级（通用属性，每个组件都有）
-        this.param = param;
-        this.name = "tenantPanelList";
-        this.template = "main-tenant-panel-list";         //组件绑定的模板//组件需要订阅的事件与消息
-        this.totalPages = "";
-        this.totalRecords = "";
-        this.tenantId = "";
-
-        this.nextPage = function (msg, data) {
-            this.totalPages = this.totalPages == 0 ? 1 : this.totalPages;
-            this.index = this.index + 1 > this.totalPages ? this.totalPages : this.index + 1;
-            $("#tenant-index").html("第" + this.index + "页");
-            this.body();
-        };
-
-        this.prePage = function (msg, data) {
-            this.index = this.index > 1 ? this.index - 1 : 1;
-            $("#tenant-index").html("第" + this.index + "页");
-            this.body();
-        };
-
-        this.delete = function (msg, data) {
-            ajaxRequest("/yuanqu/tenant/deletePanelById", {id: data}, function (responseData) {
-                if (responseData.code != "1") {
-                    this.body();
-                }
-            }.bind(this));
-        };
-
-        this.qrcode = function (msg, data) {
-            var param = {};
-            param.id = data;
-            ajaxRequest("/yuanqu/tenant/createQRCode.do", param, function () {
+            /*******************************************/
+            $("#panelForm").parent().parent().find("li").each(function () {
+                $(this).attr("class", "");
             });
-        };
+            $("#panelForm").parent().attr("class", "am-active");
 
-        this.body = function (msg, data) {
-            ajaxRequest("/yuanqu/tenant/getPanelListByTenant", {id:this.tenantId}, function (responseData) {
-                this.data = responseData.list;
-                renderTemplate(this.template + "-body", this.data);
-            }.bind(this));
-        };
-
-        this.render = function (msg, data) {
-            this.index = 1;
-            this.tenantId = data;
-            renderTemplate(this.template, this);
-        };
-
-        this.show = function (msg, data) {
-            /*PubSub.publish("nav.setCurrentComponent", this);*/
-            $("[dot-template=" + this.template + "]").show();
+            $("[data-type=tabs]").each(function () {
+                $(this).hide();
+            });
+            $("[data-for=panelForm]").show();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
@@ -2972,9 +2748,9 @@
             {message: this.name + ".hide", subscriber: this.hide},
             {message: this.name + ".render", subscriber: this.render},
             {message: this.name + ".remove", subscriber: this.remove},
-            {message: this.name + ".body", subscriber: this.body},
-            {message: this.name + ".nextPage", subscriber: this.nextPage},
-            {message: this.name + ".prePage", subscriber: this.prePage},
+            {message: this.name + ".submit", subscriber: this.submitForm},
+            {message: this.name + ".tabShow", subscriber: this.tabShow},
+            {message: this.name + ".imageView", subscriber: this.imageView},
             {message: this.name + ".delete", subscriber: this.delete}
         ];
 
@@ -2982,7 +2758,8 @@
             var subscribe = this.subscribeArray[i];
             PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
         }
-    }
+
+    };
 
     var ProductBase = function (param) {
         this.submit = "/yuanqu/product/baseSubmit";
@@ -3627,7 +3404,7 @@
         };
 
         this.delete = function (msg, data) {
-            ajaxRequest("/yuanqu/product/deleteProductModelById", {id: data}, function (responseData) {
+            ajaxRequest("/yuanqu/tenant/deleteProductModelById", {id: data}, function (responseData) {
                 this.data = responseData;
                 if (data.code != "1") {
                     this.body();
@@ -3635,16 +3412,11 @@
             }.bind(this));
         };
 
-        this.upper = function (msg, data) {
-            if (data.status == "1") {
-                data.status = "2";
-            } else if (data.status == "2") {
-                data.status = "1";
-            }
-            ajaxRequest("/yuanqu/product/setProductModelStatus", {data: JSON.stringify(data)}, function (responseData) {
-                this.productId = responseData.product.id;
-                this.body();
-            }.bind(this));
+        this.qrcode = function (msg, data) {
+            var param = {};
+            param.id = data;
+            ajaxRequest("/yuanqu/tenant/createQRCode.do", param, function () {
+            });
         };
 
         this.body = function (msg, data) {
@@ -3694,6 +3466,7 @@
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".body", subscriber: this.body},
             {message: this.name + ".search", subscriber: this.search},
+            {message: this.name + ".qrcode", subscriber: this.qrcode},
             {message: this.name + ".nextPage", subscriber: this.nextPage},
             {message: this.name + ".prePage", subscriber: this.prePage},
             {message: this.name + ".delete", subscriber: this.delete}
@@ -4383,8 +4156,6 @@
     var recommendBase = new RecommendBase();        //推荐信息
     var recommendList = new RecommendList();        //推荐列表
     var skuList = new SKUList();
-    var tenantNew = new TenantNew();
-    var tenantPanelList = new TenantPanelList();
 
 </script>
 

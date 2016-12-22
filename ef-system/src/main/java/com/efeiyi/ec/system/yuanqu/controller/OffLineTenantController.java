@@ -2,6 +2,7 @@ package com.efeiyi.ec.system.yuanqu.controller;
 
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.*;
+import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.product.model.Recommend;
 import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
@@ -24,6 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -334,7 +338,11 @@ public class OffLineTenantController {
         String hql = "select obj from Panel obj where obj.owner=:tenantId and obj.status='1'";
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         param.put("tenantId", tenantId);
-        return baseManager.listObject(hql, param);
+        PageEntity pageEntity = new PageEntity();
+        pageEntity.setSize(10);
+        pageEntity.setrIndex(0);
+        PageInfo pageInfo = baseManager.listPageInfo(hql, pageEntity, param);
+        return pageInfo;
     }
 
 
@@ -344,11 +352,15 @@ public class OffLineTenantController {
         int limit = Integer.parseInt(request.getParameter("limit"));
         int offset = Integer.parseInt(request.getParameter("offset"));
         String name = request.getParameter("name");
+        String imageFlag = request.getParameter("imageFlag");
+        String serachField = request.getParameter("serachField");
         String hql = "select obj from BigTenant obj where obj.tenantType='" + BigTenant.TENANT_TYPE_OFFLINE + "' and obj.status!='0'";
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        if (name != null && !"".equals(name)) {
-            hql += " and obj.name=:name";
-            param.put("name", name);
+        if (serachField != null && name != null && !"".equals(serachField) && !"".equals(name)) {
+            hql += " and obj." + serachField + " like '%" + name + "%'";
+        }
+        if (imageFlag != null && imageFlag.equals("true")) {
+            hql += " and obj.pictureUrl IS NULL";
         }
         hql += " order by obj.createDateTime desc";
         PageEntity pageEntity = new PageEntity();
@@ -390,59 +402,34 @@ public class OffLineTenantController {
     @RequestMapping({"/tenant/panelSubmit"})
     @ResponseBody
     public Object panelSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
-        Panel panel = new Panel();
+        String id = request.getParameter("id");
+        String tenantId = request.getParameter("tenantId");
+        String imageHql = "select obj from ImagePanel obj where obj.panel.id=:panelId and obj.image.status!='0' and obj.image.type='1'";
+        LinkedHashMap<String, Object> imagesParam = new LinkedHashMap<>();
+        imagesParam.put("panelId", id);
+        String audioHql = "select obj from Image obj where obj.owner=:panelId and obj.status!='0' and obj.type='2'";
+        LinkedHashMap<String, Object> audioParam = new LinkedHashMap<>();
+        audioParam.put("panelId", id);
+        Panel panel;
+        if (id != null && !"".equals(id)) {
+            panel = (Panel) baseManager.getObject(Panel.class.getName(), id);
+        } else {
+            panel = new Panel();
+            BigTenant bigTenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), tenantId);
+            panel.setOwner(bigTenant.getId());
+        }
         panel.setStatus("1");
         panel.setType("1");
         panel.setName(request.getParameter("name"));
-        panel.setOwner(request.getParameter("id"));
         panel.setContent(request.getParameter("content"));
         baseManager.saveOrUpdate(Panel.class.getName(), panel);
-        for (MultipartFile multipartFile : multipartRequest.getFiles("imageList")) {
-            String oName = multipartFile.getOriginalFilename();
-            String nName;
-            try {
-                nName = System.currentTimeMillis() + "" + (int) (Math.random() * 1000000) + "." + oName.split("\\.")[1];
-            } catch (Exception e) {
-                continue;
-            }
-            String url = "image/" + nName;
-            aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
-            String fullUrl = PConst.OSS_EF_WIKI_HOST + url;
-            Image image = new Image();
-            image.setStatus("1");
-            image.setType("1");
-            image.setOwner(panel.getId());
-            image.setCreateTime(new Date());
-            image.setSrc(fullUrl);
-            ImagePanel imagePanel = new ImagePanel();
-            imagePanel.setImage(image);
-            imagePanel.setPanel(panel);
-            baseManager.saveOrUpdate(Image.class.getName(), image);
-            baseManager.saveOrUpdate(ImagePanel.class.getName(), imagePanel);
+        if (multipartRequest.getFiles("imageList") != null && multipartRequest.getFiles("imageList").size() > 0) {
+            cascadeRemove(imageHql, imagesParam, ImagePanel.class);
+            uploadMultimedia("imageList", panel, "1", multipartRequest);
         }
-
-        MultipartFile multipartFile = multipartRequest.getFile("media");
-        if (multipartFile != null) {
-            String oName = multipartFile.getOriginalFilename();
-            String nName;
-            String fullUrl = null;
-            try {
-                nName = System.currentTimeMillis() + "" + (int) (Math.random() * 1000000) + "." + oName.split("\\.")[1];
-                String url = "image/" + nName;
-                aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
-                fullUrl = PConst.OSS_EF_WIKI_HOST + url;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            Image image = new Image();
-            image.setStatus("1");
-            image.setType("2");
-            image.setOwner(panel.getId());
-            image.setCreateTime(new Date());
-            image.setSrc(fullUrl);
-            baseManager.saveOrUpdate(Image.class.getName(), image);
-            panel.setMedia(image);
-            baseManager.saveOrUpdate(Panel.class.getName(), panel);
+        if (multipartRequest.getFile("media") != null) {
+            cascadeRemove(audioHql, audioParam, Image.class);
+            uploadMultimedia("media", panel, "2", multipartRequest);
         }
         return panel;
     }
@@ -605,5 +592,58 @@ public class OffLineTenantController {
         recommend.setImage(image);
         baseManager.saveOrUpdate(Recommend.class.getName(), recommend);
         return recommend;
+    }
+
+    public void cascadeRemove(String hql, LinkedHashMap param, Class clazz) throws Exception {
+        List<String> ids = new ArrayList<>();
+        List<Object> objs = baseManager.listObject(hql, param);
+        if (objs != null && objs.size() > 0) {
+            for (Object obj : objs) {
+                Field field = obj.getClass().getDeclaredField("id");
+                PropertyDescriptor pd = new PropertyDescriptor(field.getName(), clazz);
+                Method getMethod = pd.getReadMethod();
+                Object o = getMethod.invoke(obj);
+                ids.add(o.toString());
+            }
+            if (ids != null && ids.size() > 0) {
+                if (clazz.getSimpleName().equals("ImagePanel")) {
+                    baseManager.batchDelete(clazz.getName(), ids.toArray(new String[ids.size()]));
+                } else {
+                    baseManager.batchRemove(clazz.getName(), ids.toArray(new String[ids.size()]));
+                }
+            }
+        }
+    }
+
+    public void uploadMultimedia(String fileNames, Panel panel, String type, MultipartRequest multipartRequest) throws Exception {
+        for (MultipartFile multipartFile : multipartRequest.getFiles(fileNames)) {
+            String oName = multipartFile.getOriginalFilename();
+            String nName;
+            try {
+                nName = System.currentTimeMillis() + "" + (int) (Math.random() * 1000000) + "." + oName.split("\\.")[1];
+            } catch (Exception e) {
+                continue;
+            }
+            String url = "image/" + nName;
+            aliOssUploadManager.uploadFile(multipartFile, "ef-wiki", url);
+            String fullUrl = PConst.OSS_EF_WIKI_HOST + url;
+            Image image = new Image();
+            image.setStatus("1");
+            image.setType(type);
+            image.setOwner(panel.getId());
+            image.setCreateTime(new Date());
+            image.setSrc(fullUrl);
+            if (type.equals("2")) {
+                baseManager.saveOrUpdate(Image.class.getName(), image);
+                panel.setMedia(image);
+                baseManager.saveOrUpdate(Panel.class.getName(), panel);
+            } else if (type.equals("1")) {
+                ImagePanel imagePanel = new ImagePanel();
+                imagePanel.setImage(image);
+                imagePanel.setPanel(panel);
+                baseManager.saveOrUpdate(Image.class.getName(), image);
+                baseManager.saveOrUpdate(ImagePanel.class.getName(), imagePanel);
+            }
+        }
     }
 }
