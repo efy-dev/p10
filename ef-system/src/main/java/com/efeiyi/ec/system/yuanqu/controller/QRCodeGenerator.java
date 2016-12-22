@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -149,18 +150,39 @@ public class QRCodeGenerator {
 
 
     public static void main(String[] args) throws Exception {
-        QRCodeGenerator codeGenerator = new QRCodeGenerator("http://www.efeiyi.com/createWxLoginUrl/0/iugd2v0v7mbwxumv");
-        String path = "C://Users//Administrator//Desktop";
-        String fileName = System.currentTimeMillis() + ".jpg";
+        QRCodeGenerator codeGenerator = new QRCodeGenerator("http://www.efeiyi.com/createWxLoginUrl/1/" + 123345);
+        String path = "C://Users//Administrator//Desktop//qrcode";
+        String fileName = 123456 + ".jpg";
+        String productName = "这是测试使用的名称abcdefg";
+        java.util.List<String> productNameArray = new ArrayList<>();
+
+        while (productName.length() > 8) {
+            String nameTemp = productName.substring(0, 8);
+            productNameArray.add(nameTemp);
+            productName = productName.substring(8, productName.length());
+            if (productName.length() <= 8) {
+                productNameArray.add(productName);
+            }
+        }
 
         codeGenerator
-                .createQRCode(122, 122)
-                .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/picture/newqrcodebackground.jpg", 313, 20)
-                .assembleText("微软雅黑", 12, "1000007108", 145, 34)
-                .assembleText("微软雅黑", 12, "手机壳系列", 145, 51)
-                .assembleText("等线", 80, Font.PLAIN, "79", 106, 164)
-                .createLocalFile(path, fileName);
+                .createQRCode(250, 250)
+                .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/picture/newqrcode.jpg", 572, 78)
+                .assembleText("宋体", 32, "1234567", 272, 105);
 
+        int height = 147;
+        if (!productNameArray.isEmpty()) {
+            for (String pn : productNameArray) {
+                codeGenerator.assembleText("宋体", 32, pn, 272, height);
+                height += 42;
+            }
+        } else {
+            codeGenerator.assembleText("宋体", 32, productName, 272, height);
+        }
+
+        codeGenerator
+                .assembleText("等线", 100, Font.PLAIN, "79", 143, 368)
+                .createLocalFile(path, fileName);
     }
 
 }

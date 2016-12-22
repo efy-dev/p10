@@ -38,7 +38,6 @@ import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyDescriptor;
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -570,7 +569,7 @@ public class OffLineProductController {
     @ResponseBody
     public int batchExportQRCode(HttpServletRequest request) throws Exception {
         String tenantGroupId = request.getParameter("tenantGroupId");
-        String hql = "select obj from ProductModel obj where obj.product.tenantGroup.id=:tenantGroupId and obj.status!='0'";
+        String hql = "select obj from ProductModel obj where obj.product.tenantGroup.id=:tenantGroupId and obj.status!='0' and obj.product.status!='0'";
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         param.put("tenantGroupId", tenantGroupId);
         List<ProductModel> productModels = baseManager.listObject(hql, param);
@@ -587,6 +586,39 @@ public class OffLineProductController {
 
     private void generateQRCode(ProductModel productModel) throws Exception {
 
+        QRCodeGenerator codeGenerator = new QRCodeGenerator("http://www.efeiyi.com/createWxLoginUrl/1/" + productModel.getId());
+        String path = "C://Users//Administrator//Desktop//qrcode";
+        String fileName = productModel.getSerial() + ".jpg";
+        String productName = productModel.getName();
+        List<String> productNameArray = new ArrayList<>();
+
+        while (productName.length() > 8) {
+            String nameTemp = productName.substring(0, 8);
+            productNameArray.add(nameTemp);
+            productName = productName.substring(8, productName.length());
+            if (productName.length() <= 8) {
+                productNameArray.add(productName);
+            }
+        }
+
+        codeGenerator
+                .createQRCode(250, 250)
+                .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/picture/newqrcode.jpg", 572, 78)
+                .assembleText("等线", 32, productModel.getSerial(), 272, 105);
+
+        int height = 147;
+        if (!productNameArray.isEmpty()) {
+            for (String pn : productNameArray) {
+                codeGenerator.assembleText("等线", 32, pn, 272, height);
+                height += 42;
+            }
+        } else {
+            codeGenerator.assembleText("等线", 32, productName, 272, height);
+        }
+
+        codeGenerator
+                .assembleText("等线", 100, Font.PLAIN, productModel.getPrice().intValue() + "", 143, 368)
+                .createLocalFile(path, fileName);
 
 
     }
