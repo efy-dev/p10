@@ -370,7 +370,7 @@ public class ProductController {
             ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
             String productId = productModel.getProduct().getId();
             List<Panel> result;
-            String hql = "select obj from " + Panel.class.getName() + " obj where obj.owner=:id";
+            String hql = "select obj from " + Panel.class.getName() + " obj where obj.owner=:id and obj.status!='0'";
             LinkedHashMap<String, Object> param = new LinkedHashMap<>();
             param.put("id", productId);
             result = baseManager.listObject(hql, param);

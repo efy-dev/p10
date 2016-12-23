@@ -1050,6 +1050,74 @@
                                placeholder="输入新商品副标题">
                     </div>
                 </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label">大师</label>
+                    <div class="am-u-sm-10">
+
+                        <input name="name" type="text" id="product-search"
+                               value="{{=it.data!=null && it.data.master!=null  ? it.data.master.fullName : ''}}"
+                               placeholder="输入大师的名称" oninput="PubSub.publish('{{=it.name}}.masterSearch',this)">
+                        <input name="masterId" type="hidden" id="product-masterId"
+                               value="{{=it.data!=null && it.data.master!=null  ? it.data.master.id : ''}}">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10" dot-template="{{=it.masterList}}">
+                    </div>
+                </div>
+
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label">技艺</label>
+                    <div class="am-u-sm-10">
+                        <input name="name" type="text" id="project-search"
+                               value="{{=it.data!=null && it.data.project!=null  ? it.data.project.name : ''}}"
+                               placeholder="输入相关技艺的名称" oninput="PubSub.publish('{{=it.name}}.projectSearch',this)">
+                        <input name="projectId" type="hidden" id="product-projectId"
+                               value="{{=it.data!=null && it.data.project!=null  ? it.data.project.id : ''}}">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10" dot-template="{{=it.projectList}}">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label">关联作品</label>
+                    <div class="am-u-sm-10">
+                        <input name="name" type="text" id="master-work-search"
+                               placeholder="输入作品名称" oninput="PubSub.publish('{{=it.name}}.masterWorkSearch',this)">
+                        <input name="masterWorkId" type="hidden" id="master-work-id">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-10" dot-template="{{=it.masterWorkList}}">
+                    </div>
+                </div>
+
+                <div class="am-form-group am-form-file">
+                    <label for="product-imageList" class="am-u-sm-2 am-form-label">商品详情</label>
+                    <div class="am-u-sm-10">
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">
+                            选择文件
+                        </button>
+                        <input id="product-imageList" name="imageList" type="file" multiple accept="image/jpeg"
+                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
+                    </div>
+                    <div class="file-list am-u-sm-10">
+                        {{
+                        for (var i = 0 ; i < it.length ; i++){
+                        var imageList = it[i].imageList;
+                        for (var j = 0 ; j < imageList.length ; j++){
+                        }}
+                        <img src="{{=imagePanel.image.src}}" width="500"/>
+                        {{ } }}
+                        {{ } }}
+                    </div>
+                </div>
 
                 <div class="am-form-group am-form-file">
                     <label for="product-audio" class="am-u-sm-2 am-form-label">语音介绍</label>
@@ -1071,13 +1139,9 @@
                 <div class="am-form-group">
                     <div class="am-u-sm-10 am-u-sm-offset-2 am-btn-group">
                         <a onclick="PubSub.publish('{{=it.name}}.complete','{{=it.template}}-form')"
-                           class="am-btn am-btn-primary am-btn-lg">保存</a>
+                           class="am-btn am-btn-primary am-btn-lg">完成</a>
                         <a onclick="PubSub.publish('{{=it.name}}.submitAndNext','{{=it.template}}-form')"
-                           class="am-btn am-btn-primary am-btn-lg">下一步关联大师</a>
-                        {{if(it.data!=null&&it.data.id!=null){}}
-                        <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productMaster.render','{{=it.data.id}}')">跳过</a>
-                        {{}}}
+                           class="am-btn am-btn-primary am-btn-lg">完成并添加规格</a>
                     </div>
                 </div>
             </fieldset>
@@ -1107,7 +1171,7 @@
                 </div>
 
                 <div class="am-form-group">
-                    <label for="product-model-amount" class="am-u-sm-3 am-form-label">库存（默认为1）</label>
+                    <label for="product-model-amount" class="am-u-sm-3 am-form-label">库存</label>
                     <div class="am-u-sm-9">
                         <input name="amount" type="number" id="product-model-amount" min="0"
                                value="{{=(it.data!=null && it.data.amount!=null) ? it.data.amount : ''}}"
@@ -1116,7 +1180,7 @@
                 </div>
 
                 <div class="am-form-group">
-                    <label for="product-model-price" class="am-u-sm-3 am-form-label">线上价格</label>
+                    <label for="product-model-price" class="am-u-sm-3 am-form-label">价格</label>
                     <div class="am-u-sm-9">
                         <input name="price" type="number" id="product-model-price"
                                value="{{=(it.data!=null && it.data.price!=null)  ? it.data.price : ''}}"
@@ -1126,7 +1190,7 @@
 
                 <div class="am-form-group">
                     <label for="product-model-marketPrice"
-                           class="am-u-sm-3 am-form-label">线下价格（如果与线上价格相同，就不要填写了）</label>
+                           class="am-u-sm-3 am-form-label">市场价格</label>
                     <div class="am-u-sm-9">
                         <input name="marketPrice" type="number" id="product-model-marketPrice"
                                value="{{=(it.data!=null && it.data.marketPrice!=null) ? it.data.marketPrice : ''}}"
@@ -1150,18 +1214,30 @@
                         {{ } }}
                     </div>
                 </div>
-
+                <div class="am-form-group am-form-file">
+                    <label for="product-model-imageList" class="am-u-sm-3 am-form-label">详情图（可以选择多张图片）</label>
+                    <div class="am-u-sm-9">
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">
+                            选择文件
+                        </button>
+                        <input id="product-model-imageList" name="imageList" type="file" multiple accept="image/jpeg"
+                               onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
+                    </div>
+                    <div class="file-list am-u-sm-9">
+                        {{ if(it.data!=null && it.data.imageList !=null){ }}
+                        {{for(var i = 0 ; i< it.data.imageList.length ; i++){ }}
+                        {{ var imagePanel = it.data.imageList[i];}}
+                        <img src="{{=imagePanel.image.src}}" width="500"/>
+                        {{ } } }}
+                    </div>
+                </div>
 
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productMasterWork.render','{{=it.productId}}')">< 上一步</a>
-                        <a onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')"
-                           class="am-btn am-btn-primary am-btn-lg">下一步 ></a>
-                        {{if(it.data!=null&&it.data.id!=null){}}
+                           onclick="PubSub.publish('productModel.submit','{{=it.template}}-form')">完成</a>
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productModelPanel.new','{{=it.data.id}}')">跳过</a>
-                        {{}}}
+                           onclick="PubSub.publish('productModel.submitAndNext','{{=it.template}}-form')">完成并添加商品 </a>
                     </div>
                 </div>
             </fieldset>
@@ -1447,10 +1523,6 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
                         </button>
-                        <button onclick="PubSub.publish('productPanel.render','{{=product.id}}')"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 商品详情
-                        </button>
                         <button onclick="PubSub.publish('productModelList.render','{{=product.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 商品规格
@@ -1592,7 +1664,7 @@
     {{ }else{ }}
     <ul class="am-list  am-list-border" id="searchResult">
         {{ for(var i = 0 ; i < it.length; i++){ }}
-        <li><a onclick="PubSub.publish('productMaster.chooseMaster','{{=it[i].id}}:{{=it[i].fullName}}')">{{=it[i].fullName}}</a>
+        <li><a onclick="PubSub.publish('productBase.chooseMaster','{{=it[i].id}}:{{=it[i].fullName}}')">{{=it[i].fullName}}</a>
         </li>
         {{ } }}
     </ul>
@@ -1606,7 +1678,7 @@
     <ul class="am-list  am-list-border" id="">
         {{ for(var i = 0 ; i < it.length; i++){ }}
         <li>
-            <a onclick="PubSub.publish('productMaster.chooseProject','{{=it[i].id}}:{{=it[i].name}}')">{{=it[i].name}}</a>
+            <a onclick="PubSub.publish('productBase.chooseProject','{{=it[i].id}}:{{=it[i].name}}')">{{=it[i].name}}</a>
         </li>
         {{ } }}
     </ul>
@@ -1679,7 +1751,7 @@
     {{ }else{ }}
     <ul class="am-list  am-list-border" id="searchResult">
         {{ for(var i = 0 ; i < it.length; i++){ }}
-        <li><a onclick="PubSub.publish('productMasterWork.chooseMasterWork','{{=it[i].id}}:{{=it[i].name}}')">{{=it[i].name}}</a>
+        <li><a onclick="PubSub.publish('productBase.chooseMasterWork','{{=it[i].id}}:{{=it[i].name}}')">{{=it[i].name}}</a>
         </li>
         {{ } }}
     </ul>
@@ -2215,7 +2287,7 @@
                     break;
                 case "main-tenant-panel":
                     $("div[dot-template=main-tenant-panel-list]").show();
-                    $("div[dot-template=main-tenant-panel]").hide();
+                   /* $("div[dot-template=main-tenant-panel]").hide();*/
                     if (this.data == null || typeof this.data == "undefined" || this.data == "") {
                         showAlert('提示', '请填写基本信息', function () {
                             tenantBase.render(null, this.data);
@@ -2232,6 +2304,7 @@
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
+            tenantPanelList.isHide();
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
@@ -2562,6 +2635,7 @@
 
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
+            tenantPanelList.isHide();
             $("[dot-template=" + this.template + "]").show();
         };
         this.hide = function (msg, data) {
@@ -2581,7 +2655,7 @@
             {message: this.name + ".qrcode", subscriber: this.qrcode},
             {message: this.name + ".nextPage", subscriber: this.nextPage},
             {message: this.name + ".prePage", subscriber: this.prePage},
-            {message: this.name + ".delete", subscriber: this.delete}
+            {message: this.name + ".delete", subscriber: this.delete},
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2966,6 +3040,13 @@
         this.remove = function (msg, data) {
             $("[dot-template=" + this.template + "]").html("");
         };
+        this.isHide = function (msg, data) {
+            if ($("[dot-template=" + this.template + "]").is(":hidden")) {
+                this.show();
+            } else {
+                this.hide();
+            }
+        }
 
         this.subscribeArray = [
             {message: this.name + ".show", subscriber: this.show},
@@ -2975,7 +3056,8 @@
             {message: this.name + ".body", subscriber: this.body},
             {message: this.name + ".nextPage", subscriber: this.nextPage},
             {message: this.name + ".prePage", subscriber: this.prePage},
-            {message: this.name + ".delete", subscriber: this.delete}
+            {message: this.name + ".delete", subscriber: this.delete},
+            {message: this.name + ".isHide", subscriber: this.isHide}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2993,28 +3075,29 @@
         this.param = param;
         this.name = "productBase";
         this.template = "main-product-base";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.masterList = "main-product-master-list";
+        this.projectList = "main-product-project-list";
+        this.masterWorkList = "main-product-master-work-list";
         this.tenantId = null;
+        this.panelData=null;
 
         this.render = function (msg, data) {
 
             if (typeof data != "undefined" && data != null) {
                 ajaxRequest("/yuanqu/product/getProductById", {id: data}, function (responseData) {
-                    this.data = responseData;
+                    this.data = responseData.product;
+                    this.panelData = responseData.panel;
                     renderTemplate(this.template, this);
                 }.bind(this))
-            } else {
-                renderTemplate(this.template, this);
             }
             this.show();
         };
-
         this.new = function (msg, data) {
             this.data = null;
             this.tenantId = data;
             renderTemplate(this.template, this);
             this.show();
         };
-
         this.complete = function (msg, data) {
             $("#my-modal-loading").modal();
             $("#" + data).ajaxSubmit(function (data) {
@@ -3022,13 +3105,12 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    this.father.show();
+                    PubSub.publish("productList.render", data.tenant.id);
                 }
                 $("#my-modal-loading").modal("close");
             }.bind(this));
             return false;
         };
-
         this.submitAndNext = function (msg, data) {
             $("#my-modal-loading").modal();
             $("#" + data).ajaxSubmit(function (data) {
@@ -3036,14 +3118,62 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    PubSub.publish("productMaster.render", data.id);
+                    PubSub.publish("productModelList.render", data.id);
                 }
                 $("#my-modal-loading").modal("close");
             });
             return false;
         };
-
-
+        //关联大师和技艺
+        this.chooseMaster = function (msg, data) {
+            var id = data.split(":")[0];
+            var fullName = data.split(":")[1];
+            $("#product-masterId").val(id);
+            $("#product-search").val(fullName)
+            this.selectHide(null,this.masterList);
+        };
+        this.chooseProject = function (msg, data) {
+            var id = data.split(":")[0];
+            var fullName = data.split(":")[1];
+            $("#product-projectId").val(id);
+            $("#project-search").val(fullName);
+            this.selectHide(null, this.projectList);
+        };
+        this.masterSearch = function (msg, data) {
+            this.selectShow(null, this.masterList);
+            var success = function (responseData) {
+                renderTemplate(this.masterList, responseData);
+            }.bind(this);
+            ajaxRequest("/yuanqu/tenant/getTenantMasterList", {name: $(data).val()}, success);
+        };
+        this.projectSearch = function (msg, data) {
+            this.selectShow(null, this.projectList);
+            var success = function (responseData) {
+                renderTemplate(this.projectList, responseData);
+            }.bind(this);
+            ajaxRequest("/yuanqu/product/getProjectList", {name: $(data).val()}, success);
+        };
+        //关联作品
+        this.chooseMasterWork = function (msg, data) {
+            var id = data.split(":")[0];
+            var name = data.split(":")[1];
+            $("#master-work-id").val(id);
+            $("#master-work-search").val(name);
+            this.selectHide(null, this.masterWorkList);
+        };
+        this.masterWorkSearch = function (msg, data) {
+            this.selectShow(null, this.masterWorkList);
+            var success = function (responseData) {
+                renderTemplate(this.masterWorkList, responseData);
+            }.bind(this);
+            ajaxRequest("/yuanqu/product/getMasterWorkList", {name: $(data).val()}, success);
+        };
+        this.selectHide = function (msg, data) {
+            $("[dot-template=" + data + "]").hide();
+        };
+        this.selectShow = function (msg, data) {
+            $("[dot-template=" + data + "]").show();
+        };
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
@@ -3089,6 +3219,14 @@
             {message: this.name + ".imageView", subscriber: this.imageView},
             {message: this.name + ".complete", subscriber: this.complete},
             {message: this.name + ".submitAndNext", subscriber: this.submitAndNext},
+            {message: this.name + ".chooseMaster", subscriber: this.chooseMaster},
+            {message: this.name + ".chooseProject", subscriber: this.chooseProject},
+            {message: this.name + ".masterSearch", subscriber: this.masterSearch},
+            {message: this.name + ".projectSearch", subscriber: this.projectSearch},
+            {message: this.name + ".selectHide", subscriber: this.selectHide},
+            {message: this.name + ".selectShow", subscriber: this.selectShow},
+            {message: this.name + ".chooseMasterWork", subscriber: this.chooseMasterWork},
+            {message: this.name + ".masterWorkSearch", subscriber: this.masterWorkSearch},
             {message: this.name + ".new", subscriber: this.new}
         ];
 
@@ -3345,8 +3483,20 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data != "undefined" && data != null) {
-                    PubSub.publish("productModelPanel.new", data);
-                    //@TODO
+                    PubSub.publish("productModelList.render", data.product.id);
+                }
+                $("#my-modal-loading").modal("close");
+            });
+            return false;
+        };
+        this.submitAndNext = function (msg, data) {
+            $("#my-modal-loading").modal();
+            $("#" + data).ajaxSubmit(function (data) {
+                if (typeof data == "string") {
+                    data = JSON.parse(data);
+                }
+                if (typeof data.id != "undefined" && data.id != null) {
+                    PubSub.publish("productList.render",data.product.tenant.id);
                 }
                 $("#my-modal-loading").modal("close");
             });

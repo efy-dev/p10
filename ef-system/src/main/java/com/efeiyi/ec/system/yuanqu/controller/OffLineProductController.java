@@ -10,6 +10,7 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.tenant.model.BigTenant;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantGroup;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -137,6 +138,7 @@ public class OffLineProductController {
     @RequestMapping({"/getProductById"})
     @ResponseBody
     public Object getProductById(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
         String id = request.getParameter("id");
         Product product = (Product) baseManager.getObject(Product.class.getName(), id);
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
@@ -146,7 +148,12 @@ public class OffLineProductController {
         if (image != null) {
             product.setAudio(image.getSrc());
         }
-        return product;
+        String hql = "select obj from " + Panel.class.getName() + " obj where obj.owner=:id where obj.status!='0'";
+        LinkedHashMap<String, Object> params = new LinkedHashMap<>();
+        params.put("id", product.getId());
+        jsonObject.put("panel", baseManager.listObject(hql, param));
+        jsonObject.put("product", product);
+        return jsonObject;
     }
 
     @RequestMapping({"/getProductPanelById"})
@@ -181,15 +188,15 @@ public class OffLineProductController {
 
     @RequestMapping({"/baseSubmit"})
     @ResponseBody
-    public Object baseSubmit(HttpServletRequest request, MultipartRequest multipartRequest) {
+    public Object baseSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
         Product product;
         if (request.getParameter("id") != null && !request.getParameter("id").equals("")) {
             product = (Product) baseManager.getObject(Product.class.getName(), request.getParameter("id"));
         } else {
             product = new Product();
             if (request.getParameter("tenantId") != null && !request.getParameter("tenantId").equals("")) {
-                BigTenant tenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), request.getParameter("tenantId"));
-                product.setBigTenant(tenant);
+                Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), request.getParameter("tenantId"));
+                product.setTenant(tenant);
             }
         }
         product.setName(request.getParameter("name"));
@@ -198,6 +205,7 @@ public class OffLineProductController {
         product.setStatus(Product.PRODUCT_STATUS_DOWN);
         product.setType(Product.PRODUCT_TYPE_OFFLINE);
         String audioUrl = uploadImage(multipartRequest.getFile("audio"));
+        baseManager.saveOrUpdate(Product.class.getName(), product);
         if (!"".equals(audioUrl)) {
             List<Image> oAudio = baseManager.listObject("select obj from Image obj where obj.status='1' and obj.type='2' and obj.owner='" + product.getId() + "'");
             if (oAudio != null) {
@@ -209,10 +217,61 @@ public class OffLineProductController {
             Image audio = new Image(product.getName() + "_audio", audioUrl, product.getId(), "1", "2");
             baseManager.saveOrUpdate(Image.class.getName(), audio);
         }
-        baseManager.saveOrUpdate(Product.class.getName(), product);
+        associateMaster(product, request);
+        associateMasterWork(product, request);
+        associatePanel(product, multipartRequest);
         return product;
     }
 
+    public void associateMaster(Product product, HttpServletRequest request) {
+        String masterId = request.getParameter("masterId");
+        String projectId = request.getParameter("projectId");
+        if (masterId != null) {
+            Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
+            product.setMaster(master);
+        }
+        if (projectId != null) {
+            Project project = (Project) baseManager.getObject(Project.class.getName(), projectId);
+            product.setProject(project);
+        }
+        baseManager.saveOrUpdate(Product.class.getName(), product);
+    }
+
+    public void associateMasterWork(Product product, HttpServletRequest request) {
+        String masterWorkId = request.getParameter("masterWorkId");
+        MasterWork masterWork = null;
+        MasterWorkProduct masterWorkProduct;
+        if (masterWorkId != null) {
+            masterWork = (MasterWork) baseManager.getObject(MasterWork.class.getName(), masterWorkId);
+        }
+        if (masterWork != null && product != null) {
+            masterWorkProduct = new MasterWorkProduct();
+            masterWorkProduct.setProduct(product);
+            masterWorkProduct.setMasterWork(masterWork);
+            masterWorkProduct.setStatus("1");
+            baseManager.saveOrUpdate(MasterWorkProduct.class.getName(), masterWorkProduct);
+        }
+    }
+
+    public void associatePanel(Product product, MultipartRequest multipartRequest) throws Exception {
+        Panel panel;
+        String hql = "select obj from " + Panel.class.getName() + " obj where obj.owner=:id and obj.status!='0'";
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        if (product != null) {
+            param.put("id", product.getId());
+            cascadeRemove(hql, param, Panel.class);
+        }
+        panel = new Panel();
+        panel.setOwner(product.getId());
+        panel.setStatus("1");
+        baseManager.saveOrUpdate(Panel.class.getName(), panel);
+        if (multipartRequest.getFiles("imageList") != null && multipartRequest.getFiles("imageList").size() > 0) {
+            uploadMultimedia("imageList", panel, "1", multipartRequest);
+        }
+        if (multipartRequest.getFile("media") != null) {
+            uploadMultimedia("media", panel, "2", multipartRequest);
+        }
+    }
 
     @RequestMapping({"/getProductList"})
     @ResponseBody
@@ -622,16 +681,6 @@ public class OffLineProductController {
 
 
     }
-
-
-
-
-
-
-
-
-
-
 
     /*商品规格详情和商品详情编辑提交时，避免图片累加*/
 

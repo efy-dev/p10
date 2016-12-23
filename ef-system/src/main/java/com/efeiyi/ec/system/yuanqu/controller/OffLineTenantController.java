@@ -215,6 +215,15 @@ public class OffLineTenantController {
             baseManager.saveOrUpdate(Image.class.getName(), image);
         }
         baseManager.saveOrUpdate(EnterpriseTenant.class.getName(), tenant);
+        String masterId = request.getParameter("masterId");
+        if (masterId != null && !masterId.equals("")) {
+            Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
+            TenantMaster tenantMaster = new TenantMaster();
+            tenantMaster.setTenant(tenant);
+            tenantMaster.setMaster(master);
+            tenantMaster.setStatus("1");
+            baseManager.saveOrUpdate(TenantMaster.class.getName(), tenantMaster);
+        }
         return tenant;
     }
 
