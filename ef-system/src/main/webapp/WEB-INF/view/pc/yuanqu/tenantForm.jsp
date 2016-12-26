@@ -1088,6 +1088,7 @@
                     <label class="am-u-sm-2 am-form-label">关联作品</label>
                     <div class="am-u-sm-10">
                         <input name="name" type="text" id="master-work-search"
+                               value="{{=it.masterWorkProduct!=null&&it.masterWorkProduct!=undefined?it.masterWorkProduct.masterWork.name:''}}"
                                placeholder="输入作品名称" oninput="PubSub.publish('{{=it.name}}.masterWorkSearch',this)">
                         <input name="masterWorkId" type="hidden" id="master-work-id">
                     </div>
@@ -1109,16 +1110,17 @@
                     </div>
                     <div class="file-list am-u-sm-10">
                         {{
-                        for (var i = 0 ; i < it.length ; i++){
-                        var imageList = it[i].imageList;
+                        if( it.panel!=null&& it.panel.length>0){
+                        for (var i = 0 ; i < it.panel.length ; i++){
+                        var imageList = it.panel[i].imageList;
                         for (var j = 0 ; j < imageList.length ; j++){
                         }}
-                        <img src="{{=imagePanel.image.src}}" width="500"/>
+                        <img src="{{=imageList[j].image.src}}" width="500"/>
+                        {{ } }}
                         {{ } }}
                         {{ } }}
                     </div>
                 </div>
-
                 <div class="am-form-group am-form-file">
                     <label for="product-audio" class="am-u-sm-2 am-form-label">语音介绍</label>
                     <div class="am-u-sm-10">
@@ -1224,11 +1226,16 @@
                                onchange="PubSub.publish('{{=it.name}}'+'.imageView',this)">
                     </div>
                     <div class="file-list am-u-sm-9">
-                        {{ if(it.data!=null && it.data.imageList !=null){ }}
-                        {{for(var i = 0 ; i< it.data.imageList.length ; i++){ }}
-                        {{ var imagePanel = it.data.imageList[i];}}
-                        <img src="{{=imagePanel.image.src}}" width="500"/>
-                        {{ } } }}
+                        {{
+                        if( it.panel!=null&& it.panel.length>0){
+                        for (var i = 0 ; i < it.panel.length ; i++){
+                        var imageList = it.panel[i].imageList;
+                        for (var j = 0 ; j < imageList.length ; j++){
+                        }}
+                        <img src="{{=imageList[j].image.src}}" width="500"/>
+                        {{ } }}
+                        {{ } }}
+                        {{ } }}
                     </div>
                 </div>
 
@@ -1476,10 +1483,20 @@
     <div>
         <div class="am-u-lg-6">
             <legend>{{=it.tenantId}} 商品列表</legend>
-            <div class="am-input-group">
-                <input type="text" class="am-form-field" oninput="PubSub.publish('{{=it.name}}.search',this)">
+            <button type="button" class="am-btn am-btn-primary "
+                    onclick="PubSub.publish('productBase.new','{{=it.tenantId}}')">
+                <span>新建</span></button>
+            <div class="am-input-group product-list">
+                <input type="text" class="am-form-field" id="inputValue" style="width: 100px">
+                <select data-am-selected style="width: 100px;height: 38px" id="selectField">
+                    <option value="name" selected>名称</option>
+                    <option value="serial">编号</option>
+                </select>
+                <label>
+                    <input type="checkbox" id="checkbox"> 无图
+                </label>
                 <span class="am-input-group-btn">
-                    <button class="am-btn am-btn-default" disabled type="button"><span
+                    <button class="am-btn am-btn-default" type="button" onclick="PubSub.publish('{{=it.name}}.search')"><span
                             class="am-icon-search"></span></button>
                 </span>
             </div>
@@ -1531,9 +1548,6 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 添加规格
                         </button>
-                        <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 添加英文版商品（暂不支持）
-                        </button>
                         <button onclick="showConfirm('提示','是否删除',function(){PubSub.publish('productList.delete','{{=product.id}}')})"
                                 class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                 class="am-icon-trash-o"></span> 删除
@@ -1571,13 +1585,36 @@
     <div>
         <div class="am-u-lg-6">
             <legend>{{=it.productId}} 规格列表</legend>
+            <button type="button" class="am-btn am-btn-primary "
+                    onclick="PubSub.publish('productModel.new','{{=it.productId}}')">
+                <span>新建</span></button>
+            <div class="am-input-group product-model">
+                <input type="text" class="am-form-field" id="inputValue" style="width: 100px">
+                <select data-am-selected style="width: 100px;height: 38px" id="selectField">
+                    <option value="name" selected>名称</option>
+                    <option value="serial">编号</option>
+                </select>
+                价格区间:<input type="number" min="0" class="am-form-field" id="startPrice" style="width: 100px">~
+                <input type="number" min="0" class="am-form-field" id="endPrice" style="width: 100px">
+                <label>
+                    <input type="checkbox" id="checkbox"> 无图
+                </label>
+                <span class="am-input-group-btn">
+                    <button class="am-btn am-btn-default" type="button" onclick="PubSub.publish('{{=it.name}}.search')"><span
+                            class="am-icon-search"></span></button>
+                </span>
+            </div>
         </div>
         <div class="am-u-lg-12" dot-template="main-product-model-list-body">
             {{
             PubSub.publish(it.name+".body");
             }}
         </div>
-
+        <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.prePage')">上一页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" id="product-index">第{{=it.index}}页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.nextPage')">下一页</a>
+        </div>
     </div>
 
 </script>
@@ -1607,11 +1644,7 @@
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
                         <button onclick="PubSub.publish('productModel.render','{{=productModel.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 基本信息
-                        </button>
-                        <button onclick="PubSub.publish('productModelPanel.new','{{=productModel.id}}')"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 规格详情
+                                class="am-icon-edit"></span> 编辑
                         </button>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                            href="/yuanqu/product/createQRCodeSample.do?productModelId={{=productModel.id}}"><span
@@ -1789,7 +1822,7 @@
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('{{=it.name}}.submit','{{=it.template}}-form')">去添加商品规格</a>
                         <a class="am-btn am-btn-primary am-btn-lg"
-                           onclick="PubSub.publish('productList.render','{{=it.data.tenant.id}}')">返回商品列表</a>
+                           onclick="PubSub.publish('productList.render','{{=it.data.bigTenant.id}}')">返回商品列表</a>
                         <a class="am-btn am-btn-primary am-btn-lg"
                            onclick="PubSub.publish('productModel.new','{{=it.data.id}}')">跳过</a>
                     </div>
@@ -2570,6 +2603,8 @@
         this.template = "main-tenant-list";         //组件绑定的模板//组件需要订阅的事件与消息
         this.totalPages = "";
         this.totalRecords = "";
+        this.startPrice = null;
+        this.endPrice = null;
 
         this.nextPage = function (msg, data) {
             this.totalPages = this.totalPages == 0 ? 1 : this.totalPages;
@@ -2606,11 +2641,9 @@
                 limit: this.size,
                 offset: ((this.index - 1) * this.size)
             };
-            if (this.currentSearch != null) {
-                param.name = this.currentSearch
-                param.imageFlag = this.imageFlag;
-                param.serachField = this.serachField;
-            }
+            param.name = this.currentSearch
+            param.imageFlag = this.imageFlag;
+            param.serachField = this.serachField;
             ajaxRequest("/yuanqu/tenant/getTenantList", param, function (responseData) {
                 this.data = responseData.list;
                 this.totalRecords = responseData.count;
@@ -3079,14 +3112,15 @@
         this.projectList = "main-product-project-list";
         this.masterWorkList = "main-product-master-work-list";
         this.tenantId = null;
-        this.panelData=null;
+        this.panel=null;
+        this.masterWorkProduct=null;
 
         this.render = function (msg, data) {
-
             if (typeof data != "undefined" && data != null) {
                 ajaxRequest("/yuanqu/product/getProductById", {id: data}, function (responseData) {
                     this.data = responseData.product;
-                    this.panelData = responseData.panel;
+                    this.panel = responseData.panel;
+                    this.masterWorkProduct = responseData.masterWorkProduct;
                     renderTemplate(this.template, this);
                 }.bind(this))
             }
@@ -3105,7 +3139,7 @@
                     data = JSON.parse(data);
                 }
                 if (typeof data.id != "undefined" && data.id != null) {
-                    PubSub.publish("productList.render", data.tenant.id);
+                    PubSub.publish("productList.render", data.bigTenant.id);
                 }
                 $("#my-modal-loading").modal("close");
             }.bind(this));
@@ -3452,16 +3486,16 @@
         this.name = "productModel";
         this.template = "main-product-model";         //组件绑定的模板//组件需要订阅的事件与消息
         this.productId = null;
+        this.panel=null;
 
         this.render = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
                 ajaxRequest("/yuanqu/product/getProductModelById", {id: data}, function (responseData) {
-                    this.data = responseData;
-                    this.productId = responseData.product.id
+                    this.data = responseData.productModel;
+                    this.productId = responseData.productModel.product.id;
+                    this.panel = responseData.panel;
                     renderTemplate(this.template, this);
-                }.bind(this))
-            } else {
-                renderTemplate(this.template, this);
+                }.bind(this));
             }
             this.show();
         };
@@ -3559,8 +3593,6 @@
     var ProductList = function (param) {
         this.currentSearch = null;
         this.tenantId = null;
-        this.index = 1;
-        this.size = 10;
         this.label = "商品管理";
         this.data = null;
         this.father = null;
@@ -3570,6 +3602,10 @@
         this.template = "main-product-list";         //组件绑定的模板//组件需要订阅的事件与消息
         this.totalRecords = null;
         this.totalPages = null;
+        this.serachField=null;
+        this.imageFlag=null;
+        this.index = 1;
+        this.size = 10;
 
         this.nextPage = function (msg, data) {
             this.totalPages = this.totalPages == 0 ? 1 : this.totalPages;
@@ -3590,12 +3626,10 @@
                 limit: this.size,
                 offset: ((this.index - 1) * this.size)
             };
-            if (this.currentSearch != null) {
-                param.name = this.currentSearch
-            }
-            if (this.tenantId != null) {
-                param.tenantId = this.tenantId;
-            }
+            param.tenantId = this.tenantId;
+            param.name = this.currentSearch;
+            param.imageFlag = this.imageFlag;
+            param.serachField = this.serachField;
             ajaxRequest("/yuanqu/product/getProductList", param, function (responseData) {
                 this.data = responseData.list;
                 this.totalRecords = responseData.count;
@@ -3632,10 +3666,11 @@
             });
         };
 
-
         this.search = function (msg, data) {
             this.index = 1;
-            this.currentSearch = $(data).val();
+            this.currentSearch = $(".product-list #inputValue").val();
+            this.imageFlag = $(".product-list #checkbox").is(':checked');
+            this.serachField = $(".product-list #selectField").val();
             this.body();
         };
 
@@ -3661,6 +3696,8 @@
             {message: this.name + ".nextPage", subscriber: this.nextPage},
             {message: this.name + ".prePage", subscriber: this.prePage},
             {message: this.name + ".delete", subscriber: this.delete},
+            {message: this.name + ".prePage", subscriber: this.prePage},
+            {message: this.name + ".nextPage", subscriber: this.nextPage},
             {message: this.name + ".chooseTenantGroup", subscriber: this.chooseTenantGroup}
         ];
 
@@ -3682,19 +3719,37 @@
         this.param = param;
         this.name = "productModelList";
         this.template = "main-product-model-list";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.currentSearch = null;
+        this.imageFlag = null;
+        this.serachField = null;
 
         this.body = function (msg, data) {
-            //@TODO 搜索列表与商品实体
-            var param = {};
-            if (this.productId != null) {
-                param.productId = this.productId;
-            }
+            var param = {
+                limit: this.size,
+                offset: ((this.index - 1) * this.size)
+            };
+            param.productId = this.productId;
+            param.name = this.currentSearch
+            param.imageFlag = this.imageFlag;
+            param.serachField = this.serachField;
+            param.startPrice = this.startPrice;
+            param.endPrice = this.endPrice;
             ajaxRequest("/yuanqu/product/getProductModelList", param, function (responseData) {
-                this.data = responseData;
-                renderTemplate(this.template + "-body", responseData);
+                this.data = responseData.list;
+                this.totalRecords = responseData.count;
+                this.totalPages = this.totalRecords % this.size == 0 ? this.totalRecords / this.size : Math.floor(this.totalRecords / this.size) + 1;
+                renderTemplate(this.template + "-body", this.data);
             }.bind(this));
         };
-
+        this.search = function (msg, data) {
+            this.index = 1;
+            this.currentSearch = $(".product-model #inputValue").val();
+            this.imageFlag = $(".product-model#checkbox").is(':checked');
+            this.serachField = $(".product-model #selectField").val();
+            this.startPrice = $(".product-model #startPrice").val();
+            this.endPrice = $(".product-model #endPrice").val();
+            this.body();
+        };
         this.render = function (msg, data) {
             this.index = 1;
             this.productId = data;
@@ -3731,6 +3786,18 @@
         this.remove = function (msg, data) {
             $("[dot-template=" + this.template + "]").html("");
         };
+        this.nextPage = function (msg, data) {
+            this.totalPages = this.totalPages == 0 ? 1 : this.totalPages;
+            this.index = this.index + 1 > this.totalPages ? this.totalPages : this.index + 1;
+            $("#product-index").html("第" + this.index + "页");
+            this.body();
+        };
+        this.prePage = function (msg, data) {
+            this.index = this.index > 1 ? this.index - 1 : 1;
+            $("#product-index").html("第" + this.index + "页");
+            this.body();
+        };
+
 
         this.subscribeArray = [
             {message: this.name + ".show", subscriber: this.show},
@@ -3739,7 +3806,8 @@
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".body", subscriber: this.body},
             {message: this.name + ".delete", subscriber: this.delete},
-            {message: this.name + ".upper", subscriber: this.upper}
+            {message: this.name + ".upper", subscriber: this.upper},
+            {message: this.name + ".search", subscriber: this.search}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {

@@ -5,6 +5,7 @@ import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "master_work")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class MasterWork implements Serializable{
     private String id;
     private String name;

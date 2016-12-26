@@ -44,9 +44,7 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
+import java.util.*;
 import java.util.List;
 
 @Controller
@@ -138,22 +136,32 @@ public class OffLineProductController {
     @RequestMapping({"/getProductById"})
     @ResponseBody
     public Object getProductById(HttpServletRequest request) {
-        JSONObject jsonObject = new JSONObject();
+        MasterWorkProduct masterWorkProduct = null;
+        Map<String, Object> resultMap = new HashMap<>();
         String id = request.getParameter("id");
         Product product = (Product) baseManager.getObject(Product.class.getName(), id);
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        param.put("productId", product.getId());
         String audioHql = "select obj from Image obj where obj.owner=:productId and obj.status!='0' and obj.type='2'";
+        param.put("productId", product.getId());
         Image image = (Image) baseManager.getUniqueObjectByConditions(audioHql, param);
         if (image != null) {
             product.setAudio(image.getSrc());
         }
-        String hql = "select obj from " + Panel.class.getName() + " obj where obj.owner=:id where obj.status!='0'";
-        LinkedHashMap<String, Object> params = new LinkedHashMap<>();
-        params.put("id", product.getId());
-        jsonObject.put("panel", baseManager.listObject(hql, param));
-        jsonObject.put("product", product);
-        return jsonObject;
+        String hql = "select obj from " + Panel.class.getName() + " obj where obj.owner=:id and obj.status!='0'";
+        LinkedHashMap<String, Object> panelParam = new LinkedHashMap<>();
+        panelParam.put("id", product.getId());
+        List<Panel> panels = baseManager.listObject(hql, panelParam);
+        String masterWorkHql = "select obj from " + MasterWorkProduct.class.getName() + " obj where obj.status!='0' and obj.product.id=:id";
+        LinkedHashMap<String, Object> masterWorkParam = new LinkedHashMap<>();
+        masterWorkParam.put("id", product.getId());
+        List<MasterWorkProduct> masterWorkProducts = baseManager.listObject(masterWorkHql, masterWorkParam);
+        if (masterWorkProducts.size() > 0) {
+            masterWorkProduct = masterWorkProducts.get(0);
+        }
+        resultMap.put("panel", panels);
+        resultMap.put("product", product);
+        resultMap.put("masterWorkProduct", masterWorkProduct);
+        return resultMap;
     }
 
     @RequestMapping({"/getProductPanelById"})
@@ -195,8 +203,8 @@ public class OffLineProductController {
         } else {
             product = new Product();
             if (request.getParameter("tenantId") != null && !request.getParameter("tenantId").equals("")) {
-                Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), request.getParameter("tenantId"));
-                product.setTenant(tenant);
+                BigTenant tenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(), request.getParameter("tenantId"));
+                product.setBigTenant(tenant);
             }
         }
         product.setName(request.getParameter("name"));
@@ -219,7 +227,7 @@ public class OffLineProductController {
         }
         associateMaster(product, request);
         associateMasterWork(product, request);
-        associatePanel(product, multipartRequest);
+        associatePanel(product.getId(), multipartRequest);
         return product;
     }
 
@@ -253,22 +261,20 @@ public class OffLineProductController {
         }
     }
 
-    public void associatePanel(Product product, MultipartRequest multipartRequest) throws Exception {
-        Panel panel;
+    public void associatePanel(String id, MultipartRequest multipartRequest) throws Exception {
+        Panel panel = new Panel();
         String hql = "select obj from " + Panel.class.getName() + " obj where obj.owner=:id and obj.status!='0'";
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        if (product != null) {
-            param.put("id", product.getId());
-            cascadeRemove(hql, param, Panel.class);
-        }
-        panel = new Panel();
-        panel.setOwner(product.getId());
+        param.put("id", id);
+        panel.setOwner(id);
         panel.setStatus("1");
-        baseManager.saveOrUpdate(Panel.class.getName(), panel);
         if (multipartRequest.getFiles("imageList") != null && multipartRequest.getFiles("imageList").size() > 0) {
+            cascadeRemove(hql, param, Panel.class);
+            baseManager.saveOrUpdate(Panel.class.getName(), panel);
             uploadMultimedia("imageList", panel, "1", multipartRequest);
         }
         if (multipartRequest.getFile("media") != null) {
+            baseManager.saveOrUpdate(Panel.class.getName(), panel);
             uploadMultimedia("media", panel, "2", multipartRequest);
         }
     }
@@ -278,17 +284,17 @@ public class OffLineProductController {
     public Object getProductList(HttpServletRequest request) {
         int limit = Integer.parseInt(request.getParameter("limit"));
         int offset = Integer.parseInt(request.getParameter("offset"));
-        String name = request.getParameter("name");
         String tenantId = request.getParameter("tenantId");
-        String hql = "select obj from Product obj where obj.type='" + Product.PRODUCT_TYPE_OFFLINE + "' and obj.status!='0'";
+        String name = request.getParameter("name");
+        String imageFlag = request.getParameter("imageFlag");
+        String serachField = request.getParameter("serachField");
+        String hql = "select obj from Product obj where obj.type='" + Product.PRODUCT_TYPE_OFFLINE + "' and obj.status!='0' and obj.tenant.id= '" + tenantId + "'";
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        if (name != null && !"".equals(name)) {
-            hql += " and obj.name=:name";
-            param.put("name", name);
+        if (serachField != null && name != null && !"".equals(serachField) && !"".equals(name)) {
+            hql += " and obj." + serachField + " like '%" + name + "%'";
         }
-        if (tenantId != null) {
-            hql += " and obj.tenant.id=:tenantId";
-            param.put("tenantId", tenantId);
+        if (imageFlag != null && imageFlag.equals("true")) {
+            hql += " and obj.picture_url IS NULL";
         }
         hql += " order by obj.createDateTime desc";
         PageEntity pageEntity = new PageEntity();
@@ -301,9 +307,35 @@ public class OffLineProductController {
     @RequestMapping({"/getProductModelList"})
     @ResponseBody
     public Object getProductModelList(HttpServletRequest request) {
+        int limit = Integer.parseInt(request.getParameter("limit"));
+        int offset = Integer.parseInt(request.getParameter("offset"));
         String productId = request.getParameter("productId");
-        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-        return product.getProductModelList();
+        String name = request.getParameter("name");
+        String imageFlag = request.getParameter("imageFlag");
+        String serachField = request.getParameter("serachField");
+        String startPrice = request.getParameter("startPrice");
+        String endPrice = request.getParameter("endPrice");
+        String hql = "select obj from ProductModel obj where obj.product.id='" + productId + "' and obj.status!='0'";
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        if (serachField != null && name != null && !"".equals(serachField) && !"".equals(name)) {
+            hql += " and obj." + serachField + " like '%" + name + "%'";
+        }
+        if (imageFlag != null && imageFlag.equals("true")) {
+            hql += " and obj.productModel_url IS NULL";
+        }
+        if (endPrice != null && startPrice != null && !endPrice.equals("") && !startPrice.equals("")) {
+            hql += " and obj.price between " + startPrice + " and " + endPrice;
+        } else if (endPrice != null && !endPrice.equals("")) {
+            hql += " and obj.price < " + endPrice;
+        } else if (startPrice != null && !startPrice.equals("")) {
+            hql += " and obj.price > " + startPrice;
+        }
+        hql += " order by obj.createDateTime desc";
+        PageEntity pageEntity = new PageEntity();
+        pageEntity.setSize(limit);
+        pageEntity.setrIndex(offset);
+        PageInfo pageInfo = baseManager.listPageInfo(hql, pageEntity, param);
+        return pageInfo;
     }
 
     @RequestMapping({"/getSKUList"})
@@ -356,6 +388,7 @@ public class OffLineProductController {
         }
         productModel.setCreateDateTime(new Date());
         baseManager.saveOrUpdate(ProductModel.class.getName(), productModel);
+        associatePanel(productModel.getId(), multipartRequest);
         return productModel;
     }
 
@@ -403,11 +436,16 @@ public class OffLineProductController {
     @RequestMapping({"/getProductModelById"})
     @ResponseBody
     public Object getProductModelById(HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<>();
         String id = request.getParameter("id");
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), id);
-        productModel.getProduct();
-        productModel.getProduct().getTenant();
-        return productModel;
+        String hql = "select obj from " + Panel.class.getName() + " obj where obj.status!='0' and obj.owner=:id";
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("id", id);
+        List<Panel> panels = baseManager.listObject(hql, param);
+        resultMap.put("productModel", productModel);
+        resultMap.put("panel", panels);
+        return resultMap;
     }
 
     @RequestMapping({"/getPanelById"})

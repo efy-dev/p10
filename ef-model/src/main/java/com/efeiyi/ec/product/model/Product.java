@@ -253,7 +253,7 @@ public class Product implements Serializable {
     @NotFound(action = NotFoundAction.IGNORE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
-    @JsonIgnore
+   /* @JsonIgnore*/
     public BigTenant getBigTenant() {
         return bigTenant;
     }
