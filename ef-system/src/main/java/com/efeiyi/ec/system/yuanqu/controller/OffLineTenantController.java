@@ -343,13 +343,15 @@ public class OffLineTenantController {
     @RequestMapping({"/tenant/getPanelListByTenant"})
     @ResponseBody
     public Object getPanelListByTenant(HttpServletRequest request) {
+        int limit = Integer.parseInt(request.getParameter("limit"));
+        int offset = Integer.parseInt(request.getParameter("offset"));
         String tenantId = request.getParameter("id");
         String hql = "select obj from Panel obj where obj.owner=:tenantId and obj.status='1'";
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         param.put("tenantId", tenantId);
         PageEntity pageEntity = new PageEntity();
-        pageEntity.setSize(10);
-        pageEntity.setrIndex(0);
+        pageEntity.setSize(limit);
+        pageEntity.setrIndex(offset);
         PageInfo pageInfo = baseManager.listPageInfo(hql, pageEntity, param);
         return pageInfo;
     }
