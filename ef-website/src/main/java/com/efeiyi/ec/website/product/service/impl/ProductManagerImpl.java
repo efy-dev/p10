@@ -62,7 +62,7 @@ public class ProductManagerImpl implements ProductManager {
 
     @Override
     public Object searchProductModels(RequestParamModel requestParamModel) throws Exception {
-        StringBuilder hql = new StringBuilder("select obj from ProductModel obj where obj.status='1' and obj.product.type='3' ");
+        StringBuilder hql = new StringBuilder("select obj from ProductModel obj where obj.status='1' and obj.product.type='3' and obj.product.status!='0'");
         String startPrice = requestParamModel.getStartPrice();
         String endPrice = requestParamModel.getEndPrice();
         String projectCategoryId = requestParamModel.getProjectCategoryId();
@@ -141,7 +141,7 @@ public class ProductManagerImpl implements ProductManager {
             throw new ApplicationException(ApplicationException.PARAM_ERROR);
         }
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        StringBuilder hql = new StringBuilder("select productModel from ProductModel productModel where productModel.status='1' and productModel.product.type='3'");
+        StringBuilder hql = new StringBuilder("select productModel from ProductModel productModel where productModel.status='1' and productModel.product.status!='0' and productModel.product.type='3'");
         String startPrice = "";
         String endPrice = "";
         try {

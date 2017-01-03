@@ -969,7 +969,7 @@
 
         <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
             <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.prePage')">上一页</a>
-            <a class="am-btn am-btn-primary am-btn-lg" id="tenant-index">第{{=it.index}}页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" id="sku-index">第{{=it.index}}页</a>
             <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.nextPage')">下一页</a>
         </div>
     </div>
@@ -1002,10 +1002,6 @@
                         <button onclick="PubSub.publish('productModel.render','{{=productModel.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
-                        </button>
-                        <button onclick="PubSub.publish('productModelPanel.new','{{=productModel.id}}')"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 规格详情
                         </button>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                            href="/yuanqu/product/createQRCodeSample.do?productModelId={{=productModel.id}}"><span
@@ -3887,13 +3883,13 @@
         this.nextPage = function (msg, data) {
             this.totalPages = this.totalPages == 0 ? 1 : this.totalPages;
             this.index = this.index + 1 > this.totalPages ? this.totalPages : this.index + 1;
-            $("#tenant-index").html("第" + this.index + "页");
+            $("#sku-index").html("第" + this.index + "页");
             this.body();
         };
 
         this.prePage = function (msg, data) {
             this.index = this.index > 1 ? this.index - 1 : 1;
-            $("#tenant-index").html("第" + this.index + "页");
+            $("#sku-index").html("第" + this.index + "页");
             this.body();
         };
 
@@ -3967,7 +3963,8 @@
             {message: this.name + ".search", subscriber: this.search},
             {message: this.name + ".nextPage", subscriber: this.nextPage},
             {message: this.name + ".prePage", subscriber: this.prePage},
-            {message: this.name + ".delete", subscriber: this.delete}
+            {message: this.name + ".delete", subscriber: this.delete},
+            {message: this.name + ".upper", subscriber: this.upper}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
