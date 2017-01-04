@@ -603,7 +603,6 @@ public class OffLineProductController {
     @RequestMapping("/createQRCodeSample.do")
     @ResponseBody
     public ResponseEntity<byte[]> createQRCodeSample(HttpServletRequest request) throws Exception {
-        String productModelId = request.getParameter("productModelId");
         String tenantId = request.getParameter("tenantId");
         String panelId = request.getParameter("panelId");
         String id = "";
@@ -614,13 +613,6 @@ public class OffLineProductController {
         if (tenantId != null && !tenantId.equals("")) {
             redirect = "0/" + tenantId;
             id = tenantId;
-        } else if (productModelId != null && !productModelId.equals("")) {
-            ProductModel productModel = (ProductModel)
-                    baseManager.getObject(ProductModel.class.getName(), productModelId);
-            markContent = productModel.getSerial() + "：" + productModel.getName();
-            contentLength = markContent.length();
-            redirect = "1/" + productModelId;
-            id = productModelId;
         } else if (panelId != null && !panelId.equals("")) {
             redirect = "2/" + panelId;
             id = panelId;
@@ -661,6 +653,51 @@ public class OffLineProductController {
         return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
     }
 
+    @RequestMapping("/createQRCode.do")
+    @ResponseBody
+    public ResponseEntity<byte[]> createQRCode(HttpServletRequest request) throws Exception {
+        String productModelId = request.getParameter("productModelId");
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+        QRCodeGenerator codeGenerator = new QRCodeGenerator("http://www.efeiyi.com/createWxLoginUrl/1/" + productModel.getId());
+        String productName = productModel.getName() == null ? "" : productModel.getName();
+        String productPrice = productModel.getPrice() == null ? "" : productModel.getPrice() + "";
+        List<String> productNameArray = new ArrayList<>();
+
+        while (productName.length() > 8) {
+            String nameTemp = productName.substring(0, 8);
+            productNameArray.add(nameTemp);
+            productName = productName.substring(8, productName.length());
+            if (productName.length() <= 8) {
+                productNameArray.add(productName);
+            }
+        }
+
+        codeGenerator
+                .createQRCode(250, 250)
+                .assembleBackground("http://ef-wiki.oss-cn-beijing.aliyuncs.com/picture/newqrcode.jpg", 572, 78)
+                .assembleText("等线", 32, productModel.getSerial(), 272, 105);
+
+        int height = 147;
+        if (!productNameArray.isEmpty()) {
+            for (String pn : productNameArray) {
+                codeGenerator.assembleText("等线", 32, pn, 272, height);
+                height += 42;
+            }
+        } else {
+            codeGenerator.assembleText("等线", 32, productName, 272, height);
+        }
+
+        BufferedImage bimage = codeGenerator
+                .assembleText("等线", 100, Font.PLAIN, productPrice, 143, 368).getImageResult();
+
+        File imageFile = new File(productModel.getSerial() + ".jpg");
+        ImageIO.write(bimage, "jpg", imageFile);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", productModel.getSerial() + ".jpg");
+        byte[] bytes = FileUtils.readFileToByteArray(imageFile);
+        return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
+    }
 
     @RequestMapping({"/batchExportQRCode"})
     @ResponseBody

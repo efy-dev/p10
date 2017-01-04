@@ -105,6 +105,9 @@ public class QRCodeGenerator {
         }
 //        首先创造文字
         Font font = new Font(fontName, fontStyle, fontSize);
+        if (content == null || content.equals("")) {
+            return this;
+        }
         AttributedString contentString = new AttributedString(content);
         contentString.addAttribute(TextAttribute.FONT, font, 0, content.length());
         AttributedCharacterIterator contentStringIterator = contentString.getIterator();

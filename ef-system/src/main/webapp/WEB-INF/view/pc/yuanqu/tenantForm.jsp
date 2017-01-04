@@ -1004,7 +1004,7 @@
                                 class="am-icon-edit"></span> 基本信息
                         </button>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                           href="/yuanqu/product/createQRCodeSample.do?productModelId={{=productModel.id}}"><span
+                           href="/yuanqu/product/createQRCode.do?productModelId={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 生成二维码
                         </a>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -1679,7 +1679,7 @@
                                 class="am-icon-edit"></span> 基本信息
                         </button>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                           href="/yuanqu/product/createQRCodeSample.do?productModelId={{=productModel.id}}"><span
+                           href="/yuanqu/product/createQRCode.do?productModelId={{=productModel.id}}"><span
                                 class="am-icon-trash-o"></span> 生成二维码
                         </a>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
