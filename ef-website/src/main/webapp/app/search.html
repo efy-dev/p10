@@ -140,7 +140,7 @@
         requestParam = decodeURI(requestParam.name);
         $('input.name').val(requestParam);
         PageVariable.requestModel["name"] = requestParam;
-        searchProductModels(PageVariable.requestModel, 30, 0, function () {
+        searchProductModels(PageVariable.requestModel, 30, 0, 1, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         });
         $('input.name').on('blur', function () {
@@ -167,11 +167,11 @@
 
         $('input.name').on('blur', function () {
             PageVariable.requestModel["name"] = $(this).val();
-            searchProductModels(PageVariable.requestModel, 30, 0, function () {
+            searchProductModels(PageVariable.requestModel, 30, 0, 1, function () {
                 renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
             });
             return false;
-        })
+        });
         filterSearch();
     }
 
