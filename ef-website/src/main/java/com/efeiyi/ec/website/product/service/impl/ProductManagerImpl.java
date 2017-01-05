@@ -62,7 +62,7 @@ public class ProductManagerImpl implements ProductManager {
 
     @Override
     public Object searchProductModels(RequestParamModel requestParamModel) throws Exception {
-        StringBuilder hql = new StringBuilder("select obj from ProductModel obj where obj.status='1' and obj.product.type='3' and obj.product.status!='0'");
+        StringBuilder hql = new StringBuilder("select obj from ProductModel obj where obj.status='1' and obj.product.type='3' and obj.product.status!='0' and obj.price IS NOT NULL");
         String startPrice = requestParamModel.getStartPrice();
         String endPrice = requestParamModel.getEndPrice();
         String projectCategoryId = requestParamModel.getProjectCategoryId();
@@ -80,13 +80,13 @@ public class ProductManagerImpl implements ProductManager {
             throw new ApplicationException(ApplicationException.PARAM_ERROR);
         }
         if (startPrice != null && !startPrice.equals("") && endPrice != null && !endPrice.equals("")) {
-            hql.append("and obj.price between '" + startPrice + "' and '" + endPrice + "' ");
+            hql.append(" and obj.price between '" + startPrice + "' and '" + endPrice + "' ");
         }
         if (projectCategoryId != null && !projectCategoryId.equals("")) {
-            hql.append("and obj.product.project.projectCategory.id='" + projectCategoryId + "' ");
+            hql.append(" and obj.product.project.projectCategory.id='" + projectCategoryId + "' ");
         }
         if (name != null && !name.equals("")) {
-            hql.append("and obj.name like '%" + name + "%' ");
+            hql.append(" and obj.name like '%" + name + "%' ");
         }
         if (sortField != null && !sortField.equals("") && sortFlag != null && !sortFlag.equals("")) {
             hql.append(" order by obj." + sortField + " " + sortFlag);
@@ -96,7 +96,7 @@ public class ProductManagerImpl implements ProductManager {
         } catch (Exception e) {
             throw new ApplicationException(ApplicationException.SQL_ERROR);
         }
-        return pageInfo.getList();
+        return pageInfo;
     }
 
     @Override
@@ -141,7 +141,7 @@ public class ProductManagerImpl implements ProductManager {
             throw new ApplicationException(ApplicationException.PARAM_ERROR);
         }
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        StringBuilder hql = new StringBuilder("select productModel from ProductModel productModel where productModel.status='1' and productModel.product.status!='0' and productModel.product.type='3'");
+        StringBuilder hql = new StringBuilder("select productModel from ProductModel productModel where productModel.status='1' and productModel.product.status!='0' and productModel.product.type='3'and  productModel.price IS NOT NULL");
         String startPrice = "";
         String endPrice = "";
         try {
@@ -155,7 +155,7 @@ public class ProductManagerImpl implements ProductManager {
                         endPrice = jsonObject.get(key).toString();
                     }
                 } else {
-                    hql.append("and productModel.");
+                    hql.append(" and productModel.");
                     hql.append(key.toString());
                     hql.append("=:");
                     hql.append(paramKeyFillter(key.toString()));
@@ -164,7 +164,7 @@ public class ProductManagerImpl implements ProductManager {
                 }
             }
             if (!startPrice.equals("") && !endPrice.equals("")) {
-                hql.append("and productModel.price between '" + startPrice + "' and '" + endPrice + "'");
+                hql.append(" and productModel.price between '" + startPrice + "' and '" + endPrice + "'");
             }
         } catch (Exception e) {
             throw new ApplicationException(ApplicationException.PARAM_ERROR);
@@ -174,7 +174,7 @@ public class ProductManagerImpl implements ProductManager {
         } catch (Exception e) {
             throw new ApplicationException(ApplicationException.SQL_ERROR);
         }
-        return pageInfo.getList();
+        return pageInfo;
     }
 
     private String paramKeyFillter(String key) {
