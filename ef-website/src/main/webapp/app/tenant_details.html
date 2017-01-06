@@ -127,12 +127,12 @@
 </script>
 
 <script type="text/x-dot-template" id="tenant-product-list">
+    <ul>
         {{
         for (var i = 0 ; i < it.length ; i++) {
         var product = it[i];
         }}
         {{ if(product.productModel_url != '' && product.price!=null ){ }}
-        <ul>
         <li>
             <a href="product_details.html?productId={{=product.id}}&title={{=product.product.name}}">
                 <img src="{{=product.productModel_url}}@!o2o-tenant-list" alt="">
@@ -140,9 +140,9 @@
                 <p class="price">¥<span>{{=product.price}}</span></p>
             </a>
         </li>
-        </ul>
         {{ } }}
         {{ } }}
+    </ul>
     <div class="hintTitleGroup">暂无相关商品</div>
     <a class="more" onclick="loadMore()">加载更多</a>
 </script>
