@@ -2941,6 +2941,21 @@ footer .copyright {
     display: none;
 }
 
+.hintTitle {
+    line-height: 350px;
+    text-align: center;
+    font-family: 微软雅黑;
+    font-size: 14px;
+    color: #999;
+}
+
+.hintTitleGroup {
+    line-height: 50px;
+    text-align: center;
+    font-family: 微软雅黑;
+    font-size: 14px;
+    color: #999;
+}
 .product-list .more,
 .filter-list .more{
     width:100%;

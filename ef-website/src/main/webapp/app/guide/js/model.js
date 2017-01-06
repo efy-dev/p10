@@ -491,6 +491,7 @@ function searchProductModels(param, limit, offset, index, callback) {
         if (typeof callback == "function") {
             callback();
             moreHide(index, data.pageEntity.pCount);
+            haveOrNotData(PageVariable.productModelList, data.list);
         }
     };
     var requestParam = {};
@@ -515,6 +516,7 @@ function searchProductModelsByTenantGroup(param, limit, offset, index, callback)
         if (typeof callback == "function") {
             callback();
             moreHide(index, data.pageEntity.pCount);
+            haveOrNotData(PageVariable.productModelList, data.list);
         }
     };
     var requestParam = {};
@@ -534,6 +536,14 @@ function extendData(child, father) {
 function moreHide(index, count) {
     if (index >= count) {
         $(".more").hide();
+    }
+    return false;
+}
+function haveOrNotData(child, father) {
+    if (father.length == 0 && child.length == 0) {
+        $(".hintTitle,.hintTitleGroup").show();
+    } else {
+        $(".hintTitle,.hintTitleGroup").hide();
     }
     return false;
 }
