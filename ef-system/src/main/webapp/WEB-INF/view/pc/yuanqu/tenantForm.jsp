@@ -662,8 +662,7 @@
                     <label class="am-u-sm-3 am-form-label">介绍</label>
                     <div class="am-u-sm-9">
                         <textarea name="content" rows="5"
-                                  value="{{=(it.data!=null && it.data.content!=null) ? it.data.content: ''}}"
-                                  placeholder="输入实景介绍"></textarea>
+                                  placeholder="输入实景介绍">{{=(it.data!=null && it.data.content!=null) ? it.data.content: ''}}</textarea>
                     </div>
                 </div>
 
@@ -752,11 +751,6 @@
         </td>
         <td class="am-hide-sm-only"><span style="padding-right: 20px">{{=hot.ordinate==null?"":hot.ordinate}}</span>
         </td>
-        <td class="am-hide-sm-only">
-            {{ if(typeof hot.image!= "undefined"&&hot.image!=null){}}
-            <img width="10%" src="{{=hot.image.src}}" alt=""/>
-            {{ } }}
-        </td>
     </tr>
     {{ } }}
 </script>
@@ -780,7 +774,6 @@
                 <th class="table-title">商品规格名称</th>
                 <th class="table-title">热点横坐标</th>
                 <th class="table-title">热点纵坐标</th>
-                <th class="table-title">图片预览</th>
             </tr>
             </thead>
             <tbody dot-template="main-tenant-panel-hot-list">
@@ -827,7 +820,7 @@
                         商品规格
                     </label>
                     <div class="am-u-sm-9">
-                        <input name="name" type="text" id="search"
+                        <input name="name" type="text" id="hotSearch"
                                placeholder="输入商品规格名称" oninput="PubSub.publish('hotBase.search',this)">
                         <input name="productModelId" type="hidden" id="productModelId">
                     </div>
@@ -2268,6 +2261,7 @@
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
+            PubSub.publish("tenantNew.initialize");
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
@@ -2789,7 +2783,7 @@
             var id = data.split(":")[0];
             var fullName = data.split(":")[1];
             $("#productModelId").val(id);
-            $("#search").val(fullName);
+            $("#hotSearch").val(fullName);
             this.selectHide();
         };
 
@@ -3113,7 +3107,10 @@
         };
 
         this.show = function (msg, data) {
-            $("[dot-template=" + this.template + "]").show();
+            var $tenantPanelList = $("[dot-template=" + this.template + "]");
+            $tenantPanelList.show();
+            $tenantPanelList.children().show();
+
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
