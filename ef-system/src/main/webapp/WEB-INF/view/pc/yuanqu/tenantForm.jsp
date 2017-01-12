@@ -177,7 +177,8 @@
         <button type="button" class="am-btn am-btn-primary "
                 onclick="PubSub.publish('productList.render','{{=it.data.userTenant}}')">
             <span>商品管理</span></button>
-        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('skuList.render',null)">
+        <button type="button" class="am-btn am-btn-primary "
+                onclick="PubSub.publish('skuList.render','{{=it.data.userTenant}}')">
             <span>SKU管理</span></button>
         {{}}else{}}
         <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('tenantNew.render')">
@@ -193,7 +194,8 @@
             <span>新推荐</span></button>
         <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('recommendList.render',null)">
             <span>推荐管理</span></button>
-        <button type="button" class="am-btn am-btn-primary " onclick="PubSub.publish('skuList.render',null)">
+        <button type="button" class="am-btn am-btn-primary "
+                onclick="PubSub.publish('skuList.render','{{=it.data.userTenant}}')">
             <span>SKU管理</span></button>
         {{}}}
         <%--<button type="button" class="am-btn am-btn-primary "><span>图片管理</span></button>--%>
@@ -3876,6 +3878,7 @@
         this.template = "main-sku-list";         //组件绑定的模板//组件需要订阅的事件与消息
         this.totalPages = "";
         this.totalRecords = "";
+        this.tenantId = "";
 
         this.nextPage = function (msg, data) {
             this.totalPages = this.totalPages == 0 ? 1 : this.totalPages;
@@ -3915,10 +3918,11 @@
             //@TODO 搜索列表与商品实体
             var param = {
                 limit: this.size,
-                offset: ((this.index - 1) * this.size)
+                offset: ((this.index - 1) * this.size),
+                id: this.tenantId
             };
             if (this.currentSearch != null) {
-                param.name = this.currentSearch
+                param.name = this.currentSearch;
             }
             ajaxRequest("/yuanqu/product/getSKUList", param, function (responseData) {
                 this.data = responseData.list;
@@ -3930,6 +3934,7 @@
 
         this.render = function (msg, data) {
             this.index = 1;
+            this.tenantId = data;
             renderTemplate(this.template, this);
             this.show();
         };
