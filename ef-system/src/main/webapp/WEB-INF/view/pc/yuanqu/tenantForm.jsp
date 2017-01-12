@@ -3919,7 +3919,7 @@
             var param = {
                 limit: this.size,
                 offset: ((this.index - 1) * this.size),
-                id: this.tenantId
+                id: this.tenantId == "undefined" ? "" : this.tenantId
             };
             if (this.currentSearch != null) {
                 param.name = this.currentSearch;

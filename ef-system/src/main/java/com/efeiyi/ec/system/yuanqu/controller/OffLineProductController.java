@@ -346,9 +346,12 @@ public class OffLineProductController {
         int limit = Integer.parseInt(request.getParameter("limit"));
         int offset = Integer.parseInt(request.getParameter("offset"));
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        String hql = "select obj from ProductModel obj where obj.status!='0' and obj.product.type='3' and obj.product.status!='0' and obj.name like :name and  obj.product.tenant.id=:id";
+        String hql = "select obj from ProductModel obj where obj.status!='0' and obj.product.type='3' and obj.product.status!='0' and obj.name like :name";
+        if (id != null && !id.equals("")) {
+            hql += " and  obj.product.tenant.id=:id";
+            param.put("id", id);
+        }
         param.put("name", "%" + name + "%");
-        param.put("id", id);
         PageEntity pageEntity = new PageEntity();
         pageEntity.setSize(limit);
         pageEntity.setrIndex(offset);
