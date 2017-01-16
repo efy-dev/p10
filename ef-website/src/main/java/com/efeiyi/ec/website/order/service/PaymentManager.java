@@ -8,17 +8,20 @@ import com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails;
  */
 public interface PaymentManager {
 
-    String alipay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails,Float paymentAmount);
+    String alipay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount);
 
-    void payCallback(String purchaseOrderPaymentId,String transactionNumber);
+    void payCallback(String purchaseOrderPaymentId, String transactionNumber);
 
-    Object wxpay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount,String openid);
+    Object wxpay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount, String openid);
 
     String wxNativePay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount);
 
-    PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder) throws Exception ;
+    PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder) throws Exception;
 
-    PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder, String balance, String couponId) throws Exception ;
+    PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder, String balance, String couponId) throws Exception;
 
     String alipayWap(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount);
+
+    String alipayWap(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, String returnUrl);
+
 }
