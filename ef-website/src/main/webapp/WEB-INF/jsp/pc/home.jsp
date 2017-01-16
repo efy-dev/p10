@@ -24,7 +24,7 @@
     <div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{"controlNav":false}' data-am-flexslider="{playAfterPaused: 2000}" data-am-slider='{&quot;directionNav&quot;:false}'>
         <ul class="am-slides" >
             <c:forEach items="${bannerList}" var="banner" varStatus="status">
-            <li><a href="javascript:vido(0)"><img src="http://pro.efeiyi.com/${banner.imageUrl}"></a></li>
+            <li><a href="<c:url value="${banner.directUrl}"/>"><img src="http://pro.efeiyi.com/${banner.imageUrl}"></a></li>
             </c:forEach>
         </ul>
     </div>

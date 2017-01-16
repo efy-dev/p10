@@ -1,0 +1,18 @@
+<ol class="am-breadcrumb main-nav">
+    {{ if(it.currentComponent.hierarchy== 0){ }}
+    <li><a>园区管理</a></li>
+    {{ } else { }}
+    <li><a onclick="PubSub.publish('menu.render')">园区管理</a></li>
+    {{ } }}
+    {{
+    if(typeof it.currentComponent != "undefined" && it.currentComponent!=null){
+    if (it.currentComponent.father == null){
+    }}
+    <li><a class="am-active" href="#">{{=it.currentComponent.label}}</a></li>
+    {{ } else { }}
+    <li><a onclick="PubSub.publish('{{=it.currentComponent.father.name}}.show')">{{=it.currentComponent.father.label}}</a>
+    </li>
+    <li><a class="am-active" href="#">{{=it.currentComponent.label}}</a></li>
+    {{ } }}
+    {{ } }}
+</ol>
