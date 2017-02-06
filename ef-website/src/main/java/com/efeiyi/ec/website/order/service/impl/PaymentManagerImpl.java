@@ -7,14 +7,12 @@ import cn.beecloud.BeeCloud;
 import cn.beecloud.bean.BCPayParameter;
 import com.efeiyi.ec.balance.model.BalanceRecord;
 import com.efeiyi.ec.organization.model.User;
-import com.efeiyi.ec.purchase.model.Coupon;
-import com.efeiyi.ec.purchase.model.PurchaseOrder;
-import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
-import com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails;
+import com.efeiyi.ec.purchase.model.*;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
 import com.efeiyi.ec.website.order.service.BalanceManager;
 import com.efeiyi.ec.website.order.service.CouponManager;
 import com.efeiyi.ec.website.order.service.PaymentManager;
+import com.efeiyi.ec.website.order.service.PrepaidCardManager;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AutoSerialManager;
@@ -42,6 +40,9 @@ public class PaymentManagerImpl implements PaymentManager {
 
     @Autowired
     private BalanceManager balanceManager;
+
+    @Autowired
+    private PrepaidCardManager prepaidCardManager;
 
     static {
         BeeCloud.registerApp("130498c1-8928-433b-a01d-c26420f41818", "49fc6d9c-fd5d-4e9c-9ff6-f2d5ef1a1a3e"); //正式环境
@@ -98,7 +99,7 @@ public class PaymentManagerImpl implements PaymentManager {
     public void payCallback(String purchaseOrderPaymentDetailsId, String transactionNumber) {
 
         //更新支付记录的交易号
-        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrderPaymentDetailsId);
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetailsId);
         purchaseOrderPaymentDetails.setTransactionNumber(transactionNumber);
         //@TODO 修改订单状态
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getId());
@@ -171,11 +172,28 @@ public class PaymentManagerImpl implements PaymentManager {
         purchaseOrderPayment.setUser(user);
         baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
-        purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal());
+        purchaseOrderPaymentDetails.setMoney(checkOrderTotal(purchaseOrder.getTotal().subtract(calculatePrepaidCardRecord(purchaseOrder.getId()))));
         purchaseOrderPaymentDetails.setPayWay(purchaseOrder.getPayWay());
         purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
         baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
         return purchaseOrderPaymentDetails;
+    }
+
+
+    private BigDecimal calculatePrepaidCardRecord(String purchaseOrderId) {
+        PrepaidCardRecord prepaidCardRecord = prepaidCardManager.getPrepaidCardRecordByOrderId(purchaseOrderId, PrepaidCardRecord.STATUS_USED);
+        if (prepaidCardRecord == null) {
+            return BigDecimal.valueOf(0);
+        }
+        return prepaidCardRecord.getValue();
+    }
+
+    private BigDecimal checkOrderTotal(BigDecimal total) {
+        if (total.floatValue() > 0) {
+            return total;
+        } else {
+            return BigDecimal.valueOf(0);
+        }
     }
 
     //初始化订单支付，包括支付记录，支付记录详情等

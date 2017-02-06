@@ -79,6 +79,10 @@ public class PurchaseOrderController extends BaseController {
     private AddressManager addressManager;
 
 
+    @Autowired
+    private PrepaidCardManager prepaidCardManager;
+
+
     @RequestMapping("/giftBuy/showNameStatus.do")
     @ResponseBody
     public boolean changeShowGiftStatus(HttpServletRequest request) {
@@ -380,6 +384,8 @@ public class PurchaseOrderController extends BaseController {
         } catch (ApplicationException ae) {
             return ae.toJSONObject();
         }
+
+        prepaidCardManager.confirmPrepaidCardRecord(purchaseOrderId);
 
         JSONObject result = new JSONObject();
         result.put("code", "0");

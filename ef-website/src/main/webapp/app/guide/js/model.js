@@ -1,115 +1,142 @@
-var api_url = '';
+// var api_url = '';
 // var api_url = 'http://192.168.1.10';
-//var api_url = 'http://192.168.1.72';
+// var api_url = 'http://192.168.1.72';
+var api_url = '';
 var PageVariable = {
-    template: {
-        homeRecommendList: "home-recommend-list",
-        tenantBase: "tenant-base",
-        tenantPraise: "tenant-praise",
-        tenantProductList: "tenant-product-list",
-        tenantPanelList: "tenant-panel-list",
-        productBase: "product-base",
-        productDetail: "product-detail",
-        productBuy: "product-buy",
-        productList: "product-list",
-        tenantList: "tenant-list",
-        tenantAudioList: "tenant-audio-list",
-        panelBase: "panel-base",
-        tenantAppointment: "tenant-appointment",
-        purchaseProduct: "purchase-product",
-        purchaseOrder: "purchase-order",
-        purchasePay: "purchase-pay",
-        addressList: "address-list",
-        provinceList: "province-list",
-        cityList: "city-list",
-        districtList: "district-list",
-        purchaseInfo: "purchase-info",
-        purchaseAddress: "purchase-address",
-        purchaseDelivery: "purchase-delivery",
-        tenantCategory: "tenant-category",
-        productModels: "search-productModels",
-        productCategory: "product-category"
-    },
-    service: {
-        login: "/wx/login",
-        listProductModel: api_url + "/product/getProductModelList",
-        listTenant: api_url + "/tenant/getTenantList",
-        listRecommend: api_url + "/tenant/getRecommendList",
-        viewTenantById: api_url + "/tenant/getTenantById",
-        listTenantPraise: api_url + "/tenant/getTenantPraiseListByTenant",
-        saveTenantPraise: api_url + "/tenant/saveTenantPraise",
-        listTenantPanel: api_url + "/tenant/getImageTextListByTenant",
-        viewProductModelById: api_url + "/product/getProductModelById",
-        listProductModelPanel: api_url + "/product/getColumnListByProductModel",
-        currentUser: api_url + "/user/getCurrentUser",
-        panelById: api_url + "/tenant/getPanelById",
-        saveUserOrder: api_url + "/tenant/saveUserOrder",  //提交预约信息
-        getOrderById: api_url + "/tenant/getOrderById",  //获取预约信息
-        hasArtistry: api_url + "/project/hasArtistry",
-        createNewOrder: api_url + "/order/createNewOrder",
-        hasAuthenticated: api_url + "/hasAuthenticated",
-        getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
-        getAddressList: api_url + "/address/getAddressList",
-        getProvinceList: api_url + "/address/getProvinceList",
-        getCityList: api_url + "/address/getCityList",
-        getDistrictList: api_url + "/address/getDistrictList",
-        addAddress: api_url + "/address/addAddress",
-        getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
-        confirmOrderById: api_url + "/order/confirmOrderById",
-        getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial",
-        getConsumerAddressById: api_url + "/address/getConsumerAddressById",
-        tenantCategoryId: api_url + "/product/getTenantGroup", //店铺品类
-        searchProductModels: api_url + "/product/searchProductModels",
-        searchProductModelsByTenantGroup: api_url + "/product/searchProductModelsByTenantGroup",
-        getProductCategory: api_url + "/product/getProductCategory"
-    },
+        template: {
+            homeRecommendList: "home-recommend-list",
+            tenantBase: "tenant-base",
+            tenantPraise: "tenant-praise",
+            tenantProductList: "tenant-product-list",
+            tenantPanelList: "tenant-panel-list",
+            productBase: "product-base",
+            productDetail: "product-detail",
+            productBuy: "product-buy",
+            productList: "product-list",
+            tenantList: "tenant-list",
+            tenantAudioList: "tenant-audio-list",
+            panelBase: "panel-base",
+            tenantAppointment: "tenant-appointment",
+            purchaseProduct: "purchase-product",
+            purchaseOrder: "purchase-order",
+            purchasePay: "purchase-pay",
+            addressList: "address-list",
+            provinceList: "province-list",
+            cityList: "city-list",
+            districtList: "district-list",
+            purchaseInfo: "purchase-info",
+            purchaseAddress: "purchase-address",
+            purchaseDelivery: "purchase-delivery",
+            tenantCategory: "tenant-category",
+            productModels: "search-productModels",
+            productCategory: "product-category"
+        },
+        service: {
+            login: "/wx/login",
+            listProductModel: api_url + "/product/getProductModelList",
+            listTenant: api_url + "/tenant/getTenantList",
+            listRecommend: api_url + "/tenant/getRecommendList",
+            viewTenantById: api_url + "/tenant/getTenantById",
+            listTenantPraise: api_url + "/tenant/getTenantPraiseListByTenant",
+            saveTenantPraise: api_url + "/tenant/saveTenantPraise",
+            listTenantPanel: api_url + "/tenant/getImageTextListByTenant",
+            viewProductModelById: api_url + "/product/getProductModelById",
+            listProductModelPanel: api_url + "/product/getColumnListByProductModel",
+            currentUser: api_url + "/user/getCurrentUser",
+            panelById: api_url + "/tenant/getPanelById",
+            saveUserOrder: api_url + "/tenant/saveUserOrder",  //提交预约信息
+            getOrderById: api_url + "/tenant/getOrderById",  //获取预约信息
+            hasArtistry: api_url + "/project/hasArtistry",
+            createNewOrder: api_url + "/order/createNewOrder",
+            hasAuthenticated: api_url + "/hasAuthenticated",
+            getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
+            getAddressList: api_url + "/address/getAddressList",
+            getProvinceList: api_url + "/address/getProvinceList",
+            getCityList: api_url + "/address/getCityList",
+            getDistrictList: api_url + "/address/getDistrictList",
+            addAddress: api_url + "/address/addAddress",
+            getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
+            confirmOrderById: api_url + "/order/confirmOrderById",
+            getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial",
+            getConsumerAddressById: api_url + "/address/getConsumerAddressById",
+            tenantCategoryId: api_url + "/product/getTenantGroup", //店铺品类
+            searchProductModels: api_url + "/product/searchProductModels",
+            searchProductModelsByTenantGroup: api_url + "/product/searchProductModelsByTenantGroup",
+            getProductCategory: api_url + "/product/getProductCategory",
+            createPrepaidRecord: api_url + "/prepaidRecord/create",
+            checkPrepaidCard: api_url + "/prepaid/check"
+        },
 
-    currentUser: null,
-    userId: "",
-    tenant: {},
-    productModelList: [],
-    tenantColumnList: [],
-    tenantPraiseList: [],
-    productModel: {},
-    productModelColumnList: [],
-    tenantList: [],
-    master: {},
-    project: {},
-    imageTextList: [],
-    imageText: {},
-    recommendList: [],
-    panelList: {},  //店铺实景
-    appointment: {},
-    imageStyle: {},
-    currentAudio: null,
-    audioList: [],
-    addressList: [],
-    provinceList: [],
-    cityList: [],
-    districtList: [],
-    tenantCategory: [],  //店铺品类
-    productCategory: [],
-    requestModel: {},
-    name: "",
+        currentUser: null,
+        userId: "",
+        tenant: {}
+        ,
+        productModelList: [],
+        tenantColumnList: [],
+        tenantPraiseList: [],
+        productModel: {}
+        ,
+        productModelColumnList: [],
+        tenantList: [],
+        master: {}
+        ,
+        project: {}
+        ,
+        imageTextList: [],
+        imageText: {}
+        ,
+        recommendList: [],
+        panelList: {}
+        ,  //店铺实景
+        appointment: {}
+        ,
+        imageStyle: {}
+        ,
+        currentAudio: null,
+        audioList: [],
+        addressList: [],
+        provinceList: [],
+        cityList: [],
+        districtList: [],
+        tenantCategory: [],  //店铺品类
+        productCategory: [],
+        requestModel: {}
+        ,
+        name: "",
 
-    setCurrentAudio: function (audio) {
-        if (PageVariable.currentAudio != null) {
-            PageVariable.currentAudio.bodyStop();
+        setCurrentAudio: function (audio) {
+            if (PageVariable.currentAudio != null) {
+                PageVariable.currentAudio.bodyStop();
+            }
+            PageVariable.currentAudio = audio;
+            PageVariable.currentAudio.bodyPlay();
         }
-        PageVariable.currentAudio = audio;
-        PageVariable.currentAudio.bodyPlay();
-    }
-    ,
+        ,
 
-    removeCurrentAudio: function (audio) {
-        if (PageVariable.currentAudio == null) {
-            audio.bodyStop();
-        } else if (audio.id == PageVariable.currentAudio.id) {
-            PageVariable.currentAudio.bodyStop();
-            PageVariable.currentAudio = null;
+        removeCurrentAudio: function (audio) {
+            if (PageVariable.currentAudio == null) {
+                audio.bodyStop();
+            } else if (audio.id == PageVariable.currentAudio.id) {
+                PageVariable.currentAudio.bodyStop();
+                PageVariable.currentAudio = null;
+            }
         }
     }
-};
+    ;
+
+
+function getCurrentUser(callback) {
+    var success = function (data) {
+        PageVariable.currentUser = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.currentUser, {}, success);
+}
+
+
+// ----------------------tenant start------------------------
 
 function getTenantById(id, callback) {
     var success = function (data) {
@@ -123,22 +150,6 @@ function getTenantById(id, callback) {
     ajaxRequest(PageVariable.service.viewTenantById, requestParam, success);
 }
 
-//@TODO
-function getColumnListByTenant(id) {
-
-}
-
-function getCurrentUser(callback) {
-    var success = function (data) {
-        PageVariable.currentUser = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    ajaxRequest(PageVariable.service.currentUser, {}, success);
-}
-
-
 function getTenantPraiseListByTenant(id, callback) {
     var success = function (data) {
         PageVariable.tenantPraiseList = data;
@@ -150,7 +161,6 @@ function getTenantPraiseListByTenant(id, callback) {
     requestParam.id = id;
     ajaxRequest(PageVariable.service.listTenantPraise, requestParam, success);
 }
-
 
 function saveTenantPraise(tenantId, delFlag, callback) {
     var success = function (data) {
@@ -178,6 +188,62 @@ function saveTenantPraise(tenantId, delFlag, callback) {
 
 }
 
+function getTenantList(param, limit, offset, callback) {
+    var success = function (data) {
+        PageVariable.tenantList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.param = param;
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.listTenant, requestParam, success);
+}
+
+function getImageTextListByTenant(id, callback) {
+    var success = function (data) {
+        PageVariable.imageTextList = data;
+        if (typeof callback == "function") {
+            callback();
+            swiperContaniner('[dot-template=tenant-panel-list]');
+        }
+    };
+    var requestParam = {};
+    requestParam.id = id;
+    ajaxRequest(PageVariable.service.listTenantPanel, requestParam, success);
+}
+
+function getPanelById(id, callback) {
+    var success = function (data) {
+        PageVariable.panelList = data;
+        if (typeof callback == "function") {
+            callback();
+            swiperContaniner('.swiper-container');
+        }
+    };
+
+    var requestParam = {};
+    requestParam.id = id;
+    ajaxRequest(PageVariable.service.panelById, requestParam, success);
+}
+
+function getOrderById(id, callback) {
+    var success = function (data) {
+        PageVariable.appointment = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.id = id;
+    ajaxRequest(PageVariable.service.getOrderById, requestParam, success);
+}
+
+// ----------------------tenant end--------------------------
+
+// ----------------------product start------------------------
 
 function getProductModelById(id, callback) {
     var success = function (data) {
@@ -203,20 +269,6 @@ function getColumnListByProductModel(id, callback) {
     ajaxRequest(PageVariable.service.listProductModelPanel, requestParam, success);
 }
 
-function getTenantList(param, limit, offset, callback) {
-    var success = function (data) {
-        PageVariable.tenantList = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    var requestParam = {};
-    requestParam.param = param;
-    requestParam.limit = limit;
-    requestParam.offset = offset;
-    ajaxRequest(PageVariable.service.listTenant, requestParam, success);
-}
-
 function getProductModelList(param, limit, offset, callback) {
     var success = function (data) {
         PageVariable.productModelList = data;
@@ -232,74 +284,6 @@ function getProductModelList(param, limit, offset, callback) {
     ajaxRequest(PageVariable.service.listProductModel, requestParam, success);
 }
 
-function getImageTextListByTenant(id, callback) {
-    var success = function (data) {
-        PageVariable.imageTextList = data;
-        if (typeof callback == "function") {
-            callback();
-            swiperContaniner('[dot-template=tenant-panel-list]');
-        }
-    };
-    var requestParam = {};
-    requestParam.id = id;
-    ajaxRequest(PageVariable.service.listTenantPanel, requestParam, success);
-}
-
-//@TODO
-function getImageTextById(id) {
-
-}
-
-function getRecommendList(param, limit, offset, callback) {
-    var success = function (data) {
-        PageVariable.recommendList = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    var requestParam = {};
-    requestParam.param = param;
-    requestParam.limit = limit;
-    requestParam.offset = offset;
-    ajaxRequest(PageVariable.service.listRecommend, requestParam, success);
-}
-
-/**
- * @param 店铺实景
- * @param callback
- */
-function getPanelById(id, callback) {
-    var success = function (data) {
-        PageVariable.panelList = data;
-        if (typeof callback == "function") {
-            callback();
-            swiperContaniner('.swiper-container');
-        }
-    };
-
-    var requestParam = {};
-    requestParam.id = id;
-    ajaxRequest(PageVariable.service.panelById, requestParam, success);
-}
-
-
-/**
- * @param 店铺预约
- * @param callback
- */
-function getOrderById(id, callback) {
-    var success = function (data) {
-        PageVariable.appointment = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    var requestParam = {};
-    requestParam.id = id;
-    ajaxRequest(PageVariable.service.getOrderById, requestParam, success);
-}
-
-
 function hasArtistry(projectId, callback) {
     var success = function (data) {
         PageVariable.hasArtistry = data;
@@ -310,6 +294,95 @@ function hasArtistry(projectId, callback) {
     ajaxRequest(PageVariable.service.hasArtistry, requestParam, success);
 }
 
+function getTenantCategory(id, callback) {
+    console.log('====' + id)
+
+    var success = function (data) {
+        PageVariable.tenantCategory = data;
+
+        console.log(data)
+
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.tenantId = id;
+    ajaxRequest(PageVariable.service.tenantCategoryId, requestParam, success);
+}
+
+function getProductCategory(id, callback) {
+    var success = function (data) {
+        PageVariable.productCategory = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.getProductCategory, null, success);
+}
+
+function searchProductModels(param, limit, offset, index, callback) {
+    var success = function (data) {
+        PageVariable.productModelList = extendData(PageVariable.productModelList, data.list);
+        if (typeof callback == "function") {
+            callback();
+            moreHide(index, data.pageEntity.pCount);
+            haveOrNotData(PageVariable.productModelList, data.list);
+        }
+    };
+    var requestParam = {};
+    requestParam["sortField"] = param.sortField;
+    requestParam["sortFlag"] = param.sortFlag;
+    requestParam["startPrice"] = param.startPrice;
+    requestParam["endPrice"] = param.endPrice;
+    requestParam["projectCategoryId"] = param.projectCategoryId;
+    requestParam["name"] = param.name;
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.searchProductModels, requestParam, success);
+}
+
+function searchProductModelsByTenantGroup(param, limit, offset, index, callback) {
+    var success = function (data) {
+        PageVariable.productModelList = extendData(PageVariable.productModelList, data.list);
+        if (typeof callback == "function") {
+            callback();
+            moreHide(index, data.pageEntity.pCount);
+            haveOrNotData(PageVariable.productModelList, data.list);
+        }
+    };
+    var requestParam = {};
+    requestParam.param = JSON.stringify(param);
+    requestParam.param["endPrice"] = param.endPrice;
+    requestParam.param["startPrice"] = param.startPrice;
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.searchProductModelsByTenantGroup, requestParam, success);
+}
+function extendData(child, father) {
+    for (var i = 0; i < father.length; i++) {
+        child.push(father[i]);
+    }
+    return child;
+}
+function moreHide(index, count) {
+    if (index >= count) {
+        $(".more").hide();
+    }
+    return false;
+}
+function haveOrNotData(child, father) {
+    if (father.length == 0 && child.length == 0) {
+        $(".hintTitle,.hintTitleGroup").show();
+    } else {
+        $(".hintTitle,.hintTitleGroup").hide();
+    }
+    return false;
+}
+
+// ----------------------product end--------------------------
+
+// ----------------------order start------------------------
 
 function createNewOrder(productList, tenantId, callback) {
     var success = function (data) {
@@ -353,18 +426,22 @@ function getPurchaseOrderById(id, callback) {
     ajaxRequest(PageVariable.service.getPurchaseOrderById, requestParam, success);
 }
 
-
-function authenticationFilter(filterMappingFunction, failFunction) {
+function getDeliveryInfoBySerial(serial, company, callback) {
     var success = function (data) {
-        PageVariable.hasAuthenticated = data.hasAuthenticated;
-        if (PageVariable.hasAuthenticated) {
-            filterMappingFunction();
-        } else {
-            failFunction();
-        }
+        PageVariable.deliveryInfo = data.src;
+        callback();
     };
-    ajaxRequest(PageVariable.service.hasAuthenticated, {}, success);
+    var requestParam = {};
+    requestParam.serial = serial;
+    requestParam.company = company;
+    ajaxRequest(PageVariable.service.getDeliveryInfoBySerial, requestParam, success);
+
 }
+
+
+// ----------------------order end--------------------------
+
+// ----------------------address start------------------------
 
 function getDefaultConsumerAddress(callback) {
     var success = function (data) {
@@ -380,19 +457,6 @@ function getDefaultConsumerAddress(callback) {
         callback();
     };
     ajaxRequest(PageVariable.service.getDefaultConsumerAddress, {}, success);
-}
-
-
-function getDeliveryInfoBySerial(serial, company, callback) {
-    var success = function (data) {
-        PageVariable.deliveryInfo = data.src;
-        callback();
-    };
-    var requestParam = {};
-    requestParam.serial = serial;
-    requestParam.company = company;
-    ajaxRequest(PageVariable.service.getDeliveryInfoBySerial, requestParam, success);
-
 }
 
 function getAddressList(callback) {
@@ -451,99 +515,62 @@ function getDistrictList(param, callback) {
     ajaxRequest(PageVariable.service.getDistrictList, param, success);
 }
 
+// ----------------------address end--------------------------
+
+// ----------------------other start--------------------------
+
+function getRecommendList(param, limit, offset, callback) {
+    var success = function (data) {
+        PageVariable.recommendList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.param = param;
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.listRecommend, requestParam, success);
+}
+
+function authenticationFilter(filterMappingFunction, failFunction) {
+    var success = function (data) {
+        PageVariable.hasAuthenticated = data.hasAuthenticated;
+        if (PageVariable.hasAuthenticated) {
+            filterMappingFunction();
+        } else {
+            failFunction();
+        }
+    };
+    ajaxRequest(PageVariable.service.hasAuthenticated, {}, success);
+}
+
+// ----------------------other end----------------------------
+
+//-----------------------prepaidCard start ---------------------
+
+function createPrepaidRecord(purchaseOrderId, code, callback) {
+    var success = function (data) {
+        PageVariable.prepaidCardRecord = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.code = code;
+    requestParam.purchaseOrderId = purchaseOrderId;
+    ajaxRequest(PageVariable.service.createPrepaidRecord, requestParam, success);
+
+}
+
+function prepaidCheck(id, callback) {
+    var success = function (data) {
+        PageVariable.prepaidCardBalance = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.checkPrepaidCard, {id: id}, success);
+}
+
 getCurrentUser();
-
-
-/**
- * @param 店铺品类
- * @param callback
- */
-function getTenantCategory(id, callback) {
-    console.log('====' + id)
-
-    var success = function (data) {
-        PageVariable.tenantCategory = data;
-
-        console.log(data)
-
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    var requestParam = {};
-    requestParam.tenantId = id;
-    ajaxRequest(PageVariable.service.tenantCategoryId, requestParam, success);
-}
-
-function getProductCategory(id, callback) {
-    var success = function (data) {
-        PageVariable.productCategory = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    ajaxRequest(PageVariable.service.getProductCategory, null, success);
-}
-
-function searchProductModels(param, limit, offset, index, callback) {
-    var success = function (data) {
-        PageVariable.productModelList = extendData(PageVariable.productModelList, data.list);
-        if (typeof callback == "function") {
-            callback();
-            moreHide(index, data.pageEntity.pCount);
-            haveOrNotData(PageVariable.productModelList, data.list);
-        }
-    };
-    var requestParam = {};
-    requestParam["sortField"] = param.sortField;
-    requestParam["sortFlag"] = param.sortFlag;
-    requestParam["startPrice"] = param.startPrice;
-    requestParam["endPrice"] = param.endPrice;
-    requestParam["projectCategoryId"] = param.projectCategoryId;
-    requestParam["name"] = param.name;
-    requestParam.limit = limit;
-    requestParam.offset = offset;
-    ajaxRequest(PageVariable.service.searchProductModels, requestParam, success);
-}
-
-/**
- * @param 筛选店铺内商品
- * @param callback
- */
-function searchProductModelsByTenantGroup(param, limit, offset, index, callback) {
-    var success = function (data) {
-        PageVariable.productModelList = extendData(PageVariable.productModelList, data.list);
-        if (typeof callback == "function") {
-            callback();
-            moreHide(index, data.pageEntity.pCount);
-            haveOrNotData(PageVariable.productModelList, data.list);
-        }
-    };
-    var requestParam = {};
-    requestParam.param = JSON.stringify(param);
-    requestParam.param["endPrice"] = param.endPrice;
-    requestParam.param["startPrice"] = param.startPrice;
-    requestParam.limit = limit;
-    requestParam.offset = offset;
-    ajaxRequest(PageVariable.service.searchProductModelsByTenantGroup, requestParam, success);
-}
-function extendData(child, father) {
-    for (var i = 0; i < father.length; i++) {
-        child.push(father[i]);
-    }
-    return child;
-}
-function moreHide(index, count) {
-    if (index >= count) {
-        $(".more").hide();
-    }
-    return false;
-}
-function haveOrNotData(child, father) {
-    if (father.length == 0 && child.length == 0) {
-        $(".hintTitle,.hintTitleGroup").show();
-    } else {
-        $(".hintTitle,.hintTitleGroup").hide();
-    }
-    return false;
-}

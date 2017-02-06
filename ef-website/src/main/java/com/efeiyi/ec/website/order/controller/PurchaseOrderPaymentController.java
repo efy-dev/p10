@@ -256,6 +256,10 @@ public class PurchaseOrderPaymentController {
             payment = request.getParameter("payment");
         }
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder);
+        if (purchaseOrderPaymentDetails.getMoney().equals(BigDecimal.valueOf(0))) {
+            paymentManager.payCallback(purchaseOrderPaymentDetails.getId(), purchaseOrderPaymentDetails.hashCode() + "");
+            return "redirect:/order/paysuccess/" + purchaseOrderPaymentDetails.getId();
+        }
         if (payment.equals("1")) {//支付宝
             return "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
         } else if (payment.equals("3")) { //微信
