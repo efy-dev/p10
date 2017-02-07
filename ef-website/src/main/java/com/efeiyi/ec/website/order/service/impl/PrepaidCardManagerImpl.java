@@ -60,7 +60,7 @@ public class PrepaidCardManagerImpl implements PrepaidCardManager {
     private BigDecimal calculateProducesPrice(List<PurchaseOrderProduct> productList) {
         BigDecimal result = BigDecimal.valueOf(0);
         for (PurchaseOrderProduct product : productList) {
-            result = result.add(product.getPurchasePrice());
+            result = result.add(product.getPurchasePrice().multiply(BigDecimal.valueOf(product.getPurchaseAmount())));
         }
         return result;
     }
