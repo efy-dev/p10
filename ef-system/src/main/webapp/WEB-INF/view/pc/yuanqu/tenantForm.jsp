@@ -73,15 +73,15 @@
             margin-right: 20px;
         }
 
-        #startPrice,#endPrice{
+        #startPrice, #endPrice {
             width: 150px;
             margin-right: 10px;
         }
 
-       /* #endPrice {
-            width: 150px;
-            margin-right: 10px;
-        }*/
+        /* #endPrice {
+             width: 150px;
+             margin-right: 10px;
+         }*/
     </style>
 </head>
 <body>
@@ -210,7 +210,7 @@
             <li name="main-tenant-check"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)">公司信息</a></li>
             <li name="main-tenant-panel"><a onclick="PubSub.publish('{{=it.name}}.tabShow',this)">店内实景</a></li>
         </ul>
-        <div class="am-tabs-bd">
+        <div>
             <div name="main-tenant-base" dot-template="main-tenant-base" am-active></div>
             <div name="main-tenant-check" dot-template="main-tenant-check"></div>
             <div name="main-tenant-panel" dot-template="main-tenant-panel"></div>
@@ -633,11 +633,11 @@
             PubSub.publish(it.name+".body");
             }}
         </div>
-         <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
-             <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.prePage')">上一页</a>
-             <a class="am-btn am-btn-primary am-btn-lg" id="tenant-panel-index">第{{=it.index}}页</a>
-             <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.nextPage')">下一页</a>
-         </div>
+        <div class="am-u-sm-9 am-u-sm-offset-3 am-btn-group">
+            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.prePage')">上一页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" id="tenant-panel-index">第{{=it.index}}页</a>
+            <a class="am-btn am-btn-primary am-btn-lg" onclick="PubSub.publish('{{=it.name}}.nextPage')">下一页</a>
+        </div>
     </div>
 </script>
 
@@ -849,7 +849,7 @@
     <div>
         <div class="am-u-lg-6">
             <legend>店铺列表</legend>
-            <button type="button"class="am-btn-group am-btn-group-xs newButton"
+            <button type="button" class="am-btn-group am-btn-group-xs newButton"
                     onclick="PubSub.publish('tenantNew.render')">
                 <span class="am-icon-plus"></span>新建
             </button>
@@ -2229,13 +2229,17 @@
             this.currentComponent = data;
             this.refresh();
         };
-
+        this.initialize = function (msg, data) {
+            PubSub.publish("tenantPanelList.hide");
+            PubSub.publish("tenantPanel.hide");
+        };
         this.subscribeArray = [
             {message: this.name + ".show", subscriber: this.show},
             {message: this.name + ".hide", subscriber: this.hide},
             {message: this.name + ".render", subscriber: this.render},
             {message: this.name + ".remove", subscriber: this.remove},
-            {message: this.name + ".setCurrentComponent", subscriber: this.setCurrentComponent}
+            {message: this.name + ".setCurrentComponent", subscriber: this.setCurrentComponent},
+            {message: this.name + ".initialize", subscriber: this.initialize},
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2263,7 +2267,6 @@
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
-            PubSub.publish("tenantNew.initialize");
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
@@ -2300,86 +2303,79 @@
         this.template = "main-tenant-new";
 
         this.render = function (msg, data) {
-            var $data = {};
+            this.collectData(data);
             renderTemplate(this.template, this);
-            if (typeof data != "undefined" && data != null) {
-                $data["templateName"] = "main-tenant-base";
-                $data["id"] = data;
-                this.tabShow(null, $data);
-            } else {
-                var templateName = $("#tenantNew .am-active").attr("name");
-                $data["templateName"] = templateName;
-                this.tabShow(null, $data);
-            }
             this.show();
         };
-        this.tabShow = function (msg, data) {
-            var templateName = "";
-            this.initialize();
-            if (data != null && typeof data.templateName != "undefined" && data.templateName != "") {
-                templateName = data.templateName;
-                this.data = data.id;
-                $("#tenantNew").find("li").removeClass("am-active");
-                $("#tenantNew").find("li[name=" + templateName + "]").addClass("am-active");
-                var $active = $(".am-tabs-bd").find("div[name=" + templateName + "]");
-                $active.show();
-                $active.siblings().hide();
+        /*用于采集新建和更新两种操作所需的Json数据*/
+        this.collectData = function (data) {
+            var param = {};
+            param["templateName"] = "main-tenant-base";
+            if (typeof data != "undefined" && data != null) {
+                this.data = data;
+                param["id"] = data;
             } else {
-                $(data).parent().siblings().removeClass("am-active");
-                $(data).parent().addClass("am-active");
-                templateName = $(data).parent().attr("name");
-                var $active = $(data).parent().parent().next().find("div[name=" + templateName + "]");
-                $active.show();
-                $active.siblings().hide();
+                this.data = null;
             }
-            switch (templateName) {
+            this.tabShow(null, param);
+        };
+        this.tabShow = function (msg, data) {
+            var name = "";
+            if (data != null && typeof data.templateName != "undefined" && data.templateName != "") {
+                name = this.changeTabByCommit(data);
+            } else {
+                name = this.changeTabBySwictch(this.data, data);
+            }
+            switch (name) {
                 case "main-tenant-base":
                     PubSub.publish("tenantBase.render", this.data);
                     break;
                 case "main-tenant-check":
-                    if (this.data == null || typeof this.data == "undefined" || this.data == "") {
-                        showAlert('提示', '请填写基本信息', function () {
-                            PubSub.publish("tenantBase.render", this.data);
-                            return false;
-                        });
-                    } else {
-                        PubSub.publish("tenantCheck.render", this.data);
-                    }
+                    PubSub.publish("tenantCheck.render", this.data);
                     break;
                 case "main-tenant-panel":
-                    PubSub.publish("tenantPanelList.show");
-                    if (this.data == null || typeof this.data == "undefined" || this.data == "") {
-                        showAlert('提示', '请填写基本信息', function () {
-                            PubSub.publish("tenantBase.render", this.data);
-                            return false;
-                        });
-                    } else {
-                        PubSub.publish("tenantPanelList.render", this.data);
-                    }
+                    PubSub.publish("tenantPanelList.render", this.data);
                     break;
             }
         };
-
+        /*用于提交或者修改时切换Tab*/
+        this.changeTabByCommit = function (data) {
+            var name = data.templateName;
+            this.data = data.id;
+            $("#tenantNew").find("li").removeClass("am-active");
+            $("#tenantNew").find("li[name=" + name + "]").addClass("am-active");
+            var $active = $(".am-tabs").find("div[name=" + name + "]");
+            $active.show();
+            $active.siblings().hide();
+            return name;
+        };
+        /*用于直接点击Tab时切换*/
+        this.changeTabBySwictch = function (data, element) {
+            var name = "";
+            if (data != null && typeof data != "undefined" && data != "") {
+                $(element).parent().siblings().removeClass("am-active");
+                $(element).parent().addClass("am-active");
+                name = $(element).parent().attr("name");
+                var $active = $(element).parent().parent().next().find("div[name=" + name + "]");
+                $active.show();
+                $active.siblings().hide();
+            } else {
+                showAlert('提示', '请填写基本信息', function () {
+                    return name;
+                });
+            }
+            return name;
+        };
         this.show = function (msg, data) {
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
-            $panel = $("li[name='main-tenant-panel']");
-            this.panelShow(null, $panel);
+            PubSub.publish("tenantPanelList.hideToChange");
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
         this.remove = function (msg, data) {
             $("[dot-template=" + this.template + "]").html("");
-        };
-        this.initialize = function (msg, data) {
-            PubSub.publish("tenantPanelList.hide");
-            PubSub.publish("tenantPanel.hide");
-        };
-        this.panelShow = function (msg, data) {
-            if (data.hasClass("am-active")) {
-                PubSub.publish("tenantPanelList.show");
-            }
         };
 
         this.subscribeArray = [
@@ -2388,7 +2384,6 @@
             {message: this.name + ".hide", subscriber: this.hide},
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".tabShow", subscriber: this.tabShow},
-            {message: this.name + ".initialize", subscriber: this.initialize},
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2419,6 +2414,7 @@
                 this.data = null;
                 renderTemplate(this.template, this);
             }
+            PubSub.publish("nav.initialize");
         };
 
         this.submitForm = function (msg, data) {
@@ -2524,7 +2520,8 @@
             {message: this.name + ".submit", subscriber: this.submitForm},
             {message: this.name + ".searchMaster", subscriber: this.searchMaster},
             {message: this.name + ".selectShow", subscriber: this.selectShow},
-            {message: this.name + ".selectHide", subscriber: this.selectHide}
+            {message: this.name + ".selectHide", subscriber: this.selectHide},
+            {message: this.name + ".recommend", subscriber: this.recommend}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -2550,9 +2547,8 @@
                     this.data = responseData;
                     renderTemplate(this.template, this);
                 }.bind(this))
-            } else {
-                renderTemplate(this.template, this);
             }
+            this.show();
         };
 
         this.submitForm = function (msg, data) {
@@ -2573,8 +2569,8 @@
         };
 
         this.show = function (msg, data) {
-            PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
+            PubSub.publish("nav.initialize");
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
@@ -2678,7 +2674,7 @@
                 limit: this.size,
                 offset: ((this.index - 1) * this.size)
             };
-            param.name = this.currentSearch
+            param.name = this.currentSearch;
             param.imageFlag = this.imageFlag;
             param.serachField = this.serachField;
             ajaxRequest("/yuanqu/tenant/getTenantList", param, function (responseData) {
@@ -2693,7 +2689,6 @@
             this.index = 1;
             renderTemplate(this.template, this);
             this.show();
-            PubSub.publish("tenantPanelList.isHide");
         };
 
         this.search = function (msg, data) {
@@ -2705,10 +2700,11 @@
         };
 
         this.show = function (msg, data) {
-            PubSub.publish("tenantNew.initialize");
             PubSub.publish("nav.setCurrentComponent", this);
             $("[dot-template=" + this.template + "]").show();
+            PubSub.publish("tenantPanelList.hideToChange");
         };
+
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
         };
@@ -2963,10 +2959,10 @@
                 ajaxRequest("/yuanqu/product/getPanelById", {id: data}, function (responseData) {
                     this.data = responseData;
                     renderTemplate(this.template, this);
-                    this.show();
                     tenantPanelList.hide();
                 }.bind(this));
             }
+            this.show();
         };
         this.new = function (msg, data) {
             if (typeof data != "undefined" && data != null) {
@@ -2987,8 +2983,6 @@
                 if (typeof data != "undefined" && data != null) {
                     PubSub.publish("tenantPanelList.render", data.owner);
                 }
-                this.hide();
-                tenantPanelList.show();
                 $("#my-modal-loading").modal("close");
             }.bind(this));
             return false;
@@ -3029,7 +3023,7 @@
         };
         this.show = function (msg, data) {
             $("[dot-template=" + this.template + "]").show();
-        }
+        };
         this.subscribeArray = [
             {message: this.name + ".new", subscriber: this.new},
             {message: this.name + ".hide", subscriber: this.hide},
@@ -3056,6 +3050,7 @@
         this.param = param;
         this.name = "tenantPanelList";
         this.template = "main-tenant-panel-list";         //组件绑定的模板//组件需要订阅的事件与消息
+        this.template2 = "main-tenant-panel";
         this.totalPages = "";
         this.totalRecords = "";
         this.tenantId = "";
@@ -3106,13 +3101,12 @@
             this.index = 1;
             this.tenantId = data;
             renderTemplate(this.template, this);
+            this.show();
         };
 
         this.show = function (msg, data) {
-            var $tenantPanelList = $("[dot-template=" + this.template + "]");
-            $tenantPanelList.show();
-            $tenantPanelList.children().show();
-
+            $("[dot-template=" + this.template + "]").show();
+            PubSub.publish("tenantPanel.hide");
         };
         this.hide = function (msg, data) {
             $("[dot-template=" + this.template + "]").hide();
@@ -3123,8 +3117,25 @@
         this.isHide = function (msg, data) {
             if ($("[dot-template=" + this.template + "]").is(":hidden")) {
                 $("[dot-template=" + this.template + "]").show();
+                $("[dot-template=" + this.template2 + "]").hide();
             } else {
                 $("[dot-template=" + this.template + "]").hide();
+                $("[dot-template=" + this.template2 + "]").show();
+            }
+        };
+        /*处理店铺列表和店内实景切换重叠*/
+        this.hideToChange = function (msg, data) {
+            var $tenantNew = $("[dot-template=main-tenant-new]");
+            var $tenantPanels = $("[dot-template=main-tenant-panel-list]");
+            var $tenantPanel = $("[dot-template=main-tenant-panel]");
+            if (!$tenantNew.is(":hidden")) {
+                $tenantPanels.show();
+                $tenantPanels.children().show();
+            } else {
+                $tenantPanels.hide();
+            }
+            if (!$tenantPanels.is(":hidden") && !$tenantPanel.is("hidden")) {
+                $tenantPanel.hide();
             }
         };
 
@@ -3137,14 +3148,15 @@
             {message: this.name + ".nextPage", subscriber: this.nextPage},
             {message: this.name + ".prePage", subscriber: this.prePage},
             {message: this.name + ".delete", subscriber: this.delete},
-            {message: this.name + ".isHide", subscriber: this.isHide}
+            {message: this.name + ".isHide", subscriber: this.isHide},
+            {message: this.name + ".hideToChange", subscriber: this.hideToChange},
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
             var subscribe = this.subscribeArray[i];
             PubSub.subscribe(subscribe.message, subscribe.subscriber.bind(this));
         }
-    }
+    };
 
     var ProductBase = function (param) {
         this.submit = "/yuanqu/product/baseSubmit";
@@ -3175,7 +3187,7 @@
         };
         this.new = function (msg, data) {
             this.data = null;
-            this.panel=null;
+            this.panel = null;
             this.tenantId = data;
             renderTemplate(this.template, this);
             this.show();

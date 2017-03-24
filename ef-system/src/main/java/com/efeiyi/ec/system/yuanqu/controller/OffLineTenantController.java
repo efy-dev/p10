@@ -599,6 +599,7 @@ public class OffLineTenantController {
         image.setName(bigTenant.getName());
         image.setOwner(recommend.getId());
         image.setType("1");
+        image.setStatus("1");
         baseManager.saveOrUpdate(Image.class.getName(), image);
         recommend.setImage(image);
         baseManager.saveOrUpdate(Recommend.class.getName(), recommend);
