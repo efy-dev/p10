@@ -164,6 +164,9 @@ public class OffLineTenantController {
     public Object baseSubmit(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
         EnterpriseTenant tenant;
         String id = request.getParameter("id");
+        String hql = "select obj from TenantMaster obj where obj.status!='0' and obj.tenant.id =:id";
+        LinkedHashMap linkedHashMap = new LinkedHashMap();
+        linkedHashMap.put("id", id);
         if (id != null && !id.equals("")) {
             tenant = (EnterpriseTenant) baseManager.getObject(EnterpriseTenant.class.getName(), id);
         } else {
@@ -218,6 +221,9 @@ public class OffLineTenantController {
         String masterId = request.getParameter("masterId");
         if (masterId != null && !masterId.equals("")) {
             Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
+            if (master != null) {
+                cascadeRemove(hql, linkedHashMap, TenantMaster.class);
+            }
             TenantMaster tenantMaster = new TenantMaster();
             tenantMaster.setTenant(tenant);
             tenantMaster.setMaster(master);
