@@ -2106,12 +2106,10 @@
             {message: this.name + ".render", subscriber: this.render},
             {message: this.name + ".remove", subscriber: this.remove},
             {message: this.name + ".imageView", subscriber: this.imageView},
-            {message: this.name + ".complete", subscriber: this.complete},
             {message: this.name + ".submit", subscriber: this.submitForm},
             {message: this.name + ".searchMaster", subscriber: this.searchMaster},
             {message: this.name + ".selectShow", subscriber: this.selectShow},
             {message: this.name + ".selectHide", subscriber: this.selectHide},
-            {message: this.name + ".recommend", subscriber: this.recommend},
             {message: this.name + ".chooseMaster", subscriber: this.chooseMaster}
         ];
 
@@ -2560,6 +2558,7 @@
             $("#tenant-panel-index").html("第" + this.index + "页");
             this.body();
         };
+       /* this.nextPage=Pagination();*/
 
         this.prePage = function (msg, data) {
             this.index = this.index > 1 ? this.index - 1 : 1;
@@ -3675,6 +3674,11 @@
     /*公共组件*/
     //1.分页组件
     var Pagination = function (param) {
+    //①上一页
+
+        // ②下一页
+        //③渲染分页体
+
 
     };
 
