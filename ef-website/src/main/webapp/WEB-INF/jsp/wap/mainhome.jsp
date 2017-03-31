@@ -44,9 +44,12 @@
         <div data-am-widget="slider" class="am-slider am-slider-a4 img-slider"
              data-am-slider='{&quot;directionNav&quot;:false}'>
             <ul class="am-slides">
-                <c:forEach items="${bannerList}" var="banner" varStatus="status">
-                    <li><img src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!home1-banner"/>"></li>
-                </c:forEach>
+                <li><a href="http://master.efeiyi.com/html/master_home.html"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E6%88%BF%E5%BF%97%E8%BE%BEbanner.jpg" ></a></li>
+                <c:if test="${not empty bannerList&&fn:length(bannerList)>0}">
+                    <c:forEach items="${bannerList}" var="banner">
+                        <li><a href="<c:url value="${banner.directUrl}"/>"><img src="http://pro.efeiyi.com/${banner.imageUrl}" ></a></li>
+                    </c:forEach>
+                </c:if>
             </ul>
         </div>
     </div>
@@ -157,7 +160,7 @@
                                     <a href="http://${master.getName()}.efeiyi.com" title="">
                                         <img src="http://tenant.efeiyi.com/${master.getFavicon()}" alt="">
                                         <span class="master-info">
-                                    <p class="t1">${master.name}</p>
+                                    <p class="t1">${master.getFullName()}</p>
                                     <p class="t2">${master.getTitle()}</p>
                                     <p class="t3">${master.getBrief()}</p>
                                 </span>

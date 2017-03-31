@@ -283,7 +283,7 @@ a:hover { text-decoration: underline }
 .my-favorite .option-right { float: right }
 .my-favorite .bd-bt { border-bottom: 1px solid #ccc; }
 .my-favorite .bd-tp { border-top: 1px solid #ccc; }
-.my-favorite .list-title-text { overflow: hidden; height: 38px; }
+.my-favorite .list-title-text { overflow: hidden; height: 40px; }
 /*我的商品*/
 /*我的店铺*/
 .my-favorite .store-list { width: 851px; float: right; border: 1px solid #ccc; overflow: hidden; margin-top: 30px; }

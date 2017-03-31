@@ -28,7 +28,7 @@
         %>
         <a href="http://i.efeiyi.com" title="个人中心"><%=AuthorizationUtil.getCurrentSampleUsername()%>
         </a>
-        <a href="<c:url value='/j_spring_cas_security_logout'/>" title="退出">退出</a>
+        <a href="<c:url value='/j_spring_security_logout'/>" title="退出">退出</a>
         <%
          } else {
         %>
@@ -268,7 +268,7 @@
         <ul class="pro">
           <c:forEach items="${artistryList}" var="artistry">
           <li>
-            <a href="http://minglu.efeiyi.com/project/${artistry.id}" title="" target="">
+            <a href="http://minglu.efeiyi.com/minglu/project/${artistry.id}" title="" target="">
               <div class="img"> <img class="imgbg" src="http://wiki-oss.efeiyi.com/${artistry.getMainPicture().pictureUrl}@!pc-main-artistry-picture" alt=""></div>
               <div class="info">
                 <p class="txt">${artistry.name}</p>
