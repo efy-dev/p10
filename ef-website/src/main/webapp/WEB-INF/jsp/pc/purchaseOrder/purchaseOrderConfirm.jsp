@@ -422,7 +422,7 @@
 
     $(function () {
         $('.clearing-site span a').click(function () {
-            $(".header-new,.topbar,.footernew").css("z-index", "-1")
+            $(".header-new,.topbar,.footernew,.nav2016").css("z-index", "-1")
             $(this).siblings('.active-pop').show();
             $('.clase, .sh-bg').click(function () {
                 $(this).parents('.active-pop').hide();
