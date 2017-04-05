@@ -381,7 +381,7 @@
           <strong>战略合作伙伴</strong>
           <a class="icon1" href="http://en.unesco.org/" title="联合国教科文组织" target="_blank"></a><em
                 class="line"></em><a class="icon3" title="中国非物质文化遗产保护协会"></a><em class="line"></em><a
-                class="icon2" title="中国非物质文化遗产保护协会"></a>
+                class="icon2" title="中国非物质文化遗产保护协会" href="http://www.chinaich.org/" target="_blank"></a>
         </div>
       </div>
 

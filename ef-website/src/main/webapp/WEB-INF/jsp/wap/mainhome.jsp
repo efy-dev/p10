@@ -239,7 +239,7 @@
                             class="icon-home icon1"></i></em>联合国教科文组织</a></span>
                     <span><a href="http://mall.efeiyi.com" title="非物质文化遗产平台"><em class="bd"><i
                             class="icon-home icon2"></i></em>非物质文化遗产平台</a></span>
-                    <span><a title="中国非物质文化遗产保护协会"><em class="bd"><i
+                    <span><a title="中国非物质文化遗产保护协会" href="http://www.chinaich.org/" target="_blank"><em class="bd"><i
                             class="icon-home icon3"></i></em>中国非遗保护协会</a></span>
                 </div>
             </div>
