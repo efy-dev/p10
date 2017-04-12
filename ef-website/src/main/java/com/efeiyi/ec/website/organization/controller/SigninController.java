@@ -4,31 +4,21 @@ package com.efeiyi.ec.website.organization.controller;
  * Created by Administrator on 2014/11/13.
  */
 
+import com.alibaba.fastjson.JSON;
 import com.efeiyi.ec.exception.NonUniqueConsumerException;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.website.base.util.AuthorizationUtil;
-import com.efeiyi.ec.website.order.model.WxPayConfig;
 import com.efeiyi.ec.website.organization.model.ValidateCode;
 import com.efeiyi.ec.website.organization.service.IConsumerService;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
-import com.ming800.core.p.model.WxCalledRecord;
 import com.ming800.core.util.CookieTool;
-import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,11 +30,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -200,16 +190,21 @@ public class SigninController extends BaseController {
     }
 
     @RequestMapping({"updatePassword"})
-    public String updatePassword(HttpServletRequest request, HttpServletResponse response) {
+    @ResponseBody
+    public Object updatePassword(HttpServletRequest request) {
         String username = request.getParameter("username");
+        Map<String, String> map = new HashMap();
         if ("checked".equals(request.getSession().getAttribute(username))) {
             String password = request.getParameter("pwd");
             MyUser myUser = (MyUser) userManager.loadUserByUsername(username);
             myUser.setPassword(StringUtil.encodePassword(password, "sha"));
             baseManager.saveOrUpdate(MyUser.class.getName(), myUser);
-            return "redirect:/login";
+            map.put("username", username);
+            map.put("password", password);
+            return JSON.toJSON(map);
         } else {
-            return "forgetPassword";
+            map.put("code", "1");
+            return JSON.toJSON(map);
         }
     }
 
@@ -254,8 +249,6 @@ public class SigninController extends BaseController {
         model.addAttribute("unionid", unionid);
         return "/wxRedirect";
     }
-
-
 
 
 }

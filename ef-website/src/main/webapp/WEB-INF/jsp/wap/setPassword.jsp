@@ -48,17 +48,46 @@
         var flag = true;
         var np = $(":input[name='np']").val();
         var pwd = $(":input[name='pwd']").val();
+        var username = $(":input[name='username']").val();
         $(".active-d").each(function () {
             if ($(this).text() != "" || np == "" || pwd == "") {
                 flag = false;
                 return false;
             }
         });
+        /*ajax参数部分*/
+        var param = {};
+        param["username"] = username;
+        param["pwd"] = pwd;
+        var success = function (data) {
+            if (data.code != "1") {
+                login(data);
+            } else {
+                $(":input[name='pwd']").next("span").text("登陆失败,请重新登陆");
+            }
+        };
         if (flag == true) {
-
-            document.getElementById('myform').submit();
-            //document.getElementById('myform').submit();
+            //异步请求
+            ajaxRequest("/updatePassword", param, success, function () {
+            }, "post");
         }
+    }
+    function login(userInfo) {
+        var success = function (data) {
+            if (data["login"] == "true") {
+                //登陆成功
+                $(":input[name='pwd']").next("span").text("");
+                window.location.href = data["redirect"];
+            } else if (data["login"] == "false") {
+                $(":input[name='pwd']").next("span").text("登陆失败,请重新登陆");
+                return false;
+            }
+        };
+        ajaxRequest("/j_spring_security_check", {
+            "username": userInfo.username,
+            "password": userInfo.password
+        }, success, function () {
+        }, "post");
     }
 
     function checkEq(obj) {
