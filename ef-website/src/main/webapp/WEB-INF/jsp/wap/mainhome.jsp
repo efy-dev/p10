@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>非物质文化遗产互联网平台</title>
+    <title>e飞蚁-领先的非物质文化遗产电商平台</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css"/>">
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/home.css?t=20160413"/>">
@@ -237,7 +237,7 @@
                 <div class="bd icons">
                     <span><a href="http://en.unesco.org/" title="联合国教科文组织"><em class="bd"><i
                             class="icon-home icon1"></i></em>联合国教科文组织</a></span>
-                    <span><a href="http://mall.efeiyi.com" title="非物质文化遗产平台"><em class="bd"><i
+                    <span><a href="http://mall.efeiyi.com" title="e飞蚁"target="_blank"><em class="bd"><i
                             class="icon-home icon2"></i></em>非物质文化遗产平台</a></span>
                     <span><a title="中国非物质文化遗产保护协会" href="http://www.chinaich.org/" target="_blank"><em class="bd"><i
                             class="icon-home icon3"></i></em>中国非遗保护协会</a></span>
