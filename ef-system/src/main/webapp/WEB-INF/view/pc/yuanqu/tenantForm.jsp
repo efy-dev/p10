@@ -3161,6 +3161,8 @@
             {message: this.name + ".body", subscriber: this.body},
             {message: this.name + ".delete", subscriber: this.delete},
             {message: this.name + ".upper", subscriber: this.upper},
+            {message: this.name + ".nextPage", subscriber: this.nextPage},
+            {message: this.name + ".prePage", subscriber: this.prePage},
             {message: this.name + ".search", subscriber: this.search}
         ];
 
@@ -3249,6 +3251,16 @@
             this.index = 1;
             this.currentSearch = $(data).val();
             this.body();
+        };
+
+        /**
+         *导出skuexcel、
+         *临时
+         */
+        this.outExcel = function (msg, data) {
+            var param = {};
+            param.data = this.data;
+            ajaxRequest("/yuanqu/product/downloadProductModel", param);
         };
 
         this.show = function (msg, data) {
