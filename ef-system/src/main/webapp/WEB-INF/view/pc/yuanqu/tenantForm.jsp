@@ -845,6 +845,10 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 基本信息
                         </button>
+                        <button onclick="PubSub.publish('tenantList.outExcel','{{=tenant.id}}')"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                class="am-icon-edit"></span> 导出excel
+                        </button>
                         <button onclick="PubSub.publish('productList.render','{{=tenant.id}}')"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                 class="am-icon-edit"></span> 商品管理
@@ -2241,6 +2245,14 @@
             this.body();
         };
 
+        /**
+         *导出skuexcel、
+         *临时
+         */
+        this.outExcel = function (msg, data) {
+            window.location.href = "/yuanqu/product/downloadProductModel?tenantId=" + data;
+        };
+
         this.delete = function (msg, data) {
             ajaxRequest("/yuanqu/tenant/deleteTenantById", {id: data}, function (responseData) {
                 this.data = responseData;
@@ -2312,6 +2324,7 @@
             {message: this.name + ".nextPage", subscriber: this.nextPage},
             {message: this.name + ".prePage", subscriber: this.prePage},
             {message: this.name + ".delete", subscriber: this.delete},
+            {message: this.name + ".outExcel", subscriber: this.outExcel}
         ];
 
         for (var i = 0; i < this.subscribeArray.length; i++) {
@@ -3251,16 +3264,6 @@
             this.index = 1;
             this.currentSearch = $(data).val();
             this.body();
-        };
-
-        /**
-         *导出skuexcel、
-         *临时
-         */
-        this.outExcel = function (msg, data) {
-            var param = {};
-            param.data = this.data;
-            ajaxRequest("/yuanqu/product/downloadProductModel", param);
         };
 
         this.show = function (msg, data) {

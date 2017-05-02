@@ -12,11 +12,7 @@ import jxl.format.BorderLineStyle;
 import jxl.format.VerticalAlignment;
 import jxl.write.*;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,7 +35,7 @@ public class ExportExcel {
             //定义输出流，以便打开保存对话框______________________begin
             //HttpServletResponse response = ServletActionContext.getResponse();
 
-            OutputStream os = new FileOutputStream("D://CouponBatchDownload//"+fileName+".xls");// 取得输出流
+            OutputStream os = new FileOutputStream("D://CouponBatchDownload//" + fileName + ".xls");// 取得输出流
             /*response.reset();// 清空输出流
             response.setHeader("Content-disposition", "attachment; filename=" + new String(fileName.getBytes("GB2312"), "ISO8859-1"));
 // 设定输出文件头
@@ -116,8 +112,7 @@ public class ExportExcel {
     }
 
 
-
-    public final static String exportExcel(String path,String fileName, String[] Title, List<String> listContent) {
+    public final static String exportExcel(String path, String fileName, String[] Title, List<String> listContent) {
         String result = "系统提示：Excel文件导出成功！";
         // 以下开始输出到EXCEL
         String resultFileName = null;
@@ -138,7 +133,7 @@ public class ExportExcel {
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
             String date1 = sdf.format(date);
-            File file = new File(path+"//"+fileName+"-"+date1+".xls");
+            File file = new File(path + "//" + fileName + "-" + date1 + ".xls");
             file.createNewFile();
             resultFileName = file.getName();
 
@@ -205,8 +200,8 @@ public class ExportExcel {
 //                }
 //                i++;
 //            }
-            for(int i = 1;i<=listContent.size();i++){
-                sheet.addCell(new Label(0,i, listContent.get(i-1), wcf_left));
+            for (int i = 1; i <= listContent.size(); i++) {
+                sheet.addCell(new Label(0, i, listContent.get(i - 1), wcf_left));
             }
             /** **********将以上缓存中的内容写到EXCEL文件中******** */
             workbook.write();
@@ -228,7 +223,8 @@ public class ExportExcel {
      * @param contents
      * @return
      */
-    public final static Object exportExcel(Object[] titles, List<Object[]> contents, OutputStream os) {
+    public final static byte[] exportExcel(Object[] titles, List<Object[]> contents) {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
         try {
             /** **********创建工作簿************ */
             WritableWorkbook workbook = Workbook.createWorkbook(os);
@@ -286,7 +282,7 @@ public class ExportExcel {
                     e.printStackTrace();
                 }
             }
-            return os;
+            return os.toByteArray();
         }
     }
 

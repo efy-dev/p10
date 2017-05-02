@@ -1,6 +1,5 @@
 package com.efeiyi.ec.system.yuanqu.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterWork;
 import com.efeiyi.ec.master.model.MasterWorkProduct;
@@ -12,7 +11,6 @@ import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.system.util.ExportExcel;
 import com.efeiyi.ec.tenant.model.BigTenant;
-import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantGroup;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -20,7 +18,6 @@ import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.StringUtil;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +40,6 @@ import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyDescriptor;
 import java.io.File;
-import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -826,7 +822,6 @@ public class OffLineProductController {
      * 根据筛选结果导出excel
      */
     @RequestMapping("/downloadProductModel")
-    @ResponseBody
     public void downloadProductModel(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String hql = "select obj from ProductModel obj where obj.status!='0' and obj.product.status!='0' and obj.product.tenant.id=:tenantId";
         String tenantId = request.getParameter("tenantId");
@@ -835,9 +830,13 @@ public class OffLineProductController {
         List<ProductModel> productModels = baseManager.listObject(hql, linkedHashMap);
         List<Object[]> contents = getContents(productModels);
         Object[] titles = {"商品名", "市场价", "序列号", "价格", "库存", "图片地址", "SKU名称", "客户属性", "热度", "销量", "创建日期"};
+        byte[] bytes = ExportExcel.exportExcel(titles, contents);
         response.setContentType("application/vnd.ms-excel; charset=utf-8");
-        response.setHeader("Content-Disposition", "attachment;Filename=sku.xls");
-        ExportExcel.exportExcel(titles, contents, response.getOutputStream());
+        response.setHeader("Content-Disposition", "attachment;Filename=\"sku.xls\"");
+        response.setContentLength(bytes.length);
+        response.getOutputStream().write(bytes);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
     }
 
     public List<Object[]> getContents(List<ProductModel> productModels) {
@@ -865,6 +864,6 @@ public class OffLineProductController {
             content.add(productModel.getSaleAmount() == null ? "" : productModel.getSaleAmount().toString());
             content.add(productModel.getCreateDateTime() == null ? "" : productModel.getCreateDateTime().toString());
         }
-        return  content.toArray();
+        return content.toArray();
     }
 }
