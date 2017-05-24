@@ -31,7 +31,12 @@ public class AuthorizationUtil {
 
     public static String getCurrentSampleUsername() {
         String username = getMyUser().getUsername();
-        return username.substring(0, 3) + "****" + username.substring(7, 11);
+        try {
+            return username.substring(0, 3) + "****" + username.substring(7, 11);
+        } catch (Exception e) {
+            e.getStackTrace();
+            return username;
+        }
     }
 
     public static boolean isAuthenticated() {

@@ -62,7 +62,7 @@
 						<c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct">
 							<li>
 								<div class="shops-pic"><img
-										src="<c:url value="${purchaseOrderProduct.productModel.productModel_url}"/>"
+                                        src="<c:url value="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}@!product-model"/>"
 										onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></div>
 								<div class="shops-text">
 									<p>${purchaseOrderProduct.productModel.product.name}</p>
