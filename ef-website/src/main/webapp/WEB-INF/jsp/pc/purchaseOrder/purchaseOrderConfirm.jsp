@@ -90,7 +90,7 @@
             <div class="page-box-m">
                 <c:forEach items="${addressList}" var="address">
 
-                    <div id="address${address.id}" class="page-default" style="position:relative">
+                        <div id="address${address.id}" class="page-default" style="position:relative">
                     <span>
                         <c:if test="${address.status=='2'}">
                         <div id="${address.id}" class="default-text triangle activeFlag" name="addressItem"
@@ -494,7 +494,7 @@
                 $(".active-pop").hide();
                 $("#reset").click();
                 $("#" + data.id).click();
-            }
+            };
             ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
             }, "post")
         }

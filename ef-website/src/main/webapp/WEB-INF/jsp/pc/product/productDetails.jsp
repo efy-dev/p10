@@ -453,12 +453,18 @@
         }
     }
     function addCart(o) {
-        var t = document.getElementById("value").value;
-        window.location.href = "<c:url value="/cart/addProduct.do?id="/>"+o +"&amount="+ t+"&redirect=/product/productModel/"+o;
+        var t = $("#value").val();
+        if (typeof  t == "undefined" || t == null || t == "") {
+            t = 1;
+        }
+        window.location.href = "<c:url value="/cart/addProduct.do?id="/>" + o + "&amount=" + t + "&redirect=/product/productModel/" + o;
     }
     function immediateBuy(o) {
-        var t = document.getElementById("value").value;
-        window.location.href = "<c:url value=""/>"+"/order/easyBuy/"+o +"?amount="+ t;
+        var t = $("#value").val();
+        if (typeof  t == "undefined" || t == null || t == "") {
+            t = 1;
+        }
+        window.location.href = "<c:url value=""/>" + "/order/easyBuy/" + o + "?amount=" + t;
     }
 </script>
 <script>
@@ -471,7 +477,6 @@
     //    });
     $('#btn-gift').bind('click', function () {
         var t = document.getElementById("value").value;
-        ;
         var url = "http://mall.efeiyi.com/order/giftBuy/${productModel.id}/" + t;
         $("#native").html("");
         $('#native').qrcode({

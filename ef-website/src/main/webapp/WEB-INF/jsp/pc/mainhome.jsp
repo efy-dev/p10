@@ -34,7 +34,7 @@
         %>
         <a href="<c:url value="/sso.do"/>" title="e飞蚁登录">登录</a>
         <em>&nbsp;/&nbsp;</em>
-        <a href="http://passport.efeiyi.com/register?service=http://mall.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do" title="e飞蚁注册">注册</a>
+        <a href="http://www.efeiyi.com/signin" title="e飞蚁注册">注册</a>
         <%
           }
         %>
