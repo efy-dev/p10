@@ -130,13 +130,33 @@ public class CartManagerImpl implements CartManager {
         return cart;
     }
 
+    public Cart fetchCart(HttpServletRequest request) {
+        MyUser bigUser = AuthorizationUtil.getMyUser();
+        Cart cart;
+        String hql = "select obj from " + Cart.class.getName() + " obj where obj.user.id=:userid";
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("userid", bigUser.getId());
+        cart = (Cart) baseManager.getUniqueObjectByConditions(hql, param);
+        if (cart == null && bigUser.getId() != null) {
+            User user = new User();
+            user.setId(bigUser.getId());
+            cart = new Cart();
+            cart.setUser(user);
+            cart.setCreateDatetime(new Date());
+            cart.setCartProductList(new ArrayList<CartProduct>());
+            baseManager.saveOrUpdate(Cart.class.getName(), cart);
+        }
+        cart = copyCart((Cart) request.getSession().getAttribute("cart"), cart, request);
+        return cart;
+    }
+
 
     @Override
     public Cart getCurrentCart(HttpServletRequest request) {
         Cookie userinfo = CookieTool.getCookieByName(request, "userinfo");
         Cart cart;
         if (AuthorizationUtil.isAuthenticated()) {
-            cart = fetchCart();
+            cart = fetchCart(request);
         } else {
             if (userinfo != null) {
                 String userId = userinfo.getValue();
@@ -157,9 +177,8 @@ public class CartManagerImpl implements CartManager {
     }
 
 
-
     @Override
-    public Cart fetchCart(String userId){
+    public Cart fetchCart(String userId) {
         Cart cart;
         String hql = "select obj from " + Cart.class.getName() + " obj where obj.user.id=:userid";
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
@@ -170,15 +189,29 @@ public class CartManagerImpl implements CartManager {
 
 
     @Override
-    public Cart copyCart(Cart sessionCart,Cart realCart) {
+    public Cart copyCart(Cart sessionCart, Cart realCart) {
         if (sessionCart != null) {
-           /* List<CartProduct> cartProductList = sessionCart.getCartProductList();
+          /*  List<CartProduct> cartProductList = sessionCart.getCartProductList();
             for (CartProduct cartProductTemp : cartProductList) {
                 cartProductTemp.setCart(realCart);
-                addToCart(realCart,cartProductTemp.getProductModel(),cartProductTemp.getAmount());
+                realCart = addToCart(realCart, cartProductTemp.getProductModel(), cartProductTemp.getAmount());
                 baseManager.saveOrUpdate(Cart.class.getName(), realCart);
             }*/
             return sessionCart;
+        }
+        return realCart;
+    }
+
+    public Cart copyCart(Cart sessionCart, Cart realCart, HttpServletRequest request) {
+        if (sessionCart != null) {
+            List<CartProduct> cartProductList = sessionCart.getCartProductList();
+            for (CartProduct cartProductTemp : cartProductList) {
+                cartProductTemp.setCart(realCart);
+                realCart = addToCart(realCart, cartProductTemp.getProductModel(), cartProductTemp.getAmount());
+                baseManager.saveOrUpdate(Cart.class.getName(), realCart);
+            }
+            request.getSession().removeAttribute("cart");
+            return realCart;
         }
         return realCart;
     }
