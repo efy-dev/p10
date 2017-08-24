@@ -232,7 +232,7 @@ public class PurchaseOrderController extends BaseController {
 //        }
 
         String consumerId = AuthorizationUtil.getMyUser().getId();
-        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), consumerId);
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), "iw1r48p7aunu1y6y");
         if (null == consumer.getBalance()) {
             consumer.setBalance(new BigDecimal(0));
             baseManager.saveOrUpdate(Consumer.class.getName(), consumer);

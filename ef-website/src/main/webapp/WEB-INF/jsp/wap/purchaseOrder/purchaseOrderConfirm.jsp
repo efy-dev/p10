@@ -489,7 +489,7 @@
     $(function () {
         $("#add").click(function () {
             $(this).siblings('.active-pop').show();
-            province();
+            provinceChange();
             $('.my-order .clase, .my-order .sh-bg').click(function () {
                 $(this).parents('.active-pop').hide();
             })
@@ -509,6 +509,10 @@
 
     function provinceChange(element) {
         var provinceId = $(element).val();
+        if (typeof  provinceId == "undefined" || provinceId == null || provinceId == "") {
+            provinceId = 110000;
+        }
+        cityChange();
         ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>", {provinceId: provinceId}, function (data) {
             var out = '<option value="">请选择所在市</option>';
             for (var i = 0; i < data.length; i++) {

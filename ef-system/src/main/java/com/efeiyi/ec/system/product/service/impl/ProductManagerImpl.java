@@ -24,6 +24,7 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -79,6 +80,7 @@ public class ProductManagerImpl implements ProductManager {
         return productTemp;
     }
 
+    @Transactional
     @Override
     public Product saveProduct(Product product) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -90,30 +92,30 @@ public class ProductManagerImpl implements ProductManager {
             } else {
                 product.setProductModelList(xdoDao.getObjectList("from ProductModel where status!='0' and product.id=?", new Object[]{product.getId()}));
             }
-            System.out.print("".equals(product.getProductDescription().getId()));
-            if ("".equals(product.getProductDescription().getId())) {
+          //  System.out.print("".equals(product.getProductDescription().getId()));
+            if (product.getProductDescription() == null || "".equals(product.getProductDescription().getId())) {
                 product.setProductDescription(null);
             } else {
                 product.setProductDescription((ProductDescription) xdoDao.getObject(ProductDescription.class.getName(), product.getProductDescription().getId()));
             }
-            if ("".equals(product.getMaster().getId())) {
+            if (product.getMaster() == null || "".equals(product.getMaster().getId())) {
                 product.setMaster(null);
             } else {
                 product.setMaster((Master) xdoDao.getObject(Master.class.getName(), product.getMaster().getId()));
             }
-            if ("".equals(product.getProject().getId())) {
+            if (product.getProject() == null || "".equals(product.getProject().getId())) {
                 product.setProject(null);
             } else {
                 product.setProject((Project) xdoDao.getObject(Project.class.getName(), product.getProject().getId()));
             }
-            if ("".equals(product.getTenant().getId())) {
+            if (product.getTenant() == null || "".equals(product.getTenant().getId())) {
                 product.setBigTenant(null);
             } else {
                 product.setBigTenant((BigTenant) xdoDao.getObject(BigTenant.class.getName(), product.getTenant().getId()));
             }
 
 
-            xdoDao.saveOrUpdateObject(Product.class.getName(), product);
+            xdoDao.saveOrUpdateObject(product);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -588,18 +590,18 @@ public class ProductManagerImpl implements ProductManager {
     }
 
     @Override
-    public ProductPicture setModelPicture(String modelId, String pictureId,String oldModelId) throws  Exception{
+    public ProductPicture setModelPicture(String modelId, String pictureId, String oldModelId) throws Exception {
         ProductModel productModel = null;
         ProductModel oldProductModel = null;
-        if(!oldModelId.equals("0")) {
+        if (!oldModelId.equals("0")) {
             oldProductModel = (ProductModel) xdoDao.getObject(ProductModel.class.getName(), oldModelId);
             oldProductModel.setProductModel_url(null);
             xdoDao.saveOrUpdateObject(oldProductModel);
         }
-        if(!modelId.equals("0")) {
+        if (!modelId.equals("0")) {
             productModel = (ProductModel) xdoDao.getObject(ProductModel.class.getName(), modelId);
         }
-        ProductPicture productPicture = (ProductPicture)xdoDao.getObject(ProductPicture.class.getName(),pictureId);
+        ProductPicture productPicture = (ProductPicture) xdoDao.getObject(ProductPicture.class.getName(), pictureId);
         productPicture.setStatus("1");
         productPicture.setProductModel(productModel);
         xdoDao.saveOrUpdateObject(productPicture);

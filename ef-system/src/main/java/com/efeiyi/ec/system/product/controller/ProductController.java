@@ -8,23 +8,16 @@ import com.efeiyi.ec.project.model.ProjectCategoryProductModel;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.system.product.service.ProductModelManager;
-import com.efeiyi.ec.system.tenant.controller.SysTenantCategoryHandler;
 import com.efeiyi.ec.tenant.model.BigTenant;
-import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AliOssUploadManager;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -268,8 +261,20 @@ public class ProductController extends BaseController {
                                  HttpServletRequest request,
                                  MultipartRequest multipartRequest,
                                  String resultPage, Model model, String step) {
-
         model.addAttribute("view", request.getParameter("view"));
+        Product product1;
+        if (StringUtils.isEmpty(product.getId())) {
+            product1 = new Product();
+        } else {
+            product1 = (Product) baseManager.getObject(Product.class.getName(), product.getId());
+        }
+        //@TODO 需要自定义对象克隆
+        product1.setName(product.getName());
+        product1.setSubName(product.getSubName());
+        product1.setType(product.getType());
+        product1.setTenant(product.getTenant());
+        product1.setMaster(product.getMaster());
+        product1.setProject(product.getProject());
         if ("product".equals(step)) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
             String identify = sdf.format(new Date());
@@ -278,11 +283,11 @@ public class ProductController extends BaseController {
                 if (multipartRequest.getFile("picture_url1") != null && !"".equals(multipartRequest.getFile("picture_url1"))) {
                     if (!multipartRequest.getFile("picture_url1").getOriginalFilename().equals("")) {
                         url = "product/" + identify + multipartRequest.getFile("picture_url1").getOriginalFilename();
-                        product.setPicture_url(url);
+                        product1.setPicture_url(url);
                         aliOssUploadManager.uploadFile(multipartRequest.getFile("picture_url1"), "ec-efeiyi", url);
                     }
                 }
-                Product temProduct = productManager.saveProduct(product);
+                Product temProduct = productManager.saveProduct(product1);
                 String tenantId = "0";
                 String masterId = "0";
                 if (temProduct.getTenant() != null) {
@@ -291,9 +296,7 @@ public class ProductController extends BaseController {
                 if (temProduct.getMaster() != null) {
                     masterId = temProduct.getMaster().getId();
                 }
-
                 resultPage = resultPage + "&tenantId=" + tenantId + "&masterId=" + masterId + "&id=" + temProduct.getId();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
