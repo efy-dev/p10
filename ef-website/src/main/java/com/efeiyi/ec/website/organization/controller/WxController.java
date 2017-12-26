@@ -73,13 +73,13 @@ public class WxController {
     @RequestMapping({"/fetchLoginCode.do"})
     public String getWxLoginCode(HttpServletRequest request) throws Exception {
         String redirect = request.getParameter("redirect");
-        String redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
-        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=" + WxPayConfig.APPID +
-                "&redirect_uri=" +
-                URLEncoder.encode(redirect_uri, "UTF-8") +
-                "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-        return "redirect:" + url;
+//        String redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
+//        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+//                "appid=" + WxPayConfig.APPID +
+//                "&redirect_uri=" +
+//                URLEncoder.encode(redirect_uri, "UTF-8") +
+//                "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+        return "redirect:" + redirect;
     }
 
 

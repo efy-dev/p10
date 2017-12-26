@@ -88,13 +88,14 @@ public class YuanquController {
 
     @RequestMapping({"/createWxLoginUrl/{dataType}/{dataId}"})
     public String createWxLoginUrl(@PathVariable String dataType, @PathVariable String dataId) throws Exception {
-        String redirect_uri = "http://mall.efeiyi.com/wl";
-        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=" + WxPayConfig.APPID +
-                "&redirect_uri=" +
-                URLEncoder.encode(redirect_uri, "UTF-8") +
-                "&response_type=code&scope=snsapi_userinfo&state=" + URLEncoder.encode(dataType + "/" + dataId, "UTF-8") + "#wechat_redirect";
-        return "redirect:" + url;
+//        String redirect_uri = "http://mall.efeiyi.com/wl";
+//        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+//                "appid=" + WxPayConfig.APPID +
+//                "&redirect_uri=" +
+//                URLEncoder.encode(redirect_uri, "UTF-8") +
+//                "&response_type=code&scope=snsapi_userinfo&state=" + URLEncoder.encode(dataType + "/" + dataId, "UTF-8") + "#wechat_redirect";
+        String redirect = URLEncoder.encode(dataType + "/" + dataId, "UTF-8");
+        return "redirect:http://www.efeiyi.com/qrcode/sample/" + URLDecoder.decode(redirect, "UTF-8");
     }
 
 
